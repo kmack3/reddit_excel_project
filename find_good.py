@@ -24,6 +24,7 @@ for filename in os.listdir(path):
     count = 0
     for line in open(path+filename):
         for word in line.split():
+            # get rid of punctuation
             word = (''.join(c for c in word if c not in string.punctuation))
             if word in stopwords:
                 count+=1
