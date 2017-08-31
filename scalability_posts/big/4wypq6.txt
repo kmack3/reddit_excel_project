@@ -1,0 +1,84 @@
+big
+4wypq6
+Can't get my head around such big numbers, need help tracking the orders of 13000 people. 1 big spreadsheet isn't going to do it.
+
+I need to create a form for each team lead to fill out, then return them to me. I will compile and create a master list that updates with every new order. Any ideas?
+
+Each team has 4-8 associates, and each team lead will need to send me information on how many people want the following:
+
+Pepperoni vs cheese pizza
+
+Pepsi, Diet, Mtn Dew, Sierra Mist
+
+Green or Red Apple
+
+Bottled water Y or N
+
+Location for delivery
+
+I am flummoxed on how to get all the information onto one sheet. 
+
+
+-------------
+If I were you, I would just invest in an online form/survey company. It's going to be annoying tracking, sending that many excel sheets and combining them.
+-------------
+Consider using MSACCESS and a shared database with a form to add data.
+-------------
+Depends if they're all on the same network as you. If not, you could make one spreadsheet where they mark a box for each part of the order then click a button that fires off an email to you, then write a macro that reads all the emails and dumps the info into a sheet.
+
+If so, you could just have the menu and info dump in the same wbook (with the info in an xlVeryHidden sheet, maybe?) and validate that they haven't already ordered by storing Environ("USERNAME") (their windows logon ID) and checking against it before allowing the new row.
+-------------
+Do you have any other tools at work? Sharepoint?
+-------------
+Or you could set up a google form maybe that would be fast and easy.  
+-------------
+So much this.  The amount of work it would require to combine sheets alone will make it worth the cost.  And that cost will pretty small compared to ordering food for 13,000 people.
+-------------
+I would LOVE to be able to do this, but not all locations within the plant have access to the internet. Some have intranet access, but some are going to have to fill out a form by hand and drop it off at my office. 
+-------------
+This is the only answer you need OP.  Make the form with buttons for the 4 static options and I would go as far as having preset fields for number, street, town, state, zip.  Have access create a table on the backside with 5+ columns.  
+-------------
+I am trying to do this... I should have paid more attention in Computer class years ago. 
+
+I have the basic questions: Contact name, phone extension, total # of associates. 
+But how do I make secondary level questions? Like location by building, then if building X is chosen, what building pillar?
+Once the information is in the form... can it tell me how many pizzas based on 3 slices per person have to go to each location, rounding up to the next whole pizza?
+Can it give me the number of sodas to each location, based of a ratio I have for each of 4 options?
+-------------
+Or, actually, since the TLs are already collating it for you, you could just have 1 item per column and have them fill out a row each for their teams. 4-8 associates, 13000 people, at worst you've got 3250 rows to contend with, and whether you go by individual order or team order you can just COUNTIF for your final purchase.
+-------------
+Nope, some only have their own departments intranet, others have no access at all. 
+-------------
+Nope. I wish i did, even if e-mail were available plant wide I would be happy. 
+-------------
+People own phones, though. Why not create it on Qualtrics or a quiz site or something, use a URL shortener, and tell people to visit tinyurl.com/Chef-Rae ?
+-------------
+I know that all those words are English, but I am really sure I don't understand what they mean. 
+-------------
+MSACCESS is a fully programmable database application. You can do anything with it... It takes some learning though.. [here is an example](https://www.youtube.com/watch?v=SEiT9T-99pw). 
+
+[Here is a tutorial](https://www.youtube.com/watch?v=kogGwRIHH6o&list=PLYMOUCVo86jEeMMdaaq03jQ_t9nFV737s) for writing MSACCESS applications -  I have no idea how good it is, there are many more on Youtube.
+
+Learning all the components to create your application will give you a great head of knowledge of all aspects of data and proccessing and programming etc..
+-------------
+I think you should try setting up a google form.  It is free and you could send a direct link to everyone.
+-------------
+Some parts of the plant, whole buildings, in fact, are electronic free. No phones are allowed in. People can't even wear digital watches. 
+-------------
+MS Access ( the purple icon ) is a database management tool.  What you are trying to set up is a database essentially.
+
+Google MS Access Forms and MS Access Tables
+-------------
+They go outside sometime, right? Tell them to do it on their break if they want some lunch, I guess. It's worth thinking about how much of the issue of poor lines of communication within the organisation is your burden to shoulder; you've been given at least 3-4 totally viable solutions and the only reason none of them will work is totally out of your control. Like, we can help you with the data, but I don't know how we could help you with people who won't/can't use a computer.
+-------------
+> I am trying to do this... I should have paid more attention in Computer class years ago.
+> 
+> 
+> 
+> I have the basic questions: Contact name, phone extension, total # of associates. But how do I make secondary level questions? Like location by building, then if building X is chosen, what building pillar? Once the information is in the form... can it tell me how many pizzas based on 3 slices per person have to go to each location, rounding up to the next whole pizza? Can it give me the number of sodas to each location, based of a ratio I have for each of 4 options?
+
+
+-------------
+Access can build you a data set.  You can export the data to Excel to manipulate it and do calculations. 
+-------------
+Ok, so I put the basic questions into Access, then send out the form for everyone to answer, electronic or printed as needed. Enter the printed information manually, figure out how to get the electronic ones into the data base, export the data and figure out the numbers of what is needed where. Sure this is going to be an easy all night headache. 

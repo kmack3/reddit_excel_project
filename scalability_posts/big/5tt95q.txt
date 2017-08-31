@@ -1,0 +1,81 @@
+big
+5tt95q
+How To Merge Different Excel Files Into One Big One (in Mac)?
+
+I have different files with the same headers and need to pull them all into one big file. The RDBMerge Add-In can't seem to handle more than a fraction of my files. The macros I am finding in different fora don't work with my Excel (v 15.19.1) and give error messages.
+
+
+-------------
+~~Have you tried [appending queries](https://support.office.com/en-us/article/Combine-data-from-multiple-data-sources-Power-Query-70cfe661-5a2a-4d9d-a4fe-586cc7878c7d?ui=en-US&rs=en-US&ad=US#__toc382391208) in PowerQuery?~~ 
+
+EDIT - didn't realize Mac doesn't have PowerQuery. Does MSQuery have similar applications?
+-------------
+If you can somehow get access to Excel for Windows, PowerQuery can easily do the job. Unfortunately it's not available for Mac.
+-------------
+> The RDBMerge Add-In can't seem to handle more than a fraction of my files
+
+Out of interest, how many files are you attempting to merge, and what kinds of sizes? 
+
+This add-in would've been my suggestion until I saw the content of your post. I've used it to merge up to a hundred or so separate files at a time, although admittedly only about 5-6KB per XLSX.
+-------------
+When I do stuff like this I use VBA (Just put all the files in the same directory).
+
+     Sub Compiler()
+
+     Dim FolderPath As String
+     Dim FileName As String
+     Dim WorkBk As Workbook
+     Dim endrow As Long
+     Dim Sheet As Worksheet
+
+     Application.ScreenUpdating = False
+
+     FolderPath = "C:\Path\"
+    FileName = Dir(FolderPath & "CPR_????????_C??.xlsx")
+    
+    Do While FileName <> ""
+        Set WorkBk = Workbooks.Open(FolderPath & FileName)
+
+     endrow = Range("A1048576").End(xlUp).Row
+     On Error Resume Next
+     Range("A2").Select
+     Selection.CurrentRegion.Select
+     Selection.Offset(1, 0).Resize(Selection.Rows.Count - 1).Select
+     Selection.Copy            Destination:=Workbooks("DailyNumbers.xlsm").Worksheets("Imports").Range("A1048576").End(xlUp)(2)
+
+       WorkBk.Close savechanges:=False
+        FileName = Dir()
+    Loop
+    
+     Application.ScreenUpdating = True
+     End Sub
+-------------
+To clarify, I have different files with the same type of content (e.g. student names, ages, etc.) and want to have all of that content in one big file. So add them as rows, not as columns. Would PowerQuery allow me to do that? Can't seem to find that answer. I'm downloading a Windows VM to be able to use PowerQuery.
+-------------
+Unfortunately it's hundreds at about 600KB each.
+-------------
+Pssssst
+
+^This ^is ^for ^Excel ^running ^on ^a ^Mac
+-------------
+Absolutely.
+-------------
+Yes, absolutely. When you ~~merge~~ the queries, just select all the columns that match up together.
+
+edit: I meant append, not merge, for pretty much everything in this thread - got them mixed up. 
+-------------
+Depending on the size you may want to import to PowerPivot - especially if you're going to end up with 1,000,000+ rows. I'm not as familiar with it, but there's lots of stuff out there for that sort of thing.  
+-------------
+Oh I don't use macs. I didn't know it even mattered.
+-------------
+Or PowerBI, It's much more stable than PowerPivot, and uses the same languages. If someones going to make a move due to size, IMO PBI is the way to go. 
+-------------
+Yeah, the file system between iOS and Windows is very different. I don't have any macs, so I wouldn't be able to experiment with VBA on them to see what works and what doesn't. I kinda feel bad for the people requesting assistance here but are stuck on macs.
+-------------
+So it won't work on a mac? Any way I can modify it to work on a mac? Not much coding experience.
+-------------
+Isn't the difference between the two something like PBI being a paid add-on and PowerPivot being free with the base Excel install? Just asking - familiarity level zero. 
+-------------
+PowerBI is free. The difference is that Powerpivot is an analysis add-in and excel isn't designed for large data-sets. PBI does a LOT more as well, its basically Acess/PowerPivot/PowerQuery/Powerpoint all rolled into one package.
+
+

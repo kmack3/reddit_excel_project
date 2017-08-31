@@ -1,0 +1,27 @@
+big
+lseec
+Is there any way to ignore page limits when dealing with big charts dealing with large amounts of data?
+
+I find that the more additions I make to the x axis, the more the chart gets squashed due to Excel's desire to fit the chart onto one page. I would rather have the chart maintain a massive width which I can scroll between left and right without the chart getting squashed. In other words, I want excel to completely ignore page restraints like it does for spreadsheets.
+
+Is there a way to do this?
+
+Thanks in advance.
+
+EDIT: And I'm on Excel 2003 unfortunately.
+
+
+-------------
+I may be missing something, but is there a reason why you can't click into the chart area and do a manual resize by stretching it out horizontally?
+-------------
+Yeah, I tried that. There seems to be an invisible wall preventing me from increasing the chart beyond its default size. 
+
+The original chart was on its own sheet but the invisible wall occurred after I copied and pasted the chart into a standard spreadsheet. It's well annoying.
+-------------
+Hmm, you should be able to do this. The plot area is restrained by the chart area, so perhaps you are trying to resize the plot area? When you click into the chart, what is in the name box in the upper left corner? Does it say Chart Area or Plot Area? If Plot Area, tap on any arrow key and cycle through the names until you get to chart area. You should then be able to resize when Chart Area is selected.
+-------------
+Backup solution: If all else fails, hold your Ctrl Key and click one into the chart. This will select the entire chart. Put your pointer in the center of the hollow dot on the right side of the chart, then drag it out.
+-------------
+Oh my god, that works. Thank you so much. I was being so defeatist about the problem. Can't believe I didn't notice the difference between chart and plot area so thanks again.
+-------------
+No problem, glad it worked!

@@ -3,7 +3,7 @@ import praw
 term = "big"
 terms = "scalability_terms.txt" # list of terms to search in the excel subreddit
 before = 1495612800 # time we got irb approval
-file_path = "first_scalability_posts/"
+file_path = "scalability_posts/"
 max_posts = 100 # maximum number of posts that will be collected
 				# from one subreddit
 

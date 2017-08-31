@@ -1,0 +1,52 @@
+big
+2lev0d
+How big is too big for a workbook?
+
+So i just started a new job and inherited a model that is insanely large and even more inefficient.  It's 42MB and I can just tell it's going to crash one day and that won't be good.  I have my own ideas of how to shrink it down but I'm looking for some of your ideas as well (setting up arrays and erasing memory in VBA--I'm just not exactly sure how to do that)  Along the same lines, what size should an "ideal" workbook be?  
+
+
+-------------
+Size isnt as important as how efficient the workbook is. I have 65Mb workbook but it still runs very fast because theres no excess data.
+
+Formulas are also calculating on a sheet basis as opposed to the entire workbook which helps keep memory usage low.
+
+When you cant get any work done because Excel slows you down - then its too bloated.
+-------------
+Maybe consider transferring the data to a database? A 42Mb excel document is pretty damn big.
+-------------
+We have big workbooks that just can't be avoided. I don't think that just because file size is large it implies that it's a crash waiting to happen. Save as Excel binary format if you're worried about storage space. And if you discover any inefficiencies, clean them up, I guess, as appropriate.
+-------------
+have a look here: 
+
+http://msdn.microsoft.com/en-us/library/office/ff700515(v=office.14).aspx
+
+Size isn't particularly important, as /u/epicmindwarp said. 
+
+What you want is to keep performance high, make sure calculations are broken down into smaller bits, and that you avoid volatile formulas and monster formulas. If you need to use OFFSET, use INDEX:INDEX instead, and limit your use of INDIRECT to where they are absolutely necessary. 
+
+http://www.decisionmodels.com/calcsecretsi.htm
+
+
+If you are working with very large datasets, then use macros where you load the data values into arrays, and then operate on them as best as you can, rather than referring to the ranges. 
+
+http://blogs.office.com/2008/10/03/what-is-the-fastest-way-to-scan-a-large-range-in-excel/
+
+and make sure you disable screenupdating etc. 
+
+http://blogs.office.com/2009/03/12/excel-vba-performance-coding-best-practices/
+-------------
+Another way to quickly reduce the size of the work book is to save it as .Xlsb (binary). If you haven't already done so that is
+-------------
+Hi!
+
+It looks like you are trying to ask a question!  Since you have not responded in the last 24 hours, I am here to assist you!
+
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?
+
+[Help Changing Your Flair?](https://www.reddit.com/r/excel/wiki/flair)
+
+[Asking Question and Sharing Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+

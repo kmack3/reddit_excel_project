@@ -1,0 +1,22 @@
+big
+46axoi
+Operations with big numbers in cells (1e15) gives weird results
+
+I'm adding, subtracting and multiplying numbers from cells in a list, the first members of the list are small and it gets bigger. The result is supposed to be the same for all the list but at some point where the numbers are big, it starts giving out weird values. For example, one of my list will yield -25 for the first 20 lines but 0 on the 21th, -26 on the next and 0 all the way down. Different lists give different weird results but always end in endless 0s. I've checked the calculations with python code. Is this problem related with the limit for a float number ? If so, how could I fix this ?
+
+
+-------------
+You suspected correctly. You need to store the numbers as text. [See here](https://support.microsoft.com/en-us/kb/269370). 
+
+I'm not sure how you can perform operations on large numbers. Maybe a user-defined function that passes a string representing an arithmetic expression to VBA's evaluate() would work if you make sure to format the result and return it as a string. Haven't tried that though. 
+-------------
+Thank you !
+-------------
+Sure. See my edit for an idea how you might use these large numbers stored as text, but I haven't tested it. If you try it, please share your findings. 
+-------------
+As you said, format the cells as text. In your UDF, define your input variables as Variant. Then use CDec() on each, and then CStr() at the end. For example:
+
+    Dim c As Variant, d As Variant
+    c = CDec(Range("G20"))
+    d = CDec(Range("G21"))
+    Range("G22").Value = CStr(c + d)

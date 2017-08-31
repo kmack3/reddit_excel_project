@@ -1,0 +1,45 @@
+big
+3yimi6
+Need to extract data from a big excel sheet. The example screenshot which gives the format is given.
+
+I have a big excel sheet which is filled in by various people, i do not control the format as it is in use for a long time. However, There is some data which is useful for me, which I am finding difficult to extract for a large number of rows.
+http://imgur.com/B5gziEj
+The image gives and example of the data format in the sheet.
+Assume, IA1 and IA2 are 2 resources which different projects (Here M and K) are sharing. 
+The total usage of IA1 is got by using SUMIFS function.
+The allocated work is in Column 3, DynM, StatM, DynK, StatK....
+Since IA1 and IA2 are shared on number of projects, I want a summary of where they are allocated (atleast allocation=>0.5). 
+So in the circled Cell, I want "DynM" to appear, since IA1 is allocated to DynM.
+Bonus: this would be if for IA1 in Column 7 I would get DynM-DynK.
+As mentioned above, this is a simplified example, The sheet I have has multiple projects with multiple resources, so this will be applied on a large scale. Thanks if you can help.
+
+
+-------------
+Showing B1:F13
+
+cat | a | 1 | 1 |  | 
+:--- | :--- | :--- | :--- | :--- | 
+dog | b |  | 1 | 1 | 
+ |  |  |  |  | 
+ |  |  |  |  | 
+rat | a |  | 1 | 1 | 
+bat | b | 1 | 1 |  | 
+ |  |  |  |  | 
+ |  |  |  |  | 
+ |  |  |  |  | 
+ | a | 1 | 2 | 1 | 
+ | a | cat | cat,rat | rat | 
+ | b | 1 | 2 | 1 | 
+ | b | bat | dog,bat | dog | 
+
+with D11
+
+    =StringConcat(",",IF($C13=$C$1:$C$6,IF(D$1:D$6>=0.5,$B$1:$B$6,""),""))
+
+entered as an array formula, control+shift+enter, filled to F11 & copied to D13:F13. [StringConcat.](http://www.cpearson.com/Excel/stringconcatenation.aspx) Edit: F > D
+-------------
+Antimutt, thanks for pointing in the right direction, I am having problem defining stringconcat function. Could you help with that? as in start with the basics please.
+I am able to partially solve the problem using Concatenate function on a small scale but for the big sheet, the Stringconcat function has to work I suppose.
+Thanks
+-------------
+[Here's how](http://www.contextures.com/xlvba01.html) to add the code and there's more links at the bottom of that page.

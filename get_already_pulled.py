@@ -8,12 +8,13 @@ folders = [
             "slow",
             "lag",
             "long_time",
+            "big",
           ]
 f = open("already_pulled.txt", 'w')
 
 for folder in folders:
     print(folder)
-    for filename in os.listdir("first_scalability_posts/"+folder+"/"):
+    for filename in os.listdir("scalability_posts/"+folder+"/"):
         if ('.txt' in filename):
             print(filename)
             f.write(str(filename) + '\n')

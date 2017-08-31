@@ -1,0 +1,20 @@
+big
+3fqzqv
+Big difference in FORECAST formula outcome vs. what I see on a chart with a trendline.
+
+I'm trying to determine the gap between a predicted y value and an actual y value (.056), which is one of 152 pairs of known x/y combinations. When I pivot chart the know combos with a trendline, the line goes almost exactly through the specific actual y value. Obviously, it's hard to tell visually, but it's very close.
+
+But when I use the FORECAST formula, the result is .101. Shouldn't that mean that the trendline should pass above the actual y value (.056)?
+
+
+
+-------------
+As far as I know, [there shouldn't be a difference at all](http://www.excel-easy.com/examples/forecast-trend.html), unless you changed the trendline to some non-linear format. What's the range of values on your y axis?
+-------------
+What's your EXACT formula using FORECAST?
+-------------
+No, the trendline is definitely linear. There are two y axes, on is 0 to 25 million, the second is 0 to 200%.
+-------------
+Can you post a picture of your data and chart, or the worksheet itself? Sounds like, to me, that everything is as it should be. A difference of 0.045 between actual and predicted y values would show up as being very close to the plotted point on a y axis with such large ranges as both of yours have (not sure which is being predicted).
+
+I'm also curious as to how a pivot chart fits into this. Typically, I would just create a scatterplot of (x,y) and add a trendline to it without the need for a pivot table - Excel automatically skips error values. Adding in a pivot step would introduce a few wrinkles regarding how the data is displayed that might be causing an issue that I don't fully understand without being able to see your work.

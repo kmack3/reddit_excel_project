@@ -1,0 +1,62 @@
+big
+54r1m3
+Have a list of IDs on one big CSV, need CSVs with only unique values
+
+So I have the following columns in my file:
+
+    Group Number, UserID, Date1, Date2, EEID
+
+Where the count of some UserIDs is > 1, which will fail in the system when I load the data. What is the best way to get each record where the count is > 1 on it's own file, so that I would end up with 4 different CSVs - since 4 is the highest count.
+
+
+-------------
+What I would do is create another column that shows what instance of UserID that is, 1st, 2nd, 3rd or 4th. If UserID is in column B, you can do this with this formula:
+
+    =COUNTIF($B$2:B2,B2)
+
+Drag that formula down and then sort by that new column. All of your 1s, 2s, 3s and 4s should be together. Cut and paste them to their own CSV.
+-------------
+Make a pivot table. Put the ID's in the rows, and the ID's again in the values leave it as count. Then use a numerical filter, filter where the ID <> 1, double click the grand total. Boom, id's in its own sheet. You can do the same for the other counts. 
+
+-------------
+Its there a way to automate the cutting and pasting?
+
+
+-------------
+The quickest way would be to create a pivot table with the field being your count column, and then right click->show details (or just double click the value in the count column).
+
+If you're familiar with vba, you could make the pivot table and then run the code to kick each line in the pivot table into its own worksheet.
+-------------
+I really need to learn VBA. 
+
+-------------
+I'm dumb and forgot about cell references. It was able to give me a distinct count and made copy/paste quick.
+-------------
+In this case if it's only four reports, it's probably just as quick to do it via the first method I described.
+
+Below is simple VBA code that you could paste/run when you have the pivot table sheet selected.  If I recall, I had to first change the pivot to classic style and also removed grand total row or you get a sheet for that, too.
+
+
+Sub MakeReports()
+    Dim c As Range
+    With ActiveSheet.PivotTables(1)
+        For Each c In .DataBodyRange.Resize(, 1)
+           c.ShowDetail = True
+        Next c
+    End With
+End Sub
+
+edit: thanks to /u/All_Work_All_Play for fixing the formatting.  See below.
+-------------
+Fixed up yer formatting here
+
+    Sub MakeReports() 
+    Dim c As Range 
+    With ActiveSheet.PivotTables(1) 
+    For Each c In .DataBodyRange.Resize(, 1) 
+    c.ShowDetail = True 
+    Next c 
+    End With 
+    End Sub
+-------------
+Thank you-I'm more used to posting in the various Excel forums, not on reddit.

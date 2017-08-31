@@ -1,0 +1,33 @@
+big
+33da64
+Big SQL data dump - Extract date range to column headers of a new sheet.
+
+I pull about 150k rows of data and each row has a date tag. I am tasked to create a report that shows the data by date. 
+
+Ideally, I would like to extract the date range and order it newest to oldest as column headers on a new sheet. From there I can index match the rest of my data back in.
+
+This request could include differnt sized ranges in the future, and I will have to refresh it many time for a given time frame. Thoughts? Should I just pivot it?
+
+
+
+-------------
+PivotTable with dates as column headers 
+-------------
+
+Hi!
+
+It looks like you are trying to ask a question!
+
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?    
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)    
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+-------------
+I just used a pivot. I would prefer to not use one because the data is refreshed on demand. I have to link the pivot cells to another sheet them do my indexing and sorting. (3 separate sort criteria ;top30 for 3 different groups) 
+
+I not really a fan of using pivots this way, I only really like them for analysis, anyone have any comments about another method or reassure me of this one?
