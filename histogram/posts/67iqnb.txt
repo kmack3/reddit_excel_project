@@ -1,0 +1,21 @@
+Can excel count painted cells and automatically add up an assigned value?
+Excel cannot natively count coloured cells. You would need VBA for this. Instead why not simply indicate in another cell "Win" or "Lose"... then you can have Excel conditionally format things to green or red depending on the contents of these cells and you can also more easily perform calculations like counts and other things. 
+
+I believe Google sheets is the same way.
+Helper column where you enter a "win" or a "lose".
+
+Conditional formatting on the whole row, if that column = "win" set to green. Red for "lose".
+
+You can do the $ subtotals a number of ways. 
+
+You could use an if statement to get 2 if it says "win" like this: =If(C1="win",2,-2) and drag down the list.  You change C1 to whatever you used. Then that column will be filled with either 2 or -2 depending on the win/lose criteria. Then you can sum at the bottom. 
+
+You can do a single countif "win" to get all the wins, and a simple count to the get total, then subtract those to get the losses if needed.
+You could also just assign a 1 or 0 for a win or loss, then take the sum as the number of wins.
+What excel can do is filter by color and then you sum up yourself. Not what you wanted, but maybe allows for a quick way to get your solution. It's just not useful for long term use of a constantly changing spreadsheet
+
+Go to data: filter to turn on filtering, then click on the filter of the column you have colored. In the drop down there will be an option "filter by color" - choose a color and you should be able to see only the color you wanted. Then you still have to sum up yourself. Dirty solution if you need a sum quickly and don't have time for VBA 
+https://support.microsoft.com/en-us/help/2815384/count-the-number-of-cells-with-specific-cell-color-by-using-vba
+great! i wouldnt mind doing this. could you lead to towards resources that would help me do the things you described?
+thanks!
+/u/occamsrazorburn (nice username!) has you covered

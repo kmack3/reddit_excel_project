@@ -1,0 +1,68 @@
+I dun spent over a year refining a spreadsheet for work. Now the company is sharing new butt-ugly low-functionality spreadsheets with us via Google Docs and telling us that's the system. Need a VBA to copy data from one to the other.
+Oh oh, I might be able to help with this! Doing something similar at work. 
+
+You save your files in a particular location. Right now it's C\June, and it's grabbing specific data and pasting it into a specific location. It can be generalized, but in that case I'd create data "landing tabs" where you can safely paste in all of the data at once, then parse it from there. 
+
+Downloading everything from Google sheets easily, I don't know. I know Google has some interesting features in that direction
+
+    Option Explicit
+
+    Sub Create_Month_Summary()
+
+    Dim folderPath As String
+    Dim fileName As String
+    Dim thisWorkbook As Workbook
+    Dim dayNumber As Integer
+    Dim workbookDate As Date
+    
+    'Folder containing daily dated workbooks for a month - CHANGE AS REQUIRED
+    
+    folderPath = "C:\Excel\June\"
+    
+    Cells.ClearContents
+    
+    Range("A1").Value = "Date"
+    Range("B1").Value = "Total 1"
+    Range("C1").Value = "Total 2"
+    Range("D1").Value = "Total 3"
+    
+    Set thisWorkbook = ActiveWorkbook
+    
+    If Right(folderPath, 1) <> "\" Then folderPath = folderPath & "\"
+    
+    fileName = Dir(folderPath & "*.xls")
+    Do While fileName <> ""
+        
+        'Parse file name to get workbook date
+        
+        workbookDate = CDate(Left(fileName, InStr(fileName, ".") - 1))
+        dayNumber = Day(workbookDate)
+        
+        'Copy data from dated workbook to associated row in summary sheet
+        
+        Workbooks.Open folderPath & fileName
+        With thisWorkbook.Sheets("Sheet1").Range("A1")
+            .Offset(dayNumber, 0).Value = workbookDate
+            .Offset(dayNumber, 1).Value = Sheets("Sheet1").Range("D25").Value
+            .Offset(dayNumber, 2).Value = Sheets("Sheet2").Range("D26").Value
+            .Offset(dayNumber, 3).Value = Sheets("Sheet3").Range("D27").Value
+        End With
+        ActiveWorkbook.Close savechanges:=False
+        
+        'Get next file name
+        
+        fileName = Dir
+    Loop
+    
+    MsgBox "Finished"
+    
+    End Sub
+
+
+I'd google "Excel VBA get data from other sheets" or some terms similar for more details
+
+screenshot or a mock-up (in case of sensitive data) of the the layout of both sheets (which columns/data is where and needs to be copied to which columns/data where) would be mighty helpful I'm sure. 
+
+
+Can I email the two workbooks to you? Because of the layout of mine, a mockup is far too complex.
+I don't have time to look at it too much right now, sorry, hopefully someone else will shoot you a message

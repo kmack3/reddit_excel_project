@@ -1,0 +1,31 @@
+Trying to include cells in the pivotable filtering.
+is the uuroster just a difference between the start time and end time?
+There is a solution that is not very elegant but might work:
+
+You can "nest" all the formulas in the UURROOSTER columns within an iferror formula.  The way to do this is to go into one of the cells with a formula and right after the equal sign, type in iferror( 
+
+then at the very end of the formula put a ,"")
+
+Hopefully the formulas are structured so you can drag the formula across and down without messing up references.
+
+This will make it so if your filter on the pivot table creates blank rows, you wont get errors on the right side, they will just show up as blank rows.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+No one with another option that doesn't involve rebuilding the whole thing?
+
+Thanks in advance guys!
+Yeah basically, but we want to keep the visual representation of the time slots + the sum of those hours (or the difference between start and end) is used to calculate the worked hours.
+But then the coloured bars will still stay where they are and not follow when filtered right?
+

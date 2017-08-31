@@ -1,0 +1,147 @@
+Any Data Analysts here?
+Probably boilerplate excel stuff like sumifs, vlookup, and pivot tables.
+If you have never watched this: it's both entertaining and informative: https://www.youtube.com/watch?v=0nbkaYsR94c
+
+If the beginning seems too tame, don't worry: it goes deeper.  If you get to the end and feel you've learned nothing, I'm confident you'll ace anything they'll throw at you on an assessment test.
+I was a Digital Analyst until last year (now Software Engineer).
+
+My technical interview was mostly questions that revolved around knowing when to use SUMIFS, COUNTIFS, INDEX/MATCH, MAX, etc, and some that were creative implementations of both to solve a problem.
+
+Most of the questions also involved some amount of statistics knowledge, such as dealing with non-harmonic averages, knowing how show percent changes on percent changes reliabely, etc.
+
+I would say make sure you know the above formulas and the other big ones. Know how to graph things quickly. Know how to use the named range manager for dynamic formulas. Know how to write dynamic range formulas that do things like OFFSET based on changing criteria. 
+
+You might be asked about array formulas. They are kind of stupid, but if something doesn't work and you think it should, try entering it as an array formula.
+
+On that note, look up on how Excel handles non-contiguous arrays and assesses their logic. It's kind of interesting.
+Hi James, 
+I'm a Data Manager; been a Data Analyst for just over 9 years now. Please download the spreadsheet in this link and work through it. I created it as a test before the interview, we were hiring a Data assistant. Remember, Google is your best friend. Let me know if you have any more questions.
+
+https://drive.google.com/file/d/0B6170nLX_ro9ejA4TEQ5OVM3d0k/view?usp=sharing
+
+Edit: forgot how long I've been an analyst! 9 years, still feels like 7.
+
+Edit 2: added some context.
+9/10 If it's proprietary software exported to excel, they won't actually know jack all about Excel. 
+
+####Research these terms:
+
+Conditional Formatting
+
+Filtering
+
+Macros, Pivoting 
+
+Nesting 
+
+Helper columns & Optimisation.
+
+
+Anyone worth his salt in Excel will know these things:
+
+
+Hell even Normalising & Data Integrity (Database terminology) will go down well here.
+
+
+###In interview. Just shoe horn in the bold if you wanna make jokes when you can if they ask anything.
+
+Why are you here you suck?
+*Well I could set up Conditional Formatting rules to select Anomalous Data, then use filters to extract the anomalies / repeated ID's to ensure that the Table is normalised before the Data is pivoted.* Money *probably but it depends on the criteria in the table.*
+
+Why even show up you litterally don't know what you are doing?
+
+*This question could be embedded into a procedural Macro which would probably use Nested LOOKUP and CountIf helper columns to ensure Data Integrity is maintained, then through all the possible inputs I could extrapolate.*
+The money is probably the reason.
+
+
+I mean shoe horning data integrity humour into an interview can't possibly go wrong.
+
+Just interned this summer as a Data Analyst and I primarily worked with visualizations that I built primarily through pivot tables. If i were you I would make sure to be comfortable with vlookup/index match and be creative with visualizations. Chandoo is a great place to look for ideas for different ways to manipulate data. 
+I'm surprised nobody has mentioned importing various types of data... Excel Queries, data connection knowledge and certainly SQL queries and basic database comprehension.  Perhaps even SSAS knowledge.  What If Analysis, data validation, even Web extraction, etc.
+Anyone help with some differentiators between a commercial analyst and a data analyst. I'm interviewing for this role (we are hiring) and wanted to construct a few competency based q's.. Thanks all. 
+I'd be doing that, but also trying to make sure they know how use to these formulas in context and haven't learnt them rote. 
+
+I'd also being asking some process related questions to test their application and understanding of new knowledge. I'd rather have someone intelligent and adaptable who can learn than someone who spent 100 hours on an excel course 
+> https://www.youtube.com/watch?v=0nbkaYsR94c
+
+Good resource, but this guy acts like he's the hottest shit ever and isn't particularly good at Excel.
+
+Adjusting an INDEX/MATCH named range, "This is as far as I know the only way to do this". Yeah, it's not, and it's actually a really and inconvenient way. His ranges should have been OFFSETS with COUNTS.
+it bothered me that he didn't use alt+h+v+v to paste values. i'm weird.
+Oddly curious, how did you make the transition from digital analyst to software engineer? I'm a financial analyst and would love to move into a more programming oriented role.  
+As someone who does independent Data Analyst(ey) things, is there a good reason I should be doing these things but don't? My customer base frankly doesn't care how I get to the answer as long as the process is solid, but reading over your response makes me think I've overlooked some tools in my potential toolset. Name range manager for dynamic formulas? Dynamic range formulas that do things like offset based on changing criteria? Array formulas? I know what array formulas are (and use them frequently) but I try to avoid them as they're a performance hit and if I'm using them frequently enough I could probably come up with faster calculations using a pivot table or some type of VBA. Is this a case of knowing what you're saying but not knowing the verbiage (all self taught)?
+Arrays are really nice for inserting an OR into a sumifs
+Hello! 
+
+Thank you very much I'll wok though this tomorrow and I'll be sure to ask you if I get stuck with anything!
+Where do I find a job doing this?  
+Q11 was the only type I couldn't do super quick, but the Subtotal feature got me close.
+Not gonna watch that guy for an hour lol, but you might want to opt for an index-count/match/0-rows to adjust named range.   
+The main reason being that offset is volatile while index isn't (usually).   
+Not an issue with smaller workbooks but if it's a bit bigger the constant recalc can slow stuff down.
+
+Important to note though that if he is using it like A2:INDEX(), then that's apparently volatile anyway, so might as well use offset.
+
+But let's say you want all rows in a column and you are using a table, you can use =INDEX([table],0, match(column_name, table#header,0)). The table does the dynamic adjusting with new data and the match does the adjusting based on what you're looking for.
+
+
+I think he's copying this series:
+
+https://youtu.be/U_X5uR7VC4M
+I was most shocked that he was actually hitting ENTER, right arrow, up arrow to get to the next cell, then suggested selecting the cells in the row and hitting ENTER to move to next cell instead.  Apparently he doesn't know that hitting TAB gets you to the next cell, and hitting ENTER at the end will take you to the first cell that you hit the first TAB at.  Here I thought everyone knew that.  O.o
+That is weird.  I've always used alt+e+s+v 
+You could just macro it and save yourself some keystrokes. I have control+shift+every key my left hand can reach bound to the most common tools that I use.
+I've always used alt,e,s,v - I didn't know there was another way!
+Thanks
+I understand macro-ing it to save key stroke, but doesn't alt-e-s-v have the same number of keystrokes as alt-h-v-v? So what's the difference?
+
+I didn't know about alt-h-v-v until now, just tried it, it feels so weird after years of alt-e-s-v. 
+I'm self taught. I started building my Excel dashboards in an MVC paradigm (how web apps are often architected), which me got me more curious about web development. I started watching a lot of YouTube videos at night about JavaScript and all in one frameworks where people spin up web apps really fast, and just got really interested. Started teaching myself JavaScript and make my own simple web apps with these frameworks (literally just displaying lists and adding and deleting from them)
+
+Just kept making my little side project apps more and more complicated, googling as I went how to do things. Always more YouTube videos. Finally a Software Engineer position opened up at my company and I harassed enough people to give me a shot at it. Really lucky, but think people overestimate the effort to do web development these days. If you want to learn, super easy to get started and running with the frameworks available now.
+Not the guy but i had a similar transition. I ended up learning VBA in excel. Then writing programmes the company used. Then it escalated from there into sql and python and then into online frameworks and object oriented programming in other jobs. Ive found it a pretty useful mix to have a data analyst background while being able to execute a tool for others too. 
+So, I should say I was building dashboards that replicate web apps. They were incredibly scalable and dynamic based on very different scenarios.
+
+We used names ranges as more or less variables, so they needed to be smart enough ranges that any calc could be done on them without throwing errors, so different lengths, moving around to adapt to changes in input data, etc.
+
+We only created non contiguous named ranges when we had to, to keep these high standards up when we knew a cake would need it.
+
+The only reason to Excel like this is if either you want to start building dashboards that are like web apps and very interactive (and generally really fucking cool), or dramatically cut down development time with scalable templates. Solve a problem once, never do it again. Just rely on your variables adapting. I taught a consultant once, he started being able to take on a lot more clients because he never had to repeat a similar task.
+
+Edit: we didn't use VBA because VBA enabled workbooks are blocked or disabled on a lot of clients by their IT department. It also would split our code base, and in general VBA is really shitty. So we just decided to never use it, and keep all our code in native Excel and transparent to end users to change at will or do quick modifications on our end.
+Not sure if there's many jobs out there for this sort of thing, I work in a medium sized school and handle all data (coordination and analyses) along with other duties (funding, exams management, etc.). There weren't enough hours in the day for me to do it all and hired an assistant. This was the test before the interview. 
+I use Ctrl+V, Ctrl, v,  
+
+or Ctrl+v, Ctrl, f, for formulas
+I have it macro'ed to Ctrl+Shift+V, so it's just an extra key to paste values :)
+alt-e-s-v + enter
+
+h-v-v is just 3 strokes
+> in general VBA is really shitty
+
+Whaaaaat??  O.o  There are SOOOOO many things one can do with VBA that are absolutely impossible to do with Excel functions... including making decent "dashboards" that you speak of (forms anyone?).  I'll take my VBA usage over pure formulas any day.
+
+Also, I've never seen an instance where using OFFSET made any sense.  Seems sloppy to me, but I imagine there may be some decent use for it out there.
+I'd be interested to learn more (also snooped a bit through your comment history). I *try* to run a 'build it once' shop, but almost inevitably someone decides they want a particularly different metric displayed somewhere else. The moving around to adapt to changes in input data... I get that happening at least every other month and can be a bit of a bugger. Can you give me a few pointers, or perhaps a bare-bones example I can reverse engineer? I got my start in javascript, but it's been a long time.
+Ok, most of the analyst jobs I see are in the financial realm but I have a science background and don't feel like re-training.
+Ah, right. Thanks. My fingers were moving so quickly I didn't even register the enter as a keystroke. 
+It's a bad programming language. It masquerades as Object Oriented and adopts its conventions without any real support for object oriented programming as it's paradigm, which makes it very confusing and difficult to debug.
+
+They are not impossible, you just don't know how to do them (no offense intended by this, trying to point out that lack of knowledge and lack of capability are two different things).
+
+OFFSET is the most used function in all of my named ranges. It's exceedingly versatile and simply essential for making scalable dashboards.
+
+If you want to make money from Excel in a B2B environment, VBA quickly becomes a no-starter without enormous IT cert hoops to jump through.
+Hi, absolutely! To be really honest I'm a bit drained tonight but DM me and I will send you an example workbook sometime tomorrow and can explain some areas in it where the named ranges are really helpful and basic architecture of them.
+So just because it isn't a perfect OO language, you would rather have NO programming language, and instead use Excel functions, which lack any OO capability whatsoever?  Oh my... O.o
+
+Of course you can make some semblance of a dashboard without VBA, but without the full power of VBA, it will most certainly be limited in its usefulness.  Slicers and charts only go so far.
+If possible I'd be super interested in this as well.  Sounds like you really know your stuff! 
+More like Excel itself can be supported.. Hundreds of random VBA end user applications coded by people of varying abilities, who may not work there anymore creates a massive headache for IT departments that will be presumed to be able to support them when they go wrong. VBA is great if the author is the only one that is going to use and maintain them, and will retire them when they leave, but once they get out in the wild they cause all sorts of havoc and nightmares.
+
+Have you not seen Jurassic Park? I'm pretty sure it was an allegory for VBA end user apps that escaped into the wild!
+Just like with any code base, you need to document it well, and you need to hire based on the tools you are using.  Of course if you don't need VBA for what you're working on, then don't use it.  But if you want to automate time consuming procedures, provide higher functionality, clean forms for input, etc then you need VBA.  The cost savings it can provide far outweigh any issues with code maintenance.  Hell, I had one VBA automated report that one could just click the button and it would generate a perfectly formatted 30+ page Word report filled with charts, sheets, etc which they were then selling for $5,000 each.  Doing each of those manually would probably require a couple days of work.  Just the other day my wife, an IT Director herself, needed a way to search and return from their email server based on highly specific criteria (this word within X number of words from another word, etc) and I made it within a couple hours using Outlook VBA.  Come to find out, the software already out there to do that costs $5-10k.  Couple hours of work (free in this case, but still ;P ) or pay $5-10k?  VBA is an absolute necessity in just about any decent business IMO.  Automation is where it's at!
+> (free in this case, but still ;P )
+
+Need me to work up an invoice for you? We can defiantly write in delivery of X number of beers to your couch while you watch football. The options are endless!
+I was bored, and I gotta help the wife ya know?  ;P

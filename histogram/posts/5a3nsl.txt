@@ -1,0 +1,122 @@
+I think my analyses have outgrown Excel and I'm looking for some guidance on which tools I should be focusing on learning.
+I currently do what you're next step sounds like it might be. I'm a Data and Reporting Analyst in the Business Intelligence group for a company that competes with P&G, Johnson's & Johnson, etc. I'm actively pursuing my next step - Data Science. 
+
+Where we (our team of analysts) currently are, is we use SMSS for our SQL database, PowerPivot for large data modelling in Excel (3mil<x<18mil rows) with multiple SQL table relationships, PowerBI for dynamic visuals and R for more interesting/more rigorous data exploration. I myself am an amateur scripter in R, Python, TSQL and VBA. 
+
+Without knowing exactly the business case regarding your position, I'd would say in the immediate future, you should be focusing on #2. PowerPivot is the intermediate step between Excel and SQL. PowerPivot will allow you to complete your deliverables for the next few months while you work on learning SQL and relational database models. Then, you can start building your SQL database. Meanwhile, because you understand the PowerPivot, when you need to do some analysis, you can write your query, paste in PowerPivot and pull in data to play with in a pivot tables of a dozen million rows. 
+
+The step after this is learning Python or R depending upon if you would like to do basic statistics and web-crawling or 3rd year undergrad to masters levels statistics.
+
+Sidenote. R is the scripting language "behind the scenes" for data visualization in PowerBI. If you're interested in exploring that tool, then learn R. 
+
+Tl;dr learn PowerPivot with the data you have. Then, while it's still possible to met your deliverables in Excel and PowerPivot, start to learn SQL and how to structure the relationships between the tables in your brand new database. Then, use your knowledge of PowerPivot to build pivot tables of, at max, around 18mil rows while you teach yourself Python or R so that when it's time to deal with bigger data, you have the tools. 
+Honestly one of the best visualization tools in the industry is Tableau. I don't know how it compares to Power Pivot but it's s pretty damn impressive. It can be a bit pricy, I think 1,500 for a desktop license, but it is the next step after Excel.
+There is a pretty cool tool called **POWER BI** 
+
+Microsoft tool which incorporates artificial intelligence
+
+check it out /r/powerbi
+Python has been an amazing tool for me. I blogged about my learning experience [here](http://inky.space/after-excel.html) if you'd like to see an example and some links to where to get started.
+all of the above. Plus 'R'. Figure out what works with your workflow.
+Have you considered ms sql server reporting services - can connect to salesforce and uses expressions like excel. A developer license is free to play with. It can be as simple as writing sql or as complicated as everything can be controled with expression. There's a ms tutorial with an example database since the 2005 version. Its an alternative to visualisation tool to Tableau.
+Both 1 and 3 are good.  If you are regurgitating data into pretty pictures then [Qlik](http://global.qlik.com) is pretty amazing.  If you really need to crunch some serious numbers then perhaps look at [R](https://cran.r-project.org/).  I also tend to use a Linux CLI to hack and slash large data files.  I hope the BASH shell they are adding to Win10 is decent.
+  
+As for WHICH databases....once you learn the basics of how to design, build, and interface with a database then it really doesn't matter.  I'll use Access if I need something quick and dirty, MySQL if I'm working on a larger project, and Oracle if I have to work with the main company ERP system.  To most end-users a database is a database (don't tell my DBA I said that).  The only real difference is the interface.
+Consider power query. It's a free ETL extension from ms, just like power pivot.
+I'm not sure how your data is assembled. I would highly encourage you to look into Spotfire. The raw excel data / database information has to be formatted specifically or it won't work right. 
+
+But wow.. when you get your data formatted and loaded into Spotfire - it's a whole other world. It's so good. If you have multiple data sources it can be great as well. You get them set up once then all you have to do is refresh. I rarely use excel for anything anymore. 
+
+I know it's very expensive, but in my option totally worth it. Check it out! 
+If you use python, you may as well bypass step 1 with it as well.
+Have you looked into Power BI?
+R without a doubt, by you should also learn SQL. Just make sure your statistics are up to snuff.
+If there is a large enough business case Wave Analytics is a Salesforce 'plugin', it can do practically everything an excel report can and the data can be updated directly without need for export, scheduled for every 1-24 hours
+Sounds like what Alteryx is designed for. It can connect to salesforce and run standard flows in a repeatable fashion. The background of it is R.
+Flair changed to discussion, thanks for all of your great inputs everyone, and OP for the question :) 
+Doing what you do, combining multiple downloaded tables and joining them into multiple reports, I think Access can be effectively used as a tool to prep your data for excel.  In my previous job, I delivered reports out of access every day.  It's very easy to learn and use without knowing any SQL.
+
+Basically you can use access to create the data sources that you'd drop in to your excel data source.  BTW, you know about dynamic ranges for your pivots, right? Also, if you haven't done so, you can write a macro to update all your pivots if that gets tiring.
+ #1 and #3. Heck, do #3 and that will help you with #1. 
+i had to request the ability to download Power Pivot at work and i'm not sure i'm going to get it :/
+Thank you so much for the detailed response, I really appreciate it! I have a very noobie question that is about to illustrate how little I know about databases, but you said that after I learn Power Pivot, I can start building a SQL database. I guess I'm a little confused as to how this database would work considering all of the data that I'm using is on Salesforce, and when anyone else in the company needs data, they pull it from Salesforce as well. Am I essentially building a database for my own use? How does this interact with data that is being uploaded into Salesforce on a daily basis?
+
+I had a hunch about the order in which I should be learning things, and I'm glad your suggestion lines up with that! I think it makes perfect sense to start learning something that is native to Excel as a short term solution, and then explore the complex options as long term solutions since I don't expect I will be learning SQL and/or Python overnight :) Thanks again!
+
+EDIT: I kept on reading some of the other responses and someone mentioned that you can connect a SQL database to Salesforce, so I may have answered my own question? Unless you had any other thoughts.
+Large learning curve tho. If you don't know much about databases when it will take you a while to get even a trivial report/analysis up and running.
+Awesome, thanks for the response! Do you currently use the free version? If so, is that sufficient for your needs?
+Wouldn't most of the points you brought up about the pros of using python be just as applicable to using VBA? Does the same thing every time, takes just a few seconds, you can alter the lines of code if something goes wrong... 
+I'm learning a bit of Python now using this site: automatetheboringstuff.com
+
+There's a chapter about using Python with Excel spreadsheets that I haven't gotten to yet, but that's great to hear that you were able to have success with it! Thanks for the response.
+Yeah definitely, I listed Option #1 as learning how to build a database, unless you're referring to something else? That's awesome that it can connect to Salesforce, that's really good to know! Thanks.
+Hey, I had a noobie question about using MySQL that is about to illustrate how little I know about databases. You mentioned that SQL can connect to Salesforce, but everyone else in the company still uses Salesforce whenever they need data, so I guess I'm a little confused as to how this database would work. Am I essentially building a database for my own use? How does this interact with data that is being uploaded into Salesforce on a daily basis?
+I run a lot of reports on a monthly or quarterly basis, so it seems like MySQL would be best as a long term solution. Thanks for the response!
+Hey, I had a noobie question about using MySQL that is about to illustrate how little I know about databases. All of the data I use is coming from Salesforce (and when anyone else in the company needs data, they use Salesforce as well), so I guess I'm a little confused as to how this database would work. Am I essentially building a database for my own use? How does this interact with data that is being uploaded into Salesforce on a daily basis?
+Thanks for the suggestion! I actually looked into Power Query as well and just forgot to include it in the original post. I stumbled onto this thread a while back which I thought was really helpful: http://stackoverflow.com/questions/29696131/difference-between-powerpivot-powerquery-and-powerbi
+I haven't! Someone else mentioned it as well -- is the free version sufficient?
+I had a noobie question about using SQL that is about to illustrate how little I know about databases. All of the data I use is coming from Salesforce (and when anyone else in the company needs data, they use Salesforce as well), so I guess I'm a little confused as to how this database would work. Am I essentially building a database for my own use? How does this interact with data that is being uploaded into Salesforce on a daily basis?
+Thanks for the suggestion, I'll definitely look into it!
+Thanks :)
+Thanks for the response! I know what dynamic ranges are, but can you elaborate how it would help with pivot tables?
+Sure, I'd explore connecting SQL and SharePoint. See what kind of efficiencies can be gained. Not something I've looked into though. 
+
+You want your own database for a few reasons:
+
+1. Data validation. You can ensure that the data you're working with is 'good' data when you've got control of what is stored. As well, you can ensure everyone is using the same data. This is fantastic when you're working with lots of data and lots of people. 
+
+2. Data security. You've got your data stored nice and securely so, just in case your salesforce data gets corrupted, goes offline, deletes the last two years without notice. You've got your own copy. 
+
+3. (3a) Data exploration at volume. What happens when you've reached the limit of your PowerPivot? Are you going to take out the last year to include the next one? Where are you going to put that year? What if you want to explore the starting 5 years and the last 5 years? How are you going to 'fix' your data model? It's much easier to have a storage space that can be relatively easily sliced and diced in order to explore large volumes of data. 
+
+3. (3b) Data exploration at volume. What happens where you're getting data from more than one source? Or even multiple sheets/tables from one source and you want to combine them? Combining large sums of data in SQL is easier than in Excel (PowerPivot aside) 
+
+3. (3c) Data exploration at volume. What about scaling up your data. You've built your model for one account. What if all your sales reps now want the same deliverable? Scaling in SQL can be fairly straightforward. 
+
+4. (4) The alternatives can be pretty sophisticated. You would write a script (probably python) yo hit your salesforce API, snag your data. Then in that script you'd write your cleaning routines. Then, in that script you'd wrote your data exploration techniques - stats and pattern recognition, then you'd write your data visualization scripts. If your data changes shape, you've gotta change your scripts. It's very ad hoc. With SQL, data is stored such that you don't have to write API and cleaning routines every time you want to look at your data. 
+
+That's all I can think of off the top of my head. Good question though. 
+True, but you can connect an excel file to tableau and do the visualizations there.
+Hey OP,
+
+You can download the full version of Power BI on your desktop right now: https://powerbi.microsoft.com/en-us/desktop/
+
+For desktop versions of PowerBI, there is no functional difference between what you will use and what I will create for one of my enterprise client's. It's actually pretty amazing. If you're interested in continuing as an analyst, i would definitely check out this tool. 
+I got an intro to it at a 3 day workshop. Seemed pretty cool... simple to use and very useful. 
+
+You can actually ask it everyday english questions about your data ... and it answers.
+
+
+However at my workplace we mostly use Crystal Reports...
+
+ /r/crystalreports
+VBA is amazing, but it isn't as concise as Python, which can make a difference. I would say (though maybe naively) - anything VBA can do, Python can also do - but Python can also do a lot more, as it has a lot of elements similar to R - plus web scraping etc. 
+Yeah, definitely. 
+
+I'm only talking to someone who is in the position of deciding what to learn next: Python is a better tool to learn than VBA, in my humble opinion, because of how readable and intuitive its syntax is, and because of how widely used it is in fields like web development, scientific programming, and others. I don't know of that many professions that use VBA very much except as an extension of Excel.
+Just to clarify on the original poster's comment: SQL Server Reporting Services, or SSRS, is a reporting tool from Microsoft. It's a tool you can use to connect to a data source and create a large variety of reports. SSRS is not a database, it's a tool to connect to database.
+Most databases have connectors that you pass the database server and instance name as well as username/password.. is the simplest way. When you connect to a database is pretty much the same way as passing the connection string. Salesforce would be using a database as well. Most applications have a database as its brain and the gui is its face. Salesforce is not the only database type you can connect. SAP BW is another one, there's a few but those two is what we use in our business.
+SSRS is a reporting application n with data visualisation. When connected to salesforce you can pull the data into SSRS to display n manipulate visually. You cannot n should not change the underlying data. Those who connect to salesforce, depending on their access level, can create, update & delete data. Most likely master data and transactional data.
+Connectors will grab the data from said databases into your report, you can have schedules to update the data every hr, day, week etc. 
+If all of the data you use is coming from SalesForce then unless you're doing a bunch of pre-processing then I'm not sure why you would need a separate database.  I believe SalesForce runs on Oracle.
+Absolutely! 
+Salesforce is essentially a database. If your current company isn't using a SQL server, then you'll not have any need for SQL for the time being. Companies that store their own data use SQL servers. Also SQL servers are Relational Databases Management Systems (RDBM). You should know the difference if you ever decide to learn SQL.
+
+Also, let me further emphasize the importance of knowing Probability Theory And Statistics when doing any analysis. If you're interested in learning, checkout Dr. George Ingersoll's Workshop in Probability And Statistics via Udemy. Then learn visualisation using R with the ggplot2 package. But you'll need to learn the basics of R first. Good luck and don't hesitate to ask more questions.
+You use them as the pivot table data reference so you never have to update your data reference.
+Thank you so much for your response! I really appreciate all of your help :)
+Thanks for the suggestion, I totally forgot to include Tableau as one of the options. I believe another team at my company uses Tableau, so I will have to speak to my manager to see if I can collaborate with them. Can you elaborate on connecting it to Excel and how that would work?
+Amazing! Thank you so much :)
+Strongly disagree about your stance on VBA. It has been an integral part to my success in four of the past roles I have had in finance.  It is not the end all be all but you can do a lot with little knowledge and it's much easier to debug and get going with them other languages, as someone only familiar with excel.  Please don't spread misinformation, many job descriptions i look at have VBA in the requirements.  Professionally it makes sense to start with VBA to drastically extend your abilities and then leverage that experience into learning SQL, R, Python, etc.
+Yes but technically itself is also a database..
+Makes sense, I'll look into that -- again, speaking as a complete database noob here :) thanks!
+Thanks, that makes perfect sense. I used MySQL at my old job so I have some familiarity with it, I'll have to find out if my current company is using a SQL server.
+No worries. I run the Power BI User Group in Indianapolis, so I'm happy to help where I can.
+
+If you have any other questions, feel free to PM me.
+I'm not sure I hear a counterargument in there to what I was saying. Not saying VBA is a bad language, at all.
+Yeah I re-read your comment and see that "except as an extension of Excel" is what I missed, which I agree with.
+
+Nevertheless, in terms of what to learn first, it kind of comes down to how technical the group wants to get, as once you leave others will have to support your projects.
+Definitely agree about taking guidance from the group you're working with. If I had to start learning again and had a VBA expert offering to teach me I would choose it over any other language any day of the week. Cheers.

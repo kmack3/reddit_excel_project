@@ -1,0 +1,32 @@
+Trying to export data to another sheet
+What do you mean "I cannot filter my data with that"? You can certainly record filtering data.
+But it will be the same keystroke everytime if i record a macro doing that 
+
+Are you filtering by something different every time? Perhaps try using and recording an [Advanced Filter](http://www.contextures.com/xladvfilter01.html). You could manually set the criteria and then run the macro.
+
+
+Yes filtering data for different periods during a financial year 
+
+You sir are a saving grace
+I tried that and it worked...:D
+
+Is there a way for me to retain the format? 
+And also can it not be automated? 
+Thanks for posting that link.
+How can i give a date range as criteria? 
+
+I tried selecting 2 cells for date range 03-01-2017 to 06-01-2017...but it didnt work...also tried >03-01-2017 and <06-01-2017...but no luck
+You can just record a macro where you run the Advanced Filter -- in the future all you'd need to do is change what's in the criteria range and run the macro.
+
+You can take the formatting from the original and apply it to the new one. Add this to the macro, make sure you fill in the correct sheet names
+
+          Sheets("Original Sheet Name").UsedRange.Copy
+          Sheets("New Sheet Name").Range("A1").PasteSpecial xlPasteFormats
+
+
+3/1/2017 and <6/1/2017 will work. You need to create a separate heading for each criteria, then select the whole range for your criteria in the advanced filter:
+
+Date|Date|
+:--|:--|
+3/1/2017 |6/1/2017|
+

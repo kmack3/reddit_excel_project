@@ -1,0 +1,47 @@
+Is it possible to get Excel to grab price data from Amazon?
+I'd like to inject my two cents: if you're trying to get excel to scrape web data -- you're  doing it wrong. 
+
+Yes, It's certainly possible in a technical sense -- but you'd be crazy to think excel is the best tool for the job, and anyone who condones using excel for this purpose is offering misinformed bad advice. 
+
+You'll be spinning your wheels with some horrific wonkiness -- for starters: "[That example sorta worked](http://new.office-watch.com/2013/amazon-price-scraping-to-excel/) -- but I have a big list of URLS, some of them different layouts, what do I do now?" Strap yourself in for a horrific VBA nightmare. Scraping with excel will result in an overall inflexibility that belongs only in the realm of an experienced, sadistic or seriously aspergian developer. 
+
+There are virtually no benefits to importing custom web-scrape data natively into excel save for some fringe database integration benefits (where python would be far more suited for the job anyway: see [beautifulsoup](http://beautiful-soup-4.readthedocs.org/en/latest/) or [scrapey](http://scrapy.org/)). 
+
+*You're looking for an end result:* an automated CSV export to manipulate in excel. But you don't need to fight with some wonky excel-workaround to get that automated CSV.
+
+**Okay -- so what's the best toolkit for a lowlvl-developer, if not excel?**
+
+There are plenty of awesome free tools out there, geared towards web scraping novices. 
+
+* 1: [KimonoLabs](https://www.kimonolabs.com/)
+I highly recommend you check this out. You essentially "train" this tool to look at specific elements on page, and then schedule it to crawl these elements whenever you want. The output is incredibly versatile -- but you'll likely just be after a simple CSV. Very powerful, batch actionable, free! and super user friendly.
+
+* 2: [Import.io](https://import.io/)
+This is a pretty simplistic tool that primarily focuses on scraping links and simple elements. However, with some intemediate-level XML parsing rules this can become a pretty powerful tool and a solid secondary option if Kimono aint your cup of tea. Image scraper is top-notch.
+
+There's a learning curve to any choice of course, but structuring and scraping information from the web is fundamentally a complicated affair which you absolutely must respect if you want results. Don't underestimate the complexity of the task at hand. Good luck!
+It is absolutely possible. 
+
+Search for something like "excel web scrape amazon price"
+Honestly, not sure what quantities you need, but would recommend import.io (https://import.io/) instead. Excel is okay for data tables.
+
+If you must use Excel, go to Data -> under External Data choose From Web -> Navigate to Amazon and choose which tables you want to pull in.
+Import external data from the web as mentioned by another poster.  Great for 'moving targets' like currency conversion rates etc too.
+
+Hi!
+
+It looks like you are trying to ask a question!
+Since you have not responded in the last 24 hours, I am here to assist you!
+
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?
+
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)
+
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+
+This is an excellent answer. Thanks for the linking.

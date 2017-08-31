@@ -1,0 +1,256 @@
+What is the craziest thing you can do in Excel?
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+[deleted]
+I made an IM application. basically it's a userform in which you enter the location on a shared directory and the "session." it creates an excel file which uses ADODB to enter and query submissions to the file and displays them in each persons userform. after the last person has left the session, it kills the file. 
+
+
+compliance at my firm is a bitch and my friends and I were tired of getting department-wide messages from compliance saying "FYI we can see all of your chats."
+My previous workplace used excel for floorplan diagrams.  Set the cells to be squares, each square represents 1 square foot, and you can make a very accurate floor plan.  Entire 75,000 square foot warehouses were planned this way.
+Me personally? I can choke it out using far too many array formulas in a profit model workbook.
+
+I have seen [this](http://www.accountingweb.com/technology/excel/worlds-colliding-convert-a-digital-photo-into-an-excel-spreadsheet) on the internet though.
+Not crazy but I built a chipotle calculator that estimates calories, fat, protein, etc.. in your order and ran Solver to attempt to find the healthiest thing you could order. 
+I made a breakout game.
+
+https://www.dropbox.com/s/zxmxpqcs7lajvxt/ExcelBreakout.mp4?dl=0
+
+All VBA, userform, activeX controls.
+[deleted]
+I've always thought [this Japanese artist using Excel as a canvas](http://www.spoon-tamago.com/2013/05/28/tatsuo-horiuchi-excel-spreadsheet-artist/) was pretty crazy. Impressive, but crazy.
+I made a workbook that acts as an operations scorecard system that pulls data from my company's SQL database upon refresh into one big table.  There are 130+ pivot charts off that table, all controlled by a slicer that selects which of the 10 departments' scorecard to display.  I then coded a button that loops through selecting each department in the slicer, uses ref tables to determine which charts to move where for each scorecard, cleans the charts up a bit, and creates and saves a pdf of each scorecard into a specific folder.  There is also a conditional color-coded stoplight system for the "border" of each chart (really just the cell color behind the chart) which indicates performance to goals.  We post an updated scorecard for about 10 departments every week.  The excel portion of this process takes maybe 3 minutes total including macro run time.
+Many, many things. Literally $10B+ of revenue has been first modeled on my laptop, which is cool. The most useful thing I did in that process was scenario modeling, which allowed for the changing of multiple variables simultaneously using a data validation dropdown. Not fancy, but very user friendly.
+I saw a guy make a custom bingo sheet.  It scrambled the bingo choices every time it printed out.  You could populate the bingo choices with whatever you wanted.  I used it for meetings at work when we knew the speaker and what cliche's they always used.
+Watch a movie
+Here is a Turing machine simulation: http://imgur.com/mcBOCDI
+
+Time advances down the page. Red box is reader position. There is a table of instructions on another sheet. 
+You can rename excel file (.xls or .xlsx) to .zip (book1.xlsx -> book1.zip). then Unzip it ..and see what excel file is really made of. 
+
+You can have lots of fun by screwing with XMLS in there. 
+Not myself, but someone built a roller coaster simulator in excel, with graphics and everything. Download it and run it, very impressive stuff:
+
+http://excelunusual.com/coaster/
+The Power BI suite has some cool stuff. Pivot tables are extremely useful for a variety of things. Conditional formatting and spark lines are always a nice touch. If we can't touch on code or formulas you really won't even begin to cover the extensive capabilities. Extending the toolbar, custom functions or classes, ect. 
+I managed to control a Game Boy Advanced emulator from Excel...
+
+Mainly to get through those levels with repetitive keystrokes (after I fail at them twenty times).
+I've made myself a game of breakout, and the levels were stored in the spreadsheets, with a nice little level editor to make your own levels and add them to the game. User accounts and scores were stored outside of excel though. Slightly bummed that I've since lost the document, but it's tempting to recreate it all over again.
+
+Another thing I've done is have an IP scanner that would identify all active devices on a network, and give you basic network mapping between as many of them as possible to look up from a single node. It would spit everything out as a database to browse through with stats on each item.
+not me but this rollercoaster is the craziest thing i have seen in excel...
+
+http://excelunusual.com/coaster/
+Guy I work with made a rotating 3D chart of a drilling well. Key word on rotating. You could see the borehole from any angle. Sliders allowed you to move up/down, left/right and backwards/forwards. 
+
+He's a fucking wizard though. A couple of his examples made it into walkenbach's books. 
+Not exactly in Excel but if you save sheets as .csv you can combine them in the command prompt using the 'copy' command.
+I make graphs that let you chose start date and how much history to display just by changing the date in a cell and the periods to display in another. Admittedly, I can do crazier stuff in VBA but this seems to impress the pants off my coworkers.
+Everything "power" in excel and how it works blows the mind of my co-workers. 
+Minecraft
+Disguise a macro based book that looks like a fantasy football prediction tool but is actually a email function that mails me with a promotion confirmation. I graciously reply with history indicating they sent it.
+Click on the "Tips" CheckBox on my favorite spreadsheet, and there's a data validation box above it that allows you to select a language (English, Simplified Chinese, Japanese or Russian).  Next, when you mouse over any of 18 cells, a brief explanation of the button that occupies that cell appears in C5 (in your chosen language, of course).
+
+It's just a random code I found when I was out digging through the internet one day.
+I created a polar graphing utility for fun. A friend of mine created a Family Feud style game.
+Hands down [this](https://youtu.be/IrVA1BBHFHw). Even after watching the video I am baffled.
+My company at one time had a strict no instant messenger rule with a good firewall. I made a spreadsheet that acted as an instant messenger to get information to a technician by creating a macro that connects to a shared file server, inserts new messages into a spreadsheet there, then copies the information and pastes it into the local document. 
+
+I also made a writing version of hangman.
+
+
+Use it as a gaming platform.
+
+And I'm not talking about simple dungeon crawlers or board games. I'm talking about full-on ports of video games like Pac Man. Just do a search and you'll find a bunch of stuff.
+
+I've personally been experimenting with using the cells as pixels (setting their width and height really small). It's pretty interesting, even if a simple Game of Life demo runs really slow through pure VBA.
+Not super crazy but I modeled some multiple layer planetary gears. 
+[removed]
+it amazes me how many large companies do this.  I worked for a multi national that had all of their logistics and material release information in an excel "database."  even though they had SAP, they stuck with excel and swore by it.  awful.
+You can actually use it as an xml database with PowerPivot.
+you're evil
+You *can* use it as a database.  I often use ADO to connect to a sheet and query it using SQL.
+I built a huge database for a large company over my internship in excel, although it took me a long time and a lot of VBA code but it was surprisingly fun to do
+I find that the Chrome extension "Data Miner" is better for this sort of thing.
+So tables and what not? Seems like this wouldn't be useful for web scraping online databases with unique sites for each entry unfortunately
+Bit naughty but we use it to scrape exchange rate data for a file we use once in a while. Don't do this on a large scale or link it to automate data you'll get seen doing it all the time. But it's quite cool to do on a small scale. 
+You win
+You definitely get an upvote
+I've done the same in Access! At the time when I thought a boss was building a case to get me fired. That way I could chat all day with a coworker while answering the lines. Thanks Access. 
+I did the same thing for my oddly-shaped livingroom to figure out where the hell to fit a couch.
+
+Printed it out, got the scale, made little cut-outs of my furniture and moved it around. 
+
+
+I've done this every time I've moved! And when building houses in the Sims.......
+I have my house and yard mapped out like this but each square is 6" so that the wall widths are almost accurate.
+It's like a D&D campaign hahaha
+Did the same for a 3 floor Office re-org, even had scaled graphics for L shaped & normal desks & chairs, so we could quickly try different layouts and orientations 
+
+
+I've got one going for my work at the moment.  Mapped out our warehouse (70,000sf) by pillars.   Each foot between a pillar = 1 pixel. And pillars create the cells.
+
+Makes it really easy to track where things are.
+
+The other thing I use it for is keeping track of how much space in our warehouse we're using.  We pay by the sf per month and I can print out a map.  walk for 3 minutes in the warehouse with a highlighter, get back to excel and color in the cells that we're using (created my first custom macro to count just the colored cells) and arrive at our SF usage within 5 minutes total.    Previous methods they used before I started took 6 - 7 hours.
+
+I have seen this, but I have never been able to figure out how to calculate square footage this way.  Do you know how that might work?
+But it's only a picture, not a video!
+So what is it
+I was thinking about doing this for nearby grocery stores.
+The calculator would be nice to see on the nutrition page of their site. You should pitch it to 'em.
+But... E. coli...
+Can you share the sheet?
+There was a pacman game in excel going around my workplace about a year and a half ago. But that's impressive. I wouldn't even know where to start. 
+How did Excel determine whether the comments were positive/negative, and what score to give them?
+This sounds great.  How hard was it to build? 
+I was never impressed by this since it can be done in most MS Office products. PPT would have been a better choice as a canvas since it doesn't distort the shape proportions like Excel does.
+>“Graphics software is expensive but Excel comes pre-installed in most computers,” explained Horiuchi. “And it has more functions and is easier to use than [Microsoft] Paint.”
+
+Haha!
+I would absolutely love to see some form of this file if you have a version that could be shared.
+How did you put multiple variables in a data validation list? Should make a post about this? 
+Ha. I made a few of these. Had a user form for the number of unique sheets could save down to a path or print. It was my first real vba creation. 
+???
+Explain the .zip
+You can also save your workbook as "Excel Binary" filetype XLSB.  stuff in the zip file aren't saved in XML, but in a binary format.  It makes large workbooks much faster.
+This is helpful if you're trying to figure out what's taking up so much space in your file as well.
+I once saw a spreadsheet where an engineer had created a voxel representation of a heat simulation in a solid using excel, but that rollercoaster looks much more impressive. 
+haha i just posted this
+Excel yams
+3D rendering was going to be what I mentioned. It's pretty fucking cool. 
+^?
+What do you mean by "power"?
+Disguise a macro based book that looks like a fantasy football *game*, but is actually an e-mail function that mails me your choices. I graciously use your predictions as my own.
+^ ^Spammer
+A friend of mine spent some time in a contract position as a "database specialist" at a Fortune 100 company a few years ago. He literally didn't know SQL existed - 100% of the job was done in Excel.
+Hah. I saw people making full documents in Excel by carefully lining up cells and spacing. I still don't understand why mail merge to Word wasn't used.
+If I'm honest I think a lot of companies are so full of people who are good with excel that it's kind of a "everything looks like a nail when all you use a hammer" case. There is in fairness a role for it for manipulating "small" data loads extracted from a large database. A lot of big finance companies are doing it now after realising how hard it is to make a quick big data database that's still user friendly. 
+Was it a bank?
+I remember doing this - then I found out it was scanning the first few rows to determine data types. If you have numbers and then text - it will return nulls for the text (as it thinks columns is number type). Never again.
+How do you do this? I would like to learn please!
+YOU JUST CHANGED MY LIFE!!!
+Did you boys succeed, or did you win by escaping?
+I'm not sure I follow.  
+
+We had the square footage first - we knew the measurements of the building.  If it is 250 feet wide, we did 250 cells wide (just shrunk the cells so it would fit on a piece of paper).  Then you just count cells for each foot and start adding the infrastructure based on known dimensions.  Once you have the building diagram, then it is easy to plan where shelving, pallet racking, etc should go.  Conveniently, the pallet racking, shelving etc were, for the most part, in whole feet...so you could use the cells with highlighting and borders to "draw" them.  For some things (fitness room, bike storage), we inserted clip art and scaled appropriately across cells.
+It depends on how you define "healthy" but I had tried to maximize protein while restricting sodium, fat & carbs. 
+
+My first run it had ended up being a bowl with double lettuce and double chicken haha so then I tweaked it a bit and got to a bowl with black beans, chicken, lettuce, corn salsa & mild salsa. 
+In what capacity?
+
+I was thinking it could be a tool you could build for a mobile app and easily replicate for different fast food restaurants. 
+Yeah haven't been in a while...
+We had a monopoly game going around the office
+I tried to write pac man on my ti 83 in high school. Got as far as drawing the board, but nothing would move
+[deleted]
+[deleted]
+I completely agree that PowerPoint would be better, but I still find it impressive in the way that I find photorealistic pixel art impressive. There are much better tools available, but the constraints of the method highlight the talent. 
+Sorry, it is so infused with proprietary info it would be one hell of a task to sufficiently redact.  On the bright side, having the idea and knowing it's possible is most of the battle.
+Same here!
+Create a table similar to this: 
+
+Scenario | Volume | Rate | Discount
+--------|------|----|--------
+1 | 1000 | $50 | 0%
+2 | 1000 | $50 | 30%
+3 | 1000 | $50 | 0%
+4 | 1000 | $75 | 30%
+5 | 2000 | $50 | 0%
+6 | 2000 | $50 | 30%
+7 | 2000 | $50 | 0%
+8 | 2000 | $75 | 30%
+
+Then, for the inputs to your model, create an index function referencing each vertical array like INDEX($b$2:$b$9,$c$6) where $c$6 is your data validation drop-down list, with its source the first column of the table. Then, as you toggle the drop-down, your variables automatically change.
+
+This is great for both sensitivity analysis (you can make a data table with $C$6 your variable cell) and for keeping track of inputs for scenarios. My biggest table to date had 60+ different combinations across six variables, but all working on the same principle.
+I'd like to learn how one day.
+I think if you look in Top All time it's up there; Some guy at work couldn't run any programs on his work station other then Excel, so he wrote a VBA that I think called a video codec library pre-installed on the OS, then opened a dropbox URL that let him stream video via Excel.
+https://www.reddit.com/r/excel/comments/2jtd2f/worked_on_a_completely_locked_down_machine_time/
+It does up your .fly
+If you have 10 workbooks you want to combine. You save them all in csv format in the same directory. Than in command prompt "Copy *.csv combined.csv". All 10 sheets are now one sheet in a new file called combined.csv.
+Power add-ins, like power pivots, power charts, power query etc
+But wait... this is useful!
+^didja ^press ^the ^report ^button?
+Sorry - I didn't realize that wasn't legit. I removed it. 
+I'd believe it.  I do tons of database work...in excel.  It's often the case the datasets just aren't that big and/or I have to build them from multiple disparate sources, which requires a bunch of excel manipulations.
+
+I know it's cleaner to implement a database in an access db and call it in excel bit when it's only 50k lines it's not a huge deal.
+I worked for a Fortune 500, they used SQL to store data, but if anyone wanted to use it for anything, they'd say what categories they needed and get it in excel.  Several company members had no idea what SQL was, but only because they never saw the full database.
+Amazing.
+I, for one, appreciate the mail merge function.  MS Office is a "suite" of software designed to work together.
+
+Forms in Excel bother me.  Make a template in Word.
+I agree.  Even "medium" data on a shared spreadsheet is functional.  To use it as a corporate database is not good.  Go to Access and step up if the company cannot afford MRP.
+I became friend with that coworker who was also bullied. Our friendship kept us from quitting, even though we were only part-time temporary workers. We could alos be fired at will.
+
+ The boss got fired a few months later (I mean "promoted" at some on-the-road position where he had nobody anymore under his direct control). 
+
+Things went better, I still work for the same company in a full-time permanent position. The work atmosphere is very good now.  
+
+I guess what I mean is, you measure a building, it's not a rectangle but a combination of[ rectangles](http://imgur.com/psmkxmb) and possibly triangles.  I've been looking for years for a way to do it in excel where it calculates the square footage.  Not really interesting in counting the 1,500+ cells in this footprint.  Don't care about shelving, racking, don't even care about doors and windows, I need gross building area.  There are certainly other ways to do it, by hand or with other software, I was just wondering if you or anyone else had a way to calculate the area of a polygon drawn in excel.
+That's my order! Except I do burrito and no rice. Chipotle is the best fast food
+We had mini golf
+I'd love to see an example or the content of the code / formulas that did this, if that'd be at all possible? It sounds like something I could make heavy use of.
+Any chance you could post a workbook with your carpet example and a comment just so we can see the structure? Someone in my department is pushing sign up to Rant and Rave and i thought it seemed like a lot of noise for what it is and have been wondering if i could do it in Excel...this post is therefore very timely!
+I used =rand() then a calc job, turn calcs off, rank your list to randomize. Then I used copy and paste but you can use list manager and .values for a cleaner feel. 
+that's brilliant
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+ELI5
+I'm not a Windows user, so I'm not sure about this, but I think the complimentary *nix command would be `cat *.csv > combined.csv`. If this is really the same, this would do nothing to consolidate the headers, so you'd have to manually pluck out all the copies of the table headers (which appear as the first row of a CSV). There's gotta be a better way...
+But doesn't saving them as csv only keep one worksheet and loses things like formulas and formatting?
+You were probably right to call it from multiple sources and collate. Excel has some memory leak issues which become very apparent once your file size is 40mB+
+How do you figure that Excel manipulations are required, as opposed to any database platform?
+I spent so much time to tell people to store stuff in Access, pull them into Excel to do calculations then merge them into letters or reports in Word. Guess what? Excel all the way. D:
+Sure, but you'd have to do it through vba. Either you color in the inside squares and have vba count them based on color, or you create a macro which checks for each cell if it has an uninterrupted line to the edges of the spreadsheet. If it is blocked in by walls on all 4 sides, it's inside.
+
+If you're only doing it once and don't want to use vba, when you select more than one cell Excel tells you in the name field how many rows and columns you have selected, allowing you to select each part of the floorplan and adding the squares manually. I'd do it through vba though.
+Moes is hands down better
+[deleted]
+I think I understand what you mean but at the same time *whoosh*! Either over my head or I need to learn VB.  I get it, I just need to teach myself how. (1980s BASIC guy here that didn't go further with it)
+omg i need this
+Change excel workbook's extension. 
+Excel files are actually Zip archives. All you need to do is change it's extension to zip. If your file name is myfile.xlsx rename it to myfile.zip. Then you will be able to unzip it and see the content. 
+
+Yes, its only good for combining multiple datasets. Like if you can only run a report for a limited data range like one month.
+Yeah, I have some quite large DBs (100MB to nearly 1GB) in excel from older projects and I avoid them at all cost.  If calculations are ever set to automatic when they're active I need to force close the application (if I can, otherwise power button).
+bingo
+I have one project where I get data from 10-15 different stakeholders, almost every one with their own special formatting.  I have to reformat everything, deconflict overlaps in the data (which require an initial automated pass followed by a careful examination by hand to check the automated results and find conflicts that can't be found with simple filters), create my database, and then fill in some calculated columns based on other data with special rules for missing or wrong entries.  a solid chunk of this involves some VBA functions as well.  Then I have to slice and dice that main database a number of ways depending on what parts of it we're examining at any given time.  I *could* manage a lot of that in access, but I'd be hopping back and forth between the programs to do certain tasks.  It easier for me to keep everything (only ~30k lines in the final DB) in one place and keep my VBA use to one program for simplicity's sake.
+
+That's one example.  As I said, it's often perhaps cleaner to keep the DB in a separate file and call it from excel for my work there, but it's also often easier and quicker to keep everything centralized.
+wait?  you mean I need to make THREE files?  Here...I tied all my paperwork to this rock so it doesn't blow away.
+The "uninterrupted line" idea has promise.  Thanks for that, I may work on it.
+WELCOME TO MOE'S!!
+I live in San Francisco. If I actually want a good fast burrito I would just go to any of the amazing spots in the mission. 
+
+We don't have moes so I can't vouch for its quality. But if I ever go to the south I will maybe try it
+That's incredibly helpful, thank you for such a detailed reply. I'm not sure I have the skills to replicate it based on your steps, but it's definitely a good first place to start. I really appreciate it!
+Thank you for the taking the time to fully describe your process. Very helpful.
+=rand() will assign a new unique value to each of your bingo items. If you rank them, it will create a new unique list. The vba code I used then copy and pasted the ranked items into their squares. At the end, it would recalc reorder the items and start the process over depending on how many unique bingo sheets you wanted. 
+Oh god a gig? Jesus Christ. Even an extremely powerful computer would be absolutely fucked by that
+You portray a perfect example of [Excel as a database](http://imgur.com/z6iyLhs)! In all seriousness, I'm just looking for an excuse to share Rory's little cartoon there, and I've had plenty of fun writing SQL and joining tables without ever leaving Excel, but you have to stop and consider why you're still using VBA when Microsoft has already encompassed every bit of its functionality in a separate set of tools that are more advanced and much easier to use. If you're automating tools for people who must be restricted to Excel (e.g. Non-programmers) then VBA is ideal, otherwise you're probably using the wrong tool.
+this is like when Lotus 123 used to pull from floppys.  WTF?
+Moe's 
+That makes total sense to me.  My handicap is that I do not know VBA.  I'm so old I need line numbers, and A($) is king.
+
+I think I will read the Exel help file on VBA at work when I get a moment.  Sounds simple enough.
+
+EDIT:  Oxford comma 
+Yeah they were...uh...special
+I had to build a gaming rig to open a spreadsheet at work and it still sucks. 
+
+Anyone have any opinions on what I should try to migrate it to make it usable? It's inherited and miserable
+Oh god that comic hits too close to home.  On the project I described we have received both one or more of the stakeholder inputs as word docs, and I've had to print out a pdf and scan it in with OCR assist to import data (in one case we received a pdf image file, in another we got a pdf with tables that I couldn't get imported into anything useful with the formatting intact).
+
+Most of my work involves taking the raw data and making it presentable for people who are quite far from being programmers, or else some M&S work.  VBA is usually appropriate because the people I'm making this stuff for are comfortable in excel.  They don't care that I've got a bunch of ~~coffee~~code in the back end, just that the front end is familiar.  It's imperfect but, eh, what ya gonna do.
+We keep sending them all a preformatted sheet to fill in.  They keep ignoring us.  Some of them also have a penchant for sending everything over classified networks, and not marking it appropriately so I can't get it moved to the unclassified networks.  It's like 60% real work and 40% chasing down people to get clarifications and fixes.  Looooove it.
+R is a great option as is ruby
+This frustrates me so much, it took me 20 minutes to write this response so I appear civil.
+i've been meaning to teach myself R for years, this might be a good time to commit. thanks 

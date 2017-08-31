@@ -1,0 +1,55 @@
+Removing middle initial
+Hi,  
+
+let's imagine the name is in B2 the following formula should work : 
+
+    =SUBSTITUTE(B2,MID(B2,SEARCH(".",B2)-1,3),"")  
+
+If you have questions do not hesitate,  
+
+Cheers
+As an alternative, if your formatting isn't exactly the same for each cell, something like:
+
+First Middle Last
+
+Last, First Middle
+
+Title First Middle Last
+
+Title First Last
+
+Then you can use the fuzzy lookup plugin for this type of thing, which is very good at looking for things like names, where you can have all kinds of variations with titles, no middle name, first middle last, last comma first middle, etc.
+
+> =SUBSTITUTE(B2,MID(B2,SEARCH(".",B2)-1,3),"") 
+
+Thanks a lot. You saved me hours of work. Good day to you, good fellow.
+Why does this not work in replacing John with aaa?
+
+=SUBSTITUTE(B2,SEARCH("John",B2),"aaa")
+
+I feel like it should work without using the MID function. Can you please explain? I thought this would output "aaa Smith D. Doe" I can get it to work by using "=SUBSTITUTE(B2,"Smith","ABC")", but I guess I don't understand why Search doesn't work on it's own, and why it worked when you put it in your formula, but didn't in my original.
+
++1 Point
+Interesting. Had never heard of that. Will have to refer back to this and see if I can dl it.
+Thanks for marking the thread as solved.
+
+> OPs should reply to the answer with:
+> Solution Verified
+> .... award the user a ClippyPoint
+
+
+You're welcome have a good day too!
+Break down each function individually to get an understanding of why your formula does not work. 
+
+Read the help file for each function, it will become clear.. 
+
+You have awarded one point to _Starwax_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I would think it's because Search returns the position of something instead grabbing a piece of text, which MID does. That makes sense.
+Correct.
+
+In the example above `SEARCH` is telling `MID` where to start that grab in the middle of the text as the second of the `MID` arguments. The third argument is how many characters to grab from that starting point.
+
+
+Makes sense. I just never really looked at the function description for SEARCH much. I've just seen it used a lot of times in formulas for this and assumed I knew how it worked. Thanks.

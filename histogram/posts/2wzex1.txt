@@ -1,0 +1,54 @@
+How to unlock password protected documents
+So how does this work?
+(noob here, but I like to snoop!)
+so it's for a protected sheet or a protected workbook?
+
+how do i use this?? when i open a file with password protection,it prompts for a password and i can't run the macro.
+ > useful to anyone who has forgotten their passwords
+
+Let's be honest, most people who use this code use it to unlock other peoples workbooks.  I know I'm no exception.  
+  
+  There's also another variation of this code floating around that allows you to unlock other workbooks, not just the sheets.
+I just found this through google at work yesterday and used it to unlock a spreadsheet we've been using for years but finally needed to make some changes to.  Worked great!
+
+I doubt the original password was AAABBBAAABBBAf though.
+I just tried it and it errors out at 
+
+ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+
+
+Is there a specific point where I should run it? Or just as soon as I open the protected sheet?
+I don't know who wrote this, but since I found this a little while ago, things got way better in my life. 
+Nice!
+You can also just open the spreadsheet in another spreadsheet program, and everything is wide open. 
+Nice
+Looks like it's just a brute force password cracker. Tries character after character in order until it gets it right. something like aaaaaaaaaa1 then aaaaaaaaaaa2, and so on. I could absolutely be wrong, though.
+Sheet.
+
+You need to paste this into the Visual Basic Editor (ALT+F11) in a new module and hit F5 to run.
+We had a lady who used to work here who kept all her passwords in a locked workbook.
+
+Thats fine except the passwords were for work accounts with vendor websites she no longer needs to interact with. She left the document on a shared drive.
+
+I wish I had this about 6 months ago when I took over her position. Since then I've contacted everyone and reset every system I need, but it would have been much easier to have access to that document!
+You used to be able to just open with a hex editor and remove the password string. Not sure if you still can.
+As soon as you open the workbook and select the locked sheet. What it looks like is that the active sheet you're on doesn't have protections
+[This website](http://geeknewscentral.com/2013/11/10/unprotecting-excel-spreadsheets-without-a-password/), which is where I found the macro from, gives credit to the University of Wisconsin, Green Bay. 
+In an office, most people are restricted to Excel.
+Yah...it's the only reason Open Office is installed on my computer at work.
+[deleted]
+Same tactic the monks used in [The Nine Billion Names of God.](http://en.wikipedia.org/wiki/The_Nine_Billion_Names_of_God)
+Is there anything similar to unlock a workbook?
+.
+Using a password manager would probably be a better bet. I personally use LastPass and it's great. I think there might be a business type you can setup where you can temporarily give someone access and/or limit them to what they can use.
+I've never tried that with the worksheet/workbook password but I've done it with the VBA Project password.  Works very well.
+It's going to be due to collisions in the password hashes I'd imagine. 
+There was a trick prior to office 2010, where you would open the file in a hex editor (or even notepad?), find a particular string and delete it. Then, once you saved the changes, opening the file normally would cause office to pretend there was no password.
+
+There was a bit more to it than that, but honestly, just use one of the Elcomsoft products like Advanced Office Password Recovery. They work really well on basically every type of security, from pdf to Office to Windows login to archives. Well worth thy money if you have a use for if.
+
+I use it to remove VBA passwords in Access so I can see the code people use on their example apps online. Saves me so much time reinventing the wheel.
+Just Google Excel sheet password breaker and you'll get a working version. 
+Oh I totally agree. It's government though, so efficiency isn't always as standard as logic would suggest.
+Exactly
+.

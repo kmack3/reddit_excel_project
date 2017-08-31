@@ -1,0 +1,54 @@
+Practice excel tasks/projects for beginners?
+I did this to teach Excel to my girlfriend:
+
+[Exercise 01: Managing Strings](https://docs.google.com/spreadsheets/d/1-P0Yg5PWRJ6WOwWJLojcaQFF7HVt3UscsLwvSBL388M/edit#gid=878050816)
+
+She dump me. She left me for a guy who didn't know how to format a cell. Someone told me that they are learning excel together now.
+Search YouTube for Excel Magic Trick #1.  It's a series of 1000+ short Excel tutorials with downloadable workbooks for practice.   It's run by a college professor and is really great. 
+1 Make a table in one sheet with a list of products (onion, tomato, potato), vendors, quantities and few additional columns, like "country of origin", "taste rated 1 to 5", "brand" ("data" tab)
+
+2 Make a 2nd sheet with products, vendors and their prices. ("pricelist")
+
+3A Use VLOOKUP to add prices to your sample purchases on basis of glued vendor/product
+
+3B. Calculate total price per each line item
+
+4A. Change the goods and vendors in your "data" to data validation, so that you select data it instead of inputting it.
+
+4B. Make data validation "floating" (automatically adds new items to your list; not a static list of say 30 choices)
+
+5 Input like 50 products to your "data" tab
+
+6 Make a pivot table on basis of "data" tab - to do some sample analyses: sales per country of origin; average ranking of manufacturers (that: taste 1-5)
+
+******
+
+Second project would be to make  a simple home budget, where you collect actual spending, have budgeted spending and compare your actuals vs a budget to see variances. Then you would do a sort of a variance analysis (e.g. food more than budgeted by x%)
+Have you gone through the wiki and the side bar learning materials?
+An idea just dawned on me reading your question. Go to lendingclub.com and download their raw data files of loan performance over time. Practice excel tutorials on that. 
+
+
+Here's a simple worksheet you can do 
+
+On B1 Put 1, Put B2, put =B1+1. Drag this to J1. This should equal 9.
+
+On A2, Put 1, on A3, put A2+1. Drag this down to A10.
+
+On B2. Put the formula, $A2*B$1 and drag it to fill the table.
+
+On A12, Do a data validation with the list of A2:A10
+
+On A13, Do a data validation with the list B1:J1.
+
+On A14. Do an Index Match Match formula like this 
+
+=INDEX($A$1:$J$10,MATCH($A$12,$A$1:$A$10,0),MATCH($A$13,$A$1:$J$1,0))
+
+Congratulations, you have now learned the basics of Index Match Match.
+
+> She left me for a guy who didn't know how to format a cell
+
+I hope her formulas treat numbers as text.
+Yeah, I have, most of those are either articles or video lessons. Couple of people on those wiki threads are suggesting to get myself a project to work on which is basically what I'm looking at, but made as a test, with wide array of required Excel features.
+=isnumber()  false. I hope I haven't embarrassed myself. Just a noob comment. 
+and her dates as numbers!

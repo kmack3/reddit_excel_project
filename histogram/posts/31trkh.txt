@@ -1,0 +1,40 @@
+How I saved time in my spreadsheets by not using =IF(VLOOKUP(...)="","",VLOOKUP(...))
+I usually just use iferror. It works well, as long as you are okay with not knowing what the actual error was.
+The one I find myself using a lot that feels super redundant and like there must be a better way is:
+
+     =IFERROR(IF(Vlookup(A2,Sheet2!$A$2:$A$1000,1,FALSE)=A2,"Found","This shouldnt happen"),"Not found")
+
+I just hate looking at a list of random values and "#N/A" when I just want "Is it on the other sheet or not?"
+I do see a slight downfall for this. If you are using a VLookup to grab numbers, this formula makes the numbers into text, and as long as you leave the formula there, you cannot change the format to number/accounting. As an accountant, this can be an issue, as number formats are important.
+
+However, if you are not looking for numbers in for VLookup, this seems like an efficient way to not have 0's. Yet another issue with this though is that I've always been taught that, in general, blank cells are not desirable, as you do not know whether or not the cell was intentionally left blank. so if you avoid having blank/null cells in your tables, the whole 0 VLookup issue will be nonexistent, which is why I've never actually had a use for this.
+If I'm looking up values (or returning values some other way) I often divide by 1 and wrap in an IFERROR. OP's method is a nice way to handle vlookups for text results though!
+
+Nice one!
+I have not used it, but it is a good idea. I used to use If(vlookup all the time. I like it. Thanks!
+Thanks so much for sharing this. This makes my formulas much cleaner!
+This is a nice little formula, thanks!
+if youre just talking about a visual thing, you can just use a conditional format?
+But that only works if you have an error. In OP's example, there is no error, the vlookup successfully looks up the v, it's returning a blank.
+The biggest issue which OP's solutions solves is where you're doing VLOOKUPs on something which can return either a blank or a nil value. You need to know whether it actually found a blank cell or "0", but excel will give you "0" for both.
+Its the worst.  I picked up a small contract recently and their spreadsheet conditional formatted the text colour to white if there was an error.  Its reasons like this I have a secondary income.
+You could use COUNTIF to do that.  
+If it returns >=1 then the value is on the other sheet, if it returns 0 then it's not
+Best solution I found to get around that is using =isnumber and MATCH.
+
+You can basically put
+
+    =isnumber(match(A2,Sheet2!$A$2:$A$1000,FALSE))
+
+This should return a TRUE or FALSE since the MATCH function only returns a number if the item is found. Hence using ISNUMBER.
+
+If you want to be more descriptive, you can go...
+
+    =if(isnumber(match(A2,Sheet2!$A$2:$A$1000,FALSE)),"Yes","No")
+
+Bearing in mind this will only work on one column of data as you're using the MATCH function. The IF statement takes the TRUE or FALSE and you can use the returned statements to change it to say whatever you want.
+If you use the test iserror around the vlookup you can forget about the iferror and =a2 bits of the formula.
+
+Or do the match suggested below
+Would a helper column make it faster, or is that pretty much the same thing?
+I wish I could make money fixing people's poorly-formatted spreadsheets. The things I see...

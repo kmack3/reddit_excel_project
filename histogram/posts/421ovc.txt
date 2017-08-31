@@ -1,0 +1,173 @@
+Text to Columns Wizard Problem trying to use VBA - Too many lines continuation?
+Just a guess: delete the very last_ 
+Did you manually align all of those columns using fixed width..?
+
+You know you can use the 'Delimited' Option if the columns are being separated by a space, comma, etc. In fact, if you let us know what criteria you are using to separate the data into columns we will be able to write the macro out for you. 
+
+You will obviously get different results every time you try to run that macro if you have different data
+And probably the comma. I don't know much about VBA, but that ending (just before end sub) seems wrong 
+Well now I am getting the error "Compile Error: Syntax Error" and the
+          Sub test4()
+
+is being highlighted in yellow
+Yeah, the
+
+        , _
+At the end of line 30 should be causing an error. You'd need to remove that AND replace with a 
+
+    )
+to avoid the syntax errors.
+
+However, I think a bigger fear should be that it didn't get everything - the original error that you gave plus the way it ends line 30 implies that it was still adding code to do what you needed but then used the ", _ " too many times and couldn't continue - so it just gave you a partial for what it was doing.
+
+Per OPs comments below it looks like possibly try doing a delimited Text-To-Columns using spaces as the delimiter might be better. If that doesn't work you could even probably build a set of formulas to automatically parse whatever string you put in - otherwise you might be left with trying to manually write the VBA for the macro so as to avoid the error that you were getting. That wouldn't be too bad unless you aren't very comfortable with VBA.
+   999999.  74. **0724** 15. 10.  6.  1. 334.  71. 37097. 28115.  41801.     0.     0.  53701. 1. 4. 5. 8. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 2. 0. 0. 0. 0. 0. 0. 0. 1. 3. 0. 0. 0. 0.  100.   90. 2.    0. 1. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.   90. 2. 2. 1. 4. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 11.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 1. 0. 0. 0. 0. 0.   2.   0.   0.    6.    6.  1.   0. 41801.   6.  36. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0. 2.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.     -1.      -1.  -1.    1000.      -1.       6.   2.  -1.   2.       0.       0.       0.       0.       0.       0.       0.       0.       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  90.   7.  22.   0.   0.   0.   0.  10.   0.   0.  1.  4.  5. 11.  0.  0.  0.  0.  0.  0.  0.  0.   0.   0.  1.  2.  4.  7.  9. 10. 11. 13. 14. 15.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 0. 3. 4. 5. 4. 3. 9. 9. 9. 9. 9. 9. 1.  1. 1.  2. 3.  3. 2. 4. 1. 0. 0. 0. 0. 0. 0. 4. 4. 4. 3. 4. 0. 0. 5. 5. 5. 0. 0. 0. 0.    0. 0.  0.  0. 0. 2.   2.  2.  37. 1.  115000.  2.  5.  0.  0.  0.  0. **L** **B** 334. 334.   0.   0.   0.   0.  71.   0.   0.   0.   0. **321**
+
+this is just one text line out of 3K+ that are in the file.  I want them separated by space. And the four that are in bold, those are the columns that I want as Text. The first "1." should be "999999.", not sure why it kept changing it to "1." here.
+
+And I did not manually align columns. I was using the fixed width option in column wizard
+
+    999999.  74. **0724** 15. 10.  6.  1. 334.  71. 37097. 28115.  41801.     0.     0.  53701. 1. 4. 5. 8. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 2. 0. 0. 0. 0. 0. 0. 0. 1. 3. 0. 0. 0. 0.  100.   90. 2.    0. 1. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.   90. 2. 2. 1. 4. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 11.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 1. 0. 0. 0. 0. 0.   2.   0.   0.    6.    6.  1.   0. 41801.   6.  36. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0. 2.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.     -1.      -1.  -1.    1000.      -1.       6.   2.  -1.   2.       0.       0.       0.       0.       0.       0.       0.       0.       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  90.   7.  22.   0.   0.   0.   0.  10.   0.   0.  1.  4.  5. 11.  0.  0.  0.  0.  0.  0.  0.  0.   0.   0.  1.  2.  4.  7.  9. 10. 11. 13. 14. 15.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 0. 3. 4. 5. 4. 3. 9. 9. 9. 9. 9. 9. 1.  1. 1.  2. 3.  3. 2. 4. 1. 0. 0. 0. 0. 0. 0. 4. 4. 4. 3. 4. 0. 0. 5. 5. 5. 0. 0. 0. 0.    0. 0.  0.  0. 0. 2.   2.  2.  37. 1.  115000.  2.  5.  0.  0.  0.  0. **L** **B** 334. 334.   0.   0.   0.   0.  71.   0.   0.   0.   0. **321**
+
+looks better as a line. 
+Yes i realized that you weren't using delimited because of your code says "DataType := xlFixedWidth" lol. Just out of curiosity how long did that take you?
+
+Try this sub procedure out instead:
+
+    Sub Iam_The_Giver()
+          Selection.TextToColumns _
+          Destination:=Range("A2"), _
+          DataType:=xlDelimited, _
+          TextQualifier:=xlDoubleQuote, _
+          ConsecutiveDelimiter:=False, _
+          Tab:=False, _
+          Semicolon:=False, _
+          Comma:=False, _
+          Space:=True, _
+          Other:=True, _
+          OtherChar:="-"
+    End Sub
+
+Also there is one more thing. To my knowledge it is impossible for a cell to be partially bold. It is either entirely bold or not bold. However, after the text to column you can easily format some cells to bold. I would suggest you manually do that yourself or if there is a criteria you are using to make those particular characters bold, I can add that into the macro as well
+I think the reason that the 999999 was being changed to a 1 is that it thought you were doing an ordered/numbered list. Starting a line with a number followed immediately with a period is the markdown for starting an ordered list - it apparently doesn't matter WHAT the number is but it will start with a "1".
+
+123456. Like this
+
+I entered 123456.
+As long as you have your default format set to 'General' those values beginning with "**" will come across as text. You can verify it by the way that the data aligns. If it is text excel will align the cell towards the left wall
+lol sorry about the whole ** bold thing. I just did them bold in the comment so you could see which columns should be as Text. They are not suppose to be bold, sorry about that.
+So there are no "" or ** in the actual text file. Just numbers, letters, periods and spaces. The ** and "" were just used in the comment box for explanation purposes.
+
+I tried the code and I did not get any errors but I am getting some blank cells. I don't believe it is missing data. I think the problem is that it is making columns out of spaces. Some numbers have double space in between and some just have single space. So for the double spaced ones, it is using the first space as separator but using the second one as an actual column.
+
+Also can the destination just be in the same location of where that text line is? The file will have 3k rows of data (all in the same structure), and I just want it to run the wizard for each row without moving destination.
+
+Thanks a lot for helping BTW
+the ** were just used in the comment to make them bold so they can stand out. The actual info does not have **. sorry about the confusion.
+What criteria are you using to justify the number as text? Is it the column #?
+Can't you just manually do that too btw? I can write a loop for that but if it's only 4 cells doesn't seem to be too time consuming either. Test the sub procedure in my previous post first and let's move from there
+Try this instead
+
+    Option Explicit
+    
+    Sub Iam_The_Giver()
+    
+    Dim lastCol As Long, i As Long
+    
+        Selection.TextToColumns _
+        Destination:=ActiveCell, _
+        DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, _
+        ConsecutiveDelimiter:=False, _
+        Tab:=False, _
+        Semicolon:=False, _
+        Comma:=False, _
+        Space:=True, _
+        Other:=True, _
+        OtherChar:="-"
+        
+    lastCol = Cells(1, Columns.Count).End(xlToLeft).Column
+    For i = lastCol To 1 Step -1
+        If Cells(1, i) = "" Then
+            ActiveSheet.Columns(i).Delete
+        End If
+    Next
+    End Sub
+
+The criteria are: any number that has a 0 as first digit (we need the 0 to stay in front, otherwise it gets deleted) and anything that has letters. But seeing as how some cells only have 0 that might change to many things.
+
+There will always be 4 columns that will need to be justified as text and those 4 columns will always be the same ones for every row. 
+
+if it helps, the following digits are the ones that need to be in text: 0724, L, B and 321. Hope this makes sense
+
+
+It works but I still keep getting blank cells.
+
+here is a screenshot I took of two rows of excel
+
+http://i.imgur.com/5eQdqp8.png
+
+The top one I formatted manually and the second one was with your code.
+
+The highlighted cells are both suppose to be in column C as text file.
+Hmm.. try this. If this doesn't work copy and paste the cell that you are testing so I can check myself
+    
+    Sub Iam_The_Giver()
+    
+    Dim lastCol As Long, i As Long
+    
+        Selection.TextToColumns _
+        Destination:=ActiveCell, _
+        DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, _
+        ConsecutiveDelimiter:=False, _
+        Tab:=False, _
+        Semicolon:=False, _
+        Comma:=False, _
+        Space:=True, _
+        Other:=True, _
+        OtherChar:="."
+        
+    lastCol = Cells(1, Columns.Count).End(xlToLeft).Column
+    For i = lastCol To 1 Step -1
+        If IsEmpty(Cells(1, i).Value) Then
+            ActiveSheet.Columns(i).Delete
+        End If
+    Next
+    End Sub
+Still getting blank cells on some.
+
+this row came out fine:
+
+     280001.  74. 0724 15. 10.  6.  1. 334.  71. 37119.     0.  41801. 99900. 41800.  53701. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.   90.   90. 2.    0. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0.   90. 2. 1. 1. 3. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 0. 0. 0. 0. 0. 0.  -1.  -1.   0.   10.   10.  1.   0. 41801.  -1.   0. 1. 1.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0. 2.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.     -1.      -1.  -1.      -1.      -1.      -1.  -1.  -1.  -1.       0.       0.       0.       0.       0.       0.       0.       0.       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0. 100.   1.   0.   0.   0.   0.   0.   0.   0.   0.  4.  9. 11.  0.  0.  0.  0.  0.  0.  0.  0.  0.   0.   0.  1. 10. 13. 14. 15.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 9. 9. 9. 9. 9. 9. 9. 9. 9. 9. 9. 9. 0.  2. 1.  0. 0.  0. 0. 4. 3. 0. 0. 0. 0. 0. 0. 4. 9. 9. 9. 9. 9. 9. 9. 4. 4. 0. 0. 0. 0.    0. 0.  0.  0. 0. 0.  -1.  9.   0. 1.      -1.  0.  5.  0.  0.  0.  0. L B 334. 334.   0.   0.   0.   0.  71.   0.   0.   0.   0. 321
+
+but this one had many blank cells that need to be deleted and cells need to move left. again, I think those blank cells are due to more than one space between numbers.
+
+      280014.   1. 0064 15. 10. 22.  1. 395. 251. 39151. 44646.  43299. 99900. 99900.  23614. 3. 4. 5. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 0. 0. 2. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  120.   30. 2.    0. 1. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.   30. 2. 2. 1. 1. 3. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.  4. 11.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 1. 0. 0. 0. 0. 0.   2.  -1.   0.   10.   10.  3.   0. 43299.   3.  54. 0. 0.   0. 41907.   3.  54. 0. 0.   0. 41999.   2.  54. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0.   0.     0.  -1.   0. 0. 0. 2.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  -1.     -1.      -1.  -1.      -1.      -1.      -1.  -1.  -1.  -1.       0.       0.       0.       0.       0.       0.       0.       0.       0.   0.   0.   0.   0.   0.   0.   0.   0.   0.  -1.   0.  -1.   0.   0.  -1.   0.  -1.   0.  -1.  -1.   0.  9.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.   0.   0.  1.  2. 10. 11.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 9. 4. 3. 3. 4. 3. 9. 9. 9. 9. 9. 9. 2.  2. 2.  6. 3.  9. 1. 4. 1. 3. 0. 0. 0. 0. 0. 3. 4. 9. 3. 3. 9. 3. 9. 2. 3. 0. 0. 0. 0.    0. 0.  0.  0. 0. 0.  -1.  3.  56. 2.      -1.  2.  5.  0.  0.  0.  0. L B 395. 395.   0.   0.   0.   0. 251.   0.   0.   0.   0. 763
+
+Try this. The only problem now are those leading zeroes I'll take another look either tomorrow or on Monday
+
+    Sub Iam_The_Giver()
+    
+        Selection.TextToColumns _
+        Destination:=ActiveCell, _
+        DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, _
+        ConsecutiveDelimiter:=True, _
+        Tab:=False, _
+        Semicolon:=False, _
+        Comma:=False, _
+        Space:=True, _
+        Other:=True, _
+        OtherChar:="."
+        
+    End Sub
+
+
+No more blank cells! lol
+
+It only leaves column A blank but that's no problem. Quick delete of that column fixes it. 
+
+But yea, the digits in column C need to be text so that the leading zeros don't get deleted. the numbers in that column will always contain four digits, including the leading zeroes. EX: 0001,0010, 0100, 1000. When we use the data we need the leading zeros there. 
+
+Great job getting me this far. I really do appreciate that you have taken some of your time today to help me with this. 

@@ -1,0 +1,32 @@
+Understanding Pivot Tables and V-Lookups
+I like [this video by ExcelIsFun](https://www.youtube.com/watch?v=e-yuYNgsHAk) on YouTube. His whole channel really, but this is 58 examples of Pivot Tables. He also has [25 examples of VLOOKUP](https://www.youtube.com/watch?v=-hJxIMBbmZY).
+A great set of practice questions for pivot tables can be found in the "Data Analysis 2013" module on [this page](http://www.modeloff.com/questions/). If you can do all those questions, you've mastered pivot tables. But that link doesn't provide much instruction; for that I would check out the links on the sidebar. 
+[gcf learn free](www.gcflearnfree.com) 
+
+This is a good site that includes some fairly easy data that you can manipulate to what you need!
+The absolute key to creating pivot tables is to have your data set up correctly.  If your dataset is set up correctly, then pivot tables are like magic.  You can drag, drop, do all sorts of things without even thinking about, and the data will form into beautiful patterns.  If you mess up, you delete the sheet and start over.  The pivot table never touches your actual data.  Why don't you post a few sample lines of your data, and we'll see if your dataset looks ready for a pivot table?
+You should look into INDEX-MATCH if you're going to learn about V-Lookups as well.
+FYI - training materials are the first link in the sidebar.
+for lots of fun, useful guides check out chandoo.org.  Chandoo is awesome.
+I think yall just saved me for my new and upcoming job. 
+Thanks for the help, everyone! 
+[removed]
+Seconded. His whole channel is great - he also teaches you tips and shortcuts along the way which are extremely useful and easy to understand. 
+very much appreciated!
+agreed, but don't skip vlookup.  It's pretty much useless once you know index/match, but whether or not you can do vlookups is the deciding factor in whether you know excel at multiple departments/companies I've worked.
+Death to v-look up. Index match took me longer to wrap my brain around but when it works it's fast and clean. 
+At work and link is blocked, unfortunately. But I will certainly peruse through there when home.
+Chandoo is the best! I learned a lot from his site, I would absolutely recommend it. In particular, look up the "Top 10 Excel Formulas for Analysts" for some great formulas beyond your basic VLOOKUP.
+Thanks for the help, Ace. You should try writing a BLO in ME. 
+I read a post from another user explaining an exploitable feature of V-lookups because the entire lookup_array is stored in the formula which can pose a potential threat to data breaches is some information in that lookup_array is sensitive/classified and not intended for a user. 
+
+Say the vlookup is pulling personal information and your range takes columns B:F and column D are social security numbers, but you're referencing column 5 in your formula--if you just change the 5 to a 3, you should be able to pull those social numbers in your workbook.
+
+It was very interesting.
+It's important to know both, and know why Index-Match is usually a better choice =]
+
+vlookup is very usefull in many situations, I use it many times along with index matches.  Vlookup is more efficient in certain tasks especially when you have 4 or 5 different 2 column tables that just need one to one matching. Index match is nice to merge sheets, but if you really need big queries, it's best to make an access query or do things through mysql and the table query wizard.
+https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+yep, but if you have multiple double look up tables, vlookup is sometimes easier to implement quickly than one huge index match
+
+No argument there. Vlookups are definitely easier to type out lol.

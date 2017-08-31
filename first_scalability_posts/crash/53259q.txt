@@ -1,0 +1,47 @@
+crash
+53259q
+New built out spreadsheet regularly crashes if I open a second version (for comparison/editing). This is a new problem, and specific to the file. Nothing else crashes excel as predictably. Any thoughts for why, and why now? and is it fixable?
+
+As per title.  Apparently I needed to fill in the box here.
+
+Words.
+
+
+
+-------------
+More details needed.
+
+How large is the workbook in terms of space on disk and in memory? Any VBA modules? Any VBA user-defined functions used in cell formulas? Any Tables or Pivot Tables? Any data connections? How many volatile function calls (INDIRECT, OFFSET)? How many lookups?
+
+In general, large workbooks cause more problems than small workbooks. External data connections can cause problems. Many lookup functions and/or lots of INDIRECT or OFFSET calls can affect recalculation.
+-------------
+1. Fair enough.
+1. 2 Mb  
+1. No VBA
+1. A few small tables, and pie charts.  no pivot tables.
+1. no data connections or references to external docs or other excels.  
+1. No Indirects or offsets, a couple index matching, if that's a concern.    
+1. A fair few V- & H-lookups, but nothing I'd consider terribly excessive.  I've run larger files with more and never had an issue.  How many is too many?  I'd say I'm probably in the neighorhood of a hundred; again, though, I've run more.
+-------------
+10,000 or so lookups is too many. Doesn't seem like that's a problem.
+
+At 2MB, your workbook is small enough it shouldn't cause problems due to managing system resources.
+
+Have you looked through the Windows Event Viewer? It should show information on application crashes.
+-------------
+Huh.  Well, I didn't even know about the windows event viewer, so thanks for that.  Looks like it's going to takke a learning curve, but I ddidn't see anything obvious right off the bat.
+
+Thanks for the tip, though; and ruling out the other factors you listed is nice.
+
+-------------
+You could proceed by trying to isolate the problem. Make copies of the two versions of the workbook, open one and delete one worksheet from it, save it, then open the other. If Excel still crashes, open the one you modified and delete another worksheet, save it, then open the other. Keep going until there's just one worksheet in the workbook you've modified or Excel stops crashing when opening the second.
+
+If Excel still crashes, the remaining worksheet would seem to cause the problem. Copy the original again and remove ONLY that worksheet, save the workbook, and open the other. If Excel still crashes, you may need to try removing all subsets of worksheets to isolate the problem.
+
+If Excel doesn't crash after removing a few worksheets, the last worksheet removed would seem to cause the problem. Copy the original and remove only the previously last removed worksheet, save the workbook, and open the other. If Excel still crashes, then same as above: you may need to remove all subsets of worksheets.
+
+If Excel doesn't crash after removing some worksheets, copy the original, DON'T remove the worksheet, but copy the whole worksheet and paste special as values, replacing all formulas with values. Then open the other workbook. If Excel still crashes, you'd need to try not removing the problem worksheet but clearing all cells in it. If Excel doesn't crash, you'd need to convert smaller and smaller sections of the worksheet to values then opening the other workbook until it crashes again.
+
+Yes, this sort of problem isolation is a royal PITA and time sink.
+
+One other possibility: are either of these workbooks stored on a network drive? If so, try copying both to local drives and opening them on local drives.

@@ -1,0 +1,47 @@
+Convert Text of Date to Date that can be sorted correctly
+Here's an option, just adjust the cell references as needed.
+
+    =VALUE(SUBSTITUTE(A1,LEFT(A1,FIND(",",A1)),""))
+Oh, TIL. I was using `DATEVALUE(...) + TIMEVALUE(...)` for stuff like this.
+> =VALUE(SUBSTITUTE(A1,LEFT(A1,FIND(",",A1)),""))
+
+Thank you for your reply. Two questions:
+
+1) Does this take into effect the time? I would like to include time as well, and after trying it I only get an ouput of the date. Maybe it's just the cell's settings?
+
+2) What does the single " mean? I know what "" and " " mean but never a single quote mark. What is the FIND looking for?
+
+Haha I know what you mean. I didnt pick it up until recently either. I felt like such a sucker doing the datevalue/left + timevalue/right nonsense as well after seeing another way. 
+No prob! Yes it does factor in the time. And on your other question, the find searches for the first comma or (",") and then the left function grabs the day in text + first comma, which i then substitute out/remove it. 
+> =VALUE(SUBSTITUTE(A1,LEFT(A1,FIND(",",A1)),""))
+
+Thanks. I tried it and it doesn't sort properly with this. I can change the number format to date and then to time and it does switch to the same time it's referencing, but if I have
+
+Friday, May 26, 2017 1:10:31 PM  in cell B1 and
+Friday, May 26, 2017 10:00:30 AM  in cell B2 
+
+It's not putting B2 in B1.
+
+I see what your formula is doing. Removing the day of the week and replacing that part with blanks, but how come it's not sorting right? I think it has to do with the AM/PM.
+It's not sorting to put the second one with the AM on top when sorting A-Z.
+
+I just tried adding a "plus one" to the find (I used Search)  
+
+    (SEARCH(",",A3)+1)
+
+I thought it was maybe because I wasn't removing the extra space between the comma and the date. Still isn't sorting right when I put data next to the formulas.
+
+Edit: I can get it to sort based on the time, but it doesn't take into account the AM/PM. I tried sorting from Z-A instead, and it sorted, but only based on time, not AM/PM.
+Did you copy/paste "the corrected" dates/times as values before sorting?
+
+I tried to copy and paste the formulas and paste as values then went to the number formatting and changed to time.
+
+Is it necessary to change it from a formula though? Can excel not recognize it as a time if it's just a formula?
+Apparently it is, here's [an example](http://imgur.com/nXU2dRc) that shows the return values of the formula sorted newest to oldest versus the pasted values. Number formatting is irrelevant as long as excel recognizes the values as actual dates and or times. 
+Awesome it works now! Thank you so much!
+
+Solution Verified!
+
+You have awarded one point to _manpretty_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

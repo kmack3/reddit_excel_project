@@ -1,0 +1,20 @@
+Formula to Return Formula
+Not quite. If you're just doing basic stuff, you might be able to use SUBTOTAL. The first argument in that function controls what operation is performed, so you could do a lookup to say whether you want to do a Count, Average, Sum, etc.
+
+Otherwise, you'd need to build a big CHOOSE function to determine which formula, along lines of
+
+    =CHOOSE(ControlCell, Formula1, Formula2, Formula3, etc.)
+What if you created your own custom function with VBA and then use the first argument to determine which vba code to run in your custom function?
+
+https://support.office.com/en-us/article/Create-Custom-Functions-in-Excel-2007-2f06c10b-3622-40d6-a1b2-b6748ae8231f
+Have a look at INDIRECT(), it might fit your needs. 
+This is pretty close to what I'm looking for. However, given the size of the list of various functions I'll be applying, I think the overall length of the formula could get a little unwieldy (in terms of QA, auditing, passing it off, etc).
+
+Perhaps a custom function is in order? SUBTOTAL nearly fits my needs as well, if only I knew how to customize each of its sub-component function options.
+This is the solution I'm exploring right now. It has a lot of promise so far, though there's a bit of a learning curve.
+
+Solution Verified, and thanks for the support link.
+
+You have awarded one point to _lifenoodles_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

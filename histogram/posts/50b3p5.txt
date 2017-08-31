@@ -1,0 +1,33 @@
+Excel screwed your report because of names conversion? You're not alone: nearly 20% of papers about genetic research using Excel lists contains errors because of its default settings
+Sounds more like we need to (continue) to teach users how to properly input their data. Simply formatting the cells to Text before entering their data would have prevented this. Or turn off AutoCorrect. Interesting follow-up article here:
+
+http://chandoo.org/wp/2016/08/26/psa-dont-let-auto-correct-spoil-your-party/
+Wow who doesn't love a text string with a bunch of numbers and a e toward the end.  It gets me every time.
+Excel is surprisingly terrible in its whole system of defining data types.
+Are people still repeating this bullshit?
+You'd think that as scientists, they'd be much smarter and know to verify the data. 
+I'd disagree with this one.  It's extremely flexible, which means I can probably do what I want to do, even if it means fiddling with some settings somewhere or Googling how to fix a particular problem. 
+
+I'd much rather have confusing flexibility than simplicity without flexibility like you see in some other software. 
+That's what I thought. At my office I need to fix this kind of issues pretty often, but when you think about scientist doing science, you'd think they notice these things and know how to fix them. I'm scared to think what other things they could've overlooked.
+a lot of the time it's very clumsy to figure out something that should be simple, like dates, or dealing with numbers like UPCs that start with 0s. I'm not saying it's not flexible, but it's surprisingly prone to "user" error, which I generally blame on the poor design rather than the user.
+the zeros issue is annoying. 
+It is very good being spreadsheet software. It's not a great at being database software.
+>> it's very clumsy to figure out something that should be simple, like dates
+
+Dates are all but simple.  
+01/05/2016  
+What is that date for you? Fifth of January or First of May?  
+And what if you find:  
+01.05.02  
+?
+Even the simple numbers are a pain in the ass: thousands separator could be a comma or a period or a space (I don't know of any others but there could be more).
+
+I work in an international environment and I deal with these kind of issues all the time, I can't even imagine what a nightmare is to think about all the possible outcomes. Sure a better system would be better (one that would be easy to implement is "if a column as mainly general text values, don't convert any to other formats"), but you can't have it all.
+="08"
+Probably what access was made for.
+'08
+When we are talking about this, I assume that there is absolutely zero difference between those two, just a different way of input. Correct?
+One is recognized as a formula, the other as a value (which Excel will also interpret as a number stored as text). Depends on use case, it's a subtle difference. The effective string value is the same.
+
+More importantly, with a value, the range.value = range.formula = range.formulaR1c1

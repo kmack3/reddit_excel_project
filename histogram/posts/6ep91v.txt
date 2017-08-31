@@ -1,0 +1,19 @@
+Conditional formatting based on previous cell while ignoring blanks?
+>If the value is greater than the previous non-blank-cell's value, set red
+
+A quick heads up that [your rule doesn't do that now](http://i.imgur.com/NASqEI0.png) - it sets a cell red or green depending on the cell *after* it, not before it. Assuming you want what's written in your post and base the color on the preceding non-blank value, select A2, type in this
+
+    =A2>INDEX(A$1:A1,MAX(ROW(A$1:A1)*(LEN(A$1:A1)>0)))
+
+Hit Apply, then change Applies To to =$A:$A.
+
+Same basic deal with green but swap `<` for `>`.
+
+[Here is the rule after applied to all of A](http://i.imgur.com/zS1umDt.png). Note the funky 1048576 - that's fine. That's the wraparound because Excel doesn't have a row 0, so the row 'before' A1 is the last row. That's why I had you do A2 first, then change applies to. Or, just keep Applies To as `=$A$2:$A$whatever`.
+I made that change in http://briansweet.me/files/sample2.xlsx, and now nothing is highlighted.
+
+_bashes computer with hammer_
+It doesn't look like you didn't follow the steps - select A2, not A1 and not all of A, then put in the formula (hit OK, let the box exit out if you didn't start with CF manager, then go back to CF manager) and change Applies To.
+Heros do exist.
+
+I'd ask for an explanation of the combined use of INDEX, MAX, ROW and LENS, but at this point I'm just glad it works.

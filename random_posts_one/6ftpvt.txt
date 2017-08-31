@@ -1,0 +1,16 @@
+6ftpvt
+Running Accuracy Function?
+http://imgur.com/a/9M3p2
+
+I am looking to keep a running accuracy in the "Running Accuracy Column". The first day in row 2 would read "74%". The second column would sum C2 & C3 and then divide by the sum of b2 & b3. I could do this manually, but I'm sure there is an easier way.
+
+
+-------------
+In E2, and then drag down: `=SUM(C$2:C2)/SUM(B$2:B2)`
+-------------
+solution verified
+-------------
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

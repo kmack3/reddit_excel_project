@@ -1,0 +1,14 @@
+6g1s0m
+Transforming values in a table to an equivalent creating another table.
+Hey guys! First time posting so pardon me if I make any mistakes in the process. Im using Excel 2016 in Mac and I am basically looking to create a macro that allows you to transform the values in a list (in a table) into the given equivalents I need. Like this, (I wrote this myself, I do not know how to give the equivalents to each value) http://imgur.com/nWOBRXt. Basically press the button and switch Fruit 1 with its equivalent of value and put it in a separate list. Also the range of values I need to transform won't always be in the same list, so going back to the example sometimes I can have fruit 1 in my list but sometimes I wont have that value but Ill have fruit 20 that I also need excel to know that would be an apple for example. G, this is confusing but I hope I can gain some clarity here. If there is anything else y'all would like to know just ask!
+Thanks beforehand.  
+
+
+-------------
+why do you need a macro if you can just use logical expressions?
+-------------
+well that is an option to, I wanted to do it that way since it is a platform that other people will be using and that with the press of a button they could obtain the necessary information. Do you have any idea about a way to do so differently?
+-------------
+The thing about macros is that you have to understand how they work otherwise if they break who's to fix it?
+
+I'm not understanding how you get the translated values, basically how to arrive at the output values. It seems like a simple index-match based on what you're asking but maybe there's more to it.

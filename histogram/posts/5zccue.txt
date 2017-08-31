@@ -1,0 +1,51 @@
+VBA tool runs ~50x slower and maxes CPU when run on a higher spec'd, more up to date computer
+Include this bit of code into your VBA code:
+
+    Public Sub LudicrousMode(ByVal Toggle As Boolean)
+        Application.ScreenUpdating = Not Toggle
+        Application.EnableEvents = Not Toggle
+        Application.DisplayAlerts = Not Toggle
+        Application.Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+    End Sub
+
+You will see your largest performance increases if you are writing data to, or making graphical changes to a spreadsheet. So if you have code that does any of the above, then use this subroutine.
+
+    'Before any writing or graphical changes are made
+    Call LudicrousMode(True)
+    
+    'Right before code is completed
+    Call LudicrousMode(False)
+that seems super weird. Can't think of anything that should cause such a huge spike, especially given the size of the worksheets it is working with, and the same code in both cases.
+
+Is there something funky going on in the desktop version? Like maybe the macro is scanning an entire worksheet/workbook instead of just the relevant range? 
+
+You can always try putting his "microtimer" in a module, then calling it / printing to the worksheet the time at different parts of your code, try to figure out what is taking so long: 
+
+http://www.vbaexpress.com/kb/getarticle.php?kb_id=1068
+
+ 
+My experience is that 2016 is way more resource hungry than 2010. That might be because of some settings, but this upgrade is still too new for me to have tweaked it yet.
+
+Nice one about disable the auto calculations though.
+Damn, automatic calculation was what did it. I already had covered the rest... executes in less than a second. 
+
+Thanks, I learned a valuable lesson today!
+Solution Verified
+Can you walk me through exactly what this is? 
+Love the Tesla inspired sub name
+Not sure why there is such a large disparity between the two versions. Something on the automatic calculation is eating up massive resources in excel 2016 that has much less impact on excel 2010. The only sheet calculation going on is a few arrayed nested ifs linked to data on another sheet (data that is static while this procedure is going on) and the conditional formatting, which IS in relation to the data being updated. But turning off autoupdating cut down runtime from 10 mins to 1 second. Outrageous.
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+All it is is a subroutine to toggle on and off the stuff that doesn't need to happen when Excel is running a macro. Turn off screen updating, alerts, events, and cell calculation when you pass it "false". When you want it back on, when your code is done, you pass it "true".
+
+ Otherwise, Excel is trying to recalculate and update every cell during every step of the macro slowing down (apparently significantly) the whole process.
+
+You don't really need the sub, I just put them in as individual commands. But this is more elegant and reusable, which is nice.
+[Tesla got it from somewhere else too...](https://www.youtube.com/watch?v=ygE01sOhzz0)
+ah well the automatic calculation I think would explain it, especially if you have a lot of conditional formatting, which can be tricky. 
+
+There's a good write-up on it here: 
+
+https://fastexcel.wordpress.com/2013/10/09/exploring-conditional-format-performance-part-1-whats-slow-whats-buggy-and-whats-faster/

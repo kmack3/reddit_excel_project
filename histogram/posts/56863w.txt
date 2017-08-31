@@ -1,0 +1,97 @@
+Best resource to learn Power BI?
+The edx course by Microsoft is a pretty good starting place.
+Get the book from powerpivotpro.com or read through their articles.
+
+I have done both after I came across other ways and their content is really well done and fun to read.
+
+For some specific topics you can check out the PowerBI YouTube channel.
+
+And: don't get discouraged from fans if other software. PowerBI is really good. It's still growing and might not have some things others are used to but at the same time offers advantages that other products don't have. The import engine is great and the Dax-language is even better. And the price difference alone is so much more attractive to creators and viewers.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 5 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+I have been working with Power BI for the last 2 or so years since it was released.  So most of what I have learned has been either directly from microsoft or figured out on my own.  I would Echo Data_Cruncher's statement below.  In order to match your vision of what you want to display with the reality of your actual data, you should get familiar with DAX.
+
+Good DAX books I have read:
+Learn to write DAX from Matt Allington (good book, lots of basic concepts)
+https://www.amazon.com/Learn-Write-DAX-practical-learning/dp/1615470417
+
+Power Pivot Power BI by Rob Collie (funny book with more advance concepts)
+https://www.amazon.com/Power-Pivot-BI-Excel-2010-2016-ebook/dp/B019BNG4YW/ref=mt_kindle?_encoding=UTF8&me=
+
+Also, since I figured if I was trying to learn others would want to know what I have developed.  So I have built a website with short tutorials on how to use and manipulate data in Power BI.  You can access it by going to www.powerbi.tips.  
+
+As a final thought you should also check out he Power BI youtube channel.  Start at the beginning at Video 0-1 and work your way through the tutorials.  It starts with some over views and then quickly gets into how to build dashboards.  
+https://www.youtube.com/playlist?list=PL1N57mwBHtN0JFoKSR0n-tBkUJHeMP2cP
+
+Don't. PowerBI is terrible. Learn Spotfire or Tableau instead.
+And then take it to the next level with any DAX book by Marco Russo
+I love Tableau but it's going to be murdered by power by. It cost $1000, where the most expensive version of power BI is $10/ month. Power BI isn't perfect yet but this is the same these are the same people who make excel(though they are also the motherfuckers who made windows 8 and 10). Lean Power BI, Microsoft is investing in it and increasing their market share. 
+What are you even talking about? You are comapring enterprise tool to entry level. Wanna compare spotfire vs ssas+ssrs? didn't think so.
+Why do you say that? Power BI is insanely powerful.
+It's powerful if all you know is Excel. If you have used Spotfire, you'll never use PowerBI. PowerBI visualizations are limited, and so are the customizations to those visualizations. Adding additional functionality through R is much uglier and more difficult than with Spotfire. PowerBI lacks a lot of the basic data science functionality Spotfire has built in. Further, the data connection optionality on PowerBI is terrible as MS really wants to force SQL onto everybody. Let me know how Hadoop and Spark live data feeds are handled in PowerBI. The speed differential between Spotfire and PowerBI when handling high dimensionality datasets with 5+mm rows is immense. The built in GIS capabilities of PowerBI are underwhelming and I find most of the charting to have a cartoonish feel. 
+
+PowerBI was Microsoft's solution to some limited BI functionality in Excel. BI tools should be able to handle almost any data connection, real-time data, big data, and apply highly advanced statistical analysis of the data natively, and be able to visualize the data in highly intuitive ways. PowerBI doesn't accomplish these things comprehensively or very well individually. 
+
+Keep downvoting me though. I have more Excel knowledge than 99% of users and have extensively used most BI tools in advanced financial analyst and data science roles. Spotfire puts the rest of them to shame. This sub has gone downhill recently as any opposition to MS is staunchly downvoted by some Excel monkey that just learned how to build a dashboard in Excel and thinks he's hot shit. Excel is a great tool. PowerBI can do some great things Excel struggles with. But frankly, Microsoft is outclassed in the BI space by Tibco and Tableau. 
+
+
+
+
+Just commented on your other post in this thread. I don't see why you see the need to build yourself up and knock down this sub. This is the best sub on reddit that I have seen in terms of people being willing to help each other. If you asked questions that people submit here to any other technical sub you'd get a bunch of "I am not going to do your job for you."
+
+ You brag about your knowledge of excel and looking at your post history, you're a sharp guy or girl. Maybe you're some hedge fund quant. That's terrific, well done. What you're missing is that excel ships on every PC. And whether you work for McKenzie or McDonalds, you'll be crunching your numbers in excel and using Microsoft products to do your job. Like word perfect, Visicalc, and god knows how many others, Microsoft will devour its software competitors. 
+
+No other company has the economic means, and, more importantly, the technical trust, to make a cheap BI tool that will be widely used. A college student can learn Power BI on break, use it at his or her summer job that hasn't even found out about power view and impress. But let this same student ask the company to spend 1k per user and they will be working some shitkicker job faster than a pivot table refreshes.  
+Both you and I seem to have similar backgrounds yet we came to very different conclusions.  I work in the advanced analytics lab for one of the biggest consulting firms in the world and, in a similar vein, I am also quite advanced in Excel having spent many years leveraging Excel languages like MDX, VBA, DAX, VSTO & M. Further, we regularly use Tableau, Qlik & Power BI. We had Spotfire in the lab but ended up removing it from lack of client adoption, not because it is a bad product however (it isn't).
+
+I feel I am in a good position to address your points, so here goes -
+
+Performance -
+Nothing on the market comes close to Power BI's performance - you're actually the first person in the industry I've met who has questioned its performance. I don't know what you mean by high dimensionality data - did you mean granular cardinality in dimensions?  If so, then what you said is demonstrably incorrect. If we were to compare the two products using a real-time calculation (i.e. no pre-aggregation) performed on a high cardinality 2 billion row fact table against several modestly sized dimension tables (say 10 million each) then Power BI would be much faster than Spotfire.  And when I say faster, I'm talking multiples - there is no comparison.
+
+Viz -
+You're correct - Power BI's viz is lacking. However, the viz layer has only existed for ~1 year so I expect to see major improvements, e.g. the ArcGIS partnership that was announced last week.  But otherwise, I totally agree with you.
+
+Data science -
+Power BI not a data science tool. It's mainly designed to rely on other tools, e.g. AzureML / Alteryx / SQL / R / Python, to accomplish this.  It is important to remember that Power BI is a part of a giant ecosystem that Microsoft is developing (Azure). However, it does have R support, which is nice.
+
+Connectivity -
+The ETL engine in Power BI is ridiculously functional, so I'm not sure what you mean.  To your points - there is a spark connector and there is also an HDinsight connector.  Further, it can both push and pull real-time data feeds.
+
+Summary -
+The foundation for Power BI (DAX and M) are some of the, if not the, strongest tools of their kind in the industry. This is an indisputable fact. However, the viz component is lacking but it is important to remember that is also very new. Microsoft is putting a lot of money into Power BI and as far as I can tell, they're doing everything right.  Watch this space.
+What about price?
+
+I mean, I can kind of go along with the idea that you get what you pay for, but I think Spotfire is silly-priced compared to its value-added over PowerBI.
+
+>This sub has gone downhill recently as any opposition to MS is staunchly downvoted 
+
+Remind me, what's the name of this sub again? Oh, that's right, it's /r/excel, not /r/statistics, not /r/datascience, not /r/businessintelligence. It's almost as if people come here for help on excel related issues...weird....
+I'd agree with this. Although I'm no expert, I've used Excel, Tableau and Power BI. I use Power BI at work as I'm the only BI guy and its a small construction company with limited data, most coming from a CRM, Google Analytics, and local Excel files. It's also cheap! But if it were a bigger company, with a bigger budget and more advanced needs, I'd definitely move over to Tableau.
+In instances such as yours, PowerBI and Excel are probably more than adequate. PowerBI is certainly cheaper than other BI solutions.

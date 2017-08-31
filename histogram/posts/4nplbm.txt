@@ -1,0 +1,40 @@
+Is a pivot table always the best over manual tables? And how does one use it effectively?
+Its called a PIVOT table because you can pivot the data results from column to row and back in easy or complex formats very easily.
+
+Its use depends very much on what results you require. PIVOT tables allow to combine data for counts or other calculations, or add additional calculation columns on the data.
+
+From the amount of data you are describing, a database may suit you better for student data even some analysis.
+
+I'd use one master data sheet, then have one pivot table.  Use slicers to be able to flash back and forth between the various views you want, rather than a bunch of different pivot tables.
+[Let's Pivot](http://imgur.com/jt7i5sI)
+https://www.youtube.com/watch?v=e-yuYNgsHAk
+Pivot tables are great for simple aggregation calculations across many different intersections of categories. OTOH, if you change the data, you have to make sure to refresh pivot tables. That is, pivot tables (and web queries) are outside the formula recalculation framework.
+
+If you have frequently updated data which you summarize in a fixed layout, purely formula-based tables would update upon each recalculation.
+
+So the answer is: depends on your data and how flexible you need to be presenting results.
+i was going to ask this questions as well, my company uses a ton of pivots but i never really recognize an instance when they are superior over just a raw report formatted cleanly 
+The best solution is to actually consider your business questions BEFORE you collect a pile of data and start abusing it.  
+There is no purpose for a data sheet with so many rows and columns that a human could never consume it.  
+PIVOT tables are nice, but what is the actual purpose?  If you just need grouped aggregates, or a chart, then plan ahead and just get that data.  Make hyperlinks back into your source system if you MIGHT want to dig into the detail.  
+is there a good  database software that's free to play with?
+It depends on what you want to show.  If it's pretty straightforward, a regular data table is fine.  If you want to be able to "slice and dice" to show a lot of different things from the same report, pivot table is the way to go.  I typically just use tables and a filter or two as needed, but sometimes you want that extra bit of flexibility.
+> There is no purpose for a data sheet with so many rows and columns that a human could never consume it
+
+It sure would be nice if that were true.
+
+A data sheet can be as big as it needs to be as long as you have the tools to show summaries of it elsewhere. Excel plays at being both the front end and back end of a database, so it's often necessary to have some monster sheets that contain all the data but not use them to display it. That's where tools like Pivot tables and charts come in. In a proper database, you still have that monster amount of data but it's hidden from you.
+Do you not have MSACCESS with your Office Suite that Excel came with?
+Look into SQL server express. Enterprise grade database, for free from Microsoft.
+
+Has constraints - but none that should bother you at this level
+Open Office offers something, it's called Apache. It's similar to Microsoft's Access but free.
+Tangent: where I work, Office Standard outnumbers Office Professional 49 to 1.
+
+OTOH, even Office Standard comes with MS Query. Set up a few tables in an Excel workbook, and you could play with SQL queries against those tables in MS Query.
+Developer edition is free and unlimited. 
+Apache is a web server.
+
+You can get a free version of SQL server (express version) from microsoft
+Oops, read the name wrong. A company named Apache makes Open Office it seems, and the database program is called Base.
+Developer edition is free and unlimited

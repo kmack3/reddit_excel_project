@@ -1,0 +1,91 @@
+6g8vn5
+Repeating Blank Rows from Specific Cell Value in VBA
+I'd like to repeat a blank row X times based on a cell's (G1) value then copy the repeated rows with Cells (A1 to F1).
+
+I've been digging around to find a solution and found something that inserts 1 row above each. Can someone help complete?
+
+Sub BlankLine()
+
+    Dim Col As Variant
+    Dim BlankRows As Long
+    Dim LastRow As Long
+    Dim R As Long
+    Dim StartRow As Long
+    Dim RepeatR As Variant
+    
+        Col = "G"
+        StartRow = 1
+        BlankRows = 1
+        RepeatR = "G1"
+        
+            LastRow = Cells(Rows.Count, Col).End(xlUp).Row
+        
+            Application.ScreenUpdating = False
+
+            With ActiveSheet
+            
+    
+    For R = LastRow To StartRow + 1 Step -1
+    If .Cells(R, Col) > "0" Then
+    .Cells(R, Col).EntireRow.Insert Shift:=xlUp
+    End If
+    Next R
+    End With
+    Application.ScreenUpdating = True
+    
+    End Sub
+
+Edit: codeformatting
+
+
+
+-------------
+To apply code formatting
+
+    Use 4 spaces to start each line
+
+You can select code in your VBA window, press Tab, then copy and paste into your thread or comment.
+
+-------------
+You can try the following
+
+
+    Sub BlankLine()
+        Dim Col As Variant
+        Dim BlankRows As Long
+        Dim LastRow As Long
+        Dim R As Long
+        Dim StartRow As Long
+    
+        Col = "G"
+        StartRow = 1
+        BlankRows = 1
+    
+        LastRow = ActiveSheet.Cells(Rows.Count, Col).End(xlUp).Row
+        Application.ScreenUpdating = False
+    
+        For R = LastRow To StartRow + 1 Step -1
+            If ActiveSheet.Cells(R, Col) > 0 Then
+            For i = 1 To ActiveSheet.Cells(R, Col).Value
+                ActiveSheet.Cells(R, Col).EntireRow.Insert Shift:=xlDown
+            Next i
+            End If
+        Next R
+    
+            Application.ScreenUpdating = True
+    End Sub
+
+-------------
+> For i = 1 To ActiveSheet.Cells(R, Col).Value
+>             ActiveSheet.Cells(R, Col).EntireRow.Insert Shift:=xlDown
+>         Next i
+>         End If
+
+SOLUTION VERIFIED!
+
+All I need now is to do some lines with Copy to repeat the content. thanks!
+-------------
+
+You have awarded one point to _Ofmm_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

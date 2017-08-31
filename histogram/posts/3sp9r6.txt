@@ -1,0 +1,66 @@
+Simple Loops in VBA
+Clean layout, good examples and descriptions.
+Very nice! Thank you for putting this together. 
+
+Folks, take notice--These examples are not just about loops, but also about working with the Excel Range and Worksheet objects. These simple techniques are powerful, and should be basic training for anyone learning Excel VBA. 
+
+A couple comments for OP:
+
+Please indent code within loops.
+
+I also question the **.Activate** method. On cursory test, this does not seem necessary. I'm willing to help sort out the confusion if you can provide a test bed. 
+Next Installment: While/Wend, Do Until/Loop
+
+Pet peeve: oWS.**Activate**
+Saved.  Thanks!  I always open old worksheets in which I've done loops instead of just combining them. 
+Good job, OP. Way to be a leader!
+Use 
+
+    Range(ows.Cells(1, 1), ows.Cells(oRow, oCol))
+
+Then you don't have to use `ows.Activate`
+
+Some great examples, although I disagree with your spacing sometimes! 
+Very useful snippets, will be adding this to my stash.
+One thing I will change is
+
+    oRow = Sheets(1).UsedRange.Rows.Count
+
+Which requires continuous data from A1 to
+
+    oRow = Sheets(1).Cells.Find("*", searchorder:=xlByRows, searchdirection:=xlPrevious).Row
+    oCol = Sheets(1).Cells.Find("*", searchorder:=xlByColumns, searchdirection:=xlPrevious).Column
+
+This crashes on the Worksheet_Dynamic_Range_Loop module so I may roll these lines into a function to return the range.
+
+This is great, it would be awesome to see more content like this!
+I went ahead and indented the code within the loops. I typically don't indent code within loops unless I'm starting another statement like IF or another Loop. These examples are not formatted the way I usually would format them for the purpose of trying to make it as easy as possible for users without much VBA experience to understand.
+
+Yeah I've had a few comments on the .Activate and I'm going to be looking into it. Thanks for the comment and helpful advice!
+I don't like it either but for some reason it will not update oRow and oCol unless I start with .Activate. 
+
+Suggestions?
+Thanks!
+Thanks for the suggestion! I looked back at some old code to see if I had been able to do it a different way but i've used activate every time. I'll be putting this tip in the toolbox!
+
+In defense of my spacing, I tried to differentiate between different steps of the code but I do agree with your disagreement haha; I would typically use a slicker format.
+
+Again, thanks for the advice!
+Let's say you have a table of data in an arbitrary location in your sheet and it can move around whenever. You can use the following to capture the exact range.
+
+    First_Row = Sheets(1).UsedRange.Row
+    Last_Row = Sheets(1).UsedRange.Rows.Count - First_Row +1
+    First_Col = Sheets(1).UsedRange.Column
+    Last_Col = Sheets(1).UsedRange.Columns.Count - First_Col +1
+
+There are other ways to do this that may work better depending on the specific situation. Keep in mind that these examples are very general and in most cases each will need to be modified to fit the specific task. If you have any questions feel free to post them and I'll do my best to answer them! 
+I first learned in Python which forces indentation, it becomes very easy to follow the code once you're used to it!
+What about looping through the workbook.sheets collection instead, any difference?
+This shouldn't be the case!
+But I want to re-iterate you're doing something useful here.
+
+Keep it up!
+I'll put that to the test when I get a chance. Thanks for the suggestion!
+Please help me then! I've been using this syntax for forever! Also, as long as screen update is False this works very well. I would love to write code without .Activate!!!
+Just remove it.  You are referencing the sheet in the for loop.
+I think I left a comment in there on how to fix that issue. 

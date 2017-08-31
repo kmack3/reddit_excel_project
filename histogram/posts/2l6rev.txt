@@ -1,0 +1,719 @@
+Share your UDFs!
+It's super simple, but it kinda bothers me that the CONCATENATE function requires the following format:
+
+    =CONCATENATE(A1, B1, C1, ....)
+
+instead of:
+
+    =CONCATENATE(A1:D1)
+
+mainly so people can put characters between their words, but since I rarely do that, I created my own. I also allowed for the user choose what they want the delimiter to be. Anyways, here's the code:
+
+    Public Function CONCAT_RANGE (inRange As Range, delimiter As String) As String
+
+		Dim c As Range
+		Dim returnValue As String
+
+		For Each c In inRange
+			returnValue = returnValue & c.Value & delimiter & " "
+		Next
+
+		CONCAT_RANGE = Left(returnValue, Len(returnValue) - 2)
+
+	End Function 
+
+Again, super simple, but here's the format of the function:
+
+    =CONCAT_RANGE(A1:D1, ",")
+
+
+ScrubFileName
+
+Removes all illegal file name characters. It's like 10 Replace (... wrapped. I had a file where users would input an ID# that would end up being part of the file name when saved.... you can imagine my headache I created....
+I got fairly in to UDFs at my last job, particularly to take the ease of off some repetitive and regular tasks where there was no access to the root data or the systems generating it.
+
+In one instance, we had data coming out of a huge cube that had hourly intervals presented as 6:00 - 6:59am, I wanted just 6:00am for charting purposes and ease of reading, so I used this to quickly manipulate the text of thousands of rows.
+
+    Function shortenhoursinpivot(cell As String)
+        Dim length As Integer
+        length = InStrRev(cell, " - ") - 1
+            shortenhoursinpivot = (Left(cell, length)) & (Right(cell, 2))
+    End Function
+
+In other cases, we would often do large analyses on item level data that required UPCs, but they had to be formatted in 13 digit format with zeros padding the start of the number. So a SKU of 1234567890 needed to be formatted as 0001234567890. But, we wanted to be able to feed a reporting engine with an entire column of UPCs at once, correctly padded with zeros, surrounded by single quotes, and separated by commas.
+
+    Function ODSRange(myRange As Range)
+        Dim RangeA As String
+        Dim UPC As Range
+        For Each UPC In myRange
+            If Not IsEmpty(UPC.Value) Then
+                'entry.Value = Format(.Value, "0000000000000")
+                RangeA = RangeA & "'" & Format(UPC.Value, "0000000000000") & "'" & ","
+            End If
+        Next
+        ODSRange = Left(RangeA, Len(RangeA) - 1)
+    End Function
+
+Various variations were then created to take lists and drop them into SQL format or other formats.
+
+    
+
+
+Mm, on my phone,  but I have lots. One of the more useful ones is a uniques(range) to return a unique list. Also a copy of the join(array) vb function as an excel udf, so I can easily format a unique,  comma (or other) separated list into a report. 
+
+The cleanfilename() one that someone else posted is always good. Likewise, a cleantabname() is handy. 
+
+I stole some code from a coworker and turned his macro to add the check digit of upcs into a udf to return the same. 
+
+I've had to rewrite search() to work on an array and return the row index. 
+
+**Edit** some code:
+
+___
+**FileLocked as Boolean**: returns true/false on if a file is locked for editing.
+
+    Function FileLocked(strFileName As String) As Boolean
+       On Error Resume Next
+       ' If the file is already opened by another process,
+       ' and the specified type of access is not allowed,
+       ' the Open operation fails and an error occurs.
+       Open strFileName For Binary Access Read Write Lock Read Write As #1
+       Close #1
+       ' If an error occurs, the document is currently open.
+       If Err.Number <> 0 Then
+          ' Display the error number and description.
+          'MsgBox "Error #" & Str(Err.Number) & " - " & Err.Description
+          FileLocked = True
+          Err.Clear
+       End If
+    End Function
+
+___
+**AMATCH_V as Variant (array)**: returns an array of MATCH results for lookups (used with INDEX and as part of an array formula)
+
+    Public Function AMATCH_V(val As Variant, r As Range) As Variant
+    
+        Dim i As Long
+        Dim n As Long
+        Dim c As Long
+        Dim vIn As Variant
+        Dim vTmp As Variant
+        Dim vOut As Variant
+    
+        vIn = r.Value2
+        n = UBound(vIn)
+        ReDim vTmp(1 To n, 1 To 1)
+        For i = 1 To n
+            If val = vIn(i, 1) Then
+                c = c + 1
+                vTmp(c, 1) = i
+            End If
+        Next
+        ReDim vOut(1 To c, 1 To 1)
+        For i = 1 To c
+            vOut(i, 1) = vTmp(i, 1)
+        Next
+        AMATCH_V = vOut
+    
+    End Function
+
+___
+**ADJOIN as String**: The Join() function as a UDF
+
+    Public Function adjoin(vals As Range, delim as String) As String
+    Dim tmpArray As Variant
+    Dim i As Integer
+    ReDim tmpArray(vals.Count)
+    For i = 0 To vals.Count
+        tmpArray(i) = vals(i).Value
+    Next
+    adjoin = Join(tmpArray, delim)
+    End Function
+
+___
+**zcut as Variant(array)**: take an array of numbers, remove zeros, return resulting array
+
+    Public Function zcut(arrIn As Variant) As Variant
+        Dim tval As Variant
+        Dim arrOut As Variant
+        Dim i As Integer
+        Dim j As Integer
+    
+        ReDim arrOut(0)
+        j = 0
+    
+        For i = 1 To UBound(arrIn)
+            If arrIn(i) <> 0 Then
+            arrOut(j) = arrIn(i)
+            j = j + 1
+            ReDim Preserve arrOut(UBound(arrOut) + 1)
+            End If
+        Next i
+    
+        ReDim Preserve arrOut(UBound(arrOut) - 1)
+        zcut = arrOut
+    End Function
+
+___
+**isFile as Boolean**: returns true/false based on if a file exists
+
+    Public Function isFile(path As String) As Boolean
+        Application.Volatile
+        isFile = Strings.Len(Dir(path)) <> 0
+    End Function
+
+___
+**uniques as Variant(array)**: returns unique list of items from an array
+
+    Public Function uniques(ByRef list As Variant) As Variant
+        Dim tmpList As Scripting.Dictionary
+        Dim i As Integer
+        
+        Set tmpList = New Dictionary
+        
+        For i = 0 To UBound(list)
+            If Not tmpList.Exists(list(i)) Then
+                tmpList.Add list(i), list(i)
+            End If
+        Next i
+        
+        uniques = tmpList.Keys
+        
+        Set tmpList = Nothing
+    End Function
+
+___
+**cleanFileName as String**: cleans the file name so it can be saved
+
+    Function strip(ByVal inString As String) As String
+        Dim chars As String
+        Dim i As Integer
+        
+        chars = "\/:*?""<>|"
+        strip = inString
+        
+        For i = 1 To Len(chars)
+            If InStr(strip, Mid(chars, i, 1)) > 0 Then
+            strip = Replace(strip, Mid(chars, i, 1), " ")
+            End If
+        Next i
+    End Function
+Here's a couple that are closely related:
+
+This one returns the formula of the selected cell, but replaces the references in the formula with the values in the cells.
+
+    Function SHOWVALUES(r As Range) As String
+
+    Dim sFormula As String
+    Dim sPattern As String
+    Dim cValue As String
+
+    Dim oRepExp As Object
+    Dim oRegExpMatch As Object
+
+    sFormula = r.Formula
+    sPattern = "\$?[a-z]{1,2}\$?\d{1,5}"
+
+    Set oRegExp = CreateObject("vbscript.regexp")
+
+    With oRegExp
+        .Global = True
+        .IgnoreCase = True
+        .Pattern = sPattern
+    End With
+
+    Set oRegExpMatch = oRegExp.Execute(sFormula)
+
+    For Each Match In oRegExpMatch
+        cValue = Range(Match.Value).Value
+        sFormula = Replace(sFormula, Match.Value, cValue)
+    Next
+
+    SHOWVALUES = sFormula
+
+    End Function
+
+So if A1=1, A2=2, and B1 = A1+A2. Then SHOWVALUES(B1) = "=1 + 2". Obviously this will not work for ranges.
+
+The next one here returns an array of the references a given formula is using:
+
+    Function SHOWREFS(r As Range) As Variant
+    
+    Dim sFormula As String
+    Dim arrRef() As Variant
+    Dim sPattern As String
+    Dim cValue As String
+    Dim i As Integer
+
+    Dim oRepExp As Object
+    Dim oRegExpMatch As Object
+
+    sFormula = r.Formula
+    sPattern = "(\$?[a-z]{1,2}\$?\d{1,5}:\$?[a-z]{1,2}\$?\d{1,5}|\$?[a-z]{1,2}\$?\d{1,5})"
+
+    Set oRegExp = CreateObject("vbscript.regexp")
+
+    With oRegExp
+        .Global = True
+        .IgnoreCase = True
+        .Pattern = sPattern
+    End With
+
+    Set oRegExpMatch = oRegExp.Execute(sFormula)
+    
+    ReDim arrRef(1 To oRegExpMatch.count) As Variant
+    
+    i = 1
+    For Each Match In oRegExpMatch
+        arrRef(i) = Match.Value
+        i = i + 1
+    Next
+
+    SHOWREFS = arrRef
+
+    End Function
+
+So, following the example above. SHOWREFS(B1) = {A1, A2}. This does work for ranges. It will have to be updated to find refs from other sheets though. You could add a TRANSPOSE to re-orient that array too.
+Excel is missing a function to return the text dayofweek for a date, requiring nesting of CHOOSE() inside WEEKDAY().  VBA does have a function, this wrapper lets you use it from a worksheet
+
+    Function Weekdaynme(in1date As Date)
+    Weekdaynme = WeekdayName(Weekday(in1date))
+    End Function
+working_hours, to take a starting and ending date time stamp, your beginning of day, your end of day, and return the number of working hours in between.  (Had to create this to determine how long tickets were taking to solve.)
+
+EDIT:  Adding function, there's probably a way to do this as a formula, now that I think of it... at the time, I just solved all my problems with VBA.
+
+    Function Working_Hours(FirstHours, SecondHours)
+    'this takes two timestamps (date followed by time in am or pm)
+    'and calculates the number of working hours between them.
+    'set end (eod) and beginning (bod) of working day, in serial hours
+    'of course, you'd want to modify this if your working hour window differs.
+    Eod = TimeValue("5:00 PM")
+    Bod = TimeValue("8:00 AM")
+    lenworkday = (Eod - Bod) * 24
+    'get serial date values of inputted times
+    in1date = DateValue(FirstHours)
+    in2date = DateValue(SecondHours)
+    'get serial time values of inputted times
+    in1time = TimeValue(FirstHours)
+    in2time = TimeValue(SecondHours)
+    '<--- First Half of Function for Same Day Stamps.
+    'are these two timestamps on the same day?
+    If Int(in1date) = Int(in2date) Then
+    'is the start or end time prior to the beginning of the business day?
+    If in1time <= Bod Then FirstHours = in1date + Bod
+    If in2time <= Bod Then SecondHours = in2date + Bod 
+    'is the start or end time after the end of the business day?
+    If in1time >= Eod Then FirstHours = in1date + Eod 
+    If in2time >= Eod Then SecondHours = in2date + Eod
+    Working_Hours = SecondHours - FirstHours
+    Exit Function
+    End If
+    'Locate the number of working days between each date
+    rawdays = DateDiff("d", in1date, in2date)
+    workdaycount = 0
+    For n = 1 To rawdays + 1
+    nt = n - 1
+    dayoweek = WeekdayName(Weekday(in1date + nt))
+    Select Case dayoweek 
+    Case "Sunday"
+    Case "Saturday"
+    Case Else
+    workdaycount = workdaycount + 1
+    End Select
+    Next n
+    DayofFirstStamp = WeekdayName(Weekday(in1date))
+    DayofSecondStamp = WeekdayName(Weekday(in2date))
+    Select Case DayofFirstStamp
+    Case "Saturday"
+    Case "Sunday"
+    Case Else
+    If in1time >= Bod Then
+    frontendtime = in1time - Bod 
+    Else
+    End If
+    If in1time >= Eod Then
+    frontendtime = (lenworkday / 24)
+    End If
+    End Select
+    Select Case DayofSecondStamp
+    Case "Saturday"
+    Case "Sunday"
+    Case Else
+    If in2time <= Eod Then
+    backendtime = Eod - in2time
+    Else
+    End If
+    If in2time <= Bod Then
+    backendtime = (lenworkday / 24)
+    End If
+    End Select
+    rawworkhours = (workdaycount * lenworkday)
+    frontendtime = frontendtime * 24
+    backendtime = backendtime * 24
+    Working_Hours = rawworkhours - (frontendtime + backendtime)
+    End Function
+One of my favorites is one like vertex vortex mentioned. I have a function that returns the number of unique items in a range. If you add a second argument (integer), it returns that number unique entry in order of appearance. I really want to work out and eloquent way to optionally sort the unique array in various ways before returning the nth unique value.
+I know this is pretty common, but I'm suprised it's not a stock function: find the last row or column in a sheet or range that contains a value.
+
+    Public Function LROW(Optional r As Range) As Long
+    
+    Application.Volatile
+    
+    If r Is Nothing Then
+            LROW = Cells.Find("*", LookIn:=xlValues, SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+    Else
+        If Application.WorksheetFunction.CountA(r) > 0 Then
+            LROW = r.Cells.Find("*", LookIn:=xlValues, SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+        Else
+            LROW = 0
+        End If
+    End If
+    
+    End Function
+    
+    Public Function LCOL(Optional r As Range) As Long
+    
+    Application.Volatile
+    
+    If r Is Nothing Then
+            LCOL = Cells.Find("*", LookIn:=xlValues, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column
+    Else
+        If Application.WorksheetFunction.CountA(r) > 0 Then
+            LCOL = r.Cells.Find("*", LookIn:=xlValues, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column
+        Else
+            LCOL = 0
+        End If
+    End If
+    
+    End Function
+
+If you leave the arguments blank, it finds the last used row/column on the entire sheet. Otherwise, in the range you define. It only fails to work if the calling cell is in the range (circular reference) but I haven't figured out a practical way to fix that yet.
+My current workhorse is this routine to switch to a sheet.  If the sheet does not exist, it creates it.  If the sheet exists and you want it deleted and then created, it can do that too, just change the False at the end to True.  Displayalerts are turned off during this routine so deleting a sheet won't pop a box.  Yes, I know it is technically not a function, but it is still one of the handiest pieces of code around.  Call it with:
+
+Sheet_Select "Map.Old.New", "A", False
+
+    Public Sub Sheet_Select(Sheet_Name As String, Dest As String, Del_Sheet As Boolean)
+        Dim flag As Boolean
+        Dim ws As Worksheet
+        
+        Application.DisplayAlerts = False
+        flag = "False"
+        For Each ws In ActiveWorkbook.Sheets
+            If ws.Name = Sheet_Name Then
+                If Del_Sheet Then
+                    Sheets(Sheet_Name).Delete
+                Else
+                    flag = "True"
+                End If
+            End If
+        Next ws
+        If Not flag Then Sheets.Add(After:=Sheets(Sheets.Count)).Name = Sheet_Name
+        Sheets(Sheet_Name).Select
+        Cells(Rows.Count, Dest).End(xlUp).Offset(Abs(Cells(Rows.Count, Dest).End(xlUp).Value <> ""), 0).Select
+        Application.DisplayAlerts = True
+    End Sub
+
+    Function FN_RemoveSpecial(str_Input As String) As String
+
+        Dim str_SpecialChars    As String
+        Dim i                   As Long
+    
+        str_SpecialChars = "\/:*@?""<>|" 'Define which characters are 'special'
+    
+        For i = 1 To Len(str_SpecialChars)
+            sInput = Replace$(str_Input, Mid$(str_SpecialChars, i, 1), "")
+        Next
+    
+        removeSpecial = str_Input
+    End Function
+
+Another one:
+
+    Function FN_GetColour(rng As Range) As Variant
+        FN_GetColour = rng.Interior.ColorIndex
+    End Function
+UDFs are awesome: they are about the only aspect of Excel that parallels the "modularity" of most other programming languages. But yet they are so underused. My theory is that it is because:
+
+a) most people don't know they exist
+b) most people don't have the programming ability to develop them even if they did know they exist
+c) most people don't understand how powerful modularity and re-usability actually can be
+
+We've been toying with an idea to address these issues that allows you to wrap up UDFs as a non-technical user. Would be great to hear what you think: [useslate.com/granite](https://useslate.com/granite)
+Not mine, got it off the net long time ago, converts a number  to its wordy equivalent in Indian Current terms. So if the A1 contains  80,45,97,225.00  and in B1 I write Spellnumber(A1), the result is Rupees Eighty Crore FourtyFive Lakh NinetySeven Thousand Two Hundred TwentyFive Only .  I know if instead of FourtyFive the F in five was in small caps but it does the job for me
+
+    Function SpellNumber(amt As Variant) As Variant
+    Dim FIGURE As Variant
+    Dim LENFIG As Integer
+    Dim i As Integer
+    Dim WORDs(19) As String
+    Dim tens(9) As String
+    WORDs(1) = "One"
+    WORDs(2) = "Two"
+    WORDs(3) = "Three"
+    WORDs(4) = "Four"
+    WORDs(5) = "Five"
+    WORDs(6) = "Six"
+    WORDs(7) = "Seven"
+    WORDs(8) = "Eight"
+    WORDs(9) = "Nine"
+    WORDs(10) = "Ten"
+    WORDs(11) = "Eleven"
+    WORDs(12) = "Twelve"
+    WORDs(13) = "Thirteen"
+    WORDs(14) = "Fourteen"
+    WORDs(15) = "Fifteen"
+    WORDs(16) = "Sixteen"
+    WORDs(17) = "Seventeen"
+    WORDs(18) = "Eighteen"
+    WORDs(19) = "Nineteen"
+    tens(2) = "Twenty"
+    tens(3) = "Thirty"
+    tens(4) = "Fourty"
+    tens(5) = "Fifty"
+    tens(6) = "Sixty"
+    tens(7) = "Seventy"
+    tens(8) = "Eighty"
+    tens(9) = "Ninety"
+    FIGURE = amt
+    FIGURE = Format(FIGURE, "FIXED")
+    FIGLEN = Len(FIGURE)
+    If FIGLEN < 12 Then
+    FIGURE = Space(12 - FIGLEN) & FIGURE
+    End If
+    If Val(Left(FIGURE, 9)) > 1 Then
+    SpellNumber = "Rupees "
+    ElseIf Val(Left(FIGURE, 9)) = 1 Then
+    SpellNumber = "Rupee "
+    End If
+    For i = 1 To 3
+    If Val(Left(FIGURE, 2)) < 20 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & WORDs(Val(Left(FIGURE, 2)))
+    ElseIf Val(Left(FIGURE, 2)) > 19 Then
+    SpellNumber = SpellNumber & tens(Val(Left(FIGURE, 1)))
+    SpellNumber = SpellNumber & WORDs(Val(Right(Left(FIGURE, 2), 1)))
+    End If
+    If i = 1 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & " Crore "
+    ElseIf i = 2 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & " Lakh "
+    ElseIf i = 3 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & " Thousand "
+    End If
+    FIGURE = Mid(FIGURE, 3)
+    Next i
+    If Val(Left(FIGURE, 1)) > 0 Then
+    SpellNumber = SpellNumber & WORDs(Val(Left(FIGURE, 1))) + " Hundred "
+    End If
+    FIGURE = Mid(FIGURE, 2)
+    If Val(Left(FIGURE, 2)) < 20 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & WORDs(Val(Left(FIGURE, 2)))
+    ElseIf Val(Left(FIGURE, 2)) > 19 Then
+    SpellNumber = SpellNumber & tens(Val(Left(FIGURE, 1)))
+    SpellNumber = SpellNumber & WORDs(Val(Right(Left(FIGURE, 2), 1)))
+    End If
+    FIGURE = Mid(FIGURE, 4)
+    If Val(FIGURE) > 0 Then
+    SpellNumber = SpellNumber & " Paise "
+    If Val(Left(FIGURE, 2)) < 20 And Val(Left(FIGURE, 2)) > 0 Then
+    SpellNumber = SpellNumber & WORDs(Val(Left(FIGURE, 2)))
+    ElseIf Val(Left(FIGURE, 2)) > 19 Then
+    SpellNumber = SpellNumber & tens(Val(Left(FIGURE, 1)))
+    SpellNumber = SpellNumber & WORDs(Val(Right(Left(FIGURE, 2), 1)))
+    End If
+    End If
+    FIGURE = amt
+    FIGURE = Format(FIGURE, "FIXED")
+    If Val(FIGURE) > 0 Then
+    SpellNumber = SpellNumber & " Only "
+    End If
+    End Function
+    
+ 
+
+the option to add a delimiter is a nice touch.
+I have one exactly like this.  And I'm really surprised they don't have this built in.  I also have one that does the reverse. It's the UDF version of delimited text to column. It takes the form
+
+=extractelement(text,  element number,  delimiter string) 
+
+It helps me extract specific parts of of complicated concatenating without a laborious and repetitive find/mid formula 
+I have pretty much this exact one as well, but I also include a prefix and suffix optional parameter. I mostly use it to take a list of values and turn
+
+Item1
+
+Item2
+
+Item3
+
+Into 'Item1','Item2','Item3' for a quick paste into a SQL IN clause. Saves tons of time everyday
+I can't find it, but I also wrote another really simple one that I called testcontrol that took a formula like this =(A1-B1)/B1
+
+And turned it into =testcontrol(A1,B1).
+
+Simple, but if you're tired of typing parenthesis, it's useful.
+Well those are suspiciously familiar... Found you! :) 
+
+>I've had to rewrite search() to work on an array and return the row index. 
+
+Isn't this what match does? Or is search used for substring matching
+What have you used this for? It seems to me like an advanced and high-powered tool that I would never actually need.
+It does have
+
+    =TEXT(Today(),"DDDD")
+
+Try it out....
+Mind if I ask where/why you use this? It's super helpful in VBA, but I don't see myself using this as much in worksheet work with formulas. If I need a dynamically changing list, I use OFFSET with COUNTA and a named range.
+LCOL or LROW = 0 is a problem.  You can't reference row 0 or column 0 in a sheet.  While I agree with your approach, this particular part will cause headaches for folks who want to move data into an empty sheet.  Also, if you trigger this in an empty sheet, you will get an error 91.
+
+I suggest adapting this code instead.  URow finds the last used row in a sheet.  ORow finds the first open row.  Someone will get smart and say that you can just add 1 (or subtract 1) to do the same thing.  Knock yourself out and try it in a sheet and you will find out why it is necessary to have one function for each.
+
+    Private Function URow(Book_Name As String, Sheet_Name As String) As Long
+        URow = 1
+        If Application.WorksheetFunction.CountA(Workbooks(Book_Name).Sheets(Sheet_Name).Cells) <> 0 Then
+            URow = Workbooks(Book_Name).Sheets(Sheet_Name).Cells.Find(What:="*", _
+                After:=Workbooks(Book_Name).Sheets(Sheet_Name).Range("A1"), Lookat:=xlPart, _
+                LookIn:=xlFormulas, SearchOrder:=xlByRows, SearchDirection:=xlPrevious, MatchCase:=False).Row
+        End If
+    End Function
+    Private Function ORow(Book_Name As String, Sheet_Name As String) As Long
+        ORow = 1
+        If Application.WorksheetFunction.CountA(Workbooks(Book_Name).Sheets(Sheet_Name).Cells) <> 0 Then
+            ORow = Workbooks(Book_Name).Sheets(Sheet_Name).Cells.Find(What:="*", _
+                After:=Workbooks(Book_Name).Sheets(Sheet_Name).Range("A1"), Lookat:=xlPart, _
+                LookIn:=xlFormulas, SearchOrder:=xlByRows, SearchDirection:=xlPrevious, MatchCase:=False).Row + 1
+        End If
+    End Function
+
+I reckon that throws an exception on a blank sheet.
+My biggest gripe with UDFs is that they have no way of using custom tool tips. Every time I start using one of my custom functions,  I forget what order and format the argument are 
+
+edit typos, damn broken finger
+I recall there being a function that does proper capitalization. =Proper()  I think
+Thanks! I need to make the second parameter optional, just so that you can smash them all together without any spaces if you so fancy. If you just put double quotes, it'd still leave a space between the items in the array. 
+Some guy came up with a (pretty darned clever) way of doing this with formulas, here's his whole blog'ish post about it: 
+
+http://www.excelfox.com/forum/f22/get-field-from-delimited-text-string-333/
+
+here's just the formula: 
+
+    =TRIM(MID(SUBSTITUTE(A1,delimiter,REPT(" ",99)),fieldnumber*99-98,99))
+
+
+That's glorious. I see a lot of people come to /r/Excel with that exact problem. I could probably whip up the code, but do you want to be the best OP ever and post what you have? 
+That's a good idea, especially for SQL. I hate having to type out all of those words for the IN clauses, except in my class right now, we mainly just use sub-queries which, to my limited understanding, is not the most efficient way of doing things.
+I use that particular formula daily.  Never thought of UDFifying it.
+This is great for people who get the percent change formula backwards.  This calculates percent change backwards for them.
+Hi. 
+Yep, substring matching. I think I had another one that tested multiple patterns. 
+probably the latter. The formula equivalent would be something like
+
+    =ISNUMBER(SEARCH("blueberry",list_of_cakes))*(ROW(list_of_cakes)-headers) 
+
+could change the * with an IF and stick it in an INDEX(SMALL or whatever to return the name of the first cake that has blueberry in it, or whatever. 
+For spreadsheet validation and reporting purposes. Under FDA GLP guidelines, any software (spreadsheet) my company uses for data analysis etc needs to undergo validation.
+
+This requires, in addition to many other things, a complete summary of every single formula in a workbook (even redundant ones), how the formula works and interacts with the rest of the book, and some unit testing to ensure the correct behavior under a variety of different conditions.
+
+UDFs like the ones above can help facilitate that. Say I have a formula (=C2/C3). I can use SHOWREFS() to return the references (C2, C3). Now that I have a hold on the references for the formula, I can use a macro to change the values located in those cells (logic, negatives, errors, zeros, etc), and return each result to verify and describe the formula at hand.
+
+Other things along these lines...
+
+EDIT: To your point, most people would probably never find a use for these
+> =TEXT(Today(),"DDDD")
+
+does the same thing.  dang.
+I don't particularly have any use for it outside of VBA (yet); I just made it out of boredom really, since I realized it wasn't a built-in function. Also, it works accurately even if there are blank cells in the middle of the range, whereas using COUNTA to get row/column numbers can be thrown off in that situation.
+So, adding 1/subtracting 1 did work. Also, referencing a blank sheet just returns 0 (I can't get it to produce error 91). Can you go into more specifics on what situations this would be a problem? Not trying to argue, I just want to improve my VBA skills so I want to understand what you mean exactly.
+Nah, if you're referencing a blank sheet, it just returns 0.
+The easy workaround to this is:
+
+Start typing in your custom formula on the worksheet. 
+
+Tab to select it, or however you do.
+
+Then press CTRL + Shift + A
+
+This will show the arguments your function takes. Just be sure to use descriptive argument names in your VBA and you're fine. You can then double click each argument to select all the letters in the argument name and start replacing that with whatever your argument value is
+Preach
+That's pretty good. Not very pretty, but very inventive
+    Function ExtractElement(str, n, sepChar, Optional nElement As Boolean = False)
+        '   Returns the nth element from a string,
+        '   using a specified separator character
+        Dim x As Variant
+        x = Split(str, sepChar)
+        If n > 0 And n - 1 <= UBound(x) Then
+            ExtractElement = x(n - 1)
+        Else
+            ExtractElement = ""
+        End If
+        If nElement = True Then ExtractElement = UBound(x) + 1
+    End Function
+
+I can't recall why I added the optional nElement argument the way I did. I think it will just return the number of elements instead of a specific element.
+It's on my work machine and I turned it off so I can't even remote connect to get it. I'll post it first thing tomorrow 
+> UDFifying 
+
+Congratulations, you just made up that word. Only [one other use](https://www.google.com/search?q=UDFifying&oq=UDFifying&aqs=chrome..69i57&sourceid=chrome&es_sm=93&ie=UTF-8#q=UDFifying&nfpr=1) pops up in Google. I kinda want to see how that other person used it in full context, but I'm afraid to click on that link.
+Ha, that was a typo...fixed.
+I just flip the chart upside down. BOOM. FIXED.
+ha!  code is like a fingerprint.
+
+What do use for unit testing in VBA?  Other languages offer a variety of frameworks for TDD, but VBA, not so much.
+And TEXT(Today(),"DDD") does a 3-letter abbreviation (Mon, Tue, Wed, Thu, etc..)
+Trigger it via vba in an empty sheet and see what it returns.
+
+Re the add 1/subtract 1, you have to test it in an empty sheet to see why it has to be separate routines.  If you are looking for the last used row in an empty sheet, there is no data for the routine to find, therefore it reports row 1 as the last used row.  There is no data there.  By the same token, looking for the first open row in an empty sheet also returns row 1 but then you add 1 because you searched for the last row with data and then added 1. Now go back to your routine and see what values it returns if you try to find the last used row in an empty sheet and then see what value you get if you "add 1" to calculate the first empty row in the same empty sheet.  You get values of 1 and 2.  If you check my URow and ORow routines, you will see that both evaluate to row 1 instead.  Is this the correct way for it to work?  That is debatable.  I could argue this 3 ways, but in the end, what matters is that my vba routines work that transfer data into sheets that are sometimes empty and sometimes have data in them.
+I don't really consider this a workaround. I'd say it's a good enough for now solution.  
+Good call. I like this formula for sure. I'll be adding it to my file! Thanks!
+lover's lab .... or
+lover slab
+?
+
+Either way, I ain't clickin' that link either.
+In interest of science I had a look around. Something about programming a mod of game called Fallout 3 (good game) and as far as I can tell they mean the exact same thing. In fact it doesn't seem all that different to my untrained eye. Here is a function from the one of the threads
+
+    Begin GameMode
+    
+    if iInit == 0 ; code that only has to run the first time a mod is ever loaded
+        set Var1 to someValue
+        set Var2 to someValue
+        set Var3 to someValue
+        etc etc
+        set iInit to 1
+    elseif iInit && fVersion < somefloat ; code that only runs on a mod update
+        if Var1 < someValue
+            ; do stuff
+            if someActor.GetAV someActorValue > someValue
+                ; do stuff
+            End If
+        Else
+            ; do stuff
+            if somecondition || (somecondition && somecondition)
+                ; do stuff
+            End If
+        End If
+        set fVersion to someFloat
+    elseif iInit && (GetGameLoaded || GetGameRestarted) ; code that only has to run once on each game load
+        if IsModLoaded "SomeMod"
+            set iModIndex to GetModIndex "SomeMod"
+            set rRef to BuildRef iModIndex someDecimalNumber
+        End If
+        if IsModLoaded "SomeOtherMod"
+            ; etc.
+        End If
+    End If
+    
+    ; finally, the actual chunk of script that does need to run all the time
+
+
+PS. I have finished the game of Fallout some time ago, and even though I can't be sure there was no such thing as sexout. Perhaps those guys were modding the game to add just that.
+
+My business protip? Multiply everything by 1.2, we win always.
+I don't know how many times I've seen your username, but I've just now realized that I love it.
+When I say "unit testing" I mean it in the loosest possible form you could imagine. Specifically in regards to testing formulas in a spreadsheet. We do not do unit testing of VBA modules, classes, etc.
+
+Basically, there are rules in place that say you have to validate any software product "for your specific needs." So even though we all know Excel works just fine, there still has to be a validation to prove it does what we say it does (can't just say Microsoft already proved it works). 
+
+As you can imagine, this can be pretty darn tedious. Luckily, functions that pull references (god only knows why there isn't a built-in for this) can be used to automate most of the process.
+Thanks!  I am late to reddit so all my usual ones were taken.  It was the product of about three seconds of thought, but I've grown to like it.  Yours ain't too bad either.
+Got it, thanks.  

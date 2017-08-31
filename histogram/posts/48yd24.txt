@@ -1,0 +1,37 @@
+VLOOKUP not returning desired value
+/u/Golmaia has a working suggestion but it's pretty clunky to look at.
+
+I would make a third column, taking the difference between your estimate and the actual. You can then use a vlookup formula with a MIN function as your lookup value, use FALSE to get the exact value and bob's your uncle!
+You'd think excel would have something nice like this built in.
+
+Here is a formula I have saved when I need something like this. Hope it works, I've tweaked it to match the data ranges you've given.
+
+=INDEX($C$4:$C$53,MATCH(F4,$B$4:$B$53,1)+(F4-INDEX($B$4:$B$53,MATCH(F4,$B$4:$B$53,1))>INDEX($B$4:$B$53,MATCH(F4,$B$4:$B$53,1)+1)-F4))
+
+Put that in F3
+
+Note I used F4 as a reference in my formula rather than using "1" directly like you did. This is just to avoid confusion as "1" is used as an argument in a few places here. I didn't want to write your n value of 1 and also use 1 as an argument. So anywhere that says F4 is your lookup value.
+
+Credit where due:  I pulled that off a google search a few years back when I needed it. It's been ages since I even traced through how the logic works. These days I just know it works for me.
+You want to change your final parameter to FALSE, TRUE will give you an approximate match while FALSE will give you an exact match on the lookup value
+Awesome idea, have an upvote, hell, I'll give you three!
+Thank you so much, cloud intelligence, for making us look good.
+SOLUTION VERIFIED! Thanks guys!
+It doesn't appear that OP's problem is that simple. He/she wants to find the value in column B that is *nearest* to the value in F4, and then return the corresponding value in column C. Try this, entering it as an array formula (i.e., use ctrl-shift-enter)
+
+    =INDEX(C4:C22,MATCH(MIN(ABS(F4-B4:B22)),ABS(F4-B4:B22),0))
+
+edit: formula range fix
+
+Change 22 to however many rows you have.
+I have used true to give an approximate match but I assumed that the approximate match would be the one closest to the desired value of 1.00, i.e. η = 1.0010, D = 1.7 not η = 0.9816, D = 1.6.
+Cheers, I think /u/semicolonsemicolon 's suggestion above is doing exactly that but without the additional column. 
+
+You have awarded one point to _Golmaia_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+TRUE is behaving right here. 
+
+It will look for exact, and if it cannot find it will always go next closest that is lower. It doesn't look up.
+Yuppers. Just makin' America great again. Have an upvote from me too anyway.
+It is even one step worse if you don't have things sorted in ascending order it will stop looking as soon as it finds one over you reference value it takes the last one.

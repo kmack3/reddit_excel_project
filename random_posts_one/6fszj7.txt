@@ -1,0 +1,39 @@
+6fszj7
+Trouble with a dynamic GETPIVOTDATA setup
+Hello,
+
+I'm trying to create a dynamic reference with GETPIVOTDATA.  The main complication (I think) is the pivot is referencing other workbooks that I have tied-in via 'Get and Transform' and 'Data Model.' 
+
+When I click in the pivot table, here is the auto-generated GETPIVOTDATA formula I get:
+
+=GETPIVOTDATA("[Measures].[Count of Inquiry Month-Year (Month)]",Pivot!$B$4,"[TimelineData].[Inquiry Month-Year (Month)]","[TimelineData].[Inquiry Month-Year (Month)].&[Jan]","[TimelineData].[Channel - Clean]","[TimelineData].[Channel - Clean].&[Alumni]")
+
+From the syntax you can see that the workbook query that is being looked up is "TimelineData" and that I'm looking to create dynamic look ups to the fields of 'Month' and 'Channel.'  Specifically in this case, "Jan" and "Alumni."  Here is a link to what the Pivot looks like with scrubbed data.
+
+http://imgur.com/a/QAr9U
+
+When I attempt to change the syntax (in another sheet in a table) to be dynamic and reference a cell with "Jan" and another cell of "Alumni" (Let's says those cells are B3 and C2 respectively for example sake) I get a #REF error.  
+
+What is the proper syntax to make this dynamic?   Thank you again,
+
+
+-------------
+Try =GETPIVOTDATA("Value",'PivotTableName'!$B$3,"Column","Channel 1","Page1","Jan")
+
+If it is just an un named pivot table it should be PivotTable1 in you reference. Page1 refers to the Row Field Name. Also I would check the boxes "For error values show 0" "For empty cells show 0" and "preserve cell formatting on update". The key is having locked references in your formulas. That way when it becomes dynamic, i.e slicer. The cell location never changes. Just the data. 
+-------------
+So based on your suggestion, I used the following:
+
+=GETPIVOTDATA(Inquiry Month-Year (Month),InquiryGoal!$B$4,Channel - Clean,C2,Inquiry Month-Year (Month),B3)
+
+I get a #NAME? error.  I named my pivot "InquiryGoal" but when I auto generate the GETPIVOTDATA it references the pivot table name as a simple reference, "Pivot!$B$4" (It's on a sheet called "Pivot").  I tried that as the pivot table name but still get the #NAME? error.  It acts like it can't locate this pivot table.  Does it have to do with the pivot table coming from a power pivot?  Thanks
+-------------
+You need quotation marks around everything except cell references
+-------------
+I tried that and now I get a #REF error, but this is because I didn't try to call the pivot table name, I just clicked on the pivot directly.  So now it seems that my field references are off?
+
+This is what I got:
+
+=GETPIVOTDATA("Count of Inquiry Month-Year (Month)",'Raw Data Pivot'!$B$4,"Channel - Clean",C19,"Inquiry Month-Year (Month)",B20)
+-------------
+Try taking out the B20 reference. If its a standard pivot table. Click on just the cell while writing the formula shouldnt trip a #REF error. However, im not sure how it reacts to power pivot. I can send you and example if you would like. 

@@ -1,0 +1,26 @@
+6gatxx
+Making a chart automatically integrate new values and increase a variable.
+So I'm making a chart that encompases an overall performance rating by "Match"
+
+For example
+
+
+Match# | Rating
+-----|------
+1 | 2400
+2 | 2560
+3 | 2544
+4 | 2523
+*(The chart will go on for hundreds of matches, ergo why I want to make this automatic)*
+
+I want the chart that represents this data to automatically include the values as I go, instead of having to manually expand the criteria, and as well, Input the next value for "Match #" as it's always going to be previous cell +1
+
+
+
+-------------
+Make your data a "table" (Ctrl-T). The table will expand to encompass any additional rows added to the bottom; and the chart that points to fields in the table ought to automatically update also.
+
+edit: for automatic incrementing in the first field. Before the table is created, make a formula in the second row `=A2+1` (but use whatever cell on the worksheet that first column first row is in) and copy this formula down for the rows that you have. Then Ctrl-T to create the table. Then all you need to do is add to the Rating column and Excel will automatically and correctly fill down the Match field. The chart will automatically expand.
+-------------
+The formula for game number isn't expanding on its own, The automatic expansion of the table however, is.
+

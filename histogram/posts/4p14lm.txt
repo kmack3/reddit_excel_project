@@ -1,0 +1,140 @@
+Do any of you keep a common tools workbook? What's in it?
+I started with some macros, but ended up porting them to VB.NET to build a custom toolbar that I shared with my coworkers . The toolbar looks like [this](http://imgur.com/DYNKE0a), and the ones I use the most are:
+
+* Jump to next different value / previous different value
+* Jump to next / previous error
+* From selection, clear all #N/As and zeros
+* Swap month and day in all cells in selection (whether they are text or date; if they are date it only does it when valid)
+* Copy all the selected cells as a single string with a specified separator (usually emails with semicolons to paste in Outlook)
+Changed the flair to 'Discussion'.
+
+Also, since this is a topic which come us every few months, here are the links to previous such threads for helpful ideas.
+
+1. https://www.reddit.com/r/excel/comments/2xokz1/what_are_some_of_the_best_macros_you_have_saved/
+
+2. https://www.reddit.com/r/excel/comments/2ekwye/does_anyone_have_a_personalxls_file_they_would/
+
+3. https://www.reddit.com/r/excel/comments/1rdra2/what_are_some_of_your_personalxlsx_macros/
+My current list:
+
+**Desc** | **Formula** | 
+:--- | :--- | 
+Advanced VLOOKUP | INDEX(ReturnRange,MATCH(LookUpValue,LookUpRange,0)) | 
+AND/OR Multiple Criteria SUM | {SUM((SumRange)\*(Criteria1=Criteria1Range)\*((Criteria2.1=Criteria2Range)+(Criteria2.2=Criteria2Range)))} | 
+DynamicChartLabels | OFFSET(DynamicChartValues,0,-1) | 
+DynamicChartValues | OFFSET(ValueHeader,1,0,COUNT(ValueRange),1) | 
+DynamicRange No Blanks | OFFSET(ValueHeader,0,0,COUNT(ValueRange),1) | 
+DynamicRange No Blanks (Text) | OFFSET(TextHeader,0,0,MATCH("\*",TextRange,-1),1) | 
+Hyperlink jump to cell within workbook | HYPERLINK("#SheetName!CellRef","Text") | 
+Multiple Criteria SUM | SUMPRODUCT((SumRange)\*(Criteria1=Criteria1Range)\*(Criteria2=Criteria2Range)) | 
+Multiple Criteria VLOOKUP | {INDEX(ReturnRange,MATCH(Criteria1,IF(Criteria2=Criteria2Range,Criteria1Range),0))} | 
+Multiple Criteria VLOOKUP 2 | {INDEX(ReturnRange,MATCH(1,(Criteria1=Criteria1Range)\*(Criteria2=Criteria2Range),0))} | 
+Count number of blank cells upwards | {IF(ISBLANK(A1),INDIRECT(ADDRESS(MAX(IF(ISTEXT($A$1:A1),ROW($A$1:A1))),1)),A1)} | 
+Round to Significant Figures | ROUND(Value,SigFigs-(1+INT(LOG10(ABS(Value))))) | 
+Rank based on category | SUMPRODUCT((Criteria1=Criteria1Range)\*(ValueRange>Value))+1 | 
+Find First Numeric in a Text String | MIN(IF(ISERROR(FIND({1;2;3;4;5;6;7;8;9;0},A1)),"",FIND({1;2;3;4;5;6;7;8;9;0},A1))) | 
+Find First Non-Empty Column | {MATCH(0,--(ISBLANK(A1:X1)),0)} | 
+Extract First Two Words | IF(LEN(A1)-LEN(SUBSTITUTE(A1," ",""))>1,LEFT(A1,FIND(" ",A1,FIND(" ",A1)+1)-1),A1) | 
+
+[StringConcat](http://www.cpearson.com/Excel/stringconcatenation.aspx) and some sendkeys stuff.
+I keep a folder of useful .xlsx's that I've made more dynamic for reuse. Saves a lot of time in programming and other data migration heavy tasks.
+
+
+I have few:
+
+* standard macro structure, e.g. standard variables, and palce for starting values
+* SAP connection module
+* standard SAP scripting messages handling
+
+not much, tbh
+I have an .XLA add-in with many user-defined function. My most used ones are wrappers around regular expression and Windows scripting DLLs.
+my personal workbook has macros for 'unhide all tabs', 'delete all empty rows', 'delete all empty columns', one to mass rename tab names by replacing one string in them (for changing a workbook with a lot of tabs from jan to feb, for example, mostly for month-end reports)... can't remember what else off the top of my head.
+I usually have it as tools for one project. So tools for steam trading, tools for games I play.
+
+&nbsp;
+
+it is an absolute mess and I have 10 different files like this each with 10+ versions. So I probably should clean that up.
+
+
+I did think about doing that but to much effort....
+
+&nbsp;
+
+
+
+&nbsp;
+
+Also did you use vba for your search box? If not could you send me how you did it? It would be Greatly appreciated.
+Would you share that macro that erases 0s?
+
+Are you willing to share this?
+Would you mind sending it to me by PM? :) Thank you
+This is awesome, thanks 
+Thank you!
+Mind sharing the SAP connection macro?
+I would be very interested in the SAP modules you have if you would be willing to share. Or if you know of any tutorials on VBA talking to SAP that be awesome too
+I second the add-in approach. My personal XLAM has a dozen hot-key macros and a few UDFs. I also have the Reddit 'selection to table' stuff (which I have modified) in a separate XLAM. 
+It's nothing too fancy:
+
+	Sub ClearErrorsAndZeros()
+		
+		If Selection.Cells.count > 600000 Then
+			MsgBox "Too many cells!"
+		Else
+		
+			For Each cell In Selection
+		
+				If IsError(cell.value) Then
+					cell.value = ""
+				Else
+					If cell.value = 0 Or cell.value = "0" Or Trim(cell.value) = "" Or cell.value = "-1" Or cell.value = -1 Or cell.value = "MANY FOUND" Then
+						cell.value = ""
+					End If
+					
+				End If
+			Next cell
+		End If
+
+	End Sub
+
+Please see the notes I made in [this other reply](https://www.reddit.com/r/excel/comments/4p14lm/do_any_of_you_keep_a_common_tools_workbook_whats/d4ijrwf)
+There are two things about this .net toolbar:
+
+* Even though most of the ideas were mine, I did end up adding some ideas from coworkers, and in fact made it as a part of my job and got paid for it (so you could say it's not mine, but my company's).
+* I'm actually not sure where the source code/project is right now. It connects to a company database to log usage information anyways, so it will constantly give errors if you're not in the company network.
+
+I can, however, share the VBA code to my macros that were the inspiration for this, at least for now until I find the project again and make it portable and make sure I wouldn't get into troubles.
+
+[Here's the module](https://dl.dropboxusercontent.com/u/252517/VBA_Toolbox.bas). It's not much, but you might find it useful. Also, these might have bugs in some cases, that I'm sure I corrected for the final .net version, but not here. (For example, the Dates one handles many different data types and cases in the final version)
+Hi! See [here](https://www.reddit.com/r/excel/comments/4p14lm/do_any_of_you_keep_a_common_tools_workbook_whats/d4ijrwf)
+Nothing fancy :)
+
+    Sub ConnectSAP()
+    
+    On Error GoTo ErrHandler
+    'Connects Excel to current open SAP Session
+        If Not IsObject(ARLA) Then
+           Set SapGuiAuto = GetObject("SAPGUI")
+           Set ARLA = SapGuiAuto.GetScriptingEngine
+        End If
+        If Not IsObject(Connection) Then
+           Set Connection = ARLA.Children(0)
+        End If
+        If Not IsObject(session) Then
+           Set session = Connection.Children(0)
+        End If
+        If IsObject(WScript) Then
+           WScript.ConnectObject session, "on"
+           WScript.ConnectObject ARLA, "on"
+           
+        End If
+    ErrHandler:
+    If Err = 70 Then End
+    End Sub
+
+How do you Hot key a macro in an xlam file? I have a few macros that I need to get to coworkers and would love to be able to keep it in a single add-in to update as needed.
+In the add-in's 'This Workbook' module, use the `_Open` event to call the key bindings. Key binding is done like this:
+
+    Application.OnKey "^+a", "OnKey_Accounting_Format"
+
+This one binds `Ctrl+Shift+A` to the macro 'OnKey_Accounting_Format'. Put the macro in a standard module of the add-in, and you're good to go.

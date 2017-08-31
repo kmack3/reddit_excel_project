@@ -1,0 +1,46 @@
+Does anyone pull weather data from a website into their spreadsheet? how/where?
+I use IFTTT and Google Sheets. I have the weather uploaded every morning at 7am EST. It's a great recipe. 
+No experience with this myself, but what version of excel do you have?
+
+I found [this](https://blogs.office.com/2013/03/21/use-webservice-functions-to-automatically-update-excel-2013-spreadsheets-with-online-data/) online - if you have Excel 2013, maybe it could be of some use.
+If the data you're looking for is in a table on the webpage (I don't think it works if it's not, but I'm not sure) you can use the [GetExternalData](https://support.office.com/en-nz/article/Get-external-data-from-a-Web-page-708f2249-9569-4ff9-a8a4-7ee5f1b1cfba) function. 
+
+If that doesn't work, you can use VBA and either [XmlHttp](https://www.youtube.com/watch?v=jvXFc1jCIK4), or WinHttp.
+Several people I work with have done this. One thing that will help is to find a relatively simple website that's not likely to change much. If Canada has anything like the USA's National Weather Service that might be helpful:
+
+http://forecast.weather.gov/afm/PointClick.php?site=lwx&zmx=1&zmy=1&map.x=299&map.y=69
+
+From there, it's a matter of pulling that information into excel and formatting it appropriately.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 4 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+Could you please give me an idea how to set it up? I'd love to try that
+[I published my recipe](https://ifttt.com/recipes/302609-daily-weather)
+Thank you.  Just started experimenting with IFTTT.  I was looking to have it record my location every hour.  Can't seem to get a recipe to work though. 
+Do you have android or iOS?
+iOS. I've got it so that when I enter or leave work or home it'll record, but the combo of time/location don't seem to work

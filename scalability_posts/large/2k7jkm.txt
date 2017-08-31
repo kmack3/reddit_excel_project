@@ -1,0 +1,66 @@
+large
+2k7jkm
+Excel 2007: I have a large data set containing information about 30 counties in NY. I would like each county to have its own pie chart.
+
+Do I need to create a chart for each, or can I automate that?
+
+Edit: I'm going to give the macro a try, but it seems like creating one chart, copying it 30 times, and then doing a Select Data on each one is the way to go.  Now I just need to figure out a way to display them nicely, 5 or 6 to a page.  Maybe in a Word table?
+
+Edit 2: I ended up doing one chart, copying the tab, grouping the two tabs and copying them, etc, until I had enough charts, then changing the data that each chart referenced via Select Data.  Hopefully this won't come up again, but just in case does anyone have a better idea?
+
+
+-------------
+Why you didnt use pivot chart?
+-------------
+Try recording a macro using relative references and see if that gets you anywhere. Worst case scenario, you format one chart, save the format as a template, and just use that template for the rest of the charts.
+
+Do you have the data nicely formatted? Or do you need to format the data, too?
+-------------
+I have done this with VBA for creating about 20 different line charts.  I basically created one using macro recorder to get a record of all the commands to create one chart and wrapped it in a loop to create multiple charts.  Not sure how familiar you are with VBA, but here is the snippet of code that actually creates the chart.  The first half of the code is not included but is specific to the source data to determine the correct range of the data for the chart.  Thus, some of the variables contained in this snippet are defined in the code not shown.
+
+
+    Range(lstrTopLeft, lstrBottomRight).Select
+
+    Set oChart = Charts.Add
+    With oChart
+        oChart.ChartType = xlLine
+        ActiveSheet.Name = lstrTitle
+    End With
+
+    'at this point the Chart Object has become a ChartObject Object
+    With ActiveChart
+        .HasTitle = True
+        .ChartTitle.Characters.Text = lstrTitle & " as of " & lstrAsOfDate
+        With ActiveChart.Axes(xlValue, xlPrimary)
+            If .MajorUnit > 15000 Then
+                .MajorUnit = 15000
+            End If
+        End With
+        ActiveChart.Axes(xlCategory).TickLabelPosition = xlLow
+    End With
+
+This was patched together from recording and googling.  I've long since forgotten any sources.  If you are familiar with VBA, this might give you a start.  Basically, the whole procedure is a big loop.  Start, determine a section of data, create a chart, rinse/repeat until the end of the data is reached.
+-------------
+You can also try using filters.
+This sounds like Access would work better than excel for this.
+
+-------------
+Power View has a feature called Horizontal Multiples, which sounds like what you are looking for.
+
+1. Connect your data to the workbook via table or external data source
+
+2. Drag the country field and corresponding value field onto the sheet. Convert dataset to Pie Chart
+
+3. Set the Country field as a horizontal multiple
+
+4. Set your value fields under Size
+-------------
+I came here to say this. My only thought would be that he would only get one chart at a time, but still seems easily doable.
+-------------
+Thanks, I'll give this a try.  I'm mostly VBA illiterate, but I've done minor editing on recorded macros before.
+-------------
+I'm not that familiar with Access, but can you do pie charts with the data?  I don't remember seeing anything like that.
+-------------
+I'm out for the rest of the day, but if you can post a sample workbook of what the data looks like I could probably help. 
+-------------
+You can make a pivot table and then create a pie chart from the information in the pivot table, just select the graph you want under the 'Insert' heading. It would help to know what you're trying to represent (i.e. the subject matter/point of the graphs) but if you want any further advice on this just let me know. This is all also assuming you're using the latest version of Excel.

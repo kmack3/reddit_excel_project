@@ -1,0 +1,98 @@
+Is excel good on mac ? Hesitating between xps and MacBook Pro
+It doesn't have Power query, and you'll regret that.
+For an advanced Excel user the Mac version is terrible. At work we use [Parallels](https://www.parallels.com/landingpage/pd/general/?gclid=CI6mnLHS4tICFYESgQodSgEL_Q) to run Windows and other OS's on our Mac. I use the Windows version of Excel that way. 
+It depends what you use Excel for. Basic spreadsheets with formulas/formatting then Mac is OK. But any vba or power query or anything else "advanced" then you will need a PC. 
+I had a mac for work once and I didn't care for it... mainly because there were no F2 and F4 buttons! It killed me!
+No...Please stay away from the abomination that is excellent on the Mac
+No flash fill, either. 
+Excel for MAC is a big no-no.
+excel for PC is better. If you're concerned about feature loss, you could try running the PC version in Parallels & see what the performance is like. If it's abysmal, you could try bootcamp. (Switching into Bootcamp just to use one program is a PITA - if you end up doing this, check out paragon's HFS+ driver for windows, then you can access your mac drives easily.)
+
+It sounds like you're already fairly invested in the apple ecosystem - so parallels/bootcamp would probably be the way to go. Depending on what you're doing, it'd be easy to graduate to R or Python, and if you're going to be using Adobe stuff to make your output pretty it's my experience that you get better performance on a mac.
+
+Not to mention the fact that if you're doing presentations, you have access to keynote, which makes tasteful stuff simple. 
+
+
+after reading all your comments i guess i will not consider the macbook then ?
+As well as no VBA there's no Addin or XLL support on the Mac version. So you miss out on [stuff like this](https://www.thespreadsheetguru.com/blog/popular-excel-addins), or [QuantLibXL](http://quantlib.org/quantlibxl/) or our own [SSAddin](http://spreadserve.com/s3/downloads.html?utm_medium=social&utm_source=reddit.com&utm_campaign=excel_comment1603) for [Tiingo & Quandl data](https://github.com/SpreadServe/SSAddin).
+I work in a an all-mac environment, and half of my daily work is excel-based (on an intermediate-level). Simply-put, after 3 years it is sub-par.  I have been able to accomplish all that I've ever needed to, however with creative/lengthy workarounds. If you have the choice, go PC or run parallels (this also runs sub-par but in different manner). 
+PSA I did a little while back : 
+
+https://www.reddit.com/r/excel/comments/5y16m9/psa_dont_ever_accept_to_develop_a_solution_for/
+MacBook and boot camp it to run Windows. I love mine
+The Mac version of excel lacks many advanced features. Plus, this might be hard to picture for someone without first hand experience, but it feels laggy and slow, as if running behind an emulator.
+
+That said, in my opinion, apple laptops are still superior in terms of build quality, keyboards, touchpads, the overall feel, and can run windows natively. You can buy a Mac, install windows using boot camp, and use the apps you need. That's what I've done.
+While I haven't used 2016 on a Mac, every other version of Mac Excel seems to be behind and or lacking when compared to the corresponding PC version. 
+
+I would put my excel skills at advance expert and I learned and mastered Excel on PC machines so the Mac versions have been extremely annoying to me by with different layouts in the UI and keyboard. So if you are more familiar with mac's version this won't be a concern to you.
+for Excel you'll want Windows. Whether to dualboot on a mac or get an XPS or whatever is up to you, obviously performance is better on the latter. If this is primarily a work computer and you don't do creative work or whatever macbooks are supposed to be good at, I'd probably go for a windows laptop over a macbook. But it also depends on your other devices and whatever your preference is (like if you're set up with an apple tv and an iphone, might be nice to have a macbook so you can use all that cross-device apple snazz)
+FWIW my XPS can handle everything and I wouldn't trade it in for a Mac even if they paid me :)
+That's the best answer here. The lack of power query and real VBA support should be your concerns. A lot of this thread is dated or "I don't have a mac but blah" not answering your question.
+
+Since you want to be in a mac, and presuming you have one, it would be worthwhile to use the trial copies of parallels or VMware fusion. Set to transparency modes where you never see the windows OS, you can open a native window application and open your mac's file system files like normal, windows apps take their place in the dock alongside mac apps. There's bound to be complexity when it goes wrong because it's more moving pieces and it'll take up more ram/processor because you're running another app and OS in the background, but depending on the work you're doing you may never notice. 
+
+Speed-wise and performance wise it's the same.  It's really all about the power features that Ms is holding out and likely won't port. 
+
+Virtualization should be your answer.  Try to take a tour of the virtualization options and if you don't like it, you can always dual boot and live a mac lifestyle and hard boot over the few times you need the power/vba stuff. If you're using the power stuff a lot and you don't like virtualization, you're probably staying PC. 
+
+Apple also has a flexible return policy as long as you don't make it unsellable, that you can buy one and try out your setup and if the greater apple environment in your home doesn't outweigh any excel ass pain, return it in I think 1 week? And get your windows on. 
+It's also missing slicers. 
+My office gave me a Macbook and that's what I've learned Excel on. What's power query and what am I missing out on?
+Yes. And excel for Mac (even the 2016 version) doesn't support multi-threading. That means you only get the use of one processor, and that, in turn makes it nearly impossible to do any serious processing of datasets larger than 50,000 records... SMH
+Care to give a couple of examples of how you use Power Query?
+How do you like Parallels? I used Boot Camp for a while on my Mac but it used a ton of hard drive space and having to reboot to switch the OS was more of a hassle than I cared for.
+That's weird. I have a mac on my lap right now that has all the function keys.
+
+That said, having used Excel on both PC and Mac, it's clear that the PC version is more powerful and better supported. 
+I use Excel 2016 on my MBP with Parallels. I cleanup and format data for upload and it works great for me. $200 extra bucks though for Windows 10 and Parallels, but then you get to use a Mac which can be nice. I would suggest looking in to it if that cost sounds reasonable to you. 
+this is why im struggling between those two. I am really into apple eco system, but the XPS is tempting me since i ll use excel. I just wanted to be sure that excel is as good on mac as windows
+Came here to say this. I LOVE my xps13. Best working piece of tech (phone/computer) I have ever purchased.
+And pivot charts. And vba support that actually works.
+That's in the 2016 version, but it didn't have it for a long time. 
+Really? Oh, that really fucking sucks.
+What idiots.
+
+https://support.office.com/en-us/article/Introduction-to-Microsoft-Power-Query-for-Excel-6E92E2F4-2079-4E1F-BAD5-89F6269CD605
+I'd still be waiting for last year's calculations to finish on one processor.
+Ask and you shall receive: https://www.youtube.com/playlist?list=PLrRPvpgDmw0m3ohSvgwoHvd0KO8QsQdiK
+I use it to:
+
+- drag data off the internet to use as static lookup data (e.g. I recently needed a complete list of UK Towns and cities - so used 4 separate PQ "web" queries and appended them together.)
+- I use it to select subsets of data from larger datasets
+- I convert inbound datasets from local format into a standardised format we can import into our central data repository.
+It is very easy to use (I did not set it up so I can't comment on that experience). No reboot needed. It just opens as another window and works exactly like a Windows PC.  I can easily share files between the Mac and PC. I can create and edit an Excel file on the Mac and switch over to Parallels and continue using the same file there in Windows Excel. I can also set default programs when opening a file. If I get an Excel attachment in Outlook on my Mac I can set the Windows version on Excel the default. I double click the file and it will launch Parallels and open in Windows Excel.
+
+As a software developer Parallels makes it very easy to test user experience if they are on a Mac or Windows PC.   It is a full Windows install so it is going to use up a large chunk of hard drive space depending on what else you have installed.
+It's the retarded but prettier cousin, just like the OS. 
+yeah, well you can always dual boot into windows for full functionality, depending on how large your large spreadsheets are (like are we talking a couple of megabytes or 50+) your sheet might not calculate AS fast as it would on a native windows machine, but you at least have full feature access to things like powerquery and VBA and whatnot, which really speed up working with large datasets. 
+Oh wow. I had no idea it was that shitty and didn't have any of the above. PC Master race wins again.
+Ah, didn't realize that.  I'm stuck on the 2011 version at work.  My understanding is that 2011 is the last one with a real somewhat working VBA setup, which is why I think we're staying on that one for now.
+
+Either way, Excel on Mac is wretched.  I want so badly to be back on a PC with a good working version of Excel that doesn't crash when I load a file that's more than 4Mb.  :-/
+
+That's some guru level there. I wouldn't even think of doing it in Excel. :-)
+Is there any possibility of you sharing the "towns and cities" queries? Just to see how it is done :D
+I was literally just reading about the asc function in VBA on msdn and read this note on the page: 
+
+"Visual Basic for the Macintosh does not support Unicode strings. Therefore, AscW(n) cannot return all Unicode characters for n values in the range of 128 – 65,535, as it does in the Windows environment. Instead, AscW(n) attempts a "best guess" for Unicode values n greater than 127. Therefore, you should not use AscW in the Macintosh environment."
+It's just true.
+Yep, that's accurate.  2011 was the last best VBA for the Mac and they pulled it and never put it back.  [Here](https://excel.uservoice.com/forums/304933-excel-for-mac/suggestions/9098431-bring-back-a-fully-functional-vbe-visual-basic-ed) is the ongoing protest about this.  2016 was supposed to be the year they brought back excel VBA support but didn't.
+Remindme! 1 hour "provide UK town list"
+Need to get it from another PC - will be tomorrow now.
+Here:
+
+https://filetea.me/#n3wN5x26DWaSvmYwpZORlhHsA
+
+Enjoy.
+I will be messaging you on [**2017-04-04 17:04:29 UTC**](http://www.wolframalpha.com/input/?i=2017-04-04 17:04:29 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/609f8z/is_excel_good_on_mac_hesitating_between_xps_and/dfticha)
+
+[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/609f8z/is_excel_good_on_mac_hesitating_between_xps_and/dfticha]%0A%0ARemindMe!  1 hour ) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! dftjf6k)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+Great news! Thank you

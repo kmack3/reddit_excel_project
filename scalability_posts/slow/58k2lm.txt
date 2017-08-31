@@ -1,0 +1,45 @@
+slow
+58k2lm
+Excel suddenly becomes slow when working on macro-enabled workbook located on network drive
+
+I am encountering a strange problem with a macro-enabled workbook.
+
+The workbook is a tool that my company made for a client, and contains a significant amount of VBA. The spreadsheet with no data aside from the code and interface, reaches about 2MB. It runs fairly well, and is pretty stable: 15 people have been using it for over 2 years now and, while there are bugs sometime, it remains rare.
+
+This particular user has dozens (read ~40) of tabs: the tools itself has about 10 tabs, and there are about 30 tabs with one or more pivot tables, bringing the file size at ~25MB. Also, the user runs the workbook from a shared drive, and there are quite a few links to other files. Pretty scary, but it's been running fine for the past 6 months.
+
+Up until last week when, for some reason, Excel started to stop responding for ~30s whenever he makes a change in a worksheet that triggers some code. The rest of the workbook appears to be fine, other files are fine, and there is no delay when he works on an exact copy on his computer.
+
+The tool generate logs, which tell me that, both locally and over the network, the code runs between 1 and 4 seconds, which is normal. I think the delay happens either before or after the code is executed, and it is most likely related to the fact that the file is on a network drive, but I'm at a complete loss here, and if somebody has any idea what could cause the problem or at least what kind of tests could help narrowing it down, you'd be a life saver.
+
+A few more potentially helpful details:
+- It is all on company computers, and I doubt I will be able to do anything that requires more than simple user-level access. Especially registry.
+- The code deactivate a bunch of Excel application settings (EnableEvents, Automatic calculations, ScreenUpdating), and resets them at the end of the code sequence. This usually triggers calculations, but I'm not sure that's the problem.
+- There is no networking in the code involved. There are interactions with a database in other parts of the tool, but they're working fine.
+- The workbook is slow to open, but I don't know if that's related.
+
+
+-------------
+2MB ___.XLSM___ or ___.XLSB___? 2MB .XLSM not too concerning. 2MB .XLSB is quite heavy if most of that is from VBA modules.
+
+Anyway, the links to other workbooks is very likely the reason it's slow. Are those other workbooks open or closed usually? If closed, are they also on network shares? If so, are they on the same network share as the base workbook you maintain?
+
+Links to closed workbooks on network shares can be a problem. Best to make sure all workbooks from network shares are open, though they could all be open read-only.
+-------------
+[deleted]
+-------------
+Thanks for the help! The workbook is xlsm. 
+
+That's what I am thinking, but the user assured me that the links were already there before the delays started to happen. 
+
+I will check with him and try to have him remove the links on a copy to see if that's the problem though.
+
+As for the links, they are most likely other workbooks on network and closed.
+-------------
+This is the right idea. Setting formula calculation to "manual" will help in the short-term, but solving the problem requires going into the formulas and isolating the "brain draining" one.
+-------------
+The links may have been there before the problem started, but if the other workbooks are on different network shares ___and if___ your client's network changed recently (new routing, new hubs, etc), the changed network topology could have affected file access speeds.
+
+Links to closed network files can be a big problem. Are they simple links, e.g., just ='X:\Y\[Z.xlsx]foobar'!$X$99, in which case they'd be treated as nonvolatile and only refreshed on file open and explicit link updating (does your VBA code refresh links?), or are links to closed workbooks arguments to functions called in cell formulas? Or, potentially worse, are any of the pivot tables based on references to closed external files?
+-------------
+Try to "save as" the xlsm as an xlsb. Xlsb take up less space.

@@ -1,0 +1,66 @@
+Is there a decent way get an image behind cells?
+You could do it with linked text boxes.
+
+Just straight paste your screenshot in to a sheet, then insert a textbox where you want the custom data to show. Then in the formula bar you can do =Sheet1!A1 and it'll display in the textbox whatever is in Sheet1!A1. You can then do this for each cell that you need overlaying the screenshot
+**If the background is always the same** then I suggest you do create a "live picture" (I don't know what the technical term is =P).
+
+* Open a new workbook
+* Go to the multicolored round button in the upper left hand corner > Excel Options > Customize > Show all commands (in the dropdown menu) > scroll down and add **camera** to your quick access list.
+
+**Sheet1**
+
+* Add your calculation inputs (variables)
+
+**Sheet2**
+
+* Do the background image method, but make sure there is some whitespace around your image, if not, add some generous whitespace around your image in paint or other such program)
+* Resize your rows and columns so that your calculation will show up approximately where you want it.
+* Box in the first image (make sure that the edge of a column lines up to the edge of the first image and the same with a row)
+* Fill your calculation fields with a contrasting color (you can change these later, but for the set up, contrasting is best)
+* Add your calculations into the field, (remember your inputs will come from Sheet1)
+* Turn off your gridlines 
+* Highlight the cells covering the first image, then click the camera icon
+
+**Sheet1**
+
+* Paste the picture in Sheet1, the fields will probably not be where you'd expect (stupid excel!), but the adjustments needed are obvious. 
+* If the field needs to be lower or more to the left, then go back to sheet2 and move the calculation cells down and left. 
+* The adjustments take a bit of trial and error, but once everything looks good on Sheet1, then you can change or remove the contrasting fills and hide or lock sheet2.
+
+
+Now whenever your students enter values in Sheet1, they will see the result on Sheet1 that were calculated on Sheet2!
+You could try imputing the image into a comment box and then the image would pop up when the user puts their mouse over that cell. 
+
+http://www.thewindowsclub.com/insert-a-picture-into-a-comment-in-excel
+...how do you feel about pixel art?
+Google spreadsheet has a pretty neat =image () function that allow you a level of control on how it should be displayed within a cell (scale, fit width or fit height ) but from my understanding you want a superposition of your image with the data so i am guessing a dynamic web form would be better for your tutorial than any spreadsheet program.
+I think you've got it with the Background Image feature.  As far as I can tell, there's no way to turn off the tiling or change placement. You'll need to tailor the size of the image, add whitespace to the top and left of the image to move it.  Probably turn off gridlines.  Probably set the spreadsheet area to the same size as your image so it doesn't time and protect the sheet from being re-sized.
+
+Doable, but it'll be fiddly.
+I just thought of another solution. Instead of using a background image, why don't you use a foreground image with transparent output fields?
+
+Let's say that [this](http://www.npreview.com/~media/elements/Clipart/technology/cell_phone.jpg) is your software screenshot.
+
+* Paste it where ever you want it placed. 
+* Now click on on the picture > (Picture Tools) Format >Recolor (bottom left on the ribbon) > Set Transparent Color > then click on the output display (the blue screen in the example picture)
+
+Now you should be able to see the cells beneath the picture. Format the cells to line up with the picture as necessary. This will only work if all your output displays are the same color though. But if not, you could photoshop or use gimp to "erase" the o/p displays so you'd be able to see the cells underneath. 
+
+[Here's](https://i.sli.mg/82NkgZ.png) what it looks like.
+SOLUTION VERIFIED
+This is by far the simplest and most doable solution for me. I tried this solution first, but the dummy I am, I put the formula straight in the text box rather than in the formula bar. 
+
+I'm stuck on a thin client and a limited intranet so I can't really use tools outside our regular software suite. We can't even copy/paste to web for security reasons.
+
+Thanks, /u/wormania!
+Thanks for the input. 
+
+I tried it, but it doesn't give me the effect I want as it displays the comment image on a layer in front of the cells, not behind them.
+In general: OK.
+
+In this case: No can do :/
+I'm stuck on a thin client and a limited intranet so I can't really use tools outside our regular software suite. We can't even copy/paste to web for security reasons.
+
+You have awarded one point to _wormania_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

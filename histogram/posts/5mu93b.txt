@@ -1,0 +1,62 @@
+How to create relative links between Excel and Word for a lengthy report.
+It's also worth exploring using StyleRefs within Word to reuse text. I also work in real estate and when I have to create offering memorandums, I have a series of fields such as property name and city that repeat throughout the document in a table on the last page that is not printed. Each field has a certain style (such as PropertyName) that can then be used throughout the document for boilerplate information.
+Is there a reason your boss can't be doing the editing in Excel itself? Word is a word processor, it's not at all built to easily allow you to take Word text into Excel. However, Word does easily allow you to insert a table from a Spreadsheet. If you can keep all your data in the spreadsheet, and none as just raw text in word, it should work fine.
+Here's the [guide I wrote up after wanting to have dynamic tables within a Word document](http://stackoverflow.com/questions/15371442/reference-excel-cells-in-word/39781640#39781640). It was quite clunky, but it worked.
+A bit off topic, but do you enjoy your career? What did you do to become a commercial real estate appraiser?
+
+I'm in the environmental sector and it is impossible to find work. I have friends with PhDs, several years experience, and are unemployed, with prospected of making $40k when they do find something. My dad is an SRA, so I'm slightly considering training under him to do residential, but he always has said commercial is the way to go. I have a masters degree and a love for data analysis and finance, so it might make sense if work is available.
+[deleted]
+You've got it backwards... maybe i worded things poorly.
+
+Most of the work is being done in excel, which needs to be imported to Word.    
+  
+  
+I can get the dynamic links where the text in Word changes when I change it in excel, but the problem is the whole Paste Special method doesn't provide an option for relative linking. Even if both files are moved in tandem to the same location, the word document is still looking for the excel data in the old location.
+
+Awesome, thank you. I'll look into it next time I take a few minutes to mess with this project.
+There are things I like about it, others that I don't.  My work set up is very atypical for a real estate appraiser. I'm still not licensed (only a trainee) but I work remotely with my sponsor being in another city 3 hours away. Most trainees will get paid shit, have to work from an office where they have to dress up and be worked to the bone.    
+  
+On the other hand, I get a 40% split (which is pretty unusual for trainees, I believe) and we charge a good bit more than other appraisers. On top of that, if I don't want any work (like i want to take a trip) I can pretty much just tell my sponsor to bid things less aggressively so we have less to do and I can take a little time off. So I get paid really well for my experience level and I have A LOT of freedom in when, how and where I work as well as how much I actually have to work.  So I love the freedom that I have with the job, which skews my opinion of it overall to the positive.  
+  
+I also appreciate that I've learned a good bit more about this really sizable part of our economy (real estate) and I'm constantly having  to keep up with what's happening in the economy.  I'm no expert by any means, but probably above average. I also get to appraise a wide range of things (huge multi-family properties, industrial, retail, office, golf courses, bed-and-breakfasts, camp sites, etc.) and we do work all over the country.  So in addition to the freedom, I get a good bit of exposure to range of things, both in terms of subject matter and geography.   
+
+I also really like messing around in Excel, data analysis, etc. So I try to find opportunities to work in more of that with my sponsors workflow/presentation.
+  
+My biggest issue with appraisal, which I'm trying to come to terms with, is that it's just not sexy work. I sit in my home office, staring at a screen however many hours a day writing a bunch of bullshit about some building somewhere that no one is ever going to read. As an appraiser, you're pretty low on the Real Estate World Totem Pole. Everybody needs your product, and you rely on other real estate professionals for good information, but it often feels like those other real estate professionals don't really want to answer your questions when you start making your calls to confirm/collect information.  On top of that, I don't really feel like my finished product is really material. I spend a week writing an appraisal, I send it off, and aside from pulling information from it later for another report, that's it... it's just some thing I did and now its out there sitting in a folder... first world problems... complaining that my $6,000 report isn't appreciated. Silly thing to complain about.
+
+For me, the positives outweigh the negatives, but a lot of that comes from my particular set up. I quit appraisal about a year after I started it because it was killing my spirit, but I ended up coming back to it because nothing else provides the freedom I have with it through the guy I do work for.  I would say your dad is probably right in that commercial is the way to go. Your dad probably has to write several residential appraisals every day. A commercial appraisal is a more lengthy ordeal that takes several days per report.  The money is better and you get more variation in the subject matter.  It's just a little hard to find some old-timer who wants to take on a youngster who doesn't know shit about appraisal, his work flow, methods, whatever.  As licensed, professional appraiser, bringing on a trainee is likely going to hurt rather than help for the first little while. 
+
+If your dad is willing to train you in residential, and you're really interested, I would say go for that so you can get some exposure as well as the hours you need. But when doing the required education, don't stop at the residential courses... keep going through to finish out the requirements for General Appraisal licensure. Convincing a commercial appraiser to become your trainer will be much easier if you already have a bunch of appraisal hours and coursework done. 
+  
+  
+Sorry that was so long-winded. I don't feel like proof-reading all that, so feel free to ask any questions if I worded something poorly.  Where do you live if you don't mind me asking? I may or may not be able to put you in contact with someone you could talk to, if nothing else for their thoughts on the business.
+I won't be able to share the work related files, but I just emailed you a sample Word doc. It's also worth reviewing the following: http://wordfaqs.mvps.org/formatcrossreferences.htm
+Oh, that's fantastic! In Word, go to Insert --> Text --> Object --> Text from File, and point it to the relevant Excel document.
+Thanks for all the great info!
+
+I'm in Washington state.
+cool, thanks a bunch!
+I feel like a real dumbass, but whenever I go through that process I get an error saying "We're sorry. We can't open [workbook] because we found a problem with its contents."  
+  
+Expanding the details dropdown just tells me the file is corrupt and cannot be opened. It gave me the same error after I created a new workbook and tried again fresh.
+Ah, yeah, I've got no one I can point you in the direction of. If you're really interested. Good luck figuring it out!  
+  
+Also, despite what you may hear about commercial appraisal being the way to go (vs residential appraisal), sometimes you have to take what's available until what you want comes along.  Whether or not starting with residential becomes a limiting factor in getting into commercial, I'm not sure, so that might need to be investigated before you commit.  
+That is... really strange. Try just inserting the cells' values? Copy-paste everything into a new spreadsheet as values only (ctrl-alt-v, select values), and see if it works. I have no clue why it wouldn't be working with your spreadsheet though, sorry.
+It appears I may have found the solution to my problem...
+
+by Insert --> Text --> Object --> Object --> Create from File --> [browse to file]
+
+Check box for 'Link to File'... after moving the files around to different folders, I was able to change the information in excel and have the word doc change dynamically.    
+
+The caveat is that I have to have an image file of sorts of the full workbook on the last page of the Word document.
+
+I'm going to mess with this a little longer before I mark anything fixed.
+Good to hear. Perhaps if you only point to a given range, you'll avoid having to have the full workbook in the report? That should be doable in the same Text from File pop-up.
+i may try to refine that aspect a bit some point later. for now having the entire workbook on the last page of the word doc won't matter. i will also end up referencing several worksheets throughout the the word doc, so referencing only a range might cause more issues. 
+
+at this point, assuming the current problem is fixed, my next issue is making sure my word doc references to worksheet cells aren't thrown off if i add new rows or columns in excel. 
+I'm not sure Word will auto-update. What you could try to do is make a separate sheet on the spreadsheet that links directly to the results you want (ctrl-alt-v as links). Then even if you add in new columns of formulae on other sheets, that sheet will stay consistent and should continue to work with the word document. Not sure you can have it stay the same if you're adding new columns of data, however.
+The fix I'm currently using, which appears to be adequate, is actually naming the individual cells that are being referenced in excel.  
+  
+If I hit Alt-F9 in word, it'll show the actual codes Word is using (including the link) and instead of referencing the cell (ie Sheet1;B19), it references the cell name ("RightsAppraised" or whatever else).  Adding a row in above a grouping of named cells does not throw off the references in Word as it was doing before.

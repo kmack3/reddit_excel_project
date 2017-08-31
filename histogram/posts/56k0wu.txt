@@ -1,0 +1,55 @@
+List Top 5 Values including duplicates
+[This should work](http://i.imgur.com/zeXnpVp.png). The RANK function accounts for ties, so would consider Tristen to be rank 3 in your example.
+
+    =INDEX(Name,RANK(ROW(A1),Score))
+
+Note `ROW(A1)` is just 1, and increments as you drag down. In my example I could have used `D2` and dragged down as well.
+Select all your data, then on menu bar, choose Data->Sort, check my data has headers, then sort by Col B, Largest to Smallest.
+Sheet 1 has your data in columns a and b. Sheet 2 has your top 5. 
+
+Sheet1:
+Column A has names
+Column B has Score
+Column C is a helper column that give unique scores by adding a "."&1,2,3... 
+
+use this formula
+
+=B2&"."&countif(B$2:B2,B2)
+
+=B3&"."&countif(B$2:B3,B3)
+... you can drag down this column
+
+
+
+Sheet 2:
+
+A1-A5 list values 1,2,3,4,5.
+
+B1-B5 array formula =large(sheet1!B1:B5,A1) ***this is an array formula so you have to press crtl+shift+enter to make it work, if done correctly the { } should appear around the formula.
+
+C1-C5 is a helper column that makes a unique value for the score
+=B2&"."&countif(B$2:B2,B2)
+
+D1-D5 index match your unique value to name
+=index(Sheet1!A:A,match(C1,Sheet1!C:C)
+
+Hide you helper Columns to make it less confusing to people looking at your top 5 list.
+
+Alternately, you can use a pivot table but I always find it a pain if I have to keep formatting the information.
+
+
+
+
+
+Here is my take on your problem.
+
+http://upload.jetsam.org/documents/SoManyUsernamesGone.xlsx
+If top5 isn't a strict requirement, then you can also putthe data in a Pivot and apply the top10 value filter.
+pivot the table and filter on top 5
+[deleted]
+It needs to be an array for your purpose. You need to incorporate the LARGE function with your index match. Search YT for ExcelIsFun array magic large  index match.
+[deleted]
+
+You have awarded one point to _St_OP_to_u_chin_me_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

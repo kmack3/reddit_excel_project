@@ -1,0 +1,23 @@
+6g3i4c
+Yearly increases that begin in odd months
+Hi everyone!  TIA for taking a look at this.  Here is my question.  I currently am modeling rental income for an office project.  My issue is that the project starts in month 1 and tenant A lease begins in month 8.  The tenant's rent will be increasing 2.5% annually thereafter.  Also, there is a chance that the rent increase will happen every two years instead of annually.  Fairly simple if year 1 of the project and month 1 of the rent coincide but having issues reconciling this.
+  
+
+
+-------------
+Do you have a screenshot of some example data, and what you want the formula/code to do?
+
+Should it calculate the current rent, outstanding rent, rent to date, or what?
+-------------
+Do you have a toggle cell that dictates where the rent begins? I assume you'll have this and a variable for the frequency of rent reviews. If this is the case, you should be able to achieve this pretty simply using the mod function. A simple example for annual rent reviews would be:
+
+    =if(mod(B$3,Cell with rent start toggle i.e. 7)=0,increase function,no change function)
+
+
+-------------
+See below.  Now I just raise the increase to the power of the year and subtract one.  I have another sheet with rental rates that I reference.
+
+http://imgur.com/nZSHSUd
+-------------
+Thanks a ton!  I had to tweak it some to round down but this worked perfectly.  Thanks again!
+

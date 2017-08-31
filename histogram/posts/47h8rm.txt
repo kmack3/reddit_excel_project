@@ -1,0 +1,94 @@
+VBA Essentials: Collections
+Interesting stuff, thanks for sharing.  Someone a little while back posted some code that I've added to my file of clever things and have used a few times since.  The gist of it being:
+
+    Sub Loop_Thru_Select_Files()
+    
+    'FileNames is array of file names, file is for loop
+    'wb is for the open file within loop
+    Dim FileNames
+    Dim file
+    Dim wb As Workbook
+    
+    'Build the array of FileNames to pull data from, note filetype specified
+    FileNames = Application.GetOpenFilename(filefilter:="Excel Files (*.xlsx), *.xlsx", MultiSelect:=True)
+    
+    'If user clicks cancel, exit sub rather than throw an error
+    If Not IsArray(FileNames) Then Exit Sub
+    
+    'Loop through selected files, put file name in A1, paste as values
+    'below each file's filename. Paste in successive columns
+    For Each file In FileNames
+        Set wb = Workbooks.Open(file)
+            'Do some stuff with the open workbook here
+        wb.Close SaveChanges:=False
+    Next
+
+    End Sub
+
+Which shows me that you can make an array out of files.  By extension, could you also make an array of ranges, sheets, and books, too?
+
+If so, is there any benefit to a collection over an array (or vice versa) for things like this?
+
+Tl;dr - Collections seem very similar to arrays.  In what situations would one be better than the other?  If I'm stupid and totally misunderstanding things just tell me!
+Top-notch stuff. Saved for later use. Thanks much!
+Great piece! Very clean layout and usable samples.
+
+A caution:
+
+    Dim aCollection As New Collection
+
+Auto instancing variables is not a great approach. It prevents you from testing if the variable is Nothing. As soon as you touch it, the variable is brought into existence.
+
+Using your FSO example
+
+    Dim FSO As New Scripting.FileSystemObject
+
+    If FSO Is Nothing Then ' At this point, FSO is now SOMETHING and will never test as nothing
+        Set FSO = New Scripting.FileSystemObject
+    End If
+
+That being said, it's a notable problem when debugging your code, and less so when the code is already tested and in production. When debugging, you want to make sure you know when the Object comes into existence and is assigned properly, and when or why it fails. So the Is Nothing test is an important one.
+Saved! 
+
+Thanks for writing this up! I've been wanting to learn more with collections but getting my head around it is a bit tricky, these straight forward examples (also super useful with the find) are great! 
+
+
+/u/pmo86 answered this pretty well. I find collections to be easier to handle and the syntax is as straight forward as it gets. When I get around to making one on dictionaries you'll ask why ever use a collection! I'll still probably say ease of syntax and use. They're just easy and clean!
+Yes, you can have an array of any object. The Add and Remove methods of collections make them easy to use. Where as, with an array, you have to ReDim to remove or add. Arrays can also be multidimensional and it is very easy to assign an Excel range to an array. A downside of collections is that you cannot assign an element directly, but you can with an array. For example:
+
+    myCollection(2) = obj 'doesn't work
+    myArray(2) = obj 'works
+
+In my opinion, array vs collection usage is just situational.
+For me, Collections are great when you don't know the size and don't need to transform the items in the collection (they are read only).
+
+    myColl.Add myStr
+
+Arrays require sizing in order to add items to it.
+
+    Dim myArr() As String
+
+    myArr = Split("this,string,is,seven,words,long", ",")
+
+    ' Wait, that was only six words...
+    Redim Preserve myArr(UBound(myArr)+1)
+
+    myArr(UBound(myArr)) = "Oops"
+
+vs.
+
+    myColl.Add "Oops"
+
+Either a defined range (even if the range has been dynamically defined) or Splitting a string.
+
+As soon as you need to perform functions like MATCH or FILTER on your data, or change the contents, use an array.
+
+    For i = LBound(MyArr) to UBound(MyArr)
+        MyArr(i) = Replace(MyArr(i), "s", "z") 
+    Next i
+Thanks!
+Thank you for the notes! I'll keep that in mind as a write future code. 
+Thanks!
+Gladly. This is an excellent post and one I will definitely directly other users to.
+
+Glad I stumbled on it.

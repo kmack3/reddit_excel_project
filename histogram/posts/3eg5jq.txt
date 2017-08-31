@@ -1,0 +1,65 @@
+I learned how to VLOOKUP with two variable criteria and thought I'd share
+[Here's a blog post](http://blog.contextures.com/archives/2012/07/12/check-multiple-criteria-with-excel-index-and-match/) with a more detailed breakdown if anyone wants to take a look. 
+
+Also, OP, you might want to mention that this needs to be entered as an array formula with CTRL + SHIFT + ENTER.
+You can do the same with sumproduct and not have to enter it as an array formula. The link explains this pretty well.
+
+http://www.xldynamic.com/source/xld.SUMPRODUCT.html
+And you can continue adding "factors" to the second argument of the MATCH function to have more than two criteria if you want.
+
+And if you you use addition instead of multiplication, it mimics  boolean OR instead of AND.
+Misleading title if there ever was one.. love this technique though
+Oh my goodness this is exactly what I've been looking for to help automate a particular soul-sucking data audit task for a client (large bank). Thank you!!
+Same result with different syntax:
+
+    ={NDEX(A1:G27, MATCH(A1:A27&B1:B27, L7&M7, 0))}
+I got this as an answer to my question a month ago. And It was over satisfying. 
+Or you can just use sumproduct()...
+Or you can keep it simple and decipherable and concatenate your variables.
+So I did this for a spreadsheet at work once, and it blew out the file size massively. We're talking 150KB to 24MB. Has anyone else found that using this technique?
+Great discovery!
+
+INDEX-MATCH is more capable, faster, and more flexible than VLOOKUP and HLOOKUP. As far as I know, it's better in every single way.
+
+INDEX-MATCH and SUMPRODUCT are both a bit tricky to learn, but once you do, you never need to use the LOOKUP functions again.
+
+As others have mentioned, you can use SUMPRODUCT to use multiple criteria without using an array formula. You can even tuck your multi-criteria MATCH function into a SUMPRODUCT function and it will work without entering it as an array formula.
+
+I'm on mobile now, so I can't test, but I *think* you could even just wrap a SUMPRODUCT function around your existing formula and it would work the same without being entered as an array formula.
+
+=SUMPRODUCT(INDEX(A1:G27, MATCH(1, (A1:A27=L7)*(B1:B27=M7), 0), 5))
+Thanks OP
+I used to concatenate two columns with factors into one and search with that either in vlookup or countif (in case I just needed to find what combination is missing)
+TIL control+shift+enter, thanks.
+sumproduct was the most amazing thing when I first found out about it. Pre "-ifs" this made me feel like a data GOD! hahaa. ahhh, good times...
+Isn't it slightly different though? What op is talking about is a lookup whereas sumproduct would be used for multi variable count/sum?
+Wow this is awesome! I never know about this. Thanks!
+Can you give an example formula demonstrating this? I read that site top to bottom but I still don't understand how you do a lookup with sumproduct.
+Yeah I thought about putting VLOOKUP in quotes but I second guessed myself.
+You're welcome, friend!
+How does this code bring back a result from a specific column without referencing said column? 
+I've never noticed such a bump. Maybe the formula got copied or autofilled to a very big range?
+Only for Array formulas. Has no effect on regular formulas.
+Oh. Ohhhh. OHHHHHHHHHH! I'd upvote you over and over if I could.
+You can do lookups with sumproduct that match as many conditions as you like.  This section of the link I posted earlier goes into detail how to do it. 
+
+http://www.xldynamic.com/source/xld.SUMPRODUCT.html#new
+You're right, I've made a mistake, the first argument of INDEX is wrong. It should be something like
+
+    ={INDEX(E1:E27, MATCH(A1:A27&B1:B27, L7&M7, 0))}
+
+Where column E is the one you want to retrive the result from.
+It is autofilled, but only in a roughly 50x10 range. I think the issue is that the range it's looking up (the (A1:A27=L7)*(B1:B27=M7) bit) is around 1100 rows, and every cells essentially computes two lots of 1100x15 arrays as part of the lookup. That's current hypothesis anyway. Sumproduct might help.
+Hahaha. Here, take mine instead. 
+I see what you mean but it's more of a multiple variable SUMIF than a lookup, i.e. it returns a count or sum depending on multiple variables not just returning a single corresponding value. Useful, but I also personally don't mind doing an array SUMIF with AND and OR functions within instead. Would give sumproduct a go next time tho and compare.
+Doing a large array formula in a lot of cells would explain slow calculations, but not large file size. SUMPRODUCT will still lead to slow calculation when working with large arrays.
+
+Does the file size shrink back down if you copy all the cells with the formula (the 50x10 area) and paste values over the formulas? Make sure you save a backup first if you are worried about losing the formulas.
+Correct me if I'm wrong, but couldn't you just use SUMIFS? 
+
+Also, to add onto what you were saying, it isn't a substitute for the lookup, since it can't return text 
+I'll have to try it on Monday and see if that fixes it. It's not a huge issue, as it lives on the server anyway, doesn't need to be emailed. Just curious.
+You can for a lot of things, however with SUMPRODUCT you can use formulas in your criteria. Also, you can match bith Horizontal and vertical conditions at the same time. 
+
+If you don't need either of these though, SUMIFS will calculate faster. It also lets you use wildcard characters when matching text which can be pretty useful.
+I'm guessing your company's servers aren't like mine. A <1MB file loads in a couple seconds and 25 MB would probably take at least 90 seconds. I blame the antivirus and IT won't do anything about it. I'm always trying to keep my files as small as possible.

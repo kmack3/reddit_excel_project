@@ -1,0 +1,991 @@
+What are some of the best macros you have saved in your personal workbook?
+Style Killer.
+
+Deletes all custom styles that get randomly added into workbooks. It stops the file getting bloated with 200+ styles, preventing you from copying and pasting information later.
+
+Also a converter to change all numbers stored as text in to numbers in one go.
+
+
+Edit: Here you go (I wrote them from memory as they are at work, but they should work). You can add them to the ribbon as a button on a new tab, and hey presto! One click solution with a pretty icon to boot.
+
+    Sub KillStyles()
+    
+        Dim styT As Style
+    
+        'CONFIRMATION THAT YOU WANT TO DELETE STYLES
+        If MsgBox("There are: " & ActiveWorkbook.Styles.Count - 47 & " custom styles." & vbNewLine & vbNewLine & _
+        "Delete?", vbInformation + vbYesNo) <> vbYes Then Exit Sub
+        
+        'STATUS BAR UPDATE SO YOU KNOW WHAT'S HAPENNING AND HOW LONG ITS BEEN
+        Application.StatusBar = "Deleting styles: Started: " & Time
+        
+        'ONE SECOND GAP GIVING YOU TIME TO BREAK IF NECESSARY
+        Application.Wait Now + (#12:00:01 AM#)
+        
+        For Each styT In ActiveWorkbook.Styles
+        
+            If Not styT.BuiltIn Then styT.Delete
+        
+        Next styT
+    
+        'CLEAR STATUS BAR
+        Application.StatusBar = False
+        
+    End Sub
+    
+    Sub ConvertTextToNumber()
+        
+        Dim c As Range
+    
+        'IF YOU HAVE A SELECTION, THEN CONVERT ONLY THE SELECTION
+        If Selection.Count > 1 Then
+            
+            For Each c In Selection
+                If IsNumeric(c) And c <> "" Then c.Value = Val(c.Value)
+            Next
+        
+        Else
+        'IF NO SELECTION IS MADE, THEN CONVERT EVERY CELL WITHIN THE USED RANGE
+            For Each c In ActiveSheet.UsedRange
+                If IsNumeric(c) And c <> "" Then c.Value = Val(c.Value)
+            Next
+        
+        End If
+    
+    
+    End Sub
+
+Just like any good submitter, I have the Reddit Table Macro saved in my workbooks! *::winks at mods::*  
+I've got a couple, so I'll post them here separately...
+
+First is my RegEx string cleaner. It strips everything but alphanumeric characters and has an optional "addnl_chars" as an optional input string to allow other specific characters as required by the implementation:
+
+Here's the function:
+
+	Function AlphaNum(Input_String As String, Optional addnl_chars As String = "")
+		With CreateObject("VBScript.RegExp")
+			.Pattern = "[^a-z0-9" & addnl_chars & "]"
+			.IgnoreCase = True
+			.Global = True
+			AlphaNum = .Replace(Input_String, "")
+		End With
+	End Function
+
+And here's a junk sub calling it for testing:
+
+	Sub Clean_A_String()
+		Dim Messy_String As String, Also_Show As String
+		Messy_String = "ABC_!@#$%^&*()+<>?/{}[]"".,<>:;'_123_abc"
+		Also_Show = "&$?_"
+		MsgBox ("Alpha Numeric: " & AlphaNum(Messy_String))
+		MsgBox ("Plus Optional Characters: " & AlphaNum(Messy_String, Also_Show))
+	End Sub
+I'm a beginner, but this has been an enormously helpful code I've used to count the number of rows in a column with CountA:
+ 
+    Sub counta()
+
+    Dim a As Range
+ 
+    Dim b As Long
+
+    Set a = Range("a:a")
+ 
+    b = Application.WorksheetFunction.counta(a)
+
+    MsgBox b
+
+    End Sub
+
+[StringConcat.](http://www.cpearson.com/Excel/stringconcatenation.aspx)
+I use a pair of macros to select the continuous range of the current column and copy all values as a comma-separated string to the clipboard.
+This comes in very handy for running database queries on id numbers.
+
+My other favorite, and the one that started me learning VBA is a UDF to return the hyperlink value of a cell. ex:
+
+[unhelpful friendly text](http://www.reddit,com/r/excel) in A1 becomes http://www.reddit,com/r/excel in B1
+Main ones I have are:
+
+**Get the formula in a cell, to show in a separate cell for audit purposes:**
+
+    Function FORMULAIN(r As Range)
+      FORMULAIN = r.Formula
+    End Function
+    
+**Yield curve manipulation - converting between spot and forward rates**
+
+    Function FWDFROMSPOT(CurrentYear As Variant, CurrentSpot As Variant, PreviousSpot As Variant)
+      If CurrentYear = 1 Then
+        FWDFROMSPOT = CurrentSpot
+      Else
+        FWDFROMSPOT = (1 + CurrentSpot) ^ CurrentYear / (1 + PreviousSpot) ^ (CurrentYear - 1) - 1
+      End If
+    End Function
+    
+    Function SPOTFROMFWD(ForwardRates As Range)
+    
+      If ForwardRates.Cells.Count = 1 Then
+        SPOTFROMFWD = ForwardRates
+        ' need to treat single value as special case as otherwise
+        ' the line arr=ForwardRates below doesn't give an array
+      Else
+        
+        Dim arr As Variant
+        arr = ForwardRates
+        
+        Dim i As Integer
+        Dim j As Integer
+        Dim accumulation As Double
+        accumulation = 1
+        
+        For i = LBound(arr, 1) To UBound(arr, 1)
+          For j = LBound(arr, 2) To UBound(arr, 2)
+            accumulation = accumulation * (1 + arr(i, j))
+          Next j
+        Next i
+        ' apparently copying to an array and going through like this is
+        ' faster than "foreach c in ForwardRates.Cells"
+        
+        SPOTFROMFWD = accumulation ^ (1 / ForwardRates.Cells.Count) - 1
+      
+      End If
+    
+    End Function
+    
+
+The two I use a lot are a function to wrap an 'iserror( code, "" )' around a selection of formulas and one to turn blank cells into empty cells. Happy to post code if of interest.    
+
+The more work specific ones I have is a formatting macro that takes a table and puts it into corporate colors/branding ready to drop into a presentation and one that runs through a workbook hiding hidden sheets/cells and stripping out rubbish.
+This function checks if a sheet exists and returns a true/false value.  If your code allows manipulating multiple sheets in multiple books, it is invaluable to determine if the relevant sheet is available.  This function is most often combined with "bookexists" to ensure both book and sheet can be referenced.
+
+    Private Function SheetExists(ByVal BookName As String, ByVal Sheet_Name As String) As Boolean
+        Dim flag As Boolean
+        Dim SheetName As Worksheet
+        flag = False
+            For Each SheetName In Workbooks(BookName).Sheets
+            If SheetName.Name = Sheet_Name Then
+                flag = "True"
+            End If
+            Next SheetName
+        SheetExists = flag
+    End Function
+
+This function checks if a book exists and returns a true/false value.
+
+    Private Function BookExists(ByVal Book_Name As String) As Boolean
+        Dim flag As Boolean
+        Dim BookName As Workbook
+        flag = False
+            For Each BookName In Workbooks()
+            If BookName.Name = Book_Name Then
+                flag = "True"
+            End If
+            Next BookName
+        BookExists = flag
+    End Function
+
+This function finds the last used row in a sheet.  It uses one of the three effective methods of finding the end of data in a sheet that is not confused by things like empty cell formatting.  Keep in mind that this function finds the last "used" row!  Do NOT use this function and add 1 to find the first open row!
+
+    Private Function URow(Book_Name As String, Sheet_Name As String) As Long
+        URow = 1
+        If Application.WorksheetFunction.CountA(Workbooks(Book_Name).Sheets(Sheet_Name).Cells) <> 0 Then
+            URow = Workbooks(Book_Name).Sheets(Sheet_Name).Cells.Find(what:="*", _
+                After:=Workbooks(Book_Name).Sheets(Sheet_Name).Range("A1"), Lookat:=xlPart, _
+                LookIn:=xlFormulas, searchorder:=xlByRows, searchdirection:=xlPrevious, MatchCase:=False).Row
+        End If
+    End Function
+
+This function finds the first "open" row in a sheet.  There is a very important tweak that makes this return the correct row in an empty sheet.  Do NOT use this function to find the first open row, then subtract 1 to get the last used row.
+
+    Private Function ORow(Book_Name As String, Sheet_Name As String) As Long
+        ORow = 1
+        If Application.WorksheetFunction.CountA(Workbooks(Book_Name).Sheets(Sheet_Name).Cells) <> 0 Then
+            ORow = Workbooks(Book_Name).Sheets(Sheet_Name).Cells.Find(what:="*", _
+                After:=Workbooks(Book_Name).Sheets(Sheet_Name).Range("A1"), Lookat:=xlPart, _
+                LookIn:=xlFormulas, searchorder:=xlByRows, searchdirection:=xlPrevious, MatchCase:=False).Row + 1
+        End If
+    End Function
+
+This function finds the LastRow of data in a sheet or if the sheet is empty, positions to row 1.  This uses the End(xlUp) method.
+
+    Private Function LastRow(ColNum As Variant, Optional Sheet_Name As Variant, Optional Book_Name As Variant) As Long
+        If IsMissing(Book_Name) Then Book_Name = Application.ActiveWorkbook.Name ' search bottom to top, find first empty cell in column
+        If IsMissing(Sheet_Name) Then Sheet_Name = ActiveSheet.Name
+        If BookExists(Book_Name) And SheetExists(Book_Name, Sheet_Name) Then
+            LastRow = Workbooks(Book_Name).Sheets(Sheet_Name).Cells(Rows.Count, ColNum).End(xlUp).Offset(Abs(Workbooks(Book_Name).Sheets(Sheet_Name).Cells(Rows.Count, ColNum).End(xlUp).Value <> ""), 0).Row
+        Else
+            MsgBox (Book_Name & " with " & Sheet_Name & " is not available.")
+        End If
+    End Function
+
+This function switches to a sheet by first checking if the sheet exists and if it does not, then creates it. It can also delete a sheet first and then create it if the boolean is set True for the third parameter.
+
+ Example of usage:         Sheet_Select "Map.Old.New", "A", False
+
+    Public Sub Sheet_Select(Sheet_Name As String, Dest As String, Del_Sheet As Boolean)
+        Dim flag As Boolean
+        Dim ws As Worksheet
+        
+        Application.DisplayAlerts = False
+        flag = "False"
+        For Each ws In ActiveWorkbook.Sheets
+            If ws.Name = Sheet_Name Then
+                If Del_Sheet Then
+                    Sheets(Sheet_Name).Delete
+                Else
+                    flag = "True"
+                End If
+            End If
+        Next ws
+        If Not flag Then Sheets.Add(After:=Sheets(Sheets.Count)).Name = Sheet_Name
+        Sheets(Sheet_Name).Select
+        Cells(Rows.Count, Dest).End(xlUp).Offset(Abs(Cells(Rows.Count, Dest).End(xlUp).Value <> ""), 0).Select
+        Application.DisplayAlerts = True
+    End Sub
+It seems simple and unexciting, but I have macros saved in my quick access toolbar for the spreadsheets that I get into multiple times a day (for both work files and personal, like my budget). Saves me a tremendous amount of time just to be able to click a little icon rather than open them up individually, go to my desktop for a shortcut, or even click over to the "recents" list. 
+The main one I use is to select all formulas, enable protection and turn on protection for each sheet in a workbook. Not at work so I don't have the code to post but it's really simple and incredibly useful
+
+EDIT. Here's the code:
+
+    Sub protectFormulasAndEnableProtection()
+    
+    Dim sht As Worksheet
+    
+    On Error Resume Next
+    
+    For Each sht In Sheets
+        sht.Activate
+        sht.Unprotect
+        Cells.Select
+        Selection.Locked = False
+        Selection.FormulaHidden = False
+        Selection.SpecialCells(xlCellTypeFormulas, 23).Select
+        If Err.Number = 1004 Then
+            'No special cells found (no formulas in this case). Clear the error and take no action
+            Err.Clear
+        Else
+            Selection.Locked = True
+            Selection.FormulaHidden = False
+        End If
+        sht.Protect AllowFormattingColumns:=True,     AllowFormattingRows:=True
+    Next sht
+    	
+    End Sub
+I've got a few useful ones listed here -> http://vbawizard.blogspot.com/2013/12/vba-misc-useful-excel-macros.html
+I used this to grab names from a column and convert them into email form :
+
+    Sub CreateAddresses()
+    Dim LastName As String
+    Dim FirstName As String
+    Dim Domain As String
+    Dim Pos As String
+    Dim r As Range
+    Dim LastRow As String
+
+    LastRow = Range("A1").End(xlDown).Row
+    Range("K2:K" & LastRow).Select 'K is the range where I have the names
+
+    Domain = "domain.com" '<<<< CHANGE
+
+    For Each r In Selection.Cells
+
+
+    Pos = InStr(1, r.Text, " ", vbBinaryCompare)
+    If Pos > 0 Then
+    LastName = Trim(Right(r.Text, Len(r.Text) - Pos))
+    FirstName = Trim(Left(r.Text, Pos))
+    r(1, 4).Value = FirstName & "_" & LastName & "@" & Domain
+
+    End If
+    Next r
+
+
+I like the HYPERLINK function but keep forgetting how to write it without including the file path and name. One of my macros turns direct links (regular cell references) in the selection into HYPERLINK formulas that link to the same locations.
+
+Edit: I'm on a computer now and have the code. There is a later version which forces all references to be absolute (so that the resulting formulas can be cut and pasted, and still point to the same place) - if that's of interest to anyone let me know and I'll come back to it in a few days.
+
+This one creates hyperlinks to locations in the same workbook using the HYPERLINK function from the formula in each cell in the selection. Props to /u/Swift182 who shared one which creates regular hyperlinks from the value in each cell in the selection.
+
+    Sub CreateHyperlink()
+    '
+    ' Change Link to HyperLink
+    '
+    
+    Dim OriginalSelection As Range
+    Dim CurrentCell As Range
+    
+    Set OriginalSelection = Selection
+    
+    Confirmation = MsgBox("This macro attempts to convert all formulas in the selection to hyperlinks." & vbNewLine & vbNewLine & _
+        "There is no way to undo." & vbNewLine & vbNewLine & _
+        "It is designed to work for regular cell and range references to the same workbook. Any other formulas are likely to either break or stop this macro." & vbNewLine & vbNewLine & _
+        "Click 'OK' to continue or 'Cancel' to Stop.", vbOKCancel, "Hyperlink Confirmation")
+        If Confirmation = vbOK Then
+            For Each CurrentCell In OriginalSelection
+                If CurrentCell.HasFormula Then
+                    CurrentCell.Formula = "=HYPERLINK(""#""&CELL(""address""," & Right(CurrentCell.Formula, Len(CurrentCell.Formula) - 1) & "),""Link"")"
+                End If
+            Next CurrentCell
+        End If
+    
+    End Sub
+I've slowly added my useful functions [here](https://github.com/taxbender/ExcelVBA).
+Remove all hyperlinks
+
+    Sub RemoveHyperlinks()
+       ActiveSheet.Hyperlinks.Delete
+    End Sub
+
+So simple, yet removes any annoying hyperlink if you copy and paste a lot of data and text.
+Less relevant now since they put it on the right-click menu, but I recorded a macro and assigned Paste Values to Ctrl+q. Saved(s) some menu navigation if you Paste Values a ton. 
+Created a macro to delete all contents of a workbook and save the file. Assigned it to ctrl + S. So far no one has pissed me off enough for me to need it.
+I work with both Excel and Oracle a lot, so I'm always making "in" statements out of Excel data. With this macro, highlight any range of data and run the macro and it will make an "in" statement out of it in an empty cell. If you've selected over 1000 cells (limit for one in statement in Oracle), it will make multiple ones as needed. Should work with any flavor of sql, but replace the single quotes with double quotes as needed.
+
+    Sub OracleIn()
+    
+    Dim cell As Range
+    Dim i As Long
+    Dim OraIn As String
+    OraIn = "('"
+    
+    For Each cell In Selection
+        i = i + 1
+        If i = 1 Then Selection.End(xlDown).Select
+        If CStr(cell) <> "" Then OraIn = OraIn & CStr(cell) & "','"
+        If Round(i / 1000) = i / 1000 Then
+            ActiveCell.Range("A2").Select
+            OraIn = Left(OraIn, Len(OraIn) - 2) & ")"
+            ActiveCell.Value = OraIn
+            OraIn = "('"
+        End If
+    Next cell
+    
+    If Len(OraIn) > 2 Then
+        ActiveCell.Offset(1).Select
+        Do While ActiveCell.EntireRow.Hidden = True
+            ActiveCell.Offset(1).Select
+        Loop
+        OraIn = Left(OraIn, Len(OraIn) - 2) & ")"
+        ActiveCell.Value = OraIn
+    End If
+    Selection.Copy
+    
+    End Sub
+
+For doing fuzzy string comparisons, here's an n-gram match function (gives % similarity between 2 strings, based on how many sets of adjacent characters the 2 strings have in common). Usage is =bigram(string1, string2) , returns % similarity based on bigram match. I don't take credit for this one, I dug it up on the web.
+
+    Function CreateNGram(strInput, intN)
+        Dim arrNGram, intBound, i, j, strGram, didInc, arrTemp
+     
+        If Len(strInput) = 0 Then Exit Function
+     
+        ReDim arrNGram(Len(strInput) + 1, 1)
+        strInput = Chr(0) & UCase(Trim(strInput)) & Chr(0)
+        intBound = -1
+     
+        For i = 1 To Len(strInput) - intN + 1
+            strGram = Mid(strInput, i, intN)
+            didInc = False
+     
+            For j = 0 To intBound
+                If strGram = arrNGram(j, 0) Then
+                    arrNGram(j, 1) = arrNGram(j, 1) + 1
+                    didInc = True
+                    Exit For
+                End If
+            Next
+     
+            If Not didInc Then
+                intBound = intBound + 1
+                arrNGram(intBound, 0) = strGram
+                arrNGram(intBound, 1) = 1
+            End If
+        Next
+     
+        ReDim arrTemp(intBound, 1)
+        For i = 0 To intBound
+            arrTemp(i, 0) = arrNGram(i, 0)
+            arrTemp(i, 1) = arrNGram(i, 1)
+        Next
+     
+        CreateNGram = arrTemp
+    End Function
+     
+    Function CompareNGram(arr1(), arr2())
+        Dim i, j, intMatches, intCount1, intCount2
+     
+        intMatches = 0
+        intCount1 = 0
+     
+        For i = 0 To UBound(arr1)
+            intCount1 = intCount1 + arr1(i, 1)
+            intCount2 = 0
+     
+            For j = 0 To UBound(arr2)
+                intCount2 = intCount2 + arr2(j, 1)
+     
+                If arr1(i, 0) = arr2(j, 0) Then
+                    If arr1(i, 1) >= arr2(j, 1) Then
+                        intMatches = intMatches + arr2(j, 1)
+                    Else
+                        intMatches = intMatches + arr1(i, 1)
+                    End If
+                End If
+            Next
+        Next
+     
+        CompareNGram = 2 * intMatches / (intCount1 + intCount2)
+    End Function
+
+    Function Bigram(str1 As String, str2 As String) As Double
+        Dim x(), y()
+        x = CreateNGram(str1, 2)
+        y = CreateNGram(str2, 2)
+        Bigram = CompareNGram(x, y)
+    End Function
+
+A few of the ones I use most often:
+
+* Individual subs to set ActiveCell's background color to yellow / grey / blue / none. Each is linked to the Quick Access Toolbar with an icon of the same color. So, if I want to highlight yellow, I just press alt+4.
+* Change sign. Ctrl+Shift+n to flip the sign of ActiveCell.
+* Disabled the F1 key, since it can get in the way when pressing F2 or Escape and the help window loads slowly.
+* Place the sum of all selected cells' values in the clipboard.
+
+If I have a template that I need to reuse a lot (ie input new data daily/weekly) I just record my steps when deleting the prior day's data. A quick shortcut deletes a bunch of old data from several tabs.
+My macro can take any Access database file (.mdb or .accdb) as an input, and then it populates all the tables, all the columns within a table, all the values within a field using a button one for each. These values are stored in List Boxes and are used to make selections(single/multiple). And then there is a dropdown where I can select "what-kind-of-output-I-am-looking-for"(can be generating charts, retrieving data, trend over a period of time etc.) and another button which will generate the output for the selections made.
+looks this excel addin:
+
+https://www.reddit.com/r/excel/comments/2xp07u/new_excel_tool_looking_for_excel_users/
+I have been adding some of my excel macros to https://accountingmacros.com. Check it out and stay tuned as I add more macros. 
+
+I am currently in the process of uploading a fairly complex macro that checks for highlights and comments in an excel file, lists them all in a summary tab with a button to accept the comment, which is good for reviewing a workbook. 
+
+
+
+    Sub comments_and_highlights() 
+     'Macro to list all comments and highlights in new sheet
+     Application.ScreenUpdating = False
+
+     Dim commrange As Range
+     Dim mycell As Range 
+     Dim curwks As Worksheet
+     Dim newwks As Worksheet
+     Dim i As Long
+     Dim rowTop As Long
+     Dim colFirst As Long
+     Dim colLast As Long
+     Dim rCell As Range
+     Dim temp As Range
+     Dim strg As String 
+     Dim strg2 As String
+
+     Dim aColor As Long
+     Dim bColor As Long
+     Dim cColor As Long  
+     aColor = vbYellow
+     bColor = RGB(255, 230, 0)
+     cColor = RGB(255, 255, 153)
+     Dim btn As Button
+
+     i = 1
+     ActiveWorkbook.Sheets.Add Before:=Worksheets(1)
+     Set newwks = ActiveSheet
+
+     newwks.Range("A1:E1").Value = _
+     Array("#", "Sheet", "Address", "Comment", "Value")
+
+     For Each sht In ActiveWorkbook.Sheets
+
+       Set curwks = sht
+
+       On Error Resume Next
+       Set commrange = curwks.Cells _
+          .SpecialCells(xlCellTypeComments)
+       On Error GoTo 0
+
+       If commrange Is Nothing Then
+
+       Else
+
+          For Each mycell In commrange
+            If mycell.MergeCells Then
+               colFirst = mycell.MergeArea.Columns(1).Column
+               colLast = mycell.MergeArea.Columns(mycell.MergeArea.Columns.Count).Column
+               rowTop = mycell.MergeArea.Rows(1).row
+            Else
+               colFirst = mycell.Column
+               colLast = mycell.Column
+               rowTop = mycell.row
+            End If
+
+            If mycell.row = rowTop _
+               And mycell.Column = colLast Then
+             With newwks
+              i = i + 1
+              On Error Resume Next
+              .Cells(i, 1).Value = i - 1
+              .Cells(i, 2).Value = curwks.Name
+    .Hyperlinks.Add Anchor:=.Cells(i, 3), Address:="", _
+    SubAddress:="'" & curwks.Name & "'" & "!" & mycell.Address, _
+    TextToDisplay:=mycell.Address
+    .Cells(i, 4).Value = Replace(curwks.Cells(rowTop, colFirst).Comment.Text, Chr(10), " ")
+    curwks.Cells(rowTop, colFirst).Copy
+    .Cells(i, 5).PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+    .Cells(i, 6).Value = " "
+    strg = mycell.Address
+              strg2 = curwks.Name
+              newks.Activate
+              Set temp = ActiveSheet.Range(Cells(i, 6), Cells(i, 6))
+              Set btn = ActiveSheet.Buttons.Add(temp.Left, temp.Top, temp.Width, temp.Height)
+              With btn
+    .OnAction = "'removeComment """ & strg & """,""" & strg2 & """'"
+    .Caption = "Accept"
+    End With
+
+            End With
+           End If
+
+         Next mycell
+     End If
+
+     Set commrange = Nothing
+     Set rCell = curwks.UsedRange
+     For Each cell In rCell
+        If cell.Interior.Color = aColor Or cell.Interior.Color = bColor Or cell.Interior.Color = cColor Then
+          If commrange Is Nothing Then
+             Set commrange = cell
+          Else
+             Set commrange = Union(commrange, cell)
+          End If
+        End If
+     Next cell
+
+     If commrange Is Nothing Then
+
+     Else
+
+     For Each mycell In commrange
+      If mycell.MergeCells Then
+        colFirst = mycell.MergeArea.Columns(1).Column
+        colLast = mycell.MergeArea.Columns(mycell.MergeArea.Columns.Count).Column
+        rowTop = mycell.MergeArea.Rows(1).row
+      Else
+        colFirst = mycell.Column
+        colLast = mycell.Column
+        rowTop = mycell.row
+      End If
+
+      If mycell.row = rowTop _
+       And mycell.Column = colLast Then
+       With newwks
+        i = i + 1
+        On Error Resume Next
+        .Cells(i, 1).Value = i - 1
+        .Cells(i, 2).Value = curwks.Name
+        .Hyperlinks.Add Anchor:=.Cells(i, 3), Address:="", _
+    SubAddress:="'" & curwks.Name & "'" & "!" & mycell.Address, _
+    TextToDisplay:=mycell.Address
+    .Cells(i, 4).Value = "Highlight"
+    curwks.Cells(rowTop, colFirst).Copy
+    .Cells(i, 5).PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+    .Cells(i, 6).Value = " "
+    strg = mycell.Address
+        strg2 = curwks.Name
+        newks.Activate
+        Set temp = ActiveSheet.Range(Cells(i, 6), Cells(i, 6))
+        Set btn = ActiveSheet.Buttons.Add(temp.Left, temp.Top, temp.Width, temp.Height)
+        With btn
+         .OnAction = "'removeHighlight """ & strg & """,""" & strg2 & """'"
+    .Caption = "Accept"
+        End With
+
+       End With
+      End If
+     Next mycell
+     End If
+
+     Set commrange = Nothing
+
+     Next sht
+
+     newwks.Cells.WrapText = True
+     newwks.Columns.AutoFit
+     Columns("A").ColumnWidth = 5
+    Columns("B").ColumnWidth = 40
+    Columns("C").ColumnWidth = 10
+    Columns("D").ColumnWidth = 60
+    Columns("E").ColumnWidth = 60
+    Columns("F").ColumnWidth = 10
+    Columns("G").ColumnWidth = 2
+    Columns("H").ColumnWidth = 2
+    newwks.Name = (Worksheets.Count) & " - DELETE - Comments"
+    Format
+     NormalPosition
+
+     Rows(1).Font.Bold = True
+     Range(Cells(1, 1), Cells(i, 5)).Borders.LineStyle = xlContinuous
+     Range(Cells(1, 1), Cells(i, 5)).VerticalAlignment = xlTop
+     Columns("A").HorizontalAlignment = xlLeft
+    Range("a2").Select
+
+     If IsEmpty(ActiveCell) = True Then
+      Application.DisplayAlerts = False
+      newwks.Delete
+      Application.DisplayAlerts = True
+      MsgBox "No Comments or Highlights"
+     End If
+
+     Range("A1").Select
+     Application.ScreenUpdating = True
+    'MK
+    End Sub
+
+    Sub removeHighlight(sPar As String, strg As String)
+     Application.ScreenUpdating = False
+
+     Application.DisplayAlerts = False
+     ActiveSheet.Delete
+     Application.DisplayAlerts = True
+
+     ActiveWorkbook.Sheets(strg).Select
+
+     Dim col, row
+    col = Split(sPar, "$")(1)
+    Row = Split(sPar, "$")(2)
+
+     Range(col & Row).Select
+     ActiveCell.Interior.ColorIndex = 0
+
+     comments_and_highlights
+     Application.ScreenUpdating = True
+    'MK
+    End Sub
+    Sub removeComment(sPar As String, strg As String)
+     Application.ScreenUpdating = False
+
+     Application.DisplayAlerts = False
+     ActiveSheet.Delete
+     Application.DisplayAlerts = True
+
+     ActiveWorkbook.Sheets(strg).Select
+
+     Dim col, row
+     col = Split(sPar, "$")(1)
+    Row = Split(sPar, "$")(2)
+
+     Range(col & Row).Select
+     If Not (ActiveCell.Comment Is Nothing) Then ActiveCell.Comment.Delete
+
+     comments_and_highlights
+     Application.ScreenUpdating = True
+    End Sub
+
+    Function LastCol(sh As Worksheet)
+     On Error Resume Next
+     LastCol = sh.Cells.Find(What:="*", _
+     After:=sh.Range("A1"), _
+     LookAt:=xlPart, _
+     LookIn:=xlFormulas, _
+     SearchOrder:=xlByColumns, _
+     SearchDirection:=xlPrevious, _
+     MatchCase:=False).Column
+     On Error GoTo 0
+    End Function
+    Function LastRow(sh As Worksheet)
+     On Error Resume Next
+     lastRow = sh.Cells.Find(What:="*", _
+     After:=sh.Range("A1"), _
+     LookAt:=xlPart, _
+     LookIn:=xlFormulas, _
+     SearchOrder:=xlByRows, _
+     SearchDirection:=xlPrevious, _
+     MatchCase:=False).row
+     On Error GoTo 0
+    End Function
+
+    Public Sub Format()
+
+     Cells.Select
+     With Selection.Font
+     .Name = "Arial"
+     .Size = 8
+     .Strikethrough = False
+     .Superscript = False
+     .Subscript = False
+     .OutlineFont = False
+     .Shadow = False
+     .Underline = xlUnderlineStyleNone
+     .TintAndShade = 0
+     .ThemeFont = xlThemeFontNone
+    End With
+
+     Dim columnNum As Integer
+     Dim rowNum As Integer
+
+     On Error GoTo doError
+
+     columnNum = LastCol(ActiveSheet) + 3
+     rowNum = LastRow(ActiveSheet) + 3
+
+     ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(rowNum - 1, columnNum - 1)).Address(False, False)
+
+     With Range(Range(Cells(rowNum, 1), Cells(rowNum, columnNum)).Address & "," & _
+     Range(Cells(1, columnNum), Cells(rowNum, columnNum)).Address).Interior
+     .ColorIndex = 11
+     .Pattern = xlSolid
+     .PatternColorIndex = xlAutomatic
+     End With
+
+     Rows(rowNum).RowHeight = 6.75
+     Columns(columnNum).ColumnWidth = 0.83
+
+     With Range(Range(Cells(rowNum + 1, 1), Cells(1048576, columnNum)).Address & "," & _
+     Range(Cells(1, columnNum + 1), Cells(1048576, 16384)).Address).Interior
+     .Color = RGB(128, 128, 128)
+     .Pattern = xlSolid
+     .PatternColorIndex = xlAutomatic
+     End With
+
+     ActiveSheet.DisplayPageBreaks = Not ActiveSheet.DisplayPageBreaks
+     Exit Sub
+
+    doError:
+     MsgBox ("ERROR")
+
+    'MK
+    End Sub
+
+    Public Sub NormalPosition()
+
+     Dim ws As Worksheet
+
+     For Each ws In ActiveWorkbook.Sheets
+
+    If ws.Visible = True Then
+    ws.Select
+     Range("a1").Select
+     End If
+
+     Next ws
+
+     Sheets(1).Select
+
+    End Sub
+
+On my phone, but finding "  " and replacing it with " " has saved a lot of headaches. It removed any occurrence of two spaces. 
+ooooh, this is such a great idea.
+Are you willing to share them?
+Impressive.
+
+I notice you included a wait to allow the user to exit. In case you haven't heard if it (not implying that is the case or that you have considered it), we can have a DoEvents command which allows the same thing without much of a delay. For most purposes we can put a DoEvents inside each loop and not notice any decrease in performance.
+I literally have these same two procedures in my personal workbook  but I put a DoEvents in the loop so that excel does not lock up. And my text to number sub uses the Range.TextToColumns method, which is faster
+What is that?
+Here's some sample code that I use to connect to CSV files as a database, it allows multiple CSV files in the same folder to be treated as a relational database.  It has come in handy quite a few times:
+
+	Option Explicit
+	 
+	Sub CSV_DB()
+	    Sheets("Sheet2").Cells.Clear
+	    Dim db As Object
+	    Dim rs As Object
+	 
+	    Set db = CreateObject("ADODB.Connection")
+	    Set rs = CreateObject("ADODB.Recordset")
+	    
+	    Dim File_Path As String: File_Path = "C:\Users\myname\Desktop\Some folder\Data\"
+	    Dim File_Name As String: File_Name = "somefile.csv"
+	    
+	    db.Provider = "Microsoft.Jet.OLEDB.4.0"
+	    db.Open "Data Source=" & File_Path & ";" & "Extended Properties=""text;HDR=Yes;FMT=Delimited;"""
+	 
+	    rs.Open "SELECT * FROM [" & File_Name & "]", db
+	    rs.MoveFirst
+	    Worksheets("Sheet2").Cells(1, 1).CopyFromRecordset rs
+	    
+	    rs.Close: Set rs = Nothing
+	    db.Close: Set db = Nothing
+
+	End Sub
+I've also run into issues using VBA in automation to save files to SharePoint.  It works fine when I'm sitting there clicking a button, but hangs randomly when being run from our job scheduler. So I spent some time digging around for code to do a binary file stream to SharePoint, it's reliable in my environment.  Run_me just calls the sub that does the work:
+
+	Option Explicit
+	 
+	Sub Run_Me()
+		'Just a routine to call the binary stream to file
+		Dim SourcePath As String 'UNC folder path to file, trailing slash
+		Dim TargetPath As String 'HTTP path to target Sharepoint Docs folder, trailing slash
+		Dim FileName As String 'The name of the file ot be copied
+		'Set the variables
+		FileName = "somedata.xml"
+		SourcePath = "\\myserver\C$\some folder\"
+		TargetPath = "http://share.somewhere.com/sites/whatever/path/My%20Test/"
+		'Call the routine to stream the data
+		Stream2SharePoint SourcePath & FileName, TargetPath & FileName
+		MsgBox ("Done!")
+	End Sub
+	 
+	Sub Stream2SharePoint(FullSourcePath, FullTargetPath)
+		Dim binFileSize As Long, SP_xmlDoc As Object
+		Dim binArray() As Byte, vArray As Variant
+		'Set a static byte array to the file size
+		binFileSize = FileLen(FullSourcePath)
+		ReDim binArray(binFileSize - 1)
+		'Read the file into the array
+		Open FullSourcePath For Binary As #1
+		Get #1, , binArray
+		Close #1
+		'Convert the array to type variant
+		vArray = binArray
+		Set SP_xmlDoc = CreateObject("Microsoft.XMLHTTP")
+		'Put the data to the server, false means synchronous.
+		SP_xmlDoc.Open "PUT", FullTargetPath, False ', UserName, Password
+		SP_xmlDoc.Send vArray
+		'FYI:  .close method does not work
+		Set SP_xmlDoc = Nothing
+	End Sub
+Do you work with text?  Do you use Excel as middleware or as a final destination for "real database" data?  You need StringConcat.  
+
+It's easy to say in words "mash a bunch of strings together", but until you've read the code, it's hard to appreciate how well StringConcat handles mostly everything you throw at it.
+What is your profession?
+I would be interested in that first one! It sounds very useful.
+I pin frequently used spreadsheets to the start bar, so it's right click on excel and the list of files pops up
+I'd like to see this one. Would you be able to post later?
+THIS turns any cell into a hyperlink of itself, so it works for webaddress and filepaths etc but if you run it on a cell that says "TODAYS DATE" it will kind of break it... use wisely... Oh I also have it set it Crtl-Alt-H i belive :)
+
+Public Sub Convert_To_Hyperlinks()
+
+Dim Cell As Range
+
+For Each Cell In Intersect(Selection, ActiveSheet.UsedRange)
+
+If Cell <> "" Then
+
+ActiveSheet.Hyperlinks.Add Cell, Cell.Value
+
+End If
+
+Next
+
+End Sub
+More elegent than mine...
+
+    'Generates an in block from a list
+    Public Function SQLIn(Variables As Range) As String
+
+
+        Dim ReadArr As Variant
+        Dim Row As Long
+    
+        ReadArr = Variables.Value2
+
+        SQLIn = "in ("
+    
+        For Row = LBound(ReadArr, 1) To UBound(ReadArr, 1)
+        
+            SQLIn = SQLIn & "'" & ReadArr(Row, 1) & "',"
+    
+        Next
+    
+        Erase ReadArr
+    
+        SQLIn = Left(SQLIn, Len(SQLIn) - 1)
+    
+        SQLIn = SQLIn & ")"
+    
+
+    End Function
+I added the code to OP
+Sure, see OP.
+I did try a DoEvents but the PC just froze. The 1 second gap just allows enough time to break it unadulterated. 
+In the loop or just outside the loop?
+
+I put it both outside and inside the loop, and it didn't make a difference. Still froze up my PC.
+Its a macro that allows you to copy a table from excel and paste it into Reddit with a table format.  Without it, pasting data into Reddit just looks like one big line of data.  
+  
+This	is	how
+data	looks	without
+using	the	macro
+  
+and  
+  
+This|is|how|
+-:|-:|-:|
+data|looks|while|
+using|the|macro|
+
+See the top black bar (under hot/new) or the side bar.
+This code works for a single file though right?
+Do you know how to adapt your procedure to include other SharePoint metadata? For example a comment or title property.
+All of the above.
+Could be in the commodities market. If so, that is some cool stuff.
+Actuary working in investment
+It works on a single cell or a selection. I just have it tagged to a button.
+
+    Public Sub Encapsulate_IFERROR()
+    'Adds iferror to formula.
+        
+        Dim Row As Long
+        Dim Col As Long
+        Dim FormulaString As String
+        Dim ReadArr As Variant
+        
+        If Selection.Cells.Count > 1 Then
+        
+            ReadArr = Selection.FormulaR1C1
+            
+            For Row = LBound(ReadArr, 1) To UBound(ReadArr, 1)
+                For Col = LBound(ReadArr, 2) To UBound(ReadArr, 2)
+                
+                    If Left(ReadArr(Row, Col), 1) = "=" Then
+                    If LCase(Left(ReadArr(Row, Col), 8)) <> "=iferror" Then
+                        ReadArr(Row, Col) = "=iferror(" & Right(ReadArr(Row, Col), Len(ReadArr(Row, Col)) - 1) & ","""")"
+                    End If
+                    End If
+                
+                Next
+            Next
+            
+            Selection.FormulaR1C1 = ReadArr
+            
+            Erase ReadArr
+        
+        Else
+            
+            FormulaString = Selection.FormulaR1C1
+            
+            If Left(FormulaString, 1) = "=" Then
+            If LCase(Left(FormulaString, 8)) <> "=iferror" Then
+            
+                Selection.FormulaR1C1 = "=iferror(" & Right(FormulaString, Len(FormulaString) - 1) & ","""")"
+            
+            End If
+            End If
+        
+        End If
+    
+    End Sub
+
+What I do is handy for when I'm already in Excel tho => kind of like the favorites bar in my browser.
+Sure thing. I added an edit to my original post
+Nice, thanks.
+you are the *best.*
+Weird. This is actually a concern for me as I use it all the time and most of my work gets handed over to people in other organisations. I need to do some research. Thanks for the leads up!
+Yes, as written it works for a single file. Multiple files in the same folder are addressed asthough they are tables, and it works fine accessing just one table. 
+
+I should note that the driver does allow for creation of tables (files) and inserting records, but does not allow table alters and the like. 
+Unfortunately I do not. I would imagine that the metadata is a SharePoint specific property and not part of the file itself, unless maybe you're uploading Office docs and displaying built-in metadata fields.
+
+Fortunately that would mean you're working specifically with SharePoint instead of your files and hopefully you can find some documentation. 
+I know *you* do, /u/Antimutt. You linked the function.  I was adding a sales pitch in case anybody scrolls past it.  StringConcat is extremely useful.
+That was my guess. I was hoping for specifics, but I understand not doxing yourself. I work in the energy finance sector. 
+Cool thanks for the reply. Nice macros btw. 
+My excel foo while good, has never needed to deal with files as databases. 
+I do end up working with pivots and multiple csv files on a daily basis though. Could I use this to create a single database with multiple tables (each table being the content of a single file?)
+Ah cool. So do you work with futures or forward contracts? I'm graduating with May with a Finance degree and one of the capstone courses is strictly on Options and Futures and it is fascinating.
+Sure, just make sure the files are in the same folder and use the filenames as tables in your SQL.
+Both, but primarily forwards. I got my Master's in Economics a couple years back, and I don't know your capstone choices, but that course sounds like it would be really good. I'd probably recommend it, financial engineering is always in demand. 
+Cool! Thanks.
+Do you mind if I PM you with a few questions? I won't be too specific, but sometimes it's nice to know how it works in the real world versus in-class simulations.
+Ever work with actuaries or no? Learning about options and futures and that's my career path. Just curious. 
+I don't mind, ask away!
+I personally have not worked with actuaries. 
+I just shot you a message, thanks!

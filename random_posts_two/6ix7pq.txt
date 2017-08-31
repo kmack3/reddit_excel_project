@@ -1,0 +1,64 @@
+6ix7pq
+Finding Duplicates with different attached data
+Hello r/excel, first time I post here after subscriibing, I am sorry if the title is not descriptive enough but I really cannot think of a better way. It's best I just describe my problem.  
+  
+I have an excel with names of customers and the market segment they are booked under:
+http://imgur.com/LNKgKcO
+
+As you can see, some customers, like "James K." are booked multiple times, under the same or different market (2x Chicago, 1x New York).  
+  
+What I need is a list of all clients who are booked in more than one segment (does not matter how many times, just how many segments, and which).  
+  
+To be clear, what I would expect for this example is a formula that tells me that:  
+*James K. is booked in two segments: New York and Chicago.*  
+  
+Non duplicates are unimportant.  
+  
+Any ideas? Thank you in advance for helping a noob.
+
+
+-------------
+A pivot table would do that analysis for you - is that on the table as a possible solution?
+
+You could arrange a pivot with the traveller's name as the rows, and use "count of zip codes" as a value to give you the number of segments each person is booked in. 
+
+To get the actual segments themselves, you could either make the list of segments a Column value, or use them as Rows values *underneath* the traveller's name.
+
+That would provide the information, though in a different format to what you're envisaging, if that's not a problem.
+
+Edit: [Here](http://imgur.com/a/2SPA4) is an imgur album that shows the arrangement of the fields, and what the output could look like.
+-------------
+You can make helper column D, paste this into D2 and then copy and paste it down:
+
+    =COUNTIFS(A:A,A2,C:C,"<>"&C2)>0
+
+Checks if the name in A2 appears again in column A but in a different market than C2 ie that person is booked somewhere else. If there's multiple bookings then it returns TRUE. If not, FALSE.
+
+Then you can filter the data based on column D to only show you TRUE values, sort the table by priority A and then C, and there you go: all the multiple bookings for a person and in which market.
+
+I hope that does all you needed!
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+This is kind of a start, but the count is irrelevant. What the OP is looking for is clients with more than one *unique* market. 
+
+'James K' is easy(er) to spot in the pivot table, but it's impossible to exclude the other clients. 
+
+The real need here is *distinct count*, which is not available as a direct formula in Excel. There are various work-arounds, including using fancy formulas (e.g., [here](https://exceljet.net/formula/count-unique-values-in-a-range-with-countif) and [here](https://exceljet.net/formula/count-unique-text-values-in-a-range) ). Also, workflows are described [here](https://support.office.com/en-us/article/Count-unique-values-among-duplicates-8d9a69b3-b867-490e-82e0-a929fbc1e273). 
+-------------
+Yeah, I suggested the pivot because it would get a person close enough to the answer to see it, without being particularly complex.
+
+If OP has very specific output requirements, then a simple pivot won't do.

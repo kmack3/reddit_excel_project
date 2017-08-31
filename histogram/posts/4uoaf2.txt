@@ -1,0 +1,33 @@
+Vlookup - Why doesn't my formula work?
+Add **,false** to the vlookup, then the correct result will be shown.
+
+So:
+
+    =VLOOKUP(E2,$B$2:$C$121,2,FALSE)
+
+Please don't ask me, why. I never found ANY situation, where otherwise would be better or even good. It's just something you always have to consider, when using the VLOOKUP Formula.
+Sort your data alphabetically or add false like u/francetto says. Adding false makes the vlookup slower, sorting makes it faster. Your list is mainly sorted but a quick glance shows Blackpool, St. Albans and Lerwick - possibly others are in the wrong place.
+Hop on over in to the world of INDEX MATCH my friend! You won't regret it. I'd elaborate more but it's tough on mobile. Bottom line, it's great! 
+FYI, you should use Index Match, especially if you have unsorted data. Index Match is better in literally every way than VLookup and HLookup. 
+
+This is a decent tutorial on it:
+https://www.deskbright.com/excel/using-index-match/
+Adding false to the formula tells Excel not to assume the list is sorted. The default (omitted=true) assumes the list is sorted and Excel does a *divide and conquer* sort and looks for the closest value - sometimes the closest value is what you expect but most times it isn't. Adding false makes the VLookup slower but the data doesn't need to be sorted because Excel starts its compare at the top row and works sequentially down.
+One situation for using "Approximate Match" in match type (TRUE in last parameter): search a discount percentage based on a table of amounts (not mathematical rule):
+    
+    Amount, Discount %
+    0, 0%
+    500, 10%
+    1500, 15%
+    5000, 20%
+    
+Formula example:
+    
+    =VLOOKUP(value, A1:B5, 2, TRUE)
+    
+
+Thank you so much! So angry how simple the solution was! Many thanks!!!
+Many thanks friend!!!
+TIL - I never needed that. Thank you.
+Exactly this - any time you want to apply buckets or groupings to your data. Useful for discounts, postage, etc. It's a bit like a simplified nested IF in some cases. 
+here is where you state solution verified

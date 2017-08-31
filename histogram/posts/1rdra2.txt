@@ -1,0 +1,339 @@
+What are some of your personal.xlsx macros?
+My favorite personal macro replaces all "=" in the selection with "#". From there, I can copy paste values, then apply another macro to reverse the replace. It's a good way to copy paste formulas (perhaps with a transpose) without worrying about anything changing.
+I've got one that will consolidate formulae after I've worked out a solution in several steps.  For each cell reference in a selected cell, it will replace the reference with the formula from the cell and and mark the redundant cell for deletion.  That new formula may have its own references, so I'll run the macro several times until the final equation is completely standalone.
+
+EDIT: My code for it...
+
+Sub Consolidate_Eqs()
+
+    Dim AreaCount, CellCount
+    Dim CellRef As String
+    Dim CellForm As String
+    Dim NewEq As String
+    i = 0
+    Dim safecells() As Variant
+    ReDim Preserve safecells(0)
+
+    On Error Resume Next
+
+    Set protectedinputs = Application.InputBox("These cells won't get replaced.  Select each one and hit 'OK' and then Cancel when there are no more.", "Choose Inputs to Keep", Type:=8)
+
+    While protectedinputs <> False
+        ReDim Preserve safecells(i)
+        safecells(i) = Replace(protectedinputs.Address, "$", "")
+        i = i + 1
+        protectedinputs = Application.InputBox("These cells won't get replaced.  Select each one and hit 'OK' and then Cancel when there are no more.", "Choose Inputs to Keep", Type:=8)
+    Wend
+
+    NewEq = ActiveCell.Formula
+
+    For AreaCount = 1 To ActiveCell.DirectPrecedents.Areas.Count
+       For CellCount = 1 To ActiveCell.DirectPrecedents.Areas(AreaCount).Cells.Count
+          CellRef = Replace(ActiveCell.DirectPrecedents.Areas(AreaCount).Cells(CellCount).Address, "$", "")
+          If Not (UBound(Filter(safecells, CellRef)) > -1) Then
+            CellForm = Replace(ActiveCell.DirectPrecedents.Areas(AreaCount).Cells(CellCount).Formula, "=", "")
+            NewEq = Replace(NewEq, CellRef, "(" & CellForm & ")")
+            ActiveCell.DirectPrecedents.Areas(AreaCount).Cells(CellCount).Interior.ColorIndex = 3
+          End If
+       Next CellCount
+    Next AreaCount
+
+    If NewEq = ActiveCell.Formula Then MsgBox ("No changes, that was it!")
+    ActiveCell.Formula = NewEq
+
+End Sub
+I've created a few different things in my last year at work that are all helpful at one point or another.
+
+A function to extract a hyperlink from a cell:
+
+    Function GetURL(cell As Range, Optional default_value As Variant)
+     'Lists the Hyperlink Address for a Given Cell
+     'If cell does not contain a hyperlink, return default_value
+          If (cell.Range("A1").Hyperlinks.Count <> 1) Then
+              GetURL = default_value
+          Else
+              GetURL = cell.Range("A1").Hyperlinks(1).Address
+          End If
+    End Function
+
+Import all worksheets from a selected workbook into the current workbook:
+
+    Sub ToolAppendWorksheets()
+        'Define some vars
+        Dim wb As Workbook, wb2 As Workbook
+        Dim WS As Worksheet
+        Dim vFile As Variant
+        
+        'Set source workbook/worksheet
+        Set wb = ActiveWorkbook
+        Set WS = ActiveSheet
+        
+        'Open the target workbook
+        vFile = Application.GetOpenFilename("Excel-files,*", _
+            1, "Select a file to append worksheets from", , False)
+        'if the user didn't select a file, exit sub
+        If TypeName(vFile) = "Boolean" Then Exit Sub
+        Workbooks.Open vFile
+        'Set targetworkbook
+        Set wb2 = ActiveWorkbook
+        
+        For Each sh In wb2.Worksheets
+            sh.Copy After:=wb.Sheets(wb.Sheets.Count)
+        Next sh
+        
+        wb2.Close SaveChanges:=False
+        
+    End Sub
+
+Remove duplicates based on a certain column:
+
+    Sub ToolRemoveDuplicates()
+        'A macro to delete all rows that have a duplicate entry in a certain column
+        'Easy user defined vars
+        DupCol = Int(InputBox("Which column are we comparing for duplicate entries?"))
+        CompareChars = 50
+        StartingRow = Int(InputBox("Starting at which row?"))
+        
+        'Internal code
+        LastRow = ActiveSheet.Cells(ActiveSheet.Rows.Count, "A").End(xlUp).Row
+        
+        For rwIndex = StartingRow To LastRow
+            If Cells(rwIndex, 1) <> Empty Then
+                CurLastRow = ActiveSheet.Cells(ActiveSheet.Rows.Count, "A").End(xlUp).Row
+                For delIndex = CurLastRow To rwIndex + 1 Step -1
+                    If Left(Cells(rwIndex, DupCol), CompareChars) = Left(Cells(delIndex, DupCol), CompareChars) Then
+                        Rows(delIndex).Delete
+                    End If
+                Next delIndex
+            Else
+                Exit For
+            End If
+        Next rwIndex
+    End Sub
+
+Insert the specified number of rows at a certain row:
+
+    Sub ToolInsertXRows()
+        RowsToInsert = InputBox("How many rows would you like to insert?")
+        InsertPoint = InputBox("Which row would you like to insert them at?")
+        
+        For Point = 1 To RowsToInsert
+            Cells(InsertPoint, 1).Offset(1).EntireRow.Insert
+        Next Point
+    End Sub
+
+Join and merge all highlighted cells:
+
+    Sub ToolJoinAndMerge()
+        Dim outputText As String
+        delim = " "
+        On Error Resume Next
+        For Each cell In Selection
+        outputText = outputText & cell.value & delim
+        Next cell
+        'Removes the Trailing Delim
+        If Right$(outputText, 1) = delim Then outputText = Left$(outputText, Len(outputText) - 1)
+        With Selection
+        .Clear
+        .Cells(1).value = outputText
+        .Merge
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        End With
+        Selection.ClearFormats
+    End Sub
+
+Delete all blank rows in selection:
+
+    Sub ToolDeleteBlankRows()
+    
+    'Deletes the entire row within the selection if the ENTIRE row contains no data.
+    
+    'We use Long in case they have over 32,767 rows selected.
+    
+    Dim i As Long
+    
+        'We turn off calculation and screenupdating to speed up the macro.
+    
+        With Application
+    
+            .Calculation = xlCalculationManual
+    
+            .ScreenUpdating = False
+    
+        'We work backwards because we are deleting rows.
+    
+        For i = Selection.Rows.Count To 1 Step -1
+    
+            If WorksheetFunction.CountA(Selection.Rows(i)) = 0 Then
+    
+                Selection.Rows(i).EntireRow.Delete
+    
+            End If
+    
+        Next i
+    
+            .Calculation = xlCalculationAutomatic
+    
+            .ScreenUpdating = True
+    
+        End With
+    
+    End Sub
+I have one that takes the current selection and copies/paste special values and another that takes the selection and removes word wrap and auto expands columns to fit.
+
+Both are added to the quicktools toolbar (think thats the name of the small toolbar with the save buttons in 2007)
+I've got a bunch. I have one to autofit only visible rows/columns, one that turns on/off autofilter using the currently selected row as the header row, a set that move selected columns to the right or left end of the data set, another that duplicates the selected column and appends "_Original" to the header cell, etc.
+I deal with a lot of shared workbooks.
+I have one that starts on open, and saves the workbook every minute, updates the screen and hides all prompts. This was you can always see what has been added. 
+I also set CTRL+S to a macro which saves the workbook, then saves a back-up to a different folder. 
+I set Ctrl+V to a macro which pastes values only.
+I have one which, after filling in a chart, I hit a button, and it copies the chart into a new email, and addresses the email to all the people on the chart.
+* Encapsulate iferror (drops an iferror around a formula or range of formulas)    
+* Remove dead whitespace (swaps the whitespace left by a formula to vbnullstring)    
+* SQLIN (takes a range and generates a SQL in statement from it)    
+* Key (Takes a range of values and builds a composite string key by concatenating and adding a "-" between strings)    
+* Format Block (formats a block of data into my standard presentation format)    
+
+
+The rest is either bespoke (database integration etc) or somewhat niche (time weighting functions etc). Happy to share if any of it is of interest.
+I moved all my pesonal.xlsb macros to an add-in (.xla) so I could share with people more easily. It has most of the functions added to a menu but has a few functions kept secret. My favorite is the password cracker, which should be a tool everyone has at their disposal.
+My most popular macro is one which opens the current workbooks folder.
+
+    'Opens the folder the currently active workbook is in
+
+    Sub OpenFolder()
+
+    On Error Resume Next
+    Call Shell("explorer.exe " & ActiveWorkbook.path, vbNormalFocus)
+
+    End Sub
+
+
+
+I also have another which unhides all hidden and veryhidden worksheets.
+ITT: Macros I would love to see the code for.
+Disabling the F1 key! I can't stand using someone's computer when they don't have the help shortcut disabled in Excel. 
+
+Enough people apparently feel the same way that my school's computing department [disabled it](http://consultant.wharton.upenn.edu/link/portal/632/655/Article/6343/Excel-Help-Shortcut-F1-Key-Disabled-on-Wharton-Public-Computers)on all public computers 
+Real simple, but super useful, for table heavy analysis. Unfilters all when filters have been applied. Assigned to Ctrl+q.
+
+    Sub UnfilterAll()
+       ActiveSheet.ShowAllData
+    End Sub
+Most of mine are simple things like unmerging all merged cells. Every report that comes out of our POS system requires it in order to have clean, workable data.
+I have two just for tab switching assigned to Ctrl+Q and Ctrl+Shift+Q. The other two most used are for refreshing all pivot tables and restoring everything back to normal (screen updating, calculation, status bar message)
+Mine are pretty self explanitory:
+
+CreateSheetIndex - Creates an Index with hyperlinks to every non-hidden sheet in the workbook.
+
+RemoveHyperlinksInSelection - Removes hyperlinks in selection.
+
+SelectA1 - Resets selection in all sheets to A1.
+
+SelectionToSheetLink - For every cell in selection, if there is a sheet with the same name as the cell contents, create a hyperlink to that sheet.
+
+TrimSelection - Trims all cells in the selection.
+
+OpenPersonalForEditing - Unhides and unshares PERSONAL.XLSB. If executed again, save, shares, and hides personal.
+
+I also keep a UDF add-in with rtrim, ltrim, rpad, lpad, and NthWord (searches for Nth word, starting from a given position. Can also search backwards and change delimiter from space to any other characters.)
+* Auto time stamp of file (also removes connections)
+* Add paste values to right click menu
+* Add macro to pivot table right click menu to format all data in the pivot in a custom format.
+* Remove database hold on read-only connections to Access db's.
+* Program to transpose multiple blocks of data
+* Auto-import of lookup table data into current table
+* Program to open the folder of the current file
+
+That's cool. That's bugged me for years. 
+So it's a macro that creates nested formulas from multiple formulas?
+
+Neat stuff.
+This sounds brilliant - I'll definitely try this out
+Would you post your code? This is intriguing.
+I like yours that inserts a specified number of rows.  How come you wouldn't do it like this, though, and run it from a keyboard shortcut?
+  
+    Sub ToolInsertXRows()
+    RowsToInsert = InputBox("How many rows would you like to insert?")
+    For Point = 1 To RowsToInsert
+        Selection.Offset(1).EntireRow.Insert
+    Next Point
+    End Sub
+>I set Ctrl+V to a macro which pastes values only
+
+Can't believe I haven't thought of doing this. 
+All five of your examples are things I could easily use several times a day - brilliant!  Please share!
+Same.  I upload the one from my machine to the shared folder with a button on my QAT and then users can update theirs with another button.
+
+right?! 
+I'm gonna blow your mind. Ready?
+
+1. Ctrl+A to select all
+2. In the "alignment" section on the default tab of the ribbon bar, click the little arrow next to "merge cells"
+3. Click "unmerge cells"
+I prefer the default Ctrl + PgUp/Dn
+I have a gaming mouse Logitech G500, it has 3 buttons inside the wheel, 1 normal middle click and 2 other when you press the wheel sideways, i assigned to change tabs on these buttons and now on every program (chrome,Excel) i can fly between the tabs.Also there are 3 buttons on the side for my thumb, i assigned them as copy,past as values and ctrl+Z.
+
+
+not really relevant but it helps a lot when working on excel every day for years. 
+What does your OpenPersonalForEditing look like? (if you don't mind)
+
+I've tried to doing something with this, but I keep getting stuck for some reason. It's frustrating. I can't hide/unshare it, but I can do the opposite.
+Thanks!  Yeah, you're picturing it right.  So for example, if
+
+A1=1;
+
+B1=2*A1; and
+
+C1=A1+B1,
+
+running the macro once on C1 will make
+
+C1=(1)+(2*A1), and then running it again will make
+
+C1=(1)+(2*(1)).  Any cells I shouldn't need anymore get filled red.
+
+That's a silly example, but you get the idea.  For more complex stuff it's a lifesaver.
+No problem.  See above!
+That is a perfectly fine option. I just often know which point in my sheet I need to add rows to, so asking for the row was faster than finding it for me in my work.
+Everything I have learned in VBA, it's always the most simple which is most useful.
+Oh, I remembered another one. I have a workbook with sheet protection, so I can avoid people changing certain ranges, but the workbook has 50+ pages, so I have a macro which locks/unlocks all the sheets.
+[Here you go](http://codetidy.com/7399/), sure there are some optimsiations and edge cases out there but they work for me.
+Or he could just write a macro that requires a single button click/keyboard combo instead of 3 or 4. Oh wait, he has! Mind not blown.
+CTRL+A
+ALT H M U
+To each their own, I find myself working much faster when I only have to use 2 or 3 fingers of my left hand to switch tabs. Also, I made the switching loop around the sheets, so that when I reach the last tab, it switches to the first, which Ctrl+PgUp doesn't
+That sounds awesome... I don't plan on bringing my own mouse to the office, but if I do, that's what I'll do with it
+Of course, half the time I forget it's a macro and do it manually...
+
+    Sub OpenPersonalForEditing()
+        On Error GoTo TheEnd
+        
+        Dim wBook As Workbook
+        Set wBook = Workbooks("PERSONAL.XLSB")
+            
+        If Windows("PERSONAL.XLSB").Visible = True Then
+            ' End changes to PERSONAL.XLSB
+            Windows("PERSONAL.XLSB").Activate
+            ActiveWorkbook.KeepChangeHistory = True
+            ActiveWorkbook.SaveAs Filename:=ActiveWorkbook.FullName, AccessMode:=xlShared
+            ActiveWindow.Visible = False
+        Else
+            ' Allow changes to PERSONAL.XLSB
+            Windows("PERSONAL.XLSB").Visible = True
+            ActiveWorkbook.ExclusiveAccess
+        End If
+
+    TheEnd:
+    End Sub
+
+Still requires a few clicks to deal with dialogs when saving/changing access.
+Do you use Range Precedents collection to accomplish this? 
+I wouldn't know how to start to build a macro for this, but I would use it a lot. Any further tips?
+Brilliant - thanks
+That's fair. I'd rather spend my time writing macros that save a bit more than 2 seconds, but to each his own.
+Yep, see above.
+I agree completely. But then, I don't have to do the same tedious few clicks all day every day. I'm sure there's a limit where it becomes desirable, if only for one's sanity.
+Sure. If the macro is saving 2 seconds a couple hundred times a day then that's a bit different.

@@ -1,0 +1,19 @@
+Excel can't compress png very well. Is there a way to force all insert to jpeg or batch convert the pictures as jpeg?
+1. Jpg is a lossy format created to reduce file sizes for the internet.
+2. Png is a non-lossy format, created to preserve and enhance filesize compression for images. It's not designed to reduce file sizes of images that aren't meant to be non-lossy.
+
+If you want better compression and file size, convert your images to Jpg before trying to store them in Excel. It's possible to create VBA code to convert images though.
+This wouldn't be an Excel solution (sorry), but if third-party software is an option, you could possibly use something like [IrfanView](http://www.irfanview.com/) to handle the process for you. [They have an option for batch conversion where you can specify the quality reduction of the resulting images when converting to lossy.](http://i.imgur.com/UPw9sAk.png)
+Photoshop is much better suited to this task. You can automate a batch process to convert an entire directory of png to jpeg without writing a single line of code, and very quickly at that. 
+
+You can simply google how to do it, and CS3 is free. 
+I believe the files were jpeg before inserting in excel as they are taken from camera. Afaik most cameras don't save in png.
+
+I don't know how people insert the files but somehow a portion of the images from the same batch ended up as png and some as jpeg. I just assume they are all inserted in the same way. If there is a way to force the insert as jpeg, it would certainly help.
+
+I guess I need to explore the vba option.
+thank you but it can't be done this way. If I convert with the .xlsx unzipped, convert to jpg, repack it as .zip then rename back to xlsx, the resulting file will be corrupted. I believe the XML just can't find the png file and won't link to the jpg by itself.
+
+I also can't ask them to compress before insertion because that's too complicated for these employees. Heck I even told them how to copy and paste every picture as jpeg, they just can't.......I could just leave it but the file size is more of an issue for me than for them.
+came to say exactly this.  IrfanView is awesome.
+Yup, literally been using it for 20 years.

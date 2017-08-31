@@ -1,0 +1,12 @@
+IF statement inside an IF statement, Just a mess
+    =IF($C$3="Test",IF($C$4="Sell Order",Sheet37!J4,IF($C$4="Buy Order",Sheet37!I4,0)),IF($C$4="Sell Order",Sheet32!B4,IF($C$4="Buy Order",Sheet32!C3,0)))
+
+Works using your logic, and return 0 when not true.
+You could clean this up so much with =if(and(
+You need to enter an IF statement every time it's relevant. So in the valueiftrue, just add another IF(logicaltest;valueiftrue;valueiffalse). This is called a nested IF statement, google it if you still have struggles.
+Thanks this worked perfectly. Makes sense that i can now see it.
+ Solution Verified
+
+You have awarded one point to _TESailor_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

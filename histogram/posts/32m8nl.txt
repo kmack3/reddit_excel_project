@@ -1,0 +1,28 @@
+Is there a way to import stats from sites like mlb.com or baseball-reference to excel without copy & pasting everything manually?
+Another suggestion that no one has mentioned is utilizing a webquery. I dont know how those websites lay out stats, but that is what I use to download stats from PGA.com for fantasy golf. you simply input the URL of the site you are getting data from and if it is a static URL then you can easily refresh the queries every time you open the workbook without having to recopy and past or click and drag or anything like that. 
+
+
+just click Data > Get External Data > From web 
+and follow the prompts. More info can be found here https://support.office.com/en-nz/article/Get-external-data-from-a-Web-page-708f2249-9569-4ff9-a8a4-7ee5f1b1cfba
+In addition to B-Ref, the FanGraphs Leaderboards have a ton of functionality and an Export button that downloads a CSV. You can customize what data is shown, filter by date, aggregate at the team level, and much more. 
+
+http://www.fangraphs.com/leaders.aspx?pos=all&stats=bat&lg=all&qual=y&type=8&season=2015&month=0&season1=2015&ind=0&team=0&rost=0&age=0&filter=&players=0
+
+I use both B-Ref and FanGraphs for about 90% of my baseball research, and mostly FanGraphs. (The Play Index at B-Ref is really good for tricky and unusual data questions, but not more typical inquiries.)
+you can try import.io
+Yes it is possible ... i do the same with soccer results. it fetches the data from a certain website an edits it to outputs it in the correct format to keep my subreddit up to date (/r/austriansports if anyone is interested). if you want i could post the file or the code (allthough its a written clusterfuck since i wrote that sometimes in the night and was too tired to clean it up - well never change a running system i guess)
+Yes. Check [this](http://www.mrkent.com/tools/converter/) out. There are probably better tutorials out there, just google "Excel web table import".
+On Baseball reference (or any of the sports reference sites) there is a link that says "[export](http://imgur.com/yIabayJ)" above the table.  Clicking this will download an excel file with the data in it.
+
+Alternatively, next to the export button there is a "CSV" button.  I prefer to use it.  It will make the data look like [this](http://imgur.com/5bDGCMP), which is very easy to copy and paste into excel.  Then its just a few clicks* using the text to columns feature to create a nice table that you have more control over.  This method also has the advantage of not requiring you to download a new file every time you want a new table, you can copy and paste them all into a single excel file.  
+
+Instructions for text to columns*
+
+1. Go to "data"--->"text to columns"
+2. Make sure delimited is selected, click next
+3. Make sure comas is selected, click finish
+Awesome, Thank you!
+Thanks!
+Thank you!
+You can rearrange and add/remove columns before exporting too. It's pretty darn slick. 
+Perfect, Thank you!

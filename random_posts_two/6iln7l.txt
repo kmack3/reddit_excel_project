@@ -1,0 +1,37 @@
+6iln7l
+Can I do this using excel?
+So at my work, we have two types of physicians. One type is fully employed, and the other is independent physicians. I have an excel sheet that contains both types, and then I have a separate excel sheet that contains only the fully employed ones. However, I do not have one excel sheet for the docs who are only affiliated.
+
+Is there anyway I can take the one excel sheet that has fully employed docs, and the excel sheet that has both employed and independent, and create a document that has only the independent ones? 
+
+We have thousands and thousands of physicians on these lists, so I can't just go through one by one deleting the employed physicians. It would make me crazy.
+
+
+-------------
+u/Bigshotbobbylight
+
+A reminder to please read the [submission guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) about post titles.
+
+Your post title must contain a description of your problem, this makes searching for it again easier. Your title is generic as to apply to 98% of posts.
+
+Posts may be removed where they do not describe the problem.
+
+Suggested title from your question: **How can I filter data to return a subset of data that contains employed and independant workers from two worksheets**  
+-------------
+Temporarily paste the list of employed doctors onto the same sheet as the full list of doctors. Let's say the full list of doctors is in column A. And the list of employed doctors is in column F. Then in cell B1 enter `=MATCH(A1,F:F,0)` and copy this formula down to as many docs in the full list. Every time Excel finds a match in list 2, it will return a number (the position in the list), otherwise it will return an error. Filter columns A and B on column B and only show the errors. This will reveal only the non-found doctors.
+-------------
+If there is a column telling you whether they are fully employed or independent, you can apply a filter to it so that it only shows the independent ones. Then, under find and select, you choose "go to special" and choose only visible cells. Then press copy, open a new workbook, and paste.
+-------------
+Is there some sory of doctor ID that is in each sheet? Is the naming convention the EXACT same with the fully employed? (example Dr. mike Smith and Dr. Michael Smith are NOT the same)
+
+This can be done easily with VLOOKUP.
+-------------
+There isn't. I only have excel sheets with names/emails of employed docs vs. names/emails of both employed and independent.
+-------------
+They all have an identifying physician number that's specific to their name. 
+-------------
+Then semicolonsemicolon's method should work for you.
+-------------
+This is simple to do
+
+in the master sheet, do a VLOOKUP againse the physicial number, and it will return everyone thats a full time. Anyone not returned is not full time.

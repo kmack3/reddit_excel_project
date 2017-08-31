@@ -1,0 +1,116 @@
+Macro to Google meaning of words and paste (MS Excel)
+The Definitions API service is free to use for up to 100 queries per day.
+
+1.  Sign up for a free API key at http://www.definitions.net/api.php
+
+2. Wait for the email they send you (mine took less than 15 minutes) to receive your User ID, Token, and Web Admin Password
+
+3.  Assuming your word is in cell A1, paste this code into cell B1, replacing the uid= and tokenid= values with those from the email
+
+    `=FILTERXML(WEBSERVICE("http://www.stands4.com/services/v2/defs.php?uid=1234&tokenid=ABCDEFGHIJKLMNOP&word="&A1&""),"//results/result/definition")`
+Here you go OP:
+
+    Option Explicit
+    
+    Public Function GDEFINE(ByVal SearchTerm As Range) As String
+        Dim BaseURL As String: BaseURL = "https://www.google.com/search?q=Define%3A"
+        GDEFINE = GetXML(BaseURL & URLIFY(SearchTerm.Value))
+        GDEFINE = RegExer(GDEFINE, "(?:data-dobid=""dfn""><span>)([\w\s,:;().]+)")(0)
+        GDEFINE = Replace(GDEFINE, "data-dobid=""dfn""><span>", "")
+    End Function
+    
+    Public Function URLIFY(ByVal RawString As String) As String
+        URLIFY = Replace(RawString, " ", "+")
+        URLIFY = Replace(URLIFY, "%", "%25")
+        URLIFY = Replace(URLIFY, """", "%22")
+        URLIFY = Replace(URLIFY, "<", "%3C")
+        URLIFY = Replace(URLIFY, ">", "%3E")
+        URLIFY = Replace(URLIFY, "#", "%23")
+        URLIFY = Replace(URLIFY, "|", "%7C")
+        URLIFY = Replace(URLIFY, ",", "")
+    End Function
+    
+    Public Function RegExer(ByVal RawData As String, ByVal RegExPattern As String) As String()
+        'Outputs an array of strings for each matching expression
+        Dim RegEx As Object: Set RegEx = CreateObject("VBScript.RegExp")
+        Dim Matches As Object
+        Dim match As Variant
+        Dim Result As String
+        Dim Output() As String
+        Dim OutputUBound As Integer
+        Dim Counter As Long
+    
+        With RegEx
+            .Global = True
+            .MultiLine = True
+            .IgnoreCase = True
+            .Pattern = RegExPattern
+        End With
+    
+        If RegEx.test(RawData) Then
+            Set Matches = RegEx.Execute(RawData)
+            For Each match In Matches
+                OutputUBound = OutputUBound + 1
+            Next match
+            ReDim Output(OutputUBound) As String
+            For Each match In Matches
+                Output(Counter) = Matches(Counter)
+                Counter = Counter + 1
+            Next match
+            RegExer = Output
+        Else
+            ReDim Output(0) As String
+            RegExer = Output
+        End If
+    End Function
+    
+    Public Function GetXML(ByVal URL As String) As String
+        On Error Resume Next
+        With CreateObject("MSXML2.XMLHTTP")
+            .Open "GET", URL, False
+            .Send
+            GetXML = .ResponseText
+        End With
+    End Function
+
+To use this, simply use `GDEFINE` as a normal formula like so: `=GDEFINE(A1)` which would yield the result `regard with disgust and hatred.` Note: That this is prone to taking a while to process because a page has to be loaded for each word definition, then parsed, and filtered to output the definition. The upside to this is this will always work if you have access to Google.
+
+---
+
+**Important Note:** If you use this too often, Google will begin to block your requests to its servers until a captcha is filled out. So this also comes with the downside of being limited in how often you can query for definitions.
+I am sure this is possible via googles API, last time I had to do something similar I wrote some xml code that queried the gmaps api，there are some data limits on calls per day that can slow things down but usually that shouldn't be too much of a problem.  I would start searching for some xml code for googles search API then put it in a vba command wrapper
+Google dictionary as a website has been discontinued.
+
+There is this browser extension: https://chrome.google.com/webstore/detail/google-dictionary-by-goog/mgijmajocgfcbeboacabfgobmjgjcoja
+
+You could take it apart and have a look at how it processes your requests.
+As an alternative, you can make a request like this: http://google-dictionary.so8848.com/meaning?word=test and then try to extract the content manually.
+Does this need to be a macro? Can you find the data online, import the data, and then do lookups on the values in column A?
+
+Smart Lookup in Excel can return the definition of a word. But I'm not sure if you can write that information into a cell in Excel I don't see a ".value" or ".text" property in vba at least. (The macro recorder didn't provide particularly useful code for Smart Lookup")
+Never seen this before. Thanks for the tip. 
+
+!remindme 72 hours
+Yeah. Smart lookup does the job partially. If I want to paste that information in a cell. Then how would one do that? 
+I will be messaging you on [**2017-03-08 17:18:35 UTC**](http://www.wolframalpha.com/input/?i=2017-03-08 17:18:35 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/5xl8qv/macro_to_google_meaning_of_words_and_paste_ms/dejg8yw)
+
+[**3 OTHERS CLICKED THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/5xl8qv/macro_to_google_meaning_of_words_and_paste_ms/dejg8yw]%0A%0ARemindMe!  72 hours) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! dejhd2h)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+No idea unfortunately! I can't tell if it had a property to write the value of the lookup into the cells. It's hard to find information on it both in Excel and online.
+Are you two saying that you already have the definitions stored as variables in VBA?  If so, VBA certainly has ways to insert data into a cell.  [Here](http://analysistabs.com/excel-vba/write-data-to-worksheet-cell/) are simple methods.  Does that resolve the issue?
+
+If you still have the issue of how exactly to automate grabbing the Google definition as a variable, you might be able to do it with Power Query.  But I don't have too much experience with it.  I know for sure that the AutoIt programming language can do all of this.  But I believe AutoIt is based largely (entirely?) on Visual Basic, so it seems inefficient to move from Visual Basic to AutoIt to complete this task.
+> Are you two saying that you already have the definitions stored as variables in VBA? If so, VBA certainly has ways to insert data into a cell. Here are simple methods. Does that resolve the issue?
+
+I'm saying that as far as I can tell, Excel doesn't let me access the result of a smart lookup in VBA.
+
+My guess is that this was intentional. Smart Lookup can include more than definitions. You can do searches of people and bring up their pictures, Wikipedia entries, etc. Oddly enough, pictures in smart lookup have a copy and paste component, but definitions don't. 
+I've never used Smart Lookup, so I won't comment on it.  Maybe ask at the [official Microsoft Forums](https://social.technet.microsoft.com/Forums/windows/en-US/home?filter=alltypes&sort=lastpostdesc) (the Excel-specific forum) to confirm that Smart Lookup cannot store text.
+
+Alternatively, [this Stack Overflow post](http://stackoverflow.com/questions/26561527/vba-to-copy-website-data) describes how to open a browser to a specific URL and copy the text to a cell.  That might be a good starting point.  You'd still need to do some considerable parsing.  I'm reasonably sure that there are similar functions to copy the HTML of the page (instead of the text on the page)--that may or may not make your job easier.  

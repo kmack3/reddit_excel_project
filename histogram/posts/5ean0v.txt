@@ -1,0 +1,139 @@
+VLOOKUP referencing an empty cell gives 0
+Hi,  
+
+A possibility would be to use an IF statement to encase your VLOOKUP as follow : 
+
+    =IF(YourVLOOKUP="","",YourVLOOKUP)  
+
+It means that is your vlookup returns an empty cell the formula will return an empty cell else it will return whatever is in the cell.  
+
+If you have questions do not hesitate.  
+
+Cheers
+The brute force way is to wrap the VLOOKUP in an IF() statement. What sucks about that is that you wind up having to repeat the VLOOKUP twice.
+
+But, say this is your VLOOKUP:
+
+=VLOOKUP("X",B4:C7,2,FALSE)
+
+You can make that, instead:
+
+=IF(VLOOKUP("X",B4:C7,2,FALSE)="","",VLOOKUP("X",B4:C7,2,FALSE))
+
+
+
+Not sure if this will help you, but in excel you can use "" (two double quotations) to mean 'empty' and 0 to mean the mathematical value of zero. You can also type ' (an apostrophe) in front of any number for excel to store that number as text
+
+[deleted]
+Use the custom number formating function to display zeros as blanks, will work for the human eye at least. Will run faster than dual lookups or nested ifs.
+You can even try 
+=IFERROR(INDEX(what you want,MATCH(data1,data2,0)),"")
+Sometimes I wish they'd release some sort of IFZERO function similar to IFERROR or IFNA. It'd save us a bit of typing time considering how often we write out these IF statements.
+You could have your vlookup in a column and hide it.
+
+Then where you want your actual data, you could just do one simple IF and save you repeating your vlookups?
+
+E.g. 
+
+In  B1 =vlookup(A1,[some table],3,0)
+
+Hide column B
+
+In column C where you want your data
+
+=if(B1="","",B1)
+
+One vlookup
+Just an additional take on this issue
+
+An exact match VLOOKUP takes more time and resources and can be a problem on large datasets.. Another much faster option is to use a [Double TRUE VLOOKUP](https://exceljet.net/formula/faster-vlookup-with-2-vlookups)
+
+This can then be used for the required answer to solve OPs issue with a double lookup for finding blanks..
+
+Example, looking up value from B1 in the `data` range table. 
+
+    =IF(VLOOKUP(B1,data,1,TRUE)=B1, IF(VLOOKUP(B1,data,2,TRUE)="","",VLOOKUP(B1,data,2,TRUE)), NA())
+
+Although it has the potential to go through 3 iterations of VLOOKUP it should be much faster overall than doing exact lookups even once.
+Here's what I use (index-match). Found it on SO I think[1]. 
+
+Given a formula of 
+
+    =index(column_to_return_value_from, match(look_up_value, wolumn_to_lookup_that_value_against, 0))
+
+and calling that formula
+
+    f
+
+If I am returning text values
+
+    =iferror(f & "", "")
+
+If I am returning numeric values
+
+    =iferror(if(f = "", "", f), "")
+
+In above formulas, you'd copy-paste your index-match formula wherever you see "f".
+
+I no longer use vlookup since this made life so much easier for me. 
+
+[1] http://stackoverflow.com/questions/31255281/iferror-index-match-returning-zeros-instead-of-blanks 
+You could first run a find and replace all blanks ("") with a space (" "), then when you call your lookup, it will return " " and not 0. 
+Solution Verified
+Thanks. This is clunky as hell, but i guess it's the only way :(
+Would this not double the calculations needed for whenever the answer is not blank, or does excel "cache" the answer and use it since the equation is the same in both locations.
+Solution Verified
+sounds to me like your data cells aren't truly blank?
+Yep, I use IFERROR(VLOOKUP(...),"") to avoid having errors displayed. But the problem I have is different. I cannot control what the VLOOKUP function gives me back. Somehow in it decides to give a 0 if it sees an empty cell, and there are no parameters in the function to work with that. At least none that I know of.
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Won't work. There are formulas counting the total number of each digit. I don't want it to count blanks as 0s.
+Yep, tried that, the result is the same: if the referenced cell is empty, the function returns a 0.
+
+You have awarded one point to _Starwax_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I agree with you but I do not have a better solution at the moment.  
+
+And ty for the clippy point!
+OP's formula is probably what I would use too, but if you find that clunky, then an alternative you can use is...
+
+=IF(ISBLANK(yourlookupcell),"",VLOOKUP(your VLOOKUP)
+
+This tells excel that if the cell is empty, just return a blank, if it's not empty, then go ahead and VLOOKUP the shit out of that cell.
+I am not expert but from experience this kind of formula tend to slow things a lot when you work on a lot of rows so I think it calculates it 2 times every row.
+
+You have awarded one point to _timwilson7_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+try using iferror(T(vlookup()&""),"") should give you blank when blank and 0 when 0 
+Or you could format the cell with the formula to suppress the zero, but only if the result of zero was meaningless. Format the cell: 0;;;@, or Display no zeroes in the entire worksheet File > Options > Advanced/Display options for this worksheet/worksheet, check the Show a zero in cells that have zero value check box.
+I have found this useful in making worksheets more readable, but make sure that zeroes mean the same as an empty cell.
+But I don't know my lookup cell, so i need to add the VLOOKUP formula into the ISBLANK(), right? So it's doubling it again...
+This seems to only work if the reference cell is text, no?
+
+If the reference cell has a 0 (numeric), the T() function will return a text cell. The &"" operator will again turn the cell with the function into text, right? So basically your function will always return a text cell, and will only give something other than an empty cell if the reference cell is text.
+
+If so, this won't work. I need the function to return numbers as well, there is some subsequent calculation that uses those numbers.
+No ISBLANK won't work with VLOOKUP inside it's parentheses, because VLOOKUP returns a 0 for a blank cell. You will have to use 
+
+IF(YOURVLOOKUP=0,"", YOURVLOOKUP)
+yes it will turn it to to text and adding an empty string guarentees the text type so 0 becomes 0&"" whereas empty becomes ""&"", however to force it back to numeric you need only multiply the result by 1, this causes an error (caught by iferror) when its truly empty, and 0 when its 0. 
+
+so to finalise 
+
+     =iferror(T(vlookup()&"")*1,"")
+
+should give us what you want? and avoids the double lookup overhead. 
+And if the reference cell has some text, then it'll be turned into an empty cell.
+
+I might have not been clear enough in the opening post, saying that some reference cells are 0s and some are empty - these are not the only options, still other cells have numbers higher than 0, and others have text in them.
+
+In my particular case I guess I could use different formulas for columns that are text-or-empty and for those that are number-or-empty - I wanted to use one formula for both, but i can work around that. Problem is, the cells that are number-or-empty also sometimes contain the value "X" (as in, a variable defined by something else, for the human eye). Your formula will return all text cells as empty cells.
+
+Anyway, thanks for the suggestions. I think i've learned enough, will think on how to preceed from here.

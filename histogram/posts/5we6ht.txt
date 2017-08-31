@@ -1,0 +1,15 @@
+Loan amortization table
+Your formula in G11 is incorrect - the values in that column represent the remaining principal of the loan and therefore should only be reducing by the amount of the principal payment calculated in column F. 
+Thank you. Does that mean by value in d12,d13,d14,etc are also incorrect? I am assuming that cell g11=d12, g12=d13, g13=d14, etc
+Solution verified
+
+Yep - you got it! Opening balance in column D should reference the prior period closing. 
+
+You have awarded one point to _jonokress_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Solution verified
+
+You have awarded one point to _jonokress_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

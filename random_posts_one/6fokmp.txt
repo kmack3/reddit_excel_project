@@ -1,0 +1,51 @@
+6fokmp
+Need to re-create hierarchy to allow grouping/ungrouping
+So I have a dump from a system, and the table looks something like this.  
+  
+Name|ID|ParentID|Echelon  
+:--|:--|:--|:--  
+Top Level|1|*Blank*|1  
+Second Level|10|1|2  
+Third Level|11|10|3  
+Another Second|12|1|2  
+Another Third|22|12|3  
+A Fourth|64|22|4  
+  
+I have 16 levels of this, and tens of thousands of row.  Is there a way with VB Scripts, Power View, or some other plug to group them into a drill-down???  
+  
+Thanks!
+
+
+-------------
+Not totally sure what you're going for, but have you tried just making a pivot table? It'll allow you to group however you please.
+-------------
+Yes, but you cannot automatically create nested groups via the echelon.  I need to be able to drill down, so if I collapse the first Echelon 2, all subordinate echelons collapse with it.  It also will let me do calculations within that group.  
+-------------
+Pivot table does what you're describing, try adding slicers...
+-------------
+So when I try to add slicers, it doesn't understand the relationship at all.  All it does is just gives me buttons to filters.  It doesn't group them at all.  The echelons have no relation to each other, it's how far "tabbed" they would be in a drill down chart in relation to the item above it. 
+-------------
+Yeah, I can see your issue now, you need to write some VBA to unpack it all into a better format which you'd then apply the pivot table to.  
+  
+Are all the IDs unique?
+-------------
+Yes, all the IDs are Unique, and all subordinate items reference the unique parent's ID (many to one, recursively).
+-------------
+Is there any underlying data to capture? Or just heirachize the IDs?
+-------------
+There's a bunch of other columns that contain information that I'd like to manipulate (mainly add).  
+  
+It's an organizational hierarchy structure dumped from our database.  We need to sanitize it and give it to our external partners, I offered to do it in Excel, thinking it'd be easy, but it's definitely got me stumped!
+-------------
+Right, so there are a few steps you're going to need to do, ideally you get the data in a similar format to this: http://imgur.com/a/xjT9h  
+  
+And then put it in a pivot table.   
+  
+How familiar are you with VBA?
+  
+
+-------------
+very familiar, just not sure the most efficient method.  
+I like the path you're on! If i get columns for each echelon, can I wrap that back up into a pivot chart?
+-------------
+So I put it into that format, and started messing around.  I get it show one level of relationship, but not recursive (E.g., if I hit a tier 2, it will show me the tier 3's that fall under it, not the 4's and below). And it's also still treating each item like a top-level. 

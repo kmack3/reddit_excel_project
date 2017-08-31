@@ -1,0 +1,36 @@
+6g38ci
+VBA: Multiple cells must contain this data before running the rest of this Macro
+I have this macro that removes some of the content of "I" if "P" is the current year or more. I only need the macro to process the partial removal of "I" if "AE" contains any of the following data Rugby, AFL, NRL, A-League or NBL. How do I add this extra step in the macro? 
+
+    Sub RemoveRound()
+    'remove the round number for programs for this year
+    For i = 2 To Cells(Rows.count, 16).End(xlUp)
+        If Range("P" & i) > Year(Now()) Then
+            If InStr(Range("I" & i), "Round") > 0 Then
+                Text = Range("I" & i)
+                NewText = Right(Text, Len(Text) - InStr(Text, " "))
+                NewNewText = Right(NewText, Len(NewText) - InStr(NewText, " "))
+                Range("I" & i) = NewNewText
+            End If
+        End If
+    Next i
+    
+    End Sub
+
+
+
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

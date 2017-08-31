@@ -1,0 +1,55 @@
+6fpifk
+Array formula will work with either of two logical functions, but won't work if joined with and()
+The formulas below are compiling a list without any blanks, so they're just using a condition to identify an instance, then grabbing the row number. If it was grabbing the wrong number, it would give me the wrong data in a return, but it only returns blanks - indicating that the array is empty. Nothing's getting in.
+
+The only thing I can think is that it's having a hard time identifying the row number it's on when it returns "true, true" - but I *think* I'm telling it to return the row number of the [Options Table].
+
+
+**This works:**
+
+{=IFERROR(INDEX(Table19[Options Table],SMALL(IF(**NOT(ISBLANK(Table19[Options Table]))**,ROW(Table19[Options Table])),ROW(1:1))-ROW(Table19[Options Table])+1,1),"")}
+
+**This works:**
+
+{=IFERROR(INDEX(Table19[Options Table],SMALL(IF(**Table19[Included?]="Included"**,ROW(Table19[Included?])),ROW(1:1))-ROW(Table19[Options Table])+1,1),"")}
+
+**This doesn't work:**
+
+{=IFERROR(INDEX(Table19[Options Table],SMALL(IF(**AND(NOT(ISBLANK([@[Options Table]])),[@[Included?]]="Included")**,ROW(Table19[Included?])),ROW(1:1))-ROW(Table19[Options Table])+1,1),"")}
+
+Why won't this work with the and() function? All I'm doing is providing a true/false result for the rest of the formula, aren't I?
+
+
+
+-------------
+generally array's don't respond well to And statements. 
+
+option one: adjust use of If. Example: 
+
+     =MAX(IF(a1:a10<25,IF(ISNUMBER(b1:b10),b1:b10)))
+
+or by using multiplication (does same thing as AND): 
+
+     =MAX(INDEX((a1:a10<25)*(ISNUMBER(B1:B10)*(b1:b10),))
+
+can't modify your formula directly (unless you want to upload you file) but the above examples should provide guidance. first formula is an array, second is not. 
+
+-------------
+Huh. Well ain't that a thing. 
+
+Good to know I wasn't crazy & excel's just fussy on some things.
+
+Thanks!
+
+-------------
+PROBLEM SOLVED?
+
+OPs can reply to any solutions with:  Solution Verified
+
+This will change the flair to SOLVED and award the user a ClippyPoint. Please be patient, sometimes it takes a couple of minutes.
+
+Make a new reply, not an edit.
+
+
+-------------
+It's less that it's fussy and more that AND is designed to take an array of inputs and return a single result; so passing an array to an AND will collapse it down to just one result and hence lose you your array.

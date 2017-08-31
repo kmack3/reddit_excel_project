@@ -1,0 +1,21 @@
+Change from TEXT format a different way?
+If you have not yet entered a formula, you can select the column or cells and press `Crtl+(backtick)` to set General Format. 
+
+If there are already formulas in the cells, do the same, but this will not convert the text to formulas. After setting General Format, you can press `F2 Enter` in a cell to commit it as a formula. If the formula is fillable, you can then fill instead of doing `F2` in every cell. 
+Thanks for the response. There is not a formula in the cells. There were values that were hard keyed into column C. I added a column, which became column C (pushing the hard keyed #'s to Col D).
+I'm pretty sure that when you add a column between two columns the new column you added picks up the formatting of one of the columns it is now between. Right now, Column B is in TEXT and Colum D says currency. There are no formulas in either.
+
+> when you add a column between two columns the new column you added picks up the formatting of one of the columns it is now between
+
+True, that. The new cells inherit the formatting of the left (in your case) or above cells.
+
+After inserting, column C inherited Text Format. Select it, hit `Ctrl+(backtick)` to set General Format on that range, then add formulas to your heart's content.
+> Ctrl+(backtick)
+
+I was excited by this trick, until I tried it and it just switches between views of the cell value .. what am I missing?.. no formats where changed. 
+MY BAD!
+
+It's supposed to be `Ctrl+Shift+(backtick)`
+Nice!
+
+It's a pity it does not refresh the cells to trigger the formulas.

@@ -1,0 +1,184 @@
+HELP! Excel test at job interview, what to look for?
+At it's simplest, an array is simply an object which holds 1 or more values.
+
+If you've ever used SUM you've used an array (probably without realising it).
+
+A|B
+-|-|
+10|
+20|
+30|
+40|
+
+    =SUM(A1:A4)
+
+Gives answer of 100 because excel actually has an intermediary step which you usually don't see:
+
+    =sum({10;20;30;40})
+
+Excel converts the cell references into an array of the values, then adds them together.
+
+The above is a 1-dimensional array (because it's 1 column and 4 rows - A1:D1 is also a 1-dimensional array of the same size because it's 1 row and 4 columns)
+
+A 2-dimensional array is multiple rows **and** multiple columns
+
+A|B|C
+-|-|-|
+10 | 100|1000
+20|200|2000
+30|300|3000
+40|400|4000
+
+    =SUM(A1:C4)
+
+Gives 11,100 because the intermediary step
+
+    =SUM({10,100,1000;20,200,2000;30,300,3000;40,400,4000})
+
+(in arrays, commas separate the columns and semi-colons separate the rows)
+
+Excel allows you to create **array formula**, which is where the real power comes in
+
+Normally, a formula like IF checks for the TRUE/FALSE nature of *one* condition
+
+    =IF(A1>100,[do something if TRUE],[do something else if FALSE])
+
+But what if you want to check multiple things at once?
+
+A|B|C
+-|-|-|
+10 | 100|1000
+20|200|2000
+30|300|3000
+40|400|4000
+
+If you want to check whether any of the values in row 1 is > 100, you could write:
+
+    =or(A1>100,b1>100,c1>100)
+
+Which evaluates to TRUE because C1=1,000
+
+That's not so bad when you have only 3 columns, but what about if you had 30?
+
+So you can use an array formula, which means that you are using multiple values (an array) in place of what is normally a single value/cell reference
+
+    =or(A1:C1>100)
+
+You have to use CTRL+SHIFT+ENTER when you use an array formula so that Excel does the hard work for you, and the intermediary step which you won't see in the above is
+
+    =or({10>100;100>100;1000>100})
+
+Followed by another step which you generally won't see
+
+    =Or({FALSE;FALSE;TRUE})
+
+which gives a final answer of `TRUE`
+
+EDIT: Putting it back in the IF formula:
+
+    =IF(or(A1:C1>100),[do something if TRUE],[do something else if FALSE])
+
+Will evalue the 'TRUE condition' when you press CTRL+SHIFT+ENTER on the formula
+Linking can mean getting data from an external data source. Some market data programs allow you to insert live feeds into a spreadsheet using OLE or DDE. You can put in a reference to a security's current price or the interest rate of a bond and the spreadsheet will invoke a call to the market data program to get the current value.
+I've set a number of these, and it allows me to understand someone who think they know how to use Excel in a practical way, and those who actually do. 
+
+I tend to employ the guys and girls who can think their way round a problem though, using google if necessary, rather than someone who can write a nestedIF into a Vlookup freehand so show some initiative, 
+
+Oh, and add comments to each formula cell if you have time. Someone who can explain what they did in each step makes it much easier to explain why it went wrong, and tends to suggest that they will learn the requirements of the role faster.
+
+Good luck!
+I've worked in a few companies where these tests are to basically filter out people who are lying they know excel. (One test for a VBA accountant needed a file opened for the VBA to work - I was the only person who managed to open the file! I was embarrassed for everyone)
+
+a previous boss used to love these question:
+How do I format 12\12\14 as a date (note the direction of the slants)
+Almost everyone failed (the easy answer is a combo of left, mid and right)
+
+How do I look an invoice value in the following table:
+Value  Invoice
+
+£10      111
+
+£14      112
+
+£23      113
+
+Most people would incorrectly say VLOOKUP - but we were more interested in how they would approach 
+
+EDIT they were supposed to be in columns
+/u/snosty_the_froman27 already explained array formulas, so that leaves "linking".
+
+**What is linking?**
+
+Linking in Excel basically means using data which is in another Excel file. Basic example:
+
+- You have 2 files, Test1.xls and Test2.xls. You want to SUM contents of both A1 cells. A normal formula =SUM(A1;A1) won't work, because it will just add the same cell twice. So you need to replace the second A1 with the full path to make it work: 
+
+=SUM(A1;'[Test2.xls]Sheet1'!A1)
+
+This way excel knows that it has to sum the value in cell A1 from the current sheet and take the value in A1 in Test2.xls. Every single formula works with linked data as well, but there are a few things you should know when you're working with linked data:
+
+1. Linked data can be set to refresh automatically every time you open excel, or it can be set to manual refreshing.
+
+2. The path to the linked excel file must stay EXACTLY the same or else the data will not be retrieved, however it is possible to substitute linked file with a new one. This allows you correct the path if the original file has been moved.
+
+3. Linking data is incredibly useful in situations where: A file with data relevant to your work is updated periodically, Normally you'd have to open the file and copy the data into your own file to calculations or such. Alternatively you could just link the data in the formulas in your excel file to fetch the latest data each time you need it.
+
+4. Linking can be done for objects as well: Let's say I made a nice chart in Excel, but now I need to place it in powerpoint. If I need to do the periodically, each time with new data for the chart, I might consider copying the chart from excel then selecting Paste Special (in PowerPoint) and select "Paste link". this way, the chart will always be updated with new data as soon as the original chart in Excel is updated.
+
+5. To link data, open your excel, enter "=" then alt-tab to a different excel file and select the cell(s) you want to link. If you move back to the original excel file you should see the full path in the formula tab.
+
+Other specifics about linking data are probably not needed for the test. I have taken and passed 2 Excel tests so far. 1 was theoretical and the other one involved making a chart in excel, formatting a table, using a pivot table to get the desired data and the last exercise a database and I had to find out as much relevant statistical information as possible about a selected product. Both tests were very easy, but I already had a lot of experience with Excel when I took them. There were no specific formulas to know other than =vlookup for the first test. Judging from what you described, you should prepare yourself for something a bit more challenging than what I had.
+
+Good luck!
+link Excel to PPT -- copy Excel, go to PPT, ALT E, S and click the paste link radial and select MS Excel object. One thing to note, for the future, is that it goes much easier updating the links when the Excel file is open and you update the links in powerpoint.
+
+I haven't done one that is quite like this, however, make sure the data is in the correct order for v/hlookups. Thats one thing on the test I took, and administer I have people watch for.
+
+Whenever people ask me about things like, what my ability is, I make sure to tell them that if there's something I don't know, I know where to go for an answer. You know that already, by being here. I'd ask if you can use any external resources as necessary, but likely won't be able to. I would much rather have someone say, "I dont know, but I know where I could go to figure it out" rather than "I dont know".
+
+Good luck!
+Thank you everyone for your help!
+
+This job description was intimidating at first, but when I went to the job interview they tested me using a program called Kenexa Prove It!.... It was much easier than expected.
+
+But my studies weren't for nothing. I don't use v/h lookup at all. Index(match) is the way to go!!
+Kudos - seems like a good desc of arrays.
+Thank you for the help!
+Would you be able to simply explain how to do input data using dde? 
+Youre the only one i can find that has mentioned  it and im having trouble getting it to work.
+Just testing myself here.
+
+Format 12\12\14 as a date:
+Is the correct date 14th of December 2012? As to formatting this in excel, without rewriting it, I do not know off the top of my head. I'm sure it's something really simple.
+
+Invoice look up:
+I would use Index/Match. I would also use an invoice search cell. You enter the invoice number, then the adjacent cell would contain Index/Match function.
+>a previous boss used to love these question: How do I format 12\12\14 as a date (note the direction of the slants) Almost everyone failed (the easy answer is a combo of left, mid and right)
+
+Ctrl+F -> Replace -> Replace \ with /, excel will then auto format to a date
+
+Unless the dataset was more complex (but then doing left/mid/right would rarely work on a varying dataset without some obnoxiously long formula)
+What market data program are you using? Your market data provider should provide documentation on how this works. I have done this before with reuters and bloomberg, but it has been many years sibce I did it last and even if I remembered the details they would likely have changed.
+
+Edit: looks like these days you can do this with a web data provider -> https://support.office.com/en-us/article/Get-external-data-from-a-Web-page-708F2249-9569-4FF9-A8A4-7EE5F1B1CFBA
+
+http://www.owenbloggers.com/2011/05/27/excel-tip-of-the-week-linking-to-data-on-the-web/
+ 
+The first one isn't that simple (as I said), because of the variable lengths of the characters. I would give brownie points for asking what format the date is in (most people wouldn't ask)
+The really easy way is with a ctrl H and replace "\" with "/" - it seems a cheat but is often the best
+
+for the second (initially didn't realise my columns didnt come through). Most people would argue a vlookup would work (with negative numbers), index/match is perfectly okay - but gets REALLY slow in big complex sheets. (and is often the best/only solution) The trivial methods are to shift column A and B or to add a column C that equals column A and vlookup on that.  Excel (and programming) is all about lazy programming winning and if someone was able to see a way around they would also be able to think ways around other issues
+Ctrl + H :)
+Them links are useful! Thank you
+I have trouble with VLOOKUP lagging when I use a drop down menu(s). Should I leave out the drop down menu and revert back to typing in the entry? 
+
+I am not the best of spellers, and my coworkers are just as bad. So I tried to eliminate this variable, but at the cost of an excel file working smoothly. I also had to use drop down menus in a few other sections of the excel file. Took me a week to correct the misspellings and wrong notations. I created a page "lists" to ensure spelling and notation are the same throughout the excel file.
+
+I am starting to dabble in VBA area of excel. I want to try to make things easy and very difficult for my coworkers to screw up the excel file. I understand what most VBA codes are doing, but I have a learning curve to conquer before I can manipulate them to my liking. Granted, I've only been at this for a few weeks. I'm sure I can figure it out. Most of the things I want to do are simple, but it's getting them to work together that is the problem.   
+What drop down menus are you using? Is it a control or just data validation? I haven't ever experienced this before (not that I tend to use that functionality) - can you post the workbook (if not confidential) 
+If you have a problem with bad spelling I would say keep some form of checking and having a 'lists' page seems like a good way to do it (it is basically the way you do it in databases), there is nothing worse than spending hours (weeks) looking for a simple spelling mistake in your excel/programmes
+
+With VBA remember that once you make it idiot proof they will just create a better quality idiot; so remember to lock down cells and formula, password protect and make it so they can't do anything you don't like. This subreddit tends to be nice to newbies if you get any problems with VBA...
+I wish I was able to post the worksheet, but it is confidential. It's just data validation. I think some of the lag might come from the COUNTIFS functions.
+
+Thanks for the heads up. I problem will run into some trouble very soon. 

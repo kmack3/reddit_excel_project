@@ -1,0 +1,82 @@
+Going from public to private accounting. Told I need to learn vlookup and pivot tables. Where/How do I start?
+You can learn both of those things in two hours or less, up to intermediate levels. 
+
+YouTube. 
+If you know sum, you should learn SUMIF and SUMIFS as well. Also learn to use your keyboard for navigation. I essentially don't touch my mouse at any point now 
+Lookup INDEX(MATCH()) instead of VLOOKUP, it does the same thing but with more flexibility and efficiency. VLOOKUP requires your data to be a specific order (it only works left to right), while INDEX(MATCH()) can lookup in any order and can do composite (more than 1 criteria) searched. 
+On YouTube there's the channel "excelisfun". This guy is great. He'll teach you everything you need to know.  He'll be sure to teach you keyboard shortcuts as you go as well. 
+>Where do I start? 
+
+PLEASE FULLY READ THE SIDE-BAR BEFORE SUBMITTING A POST! >>>>>
+
+[Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/)
+Chandoo.org is my favorite site for when I was first learning Excel, that would be my recommendation.
+I'm an engineer and vllookup, indexmatch, and pivot tables are something I use on a freakishly regular basis. Maybe I should be an accountant? 
+www.rondebruin.nl is one of the best resources out there. His Excel Bible has a workbook for every single function - really amazing stuff. Delves into VBA as well. 
+YouTube 
+Perfect. I'll be working on it tonight :) I'm excited about my new job but sad I'm leaving the current. 
+Yes. When working almost enitrely with numbers, I find SUMIFS and COUNTIFS much, much easier and more useful. For me Index + Match (and any {arrays}) are niche, although to each their own.
+I'm super huge on keyboard shortcuts I don't like to use my mouse so I will definitely make it a point to be this way with excel. 
+Got it. Ok. 
+How do you do index(match()) with multiple criteria? 
+How do you do multiple criteria?
++1 for excelisfun. I did his vlookup tutorial and learned quite a bit 
+Used the app. Thanks for the link. 
+Thank you 
+What kind of an engineer are you? 
+Ok great. Thank you for this 
+Not to self promote, but I've curated a few useful videos for my students (for free) on Alym.com (mods, feel free to delete if this isn't okay). 
+COUNTIF is a godsend. My coworkers used to look up duplicate accounts using a pivot table and count. I blew their mind with countif
+Definitely learn INDEX(MATCH()), but I think I'd probably practice VLOOKUP first. I feel like people obsess about INDEX(MATCH()). I suppose it depends what you're trying to do but 9 times out of 10 VLOOKUP works fine for me and is quicker to set up. 
+
+I went from public to private myself, one of the best changes I ever made in my life. Good luck to you. One nice (Excel related) thing is that the awesome spreadsheet you create this year will ACTUALLY be used next year. I felt like I'd spend so much work in public creating a nice spreadsheet only for processes to change, client reports being different year to year, moving to different clients, etc. It's nice to just have a job and be able to own all the pieces.
+https://www.deskbright.com/excel/using-index-match-match/
+I'm bad at describing this but if normal is:
+
+=index(Source,match(ref1,RefColumn1,0)), then multi criteria match is:
+=index(Source,match(ref1&ref2,RefColumn1&RefColumn2,0))
+
+Enter with Ctrl+shft+entr (array formula)
+
+The link to deskbright.com is for matching horizontal in addition to vertical, but only one vertical criteria.
+It's an array that uses the & operator between criteria and the lookup columns, I can type up a better example when I get back to my computer, I'm on mobile right now. 
+Usually you can use a sumifs formula to get the same result easier (it it's a number).
+    =Match(A1&B1&C1,D:D&E:E&F:F,0)
+
+Use ctrl+shift+enter to tell excel it's an array formula and you'll see curly brackets around it. 
+
+Don't actually use full column lookup ranges in a linear search like this or your computer will hate you. 
+aha! did not know the app bypasses all advice on sub reddit submissions advice.. interesting!
+
+edit: this is not a sarcastic reply, it is a [TIL](https://www.reddit.com/r/todayilearned/) moment.
+
+edit2: so many downvotes, so many mobile users ¯\\\_(ツ)_/¯
+that is a loaded question, um.... materials mostly.  just check my top comment history you'll figure it out ;)
+This is more than ok. Thank you for sharing!  I will make sure to take a look at it tonight. 
+Mistake-finding + filtering (1-2 punch) = mind blown for good co-workers. Your bad co-workers will think you got lucky and treat it with contempt/distrust. Unfortunately it's 50/50 where I work currently. Sorry for derail.
+I use VLOOKUP most of the time, especially on spreadsheets that I built myself (since I set them up in the correct order). If I'm doing analysis with data from someone else, INDEX(MATCH()) saves so much time since I don't have to rearrange the sheet in the correct order. 
+Thank you. 
+
+Vlookup is easy to use and works most of the time. 
+
+Despite having used Index Match multiple times, the correct syntax cannot stick in my mind for some reason. 
+
+Can't even figure it out by messing around quickly. Always need to go back to some tutorial. 
+
+I have grown to hate it... 
+You're only quicker at VLOOKUP because that's what you learned first
+Yeah; the app doesn't show sidebars at all, just threads.  I got "reprimanded" for my first post too :)
+> that is a loaded question, um....
+
+It really wasn't meant that way. Pretty cool stuff you are working on! :)
+I mean maybe? I'm quite comfortable with both so I'm not sure that's true. It's also a smaller formula. 
+This comment has been downvoted, but I don't completely disagree. Once you use index/match a lot it's only marginally slower than vlookup. 
+Its for you own good ;)
+
+Its easier to get answers to clear questions, where the first 10 questions aren't simply trying to clarify the issue - though still a big problem unfortunately.
+
+
+ok :P 
+
+Most engineers can use excel, we have to use all sorts of programs for data processing (scripting in C/C++/etc) but I use excel for quick scratch paper or for managing medium size data sets.
+Alright, I'll make a different point, you'd be able to do either fast enough that the time it took to type the formula in is irrelevant 

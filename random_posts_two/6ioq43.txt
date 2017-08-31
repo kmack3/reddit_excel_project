@@ -1,0 +1,22 @@
+6ioq43
+Return a value dependent on a range from another column
+I have a column with a % in it. I would like a formula that I can use that will look at the % is in that column then depending on what is there will give me a specific value. I would like it to be something like if 99% or lower returns value of "0", if 100% to 104% returns value of "1", if 105% to 109% returns value of "2", if 110%+ returns value of "3"
+
+
+-------------
+I put all my percentages in the N column, then the following formula in the O column:
+
+=IF(AND(N1<100%,N1>0%),0,IF(AND(N1>99%,N1<105%),1,IF(AND(N1>104%,N1<110%),2,IF(N1>109%,3))))
+-------------
+https://exceljet.net/tips/how-to-use-vlookup-for-approximate-matches
+-------------
+Thanks!
+-------------
+You're welcome!
+If it worked, please reply with "Solution Verified"
+-------------
+I'll check it when I get to work in the morning 
+-------------
+Awesome 
+-------------
+worked great thanks again

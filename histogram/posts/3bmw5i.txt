@@ -1,0 +1,221 @@
+What are unique solutions you made on excel that saved your company tons of money?
+Some time ago (6 years)... I made a huge excel file (30MB) to calculate historic morbidity and mortality of 110 clinics and hospitals in my state in México, using a data matrix of 4 databases (National and Institutional databases). The file had to run for 8 hours after copying/pasting the data (at the time, now it takes less than 10 minutes on a i7), but it saved over a month of an epidemiologist and an analyst work time. I'm still proud of that achievement and people still awe at the excel file and the way I made it to work. I'm still using some variations of that file to evaluate some data, sadly not that exact data anymore, as the new boss for the area doesn't like people messing with "his" data, so, I'm saving my file in case of future use again.  
+And yes, now they work manually for weeks to get the data again... Fools!.
+I created something that takes our Benchmarks for subscription revenue growth and compares it to our Traffic sources and it automatically analyses huge amounts of data for our marketing people and then puts a positive or a negative recommendation and how much the source is worth. Doesn't "Save" us money I guess but it does stop us losing money on stupid decisions. 
+I wouldn't say the problem was unique, just it wasn't something my company was doing at the time. Anyways, we buy and sell used electronics. When we buy an item, we have to wait 35 days to sell it due to CA DOJ regulations. When I first started working, there was no method to the mayhem of putting items online (IE taking pics of it, clearing memory, etc). People would literally grab whatever they could find and work on it. So, items that would be ready to sell in 2 days were being pushed back for items that would be ready to be put online in 30+ days. It was super inefficient. I basically took our google spreadsheets and created a query function that sorted items based on the date they were able to be sold on, showing what still needs to be done on the item, etc.  
+  
+**TLDR** I created a query function that made my company more efficient. 
+I recently wrote a visual basic function that would take the prefix of a Canadian postal code and convert it to the name of the city to which it corresponds. It works for all postal codes in Ontario, Canada. Saved my company about 1500 dollars, as the only other option was buying the postal code conversion file from the national postal service. 
+IT Department: "At least one million dollars. We can meet on Wednesday to discuss the development plan."
+
+Me at the Wednesday development meeting: "A solution is already in production."
+
+Management: "Meeting's over!"
+I use Google Speadsheets to do webscraping. Where I worked before we were in talks with an external provider to create a solution to collect data from 2,000+ pages, they quoted $25k for the job. I can now do the same output of nearly 100,000 rows of data for free
+Wrote a script that aggregated user input and output of multiple end user copies of an excel workbook into a central location.  It helped identify issues before they became big problems, it allowed us to enforce best practices and best of all, i had documented evidence and logs whenever we had users start blaming the workbook for stupid stuff they were doing.  It was fun.  
+I made multiple spreadsheets that automates a lot of the work in progress reports I have to run. What used to take someone else 4 hours of data entry now takes like 5 minutes.  
+  
+  I also made a spreadsheet that analyses purchasing information on metal ingots we use in our foundry and gives me a monthly usage from first purchase to the last purchase. I take that number and purchase 6 months of inventory at a time and it saves the company tens of thousands per year on all the metal they buy.  They used to buy maybe a months worth of time... Now I just need to work on getting them to edit their database that tracks jobs to add in a metal type and metal weight so that I can properly forecast metal usage.
+First, I made a macro to convert an order spreadsheet for a coworker that she used to spend 4 hours formatting every Monday. Took that down to <1 minute.  Then I took that order export and made it convert to a format that will allow my coworker to upload the order through FTP directly to the vendor, saving her another 2 hours.  Since those orders get packed individually by the vendor since we can do it that way, it saves our receiving department 4 hours per week as well. I figure a 10 man hour savings per week to my company, which potentially saves the company $1500+ per month. 
+I've made 5 tools for my company that are all sitting on my hard-drive collecting the digital version of dust. I work in financial services.
+
+1. A simple look-up tool to find out various pieces of information (age of majority for different states, withholding requirements, etc.)
+
+2. A tool that calculates transactions "pro-rata" across different investments within an account.
+
+3. A training aid
+
+4. A withholding calculator that lets you choose between "I need $X AFTER taxes" or "I need $X BEFORE taxes." 
+
+5. My baby, a "rebalancer" that automatically tells you, in share and dollar values, what transactions are needed between different funds to get an account to certain allocations (i.e. "My account is currently 33%-33%-33% in these funds, I want it to be 20%-20%-40%-20% across THESE funds.") 
+
+The ones dealing with transactions are all "too risky" to implement (which is bullshit, as everyone else does "rebalancing"), and the others have been "in testing" since friggin April.
+This is my favorite story.
+
+I worked for a website, as a data entry operator back in 2012. That website got some symbols error. It would replace every special character (with [ascii code](http://www.asciitable.com/) greater than 128) with "?", e.g. ∞. So they downloaded database and gave it to me, almost a month task. I went through data and fixed it with VBA code within one hour.
+
+It did not save them ton of money exactly, but yes, it earned me lot of respect and saved me lot of hard work.
+Nothing I've made has saved them tons of money but I'm made two things that have saved myself tons of time and ensures I'm always correct.
+
+First thing I made is a conduit fill calculator that lets me set numbers of cables of different sizes and tells me if that combination of cables will fit though the type/size of conduit chosen.
+
+The second thing I'm working on now is a voltage drop calculator that is totally customizeable (lets you input everything even the power factor) and also automatically re-sizes the ground for you.
+A while back, I created a query that pulled stuff off the mainframe and put it into Excel, then used a Sort feature to show which items didn't have matches. That saved one person several hours a day because they had previously run a report and printed it, then used highlighters to mark the matches and work the exceptions. 
+instead of relying on 2-3 days of manually doing vlookups and reports, I was able to tie two tables together in MS Dynamics and load the tables in PowerPivot for a coworkers AR Lookback Analysis. Saves him a lot of time during each quarter end.
+I work in the marketing department for a huge staffing company. We have ~90 offices around the US and hire ~70k people per year.
+
+Many of our offices contact me to help them with recruiting candidates. 
+I created a database from a SQL query of all the company's hires over a given time period. I then created a quick and easy dashboard from the data.
+
+Now, any manager or VP can look at the dash, select a few filters and see (for instance) how many people were hired in XYZ Branch from March to June, how long they stayed on assignment (mainly temp work), where they were recruited from (Indeed, CareerBuilder, referral, etc.) and what type of job they were hired for (Industrial, Technical, Administrative). Oh yeah, and I can update the SQL query each year and everything updates automatically.
+
+Not an overly complex solution, but you would have thought I hung the moon by the responses from my managers.
+
+Also during my first few weeks on the job, I automated two reports that took about 30 minutes each. We run these reports twice a year for ~90 offices so, it saved quite a bit of time.
+
+
+Management created a rather nifty data analysis tool in Access.  For them it did wonders.  For staff it meant over 300 people on a weekly basis spending approximately 15 minutes each inputting data, printing it and givinf it to their supervisors. Who then spent about 45 minutes trying to interpret the data and put it into the access database.
+
+I suggested a macro in access to pull the data from everyone but was shot down because they didn't want anyone to mess up the file...  so I did the next best thing.
+
+Created a macro that grabbed all of the information from the employees and compiled it into a single sheet and formatting to make it easier to input.  Employees went to taking about 2 minutes to open a document and input the numbers and save it.  Supervisors went from almost 45 minutes to about 10 minutes.
+
+The data was also much more accurate because I just added some basic formatting that forced them to put in the information we wanted.  Ie a date in this cell, time in this one, etc..  not fool proof but obvious enough that most people stopped fucking things up.
+
+The paper was also huge.  That was almost an entire pack per week.
+Flair changed to discussion.
+
+Please note that you shouldn't post anything that belongs to the company and could potentially get you in trouble.
+
+I myself fall under the umbrella.
+
+*reserves space for list of cost-saving builds.*
+I wrote an inventory tracking log that jad three components, an individual item sheet giving the entire description of the item and the location it was stored and what each component was used for when taken. A master item list that compiled the individual sheets and was automatically updated by the individual sheets and then the kicker was a visual inventory box where you could search by box and rack and find exactly where in the box the item was. It saved time, boosted tracking and improved quality
+I work for a defense contractor. We put together some of the Repair Manuals for various military vehicles. A lot of that involves the logistics of each vendor's parts and all the various data elements that go into the database that helps create the manual. We use excel as "load sheets" to bring that data into the database.
+
+Part of the process is to screen parts to see if the government has already assigned a National Stock Number to the part. My boss designed a spreadsheet that allows my coworkers to batch screen parts from the government FLIS database.
+
+I had to familiarize myself a bit with VBA and the structure of his macros before I was able to then modify his existing spreadsheet to add an option to save a PDF of the screening results for each part rather than just bring the data back in excel format like we had been doing. This was due to a contractual requirement that we needed to include PDFs of the screening to prove we had done it in the last 30 days.
+
+This simple modification to his existing spreadsheet has already saved 100s of tedious man hours of someone clicking "Convert to PDF" after each screening result was returned.
+
+Now, with that being said, I'm embarrassed to say I had to use an implementation of SendKeys in order to have the program function like we wanted.
+
+I've come up with a lot more creative solutions than that one since then but most of them involve importing an Excel sheet, sucking in the data, splitting it out into some arrays, modifying/manipulating it, and then putting it back together on a new excel sheet, so it's not as pertinent to /r/excel. My programming language of choice is currently VB.Net but I would like to make the transition to C# in the near future.
+We had some guys putting together maintenance data for a huge fleet of vehicles to determine the amount of pieces that were unavailable daily.  Took him six to eight hours.  I made a solution using SQL and Excel that now makes it about a thirty minute solution.
+Any mail merge because they're too cheap to pay for any automation for front line workers. 
+A law firm I work for right now would get a big list of disbursements (things they paid for on behalf of the client) when the case finished.  They then went and manually sorted them into categories, consolidated some of them, and CALCULATED interest manually for each one.  That was my first VBA project (but really my job description) but I had to do something.
+Not the most advanced Excel document I created, but I mapped the resource / revenue of my agency, about 60 people. The outcome is a pivot table that shows the monthly revenue per team, as well as the profitability of each client.
+Allowed us to massively optimise the workload, and realign the team's priorities. 
+I did a couple VBA macros to automate some monthly reports they were running and doing manually each time.
+
+First one, they get a file each month from the county that is formatted terribly. And they would format it each time to the specifications of the import requirements. This would take a few hours each time. I made a macro that essentially auto formatted it with the correct columns, order, fills in blanks etc. So now they get the file, run the macro, and presto - it's ready to import.
+
+The second one is similar, just a different source file, and it outputs a pivot table for them that gives specific counts they need from the file. Speeds up their process tremendously. They run this one all the time to get updated totals now. Before they would calculate it out once or twice since it took so long to do each time. So their numbers are more accurate/up to date more easily.
+
+And a third macro, which gets used the most but everyone at the office is a super simple one, but makes their lives so much more convenient and less repetitive. Our payroll program's search deliminator is the "pipe sign" |. And to search for multiple employee's at once, you have to do empID1|empID2|empID3 etc. and type the pipe sign inbetween each employee ID number you wanted to search.
+
+This macro takes any list of employee ID numbers in excel and puts a pipe sign inbetween them all so all they have to do is copy and paste the text into the program and it will search for that group of employee ID's. Saves everyone maybe a couple minutes each time they use it, and it gets used all the time. 
+
+I created write to text file so every time a macro gets used, it time stamps the computer username that used it so I have running total of each use. Figure it will come in handy some day to show how often it gets used.
+I work for a law firm and I hobbled together an excel spreadsheet to help me prepare interogatory reponses. 
+
+since we usually get the interrogatories just in paper form the attorneys would need to either email and request a digital copy or have me type them up. Then I would take the questions and reformat it for our answers and plug in a few standard reponses here and there. 
+
+Eventually I realized the scanner I used had a 'scan to text' and I created a few macros in word to reformat the questions so I can plug them into a 'convert' table and plug the questions into a table that looks for key words to plug in the auto reponses. And then formats it into the proper reponses. 
+
+So something that usually took me 2 days to do (and they were impressed with that) now takes me an hour. 
+
+They are going to miss me when I move end of the summer. 
+
+I've since learned a ton more excel so my original file looks so hacked together and crappy now, but I've been putting off redoing it all since it's not like anyone in the office wants to learn it. 
+automated macro to print off pdf reports via outlook in one click (we usually received 30+ per day, I work in Treasury)
+
+edit: anyone have a solution to print off 1st page of multiple paged pdf file with a macro via outlook for a batch of files?  I've been trying to find a solution to this but seems impossible haha
+Man I love that feeling of automating something that expands your knowledge of vba. Makes me feel like a wizard.
+Break the function before going on leave.
+
+Come back and see how much time has been spent to fix it or recreate the results.
+
+It's worth that much.
+It's a broad question, but I'm looking to do something similar at my work and I'm wondering what kinds of calculations you focused on when making this. 
+Here's the database if you want it: http://geocoder.ca/?freedata=1
+I should note that I don't think I can post the file. Suffice it to say, it's essentially a series of if then statements which take the prefix as input and if it matches a condition, outputs a certain city. 
+Do you keep the data in each XLS file, or does the function "call out" to a master lookup list somewhere?
+Close, but your estimate seems low.
+Or you know...
+
+LLC a company, and charge $24k to do it.
+Man, How did you forecast it?
+
+ I'm trying to forecast sales from really noisy data and I've just given up, as has my boss. Something like a full 38% of all sales are 0 day sales. (We sell capital goods - which almost *no one* will buy on a whim.)
+.
+According to [XKCD](https://xkcd.com/1205/) you could have spent 2 months on automating that and it would still have been worth it.
+This hits close to home.  Everything I suggest would need to be validated,  which in my current experience is anywhere from 2 days to 2 years.  But since customer complaints aren't involved, probably 3 years.  
+
+I just haven't made anything instead.  If they want to waste 800 man hours a year on poor methods, that's their agenda.  It's extra infuriating as we have consultants sending us tools which are at best, incomplete, and at worst poorly designed.  I seriously got a tool that was missing huge segments of code, with no assignments to buttons.  Which was weird, because there were like 8 buttons.  There shouldn't have even BEEN 8 buttons.  It was just "pretty" to people who have no idea how powerful excel is. 
+
+Ugh. 
+I could use that exact thing where I'm working
+I'm trying to get familiar with terminology.  When you say that you created a query, what and how did you to that?  If you don't mind enlightening a new kid.  
+Anything even partially developed on a company owned computer belongs in whole or in part to them.
+.
+Zero VBA, all functions... The computer I used at the time had no capacity to run complex macros, or some others were restricted, so, had to be creative. That's why it's a heavy file. Most computers at work are locked and macros can't run without permissions, so I do db analysis without macros mostly for those restrictions... Right now I'm doing mostly copy/paste database analysis excel files and my boss, her boss and other people around the office love them because it's easy for them to see results that way. Yes, they're easily impresionable.
+I had a somewhat similar situation.  We had a quasi external development team.  While they were internal to a different part of the company, they would bill us (I suspect for tax shifting reasons).  In anycase they provided us with an estimate of $192,000.00 for implementation of a requirements document... typically they go over budget by about 10-25%, so the 200,000 figure was probably reasonable.  In helping to generate the requirements I had a good understanding of the tax issues involved.  Worked with local IT on a query, and developed an excel based VBA solution that would read files and generate tax forms as well as IRS electronic files.
+
+Somehow I was not seen as saving the company 200,000k, as my time was a soft cost... oh well.
+
+On a similar note, I automated 50% of my job within the first two weeks on the job, and it identified about 46,000 in error where we were over reemitting taxes on an annual basis.... but that was rather simple stuff once you identified the common human errors to have a hope in hell of really reconciling rather than writing a cheque to the tax authority.
+Upvote for the funny idea, not for a recommendation that you do it.  Doing stuff like that gets people fired, or at least is a dick move.  :)
+what is this "leave" you speak of... 
+If I'm honest its a pretty elementary Do Until Loop with lots of basic arithmetic and IF conditions (e.g Revenues divided by leads) + arranging and formatting the data and then an automated Vlookup for the expected values from another sheet. Couple more IF conditions for "is X larger than Y" that colour in the cells and that's it. 
+Oh goddamnit. That could have saved me some hand cramps writing the function. Worth it though. Thanks a bunch, dude (ette)! 
+
+Edit: fixed assumptions of gender. 
+Thanks!  Fantastic.  
+> it's essentially a series of if then statements
+
+Eurghhh  
+  
+Did you consider `VLOOKUP`?
+If I understand your question correctly, the data is kept in the XLS file when I put the function into a VBA module for use in the file. Unfortunately, I don't have the skill to call from a master list using a function yet. Working on it, though!
+Well, I never saw them close-out a project on budget.
+It was difficult to say the least. They use quickbooks for sales and a custom access database to track jobs through the foundry, and they do not put all the require info I need in order to accurately forecast.  
+  
+  What I had to do was gather all the purchasing data from the past 5 years so I can see how much they were purchasing and what they were spending. I then had a yearly breakdown of how much was bought and how much they spent with a average used per month for each of those 5 years. Since the sales have been very close to the same I could use that data as a base on how much to purchase.   
+  
+  Now as far as forecasting I'll still have to figure out what I'm going to do, because like I said the only data is what I have and what has been quoted and what is currently moving through the foundry, and since there are potentially over 350 different casting numbers it would be a lot of manual work to figure out what metal, and weight used per pour for upcoming usage.   
+
+  So what I will have to do is take what was quoted and what is in the factory that hasn't been casted and assign the corresponding metal and total weight to get future usage... and since doing business with large OEMs can take up to to a year for awards it's going to be a crap shoot. Luckily we have multiple 5 year LTA contracts I at least can forecast out for 5 years on what is firm.   
+
+Luckily you can Google what you're looking to do that will produce a ton of links that will have multiple ways to do want you want with macros.  
+  
+  All my VBA knowledge was learned from reading up to see if there has been anyone who wanted to so what I want then reading what all the things I copy and pasted do. There are also a ton of people here in /r/excel what are wizards.  
+  
+
+  
+  Now I do have a little more experience since I did some VB coding in college so it doesn't look like a foreign language to me.
+[Image](http://imgs.xkcd.com/comics/is_it_worth_the_time.png)
+
+**Title:** Is It Worth the Time?
+
+**Title-text:** Don't forget the time you spend finding the chart to look up what you save. And the time spent reading this reminder about the time spent. And the time trying to figure out if either of those actually make sense. Remember, every second counts toward your life total, including these right now.
+
+[Comic Explanation](http://www.explainxkcd.com/wiki/index.php/1205#Explanation)
+
+**Stats:** This comic has been referenced 237 times, representing 0.3354% of referenced xkcds.
+
+---
+^[xkcd.com](http://www.xkcd.com) ^| ^[xkcd sub](http://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](http://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_cso9xlk)
+Very interesting.  I'll have to show the people who sign my paychecks.  I think it took me a couple days in all.
+Which one?
+It was a mainframe query in SQL. 
+Kudos.  I have been challenging myself recently with this restriction on many solutions.  It is amazing what excel can do even without VBA if you are inclined to try.  I am part way through a Sudoku solver, but extreme cases where there are more than one possible answer lead to problems for me still, as the guess and test is still required after a certain difficulty until you want to add a lot of complexity.
+
+On the topic of your solution, just curious... manual calculations I assume? (I mean no auto calcs on the 8 hour spread sheet I assume.)
+
+This stuff is always annoying, and probably one of the reasons someone should always have a mentor or someone you can highlight your successes too (assuming your boss doesn't care).
+:E
+
+Cthulu says this is not madness.
+
+But yes it is a dick move. Sabotaging something is definitely not Bueno. 
+Thanks! Great hearing different approaches.
+I did, but my learning of excel has been a bit haphazard. I learned VLOOKUP after learning some *ahem* basic Visual Basic.
+Heh, you'll never get a solution as easy as it is in the books.
+
+Well at least foundry input vs output is correlated, based on what you said; plus you have firm visibility on larger contracts. You can definitely estimate the minimum production amount.
+
+Good luck, I'll think about seeing if I can predict the floor instead of the full monthly sales. Then use a fudge factor ("sensitivities") and see what happens.
+Both to be honest. Probably the first one a little less but I'm a building services engineer so both would apply at some stage or another
+Sweet.  My knowledge grows slightly.  Thanks for your time.
+    {=SUMA(CONTAR(SI((Mort1!$C$2:$C$65536="H")*(Mort1!$E$2:$E$65536>="J100")*(Mort1!$E$2:$E$65536<="J18X")*(Mort1!$G$2:$G$65536=$A10),Mort1!$D$2:$D$65536)))+(CONTAR(SI((Mort1!$C$2:$C$65536="D")*(Mort1!$E$2:$E$65536>="J100")*(Mort1!$E$2:$E$65536<="J18X")*(Mort1!$G$2:$G$65536=$A10),Mort1!$D$2:$D$65536)))+(CONTAR(SI((Mort1!$C$2:$C$65536="M")*(Mort1!$E$2:$E$65536>="J100")*(Mort1!$E$2:$E$65536<="J18X")*(Mort1!$G$2:$G$65536=$A10),Mort1!$D$2:$D$65536))+(CONTAR(SI((Mort1!$C$2:$C$65536="A")*(Mort1!$D$2:$D$65536>0)*(Mort1!$D$2:$D$65536<=4)*(Mort1!$E$2:$E$65536>="J100")*(Mort1!$E$2:$E$65536<="J18X")*(Mort1!$G$2:$G$65536=$A10),Mort1!$D$2:$D$65536)))}  
+
+An example of the old functions I used, they're on the Spanish version. This is for looking and counting cases on each clinic according to specific age groups. As I had no idea how big the db were, I had to search the whole sheet for the data, so it takes a lot of time calculating the numbers. The whole book has over 10k functions like this with different criteria for the age groups. I think is not elegant, but I spend over 6 months to get it right.
+I'll let you know if/when I finish the voltage drop calculator.  It'd be good to have someone else help me test it.  I'm just a little apprehensive to send it out for fear of someone blaming me for choosing the wrong cables.
+My inner programmer is cringing :P Doing this through a macro would be WAY faster
+Elegance, while nice, is over rated in my experience.  When I look back at some of my older solutions I cringe a little, but you know what?  They worked, and some of them worked for a really long time.  Kudos to you to keeping at it for 6 months.  I've had spreadsheets last that long, but they were more iterations/versions than taking 6 months to get things right.  I also learned VBA early on, so I tended to fall back on it early on, and was lucky enough to work for mostly well funded organizations technology wise, so my inefficient (PC wise) solutions didn't slow to a halt loo.
+To be honest I'd be sanity checking the figures by hand anyway, I'd do that even if it was a calculator i paid for. It's just nice to have a figure to work towards. I'd be happy to help you test it out
+I know, sadly I'm very limited by the resources we have in the office... I have to bring my own laptop and I can say it's the best system around as most desktop computers are at least 4 years old and some are even 7 years old... If I gave them files using macros made in my laptop most of them can't even run the files or have no admin permissions to allow them to run... So my only chance to be able to share the files and the information is using functions only.
+Just FYI, macros run faster on computers compared to using formulas, if you write them well.
+I like to use macros for stuff I'll use myself only, as most end-users have no idea what a macro does or why it must run using that big red button on the first sheet, some get scared of the program doing stuff by itself too. I work with over 70 people and most of them have no idea what to do when something unexpected happens... I've learnt to do everything as if some 5 year old kid was the end user of the files and the data. So, the simpler it is the less trouble I get at sharing data.

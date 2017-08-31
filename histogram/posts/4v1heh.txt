@@ -1,0 +1,26 @@
+Same formula, same input, different results. Wtf, Excel
+It might be something to do with the format of the dates?
+
+You have used the US format of MM/DD/YYYY. But perhaps Excel is expecting the "international" (dare I say sensible? :P) format of DD/MM/YYYY?
+
+Notice that [every line where you have an error, it is a line where the day value is > 12](http://i.imgur.com/UKaKSLC.png). In the international format this would not be a valid date because of course there are only 12 months. So I suspect Excel is not reading these as dates but as text strings.
+Could you share the file ?
+
+When I get stuck in this kind of formatting issue, I usually start over on a New sheet.
+Which are the correct values? Are you trying to get just the time and not the date? 
+
+If so then you could use a Right function to get the last 5 digits
+Same formatting in column E?
+.
+> Notice that every line where you have an error, it is a line where the day value is > 12.
+
+Nice catch! If excel is willing to see it as a text string, then the suggestion from /u/vomita_conejitos should work to fix it.
+Yes
+~~I don't think so. Click on E2, click on "[Format Painter](https://articulate-heroes.s3.amazonaws.com/formatpainter8ehq2.png)" and then click on the E to select the whole column E. That should fix the problem.~~
+
+edit:
+
+Ahh! No, the problem is the month. You probably have excel in **dd/mm/yyyy** format so 05/20/2016 has no sense for excel. Month 20? 
+
+
+Yes this, you can see the result changes on dates that have a mm value of >12 in the dd/mm/yyyy format

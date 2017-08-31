@@ -1,0 +1,55 @@
+long time
+5cyvgy
+Have pulled data into Power Query. Would like to take what's in columns G & H and combine them, either by putting stuff in H into G after the stuff there now, or by making the table twice as long, and having a new column have column G's data half the time and column H's data the other half. How?
+
+That all made sense in my head.
+
+Basically I have imported data into Power Query. I'm looking at the first 100 rows now. The first column (A, though I know the letters aren't there until I close & load the data into Excel), is sort of like the 'key' - it's the thing that's unique on each row. Rows B thru F is irrelevant for purposes of this question. Rows G and H have data in them that I want to combine. I'd like this query to end with twice as many rows as it has now, with a column that contains everything that's now in row G and row H, whether it's alternating like shuffled cards, or all the H data after all the G data - whatever. But I need to have it done inside the Query Editor so that this is refreshable.
+
+
+-------------
+This is very hard to visualize without sample data of what you have, and what you want to happen :(
+-------------
+Ok here's how I would tackle this. Query 1 open the data and I delete columns B through F and then delete column H. Save as a connection. Next, do Query 2 the same way except delete column G, but leave H. Save as a connection. Next do an APPEND query select Query 1 and then select Query 2, save to Worksheet.
+-------------
+I hope this makes sense:
+
+What I have is this, where "X" is just data I can live without-
+
+    A    B    C    D    E    F    G    H
+    17   X    X    X    X    X    Blue Green
+    19   X    X    X    X    X    Blue Yellow
+    22   X    X    X    X    X    Red  Purple
+    23   X    X    X    X    X    Blue Orange
+    27   X    X    X    X    X    Red  Blue
+    28   X    X    X    X    X    Blue Red
+
+And this is what I'd like to create from that, either in this order or in some other order:
+
+    Blue
+    Blue
+    Red
+    Blue
+    Red
+    Blue
+    Green
+    Yellow
+    Purple
+    Orange
+    Blue
+    Red
+
+
+
+-------------
+Tried it and that doesn't work. I get the data from column G in the new sheet's column A, and then the data from column H in the new sheet's column B starting with the row after the first data ends. I need them both in the same column.
+-------------
+Unpivot G and H
+
+You will end up with "Attribute" and "Value" columns.
+
+If you don't need it in original order, delete everything except Value Column and you're done.
+
+If you need it in original order, Sort the Attribute column first, then Column A. Then delete everything except Value Column, and you're done.
+-------------
+You did a merge query and not an append query. If you don't need the key in column A, delete it in both of the "connection only" queries.

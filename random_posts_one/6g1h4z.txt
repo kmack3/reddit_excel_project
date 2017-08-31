@@ -1,0 +1,30 @@
+6g1h4z
+How to extract text after third comma
+I have a text string where I'd like to extract all text after the third occurrence of a comma. 
+
+Example A1 contains:
+    2353,post,http://www.examplesite.com/,Donec ullamcorper nulla non metus auctor, fringilla
+
+I'm hoping to isolate, in its own cell: Donec ullamcorper nulla non metus auctor, fringilla
+
+Thanks!
+
+
+-------------
+It looks like you're working with a csv, is that it? Because it would be easier to split this to different columns.
+
+Data > Data tools > Text to columns, and use comma as a separator. Then you'll be able to access your files without difficult formulas.
+-------------
+`=RIGHT(A1,LEN(A1)-FIND("@@@",SUBSTITUTE(A1,",","@@@",3)))`
+ where `@@@` is text guaranteed not to be in your source data.
+-------------
+The problem with text to columns in this situation is that it would separate "Donec ullamcorper nulla non metus auctor, fringilla" into 2 columns 
+-------------
+Solution Verified
+-------------
+Thanks for the help u/rnelsonee. This works perfectly, and helps keep the sheet a bit cleaner instead of using text to columns.
+-------------
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

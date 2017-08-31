@@ -1,0 +1,62 @@
+What black magic occurs when you save a file as a binary?
+XLSB files contain data that can be compressed and data structures can be saved in raw format - it's essentially the default for many applications to store their data in a binary format. But Microsoft went on an open file format kick to make their files more easy to read, but at the expense of having more overhead in the file.
+
+Note both .xlsx and .xlsb are both archive formats - [you can rename both of them to have .zip extensions and then explore their components individually](http://i.imgur.com/2a3NQDF.png). The difference will be sheet1.bin and worksheets.bin vs .xml. [XML](https://en.wikipedia.org/wiki/XML) is a hierarchical and easy to read format, but takes up a lot of space  - like it can take up 100+ characters just to save one cell.
+
+Like here's a spreadsheet 123 in A1 and nothing else. The .xlsx sheet1.xml file looks like this (123 bolded):
+
+><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"><dimension ref="A1"/><sheetViews><sheetView tabSelected="1" workbookViewId="0"/></sheetViews><sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25"/><sheetData><row r="1" spans="1:1" x14ac:dyDescent="0.25"><c r="A1"><v>**123**</v></c></row></sheetData><pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/></worksheet>
+
+And here's the bin file:
+
+> “É @      ÿÿÿÿÿÿÿÿ    ”                … ‰ Ü            @   d           ˜$                                  Š † %  €• & å ÿÿÿÿ ,    ‘ %  €€ &          ,                        À^@’ —B                                                              Ý Ü0ffffffæ?ffffffæ?      è?      è?333333Ó?333333Ó?‚ 
+
+Now those characters don't make much sense, but each character and space is just one byte, and is shorter than the XML above, in which each character also takes up one byte. And note in the XLSX, Excel essentially needs to convert from XML to the binary format that's already in the .bin file to begin with.
+
+They each have their tradeoffs. If my software is storing data that only the software cares about, I save as binary. If it's something like a configuration file I might need to edit in the field, I'll save as XML so I can trudge through all those <headings> and <elements> to set my parameter in a pinch.
+
+So **tl;dr**: Binary is the usual way to store things, the XLSX adds a bunch of overhead to make it easy to read.
+I think someone answered your question in terms of excel very well, but I'd like to answer your question as it was asked. An ascii or Unicode file is a file that contains printable characters, such as a-z, 0-9, and other languages and so on. A binary file is a file that is expressed in bits of data, like a zip or a picture or an mp3 file. These contain data that don't make sense in terms of a-z like a text file does. So what Microsoft has apparently done is make a compressed form of the xlsx format. The beauty of the xlsx format is that it can be taken completely apart and every component read in notepad. Apparently Microsoft has taken the same format and compressed it, for obvious reasons, into a format that is smaller, but less flexible.
+It's also important to note, that the translation from binary format to what Excel displays to you is entirely arbitrary. Where XML may save a data tag, and then the data within the tag, binary format would really only need to save the data, and nothing more. The file format of the binary file itself dictates where the information will be stored, so tags and indicators aren't necessary for Excel to figure out where everything is supposed to be.
+> So tl;dr: Binary is the usual way to store things, the XLSX adds a bunch of overhead to make it easy to read.
+
+And it makes it easier for other programs to read and modify the contents of the workbook.
+Beautiful. Having putzed with the XML source a couple times, this makes way more sense now. 
+
+Thank you!
+This makes we wonder about the ability to share xlsb files with other software, like Open Office or Google Sheets.
+Further info: xlsb is a continuation of the "xls" format, which was also binary. The main reason xlsb is smaller is that it's compressed; xls wasn't. Consequently, you can zip up xls and save space, but if you try zipping an xlsb (or xlsx), there will be no significant difference in file size--because it's already compressed.
+I haven't seen whether or not the binary format is proprietary but even if it isn't it would be much more arduous for Open Office or Google Sheets to support a binary format in addition to an XML plain-text format.
+I think the file format is published somewhere at microsoft, so you can make an application, that can read/write that format.
+A quick test makes it seem Google Sheets does not support XLSB. I'm not sure about Open Office. I want to say there are one or two major freeware options that can read XLSB but I'm unsure. From the forums I read after seeing this question, it sounds like the major advantage of XLSX over XLSB is ease of sharing across software. (And conversely, the major disadvantage of XLSB is that it *cannot* easily be read from other software.)
+
+Interestingly, XLSB also supports macros.
+I haven't had problems opening XLSB workbooks without charts or complex conditional formatting in LibreOffice Calc. Haven't tried with Google Sheets.
+The little I read showed there was a lot that wasn't easily interpreted, and certainly not very intuitive (not that binary ever is for me).
+
+Might have to play with the xlsb if it's that much faster for larger data sets.
+Xlsb looks pretty interesting. I'm liking a lot of what I've read so far on it.
+Good to know!
+> Might have to play with the xlsb if it's that much faster for larger data sets.
+
+At a certain point you might want to switch to an SQL Database if you have to deal with gigantic datasets.
+Yeah, I'm curious about playing with it. Unfortunately, a google search on it mostly turns up articles from 2006/2007 when it was introduced, with the odd forum mentioning something that was fixed in 2010 or 2013. Not a whole lot of info on it without getting into the nitty gritties of MS documentation
+If only that were an option! At one point I was loading xlsx into Access for easier data manipulation, then spitting out individual workbooks.
+
+Employers make stupid decisions, man.
+And MS documentation is always so thorough and fun.
+> Employers make stupid decisions, man.
+
+[XAMPP](http://portableapps.com/de/apps/development/xampp) exists in a portable version. It is meant as a web development environment, but you can start only MySQL if needed.
+
+I remember doing this once or twice to analyze a huge result set. I used MySQL as storage and pulled data according to certain conditions into excel.
+Guess who's firewall blocks the XAMPP link?
+
+Yes, we're that stupid here.
+
+Importing into Access worked, and worked rather well for the most part. I would have done a few things differently were it to be a permanent project, but it was just something to get through for a few months.
+Lol, blocking PortableApps from a workplace environment is not "stupid."
+> Guess who's firewall blocks the XAMPP link?
+
+Well somebody needs a HTTPS proxy in his life.

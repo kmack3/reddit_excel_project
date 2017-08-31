@@ -1,0 +1,73 @@
+freeze
+5fctkb
+VBA Form input and Fixed/Freeze column bar problem
+
+Hello 
+I have small form that has this line in it: 
+ iCol = ws.Cells(2, ws.Columns.count).End(xlToLeft).Offset(0, 0).Column 
+
+Finds first empty column and puts data from form into rows, however when my first column is fixed using Freeze first column command this VBA completely ignores this and writes over that first column, I guess it is the way that xlToLeft command works, anyway to avoid that, use something else ?
+
+Thanks 
+
+
+-------------
+> I guess it is the way that xlToLeft command works
+
+That shouldn't be the case. If I use your line of code to find the last used column in a dummy sheet, it gives me the correct output for iCol no matter whether or not you have a frozen column. Unless you have a different version of Excel (I have 2013) that uses xlToLeft differently, I think your problem is elsewhere.
+
+After your *iCol = ws.Cells(...* line of code, add this line:
+
+    MsgBox "Last used column = " & Cstr(iCol)
+
+What does it say?
+
+If it gives the correct column number in the pop-up window, we should be able to find the issue if you paste more of your code. (All of it if it isn't a huge amount, otherwise focus on the stuff from *iCol = ...* up to where it pastes the new data in.)
+-------------
+SOLUTION VERIFIED!
+-------------
+I get 4 and last data was in column D , so it is working correctly. 
+But look, if you have same code and some data in column A that is in the FREEZE mode does it overwrite that data on your end? 
+I have to put in some data in column b so it can start writing down in column C instead of overwriting A straight away (frozen column) When it is not Frozen it works just fine. That is what is really strange. I have office 2013. 
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+So i just tried another thing, IF i have only column one (A) in use, first row name last name in second row etc etc, when i run VBA i get last used column 1, but it then proceeds to put data in column one instead of putting it in column 2. Like it normally does. 
+-------------
+NVM i am retarded i had : 
+
+If iCol > 1 Then
+        iCol = iCol + 1
+            End If
+
+Instead of 
+
+If iCol >= 1 Then
+        iCol = iCol + 1
+            End If
+
+sorry about being stupid :) 
+-------------
+SOLUTION VERIFIED!
+-------------
+Glad you figured it out!
+
+Do you have other If/Then statements that adjust the value of iCol? The line *If iCol >= 1 Then iCol = iCol + 1 End If* should be unnecessary: *iCol* will always be >= 1 because the minimum value *ws.Cells(2, ws.Columns.count).End(xlToLeft).Offset(0, 0).Column* can return is 1. So you can delete *If iCol >= 1 Then iCol = iCol + 1 End If* and change
+
+     iCol = ws.Cells(2, ws.Columns.count).End(xlToLeft).Offset(0, 0).Column
+
+to
+
+     iCol = ws.Cells(2, ws.Columns.count).End(xlToLeft).Offset(0, 1).Column
+
+or
+
+     iCol = ws.Cells(2, ws.Columns.count).End(xlToLeft).Column + 1
+-------------
+You are right. I actually use lRow = ws1.Cells(Rows.count, 1).End(xlUp).Offset(1, 0).Row and it worked just fine but i forgot i had used iCol and it was messing things up with 0,1 offset since i used iCol in another part of the VBA... instead i just needed another variable instead of manipulating iCol. Really stupid :) 

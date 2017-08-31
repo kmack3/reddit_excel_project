@@ -1,0 +1,215 @@
+Formula to turn YES into a checkmark and NO into an "X"
+There are symbols available in Wingdings font. 
+
+ALT + 0252 for a tick
+ALT + 0251 for a cross
+
+In regular fonts they look like this:
+
+ü - tick
+
+û - cross
+
+Make the column you wish to have a tick/cross Wingdings font.
+
+Then have the formula ->
+
+If( [Cell Ref with Yes/No]="YES",ü,û)
+
+That should be what you're after (my poor explanation aside)
+
+EDIT: VBA Macro to select YES/NO Range and replace with ü/û (+ changing font) would also do the job.
+[Apologies, I haven't got MS Excel on my home PC otherwise I'd provide a step by step)
+Another option maybe: 
+
+Custom format the cell.  Right click > Format > Number > Custom
+
+Custom format is configured as <postive>;<negative>;<zero>;<text>
+
+If you use the custom format `√;;x;` then you can type in 1 or 0 for a tick or a cross to appear. This also allows for simple data analysis, as you have 1s for Yes and 0s for No as the underlying value is not changed.
+Not sure if this is possible. But another solution you could consider  is record a macro of you inserting a check mark the way you want it formatted. Then assign the macro to a shortcut, like ctrl+shift+v. Then you can just hit ctrl+shift+v to insert the check mark as you want it formatted in the active cell. Then you can do the same with the X with another shortcut key.
+While there IS a way to get a 'yes'  and 'no' to display as special characters, I'm going to recommend that you Ctrl+H and change your 'yeses' and 'nos' to 1s and 0s. First, it'll save you some keystrokes, second, Excel understands 1/0 as true/false, so someday if you end up basing an If function on this column, it'll save effort. It's just good habit. 
+
+You can do this with custom formatting (NOT conditional formatting). Select your cells, right click and choose format cells. Then choose 'custom formatting' on the left. The box in the upper right is where you're going to type the formatting pattern. Type:
+
+;check;;x;
+
+... Where 'check' and 'x' are your special characters. Be aware that if someone opens your spreadsheet without having the same size font set applied, they might see a big list of indistinguishable boxes. 
+Wingdings 2 paired with a VBA macro has worked well for me. This works by double-clicking a cell with a check or option button and it reverts to the other value.
+
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+        If IsError(Target) = True Then Exit Sub
+        If Target.Locked = True Then Exit Sub
+        If Target.Cells(1, 1).Font.Name = "Wingdings 2" Then
+            Cancel = True
+            If Target.Cells(1, 1).Value = Chr(163) Then
+                Target.Cells(1, 1).Value = Chr(82)
+            ElseIf Target.Cells(1, 1).Value = Chr(82) Then
+                Target.Cells(1, 1).Value = Chr(163)
+            ElseIf Target.Cells(1, 1).Value = Chr(153) Then
+                Target.Cells(1, 1).Value = Chr(158)
+            ElseIf Target.Cells(1, 1).Value = Chr(158) Then
+                Target.Cells(1, 1).Value = Chr(153)
+            Else
+                Cancel = False
+            End If
+        End If
+    End Sub
+
+Chr(82) = ☑
+
+Chr(163) = ⬜
+
+Chr(158) = ⦿
+
+Chr(153) = ○
+
+These symbols look pretty nice on a spreadsheet. Reddit may display them weird though.
+
+
+Edit: I realized that if the value of a cell was just "R", double-clicking on it changed it's value even if the font wasn't Wingdings 2. I changed the code to require the cell's font to be Wingdings 2 to change the value.
+Hi,
+
+As some people suggested, I'd implement either a worksheet change event or a before double click event.
+
+Firstly, the double click event.  Basically, you double click once for a tick, then double click again for a cross.  Use this in the sheet code in VBA - not in the module code.
+
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+    'Change H1:H1000 to the relevant range that you want this to apply
+    If Selection.Count = 1 And Not Intersect(Target, Range("h1:h1000")) Is Nothing Then
+        If Target.Value = "O" Then
+            Target.Value = "P"
+        Else
+            Target.Value = "O"
+        End If
+    End If
+    End Sub
+
+To have it auto swap a 'yes' to a tick and a 'no' to a cross, paste the following in the sheet code in VBA - not in the module code.  This will do exactly what you described:
+    
+    Dim onoff As Boolean
+    Private Sub Worksheet_Change(ByVal Target As Range)
+    If onoff = True Then Exit Sub
+    'Change H1:H1000 to the relevant range that you want this to apply
+    If Selection.Count = 1 And Not Intersect(Target, Range("h1:h1000")) Is Nothing Then
+        If Target.Value = "Yes" Then
+            onoff = True
+            Target.Font.Name = "Wingdings 2"
+            Target.Value = "P"
+            onoff = False
+        ElseIf Target.Value = "No" Then
+            onoff = True
+            Target.Font.Name = "Wingdings 2"
+            Target.Value = "O"
+            onoff = False
+        End If
+    End If
+    End Sub
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+    'Change H1:H1000 to the relevant range that you want this to apply
+    If Selection.Count = 1 And Not Intersect(Target, Range("h1:h1000")) Is Nothing Then
+        Target.Font.Name = "Arial"
+        If Target.Value = "P" Then
+            onoff = True
+            Target.Value = "Yes"
+            onoff = False
+        ElseIf Target.Value = "O" Then
+            onoff = True
+            Target.Value = "No"
+            onoff = False
+        End If
+    End If
+    End Sub
+
+Thanks :)
+
+
+
+You guys are making it wayyy more complicated than it has to be. It's very simple.            
+Have your cell displaying YES or NO, as you normally would. Then in column B; assuming your YES/NO is in column A, use this formula, =if(A1="YES","a",if(A1="NO","r","")).     
+Now the key is to format column B with Webdings font, because in webdings font, 'A' is a checkmark symbol, 'R' is an X symbol, 'X' is the NA symbol.     
+Pic of the formula and formatting in action http://imgur.com/MjABUYQ
+Thank you all; this is more input than I was expecting! It seems like I have more options than I thought. I will play with all these different options this week and update with my progress. 
+
+I am learning a lot just reading this sub and this was my first time posting here. Thank you again for your time and insight!
+&#x2713;
+I'm not sure I understand what you're aiming for. You want the same cell that you type "YES" into to change automatically to say "check"? Or would an adjacent cell be okay? Why can't you write "check" or "X" instead of YES or NO?
+An alternative to VBA would be to use Data Validation to create a dropdown that lists those two values, along with the rest of your method.  Though it doesn't appear that the font change shows in the dropdown box...
+
+I do agree that VBA is the superior method and does exactly what OP is asking for.  I just wanted to mention a less technical solution for those people that are not comfortable with VBA.
+Came here to say this.  
+[Custom Formatting with icons](https://support.office.com/en-au/article/Add-change-find-or-clear-conditional-formats-5823680b-8d8e-4f0a-99fb-402b349cb255#bm5) is the best mechanism Excel has for this.  
+I used to do the wing-ding thing until I learned this.
+
+There's a built in custom format that has a green check, yellow warning, and red x - several styles to choose from.
+Definitely change "YES" and "NO" to 1 and 0. It is much more useful going forward.
+
+If all you care about are green checks and red Xs, you can use Conditional Formatting - Icon Sets. Then go to Manage Rule to select your icons, and select Show Icon Only to show icon only. The icons are nicer looking generally than a font character and will work in all workbooks
+Was wondering what this magical Ctrl+H command was that could change yeses and nos to 1s and 0s.  
+
+Opened up a new Excel workbook, typed a few "Yeses" and "Nos" and then hit Ctrl+H.
+
+Realized I am not a very smart man.  
+Here are a few more characters you may be interested in:
+
+Chr(79) = ✗
+
+Chr(80) = ✓
+
+Chr(83) = ☒
+Under Insert>Symbols there is an "x" symbol and a "check" symbol. I have these two laid out on a separate worksheet.
+
+My goal is to have the SAME BOX that I type "YES" or "NO" into, to automatically convert to those symbols.
+
+Sorry for any confusion I hope this clears up what I'm trying to accomplish!
+You could well be right. (I'll have to learn about Data Validation; have seen it, but never explored its use).
+Thanks for that. I have never tried using the icons, not sure I ever noticed them actually!!  A new method for future consideration.
+Not the OP, but a question - Which version of Excel adds custom icons for conditional formatting?  Excel 2007 appears to not have them yet.
+
+Thanks!
+> Definitely change "YES" and "NO" to 1 and 0. It is much more useful going forward.
+
+As someone currently unemployed because my last supervisor didn't understand these kinds of practices, *thank you.*
+gotcha! I think the best way to do this would be with a macro, but I'm not super efficient with those yet, maybe someone else can weigh in?
+
+
+What I would do is either insert a column before the checkboxes where you can write "YES" or "NO" and put a formula into the checkboxes that looks up your symbols on the next page:
+
+=lookup(A1,Sheet2!A2:B4,2,0)
+
+where A1 is your yes/no and the lookup range looks like this:
+
+
+
+Yes | checkmark symbol
+---|---
+No | X symbol
+
+
+and then hide that "helper" column after.
+
+OR, I would fill out the entire worksheet with yes/no's and then use find & replace to replace all the yes's with checks and the nos with X's.
+
+hope that helps!
+Data Validation is great for forms and getting info from users.  It's got two main features.
+
+The first is to limit what the cell value can be changed to.  You can set variable type such as date or whole number, and then set min/max values for them.  You can also specify a list of options, and it creates a dropdown menu for the cell.  Those are either comma separated in the little Data Validation configuration box, or it can point to a range.
+
+If an invalid value is entered, it can pop up a custom error message.
+
+The other use is to add a message that pops up when the cell is selected.  It can describe what that cell is used for and provide info that is helpful for getting correct input from other users.  Kind of a mini job aide if you will.
+Whichever one has the Ribbon. So Excel 2010, maybe?
+From a macro standpoint, The it would be a simple if statement like this
+
+    For x = startCol to endCol
+        For y = startRow to endRow
+            If cells(y,x) *cell with yes or no in it* = "Yes" then
+                cells(y,x) *cell with yes in it*= cells(row,col) *cell with yes symbol*
+            else
+                cells(y,x) *cell with no in it*= cells(row,col) *cell with no symbol*
+            end if
+        Next y
+    Next x
+
+you just have to take out the parts with the stars and replace the row and col designations with numbers, and it is a functioning macro.
+Ribbon is 2007 and more recent versions

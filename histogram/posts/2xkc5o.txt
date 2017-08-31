@@ -1,0 +1,128 @@
+What should a Financial Analyst know in Excel after 1 month?
+This could apply to any excel-based jobs but I recommend within a month you familiarise yourself with VLOOKUP,  IF and PivotTables
+??
+
+Ok - how's your ability to string together a document which pulls and populates data from a bb terminal? 
+
+What sort of fin analyst are you?  Are you doing data analysis/cleaning at any point? Or is it comps/modelling/etc? If yiu are ever compiling data, trim, Len, right, left, and array functions will help a lot. Pivot tables will help reconfigure data tables faster. 
+
+If it's more Modelling and analysis of that nature, You will find learning pivot tables to be occasionally useful, but now(), today(), or a formulae to calculate the end date of a month (date(1,n+1,15)-1), will be useful quality of life improvements. 
+
+Does your firm not have a standard macro workbook enabled on all PCs? How fast and accurate are you when you use it (if it exists). If you guys don't have a standard macro doc, make one which implements  the formatting standard (header 1 blue with white font, highlight cells, borders, spacer columns etc.).
+
+
+How's your template creation ability? What would VBA actually help you with?
+
+There's a huge world of stuff that different financial analysts do, and a lot of it depends on the sub group you are in. You would do well if you checked out financial templates and macros online.
+
+Edit: if you were my analyst, 1 month in I would be more concerned with speed, accuracy and compliance with standards than anything else when it comes to excel. The last thing I would the horror of finding out data was linked incorrectly. Do you know how to trace precedents and dependence in formulas? 
+I'm told employers want you to know vlookup and pivot tables. So learn up to those things at the very least. I had a project for a class and was surprised a lot of people didn't even know about absolute cell reference. So, even just those basics. Use all the formulas, record macros, make charts, pretty colors, cell outlines, etc. Start with the basics and move up.
+
+Also, I'm very interested in knowing how you got a job as a financial analyst without knowing excel. I'm impressed.
+Come on everyone here's a newbie asking a reasonable question. As a newbie he doesn't know what he doesn't know - that's no reason to downvote each of his comments.
+It sounds like you have most of the necessary excel techniques down.  Probably just need some practice learning the systems from which you pull data.  I pull a lot of data from various electronic medical record and accounting systems.  I spend much more time getting the correct data set from those (each tends to be quite different) than I do in excel.  Once in excel, I use a ton of Index/Match.  Also the text-to-columns feature is great when you get reports in .txt files.
+FLDS in bloomberg is your friend. 
+Learning the formulas that everyone has suggested here is a given. Forget about Macro's/VBA. 
+
+Learn to set out your financial models in a logical and structured way. So that when you update your analysis, these changes can be quickly factored in. Separate and identify your assumptions. 
+
+Build in error checks, so that you know if your analysis isn't "adding up" (so to speak).
+
+
+Don't go crazy on formatting, put in titles, separate out your workings - so that when others pick up your analysis, they can make sense of what you're doing.
+
+There's probably more - but if you find yourself building formulas more than a line or two long - then you're doing it wrong.
+
+In additon i use:
+Sumifs and sumif as well.
+Hlookup 
+Match
+Index
+Counting
+How to pull pieces of text out and manipulate is also useful. 
+
+Source: Accountant/financial analyst now
+What kind of analyst?
+Some tools of the trade to accelerate your work and make you robocop of analysts:
+1) ASAP utilities (save a ginormous amount of time with ready-made scripts) - http://www.asap-utilities.com
+2) PDF2XL by Cogniview (professional pdf to excel converter from structured and unstructured documents) - https://www.cogniview.com
+3) Excel dashboards - http://exceldashboardschool.com
+
+You may benefit from learning a structured approach.  There is a lot of information to read about this subject. I only take pieces from these resources myself, but I learned a lot about the scale of excel from them.  
+
+websites:
+
+* [rondebruin.nl](http://www.rondebruin.nl)
+
+* [clearlyandsimply.com](http://www.clearlyandsimply.com)
+
+* [bestpracticemodelling.com](http://www.bestpracticemodelling.com)
+
+* [hichert.com](http://www.hichert.com) 
+
+books:
+
+* *Analyzing business data in excel, by Gerald Knight* ^fave
+
+* excel 2013 expert skills
+
+* wayne winston, chris albright, mike girvin, 
+
+* classic spreadsheet books like management science are good if you are interested in models.
+I would definitely say the text functions.  Clean, trim, mid, left, right, find, search.  So much data dumps really poorly.
+I know these already and wanting to implement vba
+How do I not know excel? I am so confused right now. Some Redditors said I know excel, but you say I do not?
+Would you mind elaborating on the "pull pieces of text out"?  You mean pull out certain characters from a long string/multiple string of characters or something?
+Delimited is great
+This is a very important question. A financial analyst can and does often live in a very different world from the regular excel user. Most of the stuff which would be considered advanced elsewhere is first month analyst training material.
+Financial
+Just knowing those 3 essentials already puts you at the top of the group. From my experience, I find it surprising that many of those in office jobs simply can't do those things on Excel.
+
+You say you're a newbie, but can you provide some more context? e.g. What do you already know? What do you want to know and how can we help you?
+Huh? I don't know if you know Excel. I thought you said you didn't.
+I end up getting a lot of reports that have a field that is information i want but isn't presented in the way i like. For example I'll get a report that list check numbers that are paying invoices. The catch is the field is "chk#1234" the other report i got to match it up against will just list the 4 digit check number. So I'll make a new column and use the formula =left(previous cell, 4)+0 and then that will give me a column i can lookup against in number format.
+LEFT, RIGHT, MID, LEN are also useful 
+What kind of financial analyst?
+I know intermediate vba, about 50 power user shortcuts memorized, index match, etc... i want to make some vba code to automate tasks but the senior financial analyst keeps saying to do that later and to just learn the processes now... later i can automate
+How does one judge ones ability?
+Don't you mean =RIGHT(Cell,4)+0 ?
+Ah gotcha, thanks.  
+Len is a wonderful tool when trying to pull out certain items. I'll do a left(cell ref, len(cell refrence)-6)). We get a lot of things that are "miscclientname total" and i like to use the left and then take total text characters - the amount of charcters to remove. And then bam easy loookup of clients
+How do I answer?
+There's no way anyone would categorize this as "newbie", but I bet you already knew that. 
+You are maybe the most annoying OP ever
+Look at the ribbon on excel. Do you know what 75% of the buttons do? That'd be my test.
+chk#
+Yeah but I was to lazy to go back and fix it and yall knew what I meant
+Examples of types of financial analyst include corporate finance, project finance, reporting, private equity, m&a, equities research. If none of these ring a bell you might be able to briefly describe the types of things you generally get asked to do/projects you work on.
+Maybe describe your specific position (either currently acting in or attempting to achieve in the near future) without naming the company with which you're working.
+What would you call it?
+Okay. I do not want to annoy anyone. I just need help seeing things clearly. :( Can you please show me how i am being annoying and what i can do to fix it?
+what's the difference re OP's question?
+That definitely an intermediate to advance user. You'll start to come across people that are truly noobs.
+
+As far as automating things you with vba you really should wait and learn the process before jumping into it.
+
+You may think you know the process well enough to make vba code and make it easier on you but there's always curveballs in business that get thrown at you and you wouldn't have seen them yet to know. Then you rely on vba code that isn't working for 3 months and you look like an idiot when a higher up finally notices.
+The other posters say you're being annoying because a 'newbie' is somebody who barely knows there are formulas in excel, let alone what vba is. 
+
+Your boss/supervisor is right. Don't go and automate the things that it is your job to know inside and out. 
+The most important excel skills vary depending on the job, and some of these jobs are quite different from each other.
+I second this, always know what process is in place and why it is done that way prior to making changes.
+I second this. We have had problems in my department where we've hired people who spend so much time trying to "improve the process", and then get very little actual work done. (Not saying OP does this, but it can be a red flag.) I'm all for increasing efficiencies, just make sure you understand the process first.
+
+That being said, I took a web course with Webucador to learn basic VBA. I found it extremely helpful. Also if you take a course with them, you can retake the same course later without paying the fee again, so if you find yourself getting rusty down the road, you can retake as a brush up.
+Hell, on my job market, I call myself Expert level only for =IF, =Vlookup, and light Pivot Tables.
+
+Gauged not by the scope of all Excel, but by the ability to solve a problem compared to those around you, 99.9% of my Excel-heavy employment peers don't know how to use the col_index_num value.
+
+I'd expect a "newbie" to know how to do basic math functions, cell references in basic math functions, and to have lightly dabbled in point and click formula creation and not much more.
+
+I mean, yes, there are wizards out there like you guys who know how to use 80-90% of what is out there, but you comprise .0001 percent of people in excel centric jobs. You are Wizard level, not Expert. By the time you are putting a vlookup in an if, you have safely surpassed 95% of those out there.
+Understandable - thank you! 
+I am BRAND NEW to this line of work, and all I am doing is trying to be the best I can. With all honesty, I do not know how to judge my knowledge of Excel/VBA. Please understand, I am new to this line of work.
+[deleted]
+OP, I get that you want to set a good impression for your bosses but I recommend you spend at least a few more months to know how your team works and the processes inside out.
+
+Once you've gained confidence from your bosses/team, start working on what you think is the most efficient way to do this particular task (as a side project) and then present your idea to your manager. Even if your idea gets shot down, s/he'll recognise your intuition, which is a very valuable skill to have.
+He is not threatened, he is annoyed with you. If you have only been on the job for a month shut up and learn the job before you try to "make it easier". There could be very good reasons why they do not do things the "easy" way.

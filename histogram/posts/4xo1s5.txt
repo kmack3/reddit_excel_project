@@ -1,0 +1,38 @@
+Is there a way to hide a row if a value is entered into a column?
+Put this code into the sheet section of visual basic.  When there is a change to column D and only one cell changes it will reapply the auto filter.  If you typed "Drafted" then the line would be filtered out.
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Target.Count = 1 And Target.Column = 4 Then
+            ActiveSheet.AutoFilter.ApplyFilter
+        End If
+    End Sub
+
+Edit:  The above assumes you'll be doing the same and have the auto filter in place.  If you actually want to hide the row without the use of auto filter, then just note this minor change:
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Target.Count = 1 And Target.Column = 4 Then
+            Target.EntireRow.Hidden = True
+        End If
+    End Sub
+What do you mean put it in the sheet section? I am just learning VBA and already have a couple of Modules setup on this that I used to clean up the names on different worksheets.  So would this just be another module? Where you have this as "Worksheet_Change" would I replace that with the actual name of my worksheet?   Thanks for the help
+Ok.  Finding VBA is the hard part.  :)  Above your modules section, you see another section for "Microsoft Excel Objects" where it lists your sheets and ThisWorkbook.
+
+You can double click on the worksheet that you will be using this on and paste that code in there which makes it sheet specific.
+You could do this without a macro by the way. It would involve a data table and a filtered table. The filter table would update according to which players you'd marked as drafted. I can give you more details if you want but am in bed on a tablet currently :)
+SOLUTION VERIFIED!
+
+
+
+This sounds interesting - not op but could you provide an example of how this could work?
+
+Thanks, just went with the code Spovik gave. 
+Thanks! That worked perfectly
+
+You have awarded one point to _Spovik_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Here you go:
+
+https://docs.google.com/spreadsheets/d/11rn_w9uC1uhlTS_qMlvzegKPs3TLzzLe5_UgKK3EU2k/edit?usp=sharing
+
+It's not excel but all the formulas are identical.

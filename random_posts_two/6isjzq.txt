@@ -1,0 +1,40 @@
+6isjzq
+Need a (presumably) complex formula dealing with taking numeric variables tied to a time increment based on the current time.
+Okay, so I'm trying something my weight-loss coach recommend, and eating whenever I feel hungry(as opposed to set meals) so long as I stay under my calorie restriction of 1600 calories(or 100 calories per hour).  Okay so I have a spreadsheet that has the 10 minute time increments in the A column. In the B column, I add 16 and 2/3 for every 10 minutes, starting at 100[i.e B1 is 100, and B2 uses (B1+(16 +(2/3)))] which I dragged down as far as I needed it. This comes out to 100 calories an hour. In C1 I will be manually entering calories consumed , and in D1 I want excel to take the calories from the most recently passed 10 minute increment minus C1. Is this possible ? I'd be willing to change it to one minute increments at (1+(2/3)) calories each increment if excel can only work with exact times. Any ideas ?
+
+EDIT: [Current spreadsheet](http://imgur.com/E063eHz)
+
+
+-------------
+So if it's 7:15 AM, you want to see 316.67 minus C1?
+
+`=VLOOKUP(MOD(NOW(),1),A1:B114,2)-C1`
+
+[Imgur](http://i.imgur.com/rCB3XDk.png)
+
+-------------
+It's a bit difficult to follow your explanation. Can you provide a sample spreadsheet to more easily help you?
+-------------
+I think OP wants to know how much calories he can still take when he input data every ten minutes. But I was confused and don't understand why he needs to include time in the calculation because no matter what his daily calories intake is fixed at 1600 (unless he wants to plot a chart indicating how fast he reaches his daily intake).
+-------------
+> =VLOOKUP(MOD(NOW(),1),A1:B114,2)-C1
+
+Fantastic!  Thanks
+-------------
+Edited post
+-------------
+It's a pacing thing. I have trouble with self control when making meals, so he recommended I eat many more times in smaller increments. Ie if I wanted to eat something that was 250 calories, I'd have to wait until 6:30. If I wanted to add an additional 100, I'd have to wait an hour more ect.
+-------------
+Still not sure what you mean for column D, since you didn't include a "sample what-I-want-the-end-result-to-look-like" :P
+
+What exactly do you want to show in column D?
+
+* I understand that Col.B is "What I am supposed to have eaten by this time"
+* Col.C is manual input of "Number of calories I at during this 10-minute period"
+* Do you want Col.D to read "How much more/less I am supposed to have eaten by this point"? i.e. Col.B minus the running aggregate of Col.C?
+
+If so, D1 would have something like:
+
+    =B1-sum(C$1:C1)
+-------------
+There's a helpful description in Imgur below the picture - OP wants a lookup based on the currrent time, and then subtract C1. I don't think anything goes in C2 on down.

@@ -1,0 +1,134 @@
+Let's talk about VLOOKUP...
+From the horses mouth;
+
+HLOOKUP and VLOOKUP - https://support.microsoft.com/en-au/kb/181212
+
+If you are looking for an **exact match** in Microsoft Excel, the first column of a lookup table **does not have to be sorted** to use the VLOOKUP and HLOOKUP functions. To look for an exact match, specify the fourth argument of VLOOKUP or HLOOKUP as FALSE. 
+
+**If you omit the fourth argument, or specify the argument as TRUE, you must sort the first column of the table**
+I'll bite on the "you always type more for INDEX/MATCH and it's less intuitive, attack me in the comments" blurb :)
+
+I exclusively use INDEX/MATCH.  More typing it may be, but it is fundamentally more intuitive to me: INDEX works with X/Y coordinates that I specify.
+
+Honestly, for the life of me, I can never remember if HLOOKUP scans the horizontal and then returns the vertical, or vice versa.  Same with VLOOKUP.  Sure, tooltips exist for a reason, but the X/Y distinction of INDEX fits with the basic algebraic way of thinking I was taught in middle school.
+
+Moreover, using one's own MATCH functions means that INDEX/MATCH can look for its target in any column or row I can think of.  I don't need to worry about changing the size of my lookup array based on whether my unique identifier of interest is in column/row 1 of a small dataset, or column/row 10 of a complex cross-referenced dataset.
+
+That's why I teach everyone who works for me to use INDEX/MATCH, and stick to it.
+I'd like a DEPTHLOOKUP for 3D spreadsheets
+[This video from Mr. Excel is related](https://youtu.be/Guj__8KEQD8)
+I read somewhere that for real speed, you do a couple of VLOOKUP TRUE to simulate exact VLOOKUP:
+
+    =IF(VLOOKUPTRUE=LOOKUPVALUE,VLOOKUPTRUE,"")
+
+I also recall reading that exact vlookup is fastest if you sort by descending popularity.
+
+
+i find index match so much more useful than vlookup. mainly for instances when you want to drag the formula across.
+with vlookup i find when you drag across you have to manually edit the formula from =vlookup(a1,y:z,2,0) 
+
+=vlookup(a1,y:z,3,0)
+
+=vlookup(a1,y:z,4,0)
+
+=vlookup(a1,y:z,5,0)
+
+for the column numbers. using index match you just fiddle once with the absolute values and drag across and you're sorted.
+
+The only time I use vlookup anymore is if it's embedded inside or contains a choose function. Otherwise, index/match is just better. If it's too much data for index/match, I resort to vba and paste values.
+honestly, index/match is so versatile that if I were to teach excel, I'd just skip over vlookup and use index/match as an additional means for summing and counting. After all, index can be used for multiple table lookups, multiple column lookups and for, say summing column A when column B matches particular criteria. 
+
+I think once you understand index and index/match you can do a whole lot of functions that go way beyond vlookup. 
+your most recent instance didn't even need to be using VLOOKUP().
+INDEX/MATCH will run about 30% faster than a VLOOKUP query. 
+
+Does it matter on a small sheet? No. Will it save you time on those overly large and complicated sheets that really shouldn't be in excel but are because that one person in the office ten years ago set it up like that and your boss knows how to find that one bit of info using VLOOKUP only? YES
+
+EDIT: PS It's also more robust.
+We prefer the term I/M'fer, thank you very much. I think the main arguments for using I/M is not that the data can be unsorted but that 
+
+I/M:
+
+1. Is one method to replace both v and h lookup
+2.  Works better/faster in large workbooks
+3.  Works on more than just the right row. This one is *critical* to me. I have wasted so much time wondering why my dang vlookup wasnt working. It's because I was using an imflexible formula
+4. lends itself better to array functions
+Oh look, another forum post about vlookup. Please don't mind as I punch myself repeatedly in the face
+\thread?
+
+in reality its very rare for me to not want an exact match (but this maybe job dependant)
+I always use FALSE as default
+ 
+I've never had an instance where I need TRUE
+Praise Jesus, fellow INDEX/MATCH evangelist!
+X 100000000.
+
+INDEX(MATCH) is better for the simple reason that is gets you thinking about the data in a more flexible and functional way. Knowing INDEX(MATCH()) makes it easier to figure out INDEX(SUMPRODUCT()) for multi-criteria lookups.
+
+It's also much more convenient (and less error prone) to set up INDEX(MATCH(),MATCH()) with relative references and copy and paste, and you don't have to worry about your return column getting off.
+
+Sure, you can use VLOOKUP(MATCH()), but at that point you should just do INDEX().
+Teaching and suggesting index/match is one thing,  but forcing it is kind of a dick move
+Vlookup becomes very quick and intuitive if you need to return data based on dates frequently (1 col of dates and other cols of price data for example). I think that's why you see it so often used instead of INDEX/MATCH. Lots of people who work in finance and use Excel. 
+INDEX/MATCH is also a lot more flexible when you're looking up several columns based on the on lookup column (think looking up all product detail columns based on one product code column). It replicates a lot more efficiently than VLOOKUP. 
+I ran an Excel training course today, covered VLOOKUP and HLOOKUP as requested but basically the slides said "here's how they're work but I recommend INDEX MATCH and then showed them how to do that in far more detail. I described it as like playing battleships, intersecting rows and columns 
+I've started using index/match more, specifically because I prefer not having to change the columns in the data I'm looking up, if I want a column returned that is before the column I'm looking up.
+
+I also much prefer =IF(ISNUMBER(MATCH(value, array, 0)) to =IF(vlookup(value, array, 1, false) = cell,
+My one issue with index match is when working with tables/columns of data that get filtered. INDEX/MATCH breaks down and the cell references get all screwy if you ever filter the table.
+Just what excel needs! A cube of sheets! :D 
+
+(3D references just aren't effective enough!)
+Interesting. It'd look at the top-left cell in each worksheet then need row and column indices? Or would it need lots of new arguments to determine search order: depth-vertical, depth-horizontal, vertical-horizontal (with depth the index argument), and each of these pairs reversed?
+pretty sure that's called SQL
+If you have an unsorted table, VLOOKUP(.,.,.,1) isn't guaranteed to produce correct results. It seems to check the 1st argument against the 1st lookup column value, returning #N/A if arg < value, using the 1st row if arg = value, proceeding it arg > value. Next, it seems to check the 1st arg against the last lookup column value, using the last tow if arg >= value, proceeding if arg < value. At this point, arg is bracketted between 1st and last lookup column values, so it uses binary search.
+
+If you have, say, 129 rows in the lookup range, you could go through another 7 iterations to find the proper interval (arg >= low end of range, arg < high end of range). If arg would eventually match the 2nd row, exact match would have been faster than binary search. However, that's contingent. On average, binary search is O(log(N)) while linear/exact search is O(N).
+
+If one has a distribution of possible lookup values by _popularity_, and that distribution is substantially skewed, then sorting the table in descending popularity and using exact matching could be faster, but that's seldom the case with what I do. Most of the tables I use have 2-letter state abbreviations or 4-digit SIC codes as lookup columns. Yes, CA would show be needed more often than AR, FL more often than DE, but the tables are used in many regional offices across the US, and the Memphis office just might need AR, KY, LA, MO, MS, TN and TX more often than CA or FL. Sorting the state table differently for each regional office may be possible, even automatable, but good design?
+Instead of using 
+=vlookup(a1,y:z,2,0)
+use
+=vlookup(a1,y:z,column(b1),0)
+then when you drag across, the column numbers will increase as well.
+If that's actually true on a given dataset (not saying I don't believe you), then that's just a terrible implementation. Both Index/match and vlookup need to perform essentially identical tasks. Weird.
+Perhaps INDEX-MATCH used to be faster than VLOOKUP, but [this benchmarking from 2015 says otherwise.](http://analystcave.com/excel-vlookup-vs-index-match-vs-sql-performance/)
+imho the most relevant difference is that Index returns a reference while vlookup returns a value (or array of values). 
+
+you can for example use OFFSET based on the return value of an INDEX formula, but not the return value of a VLOOKUP. 
+I [present this thread](https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/) from our [Pro Tip](https://www.reddit.com/r/excel/search?q=flair%3A%27pro+tip%27&restrict_sr=on) library for the use of TRUE=VALUE and TRUE lookup together to increase the lookup speeds by a magnitude of lots (!!) against a large dataset... Yes it requires sorted data, but certainly something I will try in the future when the similar situation presents itself.
+
+edit: corrected description
+I use it when I want to look up prices based on the physical criteria of the product.  For instance, if a bearing is between 2.25 and 4.5 inches, it might cost $423.
+I have twice used a non-exact match.
+
+Once was because it would default to the "close enough" value, since my data was in ABCDEF123 form, and my lookup table was in ABCDEF form.
+
+The other I used an exact match, since I needed null returns when searching against a non-exact match again.
+Most of my lookups are for exact matches, but I do use the TRUE match for ranges.
+
+Creating a column for Fiscal Year (doesn't match Calendar)
+
+Grouping product sales by certain price points
+
+Etc.
+
+I'll have a separate column with the first day of each new fiscal year and the fiscal year, then use my INDEX/MATCH (I don't use VLOOKUP) with either 1 or -1
+Index/Match master race checking in. 
+Please elaborate on this.
+
+I've had no issues with INDEX/MATCH on a filtered table.
+There are things which were easy in 1-2-3 and Quattro Pro which aren't easy at all in Excel (and to be fair LibreOffice Calc or Google Sheets) due to 3D ranges rather than 3D references.
+Alternatively, use "column()" and +/- whatever offset integer you need.
+Solution Verified.
+This sounds interesting. Could you give me a for instance of this in use? 
+Whoa, I'm actually looking forward to going to work tomorrow so I can try this out!
+Point of clarification: You don't use a TRUE lookup and a FALSE lookup; you use two different TRUE lookups to simulate what a single FALSE lookup does, only much faster.
+
+Thanks for the shout out.
+I submitted that tip, now I feel a little responsibility that people use it correctly.  So:
+
+* Sort the data you're looking up  
+* If your workbook is used by others, take steps to ensure the lookup range stays sorted.  This is easier to say than to implement.
+Let us know your results!
+Oops, yes, corrected above.  Your method is now being scrutinised :) the pressure is on !

@@ -1,0 +1,24 @@
+create persistent formulas that don't error out on row/columnm edits
+The only workaround I know for this is to use VBA to continuously re-insert the formula into the cell whenever there are changes. To do this, you would put the following code in the Data Entry Form worksheet module.
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        Sheets(2).Range("A1").Formula = "=('Data Entry Form'!A1)"
+    End Sub
+
+
+EDIT - OP, after seeing other responses, I think /u/EIYF's option is better. Running code on every worksheet change has its disadvantages.
+You can try using INDIRECT
+
+    =INDIRECT("dataentry!a1")
+
+This doesn't change to #REF when deleting row 1 on data entry sheet
+Aside from VBA and INDIRECT, which both work, there's also OFFSET.
+
+[Example before](http://i.imgur.com/Va4nGcC.png) and [example after deleting row 1](http://i.imgur.com/V2z6b4R.png) (the formula's A10 turned to A9 automatically).
+
+I'd use INDIRECT if you want to reference the cell's position absolutely, OFFSET if it's relative to the cell of interest.
+
+Another quick way to fix the formulas (which is not ideal agreed), select the whole top row and double click the small black square in the active cell to copy the formula down again. This assumes the first row has not been murdered as well.!
+Try using Indirect function
+
+INDIRECT when you want to change the reference to a cell within a formula without changing the formula itself.

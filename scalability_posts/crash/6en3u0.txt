@@ -1,0 +1,15 @@
+crash
+6en3u0
+Using Workbook.RefreshAll more than once crashes Excel 2013. Worked perfectly in Excel 2007
+
+I have some code that is basically 
+
+* Workbook.RefreshAll
+* Some cut and paste between sheets
+* Workbook.RefreshAll
+
+I use a web query to pull a table of data, cut some specific stuff to another sheet. I can't use copy because the stuff I'm looking at is offsets and I need to remove it from the main loop once it's found so it doesn't create duplicates. But the first sheet needs to also have the original data for other reasons so I refresh all at the end again. 
+
+In 2007 it worked perfectly. In 2013 it crashes Excel and throws up Automation Error 440
+
+

@@ -1,0 +1,62 @@
+6imxw0
+Having trouble breaking down this Excel formula
+Hi guys, I don't know if I'm just tired or missing something obvious but I'm trying to breakdown the following formula:
+
+    =IF(SUM(P10:Q10)=0,0,IF(AND(P10>0,Q10>0,ISERR((Q10-P10)/P10*100<10000),0),(Q10-
+    P10)/P10*100,IF(AND(P10=0,Q10>0),999,IF((Q10-P10)/P10*100>10000,9999,(Q10-P10)/P10*100))))
+
+There are so many nested statements (seemingly?) that I'm having trouble breaking this formula down and figuring out exactly what it's doing. I guess there's a big IF statement enclosing the whole thing which basically says if the total summed value is 0 just keep it as 0? 
+
+After that I get a bit lost, so if the summed value isn't 0 then move on to the next IF statement? But then does that IF statement lead into the other ones or are they part of the larger statement? I also couldn't figure out what the second IF statement does, is it checking for both values being greater than 0 and that there also isn't a divide by zero error? What happens if there is?
+
+Anyway making sense of this is doing my head in so if anyone could help me understand this/break it down I'd really, really appreciate it.
+
+Thank you.
+
+
+-------------
+Mind reformatting as code with four spaces before the formula? I think reddit formatting messed with some of the formula (notice the italics) 
+
+I should start by saying it is NOT just you -- this is the type of formula that makes us cringe because it's very unfriendly to read and to sort out what's actually going on.
+
+Also FYI you can try Excel's "Evaluate formula" tool in the "Formulas" tab -- it will walk you through step-by-step what Excel is "thinking" as it evaluates the formula.
+
+-------------
+Also, in the formula entry bar, you can highlight any particular part of the formula and press F9. This will evaluate just that particular part, which can sometimes help in figuring out what's going on. Press escape to go back, if you press enter it replaces that part of the formula with the result!
+-------------
+Sure thing, I'm on my phone but I tried to separate out the lines, does that help? Relieved to know it's not just me! I was hoping it wasn't just me being stupid
+-------------
+That's interesting I didn't know that! I usually import Excel data into SQL and work with it there so I'm not super familiar with the formula bar
+-------------
+Add a single line break and then four spaces before the formula begins. No need to separate out the lines. 
+-------------
+Ah sorry, I'm on my laptop now, just edited it
+-------------
+Okay here's my best attempt at decoding, I'll write it in somewhat pseudo-code 
+
+    If SUM(P10:Q10) = 0 Then
+       Return 0
+    Else If P10 > 10 And Q10 > 10 And [(Q10-P10)/P10*100] Doesn't give an error and [(Q10-P10)/P10*100] < 10000 Then
+        Return (Q10-P10)/P10*100
+    Else If P10 = 0 And Q10 > 0 Then
+        Return 999
+    Else If [(Q10-P10)/P10*100] > 10000 Then
+        Return 9999
+    Else 
+        Return (Q10-P10)/P10*100
+    End If
+
+
+-------------
+SOLUTION VERIFIED!
+
+That's great man thank you very much, that's very helpful! Can I just clarify for the second elif, if it does throw a divide by zero error I assume just a 0 will be returned for the final output?
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+On that second logical, if you get a divide by zero error, it's just going to move on to the next ELSE IF. 
+-------------
+Got you, thanks again!

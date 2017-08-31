@@ -1,0 +1,13 @@
+[ProTip] Highlighting cells that are older than 6 calendar months
+    A1<=EDATE(Today(),-6)
+Oh yeah, never use 180 for 6 months or 30 (or 31) for months. In the few months I've been here, I think every response has been good in avoiding those shortcuts. And months especially are easy, since Excel has a number of  functions specifically for months, as /u/TheCryptic points out. Before `EDATE` people had to use the formula you mention with the awkward DATE(...,...,...) function.
+
+Note they are slightly different, for things like leap days. Using DATE(y,m-6,d), 6 months prior to 8/29/15 is 3/1/15, while using EDATE it is 2/28/15.
+Good post. 
+
+Part of the conundrum is the definition ... is not so well defined. "Older than 6 months" means different things to different people and in different circumstances. 
+
+`EDATE` is a pretty good solution, just be careful: `EDATE(<some date>,-6)` will never return 8/30/2015 or 8/31/2015, for instance, because there is no 30th or 31st day of month 2. The closest you will ever get for output is 8/29 or 8/28, depending on what year the input date is in. 
+Even better! I'll edit my post to include this.
+I have never used or seen EDATE. I came to teach people something and ended up learning something myself.
+EOMONTH() is a good way to deal with the 31/30/29/28 issues

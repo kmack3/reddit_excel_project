@@ -1,0 +1,141 @@
+I have over 3000+ dates entered into the cells and they are all formatting as a number.
+Use this formula in new column and drag it down,
+
+=TEXT(D2,"dd/mm/yyyy")
+I've seen this before, and it's bizarre. Let me ask, when you do date related math then format that column as date, do they appear as dates? 
+
+One solution could be to copy and paste special values to another column, then cut and paste.
+
+Or you could run a helper column to text it, then values that column, then cut and paste over.
+Are you in show formula mode?
+
+Ctrl+~ to toggle between the modes.
+...your problem is that you're formatting it as text. Highlight the column > right click > Format Cells > Select 'Date', and pick the format you want
+
+In Excel, dates are integers, starting at 1/1/1900 and going up by 1 to the present day. The numbers you're seeing aren't random, it's the number of days between the date and 1/1/1900
+In a separate column, multiply the figures in column D by 1...
+
+    =D2*1
+
+And drag that down. Format that column as date, and see what you get.
+I think you're looking at formulas. 
+
+Tools|options|view tab -- uncheck formulas in xl2003 and earlier. 
+
+I think there's a checkbox on the view group of the ribbon, too.
+Dates are stored as numbers in Excel, specifically the number of days since "Jan 0, 1900"  (so that 1 = Jan 1, 1900). The different Date cell formatting displays these numbers in standard date formats. When you formatted the column as text, the contents are prevented from being recognized as numbers, so applying a date format won't work, since it only changes the way numbers are displayed. It's easy to fix though. 
+
+Type 0 in a cell, copy the cell, select the range with the problem dates, open the Paste Special dialog, and select Add. This will convert them to numbers (force Excel tl recognize them as numbers). You can then format the column as a Date. 
+
+If you want to keep these as text written as a date, you can use:
+
+   =TEXT(D2+0,"m/d/yyyy")
+
+In another column and drag it down, then paste values over it. 
+You need to convert the data to date type. Google "text to column excel" and follow the converter wizard. It's a button in the menu under data. A window will pop up and you need to convert the data type to date. 
+I think there might be some answers here that might fix it, but if not - if you have another cell that has the correct format, maybe try copying that cell, selecting the column with your actual dates and paste special to paste formatting?
+Alt + ESC.
+First make sure the column is formatted as a date, then highlight the column and use the replace function to replace "/" with "-". Excel recognizes dates written with either character but as it is going through the cells to make the change it will recognize the entry as a date.
+Right click column D
+Format cell
+Go to Dates
+Change date format as mm/dd/yyyy
+I'm not really familiar with date related math so I do not have an answer to this.
+
+I tried the copy and paste special values and it did not work.
+
+Could you elaborate on how I would run a helper column?
+YESSS THIS WORKED!!!!!!!!
+Would you be able to elaborate more on this??
+It worked but I am not sure why....
+It's on the same key on my USA keyboard -- but it's ctrl-`  
+(control-backquote.  ~ needs the shift key).
+It is currently formatted as Date mm/dd/yyyy and I tried to correct by switching to text
+If you get numbers after this OP, try to format *that* column as dates
+Sure. Excel has a mode where you can inspect formulas.
+
+When in this mode it disregards number formatting and shows you what's actually in the cells.
+Do you have a backup of the spreadsheet? I'm playing around in Excel, and I noticed that if you enter the integer as text, it won't convert back to the date when yous witch the column types. I can play around more to see if there's a way to convert it back, but it would be easiest if you had an older version of the sheet where the values were formatted as dates
+If you format the column as dates, then double click the cell and click out of it, does it change back to a date?
+https://www.google.co.uk/amp/s/kickthatcomputer.wordpress.com/2014/08/05/converting-us-dates-to-uk-format-in-excel/amp/?client=safari
+
+This is the quickest solution. No need for macros. 
+I do not have an older version of the spreadsheet
+It changes back to the random number
+If this works (I think it will) try running this VBA code to force all of the cells to update their values. Update the lLastRow and lFirstRow values to be the first and last rows
+
+    Sub Refresh()
+      Dim lRow As Long
+      Dim lFirstRow As Long
+      Dim lLastRow As Long
+  
+      lFirstRow = 2       'plug in the first row here
+      lLastRow = 4000     'plug in the last row here
+      lcol = 4            '4 = D
+  
+      For lRow = lFirstRow To lLastRow
+        Cells(lRow, lcol) = Cells(lRow, lcol).Value
+      Next lRow
+    End Sub
+
+If you don't know how to use VBA, just do this:
+
+* Save your workbook
+* Hit Alt+F11
+* **Below** the FIle menu (not in it, so don't click) you'll see an Excel icon--click the button **next to** that one
+* A text box will pop up--paste my code below in it
+* Click somewhere in the code (so the cursor is between lines 1 and 13)
+* Hit F5
+* If it didn't work as expected, close without saving and let me know
+* Save your workbook if everything worked. Excel will warn you of a file type issue--ignore it, close the workbook, and re-open. That will wipe out the VBA code, as you won't need it again
+Back? Or it stays the same? If you format the column as a Date and then edit the cell and click out of it, it should format as the date, unless you're using an old version of Excel. What version are you using?
+I cannot seem to get the VBA window to open to enter the code.
+stays the same... I am running Excel 2013
+Umm.. try this then?
+
+* Go to the View Tab 
+* Click the down arrow below the Macros Button 
+* Click 'Record a Macro' 
+* Click the down arrow again 
+* Click 'Stop Recording' 
+* Click the down arrow again 
+* Click View Macros 
+* Click 'Edit' >
+* In VBA, click Ctrl+A 
+* paste my code 
+* Click F5
+Follow my VBA steps below, but run this code instead (editing the lFirstRow and lLastRow values in line 6 and 7 as needed). I think this should fix it for you
+
+    Sub Refresh()
+      Dim lRow As Long
+      Dim myDate As Date
+      Dim lFirstRow As Long
+      Dim lLastRow As Long
+      Dim lCol As Long
+      
+      lFirstRow = 2       'plug in the first row here
+      lLastRow = 4000     'plug in the last row here
+      lCol = 4         '4 = D
+      
+      Columns(lCol).NumberFormat = "m/d/yyyy"
+      
+      For lRow = lFirstRow To lLastRow
+        If Cells(lRow, lCol) <> "" Then
+          On Error GoTo SkipRow     'skips cells that would cause errors (e.g. text cells)
+          myDate = Cells(lRow, lCol)
+          Cells(lRow, lCol) = myDate
+          On Error GoTo 0
+        End If
+    SkipRow:
+      Next lRow
+    End Sub
+
+I can't do that either. All those buttons along with the Visual Basic button are grayed out 
+Are you on a work PC? Could be disabled at your organization
+personal laptop
+Try following the steps in this Office guide (just 1-6) and then doing either one of my steps for opening VBA:
+
+https://support.office.com/en-us/article/Enable-or-disable-macros-in-Office-files-12b036fd-d140-4e74-b45e-16fed1a7e5c6#__toc311698312
+
+Set it to Enable All Macros, and then switch it back to whatever it was when you're done
+

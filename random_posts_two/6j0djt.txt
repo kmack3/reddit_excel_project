@@ -1,0 +1,57 @@
+6j0djt
+How to add comma's to a number in the middle of text
+I have a formula that is stitching a sentence together as follows:
+=A1&" "&B1&" "&C1
+
+B1 contains the value (-100,000.55)
+
+Using the above formula I return:
+Once you approve -100000.55 then we can proceed
+
+What function can I use to get -100000.55 to say -100,000.55 or (-100,000.55)?
+
+
+-------------
+Use =A1&" "&text(B1,"###,###.00")&" "&C1
+-------------
+will the values always be 100,000 to 999,999 ???
+-------------
+You can use the text() formula to replicate most of the custom number formats inside a formula btw
+-------------
+I think this will work. You might need to add
+
+IF(LEN(round(B1,2))>5,A1&" "&text(B1,"###,###.00")&" "&C1,
+IF(LEN(round(B1,2))>8,A1&" "&text(B1,"###,###,###.00")&" "&C1,
+A1&" "&text(B1,"###.00")&" "&C1))
+
+EDIT: added some parenthesis
+-------------
+no it can vary from 1.00 to 100,000,000.00
+-------------
+Solution Verified
+-------------
+Nah, /u/Swarmthief's formula works fine. He actually can have *less* `#`'s: Excel treats `#`'s as "as many digits as needed". So for example `=TEXT(B1, "#,###.00")` or even `=TEXT(B1, "#,#.00")` will work.
+
+[Screeshot](http://i.imgur.com/L4jFl2w.png)
+
+-------------
+
+You have awarded one point to _Swarmthief_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Yeah, I might have got a little hash-happy :P
+-------------
+Yeah, it's funny because even Microsoft puts the default number format as `(* #,##0.00_)` which I think can be shortened to `_(* #,#.00_)`.
+
+*edit*: Oh wait, no - for values of <1, mine does `.1`. So maybe `#,##0.00` is best, since that forces the ones position.
+-------------
+This subreddit is gonna be great  -just joined yesterday. Learnt something new already.
+-------------
+Strange, I always thought you could force two numbers between commas by doing something like #,#0 .  Just tested some custom number formats and Excel keeps autocorrecting to put three numbers between commas.
+-------------
+I use this subreddit at least daily to answer my questions hahaha. So much applicable information
+-------------
+You can use `\,` to do a literal comma vs using your OS language/format settings. Like `##\,##\,`. [Imgur](http://i.imgur.com/YMnV4gW.png)
+
+Or you can just set your OS to India settings or something funky. Then the normal comma looks there for grouping information.

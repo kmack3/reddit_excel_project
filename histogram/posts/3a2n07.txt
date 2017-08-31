@@ -1,0 +1,52 @@
+I made my own Excel version of Nokia's Snake game
+I don't recommend anyone downloading this... Sorry OP, but a macro in excel from a stranger is dangerous. I can easily send a macro to someone so that when the file is opened it sends a copy of the C drive to me. Not saying this is your intent here, just a caveat to those who do not know this but of info
+...and I just made 40 points!
+Tem vaga aberta na Clarian? :)
+Nice work OP, cool demonstration of Excel's capabilities :)
+That's not as complex as I thought it would be. Thanks for not locking down the code. Was cool step through. 
+I understand your concern. Perphaps I can clarify any security concern by writing this: 
+My name is Felipe Costa Gualberto and I'm a Microsoft Excel MVP (Most Valuable Professional) since 2013. MVPs are hand-picked professionals awarded by Microsoft that causes great positive impact in the technical community. If a MVP doesn't behave great, he or she loses his award. Of course that by distributing virus, I'd lose my award and I'm proud being a MVP.
+The link I posted itself points to my personal blog's domain, that is http://www.ambienteoffice.com.br
+My MVP profile: http://mvp.microsoft.com/en-us/mvp/Felipe%20Costa%20Gualberto-5000345
+[deleted]
+Question, with macros disabled, could we inspect the code and then look for malicious coding without it running automatically?
+
+I have written macros that run on opening the file, but won't actually run until you enable macros for that workbook.
+Good advice.  A gif showing it is more than enough for people to try to pursue something on their own.  If the OP wants to share and people aren't trusting, posting the code so people can recreate themselves is always an option... though it may require some work on the part of the person wanting to run the files if there are buttons or other setup that is done before the macros run.
+
+That said, anyone doing so would likely learn a lot more than just running something.  CG on getting something that sounds like it works well OP.  I actually will be unable to try it for exactly the reasons the above user has described as I am on a work PC, and would probably run this on a VM, if I were to do so, as I tend to wear a tinfoil hat unless I know the people.  (I will concede, it is sad state of affairs that it has to come to this.)
+This is why 
+
+1  You don't turn All macros on in security settings as your first level
+
+2  You activate Devmode from the ribbon as a 2nd level of protection since it will prevent events from occurring should you click a button
+
+3  Then you open suspicious files while holding down shift to auto disable all macro execution of workbook_open events upon file open.
+Se tudo der certo, este ano terão mais vagas! Você mora em São Paulo?
+Amazingly well done OP, really.
+
+
+Set SnakeInitialSpeed (s)	to 0,1 for a more realistic snake version. fun!
+
+The big advantage about using class modules is making your code more readeable and look less complex by giving procedures meaninful names.
+I believe that if I used only regular modules, the code would not get as clean as that.
+This is really interesting. I have heard of this before, but haven't looked into it.  I am an advanced user, but I am uncertain as to the test. What is the test like for the MVP, if you don't mind answering? 
+
+I am the office VBA guy, so if I could get certified it would only help.
+Wow, that's actually pretty awesome. I'm impressed.
+Thank you, I appreciate that.
+Is that what the mods do here?
+Yes, you can inspect the code before running it. If you've not changed your macro settings, then any downloaded workbook, by default, won't run any VBA code, even those that run when opening a file. You get a warning bar right below the ribbon asking if you want to enable macros or not.
+Another method is downloading the file to a local folder, and then, in the Excel's open dialog, double click the desired file holding Shift key until the file is completely loaded in Excel.
+Sorry, this is my first post, next time I'll put at least a GIF, as you recommended.
+I believe posting the source code is not useful... it's almost the same as opening the workbook without enabling macros, but more work to one replicate the game. The only concern is the possibility of the XLSM file having some obscure procedure name set by its onLoad customUI.xml attribute. But even that procedure doesn't run if you choose not to enable macros.
+Não, mas pretendo me mudar para aí em breve.
+I suggest you to read: http://mvp.microsoft.com/en-us/overview.aspx
+You're welcome!
+We do a lot of stuff here!
+
+I saw it right when it was posted, and at first glance it looked suspect. So I went to his site, and saw that he was an MVP, so I personally felt comfortable enough to open the file and take a look at the macros. Everything looked fine, so I didn't remove the post.
+
+I'm excited to look at it. I don't have a VM right now to test though, so it may be a while. Does it use the excel sheets at all or it it entirely in VBA?
+I get where you are coming from.  Please don't be discouraged by all the paranoia.
+It uses an Excel Worksheet, and VBA code change cell's styles to make a movement effect of the snake.

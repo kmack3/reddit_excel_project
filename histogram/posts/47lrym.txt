@@ -1,0 +1,84 @@
+How to return 2nd, 3rd, 4th, etc. lookup with Index(Match())
+I've done very similar things by just adding a countif() function and a concatenation key. Technically I would look for each of the count up to a max number of jobs you have in a day but it works and very fast to implement.  It is my oldest and most used trick to make my own key fields for looking things up, I often even do it instead of a pivot table because the formatting and structure is more stable for displaying results.
+
+
+Column 1: date or other duplicate key.
+
+
+Column 2: countif from top to current line looking for key
+
+
+Column 3: concatenation of column 1 and 2. I usually put dashes in just for easier reading.
+
+
+Now on the summary sheet you have a date at the top and use a max() function to find the most occurrences of any one key.
+
+
+Then you make each row use a dynamic key of your key and the line number.
+
+
+When I am getting fancy I'll build in iferror() or similar commands to only display the lines that I need for one particular key.
+You might consider using a PivotTable for this, too, and just changing the filter to the current day each day?
+You probably need an array formula using index/small/if
+
+    =Index(array to return, Small(If(matchRange=matchValue, Row(matchRange)-Row(firstCellofMatchRange)+1),Row(A1)))
+
+    =Index(Sheet1!$C$3:$C$5000, Small(If(Sheet1!$A$3:$A$5000=A2,Row(Sheet1!$A$3:$A$5000)-Row($A$3)+1),Row(A1)))
+
+It is an array formula, requires CTRL + SHIFT + Enter 
+
+Compare it to a normal index / match 
+
+    =Index(array to return, Match(matchValue, matchRange, 0))
+similar thought process to fuzzius but without needing ctrl shift enter 
+
+https://docs.google.com/spreadsheets/d/1y5hNSaQj7K9tB_UfsJ8t3exedLIAFNzAdTqUvD4wmxE/edit?usp=sharing
+
+    =index($D$7:$D$13, sumproduct(large(--($C$7:$C$13=C18)*(row($C$7:$C$13)),countif($C$18:C18,C18)))-row($C$6))
+Try using the AGGREGATE function instead. 
+This was my first thought as well, easy and simple way to create "sub-items" from a non-unique ID 
+This is the easiest solution OP (/u/Cristian888).
+thanks, will try it tomorrow at work
+The day I discovered this was the happiest I've ever been while working a spreadsheet.  The day I had to make all of the ranges conditional on the combination of two cells with 10+ option dropdowns was the exact opposite.
+thanks, will try it tomorrow at work
+Bah, yes. That sneaky SUMPRODUCT. Nice.
+Alright so this was easiest for me to implement since you provided a workbook, still no clue what's going on.  Also, there was some stuff I overlooked concerning the fact that jobs have a start and end date and they need to show up on every day until the end date.  But as far as the question I asked, this definitely works, thanks!
+solution verified
+Indeed so, and makes the formula more clear than using an array, which quite frankly, completely mystify about 95% of Excel users.  
+
+My general rule of thumb is that if it's complex enough that it needs an array formula, I'll write a UDF so that whomever uses the spreadsheet after has a better understanding of what's happening.
+
+ 
+It does, didn't even think of it. Lotta things to try out at work, should be fun 
+I did this, was an absolute hoot.  It's still used two years later at work and I don't remember the details of what I did because it's been working fine since.
+to break it down, 
+
+the index specifies the data you want at the end, 
+
+the sumproduct enables array processing which we use to return the row number for the index. 
+
+the arrays processed are firstly an array of 1/0 for locations where the data matches the target --($C$7:$C$13=C18) and secondly an array of row numbers. 
+
+when dot producted these form an array of row numbers where the data matched and 0's everywhere else.  
+
+wrapping a large around this allows us to select each of these matching rows, the countif determines which one. since large only returns one value from the array this is the value reported by sumproduct and passed to index. 
+
+as to your other issue, if you can show us the data then i can probably offer an answer, although as suggested elsewhere a pivot is probably easier if your data is formatted nicely. 
+
+You have awarded one point to _Snorge_202_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I actually overlooked a significant detail in my original question.  There are actually some jobs that span multiple days.  I have start and end date columns and I need to be able to return a job on every date until finish date
+
+Someone messaged me saying Excel wasn't even appropriate and that Access can do this, which may be correct and I'm looking into it.  Anyway, here's my data, showing what I would need to return on a given week.  As you can see a day can have one or many jobs and a job can show up on multiple days depending on start/end dates.  Pivot table won't work unless I include a column for every work day, for that given job, which would give me a table with rows each ending in different columns, plus it would be as time consuming as just doing it manually, which is what I'm going to do in the meantime.  Thank for you time
+
+https://docs.google.com/spreadsheets/d/17Pug_knu6sHAauuDZ8KEzCYnJ_XZjRTBa2bExDOtlCM/edit?usp=sharing
+hows that? - the job order is reversed (is that a problem?) just always drag the blue table down for at least as many jobs as you have. 
+Wow, you're like an excel god.  
+
+Sadly I don't understand how to transfer the last part, the one with the 2 row cells.
+
+I have the calendar and the entire data columns on separate tabs and not sure if the rows in the end should point to the sheet with the entire data columns or if it belongs with the summary table? 
+it belongs with the summary table, it essentially counts down how many rows from the top of the summary table you are - and therefore what argument ytou want to pass to large. 
+
+thanks for the gold :) 

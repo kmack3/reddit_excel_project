@@ -1,0 +1,48 @@
+large
+54di39
+Isolating large ranges of cells to export
+
+I have an excel sheet of just over 1 million "leads". They are organized in this fashion: first name, last name, address, city, postal code, contact #.
+
+I need to isolate every city and export it to a new excel sheet.
+
+Is there any way I can easily select a range based on a variable (city)?
+
+
+I am using Excel 2013
+
+Edit 1: I feel I should maybe be more clear: when I say I need to isolate every city, i mean i need to isolate every lead in said city and export those leads to a new excel sheet.
+
+
+-------------
+Use a [PIVOT Table](http://www.excel-easy.com/data-analysis/pivot-tables.html) to show unique values, then Copy Paste Special Values the result.
+-------------
+This is amazing, thanks!
+
+edit 1: i lied, im having an issue lol. see this image; 
+
+http://imgur.com/aHqMXXH
+-------------
+Don't put that in columns. Excel only has a limited number of columns (what are you going to do with 11,000 columns?)
+
+Put the City as a Filter, then everything you wish to export as a row. Show data in Tabular form, and remove all the subtotals.
+
+After the pivot table is looking nice, go to Pivottable Tools > Analyze > Options > Show Report Filter Pages. Excel will create 1 page per city which you can then export to your heart's desire.
+-------------
+ahh okay thats looking much better, thanks. just one question, I need to have the city as a row as well as being able to have it under filter but its not letting me assign it to both. is there any way to get around this?
+-------------
+Put that in the rows, and filter from there.
+-------------
+If i do that, i am unable to "Show report filter pages"
+-------------
+Yup. Can't have everything :(
+
+Actually you can if you duplicate the cities column, and use one for the dupe and one for the row...
+
+But in all honesty, you're already filtering by city. Why do you need it in a row? It's all gonna be the same city anyway.
+-------------
+ya i was trying to do that but its as if the whole sheet is protected. like I cant add in a row say at the top. It wont let me shift any cells :( I'll see if I can maybe copy and paste into a new sheet and add in another column there.
+
+Thanks for the help btw, even if this doesn't work I'm sure ill be able to make ti work.
+-------------
+I need the city in a row because the sheets are being uploaded to a dialing software and the lead needs that info in the system

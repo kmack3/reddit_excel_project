@@ -1,0 +1,30 @@
+I have a folder full of Excel docs that I want to pull data off and have that data display in another sheet.
+Are you willing to use VBA?
+
+Are you pulling in data from the same worksheets (by name) and cell ranges from each of the workbooks?
+Are you using 2013 or, 2016? If so, download power query and do new query - from file - folder. It's really easy. 
+Do they all have the data in the same position in each file? If so, then you need RDBMerge here http://www.rondebruin.nl/win/addins/rdbmerge.htm
+
+It allows you to specify a folder, where it can pull the data from all files or just some, then you specify the index number of the sheet, then finally the cell or cell range. 
+
+I've found it invaluable, hope it helps you. 
+try a vlookup
+I can use VBA, but honestly don't know much about it. The names are the same and only change by date. So its "Month/Date/Year NAME OF REPORT.xlsx" and in all those files the data is in the same cell. 
+Everyone is willing to use vba but nobody knows how to use it. FUCKING a. This shit is harder than one would think. Java is easier. 
+Im using 2013. Ill check out power query. Thanks. 
+Sorry to be such a noob, but can you give me some pointers to get this working or point me in the right direction where someone has explained this already. 
+Power Query is built into 2016 btw.
+Look up Power Query (Excel 2013) or Get Data (2016) this sort of thing is built in now. It's pretty spectacular.
+I got it to work and it's stupid easy to use, which is great for me as I suck at Excel. Do you know if it will auto update when a new file is put in the folder?
+It's alright. I have 2016 but I can try and help.
+and it's a little different.  I think it may be a separate download and tab in 2013 called "power query" but it's under the data tab in 2016.  It's literally new query -> from file -> from folder then choose the folder.  There are some options to clean up the data and format it how you like but, when you're done, you can add files to the folder and power query will automatically import the data. A quick search brought this instructional up.
+
+https://www.youtube.com/watch?v=a7E29H5ZUmE
+You'll have to do it manually as far as I know. Consider using a subfolder for the new files maybe, pull the data in, then move it over? You'll have to work around it. 
+I cant believe I looked over it tab. Thanks. 
+Did that work for you? Power Query is a beast. There are so many great things you can do with it and so many data sources you can connect to with it.
+I followed his guide but I guess the report Im trying to get the information from is not setup the same was his was so the data its reporting back isnt showing up the same way. I didnt expect it to be the same, but I couldnt get what I wanted to show up at all. I havent given up yet though. It does look like it has lots of options. 
+I'll give a close look at your problem in the morning if I see you haven't solved it yet. Too tired to think straight right now.
+Hey thanks! Ill keep working at it and let you know if I have any success. 
+Hey did you get it to work? Let me know if you are still stuck and I will try to help.
+I have not. I tried a program /u/althanis suggested but it didnt auto update when a new sheet was placed in the folder and it dumped the data so crudely I could easily just enter it manually. 

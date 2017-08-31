@@ -1,0 +1,82 @@
+6fpzr3
+Having issues with concatenating a string and integer (integer generated with randbetween) to create a qualifier in VBA
+Hello, 
+I am trying to build a tic tac toe game where it is one player versus the computer. I was able to make it a two player game but my teacher asked for the computer to be a player. I am having trouble in having the computer selecting a random tile, and also I would like to make it so it dosn't select a tile that is already selected. I am trying to make it with only three tiles until i get the code down, then expand it to nine tiles, that is why you see the large comment block below the code. Thank you!!
+
+    Private Sub button1_Click()
+    Dim Random As Integer
+    Dim Computer As String
+    
+    If Checker = False Then
+    button1.Caption = "X"
+    Checker = True
+
+    Random = Application.WorksheetFunction.RandBetween(2, 9)
+    Computer = "Button" & Random
+
+    Computer.Caption = "O" 'ISSUE IS HERE
+    Button"& Random &".Caption = "O" 'This doesn't work either
+
+
+    'If Random = 2 Then
+    'button2.Caption = "O"
+    'ElseIf Random = 3 Then
+    'Button3.Caption = "O"
+    'ElseIf Random = 4 Then
+    'Button4.Caption = "O"
+    'ElseIf Random = 5 Then
+    'Button5.Caption = "O"
+    'ElseIf Random = 6 Then
+    'Button6.Caption = "O"
+    'ElseIf Random = 7 Then
+    'Button7.Caption = "O"
+    'ElseIf Random = 8 Then
+    'Button8.Caption = "O"
+    'ElseIf Random = 9 Then
+    'Button9.Caption = "O"
+    'End If
+    End If
+
+    button1.Enabled = False
+
+    End Sub
+
+
+
+
+-------------
+I'm not sure you really need that string variable, unless you're using it for something else? Try using a select case statement.
+   
+    Random = WorksheetFunction.RandBetween(2, 9)
+    
+        Select Case Random
+            Case 2: Button2.Caption = "O"
+            Case 3: Button3.Caption = "O"
+            Case 4: Button4.Caption = "O"
+            Case 5: Button5.Caption = "O"
+            Case 6: Button6.Caption = "O"
+            Case 7: Button7.Caption = "O"
+            Case 8: Button8.Caption = "O"
+            Case 9: Button9.Caption = "O"
+        End Select
+
+-------------
+    Dim Computer As String
+    ...
+    Computer.Caption = "O" 'ISSUE IS HERE
+
+A string won't have a `.Caption` property
+-------------
+What I am trying to do is use the string to determine which button the computer will click on, so if computer = Button2 then I want Button2 to have a "O" caption, or if computer is Button3 and have Button3 to have a "O" caption. I want to avoid using Button#.Caption because then that gets rid of the random move...
+-------------
+As /u/_intelligentLife_ said, you can't use the .Caption property on a string.
+
+
+You'll need to think about things logically. Simplistically it will be something like:
+
+
+1. Think of a random number
+2. Check if that button.Caption is already "X" or "O"
+3. If it is, then go to step 1 (to avoid overriding)
+4. If not, play move (i.e. change relevant button.Caption to "O")
+

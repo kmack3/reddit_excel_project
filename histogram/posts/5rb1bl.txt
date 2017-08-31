@@ -1,0 +1,49 @@
+"Excel cannot complete this task with available resources. Choose less data or close other applications." with an i7 processor and 32 gb of ram.
+Do you have 64 bit Excel?  IIRC, 32 bit excel has a cap on how much memory it can use that can be really annoying.
+try having him save it as a .xlsb file instead of .xlsx. 
+
+it may or may not help depending on what the problem actually is, but .xlsb files can generally be read from and written to more quickly than .xlsx files.
+If you have Excel 2013 or 2016 the cap should be around 4GB if you have the updates installed. 
+I used to see that when dealing with spreadsheets that had orphaned styling outside the intended used areas. If you see very small scrollbars that zoom way past your content when moved then you might be facing this.
+
+A solution is to select all rows below the used area and delete them. Repeat for all columns beyond the used area.
+>Try using this subroutine to see if it. makes any difference for you:
+
+        Public Sub LudicrousMode(ByVal Toggle As Boolean)
+        Application.ScreenUpdating = Not Toggle
+        Application.EnableEvents = Not Toggle
+        Application.DisplayAlerts = Not Toggle
+        Application.Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+    End Sub
+
+>Using `Call LudicrousMode(True)` before your code executes, then `Call LudicrousMode(False)` afterwards.
+
+From /u/ViperSRT3g 
+Also check if you have many cells with array formulae. I've managed to crash Excel on a similar/faster machine as yours just by having a plain old .xlsx workbook with a few thousand array formulae.
+When you are setup, check your options for Excel to make sure you aren't limited to just 1 or 2 cores/processors.
+SOLUTION VERIFIED
+After checking, yes this is 32 bit.  Could this be my issue?
+
+Edit:  Just talked to the director, he is running 64 bit and is pretty confident my 32 bit is the reason.  IT has had a fire lit under their ass
+Yup.
+
+Memory usage limited to 1.5Gb.
+Is there a possible way for me to do this without opening the file?  He is going to be in meetings for the rest of the day?
+This was partially the case but changing from 32 to 64 fixed it
+
+You have awarded one point to _Nateorade_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Was going to say this also. Your issue is the 32-bit Excel. Think it'll only use 2 GB of your memory.
+Very possible.  Here's a link with a quick summary of differences between the two:
+
+https://support.office.com/en-us/article/Choose-the-64-bit-or-32-bit-version-of-Office-2dee7807-8f95-4d0c-b5fe-6c6f49b8d261
+check your options, your excel settings might be limiting the amount of power/memory is being used
+Definitely.
+>IT has had a fire lit under their ass
+
+wow a fire lit just to hand you the right version of excel. sounds fun working at your company.
+It was a joke...
+[removed]
+[removed]
+This sub is not the appropriate place for this kind of comment.

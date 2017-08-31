@@ -1,0 +1,112 @@
+Been banging my head a few days now - Solve for a % Value for - & +.
+Thank you in advance. 
+Can you just add a little more detail to the negative targets? What does a negative target represent? I can see that at -98 vs -500 you are more than 0.75 of the way between -500 and 0, is that the point at which it is 10 %? So if they have a target of -500 and get a positive value (let's say 1) is that when they get the full 20 % bonus?
+
+
+      =IF(ABS(J2/J1>)=1,20%,IF(ABS(J2/J1)>=0.75,10%,0))  
+
+Does this work?
+Why should the person in that exaple get the 20% for -98 if the budget was -500? I'm not saying they shouldn't, but if you can explain why, we can come up with a formula.
+
+And fair warning, variants of this question do come up time to time, and unless you can explain definitively what bonus should be allotted based on the different numbers, we won't really be able to provide a formula. It just seems like setting bonuses on negative expectations is really situation-specific.
+I may have it. Im so sorry - You know I had to ask the question to (maybe) figure it out: =IF(J2>J1,20%,IF(J1*0.75<J2,10%,0))
+
+I can figure out J1 and J2 both positive or both negative, but I have to ask that if J1 (budgeted) were positive, how could J2 (actual) be negative and vice versa? That is, if the budgeted goal were positive, how would negative actual be possible? Conversely, if budgeted goal were negative, how would positive actual be possible?
+
+Are you a charity in which some employees bring in money while other employees fund projects or deserving individuals?
+
+Regardless, wouldn't the correct answer be zero whenever J1 and J2 were on opposite sides of zero?
+    =IF(J2>=J1,"20",IF(J1<=0,IF(J2>=(J1+J1*0.25),"10",),IF(J2/J1>=0.75,"10",)))
+Can you not just use ABS(Number) or ABS(cell reference) to make all the numbers positive and calculate the percentage as positive for the purposes of calculating the commission?  Adding two columns of data would be easier than a much longer IF statement
+I want to say I am blown away by the support you guys have given me in this. This was a work project and I was really struggling with it. I am an Excel Newb. Knowing I can reach out to you guys means a lot. Thanks to all of you. Next time ill try to be more specific and post more details and pictures. (Imgur is blocked at work but I could use my phone). 
+
+Exactly. this is one of many measures. So they have the possibility of 20% points that adds up with other measures. A bit more detail. 
+
+J1 & J2 are + | In this case, if the actual is >=100% of the budgeted they get 20% points to their total. If is >=75%-99.99% they get 10%.      
+J1 & J2 are -  | (similar to above only my current formula assigns them 0%)   
+J1 is + J2 is -  | In this case they will receive 0% - Example: If they had a budgeted amount of say $10,000 but were negative. 
+J1 is - J2 is +  | In this case they have a budgeted amount that is negative but mad it positive. That would be good. so if they were budgeted for -1000, but were greater that would give the 20% 
+I hope that helps. 
+As a side note, you probably want to use Match if you're testing the same number against multiple criteria. 
+
+Edit: Syntax would be *something* like:
+
+    =choose(match(abs(J2/J1),{0,0.75,1}),0,0.1,0.2)
+Sure, so a persons cost center is expected do be -500. but instead they have -98. So they are well above their budgeted amount. because -98/-500=+.196 they receive 0% in my original formula: =IF(J2/J1>=1,20%,IF(J2/J1>=0.75,10%,0)). But they should receive the 20%.  
+
+the Bonus allotment is 20% if they reach or exceed their goal. It is 10% if they are greater than 75% of their goal and 0% if they are below 75% of the goal.  
+Let me know if you have any thougths. 
+
+This works if it is supposed to be that any value over the negative value is complete success. Someone with a negative target can never get just 10%, though. Try with a target of -500 and actuals of -499 and -501. Is that what you wanted?
+Depends on the way it needs to be calculated. If negative 501 was better than negative 500 then yes, absolutely this would be the most efficient. 
+OK, if I understand properly, you need two separate equations. One for the positive targets and one for the negative targets.
+
+So I wrote this, it tests whether the target is positive or negative. If the target is positive then it does the fraction as you had originally. If the value is negative it finds out what percentage of the way between that negative value and 0 the value is. If it is more than 0 then it will express a value more than 1 as they have gone 100 % over their target.
+
+    =IF(J1>0,J2/J1,1-((J2)/(J1)))
+
+Substituting into your formula I get this:
+
+    =IF(IF(J1>0,J2/J1,1-((J2)/(J1)))>=1,20%,IF(IF(J1>0,J2/J1,1-((J2)/(J1)))>=0.75,10%,0))
+
+Do you want to try it out and let me know where I've messed it up!?
+>  But they should receive the 20%.
+
+Right, but *why* should they get 20%? The criteria "well above their budgeted amount" is simply not workable. So 19.6% for the negative/negative case is worth the 20% bonus. What about 19.7%? What about 20%? What about 25%? What about 40%, etc? Some people would say -200 when the goal was -500 is well above their budget amount (40%) but others wouldn't. Unless you can explain the algorithm in words using specific numbers, we can't create a formula for it.
+
+*edit*: Okay, actually based on "the Bonus allotment is 20% if they reach or exceed their goal", that helps with the 20% criteria. That's taken care of with a simple `=IF(J2>=J1,20%...)` and works for all four combinations of positive and negative. But there's still the issue of 75%. Like if the budget is -1, then is 0 greater than 75% of their goal? The issue is that it can be argued either way.
+
+
+How I see it (may be wrong, please correct me) is that you have a goal (positive or negative). If they meet or exceed that goal, they get 20%. If they come within 25% of that goal but don't meet or exceed it, they get 10%. 
+
+So basically you want something like...
+
+    =IF(J2>=J1,20%)
+
+and where J1 is negative, you want it to be greater than 1.25 x J1 and when J1 is positive you want to give a bonus if J2 is greater than 0.75 x J1.
+
+
+    =IF(J2>=J1,20%,IF(J1>0,IF(J2>=(0.75*J1),10%,0),IF(J2>=(1.25*J1),10%,0))) 
+or think im missing something. 
+
+Right - and in my case -501 is worse. 
+If J1 were -500 and J2 were -499, J2>J1, so 20%. That doesn't seem right if J2 were instead -98, the result should be 20%.
+In my initial testing this works. 
+SOLUTION VERIFIED
+"J2>=J1" and "J1*0.75<=J2" , so that if someone exactly meets the goal they should get their full bonus, and if they exactly hit 75% of the goal they should get their small bonus.
+
+To do otherwise would be unfair.
+
+EDIT: also, the 0.75 thing is going to fail when you go negative. 75% of -500 is -375, which I do not believe is the intention here.
+
+Normal maths rules work on the assumption that the 'floor' of your number system is 0, but in your case they have decided on a new floor, the point that the person starts off at. So in the case of the -500, the person who is doing the work starts off at maybe -1000, and has to do +500 to get his bonus. That's the key number. So if your sheet tells you what the starting point is (maybe the previous month's actual?) then the rest becomes simple. "IF((current_value - starting_value)>=(target_value - starting_value)" etc...
+Just making a guess at the logic here:
+
+If the cost centre's goal was to have expenses (which are tallied in the negatives) to be greater than or equal to 500, then both -499 and -98 match that goal. 
+
+If the ending cost was 501, then they should get 10% because they got to within 25% of the expenses goal (greater than or equal to -625). 
+Glad to help! In the future, please try to explain in words and pictures/examples what you're after and we'll be better able to help you without everyone being rather confused. 
+
+
+You have awarded one point to _solarpool_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+thank you for seeing this. You are right that it misses the case where the actual is more negative that the budget. 
+If expenses are the negatives, then you'd want them as small as possible in absolute value. With a budget of -500, -98 actual would be much better than -499. Granted -499 is still better than budget, but not by much.
+
+If the idea were that expenses greater than budget would produce offsets at 20%, expenses below but within 25% of budget produce offsets at 10%, and expenses less than 75% of budget produce no offsets, that'd make sense, but then -98 / -500 producing 20% wouldn't make sense.
+
+OP needs to provide clearer, more complete specs.
+Thank you. Next time ill learn how to post the formulas like you guys did. 
+> OP needs to provide clearer, more complete specs.
+
+This, so much. 
+
+Care to clarify, /u/shoulinjedi ?
+Sidebar to the rescue! 
+
+    TO APPLY CODE FORMATTING
+
+    Use 4 spaces to start each line
+  
+Yes -98 is much better. But in this specific measure they are not given extra for going over. (the business does compensate them in other ways for how far over their goal they go). 

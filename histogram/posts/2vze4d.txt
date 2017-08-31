@@ -1,0 +1,101 @@
+Python Library to Allow MS Excel spreadsheets and Python Applications to Share Data and Code
+question: why is python better than VBA?
+Okay, so I took a look at it and once you get passed the "pythonic" differences (the big one: workbooks don't reveal worksheets which, in turn, don't reveal ranges -there is no hierarchy) it seems to work quite well.
+
+I'm pleasantly surprised, and will continue my investigation...
+
+You should look into the pandas library and stuff like that. 
+Threw this together quick to test Excel curve fitting vs scipy.optimize.curve_fit:
+
+    import numpy as np
+    
+    import matplotlib.pyplot as pyplot
+    from xlwings import Workbook, Sheet, Range, Chart, ChartType
+    from scipy.optimize import curve_fit
+    
+    FUNCTION_NAME = "Ax**2 + Bx + C"
+    
+    def func(x, a, b, c):
+        return a*(x**2) +b*x + c
+    
+    LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    
+    def excel_style(row, col):
+        """ Convert given row and column number to an Excel-style reference. """
+        result = []
+        while col:
+            col, rem = divmod(col-1, 26)
+            result[:0] = LETTERS[rem]
+        return ''.join(result) + str(row)
+    
+    
+    wb = Workbook()
+    ws = Sheet.add()
+    
+    xdata = np.linspace(0, 5, 50)
+    
+    y = func(xdata, 2.5, 1.3, 0.5)
+    ydata = y + np.random.normal(size=len(xdata))
+    
+    Range("A1:A3").value = [[FUNCTION_NAME], ["xdata:"], ["ydata:"]]
+    
+    Range("B2").value = xdata
+    Range("B3").value = ydata
+    
+    sx = excel_style(2, len(xdata)+1)
+    sy = excel_style(3, len(ydata)+1)
+    
+    Chart.add(None, 390, 75, 355, 225, source_data=Range("B2").table, chart_type=ChartType.xlXYScatterLines, name="Chart")
+    
+    popt, pcov = curve_fit(func, xdata, ydata)
+    
+    Range("A7").value = "popt:"
+    Range("A8", asarray=True).value = popt
+    
+    Range("A10").value = "pcov:"
+    Range("A11", asarray=True).value = pcov
+    
+    Range("E5").value = "{E8:G8} = ctrl + shift + enter"
+    Range("E7").value = "linest:"
+    Range("E8").formula = "=LINEST(TRANSPOSE(B3:" + sy + "), TRANSPOSE(B2:" + sx + ")^{1,2})"
+    
+    Range("A15:A18").value = [["comparison"], ["a: "], ["b: "], ["c: " ]]
+    Range("B16:B18").value = [["=(A8-E8)/A8*100"], ["=(B8-F8)/B8*100"], ["=(C8-G8)/C8*100"]]
+    
+    pyplot.figure()
+    pyplot.plot(xdata, ydata, label='Data', marker='o')
+    pyplot.show()
+
+Not elegant, but the function to fit can be changed if others want to rip some of this.
+
+Does anyone know if you can use this to interact with an OLAP data cube? I have no Python experience, but I'm planning on learning.
+Where to even begin.... Okay, so "better" is one of those words that muddles things up a bit; partly because it's meaning is vague, but mostly because it's interpretation depends on the subject and context (i.e. "better" is subjective). When speaking in terms of programming languages, one being "better" than another doesn't really even make sense. Better for what? Everything?
+
+Semantics aside though, I would rather code in python instead of VBA for a few reasons (weak and strong):
+
+1. Less boilerplate code (weak)
+
+I know VBA doesn't require dimensions and types for every variable, but, by convention, best practices do dictate that this be done (you won't be getting any intellisense if you don't!). As such, many methods and procedures begin with 1-20 lines of "Dim" statements typing everything before the actual meat of the program begins. It can get fairly annoying sometimes.
+
+2. Syntax (weak)
+
+I simply prefer coding python syntax over VBA. Not hugely different, but working with arrays and such (pretty relevant to Excel) is a bit easier in python. In addition, I feel like the python standard library comes with a bit more bang than VBA. This brings us to the big one...
+
+3. Support (strong)
+
+VBA (VB6) is basically a dead language. It still runs behind Office, but for how much longer? How many Git projects are libraries for VBA?  On the other hand, python has an extremely strong community behind it. The sheer amount of 3rd party python libraries at one's disposal is incredible. If you can think it, there is already probably a library to help you do it. This makes so many tasks a piece of cake in python (curve fitting for example). With VBA, you will often find yourself re-inventing the wheel.
+
+All that said, there is no replacement for VBA (see comment above about *xlwings*). There is simply no better way to interact with Excel than using the VBE and, it's partner in crime, VBA (although you can use VB.NET and Visual Studio's Miscrosoft.Office.Interop.Excel Class as well... it's just not always as convenient). This is especially true if you plan to heavily rely on the Excel API (Workbook, Worksheet, Range, etc).
+
+So in the end, while python may provide a more integrated environment for production, VBA is still the master of it's domain.
+
+
+
+That depends what you mean. You will definitely NOT be able to use *xlwings* to interact with any part of the Excel data model, but *Cubes* is a python framework that can be used to mess with OLAP data.
+
+*xlwings* really only has a handful objects (Workbook, Worksheet, Range, Chart) that you can interact with currently, and most of these don't have anywhere near all of the methods/procedures mapped to them. From what I can tell (have a look at the Git), *xlwings* in its current state is NOT a replacement for VBA programming in Excel (there is just no way... for example iterating through a range is a pain), rather, more of an interface between Excel and Python (i.e. Easily link/insert Python scripts/small apps between Excel and source data) which is extremely useful considering the enormous amount of python libraries/data crunching techniques that could be used instead of messy VBA modules.
+
+Personally I've never used *Cubes*, so you may have to be the investigator on this one. I'm sure you would be able to grab data from Excel, manipulate it through python, then push it back to a spreadsheet if you are diligent enough to try.
+
+EDIT: Also, Python > VBA :)
+a very well thought out reply -- thanks for the thoughts!

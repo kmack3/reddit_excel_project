@@ -1,0 +1,61 @@
+Would you find this useful? (Convert an Excel worksheet to a working website)
+This is utterly fantastic.  You sir, are a genius and I would be very interested in talking to you about allowing me to create an offline (intranet instead of whole web) version of some of my spreadsheets.  I understand that is not necessarily the point but for my office it would be immensely useful.  Please let me know if you could make that happen :) 
+
+Also will this cope with vba?
+
+Well done, fantastic job!
+This would be great. I'm trying out your website, but it seems to be stuck and the website is not loading.
+Interesting, I have one file that I could find a use for here, but it is around 5 megs and requires 2 macros to be of any use. Will these restrictions always be in place as the nature of the site or potentially change with site upgrades?
+This is mind blowingly awesome. Thank you for this. I will be registering for sure.
+This is amazing.
+Do you have a list of all the compatible features from excel which will transfer?
+
+Insertion deletion of rows
+
+User forms
+
+Which worksheet functions still work
+
+Etc. 
+
+ this is something the company I work for would be very very interested in and even pay for if y have near 100% compatibility with all features in excel.
+Hi Limebaish,
+
+Thanks for writing.  The system does support "private" worksheets - which I could probably expand to allow for access to specific users. 
+
+That said, if your goal is to post on company intranet.  I think I may be able to make that work with some tweaking.  Unfortunately, this system can't support VBA/macros.  
+This is great!  I too would be interested in making an intranet version for our small office.  Is it an all-contained page, or do you need some kind of database?  Would I be able to add it to a Wordpress site?  Is it possible to upload spreadsheets that primarily are for record-keeping, but with some simple formulas?  Is it possible then for multiple people to make simultaneous edits on the uploaded spreadsheet?  Lot of questions because there's so much potential here.
+Hi cqxray,
+
+Thanks for writing!
+Did you upload the Price/Cost/GM Calculator?  It seems to work for me.
+Hi Swiff182,
+
+I arbitrarily set the size restrictions for safety's sake - they could very well change in the future.
+
+I don't imagine supporting macros because I would theoretically need to convert all the macro logic into javascript.  I think you should be able to upload worksheets that contain macros - they would just just be stripped out.
+Awesome thanks!
+Hi d4m,
+
+Right now, we only support basic arithmetic, + SUM() and PRODUCT().  I expect to keep adding functions regularly.
+
+Adding/removing rows wouldn't really fit with this particular app as it stands.  This software basically interprets your worksheet as a calculator of sorts.  It figures out which cells are inputs and makes those editable on the website.  Everything else is static.
+
+That said, it's interesting to hear about your (and another poster's) companies needs - even if they are not a match for my product.
+
+If you're intention is merely a shared spreadsheet that is available on your intranet - I think MS sharepoint supports this type of functionality. 
+
+Hmm for some reason a blank page appears after I've uploaded the excel sheet with only the button "Calculate" below it.
+
+You can see it here, I think: [http://360cells.com/Worksheets/DetailsDemo/149](http://360cells.com/Worksheets/DetailsDemo/149)
+
+Edit: I'm not sure if it matters but I'm working in a European system of Excel (, and . are reversed etc.).
+Far more than simply a shared worksheet.  To give your idea, I just finished 2 massive projects.  One involved creating a tool that would project 10 years into the future all the network topology and bandwidth needs for subscribers of HSD, VOD, SDV, DTA, Digital Broadcast, analog broadcast, cloud DVR.  Needed roughly 1200 controls on user forms to accomplish the extent of the clients needs.  This was planned for a web launch using SAP Dashboards, but the tool was simply too damn heavy for SAP.  It would lag to all holy hell.  The other didn't require net access but it would simplify its use since it must service a world wide network of sales reps.  This one topped the scales at 14k lines of vba code.
+Hi finnurtg,
+
+I can see the converted choked on one of your formulas.  Right now it only supports some basic functions.  Still, I would want to post any content that was interpreted.  I'll be working more on this this over the weekend.  Thanks for trying.  
+
+It was my pleasure. I love this idea.
+
+And I just used brackets (), thought it would be understood. But that's fine. I hope this idea works out well.
+

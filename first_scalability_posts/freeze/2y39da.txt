@@ -1,0 +1,45 @@
+freeze
+2y39da
+How to freeze a number in a cell after a macro transfers the formula to a different sheet
+
+Hi everyone,
+
+I currently am working on a spreadsheet that uses a macro to transfer an entire row of data over to a different spreadsheet when the value in column I equals a certain value.
+
+When rows are transferred to the other spreadsheet, I want the value in a certain cell to freeze. The problem is, that formula is reliant on the current date. Here is the formula:
+
+=IF($G4="","",TODAY()-$G4)
+
+Basically, the formula takes the date that is entered into column G, and converts it into a number based on the number of days since that date. The metric I'm interested in is when that row of data is moved to the other sheet by the macro, so I want the value that formula gives to freeze when it is transferred.
+
+Thank you for the help!
+
+
+-------------
+Sounds like you want to paste values.
+
+To copy row 1 and paste values to row 2:
+
+    range("1:1").copy
+    range("2:2").pastespecial paste:=xlpastevalues
+
+If you want the formats to be the same, add the following:
+
+    range("2:2").pastespecial paste:=xlpasteformats
+
+Do you need to preserve formulas in any of the other columns?
+-------------
+
+Hi!
+
+It looks like you are trying to ask a question!
+
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?    
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)    
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+

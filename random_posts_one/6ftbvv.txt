@@ -1,0 +1,168 @@
+6ftbvv
+Code Monkey trying to make code functional and elegant - filter-copy-paste from one workbook to another
+Hey,
+
+Trying to up my VBA game by only working with the objects in question, and minimizing my use of selects, activates, etc. I seem to be opening, selecting, and filtering well, I just can't get any of my pasting to work. Additionally, I'm not sure how I can work with the object directly when a file has a name I know and can find, but the tab name keeps changing. (That's the copy section). Also hoping to find a way to pass an array from Excel to VBA, so I can keep my "Filter for" array in the excel workbook, not the code itself. That part is in, but it doesn't seem to work properly. Code is as follows:
+
+    Option ExplicitSub
+
+    sub ResetFilters()   
+      On Error Resume Next
+      ActiveSheet.ShowAllData    
+      On Error GoTo 0  
+    End Sub  
+    'This is for clearing out the filters in a sheet. I should use a boolean instead of an onerror
+
+.
+
+    Sub ResetAllFilters()
+    Dim ws As Worksheet
+    Dim wb As Workbook
+    Set wb = ActiveWorkbook
+    For Each ws In wb.Worksheets
+    Call ResetFilters
+    Next
+    End Sub
+    'And this is to clear all of the filters out in a workbook. It's so I know exactly where I stand with filters and don't need to be concerned.
+
+.
+
+    Option Explicit
+
+    Sub CSReport()
+    Dim CSReport As WorkbookDim CabReport As Workbook
+    Dim ExCashArchive As Workbook
+    Dim CABReconFilePath As String
+    Dim CSreportpath As String
+    Dim ExCashPath As String
+    Dim HoldingsTabName As String
+    Dim IMSHoldingsTabName As String
+    Dim HoldingsTab As Worksheet
+    Dim IMSHoldingsTab As Worksheet
+    Dim LastRowHoldings As Integer
+    Dim LastRowIMSHoldings As Integer
+    Dim LastRowCS As Integer
+    Dim RngHoldings As Range
+    Dim RngIMS As Range
+    Dim RngCS As Range
+    Dim Fundlist As Variant
+    Dim dt As Date
+        dt = Range("Today")     
+        Fundlist = Range("FundList")
+      'Fundlist is an offset along the entire fundlist. Hoping I can use it as a filter
+        CABReconFilePath = Range("CABReconFilePath") 
+       CSreportpath = Range("CSReportPath")                        
+      ExCashPath = Range("ExcessCashArchiveFilePath")      
+      'What are the files we care about
+        HoldingsTabName = Range("HoldingTieOutTabName")     
+      IMSHoldingsTabName = Range("IMSHoldingsTabName")       
+     'What are the tab names we care about
+                Workbooks.Open Filename:=CABReconFilePath      
+                Set CabReport = ActiveWorkbook         
+                       Call ResetAllFilters     
+                      
+          Workbooks.Open Filename:=CSreportpath    
+               Set CSReport = ActiveWorkbook    
+               Call    CSReportFilter                      
+
+                  Workbooks.Open Filename:=ExCashPath      
+        Set  ExCashArchive = ActiveWorkbook      
+             Set HoldingsTab =  ExCashArchive.Sheets(HoldingsTabName)      
+             Set IMSHoldingsTab =  ExCashArchive.Sheets(IMSHoldingsTabName)   
+
+     'Opening and defining the workbooks we're dealing with    
+
+      
+          LastRowHoldings = HoldingsTab.Range("A" & Rows.Count).End(xlUp).Row          
+          LastRowIMSHoldings = IMSHoldingsTab.Range("A" & Rows.Count).End(xlUp).Row        
+           'Defining the edges of the data                   
+       Set RngHoldings = HoldingsTab.Range("A3:K" & LastRowHoldings)      
+       Set RngIMS = IMSHoldingsTab.Range("A3:P" & LastRowIMSHoldings)    
+ 
+         
+       'Grabbing the data                   
+      RngHoldings.AutoFilter Field:=2, Criteria1:=Fundlist, Operator:=xlFilterValues           RngIMS.AutoFilter 
+    Field:=4, Criteria1:=Fundlist, Operator:=xlFilterValues     
+             Set RngHoldings = HoldingsTab.Range("A3:K"& LastRowHoldings).SpecialCells(xlCellTypeVisible)     
+       Set RngIMS = IMSHoldingsTab.Range("A3:P" & LastRowIMSHoldings).SpecialCells(xlCellTypeVisible)                       
+    CabReport.Sheets("CS").Range("C1").PasteSpecial _    Paste:=xlPasteValues, Operation:=xlNone, 
+    SkipBlanks:=False, Transpose:=False  Application.CutCopyMode = False
+
+
+      Set CabReport.Sheets("Holdings_TieOut").Range("A3").Resize(RngHoldings.Rows.Count).Value = 
+    RngHoldings.Value  
+    Set CabReport.Sheets("IMS_Holdings").Range("A3").Resize(RngIMS.Rows.Count).Value = RngIMS.Value    
+      Set CabReport.Sheets("Recon Summary").Range("B1").Value = Format(dt, "MM/DD/YYYY")
+
+    CSReport.Close savechanges:=False
+    ExCashArchive.Close savechanges:=False
+    CabReport.SaveAs Filename:=CABReconFilePath & Format(dt, "MM.DD.YY")
+    CabReport.Close
+
+    End Sub
+
+.
+
+    Sub CSReportFilter()
+    Call ResetFilters
+    Range("A1").Select    Range(Selection, Selection.End(xlToRight)).Select    Range(Selection, 
+    Selection.End(xlDown)).Select    Selection.AutoFilter    ActiveSheet.Range("$A$1:$W$71").AutoFilter Field:=1, 
+    Criteria1:="=*1470*", Operator:=xlFilterValues    Selection.Copy        End Sub
+
+I get the "Pastespecial method of range failed" on my pasting. I get various error messages when I pass over that part and try to get the ranges in. I've been googling this and trying to get it to work for about two weeks now with no luck. Any help would be greatly appreciated!
+
+
+-------------
+Where do you actually fill the clipboard? I don't see a `.Copy` line within CSReport(). Are you expecting to paste the data from when CSReportFilter() was called?
+
+Hard to tell from your formatting -- is ` Application.CutCopyMode = False` on its own line? 
+
+You can remove all of `Operation:=xlNone, 
+SkipBlanks:=False, Transpose:=False` these are just default values and are unnecessary.
+-------------
+Your ResetAllFilters() is flawed. ResetFilters() work on activesheet but activesheet does not change in your loop. Change ResetFilters() into taking worksheet as parameter.
+-------------
+A few pointers. You can define your variables on fewer lines:
+
+    Dim CSReport, CabReport, ExCashArchive As Workbook
+    Dim CABReconFilePath, CSreportpath, ExCashPath, HoldingsTabName, IMSHoldingsTabName As String
+    Dim HoldingsTab, IMSHoldingsTab As Worksheet
+    Dim LastRowHoldings, LastRowIMSHoldings, LastRowCS As Integer
+    Dim RngHoldings, RngIMS, RngCS As Range
+    Dim Fundlist As Variant
+    Dim dt As Date
+
+I would advise that you just shouldn't use copy and paste...
+
+    range("d1:f3").value = range("a1:c3").value
+
+is a much better solution than copy and paste unless you require cormats to be copied over, which in this case it doesn't look like you do...
+
+Also instead of working with filters you should probably either:
+
+1. Work with ADODB and perform an SQL on the table. (the tables will have to be tables for this to work though...)
+2. Just work with arrays.
+-------------
+Application. Line is on it's own yes. 
+
+Got it, I'll remove the operation line.
+
+And yes, what's copied from csreport filter is what I'm trying to paste. If you know a way to select the sheet without knowing it's name, or defining a sheet with a partial name, I can completely remove all copy pasting, and just use the same method throughout
+-------------
+Hmm, I thought it would go through every sheet but n the workbook.  Clearly I need to rework it, thank you!
+-------------
+Well, if I knew how to do 1 or 2 I would. Issue I have with 1 is were sent the data, so it seems just as easy to filter as to sql it. For 2, if you can show me where I can find out how to do that in a flexible, expanding, easy to modify way I am all ears. 
+-------------
+You can select it by it's location, i.e. 
+
+     CSReport.Sheets(1).Range.Range("$A$1:$W$71").AutoFilter Field:=1, Criteria1:="=*1470*", Operator:=xlFilterValues
+     CSReport.Sheets(1).UsedRange.Copy
+
+-------------
+Yes, it does "go through" every sheet, but it does not change which sheet is active.
+
+However, don't be surpriced is Excel fails on some operations if you are performing them on a sheet that is not active or not visible! I have had to work around such errors more than i care to remember.
+-------------
+Hey thank you! That's super appreciated!
+-------------
+Ahh thank you!

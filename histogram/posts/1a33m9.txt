@@ -1,0 +1,236 @@
+Speed up your macros by adding these three lines...
+It's not quite that simple as it is completely dependent on what it is you are trying to do. That being said, I use them in just about everything I write...    
+
+Screen updating is key if you are doing anything visual.  
+Calculation is only relevant if you are writing data back to the sheet that impacts formulas or you have volatile formulas in place.  
+Evens is only key if you have an event trap in place - if you do and don't know to turn this off you have bigger issues.    
+
+There are, of course lots of others dependent on what you are up to, the other one I sometimes need to use is to turn off page break updates...    
+
+Given how often these type of functions are used I tend to abstract them as a function as below:
+
+      Public Sub Speed_Up_On()
+          Speed_Up (True)
+      End Sub
+      Public Sub Speed_Up_Off()
+          Speed_Up (False)
+      End Sub
+      Private Sub Speed_Up(Enable As Boolean)
+      
+          Application.ScreenUpdating = Not Enable
+          Application.DisplayAlerts = Not Enable
+          Application.EnableEvents = Not Enable
+      
+      End Sub
+ 
+When you're setting application wide properties it's a good idea to check their current state before you set them to your desired state. That way you can set them back as they were before you turned them off.
+
+    Sub foo()
+
+    Dim intCalculation As Integer
+
+    'get current state
+    intCalculation = Application.Calculation
+
+    'switch off
+    Application.Calculation = False
+
+    'do your stuff
+
+    'turn it back to its previous state
+    Application.Calculation = intCalculation
+    End Sub
+
+Point being, you don't know what state someone already set their properties to, so it's only polite to leave it as you found it.
+
+One thing that really helps macro performance is to avoid read/write one cell at a time.
+
+For example:
+
+    Dim rngValues() as Variant
+    rngValues = Range("A1:A20")
+
+Instead of looping through each cell. Writing is a little bit more complex, but totally worth it. :)
+
+This is all well and good until the code fails at some point and the user is left wondering why their workbooks aren't working right anymore.
+
+In 99% of cases, people don't make macros that are so complicated that these would make a noticeable difference.
+Yeah this assumes you can afford to turn them off.
+
+Good idea with the function
+I'm not so sure that avoids a lot of processing. Probably a little?
+
+But it certainly is a bit more confusing. 
+
+Consider, what you are telling the VBA interpreter is "Assign these cells to this array". The VBA engine will not assign the cell **objects** to the array though, it assigns the **values** because the .Value is the default member accessed from the cell object (what this means is, refer to the cell, get its value. On other objects without a default member, you get [NOTHING](http://stream1.gifsoup.com/view/263741/you-get-nothing-o.gif)!)
+
+So, essentially, you tell it to assign the cells, instead it assigns the values. This is what you are saying to do, but it is a bit misleading. Also, the Excel engine will still loop through the cells and assign the values one by one. Probably just a little faster than making VBA do it though.
+I'm curious, how would you write for it though? Assuming I want to do something with that range, I usually use a step 1 for...next loop, but what you have said sounds pretty interesting.
+I always tend to use:
+
+      rngValues = Range(cells(1,1),cells(20,1)).value2
+
+As using a string is fairly inflexible and the alternative allows for dynamic selection or use of constants :)
+These are for macros that need sped up. I use many that take >10 seconds to run.
+Most importantly, if you are going to use these, you damn well better use error handling.
+
+If your user (or you) ends up ending a macro because of some data conversion error, all of those environment settings stay.
+I *really* don't like to teach newbies this.  It's just plain bad advice until they are ready to use robust error handling. "Be sure to turn it back on" fails if they have unhandled exceptions, and they will.  Disaster can strike with calculation/events off, the screen updating turns back on by itself on an exception, so the user won't even know there's an issue.  I have seen some extremely costly error happen because of amateur spreadsheets fiddling these settings (and other amateur spreadsheets counting on them).
+
+Whenever I am writing to a spreadsheet, I have an **object** that saves application states and restores them to their previous state on command or when it's destroyed.  And I *always* have error handling when I'm using this object, so I'm sure I get a clean exit and it de-scopes.
+
+
+On the flip side, you need to make sure that some idiot hasn't turned off calculation.  Try not to rely on the spreadsheet to calculate for you when possible. If you need to write formulas, then force calculations after.
+
+Switched off event handling is a bit tougher.  How do you detect if there's no events?  One way is to use activeX buttons and catch the click events to launch your code instead of directly attaching a procedure.  I have a splash screen (tab) with my company's logo.  Before close, all tabs are hidden except this one.  On open, the needed tabs are displayed again and the splash screen hidden.
+Yes, it assigns the values instead of the objects, so you kind of lose some info, but I guess that when you go through a huge amount of data that's what you normally want: raw data (YMMV). 
+
+Regarding speed of execution, I don't have any available benchmark and I don't really know what Excel does behind the scenes, but from my experience it's a lot faster. But I may be wrong.
+The reason it saves time, and it does, is that the event handling and dependency checks/calcs are done once at the end instead of for each cell. 
+
+It's not the value assignment that takes heaps of time, we know this because of the speed at which things run when you turn off the application states, it's all that extra stuff that happens when you write in a cell.
+Well, you would then have to loop through the array, but it would be a lot faster than doing the loop through the range.
+Yes I think that's a better approach. The example I supplied was just on the top of my head
+In fact, here's the code (class module).  Maybe useful for someone.  It's about 3 years old, and I'm cringing in a couple places as I read through, it could have been a bit more succinct, but it's done me well.
+    
+    Option Explicit
+    '
+    'hold the current status (to report)
+    Private StatusOff As Boolean
+    Private curDisplayAlertStatus As Boolean
+    Private curEventStatus As Boolean
+    Private curScreenUpdatingStatus As Boolean
+    Private curCalculationStatus As Integer
+    '
+    'Holds the initial status to restore
+    Private initDisplayAlertStatus As Boolean
+    Private initEventStatus As Boolean
+    Private initScreenUpdatingStatus As Boolean
+    Private initCalculationStatus As Integer
+    '
+    '
+    
+    Public Property Get Status() As Boolean
+    'Read only property to check if the status is off
+    'We will run a snapshot first to align
+    Snapshot
+    Status = Not StatusOff 'This is a "negative" since we are reporting the status
+    
+    End Property
+    
+    
+    Public Sub AllOff()
+    
+        If Not StatusOff Then
+            Snapshot
+            
+            With Application
+                .DisplayAlerts = False
+                .EnableEvents = False
+                .screenUpdating = False
+                .Calculation = xlCalculationManual
+            End With
+            StatusOff = True
+        End If
+    
+    End Sub
+    
+    Public Sub RestoreToSnap()
+        
+        If StatusOff Then
+            With Application
+                .DisplayAlerts = initDisplayAlertStatus
+                .EnableEvents = initEventStatus
+                .screenUpdating = initScreenUpdatingStatus
+                .Calculation = initCalculationStatus
+            End With
+            StatusOff = False
+        End If
+    End Sub
+    
+    Public Sub AllSafe()
+    'Turn everything on.
+    'Only meant to be used from the top of the callstack/final exit point
+        With Application
+            .DisplayAlerts = True
+            .EnableEvents = True
+            .screenUpdating = True
+            .Calculation = xlCalculationAutomatic
+        End With
+        
+        StatusOff = False
+        
+    End Sub
+    
+    Private Sub Snapshot(Optional CurrentStatus As Boolean)
+    'This does not need exposed - used to align here
+    
+    If CurrentStatus Then
+        'optional flag to snap the current stati, regardless of anything else
+        With Application
+            curDisplayAlertStatus = .DisplayAlerts
+            curEventStatus = .EnableEvents
+            curScreenUpdatingStatus = .screenUpdating
+            curCalculationStatus = .Calculation
+        End With
+    Else
+        If Not StatusOff Then 'If we are in statusoff mode, we don't want to resnap
+            With Application
+                initDisplayAlertStatus = .DisplayAlerts
+                initEventStatus = .EnableEvents
+                initScreenUpdatingStatus = .screenUpdating
+                initCalculationStatus = .Calculation
+            End With
+            
+            'If all of our settings are already set false, then we'll already set our statusoff flag to avoid further iterations
+            If initDisplayAlertStatus = False And _
+                initEventStatus = False And _
+                initScreenUpdatingStatus = False And _
+                initCalculationStatus = xlCalculationManual _
+                Then
+                
+                StatusOff = True
+                
+            End If
+        End If
+    End If
+    
+    End Sub
+    
+    Public Sub DebugPrintStati(Optional ReportRestoreValues As Boolean)
+    
+    If ReportRestoreValues Then
+        Debug.Print "DisplayAlerts =" & initDisplayAlertStatus & vbCr & _
+            "EnableEvents =" & initEventStatus & vbCr & _
+            "screenUpdating = " & initScreenUpdatingStatus & vbCr & _
+            "Calculation = " & initCalculationStatus; ""
+    Else
+        Snapshot CurrentStatus:=True
+            Debug.Print "DisplayAlerts =" & curDisplayAlertStatus & vbCr & _
+            "EnableEvents =" & curEventStatus & vbCr & _
+            "screenUpdating = " & curScreenUpdatingStatus & vbCr & _
+            "Calculation = " & curCalculationStatus; ""
+    End If
+    
+    End Sub
+    
+    Private Sub Class_Initialize()
+    
+    End Sub
+    
+    Private Sub Class_Terminate()
+        Me.RestoreToSnap
+    End Sub
+
+I have an error handler that turns everything back on and ends the script. Isn't that really the bare minimum you need? Some of my macros don't have error handlers , just "on error resume next", any harm there?
+
+To be honest, I don't have a good feel for how much faster it is either. I don't often have a need to load a range of cells into an array.
+Dependancy checks and calcs are done on value assignment *to cells*. Not to array elements.
+We've got a famous macro at work that has about 2500 lines of recorded code in about 15 procedures with "on error resume next" at the top of every one. There's no way to tell which lines are executing and which not. No one is willing to touch that thing without scrapping it and starting over from requirements. 
+
+Resume next has some specific uses. If you abuse it though, best case you end up being "that guy". Don't be that guy. Use error handlers.
+Mhmm, and if you assign an array to a range all at a whack, you get a single check.  Similar if you paste in a large range, you don't get the dependency/calc/event overhead for every cell, but rather a single iteration at the end.
+Yes, but up above, cell values are being assigned to the array.
+
+When assigning arrays to a range cells (still confusing!) that does accomplish everything you were saying. (and is something I've done on more than one occasion)
+Ah, I didn't read what he was doing closely enough then!

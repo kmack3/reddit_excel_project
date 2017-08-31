@@ -1,0 +1,86 @@
+6ixc6v
+Informing users that a Function is still calculating.
+So I have a couple of functions that pull in some variables, query a web service, and return the results of the web service query. Because it's a web service, sometimes it takes a few seconds for the query to recalculate/update its cell.
+
+I tried to have the cell background turn yellow just before the actual query code executed, then back to no colour when the query returned, as a signal to users that the figure in that cell was in the process of changing. I've used that technique before when the code was structured as a SUB, but it doesn't work when it's a FUNCTION.
+
+So, VBA coders of reddit, how do you indicate to your users that something is happening, and they should just wait a bit before recalculating?
+
+
+-------------
+How about changing the mouse cursor in your function to "Wait" (hourglass in earlier Windows) then back to normal immediately before ending?
+    Function SlowCode()
+    Application.Cursor = xlWait
+    'slow code
+    Application.Cursor = xlNormal
+    SlowCode = result
+    End Function
+
+
+
+-------------
+Could you drop your code to change the cell color into a sub and then call it at the start and end of the function?
+-------------
+You can updating the status bar in the lower left of the Excel window by using .StatusBar as follows:
+
+    Application.StatusBar = "CALCULATING"
+
+"CALCULATING" can be whatever text you want.  Make sure to reset it back to default after the function is done by using
+
+    Application.StatusBar = False
+-------------
+Also a good, workable solution. More subtle than my giant orange text box, but intuitive. Can I award a clippy point to more than one person?
+-------------
+Solution Verified
+-------------
+I'll give that a go, thanks!
+-------------
+Just tried that.. a little sub that changes the interior colour of the cells in question.. Adding in the call statements into the function breaks it. Sadly that's not an option.
+
+So far the only visual signal that I seem to be able to give users that something is happening is a MsgBox - which isn't exactly a *good* signal.
+-------------
+I did that at first, but it was too subtle. If I'm going to use visual management, I want it to be really effective!
+-------------
+Do problems have more than one solution?
+-------------
+
+You have awarded one point to _katsumiblisk_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Can you call it before and after the function?
+-------------
+Continuing on the MsgBox line of thought, you could show a modeless form while the function is doing its thing. 
+
+This is better than a message box because it neither interrupts the function nor the user's ability to continue working. In fact, the form can be dismissed and the code continues to run. 
+
+Unfortunately, the form code cannot be used to modify the cell (I tried that). 
+
+[This](https://stackoverflow.com/a/38228015/1248931) Stack Overflow answer is somewhat informative.
+-------------
+Dear Doppelganger:
+
+Just stopping by to make sure you're doing well. I'd call you a nerd for being on an excel sub, but I dice roll and would be calling the kettle black. I hope life is good and things are going well for you.
+
+Twinsies!
+
+Sincerely,
+
+You, sort of.
+-------------
+The function isn't called, it's a UDF that I treat like a formula in the spreadsheet.
+
+Still, I've had a few good suggestions that work.
+-------------
+Solution Verified
+
+You got me thinking... I've now got a textbox that appears when the function is calculating, and disappears when the function has updated. 
+
+Thanks! Simple solutions are sometimes the ones I need the most help with...
+-------------
+Hey to you, my cop copycat buddy!  wow, up to 5, your mouth must taste like feet! :D :D  Hope you are well :)
+-------------
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,60 @@
+6fvh1v
+Conditional format if YEAR = BASEYEAR + Multiple of...
+Hi gurus. Hoping you can help me with this one. Have a spreadsheet for operation control. Spreadsheet has several tasks that must be completed either annually, every 2,  3, 5 or 10 years. Problem is that not all tasks started on the same date.
+
+Example: 
+Task 1 started back in 2008. Must be repeated every 5 years. Last check was 2013. Next must be 2018.
+Each year we add a new column to the spreadsheet. This year is 2017. I don't want the cell to be highlighted because there is nothing to do this year.
+
+Task 2 started in 2011. Repeats every 3 years. Last was 2014. Next is this year. I want the cell to highlight this year.
+
+Sample of current layout is here:
+https://i.imgur.com/ADbQtuD.png
+
+Basically, given a starting year for the task (Column D) and an interval (Column E), how can I check if the current date / year is equal to I1 AND a task check year? I'm relatively sure this will involve MOD or something, but that's about as far as my limited knowledge goes. Just trying to explain it makes my head hurt. I hope I was clear enough though. If not please let me know and I'll try to explain as best I can.
+
+Thanks in advance!
+
+
+-------------
+`MOD` is how I'd approach this too -- for a series w/years in row 2
+
+  =IF(MOD(F2-$D2,$E2)=0,1,0)  
+
+
+-------------
+Yeah, MOD works - you were probably very close.
+
+`=AND(J7=$I$1,MOD(J7,$E7)=MOD($D7,$E7))`
+
+[Imgur](http://i.imgur.com/0k5wY4R.png)
+
+*edit*: Oh yeah, since the divisor is the same, u/12V_man's solution can be used to make something a little shorter.
+
+    =AND(J7=$I$1,NOT(MOD(J7-$D7,$E7)))
+-------------
+Solution Verified
+-------------
+>AND current date / year is equal to I1  
+
+whoops, I missed that part.  this what you need OP
+-------------
+Solution Verified
+-------------
+This worked for me, too! Thanks!
+-------------
+
+You have awarded one point to _12V_man_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Your first proposed solution worked well for me. Thanks!
+-------------
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+welcome :)  
+
+word of warning, my soln only works bc this year is 2017. You will need u/rnelsonee 's more complete soln to highlight only the current year.

@@ -1,0 +1,443 @@
+Your best excel trick
+They tend to be quick answers to common problems that are short and easily readable.
+
+**Replace negative values from a formula with 0 Without an IF Statement**
+
+    MAX(0,[Formula])
+
+
+**Count non-blanks Using COUNTIF**
+
+    COUNTIF([Range],"<>")
+    (use "=" for counting blanks; thanks to /u/daigleo for point this out)
+
+**Multiply numeric ranges in SUMPRODUCT by True/False expressions to make a more flexible SUMIF**
+
+    SUMPRODUCT(([RangeWithNames]="Bob")*([RangeWithScores])
+    (ranges must be equal; returns sum of Bob's scores)
+Note: SUMIF/S are usally preferably in terms of performance and readability, but SUMPRODUCT has the following advantages:
+
+1. Excel 2003 compatibility
+2. Getting the product of > 1 column while still allowing for a condition like the one above
+3. Doing highly flexible VLOOKUPs that allow for selection on multiple columns.
+4. Count distinct values in a range
+
+-
+
+
+    SUMPRODUCT((A2:A100<>"")/COUNTIF(A2:A100,A2:A100&""))
+
+**Manual Color Banding**
+
+Want to do color banding without all the overhead of tables?  [Check this out](http://www.ozgrid.com/Excel/alternate-row-color.htm), I won't steal the credit.
+
+**Anything Involving IFERROR**
+
+Make your reports pretty and get rid of all those #VALUE errors. Enclose every formula:
+
+    IFERROR([Formula],"")
+
+If your formula returns an error, it will make the cell blank.  Easy to maintain and only does the calculation once.
+
+Edit: Change wrong things to righter things
+Google "Excel 2007" & what I'm trying to do :)
+
+Seriously though since I do a lot list comparisons my favorite has to be the INDEX MATCH combination.
+Click a cell containing a formula, then hit
+
+Ctrl + [     <--- (left bracket)
+
+Presto, it takes you right to the data source, even if it's in a different file!
+Crtl-g, select empty cells, delete. 
+
+Simple, but amazing to some people. 
+I don't know that it's a trick, but it IS a formula that almost no one knows. That's likely because it doesn't autofill when you start typing it.
+
+=DateDif(start_date,end_date,units) will give you the difference between two dates. Depending on whether you put "Y", "M", or "D" it will give you the difference in years, months, or days.
+Late to the party but one that is good for auditing a spreadsheet, ctrl+~ displays formulas instead of results.  Not a big thing but can be helpful in certain situations.
+
+
+Edit: Some good stuff in here.  Great idea op.
+ALT+; select visible cells only. I use this all the time to edit and copy filtered columns. 
+
+
+
+[deleted]
+ctrl+d = fill cells. 
+
+Instead of having to click the drag down bar on my surface with that high resolution screen... hugely helpful
+When using VLOOKUP, one often doesn't get any results because you are searching for a number which is formatted as a text or vice versa. This is how to solve it without having to convert the area into the apropriate format.
+
+
+Your lookup-value is a text and the array is in number-format:
+
+    VLOOKUP(your_value * 1, $A$1:$B$100, 2, 0)
+
+Your lookup-value is a number and the array is numbers in text-format:
+
+    VLOOKUP(TEXT(your_value, "#"), $A$1:$B$100, 2, 0)
+I found this both useful and elegant.
+
+    Last_cell_in_column_A = Cells(Rows.Count, 1).End(xlUp).Row
+
+When evaluating long formulas: select part of the formula you want to evaluate and hit F9 - it'll calculate it. Also, everytime you use a mouse in Excel someone somewhere loses money. :)
+
+Got random blank cells in a row, and want to copy the cells above?
+
+Highlight Column -> F5 -> Special -> Blanks -> =CELLABOVE (so =A1 for example).  Magic.
+[This](http://www.k2e.com/tech-update/tips/147-using-excel-to-identify-entries-that-add-to-a-specific-value) walkthrough on how to figure out which entries make up a total has been the best one I've done. 
+
+You use the solver add-in and a little binary trickery to get your answer. It's extremely useful when the auditors start asking for documentation.
+Set up a personal.xlsb and create your own macros therein for execution at any time 
+Incrementation.
+
+I have been the bearer of a solution many times because of it. For example, I had a data management job where I need to put prices into a platform. The vendor, however, is a bag of dicks and sent a horrid .csv file. Each item has 4 to 9 rows. 3 of them standard for each item, then the rest are description fragments up to 6 rows long.
+
+This file takes 3 days for the average person to go through and manually merge all of the descriptions.
+
+I jump in there and with a few extra columns make it to minutes of work.
+
+Since there is a blank row in between each item, I can make to the right (lets say F):
+
+=IF(E2="",0,F1+1) [instead of having a name in the header row, the formula needs to be kick started with a 0]
+
+This creates a column that counts off how long each item is.
+
+Then to the right of that:
+
+=IF(F2=0,"",IF(F3>F2,"",F2))
+
+Dont know if this is necessary, but makes it easier for me to navigate and interpret, blanks out everything but the final rows in the items. Then I can make a big nasty nested IF that concatenates based on the number being reported. Something like (in, lets say H5):
+
+=IF(G5="","",IF(G5=3,C5,IF(G5=4,CONCATENATE(C4,". ",C5),IF(G5=5,CONCATENATE(C3,". ",C4,". ",C5)...)
+
+Boom. Copy column H, paste elsewhere, remove blank rows, you have all of your merged descriptions in about 7 minutes time.
+
+Learning how to impose incrementation into a dataset to tick off an attribute is a powerful trick that empowers you to create datasets that allow you to manipulate the data in specific and useful ways.
+
+edit: [Because it was requested, I resurrected an old blog and made a post with screenshots to explain what im talking about](http://exceltinkering.blogspot.com/2015/04/this-is-expanded-explanation-of.html)
+Ctrl + C to copy a cell, then Alt + E -> S to get the Paste Special window
+
+Alt + E -> S -> F (Paste Special Formulas)
+
+Alt + E -> S -> V (Paste Special Values)
+
+Alt + E -> S -> T (Paste Special Formats)
+
+and so on
+The database functions (DCOUNT, DSUM, D-whatever.). They do the same thing as conditional functions such as COUNTIFS, SUMIFS, etc., but the syntax is so much easier to use, to read and to change.
+Dynamic named ranges.  Remember to pin them to your header row so they don't return an error if the first row of data gets deleted.
+
+    =OFFSET(Data!$A$1,1,0,COUNTA(Data!$A:$A)-1)
+Pressing F9 while highlight a portion of a formula or the entire formula will resolve it.  For example, =1+2-9 highlighting 1+2 and pressing F9 will show 3.
+I made a simple macro for my personal workbook that decreases (and a 2nd that increases) the number of decimal places displayed. This saved so much time when formatting later as there is no hotkey (that I've found) to do this. 
+
+Ctrl + Shift + $ for currency, my macro (set to Ctrl + j) to reduce decimals.
+I wrote formulas that do math for me. Lots of formulas. Excel probably calculates more formulas for me in an average day than I could do by hand in my entire life.
+Collect your favorite macros and have them available in every spreadsheet:
+
+https://support.office.com/en-nz/article/Copy-your-macros-to-a-Personal-Macro-Workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566
+Crtl-1
+Opens Format Cells window
+
+"Alt" + "=" - Sums up values above selected cell.
+All my best excel tricks came from the one and only mike alexander of bacon bits/datapig technologies blog :
+
+* [What’s so Special about Zoom 39%](http://datapigtechnologies.com/blog/index.php/whats-so-special-about-zoom-39)
+
+* [Pivot table most valuable trick](http://datapigtechnologies.com/blog/index.php/transposing-a-dataset-with-a-pivottable)
+The Kutools extension to insert blank rows and custom fill lists. I use it daily at work.
+Conditional formatting of banded rows using the formula
+
+=Mod(Subtotal(3,$A$1:$A2),2)
+
+Then copy and paste formatting everywhere.  When you sort, or filter, they stay correctly banded.
+YESSSSS GIVE ME ALL YOUR KNOWLEDGE MUAHAHA
+Go to keyboard settings. Change repeat delay to minimum, change repeat rate to maximum. Throw away mouse. 
+I have a few more advanced formulas, command, shortcuts, etc. but the simple "Alt =" is still a handy one I like to use a lot and people want to know it and can remember it (so i don't get stuck being called to show them "that trick I did that one time")
+[removed]
+The N function. Surprisingly few people know about this one. 
+I've read several times that leaving the cells blank is not recommended.  I switched to 
+
+    IFERROR([formula],0) 
+
+And then just adjust the number formatting to have zeros display as blanks.  I haven't found a good reason why yet though.  Any thoughts?
+I tested the count blanks and it returns the number of nonempty cells. Replacing "<>" by "=" seems to count the blanks though.
+The creation of iferror was a god send.  There used to be so many nested if statements before that.
+> Multiply numeric ranges in SUMPRODUCT by True/False expressions to make a more flexible SUMIF
+
+I prefer using "--", but I'm not sure if it's just a style difference.  Can you test multiple ranges using the "*" technique?  I routinely do something like the following:
+
+    =SUMPRODUCT(--([range_of_colors]="blue"),--([range_of_clients]="ClientA"),--([range_of_Model#]="1234"),[range_of_Order_Qty])
+
+Which will sum up the number of orders of Blue 1234's for ClientA.  SUMIFS will do this fine as well, so this really shines when you have multiple columns of numbers you actually want to multiply together.  For example, I had employee time by client (as a percentage) and wanted to calculate total Labor cost per client for Indirect Labor, Direct Labor, and various departments, and SUMPRODUCT(--(... worked wonders.
+Exactly!
+
+My go to: "Excel 2007 VBA" + what I want to do...
+duuuuuuuuuuuuuude this is great. and Ctrl + ] goes the other way!
+WTF. This is awesome.
+that's cool!
+That only works in some instances. Formulas with more 1 cell reference usually won't work with that shortcut.
+A nice extension of this: when you have blank cells in a column where different values need to repeat thenselves.
+
+High all blanks in the column, press F2 to select the first blank cell in that column. Set that cell equal to the nonempty cell above it and press control+enter. Now you have a clean data set within that column.
+Damn.  I've been sorting values to get rid of blanks this whole time.
+F5 ALT+s k Enter CTRL+ – u Enter
+
+Your way is definitely simpler, but I've been using ALT + E + G -> ALT + S -> K -> Enter for so long that I don't think I can change now!
+[deleted]
+I was going to say... Date1-Date2 gives you the number of days.  I use NETWORKDAYS much more frequently though.
+
+I pretty much only use DATEDIF for months.
+I discovered this a couple weeks ago doing a Google search. It's weird that the formula doesn't pop up, but you can still use it!
+What... so much time wasted...
+Learned this in my beginner Excel class in college!
+I get today's date when I do this. 
+Oh my god, that's so awesome! Does this also work with non-date numbers stored as text?
+Ctrl L and R work as well  
+  
+EDIT: Just Ctrl R not L as noted below, I swear that worked but he's right :p
+Very nice!  I use a macro that allows me to select all the cells and turn them into their numeric forms.  Just make sure you turn off automatic formula updating if you're updating thousands of cells!
+
+    Sub cDecer()
+     On Error Resume Next
+        For Each xCell In Selection
+            xCell.Value = CDec(xCell.Value)
+        Next xCell
+    End Sub
+I prefer
+
+    lastRow = sht.Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+
+Essentially the same functionality (obviously you can run on a single column if you like), but doesn't use the .end(xlUp), which is often an artifact from a recorded macro.  Can also be easily tailored to hit on something specific, by replacing the wildcard with some value.
+
+edit:  Worth mentioning that you can find the last row on *any* column in the range, where I don't think the endUp will do more than a single column.
+can you explain what this actually does?
+I am trying to use it and keep getting a compile error on the (x1up) portion
+I've never run into problems with:
+
+     lastrow = Cells.SpecialCells(xlCellTypeLastCell).Row
+            
+I usually do range("b1000000").end(xlup).row because I don't trust the rows.count to work for some reason. But yes this is great for macros that need dynamic ranges! 
+I usually use this to find the last value in row of cells.
+
+    =LOOKUP(9.99E+307,range)
+And if there are gaps in multiple places in the column, you can still do the same. Select the blanks but press alt + enter to fill all selected cells with the formula.
+Do you know how to have the "To:" section reference a cell?  
+
+For example. Set objective F4 to the value of B2. 
+Even better - make a file with all your macros and save it as add-in (.xlam).
+
+It is easier to back-up this file, share with someone or protect the code of macros.
+why have it as a .xlsb? What difference does that make?
+pls make a video to explain this because it sounds so damn promising
+I don't really get what you are doing and how it works. Is this to make 1 row from multiple rows?  If so, could you give an video/picture/excel file example?
+You can also use ctrl + alt + v for the paste special window.
+I have all three of these functions on the QAT..
+This cut a 20 minute calculation sheet down to 6 or 7. I came here to post this!
+Well, I came here to steal other people's useful tricks, but would have posted this were it not here!
+=/ for the life me I don't get why/how named ranges make life easier...but I don't use macros.
+[deleted]
+What ones do you have saved?
+The good old "Hidden Mario" Easter Egg. I like your style.
+Do you use it for in-line commenting? If so, then I hate you :)
+
+Just kidding about the hate, but seriously, what do you use N() for? I've only seen it to comment stuff in the cell and I hate that because it's hard to find.
+Haha, the reason it's not recommended is because you can't tell there's an error.  So you've kind of defeated the purpose. :)
+
+You should only use this when errors are an expected output (for example, using a vlookup to check whether an item is on a list) or when you're making a display-ready exhibit that has 0 values and division, resulting in #DIV/0 errors.
+
+A more general rule is that if you using "" for the error value, then "" should ALWAYS mean an error.  Otherwise the ambiguity could make for a hell of a time debugging later.
+
+Even so, in practice I'm only strict about it in large models or recurring reporting.  It's never actually caused an issue for me, it's just one of the "best practice" things that has the potential to save you a few hours of headache down the road.
+The problem with replacing an error with 0 is that 0 can at times be a legitimate value. You may be filling in missing data with 0 which could screw up your calculations. 
+
+For example, lets say you have daily prices for a stock but for a couple days you are missing data. If you put zero's there, that could screw up any sort of math you are running on the data (e.g. a moving average). An error or blank space would show that there is data missing, an error would cause an error in the formula, a blank space would case the formula to skip that cell in it's calculation.
+
+As /u/dipque mentioned, you should only replace error values if you know ahead of time why there will be errors. If you are uncomfortable with blank cells but don't like ugly errors, you can always do conditional formatting to give a light highlight to blank cells. This would help you quickly identify missing data.
+*Cough* right.  I'll fix that.  Sorry. :)
+Yes, you can.  It works the same, but to me it's more readable because it feels like array multiplication.  The double sign change has never been intuitive to me.  Like you said though, I think it's just a style difference.
+I can't write code, but I can tweak other people's like a champ!
+Holy crap, so it does! :)
+Nice! 
+Glad to help! 
+Yeah, I believe the issues arise from the fact that every hundred years or so there isn't a leap year. Microsoft apparently didn't account for that so dates might be off by a day or so depending on the lengths of time you're trying to find the difference between.
+Discovered it by accident about 10 years ago.  I tend to post it because I hardly ever see it mentioned and it really can be nice sometimes.  Hope it helps.
+Sorry, i meant ALT+;  
+Ctrl L does not do what you think it does. Ctrl R works though
+Good idea! I just recently started learning VBA and made sth. similar for measures in pivot-tables.
+
+
+I hope you know that you can turn off the automatic calculation while a macro is running. Just get used to encapsulate your code into these:
+
+    Application.Calculation = xlManual
+        'your code
+    Application.Calculation = xlAutomatic
+bit tardy to the party, but is there a way to do this and exclude a certain column. i ended up just using a find max for loop
+"Rows.count" is the last row in the sheet (it depends of the version Excel 2003 have 65536 rows while excel 2007 have more than a million.)
+
+Cells(Rows.Count, 1) is the last cell in the first column.
+
+.End(xlup) is the equivalent of Pressing CTRL + UP from that last cell at the bottom of the sheet.
+
+And .Row will give you the number of that row, so the value stored in "Last_cell_in_column_A" will be the last cell where there is something written in column A.
+
+
+It's very useful in the macros to carry on writing things one after the other and doing it dynamically. 
+_______________________
+Edit:
+Graphically it does something like this: http://imgur.com/eOSDXH9
+To clarify, it's actually VBA code.  And yes, it's very useful.  
+**XLUP** Like:  Excel UP
+I've run into some issues with this particular implementation in the past (it was not returning the last row) and I find using /u/Demgar 's solution to be more robust.
+SpecialCells can lie to you when a cell contains formatting but no data by reporting the formatted cell as the last used cell in the sheet.  I make a point to never use this SpecialCells format for this reason.
+The problem with using the one million is that if you try to run that in Excel 2003 it will crash.
+The way I would do it would be to make a new cell, "G4" which equals: 
+
+    =B2 -F4
+
+Then set objective: $G$4 equal to 0.
+No real difference unless it was password protected and he wanted more security.
+Macro enabled file 
+[No video, but I resurrected an old blog and explained with screenshots.](http://exceltinkering.blogspot.com/2015/04/this-is-expanded-explanation-of.html)
+[No video, but I resurrected an old blog and explained with screenshots.](http://exceltinkering.blogspot.com/2015/04/this-is-expanded-explanation-of.html)
+That's the idea I was illustrating.
+
+You're the second person who has shown interest, so ill see if I can set something up on my old blog.
+As somebody who just discovered this one a few months ago (and had been using alt + e + s + [f, v, t, etc] for years), this changed the game a bit. Mostly because sometimes alt e s randomly glitches out when im tabbing between windows.
+I use this one too, find it much easier.
+I use it so much I wrote some VBA to add it to the right click context menu.
+What is it taking 13 minutes off of?
+Can make your formulas more human readable, can use words instead of cell numbers.  But yes, it's more useful for VBA.
+
+    =vlookup(TargetData,Datarange,x,0)
+Yes, I still don't know which button is which at first glance. Hence why I need the macro. Lol
+I haven't used Excel macros extensively in a couple years but I liked to have these UDFs available at all times:
+
+* Regex Match
+
+* Regex Replace
+
+* Cell Concatenation (i.e. combining multiple cells into one cell)
+
+* IF ELSE IF (able to put multiple conditions and returns in one function rather than ugly nesting)
+Apologies for the delay. It simply tells excel to treat the string as a numeric value. Very handy when you're working with data extracted from a different source - you no longer need to cleanse the data. 
+You can use it to test for a specific error value where iserror is too generic.  For example if you want to test specifically for a DIV/0 error you could do something like:
+    =IF(N(A1)=1,"Divide by 0 error in A1")
+I don't think I've ever tried t use it on my larger models, I only use it when I'm putting together my daily dashboard for distribution to clean up the presentation.  
+
+Thanks for the answer!
+I only tend to use it in model output sheets that are supposed to be pretty reports. In calc sheets I evaluate to specific errors to make debugging easier. 
+> The double sign change has never been intuitive to me. 
+
+Yeah, I'm not sure how exactly Excel parses it.  I've always just considered it a syntax artifact, and not an actual arithmetic operator.
+Immature artists imitate. Mature artists steal. 
+Cool. Thanks for following up. 
+what... what does it do?!?
+What I found out is, that if you delete rows it's value is only updated if you save the document. If content/rows are added it will work fine.
+I found this would be an issue only when sending workbooks to people who you don't know what version they have.
+
+That is why all of my team have the same version of excel.  Makes life much easier!
+I am not sure if that will work.  What I am trying to do is write a macro so that when click on a button it automatically calculates the numbers. 
+
+So the number that I want in the "to:" section is a formula. 
+I just thought the standard was .xlsm so I thought there might be something fantastic about the .xlsb, but I guess not. 
+thanks!
+I get it now. Nice trick. I have roughly the same issue now and then. But with mine there is no blanc row, so this wouldn't work directly. Maybe I can add to this to make it work. Thanks!
+if you're not on the home ribbon, sometimes it glitches out for me.
+Same here. I started using Ctrl + Alt + V because of this.
+Finding the last entry out of 200,000... Around 10 million times.
+The smaller number of entries is a listing of training classes that employees have taken. Every employee at a 1,200-seat call center with high turn over takes at least 1 training class, and sometimes more, and we have to keep a record of them all -- even though we only care about the most recent.
+We have to keep them all because not every class updates all of an agent's credentials, and we need to know all of their credentials. We also need to track terminated employees, in case they come back, or we need to reference historical data.
+The reason it's about 10 million calculations is that there are something like 7 credentials to track across 1200 people, and the super complex lookup we used made multiple calls.
+My math is probably off, but I haven't had to work on that file in a couple years.
+Aah, I can see how this would come in handy. Thanks!
+When I test it by passing the N() function a DIV0 cell, i just get DIV0. 
+
+From the help, N() converts a number to itself, text to 0 (zero) which is the only time I've ever seen it used - to comment stuff inside the cell, and errors to themselves.
+
+So input #N/A to it and it returns #N/A. Input #DIV/0! and you get #DIV/0!
+
+How are you making this work?
+
+SUMPRODUCT takes numeric values for parameters; double negation converts the values to numbers without changing it to a different value.
+Fills right, Ctrl D fills down
+CTRL + L creates a table.
+Yeah, this uses the same funcitonality as .usedrange.  
+
+If you have just created the spreadsheet, .usedrange will be accurate.   If you make an entry at the end of your data, and then delete it, that cell still "exists".  
+
+There's a related common problem with people hitting End+Down, accidentally a creating a ghost cell at the bottom of the document, and then their file size is counted in MB's, vlookups with NA's have to look at ALL the rows before they return NA (slow!), and so forth.  
+
+This is mostly solved on the new formats, as you mentioned, it's trimmed during a save. But it was a huge problem on .xls, and the code you mentioned will return the row of those ghost cells even after a save on legacy formats.
+I don't think I understand. What is the formula doing?
+There is!  It's a binary file which is dramatically more compact than the standard zipped XML files.  So if you have a lot of data in the file, the file will be much smaller and will load much faster.
+Well, I'm guessing that with your data, there is something that all of the first rows share in common, that's how you know that they are the first row. You can plug any criteria into the first formula.
+
+So, for example, instead of "=IF(A2="",..." do " "=if(LEFT(A2,1)="A",...)
+
+But ya. It's not like "there is a paste special that will paste a column as a row" that directly fixes a super common problem.
+
+Its more like if this were /r/martialarts, and the thread was "Your best martial arts trick" and everyone was responding about different ways to karate chop through boards, or bricks, etc. This is sorta like going into that conversation and going "Kenpo is my best trick".
+
+edit: and if you keep your eye out, there are a ton of applications. I have a sales tracker. One column is the autofilled dates, I want to pull out my Tuesday and Thursday data to see how my sales stack up compared to my MWF business.
+
+That means my data is in groups of 7, so I can create a formula =IF(C1=7,1,C1+1), then filter down to 2s and 4s.
+
+Its just a way of interfacing with the data that in my experience, many people don't develop a sense for and that many people have failed to understand when I try to teach them "how I did that".
+You are completely correct, I shouldn't post if I haven't slept in 2 days!
+
+The function I was thinking of was in fact =ERROR.TYPE(A1), I don't know how I confused that with N?
+Thanks for all of your help!
+
+So I want find an interest rate that will make two stock prices equal. So, it there are two methods we use to determine a fair stock price. One of these methods uses an interest rate. 
+
+So I am trying to find the value of an interest rate that will make these two prices equal.  
+
+The first method is just the average of the monthly highs and lows. Which we use a formula for. Lets Call this cell B1.
+
+Now here is where I get stuck. "The discounted cash flow" is in B2 and we use The sum of C6/4/(1+r)^.25 +C7/4/(1+r)^.25+...+ Cn/4/(1+r)^.25
+
+I want to find the "r" That will make B1 and B2 equal. It works when I put the numbers in manually. But I want the "to:" column to be a reference cell so I can write a macro for it. I even tried altering the formula in VBA.  
+
+
+
+uuuuuuuh! Maybe I should go ahead and give that a go with some of my larger sheets. Is it also macro enabled?
+A) r represents the cost of capital, not an interest rate. think of it as the opportunity cost of using that money to buy that specific stock as opposed to investing it in something else, like a CD that pays 5%, except this stock is riskier than a CD so the cost is a little higher.
+
+
+B) in your DCF you have the cashflow discounted at the same i (.25) for all cash flows. I suspect the reason you're doing this is the same reason you divide the numerator by 4, these are quarterly cash flows. in that case the exponent should *increase* .25 every cashflow(.25, .5, .75, 1, 1.25, etc) so that you're discounting that value back relevant to the present period, not the period before.
+
+
+**SOLUTION**
+
+C) finally, to answer your question you don't need to use a macro. simply use the IRR function. the IRR of a DCF is the rate (r) that makes the NPV = 0, or more simply, it's the r that makes the initial outflow equal to the discounted future inflows. in your example, we want to find the r that makes the sum of the DCF = B1. to do this, make a row of cash flows. the first will be **-B1**, followed by the quarterly cash flows. then, in another cell type in "=IRR(cashflow range)" where the cashflow range is the range of cashflows you just made. make sure this includes the -B1. this gives you the quarterly rate r. to convert this into an annual rate IRR annual = (1+(IRR quarterly)^4) - 1. monthly would be the same except replace 4 with 12, etc. This will work no matter how many cash flows you have.
+
+Sorry for the late reply, after work, I'm Excel free.
+
+I'm not sure the solver add-in will help. At least that link won't. 
+
+You may be able to do some math to isolate r though. 
+
+You definitely want to check my math since I haven't done variable isolation since my junior year of college, but see below:
+
+http://i.imgur.com/qzouXVF.jpg
+
+Basically, with some nifty math...
+
+    r = { [ 4 * (C6 + C7 + Cn ) ] ^ 4 } - 1
+
+Does that appear to work?
+
+
+Edit: I just saw /u/half_coda's response below and that looks "righter" than mine. At least there are a lot more words.
+It is!  It's amazing, it really is.  You won't know what you did without it.
+Thanks, That sounds good. I'll get to work on that!
+Thanks! I think both of these will work Thanks!
+Then I am thoroughly confused as to why it isn't more well known. Surely there must be some downsides to this format as well?
+Sure.  Compatibility--office 2003 and before aren't compatible with this format, as well as some non-Microsoft office products.  Third party apps that show previews often won't show them for xlsb.
+
+Also, it's a macro-enabled format, so there's a security consideration as well.
+
+...That's about it.  In every other aspect its ridiculously superior.
+Man, I have a few spreadsheets I hope will get fixed to some degree with this format then. Thanks for your thorough answers - I really appreciate it!

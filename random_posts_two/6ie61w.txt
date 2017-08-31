@@ -1,0 +1,28 @@
+6ie61w
+MS Project to Excel VBA
+As part of my job I have to copy and paste data from MS Projects into Excel to run a report. It's tedious and time consuming. Does anyone have any example VBA code that can pull data from MS projects and copy and paste it into Excel?
+
+Ideally I'd have a button in excel that could be pressed to "refresh (wipe and replace the data)".
+
+
+-------------
+It can be done - I built something to do this (I did it for my employer so I can't share directly)
+
+Basically you need to declare some variables like this:
+
+    Dim MyProject as MSProject.Application
+    Dim myTasks as MSProject.Tasks
+
+Then you can open the correct file and assign it to MyProject and then assign the tasks to myTasks:
+
+    Set MyProject = MyProject.ActiveProject 
+    Set myTasks = MyProject.Tasks
+
+Then you can loop through the tasks like this:
+ 
+    For Each t in myTasks
+       ...
+    Next t
+
+HTH
+M

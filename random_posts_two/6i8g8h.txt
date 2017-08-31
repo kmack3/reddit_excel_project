@@ -1,0 +1,27 @@
+6i8g8h
+VBA Number Formatting
+Is there a way to change a pivot tables number format in vba? What I would like to do is change all numbers to a _(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_) format. The code below is how I have it, but I would like to make it dynamic because the range may not always be that.
+    
+      Range("A3:AH91").Select
+        Selection.NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+
+
+-------------
+I use the following code and assigned a shortcut (ctrl-shift-N for me). This will toggle between comma with decimals and comma with no decimals for whatever range you have selected (including pivot tables). You can't set a default pivot table number format unfortunately. 
+
+    With Selection
+    If .NumberFormat = "_(* #,##0.00_);_(* (#,##0.00);_(* ""-""_);@" Then
+    'If it equals "Comma" Format then Remove Dec
+    .NumberFormat = "_(* #,##0_);_(* (#,##0);_(* ""-""_);@"
+     Else
+     .NumberFormat = "_(* #,##0.00_);_(* (#,##0.00);_(* ""-""_);@"
+     End If
+-------------
+Assuming 1 PT on Sheet2:
+
+    worksheets("Sheet2").pivottables(1).databodyrange.numberformat = "_(* #,##0_);_(* (#,##0);_(* ""-""??_);_(@_)"
+
+-------------
+That's what I assumed, but I figured getting a second opinion wouldn't hurt. Thanks for the help!
+-------------
+Thank you!

@@ -1,0 +1,55 @@
+Hello all, want to see if there's an easier way to sync two excel sheets every day.
+Look into PowerQuery/Get and Transform - you can connect it to the other Excel file and just refresh it from one workbook. 
+Why not try with Track Changes? If it is enable in the main file, it will be very easy to manage what changes were made and when. If possible, you can even have one share file without the need to check another list. Take a look at the options in the Review tab. There are plenty of tutorials online that give detail information, this one seems to cover the basics:
+
+http://www.gcflearnfree.org/excel2016/track-changes-and-comments/1/
+What kind of conditional formatting? Essentially that's what I would love to happen( highlighting changes daily)
+I think you need to provide more details. The solution could be simple or complicated based on this.
+At some point it probably makes more sense to have a database of record and have both files update from the master data table.  You have two files wanting to sync now.  Will you have three in the future?
+Now, it will always be only 2. There will always be a difference though depending on the event. Sometimes it's a client list other times a price list and so on. But I will always have to check both for differences.
+I think powershell might be able to help. Are you comparing today's excel vs yesterday's? Something like that?  If so can you say what your headers are and which sheet in the excel it is for both?
+Workbook 1
+New Sheet
+A1 
+
+        =
+
+Click A1 in worksheet 2
+
+Press Enter
+
+
+This will now auto update every time A1 in Workbook 2 is changed and saved
+
+
+Close workbook 2
+
+A1 Workbook one sheet 2 
+
+Bottom right corner click hold and drag the corner down and across to match workbook 2 and you have a reference workbook you can run queries from. 
+
+Welcome to fantastical world of Plugins where you can change the formatting to be correct 100% of the time.
+So this would update both list to where they are both synced and have the same info right? Would I be able to tell what has changed? 
+Something like the below would probably do it. 
+
+    =IFERROR(MATCH(A1,Sheet2!$A$1:$A$11,0),-1)=-1
+
+You'd need it for each column but it should be a onetime deal 
+Ok so I have a client list that updates itself every day, wether a phone number address or contact name change. Most of them stay the same and don't change but the list has 400 different people. it's an excel, i have to use that list and one by one check another excel sheet for the changes which you might guess takes a very long time.  There are 13 rows. I can take pictures if that would help
+No - it updates your list to match theirs only (i.e. not a two way system). It also doesn't automatically highlight changes either - although you could back up the data daily and then cross reference the new data with the daily backup, using some conditional formatting to highlight changes
+Do you really need to track changes?  If not, using Power Query (2010, 2013) or Get & Transform (2016) is the way to go.
+Awesome I will input this and let you know I appreciate you responding!
+What you really need is a unique key field in the list you are drawing data from which never changes.
+
+Under the assumption that you can add a field to the list that updates itself I would suggest the most simple solution would be to give each client a unique number or code (Cell A1 example). Give each person a code (Cell B1 example). Use =concatenate() to join these codes in another column to create a third composite key code comprised of both their person code and client code. This will allow you to have multiple contacts per client and still be able to sort by individual or by client (as in a business). Alternatively you can just use the single code you need for your problem. 
+
+Once you have these fields on both tables you can =vlookup() all the columns that need updating against the unique code field. If a name changes, the name will update on your sheet as long as the code stays the same on both sheets.
+
+EDIT: as email addresses are unique by nature, as long as none of the people on your list share an inbox or mailing list, you can use the email as the unique key.
+
+The following is not in proper syntax. Google vlookup.
+If Sheet1A1 = email address, sheet2A1 also = email address,  Sheet1A2 = name: Then: Sheet2A2 =vlookup(Sheet2A1,Sheet1A1:Z400,2,FALSE)
+
+This will look at A1 on sheet 2 and find it somewhere in cloumn A in sheet 1 and return the corresponding value in column B.
+Yeah, I need to know what has changed or who was added or removed m, highlighting would be a huge plus,
+No problem! Just remember you need to back up the list in order for the highlighting to work. 

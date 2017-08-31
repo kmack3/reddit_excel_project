@@ -1,0 +1,90 @@
+Vlookup with 2 criteria?
+    =INDEX(B:B,MATCH(D1&C3,J:J&K:K,0))
+    entered with Control-Shift-Enter
+
+Can you post a screenshot of what you're looking at, please?
+comment saving for the future. Didn't know this was possible!
+
+Need help with VLOOKUP()? 
+
+    
+[fBot Example Post](https://www.reddit.com/r/fBot/comments/68rd6x/vlookup/?ref=share&ref_source=link) 
+
+    
+Excellent Sources: 
+
+    
+1. [excelisfun](https://www.youtube.com/watch?v=-hJxIMBbmZY) 
+
+    
+    
+2. [Bill_Jelen](https://www.youtube.com/watch?v=-WAEzokHSJM) 
+
+    
+    
+3. [Contextures](http://www.contextures.com/xlFunctions02.html) 
+
+    
+    
+I am a bot.  This is the first function in my library; feel free to reply with function requests.
+Go index and match. Forget about vlookup.
+WT-ACTUAL-F
+
+I've been doing it a whole lot more complicated.
+
+    =INDEX(......,MATCH(1,(J:J=D1)*(K:K=C3),0))
+
+Your way is so much easier
+Will this also work with 3 criteria if you just add another &?
+    Solution verified
+thanks!
+    
+=INDEX(Sheet3!B8:$B$3465,MATCH($D$1&C8,Sheet3!$J$3:$J$3465&Sheet3!$K$3:$K$3465,0))
+Note : I have done it this way a lot and this has the tendency to get a bit slow when working with a large amount of data. 
+Oh. my. god.
+This changes everything.
+It is so simple!
+can you explain how this being an array works?
+If you know your data, then solarpool's way will work fine.  But you may want to worry about concatenating values to make a match where there shouldn't be one.
+
+If d1="aaaa" and c3="bbbb", then solarpool's formula won't distinguish if J:k contain (aaaabb&bb) or (aa&aabbbb) or any other combination of strings that concatenate to aaaabbbb.
+
+
+
+omg I thought I knew everything about Index-Match Array Formulas too!
+yep
+
+You have awarded one point to _solarpool_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+did you use Control-Shift-Enter?  When editing the cell, you need to press all three of those buttons for the formula to work properly.
+Once it get into the larger data sets I prefer PowerQuery's merge query :) but conceptually it's intuitive
+Beyond [this](https://www.reddit.com/r/excel/comments/69egqm/comment/dh671ru)?
+ps.  If you're worried about that concatenation, then you could add a unique character to solarpool's suggestion:
+
+=INDEX(B:B,MATCH(D1&C3,J:J&K:K,0))
+
+becomes
+
+=INDEX(B:B,MATCH(D1&"|"&C3,J:J&"|"&K:K,0))
+
+(still control shift enter)
+
+(Use a character that wouldn't appear in those fields.)
+Mother of Christ. This is beautiful 
+yes
+What's control-shift-enter do in excel? Never used that combination to get a formula to work.
+Yeah, I feel like PowerQuery could be useful, I usually just do all my SQL first then do a data dump into excel, do you know if PowerQuery has a Mac version?
+It makes a normal formula into an array formula. 
+
+This formula uses the concatenate function (i.e. the & function) to attach stuff together - so if D1=A and C8=B then D1&C8 = AB. 
+
+I then want to do the same thing with the lookup ranges - but the & function is only designed to be applied to one cell at a time as above. When I do J:J&K:K, without the array operator (CSE), Excel doesn't know how to parse this since you can't attach two ranges using the concatenate function. However, with CSE, I'm telling Excel that I want J1&K1, J2&K2, J3&K3 etc for all the cells in J:J and K:K. 
+It creates an array formula. You don't need to use it that often, but an index-match formula requires it
+PQ unfortunately does not have a Mac version
+>~~an~~ **some** index-match formula requires it
+
+index-match doesn't always need it - the basic function doesn't require it at all. It's the concatenate function that requires it. 
+
+
+Ah, good to know

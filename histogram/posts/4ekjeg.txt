@@ -1,0 +1,105 @@
+Making a calculator for Age of Empires, got a few questions.
+Wolololo
+
+Sorry, I don't have much to contribute but I absolute love AOE. My love for RTS started with AOEI & II
+If I'm understanding correctly, W should be equal to 9.2, and G equal to 8.9.
+
+With this in mind, I'm assuming these values reference the sums in AI and AK respectively.
+
+Let's work with Cell AI9, for example.  In here, you could use the formula:
+
+    =COUNTIF($B9:$AG9,"W")*9.2
+
+This says count all the Ws in this row, and multiply that count by 8.9 (the value of each W).  This formula can then be dragged up and down the AI column.
+
+You can edit the W and 9.2 as needed for other columns :)
+_____
+Edit - [Though, personally, I'd do something like this](http://i.imgur.com/tx62uSg.png) (note the yellow in the top right... added a row to put in the values of each thing).
+
+This assumes that the letters corresponding to each thing are just the first letter of each thing (Wood = W, Food = F, etc.).  If this is true, the formula in cell AI3 of that sheet can be filled, and then simply dragged down and across.  That formula would look like:
+
+    =COUNTIF($B3:$AG3,LEFT(AI$2,1))*AI$1
+
+Which says count everything in the given row that is filled with "W" (the first letter of Wood is represented by the `LEFT(AI$2,1)`), and multiply it by whatever's in the first row of this column (in this case, the 9.2 value for wood).
+
+Hope this helps!!!
+I thought population max for Age of Empires was 200?
+How are you getting more than this.
+
+Sorry for off topicness
+
+Not necessarily answering your question about but I can almost guarantee that you will like the YouTube channel "Spirit of the law".
+
+The guy does all sorts of mathematical videos regarding AOE 2. When to research hand cart, how many villagers should build a TC, just to name two out of several dozen videos.
+Thanks! That's great, just messing around with it now.
+
+One more thing, so =COUNTIF($B9:$AG9,"W")*9.2 covers what I need for all columns except 'Food', which can be contributed to by B, D, S, and a few other text values which all have different corresponding numeric values. How do I do that with this formula?
+Which bit are you looking at?
+
+The population cap has been increased to 500 with the Steam release, but that's a bit buggy and rarely used online. 200 is still the standard for competitive play.
+
+Column A is the number of villagers, and Row 1 is time in seconds, to clarify. Villager population is going up by 1 every 25 seconds, in time with the creation speed.
+Aye, I've watched a few of his videos. Considering sending him a message once I've done more work, there's so much random data I don't know how to interpret.
+Ah, my edit has some good information, so feel free to check that out.  If it's a COUNTIF this or that type situation you can resort to the sum of multiple COUNTIF statements, so something like:
+
+    =COUNTIF($B9:$AG9,"B")*2+COUNTIF($B9:$AG9,"D")*3+COUNTIF($B9:$AG9,"S")*4
+
+Which assumes B has the value of 2, D has the value of 3, and S has the value of 4.  If this is the case, but you want it to just show as one value for food, I would add separate columns for each (next to each other), use the formula from my edit above, then add an additional column for food and use it to sum the individual columns (which you can then hide if you don't want to view them)!
+Cheers, I'll have a look at it. Thanks for helping mate.
+I've got another question mate, I'm trying to get conditional autofills working in my favour. I want to make it to that within the highlighted range, if I enter a certain value, then a specific range of cells change contents. 
+
+I'd like to type A and the 5 cells to the right fill up with A. This seems like it's simple 
+with [Conditional formatting -> Use a formula to determine which cells to format], but I can't figure it out.
+
+Sorry to bother you again, but you seem to know what you're talking about.
+No problem!
+Hmm, conditional formatting is typically for changing cell appearances given some criteria being met.
+
+Are you saying you'd like to be able to select (for example) cells D2:D6, then hit "A", and have all five of those cells fill with A?  If so, just hold CTRL when you hit ENTER and it will fill whatever you typed to all cells in the currently selected range.
+
+If I totally misunderstood your question just let me know!
+I think you're right about conditional formatting, I've investigated and it's not yielded anything relevant.
+
+I'd like to be able to hit 'A' in D2 and have D3:D6 fill with A.
+
+I'd also like to be able to 'A' in D# and have D#:D10 fill with A.
+You're going to need to do this through formulas in those cells or VBA with a worksheet change macro.
+
+I think the VBA is the solution you're looking for.
+
+Edit - The most basic solution to the D2 -> D3:D6 fill is:
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+    
+    Dim KeyCells As Range
+    Set KeyCells = Range("D2")
+    
+    If Not Application.Intersect(KeyCells, Range(Target.Address)) Is Nothing Then
+        Range("D3:D6") = KeyCells
+    End If
+    
+    End Sub
+
+place in the sheet module of the sheet on which you'd like it to function, though obviously this is a very static example and I think you're looking for a more a dynamic one.
+
+If you can explain the logic a little better I'd be happy to help, for example, something in row 2 of any column fills rows 3:6 of that column
+Ah, I guess I'll have to learn to navigate VBA. Thanks for the macro dude.
+
+The logic of it is to save the user manually calculating how many time units a building takes to build, you should just need to put the building ID in and have the corresponding cells autofill in with the same text value. So in the image I've linked below, you'd just put the ID (Ho) in the cell and the next 4 cells to the right would fill with 'Ho' to indicate the time units passed. Does that answer your question or did I misread it? I felt like I misread it.
+
+I feel this is a related question, but I'm pretty tired right now so I might be imagining things. 
+
+Can I get excel to do this automatically?
+
+http://i.imgur.com/mTLUJ2W.png
+
+I've conditionally autofilled all blank cells to grey fill, to indicate that they are dead cells, but I'd like certain ranges of them to change to 'no fill' dependent upon the circled cell. 
+Ignore the coloured Sh/W cells, they should be no fill for this demo. 
+
+Basically, each villager takes 25 seconds to create (you start with 3), but to research the Loom/Feudal/Castle upgrades you have to stop creating villagers. Ideally the table needs to reflect this like in the image. So say you research Loom at 8 villagers, the next villager will come out 25 seconds (the research time) later than the standard progression. From then on all cells to the right would be 'no fill' to show they are open to input, instead of the grey fill. Does this make sense?
+On the bottom part you totally lost me, sorry!  It sounds like a rather complex game and I, unfortunately, don't have any experience with it, so developing the logic side of it would be difficult for me.
+
+Regarding, the "Ho" part, if you're talking about inputting "Ho" into B14 and then filling B15:B18 with "Ho" based on that, it's simple logic, similar to the macro provided earlier (you'd just have to change some ranges).  If I understand correctly, depending on the input, you'd need to fill a certain number of cells to the right, though.  This can be achieved with some Ifs in the macro or a Select...Case approach.  Shouldn't be too difficult to learn with some googling :)
+
+If the general question is "Can Excel do this?"  The answer is very often yes.  I would suggest reposting it as a new question to get your post closer to the top of the "New" list and hopefully someone else who knows botch Excel and this game can be of more help!
+Thanks for your advice mate, a couple of the problems I asked about I managed to bypass with better maths (but I didn't solve them so it's a hollow victory). You've been really helpful.

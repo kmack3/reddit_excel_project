@@ -1,0 +1,18 @@
+Using VBA for the first time and have no idea how to do what my husband wants
+Try youtube! There's a couple of great vba tutorial series. You might need to invest 1-2 hours, but you ll be equipped to do most things you might want to do, and more!
+
+Edited for link : http://www.youtube.com/playlist?list=PLS7iHfqXNVhK3yzd_4XS5k4zsvnu2mkJC
+Hello u/gimme_bacon
+
+For future reference please review the [Submission guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) **presented when you posted**.
+
+Most specifially post titles: Put a description of the problem in the post title - not including commentary.
+
+Posts that do not follow the guidelines may be deleted.
+
+Thankyou
+
+Excelevator
+You could do it this way.  Put an index number on the form sheet somewhere not visible, start at 1.  Then use formulas (offset should work best) to populate the form based on that index.  Eg when it is 1 it looks at the first row,  when it is 2 the second row.  Then you just need the macro to print the sheet and then add 1 to the index.  Or closer to what he wants you would print the sheet and then delete the first row from your data table moving the rest of the rows up.  You can use the macro record to record yourself doing those steps, and then add in a loop to do it over and over.   
+Thanks I will watch these. 
+My friend figured it out for me and I believe that's what he did. I haven't looked at the code yet because he just sent it. 

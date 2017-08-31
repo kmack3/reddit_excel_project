@@ -1,0 +1,28 @@
+How to use a cell for data entry and simultaneously have it conditionally formatted using a formula
+This would be easier to do if your test scores were already normalized into percentages. So I'm going to assume instead of a test score of 12 or 18, it actually reads 60% or 90%.
+
+Let's say you want to apply conditional formatting to column G for rows 5 (Jonny). Highlight cell G5 and add a new rule for conditional formatting. Use this formula:
+
+    =(G5-AVERAGE($D5:F5))/(1-AVERAGE($D5:F5))>.5
+
+Then you can change to range to cover all of the rows needed, or just copy -> paste formats for the rest of the rows. 
+
+AVERAGE($D5:F5) will average all test scores up to the one in the previous column starting with the first test in column D. The ">.5" tests whether the improvement is over the 50% threshhold.
+
+Background info:
+
+[How to apply conditional formatting in excel](https://support.office.com/en-us/article/Use-a-formula-to-apply-conditional-formatting-fed60dfa-1d3f-4e13-9ecb-f1951ff89d7f)
+
+[How to take a screenshot on a Mac](https://support.apple.com/en-us/HT201361)
+
+
+
+
+Based on your definition of "improvement", the Excel formula for Jonny can be written as 
+`=(G5/G$8-SUMPRODUCT(D5:F5/D$8:F$8)/COUNTA(D5:F5))/(1-SUMPRODUCT(D5:F5/D$8:F$8)/COUNTA(D5:F5))` and Emma's can be copied down from this.
+
+You can set your conditional formatting from this, like `[above formula]>=50%`
+
+The formula is a handful, so I'd suggest putting this into a helper cell first and triggering the conditional formatting from that cell.
+I love that you taught him how to take a screen shot on a mac as well.
+Just trying to be helpful...

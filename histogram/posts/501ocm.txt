@@ -1,0 +1,30 @@
+Creating a weighted score system with mixed data
+For every item create an index from 0 (bad) to 1 (good) based on whatever range makes sense and score entries for that item accordingly. Then create a weight for each item - can be 1 by default and more than 1 for items you care more about. Then multiply each person's score for each item by the weight for that item and sum.
+Flip your "good" and convert all the numbers to a common scale.    
+
+Depending on the granularity needed, that normally looks something like  **Achieved/Target** for when "higher" is better   
+
+By switching the values in this manner, you'll have a unit-less set of numbers that you can manipulate at will.     You want Metric X to be weighted at 1.5 normal?   Take their unit-less number, multiply it by 1.5. 
+
+Add up all the numbers, and largest had the best performance based on the metrics being tracked and the weighting applied.
+
+When making the formulas, also try Good/Met/Fail variants, make sure you're getting the numbers you expect. :)
+
+Use the [Decathlon points system](https://en.wikipedia.org/wiki/Decathlon#Points_system). Create an ABC event table by using Solver to adjust A,B & C to get a desired spread (MAX-MIN) or average value, for each event.
+So far, I went ahead and just changed it to be higher = better, which does make everything work quite better (Despite the most spaghetti usage of RANK, INDEX-MATCH, and SUM I have ever seen)
+
+However the initial problem still exists, and for now, management seems happy with what I have.
+
+Alternate ideas however are still always welcome <3
+I would divide the (top score-lowest score) by the number of participants, then base the weighting from that via even tiers.  I.e. assuming you are still using the reversed weightings to "higher number = better" as you mentioned below, [here's an example for raw numbers](http://i.imgur.com/G8ZtNm3.jpg).  You only need the top table.  The other data and table below it are just to show you how it is scoring, using the formula in C2:
+
+    =INT((B2-MIN(B$2:B$12))/((MAX(B$2:B$12)-MIN(B$2:B$12))/COUNT(B$2:B$12))) + 1
+
+You can do the same thing for percentage complete, or any data really, as long as it's all relative to the other participants.  If it's not relative and instead management directive based, then just hard code those as you have been.  With any data, it's all about just gotta standardizing it back to your point system in a way which best meets management goals.
+
+You already have the weighting system in place for giving more credit for specific goals, correct?  That's really just adding a "Goal Weight" column/field and calculating accordingly.
+This seems do-able, I will have to talk with the higherups at the end of the day on what they want. 
+
+At the same time, I have been thinking about my system more and more and am actually starting to grow fond of it, since it rewards consistency. DEMOLISHING your goal in one category and being really bad at everything else shows best with the current crappy system I have. But being rank 3-4 in everything is much stronger.
+
+Not sure, at the end of the day I may just need to run it by my boss, but this could work

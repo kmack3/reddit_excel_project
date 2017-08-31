@@ -1,0 +1,59 @@
+6iwfb5
+Dealing With Data Loss And Avoiding Reference Errors
+I am not sure I worded the title correctly, but here's what I'm trying to do: 
+
+&nbsp;
+ 
+I am working on a spreadsheet that shows the progress of Employees individually and the team as a whole over the course of a year. I have five data pieces per employee: "Calls Presented", "Calls Handled", "Calls Wrapped", "% Wrapped", and "Handle Ratio". Currently I have each employee set up as a set of five columns across the data sheet, and the Team Total as another set of five columns using a =SUM Formula to gather the first three, and the same formula as the individuals for the last two.
+
+&nbsp;
+
+My problem is two fold:  
+1. When I have turnover, and I delete the employee's columns it causes a reference error. BUT I still want to maintain their data just in a different location; what is the best way to do this?   
+2. When I have new hires I have to insert them and manually add their cells into the =SUM Formula, which can get tedious, especially during periods when I have high turnover. Is there a way to make this automated?
+
+&nbsp;
+
+I am using Excel 2016, I am open to using Macros though would prefer not to. As far as skill level goes I am probably somewhere around intermediate. 
+
+
+
+-------------
+Can you please just change a name or two and show me what you mean?
+
+- I don't understand what you mean by "delete  the employee's columns." Surely you delete the whole employee row, no?
+- What kind of reference error and where? Are you highlighting cells and doing right click delete? That's the issue - just hit the delete key and delete the contents.
+- this should just be using an excel table - with calculated columns. When you add new employee data on the bottom, the calculated columns are automatically added to each row. Total rows can be added.
+
+All this summing could be done in a pivot table. You could also use it with a slicer to enable display of different views.
+-------------
+An OLD database problem. Don't delete columns. Instead, enter employees' data elsewhere, then pull in CURRENT employee's data into the individual employees columns you want to show and sum those columns.
+-------------
+ | Employee 0 |  |  |  |  | Employee 4 |  |  |  |  | Team Total |  |  |  |  | 
+:---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+**Date Range** | Presented | Handled | Wrapped | % Wrapped | Handle Rate | Presented | Handled | Wrapped | % Wrapped | Handle Rate | Presented | Handled | Wrapped | Team % Wrapped | Handle Rate | 
+12/31 to 01/06 |  |  |  | 0% | 0% | 272 | 268 | 227 | 85% | 99% | 272 | 268 | 227 | 85% | 99% | 
+01/07 to 01/13 |  |  |  | 0% | 0% | 274 | 271 | 213 | 79% | 99% | 274 | 271 | 213 | 79% | 99% | 
+03/04 to 03/10 | 1 | 1 | 0 | 0% | 100% | 333 | 327 | 260 | 80% | 98% | 334 | 328 | 260 | 79% | 98% | 
+03/11 to 03/17 | 54 | 54 | 0 | 0% | 100% | 260 | 255 | 215 | 84% | 98% | 314 | 309 | 215 | 70% | 98% | 
+03/18 to 03/24 | 187 | 185 | 76 | 41% | 99% | 256 | 250 | 221 | 88% | 98% | 443 | 435 | 297 | 68% | 98% | 
+03/25 to 03/31 | 216 | 215 | 133 | 62% | 100% | 208 | 201 | 173 | 86% | 97% | 424 | 416 | 306 | 74% | 98% | 
+04/01 to 04/07 | 142 | 140 | 107 | 76% | 99% |  |  |  | 0% | 0% | 142 | 140 | 107 | 76% | 99% | 
+04/08 to 04/14 | 199 | 197 | 160 | 81% | 99% | 155 | 154 | 118 | 77% | 99% | 354 | 351 | 278 | 79% | 99% | 
+
+-------------
+Table in Reddit form below.  
+1. I have the employees as Columns with dates as rows, I felt this was the easiest way to manipulate the data.  
+2. The reference error is in the =SUM Forumla under "Team Total", yes I am highlighting cells and right click delete. The main issue here is that when an employee is no longer with the team because I add data weekly to the sheet it adds to the workload because I have to ensure that I'm inputting data under the right employee rather than keying through quickly.  
+-------------
+Would using Cut solve the issue of deleting the columns?
+-------------
+The fairly typical error being made here is trying (and failing) to both capture AND present the data in ONE sheet.
+
+- split data entry/capture into a separate table.
+- summarise data in another table (Pivot works perfectly for this).
+- slice your pivot table to filter down to the data which is important at any one time.
+-------------
+Not reliably.
+-------------
+So ultimately the data is being presented as charts as individual employees and then a team chart. Though I would like to be able to set it up so that you could compare two different employees on the same chart.

@@ -1,0 +1,40 @@
+Keep Excel from hiding my leading apostrophe
+Can you just have them enter the string with no quotes and concatenate them in later?
+I'm not at a computer to test this right now, but I *think* changing the input cell's format type to "Text" might achieve what you want. 
+Could your users just enter the single quotation mark twice at the start? That way one appears in the cell but you will have 2 at the start. You might have to adjust your code for it?
+
+''ABC123' will show as 
+
+'ABC123'
+
+But the formula bar will show the exact cell entry as ''ABC123'
+
+I think excel works in the manner that ' is a formula or something (sorry I can't recall the exact reason) so it hides it
+Follow these steps. 
+
+* 1. Select the Cell
+* 2. Press Ctrl + 1
+* 3. Choose Custom
+* 4. Enter this format in the text box under 'Type': _*??_ ;_ '@'_ 
+* 5. Click Ok. 
+
+Now, enter all possible values in this cell. You can see a single quote added to text automatically.
+Note: If you don't want automatic quotes getting added to the text, then delete the single quote after the symbol @ in the format.
+Wouldn't =trim() work?
+I had it set up to add the apostrophes in, in the code, but if they enter multiple values, then they have to make it like PW34W', 'MC24U', 'P23H4 and I have to have a weird instruction thing by the cell telling them to leave off the first and last apostrophe, which is equally as weird as warning them about the disappearing leading apostrophe. 
+itsbecause sometimes you want a zero to be seen in front of a number i.e. ZIP codes or phone numbers
+
+0175987654321 will be 175987654321
+
+so either you format the cell as text first and input the number second or you just use '0175987654321, which is way faster usually. at least for short notes.
+> ' is a formula or something
+
+It basically forces "text" view of the column's data. So a leading single quote says "Ignore me, but display the rest of the data as-is; namely, don't ignore leading zeroes."
+
+So you're correct that adding a second single quote after the "ignore me" single quote will keep the second one in there as part of the value that gets displayed.
+Have then type ABCD, XYZW, 1BDI and then concatenate the apostrophes and then replace the spaces with nothing and finally replace the commas with ',' 
+SOLUTION VERIFIED
+
+You have awarded one point to _mecartistronico_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

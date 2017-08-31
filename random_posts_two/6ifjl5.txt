@@ -1,0 +1,34 @@
+6ifjl5
+Need a formula that'll output a different sheet's value, just the value 13 rows down every time
+Say I have a sheets named "Tab 1" and "Tab 2". In Tab 2, cell A1, I link to get ='Tab 1'!R58. Now, in Tab 2, cell A2, I need a function that'll output the value in Tab 1, just 13 rows below R58. It needs to be able to be repeated for cells A3, A4, A5, etc., so NOT just ='Tab 1'!R71. Let me know what one would do
+
+
+-------------
+So are you trying to output the value in R71 over and over? Why not just 'Tab 1'!$R$71
+-------------
+formula in 'Tab 2'!A2:
+
+    =INDIRECT("'Tab 1'!R"&58+ROW(A1)*13)
+
+this should also work:
+
+    =OFFSET('Tab 1'!$R$58,ROW(A1)*13,0)
+-------------
+=INDEX('Tab 1'!$R$58:$R$100000,51+(13*(ROW()-1)),1)
+-------------
+I believe if you drag down after highlighting a number of cells, Excel will pick up the pattern.
+
+So manually input A1='Tab 1'!R58, A2='Tab 1'!R71, A3='Tab 1'!R84
+
+Selecting A1, 2 and 3 and dragging down should make A4='Tab 1'!R97
+-------------
+So 'Tab 2'!A1 refers to __'Tab 1'!R58__, 'Tab 2'!A2 refers to __'Tab 1'!R71__, 'Tab 2'!A3 refers to __'Tab 1'!R84__, and so on?
+
+    'Tab 2'!A1:  =INDEX('Tab 1'!R:R,45+13*ROWS(A$1:A1))
+
+Fill 'Tab 2'!A1 down as far as needed.
+-------------
+I guess my example should said what if I need a formula for every cell that's 13 rows down, but I'm instead pasting it in cells A1, A4, A7, A10, etc. with completely different values in A2, A3, etc. In other words, dragging it would not work then
+
+-------------
+I guess my example should said what if I need a formula for every cell that's 13 rows down, but I'm instead pasting it in cells A1, A4, A7, A10, etc. with completely different values in A2, A3, etc. In other words, dragging it would not work then

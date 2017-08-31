@@ -1,0 +1,47 @@
+6gf4ek
+extract data from a large data pool if row has the word 'transport'
+I'm working with an excel file that has 17,622 rows, AL columns of data.I want to extract the rows that have the word 'transport' in any of the cells within the row. is there a way to do this? the extract must be in a separate file.
+
+Thank you so much.
+
+
+-------------
+Brute-force method might be to add two helper columns.
+
+Helper column 1 might concatenate every cell in that row. Let's say you're on I3, and columns A through H are occupied:
+
+    =A3&B3&C3&D3&E3&F3&G3&H3
+
+And then in J3
+
+    =ISNUMBER(FIND("transport",I3))
+
+Filter out all the "FALSE" results in column J, and copy everything to a separate file.
+-------------
+You have one possible solution. If you know VBA at all, you could write a program that iterates through each row, storing each cell of the row into an array. If the word transport is found, write that row to another sheet and then continue to the next row
+-------------
+unfortunately, I cannot edit the database, although i can 'refer' to it. this means i would have to do all work on a separate worksheet.
+-------------
+To add to this:
+You can use one helper by using the logic above in a nested if. 
+    =IF(ISNUMBER(FIND("transport",I3))=true,1,if(...
+
+Also:
+You can use an array/index function to skip non- true and list the data in a new sheet. 
+-------------
+Yeah the only way I could think of doing this is using VBA. An array isn't necessary though. You could do so using nested loops: One loop to go through every row in the worksheet. And another loop to go through every cell in a given row. And if one of the cells for a given row contains the word "transport", the row could be copied/cut and pasted into a different worksheet or workbook.
+-------------
+So create a separate workbook and link each cell to your source data. Then insert the helper columns. 
+
+Or you could just make the helper column in a separate workbook that refers to the source data. 
+
+Just dont move the files around after that because you'll break all the links
+-------------
+Well, obviously you need to import the data into your spreadsheet.
+
+Of course, you can also construct a database query to dump the data you need. This is, however, beyond the scope of Excel and this sub :)
+-------------
+I'm still new to VBA so I'm used to storing everything into a data structure and then doing something with it
+-------------
+noted. hope i can make it work. thank you!
+

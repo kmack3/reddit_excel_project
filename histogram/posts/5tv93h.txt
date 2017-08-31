@@ -1,0 +1,84 @@
+Allowing two people to edit the same excel file concurrently
+Macros will not work in a shared workbook, so if you require them to use the file, take turns. 
+
+Shared workbooks in Excel are highly problematic. They bloat. They fail.
+
+One of the problems you are probably facing is that you are trying to edit a web-shared workbook in Excel rather than the web. I'm pretty sure if you edit in the browser, you can have multiple users do so as long as no one has opened it in Excel.
+
+That still won't fix the macro issue, but there is no fix so no matter there.
+Not likely the answer that you are looking for, but Google Sheets allows multiple users to work simultaneously. I accept my downvote... :)
+I am facing pretty much the same problem. My personal solution is, that the workbook which is opened will only be used to execute a macro which then writes into another file. All reports and data in your main file just gets The data from the other File. 
+
+A bit stupid workaround but at least it well... Works ;) 
+Like mentioned by others, Excel isn't really written to share nicely with others. The solution I ended up using at work was to move all of the data into SQL Server and use VBA to query the data from there, display it to the user, and then upload it back to the server. There's a simple timestamp check that occurs with each save and if someone else has edited the data, the user gets a warning about it (though this very rarely happens). So it doesn't allow true simultaneous editing, but if you can partition the data so that different users are trying to work on different pieces at the same time, that may be the way to go... or just opt to move the entire thing over into Access or similar.
+You could use VBA to write to a CSV file if that would meet your needs 
+Sounds like you need to look at Access for a solution to your problem. Access is built for multiple users to access and edit the same data.
+As /u/Leggo_my_ego noted, I am not correct on the use of macros, however they are notably limited as per the following
+
+
+**Features that are not supported in a shared workbook**
+
+|In a shared workbook, you cannot: |However, this functionality is available: |
+|---|---|
+|Create an Excel table||
+|Insert or delete blocks of cells|You can insert entire rows and columns|
+|Delete worksheets||
+|Merge cells or split merged cells||
+|Sort or filter by formatting|
+You can sort or filter by number, text, or date, apply built-in filters, and filter by using the Search box|
+|Add or change conditional formats|
+You can use existing conditional formats as cell values change|
+|Add or change data validation|
+You can use data validation when you type new values|
+|Create or change charts or PivotChart reports|
+You can view existing charts and reports|
+|Insert or change pictures or other objects|You can view existing pictures and objects|
+|Insert or change hyperlinks|You can use existing hyperlinks|
+|Use drawing tools|You can view existing drawings and graphics|
+|Assign, change, or remove passwords|You can use existing passwords|
+|Protect or unprotect worksheets or the workbook|You can use existing protection|
+|Create, change, or view scenarios||
+|Group or outline data|You can use existing outlines||
+|Insert automatic subtotals|You can view existing subtotals|
+|Create data tables |You can view existing data tables|
+|Create or change PivotTable reports|You can view existing reports|
+|Create or apply slicers|Existing slicers in a workbook are visible after the workbook is shared, but they cannot be changed for standalone slicers or be reapplied to PivotTable data or Cube functions. Any filtering that was applied for the slicer remains intact, whether the slicer is standalone or is used by PivotTable data or Cube functions in the shared workbook.|
+|Create or modify sparklines|Existing sparklines in a workbook are displayed after the workbook is shared, and will change to reflect updated data. However, you cannot create new sparklines, change their data source, or modify their properties.|
+|**Write, record, change, view, or assign macros**|**You can run existing macros that don't access unavailable features. You can also record shared workbook operations into a macro stored in another nonshared workbook.**|
+|Add or change Microsoft Excel 4 dialog sheets||
+|Change or delete array formulas|Excel will calculate existing array formulas correctly|
+|Work with XML data, including: * Import, refresh, and export XML data * Add, rename, or delete XML maps * Map cells to XML elements * Use the XML Source task pane, XML toolbar, or XML commands on the Data menu||
+|Use a data form to add new data|You can use a data form to find a record|
+
+
+**EDIT** Table was not formatting correctly.
+Thank you for the input. That's disappointing, maybe I'll try google sheets if they have scripts that work similar to macros.
+I suspect you're correct about the issue being related to sharing a web-shared file. But you are wrong about macros not working in shared files. I know because I've done it before. As long as they aren't writing over the same cells, there shouldn't be a problem
+Actually, excel online allows you to do this as well- the problem is I need to use macros which sadly only run on the desktop version of excel.
+A few years ago, this would not have really been acceptable, but Google Sheets gets better by the day and is kind of nearly getting close to Excel.  So yeah, I totally agree with your comment.  For non-super complex stuff I use Google Sheets over Excel every time.  It is just more convenient and the collaboration system is superb.  
+Really the only solution would be to use a database like sqlite. Excel isn't meant for having multiple people use it at the same time 
+What is considered an 'unavailable' feature? This seems like the only thing that might be  causing the problem. 
+Ya the only way I see this would work is if you created the macro on a google sheet. From my experience, it works wonder. Only issue is make sure to check if your company allows the wide use of google sheet with sensitive data.  
+Keep in mind sheets have some different functions. I use the SPLIT and UNIQUE function a lot in sheets, for example. Important functions like vlookup are the same. Their pivot tables are also less fancy. 
+Google sheets allows you to run macros. What kind of macros are you using? 
+Unfortunately, you can only have multiple editors in Excel online, the desktop version will always lock out other users. Word, PowerPoint, you're golden, but not Excel.
+I know nothing.  Lol.  Someone out there has the answer I'm sure!
+I'd use it more but I hate the UI so much. Nothing's where it's supposed to be haha
+I've edited the post so the table actually displays correctly.
+I've never used a Google script before so this will be a new experience, but it's good to know it works well. 
+
+Does it function similar to visual basic?  For example, I need to be able to sort a specific range of cells automatically every time one of those cells is modified, is that something easy to implement in a Google script? 
+Mostly simple data management stuff like sorting which appears to be easily done in Google. Using Google does bring up a different issue though:
+
+Is it possible to allow specific accounts to edit the spreadsheet even if they aren't Google accounts? from what I can tell, only Google accounts can be selectively allowed to edit unless you allow everyone with a link to edit.   If not, can the sheet be password protected? 
+That's not correct. Multiple users has been possible for quite a long time in Excel, it just isn't very good.
+Haha yeah I know what you mean.  Excel is like coming home.  
+That I'm not too sure since I only used the data created by an analysis who work with the macro that multiple groups of ours used. From the look of the macro he created, it looks a bit similar to that of VBA but at the same time sort of like a new language. You can take a look more here at https://developers.google.com/apps-script/overview
+Yup. You can set a script to trigger every time the sheet is updated.
+ 
+Sorting isn't a script I personally use but I'm pretty sure it does exist. There's also a SORT function, so worst case you could set up a hidden sheet that uses the sort function and every time you update a cell Google copies hardpastes the function results over your data. 
+
+The script language is pretty simple. I forget which language it is exactly. 
+yeah, you need to either set the sheet so specific google account can edit it, or anyone with a link can edit it. but it's super easy to get a google account for free. You could always set up a google account and give select people the password so they don't need to maintain their own. The same google account can edit a sheet from multiple windows/computers. 
+
+If you do set it up so anyone with the link can edit it, only people given the link can edit it. The link isn't made public if you don't share it. 

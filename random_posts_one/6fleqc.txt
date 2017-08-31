@@ -1,0 +1,181 @@
+6fleqc
+What's everyone working on this week?
+Tell /r/excel what you're working on this week!
+
+You can be bragging, grousing, sharing your passion, or explaining your pain. Talk about your current project or your pet project; whatever you want to share.
+
+This post idea may ^have ^^been ^^^stolen.
+
+
+-------------
+I am dealing with 50+ Pivot tables across different functions of business (Sales, Marketing, Finance, and Accounting).  Instead of using 50+ different sheets, I am in the midst of creating dynamic drop down lists that allow you to choose which function of business you would like to view.  Then, you are able to choose a Pivot table to view.  Each Pivot table has it's own properties, so I've been using a bit of VBA and formula help to get these Pivot tables to auto update based on the above criteria.  
+    Sorry if that was a rant!
+-------------
+I'm doing an internship in the IT Department of a small company (2 IT-Guys for about 200 PCs and many printers).  
+And I have the task to make a Macro which gets it's data (What the printers did) from a .cvs and makes a new sheet with table. Also it makes a new sheet with a diagram.  
+And that all shall be called "yyyy-mm-Company-MonthlyReport".  But the Data is coming in a month late so I can't use Date.  
+I never before worked seriously with Excel and didn't even know it had Macro.  
+Now I'm reading into VBA and try to learn it myself as fast as possible.  
+Pretty much doen with the task for now though.  
+I think I will learn some more VBA in my free-time. You can never know enough programming Languages (am learning HTML, CSS, Java, Javascript, C++ and the like in school).
+-------------
+I've been asked to spec an Excel technical training pack together split by levels of Basic, Intermediate and Advanced Excel. I'll need to list out things which I think would be beneficial to the company and I will have to conduct these 1 or 2 hour training classes internally, sometime this year.
+
+At some point, I'll post on /r/Excel to gather some opinions once I've finished the 1st draft.
+-------------
+Created a sheet to track how many hours our unit (Army) is flying for the next few weeks.... Really exciting stuff....
+-------------
+Making something to analyze baking recipes. I'm debating between using a userform or excel cell entries to input the data. Because most recipes aren't the same ingredient wise and there is little consistency between the order their ingredients in.  
+The best would probably be a copy paste from website to a single location that would then be able to sort it and move it to it's own column to be compared with other recipes.  But this solution is currently eluding me.
+
+-------------
+Data model for a job interview - an opportunity to step out from behind the data and start lending my voice to the conversation. Pulled in United States Census Bureau information for total housing units and population by county. Using GEOMEAN and some DAX for YOY calculations and growth opportunities by sales team members.
+-------------
+Jesus, nothing compared to some of the guys in this thread.
+
+Just consolidating three budgets to one work book to make doing three year projections easier. It has multiple crop profiles and consolidating cost charts. 
+-------------
+Creating my personalized expense management tool. I'm excited that I'll be the programmer/ analyst/ executive for this project. 
+-------------
+Working on an automated calculation sheet that calculates backbilling amounts per order (loaded from a generated report from our billing system). I'm still struggling with a small error that only happens when its the 1st of the month (calculates the month double ?  
+
+This doesn't occur on the second of the month or any other day except the 1st, but everything else is working smoothly! I am learning lots and trying to dab a bit in VBA aswell. We shall see!  I'm making progress every day 
+-------------
+I'm making my first add-in! I've got a few cool macros and templates for things we work on every day, and now I'm creating an add-in that everyone can enable that will have links to all the templates and include a couple universal macros that will work on whatever workbook they have open. I'm pretty excited about it :)
+-------------
+Gantt chart. Yeah. Not that exciting haha 
+-------------
+Working on implementinga basic hydrological model in excel to model drought risk. Pretty basic stuff, but the way I'm going to set it up is going to be good.
+-------------
+Just made a personal budgeting sheet as this summer is my first full time job (and full time paycheck) but what's more exciting is that I learned the INDIRECT formula and also implemented my first ever VBA custom function/macro. 
+-------------
+I am trying to figure out how to pull multiple values from a single user input and then filter a table with those values. Seems I need an array, so trying to learn arrays lol
+-------------
+I'm currently making a swimming meet manager table. Basicly you have different forms that allow you to enter all the events, participants their times age groups etc. and then seed all the events, prepare the results for print all without having to touch a table / Its going to be used by people that when I send them a table they print it out, fill it by hand and fax it to me/
+
+So now I'm currently in the process of writing validations for every input and locking everything up so the user isn't able to break anything. Though not having afetrUpdate on dynamically created textboxes is making things way harder than they shoud be.
+-------------
+I'm currently finishing an analysis document that pulls month over month payout data and forecasts future payments. It also shows who the top and bottom are in total payout amounts to see which vendors require special treatment and which are underperforming 
+-------------
+Now that projections have been posted I've been working on finalizing my fantasy football drafting workbook.
+
+If any of you are interested in FF, keep your eyes peeled on /r/fantasyfootball as I'll be posting it there when done.
+-------------
+Trying to figure out a way to export data from multiple pivots in multiple workbooks to one master table to be viewed in PowerBi. Currently exploring RDBMerge.
+-------------
+Creating excel sheet that pulls/analyzes data from S&P and Bloomberg automatically.
+-------------
+Something at work broke ADO connections for everyone but me - straight up crash, no error message. 
+
+So I've been investigating that -_-
+-------------
+I'm adjusting finance's outlook for historical bias and providing a metric for sales to see their MTD preformance.
+
+I'm bringing together finance forecasts, adjusting for bias based on historical accuracy at any given point in the month, then projecting where sales should be MTD.  Then when that's done, I'm tapping a couple of cubes to draw in MTD open orders/backorders/sales and comparing them back to the adjusted forecasts. Then laying all that out by key customer group and tossing it back to the sales team to tell them their MTD performance in a more accurate way knowing finance will adjust their outlook 4 more times this m
+-------------
+-I've been enhancing my excel workbook for importing bank entries (payments, 7 different bankaccounts) recognizing and validating all usable info (invoice numbers etc) and posting it to the accounting system. It's a VBA project.
+
+-I have been enhancing other app, specifically the part that sendt specific mail-merged HTML emails to customer including their own Statement of Account. It's part of my colossal VBA project (that turns 20yo tjis november)
+
+-I've been making a few JET Report reports to aid processes in my Finance Team.
+
+And it's only wednesday ... and monday was a holiday :)
+-------------
+I'm just going to float this out here, because I don't do much work with Excel beyond the most basic spread sheeting...
+
+I have a seniority list, and am trying to figure out roughly when each employee would be eligible for promotion. This may sound like a homework assignment, but I assure you it is merely for personal interest. 
+
+So let's suppose there are 1000 employees, 100 of which are supervisors. The supervisors  are chosen by seniority. I have a hire date for each employee, and I'm using a hypothetical variable of 25 years for when someone will retire. Once employee #1 reaches 25 years, they are out, and employee #11 is promoted. Easy enough to calculate the first few, but after that, it becomes a bit of a grind to find out when employee 762 will be promoted...
+
+I could probably code something in Pascal or C to do this, but it would be fairly brute force and my data is in Excel, and excel seems like it might be smart enough to do it. Am I going to have to learn VB to write a script?
+
+Does anyone have any suggestions to get me headed in the right direction?
+-------------
+I'm building an excel spreadsheet to calculate beneficiary payouts for our annuity products, so that if a policy has one beneficiary paid out, the spreadsheet automatically calculates the remaining balance between the remaining beneficiaries and adds daily interest proportionately for each beneficiary. Just filling in a gap our current computer program doesn't allow for. 
+-------------
+Trying to copy a range with rng = 
+
+then paste it.
+
+This is much harder than it should be. 
+-------------
+Just learning VBA! Turns out a lot of Visual Basic is about stealing from other macros and patching it into yours. I was able to take an email macro and turn it into my mourning routine email verifying I'm at work for my boss and automatically updating the time and date with when the email was sent. 
+
+Now I need to figure out how to take pivot-tables and paste them into a similar email, but in picture form so they absolutely can't be edited or easily transposed. I may make a post about it on here later if I hit too many snags.
+-------------
+**Looking for help** I am working on creating a new metric sheet for my company. Part of this includes pulling data into a summary sheet that depends on the month we are reporting on. I was able to use some logic functions to automatically fill in the summary cells for the corresponding month sourcing the raw data sheet.
+
+I am now tripped up on the plots. Say we are looking at our shop's efficiency, I want to report those efficiencies for the last 6 months in a line chart. I cannot seem to figure out how to pull conditional ranges of cells depending on the cell that labels the month. I tried using the same function but it does not seem to work.
+Does anyone know a way I can fix this issue????
+-------------
+Hey folks, wondering if I can get some help. I'm new to data entry, so the nuances of Excel are still tricky for me.
+
+ I'm looking for a way to enter multiple filenames in one field from my computer and have Excel display the filepath of those files in an adjacent field. Is this possible? Also, is this possible when the filepath is from a google drive? Looking for both solutions. 
+
+Thank you all!!!
+-------------
+I made a thing that takes a report generated from our database and splits it into multiple worksheets. Each worksheet is a type of consumable: adhesives, sheet metal, hardware, etc... And it show when we're going to run out of any particular item.
+
+Nothing fancy, but our Purchasing Manager said it would save her team 4 hours a day. That was nice to hear.
+-------------
+You should make a gif or video. It sounds like there is a lot to be learned from seeing such a thing in action.
+-------------
+I did something similar a few years ago but rather than having *n* number of pivot tables, I created vb modules to manipulate a single pivot table on the fly and serve as a switchboard to all the different slices of data.  Everything was boiled down to the modular level and I would simply pass the different commands to the vb modules to do the work for the user in manipulating and refreshing whatever face they wanted to put on the pivot.  It drastically improved my workbook performance and reduced filesize.  
+-------------
+If your data is reliably coming in one month after the completed month, you can do something like:
+
+    Dim dOldDate As Date, strSheetName As String, strCompany As String
+    strCompany = "MY COMPANY HERE"
+    dOldDate = DateAdd("m", -1, Date)
+    strSheetName = Cstr(Year(dOldDate)) & "-" & Cstr(Month(dOldDate)) & "-" & strCompany & "-Monthly Report"
+
+Just a suggestion. Good luck with your project!!
+-------------
+I'd love to do that. That's like my dream job.
+-------------
+RemindMe! 6 months "Ask about the technical training pack"
+-------------
+Oooh keep us updated please!
+-------------
+Interesting! Do you have someone to bounce ideas off of? I find that it's very useful to find out up front how that your model is flawed, or boring.  
+In fact, I created a data model from city data for a job with the city and ran into the same issue.
+-------------
+Thanks this tool is exactly what I am looking for
+-------------
+That's literally all of programming, debugging and using other people's old code. Good luck, though email macros are risky because it's not possible to "unsend" emails!
+-------------
+Programming in VBA is the ability to google the right code and the wisdom to choose the good code over the bad code.
+-------------
+=IF($D$2="November",'Support Data'!$C$27,IF($D$2="December",'Support Data'!$C$27:$C$28,IF($D$2="January",'Support Data'!$C$27:$C$29,IF($D$2="February",'Support Data'!$C$27:$C$30,IF($D$2="March",'Support Data'!$C$27:$C$31,IF($D$2="April",'Support Data'!$C$27:$C$32,IF($D$2="May",'Support Data'!$C$27:$C$33,IF($D$2="June",'Support Data'!$C$27:$C$34,IF($D$2="July",'Support Data'!$C$27:$C$35,IF($D$2="August",'Support Data'!$C$27:$C$36,IF($D$2="September",'Support Data'!$C$27:$C$37,IF($D$2="October",'Support Data'!$C$27:$C$38,"**ERROR - Check Function"))))))))))))
+
+This is my current function that I tried inputing into the Y-axis. I used Name Manager to abridge the formulas.
+-------------
+I definitely will!
+
+-------------
+What's the difference to just using slicers?
+-------------
+Presumably the data has a timestamp *somewhere* in it. I'd pull from that so you can reliably create a report with data of any age
+-------------
+I will be messaging you on [**2017-12-09 21:57:05 UTC**](http://www.wolframalpha.com/input/?i=2017-12-09 21:57:05 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/6fleqc/whats_everyone_working_on_this_week/diozcyt)
+
+[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/6fleqc/whats_everyone_working_on_this_week/diozcyt]%0A%0ARemindMe!  6 months ) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! diozda1)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+-------------
+Sure :D
+-------------
+Yeah the team member I sat with seemed to enjoy the more hyper focused approach on the market opportunities that we already had inroads with and focusing on those from the data model. They were casting such a wide net it was hard to measure real engagement or influence of their involvement. Just had the interview - we'll see where we end up.
+-------------
+At the time slicers weren't in the version of office we were running. Our company is sloooooow to upgrade
+-------------
+Slicers are present, however, some pivot tables look at different data ranges, values, and have preset filters that are easier to just have embedded in VBA to autoupdate
+-------------
+If the location of the timestamp is always consistent, the code above can be modified to meet your needs :)
+-------------
+Best of luck!

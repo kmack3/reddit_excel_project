@@ -1,0 +1,113 @@
+crash
+4evtoi
+While wend macro crashes excel
+
+I have an xslm file that takes a external .xslx , divides it in tabs and saves the tabs as separate .xlsx files. Next step is running through all those files, making tabs in them and cleaning up empty columns. I have problems with the running through all the files part.  The littelfiles.total runs without problems.
+I tinkered on this code for a long time and after discovering that my arrays loaded the same time I fixed it. Last time I managed to run it, I saw it being filled with the right files.
+Since then excel crashes from the instant I run this part. Is there an infinite loop I'm not seeing? Can anyone help?
+
+I tried compiling, saving the code in notepad and making a new file and i have no plug ins that i know of.
+
+the "code" is the following:
+
+    Sub OpenAllFiles2()
+    'create an array
+    Dim myFiles As Variant
+    ReDim myFiles(500)
+
+    myPath = ThisWorkbook.path & "/" & "Department"
+
+    If Right(myPath, 1) <> "\" Then 
+    myPath = myPath & "\"
+    End If
+
+
+    'search for at least 5 files in the folder specified above, add the entire path     to the array
+    While myCount < 5
+       potentialFileToLoad = Dir(myPath & "*.xlsm")
+        While potentialFileToLoad <> ""
+            myFiles(myCount) = myPath & potentialFileToLoad
+            myCount = myCount + 1
+            potentialFileToLoad = Dir
+        Wend
+        Wend
+
+    'change size of array to ammount of files found
+    ReDim Preserve myFiles(myCount - 1)
+
+
+    For Each ii In myFiles
+
+    '(Insert Open, Run code, close code here)
+    Workbooks.Open (ii), True, True
+
+    Call LittleFiles.total
+
+    ActiveWorkbook.Close (False)
+
+    Next ii
+
+    End Sub
+
+    Sub go()
+    Call OpenFiles
+    Call OpenAllFiles2
+    End Sub
+
+
+
+-------------
+I think this is happening  
+
+    potentialFileToLoad = Dir(myPath & "*.xlsm")
+    While potentialFileToLoad <> ""
+        myFiles(myCount) = myPath & potentialFileToLoad
+        myCount = myCount + 1
+        potentialFileToLoad = Dir
+    Wend
+
+If there are .xslm files in myPath, *potentialFileToLoad* will always be not empty and it will stay stuck in this While-Wend.  
+Put a Watch on pFTL and see if and how it changes.  
+If it does return 'Empty' are you sure you can test for that with <>"" ? It might need to be tested with IsEmpty().  
+Another thing that I miss is you declaring myCount as 0.   
+  
+  
+While your code looks fine I think you should check this one out though:  
+http://spreadsheetpage.com/index.php/tip/getting_a_list_of_file_names_using_vba/
+-------------
+1. I ***highly*** recommend using the Option Explicit flag in all your documents as it will reduce the number of errors you may get from misusing variables.
+
+2. In this situation, I recommend using the FileSystemObject, versus Dir.
+
+3. You don't need arrays to make this all work properly.
+
+4. You definitely should use tab indentation for better code readability.
+
+5. If you have less than 5 files in your mypath directory, your code will continue in an endless loop.
+
+6. Try the following to see if it works as intended with your code:
+
+
+    Option Explicit
+    
+    Private Sub OpenAllFiles()
+        Dim myPath As String
+        myPath = ThisWorkbook.Path & "/" & "Department"
+        
+        Dim sFileName As Variant
+        Dim FSO:        Set FSO = CreateObject("scripting.FileSystemObject")
+        Dim oFolder:    Set oFolder = FSO.GetFolder(myPath)
+        
+        For Each sFileName In oFolder.Files
+            Select Case sFileName
+                Case myPath & "\~$" & ThisWorkbook.Name     'Skip this since it's the document's temp file
+                Case myPath & "\" & ThisWorkbook.Name       'Skip this since it is this document
+                Case Else
+                    Workbooks.Open myPath & "\" & sFileName, True, True
+                    Call LittleFiles.Total
+                    ActiveWorkbook.Close (False)
+            End Select
+        Next
+    End Sub
+
+

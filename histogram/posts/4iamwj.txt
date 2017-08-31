@@ -1,0 +1,226 @@
+What are some interesting and rarely used excel functions?
+You can add  + N("Your text here") to the end of a complex formula to add a description of what the formula does and how it works.
+=TRIM() for removing leading and trailing spaces from a text in a cell.
+    =VALUE(A1)
+
+If your number is formatted as text, this forces it to be treated as a number within a formula - useful for VLOOKUPs when used with things like SQL queries.
+
+    =TEXT(A1,"dd-mm-yyyy")
+
+This forces a cell value to appear in a different format in a different cell. Useful when used in concatenations e.g.
+
+    ="Report for " & Text(A1, "mmm yyyy"" & " for SMT"
+
+Where A1 is a date, you are forcing it to display it as `May-2016` format
+BAHTTEXT? OP please.
+DATEDIF is a very useful, but undocumented function.
+Choose is a god send for avoiding crazy long if statements. Yearfrac() is another one I ran into that's niche 
+=PRODUCT()
+
+It just multiplies a bunch of numbers together. Sometimes I have a little array of figures I need to multiply with one another and I used to just write out each multiplication but this simplified things marginally. 
+LINEST, TRANSPOSE, MINVERSE, any of the statistical ones
+ROMAN is interesting. I can't see when I'd need to use it myself, and don't imagine it's that popular. 
+IFERROR by far!
+
+(Or User Defined Function ;))
+INDIRECT is one of my favorite functions
+I'm really surprised no one has mentioned [=INFO()](https://support.office.com/en-us/article/INFO-function-725f259a-0e4b-49b3-8b52-58815c69acae)
+
+Not all that useful, but certainly interesting and rarely used! It can show the current path, osversion, excel version, number of active worksheets and more. In older versions of Excel it will also show the amount of computer memory available...
+
+ =DEC2BIN(CODE(a1)) 
+
+Will convert a letter to binary. If a word is in A1, you can place this formula in A2 and drag across to convert the word to binary
+
+    =IF(LEN($A$1)<COLUMNS($A$1:A1),"",DEC2BIN(CODE(MID($A$1,COLUMNS($A$1:A1),1))))
+
+
+
+I like mround
+    =TABLE([row input],[column input])
+
+This is only accessible through the Data | What If | Data Table ribbon. As such, it probably does not qualify as a 'function' (you cannot directly type `=TABLE(foo,bar)`). Nevertheless, it acts like a function in that you feed it some inputs, and it generates either a vector or an array of output. 
+
+The tool tip says 'See the results of multiple inputs at the same time', and that's a pretty good description. I use it with some regularity in models where I want to see the result of changing a variable input that feeds a calculation with a lot of interactions or a lot of steps. As implied by the parameters, one or two variables can be handled by TABLE().
+
+Maybe one day I will write a wiki on this. 
+
+[Ed] I made a [walkthrough example](https://drive.google.com/file/d/0B8wAhtaSgLH4VmQzRTQ1Mi1fVFU/view?usp=sharing). Hope you find it useful.
+=(Today)-1 is a good formula if you make a report daily for the previous day. You can use this cell as the key for your report to SUMIF from.
+
+CEILING is good if you want to round up to the nearest penny, this comes in handy for me when I'm creating a price based on cost using a profit margin, let's say 40 points. I'll do cost/.60 and then in the next column do (ceiling,.01 so I don't have prices with 3 decimal places or a fraction of a cent.
+
+=UPPER() To turn all text uppercase
+
+=PROPER() to turn the first letter of every word uppercase
+EDATE is probably tops. Solves so many issues rarely known. I also love NETWORKINGDAYS
+When would you use =FACTDOUBLE()? I not aware of any useful applications of that function. 
+
+Edit: [Never mind, I answered my own question.](https://en.wikipedia.org/wiki/Double_factorial#Applications_in_enumerative_combinatorics)
+For formatting, highlight, alt+o c a. Auto fits everything to an optimal cell width for that column. I think it's undocumented, which makes me love it all the more. It's not perfect, but it's good for a big ass sheet to make it easy on the eyes effortlessly. 
+
+Another little-used trick is paste-special cell width. I've been alt-e s v-ing for years, and I suddenly found this. Great for standardizing multiple sheets for client-facing documents when you don't want to measure pixels with your eyeball. 
+What about Evaluate()?
+You need to use a bit of indirection to use it but here's an example of its use.
+Enter SUM(2+4) in cell A1 as text but don't put the "=" in front of SUM. Then define a Name called evalTest (or any name) and in the Refers to: field enter =EVALUATE(A1). To display the answer, enter =evalTest in cell B1.
+A1's content can be any text/numbers/function/cell reference that will evaluate to a result
+I see everyone is using vlookups.  Give index ( , match ( ) ) a try sorry for the poor structure but they go hand in hand
+N(). This forces text values into 0. It's a simple way to avoid Value# errors because something in your formula flipped to a text (e.g., a cell shows "n/a" when it's a zero).
+=AND() or =OR() for testing multiple conditions.
+Don't really know if this is rarely used but I think it is very good for getting indices right using +row() *0.00001 and then getting from top to bottom with kbiggest
+Combination of IFERROR and ERROR.TYPE to trap only certain errors. There's never a good reason to trap #REF!, #NAME? or #NULL! errors, and often better ways to trap the others.
+
+Example: only trap #VALUE! error.
+
+=IF(IFERROR(1/(ERROR.TYPE(formula)=3),0),0,formula)
+
+Also LOOKUP and REPLACE.
+Protip of the Day!
+Is this better than a cell comment?
+So valuable when you can't figure out why am index match isn't working when you know if should be
+=CLEAN() works the same and removes line breaks.
+
+=Value() allows you to reference a cell as a number even if the cell is formatted as text. 
+
+=Datevalue() works the same for dates.
+
+I wish I had know these long ago. Would have saved me many headaches.
+I literally discovered =text this week, and it's like I found a new toy. 
+
+The possibilities are endless! I first found it when I was trying to do some "day of the week" trend analysis on daily performance data, and I assumed there was a easy way to convert a date to a day. Boy was I right! This little function does everything! To add on to this, you can output a shit ton of different formats from any text input. Just a quick Google and you're on your way! 
+
+In a moment of personal reflection, if I ever told 10 year old me that I would be excited about a format operator in excel, I'd have probably tried to beat my own nerd ass up, yet here we are. What a wonderful world. 
+=Text is amazing, especially when you need to pull in daily reports. Another quick tip for =Text,
+
+If A1 is 5/8/2016 then 
+
+> =Text(A1, "m")
+
+returns 5, but if A1 is 10/8/2016 then it returns 10. Very useful when some reports are named YYYY-MM-DD sometimes and sometimes named YYYY-M-DD depending on the month, for example. This happens ALL THE TIME when trying to automate a process that someone else started. Date consistency is the worst, idk if it is a USA thing or what but everyone seems to name their dates differently.
+Convert's/Translate numbers into Thai. Check it out.
+เจ็ดบาทถ้วน = BAHTTEXT(7)
+Interesting. I've used networkdays but don't think I've seen this one before
+I read it as Dated-If and was confused as to what the function could possibly do.
+I'm imagining I could use datedif for a count of days then use round up, divide by 7, to create a count for the number of weeks, right?
+Oddly, Excel 2002 did document DATEDIF, but it's the only Windows version to do so in local help files. It documented online.
+What is this choose function you speak of? What does it do?
+[deleted]
+This is a new one I discovered recently too. For example, suppose you have 30 years of forward discount rates in column A. Then 
+>{=Product( (1-A1:A30) )}
+
+returns the present value of $1 at time 30.
+Isn't that the same as SUM?
+Uh... Microverse. Miniverse? DUMB (cough) NAME (cough) 
+LINEST is basically the slope of the line? or if it were a set of X and Y values it would be y=mx, yes?
+
+Can you expand on MINVERSE? I don't understand the math. The google is showing ?it's a determinant? of a matrix?
+Tell that to the movie industry. (Kidding)
+and some of =ISxxx() formulas, e.g. =ISNUMBER(), =ISTEXT() =ISNA() =ISEVEN(), etc...
+That's rarely used?
+We use it all the time at work.
+Do you know what the use would be to change  to binary?
+I had no idea lower case "a" is 1100001 in binary lol that's hilarious.
+
+Never heard of this. Can you describe some applications?
+You mean =today()-1 I assume.
+
+
+If you use CEILING, there is also FLOOR which does the same thing except that it's equivalent to a round down.
+Didn't know about proper, cool. What type of data doesn't have proper casing though? Nothing customer related I'd assume. 
+Whoa! Never heard of these. Networkingdays will be very useful. Thanks
+Nice and neat write up. What have you applied it to?
+This is used a lot now just for adding notations into formulas. I build a lot of pseudo "programs" in Google Sheets and  N() has become a good friend of mine.
+
+
+These two I always forget about. I end up with IF formulas inside IF formulas.
+Is that a ranking process for avoiding duplicates?
+Seems like it would be cleaner formatting. Haven't tried it yet though.
+Weird, I always end up using value
+I am reviewing the top excel posts of all time and this wasn't too far down the list. I have to say, I feel the same way about this and the VALUE formula. So essited! 
+I think it would be easier to divide the difference between two dates by 7 and then round. Another oft-forgotten function could be useful here: MROUND. Aka round to the nearest multiple.
+Holy shit I was literally trying to do this last week. Do go on! 
+Choose(cell ref, 1,2,3,4) where 1234 are actions to do when you find 1 or 2 or 3 or 4. Each comma place is assumed by Excel as 123 or 4
+
+So lets say that for each cell it finds a 2 in, we want it to vlookup a value we would do choose(ref,,vlookup(stuff)) 
+
+Say for 3 we want it to sum if 
+Choose(ref,,vlookup(stuff),sumif(other stuff)) 
+
+And lets say we throw a 5 in there to put a text value in 
+Choose(ref,,vlookup(stuff),sumif(other stuff),,"butts") 
+Good video: https://www.youtube.com/watch?v=M4X2SXdXWmE
+You know, I use sumproduct all the time, but I'm struggling to think of a time I used it for something other than a weighted average. Is there any other reason to use it? 
+I got started with using sum_product when following Excelisfun on YT. I got close but IDK it seemed like excel for Mac wasn't returning the same results as the PC examples.
+I use sumproduct a lot as I do a lot of real estate modelling where I have a list of buildings, a list of occupancy rates, a list of rental rates, etc and this just brings it all together. 
+Does it have an advantage over =mmult? 
+"Sum" is addition. "Product" is multiplication.
+Peace among worlds
+LINEST can return all of the [results of a regression analysis and extra statistics](https://support.office.com/en-us/article/LINEST-function-84d7d0d9-6e50-4101-977a-fa7abf772b6d).  It's pretty excellent if you're doing analysis on multiple data sets.
+
+> or if it were a set of X and Y values it would be y=mx, yes?
+
+It can actually do multiple regression, so not just y = mx + b.
+
+[MINVERSE inverts a matrix](https://support.office.com/en-us/article/MINVERSE-function-11f55086-adde-4c9f-8eb9-59da2d72efc6).  It's standard math when doing linear algebra.  I also like MMULT (or any of the matrix formulas).
+I use iferror all the time to make sheets pretty that have formulas that show errors until the user enters some data.
+Then you'd be surprised at the amount of people who are fairly proficient at excel who have never heard of it. I was at least.
+INDIRECT is useful but with a bad downside: it's difficult to trace the cell that the formula is referring to. BUT, here a way to do just that. In the F2 edit mode, highlight the whole INDIRECT formula and then press F5, and watch Excel magic in action. 
+
+In the same F2 edit mode, you can highlight ranges in other functions like SUM, SUMIF, INDEX and OFFSET, etc., press F5 and you'll be taken to those ranges. Bonus: you change the ranges on the fly by highlighting a new range. 
+Is it an efficient function in terms of computing?
+
+Can you give an example of application?
+    =CHAR(BIN2DEC(a1))
+
+Oh opps. thought you were asking about the opposite function. Application of using binary? [Binary solo?](https://www.youtube.com/watch?v=AXhYgprPB9o)
+It's actually llooool
+
+Oh god, did I just make a really lame Excel joke?
+I think they're just talking about: http://www.excel-easy.com/examples/data-tables.html
+
+Honestly it's probably the most used "function" for quick ad hoc work I use besides pivot tables 
+I just made a [walkthough example](https://drive.google.com/file/d/0B8wAhtaSgLH4VmQzRTQ1Mi1fVFU/view?usp=sharing). Hope you find it useful.
+WORKDAYS.INTL and NETWORKDAYS.INTL are also very good if you deal with an schedule that's not Monday through Friday.  
+
+They add an extra argument to specify which days to take off. There are several ways to do it but I prefer "0000011" where the first 0 is Monday. I often use "0000001" for taking only Sunday off. I even have used the same but made a long column of holidays which are every other Saturday to make a 5.5 days per week work schedule. You can do much more with .INTL
+I miss a feature from Lotus 1-2-3: you could put a semicolon at the end of a formula then add notes.
+Exactly this
+I'm totally using this catagorize weeks aging tomorrow.
+Great reference, thanks!
+It can basically do stuff that a pivot table does - summing based on multiple text criteria for example. To do this you do something like =SUMPRODUCT(--(criteria1array="value1"),--(criteria2array=value2),dataarray)
+
+This will return arrays of 1s an 0s where the criteria are true which are all multiplied together with the actual data and then summing so you end with a sum of just the data where all of the  criteria were met.
+Of course! My mistake.
+You know there's a lot of really useful Analytics functions and I have little experience with them. Knowing the math is key. I'm finishing Biz Calc II atm. It's helped some. We're barely scratching the surface for linear programming. Kind of sucks.
+I think a ton of people wrap their formulas in IFERROR(xxx,"").
+
+This thread is supposed to be about rarely used excel functions.
+My boss thought I was joking when I mentioned it, then she saw me use it and freaked out about why had no one told her, everything we did was in excel. 
+I had a recent project that used INDIRECT a lot. Basically, the first tab had rows of securities and needed some calculation results returned for each. However, different security types required very different calculations to return the same data. I set up a calc sheet for each security type with the required result columns the same in each. Each tab was named with the type (BOND,CDS,IRS,etc). Then on the first tab, I has a dropdown for security type that matched the tab names. If you select BOND, the data would use INDIRECT to pull from the BOND tab.
+INDIRECT, OFFSET, RAND, NOW and TODAY are volatile, which means all formulas calling any of these recalculated whenever anything triggers recalculation. Using them in more than a few dozen formulas is usually a bad idea. There are often better alternatives.
+Haha, I was wondering what you were talking about and why not just use 
+
+    =Left(a1,1)
+
+I think the musical use is far better.
+
+Good job It looks a lot like creating a SUMPRODUCT array based on a value. I'm sure this could get more complex. 
+
+I think it could be useful for creating allocation scenario's. Example Through analysis Customer A could receive X covering one week of their demand and if we wanted to fill their 2nd week, 3rd, etc. etc. That could demonstrate fulfillment scenarios. Very cool good job.
+/u/nolotusnotes gives an equivalent above. Add +N("text") to the end of a formula.
+ah, neat. Thanks!
+I used to use it all the time too but have since learned SUMIFS does the same thing but much faster.
+Well solver is cool and all, but the included version with excel has some limitations. It's really mostly good for small problems. For big stuff, you're going to need to buy a fairly expensive license, and in that case, I prefer GAMS.
+Offset is good and common enough with macro's.
+> It looks a lot like creating a SUMPRODUCT array based on a value
+
+Sort of, but whereas with SUMPRODUCT the logic needs to be in the formula, and might be complex. With Table, the logic can be elsewhere, and the metric(s) of interest are simply referenced.
+
+> I think it could be useful for creating allocation scenario's
+
+Yes, I think that is a good example. In a simple version, set up variable X (a constant delivery rate), and a metric like Customer A minimum on-hand. Then in the Table, vary X to see how the metric responds. 
+
+You can get trickier with this too. Instead of a constant X, make X a function of Y (Y might be based on QOH, seasonality, or whatever), with the model dependent on X. Then vary Y to see how the metric responds. 
++N("comment") at the end of a formula is fine for formulas returning numbers, but doesn't work so well for text formulas. That requires something like &LEFT("comment",0).
+They aren't as flexible though. It's much harder to add more complex logical conditions.
+The .Offset property of the Range class isn't the same thing as the Excel OFFSET worksheet function. Also, even user-defined functions using .Offset aren't necessarily volatile while OFFSET is always volatile.

@@ -1,0 +1,36 @@
+6g9gj0
+countif within a date/year range
+what I need to do, and I can't seem to get it right is count the amount of entries in a variety of month/years
+
+ie: 
+=COUNTIF(DETAILS!T:T, "=12/2013")
+
+next row
+ie: =COUNTIF(DETAILS!T:T, "=1/2014")
+
+after I've done a count I would need to also do a sumif on Details column S based on the dates as well.
+
+the data in DETAILS!T:T is the date (ie fiormatted 12/12/2013) and the details in DETAILS!S:S is the cash value.
+
+and so on.. it seems that when it comes to counting dates the formulas always stump me! 
+
+thank you! 
+
+
+-------------
+Dates are a bit fickle in excel especially when searching against values, I suggest you use the TEXT function to reformat dates so that the values match the same type. For example, making a helper column which converts the dates in column T:
+
+    =TEXT($T1,"MM/YYYY")
+
+This way you don't have to worry about dates being interpreted as weird strings etc.
+-------------
+solution verified! 
+
+yeah, that works... counting dates is always so frustrating to me... it seems like it should be super easy but it never is.
+-------------
+Awesome, good to hear. Edited post because apparently that comment worked.
+-------------
+
+You have awarded one point to _Erotic_Chopsticks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

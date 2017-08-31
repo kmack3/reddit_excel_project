@@ -1,0 +1,68 @@
+VBA: Get date from second visible row after autofilters using offset
+I'm not sure that I'm following your range reference. Anyways I wrote this alternate code. It takes a Range argument instead of a column letter, and also lets you select any number for X. It assumes you include the header in the range.
+
+    Private Function GetVisible(rng As Range, x As Integer) As String
+    
+        Dim Cell As Range
+        VisibleCount = 0
+        
+        For Each Cell In Range(rng.Offset(1, 0), rng.End(xlDown))
+            If Cell.EntireRow.Hidden = False Then
+                GetVisible = Cell.Value2
+                VisibleCount = VisibleCount + 1
+            End If
+            If VisibleCount = x Then Exit For
+        Next Cell
+    End Function
+Getting an app/object defined error (1004) on line 6 (from your snippit above, it is line 12 on mine below).
+
+Also - assuming VisibleCount should be dim as integer.
+
+Here's the modified version I'm trying to test right now:
+
+    Sub DumbSub()
+        MsgBox GetVisible(ActiveWorkbook.Sheets("ReportsRaw").Range("G:G"), 1)
+    End Sub
+
+    Private Function GetVisible(rng As Range, x As Integer) As String        
+        Dim Cell As Range
+        Dim VisibleCount As Integer
+        
+        VisibleCount = 0
+    
+        For Each Cell In Range(rng.Offset(1, 0), rng.End(xlDown))
+            If Cell.EntireRow.Hidden = False Then
+                GetVisible = Cell.Value2
+                VisibleCount = VisibleCount + 1
+            End If
+            If VisibleCount = x Then Exit For
+        Next Cell
+    End Function
+
+
+Needs a small change to be able to accommodate passing an entire column. 
+
+    Private Function GetVisible(rng As Range, x As Integer) As String
+    
+        Dim Cell As Range
+        VisibleCount = 0
+        
+        MsgBox rng.Cells(2, 1).Address
+        MsgBox rng.End(xlDown).Address
+        
+        For Each Cell In Range(rng.Cells(2, 1), rng.End(xlDown))
+            If Cell.EntireRow.Hidden = False Then
+                GetVisible = Cell.Value2
+                VisibleCount = VisibleCount + 1
+            End If
+            If VisibleCount = x Then Exit For
+        Next Cell
+    End Function
+Solution Verified
+
+Awesome.  Thanks for saving my ass twice in one week.  There is only so much Googling I can do before going insane.
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+No prob

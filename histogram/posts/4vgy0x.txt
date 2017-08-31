@@ -1,0 +1,48 @@
+excel forecasting system to web application
+R & [Shiny](http://shiny.rstudio.com/gallery/) or [Shiny Dashboard](https://rstudio.github.io/shinydashboard/) can do some pretty cool webapps / live visualizations with a little programming.  I have done a few of these at my work.  It requires almost no HTML/web programming knowledge but you will need to learn a bit of R.   The Shiny Server portion runs in linux, eg ubuntu server, and can be set up somewhat easily.  The main con here being you would have to reimplement your excel work in R, which likely is not a minor task.
+[deleted]
+You should carefully consider whether your current employer would view your new product as substantially the same as their proprietary product (i.e. stealing secrets), done on their time (i.e. stealing their intellectual property products and  presenting them as your own), or being marketed to their customers (i.e. stealing their customers). I do't know your industry or product, but you should talk to a lawyer about how to insulate yourself from those accusations. 
+hey man, have you tried office online?  
+you can make any excel sheet into a web app, hide practically any element so it looks and feels like any regular webframe.  
+if the spreadsheet needs to call external info, not sure it will do it (unless maybe you keep the linked files in onedrive also), but you could "get around" by updating your document daily or so and hitting save.  
+no programming required, check it out, it's free, might be worth your while:  
+https://office.live.com  
+
+e: you have several security options (who can see/edit), and even set it up as a template so that users don't mess up your sheet, etc.  
+e2: the excel online version is obv a bit more limited than the regular program, so some things like macros might not work. but anything that doesn't require macros or vba will work right out of the box
+I've tried to find a solution for this as well. I am not sure what industry you are forecasting, but I've had to come up with some pretty slimmed down solutions so that people with very little excel knowledge can work through the forecasting.
+
+I'd like to see what you've come up with, but I doubt that you'd share...
+Thanks for your reply. I don't know R but I was definitely planning on learning. It will not be minor but can i actually redo everything I've done in excel into R? Also does the shiny studio work on windows too? Or I will have to have linux to use it? 
+Thanks for the reply. So essentially my impression of Google sheets was that it's just excel but on the web. I didn't know you had to create an actual app for it. If it becomes any more slow than it is, I don't think it will be an improvement.
+
+So if I use the Flask framework, do you think average Joes like me with no programming experience as such can take it up and build something on it? Or does it have a steep learning curve?
+
+I also don't know what these conversion services do that converts a spreadsheet in a few minutes.
+You definitely have a good point. I have visualized and created this style of product on my own time and I have then spent months at my employer and their clients to customize it according to their specific needs. But yes I will keep this in mind. Thank you.
+Thanks man - I went to that site you listed but besides it just being like a Google sheet kind of thing, I could not find anything which looks like a webframe. Can you direct me to an example of what it would look like? Thank you. My spreadsheet does have UDFs and some macros which would need to be transferred. 
+R studio works in windows and is how I develop.  RStudio itself can run your applications in a window or through a web browser without the server, but I find performance suffers quite a bit.   The server portion works well in a small Virtualbox VM with Ubuntu Server.
+
+R does things differently than excel, some easier some more difficult.  There are hundreds of libraries that extend R and likely one or several that do some of what you are trying to achieve. 
+
+The worst part for me is customizing various plots, adding labels or changing colors.  I've had some ggplot code for a specific chart that was longer and more complex than the data manipulation code.  
+
+As for redoing excel work in R, its tough to say.  I used to have a 401k fund tracker in excel.  It was a bear to maintain and slow.  I reimplemented much of that in R recently with just a little bit of code and it just works.
+basically just put your spreadsheet into [onedrive](https://onedrive.live.com/?qt=mru), then launch it on the [excel website](https://office.live.com/start/Excel.aspx?omkt=en-GB&auth=1&nf=1#).  
+here's a [simple example](http://www.jkp-ads.com/Articles/embeddedexcel00.asp) of a spreadsheet displayed as a webframe.  
+and a [longer guide](https://www.ablebits.com/office-addins-blog/2014/03/28/excel-online-create-web-based-spreadsheets/) by some cute russian chick. (in particular read the part "Use Excel Web App to embed the online spreadsheet onto a website or blog").  
+
+basically, excel online tries to convert your spreadsheet into html automatically, so that it looks identical to as if you open it from the regular excel program.  
+furthermore, in the embeddable "iframe" you can choose to hide anything you like, such as other sheets, the column and row headings, scroll bar, etc.  
+
+i'm definitely not sure the macros will work, but you can certainly try. and if they don't work, maybe the online version of your spreadsheet could work with static info that you might update manually say daily or so, indicating last update date or something
+Thanks for this detail. So if I were to dive into it, what is the first step I should take. I don't know there doesnt seem to be any easier way than programming my spreadsheet into a different language. 
+Start by getting R and RStudio working.  Then download and print he Rstudio provided [cheatsheets](https://www.rstudio.com/resources/cheatsheets/)  which cover R basics, shiny, datavis, data manip, etc.  I refer to these often.  
+
+Then start exploring the [Shiny Gallery](http://shiny.rstudio.com/gallery/) for similar projects or components that you want to do and copy the code (either the example will display the code inline or click on the "Get Code" button (linking to github hosted files) and copy into your rstudio.   This will help you learn features, syntax, etc.   
+
+Once you figure out how to get your data into R, start with a simple chart or calculation and then start adding features or inputs until you get the desired level of controls and results you want.   
+
+I also typically copy the project files to a new directory to start new features once I've completed a feature.  This helps to preserve my known working code in case I botch something up.  
+
+Good luck!

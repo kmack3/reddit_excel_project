@@ -1,0 +1,75 @@
+What are the necessary excel skills?
+Pivot Tables, INDEX, MATCH, OFFSET, GETPIVOTDATA, SUMPRODUCT (!!!!!), VLOOKUP.
+
+Pivot Tables...
+
+learn the camera tool.
+
+I find that Pivot tables are also important.
+
+
+Analysis here.  What usually happens is you get a huge data dump from the accounting software, you work out a way to divide it up and put it into graphs.  Things like Clean and Trim can be extremely helpful because the data may be ugly.  Vlookup will be your best friend but if you want the wow factor do index(match()).  Text to columns and other text functions (left, mid, right) plus simple concatenation ("As of "&b1&"data is accurate").  Learn all the funky quirks of charts and what looks good visually.  And as all the others said, pivot tables.
+There are few tools that will wow people:
+Pivot tables
+Charts
+Writing basic formulas
+A few functions like VLOOKUP, SUM(), SUBTOTAL(),
+Filters
+
+I've also found that learning about cell formatting really impressed my boss.  Custom number formats, conditional formatting, text formats.
+
+I don't have an analysis job though.  I assume for a job like that you would want to check out the tools in the Data tab.
+I get asked this at work all the time.  Most recently was an older lady (50+) who was being made redundant.  I replied honestly in that you can't just learn a few tricks to make you appear proficient.  Its a long learning curve of experience which most people barely start down.
+
+For me, proficiency is not even about formulas, its about planning out what you are trying to do and how you're going to get there.  For example, a typical day for me is to acquire a set of data and extract some meaning out of it.  Normally 1000s to 10ks of records with 20-50 fields, of which maybe 4 or 5 will be of interest.  I'll then need to cross-reference one or two of the fields against another set of data to give it more meaning and to allow filtering.  Then I'll pivot it and arrange it in such a way it conveys some meaning, maybe make a graph or just reduce it down to %s.
+
+So, to do this I need to know VLOOKUP and pivot tables but most importantly how to organise and manipulate data.  Just having the tools is not enough, you need to know when to deploy them.  
+
+Imagine a builder.  He needs to know how to use a hammer and a drill but he also needs to know when to actually use them and in what order.  You'll only get that knowledge with experience.
+
+All that being said, you probably won't be tested end to end like this.  So my advice is to get some data and play around with it.  Learn how to make graphs and pivot tables and *how to learn* new things.  Knowing where to get help online or in the help files is just as important as knowing it upfront.  Creating your own accounting spreadsheet with graphs is a good way to get started.
+Shortcuts, Pivot Tables, how to pull external data...I agree with WhoreDolls all the things they said is crucial.
+I always thought V-lookup was cool but INDEX MATCH took sexiness and accuracy to a whole new level. It is really cool even if you are a retail sales manager .
+
+I even taught my 25 member team Index - Match. Don't think anyone uses it though
+nested IF statements, INDEX and MATCH, Autofilters and PASTE SPECIAL!
+
+Edit: don't forget keyboard shortcuts like Ctrl + D or Ctrl + Shift + V
+Learning to properly and neatly structure worksheets.
+The wild and beautiful beast that is the INDIRECT function. Use it sparingly, but when correctly deployed it can do some amazing tricks.
+INDEX, MATCH, OFFSET, VLOOKUP, HLOOKUP, LEFT, RIGHT, and VBA should pretty much cover 99% of things.
+
+But honestly, VBA and pivot table are the two big thing.
+(not essential but everybody should know how...) To be able to do everything in excel without touching the mouse
+what do you use camera tool for?
+How much do jobs that require those skills pay?
+Thank you so much!!
+Good advice.  Everything I know came from someone saying "I'd like to see this." or "Is there a way to do this?"  One of my bosses always got a kick because I would say the impossible just takes longer.  So many internet searches and articles read that vastly outweigh any class or book.
+"Being made redundant" means getting laid off. 
+You're so right about the importance of experience and planning.  Your job sounds awesome.
+Thank you.  When you say "pull external data," what exactly do you mean? Import data into excel?
+I see this a lot and admit that I'm a key board shortcut junkie, but I have found using a keyboard superior to the mouse when doing pivot tables and charts.  Do you know some kick ass shortcuts that I've never seen?
+It just depends on what gig you land.  I used to make 70k but after a few lay offs I had to drop way down just to get a job.  While unemployed I did a 2 week contract at $100/hr but it can be hard to find stuff like that.  I'm a CPA so that helps.  I also do Access development so knowing excel and access is a boost.  40k+ is pretty common I would say.  
+
+If I was doing my career over, I would hook up with an investment bank and travel to do their acquisitions.  
+If it is purely for resume padding, then learn to record macros and play them.  Make sure you memorize how to add the developer tab, and a bonus is if you learn to create buttons to run your macro's.  Don't fool yourself into thinking you know VBA though, although recording macros is the first step.
+
+For your actual knowledge of excel, I would say learn to use help.  Where to go when you are looking for something.  Coming here is an excellent place.  If you look at the problems people post for about 2 weeks, you will come across most common problems people face, and see what some of the solutions are.  Another tip for when you are getting started is to turn off the office online help.  The classic/built in help is fantastic, and for now much much much superior to the online.
+>I'd like to see thisYeah, I know what you mean.  Normally they assume it will be easy and take you an hour but the data provided is incomplete and they want you to put it into a horribly formatted spreadsheet.  They give you half a day to develop and test something which someone specced out and mocked up over a couple of weeks.
+Correct.  You can drop a lot of jaws doing this.  As far as I know, and I just checked on my mac.  Being able to pull data off of websites only works on PCs.  The reason is that the tool to use it is an IE driven application in Excel.  Anyways... To do this you click Data in your top ribbon and then choose which destination you want to pull your data from; From Access, Web, Text, Other Sources (databases and whatnot on a server).  I use this frequently to pull data and chug all the data in real time reports.  You can get very creative and excel is magnificent. If you get into VBA, you will be able to accomplish great things (assuming you have a very creative and out of the box mind :-) ) .    Back to what I was saying about pulling data from websites what happens is that you click from web and then a window pops up (this  is the IE driven part) and you can type in the website you want to pull data from. You will see a ton of yellow arrows pointing at every element on the page (I believe).  What I like to do is at the top bar click off and on the yellow box with the right pointing arrow with the "x" on it because sometimes this application does not capture every piece on the page (just a precaution).  From there you can pull data bases, titles...anything on the page with the yellow arrow next to it.  Stock tickers, time, population...whatever.  Hit Import.  When you do this check the properties, if you want it to auto update every 1 minute or hour or whatever set it.  Make sure you look at the details.  Then click ok.  Now you have connected to the internet.  If you hit refresh this data will update.  Sometimes you need to give it a few seconds to chug depending on how big the database is.  I have pulled massive data banks and it takes a minute or two.  In addition, say if you are going to pull data from a website that you need to log into...make sure you log in on IE first onto that website, from there then you can refresh data.  Otherwise it wont work.  I hope this helps.  I love excel, so ask me any questions if you need.
+I worked for a medical company and BoD was all doctors.  The shit they requested.  Everything had to be graphs and they would want completely unrelated metrics on the same chart.  They had no idea, they just wanted to look smart.  On the other side, I was working for Disaster Housing Assistance Program after a hurricane.  I was dealing with data that no one had ever used before.  I'm dealing with data from FEMA and HUD and the housing authority running the program.  My boss was kick ass!  She would say what she thought would be useful and I would diagram it out on the dry board.  Then she would just leave me alone for a few weeks.  That's where I developed my access skills.  To my knowledge, HUD and FEMA employees are still using some of the stuff I created.
+> Correct. You can drop a lot of jaws doing this. As far as I know, and I just checked on my mac. Being able to pull data off of websites only works on PCs. The reason is that the tool to use it is an IE driven application in Excel. 
+> 
+> Anyways... To do this you click Data in your top ribbon and then choose which destination you want to pull your data from; From Access, Web, Text, Other Sources (databases and whatnot on a server). I use this frequently to pull data and chug all the data in real time reports. You can get very creative and excel is magnificent. If you get into VBA, you will be able to accomplish great things (assuming you have a very creative and out of the box mind :-) ) . 
+> 
+> Back to what I was saying about pulling data from websites: what happens is that you click from web and then a window pops up (this is the IE driven part) and you can type in the website you want to pull data from. You will see a ton of yellow arrows pointing at every element on the page (I believe).  
+>  What I like to do is at the top bar click off and on the yellow box with the right pointing arrow with the "x" on it because sometimes this application does not capture every piece on the page (just a precaution). 
+> 
+> From there you can pull data bases, titles...anything on the page with the yellow arrow next to it. Stock tickers, time, population...whatever. Hit Import. When you do this check the properties, if you want it to auto update every 1 minute or hour or whatever set it. Make sure you look at the details. Then click ok. Now you have connected to the internet. If you hit refresh this data will update. Sometimes you need to give it a few seconds to chug depending on how big the database is. I have pulled massive data banks and it takes a minute or two. 
+> 
+> In addition, say if you are going to pull data from a website that you need to log into...make sure you log in on IE first onto that website, from there then you can refresh data. Otherwise it won't work. I hope this helps. I love excel, so ask me any questions if you need.
+
+Sorry, good info. Cheers!
+That. Is. Awesome. 
+
+Did not know that. Thank you!

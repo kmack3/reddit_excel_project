@@ -1,0 +1,33 @@
+6irkt5
+I have an excel sheet with some data, I need an interface which asks for a primary key, goes to the excel sheet, fetches the data and prints it to a word document template, which, I have kept ready before hand.
+It should have a vanilla interface, which any naive user can use. 
+
+
+-------------
+If you were to create the template in Excel itself, simple references could be used to the chosen record's data - and you could print from there...
+
+- The "key" is used to identify which row of data to use, right?
+- make a table of the source data, use data validation to create a look up list of keys
+- search for the key in the source table.
+- reference the other data in the source table using the previously looked up row.
+- template fills itself in
+- choose the template cells as the print area 
+- hit print (it works, take a look...plus I centered it on the page)
+
+Here's the example file.
+
+https://expirebox.com/filesgroup/38b7640f52ee9bbdeb0998be14d6b494.html
+-------------
+Is there any way I can take that output to a word document?
+-------------
+Yes
+
+- You make a default word document, 
+- copy the cells you want 
+- paste AS LINK/Excel worksheet object.
+
+Changes in the excel should be reflected in the word document (and right click -> refresh to force it)
+-------------
+Fine I'll try this! Thank you soo much man!! 
+I appreciate this (:
+

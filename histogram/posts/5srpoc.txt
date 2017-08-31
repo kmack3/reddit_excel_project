@@ -1,0 +1,28 @@
+Converting between decimal minutes and mm:ss (e.g. 5.5 would become 5:30)
+Divide by 24 and format as time.  
+All the time presets come with seconds. If you don't want that and just to leave it in hh:mm,  
+In the format calls window, select custom, and manually enter hh:mm.  
+Alternatively, use  
+> =TEXT(A1/24,"hh:mm")  
+
+This way you don't need to mess with formatting.
+
+Divide the time value by 24..
+
+Custom format the cell `[hh]:mm` to prevent hours running over into days when over 24 hours.
+SOLUTION VERIFIED
+Oh that's perfect, thank you!
+
+You have awarded one point to _Triumerate_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Just to point out your actually converting this into hours and minutes,  which might not be a problem, but if you need to do other things with the data you may run into some issues.  To get minutes and seconds devide by 24 then 60.
+
+    =TEXT(A1/24/60,"[mm]:ss")
+
+Or 
+
+    =A1/24/60
+
+Format as [mm]:ss
+Thank you! I ended up making a simple distance/speed/time/pace converter as well and this really helped! :)

@@ -1,0 +1,19 @@
+Noob Question, Very simple, but can't figure it out.
+In cell F26: 
+
+    =sum(F2:F25)
+
+In cell G26:
+
+    =sum(G2:G25)
+
+The formula tab has the "autosum" function, it's pretty intuitive.  It might have even suggested this for you.  
+
+EDIT: Format
+Into G26, type in:
+
+    =SUM(G2:G25)
+
+And repeat the same for F26, but replace the G's with F's.
+You weren't wrong in your title :-P
+And a shortcut for this in future is to click on the cell you want the sum to appear in, then press ALT and +.

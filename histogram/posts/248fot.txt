@@ -1,0 +1,292 @@
+Why use VLOOKUP?
+Vlookup is just easier to write. 
+I completely agree, this is my all time most usefull function:
+=INDEX(C:C,MATCH(A:A,B:B,0))
+
+Finds the value in column A with the same value in B and returns the Value in C.
+Performance. I run a personal set of spreadsheets that just cracked the 60Mb mark (sure they could be optimised, but it'd take a week that I don't have to de-tangle some of the references). The conversion back to vlookup over index/match saved me a a good 5-6 minutes in processing time for calculations. 
+You are all referring to using VLOOKUP when the "range_lookup" value is set to "FALSE". And in that situation I agree with you; INDEX/MATCH is superior.
+
+However, there are a few situations where you use can VLOOKUP when setting the "range_lookup" value to "TRUE". You can't replace this type of VLOOKUP with INDEX/MATCH.
+
+I've provided a few examples in a workbook which I've linked below. They are 1) looking up a student's grade 2) Determining pricing on a order if your company gives a volume discount 3) Determining the current rent a tenant pays given the current date.
+
+https://dl.dropboxusercontent.com/u/3535032/VLOOKUP%20-%20TRUE.xlsx
+
+Edit: VLOOKUP formulas highlighted in Green (and yellow on the first page to show the wrong way to use it)
+
+Edit 2: I'm wrong. As collapsible_chopstix points out, you can replace these VLOOKUPS with INDEX/MATCH. INDEX/MATCH formulas added to spreadsheet and highlighted in orange.
+IMO, vlookup is more 'advertised' than nesting match/index. people were taught how to use the function, rather than combining multiple functions... then they couldve heard about the awesomeness that is index/match. but change is the devil/evil/scary
+
+...i guess nesting functions make them more complicated....but also more powerful & useful....but also scarier 
+
+
+speed, you cant write a match and index function faster than a vlookup
+My contribution: I seem to recall index/match has greater performance, in terms of computing power.
+I use it if I'm looking up something simple where I know exactly which column I'm looking up from.
+I only use index match when the data is more complex. When I want a quick check to see if a name on one list is listed on another list I always default to Vlookup because do how easy the formula is to type
+To turn it around, why use INDEX and MATCH together if there's VLOOKUP?
+And more people know how to read it.  
+
+The extra time you spend writing index/match lookups will be a pittance compared to the user support you'll be responsible for when someone's requirements change and they decide to call you back to change a column location that they would have done themselves if it was a vlookup they understood. 
+
+Edit:  Using named ranges to index can make a complex calculation a little more human readable about the intent sometimes though.  Essentially lets you use named variables rather than cell references. I will often use this to implement a complex model.
+
+For a simple example:
+
+    =INDEX(GDP,MATCH(Target,Country,0))/INDEX(POP,MATCH(Target,Country,0))
+
+Is very clear that we are solving for GDP per Capita.  Protect your shit though.  Good luck debugging if someone manages to bork the references.
+Thank you. I knew INDEX would be more resource intensive but it's nice to have anecdotal evidence based on experience. I guess I've been fortunate enough not to run into spreadsheets that large.
+Agreed.  In those cases Vlookup is similarly "more easy" to write than an index match.  However, Match does have the match type options -1, 0, 1 for greater than, exact, less than.  Using those match types you ~~can break your lookups no matter which way your reference range is sorted.~~ have more versatility when writing your lookups.  
+
+Added the index/match case for sorted descending with upper limit to /u/not_last/place 's spreadsheet (https://dl.dropboxusercontent.com/u/4050680/VLOOKUP%20-%20TRUE%20%281%29.xlsx)
+
+nice one.
+Don't know about scarier.  Nesting functions DOES make them more complicated, harder to read and more of a pain to debug.  
+
+I also don't know about advertising.  VLOOKUP's been around since approximately forever and before that Lotus123 had a similar function named @VLOOKUP.  
+
+For the quick lookups I often need to do in EXCEL I've never felt I'd be better off with I/M than VL.  But to each his/her own.
+Hmm, this makes me want to write a UDF to simplify and quicken the index/match writing. 
+Is this actually true? I've always thought it, and used index/match because of it, but want to know if anyone has any solid facts on this?
+Yeah I have a sheet of stock where I literally just have a list with ISBN, Title and the VAT value - I use Vlookup to find the VAT for a specific ISBN - nice and simple
+I don't know enough to give an educated answer but the ability to index a range of cells, key on one in the middle, but return a value from the left tops VLOOKUP's ability to return anything I want as long as it is somewhere to the right 
+Not that I can ever see how it would be a benefit, but your key column could be on a different worksheet than your Return value column.
+
+Likewise if your key column was AY on some large spreadsheet, and your return value column was B, you don't need to alter your data or select a giant array and count over 50 columns.
+
+You can use index/match/match to find your way around a big spreadsheet just like you could combine a vlookup with an hlookup. - this can be helpful if you suspect other people might muck with column ordering.  
+
+If you want to bring back many attributes for one value, you can pop a helper column somewhere that is just the match part, and then do small individual indexes referencing just the column of interest and your helper match column, rather than re-writing multiple vlookups.
+
+Also index match is just easier for me to "get", because my key column can be anywhere, my return column can be anywhere, they can each have meaningful names (as named ranges), and I don't need to remember any column offsets.
+
+**Edit** - Also your manager thinks you are a wizard when you type in an index/match instead of using the formula wizard for a vlookup when she can't figure out how to do it because the columns are in the wrong order.
+That's my deal.  I've been using vlookup for 25 years.  I still have to think when I do I/M
+Iirc: I/M can be used to return data from either side of the lookup value; while vlookup can only return from columns to the right
+You could call it VLOOKUP.
+Except for portabilility issues.  Vlookup works everywhere.  The intended user scope of the spreadsheet may change your design principles.
+
+Once upon a time I wrote a very simple UDF that imitates vlookup and takes a negative argument to shift left (Here's looking at you, Microsoft!), but as soon as I put it in spreadsheets, people copied formulas into other spreadsheets where it didn't work, and I had to spend time babysitting.  I would have saved time just simply using stock formulas.
+
+These days, I have a addin that I can automatically update on all user's machines to extend my function library. All of my spreadsheets can count on it being there.  Not everyone has the ability or willingness to go to such lengths though.
+There you go. By a huge, huge margin this is the most used function in my personal.xlsb. 
+
+The way it works: to write =index(A:A,match(B,C:C,0)) in cell D1, put the cursor in cell D1, then select (with ctrl+click) cells B1, C1 and A1 in this order, which corresponds to "search for cell B1 in column C and return column A". Run the function. Enjoy!
+
+I set ctrl+q as a shortcut by the way.
+
+    Sub InsertIndexMatch()
+    
+    Dim rngDataCell As Range
+    Dim rngIndexArray As Range
+    Dim rngIndexRange As Range
+    Dim rngFormula As Range
+    
+    Dim strDataCell As String
+    Dim strIndexArray As String
+    Dim strIndexRange As String
+    
+    If Selection.Areas.Count <> 4 Then
+        MsgBox "Select 4 cells first"
+    Else
+        Set rngDataCell = Selection.Areas(2)
+        Set rngIndexRange = Selection.Areas(3)
+        Set rngIndexArray = Selection.Areas(4)
+        Set rngFormula = Selection.Areas(1)
+        
+        Set rngIndexRange = Range(rngIndexRange, rngIndexRange.End(xlDown))
+        Set rngIndexArray = Range(rngIndexArray, rngIndexArray.End(xlDown))
+        
+        strDataCell = rngDataCell.Address(0, 1, , False)
+        strIndexArray = rngIndexArray.Address(1, 0, , False)
+        strIndexRange = rngIndexRange.Address(1, 1, , False)
+        
+        rngFormula.Formula = "=INDEX(" & strIndexArray & ",MATCH(" & _
+        strDataCell & "," & strIndexRange & ",0))"
+        
+        rngFormula.Select
+    End If
+    
+    End Sub
+
+I have heard that too, but not tested it.  Not the most rigourous test, but I just did some lookups for ~100,000 grades 10 times, and I saw basically no difference in runtime.  
+
+**Edit** Using this method Vlookup was quite a bit faster.  I was doing my timer incorrectly at first.  Index/Match taking about 50% more time.
+
+**Edit 2** - Modified my "test" code a bit.    
+[**Here**](http://i.imgur.com/ngdlisc.png) are the results.  Someone smarter and more knowledgeable than me will have to tell if this is a realistic test/why this test sucks.  
+[**Exact Match Results**](http://i.imgur.com/MVT4hFi.png) - same as code below except randbetween is 1-12 to allow an exact match for all my grade categories. (FALSE for vlookup, 0 for Match).  
+[**Here**](http://exceluser.com/blog/727/excels-fastest-lookup-methods-the-tested-results.html) is a post stating that:
+> At its worst, the INDEX-MATCH method is about as fast as VLOOKUP; at its best, it’s much faster.
+
+Perhaps what I should really be testing is looking up a few items with HUGE lookup range, not lots of lookups with a small range.
+
+
+    Option Explicit
+    Private Declare Function GetTickCount Lib "kernel32" () As Long
+    
+    Sub TickBenchmark()
+    
+    Dim Start As Long
+    Dim Finish As Long
+    Dim i As Long
+    Dim VlookupTime As Long
+    Dim IndexMatchTime As Long
+    Dim NumIterations As Long
+    
+    Application.ScreenUpdating = False
+    
+    
+        'NumIterations = InputBox("How Many times should wo do our calulating?")
+    
+        For NumIterations = 1 To 10
+                ActiveSheet.Range("A2:A100000").Formula = "=Randbetween(50, 100)"
+                ActiveSheet.Range("A2:A100000").Calculate
+                ActiveSheet.Range("B2:B100000").FormulaR1C1 = "=VLOOKUP(RC[-1],WholeTable,2,TRUE)"
+                Start = GetTickCount()
+            
+                For i = 1 To NumIterations * 10
+                    ActiveSheet.Range("A2:A100000").Calculate
+                    ActiveSheet.Range("B2:B100000").Calculate
+                Next i
+            
+                Finish = GetTickCount()
+                VlookupTime = Finish - Start
+            
+                Start = GetTickCount()
+                ActiveSheet.Range("B2:B100000").FormulaR1C1 = "=INDEX(LetterRange,MATCH(RC[-1],PercentRange,1))"
+                    For i = 1 To NumIterations * 10
+                        ActiveSheet.Range("A2:A100000").Calculate
+                        ActiveSheet.Range("B2:B100000").Calculate
+                    Next i
+                
+                Finish = GetTickCount()
+                IndexMatchTime = Finish - Start
+                
+                Worksheets("Summarysheet").Range("A" & NumIterations + 1).Value = NumIterations
+                Worksheets("Summarysheet").Range("B" & NumIterations + 1).Value = VlookupTime
+                Worksheets("Summarysheet").Range("C" & NumIterations + 1).Value = IndexMatchTime
+        Next NumIterations
+        Application.ScreenUpdating = True
+        
+    End Sub
+
+
+WholeTable is Column 1 has percentage grade, column 2 has letter grade.  
+LetterRange is just the second column of WholeTable.  
+PercentRange is the first column of WholeTable.
+
+
+Shame they don't just make vlookup work with negative values in the column count or something.
+
+vlookup is far easier to write if you are in a hurry.
+Never thought about that but its a real advantage to be able to do that.
+It's almost as if you don't understand the limitations of VLOOKUP. 
+Makes sense. In our situation, users already have a addins sheet where UDFs that are used a lot are housed and our users don't use other computers than their own.  
+
+How are you distributing addins like that?
+
+We have a few processes where macros reach out to network shares to pull a new set of information. Curious if there's a better way. 
+> et.Range("B2:B100000").FormulaR1C1 = "=VLOOKUP(RC[-1],WholeTable,2,TRUE)"
+>   
+
+Hey, sorry for the n00b question, where is GetTickCount() defined here?
+I don't know about "far easier" - at least for the ways I most often use index match.
+
+**Index Match**  
+type "=index("  
+select column I want to bring back  
+type ",match("  
+select cell with value to search  
+type ","  
+select column I am searching in  
+type ",0))"  
+
+**VLookup**
+
+type: "=vlookup("  
+select item I want to search for  
+type ","  
+select range that includes lookup column leftmost, value you want somewhere included  
+type ","  
+count how many columns over your "bring back" column is  
+type ",#,0)"  
+
+
+One more select step, and a few more keypresses.
+
+There's a workaround for that, adding CHOOSE allows us to set the column order of the lookup.  For example:
+
+    =VLOOKUP(A1, CHOOSE({1,2}, E:E, D:D), 2, FALSE)
+
+It's almost as if I was making a joke! :)
+I have each user install an installer locally.  This checks the version of several addins when they start their session against a version list I publish on the network.  If the version isn't current, it uninstalls, grabs the current version off the network and installs it locally on their machine to a set location.  On open, all of my spreadsheets check for a compliance artifact left by the installer, or else they shut down and warn the user.
+ 
+This avoids a few major pitfalls.
+
+* If you just pointed each session to the same network copy of the addin, it would always be locked for use, and you would have to ask each user to close their session before you could update (Um... this isn't fun!)
+
+* Each user should the same local drive path to the addin, or the spreadsheet's Excel side funtions can break.
+
+* If a user uninstalled the installer, their functional adins could remain and get out of date.
+
+FWIW, I work in a heavily audited enviornment, and I have to overkill this sort of thing to stay compliant.  One of my next projects is creating a hashing algorithm for the VBA code and function templates so I can prove nothing's been altered and the spreadsheets are stock.  I'll probably put in an auto-versioning log at the same time. 
+I mostly just lifted that syntax straight off the internet, and it is not something I totally understand either
+
+>     Private Declare Function GetTickCount Lib "kernel32" () As Long
+
+I am thinking this is the part that let's you get the kernel ticks.  When I first grabbed it into my code, I do not remember having to do anything special to get it to work.  There are no other modules or functions or classes, and I don't recall having to reference any other libraries (aside from this declare function) from my VBE.
+
+I am running Excel 2010 - so that might make a difference.
+
+If the gettickcount doesn't work for you, you can always use something like:  
+
+    Dim Starttime As Date
+    Dim Finishtime As Date
+    Dim Elapsedtime As Date
+        Starttime = Now
+        
+        'Do some code
+        
+        Finishtime = Now
+        Elapsedtime = (Finishtime - Starttime)
+        MsgBox Format(Elapsedtime, "hh:mm:ss")
+
+Which should work out of the box, and give you an actual number of elapsed seconds.  TickCount gives you a more fine-grained view of how long something takes to process, but doesn't necessarily correspond exactly with an amount of time your user is waiting.
+i generally have named ranges and typically when im using vlookup it is to validate that something exists in a list (example: two lists of social security numbers, see if each one exists in the other).
+
+=vlookup(A1,myrange,1,FALSE)
+
+No confusion with nesting or getting things just right.
+
+I will use index(match( if the need arises, but syntactically, vlookup is much cleaner and easier to follow. and for me, quicker to write.
+
+Ha, sorry. I had just woken up. 
+Yeah, for sure.  More than one way to skin a cat and all that.  Getting the job done is really what matters!
+
+My usage of vlookup/index match is normally much different than yours.  I am often dealing with big ugly data dumps from various databases, something like [**this**](http://i.imgur.com/gNmfBmm.png) (but uglier.)  I'll have a separate worksheet or workbook containing my raw data, and then somewhere else I'll be pulling back data from it.  With Index/Match I can name ranges I know I want, and then write things that are meaningful to me, for instance without flipping sheets, I will know what 
+
+    =INDEX(Height, Match(A1, Item, 0))  
+
+Is all about, and that is more descriptive to me than
+
+    =VLOOKUP(A1, Measures, 5, 0)
+
+And it is no problem for me to later decide I really need to be looking things up based on Part number, and switch to 
+
+    =INDEX(Weight, Match(B2, Part_Number,0))
+
+And not have to alter my data or really even care about column ordering.
+
+In the spirit of skinning cats, for verifying items are in a list, here are a couple shorter ways to do that:  
+
+    =MATCH(A1, myrange, 0) 'Will still give #N/A
+    =COUNTIF(myrange, A1)>0 'TRUE/FALSE
+
+And a "prettier" way:  
+
+    =IFERROR(VLOOKUP(A1, myrange, 1, FALSE),"") 'Will display blanks instead of #N/A
+the problem is when you need to work on a sheet prepared by someone else; you need to check if there is no data outside the bounds of your ranges...
+Generally I create ranges at the entire-column level to avoid these issues. Also, thankfully for me, I am generally using excel as a tool for analysis from data I have extracted from databases myself, so I don't run into many issues of what someone else did :)

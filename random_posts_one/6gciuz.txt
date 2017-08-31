@@ -1,0 +1,30 @@
+6gciuz
+Need to force two trailing commas on each row to be exported into a .csv file.
+I have  a file that I'm exporting to csv - where each row ends in:  LWL
+
+I need each row to end in: LWL,,
+
+(with two commas at the end of the LWL)
+
+I can't seem to figure out how to get those two trailing commas without quotes.  I've tried to set the value of the last two columns = NULL, or ="" and neither works. If I make the last column = LWL,,  then when it exports to .csv it results in "LWL,,"  with the quotation marks.  Help please?
+
+
+-------------
+What if you added two blank header columns? That way each row now has 2 more values to add after LWL, which would be comma separated ie an extra ",,"?
+-------------
+If it is not a fully automated effort, then a simple search replace `"` to ` ` after export!
+
+OR 
+
+Save as .PRN as then rename the extension afterward. 
+-------------
+Many people forget or do not realise that the C in CSV does NOT stand for "comma" It stands for "Character". 
+
+In excel you can specify the character to use as a separator, so just use something else if your valid data should allow for commas. 
+-------------
+ Sounds good.  How would i add a blank header column? Make the value of K1 = ?
+-------------
+Afraid I need it totally automated.  
+Save as a .prn?
+-------------
+That is a file type option in `save as` , it is a text file csv, just rename extension to `csv`or `txt`

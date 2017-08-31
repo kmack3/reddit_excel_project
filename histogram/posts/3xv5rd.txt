@@ -1,0 +1,76 @@
+VBA Code to convert large # of workbooks from .xls to .csv
+Untested, but should do the trick
+
+MAKE BACKUPS FIRST AND TEST IT ON A SEPERATE FOLDER! Also CSV files strip all formatting.
+
+    Sub LoopThroughFiles()
+        
+        Dim MyObj As Object, MySource As Object
+        Dim file As String, filepath As String
+        
+        Application.ScreenUpdating = False
+        Application.DisplayAlerts = False
+        
+        filepath = "C:\Users\User\Desktop\"
+        file = Dir(filepath)
+        
+        While (file <> "")
+            
+            If InStr(file, "xls") > 0 Then
+                
+                Application.StatusBar = "Converting " & file
+                Workbooks.Open filepath & file
+                Workbooks(file).SaveAs filepath & Replace(file, "xlsx", "csv"), xlCSV
+                
+            End If
+            file = Dir
+            
+        Wend
+        
+        Application.ScreenUpdating = True
+        Application.DisplayAlerts = True
+        Application.StatusBar = False
+        
+    End Sub
+
+Edit: Made some changes
+Sometimes VB isn't the way, this would be like 3 lines in Powershell 
+Why would you do this?
+Awesome thank you. I will try this out soon as I am through with my meeting and get back to you.
+So I am running that macro and nothing is happening with the workbook open or not. I adjust the directory in line 9, and adjusted row 13 and 17 to xlsx because I had wrong format but I dont think that should affect it. But when I run the macro nothing seems to happen - no error messages either
+We are only using 2010 is this 2013 and above? Not too familiar with powershell
+Imagine you get outputs delivered to you from a particular system in a specific format but only in XLSX format.
+
+You can instantly convert them to CSV and ready for upload into another system.
+Ok, I edited the original code above give it a try now.
+There are a couple of problems with this.
+
+1. You should implement system to system integrations without using intermediate files. (Obviously you can't always do this )
+
+2. Why not just upload using the XLSX format? It is handled natively by SSIS and SQL Server as well as other modern databases.
+
+the reason I say this is that the more you start shifting formats relying on Excel tricks to get data ready, the more risk you take on for dropping or changing data.
+
+Always try to do database to database transfers if that's an option. I realize it isn't always feasible and IT can be less than helpful, which is why people end up doing it themselves like this.
+
+I'm guessing that this is going to be a manual process, not something that runs automatically on a schedule. If this is true, that's another red flag.
+Yep works perfectly. Solution Verified
+Sorry last request. It looks like it keeps the files open after saving them which can bog down the system cause I am doing this with 100+ files. Is there an quick edit to the code that can be done to close the file after the save? If not no worries. Thanks. 
+
+I agree with all of your points, but many organisations don't have the skill set or funding to make these implementations.
+
+Sometimes this is the only way!
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+That would've been a good idea.
+
+After `Workbooks(file).SaveAs........` on the next line, add
+
+     ActiveWorkbook.Close False
+Oh I get that. And I'm not trying to be critical, just trying to pass on knowledge I have gained from decades of experience with moving data.
+
+I'm thinking about writing something up specifically for small organizations so they can move data around using free or inexpensive tools without running into the problems you face converting to CSV. Converting to CSV will generate problems with the data.
+Thanks for the quick response. Idk what the hell gold does but here you go. 
+Thanks very much friend.

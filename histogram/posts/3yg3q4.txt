@@ -1,0 +1,100 @@
+What are the weaknesses of Pivot Tables?
+Two minor annoyances in my opinion 1 - they must get their source data from a single contiguous source - you cannot combine data from multiple ranges as the source.  2 - the other one is they do not automatically refresh.
+
+Overall, you're very wise to continue to rely on them - they're my go-to Excel analysis solution 90% of the time also.
+The biggest weakness of pivot tables is calculated fields.  They are extremely limited in what you can do.
+The VBA interface is a nightmare. However when you want to do some stuff that really belongs in SQL but don't want to write that much SQL a pivot table is the bees knees
+As an IT Analyst, here are my two cents:
+1) Microsoft Access and Excel are powerful tools when combined. Before my internship many years ago, I had only used the two exclusively. Think of each program as a "tool in the toolbox", and each has its strengths and weaknesses.
+IMO:
+Excel - Simple data visualization (Tableau is another good tool)
+Access - Processing data, queries, math
+SharePoint - User input, storing information online
+
+2) Depends on the version of Excel you use. In 2007, I was unable to "repeat" items, so there would be blanks in the PivotTables. 2010 fixes that. Off the top of my head, it's right-click "PivotField Options -> Repeat items".
+
+3) For "finding information", Excel would be good for PivotTables displaying. There are other options, but that is probably your simple best bet.
+If a pivot table is filtered and a report is based off the pivot table, then if someone changes the filter the report will show different results but there is no sign that the filter is changed. Building a report directly from the source data is a safer option. In my opinion pivot tables are a lazy way out, building directly off the data is safer I think
+Currently, my biggest complaint: different functionality/usability between pcs and Macs. I have to keep two versions of many of my reports for the different platforms. 
+They aren't dynamic, so if there's a change in your data, you have to manually refresh.  
+
+Also, the look is fairly set, so you can't customize them.  If the look doesn't matter, then use pivots.  If you want to create something that is professionally presentable, make your own tables.
+
+But the fact that it's not dynamic is the biggest concern IMO. 
+Pivot tables increase the size of the excel file.  This is especially true if you keep creating new pivot tables from the same source data. A trick is to copy a preexisting pivot, this won't increase your file size.  
+Also one thing that i might like to add is if you are referencing the Pivot table in another equation, sometimes it might get distorted if you refresh it. (added additional columns or rows), were as if the equation is referencing a normal cell when the value moves the equation automatically follow the cell. 
+My biggest annoyance is using a pivot chart without the ability to have a scaled x axis. It's such a shortcoming in my opinion. Second would be extremely limited calculated field operations. 
+If you go another step into SSRS and BI technology, pivot tables feel restrictive and clunky by comparison. 
+
+There are certain formatting and layout choices that you just can't achieve in a PT.
+This isn't just about pivot 
+
+Biggest issue for me as someone who has a microsoft account for business is the fact that 95% of excel doesn't work in the Online/Mobile version!
+
+If you have docs you want to open source for your CV you have to enable download and edit privalidges... Also if you are trying to use any mobile version of excel to demonstrate your work or sourcing it for online view only on your microsoft account. 
+ 
+- Pivot 
+
+- Active X
+
+- VB functionality
+
+Are all not available. 
+
+
+Tbh with Tablets and mobile devices being used so much in modern businesses this is microsoft really of shooting themselves in the foot with this.
+So SharePoint can be used to store docs, used as a calendar, task list, discussion board, etc. I find the most value in creating forms and doing workflows. I'm on my phone right now, but I'd be happy to elaborate later. 
+Possibly the biggest weakness of Pivots and certainly why I don't bother with them is the complexity around making bespoke outputs (Reports/Dashboards).  Also, when the data gets big I prefer to reduce process bloat by using the minimal number of countifs/sumifs (that's all they are). Yes they are quick and easy but not flexible. It's worth pointing out I haven't played with 2013+ and they might be better but it's irrelevant because the companies I work in (Big Banks) are mostly still in 2007 Land so there's no point. Also, most people who I ended up using my work are Pivot illiterate so I'm adding to the complexity and 12 odd years of using Excel in the work place has taught me to make life easier for less Excel savvy people. Good discussion
+One of the biggest annoyances for me was that dates in pivot tables are formatted as strings. So you can't make a time series chart with time on the x axis directly using the dates from your pivot table as data points. i.e. 1/1/2006, 1/6/2006, and 3/9/2015 will show up as equidistant points on the x axis. There are workarounds but they're not pretty.
+The only weakness comes from crap source data. Users that don't know how to build a table properly yield crap pivot tables.
+
+Also: not enough people know how to make/use them. The business world would be much more efficient if everyone had the training.
+Problem 1 can be solved with powerpivot. I cannot express how much I have come to rely on it. 
+>1 - they must get their source data from a single contiguous source 
+
+You actually can,  although maybe not newer features are supported - it's not pretty but hit Alt+D+P to open up the Pivot Table Wizard and hit "Multiple consolidation sources". Then you can add sources there. 
+
+And if the data tables are related tables (different fields, but there is a key field shared between them) then you can do multiple tables by checking the "Add to Data Model", and then adding the other tables by modifying the relationships in the Pivot Table options.
+The refresh thing is was an easy fix, I ,made a macro button that says "Refresh Pivot table!" so I get to show off to my coworkers by just pressing a button, but still, it is inelegant.  I had not thought about your first point, do you have any experience with Access? 
+> you cannot combine data from multiple ranges as the source
+
+Actually, you can do this. Without PowerPivot. It's just not as easy as it once was (hidden now, used to be easy).
+
+Go to Files | Options | Quick Access Toolbar. Then, next to *Choose Commands*, select *All Commands*.
+
+Next, select *Pivot Table and Pivot Chart Wizard*. This will add this Wizard to your Quick Access Toolbar.
+
+When you click the Icon for this, you will be presented with the option to create a Pivot Table from multiple ranges.
+
+I don't think the fact that it doesn't automatically refresh is a "minor" annoyance.  That seems pretty damn relevant IMO.  
+Can you speak more about sharepoint stuff. Noob with it
+Access begins where Excel ends. 
+Can you elaborate further on this problem? Are you referring to a change in the structure of the pivot like columns appear/disappear based on their availability in the original dataset? Or something different..? 
+You can change this is your pivot table settings. Deselect the option Save underlying data with pivot table. This will generally decreed the size of the file. 
+Do you reference a cell or GETPIVOTDATA?
+What do you use in place of countifs/sumifs? 
+Power pivot is the single greatest tool ever released for Excel. 
+I have about 40 canned Excel pivot table reports that I store on SharePoint for about 60 users. Data flow is SQL Server/Oracle/csv files consolidated in Access queries which are the source of the Excel pivots. Lately I have begun eliminating Access and relying on Excel Power Pivot. Works much better for larger data sets (100K rows).
+Sure, what do you want to know? It's a pretty broad field.
+Well you would hope that the original data keeps its structure and column names remain the same. I always check that before pasting in new data. But if someone changes the layout of the pivot table then a report built off the pivot table will probably show errors.
+
+ But also, say you filter on a specific year. Then someone builds a report off the table. Then someone else decides to filter the pivot table on a different year. Then the report will change without giving any sign that it has changed. The fact that it is so easy to change what a pivot table is showing is a problem. I always use tables and the source data.
+I meant that Pivots Tables are essentially Sumifs/Countifs. So, instead of Pivot tables I use my own structured tables and outputs with Sumif/Countis (and sometimes Sumproducts for certain criteria)
+What would you suggest for someone interested in learning  about power pivot? 
+Better how? 
+Does sharepoint and excel vba work well together?  Besides uploading excel to sharepoint what other things can we do with sharepoint?
+You could use slicers to filter and that'll make it at least more visual
+There is a YouTube playlist on the ExcelIsFun channel for it which is very helpful: https://www.youtube.com/playlist?list=PLrRPvpgDmw0nGCx21PRFbsJpUIH06LKs-
+So two sources I have learned a lot from are blogs and books. 
+
+The best blogs to start with are powerpivotpro.com, https://social.msdn.microsoft.com/Forums/sqlserver/en-US/home?forum=sqlkjpowerpivotforexcel,
+http://blog.gbrueckl.at, daxpatterns.com, sqlbi.com.
+
+There are a lot more but that should point you to good sources and the ones I visit the most. 
+
+For books you should start with Rob Collie's Power Pivot and Power BI.  Once you have got your feet wet you should get the bible of DAX by Marco Russo and Alberto Ferrari called The Definitive Guide to Dax.  This is really deep.  Not the place to start, but the place to go once you get really confused. 
+
+Hope this helps. Changes everything. Good luck! 
+
+Edited to remove stupidity.
+Significantly faster load times. I believe it is because power pivot uses column based processing instead of row based like Access or SQL Server.

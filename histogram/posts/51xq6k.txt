@@ -1,0 +1,38 @@
+ELI5: How the HECK did Excel just do that?
+FlashFill
+
+https://support.office.com/en-gb/article/Use-AutoFill-and-Flash-Fill-2e79a709-c814-4b27-8bc2-c4dc84d49464
+The problem with data filled by some "magical tool" is that usually it is a nice start, but you still need to manually check it anyway.
+Haha I would have loved to see your face when excel filled your range automatically ! It's like Excel reads minds sometimes :p Anyway I think it was "Flashfill"
+ELI5: Magic.
+More recent versions of Excel has a feature called "autocomplete" or "autofill" which let's Excel do this. [More technobabble here,](https://support.office.com/en-us/article/Fill-data-automatically-in-worksheet-cells-74e31bdd-d993-45da-aa82-35a236c5b5db?ui=en-US&rs=en-US&ad=US&fromAR=1) though only the first few paragraphs are meaningful to your situation. When it works, it works, when it doesn't... headaches.
+
+Excel is by no means interpreting your string or whatever you have in the table. It's matching actual data values that already exist.
+Shave off more time by making a "language" master key and vlookup from that
+Same thing happened to me today for the first time (just started using Office 2016).
+
+Was about to look up a formula to remove 'x' number of characters from the string, but Excel just figured it out and filled in the entire column instead. Made my afternoon.
+So that's what this is. Excel is amazing.
+/u/pardon_the_mess if you could reply with the phrase "solution verified" to the answer you feel is the best, that would be handy. 
+Solution verified
+This is the correct response. Never trust fast-fill. 
+
+I'd make sure there isn't any misalignment - especially since you're consolidating from various sources. 
+
+Copy the two columns, paste off to the side, & remove duplicates.. If you do have anything off, just make the corrections off to the side and then Vlookup the corrected list back into the original. 
+Completely agree. It may work correctly  90% of the time but the risk of failing 10% of the time, substantiates the need to check every time. 
+Seriously, it may not be perfect, but it does seem magical every once in a while. The first time it happened was pretty awe inspiring.
+> Was about to look up a formula to remove 'x' number of characters from the string,
+
+Need to remove x characters from the right side:
+
+     =LEFT(A1, LEN(A1)-x)
+
+Need to remove x characters from the left side:
+
+     =RIGHT(A1, LEN(A1)-x)
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Yup. Whenever I hear so-and-so will run a script to automagically match the things, it means they'll spend 20 minutes getting it wrong and I'll spend a week making it usable.

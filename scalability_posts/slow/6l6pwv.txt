@@ -1,0 +1,124 @@
+slow
+6l6pwv
+Excel vba custom lookup function: fast when used manually, slow in macros
+
+I had to write my own lookup function, but its performance differs dramatically depending whether or not I call it by hand on worksheet itself (through '=') or through macros. My macros does the following:
+
+    Function betterSearch(searchCell As Range, aCol As Range, bCol As Range)
+        For Each cell In aCol
+            If LCase(cell.Value) = LCase(searchCell.Value) Then
+                    betterSearch = bCol.Cells(cell.row, 1)
+                    Exit For
+            End If
+            betterSearch = "Not found"
+        Next
+    End Function
+So the macros opens **resultsWorkbook** and **dataWorkbook** and then performs a search of the four values in column A from **resultWorkbook** in **dataWorkbook** and returns corresponding data from some other column of **dataWorkbook**.
+
+    '...opening resultWorkbook and dataWorkbook
+    For aRow = 6 To 9
+            resultWorkbook.Worksheets("B3").Cells(aRow, 125).Value = _
+                betterSearch(resultWorkbook.Worksheets("B3").Cells(aRow, 1) _
+                , dataWorkbook.Worksheets("page 1").Range("A:A") _
+                , dataWorkbook.Worksheets("page 1").Range("Z:Z"))
+
+             resultWorkbook.Worksheets("B3").Cells(aRow, 126).Value = _
+                betterSearch(resultWorkbook.Worksheets("B3").Cells(aRow, 1) _
+                , dataWorkbook.Worksheets("page 1").Range("A:A") _
+                , dataWorkbook.Worksheets("page 1").Range("I:I"))
+    Next aRow
+
+It's really slow - takes minutes for 1 file. But when I open that file manually and just type in the formula and hit Enter it calculates instantly.
+
+What is wrong here? Where does this behaviour come from?
+
+
+-------------
+A couple of potential reasons. The first is that you will search every cell in a column (over a million values) if the value in searchCell doesn't appear in aCol. To help speed things up further, you should try to limit the number of times you need to interact with the worksheet. At the moment, you're reading cells one at a time. You should instead pull the values out of the entire range and into a Variant array, and iterate over that.
+
+This should be an improvement:
+
+    Function betterSearch(searchCell As Range, aCol As Range, bCol As Range)
+        
+        Dim valuesToSearch As Variant
+        Dim i As Long
+        Dim searchValue As String
+        
+        valuesToSearch = Application.Intersect(aCol, aCol.Worksheet.UsedRange).Value
+        searchValue = LCase$(searchCell.Value)
+        
+        If IsArray(valuesToSearch) = False Then
+            If valuesToSearch = searchCell.Value Then
+                betterSearch = 1
+            Else
+                betterSearch = "Not found"
+            End If
+            Exit Function
+        End If
+        
+        For i = 1 To UBound(valuesToSearch)
+            If LCase(valuesToSearch(i, 1)) = searchValue Then
+                    betterSearch = bCol.Cells(i, 1).Value
+                    Exit Function
+            End If
+        Next
+        
+        betterSearch = "Not found"
+        
+    End Function
+-------------
+when used as a function it'll be volatile so it'll be recalculated at every calc chain call, so anything that is depednant on its result will be recalced fully everytime. 
+-------------
+It results in error ( Method intersect failed...
+
+And also - the thing is, the betterSearch as imperfect as it is still works fast when I type it manually on the worksheet (when worksheet is manually calculated)! But when the macros does it, it's slow! I tried using  **Application.Calculation = xlCalculationManual** but it doesn't speed it up..
+
+-------------
+I agree with /u/MRMCMLXXXV about getting your values into an array. You can define the range to search however you want if you have trouble with getting Intersect to work.
+
+You'll just need to use a variable to store the index of the array where you match your searched-for value to retrieve the value you want in the other column. (e.g. "I found the searched for value at position "i" in the array, now I will look in row "i" of this other column to retrieve the lookup value I want).
+
+I'd also or alternatively throw in the line "Application.ScreenUpdating = False" at the beginning of the macro and "Application.ScreenUpdating = True" at the end.
+-------------
+Are you using exactly the same data each way you run it?
+
+If aCol doesn't intersect with your UsedRange, then it must be empty. Here's a refined version:
+
+    Function betterSearch(searchCell As Range, aCol As Range, bCol As Range)
+
+        Dim valuesToSearch As Variant
+        Dim i As Long
+        Dim searchValue As String
+        Dim smallerSearchRange As Range
+        
+        On Error Resume Next
+        Set smallerSearchRange = Application.Intersect(aCol, aCol.Worksheet.UsedRange)
+        If Err.Number <> 0 Then
+            On Error GoTo 0
+            betterSearch = "Not found"
+            Exit Function
+        Else
+        On Error GoTo 0
+        
+        valuesToSearch = smallerSearchRange.Value
+        searchValue = LCase$(searchCell.Value)
+
+        If IsArray(valuesToSearch) = False Then
+            If valuesToSearch = searchCell.Value Then
+                betterSearch = 1
+            Else
+                betterSearch = "Not found"
+            End If
+            Exit Function
+        End If
+
+        For i = 1 To UBound(valuesToSearch)
+            If LCase(valuesToSearch(i, 1)) = searchValue Then
+                    betterSearch = bCol.Cells(i, 1).Value
+                    Exit Function
+            End If
+        Next
+
+        betterSearch = "Not found"
+
+    End Function

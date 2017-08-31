@@ -1,0 +1,174 @@
+Starting a job soon
+Learning to understand Pivot Table would be a huge impact with your current skill set. It's a powerful function in Excel where you could move data so that you could see data in another perspective. 
+
+If you are up to it, doing Macros in Excel is the next thing.
+Google, the most important thing is to understand that google gives better answers to your excel problems than your coworkers. Another plus is that you dont have to ask the stupid questions from your coworkers, instead you can solve them by yourself.
+
+That and conditional formatting is pretty cool
+Honestly, you will use pivot tables sometimes if you are reconciling accounts if looking for duplicates or some sort of sorting, but not as much as you would think.  I would just get good at all the short cuts.  Like to sum rows/columns it is Alt =, copying down cells from above Ctrl D, and just getting really good at navigating an excel sheet with just using the keyboard using the shift and ctrl and arrow keys.
+Sumifs and filters in addition to those. And a never ending laziness/impatience that drives you to do things easier and faster.
+Learn to use index/match instead of vlookup.  Vlookup is very limited.
+
+Use ranking functions to work with personal information and hide personal information columns. 
+
+Learn how to work with external connections.
+
+Use Name Manager for any data validation dropdown lists (this will save you A LOT of time when modifying items).
+
+Many people do not automatically keep their data sheets in tables.  Not doing so is stupid and a big time waster.
+
+
+Learn Index-Match instead of Vlookup, you will thank us for it.
+The things you named are generally what you're likely expected to know when you start. I doubt they will force you to code macros on your first day.
+
+The thing missing from your list is Pivots. Get comfortable using Pivot tables and Slicers.
+First learn about power query. Then power pivot.
+Pivot Tables, vlookups, and if you're feeling ambitious PowerPivot and Power BI.
+Please refer to the sidebar [Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/)
+Graphing data.  Oftentimes a huge part of using excel isn't the math/functions themselves (that's easy to google), but turning data into a story that could be pitched on an elevator ride.  Take anything you have a passion about and try charting some data around it - your weight, your bank balance, your top score in a game.  You'll get more creative with a data set that has some meaning than random numbers - might even discover something :)
+
+Get familiar with using stacked bars, multiple axis/combo charts (lines + bars), tweaking borders/transparencies, data labels, etc.  Your situation will probably be unique to whatever your data looks like, and what your customers want to see.  But you can at least poke about and see what's available.
+
+Simple is better.  Inevitably someone will tell you they want to see 12 lines charted at once - they almost always don't.  Even nerdier than average people have a hard time digesting more than about 4 things at a time.  Find a way to group or split your data.
+
+Seconding the recommendations on pivot tables.  Calc fields and using some of the options like %of on your values can be pretty handy.  For example, if you've got some year over year data, add the metric to your values twice: one as a sum, and one as a %of the prior year's volume.  Now you've got both with all the easy grouping and expand/collapse functionality of a pivot table.
+
+If you're not already familiar, learn how to take dates and get weeks/months out of them. You can do quarters and fiscal years too, just gets a bit trickier.  All very googleable.
+
+Index/Match is a powerful addition to knowing vlookup.  Give you flexibility to do things like pull back data based on a column header instead of having to manually figure out what row your data's on.  If you've ever had to take your key field like a date/name and shuffle it to the front of a data set so you could vlookup: solves that problem too.
+
+Congrats on the job, may you excel at it!
+Once you understand the functional areas the other comments are pointing you towards, I'd learn to use keyboard shortcuts for actions you find yourself doing often. Learn to tab between windows and sheets. You can be much more productive when you aren't taking your hands off the keyboard. Using ctrl+direction arrow to navigate to the last cell before a blank cell. Holding down shift (or shift and control) and pressing the arrow keys to select rows and columns. Using CTRL-D to fill. Learn to group and ungroup rows and columns. 
+Start using shortcuts und don't for the Save your progress. 
+
+There are shortcuts for almost anything the ones I'm using a lot are listed below. I'm dutch using german settings and as these are not the same around the globe. Search these online and write them down on a post-it. In in while you don't need the Post-it anymore
+
+Save 
+Save as
+paste formulas
+paste values 
+New workbook
+Close workbook
+Freeze header
+Format nummer 
+Ctr-end to go the last row of the set
+Ctr + 1 format in number
+Undo
+
+Good luck
+
+
+Learn a bit of vba. The record function is amazingly useful to save you doing the same shit over and over. 
+Three features that will change your life: 
+ 
+Pivot tables
+
+Solver
+
+VLOOKUP function
+
+Google, learn, and you will do okay ;)
+Some good suggestions on here, especially PowerPivot/BI, Index/Match and VBA.  SumIf was mentioned.  I use that a lot.  Also Sumifs/Countif(s) etc.
+
+I would add keyboard controls to that.  Learn to be quicker using the keyboard than with a mouse.
+
+Ctrl/Shift and arrow keys to navigate and select contiguous cell blocks and copy/paste.  This saves so much time over using a mouse and keeps your colleagues in awe of you.
+
+Get used to typing complex functions out rather than use function menu item also.  It helps you learn better how they work, plus is far quicker.
+Yeah and that ability to look left and right with your lookup is huge.  Plus VLOOKUP is a volatile formula, meaning they refresh everytime you recalc which can really slow down your spreadsheet once it gets large.
+Aside from learning, and knowing that you will need to keep learning - 
+
+My tips for anyone who's not used to Excel.
+
+Raw data is essential, do not touch that. Create separate sheets for data that doesn't work together, then you don't have to worry about sorting and filtering.
+
+Excel's primary function isn't to look nice, but to be functional. If you are going to put in line breaks because your boss asks you to do that, try to automate that from your raw data. it's going to save you a lot of time.
+
+If you see something happening over and over again, see what you can do to automate it.
+
+Long functions are okay, don't worry about it.
+
+Pivot tables is not going to be the only solution, you may need to do combinations of generating columns after you generate your pivot table, or before you generate your pivot table to get the results you're looking for.
+
+VBasic - but only if that gets a little crazy on your side. :)
+
+Good luck!
+Create a 
+My Must have data slice XL functions, 
+
+1) vlookup and know when to use index&match,
+2) &
+3) clean
+4) abs
+5) if 
+6) text to columns
+7) trim
+8) len
+
+As a wider skill copy and paste into Microsoft word, find and replace paragraph markers 
+
+Lear how to remove CR from within cells, 
+I can do basic pivot tables at the moment but haven't really had the opportunity to use large amounts of data. I'll look into learning more about them regardless!
+
+Thanks for your input
+That's exactly how I learned to use Solver! I did an internship for a week and was tasked with a bank reconciliation - Google was a life saver! 
+yeah, depending on the specific work in the accounting department, I'd actually kinda second this (even though I love pivots and all the more advanced stuff). 
+
+Get really comfortable with  
+your standard set of functions (ifs, aggregating functions (sumifs, countifs, averageifs, subtotal, aggregate), lookups),   
+keyboard shortcuts,    
+the formula review section (trace dependent, evaluate formula, named ranges),   
+the "Data" section, so you can quickly turn text to columns, sort data, filter it, remove duplicates, and add validation. 
+
+For a junior position in accounting, if you're a whiz at those basic excel things, and can bang together one of the standard reports or overviews you'll probably have to do, quickly, then I think that would put you in a good place. 
+
+You might want to give your future manager or colleague a call and ask, like "hey, I'm preparing for when I start working with you, what is the degree to which you usually use excel", that way you don't waste your time overpreparing on something that won't be immediately useful. 
+
+It might be useful in the long run, in terms of improving processes, but I wouldn't expect to do that straight away :)
+Definitely something I've been wanting to learn! Will look into this more
+Check!
+Two main takeaways, use tables and the name manager. You'll start to figure out how to write equations with structured references. After learning these two skills many more will follow just by googling.
+[deleted]
+At my accounting firm, we use Vlookup like it's crack. I've moved on to using index/match exclusively. I hit tired of having to update my return column number in my Vlookup formula if I added/deleted a column from my array. The others continue Vlookup as they are resistant to change. Go figure.
+Hijacking thread to ask you to eli5 slicers... I would consider myself a pivot table wiz but I've never even heard the term slicer
+I don't really have much experience of pivot tables so completely forgot to mention them! Will definitely look up some tutorials!
+Never heard of this, will give it a go!
+Learn VBA. Master vlookups. Be proficient with pivot tables.
+
+But learn VBA... you can create game changing objects with it and eyebrows will be raised. You'll stand out. 
+No worries. 
+
+I currently work as a Mission Control Analyst for a call center, so data revolves around me most of the time. 
+
+To add for the Macros, this will make your life easier once you get to know it. One thing you can practice is to create a Macro that will delete a specific area in a Worksheet. I'm not sure if there are videos of this in YouTube. 
+Mr Excel.com forum is a good place to search for answers too. 
+I have never used solver and im somewhat proficient in excel. How is this useful for bank reconciliation? 
+Thanks for your input! I'm in contact with their current placement student so will definitely ask!
+Index/match has been a huge mainstay for me. It's something any intermediate level user should be aware. I won't even get into the index array formulas... with a helper cell... that's a prime google moment :)
+Awesome!  You will be ahead of other people, it's a little trickier to learn but superior in just about every way.
+it's a pivot table filter on a separate pick-list.
+
+Instead of boss-man going to the filter drop-down and selecting "North Region", there is a bar with 4 buttons (North, West, South, East), and whichever button he clicks is used as a filter. 
+
+The slicer can be tied to multiple pivots, so when you change the region to "North", all the pivots update. This makes it useful for tying together a large number of pivot charts and tables that may be on the same dashboard. 
+
+Change the region to "North" in the selection bar - your whole dashboard updates. 
+
+
+edit: https://support.office.com/en-us/article/Use-slicers-to-filter-PivotTable-data-249f966b-a9d5-4b0f-b31a-12651785d29d
+If you tried it you will hardly go back to things like vertical lookup formulas. It has a syntax that is a little different but it is so much better.
+Shall have a look thank you!
+Delete specific area(s) when making a copy of a worksheet? If this is possible please tell me how!! It would be so helpful. 
+I think chandoo is more digestible, especially just starting out.
+[deleted]
+Regardless, being an Excel "whiz" opens a lot of doors and gives you a niche. 
+Yeah definitely index match and index match match, but its useless if they don't use tables. I get incredibly frustrated when my colleagues click the filter button and don't format as table. It makes my work just that much harder when dissecting a workbook. :/
+The first time I showed my bosses a dashboard I built with pivot table slicers, it completely blew their minds. They're so incredibly easy to use and can have such a huge impact on your work.
+I feel like I could do this but it would take me an hour+
+
+an expert could probably do it in 5 minutes
+I prefer: "Rows("#:#").EntireRow.Hidden = True" approach because often times you may need to access those rows at a later date and there is so much more you can do with it.
+Well, it will just delete specific parts of the worksheet ( or if you want the whole worksheet, that's possible)
+
+EDIT: I can demonstrate how. Let me just finish my class and I'll get back to you. 
+Does the solver only take numerical inputs?

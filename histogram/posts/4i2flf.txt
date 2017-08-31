@@ -1,0 +1,128 @@
+Good News Everybody!
+Congratulations on the job! Wow, such dedication you have, promising to be a slacker even before your first day.
+
+Did you mention to the interviewer or put on your résumé that you honed ur skillz on reddit?
+Dude, great news! Congratulations are due, indeed.
+
+    Sub CongratulationsiRchickenz()
+    Dim r As Byte, g As Byte, b As Byte
+    Dim cntr As Integer
+    Dim inArr As Variant
+    Dim arr As Variant
+    Dim i As Long
+    Dim Called As Boolean
+    
+        arr = Split("2,2%2,3%2,4%2,6%2,7%2,8%2,10%2,13%2,15%2,16%2,17%2,20%2,21%2,22%2,25%2,28%2,29" & _
+                    "%2,30%2,32%2,34%2,36%2,41%2,44%2,45%2,46%2,48%2,50%2,51%2,52%2,54%2,57" & _
+                    "%2,59%2,60%2,61%3,2%3,6%3,8%3,10%3,11%3,13%3,15%3,20%3,22%3,24%3,26" & _
+                    "%3,29%3,32%3,34%3,36%3,40%3,42%3,45%3,48%3,50%3,52%3,54%3,55%3,57%3,59" & _
+                    "%4,2%4,6%4,8%4,10%4,11%4,13%4,15%4,20%4,22%4,24%4,26%4,29%4,32%4,34%4,36" & _
+                    "%4,40%4,42%4,45%4,48%4,50%4,52%4,54%4,55%4,57%4,59%5,2%5,6%5,8%5,10%5,11%5,13" & _
+                    "%5,15%5,20%5,21%5,22%5,24%5,26%5,29%5,32%5,34%5,36%5,40%5,42%5,45%5,48%5,50" & _
+                    "%5,52%5,54%5,55%5,57%5,59%6,2%6,6%6,8%6,10%6,12%6,13%6,15%6,17%6,18%6,20%6,21" & _
+                    "%6,24%6,25%6,26%6,29%6,32%6,34%6,36%6,40%6,41%6,42%6,45%6,48%6,50%6,52%6,54%6,56" & _
+                    "%6,57%6,59%6,60%6,61%7,2%7,6%7,8%7,10%7,12%7,13%7,15%7,17%7,20%7,22%7,24%7,26" & _
+                    "%7,29%7,32%7,34%7,36%7,40%7,42%7,45%7,48%7,50%7,52%7,54%7,56%7,57%7,61%8,2%8,6" & _
+                    "%8,8%8,10%8,13%8,15%8,17%8,20%8,22%8,24%8,26%8,29%8,32%8,34%8,36%8,40%8,42%8,45" & _
+                    "%8,48%8,50%8,52%8,54%8,57%8,61%9,2%9,3%9,4%9,6%9,7%9,8%9,10%9,13%9,15%9,16%9,17" & _
+                    "%9,20%9,22%9,24%9,26%9,29%9,32%9,33%9,34%9,36%9,37%9,38%9,40%9,42%9,45%9,48%9,50" & _
+                    "%9,51%9,52%9,54%9,57%9,59%9,60%9,61", "%")
+        
+        
+        For i = LBound(arr) To UBound(arr)
+            r = WorksheetFunction.RandBetween(0, 255)
+            g = WorksheetFunction.RandBetween(0, 255)
+            b = WorksheetFunction.RandBetween(0, 255)
+            If Not Called Then
+                ZoomToRange Range("A1:BJ10"), False
+                Called = Not Called
+            End If
+            inArr = Split(arr(i), ",")
+            Cells(CLng(inArr(0)), CLng(inArr(1))).Interior.Color = RGB(r, g, b)
+        Next i
+    End Sub
+    
+    Sub ZoomToRange(ByVal ZoomThisRange As Range, _
+         ByVal PreserveRows As Boolean)
+    
+     Dim Wind As Window
+    
+     Set Wind = ActiveWindow
+     Application.ScreenUpdating = False
+     '
+     ' Put the upper left cell of the range in the top-left of the screen.
+     '
+     Application.Goto ZoomThisRange(1, 1), True
+    
+     With ZoomThisRange
+         If PreserveRows = True Then
+             .Resize(.Rows.Count, 1).Select
+         Else
+             .Resize(1, .Columns.Count).Select
+         End If
+     End With
+    
+     With Wind
+         .Zoom = True
+         .VisibleRange(1, 1).Select
+     End With
+    
+     End Sub
+Uhm, Steve... it is me, your new supervisor.  You did not tell me that your VBA skills were some excel internet forum...
+Congrats on this!
+
+I'm curious how this turned into a job opportunity, if there's anything you can share.
+The job sounds like a great match for you--congrats! I am guessing you will have a ton of new experiences to share. 
+If you're already experienced with VBA make sure to take the next step and get into some VBScript. It's practically the same but it will allow you to execute your VBA in "one click" or on a schedule.
+
+Congrats.
+Congratulations!
+Nice! Congratulations! I think I have some of your VBA posts bookmarked somewhere :D 
+
+
+did you start with excel here or did you learn excel from school?
+Good luck man! Keep working on it. I know you are much better than me but I also landed an excel intensive job last year and already got a promotion. It's fucking fast! I know you'll do well in that job.
+Thanks! It won't be a career for me but as a student it's much better(pay and otherwise) than working a typical college student job; not to mention I really enjoy doing it. 
+
+Slacker?! Well, I meant I'll be in front of a computer all day so.... one more tab open wont hurt right? You know, I know, you know you're going to enjoy having me around a bit more.
+
+When interviewed, I spoke about solving VBA issues on internet forums but I didn't mention reddit explicitly. I was ready to send links to some of my work on here but they never requested for anything of that nature. 
+haha this is awesome.
+This is great! I'm actually incredibly impressed that you took the time to do this! Thank you very much!
+Why did you put the ZoomToRange call in the loop?  Could you have done it before or after and then dispensed with the need to check the Called variable?
+Haha! Sorry boss!
+There's not a direct correlation between this sub and the job i.e. I didn't show my employers my reddit account, but I was able to have a technical conversation about VBA and different processes they were needing to implement.
+
+&nbsp;
+
+I was using a small amount of VBA where I was working previously so I needed to find supplemental, and more difficult problems to work on. After floating around a bit I found this sub and made a home for myself; I've been here for about a year. This sub has provided me with the practice and experience needed to be proficient in VBA. 
+
+&nbsp;
+
+It's important to note that I did 99% of actually "learning" the syntax by using other websites and books, but I learn, in general, by doing, and this sub was perfect for getting my hands dirty and delving into more advanced applications. 
+Thanks! I'll share any new tricks I learn on here as always! 
+I've done very minor VBS and I'm hoping to learn more.
+
+Thanks!
+Thanks!
+Haha, thanks! I have to go back to some of my old posts sometimes too. The machine I wrote/saved a majority of my stuff on is gone and I didn't get to copy my files!
+I've used excel in school for doing amazingly insignificant things. I had a job that required me to use excel much more and on top of that I was tasked with revamping some of their templates; I was an intern for an engineering firm so everything was in excel and the templates I was revamping were instrument specification data sheets. My boss was an EE so naturally had more of a knack for programming (I'm mechanical), and he gave me a book called Excel VBA For Dummies because I showed an interest in coding. While I was learning the basics of VBA I scoured the internet looking for anything I could find to practice on. As I mentioned to another user, I did not "learn" VBA here, I taught myself by reading and researching, but this sub provided me with a constant source of problems I could work on. Without being able to work on a wide variety of VBA problems I never would have become proficient and I probably would have lost interest. 
+:)
+
+Merci!
+Gladly, friend. Success is to be rewarded, failure to be heralded, defeat to be dismissed and victory to be drank, deeply.
+Threw that together - wasn't certain what the whole thing would look like and I needed to get to bed so very little editing involved. Anyway, quality code was not  the point.
+
+/u/iRchickenz will get it.
+Now that makes sense.
+
+Congrats again.
+I gotcha dude.
+
+I don't think I could have written this and that bothers me. Damn you /u/fuzzius_navus!!!!
+Ah OK.  Just wondered as I've never shifted the viewpoint around in VBA before so didn't know if it needed to get re-done after various actions.  Thanks
+Thanks and thanks for the reply!
+
+Without this sub, I never would have had that spark of interest. It was very motivational.  
+Ha, easy. I selected the Cells I wanted to fill, coloured them black, created a string of pairs representing the row/column (I selected the Cells and looped through Selection, that's how lazy it was...), debug.print to get the full string and dumped that String into the Sub I posted. The code was just to obfuscate the message.
+In most cases, you really don't want to manipulate anything visually as it slows the code a great deal. If I were to really do it properly, it would be the first or last task in the code, as you expected and implied with your question.

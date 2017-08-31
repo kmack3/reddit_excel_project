@@ -1,0 +1,37 @@
+6iw2zf
+remote employee monitoring
+We have employees that all work from home as phone agents. Our calls are slowing down and I am assigning customer lists to each employee. The lists are an excel file consist of customer info that each employee looks up via our web based software. 
+
+I have them enter a "1" in column F when they have completed the customer. 
+
+Is there any way I can remotely monitor their progress? Most likely they will not be using the browser based excel. 
+
+Thanks for the help!
+
+
+-------------
+I'd recommend switching to Google Sheets if you want to see the updates live.
+-------------
+You can't get live but I think with a shared workbook you can set updates to 5 minute intervals. It's probably not an ideal way to go though as shared workbooks are troublesome. 
+-------------
+You could autosave updates to a network share, or even do some basic file manipulation to send updates at regular intervals to a log file.  Alternatively you could probably do something like the code below to send of an update to you, but it might not be very efficient:  
+
+	Private Sub Worksheet_Change(ByVal Target As Excel.Range) 
+		If Target.Column = 6 Then 'Column F
+			ThisRow = Target.Row 
+			If Target.Value > ThisWorkbook.Sheets("Some Hidden Sheet").Range("A1") Then 'Checks total count of column against previous total
+				doevents 'send off update to network share your code goes here
+				ThisWorkbook.Sheets("Some Hidden Sheet").Range("A1") = Target.Value 'Update total
+				Thisworkbook.Save 'Saves the update
+			End If 
+		End If 
+	End Sub
+
+good luck!
+-------------
+This is the answer. 
+-------------
+if you're referring to a macro that saves the sheet every 5 minutes - let me tell you my tale with shared workbooks and auto-save/auto-close macros.....
+Not everybody is smart enough to click on the "Enable Macros" button on the highlighted yellow bar at the top of the program.
+-------------
+100% agree. If you want live up to date information use Google Sheets.

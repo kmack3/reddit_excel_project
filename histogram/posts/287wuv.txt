@@ -1,0 +1,20 @@
+Interactive Spreadsheets for Decision Makers Webinar (or: how I learned to do awesome things without any VBA!)
+=A1*((A1>=20)+(A1>=50)+(A1>=100)+1)
+
+You missed the "=" in ">=" in your first part of the video! :)
+The boolean logic and use of the scroll bars were both new and useful concepts for me. I'm looking forward to checking out more of your tutorials!
+Just finished watching it and I must say I'm impressed.  I considered myself a pretty proficient Excel user, but I learned a lot in that short amount of time.  I will definitely be using those techniques in the future!
+Damn Jordan, you make me feel like I'm using VBA as a crutch! Your solutions are pretty elegant. Thanks for the video!
+My current focus is on improving my interactive dashboards so I'll definitely give this a look, cheers!
+[deleted]
+Didn't watch the video but had a look at the files and it looks like you have a pretty solid presentation set up, touches on the things you need to set up neat dynamic presentations and visualizations and builds it up step-by-step in a really nice way. 
+
+I tried messing around with doing increments that de-increment as you increment another one (so you have a pool of 100 increments, rather than 5 bars that are relatively weighed with eachother), but can't seem to come up with something that isn't weird and circular (without VBA). Any clever ways to do this?
+Ooo thanks! Have some gold for finding that.
+
+If you notice anymore let me know..
+Ha, thanks Cary. I mean, I'm all about balance between VBA and formulas. The proper balance is more art than science, but I think many people forget you can do a lot with formulas. (One clear advantage to code is the ability to comment.)
+The best projects are your own. If you find you keep repeating the same tasks over and over again in Excel, you should try recording the action in a new macro and then looking through the code to see what you can understand.
+
+You might also consider these VBA manuals a reader of my blog has asked me to distribute: http://www.microsofttraining.net/vba-training-manuals.php  (I'm not an affiliate - I receive requests from time to time to help promote the work of others - and I do, if I think it's useful.) 
+I don't have a good answer for you. The only way around it is using VBA and applying a One Way Sensitivity Analysis algorithm in the code. That part isn't all that hard as I've done it before. (PM me if you want the code.) But, as far as I can tell, there isn't a way to do it without VBA -- or without dealing with circular references. 

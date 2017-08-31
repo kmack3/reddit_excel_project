@@ -1,0 +1,250 @@
+In one paragraph, what is the coolest thing you know about in Excel?
+VBA loops. Automation of a repetitive task can be save literally hours of mindless work. Learn this and become a god to your coworkers...
+The only thing Excel can't do, is make you a sandwich. 
+Pull in data from a SQL query embedded in the Excel file; into a table which you can pivot or chart off of. Spend a little bit of time setting it up and you get great looking reports really fast - invaluable for anything you're doing regularly. Combine with VBA and the input variables for the query (date range, etc) can be set in the sheet too.
+It is on **every** finance person's desktop. It is incredibly flexible / powerful. Put those together and Excel rules the world. 
+[deleted]
+In order of time saving:
+
+- **Pivot tables:** can use a table in the workbook, in another workbook or you can set it up as a connection in access, another excel book or several other files.  This is essentially OLAP connection and you can fit an enormous amount of data in a workbook for analysis without the size of the file exploding.  
+
+- **Nested formulas:** you can basically create rules engines by using formulas.  It is pretty amazing.  
+
+- **Loop VBA:** which can save a ton of time as others gave stated. 
+
+- **Controlling other programs:** VBA allows you to write code to control other office applications and run shell commands to programs that aren't VB based.  
+
+
+Some guy on here showed how you can watch movies with it. 
+I like using VBA and advanced filtering to create filtered reports; using data validation drop downs for the criteria simplifies it more for the user. I have raw data imported from a csv into a hidden sheet and then a nicely formated sheet with the critera options so the user can set the critera and click a search buttom to see all the records in the hidden csv that match in an easy to read format. 
+
+EDIT - The most recent implementation I used this for was to have multiple csv files filtered with the criteria set only once. I used this to allow each of our locations to see only records that apply to them for several reports.
+Unzipping an excel file, fixing the fucked up xml, and the rezipping
+I would argue that Excel is the most important piece of software in wife distribution. Its a swiss army knife for novice to expert users. 
+There are multiple ways to perform just about any command in excel. Just last week I write a workbook that allows the user to make 6 different brackets, choose the players, and randomize the order of the players. They automatically get sorted and all you have to do is enter the scores and the brackets are filled in automatically. This would probably be pretty easy if I knew how to write macros, but I don't. I did record a few though. 
+With my limited knowledge of VBA, I was able to generate an automated report that generated a user form for some information input, generated a dated URL, navigated to that webpage in IE, took information from that page, formatted and concatenated it and pasted it into a report with a bunch of other information from OSISoft PI, checked another report, updated another report weekly, and updated another report monthly, and printed whatever reports needed to be filed whenever it was run (environmental compliance). Once I had it running reliably, it would do about 30 minutes of work in 30 seconds.
+
+In the grand scheme of things, I know I could have done a lot better and simplified it down to a single workbook, but in the end, I gained a better understanding of what Excel is capable of and a great desire to learn more.
+PowerBI.
+Simply awesome.
+It's an incredibly versatile program wherein if it isn't programmed to handle your needs, there is generally a workaround. I needed to do a RANKIF with a dynamic range the other day. RANK doesn't tolerate dynamic ranges so I built a formula to write out my range in text format and then pointed to it with INDIRECT. Try doing something like that with an ERP system and a programmer somewhere will have a stroke. 
+Excel's object model is better than any other I've used (1-2-3, Quattro Pro, OpenOffice, Applix [while it existed]). If only there were built-in alternatives to VBA.
+This would be my answer too. Before I got my current position in an office somebody used to spend 4 hours typing 1's into a grid to represent staff working hours over the week. I changed the way we record the shift info so that VBA can interpret it and now it takes 10 seconds. 
+
+The temporary position I was filling was pretty much permanent from the second day because of the wizardry
+How can I learn about this? Is googling "VBA Loops Tutorial" sufficient or can you point out a specific link?
+Yes, it always impresses, but I am not a huge fan anymore.
+
+First macros are often too cell dependent: you have to know where your dataset starts, if you add lines you might break it, it's heavy on maintenance...
+
+Second you'll be the only one to understand your code, which is great if you want to keep your job, but not so great if you want to hand it over to colleagues when you go on holidays for instance. So you'll end up doing the repetitive task for them and they'll keep asking you to maintain your code. You'll be a god, but stuck doing boring thing, even if it only takes you a few seconds. Recognition is great, but I think they are often best ways of working.
+
+If people are doing repetitive things, you have to wonder why do they do it? where do THEY get their data from ? Can't you go one step further and take over this source ?
+
+It took me 10+ years, but I am moving away from macros, except when very necessary. Instead I highly recommend starting from a cleanly organized dataset (the most important!) , posted on a server and that you refresh when opening the file on a sheet made for that. On a second sheet you have your pivots and tables for graph (with GETPIVOTDATA()) and on the last sheet the 'dashboard' with slicers and graphs where users can interact. This is the only sheet they should see.
+
+Make sure the datasource is regularly refreshed and your excel file will run for the next years without any intervention...
+Keep this logic for all your files, and anyone will be able to understand your work by simply looking at it.
+
+Now to answer OPs question:
+Nobody knows about the text-to-speech add-on in Excel 2003, maybe because it is completely useless. But having a huge pair of lips speaking in a weird voice is definitely a 'cool' feature
+
+And more seriously : slicers+crosstabs (very common but oh so powerful) and user defined functions
+
+
+I just attempted the loop magic and Excel 2003 (not a typo, i enjoy it tyvm!:) informs me "cannot insert object." I researched to find this [KB](https://support.microsoft.com/kb/3025036/EN-US), searched system, hidden, and subfolders but did not find any *.exd. What error(s) might I be making?
+That's what I'm trying to learn right now for work because they have a process that I need to repeat 100 times and this is my first time out with VBA.
+ 
+But I haven't gotten that far into VBA For Dummies, so I'm a little anxious. I think there's a string that looks like i = 100 or something but I know there's more and have no idea where to put it in the code. Heck, I barely understand declaring variables.
+"Bread"
+
+=CHOOSE(RANDBETWEEN(1,3),"ham","chicken","cheese")
+
+"Bread"
+Ask your SO or mom to run your macro:
+
+Sub FixIt4Me()
+
+Msgbox ("Fix me a sandwhich!")
+
+End Sub
+I want to learn more about this. I run SQL Queries through Advanced Query Tool that get dumped into Excel all the time. Are you saying that I can embed this query into Excel so that it would somehow be able to update without going through the whole process of opening the program, logging in, and selecting the code i would like to run? I realize I would still have to log in, but would Excel do the rest for me? I'm no expert at VBA, but I can usually figure out most tasks within a few hours. 
+
+EDIT: After exploring, I think that I may be restricted from doing this somehow. I found the server name in AQT and put in my name and password into the box in Excel, but it refuses to connect, saying something is either wrong or I'm being denied. Is there a way to run the query, then embed it for refresh? 
+I don't think you even need VBA for that - it's just a quick edit in the connection properties to set the input to a cell in the sheet. 
+Which makes it great for rapid prototyping. You can knock up a front end, data store, generate charts all very quickly and nearly everyone has the ability to open it.
+The best way to make numbers stand out when a graph is inappropriate
+you can use VBA to apply conditional formatting?
+Can you expand on how you control other programs with VBA? Any good examples?
+Reference please!!
+Hilarious autocorrect, boss. 
+My most recent example is this:
+
+The other team get a monthly vehicle fuel bill that the coworker would spend a whole morning on to copy and paste registration numbers against around 900+ transactions rows. I spent around 20 minutes writing a loop that does the same thing in around 2 seconds. I managed to get 3 dropped jaws when I showed them what I had done for them.
+
+I don't know why they didn't come to me months ago to help streamline their excel processes...
+I got an into to VBA by Bill Jelen (aka Mr Excel). It introduces loops fairly quickly.
+
+Online perhaps start here:
+
+http://msdn.microsoft.com/en-us/library/ezk76t25.aspx
+Remember to post to /r/vba if you encounter any problems, we're generally quite helpful if after googling something you still can't seem to find a solution by yourself. A couple of useful sources:
+
+http://www.cpearson.com/
+
+http://msdn.microsoft.com/en-us/library/office/gg264383%28v=office.15%29.aspx
+
+http://stackoverflow.com/questions/tagged/vba?sort=votes&pageSize=15
+Yes! Specifically you can search for 'For Next VBA' and  'Do Loop VBA'. 
+I absolutely agree - one should use excel functions first and only turn to VBA after exhausting those options. Most VBA is written by individuals with little to no understanding of good practice, but think of themselves as "programmers" because they've solved the immediate problem with google-fu copypasta. Unfortunately this code inevitably fails and puts the department in a worse position because the spaghetti code is completely undocumented and the offending individual never truly understood how it worked.
+I make it idiot proof as possible. Use some code that finds the cells that it needs for it to work.
+
+The data is provided by our suppliers. In this example it's the fuel bill for a government department of 900+ employees.
+
+It's just to get the data to a stage that the finance officer can then use it in a pivot table.
+
+But yes, I'm the only one who knows VBA in the work unit and agree with a lot of what you say.
+It could honestly be a bunhc of different things. If there is one thing I dislike about VBA, it's that when my macro craps out, the error messages are not very helpful in the problem solving process. You best bet is to post your code here, I can try and help figure it out, but someone else may be better equipped. 
+[deleted]
+Yes but only YOU can read the message box.
+
+I guess I could attach it to an Outlook module so it emails your SO/Mother instead...
+
+And send a text...
+
+Or why not beat the middle man? Email a restaurant directly!
+The way I was shown is through the External Data source (Data tab). This [support.office.com](https://support.office.com/en-in/article/Connect-to-import-SQL-Server-data-0f3d2e8f-7d94-4ded-baa6-3b0df183ff98) page has notes.
+
+Essentially you connect to the database with your standard credentials then can setup an import. You can import an entire table or - through the properties menu after the connection is established - change the selection from Table to Query and enter the query directly in the Excel connection.
+
+Unfortunately I'm not on a device with Excel & SQL running so can't provide a better step-through from memory.
+
+There is probably a more elegant way to do this because if this sub has taught me anything it's that I know how to do some things but very rarely the most efficient way to do them!!!
+Here's an example. For this you'd need the MySQL ODBC connector and reference ADO in your project.
+
+    Sub Sheet1_Button1_Click()
+    Dim oConn As Object
+    Dim oRS As Object
+    Dim sSQL As String
+    Dim my
+    Dim sQ As String
+    Dim jB As Integer
+    Dim kB As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim sAsOf As String
+    Dim sSince As String
+    Dim sngQ As String
+    
+    sQ = """"
+    sngQ = sQ & "'" & sQ
+    
+    sAsOf = Format(Sheets("Sheet1").Range("I1"), "YYYY/MM/DD")
+    sSince = Format(Sheets("Sheet1").Range("K1"), "YYYY/MM/DD")
+    
+    Set oConn = CreateObject("ADODB.Connection")
+    oConn.CursorLocation = adUseClient
+    oConn.Open "DRIVER={MySQL ODBC 5.3 ANSI Driver};" & _
+    "SERVER=IRON;" & _
+    "DATABASE=Inventory;" & _
+    "USER=user;" & _
+    "PASSWORD=passwd;"
+    
+    Set oRS = CreateObject("ADODB.Recordset")
+    sSQL = "Select part, colr, count(tckt) as bundles, " & _
+                  "round(lgth,2) as length, sum(qty) as bars, " & _
+                  "round(sum(lgth * qty),2) totfeet, " & _
+                  "group_concat(tckt order by tckt separator ' ') as 'tckts' " & _
+              "FROM tickets " & _
+              "where tckt in " & _
+                   "(select tckt from scans where type = 'IN' and " & _
+                   "`date` <= '" & sAsOf & "' and " & _
+                   "`date` >= '" & sSince & "') " & _
+              "group by part, colr, lgth "
+    oRS.Open sSQL, oConn, adOpenStatic, adLockOptimistic
+    Range("a2:zz100000").Clear
+    Range("a1") = "Part"
+    Range("b1") = "Color"
+    Range("c1") = "Bundles"
+    Range("d1") = "Length"
+    Range("e1") = "Bar Count"
+    Range("f1") = "Total Feet"
+    Range("g1") = "Ticket Numbers"
+    On Error Resume Next
+    my = oRS.GetRows()
+    If Err Then Exit Sub
+    jB = UBound(my, 1)
+    kB = UBound(my, 2)
+    For j = 0 To jB
+      For k = 0 To kB
+        Range("A2").Offset(k, j) = my(j, k)
+      Next
+    Next
+    
+    oRS.Close
+    Set oRS = Nothing
+    oConn.Close
+    Set oConn = Nothing
+    End Sub
+
+What's the syntax for this? 
+Sorry, I'm a noob and I have no idea what VBA is. 
+Correct. You can use vba if you so wish.
+Yeah.  I've used it with PDF creator to print to PDF.  Also, you can have it open a URL for example in Chrome.  You can see examples of the macros here:
+
+
+http://www.excelguru.ca/content.php?181-Printing-Worksheets-To-A-PDF-File-%28Using-Late-Binding%29
+
+http://stackoverflow.com/questions/5915325/open-google-chrome-from-vba-excel
+
+Another great coder in VBA is Ron DeBruin seen below.  He does a lot here with using Excel to create emails.  
+
+http://www.rondebruin.nl/win/s1/outlook/mail.htm
+http://www.reddit.com/r/excel/comments/2jtd2f/worked_on_a_completely_locked_down_machine_time/
+Wide*
+
+Not changing it. Too funny. 
+Think of it like bailing water.   They are so busy burning cycles trying to keep the water out of the boat, they don't have the time to even THINK about what the cause of the water is, because if they stop for a moment, they'll sink.
+
+Then someone else comes along, notices the hole, plugs it.... they run out of water to bail and are just dumbfounded.
+>I don't know why they didn't come to me months ago to help streamline their excel processes...
+
+People are not aware. It usually is not their fault. This is why scope creep happens. "I want a website" becomes "I want a site that does this, that, and the cool thing I've almost thought of." I love authoring RFP responses. :)
+Thank you. I am a master student in mechanical engineering with quite a lot of experience in Matlab and this does not seem too hard, but nonetheless stuff that will come in handy one day.
+Thanks for the tip.
+Wow thanks, how helpfull of you, these look like good resources.
+If you could have any one food for the rest of your life, what would it be and why is it spaghetti?
+This, so much this, being the only person in my office that knows VBA, I'm always getting  nominated as the Excel wizard that everyone calls for annoying questions. Other than that little annoyance, it definitely increases your job security ;)
+Hi! I wasn't clear as I should have been. I receive the "cannot insert object" when I attempt to place the command button on the sheet. No code has been entered. 
+=IF(A1="cheese","butter","mayo")
+Butter... on a sandwich?  I mean, I've heard of using it to create a barrier to keep bread from going soggy on PB&J, but putting it on everything but ham or chicken...
+
+\**shudder*\*
+That's ok. I think I've actually explored this before, and I tried again today, but it wont recognize the server name or I'd denying me access. I'm going to have to ask around at work and see if they will even let me do it. Would be nice. Thanks for the reply. 
+SO, first off let me point that my excel skills are gained from primarily trial and error - it works out alright, but it means that there might be a much better way of doing this.
+
+The first thing you do, is set up the connection/query to pull the data in, and set a placeholder value for the field you want to filter. Then, choose the edit the query in  Microsoft Query. In the box that your placeholder value shows up, put a question mark, and save and kick it back to excel. It'll pop up a box asking where it should look for the filter value ,and you can point it at a cell, and even tell it to auto-update the query if that cell updates.
+
+If your connection is already set up, yo ucan go to exsiting connections, and to the properties of your connection. On the second tab should be a big text box with the text output of your query - You can do the same trick there, replacing a filter value with a question mark, to prompt excel to ask you where to look.
+
+Hope I explained that well enough
+Visual Basic for Applications. Programming back end for Office.  
+This is a fantastic description.  
+
+Sometimes it's not even that they're not aware - for example I was in a situation where I had an incompetent boss (poor at time management and process management); I was fully aware that there were processes problems but I literally had no time to stop and pinpoint what the problem was much less figure out a solution for it.
+
+Luckily my boss left and the replacement was much better, as higher management had also figured that this was a problem which needed to be resolved.
+
+
+Cool hope it helps you in the future. ;)
+
+John Walkenback has some awesome materials on excel as well.
+Having done both, I can say VBA is much easier than MatLab (Unless of course you are working with arrays)
+If you ever need help with anything, don't hesitate to PM me, I may not have an answer to every problem, but I've been  dabbling with VBA for almost 2 years now, so I know a thing or two :)
+Interesting. I'll have to play around, the only thing I can think off the tip of my head is that it is either the wrong file format, or you didn't click enable content at the top of the screen after opening the file. Could certainly be something else though. I'm not being very much help, sorry.
+yep.  butter and salt.  yummy
+Grilled ham and cheese.  Use butter to toast the bread.
+As a workaround, it may be possible to set up an Access database with links to a machine data source you set up (connected to whatever you're logging into), then just link Excel to Access. 
+Hi - thank you! No, I was allll into the new to me magic of VBA loops. I opened Excel, attempted to place command button, and error. :(  The button's auto code is: EMBED("Forms.CommandButton.1","") 
+
+It's like, "seriously!" thank you for your help. :)

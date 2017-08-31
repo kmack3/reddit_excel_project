@@ -1,0 +1,216 @@
+Pull data from Yahoo Finance page into excel.
+=NUMBERVALUE(WEBSERVICE("http://finance.yahoo.com/d/quotes.csv?s="&A2&"&f=l1"))
+
+See the f=l1?  You change that l1 to whatever you want data for.  A2 is the ticker symbol, mine is referencing another cell so I don't have to type it into the formula when I use it.
+
+a	Ask
+
+a2	Average Daily Volume
+
+a5	Ask Size
+
+b	Bid
+
+b2	Ask (Real-time)
+
+b3	Bid (Real-time)
+
+b4	Book Value
+
+b6	Bid Size
+
+c	Change & Percent Change
+
+c1	Change
+
+c3	Commission
+
+c4	Currency
+
+c6	Change (Real-time)
+
+c8	After Hours Change (Real-time)
+
+d	Dividend/Share
+
+d1	Last Trade Date
+
+d2	Trade Date
+
+e	Earnings/Share
+
+e1	Error Indication (returned for symbol changed / invalid)
+
+e7	EPS Estimate Current Year
+
+e8	EPS Estimate Next Year
+
+e9	EPS Estimate Next Quarter
+
+f0	Trade Links Additional
+
+f6	Float Shares
+
+g	Day’s Low
+
+g1	Holdings Gain Percent
+
+g3	Annualized Gain
+
+g4	Holdings Gain
+
+g5	Holdings Gain Percent (Real-time)
+
+g6	Holdings Gain (Real-time)
+
+h	Day’s High
+
+i	More Info
+
+i5	Order Book (Real-time)
+
+j	52-week Low
+
+j1	Market Capitalization
+
+j2	Shares Outstanding
+
+j3	Market Cap (Real-time)
+
+j4	EBITDA
+
+j5	Change From 52-week Low
+
+j6	Percent Change From 52-week Low
+
+k	52-week High
+
+k1	Last Trade (Real-time) With Time
+
+k2	Change Percent (Real-time)
+
+k3	Last Trade Size
+
+k4	Change From 52-week High
+
+k5	Percent Change From 52-week High
+
+l	Last Trade (With Time)
+
+l1	Last Trade (Price Only)
+
+l2	High Limit
+
+l3	Low Limit
+
+m	Day’s Range
+
+m2	Day’s Range (Real-time)
+
+m3	50-day Moving Average
+
+m4	200-day Moving Average
+
+m5	Change From 200-day Moving Average
+
+m6	Percent Change From 200-day Moving Average
+
+m7	Change From 50-day Moving Average
+
+m8	Percent Change From 50-day Moving Average
+
+n	Name
+
+n4	Notes
+
+o	Open
+
+p	Previous Close
+
+p1	Price Paid
+
+p2	Change in Percent
+
+p5	Price/Sales
+
+p6	Price/Book
+
+q	Ex-Dividend Date
+
+r	P/E Ratio
+
+r1	Dividend Pay Date
+
+r2	P/E Ratio (Real-time)
+
+r5	PEG Ratio
+
+r6	Price/EPS Estimate Current Year
+
+r7	Price/EPS Estimate Next Year
+
+s	Symbol
+
+s1	Shares Owned
+
+s6	Revenue
+
+s7	Short Ratio
+
+t1	Last Trade Time
+
+t6	Trade Links
+
+t7	Ticker Trend
+
+t8	1 yr Target Price
+
+v	Volume
+
+v1	Holdings Value
+
+v7	Holdings Value (Real-time)
+
+w	52-week Range
+
+w1	Day’s Value Change
+
+w4	Day’s Value Change (Real-time)
+
+x	Stock Exchange
+
+y	Dividend Yield
+
+[This](https://www.youtube.com/watch?v=iSlBE3CWg5Q) youtube guide is pretty good.
+How do you find web services that you can use this with? Is there a list of them somewhere?
+[deleted]
+FYI: I have an Excel stock application that pulls any date range of daily prices for any number of tickers. It also grabs some basic stats and does some basic calculations. If you PM me your email address I'll send over a free sample. Normally I sell the app for $25, but for the holidays I am changing the price to a gift valued between $10 and $25. If I get a couple of takers then I'll make a gallery of me opening everything on Christmas Day. 
+Sorry that paste came out gumbled.  EDIT:  Fixed.
+> =NUMBERVALUE(WEBSERVICE("http://finance.yahoo.com/d/quotes.csv?s="&A2&"&f=l1")[1] )
+
+This is in Excel? Does it need some add-in? Or maybe it's 2016 and I'm just a luddite.
+Solution Verified
+
+Thank you, this is perfect! Really appreciate the assistance
+So how would this work for this page here http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=1+Key+Statistics?
+How do I get the Enterprise Value/EBITDA number?
+You are the man
+My goodness had no idea it was possible to be done so easily
+Do I literally type the formula in a cell and the designated code  will generate a value. Ex:
+A1=AAPL
+A2= =NUMBERVALUE(WEBSERVICE("http://finance.yahoo.com/d/quotes.csv?s="&A1&"&f=l1"))
+
+and this will give last trade price?
+I'm pasting it in excel and its not working...Please help you will save me hours of work!
+Alternatively you can just use the [Google Finance function](https://support.google.com/docs/answer/3093281?hl=en)
+lol much ego?
+Sorry to be a dick now, but I already have that, and it works great. Unless your service pulls enterprise value over EBITDA, I don't give a fuck. 
+Also, CTRL+ALT+F9 refreshes the data.  It can take a bit if you are looking up a lot.  I look up all of the S&P 500, high, low, open, close, previous close, and volume and it takes no more than a minute to get everything.
+The WEBSERVICE function exists in Excel 2013 and 2016.
+I'm using 2013, no addins.
+
+You have awarded one point to _bizlur_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+What version of Excel do you have?
+Fair enough. I wish I could upgrade from 2010.

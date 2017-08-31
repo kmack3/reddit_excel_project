@@ -1,0 +1,99 @@
+Do You Know These 7 Tricky Microsoft Excel Features?
+An important tip for Format Painter is that you can double click on the Format Painter icon to lock it. Then you can apply the format to multiple cells individually in your worksheet. 
+Also, did you know you can put the content of a cell in red by clicking the little "A" underlined ?
+I thought I know a lot about Excel, but the change of comments surprised me. Thanks for sharing.
+A tip on working with Pivot tables; turn the original data into a table and then make the Pivot on that table. That way you can add more columns to the table and then just update the Pivot table to get that information, as to changing the data source. 
+
+Edit:
+Tables also remember if you have a formula in a column and applies that to added data. 
+Another format painter tip: You can use it on charts! Select the destination chart and use the Paste Special option. You can select formats and it will copy over axis settings, colors, marks... etc. 
+WRT #6:
+
+You can select basically any type of cells you want with select special: CTRL + G, ALT + S.
+
+Copy a formula, but have blank rows in between? CTRL + G, ALT + S, F, Paste. Done. 
+
+Need to select only the formulas that error out? CTRL + G, ALT + S, F, U, X, G. Done.
+Watch out for functions that change your data set. Instead of using "Remove Duplicates", use a Pivot Table and reference the pivot table.  
+
+I have never nor can I think of a time when I want to format blank cells. Beware misusing this as formatting all the blank cells in your spreadsheet will blow up it's size and slow it down considerably.
+
+Also if you copy (Ctrl+C) a cell, you can paste special (Alt+E+S). Which gives you the option to paste formatting as well as values, formulas and more.
+
+You want to make sure that your work is accurate, easy to use for the end user, and scalable. If its none of that, then its useless. 
+Interesting
+> “Remove Duplicates” is very helpful for big-sized organizations managing **huge datasets**
+
+---
+
+> Excel specifications and limits:
+> Worksheet size: 1,048,576 rows
+
+Does not compute.
+Only one I didn't know was the comment formatting. Thanks!
+I knew most of these, but I think most of us will find something new there. Good intros.
+If your a Mac user like me then Feature # 4 is not quite the same.
+
+For Mac users we cannot change the shape. We can Insert a shape and then add text to it, but we cannot change the shape of a comment box.
+Why use Pivot Tables when there's the free add-on Power Pivot!
+When did this sub turn into r/excelnoobs?
+This. This is a real tip.
+A million upvotes
+Huh - now that I didn't know - nice little tip and thanks!
+Is this true throughout office or just excel?
+This is sorcery!!
+Excellent tip, Appreciated
+Get out!
+deleted  ^^^^^^^^^^^^^^^^0.4815  [^^^What ^^^is ^^^this?](https://pastebin.com/FcrFs94k/29259)
+I like it. http://imgur.com/1Pvn1PF
+
+
+Yup, that was my TIL, too.
+To make a table, highlight the data and press ctrl+T. 
+
+Tables in Excel are awesome. Basically a dynamic source for stuff like pivot tables and data models. 
+You are a genius. Now that you say this it makes sense given the way a table behaves, but I had never considered using one with a pivot table before.
+
+I have so many spreadsheets where I paste data into a template, but I'm forever making sure my formulas are copied all the way down and my pivot tables are catching all the data.
+
+Thank you!
+coincidentally, SFUXG! is very much like the sound I make when I see my carefully planned formula erroring out in places.
+If you are really using excel for 1m plus rows you deserve to fail.
+depends where your sheets are going, what happens when you send it somewhere where addons are group policy disabled? 
+Power Pivot is overkill 90% of the time, but extremely awesome when needed. 
+PowerPivot has a totally different use case. Most of the PowerPivot models end up with a PivotTable to summarize the data. PowerPivot is helpful for number crunching and analysis, not presentation.
+
+some of us are stuck on work computers that won't let us install even free microsoft add-ins.
+Can someone give me a run down on what power pivot is?
+Escape to stop using it 
+Its true throughout. 
+Should be throughout the MS Office suite 
+Username doesn't check out. 
+This is pretty cool. OP said you can change the colour of the comment box also, but I cannot figure out how.
+I used the same, so actually not a huge change, but a star shape would be a bit too much for an audit file.
+Sorry for the late reply :)
+
+Another thing that I have begun to do is to name all the tables and pivot tables. That makes it super easy to read your formulas and sources for the pivot tables.
+With power query and PowerPivot you can certainly work with big ass datasets  but yeah if you're getting above 500k rows you need the PC and the data setup to be on point. At that stage you definitely need to be moving to a relational database and using excel as a front end for queries from the larger dataset 
+Or using 2003 Excel
+true and true
+both give the same result... a pivot table. not sure I see your point.
+edit: [Example](http://i.imgur.com/7z5PjSE.png)
+
+If you have just the comment box selected (not the text) and go to format comment, you can go to the "colors and lines" tab and change the color. 
+
+Using this you can also add a picture as a "texture" background. This allows you to add pictures as comment boxes (albeit laboriously, but probably could be automated). This way you can have, for example, a list of names, and then when you hover over the cell, the picture of the person (or thing) comes up, but is otherwise hidden. 
+
+I haven't really had a use for it yet but it was a trick a colleague showed me and it's pretty neat. 
+[Right click, Format Comment](http://imgur.com/0HetAU0)
+This. I build everything to suit the Lowest Common Denominator within my company, which, with off-shore assets and people working remote or in the field, means knowing not to fly too close to the sun.
+>both give the same result... a pivot table
+
+And yet you said in your original comment "why use PivotTable when you have PowerPivot". They both go hand in hand. 
+
+PowerPivot is a data model which works like an offline OLAP cube. You manipulate data in the model and then when you are done, the most common use/practice is to create a PivotTable from the data model. This PivotTable is more powerful than a PivotTable created from a normal table/range in Excel because you can use fields from multiple tables in a single PivotTable, but it is a PivotTable nonetheless. 
+
+So that was basically my point, you still are going to use PivotTables along with PowerPivot. PowerPivot does not replace a PivotTable, it makes it more powerful. 
+Sweet!!  (pun intended)
+Thanks!
+One could say this example is almost the icing on the cake for comment boxes.

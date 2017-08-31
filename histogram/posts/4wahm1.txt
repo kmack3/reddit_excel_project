@@ -1,0 +1,553 @@
+The most complicated solution Challenge...
+Assuming we're not going for intentional obfuscation here, I think someone who knows a bit about ASCII codes and/or binary might use something like this, instead of `UPPER(A1)` if they happen to not be familiar with Excel's text functions (works on one letter only):
+
+    =INDEX(MID(ADDRESS(1,COLUMN($A$1:$Z$1)),2,1),BITAND(CODE(A1),BIN2DEC("111111111")-32-CODE("A")-1))
+
+The  `MID(ADDRESS(1,COLUMN($A$1:$Z$1)),2,1)` gets you {"A".."Z"},  the `BITAND` and `-32` turns the 5th bit to 0, which was an intentional design decision to make converting cases easier when computers were much more limited (ASCII codes for capital letters are always 32 bits away from their lowercase counterparts). The `CODE("A")-1` just gets you back to the letter number so you can use that in the `INDEX`.
+
+
+Hear's one with an array
+
+    {= SUM(IF(ISTEXT(A3:A8),1,IF(ISNUMBER(A3:A8),1,0)))}
+
+or more simply
+
+    =COUNTA(A3:A8)
+Ooh, ooh, I wanna play. Let's say you need to determine the Roman Numeral equivalent to the integer in A1
+
+    =REPT("M",A1/1000)&IF(A1>99,CHOOSE(LEFT(RIGHT(A1,3),1)+1,"","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"),"")&IF(A1>9,CHOOSE(LEFT(RIGHT(A1,2),1)+1,"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"),"")&CHOOSE(RIGHT(A1,1)+1,"","I","II","III","IV","V","VI","VII","VIII","IX")
+
+... or I could have just
+
+    =ROMAN(A1)
+Getting whole number in A1
+
+Solution: 
+
+    =ROUND(LCM(A1)+FLOOR(A1,1)/ROUNDUP(A1,3),0)-1
+
+Simple:
+
+    =INT(A1)
+
+I guess that's an over-complication. Did I do this challenge right?
+The simple way: 
+
+    =VLOOKUP("B",B3:N10,5,0)
+
+The long way:
+
+        {=IFERROR(
+                INDIRECT(
+                    ADDRESS(
+                            SUM(
+                                IF(
+                                    ROW(C3:N10)=ROW(B4),
+                                                        ROW(C3:N10),
+                                                                    0)),
+                            SUM(
+                                IF(
+                                    COLUMN(C3:N10)=6,
+                                                        COLUMN(C3:N10),
+                                                                        0)))),
+                                    "#NotFound")}
+    
+
+(Flat version) 
+
+    =IFERROR(INDIRECT(ADDRESS(SUM(IF(ROW(C3:N10)=ROW(B4),ROW(C3:N10),0)),SUM(IF(COLUMN(C3:N10)=6,COLUMN(C3:N10),0)))),"#NotFound")
+
+- IF
+- ROW
+- COLUMN
+- SUM
+- ADDRESS
+- INDIRECT
+- IFERROR
+
+It's actually quite beautiful...
+4 | plus | 
+:--- | :--- | 
+3 | minus | 
+2 | is | 
+5 |  | 
+
+with A4
+
+    =SUMPRODUCT(2^(1000-ROW(1:1000)),ISODD(QUOTIENT(A1,2^(1000-ROW(1:1000))))+ISODD(QUOTIENT(A2,2^(1000-ROW(1:1000))))-ISODD(QUOTIENT(A3,2^(1000-ROW(1:1000)))))
+
+But you can also do
+
+1.00E+100 | plus | 
+:--- | :--- | 
+3 | minus | 
+1.00E+100 | is | 
+3 |  | 
+
+Sheet name in Cell A1:
+
+     =MID(CELL("filename",A1),(FIND("]",CELL("filename",A1))+1),(LEN(CELL("filename",A1))-FIND("]",CELL("filename",A1))+1))
+
+to 
+
+    Sub sheetName()
+        Range("a1").Value = ActiveSheet.Name
+    End Sub
+
+
+EDIT: That was an actual formula I found in one of my company's workbooks when I started working here. 
+
+It's kind of a simple sort of complicated, but I've seen some users here err toward it.
+
+    =SUMPRODUCT(--(A1:A100=B1))
+
+instead of the simpler
+
+    =COUNTIF(A1:A100, B1)
+A1 is any 1, 2, or 3 digit number.
+
+A2 is any number from 1 to 10.
+
+In order to divide A1 by A2 and get the remainder, you can do =MOD(A1,A2)
+
+Or you can do...
+
+    =IF(NOT(ISERROR(VLOOKUP(9,A1:A1,1,TRUE))),(VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2,IF(NOT(ISERROR(VLOOKUP(99,A1:A1,1,TRUE))),(((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2-ROUNDDOWN(((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2,0))*A2,(((((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2-ROUNDDOWN(((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2,0))*A2*10+VALUE(MID(A1,3,LEN(A2))))/A2-ROUNDDOWN(((((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2-ROUNDDOWN(((VALUE(LEFT(A1,LEN(A2)))/A2-ROUNDDOWN(VALUE(LEFT(A1,LEN(A2)))/A2,0))*A2*10+(VALUE(MID(A1,2,LEN(A2)))))/A2,0))*A2*10+VALUE(MID(A1,3,LEN(A2))))/A2,0))*A2))
+
+It's basically long division...the really long way.
+What's the task we should solve?
+Ha, my starting-out files definitely had that choose function for months...
+
+I'm confused- are we providing our own solution to a simple problem of our choosing, or are you providing a prompt for us to make complicated?
+This logs you off 
+
+    Sub LogOff()
+    
+        Dim fso, bat
+    
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set bat = fso.CreateTextFile("c:\testing\logoff.bat", True)
+        
+        bat.WriteLine ("shutdown -l")
+        bat.Close
+        
+        Set bat = CreateObject("WScript.Shell")
+        
+        bat.Run "c:\testing\logoff.bat", 1, True
+            
+        Kill "c:\testing\logoff.bat"
+        
+    End Sub
+If you need a word in a cell you can use this formula. If you hit F9 often enough you are eventually guaranteed to get the word you want. If you use this formula in multiple locations, you will exponentially decrease your chances of getting the words. The word is not saved, so you have to do the F9 process over and over again.
+
+
+    =CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ") & CHOOSE(RANDBETWEEN(1;27);"a";"b";"c";"d";"e";"f";"g";"h";"i";"j";"k";"l";"m";"n";"o";"p";"q";"r";"s";"t";"u";"v";"w";"x";"y";"z";" ")
+Here's *my* answer[...](https://www.reddit.com/r/excel/comments/3afqk4/is_there_a_shorter_easier_way_to_do_this/)
+
+
+	=(    IF(
+			V$3 = B88,
+			T$3,
+			0
+		) + (        IF(
+				V$4 = B88,
+				T$4,
+				0
+			) ) + (        IF(
+				V$5 = B88,
+				T$5,
+				0
+			) ) + (        IF(
+				V$6 = B88,
+				T$6,
+				0
+			) ) + (        IF(
+				V$7 = B88,
+				T$7,
+				0
+			) ) + (        IF(
+				V$8 = B88,
+				T$8,
+				0
+			) ) + (        IF(
+				V$9 = B88,
+				T$9,
+				0
+			) ) + (        IF(
+				V$10 = B88,
+				T$10,
+				0
+			) ) + (        IF(
+				V$11 = B88,
+				T$11,
+				0
+			) ) + (        IF(
+				V$12 = B88,
+				T$12,
+				0
+			) ) + (        IF(
+				V$13 = B88,
+				T$13,
+				0
+			) ) + (        IF(
+				V$14 = B88,
+				T$14,
+				0
+			) ) + (        IF(
+				V$15 = B88,
+				T$15,
+				0
+			) ) + (        IF(
+				V$16 = B88,
+				T$16,
+				0
+			) ) + (        IF(
+				V$17 = B88,
+				T$17,
+				0
+			) ) + (        IF(
+				V$18 = B88,
+				T$17,
+				0
+			) ) + (        IF(
+				V$19 = B88,
+				T$18,
+				0
+			) ) + (        IF(
+				V$20 = B88,
+				T$19,
+				0
+			) ) + (        IF(
+				V$21 = B88,
+				T$21,
+				0
+			) ) + (        IF(
+				V$22 = B88,
+				T$22,
+				0
+			) ) + (        IF(
+				V$23 = B88,
+				T$23,
+				0
+			) ) + (        IF(
+				V$24 = B88,
+				T$24,
+				0
+			) ) + (        IF(
+				V$25 = B88,
+				T$25,
+				0
+			) ) + (        IF(
+				V$26 = B88,
+				T$26,
+				0
+			) ) + (        IF(
+				V$27 = B88,
+				T$27,
+				0
+			) ) + (        IF(
+				V$28 = B88,
+				T$28,
+				0
+			) ) + (        IF(
+				V$29 = B88,
+				T$29,
+				0
+			) ) + (        IF(
+				V$30 = B88,
+				T$30,
+				0
+			) ) + (        IF(
+				V$31 = B88,
+				T$31,
+				0
+			) ) + (        IF(
+				V$32 = B88,
+				T$32,
+				0
+			) ) + (        IF(
+				V$33 = B88,
+				T$33,
+				0
+			) ) + (        IF(
+				V$34 = B88,
+				T$34,
+				0
+			) ) + (        IF(
+				V$35 = B88,
+				T$35,
+				0
+			) ) + (        IF(
+				V$36 = B88,
+				T$36,
+				0
+			) ) + (        IF(
+				V$37 = B88,
+				T$37,
+				0
+			) ) + (        IF(
+				V$38 = B88,
+				T$38,
+				0
+			) ) + (        IF(
+				V$39 = B88,
+				T$39,
+				0
+			) ) + (        IF(
+				V$40 = B88,
+				T$40,
+				0
+			) ) + (        IF(
+				V$41 = B88,
+				T$41,
+				0
+			) ) + (        IF(
+				V$42 = B88,
+				T$42,
+				0
+			) ) + (        IF(
+				V$43 = B88,
+				T$43,
+				0
+			) ) + (        IF(
+				V$44 = B88,
+				T$44,
+				0
+			) ) + (        IF(
+				V$45 = B88,
+				T$45,
+				0
+			) ) + (        IF(
+				V$46 = B88,
+				T$46,
+				0
+			) ) + (        IF(
+				V$47 = B88,
+				T$47,
+				0
+			) ) + (        IF(
+				V$48 = B88,
+				T$48,
+				0
+			) ) + (        IF(
+				V$49 = B88,
+				T$49,
+				0
+			) ) + (        IF(
+				V$50 = B88,
+				T$50,
+				0
+			) ) + (        IF(
+				V$51 = B88,
+				T$51,
+				0
+			) ) + (        IF(
+				V$52 = B88,
+				T$52,
+				0
+			) ) + (        IF(
+				V$53 = B88,
+				T$53,
+				0
+			) ) + (        IF(
+				V$54 = B88,
+				T$54,
+				0
+			) ) + (        IF(
+				V$55 = B88,
+				T$55,
+				0
+			) ) + (        IF(
+				V$56 = B88,
+				T$56,
+				0
+			) ) + (        IF(
+				V$57 = B88,
+				T$57,
+				0
+			) ) + (        IF(
+				V$58 = B88,
+				T$58,
+				0
+			) ) + (        IF(
+				V$59 = B88,
+				T$59,
+				0
+			) ) + (        IF(
+				V$60 = B88,
+				T$60,
+				0
+			) ) + (        IF(
+				V$61 = B88,
+				T$61,
+				0
+			) ) + (        IF(
+				V$62 = B88,
+				T$62,
+				0
+			) ) + (        IF(
+				V$64 = B88,
+				T$64,
+				0
+			) ) + (        IF(
+				V$65 = B88,
+				T$65,
+				0
+			) ) + (        IF(
+				V$66 = B88,
+				T$66,
+				0
+			) ) + (        IF(
+				V$64 = B88,
+				T$64,
+				0
+			) ) + (        IF(
+				V$69 = B88,
+				T$69,
+				0
+			) ) + (        IF(
+				V$70 = B88,
+				T$70,
+				0
+			) ) + (        IF(
+				V$71 = B88,
+				T$71,
+				0
+			) ) + (        IF(
+				V$72 = B88,
+				T$72,
+				0
+			) ) + (        IF(
+				V$73 = B88,
+				T$73,
+				0
+			) ) + (        IF(
+				V$74 = B88,
+				T$74,
+				0
+			) ) + (        IF(
+				V$75 = B88,
+				T$75,
+				0
+			) ) + (        IF(
+				V$76 = B88,
+				T$76,
+				0
+			) ) + (        IF(
+				V$77 = B88,
+				T$77,
+				0
+			) ) + (        IF(
+				V$78 = B88,
+				T$78,
+				0
+			) ) + (        IF(
+				V$79 = B88,
+				T$79,
+				0
+			) ) + (        IF(
+				V$80 = B88,
+				T$80,
+				0
+			) ) + (        IF(
+				V$81 = B88,
+				T$81,
+				0
+			) ) + (        IF(
+				V$82 = B88,
+				T$82,
+				0
+			) ) + (        IF(
+				V$83 = B88,
+				T$83,
+				0
+			) ) )
+
+
+
+
+Instead of :-
+
+
+    =SUMIF(V$3:V$83,B88,T$3:T$83)
+
+
+`:-)`
+Are we limited to one entry per person, or can we submit several entries?
+Also, there can be confusion about whether "12 AM" is midnight at the beginning of the day or end of the day, so could you please change the deadline to 11:59 PM or 12:01 AM to disambiguate?
+Okay, suppose A1 contains a name and you want all names to be capitalized (including the middle initial) e.g. john r. walters to be John R. Walters. You can use this formula: 
+
+    =IF(CODE(LEFT(A1,1))>96,SUBSTITUTE(LEFT(A1,SEARCH(" ",A1)-1),LEFT(A1,1),CHAR(CODE(LEFT(A1,1))-32),1)&" ",LEFT(A1,SEARCH(" ",A1)-1)&" ")&IF(ISNUMBER(SEARCH(".",A1)),IF(CODE(IF(ISNUMBER(SEARCH(".",A1)),MID(A1,SEARCH(".",A1)-1,1),""))>96,IF(ISNUMBER(SEARCH(".",A1)),SUBSTITUTE(MID(A1,SEARCH(".",A1)-1,1),IF(ISNUMBER(SEARCH(".",A1)),MID(A1,SEARCH(".",A1)-1,1)),CHAR(CODE(IF(ISNUMBER(SEARCH(".",A1)),MID(A1,SEARCH(".",A1)-1,1)))-32))&". ",""),IF(ISNUMBER(SEARCH(".",A1)),MID(A1,SEARCH(".",A1)-1,1),"")&". "),"")&IF(CODE(LEFT(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),1))>96,SUBSTITUTE(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),LEFT(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),1),SUBSTITUTE(LEFT(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),1),LEFT(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),1),CHAR(CODE(LEFT(TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))),1))-32)),1),TRIM(LEFT(SUBSTITUTE(MID(A1,SEARCH("ᴓ",SUBSTITUTE(A1," ","ᴓ",LEN(A1)-LEN(SUBSTITUTE(A1," ",""))))+1,LEN(A1))," ",REPT(" ",LEN(A1))),LEN(A1))))
+
+or
+
+    =proper(a1)
+I don't have anything overly complicated, I just wanted to let you know that actually the example you gave makes perfect sense if you do not know the end user local setting. The letter codes for part of dates can differ between languages.
+Yup, looks good to me... don't think I have EVER used FLOOR!
+
+I like where you're going - but the 2 return [different results](http://i.imgur.com/13j2Hko.png)...
+That's actually quite useful if you want something other than a value countif
+What do the '--' do in Sumproduct again?
+the sumprod has more functionality than countif(s) - you can use a lot more conditions to count that arent an option when using countif eg 
+
+    =sumproduct(--(isnumber(match(A1:A100,<SKU_list>,0)))
+
+to get the number f entries in a that match any item in SKU list. 
+Whatever you want, if you want to add two cells, and use something like:
+
+    =ABS(INDIRECT((ADDRESS(2,1))))+ABS(INDIRECT((ADDRESS(3,1))))
+
+Instead of:
+
+     =A2+A3
+
+Then use that, that is part of the challenge!
+
+
+lol
+Since I hit the post size limit here is the chance of you getting the word you want:
+
+`1:96377446463956887067806264968072481014221181496791`
+lol our line numbers only go up to 300... ~~going to have to fix that!~~ ^(fixed)
+Isn't this the number 1 all time on the sub?
+Fixed Eligibility to include one entry per person, and fixed the time as well, Thanks!
+Good lord.
+[deleted]
+Interesting, do you have a "for example", I was not aware, I guess in my mind:
+
+     =MONTH(A2)
+
+Where as Excel treats all dates the same, in that you can format it to your liking (with TEXT)...
+
+
+I tested it for ages, returned identical results for me each time. 
+
+Have you changed the column number? 
+Yep!
+It's that damn middle initial!
+If I recall correctly in order to get a
+
+    dd-mm-yyyy
+in Danish you need
+
+    dd-mm-åååå
+
+and for
+
+    hh:mm:ss
+
+you need
+
+    tt:mm:ss
+
+And accidentally I just googled solution which is to enforce specific language with
+
+    =TEXT(A1,"[$-409]dd-mm-yyyy")
+
+Which makes my first statement incorrect.
+Nope, literally just copied and pasted your code.
+> ,"[$-409]
+
+Interesting... thanks for the tip!
+
+Yeah you do have to identify the column number, similar to a VLOOKUP, but an a actual column number, not a relative one.

@@ -1,0 +1,22 @@
+6g3y25
+Finding months from start date to week ending date
+I have data that includes start date and week ending date for clock ins. I tried using datedif(start,end,"m") but it is not working for some reason. Gaps where it shows that people worked for no hours or for way too many. I just want to see how many hours by month since start date
+
+
+-------------
+I would check your start date and end date to ensure they are a number format - =ISNUMBER() and that they are not being stored as text. Otherwise =DATEDIF(A1,B1,"m") - worked fine for me just now in Excel 2016.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

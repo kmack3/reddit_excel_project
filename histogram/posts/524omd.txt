@@ -1,0 +1,214 @@
+Trying to write VBA code for fibonacci series. Need help with debugging.
+Some issues:  
+
+CurrVal is always equal to 1; you never change CurrVal.   
+PrevVal is always 1; you never change PrevVal.  
+You're setting NextVal, but not using it for anything.    
+You have an IF statement, but didn't end it (End If).  
+
+Heres what you want each iteration of your While loop to do:  
+1. Check if CurrVal Mod 2 = 0; If so, add CurrVal to Result.  End the IF statement.  
+2. Calculate the NextVal by adding CurrVal to PrevVal.  
+3. Update PrevVal by setting PrevVal to CurrVal   
+4. Update CurrVal by setting CurVal to NextVal   
+
+Hopefully this helped without giving too much away!
+
+
+    Dim NextVal, PrevVal, CurrVal, Result As Long
+
+This creates NextVal, PrevVal, and CurrVal as Variants, with only Result being dimensioned as Long.
+
+You want:
+
+    Dim NextVal as Long, PrevVal as Long, CurrVal as Long, Result As Long
+Sigh. Nobody uses For loops any more. Why does everybody dislike For loops? 
+
+I still love you, humble For loop. 
+
+    Function myFib(N As Long) As Double
+    
+    Dim prev As Double
+    Dim current As Double
+    Dim nextnum As Double
+    
+    prev = 0#
+    current = 1#
+    
+    Rem Note: Values greater than 46 will overload the Long data type
+    
+    For tick = 1 To N
+        myFib = current + prev
+        prev = current
+        current = myFib
+    Next tick
+    
+    End Function
+
+I'll just answer the syntax errors you had in your code.  You are missing an "End If" in your code, and there should not be "Result" after your "If" statement e.g.
+    
+Instead of 
+
+         If CurrVal Mod 2 = 0 Then Result
+
+
+Write
+
+        If CurrVal Mod 2 = 0 Then
+
+
+
+Your code corrected for syntax:
+
+        Sub Fibonacci_()
+        Dim NextVal, PrevVal, CurrVal, Result As Long
+        PrevVal = 0
+        CurrVal = 1
+        Do While CurrVal < 4000000
+               If CurrVal Mod 2 = 0 Then
+                   NextVal = PrevVal + CurrVal
+                   Result = Result + CurrVal
+               End If
+        Loop
+    
+    
+        MsgBox Result
+    
+       
+        End Sub
+
+
+Also, you never assign CurrVal inside the loop, so it turns into an infinite loop.  In the lines below, CurrVal is never reassigned, and is always 1.  This loop never ends.
+
+        Sub Fibonacci_()
+        Dim NextVal, PrevVal, CurrVal, Result As Long
+        PrevVal = 0
+        CurrVal = 1
+        Do While CurrVal < 4000000
+               If CurrVal Mod 2 = 0 Then
+                   NextVal = PrevVal + CurrVal
+                   Result = Result + CurrVal
+               End If
+        Loop
+
+
+I hope this helps!
+​
+A way of getting the nth fib number I wrote a while back, thought you might like
+
+    Option Base 1
+
+    Public Declare Function GetTickCount Lib "kernel32" () As Long
+    '==============================================================================================================================
+
+    Sub Test()
+
+    Dim x As Integer
+
+    x = Application.InputBox("Term")
+
+    Start = GetTickCount
+
+    MsgBox "Fibonacci Number " & x & " is " & Fib_Num(x) & vbCrLf & "Which took " & GetTickCount - Start & "ms"
+
+    End Sub
+ '==============================================================================================================================
+
+    Function Fib_Num(N As Integer) As Variant
+
+    ' I need to setup a Lookup table & I can't think of a way of doing it in one function without using a global _
+
+    ' or without the caller having to Dim the table (as ByRef arguments cannot be optional)
+
+    ' VBA does not allow you to declare an array with variable limits - you have to declare & then ReDim
+
+    Dim Lkup_Tbl() As Variant
+
+    ReDim Lkup_Tbl(1 To N)
+
+    Fib_Num = Fib_Num_Rec(N, Lkup_Tbl)
+
+    End Function
+ '==============================================================================================================================
+
+    Function Fib_Num_Rec(N As Integer, ByRef Lkup_Tbl() As Variant)
+
+    ' Computes the Nth Fibonacci number, stores it in the Lookup table
+
+    On Error GoTo Not_In_Lkup
+
+    If Not Lkup_Tbl(N) = 0 Then
+
+    Fib_Num_Rec = Lkup_Tbl(N)
+
+    Exit Function
+
+    End If
+
+    Not_In_Lkup:
+
+    Fib_Num_Rec = 0
+
+    If N = 2 Then
+
+    Fib_Num_Rec = 1
+
+    ElseIf N > 2 Then
+
+    Fib_Num_Rec = Fib_Num_Rec(N - 1, Lkup_Tbl) + Fib_Num_Rec(N - 2, Lkup_Tbl)
+
+    End If
+
+    Lkup_Tbl(N) = Fib_Num_Rec
+
+    End Function
+
+Here's one:
+
+    ' Sub procedure to list the Fibonacci series for all values below 1,000
+    Sub Fibonacci()
+    Dim i As Integer   ' counter for the position in the series
+    Dim iFib As Integer   ' stores the current value in the series
+    Dim iFib_Next As Integer   ' stores the next value in the series
+    Dim iStep As Integer   ' stores the next step size
+    ' Initialise the variables i and iFib_Next
+    i = 1
+    iFib_Next = 0
+    ' Do While loop to be executed as long as the value of the
+    ' current Fibonacci number exceeds 1000
+    Do While iFib_Next < 1000
+    If i = 1 Then
+    ' Special case for the first entry of the series
+    iStep = 1
+    iFib = 0
+    Else
+    ' Store the next step size, before overwriting the
+    ' current entry of the series
+    iStep = iFib
+    iFib = iFib_Next
+    End If
+    ' Print the current Fibonacci value to column A of the
+    ' current Worksheet
+    Cells(i, 1).Value = iFib
+    ' Calculate the next value in the series and increment
+    ' the position marker by 1
+    iFib_Next = iFib + iStep
+    i = i + 1
+    Loop
+    End Sub
+
+It came from here:  http://www.excelfunctions.net/VBA-Loops.html
+
+Blast from the past ... One of the first programs I ever wrote, in ninth grade, in the 1970s.  
+
+When you're finished, I'll post my first version, plus a more efficient way I thought of a few days later.
+I will try your suggestion and update ! Thank you :)
+
+ok that makes sense thank you. Shall amend the code.
+While true, this is mostly an issue of style (as far as OP's script is concerned). This should have no bearing on its function
+>You have an IF statement, but didn't end it (End If).
+
+
+FYI - if you write an IF statement on one line then you don't need the End If. Meaning, your code is syntactically correct if you wanted the IF statement to return "Result" if true.
+No, but it's a common mistake.
+Not only this but intellisense won't work if, for example, the variable was a dictionary object.

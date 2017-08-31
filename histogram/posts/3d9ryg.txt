@@ -1,0 +1,72 @@
+Alt+tab equivalent for sheet selection in Excel?
+Ctrl + Tab will switch between open excel workbooks and only excel workbooks. It will first go back to the previously viewed workbook (just like Alt+Tab would go to the previously viewed program) and then start to cycle through all other open workbooks.
+Ctrl+Pg Up and Ctrl+Pg Down
+Create a new window. So then you have two windows of the exact same workbook that are on two different sheets. Then you can all tab between them. 
+
+I think the shortcut is ALT W N
+
+My solution is just to get frustrated.  It's not a great solution.  Come to think of it maybe you can implement this in VBA.
+CTRL + PG UP/PG DWN
+
+However, it's not as fluid as CTRL + TAB.
+If you have a mouse with forward and back buttons they will cycle through the sheets in a workbook.
+On Mac this is Command + Tilda. It took me forever to figure this out and it is super helpful. 
+This comment just changed my life.  How did I not know this before?  I've been Ctrl-Pg Up-ing like a chump.
+This isn't working for me :/
+Just be careful, recently found out you can CTRL+SHIFT+PgUp/Dn to select multiple sheets...when so, any changes you make are mirrored across all your sheets in the same cells. 
+Yeah, i'm familiar with that short cut but that just basically scrolls between sheets. I'm talking about going back and forth between last activated sheets. 
+
+Like say I have sheet 3 in front of me and sheet 7 was the last sheet I was on. And I want to reference back and forth between 3 and 7 it'd be nice to just press a key combo like alt tab in windows to go between 3 and 7
+This literally is the easiest and best response. Someone try it. 
+Exactly what i have been doing over past several years using excel
+I think VBA does a good enough job of frustrating me without an additional macro for it. That being said, VBA can sometimes make my life incredibly easy. 
+>Come to think of it maybe you can implement this in VBA.
+
+Pretty sure it's implemented by default.
+Tilde.
+This is also used to switch between any open windows of the same program. So if you had two chrome windows open, you could switch between just those two using this command.
+Keep in mind that I said "workbook" not "worksheet". You still have to use Ctrl + Pg Up/Down to switch between tabs within a workbook. Ctrl + Tab switches between workbooks!
+So yeah, this is basically what /u/bestnottosay said:
+
+	Dim prevSheet As Integer
+
+	Private Sub Workbook_SheetDeactivate(ByVal Sh As Object)
+		prevSheet = Sh.Index
+	End Sub
+
+	Public Sub tabswitch()
+		If prevSheet = 0 Or prevSheet > Me.Sheets.Count Then Exit Sub
+		Me.Sheets(prevSheet).Activate
+	End Sub
+
+Are you familiar at all with VBA? You need to paste this code in the ThisWorkbook module of the excel workbook in the VBA editor. And then check out the exceltactics link provided by bestnottosay on how to bind the macro tabswitch to a keyboard shortcut of your choice, I tried Ctrl + q since that's sort of close to alt+tab and since it's an otherwise unused shortcut.
+
+Note that this code isn't perfect. If you remove a sheet from in between the ones you're working on at any time it won't change to the correct sheet, but if you're just looking to jump between two sheets quickly I'd say it'll do.
+> Anyway to build a macro that'd switch between most recently activated sheets and is triggered via an button shortcut?
+
+Yes, for this, you'd need two macros, and you can assign a shortcut key combination to the one that does the toggle.  I'd recommend using [Ctrl+Shift+ the letter of your choice](http://www.exceltactics.com/make-custom-keyboard-shortcuts-using-macros/#Test-your-Keyboard-Shortcut).
+
+First, you'll need an [Workbook Event Macro](http://dmcritchie.mvps.org/excel/event.htm#blueboxWB) that records the name of the sheet you're leaving as a [variable with Public scope](https://support.microsoft.com/en-us/kb/141693) as you leave a sheet.  
+
+Then you'd need a separate toggle macro that:
+
+* reads the name of the last sheet from the public variable
+* [checks the list of sheets to see if it finds a match](http://www.mrexcel.com/forum/excel-questions/3228-visual-basic-applications-check-if-worksheet-exists.html), and if so, 
+* [move to that sheet](http://stackoverflow.com/questions/4013792/how-to-activate-a-specific-worksheet-in-excel)
+
+You'd have to do some testing to see if calling the toggle macro causes the public variable to be updated, or if you need to write code that updates the public variable for you.
+If I get ambitious this evening I may try to make this.  Or I might catch up on true detective.
+Ugh, I can't believe I misspelled this! Thanks for the correction.
+Yup. This. Unfortunately, It's very annoying to stretch all the way to page down, so I reach for the mouse.
+So I'm not great with VBA coding and I'm getting an Error from the Me in line 8 and 9 when I paste in the code. Do you know how I could fix this?
+Or start coding, run in to an error you can't figure out a way around, swear profusely amidst a 2 hour session of Google-Fu, then give up and watch True Detective.
+Hmm, you have to be sure to paste this code into the ThisWorkbook module, not a separate module like Module1 or 2. If you could take a screenshot of your VBA editor window, I could tell you if you've got it in the correct place?
+That sounds most likely
+I got it, you're the fucking man. I was not a man in my office today, I became a god thanks to this code.
+Oh wow! Gold? Thanks a lot man!  
+God, huh? Well I'm honored to be of assistance in this ascendance into the realm of immortality. 
+
+
+
+
+

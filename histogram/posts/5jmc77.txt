@@ -1,0 +1,63 @@
+Does anybody have a formula/worksheet for accounting in Monopoly?
+You can try [mine](https://drive.google.com/file/d/0B8wAhtaSgLH4NHRrUlBBV01zOHc/view?usp=sharing). 
+
+I built this based on some good info found on the web [here](http://www.tkcs-collins.com/truman/monopoly/monopoly.shtml) and [here](http://www.amnesta.net/other/monopoly/).
+
+I use the in-game analysis when I'm playing a stupid AI, to help guide me on strategic buy-outs and to know when I'm rich enough to stop developing. The rest is potentially useful background info. 
+I am not a 100% sure I understand correctly how this is supposed to work, but in my mind some simple IF Statement work should do. So you want it that you can change the Monopoly Column as static data, without it immediatly affecting the Debt/Profit calculation correct? If so I would include an if statement into the calculation. I think the best solution would be to make the whole Debt/Profit calculation dependend on the other inputs via IF Statements
+
+http://imgur.com/a/E8JGu
+
+I created a similar file myself and "solved" your problem.
+Im quite new to excel myself but what I did was create two different: "times rented" colums, one for the new value and one for the old. Then I made an If statement, which basically said, IF the new value is bigger than the old one, add the calculated rent towards your profit/loss cell. 
+
+
+Edit: I see now that I forgot to add the Costs to the Profit/Debt cell, but that is still really easy and doesnt change much. If 
+you need my complete If statement formulars just let me know.
+Something to bear in mind is that 2 player gets very rarely have prices at cost, you run out of money pretty quickly and need to start going to auctions.
+
+A has already been worked out and there are many sources to help you on this.
+
+C. What sort of accounting are you after, double entry, financial statements etc , variance reports (e.g. volume frequency analysis) etc
+So what I'm seeing is that you aren't tracking the current turn. I'm guessing your current formula applies Monopoly status to all revenue earned, rather than just future revenue. I think you probably need a "current turn" variable referencing a cell holding that, along with a change to the formula that separates previous from future revenue
+I don't know how this plays into it, but someone has already done a slightly flawed but very comprehensive analysis of the game here, that you may be able to compare your own results to: http://www.tkcs-collins.com/truman/monopoly/monopoly.shtml
+Already done...?
+
+https://youtu.be/ubQXz5RBBtU
+Seeing the discussion I should add... the main value of the file I posted (if I do say so myself!) is it makes use of the probability of landing on a particular property. Therefore it's possible to determine how much money you will make by owning certain things (and likewise for your opponents). 
+
+People much smarter than me figured out the probabilities (see the links in my previous post). Coincidentally, Matt Parker recently posted a [video](https://www.youtube.com/watch?v=ubQXz5RBBtU) that talks about how these probabilities can be determined. 
+
+In case people are nervous about the file I posted (it's xlsm), the only macro in the file resets the in-game analysis sheet, and it can only be invoked manually. I'm not even certain it works correctly because I've modified that sheet so much. There's nothing to fear from the macro. My rep here should tell you where I can be found most days.
+I've looked it over a good bit now, but I have no idea how you do the expected value in in-game analysis.  And my main question still stands; I'm trying to accomplish a single column of profit/loss per property.  I loved you're idea of breaking up the levels of development, and the street values tab is a nice touch.
+Also bear in mind that 2-player doesn't work -- at all -- as you can't trade. Or rather, every trade is zero-sum, meaning there is no incentive for both players to want to accept the same trade.
+
+The game is just "Who can randomly stumble onto a Monopoly?"
+>[**The Mathematics of Winning Monopoly [18:40]**](http://youtu.be/ubQXz5RBBtU)
+
+>>I talk to Hannah Fry and compare our mathematical investigations into playing Monopoly. I’ve put all my probabilities below.
+
+> [*^standupmaths*](https://www.youtube.com/channel/UCSju5G2aFaWMqn-_0YBtq5A) ^in ^Entertainment
+
+>*^335,896 ^views ^since ^Dec ^2016*
+
+[^bot ^info](/r/youtubefactsbot/wiki/index)
+For a true P&L, I guess my workbook is not going to help. You would have to record every dollar spent and earned. Too much work for me (\^:
+
+However, the workbook does answer these questions, at least in a probabilistic way:
+
+> a) what properties generate the most revenue
+
+See 'Recoup' sheets, table at top. 
+
+> a) what properties get landed on the most
+
+See 'Landing ps' (probabilities) sheet
+
+> b) how long it actually takes to make a profit on a property
+
+See 'Recoup' sheets, two tables at bottom left. 
+
+The 'Street Values' sheet is important in the final analysis--it shows the cash value of the property asset, so we can calculate net worth. 
+
+

@@ -1,0 +1,201 @@
+Never use VLOOKUP the same way again after learning about the double approximate-match VLOOKUP trick
+Wouldn't you also see the same speed increase using INDEX/MATCH with a sorted data (last argument of MATCH being 1 rather than 0) as well? ALthough in general, it is a good trick. Main part is that sorting the data is what helps.
+Btw op, feel free to throw an edit in the wiki if you feel like it, iirc this isn't in the lookup formula section and it's a pretty neat trick for fast exact matches in sorted data.
+
+
+
+
+
+
+
+
+>The only caveat here is that the item you're matching against in search_range **MUST BE SORTED**, as a binary search algorithm requires presorting, or the `VLOOKUP`s will return incorrect results.
+
+You had me then you lost me. This is a deal breaker. Interesting concept, though. 
+I use this all the time for large searches. I'm sure there is a slightly better way to get the speed but this is so easy to remember and write that I use it all the time. 
+I've pretty much dumped VLOOKUP for Power Query. Write the script once and forget.
+Just put the damn thing in data model and just create a relationship and all performance issue will be gone no matter how large the dataset 
+Here's a page that [benchmarks this technique against alternatives](http://analystcave.com/excel-vlookup-vs-index-match-vs-sql-performance/) including a VBA solution and SQL. 
+You realize that you're searching twice, right?
+Just use the binary flag on index/match.
+I'm saving this because I can't quite wrap my brain around it.  It seems like you still run the risk of false positives.
+
+But still, a solid post and I look forward to playing with it.
+Yes, 2 sorted VLOOKUP calls are needed to ensure an exact match when the 1st column is sorted. Linear search (exact match) is O(N). Binary search (sorted lookup) is O(log(N)). 2 binary search calls is 2 O(log(N)), which is still O(log(N)).
+
+OTOH, if one needs a lot of formulas like this, faster recalculation can be achieved using 2 cells per result. The first for a sorted MATCH call, the second for a few INDEX calls.
+
+_edit_
+
+    X2:  =MATCH(a,INDEX(b,0,1))  or  =MATCH(a,INDEX(b,0,1),1)  or  =MATCH(a,INDEX(b,0,1),-1)
+    Y2:  =IF(INDEX(b,X2,1)=a,INDEX(b,X2,c),#N/A)
+
+The minor advantage of this approach is that table b could be sorted in descending order in its 1st column. One MATCH and 2 INDEX calls will be faster than 2 sorted VLOOKUP calls.
+Search PowerPivot, comes natively in excel 2013 and 2016 and can be added to 2010 via a free add-in.. If it doesn't show up then you can activate it using the COM add ins, it should add another tab to the ribbon, there will be an option to add any tables you have to data model, once there create relationship, this way you will never have to use vlookup again and any performance issues that you have using vlookup will be thing of the past 
+I have converted some of my massive vlookup pages (180ish columns at around 1000 rows within 15-20 sheets) to index matches a while back and have seen a significant improvement, going from what would normally cause a crash to a simple 60-120 sec wait period.  
+
+I can test this against one of these sheets and report the results if you're interested.
+I believe so, yes.  But if you look at most pages that tout the benefits of INDEX/MATCH over VLOOKUP, such as [this one](http://www.mbaexcel.com/excel/why-index-match-is-better-than-vlookup/), they don't write about the benefit of the binary search/approximate match vs. linear/exact match.
+
+Also, it's worth mentioning that the real meat of the trick is to use `IF` to get an approximate match search to behave like an exact match search.  So you'd need `IF` plus two INDEX/MATCH pairs.
+Done.
+I'd rather sort once, which is fast, or even copy and sort, than wait. 
+
+I agree, though, and am going to look into writing  a UDF that checks if search_range is sorted. There's a [Chandoo tip](http://chandoo.org/wp/2011/01/07/check-sort-order-of-a-list/) on that, which involves a single array formula to determine if a range is sorted. IDK how much the array will affect performance, though... I suspect a lot. 
+If it has to be sorted anyway, couldn't you just make a single standard VLOOKUP() and use the TRUE qualifier?
+I have no idea what you are talking about. I am interested. How can I start to learn?
+I have no idea what you are talking about. I am interested. How can I start to learn?
+Yes, but two binary searches, used in conjunction with `IF` logic, that return an exact result, is almost always faster than a single linear search.  [See my comment here](https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/d74g85k).
+The difference is that, instead of using the traditional FALSE (exact match) for the Range Lookup variable, you use two VLOOKUPs with TRUE (approximate match) instead. 
+> It seems like you still run the risk of false positives
+
+You absolutely risk bad results if search_range isn't sorted properly.  Otherwise, it works.  The exact-match formula with a '1' as the third argument:
+
+    VLOOKUP(search_item,search_range,1,FALSE)
+
+just returns the same thing you looked up in the first place, if it can find it, and #N/A otherwise.
+
+Instead, use a Boolean comparison:
+
+    VLOOKUP(search_item,search_range,1,TRUE)=search_item
+
+which returns TRUE if a match is made or FALSE otherwise.  You then feed that result to IF.
+The IF statement checks whether there's an exact match so you aren't getting false positives. However, if the data isn't sorted you will get false negatives.
+Please do.  There are some skeptics in here.  I couldn't believe how much quicker this was, and most people won't believe how much better this is unless they try it and see it themselves.  
+
+I was thinking some fractional time savings, like 30% or even 50%.  This is orders of magnitude faster -- on the scale of milliseconds instead of hours for my dataset.
+
+Edit: given a 180-column data table, use the INDEX/MATCH version of the trick.
+i literally have no clue why vlookup is still commonly used. My only guess is that it's an old excel standby, and it's either passed down from generation to generation, or mediocre oldschool walkthroughs for excel still teach it. Vlookup is definitely a function everyone knows. 
+
+
+RemindMe! 14 days
+I use vlookup almost always because it's faster to type in :p
+
+I'll use Index/Match if the column I want returned is before the column I'm searching.
+
+For the vast majority of people in their every day work lives, they are not working with incredibly large sets of data in excel, so vlookup is what they will tend to use because it's easier.
+Sorting is all well and good when no one else is using the data for anything.  If there was a way to do this on unsorted data it would really help out some of my dashboards.
+
+
+You would get false positives when exact lookup value is not present. 
+Power Query is great! Its an excel add in that you download from the microsoft website and it more or less acts as a total GUI version of what is possible with high level SQL knowledge without leaving Excel. With that in mind, ElCid is talking about taking raw inputs that are in a specific form and doing the same set of transformations just by clicking refresh. The best part is that its free! Plus it has an INCREDIBLY gentle learning curve, which cannot be said about vba.
+He means that information should be stored in a (relational) database, where tables are connected via relations (e.g. customerID -> allows you to search customer.address in some other table).
+
+This is nice and all, but works only for big projects, not small, fast, dirty analyses.
+You can get the best of both worlds if you just use two cells.
+
+    A: =MATCH(search_item, search_column, 1)
+    B: =IF(INDEX(search_column,cell_A)=search_item, INDEX(column_to_return, cell_A)
+
+And even if you don't want to use 2 cells you can still replicate exactly what you did using INDEX/MATCH syntax 
+
+    =IF(INDEX(search_column,MATCH(search_item, search_column, 1))=search_item), INDEX(column_to_return,MATCH(search_item, search_column, 1))), NA())
+
+That way you get the benefit of binary searches while keeping all the conveniences of INDEX/MATCH. 
+Right, but the MATCH function *also* has a binary flag which you can use in the same way. 
+I'm an old fart so I've got to test it, but it is interesting.  It's a good post.
+What do you think about the following:
+
+=VLOOKUP(search_item,search_range,1,TRUE)=search_item,VLOOKUP(search_item,search_range,column_to_return,TRUE),VLOOKUP(search_item,search_range,column_to_return,FALSE))
+
+
+That way excel would save loads of time on all the matches you got through the binary track and then applied the linear route only for the ones which it did not pick up the first time. Looks a bit messy, but if process optimisation is what you are after and you'd want to ensure proper results, would this work?
+When you say properly sorted, would a simple filter to ascending to descending order qualify? Sorry I'm a noob.
+This is such a valuable tip, /u/bestnottosay. Because of your post, this evening I toyed with a large spreadsheet a work colleague made which normally takes an hour or more to completely run through all of the various trials it is set up to do (involving macros that runs successive data tables) but as I suspected, includes a lot of VLOOKUPs. I ran a subset of the trials and that took 27 minutes. Then I went through all of the VLOOKUPs, removed the FALSE 4th argument, ordered the lookup ranges, and ran it again. The same trials took 3 minutes to complete. He is going to shit himself when I show him tomorrow.
+I originally was going to edit work files to build this but realized with all the other formulas, this wasn't the best way to have a scientific look at load and save times.  I made 3 separate files with 8 pages each encompassing 1000 rows and columns A - ER.  I placed them on a google drive for all to play with.  I'd suggest everyone who is curious download each file and see how long they take to load and save.  You could also change the data sets randomly and see how that affects your usage.  I'm not sure if anyone has a good way to time this, please let me know your thoughts.  I put these on google drive, in read only mode, and yes I stripped my personal data before sharing to all you doxxers out there.
+
+https://drive.google.com/open?id=0B-xLvPC4JrMTdjRaVjBNcEVYTGc
+
+edit:  these files were made in excel 2010, 64 bit.  also there are no macros used so they should be safe for all
+I started working on this today, but I have some major projects to fill out before the weekend, I'll try and get this up Saturday.
+The files have been shared on google drive today.
+I will be messaging you on [**2016-09-15 06:21:08 UTC**](http://www.wolframalpha.com/input/?i=2016-09-15 06:21:08 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/d753btk)
+
+[**6 OTHERS CLICKED THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/d753btk]%0A%0ARemindMe!  14 days) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! d753cej)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+> For the vast majority of people in their every day work lives, they are not working with incredibly large sets of data in excel
+
+Not so sure about that. I work at a very large corporation and we do a TON of work (a depressingly large amount) with huge datasets in Excel. I've worked other places that don't but this is more common than you think. I could go on and on about it but given the limits they have on SQL queries and the tools we have you are often having to pull exports and then manipulate the data.
+
+
+I think you're missing the point on two occasions:
+
+The point isn't which of VLOOKUP vs. INDEX/MATCH is better, it's binary search vs. linear search. The principle can be applied to both functions.
+
+Also, you don't need "incredibly large" datasets to see an improvement.  Try it out on 1000 records, or even 100.  Exact-match involves waiting for your CPU(s) to do calculations.  This trick means virtually no CPU waiting time.  
+
+
+While you are correct, it's posts like OP's that help us find more efficient ways to handle those larger datasets (before giving up and going to mysql/access).  
+
+I find this to be very useful when I don't want to build out a 180 column Database, set all the attributes and then write custom queries.  Sometimes having more tricks in your bag just makes things more efficient when you need to go quick and dirty.
+Make a copy of the data you're searching against, sort it, and search against the sorted copy.
+
+Or, if you need to put the looked-up data back into the original, unsorted data table, 
+
+* Make an ID in the unsorted data
+* Copy unsorted data with ID
+* Sort by search field
+* Run lookup
+* Copy/paste results as values
+* Sort by ID
+* Copy looked-up data, which is in its original sort order, back to the original table
+* Delete copy of data table
+
+You said you have dashboards, so I'm assuming you'd be comfortable doing the above in VBA.
+Of course >.<
+
+In that case, why not just make both VLOOKUP() formulas TRUE? since you are checking if it exists already.
+Alexisprince is right. Free download if you are not using Office Professional 2016. The Excel in that version has it built in. A great book to get is "M is for Data Monkey." It teaches you how to use the mashup query language. It's powerful and pretty easy to use with its menu driven markup. But to really get the wheels off the ground you'll need to dig into the query editor. 
+That was actually really helpful. Thanks! =)
+Agreed.
+
+    IF(INDEX(MATCH())=search_item,INDEX(MATCH()),NA())
+
+That's the INDEX/MATCH version of the original post.  Two INDEX/MATCH pairs, wrapped in an `IF`, gets you an exact match with binary search speed.  Added your syntax to OP.
+True, but you were pointing out that OP was "searching twice" with their double true vlookup...  But that's a requirement to get the desired results using that approach.  
+
+e)  Also, there are some folks that have actually tested the different lookup options and the "double true vlookup" seems to be the definitive winner in terms of speed (although there are prerequisites to using it)...  So it may be the preferred option for people looking for optimal performance.
+This would work, but the third VLOOKUP is completely unnecessary and would only slow things down.  This formula takes an approximate search and makes it behave like an exact search, thanks to the Boolean expression 
+
+    VLOOKUP(search_item,search_range,1,TRUE)=search_item
+
+Which returns TRUE for an exact match, and FALSE otherwise.
+Yes, the list that you're searching in must be sorted ascending (smallest to biggest). 
+Thank you.  I'm glad this was (mostly) well-received.  A few people have written back about this thread, so I'll tell you what I told them (even though I know it's unnecessary) -- please take steps to ensure your lookup range stays sorted, especially in someone else's sheet.
+I don't doubt that this works well, and I'm going to try your tip the next time I have need to do a lookup large enough that I would normally have time to yawn before the calculation is done. The thing is though, that the files need to be pretty damn big for this to occur. Even on my four year old laptop at work looking up 1000 records from a source with 10000 rows will happen in barely a blink of an eye. 
+
+> binary search/approximate match vs. linear/exact match
+
+Not sure if I understand it correctly but VLOOKUP and MATCH both have the option for approximate match, right? 
+
+
+I'm talking about live data that is changed by multiple users and needs to update after any changes.  If it was just something I do once, or occasionally when I feel like updating the data, I wouldn't care that it takes a minute to refresh.
+Agree with the recommendation of M is for Data Monkey. Even skimming that book gives you the understanding of what Power Query can do, and once you have a decent understanding of it, it can be applied in places you didn't think could be improved. Recently I found out that my company was transitioning to a new website, and we have all of our files that we have uploaded on the old site in a folder and all of the files for the new site in a different folder. I found out that they apparently didn't do the transition very smoothly, and were missing ~25 files out of ~5,000 and they were checking by hand. The project they spent 4 hours of time on already and expected about 10 more on took me literally 10 minutes to point them out because of this tool. Definitely worth looking at it.
+>That's the INDEX/MATCH version of the original post
+
+Yup, that was my intention.
+
+and thanks. I'll probably start using this technique soon
+Sorry, I covered that [here](https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/d74wyfc)
+Thank you!
+Yes, very very good advice. At first when I ran the revised workbook, the results were not the same. Upon inspection I hadn't labelled the lookup column well enough and it was not quite ascending order. My colleague is going to add to his macro to first check the lookup column that it's in ascending order and `msgbox` and `exit sub` if it isn't. He was floored by the speed improvement, by the way.
+To me, it really comes down to the application rather than size...  If you need a lookup on an ad hoc report, it doesn't really matter what you use as long as it works.  If, however, you are building a large, dynamic report that is updated multiple times a day, optimization becomes much more important.
+Yes, elsewhere in the thread you can see how to apply the same principle to MATCH and improve lookup speed.
+I had said a month ago I was going to look into writing a UDF that does this for you -- so it checks that the lookup column is sorted, reports an error if it isn't, and does the lookup if it is.
+
+I haven't had the time for it yet, but I may soon.
+
+Also, somewhere in this thread are links to someone who's already given all of this a lot more thought than I have.  They sell their UDFs that intelligently leverage binary lookups as an add-in, but it's $150.
+
+Considering you said you were doing this for a colleague, it might be worth looking into.
+Completely agree.  Saving seconds once isn't worth it.  Saving minutes once probably isn't worth it.
+
+Saving minutes many times, or an hour once, makes this worth it.
+Fair point. It's very rare that I make large sheets with lookups without converting to values immediately afterwards, but I can understand that it's common for others.

@@ -1,0 +1,114 @@
+6fulx5
+VBA Question: how to use the same variable (GetOpenFileName) across multiple subs ?
+Hello everyone,
+
+Need some help in how to declare a variable at module level to be able to use it in multiple subs.
+
+The variable in question is a workbook that the user browses for through GetOpenFileName. Thanks in advance.
+
+Example code:
+
+    Sub GetFile()
+    
+    Dim fNameAndPath As Variant
+    
+    fNameAndPath = Application.GetOpenFilename(FileFilter:="Excel Files (*.XLS), *.XLS", Title:="Select File To Be Opened")
+    If fNameAndPath = False Then Exit Sub
+    
+        Call one
+        Call two
+        
+    End Sub
+    
+    Sub one()
+    
+        With fNameAndPath
+        
+            'do stuff
+            
+        End With
+    
+    End Sub
+    
+    Sub two()
+    
+        With fNameAndPath
+        
+            'do stuff
+            
+        End With
+    
+    End Sub
+
+
+
+-------------
+You need to declare it above `Sub GetFile()`. I'd also recommend declaring it as a string rather than a variant.
+
+    Dim fNameAndPath as string
+    Sub GetFile()
+        'things
+    End Sub
+
+    Sub one()
+        'other things
+    End Sub
+-------------
+Thanks for the reply. Tried it but didn't seem to work. Managed to find something else which seems to work fine:
+
+    Sub GetFile()
+    
+    Dim fNameAndPath As Variant
+    
+    fNameAndPath = Application.GetOpenFilename(FileFilter:="Excel Files (*.xlsx), *.xlsx", Title:="Select File To Be Opened")
+    If fNameAndPath = False Then Exit Sub
+    
+    one fNameAndPath
+    two fNameAndPath
+    three fNameAndPath
+    
+    
+    End Sub
+    
+    Sub one(fNameAndPath As Variant)
+    
+        Range("A1") = 1
+    
+    End Sub
+    
+    Sub two(fNameAndPath As Variant)
+    
+        Range("B1") = 2
+    
+    End Sub
+    
+    Sub three(fNameAndPath As Variant)
+    
+        Range("D1:H1") = 2
+    
+    End Sub
+
+SOLUTION VERIFIED!
+-------------
+
+You have awarded one point to _RedRedditor84_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+>  Tried it but didn't seem to work.
+
+yep, because you can't declare DIM outside of a method. You declare `Public fNameAndPath as whateverYouNeed`, you can use more types though; start from the basics.
+-------------
+Nice work. There are many ways to skin the proverbial cat in programming. Glad you found something that worked for you.
+-------------
+Yes you can.
+-------------
+Never been able on Excel 2010, tried that in 2016 and it actually works.  
+
+-------------
+https://support.microsoft.com/en-us/help/141693/scope-of-variables-in-visual-basic-for-applications
+
+This article talks about variable scope. I was able to do it in 2010 and the article doesn't mention not being able to do it previously. Perhaps there was a particular place you couldn't do it previously, like in a worksheet object or something?
+-------------
+Maybe. I don't have 2010 anymore, it was a bool flag that I needed globally.
+I know about scope etc, and that's why I was shocked to not be able to DIM there :S while public and private was working.

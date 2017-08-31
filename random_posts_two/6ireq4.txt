@@ -1,0 +1,60 @@
+6ireq4
+Editing my macro to save in same workbook
+Hi r/excel, 
+
+I'm a complete excel noob. I have a macro I use to split a column up into equal lots but it currently goes into a new workbook. I was wondering if anyone here could help me identify and fix the code that saves it into a new workbook, to save it into the same workbook. This is so I can run my second macro that mass saves them all at once. Here is the code:
+
+Sub Split500()
+    
+    Dim LastR As Long, LastC As Long
+    Dim SourceWs As Worksheet
+    Dim DestWb As Workbook
+    Dim DestWs As Worksheet
+    Dim NumOfTabs As Long
+    Dim NumDataRows As Long
+    Dim RowsPerTab As Long
+    Dim OldSheetsPerWb As Long
+    Dim Counter As Long
+    Dim RowsToCopy As Long
+    Dim StartCopyRow As Long
+    
+    Set SourceWs = ActiveSheet
+    With SourceWs
+        LastR = .Cells(.Rows.Count, 1).End(xlUp).Row
+        LastC = .Cells(1, .Columns.Count).End(xlToLeft).Column
+    End With
+    NumDataRows = LastR - 1
+    
+    NumOfTabs = InputBox("You have " & NumDataRows & " data rows", "How many tabs to split into?", 1)
+    RowsPerTab = Int(NumDataRows / NumOfTabs)
+    
+    OldSheetsPerWb = Application.SheetsInNewWorkbook
+    Application.SheetsInNewWorkbook = NumOfTabs
+    Set DestWb = Workbooks.Add
+    Application.SheetsInNewWorkbook = OldSheetsPerWb
+    StartCopyRow = 2
+    
+    For Counter = 1 To NumOfTabs
+        Set DestWs = DestWb.Worksheets(Counter)
+        SourceWs.Cells(1, 1).Resize(1, LastC).Copy DestWs.Cells(1, 1)
+        If Counter < NumOfTabs Then
+            RowsToCopy = RowsPerTab
+        Else
+            RowsToCopy = LastR - StartCopyRow + 1
+        End If
+        SourceWs.Cells(StartCopyRow, 1).Resize(RowsToCopy, LastC).Copy DestWs.Cells(2, 1)
+        StartCopyRow = StartCopyRow + RowsToCopy
+    Next
+    
+End Sub
+
+Appreciate any help :)
+
+
+
+-------------
+The line which causes a new file to be created is
+
+    Set DestWb = Workbooks.Add
+
+If you `Set DestWb = thisworkbook` and change the loop to `Set DestWs = DestWb.Worksheets.add` I think you'll get what you're after

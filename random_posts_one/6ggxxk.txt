@@ -1,0 +1,31 @@
+6ggxxk
+SUMIFS() question.
+I'm sorry the title doesn't specifically ask the question, but I didn't know how to ask it without writing a paragraph.
+
+http://imgur.com/Tz55Joz
+
+For the table I linked above you write an item in a specific sell and then a threshold in another sell, it should then tell you the number of quarters where that threshold was met for that item.
+
+As you can see in the image, there are 3 rows of each item sold in each quarter. So I'm guessing I need to get the sum of them for each quarter and then compare it to the threshold. The instruction say to use SUMIFS().
+
+How would I do this?
+
+
+-------------
+Yep, you need to break the problem down first by summarizing the data by quarter and product. Have you learned the 'Remove Duplicates' widget in the Data ribbon yet?
+-------------
+I assume you mean countifs? You want to count how many times Q1, January, and Cookies appear in columns A, B, and C (I'm just assuming the columns)? This will do just that:
+
+    =COUNTIFS(A:A,"=" & A2,B:B,"=" & B2,C:C,"=" & C2)
+
+You can wrap that in if logic if you want to compare it to the threshold. Example:
+
+    =IF(COUNTIFS(A:A,"=" & A2,B:B,"=" & B2,C:C,"=" & C2)>D2,TRUE,FALSE)
+-------------
+>I'm sorry the title doesn't specifically ask the question, but I didn't know how to ask it without writing a paragraph.
+
+`How can I use COUNTIFS to total the number of quarter a specific item sales is above a specific threshold` < from image question.
+
+The expected title is invariably contained in a sentence in the question.
+
+

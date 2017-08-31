@@ -1,0 +1,39 @@
+6ie9c4
+Why am I not able to vertically concatenate this set of data?
+Hi, I have this formula for vertical concatenation, and it's worked in the past, but now it's not working for a new data set. 
+
+I need to consolidate multiple rows into a single unique row--separated by employee ID.
+
+Here's the formula I've been using, but it's not working. Anyone know why?
+
+=IF(A2=A1,C2&", "&B2,B2) 
+
+Never had a problem with it before, but now it's either just displaying zeros, or saying there are too many arguments to function properly. What's going on?
+
+**EDIT:** Other error message: "Careful, we found one or more circular references in your workbook that might cause your formulas to calculate incorrectly."
+
+How can this be, the data hasn't changed, nor has the formula or formatting...
+
+
+
+
+-------------
+Everything looks good syntax wise.
+
+Double-check and make sure your system hasn't switch to using semicolons for argument separators, rather than commas?
+
+When it says there's an error, what part of formula gets highlighted?
+
+What cell is this formula going in?
+-------------
+I'm not seeing any highlighting, just the error message I just added in my edit
+-------------
+How can I do that check. Also, this is going into cell c2 and I need column b to concatenate. The unique identifier is an employee ID number in column A
+-------------
+If the formula you listed is going in Cell C2 then you've got a recursive argument in your formula. 
+-------------
+To check for arguments, when you start working on a formula, the little tool-tip appears showing what arguments are. Carefully look at that, to see what's being used to separate the arguments.
+
+If this is going into C2, your formula (to prevent circular logic) should be:
+
+    =IF(A2=A1,C1&", "&B2,B2)

@@ -1,0 +1,16 @@
+Automatically Generate Astrological Sign Based On Birthday
+I would find a table that had date=> sign online and put it in a tab then in the sign column do =Vlookup(b2,sheet2!a:sheet2!b,false）
+Create two columns. One with the astrological sign and next to it have the last possible date that sign applies to. For example (note I don't know the actual date) if Leo is 7/2 to 8/20 then in column 1 you'd have leo and in column 2 on the same row you'd have 8/20 not 7/2. Then you could do a vlookup with an approximate match
+That did not work. I used the below V-Lookup statement and received #N/A as the error. I need a year to put at the end of each date for the astrological sign so Excel can read it in the date format. I even used the Define Name feature and named the range of signs and dates Astrological Signs in the hope it would resolve any issue, but it did not. Is there a specific year and specific V-Lookup statement I am to use?
+
+=VLOOKUP(B2,AstrologicalSigns,2,TRUE)
+Well your lookup value needs to match your data value.
+
+So if you try to lookup "05/01" but your lookup table has "05/01/2017" you'll get that #N/A
+
+I would do something like this, utilizing date ranges and testing to see if X date is between the upper and lower bounds of each sign 
+
+    Lets C1 has John Smith birthday, and F1 has the first date of the sign, G1 has the last date of the sign, and H1 has the sign name itself.
+
+    =IF(AND (C1>=F1, C1 <=G1), H1, IF(AND(C1>=F2,C1 <=G2, H2.....
+     

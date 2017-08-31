@@ -1,0 +1,58 @@
+A sneaky, but hilarious prank
+A minor point, but `;;;` doesn't confuse Excel, it's just following the rules. Excel has up to four format rules for each cell: positive numbers, negative numbers, zeros, and ~~errors~~ text, and each is separated by a semicolon. So you're just telling it to show no characters for all four conditions.
+
+So you can have all sorts of fun, like setting formatting to `0.00;[Cyan]0.00`, so all negative values turn to cyan, and you won't even be able to change the font color without removing that formatting.
+Evil... Can you imagine if someone put this in a macro which ran on startup? The horror! I mean... what would this even look like? If only someone posted it here so we knew what to look out for...
+Alternatively, make the format "7;-3;0" or similar
+
+Then every positive number will show up as 7 and every negative number will show up as -3.  The values will still calculate properly ... however it will still show up as 7 or -3.
+
+eg: A1 = 2  (A1 displays as 7)
+then A2 = A1-4 (Calculates as -2, displays as -3)
+In the options tab in excel you can change what the enter and tab buttons do. I like to trick people by making the enter key move one cell up instead of down.  
+Putting some clear 'sticky' tape over their mouse's laser is fun. 
+I've always wondered what damage i could do by going into a tech store and quickly writing some vba on one of their pcs. 
+
+An idea i had was to make a form with the x buton at the top right disabled, and a button saying "DO NOT PRESS" on it with some code behind it.
+Highlight the sheet and set the text color to white.  3 clicks and all their data is "gone".
+A simpler general computer prank is to reverse their left and right mouse click in the control panel when they go to the bathroom or alike. 
+Iirc it's actually for positive numbers; neg numbers; zeros; and text.
+I had no idea about the fourth option there. So much time I can save! 
+You're absolutely right. Thanks for sharing! 
+I've always wondered about how those advanced formatting options worked, but never looked into it. Thanks!
+Yeah this is really useful to know for formatting weird mixed data, I also use it quite a bit for pivot tables to remove zeroes or display stuff in thousands or whatever at the same time. 
+I mean... if noone else is gonna...
+
+    Private Sub Workbook_Open()
+
+        Dim ws As Worksheet
+    
+        For Each ws In Me.Worksheets
+    
+            ws.UsedRange.NumberFormat = ";;;"
+        
+        Next ws
+
+    End Sub
+
+In case it isn't obvious, this will reset all number formats in the workbook & be a pain in the ass to undo.
+No need for a macro. Just overwrite the default template :p
+Oh that's just mean 
+This is brilliant.
+Or ctrl + alt + down arrow... 
+I just liked swapping the m and n keys. Or the old sticky tape over the mouse laser.
+Oh yeah, you're right. Not sure where I got the error idea from (looks like you can't change it?)
+Actually, the default is positive numbers;negative numbers;zeros;text like you said, but you can change that to meet your requirements. For example:
+
+[<20]0.0;[<40]0.00;0.000;"blah"
+
+Generates 1dp for anything less than 20, 2dp for anything less than 40 but more than 20, and 3dp for anything not met by the first two criteria, so in this case >40, then text as normal. Why you might want to do this, I don't know, but you are not limited to the default. 
+
+In the default case the implied settings are [>0];[<0]; 0 (only possible remaining numerical option); text.
+Set it to run automatically on April fool's day and you've got yourself a devious prank!!
+Hahaha I did something similar.
+
+Whenever a cell is selected, activesheet.cells(x,y).interior.color = RGB(r,g,b) where x, y are equal to the row/column of the selected cell, and r,g,b are random 0-254.
+Can you make this reset the format to ;;; even if it's changed to something else? Basically, any time someone clicks off the cell it resets back to ;;;? 
+I believe that is only for Intel graphics card
+Not sure. It's worked on most computers I've tried it on! 

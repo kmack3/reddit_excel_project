@@ -1,0 +1,28 @@
+crash
+4hmuiu
+Excel 2016 copy and paste from filtered table resulting in crash to desktop
+
+Copy and Paste of a small amount of table data is resulting in a crash to desktop. If I try a special paste certain ones will work, but most - including normal paste - result in an instant not-responding and eventual crash to desktop. All I'm doing is highlighting the table after filtering it to a particular type, selecting copy, and then pasting into the same amount of table cells elsewhere.
+
+If I don't filter the results the copy and paste works as normal.
+
+What can be causing this off hand?
+
+Thanks for any assistance.
+
+
+-------------
+Just paste as values.  
+
+A table is an object.  A normal paste is trying to paste a filtered table object and it obviously doesn't like that for some reason or another.  I don't recall this happening in Excel 2013 or before, so this is likely just a new bug that crept into 2016.
+
+As a test. just make some simple 3x3 table with nothing but text and number, filter it and copy/paste.  If that still crashes, then it just the table object and you should probably do a bug report for it/see if this has been reported.  If it works fine, then there is something you are doing in the table, maybe a formula or something else, and when you copy/paste it, that is the cause.
+-------------
+SOLUTION VERIFIED!
+
+there isn't actually any formulas in the table as far as I can see but I decided to recreate it manually myself and its cut and pasting fine. I got the template off of the microsoft templates browser when you first start it up. 
+-------------
+
+You have awarded one point to _DankVapor_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,217 @@
+Best Way to Compound Words in Excel
+My thoughts: I regret hitting the r/random button. I don't understand any of the things
+With A1:F1
+
+Sucker | stupendous | horrifying | inspiring | great | terrible | 
+:--- | :--- | :--- | :--- | :--- | :--- | 
+Larry | 1 | 1 | 1 |  |  | 
+Curly |  |  |  | 1 | 1 | 
+Moe |  | 1 |  |  |  | 
+
+In G2 `=IF(B2=1,B$1&IF(SUM(B2:$F2)>1,", ",""),"")` filled down to G4. In H2 `=G2&IF(C2=1,C$1&IF(SUM(C2:$F2)>1,", ",""),"")` filled to K2 then down. In L2 `=IFERROR(SUBSTITUTE(K2,", ",", and ",(LEN(K2)-LEN(SUBSTITUTE(K2,", ","")))/2),K2)` filled down to L4.
+i like this method
+
+=a2&" "&b2
+
+i never use concactenate
+Bloody hell. I can't test this because I don't have Excel 2016, but this should do what you need all in one cell, and it's scalable. Entered as an array using ctrl-shift-enter. Scale by changing the range from B:F to whatever you need.
+
+    =CONCAT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(REPT($B$1:$F$1,$B2:$F2)&B2:F2*IFERROR(-EXP(LN(-MMULT($B2:$F2,--(ROW(INDEX(A:A,1):INDEX(A:A,COLUMNS(B2:F2)))>=COLUMN(INDEX(1:1,1):INDEX(1:1,COLUMNS(B2:F2)))))+3))+3,3)&" ","3",","),"0 ",""),"1 ",""),"2",REPT(",",--(SUM(B2:F2)<>2))&" and"))
+
+Ugh. This is the ugliest formula I've ever made.
+
+edit: nope nope nope, doesn't work for 3 in the row. Hang on. 
+
+edit2: yep, it does work, but you need to put zeroes in the cells that currently contain blanks.
+Based on this, you'll probably want to concatenate a bunch of if statements. It's not as daunting from the front end when you're building it, even if it's a pain to decipher later.
+Are there ever any digits other than '1' in the matrix?
+     =substitute(textjoin(", ",1,range),", ",", and ",len(textjoin(",",1,range))-len(textjoin("",1,range))
+
+Will get you oxford comma, but when you only have 2 items it'll be x, and y.
+
+Scrapping the oxford comma would be the easiest, but other than that you can just wrap it in another if or something
+Couldn't sleep and I like to play around with text functions. Enter as an array - 
+
+    =IF(SUM($B2:$F2)=1,INDEX($B$1:$F$1,MATCH(1, $B2:$F2,0)), SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(CONCAT(IF($B2:$F2=1, $B$1:$F$1&", ")),"FALSE",""), ", ", "",SUM($B2:$F2)), ", ", IF(SUM($B2:$F2)=2," and ",", and "),SUM($B2:$F2)-1))
+
+Doesn't feel perfect, maybe it will give someone ideas. 
+no, no, you're here; this is your life now.  crack open a spreadsheet and get INDEX MATCHing.
+No sir, these are true life skills you will now begin learning. This shit can get you paid.
+Love it. Although Curly is showing as "great, and terrible"  <-- includes a comma that OP didn't want
+
+> =IF(SUM(B2:F2)=2,SUBSTITUTE(L2,", and"," and"),L2)
+
+Solution Verified. Thanks for your contribution!
+isn't & basically the same thing? I think I'm more likely to use CONCATENATE when there's more than a few cells. 
+
+What I would really like to see, is something with this sort of functionality: CONCATENATE(A1:A15). I hate having to select, comma, select, comma each cell I want to join.
+> IFERROR(-EXP(LN())
+
+I smell what you're cookin'
+SOLUTION VERIFIED!
+
+Wow, this is ugly but super effective! Thanks! I'm going to have to study this thing with a fine-toothed comb, because I don't understand half the arithmetic (getting the exponent of the natural logarithm of multiplying two matrices???)
+If I have to do a bunch of repetitive/tedious formula building, I sometimes enlist VBA to build the strings (and then populate the cells of course).
+Nope, it's binary, either nothing or 1.
+If this works, then fantastic! To apply the Oxford comma or not, replace in your formula `", and "` with `REPT(",",--(SUM(B2:F2)<>2))&" and "`
+
+edit: or, (duh), `IF(SUM(B3:F3)<>2,",","")&" and "`
+
+Solution Verified!
+
+It's a lovely implementation, and scalable too (plus the added advantage of not having to put zeros). Looks far more elegant than semicolon's, but in full fairness to him, this won't work on prior versions of Excel while his will!
+
+Thanks!
+Ah, ok. So I did that and this [happened](http://m.imgur.com/41IaDfd). Is that right?
+Add one more column M and put into M2 `=IF(SUM(B2:F2)=2,SUBSTITUTE(L2,", and"," and"),L2)` and copy down.
+I'm for removing the comma & and entirely, I think it's better English.
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+There is.
+
+CONCAT lets you combine an entire range.
+
+TEXTJOIN does the same, and also lets you specify delimiters (such as ", ") and ignore blanks. In fact, TEXTJOIN would just about answer my question, if not for my fascination with the word "and" and insistence that combining just two words shouldn't have a comma.
+
+Both functions are available only to Excel 365 subscribers, and probably will be in Excel 2017.
+It seems really silly that CONCAT doesn't include that functionality. It's like when Apple didn't put a webcam on the first iPad - completely absurd omission
+You do? That, mon ami, was my convoluted way of changing an array of {4,3,2,0,1} to {3,3,2,0,1} because the MIN function would not do it.
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+> &B2:F2*IFERROR(-EXP(LN(-MMULT($B2:$F2,--(ROW(INDEX(A:A,1):INDEX(A:A,COLUMNS(B2:F2)))>=COLUMN(INDEX(1:1,1):INDEX(1:1,COLUMNS(B2:F2)))))+3))+3,3)
+
+Yeah, this is the fugly part. And all it does is append an appropriate digit 0, 1, 2 or 3 to the end of each word, which the nested SUBSTITUTEs then get rid of.
+I don't have Excel 2016 handy, but I highly recommend [this video](https://www.youtube.com/watch?v=n_QwK1LHyd8).  
+
+Since you're using 1s in row 2 to indicate that you want a word, you can simply use `SUM` to count the number of words desired:
+
+    =SUM(B2:G2)
+
+You can feed that to `CHOOSE` to get the appropriate behavior, depending on how many words are in the result:
+
+    =CHOOSE(MIN(SUM(B2:G2)+1,3),"",[1 word result],[2 words result],[3+ words result])
+
+For 1 word, use a simple `INDEX`/`MATCH`:
+
+    =INDEX(B$1:G$1,MATCH(1,B2:G2,0))
+
+For 2 or more words, we're going to use tricks in the video to get a string array.
+
+First, get an array with relative positions of the 1s (as negative numbers) and FALSEs where there are blanks:
+
+    {=IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1))}
+
+You can use the exact same trick as in the video to get an array of sequence numbers:
+
+    {=ROW(INDIRECT("A1:A"&SUM(B2:G2)))}
+
+Use `LARGE` to filter out the FALSEs, use `MMULT` with a hard-coded {-1} array to flip the signs of the word positions back to positive, feed that array to `INDEX` using the `N(IF(1,{array}))` trick at [8:17 in the video](https://www.youtube.com/watch?v=n_QwK1LHyd8&t=8m17s):
+
+    {=INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))}
+
+Feed `TEXTJOIN` a comma as its delimiter to get delimited text:
+
+    =TEXTJOIN(",",0,[string array formula])
+
+For 2 words, replace your comma delimiter with " and ":
+
+    =SUBSTITUTE([2 word text],","," and ")
+
+Finally, as /u/Antimutt suggests, for 3+ words use this formula to make your last delimiter an Oxford comma:
+
+    =SUBSTITUTE([3 word text],", ",", and ",LEN([3 word text])-LEN(SUBSTITUTE([3 word text],",","")))
+
+Putting it all together, *which I can't test, and probably has bugs*:
+
+    =CHOOSE(MIN(SUM(B2:G2)+1,3),"",INDEX(B$1:G$1,MATCH(1,B2:G2,0)), SUBSTITUTE(TEXTJOIN(",",0,INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),","," and "),SUBSTITUTE(TEXTJOIN(",",0,INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),", ",", and ",LEN(TEXTJOIN(",",0,INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))))-LEN(SUBSTITUTE(TEXTJOIN(",",0,INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),",",""))))
+yeah I didn't actually look at his sheet, something like this: 
+
+    =CHOOSE((SUM(B2:F2)>2)+1,TEXTJOIN(" and ",1,IF(B2:F2=1,$B$1:$F$1,B2:F2)),SUBSTITUTE(TEXTJOIN(", ",1,IF(B2:F2=1,$B$1:$F$1,B2:F2)),", ",", and ",SUM(B2:F2)-1) 
+
+ctrl+shift+enter I guess to account for the IF
+
+Not sure how well textjoin works with the IF-array, I cant test it, but if I understand it correctly, it should only join the cells with values. if it includes all of them.t 
+
+You have awarded one point to _EnglishTraitor_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Agreed, /u/EnglishTraitor's is much easier to read than my sloppy mess, but mine also won't work for version<=2013 because it includes the nifty CONCAT function.
+That looks like a MATLAB plot, you fucked up.
+life, liberty, and the pursuit of happiness
+ARGH and here we are on Excel 2013. Thanks anyway tho
+Weren't you the one who took my `MAX(1^(1^(...)),0)` and shortened it to `EXP(LN())` the last time around?
+
+[You were](https://www.reddit.com/r/excel/comments/4x1tp8/liked_trying_to_print_a_tabula_recta_how_about_an/d6pk3cr).
+My hero!
+
+Edit: For those without 2016, [StringConcat](http://www.cpearson.com/Excel/stringconcatenation.aspx) can be used with only a slight modification:
+
+    =CHOOSE(SUM(N(SUM(B2:G2)>={0,1,2,3})),"",INDEX(B$1:G$1,MATCH(1,B4:G4,0)), SUBSTITUTE(PERSONAL.XLSB!StringConcat(",",INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),","," and "),SUBSTITUTE(PERSONAL.XLSB!StringConcat(",",INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),", ",", and ",LEN(PERSONAL.XLSB!StringConcat(",",INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))))-LEN(SUBSTITUTE(PERSONAL.XLSB!StringConcat(",",INDEX(B$1:G$1,N(IF(1,MMULT(LARGE(IF(B2:G2=1,-(COLUMN(B2:G2)-COLUMN(B2)+1)),ROW(INDIRECT("A1:A"&SUM(B2:G2)))),{-1}))))),",",""))))
+Solution Verified!
+
+Kinda. 
+
+Your huge formula (I didn't attempt the step-by-step) works, sort of.
+
+The output is:
+
+Stupendous and Horrifying and Inspiring
+
+Great and Terrible
+
+Horrifying
+
+
+So likely SUBSTITUTE is too aggressive...?
+> =CHOOSE((SUM(B2:F2)>2)+1,TEXTJOIN(" and ",1,IF(B2:F2=1,$B$1:$F$1,B2:F2)),SUBSTITUTE(TEXTJOIN(", ",1,IF(B2:F2=1,$B$1:$F$1,B2:F2)),", ",", and ",SUM(B2:F2)-1) 
+
+Solution Verified.
+
+With a few tweaks. I modified your formula to become:
+
+    =CHOOSE((SUM(B2:F2)>2)+1,TEXTJOIN(" and ",1,IF(B2:F2=1,$B$1:$F$1,"")),SUBSTITUTE(TEXTJOIN(", ",1,IF(B2:F2=1,$B$1:$F$1,"")),", ",", and ",SUM(B2:F2)-1))
+
+The reason was, if value if false is set to B2:F2 instead of "", the function was returning "0", which nullifies the "don't include blanks" in TEXTJOIN.
+Its ok i think i fixed it but what do i do [here](http://m.imgur.com/U0RtJfR)?
+Tea, milk and sugar.
+That video is fantastic.  I just wish I had 2016 to test out my formulas.
+
+You have awarded one point to _bestnottosay_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Cool! I'm still stuck with 2010 at work so no chance to play around with the cool new functions :/
+This is a common mistake.  All of your cells are not neon-colored with white text, so it's easy for users or the excel search function to miss them.  You need to make them POP!
+You can test it with my edit.
+Testing with A1:F4, I've got success with the array function
+
+     =CHOOSE(SIGN(SUM($B2:$F2)-1)+2,"",PERSONAL.XLSB!StringConcat("",IF($B2:$F2=1,$B$1:$F$1,"")),SUBSTITUTE(PERSONAL.XLSB!StringConcat(", ",IF($B2:$F2=1,$B$1:$F$1,"")),", ",IF(SUM($B2:$F2)=2," and ",", and "),SUM($B2:$F2)-1))
+
+In Excel 2016, which I don't have, it should be
+
+    =CHOOSE(SIGN(SUM($B2:$F2)-1)+2,"",TEXTJOIN("",0,IF($B2:$F2=1,$B$1:$F$1,"")),SUBSTITUTE(TEXTJOIN(", ",0,IF($B2:$F2=1,$B$1:$F$1,"")),", ",IF(SUM($B2:$F2)=2," and ",", and "),SUM($B2:$F2)-1))
+
+but someone will need to test it.
+I looked at the video and my head started to swim at the 6 minute mark.
+
+So much gymnastics to do something that you can do (destructively) with a click of a button :)
+Oh man i deleted a few spreadsheet files and now my computer wont start. Can you tell me [what ive done wrong](http://m.imgur.com/BLVrrOC)
+Edit: 
+It works. The only change needed is to change the second argument of TEXTJOIN from 1 to 0.
+Solution verified.
+
+Thanks for your contribution utilizing TEXTJOIN!
+That's working as intended, no issue here.
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Awesome! So when do I get paid?
+Not until you perfect your [flourish](http://i.imgur.com/hY9jsU2.gif)

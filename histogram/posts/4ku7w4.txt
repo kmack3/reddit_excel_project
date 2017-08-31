@@ -1,0 +1,27 @@
+Using excel in *proper* split screen (Windows).
+FYI, if you have Excel pinned to your taskbar, you can shift-click the Excel icon to start another instance of Excel.
+The unfortunate part, is you can't copy paste (special - otherwise it treats it as a cut) across windows with 2007-2010. Only in 2013 did they bring back the ability to copy-paste.
+its native in 2013+ 
+also if you hold the windows key and the arrow button it will stick it to the sides  (more useful for when running multiple screens)
+This is a registry hack I found out about several years ago. It worked in Win7 with Office 2010. Please be cautious and backup your registry before you try these. I haven't used them in years, so it might not even work anymore.
+
+1). Open: Registry Editor from C:\Windows\System32
+Navigate to: HKEY_CLASSES_ROOT\Excel.Sheet.12\shell\Open\command and change the value for command (right click command and select 'Modify') to: xb'BV6!!!!!!!!!MKKSkEXCELFiles>VijqBof(Y8'w!FId1gLQ /p "C:\Program Files (x86)\Microsoft Office\Office14\EXCEL.EXE" /e "%1"
+ 
+2). In Registry Editor navigate to: HKEY_CLASSES_ROOT\Excel.Sheet.12\shell\Open\ddeexec and rename 'ddeexec' to: ddeexec2
+Tip if your still using 2010 upgrade to 2013 its a whole other world of joy. My company though still runs 2010 but they are upgrading soon.
+Or even middle-click. 
+I love the 'tabs for excel' add-in, I highly recommend you check it out 
+Cheers for this! 
+You also cannot do a Lookup across the separate instances. 
+Sorry, should have specified. This is excel 2010. 
+This feature changed my life. But for some reason, it works very differently in Windows 10 - now it wants to stick the window to a corner of the screen, which is way too small with W10's huge interface. Anyone know why it changed, and how to change it back?
+Turn off numlock and hold windows key and use those as well
+It's in work that I am forced to use 2010 unfortunately. No word of upgrading.
+This. Click with your scroll wheel to open any icon on your taskbar in a new window. 
+I know Windows 10 has the new 'Snap Assist'. Not 100% sure if any of the settings would interfere with Excel, [un]fortunately I dont run windows at home so I cant verify, but it's a possibility.
+
+Only if you have not customized your mouse buttons.
+I don't mean just Excel. It happens with any program. Found out it's called 2x2 Aero Snap or something like that. Just gotta find a way to restore the "classic" snap or whatever you'd call it.
+Only if your computer is not on fire.
+Only if you have a computer

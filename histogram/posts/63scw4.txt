@@ -1,0 +1,22 @@
+How to make a macro from an existing VBA Formula
+If you want it available just on you computer you can create an add-in. Create a new workbook, on it, create the module and paste your code, save it as an excel add-in and its done.
+
+Now whenever you open excel the add-in will open too. It is like an hidden spreadsheet. When you go to VBA editor you can see it is there, waiting for your hotkeys ; )
+
+If you want some sort of form to ask you which range do you want to use, you will need to create one too. But I'd prefer using a hotkey for activate the macro in the selected cell and paste the content in a predefined cell (let's say, the column on the right of the cell).
+
+I think first you would have to change it to a sub routine that has an input box asking for the cell to check. And using the active cell as the paste point. Then after you've got this working you can add it to your personal workbook, and make sure your personal workbook starts up with excel then you will have this available in every workbook even xlsx workbooks. 
+The end goal is that I want to record a macro which will perform multiple functions including the use of this custom formula whenever I open a report on excel. Do you think the two will play nice?
+
+EDIT: I created the add in and it works great... But now I ran into an even larger problem T.T. check the top if you can help
+You have to add an "End If" after your If/Then statement.
+>Do you think the two will play nice?
+
+Yes. You can use as many functions/subs as you want on a add-in. My personal one has hundreds of them.
+
+>now I ran into an even larger problem
+
+Not sure if got right what exactly is your problem... you just want to remove commas from a specific cell? if so you can use the VB function **REPLACE**. But, is it just that?
+
+Thanks for the reply. Issue was solved. I have it detailed up top. Thanks for the help though!
+great!! : )

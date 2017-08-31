@@ -1,0 +1,58 @@
+large
+5dhng8
+Removing a large amount of blank rows
+
+So I made the fatal mistake of multiplying a column by a number. I now have 105,000 rows of data, with 0's in most of them. (only 36k rows are valid). Trying to select all of the rows and delete them is causing excel to grind to a halt and crash. Any suggestions for rapidly and efficiently removing 70k semi-empty rows from excel? 
+
+Additionally, does anyone have handy tricks to shrink an excel file? Using a lot of SumIfs to populate a GL into a detailed financial breakdown. 
+
+
+-------------
+If you Save As .xlsb it drastically shrinks the size of the file. It does create mobile compatibility issues though. 
+-------------
+Maybe this will help? It'll loop through all the rows in a sheet and delete any that sum to 0.
+
+    Sub DeleteZeroRows()
+        
+        Dim row, cell, total As Long
+        
+        For Each row In ActiveSheet.UsedRange.Rows
+            
+            For Each cell In row.Cells
+                
+                    total = total + cell.Value
+            
+            Next
+                    
+            If total = 0 Then row.EntireRow.Delete
+            total = 0
+        
+        Next
+    
+    End Sub
+-------------
+I often have to remove many rows from large sheets, and I just delete the data in these rows and then sort the remaining data. 
+-------------
+remove duplicates? if your crashing on processing it try switching to manual calc before deletion. 
+-------------
+Removing data rows / why don't you do the reverse and filter for non-zero rows. Then select all rows and paste to a new sheet? This will paste over only the visible rows.
+
+Sometimes it is less computationally intensive for Excel to copy filtered rows than it is to delete filtered rows.
+-------------
+Trying to preserve the rows 1-35,000, while eliminating everything below them.  I suspect this would work otherwise, and it's pretty clever. 
+
+On that note, I did slowly go through and delete the whole thing a few thousand rows at a time, so at this point it's mostly academic
+-------------
+My issue was that excel would crash when trying to remove that many rows. I fixed it by doing it a few rows at a time
+-------------
+That's a shame.. could've used Selection.Rows instead of ActiveSheet.UsedRange.Rows and just manually selected down everything from 35k+, I guess.
+-------------
+I understood the issue, and my suggestion was to remove the contents, not the rows. Once the remaining data is sorted, all the empty rows would be at the bottom, and are easily deleted. 
+-------------
+I could manually select them all easily (highlight, ctr+shift+down arrow), attempting to delete caused excel to crash
+-------------
+Yeah, that's what I mean, once you have them all selected the rows can be referenced in VBA as a collection called "Selection.Rows", in the same way I used "ActiveSheet.UsedRange.Rows".
+
+EDIT: Also, hey, you should probably change your flare to Solved.
+-------------
+Well, I got it done, but in a really clunky way. I'm still trying to figure out if there's a low-processing intensity, rapid method of doing what I want to do.

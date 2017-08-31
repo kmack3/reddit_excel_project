@@ -1,0 +1,38 @@
+6ga71k
+My workbook has started protecting itself on its own, even when I save it as unprotected.
+I work in a manufacturing environment.  I have been working for a few weeks to come up with a special calculator for people on the manufacturing floor to use on their own so they don't have to come running to engineering every other minute.  The calculator itself is fine, I've had no issues with the simple formulas and macros that run it, but I've run into a much larger issue.  
+
+I have protected each individual worksheet with a password so that the manufacturing associates can't change the calculator (besides the cells they need to use it).  This was working fine for the last couple of weeks, and I haven't had any issues with the protection until this morning.
+
+When I attempted to open the workbook this morning, I found that the workbook itself was password-protected.  This is NOT something that I had done, and nobody else currently has access to it.  I unprotected the workbook and saved it as unprotected.  When I closed it and opened it again, the password protection was still there, with the same password as before.
+
+I'm not sure how this happened.  I don't understand how I could save the workbook as unprotected but it still opens as a protected workbook.  Can someone possibly shed some light on this?
+
+
+-------------
+Unfortunately, it has become sentient. You should delete it now, before Skynet actualizes.
+-------------
+How do you know the password if you're not the one protecting the workbook?  
+
+Have you double checked for any macros (in a Module or in the "ThisWorkBook" object) that have a .SaveAs and include a password? 
+
+Are you removing the password by going to File->Save As->Tools->General Options and deleting the password?
+-------------
+The File --> Save As thing worked!  I've never tried to password protect a file before and I've never heard of doing it that way.  I still have no idea how it got set, but thanks so much!
+-------------
+The password that was protecting the workbook is the same one I had used to protect the worksheets, which made me think that something in my code was protecting it.  I checked through the code thoroughly (it's not lengthy), and there is nothing there to indicate the workbook should be protected.
+
+    Sheets("****").Unprotect ("****")
+    Other Code
+    Sheets("****").Protect ("****")
+
+That's really all it is.  I'm baffled.
+-------------
+Solution Verified
+-------------
+Did you check the ThisWorkBook object as well?  This is quite odd. 
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

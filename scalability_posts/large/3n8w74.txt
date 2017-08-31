@@ -1,0 +1,133 @@
+large
+3n8w74
+CSV file too large to open with Excel
+
+I have a file that I downloaded that I really don't need probably 85% of but I can't seem to open it to shrink it down to a more manageable size (its 5.29GB).  I was thinking of trying to link a blank document to the cells in row 1 sheet 1. But of course I don't know the name of the first sheet.  If I did get it I was thinking maybe I could use VBA to delete some of the content in rows that I dont' need? I'm not sure if that's really possible though. Thoughts?
+
+EDIT: This is the file: http://download.cms.gov/nppes/NPI_Files.html
+
+
+-------------
+Below is a VBScript for splitting out files into smaller ones. This one will split it out every 200,000 rows. You can change that to whatever you like.
+
+	Dim  Counter
+
+	Const InputFile = "C:\Users\classic_reposts\bigfile.csv"
+	Const OutputFile = "C:\Users\classc_reposts\smallerfile"
+	Const RecordSize = 200000
+	Const ForReading = 1
+	Const ForWriting = 2
+	Const ForAppending = 8
+
+	Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+	Set objTextFile = objFSO.OpenTextFile (InputFile, ForReading)
+
+	Counter = 0
+	FileCounter = 0
+
+	Set objOutTextFile = Nothing
+
+	Do Until objTextFile.AtEndOfStream
+		if Counter = 0 Or Counter = RecordSize Then
+			Counter = 0
+			FileCounter = FileCounter + 1
+			if Not objOutTextFile is Nothing then objOutTextFile.Close
+			Set objOutTextFile = objFSO.OpenTextFile( OutputFile & "_" & FileCounter & ".csv", ForWriting, True)
+		end if
+		strNextLine = objTextFile.Readline
+		objOutTextFile.WriteLine(strNextLine)
+		Counter = Counter + 1
+	Loop
+	objTextFile.Close
+	objOutTextFile.Close
+	Msgbox "Split process complete"
+-------------
+Link to it (don't import) with Access.
+-------------
+Have you tried just opening the CSV file directly from File | Open?  Is that what you're doing now?  What error do you receive?
+
+You should definitely be able to do this if you're using 2016, or 2013 or 2010 with the Power Query add-in.  Go to the "Power Query" ribbon, and import from there.  
+-------------
+Excel max is 1 million. Maybe consider mysql?
+-------------
+I'm dealing with a 15gb csv.
+
+We are going to load into an oracle database,  until then,  I just grep out lines I need for analysis.  To get an idea of what data looks like,  I did a.   
+
+     head -10000 bigfile.csv > top10k.csv
+
+ to look at beginning data.  Then worked the rest. 
+-------------
+Try connecting to it by using the Data tab and going to text, it should then let you edit what you want to bring into the file by the wizard in excel.  That is if there is a common delimiter that you can sort the data by. 
+-------------
+You can download R and then run commands to strip it.
+-------------
+Your best bet is to import to MySQL or MS-SQL then query out what you actually need.  ALthough, saying you only needed like 85% of it, is still likely to be too large to deal with inside any other type of application.
+
+You CAN create a query inside Excel to populate your spreadsheet direct from the DB
+-------------
+There is a free program called "CSV splitter" I believe. Never used it but heard it works. 
+
+Edit: http://erdconcepts.com/dbtoolbox.html
+
+http://download.cnet.com/CSV-Splitter/3000-2074_4-75910188.html
+
+Again, I have NO idea if it works. I used a cmd on OSX when I did this, had a hard time finding one for windows.
+-------------
+There's a good utility called CSVed that works great for things like this.
+-------------
+You need Unix or custom programs for Windows to deal with that much data.  
+15% is still 790MB.  
+This is not a job for Excel.  
+Someone mentioned 'R' but unless you know it well and know how to avoid data duplication it won't be easy to deal with that much data in it either.
+-------------
+If you are in excel 2010 or greater you should consider using power query to pull the data and then power pivot to manipulate the data.  They are both free add ins to excel. They will change your whole world.  Greatest releases for analysis by Microsoft since ms sql stack,  but with considerable less barrier to entry.  Depending on what you want to do may be quite easy or as complex as you need. 
+-------------
+Do you have access to MS Access? If so open the file using that then you can cull out what you need from the data and export it to excel. It's probably the more intutive, easier option from what's listed here. Or, if all else fails you can download openoffice.org which is basically the generic version of MS Office. 
+-------------
+What are you trying to do with the file? R, Python or powershell might be better options. 
+-------------
+You can open it as a text file with Notepad++ (free). Then manually split that into smaller files which you can open and filter down to just what you need, then recombine all that into one file.
+
+For a one time task, this is probably the path of least resistance. 
+-------------
+Is this a regular occurrence? Get more RAM?
+-------------
+Just ran across this - is this inserted into a module or used via bat file? Thanks 
+-------------
+This is what I would do.
+-------------
+Honestly, there are a lot of good suggestions in this thread, but this is the easiest. Link to the file, and query on just the columns you need. You could cut the columns you need easily in Linux, but I don't know if there's a Windows powershell equivalent 
+-------------
+^ this. I would try to use PowerQuery. 
+-------------
+Power query runs out of memory. Sometimes I can get the first hundred rows/few thousand columns open  but then excel freezes almost immediately after.
+-------------
+/r/Python 
+-------------
+Tried, memory error.. I have 4GB but apparently that's not enough.
+-------------
+I have used this when I was working with a 4GB CSV file, although I didn't download it from here. It worked exactly as required, but it was a bit of a pain to split the file into 20 chunks and filter each to the bits I needed (Like Op, less than 15% was required) and then recombine into one file again. 
+-------------
+Notepad++ won't open a file that big.
+-------------
+Yeah I already tried that before posting this. It explicitly stated the file is too large for notepad++
+-------------
+You can just put that in Notepad and save it with a .vbs extension. Then double-click it and it will run.
+-------------
+honestly, if you are trying to read 5gigs of anything with 4gigs of ram you are going to run into trouble.  Some people have suggested mySQL, that would work.  You could also use python to read lines from the csv into two seperate excel sheets but that would be to big for excel.  You could use python to read one line at a time and only keep the ones you need in memory for analysis (probably rough if you want to keep 85%).  Worse case scenario, open it in notpad (as a txt) and just copy half of it to a different notepad file and save that.  it might take some trickery but this will allow you to split the data in two without downloading other crazy programs
+-------------
+Is this where I admit that I don't think I've ever actually tried to open a text file that big?
+
+Anyway.
+
+There's also a program called [Large Text File Reader](http://sourceforge.net/projects/largetextfile/)
+-------------
+Won't it? It'll take a few minutes but I've opened files a couple of gigs before. 
+
+At least I think I have
+-------------
+I ran into this problem on Monday with a text file that was 1.3GB and Notepad++ prompted me that it was too big to open.
+
+Unless I have a bunk version of Notepad++

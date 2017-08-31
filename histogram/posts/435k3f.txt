@@ -1,0 +1,29 @@
+So I built an Excel plugin for the SQL enthusiast (shameless plug)
+[deleted]
+hey baby, how much for the goods?
+How does this work if someone else opens my workbook and doesn't have it installed?
+
+Would be useful for some of my corporate projects
+This is incredible. I'll give the free trial a go.
+
+Thanks!
+Great job. What language did you write this in? Does it have full SQL support (multiple joins, having, etc)?
+Yeah, the signature is a must if I'm to have any credibility. Nice questions, let me try and answer:
+
+- In all honesty, don't have a clue about the market potential, I know there's about 1 billion (yup, billion with a B) Excel installations worldwide. I'm guessing about 5% (50 million) of them are tech savvy enough to give this a go. Out of those people, if I could reach only 0.1% (50 000 people) it would be a pretty darn decent business. I have some users, and they mostly love it. I'm having a hard time figuring out the marketing approach, I'm a dev, never tried making a business before so I'm mostly learning now. 
+
+- Nitpicking appreciated, probably mistakes. I tried to use licence for the noun, and license for the verb, but it's very likely I'm not consistent. Given that most of my customers are from the US I probably should have used the US version (license for both)
+
+And hey, thanks for the kind words!
+:D It says on the website, honey
+You can use it to query and modify your workbook data without issues, it will not do anything magical to your workbook. 
+
+If you use the automation feature though (e.g. set it up so that changing one table updates another), this WILL inject some data into the workbook (a tiny bit, just strings describing the queries and triggers) and if you then give the workbook to someone who doesn't have the plugin installed, than it will look like a normal workbook, and the only effect is that the automation won't run (there's nothing to interpret the embedded strings), so when they change one table nothing will happen with the other one. If the other person installs the plugin, automation will run fine. 
+
+Importantly, the other person won't need a license for automation to run, the plugin's automation runtime doesn't require a license, only its UI does. 
+Thanks a lot! Do give it a try, it only gets better once you try it!
+The dialect is SQLite, it's robust and mature, and is very popular. So yes, you can do all kinds of queries. 
+Congratulations on the Plugin, it's always great to see someone invest time into making something in Excel :)
+
+Your post reminded me of [this bit](https://youtu.be/HHjgK6p4nrw?t=8m45s). I hope it works out for you though!
+Yeah, it's a very good point he's making, I ended up watching the whole thing and loved it! Thanks for the link!

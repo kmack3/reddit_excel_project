@@ -1,0 +1,55 @@
+6g1jhz
+A data validation list in the same cell of multiple worksheets. If I change the value in any one sheet, can I make excel change the value in the other?
+Users may want to change the value in cell D4 in any worksheet. But it should then change the value of D4 in all the other similar worksheets (though not the whole workbook)
+
+I'd like to maintain the drop-down Data validation style format if possible.  
+
+Any ideas?  I have modest/limited VBA use. 
+
+
+-------------
+[deleted]
+-------------
+The result was a long freeze, and eventually a "Run Time Error '-2147417848 (80010108)' Method 'Value' of object 'Range' failed"
+
+I suspect It's doing a loop of some sort and filling available memory? 
+
+Post Script 2: definitely a loop.  If I just delete the sheet I'm going to change from the module-element of this code it works great!   If I leave it in it just loops until it crashes.    Would you know how to tell it NOT to refresh the same page the user refreshes to start this process?
+-------------
+Solution Verified
+-------------
+You probably need to turn off screen updating and events in the event procedure before calling ChangeVal() otherwise it will keep calling the Worksheet change event every time ChangeVal () is called.
+
+Application.ScreenUpdating = False
+
+Application.EnableEvents= False
+
+And then turn them back on again at the end of the procedure before exiting.
+-------------
+
+You have awarded one point to _ThePhoenixJ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+THAnk you!   Perfect!  I have only one solution Verified to give I think, so I'm going to leave it with the primary guy, but can I ask what this did that enabled his solution to work? 
+
+(Edit: clearly wrong!  Points for both!  10 points Gryffindor)
+-------------
+[deleted]
+-------------
+
+You have awarded one point to _katsumiblisk_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint by editing your comment.
+
+Please make a **separate reply** to a user's comment with 'Solution Verified' as edits are unfortunately not detected by our bot, Clippy!
+
+Doing so will not only give the user a ClippyPoint, it will change the post flair to solved.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+Thanks for the response!  It all makes sense, and my workbook is doing splendidly.  Now off to the next feature...sigh. Never perfect. 

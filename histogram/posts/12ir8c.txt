@@ -1,0 +1,44 @@
+Getting Started with Visual Basic
+You can do damn near anything with VBA. A decent place to start is to simply record a macro of what you want to do, then read the syntax of the code to edit it further towards what you want and just Google "excel vba whatever" for anything more. 
+Frescani got it right - [record a macro](http://www.youtube.com/watch?v=KKJj78LoFaA), go into the code, and take a look at what it's doing. That's how I got started - I would record a simple macro (like changing the formatting on a document to what I prefer) and then take a look at what the code was doing. The VBA editor comes with Excel out of the box and you can go line-by-line to see what each line does. As I got more comfortable with the syntax I started futzing around with the code that was automatically generated in order to get a more nuanced macro. (A wise fellow on here explained that this process is known as "refactoring" a macro.)
+
+Eventually I started coming up against roadblocks as I would record macros and would google the answer, find example code, and refactor it for my use. This led me down the rabbit hole, and I got a simple book to help me out some more. (Always watch out for looking up VBA *for Excel* as otherwise you'll get stuck with coding wisdom that doesn't apply to your program.) I [think this is the book that I use](http://www.amazon.com/Excel-Programming-blueprint-interactive-spreadsheets/dp/0470591595/ref=sr_1_1?s=books&ie=UTF8&qid=1351876066&sr=1-1&keywords=excel+vba+visual+blueprint) but I don't have it with me so I'm not sure.
+
+I'm no expert by any means, but I've really gotten into the whole VBA for Excel thing. Honestly, reading along on here and asking questions (most of mine are "stupid questions" that I apologize for in advance) has helped me learn even more.
+
+Best of luck getting started and let us know how it goes for you!
+I posted an 'Introduction to Macros/VBA' lesson on my Excel Training Site (part of a University of Reddit course I'm teaching).  I'll be posting more advanced lessons in the coming months.
+
+[Excel Exposure - Introduction to Macros & VBA](http://excelexposure.com/2012/04/16/introduction-to-macros-vba/)
+
+Also posted 2 VBA macro walkthroughs:
+
+[VBA Walkthrough #1: Purchase Order Generator](http://excelexposure.com/2012/06/21/excel-video-lesson-vba-walkthrough-1-purchase-order-generator/)
+
+[VBA Walkthrough #2: Message Encoder & Decoder](http://excelexposure.com/2012/06/27/vba-walkthrough-2-message-encoder-decoder/)
+Don't know if it is applicable to your situation, but I learned VBA the best when I had to use it on the job. Recipe is pretty much the same as what people here have mentioned - record a basic macro, google for other specific statements and a lot of trial and error. It really helps to have an already defined project on hand, at work or elsewhere, to learn this
+My suggestion is to think of something that may help you at work or school and try to solve it by using VBA. I am not a proficient user but I've had a much easier time learning by googling code to solve an issue I've had at hand rather than some exercise in a book. 
+I taught myself VBA by going to the library and checking out a number of books. That plus a lot of google work, and I'm still learning new things every day.
+
+And frescani's right, you CAN do almost anything with VBA.
+I learned most of what I know from 'Visual Basic for Applications for dummies, which I would highly recommend.
+[excel book](http://excelvba.ru/UsefulBooks/book9.pdf)
+Relevant to my personal interest.
+Just ask the hot reporting guy in the office to help you out...
+I have muddled through with Googles help, removing Hyperlinks etc, was wondering if there was a one-stop-shop for VBA for beginners.
+
+I agree with this completely.  See my post [here] (http://www.reddit.com/r/excel/comments/10up86/mod_here_begging_vba_experts_for_help/) for my experience with this.  Basically I ran up against a problem where I HAD to use VBA to solve it.  It took me a while, and a lot of googling and experimentation.  Basically I did the following:
+
+*Broke the problem into small steps
+
+*Googled for code/object models that would help me
+
+*Got very familiar with the debugging tools (particularly add watch) in the VBA editor
+
+*When in doubt, ask /r/excel 
+
+This is definitely a great learn-by-doing type of skill.
+Walkenbachs power programming is excellent.  Then cpearson, ozgrid, and mrexcel (in no specific order).
+Personally, I bought a book, which somebody borrowed and never returned, so I don't have the title handy. But I think I learned more online & troubleshooting than from the book anyway. Also, reading other people's projects, debugging them step by step to see what each line does.
+
+Some of the better online resources are in the sidebar. IMO, particularly ozgrid and maybe cpearson.

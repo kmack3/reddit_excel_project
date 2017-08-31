@@ -1,0 +1,176 @@
+What's the best programming language to learn that benefits your Excel skills as well
+SQL and VBA would have the most immediate benefit to you imo.
+Sorry but I have an additional question to add to the OP. Why is Python mentioned often when it comes to programming?
+
+Programming languages (or at least the ones I'm aware of or have used) have specific uses such as VBA, HTML & C#. I cannot find such a case for python. So could someone please explain why Python would be useful to know for a data analyst?
+Python with Pandas
+I personally learned how to use excel (vlookups and everything that people call "advanced") and learned R shortly after. R is really weird apparently when you already know a different one, but I digress. 
+
+Anyway, my answer is if you know what you want to do, use the language that is appropriate for that. Stats? R. If you see yourself using excel pretty exclusively, VBA. If you want to advance in a different role as an Analyst, SQL. I would recommend SQL as its pretty easy to pick up (you can be pretty not terrible within two weeks). 
+
+If you want to learn just to learn, Python is good at a lot of things as opposed to the above which are great at what they are great at.
+VBA, period. 
+I live in Brazil and i am not really impressed by a typical "data analyst" in the company that I am working (as a BI intern)
+However I fell I am a bit out of the loop about what actually means to work with data analysis or "data scientist".
+
+
+I am studying business administration and i am more than willing to develop data analysis and programming skills in a fashion related to OP.
+
+
+I guess I am just venting some anxiety.
+
+
+A more specific question: Do you guys have any strong opinions related with Excel and VBA versus Google sheets and Javascript?
+
+
+ All comments are welcome.
+SQL is great, and database building in general, for learning how to organize your data in Excel for maximum usability and retrievability.
+VBA seems to be the popular answer here, but want to add to that. I think VBA is a great beginner language because the tools you need are already on your computer and it just supports playing with it and automating regular tasks you do.
+
+Regularly max out your email allocation? Set up a button on a toolbar that calls a script that deletes all attachments from your sent mail.
+
+Need to send a monthly report based on data in Excel? Automate the process so each month you only need to click a button to output the info in Word or PowerPoint.
+
+You can use SQL from VBA too so once you've got to grips with VBA could head into SQL.
+
+You may want to go a different route if there's a specific job you're aiming for, but to enhance your current job those should be fine.
+
+Powershell is another good little tool in the bag for anything Windows related (although I saw some announcement in the news today that Powershell is spreading its wings beyond Windows). I have scripts running for things like nightly back ups for particular applications I am modifying daily and may want to quickly revert to a known safe state, checking for particular values in XMLs, setting up VMs with new files... Any regular mundane task that involve copying files, updating files, logging info... I really enjoy Powershell and only scratched the surface so far.
+A little APL never hurt. Help with learning how to manipulate vectors and arrays.
+
+There are some Python-based add-ins for Excel (I haven't used any, so I'm not naming any). Python may have the broadest scope of any language you'd use with Excel. OTOH, if you'd be doing much with Google Sheets (outside work), Javascript would also make sense, but it'd be harder to use it with Excel.
+Aside from these, maybe less obvious is Regex, or Regular Expressions. More of a tool than a language, it's very powerful for working with external data sources. It's also built in to VBA, you don't need to jump through hoops to use it!
+Agreed. Immediate value wise, these two would be your best choices. If you're currently not using SQL then VBA would show more immediate benefits, with SQL being good knowledge to have though.
+Python is an extremely flexible language that can be used to do many things. One of these things is data science. When you install packages like NumPy, SciPy, pandas, and matplotlib, then it compares to R quite nicely. Whether you use R or Python really comes down to personal choice or specific use case, because they are both very capable. Python also has the advantage of integrating into web apps and databases.
+
+If you google "R vs Python" you can find lots of information comparing advantages and use cases and why it is good to know both.
+Python has very large runtimespeed advantages over ~~c#~~ (edit, it is not faster than C#) and vba. So if youre doing heavy data analysis of terabyte sized data, then python is a better solution.
+
+If your dataset isnt that big, the advantages of python are usually not worth it. If you can spend half as much time writing code that runs at half the speed, who cares? Buy more cpu power and call it a day.
+does VBA or SQL give better programming foundation for stuff like Python and Javascript? I'm a total amateur to programming, so wondering which will set me up for understnading it better. 
+What would you consider advanced excel. I know how to do v lookup, basic Mach and index, but I really can't find any use in my job with anything more advanced than that.
+this doesnt really answer your question, but I've been in the corporate world for 6 years now, and i've seen a huge transition to google sheets. the only reason I use excel now is because of plugins like Oracle and Hyperion for budget planning reasons. I'm not a data scientist, but I know other data analysts a the commpany eventually export their work into google sheets so everyone can easily see the work. 
+
+Sheets is gaining huge traction for the audience of the work being produced. Even though the analysts themselves love working in Excel way more
+I agree with Sillycon_Valley and you probably want to learn the basics of both. Good thing about google is you have easier access to all kinds of web services -- so there is potential there.
+
+In practice I found that massaging large files on local disk is way easier with locally installed Excel then trying to use google for that -- although not impossible in practice. 
+
+TLDR: if you already work for a company -- then specialize on what they already use. If not - pick one that your heart desires and go with it -- there is no way predicting the future and it is largely and equivalent skill.
+I'd say it's not a bad idea to get into JavaScript regardless, will let you do office apps, and ms is generally moving towards things other than vba for office in addition to it, with js being one of them
+
+Maybe it's different in Brazil but here there is a lot of SharePoint / office 365 / online stuff going on. 
+
+dev.office.com/reference/add-ins/javascript-api-for-office
+Oh man RegEx. Extremely powerful. Extremely good an helping you understand the power of **\**.
+It's worth noting that some parts of standard regexp is no go in vba, iirc there is no lookbehind assertion.
+I'm aware of adding references to MSFT's VBScript regular expression DLL in VBA, but I wasn't aware regular expressions were built into VBA. That DLL is very useful, but using it requires writing a good amount of nontrivial VBA.
+hmm ok ya that's pretty much what I'm thinking. Macros > VBA > SQL > Python/Javascript
+
+That order seems to be from most immediate to longest benefit... 
+but ultimately I do want to learn how to make software tools, so I don't want to waste further time with SQL and VBA unless they give me a foundation to learn more programming. Am I going about it the wrong way?
+This is utter bullshit. Not only does C# usually run faster than Python (excepting libraries like numpy that just call into optimized C or machine code), it is also the far more verbose language. Python is much better/easier to work with when all you need is a quick solution and don't care about maintainability. 
+VBA is a clumsy weird language compared to python but is fundamentally similar.  
+  
+SQL is specifically for returning data out of a database
+VBA would give better foundations for Python or Javascript, but the "foundations" would only be thinking in the correct way. Every language has different grammar, but the largest hurdle people find is thinking the way a computer needs to think.  SQL is a very specific niche thing, but also so widely used "niche" isn't a good word to describe it.
+I learned vba by myself reading internet.
+
+Then started to read guide for python nad you can understand it easily
+There are a lot of good points noted here and I wanted to add one, which is a little bit "superficial" (i.e. it shouldn't be a determining factor) but it is also I think important for a beginner. Nice thing about VBA is that it is contained within Excel - if you have Excel -- you have VBA. VBA comes with and IDE inside excel, which is quite "spartan" by modern IDE standards, but it also helps _newcomers_ to focus on the language and not bells and whistles of a modern IDE. 
+
+It is much better than a text editor, but not overwhelming like Eclipse or Visual Studio. At the same time it has all you need to learn the language: editor, debugger, watches, breakpoints, syntax highlight, help and basic code navigation. It is like Python's "batteries included" but on much smaller scale.
+
+Another benefit of that in real life -- you can use VBA _anywhere_ you find Excel and nothing needs to be installed or configured. If you send your worksheet to a client or colleague -- they can run it right there an then. Not so much with Python or javascript, which require interpreter/nodejs to be installed and then you need to pip/npm a bunch of dependencies. Then the version gets wrong or they have other app that uses other version of Python -- so you need virtual environments or even compile some native libs -- the worst case scenario. 
+
+VBA is kind of plug-and-play and is ubiquitous. There is something to that. 
+Thats the thing, I feel like everyone has different interpretations. Before going into my current job, I considered myself workplace proficient, meaning that I could do vlookups, index/match, some basic array functions, pivot tables, pivot charts, and some of the other stuff people look for. I also did not know any VBA. In the past 2 months I've been learning VBA, and people at my job who are also proficient (according to the definition above) are considering me a god. But with that being said, I understand that I do not understand everything. There are questions on this sub that I feel like I have the understanding and experience to answer, then there are others I stare at blankly and have no idea what to do. 
+So i guess the beauty is in the eye of the beholder... unless you get the certifications. Then you can at least say "I know this this and this".
+http://xkcd.com/208/
+Lookbehind is not really "standard" though. Perl has them, but they're not technically part of what a regular expression *technically* should be able to do (which is no more and no less than what a DEA can do). 
+To be honest mate, just do this course:  
+  
+https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-8
+  
+Once you know the concepts of programming finding the syntax in each language is relatively easy...
+Programming is playing with leggo. Write the structure in pseudo code, look up syntax of whatever language you are using. If you use excel a lot, vba will give you lots of oportunity to learn concepts while doing stuff useful to your work. 
+VBA will give you a foundation to learn other programming languages once you get beyond interacting with Excel objects. As far as programming languages go though, it seems pretty outdated to me. 
+
+Python is great because it can be used for a lot of different things. Someone else mentioned learning R for statistics, but Python is also a very capable language for statistics, and is flexible enough to do other things. 
+
+Since you're interested in Excel, I'd say start with VBA. Unless you need SQL, I'd recommend jumping to Python after that. Then again, depending on what you want to make for software tools, Microsoft Virtual Academy has some great videos that will teach you C# and get you up and running making Windows apps in no time, so that's something to consider too.
+The benefit behind learning VBA is that it's integrated into Excel, so you already have an interface to interact with and a compiler and editor built in. It makes your programming life easy.
+
+After VBA, you could move to Visual Basic (which VBA is based off of, of course) and make your own stand-alone software. There are some slight differences between the two languages, but you'll run up against them quick and figure things out.
+
+VBA will do a good job of giving you a platform to learn different algorithms and debugging techniques, which are essential to furthering your study. After VBA and/or Visual Basic, the language you pick next is up to you. My first language was C, so I'm a bit biased and would tell you to pick up a C-inspired language. There's a lot of them. I haven't worked with it yet, but I hear C# is pretty good.
+I had heard the opposite, but from some googling around it appears that you're correct.
+
+Personally, I find Python to be much harder to code in than C#, and I have to do a lot of fiddly steps to get it to work.
+i've heard this very often about VBA, only thing making me hesitant about it
+gotcha, thanks for claryfying this. helps me realize SQL, as useful as it is, might be the one most different for my ultimate goal. Although it's tempting since it's highly desired in the analyst field
+What is python's "batteries included"? 
+I have transfered careers where unfortunately Excel isn't much needed. I think in the last 5 months I have used vlookup about 1 time. And match 1 time. We use google analytics for everything. 
+
+I'm trying to teach myself javascript, but I'm having trouble grasping it. The tools I have been using (codeacademy) has been absolutely trash which is so disappointing as their HTML and CSS were great.
+
+I think if I were to start reteaching myself excel I'd focus on how VBA can relate to graph creation. That seems to be a constant, though IDK why I'd choose excel of Google Data Studio at this point for that.  
+[Image](http://imgs.xkcd.com/comics/regular_expressions.png)
+
+[Mobile](https://m.xkcd.com/208/)
+
+**Title:** Regular Expressions
+
+**Title-text:** Wait, forgot to escape a space\.  Wheeeeee\[taptaptap\]eeeeee\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/208#Explanation)
+
+**Stats:** This comic has been referenced 212 times, representing 0.1697% of referenced xkcds.
+
+---
+^[xkcd.com](https://www.xkcd.com) ^| ^[xkcd sub](https://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](https://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_d7blv1n)
+Awesome answer, thanks mate
+thanks so much, great insight. might just go down this path
+Expanding on what /u/kieran_n said, that method helped me a lot as well.   
+A lot of vba stuff online is very functional "here is how you do x", I "got by" in excel for a long time, but it wasn't until I did an intro python course that I started to "get" things like types and loops and stuff. Then when I went back to vba those things were suddenly much clearer. 
+
+And I really mean intro lol, it wasn't even a course i just typed my way through the "learn python the hard way" website. But it still helped my vba!
+
+It's honestly not that bad. VBA was my first language I learned and I felt it was a great way to get my feet wet in programming because I didn't even realize it was clumsy to write and if I ever got stuck I could use the macro recorder to give me hints. Just do it and once you get good, realize that every programming language will be easier to write.
+Learn in python and then bring the concepts back to VBA
+It definitely is helpful, but as you already have a place of employment and are getting away without knowing it, then I believe you are prioritizing correctly here. Good luck!
+
+SQL is pretty quick to learn. You could blow through the Codecademy lessons in a few hours and have a decent enough understanding to say you know it. The other languages you mentioned will take more time to learn. If you're looking for an immediate resume booster then it might be worth it to take a day for SQL and then move on to the stuff you'll find more useful.
+https://docs.python.org/3.5/tutorial/stdlib.html#batteries-included
+
+This largely means that the core standard libraries provide a lot of functionality you might need in day-to-day projects. It is very convenient although things fall in-and-out of "favor" over time. 
+In retrospect, I really have to agree here. I came into VBA with a background in C/Cpp, and that's undoubtedly formed my experience in VBA. I can't stand loose typing, for instance, which VBA let's you get away with. Long story short: if you want to learn how to be a robust programmer, VBA won't force you unless you ask it to.
+
+And, as mentioned, the code you find by people on the net is incredibly sloppy. Like, do people not know you can indent VBA code? Do they not know you can explicitly type variables? As an experienced programmer, I can read sloppy code fine, but a noob programmer might find it very hard.
+hmm, I'm liking this idea too. i think i should just start and see what happens. follow-up. What about learning javascript instead of python?
+I've had so much difficulty coming back to vba after python. Everything seems to be based on memorizing huge numbers of object properties. 
+By "loose typing" do you mean allowing variables to be declared on the fly and declaring variables without a type?  I took an intro C++ course in university (which was so poorly done that I came out of it loathing programming), and am now learning VBA for work (and finding that I really enjoy programming).
+Also the VBA debug interface sucks so hard
+That really depends on what you want to do with VBA. *Scripting in VBA?* Easy. *Programming?* Get behind me Satan. As someone who knows enough to know they're not truly a programmer, they're two different mindsets. Programming is about building something to do something. Scripting (more frequently) is about getting something done. 
+
+Programming is by far the more effective discipline, but I suspect many here started off as scripters.
+Correct. If you use "Option Explicit" at the top of your code, VBA forces you to be a more robust programmer by making you declare everything. For small macros, whether or not you declare isn't a big deal, but when you have pages of code, it's nice to see exactly what variables are out there and what they're doing. It's just good practice and you'll find people trying to explicitly declare variables even in languages that don't need it (like VBA).
+
+Loose typing can also refer to being able to cast one type of variable to another without an implicit type conversion...which I hated at first because of unexpected results, but I've now embraced because it made me lazy lol. It's easier to let it slide once you know how VBA casts from one type to another and you get your operators and keywords straight in your head.
+
+For instance:
+
+    Sub Test()
+        Dim A As String: A = "1"
+        Dim B As Integer: B = 2
+        Dim C As Variant: C = A + B
+
+        Debug.Print C
+    End Sub
+
+What do you suppose it should print out? Should it be "12" or 3?
+
+Because you're using the addition operator, it casts the string to an integer type and adds to the other integer. If you use the concat operator (&) instead, it'll cast the integer to a string first, then concat the two together, giving you "12".
+
+Edit: formatting because my phone
+Exactly, which is why the transition back from python might not make sense. Scripting in VBA is more about leveraging archaic object properties than the programming you learn from python. Plus yeah, vba programming is not something I would wish upon anyone 

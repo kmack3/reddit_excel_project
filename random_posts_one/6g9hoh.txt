@@ -1,0 +1,41 @@
+6g9hoh
+Need help with a complicated Nested if statement
+I'm trying to automate risk assessment in Excel. Here is the data:
+http://imgur.com/a/9DWZZ
+
+Business need and Development risk are given a number 1-5. In Excel, we then give it a Low, Medium, or High test risk based on both business need and development risk (see pic). Because it's not consistent, I'm having an issue getting the exceptions to fit. If you look at what I've done so far, I've tried totaling the two numbers 
+
+I've been at this for a couple hours and I can't get this if statement correct. I've gotten as far as this:
+    =IF((E12+F12)<=5,"Low",(IF(OR(E12=3,F12=3),"Medium"),(IF(AND(E12=4,F12=1),"Low",(IF(OR(E12+F12=6,E12+F12=7),"Medium"))))))
+
+where E12=Bus Need, F12=Dev Risk
+
+Any help is appreciated!
+
+
+
+-------------
+    =CHOOSE(INDEX({1,1,1,1,2;1,1,2,2,2;1,2,2,3,3;1,2,3,3,3;2,2,3,3,3},E12,F12),"Low","Medium","High")
+-------------
+Solution Verified.
+
+I'm reading about how Choose Index works, but I don't see how Excel knows how to pick Low Medium and High for each set of value?
+
+EDIT: I figured it out now. 1=Low, 2=Medium, 3=High, right?
+-------------
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint by editing your comment.
+
+Please make a **separate reply** to a user's comment with 'Solution Verified' as edits are unfortunately not detected by our bot, Clippy!
+
+Doing so will not only give the user a ClippyPoint, it will change the post flair to solved.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+The table is duplicated in the {array} where each , separates columns and each ; means a new row. Thus the first line is 1,1,1,1,2 = low,low,low,low,medium.

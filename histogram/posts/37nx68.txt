@@ -1,0 +1,62 @@
+Job interview asked me about "Data Flows" in excel. What is this and where can I learn about it?
+It's pulling data from a database, usually SQL, into Excel and vice versa.
+Everybody here is saying ODBC and data imports, but I found this on Wikipedia:
+
+>Dataflow is a software architecture based on the idea that changing the value of a variable should automatically force recalculation of the values of variables which depend on its value.
+
+>Dataflow embodies these principles, withspreadsheets perhaps the most widespread embodiment of dataflow. For example, in a spreadsheet you can specify a cell formula which depends on other cells; then when any of those cells is updated the first cell's value is automatically recalculated. It's possible for one change to initiate a whole sequence of changes, if one cell depends on another cell which depends on yet another cell, and so on.
+
+I've never heard it being called that, but it makes sense.
+
+That's pretty much my job, and like the others I've never heard of that term. They may use software in the middle of SQL and excel and that software uses that term. 
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified ** to do so!
+
+See side-bar for more details. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 7 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread of make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+good call, apparently I've been doing "data flows" for years but I've never heard the term before, but now that you've said it, it makes sense :)
+
+OP: things to check out would be ODBC, OLE DB, and ADO (which for many purposes in a Windows environment are largely interchangeable). Here's a good StackOverflow link on the subject: http://stackoverflow.com/questions/103167/what-is-the-difference-between-ole-db-and-odbc-data-sources
+Add me to the list of people who use this but didn't know it's name. In fact I've been wanting to implement it in my new company but have/had no idea where to begin. 
+I think the term "Data Flow" is most likely coming from someone on the business side that also uses the term "process flow" and is using them both in similar ways.
+
+You're right. The import/export/update guys are right. As you're importing, exporting, and updating data, it has an effect throughout the data. If you're purely working with archival databases, then no, no values are going to recalculate, but in most settings you have columns in the DB that are automatically populating based on the other rows.
+
+If I import another record to the user_performance table, then how will that impact the data flow in relation to the "overall_rank" column?
+So Calculation:Automatic.  This seems to be a silly buzz word to use with respect to spreadsheets since the idea is intrinsic to the nature of spreadsheets. It's like asking a software engineer is she does Algorithmic Calculation Processing.
+Been an "Expert" in vba for 5 years.  Never heard this term.  
+Yet another keyword for the resume pile!
+I think its more about the idea of having dependent references, where one change can have a downstream impact across various ranges.
+I've never heard it called this either. In my neck of the woods we call this importing, fetching, or pulling data.
+Maybe that's the difference between the experts and us "experts" :)
+it's not good if no-one knows what it is!
+I don't know.  I guess that for me, that is the basic idea of Excel.  I have a formula that subtotals this range; I reference that sub-total in a summary; the base data is built upon assumptions held elsewhere.  Maybe that's not obvious to novice users.
+Same in my part of the woods too.
+I must be the only one who likes Cavs +5.5.
+Whoops wrong thread :)
+Tell that to HR...
+Oh I totally agree. I think the interviewer probably didn't know what the hell they were talking about, and just got this term secondhand from somebody else.
+It's probably a term the hiring manager used.

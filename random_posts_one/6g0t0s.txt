@@ -1,0 +1,60 @@
+6g0t0s
+Need some help making a total from multiplying by a quantity
+http://imgur.com/r1rmhcz
+Here is the thing I'm trying to do but I can't seem to figure out how to make it have a subtotal by looking at what quantity there is. I don't know any excel but really need this for work so any help would be greatly appreciated.
+
+
+-------------
+Basic formula will be like:
+
+    =SUMPRODUCT(PriceRange, QtyRange)
+
+So, the top left one might be:
+
+    =SUMPRODUCT(B4:B9, C4:C9)
+-------------
+Thanks will try it now :)
+
+One other thing. The hope is to have this running on a tablet where I can tick off the things I need and have a separate shopping list with a total cost created. Is that possible?
+
+
+Edit: It says Err:508 when I use that formula.
+-------------
+The formula results in saying "Err:508"? Or it won't let you confirm the formula at all. Possible ideas are that your system uses semicolons instead of commas to separate arguements:
+
+    =SUMPRODUCT(B4:B9; C4:C9)
+
+Or, are you using Google Sheets and the function is not supported (idk, just guessing)?
+-------------
+Ah I tried using semi colon and it worked haha 
+-------------
+I have values in A2:A3  and B1:C1. So two rows and two columns of values.
+
+I just used
+    =SUMPRODUCT(A2:A3,B1:C1)
+
+But that's giving a value error. Can you not use it going two ways?
+
+-------------
+Phew, that was the easier solution. :)
+
+Mind replying with "Solution Verified" to give me a ClippyPoint, and the bot will change this thread's flair?
+-------------
+We can, but I don't think it'll do what you want. You can force the multiplication by this:
+
+     =SUMPRODUCT((A2:A3)*(B1:C1))
+
+But, this doesn't do equivalent of `A2*B1 + A3*C1`. Instead, it does something like this: `A2*B1+A2*C1+A3*B1+A3*C1`
+
+
+-------------
+Solution Verified
+-------------
+Ah, I see. Thank you. Not sure if I can award you a point, but here goes:
+
+Solution Verified.
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

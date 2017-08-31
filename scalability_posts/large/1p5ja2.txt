@@ -1,0 +1,46 @@
+large
+1p5ja2
+Searching a large database for items on a list (Is this vlookup?)
+
+I have a large database that lists components, and their respective prices, descriptions, etc.
+
+I have a list of 1000 components that need prices from the database.
+
+If there a way to search and return results so that my 1000 components are given prices, or is this something that needs to be done by hand?
+
+
+-------------
+Definitely a vlookup - DO NOT DO THIS MANUALLY.Assuming your 'database' is stored in an Excel sheet (say columns A to G in Sheet1) make sure your component names are in the furthest column to the left in your database.  If your list of components needing prices is in Column A of Sheet2 then your vlookup would be something like:=VLOOKUP(Sheet2!A1,Sheet1!A:G,3,0)The number 3 in the formula represents column C in the database, change this as needed. 4 = column D etc.  
+-------------
+Assuming the data source sheet is formatted the following way:
+Column A: component name
+Column B: price
+
+=vlookup([put component name or cell reference], [range of all component name, price], 2, false)
+-------------
+I would use index and match if it is a large amount of data vlookup will slow down as the data grows
+-------------
+index-match is also more robust in case you add columns to the data
+-------------
+Thank you.  Is there any way I could have excel return a result with all of the columns and not just price?
+
+So in column A is component name, in b the price, in column c the expiration
+
+Could I search the database using my list of components and return the entire listing for that component?
+-------------
+Thank you.  Is there any way I could have excel return a result with all of the columns and not just price?
+
+So in column A is component name, in b the price, in column c the expiration
+
+Could I search the database using my list of components and return the entire listing for that component?
+
+-------------
+Yes. You just need to duplicate the formula above, but change the number in the formula each time to bring back data from a different column.  Use 2 to bring back pricing, 3 for expiry etc.  So you would have the component name in cell A1, then in cells B1 to G1 you would have vlookups each bringing back different info.  Then copy those formulas down to cover your whole list. 
+-------------
+Of course.  You change the number 2 (colmun ref) for whichever column you desire. 
+
+ So have 5 cells each with a diff column reff looked up from the same cell. 
+-------------
+What wastedwannabe said.  :)
+-------------
+I am literally too dumb to live.

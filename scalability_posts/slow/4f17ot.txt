@@ -1,0 +1,93 @@
+slow
+4f17ot
+Excel is agonizingly slow for some reason
+
+I have a large spread sheet with a lot of data and formulas, so I guess I should have expected excel to be a bit slow. But its getting really annoying now to the point that even if I click on an empty cell and try to type something, the spreadsheet hangs for a few seconds as Excel seems to be recalculating everything utilizing all my 4 processors!
+
+Any tips on how I can find the source of why Excel is doing this? I've tried to make sure all my formulas have fixed ranges (i.e. A2:A20000 as opposed A:A) and no stray or circular formulas.
+
+I'm using Excel 2013 64 bit on an intel i7 core 4GB ram system running Windows 8.1
+
+
+-------------
+Try to put the workbook in "manual calculation" mode. I believe it is under "formula" ribben. This will stop it calculating when you press something. You simply press "calculate" at the bottom left to calculate. 
+
+Auto save can become more of an issue as sheets get bigger, turn it off or at least increase the intervals. Please keep a note that you've done this, saving regular is important! 
+
+Try and review your formulas. One key example is formulas like "=now()" or row or column are classed as "volatile" formulas and force a calculation. There is an easy alternative to row or column for example by simply leaving an index column and row of numbers. 
+
+Another way to make formulas is to use better referencing. Vlookup is everyone's go to but index match becomes much faster as sheets get bigger. In addition calculation columns for indexing counts and such can be used for multiple other calculations? Reducing the overall calculation need. For example a bunch of columns saying "=averageif" will need to count them all? Then sum them all, then devide the two, where as if you had a "count" column the count would be done already. 
+
+Lastly, and I'm sorry I am unable to give assistance at this moment, but you could
+Lookup an excel consultant to create your sheet a new. Excel tends to be terribly slow working with huge datasets, however, you can abuse it's vba to compress the data and structure it in such a way that will drastically speed it up. Depends on the project side it could few hundreds to do though. 
+
+Best of luck! 
+
+-------------
+1. If you have A LOT of data, a local SQL database might be the way to go.
+2. Since you have a lot of formulas, you could either activate manual calculation, or use multiple workbooks (Excel files) if possible.
+
+EDIT: Do you have any macros in your workbook?
+-------------
+Dynamic data can slow things down a fair bit if you don't have macros. Might be database time.
+-------------
+Do you use formulars like indirect() or date(). Try to replace them with non-volatile formulas. 
+
+Volatile Formulars need to be recalculated everytime you do anything in Excel which needs plenty of ressources. To observe it you could try Now() and observe the value while you work in ihrer cells.
+-------------
+Are you sheets unnecessarily large? For example, if you control shift down and/or to the right when you are in your dataset,  and it takes you to cells with no values in it then this could make the file much larger than it should be.  
+
+You can delete the rows and columns and resave and that'll fix it 
+-------------
+[deleted]
+-------------
+If you've got a lot of formulas, there's just going to be a lot to recalculate...  Vlookups/ INDEXMATCH can be particularly brutal, since they have to scan a bunch of rows, and then return a value, which other calculations depend on....
+
+Plus, if your math is a giant "snake"  (A feeds B feeds C feed D) as opposed to parallel (A feeds BCD), then having multiple cores won't help.
+
+Short term:   set calculations to manual, but learn to check that corner of the screen before you "Read" any numbers..
+
+Long Term: look at how the file is structured, maybe consider going next-level and setting up a database.
+-------------
+Others have good recommendations for making your spreadsheet more efficient.
+
+In addition, look into getting more ram.  If you have several excel sheets, a few word docs, a few PDFs, and a few browse tabs open, that 4gb of ram is easily gone.  When I'm doing that, I'm often using 10+ of my 16gb.  When ram runs low, Windows uses virtual memory, essentially using some of your hard drive as really slow ram.  I never had win 8, but if the resource monitor is like win 10, you can watch hd read/write speeds in addition to processor use.  If your hd is going crazy when you do something minor in that sheet, might be a sign to get more ram.  Short term,  try shutting other things down, especially browser.  
+-------------
+Do you have any data tables?  Those usually slow things way down for me.
+
+Also, as someone else mentioned, switch to manual mode under the formulas menu in options.  Then, you can either press F9 to calculate everything on the worksheet you're currrently on, or press save to calculate the entire workbook.
+-------------
+you may have external links. Formulas > edit links > delete 
+-------------
+4GB is not enough at times for excel. 
+Try the spreadsheet on a 8GB machine,  I wouldn't be surprised if the problem disappears.
+-------------
+For the love of good gravy, use the in built table function and then name your ranges within the tables.
+
+The amount of times I have seen spreadsheets crash because the user has put a:a as a criteria for a sumifs and then made row after row of criteria when they could have used a named range.
+
+Array formulas, they are also killers.
+
+Heck. the biggest killer of them all, conditional formatting.
+
+CF is only used for front end tables, it is not meant for an in database analysis.
+-------------
+No just using formulas and some data are linked from multiple excel files. 
+-------------
+[deleted]
+-------------
+That's interesting. Any other drawbacks to using that format? 
+-------------
+I recognize this. It happened to me as well
+-------------
+Are the files on a network drive or local?
+-------------
+Links to other files can be very slow if used for a large number of cells.
+-------------
+Then I can only give the tip of trying to use as few formulas as possible, and perhaps just split some data up in multiple workbooks.
+-------------
+Getting started with MySQL is surprisingly easy if you get Excel and simple database concepts. Yes it can be configured and become quite complex at the advanced end, but getting up and running is really nice.
+
+Plus, SQL should be something every Excel expert has in their back pocket.
+-------------
+Important question!!

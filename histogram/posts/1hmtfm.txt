@@ -1,0 +1,24 @@
+How to Make an American Flag in Excel
+Actually, there are several useful Excel tips in that trick!
+Yes, I know it is a relatively useless trick, but I don't have any fireworks.
+Very cool, i saw a few things on the tutorial that could be useful in other spreadsheets!
+minor point: in your conditional format you had `=mod(row(),2)=1`. You don't need it to evaluate to `TRUE/FALSE` as long as it evaluates to `1/0`, respectively!
+I enjoyed that. I'll be using conditional formatting now when Monday rolls around. 
+You are so cool!! I love your gifs :)
+Awesome! You should repost to /r/murica
+Could someone explain in a step-by-step way how they did that?
+Really nice tricks with the conditional formatting to blank out the alternate stars, and the alternate stripes!
+This is exactly the sort of messing about in Excel that helps you learn new tricks. Love it.
+You get a [**FUCK YEAH**](http://www.youtube.com/watch?v=IhnUgAaea4M)!
+Good point, thanks. I tend to flip back and forth between doing this and not doing it.  Old habits die hard. Definitely good to keep formulas as short as possible.  
+I did it, what the hell.  Not sure they will appreciate it as much as r/excel, but you never know.  
+1. Format columns A1 to K11 with a Width of 4.43 and a height of 19.5 (adjust by right clicking the column or row heading while selected)
+1. Set background to Blue and font color to white
+1. Insert Symbol from Insert Ribbon; Choose Wingdings and you can find the star (I used a size 17 font)
+1. Highlight every other column and row conditionally by using ISODD(ROW()+Column()) and use the number format of ;;; to hide cells where that is an odd number (builds your array of 50 stars)
+1. Use the camera tool to capture the range of A1 to K11 and then select the 2nd tab to put an image of the range into
+1. Adjust your row height on the second tab so that your array of stars fits into the first 7 rows
+1. Use =MOD(ROW(),2)=1 on the stripes area to color each row Red
+
+
+I liked it at least and I learned some skills too

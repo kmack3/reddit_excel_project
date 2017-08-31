@@ -1,0 +1,52 @@
+How can I use Excel to process a massive (2,000,000+ rows) .tsv export file?
+If you're dead set on Excel I recommend Power Query.
+Excel does not deal with that amount of data very well. You are better off with a database program - they are designed for large data sets. Access is the database program included in the Microsoft Office suite.
+
+This sounds like research with highly specialised or possibly even bespoke equipment. Does the manufacturer make any recommendations on how to deal with the massive .tsv files their equipment outputs or offer any customer support you could ask? What about other people who have used the equipment before? They probably encountered the same issue.
+The real question is now how to process it, but more aligned with "what do you want to do with the data?"
+
+Are you looking to visualize it somehow? Manipulate the date?  Just store it with the ability to append more data as you complete your research?  Do you want to just take a simple sum or average of fields (columns) of do you want to gain some fresh analytics from it?
+
+ I think I can point you in a better direction, if you answer some of these questions. 
+You should pick up and learn Mathematica.
+So, it seems like you've already split there file up into more manageable parts. If you've opened it in vim, could you save each part as a csv? Excel would then be able to open it already split into columns.
+If you're looking to filter data out of the export file, you could do a SQL query to the export file using a data connection. 
+
+Edit: messed up a word
+Not sure what exactly you're trying to do with the data to "process" it but I would load the data into a SQL table. 
+Can I ask what kind of research you're doing?
+
+If you do stick with Excel, the first step would be to find a way to split your data into the usable chunks. Hopefully that's possible with the analysis you want to do. That could be something like pull out the fixation data, pull out saccades that are above/below a certain speed or in a certain part of the viewing range... anything to split it up into chunks that Excel can digest and still lets you see all the information you need for a given analysis.
+
+When you work with very large files of timeseries data, there are better tools than Excel. If you have a research advisor, shame on them for not pointing you to one of them. MATLAB is one of the standards for this kind of data. It has the advantage of being optimized for operating on large matrices (you'll want to brush up on your linear algebra). I also find it much easier to do signal processing tasks in MATLAB-type languages - high-/low-pass filtering, Fourier analysis, PCA/other dimensionality reduction, and generally setting up short scripts to quickly do operations that you'll want to do many times without having to fill down formulas and create new columns and all that bother.
+
+Unfortunately, MATLAB costs many hundreds of dollars so the only realistic way to use it is if you can get a license through whatever institution you work with. This leaves you with looking for open source/freeware versions, of which there are a couple. Octave and [SciLab](http://www.scilab.org/) are two possibilities. I found Octave to be a bit clunky (admittedly, this was in comparison to MATLAB, not judging it on its own merits), but I've heard good things about SciLab. *Edit: Someone else mentioned R/RStudio. I haven't used it but it will give you comparable functionality to all these other options (and it's also freeware).*
+
+Another similar option is Python. It's a bit of a pain to set up on your computer because you have to make sure you get the additional computing packages you need (scipy, numpy, matplotlib are the big 3), but you can get around some of that by downloading a bundled release like Anaconda, which also gives you a GUI to work in like Spyder (vs typing into a bash shell). 
+
+Whatever you choose, you'll have to spend the time to learn some programming, but there are many resources for this (StackExchange is your friend, and last time I checked /r/learnprogramming was a helpful community) and also there are many places to download working code instead of writing all of your own from scratch. With this much data, though, you will be looking at how to optimize your code for speed.
+process it using vba - just use split() it'll be fairly quick even for 100K rows, because your doing it on a line by line in memory operation. 
+
+what do you want to do with the data?- you still wont be able to hold all 2million rows in excel but you again can use vba to process the data line by line to get avg/s or similar. 
+
+- if you can import the data into powerpivot you might get more user friendly options 
+Might want to have a look at http://openrefine.org/
+> What's the best way to deal with 2,000,000+ rows of tab-separated data in Excel?
+
+By not using excel.  I'd recommend using [Python](https://www.python.org/) with [SciPy](http://scipy.org/index.html).
+Idk why you're having so much trouble. I can import tab separated data at 1m rows going all the way through column BG in about 5 minutes with the standard data import from text file. Are you on a slow computer?
+You need to use VBA to read in the file by the line. Although almost certainly I imagine sticking it into a database would be much more useful/flexible/powerful  approach.
+The first question I would ask is excel the right program for this? To answer your question, I would load the file with VBA.
+Listen to this man, he speaks the truth.  Power Query is the solution to 90% of the questions you find on this subreddit.
+Yes, this was my first thought as well. If you're on Excel 2010 or 2013, you can install it as an add-on. If you're on Excel 2016, it's integrated into the program.
+Eye-tracking isn't that unusual in research, it's likely marketing or neuroscience related. Normally labs that do eye-tracking will use MATLAB or possibly Python.
+I know Excel probably isn't ideal for this, but I need a lot of the data processing tools I get with Excel. I'm also using Mac, so Access isn't an option for me.
+
+Yep, this research is using a Tobii T60 eye tracker, which, as far as I know, is pretty specialized. It's also been discontinued by the manufacturer. On top of all that, I'm using it for something it wasn't really built to do (correlating eye movements with a specific aspect of web browsing behavior). The manufacturer would likely just recommend I use their software instead of exporting data from it. The problem with that is that it can't give me a per-page analysis of eye movements.
+Excel has powerpivot which is an XML database program essentially.
+Excel is probably not the right program for this, but it's the one I'm most familiar with. Do you have any suggestions for better programs?
+
+I'm willing to try macros/VBA, but I'm very inexperienced with them. Can you link to anything that can explain what you're suggesting?
+Use RStudio.  It will probably do in 1 hour what excel does in 1 day, plus it's a tool for analysis. Let me know what kind of analysis you want to do and I can suggest some libraries for the same. 
+You may be able to cut it down to just the parts you need using bash since you're on Mac. 
+Use Progress or other supported DB load and query. Use Excel to analyse. 

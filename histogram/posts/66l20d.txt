@@ -1,0 +1,49 @@
+A stronger version of $?
+£
+There's always
+
+    INDEX($1:$1048576,1,1)
+
+which works as long as formulas containing it remain in the same worksheet. Add the worksheet name before it to truly freeze it.
+
+    INDEX('some worksheet'!$1:$1048576,1,1)
+
+If you don't need to do this often, you could use the volatile INDIRECT.
+
+    INDIRECT("A1")
+[I can't seem to recreate your problem - cutting and pasting and the formula stays the same.](http://i.imgur.com/Rb6Kp1U.gifv)
+You could just rename the cell and reference it by name in the formula. 
+Have you tried a named range? Right -click on the target cell, choose define name, make up a name, e.g. MYCELL and then substitute your $ reference for that name.  Should survive cut and paste.  
+You could use the INDIRECT function and hardcode the reference to A1. Note that INDIRECT is volatile so this is likely to slow down your workbook.
+To answer your question, no there is no such thing. 
+
+The easiest workaround I can think of is using the ctrl+h prompt to replace all instances of `=` with `'=` [like so](http://i.imgur.com/5wRkBnL.png). This will have the effect of turning your functions into text cells, preventing them from changing as you cut and paste. After doing that, you can go and cut and paste whatever you want, then simply reverse it [like so](http://i.imgur.com/ZjdUQM0.png). And the formulas will be as they were before the entire thing.
+
+The better solution is to copy+paste then delete the cells you copied from, rather than cut+paste. 
+
+You could copy & paste, and then delete the initial cell?
+It's somewhat painful, but if the formula is in B2, "=Offset(B2,0,-1)" will always point to the cell just to the left.
+Write a VBA function that returns the string passed to it (your formula) as a r1c1 style formula.
+Copy the text in the formula box. Not the cell?
+Locking the entire sheet/workbook should work, if you can accept that tradeoff.
+I don't have this problem at all in Excel 2010. Cutting and pasting in another cell keeps it =$A$1.
+Want to downvote, but... goddammit. Upvoted.
+
+And brexited.
+¥ surely
+What program did you use to make this gif?
+
+Also he's saying that you you cut cell A1 to C1, the forumla will update to $C$1
+Is this the same thing as using the Ctrl ~ shortcut?
+Too much work, I've got thousands of cells. Hard to track copying and deleting.
+something something Bitcoin symbol?
+Not the person you asked, but at work I have a program called SnagIt. Works really well for training documents
+I think ctrl+~ doesn't stop them from changing 
+Before you cut, you could prefix the formulas with an apostrophe to turn them into plain strings & remove after you've pasted
+
+Or, you could try something like
+
+=INDIRECT(ADDRESS(1,1,4))
+
+Instead of =A1, as i suspect the numbers would not change after being cut & pasted
+Only if you want the file to slow to a crawl from recalculation. Indirect is the worst for this.

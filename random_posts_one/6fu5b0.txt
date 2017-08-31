@@ -1,0 +1,26 @@
+6fu5b0
+Help determining chart series index based on selection
+I want to create code to edit a chart such that it will take the currently selected series and switch it from line to column, and vice versa
+
+This is the code from a recorded macro where I selected a series:
+
+    ActiveChart.FullSeriesCollection(2).Select
+    ActiveChart.FullSeriesCollection(2).ChartType = xlColumnClustered
+
+Seems straightforward, but what is the best way to get the index (2) from the current selection.  I think it'll be something like:
+
+    dim srs as Series
+    dim srsNumber as Integer
+    
+    Set srs = ????
+    srsNumber = srs.index
+
+I just can't figure out the ???? part.  Thanks.
+
+
+-------------
+The index is apparently part of the formula for the series, so just use string calculations on formula to pull it out
+
+        sForm = Selection.Formula
+        fPart = Mid(sForm, InStrRev(sForm, ",") + 1)
+        srsIndex = Left(fPart, Len(fPart) - 1)

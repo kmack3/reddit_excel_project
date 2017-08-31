@@ -1,0 +1,37 @@
+6ganw7
+Can't delete rows
+I have a worksheet with data and I want to remove all the rows past a certain point. Not delete them, actually remove them, so the last row that is actually there is 1072. I have done this on several worksheets in the workbook by simply deleting rows, the end result is [this](http://imgur.com/ixpn6Ry).
+
+But I have 2 sheets where when I delete rows, there are always 65536 rows visible, like [this](http://i.imgur.com/7urKggd.jpg).
+
+Anyone know that the problem might be?
+
+
+-------------
+You can't actually remove the rows, it's a property of worksheets to have that many. You can *hide* the rows though, which I think is what you're wanting.
+-------------
+When you select the rows you want to delete, try clearing contents first, then deleting. 
+-------------
+When you Delete the rows all it's doing is deleting out all the data, formulas, conditional formatting, etc. 
+
+If you do not want to see any data beyond a certain row, click the row number on the left-hand side (i.e. row 1073), then press CTRL+SHIFT+DOWN, then right click the number on the left-hand side and select "Hide".
+
+This will cause you not to see any rows at all beyond 1072. If you would like to see them again, you can click the grey trinagle at top left of your sheet, which will select EVERYTHING. Next, right click the row names on the left side, and select "Unhide"
+-------------
+Nope, I don't have any hidden rows in my [example.](http://i.imgur.com/ixpn6Ry.jpg) The rows stop at 1071.
+-------------
+Tried that, no success.
+-------------
+Already tried that.
+-------------
+They're either hidden, or the scroll range has been limited so that you can't go down any farther. You could test by writing a formula like `=A2000` and you'll see that XL still knows what you're talking about.
+
+I can't tell what's going on from the tiny image (frankly, with that view no way of knowing yes or no if there's hidden rows...), so just guessing as to how it's setup.
+-------------
+Definitely no hidden rows. I can select row 1, then ctrl+shift+down, right click --> Unhide and nothing happens.
+-------------
+So on my own machine I tried hiding all rows below row 20, and it looked very much like your image.  When I selected row 1, ctrl+shift+down, Unhide, it did NOT unhide the rows I just hid.  If you click row 1071 and drag your cursor below it, and THEN try unhiding, does it work?
+-------------
+[Nope](http://i.imgur.com/quXFhLF.gifv) 
+
+The gif kinda sucks - but I I'm clicking on row 1071 and while holding down the left mouse button going below row 1071, and that's when the little info box pops up on the right. Then I right click on row 1071 and click unhide.

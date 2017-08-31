@@ -1,0 +1,46 @@
+Is there a way to format millions and billions so that they show 12.051 Million or 1.2 Billion etc?
+highlight the cell
+
+click CTRL + 1 go to format -> custom
+
+use this code: $#0.0,,,"BN"  
+
+if you want more decimals after the "." just add more zeros before the ,,,"BN"
+
+For millions only use two commas and "MM" instead of "BN"
+Yes. You can do it with conditional formatting. 
+
+Set your conditional format to say if the number is greater than or equal to 1,000,000 the number format will be 0.000,," Million" 
+If it is greater than 1 billion, use three commas as the word Billion
+And so on. 
+
+ETA - the number format can be edited in the Number tab under Custom
+Maybe some sort of if statement and concatenation. So if greater than one billion one way, and then the false will be the other way. 
+This will do it for you 
+
+http://www.theexceladdict.com/_t/t040609
+
+Just need to adjust for millions rather than thousands. 
+
+For lazy, custom number format 
+
+"#,###,##0," (I think)
+Go to custom formatting and add comma at the end, that will remove 000, add another one for another three zeros etc
+I assume that you could have 100.32 million as an option, therefore could you do something like =if(A1>1000000000000,A1/1000000000000&" Trillion",if(A1>1000000000,A1>1000000000&" Billion",if(A1>1000000,A1/1000000&" Million",A1)))?
+[removed]
+I guess this assumes you're talking about money. If its not money you don't need the "$"
+Solution verified
+fyi, you can do something kind of like conditional formatting within the number format itself without actually invoking Excel's conditional formatting. Put the condition in [square brackets] followed by the format. See [this](http://simoncpage.co.uk/blog/2008/09/excel-custom-and-conditional-number-formatting/) for a better explanation.
+I didn't get the solution from you but you came closest to what I ended finding for myself so the clippy is yours!
+I don't know if it's possible, and I'm on mobile, but could you not use scientific notation to clean that up a little?
+You're like an elementary school teacher I had. Could you explain?
+
+You have awarded one point to _Crystalfire_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Some of those are interesting.  Thanks. 
+FYI you can award more than one Clippy point per thread, so if multiple people help you you can give them a point each.
+I'm glad that you found something that works.  I am glad I saw your question because, even though I knew both parts of Excel, I never thought of tying those together like that. So I learned something. :-)
+It's in the number formatting section. 
+Why even post if you deliberately intend to not offer any useful advice? Somebody had a bad day..
+Seemed useful at the time. 

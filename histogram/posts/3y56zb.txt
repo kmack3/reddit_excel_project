@@ -1,0 +1,95 @@
+Recreate your favorite images in Excel! A Matlab/Excel combo present for the holidays
+Just for S's & G's, I typed the code in. Any errors from the image above are mine.
+
+    Sub FinalMacro()
+    
+    Dim j As Integer
+    Dim i As Integer
+    Dim icnt As Integer
+    Dim jcnt As Integer
+    
+    icnt = Worksheets("RValues").Cells.SpecialCells(xlCellTypeLastCell).Row
+    jcnt = Worksheets("RValues").Cells.SpecialCells(xlCellTypeLastCell).Column
+    
+    Sheets("Sheet1").Select
+    ActiveWindow.Zoom = 10
+    
+    For j = 2 To jcnt Step 1
+    	Columns(j).ColumnWidth = 2.14
+    Next j
+
+    For i = 2 To icnt Step 1 
+	For j = 2 To jcnt Step 1
+		1Red = Abs(Sheets("RValues").Cells(i, j).Value) Mod 256
+		1Green = Abs(Sheets("GValues").Cells(i, j).Value) Mod 256
+		1Blue = Abs(Sheets("BValues").Cells(i, j).Value) Mod 256
+		Sheets("Sheet1").Cells(i, j).Interior.Color = RGB(1Red, 1Green, 1Blue)
+	Next j
+    Next i 
+
+    End Sub
+
+EDIT: One punctuation change
+Can you paste the macro in the comments so we can copy and paste it into our own excel file? Downloading excel files with macros is risky. 
+Also, I opened the script in a sandbox. I just pasted it in and added spaces as necessary to put it in a code box.
+
+
+    srcFiles = dir('*.jpg');  %Can also replace * with the name of the single file you want to change (if left as is, Excels will be generated for all jpg files)
+    numFiles = size(srcFiles,1) %Counts number of files
+    fileName = cell(numFiles,1); %Initializes location to store file names
+    truncFileName = cell(numFiles,1); %Initializes location to store file names (without .jpg)
+    xlsName = {};
+    
+    for count = 1:numFiles %Counts through all files
+    fileName{count} = srcFiles(count).name; %Stores name from srcFiles structure
+    truncFileName{count} = fileName{count}(1:end-4); %Truncates by taking off .jpg
+    I = imread(fileName{count}); %Reads in image in the current file
+    reps = floor(log(max(size(I))/80)/log(2)); %Calculates how many times it should average adjacent pixels to make the largest dimension (roughly) 80 pixels 
+    for shrink = 1:reps %Repeats this averaging process as many times as necessary
+        checkPercent = 1; %Initializes percent readout
+        newI = zeros(floor(size(I,1)/2),floor(size(I,2)/2),3); %Initializes location to store new, averaged color values
+        for i = 1:floor(size(I,1)/2) %Counts down rows
+            for j = 1:floor(size(I,2)/2) %Counts across columns
+                for k = 1:3 %Counts through R, G, and B
+                    X = [I(2*i-1,2*j-1,k),I(2*i-1,2*j,k),I(2*i,2*j-1,k),I(2*i,2*j,k)]; %Stores values from 4-pixel clusters
+                    newI(i,j,k) = floor(mean(X)); %Averages values and stores in new pixel
+                end
+            end
+            if 100*(4*3*floor(size(I,2)/2)*i)/(size(I,1)*size(I,2)*3) > checkPercent %Comment this out for slightly faster run; displays progress at each percent
+                clc
+                disp(['On pixel number ' num2str(4*3*floor(size(I,2)/2)*i) ' of ' num2str(size(I,1)*size(I,2)*3)])
+                disp([num2str((4*100*3*floor(size(I,2)/2)*i)/(size(I,1)*size(I,2)*3)) '% done with Round ' num2str(shrink)])
+                checkPercent = checkPercent+1;
+            end
+        end
+        I = newI;
+    end
+    
+    xlsName = strcat(truncFileName{count},'.xlsm') %Creates/prints new file name
+    sheet1Name = 'RValues'; %Names R-sheet 
+    sheet2Name = 'GValues'; %Names G-sheet 
+    sheet3Name = 'BValues'; %Names B-sheet
+
+    xlswrite(xlsName,I(:,:,1),sheet1Name,'B2') %Writes new R values to Excel
+    xlswrite(xlsName,I(:,:,2),sheet2Name,'B2') %Writes new G values to Excel
+    xlswrite(xlsName,I(:,:,3),sheet3Name,'B2') %Writes new B values to Excel
+    end
+Isn't it still dangerous?  No offense to OP, but malicious code is malicious code.
+Awesome, thank~~s to both of~~ you! Sorry I didn't think to do that - that's a much less sketchy way to go about it. I've commented all of the Matlab commands so you can see what they do/tweak them as you see fit. For the Excel macro, the commands are as follows:
+
+3-6: Create integers for storing the number of pixels in the x and y dimension, and indices to count through those dimensions.
+
+8-9: Stores size of images
+
+11-12: Switches to active sheet and resets zoom
+
+14-16: Resizes columns so that the cells are square
+
+18-25: Rasters through pixels, storing R, G, and B values, and setting the background color of the current pixel in the active sheet to that color.
+
+Merry Christmas, all!
+
+Edit: Heh, just realized it was actually only one person - thanks to Cr4nkY4nk3r for the assist! :)
+It is still dangerous, but if we could see the code, we might be able to see if it dangerous. If it is only 30 -50 lines it wouldn't take long to walk through it. I programmed years ago. I cant program anymore, but I can still read code. If it wasn't too long, I think I could do it
+
+You're right ...wasn't thinking.

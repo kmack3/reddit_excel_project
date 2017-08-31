@@ -1,0 +1,29 @@
+6fs6yi
+VBA delete filtered table row - but not entire row
+I'm trying to delete a row from a **filtered** table using VBA, but I only want to delete the row *within* the table and not the entire sheet row.
+
+The row I want to delete will be visible, but it won't be the only visible row.
+
+Thanks in advance
+
+    Sub delTableRow()
+    
+        ' Delete the 2nd row in tblTest
+        '  but not the entire sheet row, as there may be data adjacent to the table.
+        ' The table will be filtered.
+         
+        Dim tblRow As Long
+        Dim tbl As ListObject
+        
+        tblRow = 2 + 1    ' add 1 to account for header row
+        Set tbl = shtTest.ListObjects("tblTest")
+    
+        ' So far I have tried...
+        
+        ' tbl.ListRows(tblRow).Delete               'only works on unfiltered table
+        ' tbl.Range.EntireRow(tblRow).Delete        'works on a filtered table but deletes the entire row
+        ' tbl.Range.Rows(tblRow).Delete shift:=xlUp 'only works on unfiltered table
+    
+    End Sub
+
+

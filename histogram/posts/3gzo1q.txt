@@ -1,0 +1,14 @@
+What can I replace this formula with?: (1+A1)*(1+A2)*(1+A3)*...
+Try this:
+
+      =PRODUCT(1+D10:D35)-1
+
+Then press Ctrl-Shift-Enter to enter it as an array formula.
+
+Ahh that makes my life so much easier, thank you!
+
+Solution verified. 
+
+You have awarded one point to _BlairMD_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

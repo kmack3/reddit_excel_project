@@ -1,0 +1,206 @@
+Elegant Method for Calculating Payback and Discounted Payback Period
+Forgive me for sounding prudish, but you'll actually *want* those helper cells. Excel does faster calculations the less nested it becomes. If it's really a hassle, put the helper sheets in a hidden sheet. It's not bullet proof, but it is faster.
+
+Also, great challenge.
+    =SUMPRODUCT(CHOOSE(SIGN(INT((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE(D7:H7)))+2,1,1-((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE(D7:H7)),0))
+
+You create an array with the cumulative values (a "triangular" 1-0 array, piece-wise multiplied with vector of incomes, matrix multiplied with a row of 1's to get the cumulative sum). 
+
+Subtract the original payment from the cumulative values to find out when it turns positive
+
+Divide the remainder after the subtraction, with the income from the period that period. 
+
+Then choose based on the sign of the integer portion this division: 
+
+If the integer is less than 0, then 1, 
+
+if it's 0, then use 1 - the remainder (ie. there'll be 10.000 left in period 3, that's 0.333, so 1-0.333 = 0.667), 
+
+If it's more than 1, then don't add anything. 
+
+If I were to implement this I'd probably use named, otherwise there's a lot of repeating the same formula. 
+
+
+To get the discounted value you discount the future cashflow in the input to the matrix: 
+
+
+    =SUMPRODUCT(CHOOSE(SIGN(INT((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE((D7:H7/((1+C2)^D4:H4)))))+2,1,1-((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE((D7:H7/((1+C2)^D4:H4)))),0))
+
+
+Where the discounted value is calculated as: 
+
+     cashflow_vector/((1+discounting factor)^period_vector)
+
+edit: Should have compatability going back to Excel 2003 :P Except it might be on the verge of breaking the -only-7-nested-functions limit. Also elegant may be an overstatement...
+Here's an expandable payback period formula with no helper rows. I'm having trouble expanding it to the discounted payback period since the sum range in SUMIF can't be manipulated to, for example, be multiplied by (1+$C$2)\^(-D4:H4).  Back to the drawing board on that one.
+
+    =IFERROR(INDEX(D4:H4+(D7:H7-SUMIF(C4:H4,"<="&(COLUMN(D4:H4)-COLUMN(D4)+1),C7:H7))/D7:H7-1,1/(1/MIN(IF(SUMIF(C4:H4,"<="&(COLUMN(D4:H4)-COLUMN(D4)+1),C7:H7)>=0,D4:H4)))),"Never")
+
+entered using ctrl-shift-enter
+What about named references? It'll cover up the jumble of cell addresses and numerical references with words making it infinitely more readable and, in a sense, elegant. So for example, if you have cash flows in =$a$3:$b$12, it would just read as =CashFlows
+Aside from the efficiency, which you are correct about, helper columns also make a spreadsheet significantly more understandable in most cases. 
+
+Single formulas are great fun to create as a mental exercise, but if your spreadsheet is ever going to be used by anyone else, or even yourself in 6 months time, you are better off with spreading a formula out and being liberal with the annotations. 
+I agree the title may be a misnomer. I just want to see how others would approach it while using the minimum amount of helper cells possible. I'm going to have to examine the solutions of both u/tjen and u/semicolonsemicolon with a fine-toothed comb. However, I would like to leave this open for a little while longer. It's really amazing to see the variety of ways people approach a problem :)
+
+As for being auditable, I suppose the black box approach works (don't examine the formula; just compare the output against expected output.) "Payback Period" is, after all, a very common business calculation. It's a function I wish Microsoft would put in, to be honest.
+I consider Payback Period to be a deceptively simple calculation, but it really has a lot of edge cases which you have to account for. Notice the nested IFs in my helper rows.
+
+Unfortunately, your function doesn't work on some of these edge cases :(
+
+# Edge Case 1: Zero Cash Flows
+
+Suppose Year 3 Cash Flow is 0 instead of 30,000. The payback period should now be 3.5, but your function returns #DIV/0!
+
+# Edge Case 2: Negative Cash Flows
+
+Suppose Year 3 Cash Flow is -10,000 instead of 30,000. The payback period should now be 3.75, but your function returns 2.75
+
+# Edge Case 3: Project doesn't Pay Back
+
+Suppose Years 1-5 have a cash flow of 7,500. There should be no payback, but your formula returns 5
+
+# Edge Case 4: Payback at Exact End 
+
+Suppose Years 1-5 have a cash flow of 10,000. Payback period should be 5. Your formula is correct here.
+SOLUTION VERIFIED.
+Woo, very nice! Your formula works perfectly for all the edge cases I threw at it (negative cash flows, no payback, zero cash flows, and exact payback).
+
+Eagerly awaiting what you manage to dig up for discounted payback, if you're willing to attempt it :)
+SOLUTION VERIFIED.
+In cases like this, I'd say this is the better argument :) 
+
+With something like this you're probably gonna have a couple of hundred cells at most. doing things the most/least efficient way is usually less of a concern. 
+
+But having your stuff be auditable and understandable is much more crucial! 
+
+Oh sure, if you label them. Ask me how often I do that...   :/
+Yeah it's a pretty standard thing, I know I've seen it in other UDFs/VBA scripts I've stumbled across over the years. I also think it's a great pleasure (and learning opportunity) to see how people solve this type of challenge. I figured you were aware of what's happening under the hood, but I know not everyone is, so why not. The black box method is common, but there's something to be said for having a *good* black box, or at least a fast(er) one.
+Here are versions which should account for almost all the edge cases: 
+
+Undiscounted:
+
+    =IF(SUM(D7:H7,C7)<0,"Never",SUMPRODUCT(CHOOSE(SIGN(INT((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/IFERROR(1/(1/ABS(TRANSPOSE(D7:H7))),1)))+2,1,1-((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE(D7:H7)),0)))
+
+Discounted: 
+
+    =IF((SUMPRODUCT(D7:H7/((1+C2)^D4:H4))+C7)<0,"Never",SUMPRODUCT(CHOOSE(SIGN(INT((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE(IFERROR((1/(1/ABS((D7:H7/((1+C2)^D4:H4))))),1))))+2,1,1-((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE((D7:H7/((1+C2)^D4:H4)))),0)))
+
+
+Most of the problems come from part where you divide with the income for the month. 
+
+In case of a negative income while the cumulative income is still under zero, you get a positive number after the division, which then throws off the "Sign" part.  This can be handled by throwing an ABS around the divisor, But with that you still get an issue of a negative cashflow leading to the cumulative value being exactly 0 at a point in time after the asset has already been repaid. 
+
+In case of a zero income, you're dividing by zero and get an error from that. If there is zero income in a period, you just want to maintain whatever sign is on the cumulative income, so you divide by 1 instead of 0. This can be handled with an IFERROR.
+
+ And you can check whether it will ever be paid back before doing the calculations at all relatively straightforwardly by wrapping it in an IF where you check the cumulative sum with the starting payment. 
+
+So the outstanding edge case that is failing is: 
+
+A negative cashflow leading to the cumulative value being less than abs(income_this_period) or 0. 
+
+In your example, a negative value in period 4 of more negative than -5000 will cause a problem. 
+
+I can't think up a neat way to take care of this. I'd have to include one more "cumulative" calculation in the cell, in order to extract the first "cell" in which you change status from unpaid to paid, and then extract only the values up to that point from the first array. 
+
+So something like this: 
+
+    =CHOOSE(SMALL(SIGN(blahblah)+2,ROW(A1:INDEX(A:A,MATCH(0,SIGN(blahblah),0)),1,1-MMULT(blahblah))
+
+And then rewrite your "never reaches payback" condition to just be an IFERROR of the above (no match will happen) 
+
+I'll update a little later, but yeah what "elegance" there may have been starts to diminish greatly :P 
+editedit: Moved the edit to a new reply :) 
+
+Edit: Ugh, had to play around with it a bit more, using SMALL just introduced other corner issues, which then introduced other corner issues, etc. etc. mostly due to dimension fuckery. 
+
+Instead, I used the MATCH to make a true/false conditional array out of D4:H4 to multiply onto the sign array, and then use this array (which will always be as long as the number of periods you are working with) as input for the CHOOSE. In this case the MATCH array would return all false values if the cumulative is never reached, and so the choose returns an array of errors. Set these Errors to 0 with an IFERROR, and then do an IFERROR on the double-inverse of the sum to check for "Never".
+
+    =IFERROR(1/(1/SUMPRODUCT(IFERROR(CHOOSE((SIGN(INT((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/IFERROR(1/(1/ABS(TRANSPOSE(D7:H7))),1)))+2)*(TRANSPOSE(D4:H4)<=MATCH(0,INT((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/IFERROR(1/(1/ABS(TRANSPOSE(D7:H7))),1)),0)),1,1-((MMULT(D7:H7*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE(D7:H7))),0))),"Never")
+
+At this point it is starting to get exceedingly difficult to navigate and trouble-shoot, and I'm the one who made it! :D 
+
+And here it is for the discounted value: 
+
+    =IFERROR(1/(1/SUMPRODUCT(IFERROR(CHOOSE((SIGN(INT((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/IFERROR(1/(1/ABS(TRANSPOSE((D7:H7/((1+C2)^D4:H4))))),1)))+2)*(TRANSPOSE(D4:H4)<=MATCH(0,INT((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/IFERROR(1/(1/ABS(TRANSPOSE((D7:H7/((1+C2)^D4:H4))))),1)),0)),1,1-((MMULT((D7:H7/((1+C2)^D4:H4))*((COLUMN(D7:H7)<=TRANSPOSE(COLUMN(D7:H7)))),--TRANSPOSE(D7:H7=D7:H7))+C7)/TRANSPOSE((D7:H7/((1+C2)^D4:H4))))),0))),"Never")
+
+
+You could also use an alternative method, which is probably more computationally heavy but may be a bit more intuitive: 
+
+    =IFERROR(MATCH(1,N(MMULT(TRANSPOSE(MMULT(IF(ROUNDUP(ROW(A1:INDEX(A:A,COUNT(D4:H4)*100))/100,0)=TRANSPOSE(ROW(A1:INDEX(A:A,COUNT(D4:H4)))),D7:H7/100,0),--(ROW(A1:INDEX(A:A,COUNT(D4:H4)))=ROW(A1:INDEX(A:A,COUNT(D4:H4))))))*(ROW(A1:INDEX(A:A,COUNT(D4:H4)*100))>=TRANSPOSE(ROW(A1:INDEX(A:A,COUNT(D4:H4)*100)))),--(ROW(A1:INDEX(A:A,COUNT(D4:H4)*100))=ROW(A1:INDEX(A:A,COUNT(D4:H4)*100))))>=(-C7)),0)/100,"Never")
+
+So basically, what you're doing is splitting up each of your cashflows into 100 cells with 1/100th of the income in each cell, so with 5 years of cashflows, that's a 500 row array. Then you perform the same operation to get the cumulative value (multiply the transposed income flow with a 500x500 array with "triangular" 1/0 fill), and then MMULT this to get a 500 row array of cumulative values.  
+In this array, you then check which values are greater than your initial investment. generating a 500-row 0/1 array.  
+Then you MATCH this array for 1. 
+
+This might give you, say, row 267. 
+
+divide by 100, and you know that the repayment period is 2.67 years :) 
+
+If you want more decimals you can increase the size of your array (at higher computational cost)
+
+The advantage being that the stuff that goes on "inside" the array is much simpler, but the computational cost could become much greater. 
+
+
+editeditedit: Also speaking of corner problems, the original schedule return 0 when the payback period is within the first year of the assets life
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I'm currently playing around with the following array formulas which can give a cumulative array. I have added "CashFlows" as a name that refers to C7:H7
+
+### SUBTOTAL/OFFSET
+
+SUBTOTAL plus OFFSET, changing the COLUMN (for some reason, I can't get SUM to work). Problem with this is just like your method, I can't divide it by (1+$C$2)^(D4:H4).
+
+    =SUBTOTAL(9,OFFSET(C7,0,0,1,C$4:H$4+(1^COLUMN(C4:H4))))
+
+### MMULT
+
+A variation of the MMULT method used by u/tjen which can return both the cumulative array for undiscounted and discounted cash flows. Needless to say this is inefficient in terms of computing resources, but there may be no other method to get the discounted flows without helper cells.
+
+#### Undiscounted
+
+    =MMULT(--(TRANSPOSE(COLUMN(CashFlows))>=COLUMN(CashFlows)),TRANSPOSE(CashFlows))
+
+#### Discounted
+
+    =MMULT(--(TRANSPOSE(COLUMN(CashFlows))>=COLUMN(CashFlows)),TRANSPOSE(CashFlows/(1+$C$2)^C4:H4))
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+SOLUTION VERIFIED.
+Holy cow, dude. 571 character formula, that's really something amazing! 
+
+That corner problem with payback happening in the first year, and my formulas failing... that's quite embarassing!
+
+Oh, and I found one more edge case causes a divergence in our formulas. This happens if there is payback in the first year, and then this gets reversed in subsequent years. For example, Y1 51k, Y2 -10k, Y3 30k, Y4 40k, Y5 50k. There are two possible solutions: 0.98 and 2.30. I've studied Finance, and I'm comfortable in saying I have no idea what should be the correct figure!
+
+Anyway, I think I consumed too much of your brain power as it is. SOLUTION VERIFIED. For each iteration!
+
+Thank you for participating, everyone! I think the take-away here is that you should not eliminate helper rows that calculate cumulative numbers! I'm sure all the formulas being proposed here will become far, far easier if a running total is allowed!
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Hello!
+
+It looks like you tried to award a ClippyPoint by editing your comment.
+
+Please make a **separate reply** to a user's comment with 'Solution Verified' as edits are unfortunately not detected by our bot, Clippy!
+
+Doing so will not only give the user a ClippyPoint, it will change the post flair to solved.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+I'd say you're looking for the payback period, so the first period where your asset has repaid itself. If you suspect a future negative cashflow from your investment (so it makes money for X periods after which it begins to cost money) you'd sell it once it starts to make losses, but you've still "made back" your money at the cost of capital. 
+
+So you might be interested in knowing "will my asset ever repay itself with the given cost of capital", if it repays itself in period 1, the answer is yes and you could buy it if only to hold it for at least 1 year. 
+
+For further assessment you might want to look at an NPV of the cashflow of keeping the asset alive for years after the first. 
+
+ 

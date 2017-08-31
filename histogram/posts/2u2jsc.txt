@@ -1,0 +1,47 @@
+Saving your workbooks as .xlsb (Excel Binary) can reduce file size and opening times.
+I just did this with a 12 meg xlsm model and it came out as an 8 meg xlsb file. No errors or loss of functionality as far as I can see. 
+
+I'm still not clear what xlsb exactly does, though. 
+Agreed, I have been doing this recently for big files.
+
+I have yet to see any loss in data, usability or functionality.
+The file size reduction is great! One difference is that you cannot open xlsb files with another software, like tableau. Gotta change it back to xlsx.
+awesome advice, thank you.  my 77 MB power queried macro workbook is now only 35 MB :D
+
+Never knew this...thank you!
+very cool.  Do you know if Access can read this as a linked table by any chance?  Too drunk to google.
+It's a file format that stores the data in your workbook in a binary format, instead of in the XML format used by the .XLS and .XLSX extensions. That's the big downside, really: you're trading file size (smaller in .XLSB) for the mark-up language that might allow your files to be readable by other software. 
+It's basically an improved version of the old proprietary xls format. It also allows Macro's to be ran, similar to xlsm.
+Off-topic but, how's tableau? My company is funding my 2 day course on tableau in April. What sort of analysis do you use it for? Any pros and cons vs Excel?
+Not sure either. But seeing as they're both under the same Microsoft product, I don't see why not. I'll check tomorrow morning when I'm at work
+You must experience the visualizations! They're great and easy to create. "Throwing something on a map" in tableau is a fast, easy dream. You will see.
+Tableau is excellent. In my opinion, it cannot replace excel. However, I think it pulverizes powerpoint. 
+
+Pros compared to Powerpoint and Excel:
+
+*Charts and graphs are very pretty and perfectly formatted from the get go.
+
+*Very easy to 'flip' data to see it in a completely different way
+
+*You don't need to set up graphs like you would in excel, you simply drag variables (columns or rows from a spreadsheet) into a blank space and it spits out a graph. Similarly, you drag variables into a formatting section to color and label your visualizations. 
+
+*Links and interactive dashboards - you upload your final product to a server and can send people a link instead of any attachments. The link will take them to a dashboard that can be made very interactive.  You never need to resend an "updated file". The link will always take them to the latest version.
+
+
+Cons to Powerpoint: None. 
+
+
+
+Cons to Excel:
+I think Tableau cannot replace the calculation power of Excel. Excel is still the best place for complex nested logical if statements, lookups, etc. To me, Excel is powerhouse for data manipulation, data cleansing and consolidation. Tableau is not. 
+
+
+
+
+Be sure to let us know, please!
+Oh, and I think you can use it to analyze anything really. I have used it to show year over year trends, growth of a business, key clients, etc. 
+Just checked. It definitely works!
+Thanks for replying! I can't wait to get my hands on Tableau.
+
+My job mainly consists of creating dashboards and slicing n dicing data in various and interesting ways. I think tableau is perfect for this.
+Awesome, thanks!  Good to know.

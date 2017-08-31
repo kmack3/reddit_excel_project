@@ -1,0 +1,40 @@
+freeze
+3p4dpx
+Filters causing Excel to freeze
+
+Hey guys,
+
+I have an excel file, and every time I use the filter, it freezes up. I want to remove the filter, but every time I do so, Excel freezes.
+
+Anyone have any advice?
+
+
+Update: Tried it on another computer with 8 gigs of RAM and an i5. My boss is gonna reimburse me for a new laptop. 
+
+
+-------------
+pull up your task manager and watch what happens to your RAM & CPU. If you tap out, you need to upgrade.
+
+Let me know!
+-------------
+Maybe try changing formulae to manual in options? Sometimes for me the hourglass cursor is still displayed after using filters but i can still click as normal regardless.
+-------------
+How many rows are in the filtered list? Are there calculated cells in the list?
+-------------
+Yup. Gotta upgrade. Shitty work laptops are the worst. 
+-------------
+There isn't a formula though. Just data. It's really weird. Gonna try it on a higher spec laptop.
+-------------
+Only 175ish, which is weird.
+-------------
+Put solution Verified to put this to solved.
+
+However, what's also running that's sucking up RAM or CPU? If you shut everything else down, change excel to be priority over everything, and try again. You may be able to get it to work, but it might kill her. 
+
+Upside: it died doing the work you need it to do. Work will issue a new one because it "wasn't your fault."
+-------------
+Have you got links to other workbooks? I had something similar on my work laptop with 10,000 lines and once I got rid of the external links everything was fine.
+-------------
+Nope, just one with 175 rows. No calculations. Just data.
+-------------
+Oh. Then I have no idea, I'm afraid. 

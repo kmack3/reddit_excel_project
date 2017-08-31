@@ -1,0 +1,41 @@
+6g0141
+Printing welcome letters with variabilities
+Hey guys,
+
+So I started as an intern in this company and naturally I get the most life-sucking tasks. One that particularly bugs me out is printing welcome letters for guests. 
+
+I tried to figure out how to automatize the process of making them because for just a dozen letters I can spend the whole day, which I don't consider as time well spent. I am hoping some of you might have a solution to my problem. 
+
+So I get the raw data like this: http://imgur.com/a/bzbKS and I have to go one by one making the letters. 
+
+The letters look like this(yellow is what changes either from day to day or from person to person): http://imgur.com/a/wbxOc
+
+The variables are titles, names, flight numbers, flight departure times, hospitality desk hours and so on. 
+
+My thinking is that if I could make a database from the data I get, I could somehow connect Word with Excel and print out the final letter. I can't say how much it would mean to me if someone could share how to do this, or any better way. Thanks for reply!
+
+
+-------------
+I am working currently, so I can't share you the exact details right now, but you can use Word to get it's data straight from Excel, and use it to send letters to everyone.  
+  
+If the excel sheet contains everything, you can make a template Word, and leave out the 'variable' parts, (name, times, etc) and pull those from Excel, using the Mailings menu in Word.  
+  
+Edit.: And of course, the most right button in the Mailings menu (sorry my Excel is not in English) will provide a function to print them all :)
+-------------
+Look up mailmerge in Word. 
+
+https://www.google.dk/search?q=word+mail+merge+letters
+-------------
+SOLUTION VERIFIED! Thank you!
+-------------
+SOLUTION VERIFIED! Thanks!
+-------------
+
+You have awarded one point to _NoExits_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _infreq_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

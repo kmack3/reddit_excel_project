@@ -1,0 +1,216 @@
+slow
+3jn13f
+VBA code works but somewhat slow. Any idea if I can make it faster?
+
+Hi guys. I created a user form that allows me to input my data easily (transfer from an account to an account, buying and selling currencies) and then copy the data to another sheet. However, the copying takes more time than I had thought. I hope someone knows how to tweak the code to make it run faster. Here is the code that I use and the table the code goes into:
+
+The Code:
+
+    Private Sub ExecuteDeal_Click()
+    
+        Dim ws As Worksheet
+        Set ws = Worksheets("Transfers")
+        
+        'Copy the Data to their fields in the Transfers Worksheet
+        
+        If txtDealMadeOn <> "" And txtCCYBuy <> "" And txtAmountBuy <> "" And txtAccountBuy <> "" _
+        And txtCCYSell <> "" And txtAmountSell <> "" And txtAccountSell <> "" And txtExchangeRate <> "" _
+        And txtCounterparty <> "" And txtValueDate <> "" Then
+        
+            With ThisWorkbook.Worksheets("Transfers")
+            
+                If ws.Range("A53").Value = "" Then
+                    ws.Range("A53").Value = CDate(txtDealMadeOn)
+                Else
+                    ws.Range("A52").End(xlDown).Offset(1, 0).Value = CDate(txtDealMadeOn)
+                End If
+                
+                If ws.Range("B53").Value = "" Then
+                    ws.Range("B53").Value = txtCCYBuy
+                Else
+                    ws.Range("B52").End(xlDown).Offset(1, 0).Value = txtCCYBuy
+                End If
+                
+                If ws.Range("C53").Value = "" Then
+                    ws.Range("C53").Value = CDbl(txtAmountBuy)
+                Else
+                    ws.Range("C52").End(xlDown).Offset(1, 0).Value = CDbl(txtAmountBuy)
+                End If
+                
+                If ws.Range("D53").Value = "" Then
+                    ws.Range("D53").Value = txtAccountBuy
+                Else
+                    ws.Range("D52").End(xlDown).Offset(1, 0).Value = txtAccountBuy
+                End If
+                
+                If ws.Range("E53").Value = "" Then
+                    ws.Range("E53").Value = txtCCYSell
+                Else
+                    ws.Range("E52").End(xlDown).Offset(1, 0).Value = txtCCYSell
+                End If
+                
+                If ws.Range("F53").Value = "" Then
+                    ws.Range("F53").Value = CDbl(txtAmountSell)
+                Else
+                    ws.Range("F52").End(xlDown).Offset(1, 0).Value = CDbl(txtAmountSell)
+                End If
+                
+                If ws.Range("G53").Value = "" Then
+                    ws.Range("G53").Value = txtAccountSell
+                Else
+                    ws.Range("G52").End(xlDown).Offset(1, 0).Value = txtAccountSell
+                End If
+                
+                If ws.Range("H53").Value = "" Then
+                    ws.Range("H53").Value = CDbl(txtExchangeRate)
+                Else
+                    ws.Range("H52").End(xlDown).Offset(1, 0).Value = CDbl(txtExchangeRate)
+                End If
+                
+                If ws.Range("I53").Value = "" Then
+                    ws.Range("I53").Value = txtCounterparty
+                Else
+                    ws.Range("I52").End(xlDown).Offset(1, 0).Value = txtCounterparty
+                End If
+                
+                If ws.Range("J53").Value = "" Then
+                    ws.Range("J53").Value = CDate(txtValueDate)
+                Else
+                    ws.Range("J52").End(xlDown).Offset(1, 0).Value = CDate(txtValueDate)
+                End If
+            
+            End With
+            
+            'Clear the fields after copying the data
+            
+            txtDealMadeOn = ""
+            txtCCYBuy = ""
+            txtAmountBuy = ""
+            txtAccountBuy = ""
+            txtCCYSell = ""
+            txtAmountSell = ""
+            txtAccountSell = ""
+            txtExchangeRate = ""
+            txtCounterparty = ""
+            txtValueDate = ""
+        
+            txtDealMadeOn.SetFocus
+              
+            FXDealBuy.Hide
+            
+            If MsgBox("Add Another Deal?", vbYesNo + vbQuestion) = vbNo Then
+                FXMenu.Show
+            Else
+                FXDealBuy.Show
+            End If
+                   
+        Else
+        
+            If txtDealMadeOn = "" Or txtCCYBuy = "" Or txtAmountBuy = "" Or txtAccountBuy = "" Or txtCCYSell = "" _
+            Or txtAmountSell = "" Or txtAccountSell = "" Or txtExchangeRate = "" Or txtCounterparty = "" Or _
+            txtValueDate = "" Then
+                MsgBox "Data is missing. Please double check before adding a FX Deal."
+            End If
+            
+        End If
+        
+    End Sub
+
+The Table:
+
+[](http://i.imgur.com/MSECcN6.jpg)
+
+
+Thanks guys!
+
+
+-------------
+https://www.reddit.com/r/excel/comments/3ibmre/how_do_i_improve_calculation_speedperformance_in/
+-------------
+Turn off screen updating might help if you don't want to dive into the code to much
+-------------
+I'd replace lines 13-75 with this.  Perhaps searching for the right line for each value is taking up time?  All the data should be on the same line, so you'd just need to do it once.
+
+    If ws.Range("A53").Value = "" Then
+        i = 53
+    Else
+        i = ws.Range("A52").Value.End(xlDown).Row + 1
+    End If
+    
+    ws.Range(Cells(i, 1), Cells(i, 10)) = Array(CDate(txtDealMadeOn), _
+            txtCCYBuy, CDbl(txtAmountBuy), txtAccountBuy, txtCCYSell, CDbl(txtAmountSell), _ 
+            txtAccountSell, CDbl(txtExchangeRate), txtCounterparty, CDate(txtValueDate))    
+-------------
+Use vbNullString instead of double double quotes.
+
+All your txt values in the workbook should be defined as a range that gets wiped out as one instead of individually.
+
+Every one of your if-then statements that asks if a cell is blank then put the info there otherwise put it in the new last row could be shortened to simply put it in the new last row, as when row 53 for you is blank, it would obey that logic as well.
+
+Also see this link for more general comments
+
+http://www.cpearson.com/excel/optimize.htm
+-------------
+Your outer IF block has the condition
+
+    txtDealMadeOn <> "" And txtCCYBuy <> "" And txtAmountBuy <> ""
+    And txtAccountBuy <> "" And txtCCYSell <> "" And txtAmountSell <> ""
+    And txtAccountSell <> "" And txtExchangeRate <> ""
+    And txtCounterparty <> "" And txtValueDate <> ""
+
+Your second, inner IF (in the outer one's ELSE section) has the condition
+
+    txtDealMadeOn = "" Or txtCCYBuy = "" Or txtAmountBuy = ""
+    Or txtAccountBuy = "" Or txtCCYSell = "" Or txtAmountSell = ""
+    Or txtAccountSell = "" Or txtExchangeRate = ""
+    Or txtCounterparty = "" Or txtValueDate = ""
+
+which is the logical opposite of the first condition, so it's **necessarily true**, so it's redundant and should be deleted. Just have the Msgbox statement in the ELSE section.
+
+All your references begin with *ws*, so you don't need the With block, but that's not affecting execution speed.
+
+If you have automatic recalculation enabled, try putting the statement
+
+    Application.Calculation = xlCalculationManual
+
+near the top of your procedure and
+
+    Application.Calculation = xlCalculationAutomatic
+
+near the end of it.
+-------------
+thanks for the link man .. I saved it so I keep using it as well. can I give solution verified to two users?
+-------------
+> If ws.Range("A53").Value = "" Then
+>     i = 53
+> Else
+>     i = ws.Range("A52").Value.End(xlDown).Row + 1
+> End If
+> 
+> ws.Range(Cells(i, 1), Cells(i, 10)) = Array(CDate(txtDealMadeOn), _
+>         txtCCYBuy, CDbl(txtAmountBuy), txtAccountBuy, txtCCYSell, CDbl(txtAmountSell), _ 
+>         txtAccountSell, CDbl(txtExchangeRate), txtCounterparty, CDate(txtValueDate))  
+
+Wow man .. this made it much faster .. however i had to tweak line 4 and delete the .value 
+
+one thing though .. if i run the code while i was on another sheet besides Transfers .. i get an error on line 7 .. it says "Method 'Range' on object '_Worsheet' failed" any idea how to solve it?
+-------------
+Solution Verified!
+-------------
+As many as you want.
+-------------
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Yes, you're right on removing the .Value, sorry.
+
+above line 7, put in "ws.activate" and it will bring up the transactions tab and then it should work.
+
+
+-------------
+
+You have awarded one point to _knightguy04_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

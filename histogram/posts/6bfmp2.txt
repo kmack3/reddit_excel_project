@@ -1,0 +1,68 @@
+Converting data from PDF to Excel
+Let me know if you figure this out. Investment banks could shave half their workforce.
+Use adobe pro to convert the pdf to html, open the html in excel, results may vary but it often works sufficiently for data extraction as long as the.underlying pdf is selectable text (not image) 
+If it's in a table format, you may be able to use something like tabula.  If it's purely an image but the forms are relatively static, you'll need to specify scanned regions in something like tesseract.  If you have text fields in a pdf form, you can use something like the pdf-reader library.
+
+If you're receiving lots of invoices in non-standardized formats, you're going to have to get into machine learning applications.  Unless you're fairly comfortable with programming open source platforms, this is almost certainly something you should consider purchasing as a precanned solution.
+
+Here's DIY training for intelligent OCR with LIOS and Tesseract
+
+https://www.youtube.com/watch?v=qLpCld4cdtk
+
+Here's an automated font trainer to lower your desire to commit murder.
+https://www.anyline.io/blog/2016/08/16/train-your-tesseract/
+You'll probably have better luck asking on another sub. 
+
+If it's all the same format (or just the same very consistent 10-25 formats, one for each major client, etc) and you can consistently tell which format it will be so the 'knowledge' work just becomes renaming the invoice, you could try ask r/javascript or especially r/python if they could write you a script (based on certain keywords in the PDF and the filename) that would delimit the data, and then export to Excel. 
+
+Once it's in Excel you know what to do with it. I don't think there's any way Excel can do this consistently.
+
+EDIT: If you have a set of invoices in EXACTLY the same format, maybe what you really need is a way to combine them into one file. Then use the Alt+click trick to only highlight a column down hundreds of pages, for six or seven columns. 
+This is damn near impossible without buying an off the shelf product *and even then* it's hit and miss.
+
+I work for a Factoring bank and we process thousands of customer invoices per day - we use specialist software which extracts daily ledgers from the GL of our clients. We wouldn't even THINK to extract data from PDF.
+Pulling information out of a PDF is really difficult and without any prior VBA experience it will be a heavy task.
+
+It will only be possible with Excel / VBA at all, if the PDF lets you mark the text and you will need to put in a good amount of extra time for each separate layout you want to get information out of.
+
+I have found no way to do it fully automated, but you can usually copy paste the PDF into a clear sheet and proceed from there, 
+
+You usually get the whole row as one plain text and you need to use TextToColumns (Found in Data) to separate them into usable Colums. If you have different Invoices with different layouts, you will need a separate sheet and macro for each one. And Excel sometimes starts to try to do that autonom, so that can get really frustrating.
+
+&nbsp;
+
+- For a start, take on of your PDFs and look if "Ctrl + A" works
+
+- if yes, "Ctrl - C", then open Excel and "Ctrl - V" into A1 of a new sheet.
+
+- Use TextToColumns (Found in Data) in those rows that contain Data needed
+
+- Save the file and only use it for that specific layout. 
+
+If you have the data separated, the main problem is solved and writing a follow up to read out the needed data and drop it in a separate sheet is trivial.
+It doesn't matter which of the suggestions offered you use. Even if it's 99% effect ocr, you would still have  1% known error that take more time to find, than you would spend manually entering the information.
+
+The simple solution is to have whomever is generating the pdf's to send you the information in a different format or have a place you could retrieve it yourself with an excel query.
+
+I have a customer that does this. I don't want him to have my workbook, so I copy his data to an excel sheet with values only and send that along with the standard pdf.
+I guess the invoices have many different layouts? 
+You may try opening the .pdf in Libre Office.
+
+It worked at a stage, but either .pdf or Libre Office might have some problems now.
+
+Edit: You can open it in Writer, and then I think with some kind of scripting you'll be able to port it to calc/csv/excel.  But I don't know if anyone has written it.
+PDFs are messy. I would rather explore the possibility to get a regular invoice overview in .xlsx-format from the firms. They probably have exporting tools for that, so it would'nt cost them much to do it regularly - maybe they even can automate it. Worth a try.
+www.ilovepdf.com
+Late to the party I have to use this quite a bit at my work place. 
+
+Two possible ways programme called nitro can convert pdfs to excel.  
+
+If you use SAP you can use crystal reports and export data. 
+I've had a lot of success opening my PDFs in Word as long as they're not images and then parsing through the word document to extract the stuff I need.
+If there's any industry that's up to their gills in machine learning expertise, you'd think it would be investment banks.
+I actually do this exact thing at work but in reverse (do things in excel and generate dynamic pdfs). This method works well.
+It is always in a consistent format, its just figuring out how to take a person out of copying and pasting from 100 invoices into an excel sheet.  I can combine all the pdf files into one, then what is the alt+click trick?  I am trying it on my current invoice but doesn't appear to be doing what I hoped.
+We are able to edit the PDF's, do you think the fastest way would be to combine all the pdf's into one file, copy all the data into an excel sheet and then use VBA or a macro to determine the lines we want to pull out and drop them into a master sheet?
+
+I have used nitro before but the main problem is I don't want all the data on the invoice in excel.  If I did go that route, would I then just write a macro to pull the info I want which would be in the same place for each invoice?  No luck on using SAP :)
+Front office, not back office.

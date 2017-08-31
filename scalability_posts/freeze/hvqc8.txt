@@ -1,0 +1,7 @@
+freeze
+hvqc8
+Freeze Random
+
+Hi everyone, I am trying to do a game of blackjack in excel and want the random numbers **NOT** to recalculate themselves every time I edit a cell. I have tried using this formula:   *=IF($B$1<>"",A1,RAND())*   This is great. It does exactly what I want. BUT, anytime I try to make any operation using these cells (random) it just writes a 0 or doesn't do anything. I know it is because of the circle reference, is there anything I could do to fix this? Thanks.
+
+

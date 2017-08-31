@@ -1,0 +1,29 @@
+6il803
+Validation check for 2 columns
+I need to do a quality check to verify if column A has value in it then column B has a value as well. Column A has Dates and Column B has a numerical value between 1-4. Is there a way to create a report that would show the mismatches/error?
+
+
+
+-------------
+Something like:
+
+    =IF(A1<>"",IF(B1="","Error - B is blank","OK - A and B have values"),"No value in A")
+
+Put that in C1 (or if your data starts on a different row, change the row numbers appropriately) and copy down.  That should give a message against each row.  You can change the messages as needed.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+Thanks it worked.. sorry for the late response..not sure how to change the flair in mobile app

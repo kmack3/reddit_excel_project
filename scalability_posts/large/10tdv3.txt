@@ -1,0 +1,88 @@
+large
+10tdv3
+Tips on Handling Large Excel Files
+
+Hey I was looking for some community tips on how to handle large Excel files.
+
+I currently have a 30MB file that uses raw data from a few different daily reports. I want to spit out summary info into a table using SUMIFs. I'm wondering what's the best way to handle all this. Keep aggregate raw data files that all link to one worksheet somehow?  
+
+I know about saving files as an Excel Binary file to reduce size, but what else can I do?  
+
+
+-------------
+* Pivottable instead of sumif
+
+* turn off automatic relcalulations
+
+* don't use conditional formatting, especially if it's based on a formula
+-------------
+Are you having problems with spreadsheet performance or simply concerned for file size?
+-------------
+Most giant files I've met have the "maximum row" problem. Blank rows at the bottom of your data eat up space like crazy, and cost calculation cycles.
+
+Check that when you are scrolled to the bottom of your data, the scroll bar corresponds, and doesn't show you are only partially down the sheet.
+
+If you have this issue, select all rows past your data, delete them, and save *immediately*, before you do another action.  It will trim your file size.
+
+If you really have 30 MB worth of data, consider loading it into a database.
+
+If that's not an option, be aware of volatile functions (EG: TODAY() or INDIRECT()) that cause recalculations constantly, instead of on the dependancy tree.
+
+Also, storing stata outside your main calculation book and indexing it for on-demand loading will generally add functionality to your process.
+-------------
+Yes, Formulas --> Calculation Options --> Manual makes a big difference
+-------------
+I work off a laptop so performance issues are always around.  
+
+The file's stability is ok now, but I need to collect daily data for the next month or so and I think I'll start to see major performance issues as time goes on. 
+
+I'm thinking I should have a worksheet to collect data for each report (there are 4 data sources/reports).  Then link those into a Summary worksheet. Not sure of the preferred way to do this.  
+-------------
+What is stata?  
+
+I think I'm leaning towards storing the data elsewhere and having a calculation book.  What's the best way to set up this link? 
+-------------
+Sounds like you're venturing into the territory where a database might be more useful.  Especially if you're considering keeping lots of data for use in calculations.  
+
+If you don't want to do a database, I'm not sure the best route.  You can always store your raw data in a spreadsheet and pull values into a new sheet via Query.
+-------------
+I used to do a monthly report which involved compiling data from a number (5 I think) of difference sources from which I derived secondary values.  I then developed a suite of other reports which linked to the main workbook with those derived values.
+
+It was a bit of a mission to set up and it occasionally crashed but it cut down my workload drastically.
+
+You can also link a pivot table across workbooks if you find SUMIFS are a bit slow, but either way everything works quicker if you have all the workbooks open at the same time when you update.
+-------------
+stata is typo'd data ;)
+
+If you can normalize your filenames, you can either write code to import specific data from your data files with VBA, or you can write lookups onto the files.  
+
+You'll probably need to implement with VBA even for direct lookups as well.  While =INDIRECT() would make it possible to write a formula where you build the target filename via a text string, it's a volatile and also won't look at closed files.
+
+You can write general formulas that target closed files, but they update VERY slowly.  For a *simple* solution, I might write some code that does the following:
+
+* Open the target file, based on whatever input
+* Find/replace the filename in the calculation formula to point at the target file.*
+* Calculate sheet.
+* Close target file
+
+*optionally, store your calculation formulas in code or in a hidden template and write them to your calculation sheet, calculate, and convert them to values so they stop recalculating or updating.  In my world this is normally the ideal solution. YMMV.
+
+edit: formatting
+
+
+-------------
+The database is probably the best route. Using SQL Server or Access is pretty trivial once you get over the learning curve.
+-------------
+They are going to set me up with SQL Studio for another way more massive project. I suppose I'll eventually use it for more day to day reports like this one.  
+
+What is this Query method you speak of?  I'm guessing something off the Data tab? 
+-------------
+I can't stand Access. But I feel like it would make my life easier if I spent the two weeks of hell getting familiar with it.  
+-------------
+Essentially, you can embed SQL-style queries into your spreadsheet to pull data in.  For what you're trying to do, however, I'd just bite the bullet and go full database.  The scalability and stability far outweight the time needed to assemble it.
+-------------
+I also can't stand Access. Do yourself a favor and try SQL Server. There are personal versions and you can have it running on your PC with fairly minimal resource hits.
+
+Also, it doesn't hurt to have the experience.
+-------------
+I'll have to echo this. SQL, and specifically SQL Server, is fucking baller. Also very easy to learn--you can pick up insane amounts of functionality very quickly. 

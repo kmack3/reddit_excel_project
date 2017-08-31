@@ -1,0 +1,45 @@
+Network file always in use by the same user
+Unverified, but things to look at:
+
+1) Maybe the user has another sheet with links to the locked file?
+
+2) Maybe the user has created a datasource (ODBC) out of the Excel file, and it always has a read lock on it? 
+
+3) Is there a VBA module that's in that document always being referred to?  
+
+Try rebooting the original user's PC. If that releases the lock (it should), see what happens next - does it get re-locked when Excel is opened next? Does it get re-locked when something else happens?   What if while the original user is rebooting, someone renames the file? What "I can't find file....." error shows up when the reboot finishes?
+strip that user of rights to the folder and its contents.
+then close the open file from windows server
+wait, and post what then happens
+What operating system is everyone using?
+We've run into this a lot, I've never seen a real solution offered by Microsoft. The only way we've ever been able to fix the problem was rebuilding the file and replacing the one that is always "open" by the other user.
+
+Edit: I forgot to mention one thing we have tried with mixed success before. If you enable viewing hidden files you should be able to see a temp file with a "$" in the name. This is a temp file that is created when someone opens the file and for some reason it sometimes stays open after the file is closed, causing it to give you the message that someone else is in the file. Try deleting this temp file and see if it fixes the problem, a lot of times it seems like there is a more fundamental problem with the excel file where it will just have this problem again after you open it but it's worth a shot.
+Server side, or the computer hosting the file, it is possible to see who has a file or directory open and boot them out of the file. It is under Computer Management. May be something is "stuck" open server side. 
+Thanks for the detailed reply. Unfortunately, one of these apply in my case.
+
+The weird part is that the file is not read-locked by that user at all times. The file is available but no matter who opens it, the message refers back to that specific user!
+Our IT department unfortunately wouldn't take it so far. Too busy with other shtuff :p
+Everyone is on Windows 7 Pro.
+
+Edit: spelling error.
+I will actually try to drag the tabs into a new file and see what's the result this way.
+
+(There's no temporary file in the folder btw)
+That wouldn't be possible unfortunately.
+> shtuff
+
+Did… did you just turn into Sean Connery?
+Try point [III. Turn off the Preview Pane, Details Pane and pop ups that show information about file and desktop items](https://blogs.technet.microsoft.com/the_microsoft_excel_support_team_blog/2012/05/14/the-definitive-locked-file-post-updated-772014/)
+
+This affected a company I worked for a while ago, and this one fix on the PC of the user who was always showing as having the file open worked.
+No luck on recreating the file?
+Who says it's not Sean Connery writing this? If you've never seen Connery and /u/YanisK in the same room, it's a possibility.
+naah, don't shay that.. 
+I'll try that tomorrow and revert :) 
++1 Point
+This worked! Solution verified!
+
+You have awarded one point to _Geekonomic_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

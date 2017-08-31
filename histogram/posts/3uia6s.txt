@@ -1,0 +1,29 @@
+How can I create line graphs which dynamically update to show only the data that I am filtering?
+Create a pivot table of the data, then a pivot chart on top of that.  The graph will update based on the filter in the pivot
+Have the pivot table on a separate sheet. Pivot chart and place slicers on the page to give your users easy control over what to display 
+If your version of Excel isn't new enough to have splicer, I know a super cool way to do this with form control check boxes. But if you can use the splicer, that is definitely the best answer
+Is there any workaround if position & data of our pivot table is continuously changing?
+Thank you for this idea.  I'll play with Pivot tables till  I get it.  
+
+I'm having trouble because my data is in a series  representing gain in elevation.  All other data are to be seen relative to the elevation.  Averages and sums don't matter.  I simply want to plot the data to look like this:   
+http://www.physicalgeography.net/fundamentals/images/atmslayers.gif  
+
+Then, I want to be able to switch between different data sets (altitude data from other locations) and have them automatically update. 
+
+Solution Verified
+Pivot table & slicer is the right answer to this.
+Solution Verified
+Pivot chart is linked to the table not the location, so it shouldn't need a workaround...
+
+You have awarded one point to _seriouslytaken_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _mkchillin_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+But if i move that chart to another sheet and add new data to source then it won't update automatically.
+just right click the pivot table and hit refresh
+I tried.. but it doesn't work if position and data (column & rows) is changing
+I can solve whatever drama you're having, but it's going to be about a 1000 times quicker if it's on skype.
+Thanks for your help buddy!

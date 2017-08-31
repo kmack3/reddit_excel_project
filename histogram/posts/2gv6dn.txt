@@ -1,0 +1,17 @@
+New trick I learned for carriage returns
+To be technically correct, *carriage return* is char(13) and *line feed* is char(10).
+I don't get it. What's the relationship between the '010' and carriage returns? Is it a system specific code for carriage returns? 
+Another useful thing you can do with text to columns is change the type of data in a column.  For example if you have dates that are text instead of serial numbers you can use text to columns on that column, make them delimited (but it doesn't create any new columns) and on the third page of the wizard choose the "date" type for the column.
+This would have been amazing to know two years ago when I was waist deep in a huge project!
+ohh neat! Worth keeping in mind! 
+Also, **Ctrl + J** can be used in the same field.
+My favourite kind of correct!
+010 is the alt key code for line feed
+The original [teletype machines](http://en.wikipedia.org/wiki/Teleprinter) were designed for [ASCII](http://en.wikipedia.org/wiki/ASCII).  The machine needed a 13 to return the carriage to the left and a 10 to advance the paper to the next line.
+
+To this day, Windows text files end each line with both characters.
+
+Edit: or maybe ASCII was based partly on the teletype.
+Huge benefit on this is converting dates from source system, which on older systems tend to extract to yyyymmdd, which excel struggles with. By using text to columns as above you can select the current date format as ymd, or whatever the current format and it will convert to standard date. This trick is a huge advantage in my world 
+That's neat! Thanks! 
+Cool info! Thanks 

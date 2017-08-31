@@ -1,0 +1,101 @@
+Recently got a promotion at work, my new position uses Excel - I'm hooked!
+Vlookup.  Autofilters.  Conditional formatting.  The three most important things.
+
+Then pivot tables and macros, but that's the advanced stuff.
+
+Full VBA programming and database connections for the professional spreadsheet ninjas.
+Congratulations on your promotion! Looking forward to your next one!
+I highly recommend using Lynda.com to learn the basics up to advanced. There are so many classes and levels on Lynda. I've used this site to learn SQL, Power Query and Power Pivot. They offer datasets as well so you can play along with the video. Exceltip.com is a great forum to read questions and answers and also post new questions. I can usually get answered within an hour. 
+
+I use these formulas daily: Vlookup, Index (Match, Sumif, Sumproduct and Or (Exact.  Keep a spreadsheet of all the helpful formulas you've used for reference later. I've used great nested formulas and forget them, so now I keep my spreadsheet of formulas up to date. I also share that collection with coworkers looking to learn.
+
+Also, once you've got formulas down, Power Query and Powers Pivot. 
+Run! Run before it is too late! 
+
+
+Just kidding, its wonderful, and you will never stop being amazed by the possibilities Excel will bring. Congratulations on your promotion and best of luck in your learning. Let us know when you need help!
+I've kept a personal finance spreadsheet for awhile and I add to it when I learn relevant new things in Excel. And I recently got an interview (and the job) partly because I worked through one of those popular vlookup tutorials on YouTube. Definitely my favorite program, even if I'm a basic user at best.
+
+It's an exaggeration, but for many workers today, data analysis is the new literacy. I only wish I learned/chose to learn more about Excel in HS/college.
+Congrats on your promotion! 
+
+I used hundreds of excel formulas to fully automate our Database during my work experience. Absolutely fell in love with excel after that! :)
+
+May I ask what resources you used to get better at Excel?
+Congrats!  Excel is a never ending wonder. The more I learn, the more I learn I don't know. This forum is an excellent place to learn. A lot of very helpful people are on here all the time. I suggest reading some of the posts every day and trying to work them out on your own, then look in the comments for a better solution. 
+Well done! Good for you.
+How big is the business you work for?
+
+If it's a big one, ask your it dept of they have a home use agreement with Microsoft.
+
+You can get a copy of office for $10 if they do.
+Yeah but irreplaceable = unpromotable  
+Helpful thread:
+
+https://www.reddit.com/r/AskReddit/comments/4huqyn/what_are_some_excel_tricks_that_are_useful_for/
+https://exceldashboardschool.com/
+
+This was an advertisement on this subreddit recently. You might like it. 
+Congratulations on the job promotion. Excel is a great program that honestly should be used more frequently in early education to teach people logical problem solving skills. Also *cough - cough - Shameless Self Promotion* feel free to check out my Excel website if you want to really get into the mindset of a full fledged Excel developer - [It's Not About The Cell](http://www.itsnotaboutthecell.com)
+I typed this a few days ago, but forgot to submit it. 
+
+First, congratulations on the promotion. 
+
+In my opinion, check out the following functions.
+
+- If(), ifna(), iferror()
+- Vlookup(), hlookup()
+- index(match(match()) <- This shit is magic!
+- indirect() <- This function is ninja as fuck!The possibilities with this function is amazing.
+- Concatenate() <- I've been using this function more and more. Additionally, been using this with indirect() which expands the possibilities. 
+
+One thing that I do on every spreadsheet i work on / create is have colored cells for formulas and inputs.
+
+- For cells that I allow users to input data, I color it light blue.
+- for cells I have formulas in / calculated values, I color this light pink. 
+
+
+I've been doing this for years. This allows me to quickly look at my spreadsheet and determine what and how my spreadsheet works and it allows people that work on my spreadsheet to know not to touch the fn'k light-pink cells unless you want to break everything. 
+
+
+Additionally, if users must change the value of a light-pink cell, you can build in an override cell directly next to the calculated value. 
+
+
+calculated Value below| User override | cell to reference against
+---|---|----
+cell: a1 | cell: b1 | =if(b1="", a1, b1)
+
+I'm saving this comment and going to learn everything you just said in the order you mentioned it. Challenge accepted.
+Vlookup is great, but you should also learn Index-match.
+
+I hate when I need to add a column, and it breaks all the vlookup commands.  I figure if I have to fix it anyway, I change them to index-match, so it wont be broken again the next time a column is added or removed.
+
+Also, on a basic level sumif, sumifs, countif, and countifs are 4 functions that I seem to find the most useful. 
+100% agree. And never be afraid to ask Reddit. You will dream of things that you can't yet do and Reddit users will help make that happen.
+
+U/thepeg is right in that list tho!
+Actually, I recommend pivot tables for beginners. People are often scared to try them but it's as easy as clicking "insert pivot table" and playing around with the fields.
+Damn dude. Points for Lynda.com, then EXACT, then keeping a formula column (+1,000) then power query. 
+
+So much good info in there. 
+At first I was picking apart existing reports sent out at work. Just looking at them and messing around with a blank sheet to try and replicate it. Then I started watching Tutorials on youtube and am learning by watching and being hands on.
+I doubt it. They're really big on PCI compliance I believe it's called so I can only do work there. No able to do stuff at home and bring it in etc...
+This is a phrase I always hold dear in my job field, no matter what it is. If regular raises stop I seek out employment that can/will need my skillset for more money. Never get comfortable enough you settle for what they give you. Business' should keep good employees moving forward.
+Final step: make incredibly useful spreadsheets where only you understand how they work.  Infinite job security and promotions.
+Macros are awesome!  If you find yourself doing the same thing repeatedly with data, find a way to automate it.  I created a few macros to simplify things at work, and they made a huge difference!
+If you ever need to normalize data sets ( RMA issues, etc) use OpenRefine. Not sure if you ever have to generate reports from test station data, but i use a python script to join all the log files together.
+further emphasis on index-match. very sturdy and versatile. 
+A decent way to make your vlookups not break is to always have a hidden first row that has 1 in A1 then A+1 in B1. Copy to Z. 
+
+When you use a vlookup, reference the value in that column (2 in column B). Then when you add a column, just drag the formula over. 
+
+It isn't fool proof but it saves some time. I find if I use index / match, no one can use my workbooks. 
+I think /u/ninjagrover 's point is that you could get Office really cheap for home practice and learning. (obv you already have it, but good to keep in mind when/if work versions up beyond your personal copy)
+Not only that, but document what you do so you are replaceable if that is a concern to you. If nothing else, that will enable you to request and backup the need for those raises. 
+This for sure. If I left my company, they'd have to hire two people just to manually generate all the reporting I automate (not to mention the other tasks I do). Even though I regularly teach excel classes at work and try to teach other people my methods and make myself "Excel available" to every person on the company. They'd all rather just ask me to do it. One day, that will come back to bite them. 
+Will take a while. My boss lady is a fucking Excel Warlock. I've increased my skill level by about 800% since I first started using it. However I expect my skill gain to drop off with diminishing returns. Maybe I'll make a spreadsheet with a trend graph to map my learning ;P
+Wow! Nice! A down vote to a response that is shown to assist in a common issue with no reasoning or an offer of a better alternative. Way to go r/excel! 
+
+I thought this was a place to learn. So either teach me why this was a poor solution to a common problem, or... keep the down vote to yourself. 
+I hope I never be like that. Stubborn to learn when knowledge is readily available. Never stop learning!
+Man I wish I had someone like you available where I work.  I'm much more the "show me how you did that" type of person and I *HATE* having to rely on others when I can learn it myself.  Kudos to you for making your knowledge available to others.  Shame on them for not being smart enough to utilize it.

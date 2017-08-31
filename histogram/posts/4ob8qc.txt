@@ -1,0 +1,66 @@
+First internship in finance and I'm a bit in over my head
+It's hard to give you anything specific without any details, but I'll try to help you get on the right track.  Hopefully I understand correctly that you have warehouses and you are bringing in product from other locations.  I'll make a quick sample that should help and then edit my comment.
+
+EDIT: [Sheet](http://i.imgur.com/07qObgU.png)
+
+The top table (D4:G6) need to be filled with the cost to ship from each location to each warehouse.  Row 19 is the same thing written differently.  Row 17 is the same as the second table (D10:G12).  I just formatted it that way to make it easier to see which warehouses/routes can be closed.  You don't need to put any numbers in here for now.
+
+Row 16 has your decision variables, which in this case you will have one for each route.  Rows 21-27 you can think of as constraint equations.  If there is a 1 in the box, that route is open.  Start by having them all open (only put a 1 in the columns that make sense, i.e. NA-TX can only have a 1 for "ships to NA" and "Supply Tx".)  Your LHS will be the sumproduct of the row with the decision variables.  O21 is =SUMPRODUCT(B21:M21,$B$17:$M$17).  The RHS just corresponds to the first table.  
+
+The next step is to use solver.  If you are really new to Excel, press File>Options>Add-Ins then where it says "Manage Excel Add-ins" press "Go...", then make sure solver is checked and press "OK".  Then go to the Data tab and press solver.   For "Set Objective" select the cell for total cost (O19).  Set it to minimize cost by changing the variable cells B17:M17 (your decision variables).  Set it subject to the constraint that O21:O27 = Q21:Q27 (Your constraint equations).  Then just press solve and it should fill in the rest for you.  If you have a 0 then you don't need that shipping route.  
+
+My numbers were theoretical, but your numbers probably won't be very clean.  You may have to play with the equals signs until it works.  This is also heavily simplified.  Good luck and congrats on the internship!
+A basic overview of decision maths would help you here. Rather than writing a tool for you you should go and investigate how to create tools like this for yourself to develop as a professional.
+This is a link to the first chapter of a textbook for 17/18 year old students in the UK as one of the optional modules for A-level maths. (There's definitely harder modules by the way). It might be a good place to start.
+
+https://www.pearsonschoolsandfecolleges.co.uk/Secondary/Mathematics/16plus/EdexcelModularMathematicsforASandALevel/Samples/NewSampleChapters/Chapter1fromD2(DecisionMathematics2).pdf
+cdarling gave some excellent advice on this project, but I'm gonna give some advice further on your internship.
+
+Go buy a book or take a course or find youtube courses on excel. I took 3 semesters of excel in college and *was still* lost in my first job gaping at spreadsheets wondering what the hell to do.
+
+Excel is the #1 used program in business for good reason. It is insanely expansive with tons of features. Learn about it. Everything you can from simple formulas like SUM & IF to XML and Macros. It iwll be the best investment in your career outside of networking.
+Either this is a test for you to do to see if you know your stuff as an Intern, or this business is a bit crazy. This kind of relocation financial planning seems like a very big decision (even if just to give the business a prelimiary idea if its viable) for an intern?
+
+Glad /u/cdarling could help you out!
+This feels more like an economics problem to me. To  move to a new warehouse is going to cost money and you need a good reason to do so, especially if you already have a positive cash flow. I would try to setup a discounted cash flow model and use NPV to justify relocations. Just a thought.
+Damn man, you just saved this kid's internship.
+
+OP, what you've been tasked to do is less finance, and more data analysis. If you're looking to follow up and look further in this direction, what /u/cdarling (just got the name haha) did was give you a great introduction in how to use solver for optimization problems. Based on constraints of your choice, solver solves systems of equations by minimizing or maximizing specific cells or ranges.
+
+In finance, optimization might be used in a functioning model to solve for an optimal mix of capital based on lender or investor constraints (among a lot of other things).
+When/if you get paid (unpaid internship?) This Redditor deserves some gold
+Give this person some clippies!
+I am more than happy to provide more information if I have it as well
+SOLUTION VERIFIED!
+Holy shit this guy just gave you a linear programming model and did an amazing job of explaining it.
+Awesome! I've been looking around for certificate programs so I could have something to throw on my resume as well. This is a great start though.
+highschool? wow...
+No offense, but were those classes garbage? I took one class and felt prepared for my first internship. Obviously there were things I didn't know how to do, and I learned those on the job. But I felt prepared, at least. 
+Probably more or less just something for me to do haha. Doubt any decisions will be made off of my findings alone 
+The directly benefits the company in a monetary way, if this is a US internship this sort of work would be illegal if unpaid. 
+You probably know this, but be careful with sharing of internal information, even if it seems harmless like hypotheticals or random numbers. 
+
+You have awarded one point to _cdarling_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I'm not sure what you're trying to say here? Would you like to expand upon your comment at all? 
+First one was. It was a general office class. 
+
+2nd and third class were very extensive and i learned a lot. But going from classroom tactics to actual workplace spreadsheets that are imperfect with hundreds of thousands of data points was pretty overwhelming. The classes taught me excel but didn't prepare me for how it was used in business. 
+i mean ... highschool transportation problems (logistics)? at 17... id say thats pretty early
+Hah, yeah, if only they had a class devoted to massive legacy spreadsheets with 30 tabs garbled with combinations of 2000-era macros, redundant cross-links, hidden tables in column AZ, and inconsistent formulas, that somehow are used to manage business-critical information! 
+
+
+Understandable. My professor related everything to the business world. And although we didn't work with the volume of my current spreadsheets, he constantly made sure we understood the files would be massive. Sometimes I forget how great of a professor he was. 
+Ahh ok I get what you mean now. The A-levels in the UK are chosen based on what career path the student wishes to follow. The maths exams at that level vary significantly in subject and complexity, covering topics like calculus, engineering/mechanics, statistics, 'further pure' (maths for the sake of maths), and in the case here; decision maths, related to logic, game theory, logistics, and optimisation. In the case of transport problems it's designed to give the student an understanding of the concepts rather than have them solve extremely difficult problems. But I take your point that it is indeed a bit earlier than most would learn it, though it is only optional and not required. Source: I hold two A grades in Maths and Further Maths at A-level. 
+Excel 324: Legacy spreadsheets Syllabus:
+
+Handling mismanaged data   
+Searching for redundant information  
+Finding inconsistency in formulae  
+Cleaning up unnecessary sheets  
+Interpreting shorthand from the 4 people who did your job before you.  
+Scotch & Whisky basics  
+Redundant information searches  
+Quitting with dignity.  
+Chuckled hard.

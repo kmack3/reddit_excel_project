@@ -1,0 +1,111 @@
+Did MS purposely dumb down Excel for Mac or is there a more technologic reason for the lack of MS functionality on OS X?
+Ex Excel PM here. The user bases are very different. Most Excel power users use the Windows version since that is the majority of enterprise installations. Mac Excel has concentrated on being simpler to use and aesthetics.
+I see a lot of... curiously wrong answers here. 
+
+The reason Excel for Mac is so different is not any underlying capability in the OS, or any conscious design decision by MS to appeal differently to Mac users. It's not because PCs are "real computers" and Macs are not.
+
+The reason Excel for Mac is different, and the reason all the Mac Office apps are different, is that the Mac Office development team has been completely separate from the Windows Office development team for at least 20 years. The last time they attempted to synchronize features in the two product suites was in 1995, when they compelled the Mac team to produce Word 6 and Excel 4 on the Mac (incl. full VBA support) and very nearly lost their Mac user base because the apps were so terrible.
+
+Since then, Mac Office development has been mostly a clean-room effort, sharing only file formats and similar basic compatibility requirements between the two suites. Supposedly, Office 2016 is meant to bring the two suites back into feature-parity and interface similarity.  We'll see. 
+
+Long story short, Excel on the Mac is missing a lot of the technical features of Excel for Windows. Let's face it, Windows is where Microsoft is pouring the bulk of its effort right now. 
+as my 'Engineering analysis of bio-processes' professor said to our class- "get a real computer."
+
+it was hilarious... because a lot of university students right now use macbooks. but the guy knew his shit, and the whole class was basically a course in how to use excel and all kinds of addons and formulas to solve engineering problems. Somebody was like, "uurrrrrhhhh.. I can't figure out how to do that on mac... that thing isn't on mac.." it was the typical college student tone that implies that there should be some change or accommodation made... and our professor wasn't having it at all. I applaud him for his stance haha. These are engineering students.. why would anybody be using a mac? I mean, sure... they look nice and work smoothly if you don't want to customize anything or do real work, and if you're going to be a DJ it is ok... otherwise, just get a "real computer". 
+Excel is a really complicated piece of software. A lot of the underlying functionality is specific to the OS, so the developers have to maintain two sets of code. 
+
+Assuming the vast majority of users are on a Windows platform, you can imagine it's hard to justify spending any effort maintaining a second code base. I'm guessing MS does this for the sake of the 1% who need to be able to view and do simple edits on other spreadsheets. That way those users are not totally shut out of the ecosystem. I would bet MS loses money on it though. 
+Are you using the Excel 2011 version? I'm not an Excel wizard who uses complicated functions yet but I just downloaded the new MS Office 2016 for Mac and it's much different. It seems to me that its basically the same thing.
+Its just sad that the further I grow in my Excel skills as a Mac user I run into the instances where the professionals are stating "do it this way because it saves time and is easier" only to not have the option. 
+Really discouraging my opinion of the MS brand.
+One of the primary reasons is OS architecture. MacOS is Unix based, while Windows is not, or at least has discarded much of its Unix roots. To program some of the advanced features MS needs to utilise an entirely different code library, while many of those used for Excel are already integrated into Windows. It has really improved a great deal over the years (I speak as someone who used Excel on MacOS 7!), but has a long way to go. I think web and mobile integration will help move that along though.
+
+
+> Mac Excel has concentrated on being simpler to use and aesthetics
+
+Boy is that the truth. 
+
+I joined my current company in 2010. The entire office is Mac-based, I'd never used one before. I got to grips with OSX fast enough but was quickly frustrated its "user-friendliness": over-simplification of features, lack of customizability, and general focus on prettification and form-over-function design -- seemingly predominantly geared toward users who spent a lot of time in Photoshop (*"Macs are better for artists"*) and didn't like dealing with file management.
+
+*"Not to worry, Excel is Excel -- that'll still be completely productivity-focused,"* I thought to myself... as I fired up the installed copy of Excel 2008.
+
+* formatting "palette"
+* floating, un-dockable formula bar
+* lots of irritating, undockable floating toolbars
+* formula and data functions buried in menus by default; focus instead on shortcuts and toolbars for SmartArt, WordArt, Drawing, sheet/chart prettification, etc.
+* no macro/VBA support, *period*
+
+Noped right out of there and have been running Excel 2010 in a Win7 Parallels machine since. I even thought it was my imagination (or bias) that Excel for Mac seemed substantially slower, but some simple processing tests proved that Excel 2010 was *several times faster* despite running inside a VM on half the number of CPU cores. 
+
+Excel 2008 was like trying to run with your shoelaces tied together... and to your wrists. Some poor colleagues are still stuck using it, and even watching them use it is teeth-gratingly frustrating and mind-bogglingly awkward and slow. Other colleagues now have Excel 2011, closer to an approximation of the Windows version, but even then they've still retained terrible habits enforced or encouraged by 2008.
+Any interesting insights from your time there?
+Please email your former team and tell them to fix the Evaluate Formula feature. It is laughable how useless it is when trying to look at a complicated formula as it can only view a few lines at once. 
+Not to mention that the mac office group in 114 was tiny.
+You think they'd at least _try_ to make the hotkeys slightly similar at least. I really miss the hotkey chaining in Excel for MS.
+no freaking power pivot! i mean come on. At least there's XLwings
+10 years ago, I would've argued with you and told you how wrong you were. Now, as someone whose mac fanboydom is fading away, I kinda feel like I cheated myself in a way, going with mac all those years ago. If I had only known the power of the darkside... er um windows then, things would've been way different. I'm a fast learner when it comes to computers/software, which is maybe why I was so intrigued by the mac, because it was so new to me. But if I had spent more time in college with PCs, I think it would've been more advantageous. Recently switched from iPhone to android. Realized I was living a lie
+Or at least invest in a copy of Windows to install via bootcamp/VM. ;)
+Not to get into the old Mac vs. Windows debate, but all real engineering work I've done beyond elaborate arithmetic was in something besides excel.  Matlab runs just fine on my mac.  That being said I greatly prefer Excel on windows.
+
+
+In my experience if you have an engineering professor that is spending his time teaching you excel add-ins and making jokes about computer you should find yourself a real engineering professor.
+They're using macs because they either have rich parents or a fat student loan check burning a hole in their pocket and they think macs are *cool* or *professional*. Anyone in the business world knows that macs aren't made to do serious business on.
+
+
+I ah it's a work computer alright. Haha I bought a refurb dell for staying MS literate. But can't use it for wk VPN ect.
+haha that would be wrong a huge portion of (one of three) MS divisions makes over half revenue in product licensing and now w/ 365 there's not even a physical product just a code in a box to dl from online.
+
+I get what you mean never the less, my conspiracist side tells me this is strategic.
+Evaluate formula step by step
+http://answers.microsoft.com/en-us/mac/forum/macoffice2011-macexcel/how-to-evaluate-a-nested-formula-one-step-at-a/db0e0caf-b019-4874-b0d3-9641d2137289
+The mac equivalent is formula builder.
+To find this on MS press alt - m - v
+or on pre 2010
+alt-t-u-f
+
+
+
+
+
+
+If you are tied to OS X compatibility, you might want to go with Filemaker. It's a full-on database app but it's also a simple way to achieve Excel-like results. 
+
+Another option would be to instill Windows and Excel on your mac. This is a fairly expensive and resource intensive solution but if Excel is your only option... 
+One big reason why I'm building a PC. I enjoy my mac in a lot of ways, but after using windows at work, I just miss all the extra functionality, especially when it comes to excel. On windows, it's like I'm chopping with a chef's blade, then on my mac, it's like trying to cut a steak with a butter knife.
+Windows doesn't have unix roots.
+
+Previous incarnations of Mac Excel have been laughably slow for large amounts of information. I haven't had to work on large sheets with the latest release yet, so I cannot comment on its speed, but I did as you, and used Windows Excel to do my work in a VM or remote desktop.
+If it helps, I know Excel 2015/16 for Mac has VBA support as I saw it in an update. :) I'm like...95% positive.
+As a technologist one of the best experiences I could have asked for. On my first day of work my manager told me every decision I made was going to piss off 2 million people and to just make sure the other 900 million were happy...talk about scale. 
+
+
+It's all one team now so I suspect a lot more crossover and feature parity . that said they are both different user bases still.
+power pivot was my feature when I worked there. There a long list of technical reasons why it doesn't work in Mac...starting with no .Net
+Oh please. What a load of codswallop, talking about a "darkside" and whatnot. 
+
+You're not saying a single thing of use in this forum. It's a known issue that Mac Excel was always written by a different team for a different use base. If you needed to run Windows Excel, then you did so in a separate environment. 
+
+With a Mac you're running a FreeBSD-based machine. If you really wanted to get things done, you could make it run.
+oh yeah, nothing wrong with apple hardware.. they have nice components. their OS is just a hindrance and doesn't let you do anything you want to do.
+Especially since you can get keys here on reddit for $20 - $30.
+that's not all he was teaching us, but that's what we ended up using for most of the problems we were faced with for bio-pharm processes balancing. 
+Half the software developers I know use Macs. It's *nix, unlike windows.
+You can't use a VPN on a pc? This sounds like a user problem. 
+yes, the internet is one large platform with no variation on how content is delivered to different devices.
+The issue w/ my work computer is not running parallels, its getting a new license for excel MS when obviolusly I've already been expensed an OS X rev.
+
+Most of the posts were mentioning pre-O365 builds which was why I was saying it was tiny.  That group was like 20 or so people forever.
+Sense of humor *clap clap clapclapclap*
+
+I'm just saying, there's a lot of increasing functionality on Windows over the years, and I think the opposite seems true for Mac. The amazing "it just works" factor seems to have faded away. The devolution of iTunes is evidence of that. 
+
+>their OS is just a hindrance and doesn't let you do anything you want to do.
+
+Like?
+Me too, but I think much of it is fashion. 
+Can't do work on a non work computer different OS systems as well.
+That's pretty rude. You don't know anything about OPs work environment or setup, or do you?
+My work has switched over to Office 365 enterprise subscription and each employee can install office on five different machines (work or personal/home). 
+like customize anything ever. Any time I'm trying to change settings, or use excel or any other real office work type software, or setup any kind of software in general, it's a huge pain the ass. Tons of generic software that is useful for getting various peripherals to work well don't even have mac-compatible versions. 
+We don't have 365 I think we'll get 2016 after integration testing
+We have 365 but running 2013. 

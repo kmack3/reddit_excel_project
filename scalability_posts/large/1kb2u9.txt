@@ -1,0 +1,88 @@
+large
+1kb2u9
+I need to remove a large number of email addresses from an excel spreadsheet that has approx 6000 addresses on it. How can I do it effectively?
+
+I have inherited an excel spreadsheet with a list of 6000 email addresses on it from a coworker who recently switched jobs. When I use this list to send out mass emails to our customers I get hit with a huge amount of un-deliverable emails being bounced back at me. Is there anything I can do (other than going through one by one) to clean this list up? I am open to a variety of suggestions.
+
+
+-------------
+Aggregate the list of bad emails and then do a vlookup or something to identify emails from bad email list and delete them
+-------------
+How's your VBA? You could write a macro in Outlook to monitor the bouncebacks and have it go edit the spreadsheet to flag the offending addresses.
+-------------
+Google for a freeware bulk emailer, that handles bounces.
+-------------
+Is this an internal mailing list? If so, can you get a list of valid emails and work on finding the common items?
+
+If not, can you export all of the invalid emails and make a list of these? 
+-------------
+1. you should probably create an Outlook rule to put all the rejected emails into a mail box. You can apply the rule retroactively to your inbox. Once you have the mailbox just dump all those emails into a regular file directory on your drive.
+
+2. From there you can enable the Outlook library in VBA (I think its addins > references > outlooksomething). If you can't find the library enable the developer tab in your outlook and check the references in the outlook VBA environment.
+
+
+then do a loop to go through all of the paths in the "selecteditems" of a file dialog where you select the files. 
+
+    dim fd as excel.application.filedialog (or something)
+    fd.multipleselect = true
+    fd.show
+    
+    dim otlk as outlook instance (I forget the exact syntax)
+    dim nav as outlook navigator (I forget the exact syntax)
+    set otlk = createobject(Outlook.application) (or something)
+    
+    for each file in fd.selecteditems
+        set nav = fileitem (dont remember exact)
+        look in nav.body to find the email
+        write email to worksheet
+    next
+
+some references for you:
+
+http://msdn.microsoft.com/en-us/library/office/aa210897(v=office.11).aspx
+http://msdn.microsoft.com/en-us/library/office/aa210946(v=office.11).aspx
+
+-------------
+Any suggestions on how to aggregate those emails? I'm talking upwards of 3000 email addresses. 
+-------------
+ares_god_not_sign links to a thread where someone is doing exactly that.  coincidently, the poster in the thread also has ~3000 bouncebacks.
+
+I did not read through the thread in its entirety, but it looks fairly code complete.
+-------------
+My VBA is non existent. I am not even remotely qualified to take something on of this caliber. 
+-------------
+I've taken a look around and my search has not been fruitful. I can't seem to find anything reliable.  
+-------------
+[You could try this.](http://www.vbaexpress.com/forum/showthread.php?33363-Solved-Parse-email-body-for-email-addresses-and-write-them-to-Excel-Help-with-Troubleshoot)
+-------------
+Are the emails undelivered due to formatting or misspelling?
+Formatting, I would suggest something along the lines of what ares_god_not_sign linked.
+
+Misspelling and nonexistent emails would be best handled by jacckfrost's suggestion.  When you mass email, does it return a list of bad emails?  It would be really easy to compare the lists using vlookup, or conditionally formatting.  But you first need a list of the bad emails that you can put into excel.
+-------------
+Your email service provider should be able to provide details of hard bounces..collect 'em and put in the same excel file and do a vlookup.
+-------------
+I'm gonna try to remember to read that link tomorrow - it looks delicious. Thanks for pointing it out to me!
+-------------
+This sounds like it is exactly what I need. Unfortunately, I do not posses the tech skills to execute this properly. Here are my issues...
+
+I have the bounced emails placed into a folder in my Outlook and can move them into an archived folder. After that is gets really fuzzy as to how I am supposed to run this script. 
+
+If anyone can provide some more guidance it would be greatly appreciated! I may be in over my head, but I do not want to give up yet. 
+-------------
+The emails are undelivered because the email addresses are no longer in use. 
+I do not get a "list" of returned emails, the come all in separate emails. It would take me a long time to dig through each specific email and copy each address. 
+-------------
+You're starting down the wonderful road of computer programming. Be scared, because you have a lot of difficult problems ahead of you, but be excited because you'll develop some very valuable skills in the process.
+
+[The basics from Microsoft](http://msdn.microsoft.com/en-us/library/ee814736(v=office.14\).aspx) (assuming you have Outlook 2010)
+
+I recommend that you go through the entire microsoft example and get their basic code working. Then, copy-paste the final version of the code in the forum I linked above into your macro **and change the folder names to what you're using**. You're likely to get errors along the way. Google the error, sometimes with a keyword or two to narrow your search to your specific situation (eg. add *Outlook* or *Outlook 2010* if just searching the error text gives you a bunch of pure-Visual Basic results).
+
+Edit: Also, try to understand as much as you can about the code you're pasting. It's not as difficult as it looks at first glance. And (I edited above) be sure to either change your folder names to align with what the forum poster named his folders, or change the code to align to whatever outlook folder names you're using.
+-------------
+This looks great. I will give it a read several times today and will give this my best shot. 
+
+Thanks for the encouragement! 
+-------------
+A dirty little secret of programming: nobody really knows what they're doing. We all just try things, see if they work, ask google for help, and repeat until the requirements are met. We remember some things that can come in handy for the next problem, but it's always a whole lot of blind fumbling. PM me if you're having too hard of a time or can't get around some error and I'll help.

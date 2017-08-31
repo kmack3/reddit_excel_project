@@ -1,0 +1,102 @@
+Higher Level Excel Skills / Modeling
+Go to YouTube and search for Excel Magic Trick #1.  I believe there are over 1500 videos in this series, all 10 minutes or less, and there are workbooks.  Taught by a college professor and no nonsense fluff. If you do it, you will become an excel master.  Much better than books.
+Learn how to use Power Query and Power Pivot in Excel, and eventually Power BI. Understanding how to acquire, shape, relate 
+ and visualize data will help you for the rest of your career.
+
+
+Don't shy away from programming. If you're building Excel solutions now, you're already programming.
+
+Learn something more worthwhile. Any excel problem you have you can just google the answer. Learning how to code would be a similar but much more adaptable skill. 
+You could try asking this question on /r/finance or /r/accounting - maybe someone can post some examples.
+Notwithstanding the other good advice you've already received, I would suggest the following:
+
+* For "advanced" problems, as often as not you'll turn to lookups (for most flexibility, the combination of `INDEX` and `MATCH`), and pivot tables – get familiar with these if you aren't already.
+* When working with data (and especially with dynamic data), structured references make life much easer (Home > Format as Table).
+* For formulae tricks, read [Chandoo.org](http://chandoo.org/)
+* For best practice charts, read [PeltierTech.com](http://peltiertech.com/)
+Don't know about best practices, but how about giving these a try?
+
+http://www.modeloff.com/questions/
+Check out Excelisfun on YouTube, he has thousands of videos on Excel and is a really good teacher. Check out his Highline BI series. 
+
+Next I would suggest broadening your skills by learning some SQL, Wiseowl tutorials on YouTube has a series for this. SQL and Excel work great together, and SQL is a language that can be used to communicate with most databases you will likely encounter.
+Thank you everyone for the helpful replies. I look forward to reading through/watching  the info provided. Please keep the suggestions coming if there are others. Thanks 
+For me, browsing /r/excel and trying to solve the questions I've found has helped a ton with my excel skills. You have hundreds of challenging mind exercises in different difficulty levels, plus you get clippy points!
+See also our [Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/) in the sidebar.
+You should clarify what type of skills you're looking to sharpen. This subreddit likes to tout Power Query/Power Pivot and more sophisticated VBA as the higher-level skillset but truthfully you use very, very little of either of those on Wall Street. If you're trying to prepare yourself for an investment banking/PE role, you should focus specifically on three-statemenr operating models as the true litmus test. 
+I've developed the majority of my excel skills through a combination of necessity, google-fu, and "If I do this, will that accomplish what I'm hoping to do?"  But if you'd like a reference I would recommend "Financial Analysis with Microsoft Excel" by Mayes.  I picked it up as an advanced reference (and a gentler intro to VBA than other books) and it is pretty good.  I didn't pay much attention to those section, but it appears to cover things like conditional statements, lookups, and pivot tables very well.
+
+Excel is fun got me a great job in college and made me look like excel God after. you need some kind of job or work that forces you to use excel daily, once that's done you will realize that you want to automate some stuff, vba is great for office. If you work in any f500 or large company, they are still using spreadsheets. From Goldman Sachs, to Accenture, to Government jobs.   
+
+Making models are not hard, its just organization and having dump pages and using look ups to bring the values needed to calculation tables.
+It might be worth asking for financial modelling examples in /r/financialmodelling, and there are sometimes examples shared in the "Financial Modelling in Excel" LinkedIn group.
+Honestly. Go learn anything but excel. It's not a differentiator. I'd say go more dataviz like tableau if you're adverse to coding. You say high level, but no VBA which basically are incomparable with each other.
+
+Based on your phrasing I'm going to assume  you're like literally any other job applicant who says they're proficient in excel because but have never heard the term pivot table. If that's the case then start learning those and lookups etc.
+This is a very good course on the consulting/modelling theme:
+
+[BeyondFormulas: Complete MS Excel Techniques & Modeling](https://www.udemy.com/beyondformulas-excel-modeling-for-analysts/?couponCode=STEALAT20BUCKS)
+
+I did it a while back and got a lot from it. Worth the money IMO.
+Winston and Albright, practical management science. 
+If you want to become an Excel ninja you should work with it on a daily basis. Preferably as a profession. I work as an data analyst / reporter in a customer support department. I spend like 20 hours a week working in Excel for the past 10 years or so. I'm consider myself a junior ninja at the moment. 
+
+I made a personal finance dashboard that I use for myself and sharing it with some friend and family. If you want you can give it a try. Have to say it contains some Dutch words and is optimized for use with Dutch banks. See it as an template or just some guidelines for making your own. If you want to take a look, you can download it at: https://goo.gl/AB7iX4
+Thank you all for your helpful input. I am starting to go through the websites and materials suggested. 
+
+Just so folks know, I have experience using excel at work and am pretty fluid with the more commonly used functions such as VLOOKUP, etc. I would like to i) learn about less frequently used functions (e.g. LEN, OFFSET, etc) and practical uses for using these more obscure functions in financial modeling, and ii) learn best practices for setting up financial models and what functions to use (e.g. EOMONTH for setting up dates for a debt table or best ways to arrange debt table for PIK-toggling, etc). Perhaps I'll learn VBA at some point but not sure I have time to do that now.
+
+The resources shared were incredibly helpful and am thankful to the community for sharing. Thanks everyone!
+What's that channel specifically? That seems interesting
+excelisfun is absolutely incredible for learning excel.  the gap in quality between his videos and every other excel tutorial i've seen is huge
+This is a great answer, OP.  I've been working in excel for over 20 years and have been using Power Query and Power BI extensively the past year.  I've taught myself some DAX and learn more everyday.  It's like the love-child of excel and SQL.  Knowing how to import, model and manipulate data into nice dashboards has been a game changer.
+what type or where would you recommend learning to code? I tried code Academy for a short time but it felt a little shallow, although maybe I never gave it a serious enough shot. 
+Disagreed. There are many problems expressable inside of Excel that either aren't solved publicly, or just haven't been solved in Excel.
+
+Probably most of the beginner, intermediate, and advanced stuff is probably out there, the same as all of those are present for the various programming languages one could learn. But to matter a programming language you must adopt a mindset that orchestrates what you know with the problem in front of you. Those are the type of problems I believe op is seeking. 
+I am always disappointed when I see these sort of anti-answers, more so the fact it gets up voted.
+
+A negative answer like this is a cheap shot that offers no help whatsoever.
+
+-----------
+edit: You cannot google an answer for a question to a solution you are unaware of.
+
+you can google VBA answers too. i don't see the point here. it's like saying you shouldn't learn how to add numbers together because a calculator can do it
+Good idea - I will also but generally want to get even better with excel not just for finance functions so initially posted in r/Excel
+The CodeAcademy free sql course is pretty good.
+To tack onto this, vlookup, index/match, and hlookup in that order of importance.
+this is terrible advice. excel is pretty universal while tableau is more specific and conditional upon the company. even without vba, someone that has a ton of excel knowledge can drastically influence the quality of reports
+ExcelIsFun
+If you want to start with VBA, someone posted this (http://www.automateexcel.com/learn-vba-tutorial/) a few weeks ago. It's a pretty decent start to understanding the basics of VBA.
+i dislike code academy.  there's youtube channel called wiseowl which has great videos for starting if you'd rather watch than read
+The more specific your requirements for excel the less likely you'll be able google it. The time you invest or waste hours trying to find a solution while most people are like why are you doing it that way.so yes let's forgo the whole solution situation so I can explain to you the complexities of global trade meanwhile I have to randomize specific highly detailed data structures just to show you an image.
+The problem is that Excel is just a tool and it has relatively shallow job implications. Like /u/cakeofzerg mentioned, you'd be doing your future career prospects a major favor if you learned skills such as programming or database management. That's saying nothing of learning the ideas behind the modeling you're asking about.
+
+If you still want to learn some cool Excel stuff, I've had a fun time at www.excel-easy.com. Otherwise, you can get relatively good by just looking at some of the problems users post on this subreddit and trying the solutions presented and figuring out how they work or coming up with your own solutions. Best way to learn is to do after all.
+I'd put index/match up top because it's not much more difficult to learn than vlookup but much more powerful, especially in unsorted columns.
+I guess. I mean I can tell you I get emails daily from recruiters regarding tableau skills and 0 for excel.
+
+I agree it's a building block, but if I'm young like him, I'm going to commit to other skills. Not spreadsheet manipulation.
+[Link to first 200 set of videos](https://www.youtube.com/watch?v=5_P4P7lyJhw&list=PLC3D5DEE0852CDB92)
+While learning a programming language can be useful for a job, learning them doesn't necessarily mean career advancement.
+
+I've learned and used html, javascript, vba/vbscript, sql (t-sql, postgres, hive, impala), sas, and spss in different roles over the last 12 years.
+
+I've had essentially the same job in all of these roles, Analyst/Senior Analyst.  I've not seen any real progression because of my ability to adapt and embrace new platforms and technologies.
+
+If you want to advance your career, find a mentor/manager that can help you find that path.
+It's significantly more difficult. It a whole separate set of syntax. Walk into any office. Most anyone can do a vlookup, most everyone will stare blankly when you say index match.
+From my experience this is typical of the apparent ignorance of recruiters of the actual work space. A big comment agreed, considering it is your job.  To be fair though the problem lies with the employers who do not realise they need Excel skills to save a bucket load of time and effort.
+
+Excel is the glue that binds the application tasks together. 
+
+Excel saves time for even basic tasks.
+
+A lot of people do not have the basic knowledge of Excel to even realise how much, and how often Excel can save a lot of time and effort. 
+
+
+
+Yeah that's why I was confused. I saw 200 not 1500
+I think my advice was less about learning a specific language and more about learning the ability to program. Programming is so much more than knowing individual commands. The whole idea here is about versatility.
+
+And even then I would argue that knowing something like C# will open up more career opportunities than knowing Excel.

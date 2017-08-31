@@ -1,0 +1,47 @@
+The FRED Add-In for Excel is awesome. Is there anyway I could build a similar tool for my company's databases?
+2. Restriction
+You may not: reverse engineer
+
+Having said that - VBA passwords are often very hackable
+
+Hi!
+It looks like you are trying to ask a question!
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+Would you like help?
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+Ha!  I just came back to this page right after hacking the password.  Your comment is too funny.
+
+It's not really an add-in that I would personally use, but maybe the code can teach me a trick or two about importing data.
+don't tempt me then not post the password...
+Oh, sorry.  I don't have a clue what the password is.  I just broke the password it was storing and when you reopen the add-in it fixes the file.
+
+1.  Change extension from .xlam to .zip
+2.  Open zip file
+3.  Open the "xl" folder, find vbaProject.bin, and extract it out of the archive for editing
+4.  Open with a hex editor
+5.  Search for "DPB=" and change it to "DPx="
+6.  Save and close .bin file
+7.  Copy .bin back into zip file and overwrite the old one
+8.  Change extension back to .xlam
+9.  Open file, hit Yes and OK until the popups about errors stop
+10.  Hit Save in the Visual Basic Editor to save the fixed version
+
+I am digging their use of MultiPage.  I hadn't known about that option for user forms.  That one could come in really handy for me to combine several of my macro front ends into one interface.
+
+Edit:  typos
+Yea left us hanging...
+It's much easier to use a hex editor to replace the current password string with a password sting of a known value than to figure out what the actual password is.
+
+[Excel VBA Password via Hex Editor](http://stackoverflow.com/questions/22663809/excel-vba-password-via-hex-editor)
+
+>Locks keep out only the honest.
+
+-Jewish Proverb
+
+Nice.. Thanks, will look at it when I get home
+Very helpful. Thank you.

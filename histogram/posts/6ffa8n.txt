@@ -1,0 +1,18 @@
+How can i find a RowSource? [VBasic]
+Is it a named range? Try Formulas Tab > Name Manager
+Yes, i found them there, looks like "=Configuration!$B$2:$B$5"
+
+How can i edit the values?
+Solution Verified
+Go to the Configuration sheet, cells B2:B5. You can edit the values there.
+
+If you don't see "Configuration" along the bottom of Excel with your other sheet names, it's hidden. Right click on any sheet name and click "Unhide" and you'll see a list of hidden sheets. 
+
+[Here](http://www.theofficeexperts.com/VBASamples/Excel02.htm) is a password cracker if you need to unlock a sheet.
+Nvm just found that the workbook has that sheet protected by password >.< Looks like i will have to make them from scratch.
+
+You have awarded one point to _ThePhoenixJ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Wow, thanks, i'm trying the password cracker, it's taking a while.
+It can be slow, lots of combinations to try. Note this won't work with spreadsheet made in the more recent versions of Excel (2013 and 2016 I think)

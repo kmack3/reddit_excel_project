@@ -1,0 +1,360 @@
+What is the best Excel thing you've learned in 2016?
+If you highlight a portion of a formula and press "F9" it will calculate just that portion of the formula.
+
+Great for debugging.
+
+Be sure to use Esc when done or you will override your formula.
+Using INDEX() and Named Ranges to create a dynamic table that points to a different data source dependent on what you enter into another cell; made for some 'oooh' and 'aaah's in the office when I sent that report out! :)
+Alt+Down in a list header, to drop down the filter menu.
+For me - I think starting to get the hang of Power Query.  I have a peer-review process that happens quarterly and now I can just paste the CSV of a new quarterly spreadsheet into a folder and have all my pivots and other stats refresh to include the latest data.  So much easier.
+I just recently mastered index/match. I've been using excel in my accounting job for 11 years and for some reason this has always eluded me, this past week it finally clicked in my head and I've been having a sort of "duh" moment ever since. But I'd say it's a good way to close out the year!
+Ctrl + ;
+Ctrl-J for indicating a line break in Search/Replace
+from a few days ago, how to use mmult to downsize matricies to arays for further processing. 
+
+https://www.reddit.com/r/excel/comments/5jg718/i_found_this_difficult_array_challenge_and_the/
+
+and being able to call putty from excel to initiate my linux based analysis program and read the results back into excel. saved over 100 hours easily.  
+I did a calendar once in excel and everyone at the office like it. It was simple, printable and good enough in case you want to write over, destroy it and just print another copy. I've been making new calendars until this year that I was tired of doing a new one every year so I just follow [this](http://www.excel-easy.com/examples/calendar.html) instructions and I did [The Last Calendar](https://www.dropbox.com/l/s/AAAn2VpDUDHLll_0amCIO6kciEb9HpvNi5U).
+______________
+The best thing. It's not using VBA it's all done with formulas.
+Ctrl + G -> Alt -> S -> Y
+
+That brings up the GoTo menu, then special, then selects visible cells only.  Have you ever wanted to paste something to just the cells in a filtered list?  This is how you do that.  Learned that this year, and I use it non-stop.
+slicers
+I needed to aggregate data from different files at work. Had never heard of power query, http://www.howtoexcel.org/power-query/how-to-import-all-files-in-a-folder-with-power-query/ this saved me so much time. 
+I learned how to set a sheet to 'very hidden' in the VBA properties so it doesn't even show up when you go to sheet - unhide
+Right clicking in a cell to filter by that value, instead of copying it and pasting it into the filter in the header row.
+That a co-worker seeing me do some basic VBA scripting would result in me being fired for 'hacking'.  
+An avoidance of IF statements by use of a double unary and boolean logic.
+
+Getting a better grasp on array's either via hard coding or Ctrl+Shift+Enter
+
+Loving PowerPivot, hating PowerPivot and then hating PowerPivot even more. I think it's great but some of it's nuances irk the living hell out of me.
+
+Getting a better grasp on everything that is great about [AutoFill](http://itsnotaboutthecell.com/2016/11/28/use-autofill-in-excel/) and using your right mouse to drag the fill handle. That sh*t cray.
+The indirect() formula.  Can be really handy in financial reports.
+
+Oh, and I am eagerly awaiting for my company to update my copy of MS Office 2016 so I can get the switch and ifs functions!
+**VBA**
+
+I had dabbled with it before, but I did not understand the *[power](https://a.disquscdn.com/get?url=http%3A%2F%2Fmedia.giphy.com%2Fmedia%2Fd2sdxvH0u2oU0%2Fgiphy.gif&key=xbH9yCwGoNFzbbMQ7hwOtg)* of having programmatic control over my workbooks and my computer.  Now I use VBA for browser automation while downloading large parts lists, querying our database directly instead of repetitive importing and exporting from our in-house software, and otherwise automating significant parts of my workload.  I can do in seconds what used to take hours.
+
+I'm even building a full recreation of my favorite board game in Excel so that I can play against my friends over Dropbox.  That's still a work in progress, but I've learned from the project.
+Converting months into quarters easily.
+
+Let's say you have a calendar date (e.g 1/1/2017).  You can use the MONTH() function combined with a LOOKUP() array to return the quarter:
+
+=LOOKUP(MONTH(1/1/2017),{1,4,7,10},{1,2,3,4})&"Q"
+
+=1Q
+
+MONTH() returns a numerical value 1-12 (if your data is already organized 1-12, you can forgo the MONTH() function in place of the preexisting 1-12).
+
+Based on the set-up of the array, months 1-3 (Jan-Mar) return 1, months 4-6 return 2, etc.
+
+It's a simple trick, but much cleaner than writing nested if statements.  You can also use a ROUNDUP(MONTH()/3,0) but using the LOOKUP() function has opened my eyes to a bunch of other uses for it.
+
+
+I'm not sure if it's the best thing I've learned, but it's certainly been useful. 
+
+ISERROR(MATCH) embedded in a SUMPRODUCT. I needed to sum anything that didn't fall into 9 out of 12 categories (written as string), on top of only summing by a certain product and by date range. 
+Vlookup(...., True) for range lookups is really nice. Prevents a whole bunch of nested ifs. You can create a min and/or max range with a description.  You would look up your value in the range and select the corresponding description.  The TRUE part if the formula finds the closest value without going over. 
+Using data validation to make a drop down list, and then locking the cell so less excel-friendly coworkers are less likely to put the wrong input into complicated sheets. 
+Power Query and powerpivot killed the need for 90% of my macros.
+Mine sounds dumb in comparison to most of the ones posted... I discovered recently that if you want to copy+paste into multiple worksheets in the same place, select multiple worksheets by using shift or ctrl when clicking on them, and ctrl+v to paste.
+Basic shortcuts.  I use Shift + space combined with CTRL, +, - all the time to highlight and delete rows.  I get joy out of the simple things.
+Sum product using both row and column criterias.
+
+
+
+Powerquery/data get and transform. 
+
+Started with it about 2 weeks ago but I already love it. 
+Sumifs and averageifs for performing sum and average for periods of data between distinct periods of date/time.  
+How did you create a custom ribbon? I've been looking into doing this for some time now.
+I'm still pretty new to excel so I really only mess with basic aspects of it. 
+
+But for school I learned a lot about pivot tables. Man are they complicated and useful! 
+Power query. It is my everything 
+How to make a very large (like 10+) multiple y axis chart
+Multiple different print areas on a single tab.
+I like it when [something clicks into place](https://www.reddit.com/r/excel/comments/5ec0sf/countifs_a_set_of_names_in_column_c_does_not/dabcue0/) after a tussle.
+[deleted]
+The power that index and match give you.
+Hasn't been too useful and is actually really simple but drop-down menus are pretty neat.
+using a vbs script to close all excel objects, dump memory and re-launch a file that references an API object in which other programmers forgot to put in a kill command.
+A summation, like in the case of a [summation from 1 to N](http://i.imgur.com/S9RQrbv.png) where N is input to another cell, but the function also includes references that need to change and move with N. Found a neat trick that uses sumproduct(), row(), and indirect().
+Using named tables more. Makes formulas and macros simpler and more understandable 
+INDIRECT has been really useful to me this year.
+Advanced Filter with Unique Records Only selected.
+I use to hate tables, but recently I started to use them again and it makes readability insanely good. 
+RemindMe!
+Using SUMPRODUCT( --( range & conditional )) to count or matrix multiply entries with empty formula results.
+
+I never understood the "--" portion, but found a description putting everything into simple terms. SUMPRODUCT evaluates in boolean terms (True/False), the first "-" converts T/F to -1/0, the second "-" reverses the sign to 1/0. Brilliant.  Can also use this with multiple ranges and conditionals as a RANKIF 
+I'm super late to the party, but VLOOKUP. Using IFERROR has saved me even more time while using VLOOKUP! 
+Need to bookmark this thread, sure I'll learn a lot.  Mine is shift-f10-.  I typically go to paste values, but take the same as right clicking.  I like short cuts, still learning though.
+What the @ symbol does when used in a formula within a table. Much better formula readability now.
+Any button you see in the excel ribbon can be assigned a shortcut by using a personal macro workbook. Example: I find myself constantly needing to insert commas into large numbers I see in reports. Instead of selecting the cells I want to format then clicking the comma button in the home tab, I assigned CTRL + SHIFT + C to be able to insert commas to whatever I currently have selected.
+This year, I learned about the superpower of the Power Query add in. 
+
+A close second is the awesomeness of TEXTJOIN.
+
+A distant third is the intersection operator (space) which i can use, with named ranges, to replicate the results of a two factor INDEX/MATCH table lookup (but with a dead easy syntax like this: =firstsearchterm secondsearchterm
+3d maps! So easy to plot geographical data (locations) on the world map and create animations/videos. Very cool!
+Woah, woah, woah. Seriously? You just made my day.
+3 years of excel at work, never knew. I use alt + m + v to enter into complex formulas but this will definitely be useful too. thanks!
+Great tip.
+
+Beware that this always works as if it's a normal formula, i.e. don't use it to debug array formulas. 
+
+If the formula component evaluates to a range, you can press F5 to go there.
+This is an awesome trick. I will definitely get some use out of this. Thank you!
+WHAT?!?!?!
+That's mine too. Learned this a couple months ago and I'm never looking back.
+
+Follow-up tip: You can also hit undo after so you stay in the formula
+This is what Google Sheets does if you highlight the portion you want calculated. I've always wanted this in Excel. Thank you!
+Better than pressing ESC you can CTRL + Y or undo so you don't revert the entire formula back.
+Could you please explain this? Tnx
+How does one do this? I'm interested
+Came here to make the same comment.
+
+This makes quarterly reporting from system generated database files a breeze. I made three great pie charts, once, now I just select from 3 drop downs which Year, Quarter, and/or Division.
+Does that need INDIRECT() ? 
+Y'all need Tableau. 
+You really can't leave us all hanging.  PLEASE, FOR THE LOVE OF ALL THAT IS HOLY, tell us how this works.
+https://www.youtube.com/watch?v=jr9A0cXlK3M
+Do you have an example?
+Could you please provide an example of how this would work? It sounds like a great solution to something I've been working on, but I can't quite visualize it. 
+Can you explain this a bit more?
+Also would love an explanation 
+Then press e to start typing in the filter search.
+Thanks for that. I just learned a few weeks ago if you have headers across the top row of your sheet, placing the cursor in A1 (Ctrl+ home) and pressing Ctrl+Shift+L gives the top row filters. Saves you from having to click the data tab then filter button. 
+Great, that's really helpful for what I'm doing at the moment.
+
++1 for this. I gave Power Query another go earlier this month and HOLY SHIT! Something in me just clicked, and now I'm in love. Being able to create queries with multiple files you place in a folder and manipulating that data is just amazing. The timing couldn't have been more perfect, since I've working on making all warehousing inventory/replen/kitting reports ERP based. This just made it that much easier, and now I'm doing everything from scratch.
+Came here to say this. 
+For some reason I've always had an easier time learning formulas when they're written in plainer English - INDEX(column I want to return something from, MATCH(lookup value, column I want to lookup against, 0))
+I still stick to vlookup.  Occasionally I need index/match and still have to look up how to do it correctly.
+For some reason I just can't understand the index function
+> Ctrl + ;
+
+What does this do?>
+And Ctrl + Shift + ; puts in the current time! 
+No kidding? That's awesome
+You can also use this in a custom number format.
+Ah man, that second one scratches my nerd itch so good.
+Let's see an image of it?
+Ah this has just made my day, cheers! 
+I really like this! Is there an easy way to add more holidays? I work at a company with 4 different holiday schedules and would like to put them all on here.
+How is this different from Alt + ; ?
+I use this so often that I have added it to the quickbar and just press Alt - 4
+I love slicers.
+
+I made a phone directory table with a bunch of slicers so I can quickly find someone based on a few criteria. My coworker saw it and asked "how long did it take to make that?" To which I replied "oh, about five minutes". 
+What are slicers?
+Just to confirm, are slicers in essence a user friendly way to apply multiple filters? That's what I've gotten from them
+I was the same way. So much more transparent to use Power Query over a macro and easier to tweak. 
+You can also use VBA to hide named ranges. 
+
+    Sub HideNames()
+    Dim hidename As Name
+    For Each hidename In Application.ActiveWorkbook.Names
+        hidename.Visible = False
+    Next
+    End Sub
+Wtf. No one else at the company knew what VBA was either?
+I've read examples of what INDIRECT() is used for, but I can't wrap my head around when to use it. What do you use it for?
+That's impressive. What did you use to learn, any books or other sources you can recommend?
+Awesome. I knew nothing about macros to start the year and it took me some time to get my head around it. I'm still a total amateur but I've created 4 macros this year that cut out 16 hrs of work. 
+Can you explain how you did that? Right now we use 3rd party software to query the database and populate spreadsheets and it takes hours. 
+I never knew you could write your arrays right into the formula like that!!! You magnificent bastard!
+This is a version of the best thing I learned in 2016. It was a /r/excel post which showed the speed improvement of using `,TRUE` in VLOOKUPs. Doing so is not without its risks, but I reduced the calc time of certain macros down in a couple of beasts by a factor of 9 (as in from 27 minutes to 3).
+That's a good one but once or twice I've pasted something meant for one sheet across 20.  I also use it to select all sheets then select A1 if I want all sheets to start at the top 
+
+oooh, mind to give a hint on how to do that?
+I'm not at the laptop right now so will double check this later but you can right click at the top of the ribbons to select edit the ribbon. From there you can add a new one. You can add an icon for any excel command like open a file but you can also trigger a macro. Just record any macro you need often then add an icon for it. I like to cycle through all sheets to make them printer friendly by printing 1 page wide and having the fifth row repeat if it prints across multiple pages. Now I just need to click that icon before sending out. I use the open files most thought. 
+When you have a setup you like I'd recommend saving it somewhere as it's just on your machine. If it broke you would have to start over on the new machine. 
+Pivot charts are nice to figure out next. 
+Oooh please enlighten me senpai
+do you mind to elaborate?
+I've never understood it. How would you use it?
+What does it do?
+
+Edit: Found an explanation (source: http://www.databison.com/table-formulas-in-excel/).  Gotta play around with Excel to fully wrap my head around it.
+
+> Using a Specific Row from the Table in a Formula
+What’s good for a column is good for the row. Format, however differ. To refer to a row in a table, we use the @ symbol. So if you want to refer to the the 10th row in the table, write =sales[@] in any cell in the 10th row. So something like =countif(sales[@],”<>”) would give you count of non-blank cells in the particular row of the table. If you copy the same formula to the cell immediately below, the corresponding values from the next row would be returned – even though the formula hasn’t changed.
+That sounds really useful. Do you know if there is a tutorial out there how to do it?
+what is Alt + M + V supposed to do ? Just tried it and nothing happens? What am I doing wrong ? (the shortcut might not be the same because I'm using a french version of Excel)
+Check out this link for the actual sheet I made: [Dropbox](https://www.dropbox.com/s/7bs09oisto19ae9/Weekly%20Incident%20Report%20by%20Route.xls?dl=0)
+
+(Unhide the sheets with the actual reference data etc.)
+
+#MODS: this information is publicly available, my business is governmental and all data is publicly reported!
+
+There are a load of named ranges, each of which applies to a specific region.  Each region has data showing number of incidents & minutes caused by that incident for that week.
+
+By using a nested INDEX() and INDIRECT() formula:
+
+
+            =SUM(INDEX(INDIRECT($B$2),4,1):INDEX(INDIRECT($b$2),7,1))
+
+B2 holds the Name of the Named Range, 2016/17 Period 1 Target is held in Column One, Rows 4 through 7 of the named range, hence the INDEX(4,1):INDEX(7,1) portion.
+
+It's actually quite simple when you break it down but god it took me a while to work out how to get it to work, and it looks real fancy.
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+"Great pie charts" is an oxymoron. 
+Get that pie chart nonsense out of here
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+Tableau requires a bit of a culture change, and can be expensive.
+
+That and if you use the reader, ad-hoc analysis by the end user of a report is pretty much dead unless you built it in already (in which case, it's not really ad-hoc).
+
+I like Tableau, but it has a few turn offs. 
+what kind of data are you connecting to Tableau? I'm debating between Power BI and Tableau on what would be a better (and cost efficient) way of putting up dashboards pertaining to digital analytics data.
+Or Alteryx. Great for processing data from different sources and combining them!
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+Hey everybody, this is the video that teaches you how to do this dynamic table thing.
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+[See here - I commented the full details!](https://www.reddit.com/r/excel/comments/5jwaoj/what_is_the_best_excel_thing_youve_learned_in_2016/dbzjs60/)
+How did I not know this! 
+Ctrl+t to turn it into a table (with filters) instead. Totals row in tables are also very useful.
+I do that when I'm explaining it to others. 
+VLOOKUP(thing I want to find, place I want to look, column I want to return when I find it)
+
+Thank god im not the only one (◎_◎;) 
+I generally do but i had a really critical need for it this past week at work and it was like an epiphany.
+This puts in today's date
+Wow! 
+crux of it runs on writing a text file to invoke the relevent python scripts from the correct location and passing that text file to putty using -m, results are then read out of the resulting text files (having parsed them for linux EoL chars.) 
+
+its amazing how lazy / effecient having your dominant arm in a sling for 6 weeks can be! 
+[Here](http://imgur.com/a/prwR7) you have a picture. You can download it [here](https://www.dropbox.com/l/s/AAAn2VpDUDHLll_0amCIO6kciEb9HpvNi5U) 
+____________________
+The most difficult part was to highlight Easter each year using conditional formatting and a very complicated formula that I found [here](http://www.contextures.com/exceleastercalculation.html#easter) 
+His first "this" link contains an image
+The list of holidays are hidden on columns AR to AT
+
+Each holiday has a different formula. From the easiest one, First of January
+
+    =DATE([YEAR],1,1)
+
+to the diabolically difficult to understand but surprisingly simple, Good Friday.
+
+    =FLOOR(DAY(MINUTE(R2/38)/2+56)&"/5/"&R2,7)-34-2
+
+Adding the holidays on those columns and changing the conditional formatting to cover the new holidays added would be as easy or complicated as calculate the day for that holiday could be.
+It's an inferior way of doing the same thing you beautiful son of a bitch.
+Slicers link multiple pivot tables together (so long as they are linked to the same underlying data base). 
+
+This then means with one click on a slicer you can update multiple pivot tables (and any charts connected to the tables). 
+
+Slicers are a great time saver and are an excellent feature to use on excel dashboards 
+Sorry about that was busy with last minute Christmas shopping.. slicers allow you to create interactive charts off of pivot tables(excel 2010) or data tables (excel 2013/2016). Helps present cool professional results. 
+Yes. slicers allow you to create interactive charts off of pivot tables(excel 2010) or data tables (excel 2013/2016). Helps present cool professional results. 
+Please explain the difference of power query vs power query over a macro.
+Is there a way to unhide them without using a macro? (for sheets you can do that in the VBA object explorer)
+I was a contractor. The IT department said 'this is normal' in the aftermath, but I'm still fired "for misconduct".
+INDIRECT("C"&D4)
+Let's say D4 is 5, your cell would show what is in C5.
+
+This is great if you have an indexed list that you want to mirror. 
+Good for referencing a variable sheet name. 
+I recently had project where I had lots of businesses' data spread out over tabs (one for each respective business). I created a summary tab along with a really important metric that always appeared in the same cell on each business tab. Instead of having to go into each tab and copy-paste the value into the summary tab I used the indirect formula to reference the value based on the business name (each business tab had its business's name).
+
+Let's say the value I wanted to bring across from the business tabs was always in cell A1 and column B in the summary tab is a list of the business names with the first business name in cell B2. The formula on the summary tab looks like this:
+
+=indirect(indirect("'"&"b"&row(a2)&"'!")&"a1")
+
+I'm not at my computer to confirm if this works, I'm just writing it from memory. But this formula saved me massive amounts of time and more generally indirect() has proven really useful when used with dynamic data, especially in finance. The formula above is also using the row(a2) syntax so that it can be copied down, which was a big time saver as my list was really long.
+
+Note: the indirect() formula is volatile, meaning that it constantly refreshes after every action you make in excel (unless you set excel calculations to manual). Bear this in mind as it may put extra stress on your spreadsheets.
+i use it for my personal finance. rows 1-3 calculate the past twelve months (min, average, max). each column is one bill. With regular formatting, if i add a new line for the new month (so new months are always at the top) it would shift the formula down. using indirect i can target B4 and it won't move (even using $B$4 would result in it being shifted to B5 with adding a new row).
+Let's say you have five tabs in a workbook, in addition to the summary tab.  The five tabs are laid out in exactly the same formats (think of them such as individual businesses or sales regions).  So in your summary tab you can enter the names of the tabs into five cells, and use the indirect function to reference a specific location based.  Copy the formulas, and bam, its easier than manually linking everything between tabs!
+I learned by bashing my head against the wall until something worked.  I would know what I wanted to do, and would Google until I found an answer.  It would work, but a lot of the time there was a cleaner, faster, better way to do that thing.  I cannot understate the importance of planning out what you want your functions and subroutines to do, how they will do it, and having neat code.  You want just enough commenting that you can see what each 'paragraph' of code is meant to do.  You don't need to comment that the next line is going to set the value of i to zero, but organizing things into bundles with a specific purpose and leaving comments for yourself will make life a lot easier for future-you to tweak or debug later.
+
+Reading/writing to cells is incredibly slow compared to reading/writing to variables within VBA, even with Application.ScreenUpdating and Application.Calculation set to False.  The less you have to do this, the better.  When execution time becomes an issue, don't hesitate to build little test subroutines to see how long different methods actually take.  The best way to learn is by doing.
+
+https://www.techonthenet.com/excel/index.php has the basics of how to use the Visual Basic editor.  It's worth a read.  It omits the Locals window, which allows you to see the value of variables while you're stepping through your code.
+
+http://excelmacromastery.com/ has a ton of great stuff.  It's comprehensive and cleanly presented.  I wish that I had seen his material on Collections when I was starting out.  It would have made my life so much easier.
+
+http://analystcave.com/  has a number of good tutorials, but the author wasn't terribly thorough in his proofreading.
+I use ADODB to connect to and query the database.  You might need to do some googling to get everything working with your specific configuration.
+
+https://msdn.microsoft.com/en-us/library/ms677497(v=vs.85).aspx
+It involves a whole lot of vba also.  Start with a master chart that contains 1 series that you are plotting.  This serves as the base layer and formatting, such as grid lines, etc.  For each additional y axis that you want to display, make a new chart with a series for that axis, and hide everything or make transparent all of the elements except for the y axis and the plotted data itself.  Give an appropriate label for your axis, superimpose this plot on top of your base plot...adjust the position of the axis so that it's just to the left of the axis of the next layer down, and that the chart areas line up.  Repeat for each y-axis.  The result is a big pile of transparent chart objects with the chart areas and y axes aligned.  The vba is then used to precisely align the chart objects, chart areas, y axes, and everything else.  I have an event procedure to refresh this with any change to the sheet.  Vba is also used to make meaningful plot scaling, and x axis scaling the same for all charts.  Also vba is used to reorder the charts if you want to make format changes to a given charts series...this is a nightmare without a macro to bring that chart to the front.  This technique is helpful for data analysis if you are collecting multiple streams of, say, time based data, and you want to see all of the channels superimposed.
+
+I also figured out how to do dynamic plot scale adjustments by clicking on areas if the screen to define a zoom window...I also have pan, zoom out, zoom all operations too, using right-click etc.  This is very heavy on the vba.  It's also bundled in a add-on that I sell, so I'm not gonna divulge my technique.
+Just chose a print area on one part of the tab.  Then select another print area using the print area ribbon icon.  The orientation and paper size will be the same across one tab.  
+I think there is plenty of information available. Easiest thing is to learn more about the solver in Excel. Basically what you do is rewrite your problem in a mathematical way and adding constraints (for you this would mean a mathematical function which restricts viewing to movies at the same time). 
+
+I would start with the solver and if you want to learn more just google some terms.
+
+You could start with this website which gives some basic explanations about linear programming.
+
+http://www.science4all.org/article/integer-programming/
+It's Evalute Formula (Under Formulas bar). It basically walks you through a formula step by step to show you where the numbers are coming from. Helpful for if statements. 
+Now I see.  Very cool solution.  Thank you for this.
+"Great pie"? I'm down.
+
+"Pie chars"? Sure, I guesssss if we have to.
+
+"Great pie charts"? Haha, funny joke.
+Pie charts are good in very limited situations, but there are occasions when they're the best tool for the  job. Just not many occasions.
+Project KPIs and other similar management reports. Primarily from MS SQL.
+We're testing power bi right now. So far unimpressed.  Feels half baked, and excel can create more powerful a graphs.  
+Alteryx wouldn't really accomplish this.
+
+Source: currently have Alteryx, Excel, and Tableau open right now.
+You're a champion. Very awesome. 
+Thanks again 
+That one little thing changed my life. :)
+Or Ctrl+L (create a table over a selection) Shift+Ctrl+L (create just a filter over a selection)
+what are the benefits of having a table opposed to just data?
+As a value or as a formula?
+If you're using Python, why not replace excel with Pandas?
+I guess the hard part for me will be the conditional formatting then. I'm dealing with Spanish holidays, UK holidays, Singapore holidays (have you seen how many they have?) and US holidays. Including overlap, I'm willing to bet there's around 30 distinct days.
+you can make yourself a nice clickable buton for this in the "fast access" menu
+There are many guides online for macros that consolidate workbooks. Unless the code is rock-solid it won't handle changes in folders, unexpected file types or changes in data and gives a honk of an error message. Macros can be a bit of a house of cards; edit one bit and the whole thing comes crashing down. 
+
+Power Query, being UI-driven is much more elegant in handling errors and explains what's wrong clearly. It lists all the steps in the process in a literal linear list and you can roll up and down making changes. 
+
+Don't get me wrong, macros are great and can literally do anything with your files but Power Query makes life a little simpler in this instance. 
+http://www.kubiszyn.co.uk/deprecated/helpful-stuff-unhide-hidden-named-ranges.html
+
+The website above has a list of things that may help. I don't believe you can unhide named ranges without using VBA. You can still use them as normal when they're hidden. I do some, (I repeat, some) VBA coding at work, and I generally hide anything that is going to confuse anyone who isn't me, which is why it works for me. If you had to hide a specific # of named ranges (for whatever reason) you can find some code in the website above.
+
+Best of luck.
+Ah that blows. On the bright side, I do not have high hopes for that company.
+I am going to check this out. Thanks!
+That's amazing, thanks. I think I'll never need more than three axis, so it might be less of a pain in the butt, but it's still super useful to know. I didn't know you could control fine positioning of a graph with vba, I'll look into it! 
+Thanks! 
+got it! Usefull indeed, thanks a lot
+Treemap is always better than a pie chart and allows for nesting/tiling.
+Via api with auto refresh or manual upload? How does tableau play with multiple sources in a single dashboard?
+What kind of graphs are missing in BI? And what kind of data are you trying out in BI?
+Simply combining two data sets with an identifying field? Oh rly? I am pretty sure that is called a simple Join. I currently have all three open as well. What can be done with hundreds of vlookups in excel can be done with a click of a button - repeatedly in Alteryx. Saves me hours every week.
+I came back to work yesterday and have been using this shortcut all the time now, thanks again!
+One thing I like about tables is that if you have a table and insert a new column and populate the first cell in that column with a formula, the table automatically populates the entire column with that formula.  
+value
+A value. (edit: thought this was the other comment I made).
+The python is on a remote Linux machine and is used to correctly invoke the 3rd party analysis software. 
+The problem I got in UK is overlap holidays. I was thinking in using three different colours. Green for Ireland, Blue for UK and another colour to indicate that is holiday in Ireland and UK at the same time, but when you have to do it for Scotland and Wales the combination of colours would be crazy. The only way I manage to totally describe all those holidays was with the table hidden on columns AJ to AO.
+
+I don't know the holidays in Singapore but in Spain you got different holidays for different regions and sometimes even for different cities.
+
+Too much information. Maybe is worthy to show all the holidays with the same colour indicating that is holiday in "some place" and then add a filter to show the holidays only for certain countries. That way you can choose what countries you want to include in the list or not.
+The company is a US Fortune 50.  My old 'team' was just tech averse....so they brought on a contractor....and then I left suddenly.
+Each piece of the chart can be controlled with the .left .top .width. height properties.   Just like any shape or object in excel.   Chart dimensions sometimes are counter intuitive, so you'll have to trial and error to get it looking right
+tdes via Alteryx during development and live MS SQL connections in production. It's fine if you structure your data correctly. It's terrible if not, but that is also true for a single source. 
+A common one we use is stacked bar charts with lines (different sets plotted on primary and secondary axes).  Lack of basic/advanced formatting options is huge given the limited range of default themes.  This could be a version issue.  We may be running a version or 2 behind.
+ 
+Structured data (SQL9 and 12) and OLAP data. 
+My comment wasnt replying to the OP. Alteryx doesn't create dynamic tables. 
+That's a good idea. We have a printout for people to keep track but I don't reference it when making plans. With this sheet I can put everything on one simple table. Rather than having Outlook with all the recurring meetings on top of the holidays. 

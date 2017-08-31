@@ -1,0 +1,28 @@
+6it6pf
+Chart: Values as visual points to analog clock
+So I have a list of workplace accidents and times when they happened ( 12:45 ). [small part as example](http://imgur.com/a/GspOd)
+
+
+I would like to create a good looking chart that would represent in which time most accidents happens. 
+
+
+
+On of my ideas: I would like to make a chart that look like [analog clock](http://imgur.com/a/4GBiH) and add those timevalues to that clock. 
+
+
+
+If you have any ideas how to do my idea or have other sugestions, let me know.
+
+
+
+Thanks guys. 
+
+
+-------------
+What is the overall purpose of the chart? To show which time periods have more incidents, to be able to read what the incidents were, etc? Assuming you want to know when the most accidents are occuring, I would make a histogram/column chart. You could have each hour of the day as a column, and height of column shows number of events in the period.
+
+A compromise would be to make a Radar chart with 24 spokes (one for each hour). That way you get your circular "clock" feel. Won't be as easy to compare the different values for each hour, but maybe the goal is just prettiness, not data.
+-------------
+While not necessarily available in Excel, I do like the look of [circular bar charts](https://www.local-guru.net/blog/2011/5/27/a-circular-chart-im-processing) and this may a good representation for you. Or possibly a [radial bar chart](http://prcweb.co.uk/radialbarchart/).
+
+ETA: [Here's one for Excel, though not necessarily as clean.](https://superuser.com/questions/687036/how-to-make-a-pie-radar-chart)

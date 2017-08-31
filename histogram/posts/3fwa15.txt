@@ -1,0 +1,23 @@
+Why doesn't this simple, recorded macro work?
+You're getting an error because you've selected the Index sheet just before this line, but in this line you haven't specified the worksheet. When you don't provide complete references like WorkbookName.SheetName.RangeName, Excel just assumes the default. The default in this case is the Worksheet in which this Worksheet_change runs (read up on variable scope to understand the details). And, you can't directly select Columns("A:A") in your source sheet when you have just select another sheet.
+
+To fix your problem, you need to use this:
+
+    ActiveSheet.Columns("A:A").Select
+Solution Verified , that did it!  
+
+On that note, could I just skip selection altogether with specific referneces, like:
+
+    Sheets("RawData").Columns("B:B").Copy
+    Sheets("Index").Columns("A:A").Paste
+Yes! I didn't bring up that suggestion because I didn't want to throw you off of your self learning path. It's always best to avoid Select and give full references. 
+
+Recording macros is the first step of learning VBA, the next is using variables to store objects and performing actions directly.
+
+You have awarded one point to _xlViki_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Or you could use a directed copy.
+
+    Sheets("RawData").Columns("B:B").Copy Sheets("Index").Columns("A:A")
+

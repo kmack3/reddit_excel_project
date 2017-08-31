@@ -1,0 +1,137 @@
+How do I make my Google API querying macro work for just a single line instead of a full 16000 row refresh every time, and is it possible for VBA script to identify a change in cell value? (This one is for those who love a problem solving challenge for sure).
+This should do it!  Quite a cool tool. Props to the guy that made this.  There are no changes needed to existing VBA. Simply open the VBA Editor and place this code directly in the worksheet object (not module) for the worksheet that contains the data (the one you screenshot)
+
+
+            Private Sub Worksheet_Change(ByVal Target As Excel.Range)
+            
+                Dim strDistance As String
+                Dim strTravelTime As String
+                Dim strError As String
+                With Target
+                    If .Count > 1 Then Exit Sub
+                    If Not Intersect(Range("B:B"), .Cells) Is Nothing Then
+                        Application.EnableEvents = False
+                        If UCase(.Value) = "VACANT" Then
+                            'DO NOTHING
+                        Else
+                            'CALL GOOGLE API WITH SINGLE INFORMATION.
+                            strFrom = .Offset(0, 1).Value
+                            strTo = .Offset(0, 2).Value 
+                            strList = strFrom & "|" & strTo
+                            x = GetGoogleTravelTimeByList(strList, strTravelTime, strDistance, strError)
+                            .Offset(0, 4).Value = strDistance
+                            .Offset(0, 5).Value = strTravelTime
+                        End If
+                        Application.EnableEvents = True
+                    End If
+                End With
+            End Sub
+
+Hope this Helps!
+
+Jarrod Tanton
+
+Become a Formula Master @ www.xlessentials.com
+Have you tried hooking into the change events in excel?  That way whenever a cell is changed, you can fire off the API query for that row.  Means there's no need to have 16000 buttons or macros or anything.
+
+See https://support.microsoft.com/en-us/kb/213612
+Are you using the functions as a formula in your sheet?  If so, your sheet will try to recalculate each formula anytime any cell is changed.  A better approach would be to capture a status on each line and then have a button run the update macro to get the distance you need and then capture the value for historical purposes.  The status you capture can be used to 'filter' the rows you want to update.
+FYI You cannot mine the Google API for information. It's against the [Terms & Conditions](https://developers.google.com/maps/terms) of the service, that is unless you have specific permission from Google to do so. Pay attention to sections:
+
+ 9.1.1.a
+
+> Free access (no fees). Subject to Section 9.1.2 (Exceptions), **your Maps API Implementation must be accessible to the general public without charge** and must not require a fee-based subscription or other fee-based restricted access
+
+10.4.d
+
+> No use of Content without a Google map. Unless the Maps APIs Documentation expressly permits you to do so, you will not use the Content in a Maps API Implementation without a corresponding Google map.
+
+10.5.c
+
+> No use of Content outside the Service. You will not use any Content outside of the Service except as expressly permitted to do so in Subsection (d). For example, you will not export or save the Content to **a third party’s platform** or service.
+
+----------------------------------------------------------------------
+
+"Third party platforms" include Excel!
+
+Just a heads up, if you hadn't already though of it! :) Neat code thought :) And **if you need an alternative** try the open street map api:
+http://wiki.openstreetmap.org/wiki/API
+No link to the VBA code. Problem is more likely there than in anything in your spreadsheet.
+This is awesome. The button initiated macro to reset everything is now 100% accurate. However, is there a way to take this one step further and make it update when an individual row value changes instead of only running when the entire macro is running? I read the resource provided by /u/ethorad and I tried to modify your code but I still have no idea what I'm doing. I bet it looks hilariously illogical.
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        Dim KeyCells As Range
+
+      ' The variable KeyCells contains the cells that will
+ 
+      Set KeyCells = Range("B2:C15493")
+    
+      If Not Application.Intersect(KeyCells, Range(Target.Address)) _
+           Is Nothing Then
+
+        ' Query Google for travel distance when KeyCells are changed
+         Application.EnableEvents = False
+                    If UCase(.Value) = "VACANT" Then
+                        'DO NOTHING
+                    Else
+                        'CALL GOOGLE API WITH SINGLE INFORMATION.
+                        strFrom = .Offset(0, 1).Value
+                        strTo = .Offset(0, 2).Value
+                        strList = strFrom & "|" & strTo
+                        x = GetGoogleTravelTimeByList(strList, strTravelTime, strDistance, strError)
+                        .Offset(0, 4).Value = strDistance
+                        .Offset(0, 5).Value = strTravelTime
+                    End If
+                    Application.EnableEvents = True
+       
+    End If
+End Sub
+Thanks heaps! I'll give this a shot at work tomorrow and see how it goes and let you know!
+Thank you so much for the resource. I will start reading up on it asap. Much appreciated.
+The code I provided was already monitoring changes in Column B. I made the updates for additional columns here.
+
+
+            Private Sub Worksheet_Change(ByVal Target As Excel.Range)
+            
+            Dim strDistance As String
+            Dim strTravelTime As String
+            Dim strError As String
+                With Target
+                    If .Count > 1 Then Exit Sub
+                    If Not Intersect(Range("A:C"), .Cells) Is Nothing Then
+                        Application.EnableEvents = False
+                        If UCase(.Value) = "VACANT" Then
+                            'DO NOTHING
+                        Else
+                            'CALL GOOGLE API WITH SINGLE INFORMATION.
+                            strFrom = Cells(.Row, 3).Value
+                            strTo = Cells(.Row, 4).Value 
+                            strList = strFrom & "|" & strTo
+                            x = GetGoogleTravelTimeByList(strList, strTravelTime, strDistance, strError)
+                            Cells(.Row, 6).Value = strDistance
+                            Cells(.Row, 7).Value = strTravelTime
+                        End If
+                        Application.EnableEvents = True
+                    End If
+                End With
+            End Sub
+
+All you have to do is change the "A:C" (near the no intersect stuff) to reference the columns you want to monitor changes in.
+
+Jarrod Tanton
+
+Save Time at Work! Master Excel Today!  @ www.xlessentials.com
+I see. However, it only operates when I start the macro to check down all 16079 rows (Which is still useful and important, hence the gold :D). So if I change a value in the database tablet, which changes the result of columns B and C for the relevant row, it doesn't change the Distance and travel result for just that row. I still need to activate the macro and wait for it to reach that row for the change to occur. Is there a way to make it actually initiate a query JUST for the row that had a change, but automatically? So the change for a specific row in Column B is a trigger that runs the macro for query results columns E and F for that specific row.
+
+edit: it just occurred to me that the change log may not be working because my changes are made by changes in the database sheet, and the vlookup formula in the cell never actually changes. When testing the simple code from here https://support.microsoft.com/en-us/kb/213612 with Vlookups it no longer displays the message, only if i change the formula.
+You should not need to press any buttons to call the macro. It is automatically monitoring the worksheet change event. 
+
+Did you place the code inside of the worksheet object or inside of a module? If you placed it inside of the module, it won't work. However, inside of the worksheet object should work just fine. I'm using it on my pc right now without any issues.
+
+Try pasting the code in there, saving the workbook and then opening it back up. (ensure macros are enabled)
+Hmmmm strange. I have definitely inserted it into the Worksheet, while my other original macro is in it's own module. It recognizes the change when I run the original macro since putting your code into the worksheet, but it's still not automatically updating. Does the original macro also need to be in the worksheet?
+I have them in separate spots. Did you alter the code from the original .txt file you posted? If so, you should delete everything you have in your module, copy the original code, and paste it in there.  That way you have the original code and the code that I provided you.
+
+I don't think so, but I gave it a shot anyway; no change. I can upload the entire worksheet if you like, but i will have to remove most of the inputs and just leave a few fake lines of data.
+
+EDIT: Else if you want provide the worksheet you made to test it in maybe I can work out the difference between yours and mine.

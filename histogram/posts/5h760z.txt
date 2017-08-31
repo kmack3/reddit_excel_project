@@ -1,0 +1,111 @@
+What's your favorite addition to Excel in recent years?
+Honestly iferror is still one of my favorite developments.  Formulas are so much cleaner without having to do all the nested if statements to error check.
+Power Query. Brilliant solution to a common problem, simple UI, and the powerful M language backing it up. 
+
+One of the reasons I've found thats exciting with its potential is that each step along the way is given a name. So with only the slightest tweaks to the code you can dive down very deep into your data, retrieve a sum or other number on the fly, then retreat back to any step along the way to place that number, and change the outcome of what you're doing.
+Power Pivot and Power Query have changed the game. No contest.
+A working 64bit version is top of my list, specifically for the ability to access more than 2GB of RAM. Aside from that, the semi-modernization of 32bit by going to 1 mil rows. But then, I suppose Excel 2007 is not necessarily recent.
+I agree that multiple windows is awesome. I would say that Slicers are a great tool. I integrated them into my dashboards and they are way cooler to work with than ActiveX. 
+Filtering by Color - this blew my mind when they finally introduced this back in 07
+[deleted]
+COUNTIFS/SUMIFS/AVERAGEIFS.
+One of the most-used at our office since its introduction is Flash Fill. Everyone loves it!
+The tool that helps you find external links wherever they are in your workbook.
+
+Oh wait, that still doesn't exist.
+You know, I worked in Excel 2016 prior to my current job quite frequently.  back in September I switched to a different company and have been working in Excel 2010.  I felt so handicapped because of the tiled screen, I didnt know what to do with myself.  Just today, I got my excel 2016 back.  
+I like how I can change the theme of my excel to TOAST 
+Ifna is so useful I can't live without it now 
+The remove duplicates button on the data tab, absolutely fantastic.
+The ability to "lock" the format painter when painting to multiple destinations.
+
+Just double click it , and your cursor stays as a brush. Press escape to release. 
+
+Still hasn't made its way to Visio unfortunately.
+Clear Filter button. Much easier than turning the filter off/on to clear the filtered values. Certainly an 'old' new feature as I think it came out in Excel 2007, but still love it as I use it countless times a day.
+IFS !!!!
+Well not addition to Excel but a subtraction from rather. Power BI has been an incredible departure for those who deal with visual reporting. Being able to take the best parts from MS Access, Power Query and data marts in general to build robust reporting platforms has been a great step forward. We aren't using it within my company as of yet but I can easily explain to my boss that this software is eventually how he can replace me without worry.
+FYI -  you've been able to open multiple windows/instances of Excel going back to at least office 2006. 
+
+You had to start excel from the start menu (or shortcut) a second time to do it.
+Oh wow, I think ever since I've learned Excel (fairly new to the game), that's been an option. I couldn't even imagine, I use that frequently! Thanks for sharing!
+To be honest, I've never had a reason to use it for work. The only time I have used it was for the Excel Championships last month, which made me hope I can use it for work soon! Thanks for sharing!
+How do you step back in M? I'm not sure I understand.
+
+I'm only just dangerous in Power Query. I would like to be better.
+
+
+I agree except for M. The mashup language has to load each step before filtering it, causing it to crash or be slow when designing queries on large data sets.
+
+Power Query is great though.
+Agreed.  PP & PQ are for sure the best additions in recent years.  ...I mean, the stuff they can do is just crazy.  
+What might be a business application for these (can be any business, but I focus on the financial side of things)? I just haven't been able to justify learning them well yet for how little I think I would use them. 
+Yep, Slicers are great (and Timelines).  ...I'd probably have to tip towards PowerQuery though.
+[deleted]
+Yep, definitely useful! I'll often highlight a cell or row in my table to come back to and review, which is so much more convenient than adding a new column named something like "Marked for review" and remembering to put an "x" for that row. And it looks like someone commenting learned something new today, thanks for posting!
+Well I've learned something today
+Google 'Excel 2010 multiple instances'. 
+
+There is a way. 
+Calm your tits Pam or HR is going to have a stroke.
+Sounds terrible, I hope LanMarkx's comment helps you out!!!
+and ad 'IFS' to that as well for me.
+Now they just need to add minif and maxif and we'll be golden! Thanks for sharing!
+I can definitely see how it's useful, I just feel like it usually tries to FlashFill something for me that I don't want. Glad it's beneficial for your office though, thanks for sharing!
+Came here to say this. How did we survive without Flash Fill for so many years...
+Not an Excel feature explicitly, but have you tried the add-on "Asap Utilities"? It is amazing in the things it can do. It will make you a report with every cell reference and formula in your document, as well as external links
+data -> connections? 
+Oh man, that could be an entirely different post. "What doesn't Excel still not have that it needs to add?" I'm pretty sure when the Excel team did their AMA awhile back, they have a place for suggestions if you want it that bad!
+It does exist - you have to enable the Enquire tab, then perform workbook analysis. It will list all the formulas in the spreadsheet, as well as which cell they are in. I think this is only available from excel 2013 onwards. 
+Today is a big day, congrats!
+Hahaha it's the little things in life. Thanks for sharing, I got a laugh!
+Hey, that's cool. TIL
+Had to look that one up, but it's going in my toolbox now. Thanks for sharing!
+Iferror also covers n/a error though.. why not use that one?
+Straight magic! Definitely useful for many of the things I do. 
+Is there a hotkey?  I usually just use ctrl-shft-L to turn the filter off then back on.  
+I always forget this exists and start in-filtering each column separately (don't judge me, I know it's a terrible method), so thanks for the reminder that this exists!
+There are disadvantages to that, especially regarding copying and pasting between instances.
+Interesting, I did not know that, thanks! Not sure why I was always taught to tile them, but perhaps it's due to reasons mentioned by arcosapphire below. 
+It used to be =if(iserror(yourformula),"something",yourformula). And if yourformula ever changes, it needs to be changed correctly in two places. This was added in Excel 2007.
+Open the Query Editor for one you've already created, click View & then Advanced Editor. Look at what you have there. Each new line begins with a # and a name. Those names are the pregenerated & alterable ones you see on the right side when using the normal UI. So using your knowledge of what this Query is doing for you in the real world, take a look at what code for that literally says. You start with a source, start naming tables (#) and work with built in subroutines & functions. And each new step gets a #"name" and then says something like Table.AddColumn(#"NameFromLineAbove" yadayadayada). Through the UI this part is impossible to change, as it only flows in one direction, but here in the Advanced Editor you can very easily change any of the parts on the right side of the equal sign to reference ANY of the #"names" you've created along the way, not necessarily the one directly preceeding it. Think of the #"names" like variables in any programming language. You can store an array (table) in them, you can drill down to a single number and treat it like a Long variable or something, the sky is literally the limit. 
+
+In one of my applications of this I do just that, I drill down, store a single number as a #"name" and then in my next line simply do the next step I wanted to perform on the table this one number came from and use my new #"name" in math equations as if it were referencing a cell in excel that contained the equation I performed when I drilled down into that table to get it! Get it? When you do its a game changer for PQ. Its like redirecting the flow of water into little channels, picking up supplies, then immediately jumping back to an upstream part of the river in order to use those supplies as you come down again.
+PowerPivot and PowerQuery turn Excel into a self-service business intelligence tool like Tableau or QlikView.
+
+So, I have a daily workflow set up that uses Power Query to pull in data from multiple sources (data warehouse, vendor csv files, etc.), cleanse and format, then add it to my PowerPivot data model.
+
+All of these data sources are related in the data model and I have written formulas (measures) that calculate various metrics. On top of that, I've built a dashboard with tables, charts and slicers.
+
+So I come in, in the morning, open that file, hit refresh and my dashboard is updated with the most recent data. I then publish these dashboards which are used by management to see how we did yesterday, weekly, month-to-date, whatever they want to see and can plan for the future. All of this is automated, the only thing I have to do is hit refresh.
+
+I can't show you my dashboards (I actually have several I've built this way) but you know what dashboards look like.
+
+I think the best place to start with PP and PQ is here: https://www.powerpivotpro.com/what-is-power-pivot/.
+
+PowerBI is the standalone version of PP and PQ and is better suited for integration with enterprise IT. Sadly, we are not a Microsoft shop, so I stick with PP and PQ.
+
+
+Ahhh yes, since my users don't all have PP/PQ installed on their computers, I haven't needed to learn it. I've heard amazing things about it though.
+Can confirm. Up until a few months ago I was working wth 2010 before my company bought me an upgrade. It's incredibly tedious and I don't remember how I did it, but it could have been as primitive as having a separate sheet with calculations and doing multiple singular countif functions in my jdividual cells then adding those together. Essentially using countif to manually construct a cross tabulation table. 
+I think you lose some functionality with multiple instances though. This is a minor one, but I know you can't paste values between instances.
+
+It is nice when you have two screens to have two fully functioning workbooks on two screens.
+TIL
+
+
+I'm using Excel 2013 which doesn't have that. This is making me seriously consider upgrading
+I think they have that with 2016
+
+https://support.office.com/en-us/article/MINIFS-function-6ca1ddaa-079b-4e74-80cc-72eef32e6599
+Isn't that in '16?
+Usually it's something like a named range that refers to another workbook and it's difficult to find.
+If memory serves me correctly it only tells you which outside workbooks the workbook is connected to. Not the actual cells that are connected to them.
+Hmmm, does this find external links in data validation, conditional formatting, graph axes etc etc.
+Yes, I remember not being able to paste values between the two. Very frustrating if you're trying to work between two screens and need to cut from one book and paste into the other but keep the formatting.
+IFERROR makes me wish I could shorten this type of formula:
+
+IF(MyFormula=SomeCondition, MyFormula, SomeValue)
+IFERROR makes me wish I could shorten this type of formula:
+
+IF(MyFormula=SomeCondition, MyFormula, SomeValue)

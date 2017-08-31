@@ -1,0 +1,45 @@
+Extract first letter of first name, join the last name and add @gmail.com at the end?
+Assuming the cell A1 contains "Jack Smith":
+
+=LEFT(A1,1)&MID(A1,FIND(" ",A1,1)+1,100)&"@gmail.com"
+I'm no Excel expert so there could be an easier way, but this is how I would do it.
+
+Text to columns the name to make Jack Smith into two columns, 1st column with First Names, 2nd column with Last Names. Add a 3rd column with "@gmail.com" typed in and copy down to all rows. Then in the 4th column, to get your desired result, then concatenate the 1st letter of the first column with the 2nd and 3rd columns. So in the 4th column, the formula would be "=concatenate((mid(A1,1,1)),B1,C1)". 
+
+I hope i helped and didn't confuse you
+You want vba?
+
+Public Sub Workbook_Open()
+
+Dim str1, str2, email as string
+
+dim norows as integer
+
+for i = 1 to norows
+
+str1 = sheet1.cells(i,1).value
+str1 = trim(str1, 1)
+str2 = sheet1.cells(i,2).value
+
+email = str1 & str2 & "@gmail.com"
+
+sheet1.cells(i,3).value = email
+
+next i
+
+End sub
+
+** This is assuming the data lies in sheet1
+You have an example of what your data looks like? It'd be really easy to do what you want just figure giving you the perfect solution is better than a generalized solution 
+I get the feeling that you just helped a spammer. 
+LEFT(A1,1) pulls "J"
+
+FIND(" ",A1,1)+1 will return the number 6. This signifies the starting point for the last name. It returns this by finding the space in the name and adding 1. The MID function takes the starting point (6) and grabs the next 100 characters.
+Beautiful! Thank you!
+Or with text to columns, do
+
+=concatenate(left([first name],1),[last name],"@gmail.com)
+
+Does the same thing but is more simplistic in code
+FYI you can use "string" & "string" as a direct replacement for concatenate (a lot shorter) 
+But a really bad spammer who can't code.  I think we are safe

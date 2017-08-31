@@ -1,0 +1,152 @@
+VLOOKUP vs INDEX/MATCH Showdown
+I only like index/match because if you reorganize columns you don't need to change the formula 
+Innerestin, but how much influence on your results does the fact you've got only 4 columns of data have? What if you made that 8, or 16 or 32?
+VLookUp has it's place within an inflexible table, but you have to remember that the application of Index/Match is able to do left handed LookUp and unlike VLookUp, doesn't rely as heavily on a numerical place.
+With INDEX/MATCH, you can do a MATCH column and then many INDEX columns that use the results of the MATCH column. 
+
+So if you need to lookup 4-5 columns of data from another table, INDEX/MATCH should be a lot faster than VLOOKUP.
+I know that I made a similar comment recently, but my comment was more about convenience for the user as opposed to performance efficiency.
+
+In my line of work (audit) I find that most people don't push their computers to their limit. A few of the large spreadsheets and macros I use -do- push my computer to its limit, but I am a rare case among my colleagues.
+
+Thanks for the write-up.
+Is there a difference in file size between a VL or a IM?
+Another test reached the same conclusion on sorted vs unsorted, but also with 3 additional lookup methods that are 15x faster than the usual INDEX/MATCH or VLOOKUP functions.
+
+Link's here: http://analystcave.com/excel-vlookup-vs-index-match-vs-sql-performance/#Performance_comparison
+Hey , guys can you please point to some good index and match tutorial ? your discussion though i am sure makes for interesting talk and i would surely like to join in..
+I made a similar test at one point, slightly different setup (just running full recalc on a lot of lookups and testing the time for it to finish)
+
+https://www.reddit.com/r/excel/comments/2wvo4g/calculation_performance_vlookup_indexmatch/
+
+Testing finding two values based on a lookup and adding them together. 
+
+IMIM = Index match + index match  
+VLVL  = Vlookup + Vlookup  
+MII = Match helper column + index on match value  
+INTJOIN = Single INDEX-MATCH on the whole range with 0 in the column field and then using space (intercept) to get the values  
+MINTJOIN = same as INTJOIN but with the MATCH in a helper column
+0/1 = unsorted/sorted search
+ 
+
+Trial | IMIM0 | VLVL0 | MII0 | INTJOIN0 | MINTJOIN0 | IMIM1 | VLVL1 | MII1 | INTJOIN1 | MINTJOIN1 | 
+:--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | 
+1 | 12.879 | 12.599 | 7.244 | 6.5 | 7.384 | 0.06 | 0.059 | 0.062 | 0.089 | 0.094 | 
+2 | 13.344 | 12.78 | 7.315 | 6.591 | 7.362 | 0.054 | 0.056 | 0.059 | 0.089 | 0.106 | 
+3 | 12.922 | 12.902 | 7.259 | 6.526 | 7.36 | 0.058 | 0.055 | 0.06 | 0.093 | 0.096 | 
+Average | 13.048 | 12.760 | 7.273 | 6.539 | 7.369 | 0.057 | 0.057 | 0.060 | 0.090 | 0.099 | 
+
+
+Didn't find any major difference between VL and IM (maybe sliiiiiightly faster), but  I did find a huge improvement between sorted and unsorted? 
+
+If you're matching the same thing multiple times in a long formula (or multiple formulas), then doing the match once in a helper column could lighten your recalc significantly. 
+
+If you're returning multiple values from the same matched row/column, and dont want to use a helper column, then it's worth looking into some sort of alternative setup returning the whole row/column and intercepting it with the columns you're interested in. 
+VLOOKUP/HLOOKUP help me avoid array functions in some cases. In those cases, I don't care how long it takes to compute the table. 
+This is probably the most exciting post in /r/excel. This is why I subbed here. 
+Interesting test, how does the result compare with in memory processing on a vba array? - either using find or looping through, i imagine for sorted data, looping the array might be even quicker. 
+Both VLOOKUP and MATCH assuming sorted tables/arrays use binary search whereas exact matching uses linear search (and can be even slower when using * and ? wildcards). Numeric searching is always much faster than text searching. To see where sorted tables/arrays really help, you'd need to lookup text values.
+
+Ensuring the lookup range is sorted is almost always a good idea when __you__, the workbook creator, control the layout. Only user-entered data should require accommodating possibly unsorted data.
+
+In the models I've seen in the wild, lots of formulas, over 10,000, using either INDEX-MATCH or VLOOKUP, and mostly looking up 2-character US state/territory abbreviations. Sorting tables and using INDEX-MATCH and VLOOKUP assuming sorted tables is more than a bit faster than unsorted.
+
+OTOH, VLOOKUP is 1 function call, INDEX-MATCH is 2. Every function call imposes some additional overhead, so VLOOKUP should be preferred when looking up up on the leftmost column, INDEX-MATCH when looking up on other columns.
+My vote goes with using power query merge functionality instead. 
+
+Vlookup and index and match are okay but I don't want my Calcs open to manipulation from my audience. So I build all my transformations in M then publish results. Also.. power query can relate entire tables or sub queries instead of just calling a related field.
+
+The last fact makes it faster too.. I think.
+#TEAMINDEXMATCH
+1. Looking at computational efficiency is a small and often insignificant part of the efficiency of formulas 
+
+2. You have no idea what sort of big o notation this follows 
+Vlookup-match anyone?
+Or insert a column. Heaven forbid anyone does that in the table array when there could be vlookups anywhere in the workbook that have a hard coded column index number. This is how nearly everyone sets up their vlookups because it's how vlookup is taught. Even [Microsoft](https://support.office.com/en-us/article/VLOOKUP-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1) does not cite as a best practice to make the column index number a calculated result: like for example `COLUMN($D:$D)-COLUMN($A:$A)+1`.
+Each test uses a lookup against a single column to keep everything level and simple. The idea I am testing here is, 'how fast can the lookup return the key?'. 
+
+My method avoids the added overhead of looking for a return result from another column. Does that make sense?
+The point here was to compare performance, not flexibility.
+
+I agree, left-handed lookups are the domain of INDEX/MATCH, not VLOOKUP. but that is a different discussion.
+And this is the real-world case imnsho.
+I too have models built in Excel that push my processor to the breaking point. And in my experience, VLOOKUP might be faster on a two-column data set, but the ten- to twenty-column sets make INDEX-MATCH the clear victor. 
+> I made a similar comment recently
+
+FWIW I did not see that comment. I am only trying to provide objective information about performance. 
+
+I am curious, though. As an auditor, what benefit do you ascribe to 'pushing computers to their limit'?
+According to the article you posted, the author arrived at different results regarding performance of sorted lookups:
+
+>What comes as strange is that **both the VLOOKUP and the INDEX MATCH actually performed worse when executed against a sorted lookup table**. Not something you might expect, but broadly explained by Excel-guru Bill Jelen in this podcast 
+Chandoo is good - maybe start with this one:
+
+http://chandoo.org/wp/2010/11/02/how-to-lookup-values-to-left/
+There's resources all over google to be fair
+Thanks for this, tjen. I just replied to another commenter that you [*can*](http://i.imgur.com/fIAGtUC.png) return a multi-column array using VLOOKUP.
+What's your point? 
+
+My empirical observation of efficiency says 'more study is needed'. 
+
+What weight does big O carry when results are what actually matter?
+> Looking at computational efficiency is a small and often insignificant part of the efficiency of formulas
+
+I suppose you don't use VBA. VBA applications is sloppy and slow for a reason can do things in a blink of an eye, yet complicated macros can take hours to complete. At this point every saving is a good one.
+
+
+>You have no idea what sort of big o notation this follows
+
+[VLOOKUP and MATCH both use a binary search](http://i.imgur.com/VQSo8df.png), so O(log n), for at least the search part.
+I just recently learned this on excel is fun YouTube, it's awesome.
+...and this is why you should be using "tables" (listobjects) with named columns. All of this shit is dealt with.
+Mmm, not sure. Then you're only testing that against MATCH, not the combination of INDEX MATCH. 
+
+Or maybe I'm not understanding.
+Here's what I think /u/semicolonsemicolon may be getting at:
+
+If the result column is far from the lookup column, does this make a difference. Intuitionally, it may, because if for example you're looking up data in column A and returning data from column Z, then you need to pass the range A1:Zx to vlookup, whereas you only need to pass the ranges A1:Ax and Z1:Zx to index-match. I don't know if this would make a difference, but it could, especially if there are computationally expensive formulas in columns B to Y.
+Flexibility is a main criteria of performance.
+
+When we ask, how does it perform when doing a task, the first question is, can it do the task.
+
+With VLookUp, it simply cannot look to the left.
+
+Further to this, with index, the ranges don't even need to be in the same spreadsheet for it to work, as long as row number is returned, it can pull the data from another sheet.
+One [*can* return a multi-column array using VLOOKUP](http://i.imgur.com/fIAGtUC.png). I don't think that this can be done with INDEX MATCH without having the MATCH part in a separate helper cell first.
+That is interesting--I will have to add that to the test bed.
+Most of the excel work we do is simple, however there's a particular process which was very manual which, before my time, a human would perform. It was extremely easy to automate that process and it should save about 200 human hours per year. 
+
+When I run the macro though it locks up the work laptop. It's a fairly big spreadsheet. 
+I like the writing style, very accessible.
+thanks my friend but community is far better then google, isnt it ?
+Yeah, I didn't know that when I did the test lol, but given everything else I'd guess this would cut down the calc time to a single "match", more or less independent on the number of values you're returning. It's definitely one of the neater aspects of VLOOKUP!
+No, it's always INDEX/MATCH. DL the workbook to see for yourself. I probably have not explained it well. Appy-polly-logies in advance, the workbook is messy, but the VBA code should make clear what I mean.
+I've been thinking about that, and it's something I should test. 
+
+Theoretically, in a smart VLOOKUP design the entire range A1:Zx doesn't actually need to be passed to or processed by the innards doing the heavy lifting. The 3rd parm of VLOOKUP specifies the column to return a value from, so the bare minimum needed by the innards is the contents of A1:Ax and Z1:Zx. This is fundamentally the same as INDEX(Z1:Zx,MATCH(A1:Ax,...)). Moreover, anything that column Z requires in the way of dependent formulas would impact either method the same way. 
+
+Of course, I have no idea if VLOOKUP is actually designed this way. 
+
+> With VLookUp, it simply cannot look to the left.
+
+Sure it can! You simply copy the columns to another sheet and then use VLookup. This isn't something that you'd do manually, sure, but when you include VBA (like Feirnt) you can. It may be that in some scenarios this is more efficient than index-match.
+Yeah but you can't keep it for reuse anywhere.
+i think you can do it if you use sumproduct to derive your match result. not that i can think of a time i'd ever want to. 
+I'm thinking of looking up data between 2 tables of data. If you are looking up data from 1 table into a single cell/row, then you can use an array formula vlookup. 
+
+When dealing with 10000 rows of data and 500 rows in lookup table, I think using volatile array formulas kind of defeats the purpose. (I haven't tested, but just an educated guess.)
+The point with using index/match is that we perform the match *once* and the index multiple times. That's *way, way* faster than executing the search multiple times. 
+> When I run the macro though it locks up the work laptop. It's a fairly big spreadsheet
+
+You could include "DoEvents" in the macro from time to time. It would take longer but it would make the Laptop more useable :)
+
+And if you're up for a challenge sometime, port it to an sql database :) It will likely be even faster and the ability to use SQL is a fantastic ability to have under your belt :)
+I had issues - 170mb spreadsheets - and you really need 64bit windows AND Excel.
+Are all array formulas volatile? If so, I didn't know that.
+I mean depends what you are trying to do with the data but yeah moving things to Access is the transitioning step since you can still use the VBA from Excel mostly 
+I have a couple of fatigue models at double that in xlsb. had to strip all the functionality out before the customer could even open them. (previous iteration of the work was 300+ individual workbooks). 64bit excel was incredibly useful.
+I lied :p I mistakenly assumed all multi-cell array formulas are volatile because they are so difficult to work with. That's probably a wrong assumption. 
+
+I tried your solution in a table and got: "Multi-cell array formulas aren't allowed in tables." so much for that test. lol
+It is true, Access is a great transitioning step and it is also worth having in your utility-belt. I did initially include it in my comment, but then I removed it mainly because VBA, even though I love it, it is single threaded and though for many applications that's not a problem for long and complicated tasks it is quite problematic.
+I've had a lot of trouble with 32 bit saving files it can't subsequently open. Fixed in 64bit, reopened in 32 bit and fine again.

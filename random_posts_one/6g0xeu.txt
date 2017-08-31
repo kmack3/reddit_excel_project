@@ -1,0 +1,25 @@
+6g0xeu
+Get External Data table returned Empty
+I am linking multiple tables from an Oracle server to sheets in a workbook. However, one table returns blank. I tried the SQL side and everything is perfectly in the table. Why would just this one table be a problem? I am using the query wizard from get external data. I'm stumped... Thoughts?  
+  
+EDIT: it also greys out the entire ribbon if i open the notebook normally. But, if i open a blank workbook and open my book from there everything is open. I just linked it in a separate new workbook and the table worked. Any ideas why this one table is down?
+
+
+-------------
+Probably greys out because it's still performing the query - which apparently isn't completing (time out, permissions, access, ODBC errors - you name it).
+
+What version of excel is it and are you using Power query (aka data get and transform in 2016)?
+-------------
+ Stuck with 2010 at work. And it's with a server connection in a structured query... Not power pivot. 
+-------------
+And you use a native connection or ODBC?
+-------------
+It's native. Standard query wizard from get external connections. Which links to my Oracle database
+-------------
+Can you modify the query? Add a *top 10* or something to rule out timeouts?
+-------------
+The table only has 6 total cells. 
+-------------
+Can you get ANY query to work on that same connection?
+
+I'll ask again - can you modify the query?

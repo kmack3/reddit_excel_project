@@ -1,0 +1,246 @@
+VBA Essentials: Writing Clean Code
+Somebody get this man/woman a drink
+<3 for emphasizing indentations, it's an often overlooked aspect with VB.
+     Option Explicit
+
+OPTION EXPLICIT!!! FOR THE LOVE OF ALL THINGS VBA, USE IT!
+But where are the comments?
+might be worth it to emphasize that this is right:
+
+    Dim myBook as Workbook, pasteBook as Workbook
+
+and this is wrong:
+
+    Dim myBook, pasteBook as Workbook
+
+
+I've been using VBA for a couple of years and just found out that the second version actually declares myBook as a variant
+Though error handling is generally poor in VBA, I beg of you; do not teach people to use "on error resume next." 
+I'm a subscriber for life now!
+Good post!
+
+A small addition for your target audience: Microsoft has published a pretty extensive [set of naming conventions](https://msdn.microsoft.com/en-us/library/ms229045\(v=vs.110\).aspx) giving some version of best practices. *edit: fixed link*
+
+If you google "Microsoft programming practices", "Microsoft programming conventions", "MSDN naming conventions", and the like you can find resources that, though they take a little time to read, give a good glimpse at conventions that many people use. Even for things that are stylistic choices, it's good to know that the standards are there.
+You would go to town on some of my terrible coding.  I must I must stay tidy.
+Thanks OP for the write up.  I have a general question.  Is there a "clean code" way of identifying a Sub vs. a Function.  I have found myself doing s_nameOfSub and f_nameOfFunction just so I can keep track of what is happening, but wasn't sure if there was a better way.
+
+Also from a code reuse point of view would it be beneficial to make another variable to handle your check range as you call it twice in the sub. ex:
+
+    Dim myBookCheckRange as Range
+ and assign it:  
+
+    Set myBookCheckRange = myBook.Sheets(1).Range(“A:A”)
+How about BASIC terminology? Dim/Next/Workbook/pasteBook etc..
+Thank you !!! <3
+Are you volunteering? 
+
+It's still morning so how about a Bloody Mary, fully dressed?
+
+Got them pickled green beans or asparagus? mmmmmm
+[deleted]
+Yeah I almost wish I chose to write a macro like
+
+    Sub
+        With
+            For
+                For
+                     If
+
+just to show how much you should indent, haha!
+
+Thanks for the reply!
+I tell my junior people (I am in a business modeling group) that the rule for indenting is: anything between a starting keyword and an ending keyword (e.g., Sub and End Sub; If and End If: For and Next; With and End With, etc.) is indented. Simple to remember and implement. 
+
+I've seen the Dim keyword indented or flush left with Sub. I tend to go with the flush left, so that the beginning of the macro looks more substantial. 
+Essential tool (VBE AddIn) for indentation: [Smart Indenter](http://www.oaltd.co.uk/indenter/default.htm)
+
+Is implemented in [Rubberduck VBE AddIn v2](https://github.com/rubberduck-vba/Rubberduck/wiki/Roadmap#smart-indenter).
+
+Rubberduck VBA AddIn is something I haven't been able to test unfortunately.
+You can set the default in the VBE so that any new module you insert has Option Explicit at the top.  Actually, you should do this the first time you work with the VBE. If you haven't done so, do it now. 
+
+EDIT: Specifically, in VBE, select Tools>Options and then check "Require Variable Declaration".  Having to always declare your variables by using the Dim (for "Dimension") statement is a good way to impose discipline in your coding--you have to consciously consider what the variable is for, and indeed whether you need it or not. It is also a nice spellcheck because if you mistype a variable name--that is, the mistyped name is something that has not been declared--then there is an error message when you run the code. Another tip: always declare your variable with at least an upper case letter, and when you write your code, always write in lower case. If you have typed the name correctly, the upper case in the name will automatically appear. If not, it's a sign for you to recheck.
+
+Another suggestion: While you are at the Options form, look at the Editor Format tab and you can play around with colors in the VBE. I make the keywords bright blue (instead of the default green), and I make my comments have a bright yellow background. Helps when I'm reviewing the code! 
+Don't look at my comment history.
+
+I'm so bad at using it, but it really should be used at all times!
+But why? 
+
+The post is great and it almost makes sense to me, which is saying a lot, but i don't understand the Explicit, what happens if you don't have that? It'll run without your variables set? Which means what? It'll mess your sheet up?
+
+
+That's a great question and I'm glad you brought it up!
+
+Code with sound logic, good formatting, and explicit variables **should not need comments** and that's what I call **Clean Code**. 
+
+Using comments when writing code for a help forum is a different beast entirely and this thread was not intended for that purpose though I do understand that this is in fact code written for a help forum. With that being said, this thread was intended to show the reader how they should be writing code.
+
+Here's several links explaining why comments aren't necessary; there are exceptions, of course.
+
+[Why You Shouldn't Comment or Document Code](https://visualstudiomagazine.com/articles/2013/06/01/roc-rocks.aspx)
+
+[To Comment or Not to Comment](https://visualstudiomagazine.com/articles/2011/01/06/to-comment-or-not-to-comment.aspx)
+
+[No Comment: Why Commenting Code is Still a Bad Idea](https://visualstudiomagazine.com/articles/2013/07/26/why-commenting-code-is-still-bad.aspx)
+
+
+Thanks, I'll make an edit!
+For the code I've written it is the correct avenue to travel. I explained the logic behind this error handling technique but if you feel like the explanation is not up to par, feel free to reply with a better way and I will make the edit.
+
+You are correct, error handling in VBA can lead to nightmares. I have a large set of interlocking macros that I use in the workplace that has a ridiculous set of error handles in it.
+
+In all, if you plan to error handle in VBA it's imperative that you know the language and have extensive experience if you're writing anything complex.
+
+I stress that the way I handle the section that could error in the above code is correct, and I'd be impressed if you gave a more efficient solution.
+
+Thank you for your reply!
+
+I hope to see you on the sub in the future!
+On Error Resume Next is useful for ensuring small subs (such as simple UDFs) always run to completion where any error the script could produce would not be harmful. But anything outside of that, agreed that it is basically the worst way to error handle.
+Thanks! 
+
+If you have any questions just post a thread!
+Just a quick FYI, this post was dropped into the spam filter because of the url shortener... in the future if you want to avoid the spam filter, just use the direct link.
+
+Thanks!
+Post some!
+First, if you're writing multiple functions and macros you should consider breaking code up into modules. I didn't hit on this point in my post as my post was intended for beginner macros, but you make a good point. 
+
+If you find yourself unable to keep up with the scripts, wether macro or function, you can always create new modules with a descriptive title. In other words, modulizing your scripts is a good idea if you're doing anything extensive.
+
+Second, I purposely re-set my chkRange. Every time I re-set it, it kills the first instance of the object. The purpose of this is to be efficient with my variables. After the first instance of chkRange, I do not need any data from that variable because I've already pulled its address.
+
+Please let me know if further explanation is required!
+
+Thanks for the reply! 
+Can you expand on that thought?
+You're welcome!!!
+Technically spaces, since tabs are automatically converted into them :P
+Tabs if I'm in my VBE but spaces if I'm freelancing in Notepad or on this subreddit!
+If we write up stuff for the wiki, do we just post it on the sub? Do we PM moderators?
+But the macro begins with Sub name()!!!!!!!
+In all honesty, indenting should be something people are doing consciously, not having it done programmatically.
+I've always wondered why it's an option not to, honestly.
+To be fair, I consider myself an okay-ish person at VBA, and I have literally never heard of this thing.
+Besides performance issues (variants tend to take up more memory than other data types), typos become a much larger headache without Option Explicit because you meant to type "SumOfIncome", which you've already used, but instead typed "SumOfIcnome". In many cases you won't get an error because VBA will automatically create a new variable "SumOfIcnome", leading to wrong results that are harder to track than it should be. 
+
+Unless you're making a throwaway macro, you should almost certainly use Option Explicit. 
+Nothing happens if you don't have it, but it's a good way to keep up with your variables. 
+
+The problem with it is you can declare more variables than you use and it won't flag it. The reason for it is that you have to declare all the variables that you use!
+And also because:
+
+    lngLastRow ≠ lngLstRow
+
+Knowing what your variables are upfront make it a lot easier to track down issues in the long run...  OE catches things like that... 
+I neglected to thank you for your post.  I don't think I'll ever stop learning, but clean, efficient code is a goal that I strive for.
+
+My current project weighs in around 3000 lines, and I've found it very helpful to have markers that describe, at a glance, what is going on with the code.  Older sections sometimes get rewritten now that I'm no longer having to google the most basic of VBA's functionality, and these markers make it a lot easier to find my bearings.  A sentence describing your goal in each block of code is a negligible cost compared to the increase in readability.
+
+Something possibly beyond the scope of your post is the importance of proper planning.  You cannot hope to have code that is clear and concise if you do not have a firm idea in your mind of what it is you are trying to do and how you mean to do it.  I've rewritten inefficient code on more than one occasion because I did not start out with a clear idea of how I was going to accomplish something.  I always managed to hack something together that did what I wanted it to do, but the route there was often more meandering than I would have liked.
+> Code with sound logic, good formatting, and explicit variables should not need comments and that's what I call Clean Code.
+
+I can't say I agree with that.  It's not uncommon to end up with some fairly ugly loops if you are doing something like automating graph building, or doing complex sequential R1C1.  Or dynamic SQL.   Things where a single line is complicated enough that you need some explanation for what you are doing there and you can't get away with just bouncing it into a method/function with a descriptive title.
+
+Honestly the whole "no commenting" thing sounds like hubris to me.  "My code is so pretty it doesn't need explanation".
+I disagree.  I spend most of my working day trawling through thousands of lines of code trying to understand what other people have done.  It takes me much longer to decode someones "clean code" than it does to read a comment saying "//this loop is used for when there are more badgers in the matrix flux capacitor."
+
+You can have the cleanest code in the world, but it can still be a ball ache for others to understand what you have written.  Comments AND clean code is the way to go.
+always wondered why the Intellisense only popped up for some of my variables... just spent an hour going through all of my code and fixing it
+I can only think of a few very small places where on error resume next is acceptable and even then it's usually as a duct tape hack in a looping mechanism with improperly structured data in it or something like that.   
+
+Your use falls into that category.  There are more appropriate ways to handle that, such as a decision tree that handles the "is not open" case that would throw the error.  
+
+Your way works but that's really not what on error is supposed to be used for imho.
+
+All of that said I use it like that all the time :)
+Thanks for the heads up, I wondered if that would happen. The direct link had a parenthesis that reddit's parser thought closed out the URL. ~~Can you use an escape character to get around that?~~ ohp, [found the solution!](https://www.reddit.com/wiki/commenting#wiki_links_with_special_characters)
+Yeah there is terminology in the post that isn't plain english. myBook means the book you are using the VBA on? But why not ThisBook or OpenBook?
+Post it on the sub so it gets some visibility first but message the mods and explain that it's intended for the Wiki!
+
+I hope to see some of your content soon!
+As an active user of the sub you should be able to just edit the wiki except for a the main index page and some of the more "fixed" pages (rules and such). 
+
+You're also very welcome to PM us :) 
+Yes, that means anything between Sub MacroName() and End Sub() is indented (except maybe the Dim statements). 
+Agreed. Anybody who is too lazy to know what the indents should be has no business writing code. 
+Joel Spolsky (pretty much responsible for getting VBA into Office) said on the Stack Exchange podcast that the Variant default type dramatically increased the take-up to just getting code working. It also bypassed some weirdness with the cell type declaration.
+Happy Cake Day!
+
+Have you ever picked up a VBA book? Most of the begginer VBA books will cover this topic.
+I think you meant the converse: you can always declare more variables than you use - Option Explicit ensures that if you use it, you have explicitly declared it. 
+I should have mentioned an example like this is the post. Thanks for pointing that out!
+Thanks!
+
+I have no issue or disagreement with having helpful markers on monster scripts.
+
+Perhaps I will draft a thread about writing more advanced and complicated code in the future. The purpose of this thread was to get beginner VBA'ers to learn good code writing practices. 
+
+I appreciate your input and friendly discourse! I look forward to seeing you around the sub in the future!
+I totally agree with this. I stated that there were exceptions to the rule and the links I provided go in depth with these exceptions. 
+
+One of the exceptions is focused on irregular or special circumstances where the code is not going to be easily read. 
+
+Keep in mind that this particular thread is for beginner users to learn the basics of writing well formatted code. Because of all the comments I've had about particulars, including comments, I've decided to daft a document on script writing for the intermediate/advanced coder. This will not be posted for at least a month so please be patient for its arrival.
+
+In the meantime, please post any helpful thread on writing code or proper technique. I absolutely do not claim to know everything about scripting and I'm always looking for more resources to learn. 
+
+Thank you for your reply!
+I suppose we'll just have to disagree to agree then (>_<).
+
+I get what you mean though.
+
+
+It is a very common mistake!
+I'd be very interested in better logic to call a workbook without knowing if it's open or not! Please provide it and I will edit my post!
+
+Thanks for the reply!
+I understand what you're saying and will keep it in mind for future posts!
+
+Thanks for the reply!
+Thanks! I just didn't want to start editing things all willy nilly without some guidance on the matter.
+Oh! I'm sorry! I misunderstood!
+Indentation of code is essential and it's good if you can do it consistently throughout your entire code, but it is something that VBE as an editor is severely lacking support of.  Look at Visual Studio which does this automatically for you as well.  This is not something that will make you a worse coder.
+
+And: suppose you as a coder have to pick up from someone else's mess: the hours of reformatting the code is just wasted time and tools like this help a lot.
+I have never looked a VBA book. I learnt everything off MrExcel and Tech on the Net.
+
+Although I can see the good things that could come of it. :)
+    TargetWb = "TodaysDate.xlsx"
+
+    For Each Workbook In Workbooks
+        If Workbook.FullName = TargetWb Then Msgbox "It's open"
+        Exit For
+    Next Workbook
+Workbooks.Open(TargetWb).Activate
+Dim workbook as excel.workbook
+
+For each workbook in workbooks
+
+<insert some Boolean two see if it's the workbook you want>
+
+<if you find the workbook change some "found" variable to "true">
+
+Next
+
+<if workbook wasn't found open it>
+
+
+
+
+No worries, it's almost impossible to mess up too bad, but it's all good :) Again, feel free to PM questions if there ever is anything at all. 
+I like it! Thanks!
+I like it! Thanks!
+Well first I'll need to create content! Is there any particular topics that might currently be lacking?
+You can have a look at this page: 
+
+https://www.reddit.com/r/excel/wiki/guides
+
+also linked in the sidebar. 
+
+the [empty] things are just stuff I made up as examples when I set up the wiki page, so don't feel directed towards that, but you can see what has already been covered (that I remembered and people have added), and there's also some guidelines with regard to formatting. 
+
+Feel free to make a site on the wiki to cover a topic, or make a post and link to it, or both! 
+Awesome, thank you!

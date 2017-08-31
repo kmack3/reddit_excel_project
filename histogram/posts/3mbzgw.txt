@@ -1,0 +1,42 @@
+Employee named "true" defaults as formula
+'True
+Have you tried changing the formatting of the cell from "General" to "Text"?  With some basic testing in Excel 2007 this appears to work.
+[Relevant?](https://xkcd.com/327/)
+Ugh I've had this problem as well. 
+Can you design a macro to automatically format the cells where it finds the name?
+Is there a way to default settings so that I don't have to manually change it each time? His name won't pull as 'True when I run reports, so it still requires me to manually change it on every report I run.
+Before I saw the bot's reply, I was expecting [this](http://stackoverflow.com/questions/4456438/how-do-i-correctly-pass-the-string-null-an-employees-proper-surname-to-a-so).
+[Image](http://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+
+**Title:** Exploits of a Mom
+
+**Title-text:** Her daughter is named Help I'm trapped in a driver's license factory.
+
+[Comic Explanation](http://www.explainxkcd.com/wiki/index.php/327#Explanation)
+
+**Stats:** This comic has been referenced 880 times, representing 1.0580% of referenced xkcds.
+
+---
+^[xkcd.com](http://www.xkcd.com) ^| ^[xkcd sub](http://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](http://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_cvdwooi)
+=if(true;"'True";"") ?
+If you do Find & Replace, it should be an easy fix. I know that doesn't fix the fact that you have to do that every time you run the report, but at least it's not manually changing each time the name shows up.
+How do you run the reports?
+
+I linked to the cell I entered it into and it returned it the same as the source cell - with hidden '
+
+Otherwise I think it is just something you would have to live with.. Every system has its system words that have to be treated differently to normal words.
+I run them out of my HR Information System. It dumps the data into a csv file, but even within the csv it defaults it to all capitals.
+
+I suppose I'll have to manually update this each time then... :(
+
+Thanks for your help!
+=IF(AND(LEN(C1)=4,LEFT(C1,2)="Tr",RIGHT(C1,2)="ue"),"'True",C1)
+
+Make a template with this formula in a helper column for the last name? (And change C to which ever column you have last names in.
+what you could try is to use the text import wizard to import your csv file, and after setting your delimiters it allows you to select the format of any of the columns, select the column with your name issue and change it to text. you can also save the query definition and have it prompt you to select a new file on refresh so you can just select the most recent report rather than do the whole import data thing each time...
+
+edit: typos
+Update the HR record so it is 'True?
+
+Use Access for your reports and link to the CSV. Then just replace the CSV with every update, named the same as the previous one. 
+If it exports to the csv with all capitals, which happens before excel even gets involved in the whole process then it's clearly not a problem with excel right? The problem is either happening as early as somewhere in the HR System, or when the csv data file is generated, so in that case the problem is actually with the HR system, no?

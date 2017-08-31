@@ -1,0 +1,34 @@
+Formula to leave a cell blank if return value is an error?
+=iferror( formula, "")
+Use IFERROR
+So your `AND` syntax is off - you're saying L6 must be true (so any nonzero value), M6 can't equal `""`, L6 must be  true, and M6 must be true. So as soon as you put a non-zero value in M6, N6 will show the work days. I think you want `=IF(AND(L6<>"",M6<>""),NETWORKDAYS(L6,M6),"")`.
+
+Anyway, to add the NA to that,
+
+    =IF(AND(L6<>"",M6<>"",M6<>"N/A"),NETWORKDAYS(L6,M6),"")
+
+or if you mean a proper #N/A! error,
+
+    =IF(AND(L6<>"",IFNA(M6,"")<>""),NETWORKDAYS(L6,M6),"")
+Display the Excel Options dialog box.
+At the left side of the dialog box, click Formulas.
+Clear the Formulas Referring to Empty Cells check box.
+Click on OK.
+
+Or use IFERROR before the formula.
+Maybe
+
+    =IF(COUNTIF(L6,">0")*COUNTIF(M6,">="&N(L6)),NETWORKDAYS(L6,M6),"")
+I tried it and nothing. This is what I entered:
+
+=IFERROR(IF(AND(L6,M6<>"",L6,M6),NETWORKDAYS(L6,M6),""))
+Still not working. I get the #value! on N6. What I'm trying to do is if any value other than a date is entered in M6, then the return value for N6 will be a blank cell. 
+Not ,"")) but ),"")
+     =IFERROR(IF(AND(L6,M6<>"",L6,M6),NETWORKDAYS(L6,M6),),"")
+
+`=IF(IFNA(AND(M6>0,ISNUMBER(M6)),FALSE),NETWORKDAYS(L6,M6),"")`
+Thanks! Solution Verified!
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

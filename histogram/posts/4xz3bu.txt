@@ -1,0 +1,278 @@
+Seperating Street name, postal code, and city name from one big string
+assuming your data begins in A1
+
+address: =LEFT(A1, FIND(" ", A1, FIND(" ", A1)+1)-5)
+Postal Code: =MID(A1, FIND(" ", A1, FIND(" ", A1)+1)-4, 7)
+City: =MID(A1, FIND(" ", A1, FIND(" ", A1)+1)+3, 256)
+
+
+EDIT: SOLVED per new conditions
+
+* address: =LEFT(A1,FIND(" ",A1,MIN(SEARCH({0,1,2,3,4,5,6,7,8,9},A1&"0123456789"))+1)-5)
+* Postal Code: =MID(A1, FIND(" ", A1, MIN(SEARCH({0,1,2,3,4,5,6,7,8,9},A1&"0123456789"))+1)-4, 7)
+* City: =MID(A1, FIND(" ", A1,MIN(SEARCH({0,1,2,3,4,5,6,7,8,9},A1&"0123456789"))+1)+3, 256)
+
+
+
+There seems to be a space in there. If so, try Text to Columns (Alt+ D E F) and set space as a delimiter.
+Here would be a macro, if you are interested:
+
+    Sub DivideAddresses()
+    For i = 1 To Range("a1").End(xlDown).Row
+    For j = 1 To Len(Cells(i, 1).Value)
+    If IsNumeric(Mid(Cells(i, 1).Value, j, 1)) = True And Mid(Cells(i, 1).Value, j + 1, 1) = " " Then
+    firstpart = j - 4
+    secondpart = j + 3
+    thirdpart = j + 4
+    Exit For
+    End If
+    Next j
+    Cells(i, 2).Value = Mid(Cells(i, 1).Value, 1, firstpart)
+    Cells(i, 3).Value = Mid(Cells(i, 1).Value, firstpart + 1, secondpart - firstpart)
+    Cells(i, 4).Value = Mid(Cells(i, 1).Value, thirdpart, Len(Cells(i, 1).Value))
+    Next i
+    End Sub
+
+is your postal code always 4 digits followed by 2 letters?
+then after text to columns, if you want to separate 53c5651 (assuming it's in cell A2), try;
+
+=left(A2, len(A2)-4)
+=right(A2, 4)
+
+then to separate the rest of the post code from the city (assuming it's in cell A3), try:
+
+=left(A3, 2)
+=right(A3, len(A3)-2)
+
+then concatenation as needed to get the final result!
+[deleted]
+If you're not opposed to calculating something that won't be used in the finished product, you could go with this method:
+
+Assuming your information begins in A1, enter this array formula in B1:
+
+    =MAX(IF(ISNUMBER(VALUE(MID(A1,ROW(INDIRECT("1:" & LEN(A1))),1))),ROW(INDIRECT("1:" & LEN(A1)))))
+
+Commit this formula as an array bit hitting Ctrl + Shift + Enter instead of just enter. This will find the position of the last numeric character in the string. Since everything else seems to take on a specific format from that point, we can then use the following formulas to find
+
+Street Name/Number in C1
+
+    =LEFT(A1, B1-4)
+
+Postal Code in D1
+
+    =MID(A1, LEN(C1)+1,7)
+
+City in E1
+
+    =MID(A1,LEN(C1)+LEN(D1)+1,LEN(A1))
+I have a similar question and am hoping that someone can help.
+
+I have many (3000+) company names and address's that I need to separate. The data is stored with the name and address in one cell, like (Apple as an example):
+
+Apple Inc. 1 Infinite Loop Cupertino, CA 95014 
+
+I need to separate the company name, city, state, and zip into different columns. I was able to get the zips and states into their own columns - so now I am left with:
+
+Apple Inc. 1 Infinite Loop Cupertino
+
+but since there are so many different names, addresses, and cities I cannot find a common spot to separate them. Some cities are multiple words, some address have numbers while some are spelt out, and some names include numbers.
+
+If anyone has any advice or tips it would be greatly appreciated!
+
+Thank you! I went with the macro posted below, but thank you for spending time on this! 
+Thank you, but doing that would also seperate all the adresses and numbers from eachother, as well as the two parts of the postal code.  
+
+I was thinking of seperating the last two characters of the last word (part of the postal code), and then counting back four numbers to get the address part.  
+I just have no idea how to do all that :)
+It always is. That is pretty much the only thing that never changes in one of these strings. Addresses can have spaces or numbers, city names are mostly one word or connected through hyphens.
+
+If only street names didn't have spaces in them! Seperating postal code and city luckily shouldn't be a problem anymore, now all thats left is address and postal code!
+Thank you, but unfortunately not!
+Hmm, that looks like fun.. At least my data was somewhat structured! 
+Any chance of maybe acquiring the data in another way or format? 
+You could do text to columns, then re-concatenate addresses and numbers. =CONCATENATE(A1,B1) or whatever your references are. 
+Yikes! that's a tough one 
+
+If you split it out with the text to columns, could you stitch the stuff you want back together using the & function? (and a few other things) 
+
+so you text to col and get something like this 
+
+      Col1 | Col2 | Col3 | 
+---------------------------------------------------------------------------------------------------------------------------------------|----|----|----|----------------|-------|-----------|------------|--------|----------|-------|---------|--------
+Mispelhoefstraat | 53c5651 | GKEINDHOVEN
+Planetenbaan | 21183606 | AKMAARSSEN
+Postbus | 112932300 | ADLEIDEN
+
+then you want to text to col again on the last row, but this time fixed width for just the first two characters 
+
+
+
+      Col1  | Col2 | Col3 | col4 | 
+----------------------------------------------------------------------------------------------------------------------------------------------------|----|----|----|-----|----------------|-------|--|---------|------------|--------|--|--------|-------|---------|--|------
+Mispelhoefstraat | 53c5651 | GK | EINDHOVEN
+Planetenbaan | 21183606 | AK | MAARSSEN
+Postbus | 112932300 | AD | LEIDEN
+
+Then you want to clean up that 2nd column and split off the last 4 and then grab what isnt the last 4, text to col wont work here because of the difference in name length 
+
+add 2 columns and make the following formulas work 
+
+
+Col2 | New ColA  | New ColB
+----|---------|--------
+53c5651 | =LEFT(B2,(LEN(B2)-4)) | =RIGHT(B2,4)
+
+and now we put have broken it down - lets build it back up! 
+
+    =A2&" "&C2 
+
+This will give you the address put back together 
+
+    =D2&" "&E2
+
+This will put your post code back together 
+
+you'll need to drag each step down to make it work 
+
+copy and past as values - delete the stuff you don't wand and boom - magic 
+
+^* I hope like shit the name/space conventions are water tight otherwise this could cause you a little more work. 
+You would have to take the column for postal code & the column for city and use some further calculations:
+
+=C2(zip)&LEFT(D2(city),2) would return 53x5651GK, for example. Then you'd have to split the city column (after copying formula results for concatenated zip as values) with the Text to Columns delimited by # spaces (2) to separate it from the 2 digit state header.
+Mostly...
+
+I know some important dutch cities with 2 words :-)
+
+Etten Leur, Den Haag, 's Grevenbroich,...
+how many street names have spaces, I would sort them by how many spaces there are and then work on formulas in the same manner for each batch
+
+alternatively if the fields are separated in different tags in the xml, you might want to do some kind of logic using xpath's to get each element. 
+We're working on pulling the data in a different way. Hopefully it comes out in some sort of usable format!
+That would definately take care of the addresses and numbers part, but not the postal code part.          
+
+So after text to colums I would have:
+
+1 | 2 | 3
+---------|----------|----------
+Mispelhoefstraat | 53c5651 | GKEINDHOVEN  
+
+  
+After which I could get the last four digits of column to and get (How would I go about doing this?)
+
+1 | 2 | 3 | 4
+---------|----------|----------|----------
+Mispelhoefstraat | 53c | 5651 | GKEINDHOVEN    
+
+Then seperate the first two of column 4 and get: (and.. how do I do this? :) )
+
+1 | 2 | 3 | 4 | 5
+---------|----------|----------|----------|----------
+Mispelhoefstraat | 53c | 5651 | GK | EINDHOVEN  
+
+Which I could then concatenate and have all that I need!
+It'll be a bit more work I'm afraid :(
+I doublechecked my data and street names can also have spaces in them.
+
+Is there a way to maybe check for (4 numbers) + " " + (2 chars) which would be the postal code andcreate new colums to the right and left of that?
+Thanks for the assistance, /u/Francetto 's macro worked wonderfully!
+Heh, good point! Will your macro work in my use case?
+It said it had trouble running (something to do with the line   
+    Cells(i, 4).Value = Mid(Cells(i, 1).Value, thirdpart, Len(Cells(i, 1).Value)) ), so I didnt get the chance to try it out!
+A| B| C| D
+---|---|----|----
+Mispelhoefstraat| 53c| 5651| GKEINDHOVEN
+=LEFT(D1,2)
+
+A| B| C| D|E
+---|---|----|----|----
+Mispelhoefstraat| 53c| 5651| GK|EINDHOVEN
+
+Make sense?
+
+edit: actually that will just split out the leftmost two characters. To get the rest of the string separate, do =RIGHT(D1,LEN(D1-2))
+
+Back when I used to work with this kind of data I would work on the 80/20 rule. you can do most of it with the formula and the last 20% is the pain. 
+
+Chances are it wont be simple to just do like in my reply. Text to column it, and then insert a row at the front (A) and put 1-8000 there as a serial number or original position number. Is this 100% necessary? probably not but I do it anyway. 
+
+Now for each extra space in the address (or city) this will push your last column out by one. so sort them into groups. hopefully 80% will have no extra spaces, sort them out. Then work largest to smallest in groups of extra spaces. Use the Cell &" "&Cell to or =CONCATENATE( to put what you need back together.
+
+It will be slightly manual, you might have to adjust for 6 or 7 groups but a hell of a lot quicker than doing it to 8k lines one at a time. 
+
+probably not the answer you were exactly expecting, but sometimes 100% automation isn't the most time effective solution. 
+Hm, your Addresses are in the column A? No free rows? No error messages in other lines?
+
+Weird.
+
+I tried it with some other test addresses I have from the Netherlands, and had absolutely no problems.
+Another Question: DID the macro do some rows and only had problems with any later row?
+Thanks for the assistance, /u/Francetto 's macro worked wonderfully!
+I got it to work! It's great. Only thing is is that is stops/crashes whenever it encounters an invalid field. Is there any way to have the macro just skip that field and continue on with the next?
+It does! It has problem with rows like this one:  
+999 Worple Way TW99 9DGRICHMOND SURREY  
+
+Is there any way to have it just skip ones like these?  
+Thank you!
+
+Ah, I see - forget my first solution in the other answer.
+
+Here's what you were looking for:
+
+    Sub DivideAddresses()
+    For i = 1 To Range("a1").End(xlDown).Row
+    If IsError(Cells(i, 1).Value) = True Then GoTo NoError
+    For j = 1 To Len(Cells(i, 1).Value)
+    If IsNumeric(Mid(Cells(i, 1).Value, j, 1)) = True And Mid(Cells(i, 1).Value, j + 1, 1) = " " Then
+    firstpart = j - 4
+    secondpart = j + 3
+    thirdpart = j + 4
+    Exit For
+    End If
+    Next j
+    On Error GoTo NoError
+    Cells(i, 2).Value = Mid(Cells(i, 1).Value, 1, firstpart)
+    Cells(i, 3).Value = Mid(Cells(i, 1).Value, firstpart + 1, secondpart - firstpart)
+    Cells(i, 4).Value = Mid(Cells(i, 1).Value, thirdpart, Len(Cells(i, 1).Value))
+    NoError:
+    Next i
+    End Sub
+
+This is great! It still crashes on addresses like: 35 The Parade ST. HELIER JERSEY JE2 3QQ  
+Also, some of these addresses seem to knock the entire thing 'out of sync 'https://i.imgur.com/zqWVq44.png
+It's not the periods (.), I've filtered those out and it still does the same thing.  
+
+  
+  
+Any ideas?
+Huh...
+
+That's... strange. I can't see an error.
+
+OK, the macro MAYBE get's an error, when having this type of address, but therefor there's the "ON ERROR GOTO NOERROR" line...
+
+Hm...
+
+Try it with this additional line (it checks, if there is a numeric value on the first character of the adress)
+
+    Sub DivideAddresses()
+    For i = 1 To Range("a1").End(xlDown).Row
+    If IsNumeric(Left(Cells(i, 1).Value, 1)) = True Then GoTo NoError
+    If IsError(Cells(i, 1).Value) = True Then GoTo NoError
+    For j = 1 To Len(Cells(i, 1).Value)
+    If IsNumeric(Mid(Cells(i, 1).Value, j, 1)) = True And Mid(Cells(i, 1).Value, j + 1, 1) = " " Then
+    firstpart = j - 4
+    secondpart = j + 3
+    thirdpart = j + 4
+    Exit For
+    End If
+    Next j
+    On Error GoTo NoError
+    Cells(i, 2).Value = Mid(Cells(i, 1).Value, 1, firstpart)
+    Cells(i, 3).Value = Mid(Cells(i, 1).Value, firstpart + 1, secondpart - firstpart)
+    Cells(i, 4).Value = Mid(Cells(i, 1).Value, thirdpart, Len(Cells(i, 1).Value))
+    NoError:
+    Next i
+    End Sub
+This worked wonderfully! Thank you so much. This would've been multiple days of work instead of just one of failing hard for one day and getting rescued on Reddit
+SOLUTION VERIFIED

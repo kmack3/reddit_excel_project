@@ -1,0 +1,667 @@
+What's your biggest Excel pet peeve you see in spreadsheets sent to you by your coworkers?
+It drives me nuts when people don't name their tabs.  They send me a file with one tab of data called sheet1 and two empty tabs called sheet2 and sheet3.
+
+It's simple and basic but I always have to delete the other two tabs and name the one with data. It's an ocd thing..
+When they take a screenshot of a worksheet, include it in the email body, and then never include the actual spreadsheet. 
+
+
+Merged cells. It's almost never necessary, and it messes up formulas and just navigating the spreadsheet.
+Combining the presentation layer and data layer.  
+
+If you want to make something pretty, for the love of all that is good and holy, do it separate from the data tables.
+As an accountant, when someone hard codes a number that could have easily been linked. That's where most of the errors I have seen come from. 
+Probably when the data [looks like this](http://i.imgur.com/uWtn4G9.png).  
+  
+A horrible mix of fonts, sizes, colours, borders, alignment etc. etc...
+When they don't freeze their headers. And these are sheets with at least a dozen headers. I don't understand how people can work this way.
+When people don't use the GOTO-> LAST CELL feature to clean up at the end. I've had 7mb excel files reduced to 50kb by deleting all the blank cells outside the table boundaries and resaving.
+When they want to start a new line inside a cell and just hit space until it wraps.  I. Could. Kill.
+59million custom styles. I fucking hate it. 
+
+And when people fill entire columns and rows with a colour instead of just the table row or column. 
+Links to external spreadsheets. Every fricking time that security bar comes up. F u.
+
+Output format instead of proper tables. 
+
+Oh, and merged cells.
+
+**Edit** for all those who also hate output format, i've got a great macro to unpivot data! Send me a message if you need it.
+When they send a picture of the data.
+
+WTF am I supposed to do with this?
+The fact that people still use .xls
+Nobody should be still using it. 
+Columns that don't have uniform width. 
+When they make secret manual adjustments in massive reports, unmarked and un-noted. Have an adjustments column for F"$"£$ sake
+=+ to start formulas, especially when it comes from coworkers who were in elementary school when IBM was still selling SmartSuite. Next comes formulas like =SUM(C5). [Two-fers like =+SUM(C5) not uncommon!] Finally, excessive number formatting, e.g., format code $\*\*#,##0.00, in all cells in a tablet rather than just the top row.
+Mine is when the project managers go and put all of the instructions in the email, and then refer to the rows or cell color on the spreadsheet.
+
+"For the items marked in blue on rows 54-67, 73-76, and 79-84, I need you to do this...  On these other rows in yellow, do this..."
+
+I try to get them to put the instructions in the Excel sheet.  Because the first things I am going to do is put those instructions there and sort the data so it is in a cohesive order.
+
+Such a waste of time on their part because it would have been easier for them to do it in the first place.  And then when you go to discuss it with them, they want to continue referring to them by cell row, which no longer matches up because they didn't sort their data first.
+So much good stuff ITT. 
+
+For me, it's just them making up their own data types. Just one example: the file I sent had a column labeled "Number of minutes" yet in that column in the file you sent back contained "2.5 hours". Ugh. Do you not realize I'm combining your file with a dozen or more others?!
+
+Also, not really what they send back, but for my VBA files, I have personally set their trusted locations as their desktop and sub folders, and told them to save the file there. Yet they continue to save to the My Documents or some other place and then wonder why the file doesn't work. Even though I've already told them - 3 times - in the past they have to enable macros!  
+1. Unformatted spreadsheets - for the love of god format your inputs, calculated variables etc. 
+
+2. Document your assumptions! I can't make decisions if I don't know what you assumed.
+
+3. Document your macros! Especially if you hack it together and its ugly as hell.
+
+4. If your Data is coming from SAP your data providers for BW better be named... And descriptive.
+
+5. If you're doing a lookup of a lookup to do a lookup to do a sumif - it would be great if you could use named ranges so I can follow your cluster fuck by reading the formula. 
+
+6. Link your inputs instead of truncating them to 2 decimal places... Our field requires accuracy!
+
+7. When sheets have data validation lists in a sheet thats meant to be expanded on... And the validation lists are hidden in column A...
+a guy I knew used to do this:
+
+=SUM(A1)+SUM(A2)+SUM(A3)...
+
+Drove me up the wall.
+Constantly get spreadsheets that might as well be raw text. The lack of normal logic and lack of formulas drives me crazy. 
+
+Also, my colleagues constantly pull multiple data sets and sort it in the same order then copy and paste it... Such crappy integrity. Needless to say I never trust their work. 
+hell is other people's spreadsheets
+I swear on my life that this is true. The other day a **vendor** (whom I won't name, but you know who you are) sent me a workbook where each tab was a list of tests with expected results. The only strange feature was the last tab, which contained, not cells containing tests, but an embedded image of such a list, formatted identically to the others, but with nothing actually in any of the cells. One of the biggest "how the hell does this even happen" moments of my entire career.
+[deleted]
+Expecting a subtotal at the bottom but seeing this instead    "a12+a16+a22+a31+a46+a55".
+Merged cells.
+
+Why? Just why?
+When it's used for something that Excel has no business doing.
+
+A few years back I worked for a company with Bernie the accountant who insisted on tracking payroll, sales, and god knows what else off of a single Excel workbook with a bazillion sheets and countless interlinked cells and values.  It would constantly get corrupted and send Bernie into a panic until someone from IT would recover/repair it.
+
+My current job is using a single shared workbook to track project time across 30+ employees, which ensures that at some point, someone will always have it checked out and locked.
+There is nothing worse to me than when someone had a sum at the bottom of a set of data then puts a bottom boarder line in the cell above the sum instead of a top boarder line in the sum cell.
+When people make me scroll past HUNDREDS of empty rows just to see a total at the bottom of the sheet.
+
+The options are: a) Hide Row and b) Delete Row
+
+USE THEM!!!
+Shitty or non-existent formatting, no labels or column/row names. 
+Subtotals mixed in a column of thousands of rows of data with no indication that they're there.
+
+
+Also:  When people have a sheet that they update every month proceed across the page, rather than down.  This isn't conceptually too big a problem for anyone not still on a pre 2003 version, but it's annoying as all fuck.
+Not using the table formatting.  I find using this feature has made my spreadsheets much more readable and consistent.  
+
+Of particular annoyance, when a user has a range of data, then a blank row, and the sum(s) of the columns in the following row.  Tables have a "Total Row" feature which allows you to keep the data contiguous even as new rows/columns are added.  Insert -> Table changed my life.
+
+edit: readability
+No consistency with fonts, size, colors, bold etc. Just so annoying, it's a minor pet peeve, but one that's bugs me. 
+All of the answers here are good ones, but the one I don't see here is gridlines.    
+    
+Fuck gridlines
+Copy of copy of copy of file (2) (3).xlsx
+
+Oh, and using word wrap + a lot of spaces to drop down to the next line in a cell.
+Merge and Centre formatting, instead of centre across selection. 
+It's not that I hate what other people do, I just like having my zoom set to 142% and have my font set as Avenir light. Any other combo gets on my nerves a little bit.
+Paste-valuing and then emailing the file. Grrr what kind of an analyst is so ashamed that they need to paste-value an excel file.
+Worked with a guy who insisted on taking huge tables of data, breaking them up into dozens of separate worksheets, manipulated each of these worksheets individually, and then call me in a panic because he couldn't figure out how to join these worksheets back together into one big list again.  Columns didn't match up, formulas were inconsistent, data repeated across several rows, so frustrating.  Long story short, he is looking for work and I just got a raise.
+I know you said 'biggest', but I feel the urge to give a list.
+
+1. Hard-coding without any sort of reference.
+
+2. Borders not on the proper cell.
+
+3. Not using Freeze Panes.
+
+4. MERGING!!!!! No! :(
+
+5. Not saving as .xlsb or at least .xlsx.
+
+6. When watching somebody use excel, if they haven't unchecked "Allow editing directly in cells".
+
+7. When using the "fill down" feature, people will take forever to grab the box in the bottom right corner and drag with the mouse down, super slow since they need to scroll, to where it needs to be copied.
+
+8. People who type one finger at a time. Poking.
+
+9. When text is cut off in a cell for any reason.
+
+10. Non-standard column widths or row heights.
+
+11. Ugly formatting.
+
+12. When people sort things with certain formulas in them and then wonder why everything is messed up.
+
+13. When the scroll bars are really small because they didn't delete unused rows or columns (I have a macro that will reset the scroll bars if anybody's interested).
+
+14. When I open a s/s and it's zoomed to 140%.
+
+15. Numbers that aren't formatted with commas, etc. Easy fix, but still annoying.
+
+16. When someone, in an *EXCEL TRAINING CLASS* say never to use pivot tables. So glad that wasn't for my group.
+
+17. When people don't use Print Titles when they should.
+
+18. When people don't clear or understand circular references.
+
+19. When I open the Name Manager and there are 6 trillion names in there with #REF links. SPRING CLEANING!
+
+20. When filters aren't for the entire data set.
+
+21. When there are things that are grouped and hidden, but then some things that are hidden but not grouped. Why you wanna screw with me so badly :(
+
+22. When people don't use Quick Access Toolbar.
+
+23. When people don't put their name in their excel so if they're in a document I need them to get out of, I know who to tell to get out.
+
+24. When people leave all of the error checking rules on their computer and I go to help out and all I see are stupid green triangles in every single cell.
+
+25. When people don't use AutoRecover and get upset that they lose a document.
+
+That being said, if you do all of these, but you're still a nice person, I still don't mind helping you!
+God bless you, every one. 
+
+Don't think anyone's mentioned this - people that don't use keyboard shortcuts. 
+
+Need to copy a formula down a thousand lines? Wait, you're going to drag the corner of the cell??? 
+
+Need to get to the bottom of that 10,000 lines of data? Well yes, the scroll wheel will get you there eventually. 
+
+Just need to change a1 to b1 in that formula. You're going to double click into the cell, delete everything after a1 and then retype it all. OK then... 
+I would say just what gives me the most work.
+
+When information that belongs together is split.
+
+One table with 4 columns from A1 to D1, then the same information for another region in columns K1 to O1 and then you can find the last region down at B19 to E19.
+
+Meanwhile its all relevant info that could have been placed in 2-3 columns max!
+"Pivot table field name is not active"
+
+What garbage have you given me?
+I don't know why, but it irks me to no end when people refer to sheets and workbooks as 'tables' and 'databases'.
+Hidden fields and records. Goddamnit, people. At least tell me. 
+From a usability perspective probably bad logic in formulas or hardcoded cells but I also get incredibly irritated by bad merging of cells, inconsistent formatting or tables that are hard to read due to formatting. 
+She's retired now, but one particular colleague, who I would deputise for in her absence, used to backfill the empty cells with white instead of just turning off the gridlines.  Bonus fail as she would only do what she could see on screen  - scroll a little and the lines were back.
+
+Why did this bug me so much?  She used to send me sheets that opened as dark blue on my machine, so were virtually unusable, but made me feel like I was being stupid as they looked fine on her machine.  
+
+I figured it out eventually.  One of our reporting systems, for some unknown reason, pulled reports with a custom palette, which then took priority in any other sheet you had open.  White was where red was in the standard palette, and navy was where white was... which led to a lot of strange looking sheets.  
+
+I tried explaining this to her, and got told that they worked for her and she was too busy to fix something that wasn't, to her, broken!
+
+When she retired, and I was discussing excel preferences with her replacement, this came up - and thankfully he's never done it!
+Print Macro Buttons!!
+
+Multiple formulas in the same column of data. Just no. I should be able to copy down the first cell and get the same result. Especially important because it is common practice in my office to value copy after the first row to make things go faster.
+being inconsistent with formatting and not formatting for printing.  
+Have you ever seen anyone add data to columns next to a pivot table? 
+Formatting! Text different sizes entered at different times, by different people, copied from different sources. No borders out other formatting to differentiate headers. 
+
+Using a GD Excel sheet to send a screenshot because they know how to paste the captured screen from the clipboard into it and not how to save our as an image file.
+But then they know that you think they can't be trusted
+Everything.
+commenting to be able to find later
+
+also hardcoding over existing formula
+VBA
+I hear that one.  I expect data, pivot, and graph to be named in some intuitive way
+Somewhere in settings there is a default number of sheets excel creates in a new workbook. You can just set it to 1...
+I find it quite forgiveable if only one of them has data. You know what it is and where to look. If it has two tabs of data I fully agree
+Its almost as bad as people who send emails without content and just a file
+TIL
+Sometimes I do this with small data tables when I just need a quick answer. We had this women who sent pdfs of spreadsheets. This drove me crazy because I needed the data in excel. I would retype it because she was so hard to work with. We fired her for something else.
+G'ahh.  Our Japanese branch is constantly sending us scans of printed out spreadsheets.  I'm saving up frequent flyer miles to go smack them.
+This can get worse. I had a user that did this:
+
+- Take a screenshot of the data.
+- Print the screenshot on to paper.
+- Use a pen to write over some numbers because the black ink of the printer was almost empty. (I remember sending them ink just a few weeks ago)
+- Circle the problem with a light yellow text marker.
+- Write with the same marker next to the circle something that looks like the sad attempt to explain the problem (but could also indicate directions on a pirate treasure map)
+- Scan the image in gray scale on a scanner that produces images that appear to have 5 DPI, so nothing will be readable except from the smears and dust of the scanner glass. The text marker is gone by now.
+- Save the scan result as PDF
+- Create a screenshot of the PDF Viewer window with the PDF in it with image in the viewing area (or at least most of the image)
+- Attach the Image to a word document, because writing E-mails in word works so much better.
+- Use the Word "Send to" option to send the word as attachment in Outlook.
+- Get mad at me when I can't figure out the issue.
+
+It was painful and amusing at the same time.
+
+The issue was a singe cell not creating line breaks.
+
+**EDIT**: Just to be clear: screenshot as in "I *shot* an image of the *screen* with my iPhone
+or when they include a screenshot in an email, when enclosing a table or the file would be so much easier to read
+sometimes when coworkers ask me for information they absolutely already have I compute for them then send back as a screenshot so they must enter it themselves, my p.a. last stand 
+I paste screenshots into emails occasionally, only cause I'm tired of people butchering my work.
+Lotus notes will do that if you copy a range into an email. Lots of people don't know if you use the paste special option in notes you can paste as rich text and preserve the table structure and the text.
+Where I work I have learned to never include the actual spreadsheet in a mail. I learned this quickly after realizing that any spreadsheet which I send will invariably be "modified" by either the recipient or by someone else if he has taken the liberty of forwarding it. Eventually it will find its way to senior management who will then come to me to urgently explain the results he saw in "my" spreadsheet. Yeah, that's my company......
+I only merge cells to give many columns each with a header a common header. I like it for that.
+This.  Among other issues, merged cells are murder when doing certain VBA operations.
+This has worked really well for me when using it with the new chart auto wizard for naming series, ect.
+Oh god, yes. We had a spreadsheet which we'd take turns adding information to daily This woman would always merge cells and delete columns to make it look pretty. I'd paste data in the next row and would have to rearrange everything to get it to fit under the right column headings. Seriously, how hard is it to NOT merge cells, and to simply hide a column if you don't want it displayed? She also used > rather than < in the tab names. Every time I went to update it she had made the same changes that I would have to reverse.
+Merged cells, color coded areas, blank rows, putting consecutive data in more columns etc all make the data look nice but are not so good for graphing, pivot tables or transferring into stats packages.
+
+Wherever possible I try to capture my data into a long list. If you could get both the mean and standard deviation in a pivot table I would be a happy man!
+This is interesting... Do you think the visually appealing stuff gets in the way of the data?
+I will say I agree if you are sending it to someone else.
+
+If you are doing it yourself, at least until you get asked to do the report again, I have no issues with combining for small things, but ya... anything complex... drives me nuts how crazy people go with presentation and data mixed in... worse yet is people who make forms this way, that change every so often... 
+You make two spreadsheets for every spreadsheet? Ain't nobody got time for that
+ctrl + ~ 
+I work with a guy, who I've worked beside for literally 8 years, and I've given him countless spreadsheets filled with lookups, countifs, sumifs, sumproducts, index/match, etc and, in that time, he's learned exactly none of those formulas. Not one. If he wants to put the sum of a column on a second tab, he'll highlight the data then flip to the second tab and manually type that number... even if it's based on data that changes weekly.
+
+He also closes Excel any time he wants to open a different file than the one that's currently open, so trying to get him to link between two files is near impossible.
+This! Use formula whenever possible. People I work with hardcode things. My job is to create formulas that make their spreadsheets works more efficiently and accurately.
+Even worse is if they *do* include a table with variables at the top but not actually refer to those cells in their formulas. The let down can be devastating at the wrong moments. 
+oh man i could care less about this! 
+
+I could literally fix this in 5 seconds.
+
+Im more annoyed when people do not know database structure, and break information into 2-3 tables when all of them should be 1 table.
+
+
+God, that damn near gave me an epileptic seizure.
+Haha, this ones hilarious. I would fix that before doing anything.
+Format Painter is your friend.
+oh man, or when people use the split in place of freezing the header.   grrrr
+I hate it when people use Auto filter and freeze panes instead of just making the data a dynamic table. Ctrl+t makes a table, adds the filter and locks the header row. 
+Right, I don't know how they work without column and/or row headers..
+I'm the opposite, I loath the inflexibility of frozen panes. Dynamic table ranges are far more graceful in showing column headers.
+I've got coworkers that are working on a row, find the value they want, then scroll all the way up to the top of the spreadsheet to see what the value represents, then scroll down again to that row again, but they didn't note the row number, so they search for the data again ... with their eyes, not "find".
+
+There's one coworker who will print out a 32-page excel file because he needs data from one small set (say, six lines) and doesn't like to "go up and down all the time". It's a government office, though.
+With the new excel I'm not as picky anymore as table headers are in the column names now.
+
+Where do you generally list a legend when you're freezing panes? Just curious. Thanks
+can you please elaborate on this a little bit more? I've never heard of this resource.
+
+
+had a coworker manage to create a 90 MB workbook once. took about 5 mins to open 
+I created a macro to do this. Highlight the last cell in the actual used range then run the macro and it nukes the rest of the sheet.
+
+1. Delete all rows and columns
+2. Reset the scroll bars (activesheet.usedrange.rows.count will do this)
+
+Edit: reading the comments it seems this is a common problem. A bit more detail may help some people.
+
+I've created an add in for myself with lots of common functions for which I can create shortcut keys and also have a macro launcher form for less common ones.
+
+For example, paste special values, formating charts, deleting blank row, converting daily to monthly data, removing dupes, etc).
+
+One macro is MakeLastCell. I'm on mobile so I can't post all the code but basically you need the following code once the desired cell is selected.
+
+1. Get cell address (activecell.address(0,0)
+2. Popup confirmation box to confirm delete action 
+3. Range.delete for all used rows after active cell
+4. Range.delete for all used columns after active cell
+5. Reset horizontal scrollbar (as per above)
+6. Reset vertical scrollbar (as per above)
+7. Check that new used range does not go past active cell (cells.special cells(xllastcell).row or .column compared to activecell.row or .column
+
+Set the macro to shortcut Ctrl+shift+D and away you go.
+New shortcut to solving one of my biggest issues at work!
+How do you it properly on the mac version of Excel? I have mac at home but am better at the Windows Office.
+I do that. In Mac I can't figure out the right buttons. Don't kill me, them me how to do.
+What do you mean filling rows and columns instead of table? What table? You mean like filling a formula to the whole availability of the spreadsheet when there's only 100 or so lines of data? 
+This is an issue with word documents too.
+I often use full colour rows to separate sections of a sheet - it makes long sheets easier to follow.  
+Are they spreadsheets you don't have access to?
+Merged cells are a particular bugbear of mine... Especially as the only reason it's done is to "center across selection". I've helped a few colleagues out with that one simple hack.
+Haha, output format, let's just work with whatever ugly crap spits out as an export.
+Would love to check out your unpivot data macro! 
+What do you mean by output format? 
+Had an executive that had Excel 93 or whatever the hell he was using. Literally had to convert files to .xls just for him.  
+Care to elaborate? 
+I work at a fortune 500 firm that just upgraded past XP in November...
+Agreed. I have to make similar data columns the same width. If one has to widened to accommodate larger numbers I widen all similar columns.
+I like the idea of an adjustments column. You use this instead of inserting notes?
+I do the + sometimes.  Excel will let you start a formula with just + and it adds the = on its own. 
+
+So if I'm primarily using the num pad and arrow keys on the keyboard, + is just faster/easier to type/reach than =. I can type everything I need without moving my hand, while the = is just out of reach.
+
+
+Ha, that is just throwback to an older time.  I like seeing it
+That drives me crazy, I edit put the +.
+Yeah, people don't understand that row numbers might change. That would be super annoying.
+Similarly, I have columns that say "Length (km)" and people put in "20K" and such. I can't do calculations with that! The unit is in the header! I think these people had math teachers who didn't properly emphasize the importance of checking the specified unit. Wearisome.
+Use personal.xlb
+Is it worth the time to add a script to force a certain data type? 
+#2 with a bullet. I deal with so many mixed populations from other people. Is it too much to ask for a tiny red flag saying why we are looking at these guys in particular?
+Haha wtf!
+They don't know how to right click, move a tab...must have pasted an image from another workbook..haha
+Good luck.  I've never worked in a business where people used this feature.  They'd prefer a zillion different versions cluttering up their Outlook, which they'll never delete (or read, usually).
+My coworkers do this...I change them to sums. I like sum and have yet to use subtotal. How do you decide which sum formula to use? Edit: autocomplete
+Geez, you guys need more software.
+Ah borders infuriate me sometimes! When you hide or delete rows and because they weren't consistent formatted suddenly half of your cell borders vanish. 
+That's so obvious now that you mention it. I'm renouncing my bottom border ways! 
+Click cell with data in it.  Type Ctrl-Shift-Down.
+
+I'd personally prefer it that they do not hide data without letting me know.  It's caused issues in the past by messing up my formulas because it finds matches in the hidden rows that I wasn't accounting for.
+One or two blank rows I can get, as a measure to ensure that they don't sum any incorrect rows. Hundreds? Why?
+You gotta use end, down arrow. Will save so much scrolling time. Can go any direction this way.
+i'm so glad i bunked off work for 20 minutes to read reddit today
+That said, if you can't use a table for whatever reason the blank row before the totals is the way to go.
+
+You include the blank row in your formulas, and if you insert new rows you do it above the blank line. The ranges in your formulas will expand to include the inserted rows and you don't have to update them. 
+I don't use this function often. The table function changes the way formulas read and I don't particularly like that. 
+You're a monster!
+Gridlines are love.
+
+Without gridlines how would I be able to read the stuff I get sent with absolutely no formatting!
+The standard blue ones or adding borders? Do you fill white?
+The copy one bugs me too. 
+
+I don't quite get what you're saying about word wrap, what is that?
+142%? Are you working on a 4k 24" monitor?
+Not even a font option for me. 
+Haha...
+I do this when I send a file to someone who can't be trusted with formulae.
+Hahaha! Wtf! This one takes the cake!
+I love you! Can I have the macro you mentioned in #13?
+Bless their hearts those little mouse jockeys
+I like your attitude
+technically they are tables, but certainly not a database. 
+I prefer grouping exclusively over hiding for this reason.
+Haha, fun lady... Was she a superior?
+Haha, one of my clients insists on this!
+I've never experienced that pasting from second row of data. I don't limit my columns to one formula. I should though. I should make more things if statements so as not to have different formulas.
+Haha, I do that, but only on pivots that I'm not sharing with anyone.
+So you don't like excel? I guess I assumed others on this sub love excel the way I do.
+Yeah, there are good tips in this thread!
+I was once afraid. Now I believe.
+Yeah, I always put pivot in the tab name is it's a pivot. Must do!
+That doesn't work on other people's PCs though, only yours.
+You gotta spread this far and wide, I'm talking about things people send me. edit: l
+Right, tell me what you're sending me...
+What if they just say "see attached"?  Does that bug you?
+If your Office install came with OneNote, here's a GREAT use for it.
+
+OneNote has OCR (Optical Character Recognition).  This means it can read the text from a picture!
+
+I started to write a tutorial on how to do it, but then I changed my mind and decided to [find a video instead.](https://www.youtube.com/watch?v=23Hzpz0b7eY) :)  Please note that before the Windows-S shortcut key will work, you have to have launched OneNote at least one time, after which it should auto-load with Windows.
+
+It's not perfect and requires the picture to be a clear one, as things like pixelation, tilted text, and strikethrough interfere with its algorithm.  And it doesn't do handwriting (the OCR relies on matching each character to a known font).
+
+But with things like Excel tables pasted as a picture or something like a copy-protected .pdf, it typically works perfect.
+Does your Japanese branch use lotus notes?
+I once managed a team 100miles away from me, that would scan in 100 pages and email them to me. I would have to get other people to type in the relevant bits. I didn't use the same software as them so couldn't give export instructions over the phone. took me 3 mins to find it when I bothered to actually go and see them
+Is it funny that I just receive and email with your first seven bullet points checked off? Damn you, Rodolfo!
+You should consider looking into "center across selection"
+Use Center Across Selection instead. Same look as merged cells without jacking anything up. It's in the Format Cells window, Alignment tab, Horizontal, Center Across Selection. 
+Merged cells are murder for pretty much everything. Basic formulas, copy and pasting, vlookups, etc,
+Seriously, why stop at fourth grade math in pivots? And why do medianif, stdevif, etc not exist. 
+
+Thank goodness for minitab
+Merged cells are evil.
+I already replied above, but you just said merged cells and that I my personal pet peeve... makes me so sad that that is how crystal reports often wants to convert things to excel format.  First thing I have to do is unmerge everything, and it sometimes puts things on different rows... not to mention the expected issues with columns.
+Yeah, it does make the data more human-readible but it's a nightmare for data analysts. 
+When I first got in my current job the guys used to make several spreadsheets inside a single spreadsheet. It's like the worst kind of structured data I've encountered. 
+I've wasted more time trying to apply indirects and offsets on "pretty" spreadsheets than i have admiring how they look. 
+wait whaaaaa what's it doing? toggling column widths between... fit to contents and fixed?
+THIS IS AMAZING.
+On a uk keyboard you need to use CTRL + `
+How does he still have a job?
+Yeah I can definately relate on some account to coworkers like him but that's impressive. 
+I had to give my coworker a gard time because I caught her entering numbers from an excel spreadsheet into a calculator to multiply them and then entering then back into excel
+You get paid *money* for this? I've been doing it for years at my office just to make my own job easier... 
+[Relevant...](https://www.youtube.com/watch?v=om7O0MFkmpw)
+Yeah, I agree, less spreadsheets, more info in one place is good.
+I don't understand what you mean by database structure. 
+Probably would be an instinctive reaction if I opened this
+Do you use split? I never know when it would be appropriate 
+Wait, how/why is freeze panes worse? 
+I'm aware of tables but I find that you are limited in sorting multiple data at once with the sort function, which I need to do rather often. I basically use the ctr+t when I need to filter data and then turn it back off when I'm done.  In any case, the geniouses I work with don't know how to use tables either.
+I was one of the heathens until I learned the benefits of creating a table straight away. Oy vey, what a difference.
+Good god. That's aweful. I thought I had it bad where I was. Is this a govt office for the elderly or something??
+Put them out of their misery! 
+I don't normally have legends with my work, but on the rare instances that I do, I put them directly above the headers and keep them frozen up there.
+Ctrl+G ---- select last cell, then "ok".  Ctrl+END does the same thing.
+
+This takes you to the last cell that Excel thinks has data or formatting, but it could be far away from where you actual data is.  For example, open a new worksheet and put some data in A10:D10, then go to column N and format it as "accounting".  Select cell A10, and go to the last cell (Ctrl+END).  You'll see that the last cell isn't D10 like you would think, instead, Excel sees N10 as your last cell because of the formatting.
+/u/almasnack basically covered it, but to expand.
+
+1. Create a table of data, A1:C2. The save file is around 10 kB. 
+2. Select and **bold** all cells A1:Z1000. Save. Your file is now about 70 kB.
+3. Unbold A1:Z1000. Save. Your file stays the same size. Excel has initialized all those cells now and the save file now contains the state of every cell in the range A1:Z1000, even if it contains no data. CTRL+G (goto) and choose "Last Cell". It will take you to Z1000 confirming this. 
+4. Select all the columns from D to the end and delete them. Note: Delete from the Right Click menu. The delete key on the keyboard only clears the cells contents, it doesn't clear formatting etc. Do the same for rows 3 down. Save. Your file is now back to 10 kB.
+
+The above example is minor. Once a file has been kicking around for a while, it can really build up. Font colours, alignments and sizes, cell widths, adding additional rows, copying an existing sheet with all those issues rather than making a new one, it adds up really quickly. By using Goto, you can check what excel has stored as the last cell on that worksheet is actually the last cell you are using. If it's not, delete everything to the right and below the last cell you care about and resave. I've reduced file sizes by over 95% with this trick.
+
+Oh, and also use the "Inspect document" feature in the file menu. It can identify track changes and other areas that might be taking up space you weren't aware of.
+I would also like to know.
+Never used a Mac, can't tell you.  Google it.
+push Alt and Enter at the same time to create a line break within a cell. I find it especially helpful if you are writing long formulas. Makes them much easier to read when you can break them out appropriately
+Fill with a colour. They select an entire column instead of just the table data. 
+That's okay, but when you use 4 columns of data, but every other row is filled in bright yellow stretching to oblivion is just nasty. 
+For me, it doesn't matter if I have access to them or not. Links are SLOW!
+Center across selection is so clutch. 
+TIL about center across selection. This will make so many things so much easier. If I could award you a ClippyPoint™, I would.
+I too avoid merged cells like the plague, but they wouldn't be so bad if Excel would handle copying/pasting with them better and would correctly handle formula references to the merged cell.
+No probs dude,
+
+Gotta give credit where credit is due, I just knicked it from somewhere off the net but I cant remember where, so if you are out there anonymous macro writer - massive thanks, because this is by far my most used macro.
+
+To use it, first create a new named range called "Target" where you wish to output your unpivoted data set.
+
+Then highlight the *data* you wish to unpivot with rows above and to the left i.e the "headings" left unhighlighted - like [this](http://imgur.com/n9MoxfF).
+
+Run the macro and make a coffee while its running!
+
+General tip, make calculation mode = manual, otherwise it runs incredibly slow
+
+Hope it saves you as much time as it does me!
+     
+    Sub unPivot()
+    Dim oTarget As range
+    Dim oSource As range
+    Dim oCell As range
+    
+    Set oSource = selection
+    Set oTarget = Names("Target").RefersToRange
+    
+    On Error Resume Next
+    
+    For Each oCell In oSource
+        If oCell.Value <> "" Then
+            oTarget.Activate
+          ' get the column header
+            oTarget.Value = oCell.Offset(-(oCell.Row - oSource.Row + 1), 0).Text
+          ' get the row header
+             oTarget.Offset(0, 1).Value = oCell.Offset(0, _
+               -(oCell.Column - oSource.Column + 1)).Text
+          ' get the value
+            oTarget.Offset(0, 2).Value = oCell.Text
+          ' move the target pointer to the next row
+            Set oTarget = oTarget.Offset(1, 0)
+        End If
+    Next
+    Beep
+    End Sub
+
+Arranged like a pivot table
+Fucking rewriting all my neat IFERROR formulae in to IF(ISERROR) shit so that the one guy stubbornly still on 2000 could use it
+Since 2007 standard is xlsx
+Id probably have an extra plain text notes column.
+
+I try not to use the excel notes, they aren't always noticeable and are easy to miss at a glance
+If most of the instances were =+123+456+789 it wouldn't be so bad. Mostly it's =+ before a function call, meaning the nice person who entered the formula had probably gotten into the habit of always starting all formulas (maybe all entries with expected numeric results) with a +.
+
+Anyway, the request was for personal peeves. I understand why others start off with +, but that doesn't affect my categorization of it as a personal peeve.
+TIL
+
+Chandoo'ing it now... tell me more, please?
+Answers may vary. Case by case basis, depending on how widespread the files are (all employees? just supervisors? just a special few or small team?), how often the requirement is to submit the file back (weekly? monthly? quarterly?) and how much data is contained or captured therein... I guess the last point is really the frustration - folks think the Excel file gods revolve around them and don't realize they're just a small speck in the larger Excelverse, so why keep f'ing the system instead of being some grease to make it run smoother?
+I know :(
+Well if it's a subtotal, use subtotal. Subtotal lets you use sum for a range and ignore other subtotals. 
+I wish I could have every hour of my life that I spent on borders, back. I've since seen the light and don't dick around with cell formatting, and my brain burns when I see it happen in other people's 40-column, multiple-entries-per-cell, color-coded, hatched, text-formatted, merged cells all up in this ho, "project tracking spreadsheets". Jeez.
+Yea, hidden rows are sketch. They have their moments depending on the dataset but a sheet should be easier to work with. If you're constantly hiding a type of data I'd rather add a column that I can filter on and off than simply hide.
+You can also just double-click the bottom border of the cell.  It jumps to the next cell with content.
+This stops at blanks. So if you have 10,000 rows, and every other row has a blank, you'd have to end, down arrow 5,000 times to reach the bottom!
+But if you add data to a table, swap column order etc. etc. all formulas using that table will automatically use the expanded/new range. This is so useful, especially for things like vlookups and aggregates. Also, if you sort some data and there are blank rows/columns, your data will only partially sort. If it's a table, it will sort the whole row regardless. It's a feature worth learning and using.
+I definitely had a learning curve, but now find it to be easier to reference data from within the table when I learned how to use the table references.  Not everyone's cup of tea though.  I first started using it because it applied the 'striped row fill formatting' and now turn all my ranges into tables.
+When you enter text in a cell and want to put more text on a second line.  Some folks just keep hitting the space bar until it wraps around to a new line instead of using ALT+ENTER for carriage return.
+For that I send a pdf file rather than excel.
+Nope,  different job role in the same team. Just older,  and set in her ways. Honestly, for the most part she was fab on excel,  and I learned a lot from her - although this particular case was what not to do! 
+I work with files with anywhere from ~10,000 - 100,000+ rows of data and often 100+ columns, so every little bit helps. Most of what we do would be more efficient in access, but we have some formulas in an excel add-in that we need, and apparently access is scary.
+> mind 
+
+Is proper Pivot technique to keep each table in a separate sheet? I try to create little "report dashboards" for my superior but I end up worrying a lot about the layout of things so that the PT's don't crash into each other or eat data upon a refresh.
+On the contrary, Excel and I have a fantastic relationship.  I put the macro on a pedestal and in return I have generated a fair amount of revenue from it. 
+
+I suppose to clarify, my pet peeve is when co-workers say they are good at Excel and then I receive an Excel file with 1,000 tabs, 37 million colours and every other pet peeve listed in the comments here.  
+Exactly!
+Wow that's fucking brilliant! Our office has long been plagued by crappy conversions from PDF to excel/word. I'm going to go in tomorrow and look like a god damned genius because of you, Mr. Bow_Bow. I would definitely, without a question gift you and your family a goat, if by some circumstance I actually owned or somehow came upon a goat, it would soon after become your goat.
+I absolutely fucking love OneNote, not just for this feature, but in general.
+
+When I found out that you could search/copy text from pictures, I started impressing everyone in my office. My manager found out, and now I'm being put on additional projects. 
+
+Not sure if I've screwed myself or not, though, cause now I can't reddit nearly as often at work! haha
+This is great! Thanks!
+Heh....
+
+
+Unfortunately, we do.  Everyone hates it, but we have hundreds of databases and reporting tools built with it.
+Sounds like the average user.
+One of the big spreadsheet takeaways I learnt from my current boss.
+Yeah, someone else mentioned and I read on my way how. I'm gonna do this on Monday... Taking a the day weekend! It bothers me that I can't do certain things when I have merging. I'm excited about this and gonna change it everywhere if I like it better.
+http://i.imgur.com/Zlrau.jpg
+Good tip!
+This... 
+
+This is awesome.
+Thank you, I'm gonna try this!
+Okay, had to try it at home on a fake spreadsheet.  It's blowing my mind! 
+
+It's the first step people learn that makes them "intermediate" in their eyes, and it destroys pivots. Why does this have to be taught?!?!
+You just create a dashboard in the front, I take it?
+I'm still confused what you mean from your original post...
+It's a simple trick I use when I'm auditing people...Easy way to check for formulas to make sure no one hard coded any financials... It exposes all the formulas :) 
+How have you not punched him in the face yet? 
+My boss does this all the time.  He'll have a spreadsheet open on his computer, we'll be in the middle of a conversation and he'll need to crunch some numbers.  He'll spend a couple minutes hunting through his drawer for a calculator and then, not finding it, pull out his phone.
+
+
+He's fairly proficient with Excel too.  He just seemingly isn't capable of reflexively using it as a calculator.
+
+I literally cringed reading this.
+"I don't trust computers."
+I use excel for math all the time. Why should I do math when I can make Bill Gates do it for me?
+
+Plus, the fill down/fill across makes things really fast.
+The heathen!
+Yep. People in my office whip out their iPhones to do simple calculations which they can then type in excel.
+Yep, my entire job is fixing up and creating new spreadsheets to help other analysts and accountants. Good money too.
+I watch this every time it is posted, great video.
+Continuous and consistent data.
+
+e.g. Don't have a break in a table of monthly transactions to sum the total of each month, which are then summed to get the total for all transactions.
+
+Instead, have continuous data and use SumIfs to get the totals for each month in a reporting section.
+
+As soon as you break up the data, you prevent anything being done to the data set as a whole. 
+I mean when they use split instead of freezing.  Of course freeze pane is better.
+Splitting is worse, not freezing...
+If you click the sort menu you can add as many layers of sort as you want. I like tables mainly because my formulas are much easier to read and troubleshoot because they use column names instead of "A1" references. 
+I work in what is essentially (heh) a state law office for entitlement programs, such as food stamps (SNAP) and Medicaid. The average age of our worker is in the mid-50s and are mostly people who have little or no college education. I joined primarily because I wanted all the days off and the job security.
+For those interested in the best way to make this problem go away, select the first entire column that is beyond the data you actually want, in the above example that would be column E. Hold CTRL and Shift and push the right arrow key to select every column from E over to the right. On the Home tab, go to Clear, and use the dropdown to select Clear All. Then hold CTRL and push minus (or right click and delete) all those unneeded columns. Finally, go back and select a cell that is within your dataset, such as A1, and save the workbook. Immediately upon saving you should notice your scroll bar returns to a proper thickness for the size of your dataset. Also note that it is just as common to have formatting below your actual dataset pop up. In this case, you would follow the same instructions, simply changing columns to rows, and to select all ross below a certain last row would be CTRL + Shift + down arrow key. I call this the best way because the last cell in the dataset might have formatting or something preventing Excel from truly recognizing where your data should stop, but if you only deal with that cell, who's to say that the cell above it or to the left doesn't have the same problem. Also, there are times when the workbook can get so big due to this problem that this method will not work, as in uses too much memory. If that happens there are some VBA options you can try, but I've had no luck in that situation, and had to simply copy everything to a new workbook that wasn't crashing. The best option is to pay attention to the size of your scroll bars as you work
+Wow that is crazy. Just took me to row 2549 when data ends at row 200
+I work with huge files all the time - I'll have to try the "inspect document" feature next time I run across one, to see if the size is due to something other than just trying to use excel as a database.
+Yeah, like everything else...
+That's a great tip - so if I have a string of VLOOKUPs or whatever, I can break them across new lines for easy reading and they'll still work? Or even line break within a single formula? 
+I found the CHAR(10) function very valuable in concatenations.
+For some reason they decided to make the mac shortcut control + command + enter.
+Yeah, that's annoying, do you unhighlight the space beyond the table?
+Agreed.
+I've never noticed that it takes a long time to load. You must have a lot of data linked; that would be annoying.
+Daylong excel course paid for by the company was worth it just for learning about centering across :)
+I'm not going to lie... I had to ask google if "...is so clutch" was a good thing or a bad thing.
+
+
+Suddenly I am old.
+Ah, yes I also think while they're extremely powerful they look like shit for any important presentation. What's the solution? Just put the time in to make your own formatting from scratch in a blank sheet? 
+Any love for xlb? 
+Good ideas
+My company's senior management maintains a 15MB workbook that contains basically all of our financials, ever. Obviously this file is e-mailed around constantly, exists in countless versions on everyone's computer, is chock-full of formatting, I could go on for days. I'm trying to steer us away from our present stupidity towards using SQL queries, better data integrity practices, etc but it really is like pulling teeth with just about anyone I try to open up a conversation with.
+Oh cool, I'm gonna put this on a spreadsheet tomorrow. I gotta try it out.
+You don't adjust formatting, ever? What about presenting? 
+Yeah, this works. I'd rather use keyboard than mouse if possible though.
+Doesn't work in this case. Filter for non blanks maybe. Edit: typo
+I noticed that updating sometime else's table. The formula filled automating. It tripped me out, I was like, what's this? I've just been too busy to play around with changing my data to tables. It sounds like I'm living in the past without this.
+Yeah I like the stripes, looks like the old-school software my dad uses to use... What's that called? This was the 90s...Edit: s not d
+Oh, right. Yeah, I know alt enter, didn't realize this was what you were referring to.  
+:-)
+I keep each pivot on its own tab.
+What I have learned from this subreddit is the better you claim to be at excel, the worse you probably are.
+What an odd yet endearing compliment!  I would gladly get your goat, but that slang means I piss you off so I am not sure what the proper reply should be...
+
+I really wish I knew about OneNote back when I was in college.  Its use as a digital notebook is amazing.  If you copy something from the web and add it, it automatically adds a URL to the source so you can go back for context or further reading if you need it.
+
+[This is one of the better feature demonstration videos](https://www.youtube.com/watch?v=f_pB12Aw6fQ) that I have come across.  At my current job, I mainly use it for the OCR, but it's a very powerful program for content storage and organization.
+
+The end of that video is outdated though, as it appears that Microsoft has changed OneNote to a free download.
+Yup that's why you are getting the screen shots of spreadsheets. Not a lot of people know this but under the edit menu is an option paste special . if you use that when paste in stuff from excel you can select rich text and it will preserve the table structure and text. Why that is not the default way lotus notes behaves is a mystery for the ages.  
+Ya it's a game changer. I was embarrassingly excited when I found out that simple trick.
+
+It solves every pain point I have with merged cells saves for one; the value still only sits the the left most cell. Thus, formulas that you drag across multiple columns and reference that "centered cell" won't carry as you drag it across.
+That feeling, right?
+Awesome thanks!
+I am the exact opposite.  Calculator in front of me and I'll open Excel instead.  Old habits die hard I guess.
+Or click Start on computer then type Calc.
+But that's what Excel is!  It's a giant calculator...
+It's good to have a healthy distrust of computers.  They're dumb machines that won't catch mistakes in syntax.  Whenever I'm making a complex spreadsheet I'll calculate one set of numbers through by hand or calculator to make sure everything's turning out the way it should.
+Exactly
+Freelance? 
+Ah, right. Yes I see the point, and agree it's very annoying! 
+Who the hell uses split?!
+Thank you for Ctrl minus!!
+Sorry for the very late reply but yes, that will work. Alt+Enter will break up the formula visually without taking away any of the functionality
+Precisely. It's a sign of carelessness.
+No, just a slow network
+Or if some of the linked files are now missing. It will sit there trying for a few seconds on each before timing out and moving on.
+Gotta look this up
+Considering clutch was a popular term through the mid-late 90s, not so much now, you're indeed old.
+Being too lazy to Google this, I'll be wondering the same thing for a while
+Have you ever heard of an athlete being clutch, or being a clutch shooter? Or someone coming through in the clutch, or a making a clutch move? "The clutch" is like crunch time, a clutch moment is like a key point in time, and being clutch, or a clutch performer, means that you perform well in important moments. 
+
+So, my saying that centering across the selection is "so clutch" was somewhat hyperbolic speech, meaning that it is a super useful tool that really helps out in certain moments. 
+At first I thought it was a different writing for "klutz", and that one is a bad thing. Now I'm surprised I never heard "clutch" used like that. 
+In my company at least, many people have no understanding of how to properly arrange data and don't understand the benefits of doing so. I'm the only one out of a team of 25ish... but that works in my favour really!
+.xlsb
+Or you can make the data a table with ctrl+t. Then click on Table Design and check the Totals row box. Now you can sum, count, average, whatever. 
+That was a bit of a late-night rant, sorry about that. I do format, but lately I try to keep it light and use dynamic tables wherever possible. Mostly just avoiding past bad practices like merging instead of centering across cells, things like that.
+I lose my cool if I don't see someone use control shift 8
+haha, np dude! 
+My father (thanks Dad) would give me a hard time whenever I tried to use a physical calculator to do my homework, instead insisting that I practice using Excel.
+My coworker told me she's old school. I told her that's not an excuse
+Win+R -> calc -> Enter
+It's tough to find the right middle ground. You have to be ready to catch mistakes but have enough trust in your work that you don't lose out on efficiency by double checking everything
+the people in my office.  First thing I do when I open an excel is to remove that mess.
+I'm with you, however I've heard that formatting the whole row / column keeps the file size smaller. Seems like a valid reason. I haven't tested whether it's true.
+latency on the fucking shared drive. 
+Clippy: Center Across Selection
+Pushing 40!
+So in a non table, using subtotal, there were more data pieces than I figured out in the few seconds I allocated to trying this today. Can you explain how to use subtotal better than the instructions in excel? Suppose I could Google it...
+I don't know this trick. Enlighten me.
+or just press the calculator button on a lot of keyboards :)
+True, but 90% of my calculation fields are copy/pasted. Once I know one's good I just need to make sure that nothing else looks problematic. 
+But what do they use it for? 
+
+Err....why would the file size be smaller...? And I doubt it be of any significant value. 
+
+Hi!  It looks like you're looking for help with an Excel function!
+Unfortunately I have not learned that function yet. If you'd like to
+change that, [message the
+moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)!
+
+Have a giant set of data and want to highlight all of the text for a pivot or to copy? Control shift 8 captures all active cells. Quicker than clicking the top left square, and you don't have to worry about bringing in blank values. 
+
+I just die inside when I see someone highlight and draaaaaaag down for fifteen seconds. 
+I haven't tested and am not inclined to because I agree with you.
+
+To try and answer the question in spite of the above, it doesn't sound unreasonable to be because Excel does seem to have smarts about it. It may be that Excel saves formatting for each column or row (I have no idea how priority works or otherwise) and then specific cells by exception.
+
+It may be possible to try by creating examples and inspecting the XML.
+Don't apologize. I'm the one that let you down
+Cool tip. I don't drag, I do ctr shift end over, crt shift end down. This only works if there aren't empty rows and columns. I'll try this one on Monday!
+Also, yes in most cases I agree that it is unlikely to be any significant difference
+Best bot ever
+Thank you =)

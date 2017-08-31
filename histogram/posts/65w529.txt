@@ -1,0 +1,77 @@
+Help with If statements
+Sounds like you need to explore the Mail Merge feature of Word using your excel file as a source of the data. From within the Mail Merge, you can specify what filters to apply (for example, column X equals 0 or column X does not equal the rate stated in "y") before generating a file of mailing labels and/or letters.
+=IF(X=0,"DELINQUENT","GOOD")
+
+That would display DELINQUENT in your new column and GOOD if they're not, assuming that you use the cell reference for X.
+That looks like an excellent way to go about it.
+
+I'm using LibreOffice Suite.
+
+I have names and addresses in an excel file inside columns B & C.
+
+How do I create this mailing list?
+Where does the address book come from?
+
+
+Doing property rentals so names & rates and properties change often.
+I'm new to all this and starting from scratch something that was in someone's head for the last 5 years.
+
+Thank you for your help.  Just downing in it all right now.
+So X equals reference column name?
+Or do I need to manually put in info for each cell?
+
+Can I then create a table a 2nd sheet, that "if(y=delinquent) send to table Z", then use that for my mail merge source?
+
+Thank you for the suggestion and help.
+I'm afraid I know nothing about LibreOffice. But surely it has a feature similar to Word's mail merge.
+> So X equals reference column name? Or do I need to manually put in info for each cell?
+
+Let's say the column with the 1s and 0s is column D. You have headers in Row 1. The first cell with a 1 or 0 is D2.
+
+The formula (now in Row E) would be: **=IF($D2=0,"DELINQUENT","GOOD")**
+
+You can then copy it all the way down. The $D2 locks the formula into column D but allows the row number to change as you copy it.
+
+> Can I then create a table a 2nd sheet, that "if(y=delinquent) send to table Z", then use that for my mail merge source?
+
+I just realized my above formula is kind of redundant, because if you're manually inputting the 1s and 0s it's the same thing as writing DELINQUENT or GOOD.
+
+Perhaps you can save yourself a lot of trouble by putting in a column for Date Paid. You can then apply a logic statement that would output the "DELINQUENT" text if the last date paid was more than 30 days or if the amount paid is under what was owed.
+
+[See this screenshot of a file I put together.](
+http://imgur.com/a/55rps) Manually enter the text instead of copy/pasting it to make sure the quotation marks copy correctly. Also, make sure you change the cell references based on your actual sheet. The formula for Row 2 is =IF(OR(TODAY()>$D5+30,$C5<$B5),"DELINQUENT","PAID UP") .
+
+Written out in English, this formula means, "If today's date is greater than Date Paid plus 30 days OR if the amount paid is less than rent, then show "DELINQUENT," else show "PAID UP."
+
+Now perhaps using the same formula but entering 1 or 0 instead of "DELINQUENT" or "PAID UP" would be better. You could then highlight your data, click Insert >> Pivot Table, and build a Pivot Table that shows only values > 0, i.e. delinquents. The subsequent Pivot Table could then be used with Mail Merge to create labels.
+
+Note that underpaying rent may not actually make them delinquent if they're still within 30 days. I'll leave that to you to understand the laws of your state.
+
+Here's the Mail Merge page. https://support.office.com/en-us/article/Mail-merge-using-an-Excel-spreadsheet-858c7d7f-5cc0-4ba1-9a7b-0a948fa3d7d3
+
+I hope this helps. Basically at the end of the day, you need some way of automatically identifying if an account is delinquent, sending that information to a new Pivot Table, and then using the output of that Pivot Table to work with Mail Merge and create labels.
+It has a wizard but i know nothing about mail merging to get starteed
+Wow. Thank you very much.
+I think that is it entirely.
+http://lmgtfy.com/?q=mail+merge+libreoffice
+Now that is awesome!
+Just have to figure out how to combine this with address labels.
+
+My cell values need to be adjusted but this totally could work.
+
+
+Am I missing an obvious way for this to be generated to go to only those nonpayers?
+
+Currently, this is one long list of everybody.   
+
+
+Thank you very much for your help.
+
+
+Present move is to print out multiple copies of same letter and go tape them to doors.
+
+Next month will be better!   :)
+http://i.imgur.com/1FQzhf9.gif
+Guess so? 
+
+*failing*

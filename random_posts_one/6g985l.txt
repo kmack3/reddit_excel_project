@@ -1,0 +1,25 @@
+6g985l
+Need to reference a cell from a table, regardless of sorting/filters
+So im in a bit of a pickle, i need to reference cells in Sheet 1 onto sheet 2. This alone isnt a problem, but the cells in sheet 1 are formatted into a table, and i sort/filter that table through different columns as needed. Everytime i filter the cells i am referencing, the cells in sheet 2 also change. Is there a way to reference a cell, and have that reference stay on that cell regardless of where it is moved? Think Absolute references in reverse, where instead of staying on Cell A2, i want the reference to move WITH cell A2 when it is changed to Cell A895 or whatever. I want Sheet 2 to remain Static while referencing my table in sheet 1. The closest ive gotten was the function "Lookup" but im still having issues.  
+
+
+-------------
+Is there something specifically within cell A2 that we can use? Like, a value to serach for, or reference ID?
+
+Side note, if sheet two has a formula like `=A2`, then the reference *should* be changing like you describe, even after sorting and/or filtering. What kind of formula are you using to retrive info from Sheet1?
+-------------
+Column A is the Company name Column, however there are duplicates since there is data for both 2017 and 2016 in the table that i need. I have tried =A2, but it does not follow A2 after being resorted by a different filter. 
+-------------
+Ok, rephrasing a little bit, what is the purpose of sheet2? Is it looking up info, transfering info? I'm trying to see if we might be able to do a lookup or sumif/countif type equation. Or, perhaps there's a better way if it's just a data transfer.
+
+
+-------------
+It would be just a data tranfer, a duplicate of sheet1 kind of, that updates as i update sheet 1, but is not affected by filters/sorts done to sheet 1. Im not sure if that makes sense..
+-------------
+with your original data, could you just add a helper column with running nuumber (1, 2, 3, ...) to keep track of original order. Then, forget about sheet 2; just sort by the helper column when you want to go back to original? I think either way you go, you're going to need some sort of unique identifier created so XL knows where to look.
+-------------
+Well the thing is i need sheet 2 to perform conditional formatting on it, since i cant do that on the table i sort and move and stuff. But yea, ill try the unique identifier, thank you! 
+-------------
+Just curious, what type of document/process is this? It seems a very strange way of managing data.
+-------------
+It is customer data, 2 sets, one from 2016 and one from 2017. I realize its an innefficient way of visualizing data but my boss wants it all on 1 table rather than seperate tables. If i had it my way i could work on it more efficiently but orders are orders, and since its a small(er) company, i can see why he'd want all the data in front. Thanks for the help!

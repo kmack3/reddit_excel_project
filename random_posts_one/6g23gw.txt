@@ -1,0 +1,15 @@
+6g23gw
+Pivot table won't fully update when I refresh data
+I have a pivot table linked to a data set in a separate sheet. I want to update the data in that sheet, then refresh the pivot table. If I pull in a large data set and it won't all fit in the current pivot table the bottom few lines are stuck with data from the prior data set. 
+
+
+-------------
+Delete all of the old data then? Confused about what you're looking for
+-------------
+Double check your data range.
+-------------
+So I have a sheet that is linked to live data and another sheet that manipulates that data using a pivot table. When i update the data on the sheet from the live data and I come from a small data set to a larger set then go into my other sheet and refresh the pivot table most of the table updates but a few rows at the bottom seem to get stuck and the data just in those couple rows doesn't update but the rest of the table does. 
+-------------
+Use excel tables for your data. Pivot tables can then determine for themselves how much raw data there is.
+-------------
+Change your pivot table data range - "Analyze", "Change Data Source", and reselect the new data.

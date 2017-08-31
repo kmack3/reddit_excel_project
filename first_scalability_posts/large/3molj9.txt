@@ -1,0 +1,43 @@
+large
+3molj9
+When saving a shared file, "Selection is too large" pops up.
+
+The file appears to be saved though, but the error pops up for all shared users. What causes this? no selection is made, and the non-shared version saves without this error.
+
+thanks!
+
+
+-------------
+Are you using Excel 2007? Is there any VBA in your workbook?
+-------------
+I am using 2007 , but there is no VBA saved with the workbook. 
+I also think that vba isn't supported on a shared workbook.
+edit - I also don't know how to figure out if the Original file (before sharing) had vba. but it wasn't a macro-enabled workbook, so I'm guessing none of that was saved in the file. I do remember using some code on the file, but didn't save the macro.
+-------------
+There is a specific issue in 2007 relating to Selection limits.
+
+To check for code: press Alt+F11 when the workbook is open. That will open the VBA editor. You can click through the worksheets in the Project Explorer, or the code Modules if any exists. My guess is that there is something in one of the worksheets.
+-------------
+I have checked the sheets but none contain any code. but this is something new on the subject, thanks for making me check. not the solution though.
+-------------
+Are there filters?
+
+What size is the workbook?
+
+Admittedly I am starting to reach a little now.
+
+You may need to copy the data to a new workbook, share it and test it. I would do one worksheet at a time to see if it is a specific worksheet/range causing the error.
+-------------
+Hashtag#nofilter
+
+Size = 3.2Mb
+
+there was a pivottable on one of the sheets,but this can not longer be used since it became shared. this might cause the issue though. the pivottable reaches to the EP'th column and 140th row.
+
+on another sheet there is a pivottable, but the scrollbar is very tiny. CTRL+End selects a cell in row 81550, meaning there is data in this area..
+
+I'm guessing I should try to clean up a little in this sheet. I will test this in the morning. Thanks so far.
+-------------
+For the sheet with 81,550 rows - insert a new worksheet, copy the used range (don't select the entire rows or columns, just the area with data) copy/paste to the new sheet. That will help you get rid of the anomalous range.
+
+Pivot tables could be the problem. If they can't be used, purge!

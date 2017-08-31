@@ -1,0 +1,257 @@
+What's your favorite "clever" Excel trick?
+For very large fields where you have numbers as text, copy the value "1", , highlight the range and go to Paste Special->Multiply and Excel converts the text to numbers, implicitily.  If you take the route of converting by way of the "Convert to Number" warning box that appears at the top of the highlighted range, very large fields could take a lot of time, especially if there is actually text values in your supposedly numeric field.  The performance difference is even more significant if you're using a weaker machine, which converting 500k+ values might result in your Excel to crash.
+
+For testing purposes, I converted a range of 500k numeric values stored as text. Using the Paste Special method, the conversion took less than a second (almost instantaneous). Using the "Convert to Number" method, the conversion took about 3.5 seconds.  Now, I have a very powerful PC, but if I had a few random text values in the field, the "Convert to Number" method took longer than 40 seconds, with Excel almost crashing.  The Paste Special method was again, less than a second.
+Not sure how common knowledge this is, but pressing f4 after selecting a range will change it to static, hitting f4 more times allows you to cycle between making just the rows or columns static.
+
+Control+t creates a dynamic table
+when using vlookup, into a table, instead of usibg a hard-coded column number, use
+    COLUMN(tablename[columnname])
+
+    =vlookup([@id],info,column(info[detail0]),false)
+
+later, when you add or reorder columns in the lookup table, or change its underlying query, you still get the correct column. 
+
+select a textbox, type '=A2' into the formula bar.
+The textbox now shows whatever is in A2. Let's you do self updating annotated diagrams.
+My favorite to show intermediate users is the VLOOKUP/MATCH combo so that the column that you pull the data from is dynamic based on the header, for example, in cell B4:
+
+=VLOOKUP($A4, $D$1:$G$100, MATCH(A$1, $D$1:$G$1,0), FALSE)
+
+where the column header in B is the same as the column in header in E, F or G. This makes it easy to add/remove columns without having to update your formulas.
+[deleted]
+to get alternating row colors, when not using tables, or in shared worksheets, use conditional formatting.. 
+(when formula is true) 
+
+=(MOD(ROW(), 2)=0)
+
+apply different color (or whatever) to even numbered rows. 
+
+
+THANK YOU OP for posting and thank you everyone who replied.  I'm a heavy Excel user at work and learned quite a few cool little tricks browsing the comments.  I've saved this post as reference material to look over in the future.  I had a reputation at one of my old jobs as being the Excel guy who knows all the tricks, so the info contained within these comments will only further my legend:)
+Not sure if this was mentioned but hitting F4 repeats the last action that you took. For example if you fill a cell with the colour green then arrow down to the next cell and hit F4 that cell will fill green. 
+
+Can come in quite handy on many occassions. 
+= if(a1<>"", if(a2="", now(), a2),"") 
+
+Enter this in a2 and enable iterative calculations. Tricky way to store timestamps. 
+
+Ctrl-d fills down a whole or selected column, ctrl-L filters, alt-down opens your filter criteria, alt-e-s-v-enter pastes values. 
+
+I admit that I sometimes go to absurd lengths not to use the mouse. It's like twitch gaming when I use excel lol
+>So what are the things you show other people in Excel when you want to demonstrate that you really know what you're doing in the program?
+      
+Never use the mouse.
+1. If you have a large block (say a column) of formulas you'd like to convert to values:
+
+* Highlight the cells  
+
+* RIGHT Click on the boarder and drag one cell away and then back (without letting go of the mouse) - Release the mouse button
+
+* The Context Menu will appear with "Copy Here as Values Only" available
+
+Not a 'trick' but the most used keyboard combinations I used that no one seems to know
+
+CTRL + D (think D for Down)
+
+CTRL + R (think R for Right)
+
+If you have a formula or a value or anything in the top cell and you want to copy it down, you just highlight the cell and below for as far as you want to copy.  Then press ctrl + D.  It'll copy the top cell down.  Now if you only want to go one cell below, then just highlight that one particular cell below and it'll copy whatever is above it.
+
+CTRL + R works the same but to the right.
+
+If you're building calculated tables its great when you just put your formula in the top left corner, highlight the entire table region and press both keyboard shortcuts one after the other.  You're table is now built!
+My faviourite is that if I have a bank of formulas that I want to copy and change the references of, I find replace = with #.  Copy paste the cells, change what I need, then find replace # with =.
+I have been using Excel for years, and i guess i just missed/ignored the addition of 'format painter' ...
+
+I realize this is in all office apps - but always just overlooked it. Oddly enough, i'm a formatting/aesthetic junky with my spreadsheets and spent way too much time making them look consistent.
+
+Then last summer i took an Advanced Excel class at the local university over a weekend, to refresh my skills. Prof used that button a few times and i was blown away ... A lot of users who started with Excel way back, i think, may not know about this amazing feature.
+I like the custom number formatting as ;;; to hide cell data.
+
+Never knew it was possible, and I can think of ways to put it to work in my sheets.
+
+Thanks for that tip, as well as this entire thread.
+Thanks for the vlookup tip. Have used excel for quite some time but have never thought to do that. 
+as others said, using keyboard for everything blows people away. but, since 2007 up, the new table features totally take the cake. 
+
+shared spreadsheets (in 2007,anyway) cant use tables, or external data links but can have formulas pointing to external worksheets.  so i have a data retrieval worksheet file that connects to the sql data, and i can do vlookups into it. 
+I like using vba but don't want to have every workbook be macro enabled. So I use the personal work book. I have it set to default has hidden whenever I open excel so I don't see it unless I need to open it for edits. 
+I think one of my favorite is select visible cells button.  Whenever I get a new version of excel installed, or put office on a new pc, this is one of the first buttons I place.  I think 2007 forward excel is "smarter" regarding cutting a pasting, but it was especially helpful in 2003 and prior.  Basically if you select a table that is filtered it will grab only what you see.  This lets you provide filtered lists quickly when pivot tables aren't wanted.
+
+Pivot tables would also be added to the list 2007 and forward.  I didn't enjoy them as much 2003 prior, but I have talked to others who liked them better before (somehow... ???).
+
+Edit:  Not so much a "Trick" but I really liked the select visible cells button, and it combines well with macros/vba.  Prior to knowing about this trick I had used otherways to get at data that weren't nearly as nice.
+Alt + Enter
+I just amazed my colleagues (one of whom is an excel whizz) with the Ctrl-' trick. 
+
+Thanks! 
+I use something similar to the concatenate formula when I have a spreadsheet that has first and last name columns separated out and I need to email everyone on the spreadsheet.
+
+It ends up looking like =(a1&" "&b1&""&$c1$&)
+
+C1 being the semi colon that separates each name in outlook. 
+
+I use this because I can never figure out how to add spaces in concatenate 
+Use the vlookup formula to see if there are any of the exact same text on another tab. = Lookup(a1,select a range),1,false) this saved me so much time when needing to find out if a number was already listed somewhere else within a spreadsheet 
+There is a cool and free tutorial about clever excel tricks and hacks. 
+Especially cool for chart hacking. 
+Check this: http://www.reddit.com/r/excel/comments/1ju10d/hi_rexcel_i_started_teaching_a_course_about_excel/
+
+Really cool: 
+- use the secondary axis as alternative x-axis to make charts look really cool
+- conditional charting
+- tuned vlookup/hlookups with drop downs and field lists
+F5 - Select (Special) - and then select (Objects) - selects all objects on a worksheet and you can then delete them with one smooth gesture. Got to love the outside vendors giving raw data with a bunch of terrible icon's and bullet points. I admire a visual masterpiece of an excel file as much as the next person but your work of art is a slow mess that I just want to filter and move onto the next report.
+Put this in behind a sheet.  To use it, doubleclick cell A1.  I wrote this several years ago as one of my first macro projects.  It could use updating, but I hesitate to change something that works perfectly well as is.
+
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+        x = ActiveCell.Row
+        y = ActiveCell.Column
+        If x = 1 And y = 1 Then Call Sortcols
+    End Sub
+
+And put this into a module.
+
+    Public Sub Sortcols()
+        Dim Sorttype As String
+        Dim XXX As Long
+        Dim Item(1 To 16) As Variant
+    
+        Sorttype = UCase(Application.InputBox("Please enter the columns you wish to sort by." & Chr(13) & Chr(10) & _
+        "Use A - Z in the form of 'A' or 'AY BA' or 'A B XFD', or 'Font' (sets fonts)", Type:=6))
+        If Sorttype = False Or Sorttype = "" Then Exit Sub
+    
+        For XXX = 1 To 3 ' this routine separates the string into 1 - 3 text values and stashes them in the Item(#) variable(s)
+            Item(XXX) = ""
+            While Mid(Sorttype, 1, 1) <> " " And Len(Sorttype) > 0
+                If Mid(Sorttype, 1, 1) >= "A" And Mid(Sorttype, 1, 1) <= "Z" Then Item(XXX) = Item(XXX) + Mid(Sorttype, 1, 1)
+                Sorttype = Mid(Sorttype, 2)
+            Wend
+            If Len(Sorttype) > 0 Then Sorttype = Mid(Sorttype, 2)
+            If Len(Item(XXX)) > 3 Then Exit Sub 'greatest legal value is XFD therefore end the routine if more than 4 chars entered
+            If Len(Item(XXX)) = 3 Then
+                If Item(XXX) > "XFD" Then Exit Sub 'greatest legal value is XFD, end the routine if anything higher is entered.
+            End If
+        Next XXX
+    
+        If Item(3) = "" And Item(2) = "" And Item(1) <> "FONT" Then
+            ActiveSheet.Rows.Sort Key1:=Range(Item(1) + "2"), Order1:=xlAscending, Header:=xlYes, OrderCustom:=1, MatchCase:=False, _
+                Orientation:=xlTopToBottom, DataOption1:=xlSortNormal
+        ElseIf Item(3) = "" And Item(1) <> "FONT" Then
+            ActiveSheet.Rows.Sort Key1:=Range(Item(1) + "2"), Order1:=xlAscending, Key2:=Range(Item(2) + "2"), Order2:=xlAscending, _
+                Header:=xlYes, OrderCustom:=1, MatchCase:=False, Orientation:=xlTopToBottom, DataOption1:=xlSortNormal, DataOption2:=xlSortNormal
+        ElseIf Item(1) <> "FONT" Then
+            ActiveSheet.Rows.Sort Key1:=Range(Item(1) + "2"), Order1:=xlAscending, Key2:=Range(Item(2) + "2"), Order2:=xlAscending, _
+                Key3:=Range(Item(3) + "2"), Order3:=xlAscending, Header:=xlYes, OrderCustom:=1, MatchCase:=False, _
+                Orientation:=xlTopToBottom, DataOption1:=xlSortNormal, DataOption2:=xlSortNormal, DataOption3:=xlSortNormal
+        ElseIf Item(1) = "FONT" Then
+            ActiveSheet.Rows.RowHeight = 12
+            With ActiveSheet.Rows.Font
+                .Name = "Courier New"
+                .FontStyle = "Regular"
+                .Size = 9
+                .Strikethrough = False
+                .Superscript = False
+                .Subscript = False
+                .OutlineFont = False
+                .Shadow = False
+                .Underline = xlUnderlineStyleNone
+                .ColorIndex = xlAutomatic
+            End With
+        End If
+    End Sub
+
+[deleted]
+Very basic one: [Auto adjust all columns width]
+
+Click at the top left corner to select the whole sheet and then, double click in the gap between two header for example A and B to Auto adjust all the columns widths.
+
+I do this almost automatic and sometimes when someone sees me they open their eyes and ask: how do you do that?
+Copy Paste Special is handy.
+I was a damn Houdini when I did this in front of my other classmates. They were manually converting rows in millions to a tens/decimal form. I just divided every thing in one motion and blew minds that day. 
+For this I always just add zero.  I just add a column next to my original data and do like =A1+0.  This converts everything.  Also, if I specifically need the format to be text, I don't bother with the TEXT function, I just do =A1&"" which converts it to text.
+That reminds me of another one. If you need to convert a formula to a value and it's only one cell, press F2 then F9, then press Enter. It's a lot faster than Copy, Paste Special, Values.
+The F4 one is the best. I flipped when I found out this one.
+[deleted]
+snazzy. noted
+Use the =trim() function!
+If you have multiple words in the cell then find and replace will remove them which is generally undesirable which is why u/TheJohnald suggested the =trim() function.
+I like!
+Similar concept:
+
+    =MOD(SUM(IF(FREQUENCY(MATCH(A$1:A1,A$1:A1,0),MATCH(A$1:A1,A$1:A1,0))>0,1)),2)
+
+This basically alternates when the value changes.  So if you had sales for John, then Sam, then Earl, John could be blue, then sam white, then earl blue.  If john is repeated it breaks down and you need to modify it, but the ordered list limitation isn't too bad for a non VBA solution.
+"The secret to being a genius is being one page ahead in the manual."
+That timestamp one is interesting -- I'm not sure I'm entirely happy with the way it updates after every single change to the spreadsheet, but there are times when that's handy.
+
+And as a general category of "when are circular references and iterative calculations useful", it's most intriguing thing I've seen.
+Yeah this blows minds.
+"Here i'll do it" Proceeds to grab keyboard and do everything. Person being shown has no idea what just happened.
+What are the best tricks to accomplish this? I have a decent knowledge of good formulas etc, but I'm a novice at quick keyboard navigation. 
+>The Context Menu will appear with "Copy Here as Values Only" available
+
+I LOVE this Context Menu, plenty of uses I can put it to. Thanks for the tip!!
+Haha did you learn that from a mrexcel book? I found that trick in one a few months ago and it blew my mind!
+Start using INDEX/MATCH and leave VLOOKUP behind. 
+Pivot Tables actually haven't changed much even if you go back to 2003 and earlier. There's the new "skeleton" that comes up on the page when you first start it, but I honestly think that the old style "skeleton" was better with the way it enabled drag and drop of field names.
+
+Thankfully, I can change it back to that way if I want to :)
+iirc,  you add a space in the CONCATENATE  function the same way you did in your example... image  double quotes.  concatenate(A1," ",c1)
+Hah, pity I saw this post a month later. 
+what does this do?
+To do what? 
+I got 'variable undefined' errors from your 'before doubleclick' code, so DIMed X and Y, but then I get 'type mismatch' errors when I enter 'b' in the dialog box
+
+Then my computer blew up
+
+Just kidding :)
+Do you have any place to learn more about real-life modelling?
+Ah, if only CTRL SHIFT A appeared automatically as a tooltip, as with the built in fuctions.
+I always just used Text to Columns.  You just highlight that column, click text to columns and click finish.  Because there's no separator, it just converts the text to numbers.  Much quicker I think
+If you want to see the calculated results of portions of a formula, press F2, highlight the portion, press F9, and you'll see the result for that portion only. Keep repeating this for other sections. Note: make sure you do not press Enter when you get out, as this converts the formula into those values. You have to press Esc. 
+I normally use this combo,
+ctrl + c
+ctrl + alt + v
+v
+enter
+
+F2, F9, enter has less keys but i'm not sure how much quicker it is since i'm so used to the paste special shortcut and it uses the keys where my hand is already.
+God bless you.  Wow.  You have convinced me of the need for me to update my knowledge of keyboard shortcuts.
+O wow I do the copy paste values daily thank you for this
+Is there any time it doesn't work where VLookup would?
+Trim function requires another column though. Also does is it grab spaces in the middle of the value?
+Yeah, I've never tried the trim function before. I'll check it out when I feel like looking at a spreadsheet again.
+So true.  I told a few of my coworkers that a huge part of the reason why I appear to be such an Excel genius is simply because I know shortcuts.  One single shortcut might only save a few seconds, but, compounded over the course of a day, it saves a lot of time.  Plus, when people are watching your screen and you're moving faster than they can follow, it makes you look good:)
+Hm, it doesn't update everytime the sheet is changed, only when the reference cell is changed. I leave a column of them hidden on certain spreadsheets that get updated monthly. 
+Ctrl-: (not ;) will give you the time stamp as a fixed value. 
+blows minds, but ain't much use as a lesson :)
+Directional Keys.  Ctrl and/or shift with the arrow keys, etc.
+Even with index match vlookup is handy. The syntax is faster and works better when you don't have nice column headings as the match.
+You are correct it is more of a UI change than anything else.  Haha exactly as I indicated, people seem to be very mixed on which is better.  Personally I really like the new setup.
+Remind me of the babe.
+I think there are a few books and websites around. I can't recall any since I haven't had to do any reading on it for quite a while.
+
+You can set up a simple model and do simple things like a scenario analysis. For example, if you set up a simple model for a manufacturing business and then ask questions like "What would happen if manufacturing time fluctuated by 10%?"... you can manipulate some variables and then record the results.
+
+Internet is cutting in-and-out for me at the moment. Sorry, otherwise I'd find an example of what I mean.
+I know... One day when I have enough energy and free time, I'll get so deep into VBA I'll see if there's a way to get those damned arguments showing up in a tool tip.
+Very cool trick.  I've been a heavy Excel user for years, but it never even occurred to me to learn how to use text to columns.  Thanks for the encouragement!
+Thanks for this. I've only been able to see calculations on #N/A's, and it was really frustrating me that I couldn't see what my formulas were doing when they were "working" properly (VLookups are wildcards). 
+Yeah, once it's already in your muscle memory there's not too much point in changing it.
+If it's a little awkward for you to use the ctrl+alt+v combination, the alt+e+s combination does the same
+
+It should work every time.  The only downside is that in my experience, it lags the sheet a bit over using vlookup.  
+Ah! I put the formula in A1 and copied down, so it updates A1 every time the clock ticks, and so...I see how it works now.
+[deleted]
+All good.  Thanks anyway for the reply.  I'll have a look around.
+I haven't had the chance to work with 2013, but I know there is vba like functionality via javascript, so it is likely as excel starts converging with web technologies (heck we are already some form of xml zipped!) somethign will become available.  That said, I prefer vba a million times more than javascript, but again I haven't seen the implementation in 2013 yet.
+Which version does this work for?  For some reason this gets me into custom views.
+Haha, as if recursion wasn't bad enough in my VBA, now it creeps into my sheets?  I have to say though, if you are sharing sheets with others having iterations turned on is unlikely.  Bad enough I need to set peoples macro security (had hoped xlsm would fix this, as you should be aware when opening that type of file it could have a macro... but anyway...).
+
+Neat solution though by BelayMeMaybe.  It could be interresting for some sort of transactional entry sheet, but I would probably still go VBA personally.
+Yes and no. The simpler syntax makes it easier to see what's going on but index match lets you click through to the reference data which is always nice.
+I understand why people are downvoting, but I disagree with the setiment.  Right now it is easier for the next guy.  There are many cases in programming where readability might be at the cost of performance.  I mean as much as I love index match, I can count the number of times where it would make more than a 10 minute difference in programming or reordering cost on both my hands.  If I have to explain index match once or twice, I am probably losing that time.
+
+That said... I would still use it in anything personal, and probably anything where people are likely just viewing my data.  If I am handing off a template to someone else to manage, then I might not.  Depending on their expertise, I might try to provide a little tips/crash course or show them how to look stuff up they don't understand.  

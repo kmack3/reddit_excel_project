@@ -1,0 +1,194 @@
+What is the best shortcut (basic Pro Tip) you've given to a person who doesn't know much about Excel?
+Ctrl-Shift-Down Arrow... It makes sitting behind someone watching while helping them a lot less painful.
+
+If they use format painter a lot, you can double-click on the button to lock it and paint to your hearts content. Click it again to disengage.
+F4 to toggle absolute references
+Delete tab: alt+E+L
+Insert tab: shift+F11
+Highlight row: shift+space bar
+Highlight column: ctrl+space bar
+Delete cells: ctrl+"-"
+Insert cells: ctrl+shift+"+"
+
+Have fun and hope they benefit from your tutorial!
+
+Edited to correct insert cells shortcut
+maybe less basic, but only slightly. i made myself the most basic macro when i worked with peoplesoft and had to constantly reformat ids to 9 char long with leading zeroes. using a very small formatting macro and giving it a shortcut key (i think mine was alt f) can take HOURS off your work life by the end of a year. my coworkers thought i was some kind of magical excel priestess. 
+My best pro-tip i can ever give is **Google**. Google that shit before you ask anyone to help you. 99% of the time somebody else has had the same problem and the answer will be within the first 5 google hits. 
+
+My boss gave me this before I even had the time to face a problem and it has saved me from having to ask lots of stupid questions.
+Hello user!
+
+I'm changing the thread flair to "Discussion". 
+
+If you think this change is in error, please feel free to message the mod team or reply to this comment.
+
+Have you checked out our [Frequently Used Formulas](https://www.reddit.com/r/excel/wiki/frequentlyusedformulas) link on the sidebar? It's a great place to find information and examples for some of the most commonly used formulas in Excel.
+
+**Thank you** for posting!
+
+ 
+
+
+"Alt =" creates a sum function for a continuous data set either directly above it or directly to the left of it.
+
+
+If you're doing a quick and dirty excel sheet punching in raw numbers, it's nice to go to the total line at the bottom and just type 'Alt' + '=' to automatically get a sum.
+
+
+Another one is I use ALL the time is basic formatting using 'Ctrl' + 'Shift' + the number keys.
+
+* Ctrl, Shift, 1 = Number Format (2 decimals)
+
+* Ctrl, Shift, 2 = Show time
+
+* Ctrl, Shift, 3 = Show date
+
+* Ctrl, Shift, 4 = Currency
+
+* Ctrl, Shift, 5 = Percentage (no decimals)
+
+* Ctrl, Shift, 6 = Scientific Notation
+
+Feel like these are seemingly random? Just look at the special characters those keys represent on standard keyboards. 4 (currency) is a dollar sign, 5 (percentage) is a % sign, 6 (sci-notation) is the exponent sign in math (^)
+F2 to edit cell contents.  Shift+F2 to add a comment.  Helps keep hands on the keyboard and off the mouse.  
+Alt-e-s for all the paste specials. 
+CTRL+SHIFT+L   
+Applies autofilter.
+When you select a range Excel will display the average, count, and sum in the lower right.  Great time saver and pretty amazing how many people are not aware of it.  
+F4 to repeat most things (formatting, etc.)
+F12 for the quickest Save As. 
+Ctrl + page up and/or page down to flip through tabs.
+
+Its like giving people the gift of fire.
+F9. 
+A lot of issues have been addressed once users realise calculations have been turned off. 
+Ctrl-C then Ctrl-V to copy and paste data, Ctrl-D to paste down, and Ctrl-Shift-DownArrow to select all the way to the bottom of the current column of data.
+
+Transpose data by copying, then Paste Special Transpose Values.
+
+Freeze panes by clicking a cell, row, or column in the sheet, then VIEW, Freeze Panes, Freeze Panes
+
+How to VLOOKUP, and be sure to show them how to convert a cell reference to absolute with $ and why it is important.
+
+Open a webpage with DATA, From Web, and work through the URL and data formatting.  Be sure to mention the limitation that leading zeros are dropped when certain data types is imported.  This can for example cause havoc with zipcodes since a bunch of them start with leading zeros.
+
+Demo the "fill" handle that shows up at the bottom right corner of selected cells.  It is really handy to fill in numbered rows, etc.  Note, you may have to turn on the fill handle in Options, Advanced.  While you are in options, click on Customize Ribbon and turn on the Developer tab if you need to use macros.
+
+
+None of these are unusual, they just happen to be small items that many Excel users don't pick up as they learn to use the program.  If I had to say what will benefit the most, learn to use macros.  They are the means to truly unlock the power of excel.  Just keep in mind that the average user will rarely use them.
+
+
+Copying and pasting a formula down a row: ctrl + shift + down to highlight, f2 to go back to the first cell, enter. BOOM. No more dragging down for 300 cells.
+Ctrl + F1. You are welcome. Damn widescreen monitors with no vertical space.
+Teach them how to type a couple very general words into the "Insert Function" - Search For A Function: feature. Explain that it's like using a search engine. If they can figure out how to ask the right questions in due time the rest should fall into place.
+Using GOTO to find differences between columns or rows.
+F2.
+Ctrl -d. IMO you should weave these into your tutorial, and at the end give them a cheat sheet with basic instructions of a pivot table and useful shortcuts. 
+F4 for cycling through references
+
+Inserting rows and columns 
+
+How cutting and deleting can ruin formulas 
+
+Ctrl down, up, over to easily navigate 
+
+Countif(s), averagif(s) and sumif(s) are probably the most powerful simple formulas.
+
+Adding new tabs and multitab formulas 
+Alt + F4. Gtfo and let me do it.
+Alt + D + F + F = Filter in 2 seconds as opposed to looking for the Filter button for a minute :)
+Ctrl + ;
+
+Insert today's date. Basic but, people seem to need it a lot.
+With all Microsoft products you can hit Alt to enable hotkeys on the above tabs. Once you get good you can filter without a click (Alt + A + T), automatically set the width (ALT + H + O + I), delete duplicates (ALT + A + M), or anything else visible on the tab. What's more, tons of these buttons have been depreciated / moved as Excel has evolved, but the keystroke combinations have been retained. You can google a cheat sheet to do things like rename worksheets, edit the color of the worksheets, and a bunch of other things.
+
+Tl;dr, if you do something repeatedly by using your mouses, there's a keyboard combination that will make it almost infinitely faster than using your mouse.
+Alt OCA will auto widen the column to the appropriate width.
+- Put a ' before any operator (-/+/=)  to make it text.  
+- Alt+Enter in a cell to enter a line break.  
+- Ctrl+arrow to move to end of data range (combine with Shift).  
+- text to columns
+format painter
+
+it still blows some peoples minds who have used the program for ages
+Ctrl + "`/~", the Tilde button to the left of 1.
+
+If you have worksheet with a large number of formulas, this will automatically switch between showing the formula text and showing the values.  Makes it a lot easier to check the formulas within your sheet.
+Or this :)
+Good lord this is true. Nothing worse then watching the scroll bar as they manually highlight from top to bottom.
+Wow that painter thing is a great tip, did not know that. 
+Just in general knowing how to use CTRL, Shift, and Arrow keys in any combination to achieve movement and selections.
+Really blow their minds and show them that it works in Word, too. 
+F4 is magical on excel. It also allow you to do the previous action again. Lets say you've selected a bunch of line and deleted them. Select another line and press f4: bim deleted. You've changed the format of a cell (grey background plus bold font and specific date format) select another cell press f4 : bam same format applied. Praise our lord F4 : the great click savior!!!
+I think this is the most important just because it explains how cells work the best. Ctrl+shift+down makes things go faster, but understanding relative cells seems to be much more important.
+Work smarter, not harder :D 
+But you already knew that ;) 
+Love this tip!  Did it a couple weeks ago for trimming the selected range.  Suddenly my Index+Match worked!  I will definitely be looking for other opportunities to make mini-formatting macros in the future.
+But if I did this, my colleagues wouldn't think I'm an absolute genius!
+
+Jokes aside, I agree. Google has the answer
+Thank you!
+Use alt + = all the time. 
+Saves me so much time
+This also works for editing file names!
+The tip here is to learn the hotkey combination for any command you use frequently.
+To add to this Ctrl+Shift+v does the same function if you have something copied to clipboard already
+Wait. What's paste special values?
+Alt A T
+
+i find this easier as often times i have one hand on the mouse and left hand on homekeys  so i dont have to move at all.
+Right click that area of the status bar to add other calculations like min and max. 
+came here to say this. incidentally, showed someone a few shortcuts on excel last night and F4 was definitely the winner.
+Or to quickly see where you have the file saved. 
+Alt FA
+
+Perfect for if you work with one hand left and one hand one the mouse (since you might want to use the mouse to navigate the folders) 
+Thank you! I use Save as at least 12 times a day, and sometimes I'll forget. This will definitely help speed and accuracy. 
+Often you can just double click the bottom right corner to autofill all the way down if it has context to know how far down to fill.
+ALT + A + T
+:)
+Or worse, using the mouse to click and drag, drag, drag, oop, too far, undrag undrag, oop too far again, drag, drag, oop too far, undrag, .... and there.
+Alt H FP all day
+I have a script somewhere that will let you Deselect a cell from a non contiguous selection. 
+
+Comes in pretty handy when you have a ton of cells selected and you accidentally hit a wrong one. 
+
+Edit: which in retrospect has nothing to do with format painter, but I have had a couple of old fashioneds and it is a handy thing none the less
+Press escape to unlock format painter. Easier than clicking on it again. 
+It gets addicting for sure. Plus it's kind of satisfying to highlight a column, hit your shortcut, and watch people go, what the hell did you just do?!?
+It's a bit like another XKCD strip: https://xkcd.com/627/
+You can tab from file to file to rename a bunch of files, too.
+Yup.  I have to use it way too much.  Those along with the Home and End keys.  
+Alt esv
+If an equation or function is in a cell you'll see the output in the cell but the actual equation up top. A normal copy and paste will paste the equation. Using paste values will paste the output. 
+Instead of alt esv, I prefer context key then v. If you hit f, it does formulas, and r does formatting.
+Nice!
+Mind. Blown. Thanks dude!
+What's not perfect about pressing one key with your left hand instead of 3 keys?
+This works for Word and PowerPoint as well 
+"I'd say I'm a solid 7/10 in Excel."
+I'm intrigued though...  does it just remove selection.range("A1") from selection?
+[Image](http://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)
+
+[Mobile](https://m.xkcd.com/627/)
+
+**Title:** Tech Support Cheat Sheet
+
+**Title-text:** 'Hey Megan, it's your father\. How do I print out a flowchart?'
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/627#Explanation)
+
+**Stats:** This comic has been referenced 520 times, representing 0.4271% of referenced xkcds.
+
+---
+^[xkcd.com](https://www.xkcd.com) ^| ^[xkcd sub](https://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](https://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_d6ef5j4)
+You're awesome. 
+Sorry, I meant the shortcut for paste special values, not the definition. But thank you. 
+I logged in just to upvote your F12 Save As comment. This is a time saver for me but I get what OP is saying-As soon as I tried F12, I said to myself, "The only bad thing is that I have to move my left hand all the way across the keyboard or right hand off the mouse"
+
+A lot of people (me) prefer not to move their hands off the mouse/off the keyboard.
+Found the link:
+
+https://www.extendoffice.com/documents/excel/760-excel-deselect-cells.html
+https://www.shortcutworld.com/shortcuts.php?l=en&p=win&application=Excel_2010 all of the old undocumented "legacy" key combinations are here, some fairly useful ones like rename sheet (alt o h r) 

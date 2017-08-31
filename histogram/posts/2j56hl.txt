@@ -1,0 +1,340 @@
+Teaching an Excel basics class to most of my office...what's something basic that you wished you had learned earlier.
+Not so much that I wished I had but more that I'm glad I did, relative and absolute formulas and why it's important to be able to use them, I'd include paste special values in this too. Also explain that excel tells you what it needs for a formula to work: http://imgur.com/498ZqyL  
+
+Also the single most important thing you should teach anyone that ever uses excel for calculations: DO NOT AVERAGE PERCENTAGES OR AVERAGES
+I can tell you right now the three most important things that form the basis for future learning:  
+  
+1. **The Alt key**; if you force yourself to do everything with the keyboard for a week you will never go back, it is SO much faster and more efficient. I started using the keyboard for gaming efficiently (Starcraft II) but the skills directly translate over to excel.  
+  
+2. **Basic programming concepts** ie data types (Integer, string, bool are the ones that spring to mind), Boolean Logic; which is pretty fundamental to everything intermediate and above. Additionally in excel if you apply a math operation to a true or false it is treated as a one or zero. This can be used to great effect with things like two way lookups.  ie Match(1,(Range1=Criteria1)*(Range2=Criteria2),0). Sumproduct is also good for this.  
+  
+3. **Never hard code variables** into a formula, have them as an input in a named range, preferably on a designated input sheet. As an extension of this, if you have more than 2 if statements you're probably better of with one of the following:  
+  - Index/Match  
+  - Sumproduct  
+  - Choose  
+  - Sumif/s  
+  - Averageif/s
+  
+  
+EDIT: I'm going to cheat a bit and add a fourth point, Using Ctrl, Shift, the arrow keys, Page up/down and end etc to navigate is really important 
+I don't have a suggestion for you, but as someone who has done this at his office, I'd like to give you a heads-up that you may be slightly disappointed at the learning speed of your peers.  I held several classes and unfortunately, I could really only go over one function per class.
+Not mathy sales figures calculations, necessarily, but here are some basic things I am always surprised when my coworkers don't know:  
+
+Filters  
+Sorting  
+Helper columns  
+Freeze panes/freeze rows (fuck split)  
+Copy paste values  (multiple methods)  
+Adding things to your quick access toolbar  
+
+Slightly more advanced:  
+
+Conditional formatting  
+Index/match (or vlookup if you really like it/your users love the formula builder thing)
+
+
+
+I found many adults forgot about Order of Operation... Cover that. 
+
+Show them about printing so they don't print 10 pages when they expected 5. (This includes print column and/or rows on pages.) 
+
+Freeze rows/columns. 
+
+View different worksheets from the same workbook simultaneously. 
+
+Auto fill
+
+Excel is not a word processor. 
+I wish I'd understood the value of the Quick Access Toolbar earlier than I started appreciating it. Also, basic pivot tables. For when your boss says, "What's the sum of all this?"
+
+Good luck. You might suggest people take an online Excel class. I took one intermediate and one advanced class. Then I took a "what's new in Office 2013" class. For $95/class, it was worth it.
+
+I find what limits most people in Excel is that they:
+1. Don't have a good understand of basic math.
+2. Can't think logically.
+
+PS: please, for all that is holy, teach them the "double click" to auto-size columns and/or rows. Please.
+[deleted]
+Whenever I teach an Excel Class, I make a workbook and basically dedicate a worksheet to each thing I want to teach, and send it out to the class before hand.
+
+Also, drill into the fact that Functions return SOMETHING.... which means you can use a function within another function.
+
+A great thing to cover is the dangers of using "text" formatting...
+
+* Take a new sheet, format A3 as text.
+* Set Cells A1, A2, A3 and A4 to 5. (don't fill down)
+* Attempt to sum in A5.
+
+Excel 2007 is **much**  friendlier than 2003 was.   I had a class of about 25 adults utterly baffled why the math wasn't working (I right-aligned the values) for about five minutes before I gave them a hint.
+Something I think is important, even if it seems pedantic, is to really hammer through a common understanding of the "language" of excel:
+
+Look at your _workbook_, it has _worksheets_, they are full of _cells_
+
+Each _cell_ has a _reference_ (e.g. A2) and a _value_ (e.g. the number 2 or "Sales")
+
+_references_ can be _absolute_ (dollar signs) or _relative_ (change when you drag)
+
+_contiguous references_ are a _range_
+
+_ranges_ can also be _absolute_ or _relative_
+
+Excel _functions_ generally take a single _reference_ or a _range_ (or multiple ranges) as their _arguments_ (inputs)
+
+_Arguments_ are either _mandatory_ (no brackets) or _optional_ (square brackets)
+
+_Functions_ return (output) _values_, either as _numbers_ or _strings_ (numbers or text) 
+
+_Formats_ may change how the number looks (e.g. 20% or 01/01/2015) but the underlying _value_ is a _number_
+
+Excel is a computer, so it is not very clever and it takes your _arguments_ literally. If it expects a _number_ and you give it a _string_, it will return an error. 
+
+Excel is, however, _logical and consistent_, and it does everything starting from one end and working it's way through to the bottom.   
+If you use =SUMIF(B2:B20,"cake",A2:A20) (The _arguments_ for this _function_ are: _range_, _criteria_, _sum range_ it will start from one end of the _range_ B2:B20, and check to see if the _value_  is the _string_ "cake". If it is, it will return the corresponding _value_ from the _range_ A2:A20. Once it has gone through all of B2:B20, it will then sum the resulting values from A2:A20. 
+
+When it is doing it's calculations, it doesn't care about about the actual _references_, but only about the _values_ and the _dimensions_ of the _ranges_. 
+
+The _range_ A2:A20 is 19 rows long and 1 column wide, it is a 19 by 1 _array_, containing 19 _elements_. So is B2:B20. When using SUMIF, Excel actually looks at the first _element_ of the second _array_, and then returns the first _element_ of the first _array_.* What is important is that the _dimensions_ of your _arrays_ are the same. 
+
+*(Range and array can often be used somewhat interchangeably, with array referring to a more general range of values, and range referring to a range of cells)
+
+As a result, A2:A20 and B22:B40 would be a valid input for the SUMIF function as well, the _ranges_ are the same _dimensions_. 
+
+Individual _elements_ of an _array_ can be referred to by their _indexes_. B2:C4 is 3 rows long and 2 columns wide, so it is a 3 by 2 array. Any _value_ of this _array_ can be referred to by it's _row index_ (from 1 to 3) and it's _column index_ (from 1 to 2). Think x,y coordinates: (1,2) is _row index 1_  and _column index 2_ (or the value of C2). (3,2) would be the value of C4, and (2,1) the value of B3.
+
+*An aside into arrays:   
+SUMIF returns a single _value_, but some _functions_ will return an _array_ of _values_, and many _functions_ can be made to return an _array_ of _values_. This may not be so relevant for basic use, but breaking down SUMIF into an IF function and a SUM function, you could write IF(logical test, value if true, value if false) as IF(B2:B20="cake",A2:A20,0). This on its own will return an _array_ of _values_ as excel checks each _element_ one after another, and returns an _element_ according to the logical statement, into a 19 by 1 _array_ of the value from A2:A20 or 0, depending on B2:B20. If you then SUM the _values_ of this _array_, it will return the same _value_ as the SUMIF function.  
+
+Knowing the language of excel helps understand the functions more easily. Like if you are using a VLOOKUP, you will see this: 
+
+VLOOKUP(lookup value, table array, column index, [range lookup])
+
+_Lookup value_ refers to a _single value_ that you want to look up in the leftmost column of your _table array_ (a range or array that contains more than 1 column). You the enter the _column index_ of the column you want to extract the value from. So if your _range_ is B4:D8, and you want to return the _values_ in column C, your _column index_ would be 2, it is the second column in your _range_, even if it is the third column of the spreadsheet. 
+
+**I've already rambled on long enough, it might be too much to get into for complete beginners, but I think equipping people with a basic understanding of how excel works and its terminology let's you break down pretty much every formula into those component parts and walk through what is happening step by step**  
+
+
+This might be a bit to the expert-side, but tables and table functions. At least the knowledge that they existed would've helped. Also INDEX MATCH MATCH, as it's an easy way to demonstrate how difficult-looking formulas formulas can be constructed easily.
+I would start at making sure the students understand of the power of structuring their data tables correctly, and emphasis keeping their data separate from the display of that data.
+
+This is an important concept because it greatly speeds your ability to restructure how the data is presented based on requests instead of having to re-work your entire data set because of how you initially setup your worksheet.
+I think that should cover the majority of it. I'm tempted to say you should introduce a shortcut or two, but I'm afraid that if you throw multiple things at them, not many of them will stick. So, I'd suggest sticking with the basics that you mentioned and really drilling those home instead of trying to teach a bunch of things.
+Back to basics:  SUM, SUMPRODUCT, AVERAGE, etc.  Also CONCATENATE, LEFT, RIGHT, MID, FIND are common, but maybe not well known.  Maybe INDIRECT and OFFSET.
+
+I would also go over Absolute and Relative references, although you may have to dumb that down and use a term like "locking the cell" instead.  
+
+If you like, you could try to do some common shortcuts.  Ctrl+d, Ctrl+r, doubleclick to drag the formula, etc.  Alt+=
+Find and Replace. 
+
+Combining two cells to make it unique I.e first and last name, order number and component, etc with '&' function and then using vlookups to return a value. 
+
+
+I did the same thing in my office just a couple weeks ago.  One thing I did that got a lot of feedback was going through each and every button on every tab of the ribbon.  There were some pretty decent users who simply had never gone through to see what was available to them.  That session took a lot longer than I had anticipated, but was well worth the time spent.
+
+The next session I held was strictly on functions.  Mostly simple functions, but some sumifs, countifs, etc.  I went through the different ways to enter them (insert function vs. typing it out) and using the arguments dialogue box.  
+
+One thing I noticed was how much more interactive and impactful the sessions were with smaller groups (3 to 4 people who are comfortable with each other) vs. having the majority of the office in the room at the same time.  People were intimidated or afraid they were going to look dumb if they asked a question with a room full of people, but with the small groups they felt  much more comfortable asking questions and being engaged in the class.  
+
+If you want me to send the PowerPoint presentations I created I would be glad to do so.  Just shoot be a PM and I'll send it to you when I get to work tomorrow. 
+I would recommend teaching them how to neatly organize data in a way that makes sense for their purpose. It is surprisingly difficult to do but is an essential skill to have!
+Since you're talking about basics, here are many suggestions:
+
+Nesting IF statements (they can learn more advanced capabilities later, but having a good understanding of nesting IF statements will help with they're logical processing; they'll understand why it's a bad idea later)
+
+Using AND/OR (for beginners, this is really useful)
+
+Indirect (how to build a reference using Indirect will help them understand how Excel understands cell references; like IF statements, though, they'll learn better ways to do this later)
+When shit gets complicated: Turn 'Workbook Calculation' to Manual, and just F9 it when you need it updated (shift F9 to just calculate the single sheet).
+I'm surprised how many people aren't aware of the ABS function.  It's nice when dealing with debits (positive) and credits (negative) coming out of a financial system.  Makes sorting way easier.
+
+I've always liked Goal Seek too although its application is fairly limited.
+I wish i had learned 
+
+The F5 key, Go to - Special. It helps you a lot
+
+and
+
+How to hide the gridlines!! Ye, i dont like them.
+
+
+
+
+Serial date stamp.
+
+Novice users do not know how Excel works with dates and it confues them.   
+Thanks for the suggestions.
+
+
+~~On another note...how does one earn Clippy Points?~~ Never mind...just received the "clippy" message after placing this post.
+Why can't you average percentages?  
+  
+Or do you just mean don't take the average of percentages across data of different magnitudes?
+What do you mean by the last bit? Newbie here.
+wait,  why would averages of averages  be different 
+Hi sorry to jump on like this but which pdf books would you recommend for a begginer whose is learning by themselves 
+I use control shift and arrows soooo much, especially if I have a very long sheet. 
+I'll second #1.    There are very, VERY few things in Excel that are quicker to do with a mouse.  If you're constantly context switching (kb-mouse-kb-mouse), you're just slowing yourself down.
+
+I routinely blow people's mind at work when I tell them to End, Down, Right, Holdshift, End, Up, Ctrl-D, Release Shift.
+
+They physically do it, and then still ask me how *I* did that.
+
+Yah...that's why there's a second session this month.  There's what people "think" they want to learn about Excel, and what they're actually capable of understanding.  Needed to build more of a foundational knowledge in folks before I could go back to the intermediate stuff.  A lot of it went over their heads during the last training.  
+> Copy paste values (multiple methods)
+
+I am going to expand on this because when I learned a method from this subreddit a few months back, it blew my mind.  I wish I had known about it years ago.
+
+For those who don't know this, a quick way to paste values is:
+
+Ctrl+V, Ctrl (by itself), and then V (by itself).
+
+Ctrl+V pastes as normal, Ctrl pops up a little "paste special" menu, and V selects Values option.
+
+Side note, these keystrokes are for when copying from Excel.  If you are copying from another program, the keystrokes are:
+
+Ctrl+V, Ctrl (by itself), and then M (by itself).
+
+The M is for Match Destination Formatting.  I really wish they were both V, but for some reason Microsoft decided differently.
+I recently had to bust out the "Please Excuse My Dear Aunt Sally" to a group of coworkers.  Another thing I noticed is that some of the older folks in my office were averaging percentages to come up with an extended GM%.  I don't know how long this had been going on, but they must have been looking at some whacked out numbers.
+These are all really good ones!
+I 2nd the quick action tool bar. Added "select visible cells" to show in a workshop I did once and it blew people away (we worked with a lot of SQL data).
+Thanks for the suggestions.
+
+
+Whenever I teach a class, I have folks bring their laptops (close down their email), and create something with me.  This way, when the class is over, they have something tangible they can refer back to as opposed to notes or memory.
+
+
+I think the thing that will baffle folks most this time is when I cover the order of operations and explain why 4+2x3 is 10 and not 18.
+Hey, I'm actually trying to learn pivot tables, macros, creating drop down lists (to start) do you have any worksheets that would help me learn this? Sorry if this is an odd request.
+Careful using the phrase data tables.  
+  
+There is a specific excel functionality called a 'data table' and it's not quite what you're referring to. (It's one of the more badass features though)  [LINK](http://chandoo.org/wp/2010/05/06/data-tables-monte-carlo-simulations-in-excel-a-comprehensive-guide/)
+  
+I completely agree with what you're saying about data structure!
+In the sessions I teach, I talk about the purpose of the workbook; is it for data or reports or something else (although I can't imagine)? Think about:
+* Layout
+* Breaking data down into basic fields if the spreadsheet has records
+* Format before you enter the data, especially useful for percentages and dates
+I agree, someone told me a long time ago to understand the data first.
+Also explain how setting calculation to "manual" can spread like a cancer to any other Excel file you open at the same time.
+
+I can't begin to tell you how many times I've been called for help by someone who was changing all sorts of values in a simple spreadsheet, but their sum or whatever didn't change. As it turned out, someone had sent them a file with calculation set to "manual" and when then they opened 3-4 other workbooks on top of that one, Excel set the calculation mode of all of them to manual.
+
+It's easy to spot once it's screwed you a few times, since Excel will say "Calculate" in the lower left bar when it wants you to F9. But, if you're a novice user, that's something that can trip you up for a good long time. I have some files at work that I absolutely wanted to make sure are always in auto-calculate mode, so I added this to them:
+
+    'Turns auto-calculate on when this file is opened
+    Private Sub Workbook_Open()
+      Application.Calculation = xlCalculationAutomatic
+    End Sub
+Amen to that one! Also, I find fractions are rarely used, but if it's the case in your industry, make sure they know about the formatting issue.
+Solving peoples problems. The op can post solution verified or mods post +1 to award points for valid solutions.
+
+https://www.reddit.com/r/excel/wiki/clippy
+If they're all of the same size it shouldn't impact anything but if they're not all of the same total amounts the numbers will be incorrect.
+So if we break it down to really simple number to over exaggerate the fact.  
+We've got 2 classes in the same year. Class 1 has 500 pupile Class 2 has 100 pupils.  
+  
+They both sit the same test and in Class 1 175 pass and in class 2 only 50 pass. Based on these numbers. 175/500 or 35% of class 1 pass and 50% of class 2 pass.  
+If we average these percentages (35%+50%)/2 we have the average pass rate at 42.5% but if you add up the total number ie 225 passed from 600 pupils or 225/600 your pass rate is only 37.5% this is the true pass rate.
+the average of 1 and 3 is 2. The average of 4, 6 and 8 is 6. The average of 6 and 2 is 4. 
+
+The average of 1, 3, 4, 6, 8 is 4.4
+
+So taking the average of averages will in most cases give you the wrong number
+I mostly learned by doing. I did buy Excel 2007 bible which I picked a number of things up from:
+
+http://www.amazon.co.uk/Excel-2007-Bible-John-Walkenbach/dp/0470044039/ref=sr_1_3?ie=UTF8&qid=1413295484&sr=8-3&keywords=excel+bible
+oooh, I didn't know about clicking end then down, I have used ctrl+ down or ctrl + shift + up until now.
+
+I'm assuming your key sequence is to drag down formulas for a column?
+
+If so, I think it may need a left right at the front and releasing shift before the ctrl +D
+
+
+my suggestion for the class is to do a breeze-through of all the things that are "possible" that you know of. Learn to do screencasts and record yourself using the various techniques and tricks. Make it available on the company's server/intranet.
+
+nothing you teach is really relevant to someone until they need to use it. Having done what you're doing I found it to be so much more effective to show our auditors the gamut of possibilities, then I really only do screencasts after reading through the 10-second survey they fill out on the way out. They know that they can ask me in the future, "hey remember that thing you showed us... " because all of a sudden it's relevant to them, then the "student" appears. And guess what, instead of having to spend my time showing this person when I showed someone else last tuesday, I can point to the video on our server. Why waste time?
+
+--
+
+to answer your question about content. go to youtube and search "excel how to" sort by view count. synthesize the video listing titles and content into a list of commonly asked questions / tips and tricks. I do this with Amazon books as well. You should read through the reviews of some of the best selling, most-relevant books to your topic these billion dollar companies have already done your content research for you. (Reviews will highlight for you the "Pains and Gains" of your customer) and again,... why do all the thinking yourself?
+I put the Quick Access Toolbar to use. You can assign whatever you want, and adjust their order in the File | Excel Options | Quick Access menu.
+
+What is extra cool is Alt+single digit can become a super shortcut for those mini icons. The leftmost icon is Alt+1, 2nd is Alt+2, etc. 
+
+I set my leftmost to Paste Values and 2nd as Paste Formatting. I use them constantly and can fly between Ctrl+C and Alt+1. Everyone I set this up for in person is more blown away by that than any elaborate formula or VBA I've written. 
+
+A downside is these Alt commands don't work on clipboard items from outside Excel where your method does.
+I really like Alt-E S V enter. When I first learned it, it sounded ridiculously convoluted. Then I did it a couple times, and got used to it. Alt-E S V with the left hand, then numpad enter with the mouse hand thumb.  
+
+Every experienced user has a combo that works well for them, hence the multiple method suggestion.
+Going to make your lives a lot easier. If you find yourself pasting values a lot, record a macro and set a custom shortcut. I personally use ctrl+shift+v
+Maybe everyone that uses it should share a screenshot of their QAT. Sometimes I forget about the commands that are buried deep in the ribbon---or not in the ribbon at all---that make life easier.
+
+Edit: I mean everyone in the subreddit
+Yeah, the file is "theirs", and I intend for them to keep it as a reference, and a way to play around....
+
+You've got my sympathy if you need to go over the order of operations....  That's like "This is a mouse, it has three buttons" level...
+
+Use Parentheses, blow their minds!
+
+Not offhand.... 
+
+* Good way to play with pivot tables is get your bank statements in electronic form.  That'll give you time-based data that you can aggregate on... play around... maybe you'll notice patterns like you only eat at Subways on Thursday or something.   Pivot tables are one of those things that until you have a heap of data to sift, are virtually pointless.
+
+* Macros...bit harder.... quickest way to get your feet wet would be to record some actions in Excel, and then put logic on them.   If you're doing the same thing over and over, then you could deal with conditionals, loops, CASE statements and all sorts of fun.   If there's something in particular you want to do, make a post about it, you're almost certain to get help here.   I think we have tutorial sites in the sidebar/wiki as well.  i'm partial to w3Schools ASP tutorial.. the vast majority of what you learn in there transfers over almost directly.
+
+* Drop down lists are nice and easy, actually... Data: Data Validation, choose what's allowed, put in messages to display when they're inputting the data, or if they input something that isn't correct.
+Yeah, good point. And a good fix!
+Sure, I thought you were saying there was a programming issue with the way excel calculated averages of %.  :•)  
+  
+
+
+Ahhh ok! The former is only true if both classes have same amount of pupils? 
+But if the sets are all the same size it doesn't matter? (well at least with sets of 2)  but I see your point though with averages of averages since it's like using percentages that don't have the same basis.
+OK. Thank you 
+True... it's the key sequence to jump to the end of a column of data, and then fill the last value in the column directly to the right down to the same row.   So the left would actually be at the very start for my example. :)
+What does this do for you?
+Damn.  That has the same issue as my keypresses as it doesn't work if it's not data copied from Excel.
+
+Your option is definitely quicker when it becomes muscle reflex, as my Paste then Special Paste can sometimes take a few seconds.  Yours skips straight to pasting how you want it and doesn't do the middle step.
+
+That said, I think Ctrl+V, Ctrl, V is really easy to pick up for most people used to pasting with Ctrl-V.
+I second this.  I always used ctrl+q so I could stay on the left hand.
+I built a ctrl-shift-v macro for one of our programs that takes what is in the clipboard and pastes only the numeric values.  Gets rid of all the junk characters (parentheses, commas, spaces, hyphens, etc.) that the program doesn't like.
+
+I had considered making one for Excel, and I made an add-in already that does all sorts of stuff.  But from what I can tell, the add-in macros cannot be called by shortcut.
+
+Is there a way to call the macro from each workbook, without them having the code on each one?  I messed around with the "personal.xlsx" method for some other stuff, but that didn't work the way I wanted, so I haven't tried that one for the pasting.  Is that what I'd need to do?
+Introduce the concept of clicking the scroll wheel...mind blown!
+Love the idea of the bank statement - I try to teach Excel for the topics that people need on the job, but, really, there's so much more you can do with it. Download data (such as data from data.gov) to figure out at what hospitals the most competent doctors operate at, and MANY, MANY other tasks.
+Nah just that anyone with little computational knowledge doesn't understand why average's of percentages are a terrible idea.
+
+side note, open up windows calculator and enter square root of 4 then minus 2 off of this. You'll be surprised ;)
+Yes
+yeah. 
+
+average is sum(x\_1 to x\_n)/n
+
+If all the sets are the same size the average of averages would then be sum(sum(x to xn\_1)/n\_1 ... sum(x to xn\_m)/n\_m)/m If all the sets are the same size (so n1 = n2 = nm) you can put them on the same denominator and essentially get =sum(all\_of\_the\_x's)/n/m which then gives you =sum(all\_of\_the\_x's)/(n*m) 
+
+I hope that made sense / I didn't mess up my math lol
+Yeah you want to set up a personal macro workbook. They auto open when you open Excel. You're on the right track. I'm sure someone can give you better instructions on how to set one up as I forget the details. You could google it too. Hope that helps!
+Lol, at least it is very, very close....
+> side note, open up windows calculator and enter square root of 4 then minus 2 off of this. You'll be surprised 
+
+I was surprised. Now please explain before I go insane.
+It actually depends on windows version what outcome you get. On W8 I get -8.1648465955.... but on W7 I think you get -1.1....
+This is 5 months old, so I apologize for freaking you out, but I'm procrastinating on homework and figured you'd like to be sane again.
+
+On windows 8, the answer you should get from sqrt(4)-2 is -8.164846595e-39, roughly. That means that it's minus zero, decimal, 38 zeroes and then the 8164846595; in other words, an extremely small number. 
+
+Computers represent all numbers in base two because they're written in binary, which means it's much more difficult to store and compute decimals in base 10... This is called binary floating point precision, or otherwise known as the bane of programmers everywhere.
+
+An example would be 1/10. If you have the number 1/10 and you do anything with it on a calculator that conforms to standard behavior, the number is converted to binary, except the binary representation of 1/10 is irrational! Excel, for example, rounds 1/10 down by roughly 2.8e-17 because of that.
+
+Most calculators calculate square roots through methods like Newton's method. Using Newton's method with Sqrt(4) can either be super accurate or decently accurate, depending on your "guess" value. If you use a guess value of "1" (ie, you "think" the square root of 4 is 1), then after 3 repetitions of Newton's method, you have the answer `2.00060975609756...`. Not too bad. If you guess "100", however, after 7 repetitions of Newton's method, you'll have a guess of `2.02403128820706...`, which is decent, but not *super* close.
+
+However, in calculating Newton's method, you have to have in-between numbers, store decimals, and do other things like that to calculate it. There's a *lot* of places for a binary number to mess up and get rounded, which is probably what happened for the windows calculator.
+
+This is why most calculator applications have lots of "lookup" tables for defined constants and "rational" answers (eg sqrt(4) is defined to be 2, rather than calculated). Calculators also rely on triggering "flags" whenever a number is modified somehow (like rounding) and may apply error corrections to whatever extent possible. Many calculators also apply things like intelligent rounding (Returning a result of 8.325e-125 is probably a rounding mistake, so we'll make that zero since it's so small of a number that it's irrelevant even at the nanoscale), that sort of thing.
+Don't think there's ever been an answer for it. Potentially something wrong with rounding.

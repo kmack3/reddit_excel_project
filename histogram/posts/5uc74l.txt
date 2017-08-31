@@ -1,0 +1,31 @@
+Formula for identifying numbers in sequence (I.e. 2,3,4) in a cell
+`=IF(COUNT(SEARCH({"012","123","234","345","456","567","678","789"},A1))>0,"Yes","")` should work. So you can put that in a `=IF(...., "Likely fraud","")`.
+
+Please tell me you use [Benford's Law](https://en.wikipedia.org/wiki/Benford's_law) in your job. That's so cool.
+You should add "890" to it since we're looking at keyboard input.
+Ha, that is to the point.  
+
+I wonder, is there a less hard-coded way to check for a sequence of certain characters?
+First off, thanks for the formula - overly simplified approach, but it should get the job done.
+
+Secondly, thanks for introducing me to benfords law.  Hadn't heard about it yet but it sounds ridiculously useful.  I will certainly look to implement this.
+Just wanted to follow up with you regarding your Benford's Law suggestion.  A sampling of a months worth of transaction shows that almost 81% of our legitimate transactions begin with either 1, 2, or 3.
+
+All of the other numbers (besides 4) are the leading digit less than 5% of the time.  We can certainly apply Benford's Law to identify potentially fraudulent transaction numbers.
+
+Great tip!
+Yeah, it's low-tech and I originally had something more advanced, but OP only asked for numbers in a sequence, and I figure clarity trumps everything else. You can obfuscate it to something like
+
+    =IF(COUNT(SEARCH(RIGHT(ROW(A$1:A$8)-1,1)&RIGHT(ROW(A$1:A$8),1)&RIGHT(ROW(A$1:A$8)+1,1),A1))>0,"Yes","")
+
+but that's just the same thing. Changing those `$8`'s to `$10`'s though does now allow for wraparounds (901 is caught, for example).
+
+You could use `CHAR` to [extend it to alphabets](http://i.imgur.com/HlGaQSU.png)
+
+    =IF(COUNT(SEARCH(CHAR(ROW(A$1:A$24)+64)&CHAR(ROW(A$1:A$24)+65)&CHAR(ROW(A$1:A$24)+66),UPPER(A1)))>0,"Yes","")
+
+
+
+
+Oh good - be sure to read up on its limitations (you need 'conforming data sets' as [touched on here](http://www.slideshare.net/auditnet/using-benfords-law-for-fraud-detection-and-auditing)), but it's pretty good at identifying made up numbers once you confirm your data is good (which it looks like yours is!).
+Good work!  Please know that my comment was a genuine question; your more advanced solution is great and interesting to look through 

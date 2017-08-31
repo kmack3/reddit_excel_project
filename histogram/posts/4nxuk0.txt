@@ -1,0 +1,31 @@
+Boss is color blind...is there a office color blind theme for charts?
+Try this link, scroll down to "Set of colors that is unambiguous both to colorblinds and non-colorblinds."   
+http://jfly.iam.u-tokyo.ac.jp/color/  
+
+Also, chat with your boss about it. Color blindness affects each person differently in terms of how strong the effect is and which specific colous they have trouble distinguishing. I'm red-green color deficient. Your boss sounds yellow-blue. Between the two of you, you may be able to create and refine a color palette that works for both of you.
+
+The page above gives a lot of detail about the hows and whys of color deficient vision, as well. Good education.
+Use pattern fills rather than colour fills (dots, lines etc). 
+You can use [Color Brewer](http://colorbrewer2.org/) to select color blind safe schemes, and you can select color ramps based on the way you're displaying data. [Kuler](https://color.adobe.com/create/color-wheel/) from Adobe is another useful tool for choosing color schemes.
+I thought I'd be able to google this one for you, but no such luck!
+
+Depending on the kind of color blindness your boss has, maybe ask him about it, you could always build a custom theme yourself? 
+
+https://support.office.com/en-us/article/Change-a-theme-and-make-it-the-default-in-Word-or-Excel-c846f997-968e-4daa-b2d4-42bd2afef904
+
+Also a stacked chart with 10 different colors is difficult to read for those of us without color-blindness! Any chance that there might be a better way to visualize your data, possibly using a few more charts to highlight the most salient information? 
+I'm assuming this is more of a problem with pie charts as opposed to bar charts. Can you use different patterns instead of different colors?   
+
+
+https://blogs.office.com/2007/11/16/chart-pattern-fills/
+As someone who is partially color blind and uses excel quite frequently instead of creating a chart with 10 data points try Id suggest to find alternative ways of displaying the data. A table will often display more data in the same amount of space and per Tufte the human eye can pick out distinctions in numbers quite easily.    
+If a chart is needed I'd argue that comparing 10 data points is unlikely to reveal anything meaningful. You could give the user the flexibility of using pivot slicers to compare the points that they find relevant vs dumping everything into one chart.
+just add labels. 
+This might be the answer! I just walked over to him and showed him the chart and he said he couldn't tell the colors, but it was 100% distinctive...I just made a color theme and dropped it in to a chart. Let's see if it works when printed!
+The data is being taken from excel and put into a PPT presentation, so slicers aren't an option. As for the data points, its comparing budget figures v actual sales v multiple items; so its unfortunately probably best suited for a bar chart.
+Glad that worked out. 
+
+I was shown that page/information a while ago. First time I saw it, it was just too much info. I just wanted a simple color chart. But, I read through it again, and it finally sunk in. I have always used those final tips on page 21 of the PPT from then on: especially this line, "Design in gray scale first, and then add color as ornament."
+
+ 
+I'm colorblind, and basically just separate similar color hues. So maybe your stacked chart goes: blue, red, purple, orange, dark blue, yellow, etc. And then make sure the legend on the side is in the same order. One time, after a meeting, someone thanked me because they were finally able to read all of a chart without fear they mixed up colors. Turns out he was colorblind too!

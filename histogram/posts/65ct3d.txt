@@ -1,0 +1,45 @@
+I have a pivot table connected to a source database - I want others who have access to refresh the pivot table, but not be able to change anything in the table. How can I disable the "Field List" option?
+How about setting the pivot table to use a view/query of the table that excludes the fields you don't want published? 
+Could you set the pivot table to refresh automatically when opening the workbook, hide all the Pivot Table menus and then lock the workbook completely?
+> setting the pivot table to use a view/query of the table that excludes the fields you don't want published
+
+Could you give me a little more detail on how to do this, or a link to where I can learn about it?  
+This is a very good point. I used the same technique with PowerQuery for a couple of projects myself. But the main problem becomes compatibility - if OP's and the users' excel versions don't match, there's gonna be a problem.
+That's a good idea; the one thing is that I would like them to be able to copy/paste the data elsewhere if they want, and if I lock down the whole thing they won't be able to do that.  I'll respond with getting you the clippy point in a while, but I want to get some more ideas from others too.
+I'm not aware of the type of database you are working with so I'll assume it's either Access or a larger SQL database.
+
+For MS Access:
+https://support.office.com/en-us/article/Create-a-simple-select-query-de8b1c8d-14e9-4b25-8e22-70888d54de59
+
+About halfway down the page, you want to start at the "Build the query" heading. The 1st part is about creating the table in Access that is used in the tutorial.
+
+For a SQL-based database (Oracle, SQL Server, ?):
+In SQL a saved query is called a VIEW
+
+   The syntax for creating a view is as follows:
+   CREATE VIEW "VIEW_NAME" AS "SQL Statement";
+   
+   You'll want to only include the fieldnames in the SELECT section of the data you want viewable.
+
+   sample:
+   CREATE VIEW V_Customer. AS SELECT First_Name, Last_Name, Country. FROM Customer;
+   CREATE VIEW V_REGION_SALES. AS SELECT A1.Region_Name REGION, SUM(A2.Sales) SALES. FROM            Geography A1, Store_Information A2. ...
+   SELECT * FROM V_REGION_SALES;
+
+Once the View is created you access it just like you would a table.Build your pivot table using the VIEW name.
+I'm pretty sure you can lock the workbook so that no one is able to make changes but they're still able to select data to copy and paste. 
+Sorry - it didn't format the reply very well & I saved it before I noticed. Let me know if you have an issue understanding the SQL sample. I copied it from a Google search on "create sql view". There's a ton of info on this. Maybe your IT database support can help.
+If they copy and paste the entire pivot table (say by selecting the entire sheet), then the field list will open back up, and they can then have access to everything..
+Solution verified 
+We're getting a little involved but, if you put the Pivot Table starting in Row 1, you can unlock the sheet then lock just Row 1 and hide it (and hiding all other headers from the Pivot Table Options). Now protect the sheet and only allow them to select unlocked cells and it *should* prevent them from selecting the whole sheet and thus copying and pasting it. 
+
+I did a small test on it and it worked for me but it only works if you hide all the headers and all the rows above them.
+
+You have awarded one point to _goldneagle_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+That's...brilliant.  Solution Verified.
+
+You have awarded one point to _AmphibiousWarFrogs_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

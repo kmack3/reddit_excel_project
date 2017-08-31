@@ -1,0 +1,258 @@
+Excel Pranks & Tricks
+One I use is below.  It's a bit of an email prank, but I've coded it in Excel as I found it easier.  You give the function a message, eg "TEA PLEASE" and it will email the target person with one letter at a time in the subject so that the message reads down their inbox.  (This does assume that they have their inbox in date order)
+
+    Sub SendEMail()
+      
+      Dim OutApp As Object
+      Dim OutMail As Object
+      
+      Dim MailTo As String
+      Dim Msg As String
+      Dim MailSubject As String
+      Dim MsgLen As Integer
+      Dim n As Integer
+    
+      MailTo = Range("targetemail").Value
+      Msg = Range("messagetosend").Value
+      MsgLen = Len(Msg)
+      
+      Set OutApp = CreateObject("Outlook.Application")
+     
+      For n = 0 To MsgLen - 1
+      
+        MailSubject = Mid(Msg, MsgLen - n, 1)
+        Set OutMail = OutApp.CreateItem(o)
+        With OutMail
+          .Subject = MailSubject
+          .To = MailTo
+          .Send
+        End With
+        
+        Application.Wait (Now + TimeValue("0:00:02"))
+      ' small wait to try and ensure messages arrive in the correct order
+      
+      Next n
+            
+      Set OutMail = Nothing
+      Set OutApp = Nothing
+    
+      Call MsgBox("Finished sending emails.", vbOKOnly, "Complete")
+      
+    End Sub
+
+For bonus points, hide similar code in a worksheet_open event, and get it to send an email to everyone in your area saying "I've just brought in some cakes".  Watch as the unwitting recipient opens the spreadsheet and unwittingly offers cakes to everyone.
+>Open Word every time you open Excel
+
+mfw I don't even have a face for this
+When we had an intern over the summer.  I created a workbook that had a bunch of BS data in it. Then told him it was very important data and to make some pivot tables and graphs and ish for the meeting later that day.  Little did he know that there was a time bomb in there that was ready to go off after 20 clicks.  A popup opens asking if the User really wants to delete everything.  Then the workbook deletes everything and saves.  This workbook wasn't given thru email or shared in SharePoint so there was no way to recover it or open an older version.  Funniest part was there was about a 1.5 hour wait of him trying to fix this before he told anyone.
+These are going to be awesome to play with. I'm might combine a lot of them to make a super-bomb. :D
+As someone who has never used VBA, could anyone explain how I would go about implementing these... *tools*?
+
+Edit: ~~I think I've figured it out. Enable developer tab on ribbon > Visual Basic. Expand the Microsoft Excel Objects in the left pane, open ThisWorkbook. Paste script, save as Macro-Enabled Excel (*.xlsm) and enjoy! If this isn't accurate, please correct.~~
+
+Edit2: More accurate instructions below, compliments of /u/Fishrage_. 
+Another prank you can do, is to set a cell's format to be 7 using the custom format option (instead of something like #,##0 or percentage to 2 decimal places etc).  Then whatever number is in the cell will actually be shown as 7.  The true value is there, but just displayed wrong.
+
+For example, if cell A1 = 1+1, and cell A2 = A1+1, and cell A1 has format of 7.  You would see a 7 in cell A1, but cell A2, which looks like it should be 7+1=8 actually shows a 2.
+I know what I'm doing tomorrow at work. Thanks man
+Just tried the command bar one, as it had me in fits of giggles at work - and the way Excel uses the ribbon now has broken it :(
+
+It seems that, with Excel 2013 at least, it now ignores all the position properties of command bars, so you can't do floating bars, and instead everything appears on the ribbon.  [See this book](https://books.google.co.uk/books?id=Wmvj-5kNesoC&pg=PT772&lpg=PT772&dq=floating+command+bar+excel+2013&source=bl&ots=qoCuEbGCag&sig=LisKhhclqsYYQvwmm0lC3-YMSL0&hl=en&sa=X&ei=lGuHVIxcy9xoz7iA0AQ&ved=0CEcQ6AEwBjgK#v=onepage&q=floating%20command%20bar%20excel%202013&f=false)
+Can we get screenshots of these in action?
+Is there a possible way to do this one google spreadsheets?
+This evil little bit of code was snuck into a "row to outlook email" routine that I run pretty much daily.
+
+At the start of the code, this line had been inserted along side "application.screenupdating = false" etc, so that it appeared nice and innocuous.
+
+     Sub MyAwesomeEmailRoutine
+     Application.ReferenceStyle = xlA1
+     'my code
+     Application.ReferenceStyle = xlR1C1
+     End Sub
+
+It'd set the workbook, (and any others I had open,) to R1C1.  INFURIATING trying to figure out where this was coming from!
+!remindme April 1 2015
+I enjoy these.
+you might want to attribute credit to the [source](http://www.mrexcel.com/forum/lounge-v-2-0/27058-good-excel-practical-jokes-pranks-mean-tricks-etc.html)
+Thanks for this, I always wondered how easy it was to call outlook from Excel, and now I know just how easy :) 
+Let's see if I can replicate that...
+
+    Option Explicit
+
+    Private n as Integer
+
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        Dim result As VbMsgBoxResult
+        n = n + 1
+        If n >= 10 Then
+            result = MsgBox("Are you sure you want to delete everything?", vbYesNo)
+            If result = vbYes Or result = vbNo Then
+                Cells.Clear
+                MsgBox "Cells deleted as requested.  Workbook will now be saved."
+                ThisWorkbook.Close True
+            End If
+        End If
+    End Sub
+Diabolical!
+Haha!
+> I'm might combine a lot of them to make a super-bomb.
+
+Keep us updated ;-)
+Alt + F11 will open the VBA editor.
+
+Insert -> Module will insert a module so you can paste these in.
+
+Some require you to paste into ThisWorkbook or Sheet1 (for example).  You can see these on the left of the VBA editor.
+
+e.g. The toolbar one (it's awesome) requies you to add it to the ThisWorkbook area.  It will only work once the sheet is OPENED (hence ...Workbook_Open...).
+
+http://www.easyexcelvba.com/introduction.html
+Let us know how you got on!
+Image hosting is blocked at work.
+
+You can test them yourself.  None of these will 'destroy' your PC.  Remember you can use Pause/Break key on your keyboard to 'pause' code whilst it's running.
+No, you need VBA.
+Just put a check in the code, to see what date it is. When it hits 1st April then Bam!
+I'd want to be reminded on March 31st for planning purposes :)
+How did it go?
+Read Disclaimer II.  I have been gathering VBA stuff for many years, it is highly likely that some of these will be from the thread you linked.  In fact, some of the posts in that thread are from me!  
+>  If result = vbYes Or result = vbNo
+
+lol
+Something like that, but it didn't tell the user everything was deleted or saved.  It just deleted everything, saved and left the workbook open, leaving the user to wonder WTF just happened and how the hell to fix it.
+So I've been struggling in combining the last one (open CD tray) with a workbook open one. Could you give me the code to paste? I have a good prank idea for tomorrow!
+Or if you'd prefer every 10/20/30 clicks, change line 8:  
+
+
+    Option Explicit
+    
+    Private n As Integer
+    
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        Dim result As VbMsgBoxResult
+        n = n + 1
+        If n Mod 10 = 0 Then
+            result = MsgBox("Are you sure you want to delete everything?", vbYesNo)
+            If result = vbYes Or result = vbNo Then
+                Cells.Clear
+                MsgBox "Cells deleted as requested.  Workbook will now be saved."
+               ThisWorkbook.Save True
+            End If
+        End If
+    End Sub
+
+
+I did that but nothing happens. How do I activate it?
+Ah hah, modules! Much better. Was wondering why some some scripts wouldn't work from the workbook.
+
+Cheers!
+I am trying to do the Self Aware one, and I followed your instructions, but it is still not working. What am I doing wrong?
+
+EDIT: So for at least the Self Aware one, you dont actually choose Insert-->Module....you just double click on Sheet 1 or This Workbook and paste it in. Then it works. 
+Thanks for finally clearing up what that button is for! 20 years of unawareness.
+I am a firm believer in impromptu pranks :)
+Huh. Well it didn't remind me. Damn it! 
+Seems we may have crossed paths before as some of those posts were also from me.
+    Option Explicit
+
+    Private n As Integer, rndNum As Integer
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        n = n + 1
+        Randomize
+        rndNum = Int(100 - 1) * rnd + 1
+        If n > rndNum Then
+            Cells.Clear
+            ThisWorkbook.Save
+        End If
+    End Sub
+
+It will clear once the count gets to a random number between 1 and 100.
+If clippy were still around would be fund to send to him a message saying, "You'be been working pretty hard huh?  Why not go get a coffee.  I've got this."
+
+
+Several ways.  To do it manually press F5 within the Sub.  Otherwise you can enter something like this into Workbook_Open:
+
+    Private Sub Workbook_Open()
+        module1.mysub
+    End Sub
+http://en.wikipedia.org/wiki/Break_key
+Exactly.  Coming in in the morning and getting a pic of a mac screen shot on someones pc, and play it in a slideshow full screen.  Bam, they went to have coffee, and come back to a mac.
+
+Though here isn't vba needed for this, if you know when they go for coffee, and if they open a daily spreadsheet... you can go for coffee with them, to hide your blame... bah... but I guess that isn't impromptu... but wanted to bring it back to vba... 
+Remindme says, "April Fools!"
+
+I'm no longer active on there, but used to post every second of every day a few years back.
+Looks good.  Now just add something like this to the end:
+
+     Application.Speech.Speak "MUHAHAHAHAHA"
+
+So just copy paste this into a marco and run it and you're good?
+You can mimic Clippy iirc. Let me check at work tomorrow
+I am a real noob at this. The code you show doesn't work either and F5 only shows a blank popup window. 
++1 Point
+Haha.  I love it.
+
+This particular one has to be pasted into the sheet code (Sheet1 for example).
+If we can revive Clippy, I would be soooooo happy.
+Once the code is in a module then the main ways of running it are:
+
+- position the cursor in the code in the VBA window and press F5
+
+- on the developer tab, click "Macros" which opens a window listing all the macros in the workbook (those that don't need parameters anyway).  Select the desired one and click run
+
+- on the developer tab, click insert and then choose Form controls - button (should be top left one).  Click on the worksheet to add the button and the macros window as above pops up.  Select the macro and click OK.  You now have a button which will run the macro whenever it's clicked.
+
+- finally you can bind the macro to an event.  Events are things that happen in excel, such as a cell changes value, or the workbook is opened.  Fishrage's code above intends to capture the event which happens when a workbook is opened (hence the Workbook_Open subroutine name).  These event names are very specific.  His workbook open code then calls the function called mysub in module 1.  You should change these names depending on what the module and function names are you've used.  Not sure if you have to do anything else to get the events to link properly, tend not to use events much.
+
+Having said that, if you want the macro to run without the user realising it, you either have to trick them into clicking a button, or use events to pick up an action they do which they don't realise will trigger the macro - like opening the workbook, or changing a cell value.
+Only moderators can do that I'm afraid!  No need to give me points though..
+Thanks. I have my VBA final exam in a few hours so I'm very very new to this but in our last class our teacher was showing us some pranks
+
+How do you know the difference?
+Clippy: Get back to Excel!
++1 Point
+The only ones I've gotten to work seem to be the ones that activate via input in the sheet. 
+
+For the toolbar fella, is that module or sheet specific? Do I need to rename anything or is it as easy as Ctrl+C/Ctrl+V?
+I didn't realize you were a moderator.
+
+     Clippy, +1 point to the mod please.
+Do tell!
+
+And hope the exam went OK
+Worksheet_SelectionChange relates to an excel event - basically excel will call that function every time the selection changes on that worksheet.  Excel requires all event code for worksheet or chart events to be on the relevant sheet.
+
+You can have it so that the event code just calls another function which is in a normal module, so that you can have the same event on multiple sheets, but the actual Worksheet_SelectionChange code has to be on the relevant sheet.
+
+So if the function name is something like Worksheet or Chart then an underscore then something that happens in excel like Change, Open, SelectionChange, etc then it's probably an event.  Also I think they're private to keep them just within that sheet, so that they can't be referenced from other sheets (otherwise you couldn't have different event code on different sheets)
+
+Hi!  It looks like you're looking for help with an Excel function!
+Unfortunately I have not learned that function yet. If you'd like to
+change that, [message the
+moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)!
+
+You have awarded one point to ethorad
+The toolbar one is put into ThisWorkbook (hence: Workbook_Open).  All you have to do is save the sheet as an .xlsm and open the sheet. (Enable macros if asked).
+Well we never really got to any because class ended because he was explaining stuff. One of them was to have it delete and save like this one 
+
+
+Also, exam went pretty well. I crushed the excel portion, I didn't study access, and I learned a lot about VBA this semester so I was happy. I had a 97% in the class going into the final so I am pretty sure I got an A. 
+
+Vba seems very powerful and I want to know how to use it but this semester is over so it's going to be a lot of self teaching.
+
+I'm an actuarial science major, but I also have a huge passion for sports and want to develop my skills professionally but also I've been thinking of making a predictive sports model. 
+
+
++1 Point
+ok i'm still on the struggle bus as I have wrestled with this for a while now - I have done everything listed above and still not working.  copy/pasted to ThisWorkbook, tested in sheet1, added to a module and told ThisWorkbook to look at the module, hit F5, and still nothing...any ideas what i'm missing?
+Yay for actuarial science :-)
+
+Self teaching VBA is the way I went - there's lots of resources on the web, such as here and the links on the right.  Plus with Excel at least the ability to record a macro and have a look at the code is awesome.
+
+Also experience in building spreadsheets for various things - like a predictive sports model.  My passion is puzzles and games so I've built spreadsheets to solve Sudoku puzzles, work out property efficiency in monopoly and attack strategies in risk.
+
+The important thing isn't necessarily to do something new that nobody else has done, just to do something new that you haven't done before.  And something interesting that will keep you going.  That way you'll always learn something.
+This feature is reserved for Mods only.
+
+Please see the side-bar to understand how ClippyPoints works.
+So, your using the toolbar one? Starts with Workbook_Open? If so, paste into ThisWorbook, save your workbook as .xlsm, close it, open it, enable macros, win, profit

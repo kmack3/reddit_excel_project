@@ -1,0 +1,60 @@
+How to become an Excel natural? (Keep re-learning concepts but they don't sink in)
+Here's my advice, and it may be a little controversial, but here it is:
+
+As soon as you start talking vlookup and pivot tables, you have stepped into the realm where are working with a spreadsheet as though it were a database. Most of the excel solutions to these problems are contrived trivialities that tend to mask the unerlying concepts with Rube Goldberg solutions.
+
+Instead of taking a class on Excel, go do a Tutorial on Access (or the database front end of your choosing). Learn how to query and manipulate data in it's natural form.
+
+After you've got a foundation on the database side, come back to Excel. This will help you learn the fundamentals, and it will teach you enough that you can take a spreadsheet, turn it into a database, and spit your output into a spreadsheet. Spreadsheets are for easy viewing and difficult for manipulation. Databases are "difficult" for viewing, but powerful for manipulation. Know how they both work if you want to be an expert.
+One word ; Practice practice practice
+
+Answer problems on r/excel , they run the gamut of easy to impossible with all shades in between.
+Concepts are no good without application. 
+
+I looked at my work and started by learning vlookup, then macros, as I had always been curious about them.
+
+Then I learned I could manually write VBA to make code do stuff. So I started to write VBA to automate my work.
+
+Manually writing the code for VBA and approaching my work from that angle helped. Data validation exercises both in and out of the VBA also helped me learn other functions. 
+
+You could always ask a colleague if there's any particular task they find repetitive in Excel and try think of a way to automate it.
+It happens to everyone. I have one job (Excel) and still forget the order of index match regularly. The guide text in the formula box and google searches are a lifesaver. 
+
+Long tutorials for vlookup way over complicate things. There's really only two parts to the formula- reference cell (or text), and range. For 99.99% of uses it always ends with 1,0. 
+
+Vlookup is just 1) WHAT are you looking for and 2) WHERE do you want to look for it?
+
+More generally, I think it's less about repetition and more about necessity. You need to start needing Excel to save you time, and automate the things you have to do every day that you hate most. It can auto fill PO's, find and flag mistakes you've made instead of manually checking for them, automate and update reports with most recent data, conditionally sum data from reports or invoices, calculate how many days, sum and reference data from other spreadsheets instead of clicking between. When you need them, it'll be easy to remember.
+Well, you can solve peoples problems here :P Or go through the solutions other people have given and see if it makes sense to youu. 
+
+Alternatively, I am pretty sure places like coursera offer excel courses for free, that would at least provide you a "schedule", fixed progression, and sample problems. 
+By solving other peoples problem
+I find going through the sub, specifically solved posts, is a great way. You have to look at a problem, find your way to solve it, and then check the solution.
+
+Then, move onto the next one.
+
+Dedication, practice and finding an excuse to use it will make you better in the long run.
+Also, I think this should go into Discussion area.
+I had the same problem so what I did was whenever I had a job task that was even remotely do-able in excel I would do it in excel. Then I would get fancy-pants with it like creating pivot tables, solving make-up problems. That way I was still working on the original task while learning my beloved excel. 
+I started a spreadsheet called Excel Tips.  This is where I organize everything I'm learning.  Using a spreadsheet in this manner forces me to organize my thinking and learning process.  I simply use Category, sub category, sub - sub category type of organization.  I put all notes and key board shortcuts I learn or want to learn in the spreadsheet.  Hope this helps.  And yes - repetition is key.  
+
+Disagree on the pivot table statement.
+With PowerPivot in Excel 2013 and up, learning DAX can take your Excel to the next level.
+Add in Power BI, and you can develop slick front end interfaces without needing SQL. 
+
+While knowing SQL doesn't hurt by any means, there are SQL / SSRS gurus who are great with data but terrible with data presentation or visualization.
+
+It really depends on how you want to specialize!
+Yup.  If you catch yourself talking about clean data, you're ready to talk database.
+Totally relate to this. Additionally I think to become a natural/expert you really need a job where you do a lot of excel/spreadsheet manipulation. 
+
+My skills really didn't take off until I needed to do problem solving or making my work more efficient in spreadsheets. It was much more difficult learning skills when they don't produce a tangible result. 
+I think 99.99% is quite an over-estimate. 1,0 would just return the same value you used as the reference which would just basically be verifying it existed in whatever range you had. 
+>  still forget the order of index match regularly
+
+Kind of off topic - but when I use Index Match, i type out the Match part first, then the Index. For some reason for me, it's easier to remember like that
+Yeah, mine almost always end with 2,0. 
+Yeah the most useful function of VLOOKUP is being able to move various data fields from one sheet to another. I'd say that 99.99% of the time you are using an absolute reference (,0) but the actual returned value is just whatever one you are trying to reference. 
+
+Something I didn't know for the longest time was that a very easy way to know what number to use for the column reference would show up while you dragged the column reference from start to finish instead of trying to think how many letters are from C to AX lol. 
+Haha, I found that out last week when my CFO showed it. It was funny because normally I show him new things.

@@ -1,0 +1,20 @@
+Averaging a variable range of cells
+"=AVERAGE(A$1:A2)"
+
+Just put a dollar sign before the 1 and drag the formula down - it'll average from A1 down in each new cell
+=AVERAGE(A:A)
+Convert your range to an excel table (highlight range - insert - table). Then all your formulas referring to the table will be dynamic. 
+Ha. So obvious. No idea why I didn't consider this. Thank you.
+SOLUTION VERIFIED
+Ah shoot. Sorry I forgot to mention this is in Google Sheets. Is the a Google solution to this?
+
+You have awarded one point to _stormr2_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I have to admit, I don't really use Google Sheets so I'm not overly familiar. Apparently there isn't an equivalent tables tool. You could "cheat" by having a dummy cell. Are you planning on adding new week's records at the top of the list or the bottom? In the below example I have assumed you add to the top. 
+
+E.g. If you're adding new records at the top, in cell A2 put something like "Insert new records below" - each time you add a record just insert it below this line. You could then use absolute references such as:
+
+    =average($A$2:$A$6)
+
+That way your range will always include the entire column of data as it is locked including the dummy anchor (text is ignored for the average). You could also try Indirect if you want a dynamic range but it looks like this behaves differently to excel also: http://stackoverflow.com/questions/18962953/google-spreadsheet-sum-which-always-ends-on-the-cell-above

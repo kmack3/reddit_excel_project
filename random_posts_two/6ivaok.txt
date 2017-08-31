@@ -1,0 +1,23 @@
+6ivaok
+Conditional formatting for if there is a range greater than X between two columns.
+Good afternoon!  
+Working on a big metrics report and I'm stuck on a formula. Columns are P and Q. Basically what I am trying to do is have the formula go "If P is 3 or more over Q, highlight both fields"  
+Example: P has a value of 9, Q has a value of 5. The difference is 4, so I'd need to highlight the fields. I have tried several attempts (self taught..) with no luck. Any help is appreciated! 
+
+
+-------------
+CF formula would be:
+
+    =$P2-$Q2>=3
+
+applied to a range of P2:Q100, or something like that.
+-------------
+Just tried and it didn't seem to work. I tried yours and "=AND($P223-$Q223>=3)" 223 because that's where my data starts. I selected both columns (headers included). Should I only be selecting one?  
+Edit: Selected the full columns without the headers this time, used "=AND($P223-$Q223>=3)" and it worked. Thank you! 
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

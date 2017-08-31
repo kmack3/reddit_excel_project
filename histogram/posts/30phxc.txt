@@ -1,0 +1,179 @@
+What is the coolest spreadsheet you've built using macros?
+I spent 6 months interning at a company that manufactured lubricants for engines. They had a recurring issue in their factories though - they had a set number of tanks for raw materials and finished products and a series of pipes connecting them through an exchange; however the tanks were not optimally allocated with respect to the piping system leading to a lot of congestion in the manufacturing vessels. It was essentially a classic issue of constrained optimization with respect to a limited number of variables, with an added pinch of "travelling salesman" for good measure.
+
+I built a workbook which essentially modelled the plant and calculated the optimal allocations of raw materials and finished products to tanks, using a mixture of brute force and a smart ranking system. In 6 months I went from not knowing what a pivot table was to being able to code in VBA. The plant saved half a million dollars a year from better efficiency and the project was rolled out to other plants in Europe and Africa. They offered me a full-time role; I started officially 4 months ago.
+The [Excel Video Player](/r/excel/comments/2jtd2f/worked_on_a_completely_locked_down_machine_time/).
+
+It [has been all over the internet](https://www.google.ch/search?q=excel+video+player) and made me famous for one day. It's open source
+One that ran every day at 7:00 am that compiled data from SQL server, access, network shares, etc and emailed a mobile friendly dashboard. 
+
+Edit: added the core of the code.  This assumes you have a table ready to email, http://pastebin.com/Vj5rGw12
+I had one that turned my movie list of imdb links into the collest spreadsheet of every bit of movie info about those movies that anyone would ever want... complete with nfo exporter and auto-tweeting which movies i watch once they complete. But now the website the scraper used has gone down plus the xml something or other the program used no longer 'works' on windows 8.1 so its all broken and only a shell of its former self. Now i update some movies manually from time to time but miss my mater movie auto-collector sheet every day!
+Reddit posting bot
+
+Betting arbitrage scanner - using web scraping and lots of API's. Auto buy/sell
+
+Tinder auto liker
+
+I automated my entire job.  What they think takes me 2 hours actually takes about 2 minutes.  Don't tell anyone.
+I've got a couple that I think are neat but my favorite is one that runs through about 20 different text files and imports/sorts/runs numbers on about 5000 lines of data in each file and boils everything down to the 4 numbers I want and a couple useful graphs. Every time I click that button and get my answers I still think to myself "dang that's so cool"
+Ever wanted a file that comes down to your inbox to be automatically saved down, processed, replicated, PDFed, a back up created, emailed out to 10 people, and then archived for future purposes, and a confirmation email that's all been done sent to boot - all done at 3AM!?!!?
+
+That's what macros can do for you. Without you even needing to be in the office.
+
+Excel is the tool that allows macros to do that for you.
+
+http://www.reddit.com/r/excel/comments/2y10n2/what_are_you_using_excel_for/cp57b8w
+I'd love to share, but it's trade secret. 
+
+What I can say is that a user inputs data and then magic happens and we get some nifty graphs. 
+Made a workbook that keeps the inventory log of our family business' raw material. You make entries through a user form (whether it is a stock input or an output) it has lists for everything, all dynamically updated so you don't do typos or anything. It tells you where a specific thing is in the warehouse. There's a query view, an overview of all the racks and an overall inventory view.
+
+I'm very proud of it. We didn't know the inventory on hand before this. It was a pain in the ass to change company culture, make the workbook without any prior VBA knowledge and count the inventory form scratch so you could start keeping the log.
+Calorie tracker.  The internet say 3500 calories surplus or deficit = 1 pound of body weight.  I thought I would test it.  Turns out my number is 3,350 / pound. 
+
+Use the workbook to record all caloric intakes and exercise.  It calculates your daily deficit surplus. 
+
+Burn = BMR (based on height / weight / age / gender)
+
+.          plus occupational factor (sedentary to pro athlete)
+
+.         plus intentional exercise burn (intensity / duration / weight formula). 
+
+Consumption diary includes menus from a dozen restaurants and a "commonly eaten items" library ... since people generally eat the same stuff. 
+
+Graphs give insights into what time of day you consume / exercise, % of calories from carbs, protein, fat, and other (which is mostly alcohol), and extrapolates the current lifestyle to a long term steady state weight.  
+Great thread!
+Used VBA to intake reports through outlook shared mailbox and parse them into a SharePoint library by "client" and "data sources". Reports arrive every few hours or minutes (in Outlook) and are saved (to Sharepoint) then manipulated (with Excel) and published to a SharePoint site library (read-only). Dashboards are built that use the library as a dynamic OLEDB connection to .xlsb files based off user input. My site and calc engine is supporting over 20 clients on 5 or more data sources. The reports are taken in at all hours and updates occur around 8 times daily via a dedicated desktop (sends me text message report after each run). Using those data sources, I then built a dashboard that eliminated around half a million dollars of man hours annually just running reports, no telling how it's impacted bottom line due to freeing up resources. I'm currently building in a PowerPivot data model that connects to all tables(.xlsb) and produces cross-client measures to use for trending and analysis, that will be published to a .xlsb table using some crafty =GetPivotData formulas. I have a list of 10 or so report requests coming from management that will use the same setup. I have no free time anymore, but I love it.
+Not mine but a cool list 
+
+http://spreadsheetpage.com/index.php/file/C35/P10/
+The [Regular expressions/xml batch importer](http://www.reddit.com/r/excel/comments/2cz97h/batch_xmlregex_importing_tool/).
+
+I work with lots of plain text that's not in csv or tab delimited format. And sometimes fixed width but multi line. 
+
+This tool will let you set up an xml file to define your output columns and regex pattern for each column. It will chew up the file and spit out an excel document with the data.  
+I built an excel workbook into something like an access db with front end, back end interfaces.  We'd distribute a tiny front end workbook that all connected to a single backend workbook we had access to at all times.  So when there needed to be an update or correction, instead of notifying users by email, we'd force changes through the backend without users even knowing.  
+
+
+I made one that externally interfaces with an old OS/2 database, gets shipping information from it, connects to a 2nd database and gets truck/driver information from it, and then merges the two datasets using a variety of rules to create truck routing information for the entire fleet of a fortune 500 company.
+
+Yes, a fortune 500 company relies on an excel sheet to do it's shipping. No, I'm not legally allowed to tell you what one.
+Very few sharing code here.
+
+
+Man up guys
+This guy made a flight simulator...
+http://excelunusual.com/a-first-flight-simulator-model-in-excel/
+I built a cold calling dialing tracker while working as a financial services representative for mega insurance company back in 2007.
+
+Our issue was that tracking the activity was done on pen and paper and scratch marks. And it was easy for someone to say fudge their activity. 
+
+You can import a list of people to call, then start a session. on each call the contacts details were loaded into the active window for you. There were buttons to start and end calls, outcome buttons to track status of call( left message, no answer, request call back, set etc.). At the end of a session you would hit end and your activity was shown. How many dials per sessions, avg time per dial, dials/contacts/ apointments per session; we tracked everything. I even built in a goal section where you could set your goals for dials, or ratios and see your performance for each session.  Finally a report was displayed for the session that you would turn in each week. On that was your metrics as well as activity log. The activity log gave you lists of appointments you set, people you had to follow up and so on.
+
+I also added in a password and a expiration date for each copy. I left and the program came with me. 
+
+Man do I wish I had it developed into a SaaS in 2007. 
+
+With my 2 coworkers who are also very handy at excel, we created a workbook that acts as an application for reporting purposes, to handle exceptions and keep people off the shit list for management.  
+
+It takes about 25-30 sources, combines them and normalizes them to one flat dataset in access (ballpark 3 GB of data) and connect to that database to generate a report that uses user forms to allow someone to select their department to find out what they are responsible for.  
+
+You can select an entire department, multiple departments or just a single user (using environ) to show what just that person owes.  It allows exceptions hosted on a SharePoint list (aggregated into data sources) to show how many outstanding items there are, and how many are exceptions to that rule.  
+
+When you go to the details, double clicking on a line will open up the appropriate internal site to that item to allow them to take action on it.  
+
+Nobody's ever seen a report that aggregates like this before there, and would eliminate up to 30 or 40 emails PER DAY to upper management responsible for it.  So far, it is a huge hit.  
+I have multiple raw data reports that sum up 150 different projects all with unique data that changes weekly.  I generate a summary report and individual project reports with graphs and PDF them.  I'm proud of it :)
+I haven't put as much effort into a single sheet as I am currently capable of, but mostly that's because my tasks are just a little but different from each other.
+
+The one I use the most often imports data from multiple sources and prepares the data for import elsewhere.  It has macros to
+
+* Preprocess data on multiple sheets
+* Check for and correct common database pitfalls (ID/primary key duplicates, bad characters, invalid data)
+* Collect specific data from multiple sheets based on layout/formatting
+* Save in a format conducive to database import
+For a ferry company, the process of managing vehicle space when large freight vehicles are involved is very manual. Staff literally draw a picture of the deck and draw vehicles onto it to see if any more vehicles would fit.
+
+I made a macro which can receive a list of vehicles, place them efficiently on the deck (literally drawing a picture by merging cells and entering the name of the vehicle), and then calculate how many more standard-sized cars would be able to fit
+I currently work for a company who outsourced their entire IT four years ago and have been paying for it in massive productivity loss ever since. I have background in software design but IT rules over what software anyone can use, so I can't do any actual development in any official sense. However I have been doing what amounts to full application development in excel for a few years now on the sly, creating job tools ranging from ETL applications to report generation to data tracking that are used by basically every person at the company. Most of what I make these days doesn't even involve spreadsheets, it just works in Oracle and user forms but is technically "excel" so IT won't put a stop to it because they have no concept of the actual functions of the software (though at this point some of the tools I've made are so important to business flow that the company would cease to function without them). I am sorta thinking of offering my skills on this subreddit for fun since I've automated my job to the point that I don't have much to do most days at work. 
+I built one that let you type in a persons login in a cell and then it would change the background color depending on their Microsoft Office Communicator or Lync status. It would update on a button, or every five minutes or so. I loved making that one, because IT thought it couldn't be done.
+Currently working on one that implements a version of the (PDF warning) [DIRECT optimization algorithm](http://www4.ncsu.edu/~ctk/Finkel_Direct/DirectUserGuide_pdf.pdf) and interfaces with an external executable to do stiffened panel analysis, optimizing on 5 variables, with some shortcuts specific to my problem. Includes some nifty kernal32 functions, lots of user options, a fancy plot that colors the design points from the first one blue to the last one red, and lots of other fun stuff. Just got it into production last week. Feels good.
+I was given a quick job at my old company to take a list of a bunch of oilfield wells they had and enter in all the meta data. It was going to be paid in lump sum rather than per hour so the quicker I could do it the better.
+
+After doing it the long tedious way for a while, I found a spreadsheet on the government's website that had all the metadata I needed. I just put in a couple of V and H LOOKUP functions and I completed the whole job in less than a few weeks. 
+
+Then I went surfing for a month or two. 
+
+I also built several macros for my team over the last couple of months that have taken weeks of man hours off our current workflow. One of them was incredibly complicated and converted our finished csv files to a format that our client prefers, and we had 200+ of these files each taking around an hour or two of concentrated work to do. What made it complicated is that a lot of the data was geological and needed a lot of logical tests for different things in the data. I built it in one day and couldn't even talk to people afterwards my brain was so blown out. 
+
+I'm super proud of that one actually.  
+
+That sounds amazing. Hope you've got way more than average pay.
+Wow that is serious. I wish I could see it!
+I remember you! Awesome work! 
+It was one of my best days on Reddit because of your sheer ingenious creativity. We all remember you. You weren't famous for one day, your excel video player is what will be remembered by everyone who is on Reddit for a long time.
+Thank you for this. Days at work whilst my automation runs will now be slightly more interesting. 
+Can I ask who taught you how to do this? I really want to do stuff like this!
+Why don't you look in to a self-service BI platform? 
+I do the exact same thing but have it send to a mailing lists generally. 
+
+Clears up most of my morning. 
+Could you share it? I've been interested in doing something similar and would love to see what you have. Maybe I can contribute a bit to get it back to its glory days! 
+Woah, woah, woah. Tell us about that last one. :)
+Please explain.....
+I eliminated a few co workers jobs like this. It's dangerous. 
+I also did this in a dying position. It was well worth the experience. 
+Same here. Secretive work shit. 
+
+I took data from 6 different sources (all daily data dumps in Excel format, but from 6 different companies so all different physical layouts, etc) and extracted the relevant info from each. It is all compiled into a master database that allows us to actually make use of the data for trending and such. 
+Any chance I could take a look under the hood?
+Hey, I was thinking about building just this for personal use. Mind if I save myself the time and ask for a copy of yours?
+Forgot to mention, I presented the reports to my technology group who completely freaked out. They have been spending tons on Tableau dashboards and were not able to produce anything near as useful. They want to link to my site across the business and get started on some client facing dashboards. 
+This is pretty cool, thanks for sharing all the documentation etc. as well. I don't have much experience with XML, regular expressions, or any present use for it, but I can definitely see it being useful. 
+> Demands manning up by sharing code
+
+> Doesn't share anything they've made
+Updated, http://www.reddit.com/r/excel/comments/30phxc/what_is_the_coolest_spreadsheet_youve_built_using/cpumse8
+I've gotten into writing games in Excel on Fridays when I don't have a lot to do. A flight sim is... way beyond anything I ever did. I did a Minesweeper clone, a 2048 clone, I started but haven't finished a Tetris clone.
+
+I made a somewhat original game where you move a grey square around (mouse), avoiding moving orange squares (cats), stationary brown squares (mousetraps), and eat yellow squares (cheese), which causes either a new mousetrap or cat to appear.
+Um. What????
+Thank you. My pay is no better than any of the other graduates unfortunately but it is still a good package. There's a lot of room for improvement in my department and VBA efficiency is virtually zero so I think there's plenty more opportunities to prove myself!
+I hope so. I still should add the improvements I promised I would.
+It's interesting that Microsoft did not try to advertise office with that.
+University of Google. 
+I do a lot of stuff similar - everything is self taught, but recently I moved to a small team of excel experts (myself and two others) with a manager who has a lot of clout of getting data and he provides us with the tools to get it.  He set me up with 3 monitors and a new i7-4770 machine to be able to run calcs faster on the workbooks we use.  
+
+Its a lot easier now to have some ppl on my level to bounce ideas off of. 
+[deleted]
+This group of managers could barely use email. One has his second 24" LCD set to 800x600. I have long since left that God forsaken backwoods place. Inadvertently this tool relied on my email being active so it died when I left. 
+Ok, but as I said lots of it doesn't work anymore so good luck and make sure to PM me if you make any improvements :)
+
+[Here is the Excel File](https://dl.dropboxusercontent.com/u/4416247/TEMP/UltimateList-RedditVersion.xlsm)
+
+[Here is a screenshot of the something or other that doesn't work on Windows8.1](https://dl.dropboxusercontent.com/u/4416247/TEMP/UltimateList-RedditVersion_Screenshot.png)
+
+And here is a new website i found that does similar IMDb scraping but I don't know how to update this sheet so that it works with the new website!: http://www.omdbapi.com/?i=tt0418279&plot=full&r=xml
+actually pretty keen on the middle one
+
+Use a tool like Burp to filter all your HTTP traffic from your phone to your PC so you can listen to API calls your phone apps make. Then just rebuild the API calls in excel using xmlhttprequest. The hardest bit is parsing the JSON you get back.
+
+Oh it's just a lot of automatic email report generation, database updating, and verification. I have a lot of scripts that download data from websites to cross check data, then some others that create some nicely formatted emails with various data reports. It's mostly just busywork that needed to be automated anyway. It still needs someone behind the wheel to enter the data and manage workflow.
+Sure. It's not in english tho. Would you need explaining or anything?
+I've sort of created one last week but doesn't use macros. Just need to enter a few details like your height, weight & calorie intake for the day and it'll track it for you.
+
+Albeit, not as detailed as /u/frowawayduh's workbook.
+
+I can upload it for you if you're interested?
+I didn't have much experience with them either when I started this project. I just knew I needed them.
+
+I will say the one thing I haven't been able to figure out how to program into this is being able to address multiple header/lines setup in the same file. There would need to be a separate process which split the files up first. Also can't handle headers being repeated at the top of the page of they're are more lines than would fit on a page. 
+I'm sorry. What's that?
+
+BOOM: http://github.com/thomasfrivold/
+While that's true, there's a fair amount of automation that can be achieved with a licensed sql server install, with ssrs and ssis.
+Fair point
+Ah if they could barely use email than a BI tool would be out of the equation. I'm glad you escaped while you could!
+Nah, I can read code well enough that English isn't a problem.
+Thanks for contributing

@@ -1,0 +1,51 @@
+6iorf0
+Using vlookup when table covers a range of values
+I have a table that says, up to 50000 = 80, up to 150000 = 120, up to 225000 = 170.
+
+So if my original value is say 175000 how do I get it to automatically reference the up to 225000 part of the table. I have it working for most of the table using nested if functions but there are too many for the full table so after a point I just have the cell say 'calculate manually'.
+
+Is there a way to assign a range of values, i.e. 0 to 49999.99 to a cell?
+
+I apologise if I've missed this in the sidebar or any incorrect formatting.
+
+Ps. Trying do the whole table in the way I have currently returns a too many functions error.
+
+Thank you for help.
+
+
+-------------
+Yes. Make a table like this  
+
+|   | A      | B   | 
+|---|--------|-----|
+| 1 | 0      | 80  |   
+| 2 | 50000  | 120 |  
+| 3 | 150000 | 170 |   
+
+Then `=VLOOKUP(Value,A1:B3,2)`
+-------------
+[deleted]
+-------------
+What does your if statement look like?  I put together the following:
+
+=if(value1>=cell(150000),cell(170),if(value1>=cell(50000),cell(120),cell(80))
+
+(Just pop in the cells that point to the values in my example)
+
+What this will do is check to see if value is bigger than 150000 and if so, assign it 170 - otherwise, it'll check to see if it's bigger than 50000 and if so, assign it 120, otherwise, it'll assign it 80.  If you use that, it shouldn't return a "too many functions" error.  
+-------------
+I'm using a table drawn using a webquery though, will this not be overwritten when it refreshes?
+-------------
+Hello!
+
+**Posting a comment with 'Solved' does not mark the thread as solved.**
+
+Please read the sidebar on how to set the correct flair.
+
+Thank you for keeping the sub tidy - please take the time to familiarise yourself with the guidelines on the side bar and the submit page.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+Put this reference table in a separate location such as on another sheet. Put the VLOOKUP formula in a spot that won't be overwritten by the webquery (i.e. where your existing formula is). Not sure what you mean.
+-------------
+Thank you.

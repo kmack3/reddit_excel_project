@@ -1,0 +1,41 @@
+Programming subreddit was laughing about a primitive Excel messanger. How would it look like if it was done the right way?
+Yes, an actual messenger would use the WinAPIs to connect via the [winsock library](https://msdn.microsoft.com/en-us/library/aa228119). But honestly, it's so much easier to implement better performing programs with more features using an actual programming language as VBA is merely a translated scripting language. It has its roots from VB5/6, which is over 18 years old at this point. ^(omg ^VB6 ^is ^legal ^now)
+
+Edit: I'd also like to add that the method of referencing worksheets in the manner used in this excel messenger kills HDDs/SSDs due to the constant reading of the disk to access the stored/written data from the other clients.
+You do this with all Excel, no WinSock API needed.
+
+You have a central Excel to act like a database, everyone has a copy of their own Excel which opens a ADO connection to the central Excel to write.  Everyone elses Excel just needs a polling loop to keep pulling the chat log from the central Excel file.
+
+I'd imagine worst case scenario you could write and IRC client in excel. Not the server but just the client.
+I can have a look at it. Excel chat with multiple channels that works on a global scale sounds fun.
+I'm just thinking of a way to listen for updates / push updates in a less intensive way than "update every 20 seconds" 
+
+Maybe you could do it as a VBA code in outlook rather than / as well as Excel? 
+
+You can send emails with excel, have the other recipients participants in a list, and send out a "refresh" email when you send a message. 
+
+Your outlook would basically "listen" for emails with the right tag, delete them, and then refresh the workbook if they have it open, pulling the data. 
+
+So you'd be using outlook as a sort of "fake" server. This requires outlook be open all the time though, and the code isn't maintained in the macro :/
+https://youtu.be/8WYHDfJDPDc?t=3m13s
+I understand that Excel is not the tool to build such stuff.
+
+But I wonder how this would look like if someone built an Excel Messanger one just as a proof of concept - using best practices (possible in Excel).
+
+The method used in the website is used for comedic values - it is wrong on multiple levels (but as a joke: we could say that it surprisingly works as for something that can be done in few minutes). However Im interested in a real solution, something that would be "as good as possible in Excel".
+
+edit: I updated the opening post to make it a bit more clear
+For sending messages I would use winsock, for receiving messages I would use RealTimeData (RTD) - this involves writing a COM server, not fun especially if you do it "properly" in C++/ATL 
+Personally, I'd use excel clients and a central mysql database. That avoids any desync issues with two clients attempting to write at once.
+
+Of course it woukd still be a terrible idea.
+It sounds extremely painful to work with though, useful upon completion.
+Ah yes. The infamous Kelly Rowland sending sms via Excel XD
+IMHO we should stick to just Excel. And to be precise: pure, out of the box Excel - so no third party add-ons that solve some problems, or add a whole programming language to Excel.
+
+The server (if any) should also be hosted in Excel. The idea is: you can run it on your work computer without installing anything, or running some "third party" programs. So pure Excel both as server and client.
+I just pointing out the pure Excel solution.  A real Db would be ideal, though MySQL requires an 3rd party driver, MSSQL and Access/Jet do not.
+> It sounds extremely painful to work with though
+
+That is the fun part in developing this.
+With pure Excel, minimal VBA, you probably can't do much better than the linked workbook solution. My proposed solution while a bit more complex is still pure Win32 + Excel. The [RTD function](https://support.office.com/en-us/article/RTD-function-e0cc001a-56f0-470a-9b19-9455dc0eb593) is built-in to Excel. The RTD server is just a COM server, which is just a DLL with known entry points (could use many different languages).

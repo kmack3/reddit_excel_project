@@ -1,0 +1,103 @@
+What are some cool tips to know when using excel?
+This is a serious tip: 99% of excel stuff can be found via googling what you're trying to do and the version of excel you're using. 
+
+Not being sarcastic or saying not to post, I just get a lot of questions at work and I resolve most of them via google.
+The Alt-based shortcuts are both efficient and impressive to bystanders. 
+
+* Alt  + H,A,C = Centers all selected cell contents.
+* Alt  + H,O,I  = Widens cells to fit contents.
+* Alt  + H,B,D = Borders on top on bottom of selection.
+If you need to select a big column of data, hold shift, press end and then the down arrow key.  Will grab everything in that data group.  Waaay faster than holding shift and scrolling down for 2000 rows. 
+
+Also vlookups
+Macros!
+Customize the ribbon with buttons you use often.
+This is not really an "excel" tip, but if you have a large monitor or just working with one monitor and need to look at two excel files, you can hit the Windows Key + Left Arrow to lock it to the left side of the screen, and just the same for Right Arrow, Up maximizes and Down minimizes... pretty handy when dealing with multiple excel files
+Not sure how proficient you are, but using ctrl+' to copy the cell above revolutionized things for me.
+I think sparklines are a really cool tool if you use excel for presentations: http://www.youtube.com/watch?v=hqFedNpnENE
+Ctr shift L puts filters up which is super useful for getting the data you need.
+Alt + d,f,f autofilter
+CTRL * selects a whole region of data. It keeps selecting until it hits an empty row or column.
+
+Unless you have a good reason not to, use Format As Table (Excel 2007+). It's on the Home tab. It sounds really pointless but it gives you loads of features like filtering, dynamic resizing and easy formulas.
+
+To really impress people highlight some data and press F11. BOOM. Instant chart.
+If you are using 2007 or below, then install [Extools](http://www.excel-extools.com/). It's a set of add-ons that add functionality and will save you a lot of time when performing certain functions. If you aren't too good with formulas then this is something that you will want to use. For Excel 2007 install the Extools-RX. [Here is a list](http://www.excel-extools.com/extools_user_guide.php) of all of the functions that it can perform for you
+
+It's also free.
+Ctrl and Shift are your best friends when navigating a spreadsheet. Alt, E, S brings up the special paste menu, and with another character you can paste values, formulas, formats, a bunch of helpful things. The formulas you use may vary based on what type of work you're doing, but the basics of navigation and quick duplication should be second nature.
+Thanks you guys these tips really helped.
+Freeze Panes! Learn how to use it if you don't know! Also learn how to : "Select Visible Cells Only" and get the most out of your filter results!
+Learn hotkeys. 
+Ctrl + D = copy whatever is on the cell above
+
+Ctrl + R = copy whatever is on the cell to the left.
+i use these quite often:
+
+* "alt + ="   is autosum
+* "alt + F + A" is file save as
+* "alt + F + D+ M" is send file as attachment
+* "alt + pageup" or "alt + pagedown"  go through multiple tabs 
+* "alt + ~"  is show formulas  (use this to see what the formula is without clicking in the cell or if a user hard coded a cell when they shouldnt have.
+* "ctrl + shift + 4" convert a number to dollars ( +5 does percentages)
+* "ctrl + c" and then "alt + e + s+ v" does copy paste values  (switch out the V for T for formats, or V for F for formulas" 
+* "control + ;" enter todays date (Dont do =()TODAY if you just want today's date in there! drives me insane when people use volatile fx for no reason other than to use one.... confuses the hell out of people who just opened up the file and excel asks " do you want to save changes?")
+
+
+also, for me personally, trace precedents and dependents has been a life saver, which i set as my quick access shortcut bar.
+
+
+
+New Window on the View ribbon - look at different tabs of the same workbook side by side, or even different parts of the same tab.
+This guy posts some new tips a few times a week: www.chandoo.org
+Didnt see these ones
+
+when selecting a cell reference F4 will cycle through the locks
+
+When in a formula selecting all or part and pressing F9 will respectively resolve that portion.
+I love Alt + D > F > F, autofilter bitch!
+Never knew this, great tip!
+Also CTRL+SHIFT+Arrow in the direction you want to grab works the same way.
+
+SHIFT+Space selects the entire row (or rows if you have multiple cells across multiple rows selected) selected
+
+CTRL+Space is the same for Columns.
+Pro-tip: check to make sure there isn't any blank rows that cuts your data in segments.
+Ctrl +shift +end will select from the cell to the end of the workbook. Replace end with home and it selected to yet first cell in the data.
+I used to think this too but if you ever move computers and can't take your custom ribbon it's much easier to know where everything is.
+Also Ctrl+D will copy down from above, and Ctrl+R to copy right from the left.
+
+Learn how to use Ctrl+G and F5.  This will make debugging formulas much easier.  Also, the F9 key will turn a formula into a value while you are editing.  This also works for parts of formulas.  E.g. If you have a formula like =A1+A2, you can highlight just the A2 part and hit F9, it will replace A9 with the value.  If you highlight the whole A1+A2, F9 will replace it will the sum.
+
+Edit: Added some more tips and changed the - to +
+Yes! This is my one piece of Excel arcania that I pull out if I want to impress people. 
+I love that one, too.
+That's one of my favorite shortcuts! I also love Alt + T > P > S, and Alt + T > P > P, which is how to lock and unlock workbooks and sheets!
+Can't you use Ctrl+Shift+L as well?
+That's just the filter.  You can only get the autofilter from a QAT button as far as I am aware. (Autofilter adds a filter and applies it based on the current active cell)
+In 2010, you can also use  ALT+F1 to instantly create a Chart Object instead of a Chart Sheet.
+I always use Right Click, S to bring up the Paste Special menu, but both ways work!
+
+Right Click, S, V -> probably the most common shortcut I use!  Outside of navigation or selection stuff, of course.
+
+Edit: Only problem is it doesn't work in Page Break View :(  Have to use Alt, E, S or Right Click and click on it.
+[deleted]
+how is it different from using Alt +A+T ?
+I found CTRL+SHIFT+Arrow in excel a long time ago but only realised this works throughout windows the other day, and have used it constantly ever since
+In Excel 2010 and later (not sure about previous versions) you can actually export and import your ribbon customizations if switching between computers or if you want to share it with someone.  It's at the bottom of the ribbon customization in options. 
+How do you do Ctrl-?
+Special paste values is my best friend.
+Ctrl-Alt-V does the same and is much quicker. 
+Sorry, I learned on older versions of excel. Old shortcuts die hard...
+It's not. Alt DFF is pre Excel 07 but still available in 07 onward. Alt AT is only 07 and newer.
+
+He just means press the ctrl key and the D or R key simultaneously, no "-"
+If you highlight a block of data, grab the selection border while holding down the right mouse button
+
+Move the mouse to another section of the sheet (next row/column), then back, and release the right mouse button
+
+The context menu which now appears has 'paste as values' and 'paste as formats' options :)
+Nice, I did not know that!
+ok, I never used pre-2007 , if i need to find any shortcut i just press Alt and then see how to go to specific function.
+When I first started to use 07 I tried adopting the new shortcut but the old one was too ingrained.
+Me too...

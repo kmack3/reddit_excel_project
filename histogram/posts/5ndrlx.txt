@@ -1,0 +1,72 @@
+Costing, Inventory, Ordering, Menu Engineering Workbook--Or, how I went from Excel weenie to not-completely-inept VBA user in a year
+I'm not sure what to give you in terms of critical feedback, but as someone who builds stuff like this for a living (except with a focus on the finance side), I'd say you've done a great job in creating a tool which would probably be useful to a lot of people.
+
+The most effective tools don't tend to come from pure excel skills, they come from a combination of excel capabilities, and subject matter expertise. You've exhibited both here.
+looks like you've got a pretty nice setup and it's been a great learning project. 
+
+Small things that could make it run "smoother" would be stuff like disabling application.screenupdating for a lot of your subs. It is mostly filtering, hiding and unhiding columns, hiding and unhiding sheets. it comes off a lot "cleaner" if the things just happen without flashing on the screen, and makes them happen faster.
+
+in Module 2, try wrapping your wineglassmode procedure like this: 
+
+     Application.ScreenUpdating = False
+    Sheets("Wine").Range("WineBTG_Table").AutoFilter Field:=5, Criteria1:="=Glass"
+    Application.ScreenUpdating = True 
+
+Now try switching between glass mode and bottle mode to see the difference. 
+
+While I know it's not user-friendly in the same way, I would also consider using a more clearly delineated input table (for example in the wine sheet) and making your table extend only to the list of products. As a user adds a new item under the table, the table will extend and the formulas will drop down. 
+
+Doing this will reduce the size of your table from 1111 rows to ~100. This will make the "updating" go waaaay faster, as the current setup spends energy sorting, and then calculating, 1000 empty rows. That's why it takes so long. 
+
+Try dragging up the table to where your data ends in the wine-sheet, then switch between bottle-mode and glass-mode again to see the difference. 
+
+And I know you're thinking "Ah, but what about my totals at the bottom of the table then!"
+
+I'd suggest moving them, to  be the top of the table. This means the user doesn't have to scroll down to see his values if there are a lot of items, and there is nothing underneith the table.  
+
+The little cocktail recipe cards are a real nice touch, as is the "copy order" button and stuff. It's obviously a very functional little tool and it's real nice to see :) 
+
+It might be a little difficult to deal with price changes if you have a large stock? e.g. an increase in future cost of bottles will increase the stock-value of what you've already bought. Anyway that's a minor accounting thing, not too relevant. 
+
+
+Oh one thing I just noticed, on your order sheets, for the wine orders, where you have two "modes", both modes are included in the order sheet, so if you offer a wine both by the bottle and the glass, then it'll show up twice (if I understand the bottle/glass distinction correctly)
+
+If you always have a "bottle" version when you have a "glass" version as well, you can just make a COUNTIFS in your WineBTGroww column, and condition it on the type being bottle as well. 
+
+Beautiful. Great work! 
+I haven't looked at the file (on mobile) and know next to nothing about VBA. With that said,  I've recorded a macro to unlock a sheet, copy it and paste it into an archive sheet, clear the data on the original sheet and then re-lock the sheet. 
+
+Have you tried that? 
+Thank you! I appreciate that.
+Mind if I ask you to go into some moreI detail about your career?
+Awesome, thanks so much for poking through this! I think I have a couple of macros that are wrapped in the application.screenupdating disable/enable, but I'll go through and make sure they all are. Great point.
+
+Originally I had the tables as you suggested--almost immediately however I ran into the problem of people copying and pasting in their whole inventory list instead of entering them one item at a time. If people were building their inventory database one item at a time then that would be perfect, but when they drop in 300 wines (even if they're JUST copying one column, and pasting as values) they overflow the table and then they're up a creek. I do like the idea of putting the totals up top though--that makes a TON of sense. And if you know a way to make the table auto-expand to house any amount of data dropped in to it I would love to know; I'm still not as handy with tables as I'd like to be.
+
+Regarding the price changes, yes; that's a tricky one. There are a couple of different ways to handle it but I have seen finance teams handle that issue very differently all over the country--so it might be best to leave it up to the use to change the value of their held product according to whatever accounting standards they are using. 
+
+Re the last note--the column that calculates bottle price for the wines is dependent on whether it is sold as BTG or just Bottle; if it's BTG then the suggested price is a function of the price and size of the glass pours, since the size of the pour determines how many pours you get. If it's BTB then it's just straight math based on the budgeted cost of goods. It's definitely not perfect, since there's no real way to incorporate tiered pricing (in spirits either) but I think it works well enough.
+
+Biggest thing for me is that I'm handing this off to people who are not just excel weenies but in many cases somewhat technophobic as well. I've tried to make it as user-friendly as possible.
+
+Thank you again for your insights and input, I will make some of these changes ASAP!
+
+Cheers!
+
+
+Thanks! 
+Not sure what using an archive sheet would do. There are a bunch of columns that show output which I don't want the user to alter, but if I lock the sheet the macros don't work. I know I've read at least one method of unlocking and relocking a sheet with vba but none of the methods I've tried have worked. 
+Sure. I do financial modeling and investment material preparation for companies and project developers (infrastructure, not software). Similar services that an IB might provide, but I get paid as a consultant rather than as a banker.
+Yes
+Cheers it was fun to have a look at, like I said good job. Especially the thing with "how do I make this as straight-forward as possible for the non-technical user" is difficult! Hopefully you get a chance to get some feedback from some people who will use it :)
+
+When you add data to a table it should auto-extend on it's own, like if you paste in 300 rows in a table 30 rows long, the table should just get 270 rows longer. 
+
+with regard to the bottles and glasses, I was thinking more about the "pull" to the order sheet. Like if a wine is available both by the glass and by the bottle, then it will show up twice in the order list. 
+
+
+
+
+
+Sorry for the confusion. I was just giving an example of how I was able to unlock and re-lock the sheet via a recorded macro. I was thinking you could try something similar. Record the macro of unlocking the sheet, place that in the code before your other macros and then record the macro of locking your sheet and place that at the end of your code.
+Ah, gotcha. I actually did try that, no dice unfortunately. I appreciate it though!

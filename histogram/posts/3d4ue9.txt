@@ -1,0 +1,109 @@
+What are your favorite, lesser known functions?
+=ROMAN(point it at a number) no use whatsoever that I can think of, but it still amuses me. :-) 
+Concatenate - we use it in a tool where users can create their own stats tables 
+I think you're missing the "N" in the CONVERT function. Right now, it sounds like it's a function used for spies. :)
+My favourite obscure one is BAHTTEXT! 
+ISERROR.
+WORKDAY(start date, days, [holidays])
+I think I use Len() more than most. I use it in array formulas to match data that may not be spelled 100% similar (Spooner St vs Spooner Street) 
+UDF's are my favorite functions because they can do whatever I want them to :-)  
+  
+Besides that, I like functions that have a bunch of different options to choose from like CELL() and SUBTOTAL().  These allow you to use the same function in many different ways.  
+  
+  
+I compare and aggregate data for counties that sometimes have " County" and sometimes have "County, State" or even just ", State" on their labels. It's easiest for me to do =VLOOKUP(LEFT(A1, FIND(",", A1)-1)) or RIGHT(A1, LEN(A1)-FIND(",", A1)-1) depending on whether I want the county name or the state it's in. It's not a specific formula, but nesting those together makes my life 1,000 times easier.
+I use INDIRECT and ADDRESS frequently to determine the cell location and contents on the fly.
+
+IFERROR allows me to print something else if there is an error, or just print whatever statement evaluates to if no error.
+
+Array formulas are by far my favorite least known thing in excel. It's magic when I can do a look-up on 3 or more columns backward or forward.
+wait... explain(Using MEDIAN to determine if a value falls between two values, instead of IF(AND()))
+AGGREGATE  
+MMULT  
+MOD / QUOTIENT  
+REPT
+WEBSERVICE and FILTERXML are essential in a lot of auto-updating dashboards I create. People are always blown away by them.
+I do a lot of budget-type spreadsheets, so EDATE has been helpful to create a list of months. 
+
+The HYPERLINK function is awesome for creating dynamic hyperlinks, but can be a bitch to get the syntax right. 
+
+LARGE and SMALL to find the nth largest/smallest values in a range of numbers. Can also be used with index to and array formulas to find the position of the nth largest/smallest number.
+
+CHOOSE, specifically for providing a limited mechanism for 3D indexing. Possible to use INDIRECT for this, but INDIRECT is volatile while CHOOSE isn't.  CHOOSE can also return anything: individual values, arrays and ranges, so it's more versatile than INDIRECT. Also, you could define names referring to ranges in other workbooks, which could be closed, then use then as 2nd and subsequent arguments to CHOOSE, and use the 1st argument to choose which one to which to refer. That works with closed workbooks while INDIRECT doesn't.
+
+**UPDATE:** I never tried this before, but I just confirmed that CHOOSE can _**return**_ 3D references. INDIRECT can't because 3D references aren't Range objects. To confirm, open a new workbook with 4 worksheets named Sheet1 through Sheet4; enter 1000 in Sheet1!A1, 200 in Sheet2!A1, 30 in Sheet3!A1, and 4 in Sheet4!A1; move back to Sheet1 and enter 1 in cell A3 and the following formula in cell A4.
+
+    =SUM(CHOOSE(A3,A1,Sheet1:Sheet2!A1,Sheet1:Sheet3!A1,Sheet1:Sheet4!A1))
+
+The formula returns 1000. Change A3 to 2 and A4 returns 1200, Change A3 to 3 and A4 returns 1230. Change A3 to 4 and A4 returns 1234. I don't know of any other Excel function which can return 3D references.
+Ok, but this is cool.  You never know when you need a spread sheet full of Superbowls!
+Nice!
+
+Only goes up to 3,999 for some reason that has always disappointed me. 
+Out of curiousity, why do people use CONCATENATE so often instead of just using & symbols?
+I dig the CONCATENATE function, but the one thing that really rustles my jimmies about it is the fact that you must separate cells by comma and can't use ranges like so:
+
+    =CONCATENATE(A1, B1, C1, D1) # valid syntax
+    =CONCATENATE(A1:D1) # invalid syntax, but much cleaner
+
+As a result, I wrote [this UDF](https://www.reddit.com/r/excel/comments/2l6rev/share_your_udfs/cls0ybh) which takes care of that problem for me!
+
+Here's the code for the lazy:
+
+    Public Function CONCAT_RANGE (inRange As Range, delimiter As String) As String
+
+		Dim c As Range
+		Dim returnValue As String
+
+		For Each c In inRange
+			returnValue = returnValue & c.Value & delimiter & " "
+		Next
+
+		CONCAT_RANGE = Left(returnValue, Len(returnValue) - 2)
+
+	End Function 
+Would make it even MORE impressive...
+IFERROR is great too
+I was just using ISERROR and ISDATE in a VBA project earlier today. Terribly useful in code.
+What do you do, use it in conjunction with Substitute to count the occurrences of "Spooner" ?
+Would you also be able to use the text to column tool with coma delimiting, or am i misunderstanding what you're saying? 
+MEDIAN will return the "middle" value of the array/values you pass it, when odd.  So, you can use it to check if a value is in between to other values,  MEDIAN(1,2,3)=2 is TRUE.  
+
+The below formula returns TRUE/FALSE if a value in G is under/over 2 standard deviations of the population of the whole column. 
+
+    =MEDIAN(G2,STDEV.S(G:G)*2,STDEV.S(G:G)*-2)=G2
+Will have to add AGGREGATE to the toolbox. 
+You can actually get the same result without VBA using a trick with the CONCATENATE function.  [Check this out.](http://chandoo.org/wp/2014/01/13/combine-text-values-quick-tip/)
+Completely agree with you there. We're still on 2007 at work so hopefully theyve sorted this out in 2013. 
+
+The way we use it is to create a tool so that our users who are unfamiliar with using pivot tables can lookup certain figures using dropdown menus. 
+Only if you have upgraded past Excel 2003. Which my work hasn't. 
+
+Which leaves me with the IF(ISERRROR(Stuff1),  Stuff2, Stuff1)
+IFERROR is problematic. It can trap too much. Usually #VALUE! and #N/A are the only errors which should be trapped. There are better ways to avoid #NUM! and #DIV/0!. OTOH, #NAME?, #NULL! and #REF! should never be trapped, should always propagate because they always indicate logic errors.
+Ooops! I meant Left()
+
+I'll use a real example. I had two lists of hospitals. One list had a client contact and the city/state.  The other had the actual address information and I wanted to merge the two lists so I could georeference them.  The problem was that the hospitals weren't all spelled the same across both lists.  Some had abbreviations for "Hosptial" and "Medical Center" and others didn't.  So I used Left() to search for the first 5 letters of the hospital name and first 5 letters of the address and it created a 100% match. 
+In many cases I could, but nesting one of those in a VLOOKUP allows me to pull numbers from another sheet without creating any new columns. Also there's usually not a good delimiter before "County," since a space wouldn't work with two word county names, like "Prince George's County." This is (so far) the fastest way for me to match "Prince George's" to "Prince George's County" to "Prince George's County, Maryland"
+right but how would that work if you wanted to tell if a value in A1 is less than or equal to say a value in B1 and greater then or equal to a value in C1? In other words, how is median a replacement for if(and(... ?
+Oh wow, I had no idea you could do that. Now that's a nifty feature. 
+
+One limitation though, CONCATENATE has a max of 30 values for input, if you're really serious about it.
+I got you.  Yeah, I notice many of the posts in this sub are for issues that arise from trying to parse very poorly structured/validated data.
+    =MEDIAN(A1,B1,C1)=A1
+
+It's not going to replace EVERY instance of a conditional AND, but it works great with testing if a number is bound by others or not. 
+You can have [up to 255 items](https://support.office.com/en-MY/article/CONCATENATE-function-8f8ae884-2ca8-4f7a-b093-75d702bea31d), up to a total of 8,192 characters per CONCATENATE.
+
+After that, just nest another `CONCATENATE(CONCATENATE(,,,),,)`
+Pretty slick.
+I read or heard that 90% of a data scientist's time is in scrubbing data, not analyzing it. Not a data scientist, but I'd say that's pretty accurate in my case.
+
+Fortunately, federal and state data sources are usually pretty clean. Many just use different naming conventions that have to be adjusted for when building a new data set.
+ahhhhhhhh.... okay. got it. Thanks! Yeah that's good to know. 
+According to [this source](http://www.techonthenet.com/excel/formulas/concat.php), it's only 30. I'll check it out tomorrow morning and see. It's probably been upgraded for Excel 2013. 
+Never understood why Excel doesn't have support for regex without having to dive into VBA.  
+30 is old excel bra
+Excel 2007 errors at 256 values, concatenates 255 values.
+How old we talking?
+65536 era

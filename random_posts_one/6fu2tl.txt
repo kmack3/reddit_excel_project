@@ -1,0 +1,38 @@
+6fu2tl
+VBA Copy Paste Values to next empty row in table
+Hi guys, in my project I had a macro set up that would copy paste values from a calculation table into a results table upon pressing a button. Afterwards I would do new calculations and copy those results into the table as well below the other results. 
+
+The macro looks as follows:
+
+
+    Sub Copy_Results()
+    '
+    ' Copy_Results Macro
+    ' Copy Pasts Results from Input Tab to Results Tab
+    '
+
+    Application.ScreenUpdating = False
+    Dim copySheet As Worksheet
+    Dim pasteSheet As Worksheet
+
+    Set copySheet = Worksheets("Input")
+    Set pasteSheet = Worksheets("Results")
+
+    copySheet.Range("Sales_Table").Copy
+    pasteSheet.Cells(Rows.Count, 1).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
+    Application.CutCopyMode = False
+    Application.ScreenUpdating = True
+    End Sub
+
+
+This macro stopped working in the intended way after the project evolved. The first copy paste usually works fine but after that subsequent values get pasted way below the existing ones. Looks like they get pasted below the selected area or something...
+
+
+For your information the Table that gets copied is usually only filled partially with values starting from the top. So maybe it would work better if I would not copy the whole table?
+
+
+Any help is appreciated.
+
+
+
+

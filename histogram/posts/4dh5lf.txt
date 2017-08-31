@@ -1,0 +1,57 @@
+I've reached a new high (or Low)...Ant Colony simulation -> Excel edition
+Cool idea! Saddly the VBA code doesn't run on 64-bits versions of Excel.
+I can't provide the link for you, but some genius managed to build a straight up media player within Excel. They banned the office from having music players, but underestimated both Excel and our hero. 
+
+Perhaps someone else can provide the link and then the two of you can form a superteam.
+Can you provide screenshots for those of us that can't view the sheet?
+Wasn't able to play as I opened it on iPad excel. It looks good though, I'm keen to know how you got started making games in excel. Are there resources available online for learning or did you use existing knowledge?
+The scope of this simulation is really quite remarkable. I like how you are using class modules to refer to the individual ants and colonies. I have not used classes much, I need to learn more. 
+
+Could you include a gametick speed, or is that driven by how fast the CPU can process (so basically it is at 100%)? It would be cool to jump ahead 500-1000 ticks at a time by clicking on a 'fast forward' button. Screen updating would be disabled to make it go faster, same as your existing hotkey.
+The debugger killed all my Ants. :(
+I will definitely take a look at this when I am home. I love programming games into Excel, I have fooled around with an RPG over the years but never have a lot of time to put into it. I had a crazy idea the other day to port Pokemon Red/Blue into Excel. It would take forever, but at least it isn't as open ended as creating your own game.
+Just add PtrSafe to the declare statements for 32 bit DLLs (2 of them).
+
+So this:
+
+Private Declare Function GetTickCount Lib "kernel32.dll" () As Long
+
+Becomes this:
+
+Private Declare PtrSafe Function GetTickCount Lib "kernel32.dll" () As Long
+Media player... holy crap. I think this is the link.
+
+https://www.reddit.com/r/excel/comments/2jtd2f/worked_on_a_completely_locked_down_machine_time/
+
+Do you know of a good way to play MIDIs using .dll hooks in Excel?
+Aaaand that puts my simulations to shame... thats crazy
+http://imgur.com/gallery/QyoyJ
+
+Some random screens I pulled.  Enjoy!
+Honestly its just the language (VBA) that I am most familiar with.  I've tried to pick up others (C# most recently), but handling graphics is not my forte so I always hit a wall.  Usually its only a day or two project to simulate some minute thing (rather proud of my traffic simulator) so I go with Excel because I can get immediate results.
+
+As far as how, I am very much self taught.  I'm sure anyone who has any formal training going through the above code would find a million optimizations for it.  I even see a bunch of things I would do differently based on things I've figured out since I finished.
+Unfortunately (as I have learned not to do since) the simulation is using the spreadsheet for some data-keeping, which slows things down even when screen updating is off.  It is strictly processor limited, at least on my computer.  And the ants work by random recursion, so its hard to predict what they will do even a few cycles ahead, do I don't think I could pull off a simple skip either.
+
+I've learned to love classes as well.  I use them constantly at work now.  I think its important to remember that VBA is a language like any other.  If you treat Excel as basically just a GUI, you can do anything that any other language can do.
+Sorry to hear that :-(  Did you catch the error by chance?
+
+I would totally play Excel Pokemon
+I've uploaded a 64-bit friendly version.  Thank you!
+the 64-bits version works, thx!
+I thought you need to do LongLong for the 64 bit return as well as the ptrsafe..?
+It was me who made that excel.
+
+> Do you know of a good way to play MIDIs using .dll hooks in Excel?
+
+To play midi you can use the same file. Just edit the code for the Play command.
+I think there is an "mpegaudio" or "mpegvideo" there which you can replace with `sequencer `
+Awesome, thanks!
+Would you mind sharing that traffic simulator?
+Run-time error 91b Object variable or With block variable not set. If I hit debug, it takes me to the GoToEat to the If line below the With Colony.Item line. 
+I think you can do that instead. Ptrsafe is just telling the compiler that your code will work, not actually changing anything. 
+https://www.dropbox.com/s/q70p6nkd5y4w1ip/GAS%20.04.xlsm?dl=0
+
+This is one of my quick ones so its not as well commented as I'd like, so feel free to ask questions if you wish.  It was actually really going to be a gas station simulator, but I got distracted with the traffic.
+Huh, I'll poke at it.  I've never had an actual With block failure, but I can't find how it could be an object issue at that point.  I'll see what I can force.
+That's seriously awesome. The code is simple enough so no worries about the comments. You're a creative man!

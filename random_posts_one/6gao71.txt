@@ -1,0 +1,46 @@
+6gao71
+SUMIFS with multiple arrays? Doesn't seem to work.
+Imagine you have a table "fruit" with columns Type, Color, Amount.  Why doesn't this array formula work?
+
+    {=SUM(SUMIFS(fruit[amount], fruit[type], {"banana","apple","grape"}, fruit[color], {"green","yellow"}))}
+
+Is there a way around this? I suspect it involves SUMPRODUCT but honestly SUMPRODUCT is a mystery to me -- is there another way around this?
+
+
+-------------
+    =SUMPRODUCT(--ISNUMBER(MATCH(fruit[type],{"apple","grape","banana"},0)),--ISNUMBER(MATCH(fruit[color],{"green","yellow"},0)),fruit[sum])
+-------------
+Problem is that the criteria arrays are different sizes. XL is interpreting the two arrays as 3 criteria:
+
+    Banana-Green
+    Apple-Orange
+    Grape-Null
+
+If you don't have too many criteria, can you do this?
+
+    {=SUM(SUMIFS(fruit[amount], fruit[type], {"banana","apple","grape"}, fruit[color], "green"))+
+      SUM(SUMIFS(fruit[amount], fruit[type], {"banana","apple","grape"}, fruit[color], "yellow"))}
+
+-------------
+> =SUMPRODUCT(--ISNUMBER(MATCH(fruit[type],{"apple","grape","banana"},0)),--ISNUMBER(MATCH(fruit[color],{"green","yellow"},0)),fruit[sum])
+
+Ah, I think I understand this. Good thinking! Thanks.
+
+Solution verified
+-------------
+Ah, that's a good explanation. I see what you mean. I think we have too many criteria, but I'll keep it in mind. Thank you!
+
+Solution verified
+
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+You can also reference a range instead of writing out the match criteria in an array. 
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

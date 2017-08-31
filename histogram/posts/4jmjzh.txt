@@ -1,0 +1,108 @@
+If I wanted to learn excel to add as a strong skill on my resume, what would I show employers to prove my knowledge? Should I do projects, and what sort of projects?
+Make sure to learn VLOOKUP and INDEX MATCH as well as Pivot Tables and you should be at a good starting point.
+
+Most of the simpler reports I run in Excel pretty much run off the above.  Next step for me is to learn VBA for some of the more in depth reports
+I work in film and television in an office job. I had to do an excel test for an entry level job. They started with basics and got progressively harder
+- Change colour of a cell
+- Format
+- Easy formulas
+- Vlookups
+- Pivot Tables
+
+I couldn't do much, but I knew what a vlookup was, so I said to the interviewer 'I can't do a vlookup but I know it looks for information from another source that matches etc'. 
+
+I got the job. 
+
+If you do have an interview that has an excel test, also remember they may be testing more than your excel skills as I learnt from my boss - who gave me the interview. 
+
+He told me, he was testing how well I coped under pressure, how quickly I accepted help from someone who could do the task etc, determination to try and find the answer. 
+
+Fast forward 2.5 years I'm in a different role and I'm writing (for me) extremely long and complex IF statements amongst other things and can Vlookup with my eyes closed and my hands tied behind my back (figuratively of course). I do all the data work for my managers, they have very limited knowledge. 
+
+Regardless of industry and role, I think knowing excel is sooooo important and recommend everyone improve their excel skills
+If you are going in to Investment Banking, do not put this on your resume. 
+I've never had someone test me on my Excel knowledge in an interview, and I've never tested someone during their interview.  I think it would really depend on the type of work you were applying for.  
+
+Most finance/engineering/accounting roles assume Excel proficiency in entry-level positions.  Given that you said
+
+> If I wanted to learn excel to add as a strong skill on my resume
+
+I'm led to believe that you're not applying for one of those roles. 
+Try to make a budget spreadsheet, it can teach you cool excel tricks and you can use it to save your money!  Start with just the basics, then add functions, then add user input through macros, then add full VBA code to automate importing data.  Your can keep developing it as you learn more excel skills and make it as sleek as you want
+For me the door to Excel opened when I wanted to calculate how much salary I should expect from my then part-time job.
+
+ It paid by the hour and so changed every month. My major breakthrough was when I figured out how to use the lookup function to find my pre-tax salary in the tax bracket tab I had created and subtract it from the pre-tax cell in one cell. 
+
+I was 15 at the time and working at Mcdonald's :-) 
+
+Since then I have had many hourly-wage and a few years ago I learned how to calculate actual work hours and to convert them to decimal. Nothing too fancy just incredibly useful! 
+
+Good luck!
+Look at the Microsoft Office Specialist certification program. I have a neat little ["Expert" seal](http://www.online-training.cc/fileadmin/templates/online-training/images/MOS-Cert.png) I throw on my resume.
+Be prepared to answer any Excel questions at your interview.  The same with anything else you put on your CV.   
+To be honest dynamic arrays is most likely more valuable at the outset. 
+
+VBA is awesome, but by and large data analysis can be done without it.
+
+Learn match, index, offset and countif really well as they are probably some of the harder ones. Vlookup, find, text manipulation etc. are fairly self explanatory. And try to stay away from using sumifs as for some reason it is horribly optimized, so it takes forever to run them.
+I agree with the other guy. I think its better to have as much of what youve done visible as possible. Vba is awful for auditing purposes, especially if youre not at the level of using MATCH and OFFSET functions
+Agreed again with the other replies. VLOOKUP and INDEX(MATCH(()) are the best starting point for 80% of business questions. The more complex stuff comes in when you're trying to marry data from disparate sources into one unified solutions. In these cases, VBA, PowerQuery, or PowerBI might be solutions. (Or Access, but don't let anyone know I told you that).
+why
+Define excel proficiency
+I'm soon going to be applying to entry-level programming jobs, and wonder if it wouldn't hurt to know excel. I also just find it interesting to model data, and get an odd pleasure out of knowing easy short cuts for stuff. Do you think knowing excel really well could help my career?
+Haha, I remember work sent me an engineering grad who couldn't excel (or read drawings) - they were let go within 6 months.
+I've only hired people for positions that use Excel. I ask them what their favorite functions are, and to describe what a pivot table does. If they can give a half intelligent answer to either, they are way ahead of most.
+I once was tested on VBA/excel. The 20min test was basically getting a macro working and all you needed to do was open another file which was referenced with no error handling. I was the only person who realised the file needed to be open and the manager was shocked I put in checks into the code to open it automatically
+
+Got the job
+Before I got on salary I found it helpful to use 4 and 8 week moving averages for budgeting my spending.
+
+If my hours got cut for whatever reason, or I got a bunch of overtime, I could make better spending decisions by budgeting around average pay instead of whatever the last paycheck happened to be.  Also, I'd get an early warning to cut spending when the 4-week average dipped below the 8-week average.
+
+I'm not claiming this is "The Best Way" to budget but it worked for me a while back.
+Tabular pivot tables are a great way to display data
+Is sumifs bad? I love that function, use it all the time and haven't had any crashing issues; but I usually only use it on arrays that probably don't have more than a few thousand cells. 
+Bankers live in Excel and know the program very well to the point where they memorize all the keyboard shortcuts because using a mouse is too slow. Best case is that listing "Strong Skill in Excel" will be laughed off, worst case is that you get drilled on your Excel knowledge and not be able to move on to the rest of your qualifications. I have been in several interviews where the person next to me will ask the candidate very difficult Excel questions. Definitely changes the tone of the interview and for whatever it's worth, none of these candidates have gotten a position. 
+Basic functions, page setups, etc.  Maybe even some Pivot tabling (especially finance/accounting).
+It helps every career.  It helped me as a system engineer.
+
+You may find it useful for rapid prototyping some idea, and definitely for explaining ideas to folks that aren't software devs.
+To be fair, engineering school doesn't spend much time teaching Excel. My school taught a little of it in a freshman intro course and that was it.
+"A pivot table is a GUI front-end to a grid of SUMIFS statements, only it's uglier, easier to break, and harder to build."
+
+...yes, I suck at interviews.
+Want to be careful with pivot tables IMO
+Have never had a major problem with them. 
+SUMIFS and SUMPRODUCT are probably my most used functions as well.
+Interesting. I'm not going into IB but thanks for the insight.
+Ah ok, since Im in this sub I dont really know how to scale excel.
+Very cool. Do you have any recommendations for starting to learn? My plan right now is to go through "excelisfun", copy what he's doing, watch some videos on a site called skillshare, then doing some modeling from data on things, maybe on the Primary elections and Reddit post data (optimal time to post vs upvotes vs text in title, whatever), just to get a feel for it. 
+It helps with every careerr **IF** they work with numbers 
+Well that seems weird to me, while they didn't teach excel at my engineering uni, you definitely needed to know the basics to pass.
+You'd get bonus points for knowing the acronym GUI, but marked off for thinking it's harder to build and not volunteering why or in what cases it could be useful.
+
+Why?
+**Excelisfun** on YouTube is an excellent training tool.
+
+
+My opinion is going to be a little different than most, but I would get some free data (government data, climate data, etc) and figure out what seems interesting to learn.  Basic statistics, some charting, etc.  Learn until you don't know something, then Google it.  Repeat.
+I disagree. Every professional job function I've ever interacted with (including HR, legal, general affairs, etc) all used Excel in some capacity.
+If someone else changes the filter or pivot table layout, any reports built off the pivot table will have the data change without you immediately being aware.
+
+They are not visually appealing for building a report you would want to show higher-ups, so why not just skip the pivot table and build the report directly using SUMIFS etc.?
+
+In certain situations they are good for a high level overview, but thats all id use them for.
+
+They are faster certainly, but I prefer to future proof.
+
+Edit: I will say that slicers with pivotcharts are awesome.
+Started watching his Office 2013 excel class. Man. This guy has an almost erotic love for excel. It's fucking awesome. After the basics series, do you know what playlists I should watch? He has so many videos...
+I did this with stock data. Went to Quandl, downloaded a bunch of data, tried to figure out how to got rich.
+
+Didn't quite work how I'd envisioned, but I had fun with spreadsheets just the same.
+Fool around with some graphs too. There is often a ton of useful information in data but putting it into a format that can be understood by your intended audience.
+Well you out experience me so I will have to take your word.
+Yeah depends on the need certaiy wouldnt uwe them for teports goimg up the chain but for quickly organising data they are great. Ive been using tabula view a lot lately for creating exceptions reporting with some detail and it has been really useful.
+I laugh at his insane love for Excel. It's love for him. And it shows.
+
+There are videos about Power Query and PowerPivot that you should watch. These are Excel Add-Ins that make Excel even more powerful as a knowledge worker.

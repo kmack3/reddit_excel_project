@@ -1,0 +1,46 @@
+6ihue5
+How do I change from an unwanted number format, to one that I want, and then strip off all formatting?
+Hi guys. Right now I have a column of data that is formatted as GENERAL. In the formula bar, it displays data as a decimal time of "0.0035419900938863" which I gather is actually associated with a date and time. This number formatting came to me from someone else after they had subtracted two timestamps. What I'm interested in is only the difference in seconds. So when I simply change the number format to "ss" I get the number that I want which is 51 seconds.  
+However, the cell itself is still formatted as custom "ss" I need to forward this data to a mapmaker who can only receive the data formatted as general. So my question is: How do I strip off the formatting right now as "ss" to be "GENERAL" while still cell and formula box both read 51? In other words, I don't want the cells to have any formulas or formatting. I just want the # of seconds.  
+Thanks for the help.
+
+
+-------------
+So this should be easy, but the specific numbers in the post don't quite make sense.
+
+Excel stores time in units of days `0.0035419900938863` is 0.0035419900938863 x 24 x 60 x 60 = 306 seconds. Note that is 5 minutes, 6 seconds. Which is why if you format as `ss` you get 06. But that's not what you want: `ss` chops off any time you go over 60 since that's minutes (format as `mm:ss` you get `05:06`).
+
+[Hopefully this helps... it might not](http://i.imgur.com/yuMZ758.png)
+
+TLDR: Your data is messed up, but chances are you want `=A1*24*60*60`.
+
+Note 51 seconds is 51/(24\*60\*60) = 0.000590. [As seen here](http://i.imgur.com/HXxN2Yr.png)
+-------------
+If you have a lot of them in a column, the quickest method is to
+
+1. copy the formatted seconds to notepad
+2. delete the Excel data and format the source cells to General
+3. copy paste all those values back from Notepad.
+
+Also note that to show seconds over 59 seconds, wrap the `ss` in square brackets `[ss]`
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+I used your tip of multiplying by 24* 60* 60. And then used the other comments advice with notepad to remove all formatting. Thanks so much! Marked as solved!
+-------------
+Yes! This is exactly the solution I needed. I used the multiplication from the other comment to get it into seconds. And then your suggestion to strip off all formatting. Thank you!
+-------------
+You do not need to use the multiplication with this solution, copy straight from the value where formatted as `[ss]` 

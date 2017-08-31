@@ -1,0 +1,59 @@
+Learning SQL for those who know excel.
+Extremely interested. I am highly proficient in excel and am currently looking into SQL classes
+I'm very familiar with Excel and SQL, but I'm a little uncertain what you mean with this question? Perhaps some tangible examples of what you're talking about would be useful in understanding?
+I dont know if you need lessons or want to give lessons.
+If you have something interesting to contribute, a blog is the best
+I have to code VBA into excel regularly and have started to dabble in ADO.  Never realized I could use VBA to apply SQL statements into excel or pulling data tables from excel and putting them into access.
+
+Any opinion on excel/database integration?  I'm interested in seeing practical applications of it (ie, using excel as a front end with access as back end to validate/index data vs. using a pure excel or pure access solution).
+As someone who is very proficient in both excel and SQL, IMO using excel to teach SQL concepts is counter productive.  I really do not see what good it would do.
+If you're meaning to contribute 'lessons' to help people, then I think it's a fantastic idea!
+
+I, myself, am pretty comfortable with Excel, but have never really touched SQL.
+I'm also very interested. Please let me know when you get things going. 
+Where exactly does one use SQL?  I get SQL-generated excel reports from analysts sometimes then I use excel to do more analysis.  I assume they have some sort of tool/ ORACLE plugin, etc. that interfaces directly with the database?
+I use SQL every day. I wish VBA wad as easy
+I am definitely interested, however for those that dont know already - w3schools offers a really good course (for free) that takes you through each SQL function step by step, with examples and mock databases to query. 
+
+It also offers a test at the end to test you on your new found knowledge, which is also free,
+
+This website also offers other languages other than just SQL, i highly reccomend this website as it is really simple and intuative, and teaches so much for free!
+I will be blogging on this soon and keep you posted.
+Check out [SqlZoo](http://sqlzoo.net/wiki/Main_Page).  They have excellent tutorials that can give you a good idea of what you're getting into.  Right off the bat you are using a sample db to see how different statements work.
+Regarding classes, are you planning on actually paying for them or are you looking into free online courses?  If the former, I highly suggest that you save your money and purchase a book (I read through the O'Reilly book "Learning SQL").  SQL is actually a very simple language and you can pick it up very fast.  In my opinion, paying for a class is kind of overkill.
+to clarify I mean for people who know excel but do not know SQL. Using excel as a teaching tool...
+
+Lessons like the following:
+example: In excel you filter a column. in SQL you add conditions to the where clause.
+
+In excel you aggregate data with pivot tables, in SQL you use group by.
+
+Basically making the transition easier for people
+Thank you for informing me about the dates. Never thought of that and I thought I was pretty awesome with excel.
+I use these methods a lot.  We have a POS with a SQL database, and our organization does most work in excel.  So if you don't want to do manual entry, knowing your way around the database and being able to plant it into excel is great.  
+
+Things I've done with SQL and VBA:
+
+* Custom Sales Reports
+* Production/Sales comparison
+* Order Check in
+* Cash Reconciliation
+* Inventory Tracking/Ordering
+* Special Order System
+curious why you think it is counterproductive. A lot more people understand excel than they do SQL and when just presented a new language it can be daunting for many. Using excel as the foundation allows someone to be able to apply concepts they are already familiar with to a new skill set, hopefully making learning more efficient.
+
+I would agree they are different in many ways but they do share some of the same foundational concepts. 
+SQL stands for Structured Query Language. ORACLE is a type of database. SQL is a language you use to communicate directly with a database to view and manipulate data. Most things which can be done in Excel with data transformation can also be done in SQL (minus formatting). It is much quicker and more powerful for large datasets. Hope that helps clarify a little.
+Excel supports data connections to a database, you actually don't even need to know SQL to do this, the only thing you neat is access (unless you are making complicated queries). It is really need stuff - there is a good book on it "Excel 2007 Advanced Report Development". If you do make complicated queries to the database you need SQL. You can write the SQL in VBA or in the data connection wizard. 
+Also yes they likely are using an application which interfaces with the database where they write queries. 
+Technically Excel stores dates as numbers, so you can sort them, but a date written as "YYYY-MM-DD" (e.g in file name) can be sorted the easiest and is the easiest to use.
+
+Sadly, due to the fact that people in USA have this "year/day/month" format, if you deal with them, you ALWAYS have to write the month with letters to avoid confusion... or educate them :-)
+No offense but I disagree.  They share almost zero foundational concepts.
+
+If you start this I will help you however I can.  Let me know.
+there is a thing called MS query (I never really used it, I think it got dropped in Excel 2010??? and the new excel has the functionality built in) and Excel can connect to external databases somehow.
+You can even write SQL there somewhere (I never did it, so I cant really contribute much). There are also "excel database formulas" - not sure how they work, since I also never had to use them.
+I would then have to disagree with you. As someone who has self taught excel (and VBA), i have been learning SQL through online resources, and if it wasnt for my excel knowledge, Id not really understand whats going on. Excel & VBA gives you foundations in logic which are essential.
+
+I would agree however, that the coding language is far different in SQL from what you see in VBA, but the skills definitely cross over.

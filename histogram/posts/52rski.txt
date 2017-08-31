@@ -1,0 +1,31 @@
+How to add 2 years to a date?
+    =EDATE(Cell, 24)
+Take her to TGI Fridays.  Actually, that's not right.  It'll seem like forever.
+=DATE(YEAR(YourCell)+2,Month(YourCell),DAY(YourCell))
+=a1+730
+This is the best answer
+OP can you "Solution Verified!" this please?
+What should 2 years after February 29, 2016 be?  February 28, 2018 or March 1, 2018?  Definitely not February 29, 2018.
+Solution verified.
+That formula will be incorrect if there is a leap year, unfortunately.
+Agreed. It only references the cell once rather than 3 times like the approved solution.
+It would calculate to March 1st. Similarly, a date that is calculated as 12/32/2016 or 13/1/2016 would show as 1/1/2017
+
+You have awarded one point to _Nateorade_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+or use =edate(a1,24)
+took me a minute to figure out what was wrong about the 13th of January.
+I meant, what does the OP want the answer to be; "last day of February + 2 years = last day of February," no matter which year we start in, or "last day of February + 2 years = last day of February or first day of March," depending on the starting year?
+If he wanted the last day of the month always, he could do month(cell)+1,0 for the month and day.
+Remember the context of this discussion - we want to add 2 years to any date.  Most of the time, it's simple: mm/dd/yyyy -> mm/dd/(yyyy+2).  When it's a leap day (February 29), we (might) need something more complex, so the overall formula would be:
+
+if(and(month(cell)=2,day(cell)=29), something, mm/dd/(yyyy+2))
+
+I'm probably making too much of this.  The first branch of the if() only applies to 1/1461 of the data, and the OP is probably satisfied with 2/29/2016 -> 3/1/2018.
+
+But I worked on software for accountants - accountants who cared about penny discrepancies on million dollar accounts far more than the value of my time.  My original comment meant only that we should ask the OP how that date should be handled and make sure the solution met that need.
+
+Maybe that first branch should be 02/29/yyyy -> 02/28/(yyyy+2).
+Yeah I get all that. I do a lot of financial modeling and need month end dates including leap years which is why I like using the day=0 method to always make sure its EOM.
+That's a great way to do it.  I was getting EOM by constructing the first day of the following month and then subtracting a day.  Your way is much better.  Thanks!

@@ -1,0 +1,20 @@
+6ijj0d
+Question regarding inventory entry worksheet for non excel users.
+Good Afternoon, I was hoping that someone with a lot more knowledge then I could help me out. I volunteer at a local music festival and was asked to fix some issues they were having with their sign inventory files. What they want is to make the sign inventory files as user friendly as possible as the people using it will not be very computer literate. What I am trying to do is make a "data entry sheet" as sheet one, as you can see in the first photo. The goal is to have the user enter the number associated with each sign into the d15 cell and then hit enter. Every time they hit enter we wanted the number to transfer to the second sheet into cell a2 and then erase from the d15 entry point. This will allow the user to enter the next number which will then populate into sheet 2 cell a3. This will go on until all signs have been inputted. I have set up a vlookup ( the extent of my ability) on the second sheet to auto populate from the inventory database tab (sheet 3).Once this is complete the user will hit the submit button and a list will appear in sheet 1 (inventory Entry) cell d19 with a list of signs that have not been inputted, signs that are not on sheet 2 put still in the inventory database. The main idea is to make sure that the crew working on the sign team can immediately identify any missing signs without having to dig through 1000 excel rows. Any help would be greatly appreciated.
+
+Pictures for reference : http://imgur.com/a/Pan6F
+
+
+-------------
+User forms are what you're looking for! http://www.excel-easy.com/vba/userform.html
+
+Edit: btw, you could make this even simpler for yourself by using google sheets user forms. Those are incredibly easy to implement and they give out data like you want them formatted. A big bonus is that the user doesn't even have to access the spreadsheet! You just give them the link with the form and they fill it out. It's amazing.
+-------------
+Thank you so much I will look it up ASAP.
+-------------
+SOLUTION VERIFIED!
+-------------
+
+You have awarded one point to _man-teiv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

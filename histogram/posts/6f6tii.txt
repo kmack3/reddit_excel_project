@@ -1,0 +1,35 @@
+Transform number string into date
+Where A1 is the date, `=DATE(20&RIGHT(A1,2),LEFT(RIGHT(A1,4),2),LEFT(A1,1+(LEN(A1)=6)))`
+
+We have to add 20 to the year to return the current millenia,
+
+for the day part, if len is 5 return 0 if len is 6 return 1, so len is 1+0 or 1+1 for return length
+
+the Len portion returns 0 or 1 where true or false
+Do you need this one time or do you need this to continue to add data?
+If you only need it one time I would try something similar to your last option and then copy the column, paste as values, and see if you can format it as a date. 
+If you need it to constantly update for new data I think I'm stumped.  I would probably start by searching for a text string column of dates and creating a lookup table. 
+    =DATE(20&RIGHT(A1,2),IF(LEN(A1)=6,MID(A1,3,2),MID(A1,2,2)),IF(LEN(A1)=6,LEFT(A1,2),LEFT(A1,1)))
+
+does this work for you?
+> Solution Verified
+
+
+
+Thanks for your help :) really big help for me
+I need it to work on tables and pivot reports for KPI
+solution verified
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _pitambara_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+thank you so much, I was now at 90% correct formula with the following
+
+=IF(LEN(B4)=4,DATEVALUE(LEFT(B4,1)&"/"&MID(B4,2,1)&"/"&MID(B4,3,2)),IF(LEN(B4)=6,DATEVALUE(LEFT(B4,2)&"/"&MID(B4,3,2)&"/"&MID(B4,5,2)),IF(LEFT(B4,2)="0",DATEVALUE(LEFT(B4,2)&"/"&MID(B4,3,1)&"/"&MID(B4,4,2)),DATEVALUE(LEFT(B4,2)&"/"&MID(B4,3,1)&"/"&MID(B4,4,2)))))
+
+
+but yours is much more simple. 

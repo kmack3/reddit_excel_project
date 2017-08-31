@@ -1,0 +1,138 @@
+Making excel pretty
+For charting, choosing a good colour palate can make all the difference. [Here's a fitness dashboard I made](https://dl.dropbox.com/u/6926046/fitness%20dash%20v2.PNG) a while ago which uses a 4 colour custom palate which turned out really nice (in my opinion). 
+
+I also tend to always split my workbook into three sheets - raw data, calculations and report / dashboard. Makes it easy to adjust any of the three elements with little to no impact on the others.
+I like to make a dynamic summary sheet for most workbooks. I use colors, arrows, graphs, icons, etc... to make everything look as easy to digest as possible.  
+
+Here's part of a completely automated report I have that I run each quarter. It won't make any sense to anyone else, but our people like it. Save it as a PDF and no one has to see the nitty gritty on the back end.
+
+[Excel Report](http://i.imgur.com/j7TFD.jpg)
+
+Most people I encounter don't care where or how the information comes from, they just wanted it summarized in a way that easy for them to understand. Pick out the key details and show them that.
+
+If you merge any cells I'ma break your fingers.
+
+*That is all.*
+Playing with border colors and fake shading can make inputs on your dashboard look real tight:
+
+[Image](http://i.imgur.com/h1R5O.png)
+For me, my audience is a bunch of regional portfolio managers and their higher ups.  They like seeing everything in a dashboard format followed by raw data.  The dashboard makes an easy-to-powerpoint slide for a presentation to their management without much work on their part.  The raw data allows them to interpret and track other metrics with their own templates.  
+
+Set your margins slim on data sheets and make sure they can print it out and it not take 4 pages wide to do so (if possible).
+One thing that is particularly impressive to me and I feel isnt used often  is how much you can improve the look and feel of a spreadsheet by using some of the options under File>Excel Options>Advanced>Display Options and also the "View" tab. You can use this to hide formula bars, row and column headings, the ribbon, sheet tabs, and scroll bars.  
+
+Combined with locking down the worksheets, this creates a pretty impressive, client facing, idiot proof way to give excel models to your client.  
+
+The effect of having all of these elements hidden/locked is making your dashboard look like some special application rather than just running within excel.  I've demoed this to clients who then ask what application this runs in since they don't recognize it as excel.
+
+EDIT: when hiding sheet tabs, obviously you need to create hyperlink "buttons" to all of the different sheets in your workbook, which makes the whole effect even more impressive.  
+
+Also, one other trick I have used: I had like 6 small graphs on my "dashboard" page, which were large enough to see the overall story but too small to see the details.  I created a "Zoom" button on each graph with a little magnifying glass logo, which is merely a link to another sheet with a larger version of the same graph.  But the effect is impressive with the sheet tabs hidden because in the clients mind they are zooming into the graph.
+
+Consistent colours. We have particular company colours that I use in my spreadsheets - purple/grey mostly. Nothing too garish, but enough to highlight certain information.
+
+The person before me *loved* his bright turquoise. ಠ_ಠ I don't think he knew other colours existed.
+Here are some tips on how to make your Excel charts look nicer:
+http://exceliseasy.wordpress.com/2012/10/22/how-to-make-excel-charts-look-more-professional-in-2-minutes/
+http://exceliseasy.wordpress.com/2012/12/03/save-time-by-changing-chart-defaults-in-excel/
+
+Consistent row heights, column widths, and margins. Also set the percentage "zoom" or whatever its called to the same number across sheets (when possible).  When you print everything out it will all be on the same scale instead of each sheet having completely different proportions. 
+Set your whole sheet to white background. Then set your data area back to "no background" and border it.
+
+If it's a presentation, kill the row and column enumeration.
+
+Dark shaded headers with bold white text look very nice.
+
+If you are presenting something more complex than will go on one page, summarize it and give the user dropdown fields to customize their view of the data.
+some very good pointers here, and just to add my 2 cents, using a grey for borders (chart or other) can make these elements less offensive to the eye 
+For me - Anything but grey scale looks bad and too busy.
+
+I am colour blind though...
+This isn't mine but I saved it from a past thread because it's amazing and shows what a difference subtle coloring can make.
+
+http://imgur.com/a/B2IaC#QKgEo
+Some good tips here. I've been using Excel for years but it's always good to see how other people use it. 
+I like to use yellow to indicate fields that users can interact with. Bright yellow indicates the field that controls how the data is sorted, highest to lowest.
+  
+  
+  
+http://i.imgur.com/DrLej.jpg 
+This is very nicely done. I do enjoy your color palate and I like the layout as well.  
+ooo that is nice, makes me wonder if you're really using Tableau :p
+Those body metrics look like this dashboard was made about a week after Thanksgiving. I agree, though, looks nice.
+that looks very nice!
+Very clean
+Wow that looks so nice.
+I was against merging cells a few years ago, but I'm over it. Most of my "presentation" sheets have merged subheaders above the field headers now.  If it bothers someone they can unmerge. If they can't figure that out, they have no business in my spreadsheets.
+[deleted]
+Totally agreed.  It's too bad there's not a center across selection for vertical as well as horizontal.
+How else am I to present wrapping text over a multi-column table? Text Box object? I think not.
+Amen to that
+This is an excellent recommendation.  I am often in the same boat.  I have a presentation worksheet that is linked either to various other worksheets in the same workbook or other documents.  Once I format my presentation or dashboard worksheet, it's always ready and always updated with the most recent information.  
+
+If someone wants to see the raw data they have the option.  
+
+Another option I've started testing is sending out the presentation workbook as a pdf and not an actual excel document.  A lot of my higher ups are not familiar with Excel and do not understand the interworking of it so unless they specifically ask for Excel I don't send it to them.
+i have an immediate need for exactly this information! thanks!
+If you want the gridlines to not appear, rather than setting the whole sheet to white background, just click on the no gridlines. Saves on memory, too.
+Thanks, [here's another I did](https://dl.dropbox.com/u/6926046/kg%20and%20bp1.PNG) for a redditor a while ago to track weight and blood pressure.
+Nope, 100% Excel! I've got Tableau Public on my work computer but haven't given it much time :)
+Hahaha, that was actually placeholder data :P
+[Center Across Selection](http://www.theexceladdict.com/images/center_across_selection_example.jpg)
+How you store, manipulate and work with data can and often should be different from how you present data.  Having a presentation sheet that includes merged, formated and colored cells is fine.  Not everyone is familiar with excel and they shouldn't have to be if your presentation worksheet is formated well. 
+Merging creates navigation problems for those of us who use keyboard controls.  When I use shift+Up arrow to scroll to the top of column K, if row 1 is merged across columns A-K, the screen will jump to a view of A1, so I've lost my place.
+
+The better solutions to make a sheet look presentable without merging?  Format the cells to "center across selection" in the format cells>alignment menu OR as mentioned below, try to keep your data for analysis away from your presentation data.
+Well, there is a merge cells vertically, and then you set the vertical format to be at the center (as opposed top or bottom).
+[Center Across Selection](http://www.theexceladdict.com/images/center_across_selection_example.jpg)
+This might be a stupid question, but how do you present a spreadsheet in a .pdf?
+
+I often send out spreadsheets so they have full functionality and control over how they want to see the data, but often they don't bother/know how. Emailing out pdfs would really help the technophobes who freak out over anything with an .xslx extension.
+i'm loving your work
+... I no longer have any reason to merge cells!
+Oh my god. That is... amazing.
+
+People poke fun at me at work, but it's little things like this that I *love* learning about Excel.
+How did I not know about this? Awesome.
+Holy Fuck... Multi decade excel veteran and NEVER knew this.  FML.
+
+Thank you!
+Way back, Center Across Selection was the default in Excel for the button that now merges cells and centers the format. Oh, the good ol' days!
+I know this is somewhat delayed, but I only just discovered /r/excel.
+
+I'm trying to design some templates for my company, so that all our headers will be a gradient between two reds. However; with "centre across selection" (I hate merging), excel applies the gradient to each individual cell.
+
+[Here are the two formats, merged on top, centre across selection on bottom](http://imgur.com/pn7IH)
+
+Do you know of a way to have cells set as centre across selection, but for the gradient formatting to apply to the entire selection as a whole?
+Well I'll be... Who knew?
+
+Gonna have to add a hotkey for that to my arsenal. (So's I can use it with my broken fingers)
+I guess the point is, we're talking about presentation worksheets.  The problems that vertexvortex mentioned exist, and I'm aware of them, **but** anyone that needs to do the things to a presentation report where these sorts of problems arise should have enough (Excel)sense to be able to deal with merged cells.  
+
+Anyone that's just looking at or printing the report probably isn't even aware that there are merged cells.  The center across selection is a neat solution that I'll be using though.  I was previouslu unaware of it. (TIL!)
+
+If we were talking about daily-use operational or data treatment sheets, then no.  Merged cells should certainly be avoided on these.
+It also causes:  
+
+* selection problems
+* sorting problems  
+* issues with gather the values of merged cells in VBA  
+* issues with copying/pasting  
+* probably more
+
+I meant as a means to avoid merging cells.  See vertexvortex's screenshot/comments. I don't like merged cells for the reasons he stated.
+That's brilliant, now if only I could left indent! (I have very particular clients)
+You can save a Microsoft Excel 2010 file in another file format by clicking the File tab, and then clicking Save As. The file formats that are available in the Save As dialog box vary, depending on what type of sheet is active (a worksheet, chart sheet, or other type of sheet).
+
+In Excel 2011 (Mac) you can *print* to PDF by hitting command+P, at the bottom of the popup click PDF, Save as PDF.  
+Grab [macabus](http://macabacus.com/macros/features) it's in their center alignment cycle.
+Just saw this comment.
+
+Actually, you can. Edit the number format of whatever cell you're using CAS on. Let's assume it's text. Set the number format to @_#_#_#.
+
+Why this works: Each underscore character tells Excel to include the spacing of the next character in the display.
+
+If you wanted to get extra nifty, write a couple macros that either append _#_#_# to the end or beginning of a text formatting, or remove it from the string. Then assign a couple buttons to those. I'm thinking you could set up three macros, one that feeds an "add" parameter, one that feeds a "delete" parameter, and one that actually does the work.
+Ah, I have Excel 2007 - but some Googling gives me a Microsoft add-in for it. Thanks!
+Sorry I should have included a like for 2007, it slipped my mind. Glad you found it! 

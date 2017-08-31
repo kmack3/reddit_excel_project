@@ -1,0 +1,17 @@
+6ft08i
+.xlsm to .xlsb
+Just converted my 21.3mb .xlsm file to .xlsb file format and it's now 10.2mb. 
+
+Loading times are almost nonexistent, macros and pivots run a lot faster. Is there any downsides apart from not being able to link to web server as its binary not XML?
+
+
+-------------
+I would probably change the flair to discussion - but I haven't come across any downsides in my use. You can even link XLSB to Access DB's. Possibly if a 3rd party didn't have Excel they would have an issue but I have not tested if Open Office can read XLSB - if someone knows please feel free to comment.
+-------------
+I've done a few projects that use Python and excel, and xlsb's are not supported by any of the standard excel packages (AFAIK).
+-------------
+The only disadvantage that I have found is that some 3rd party software/add-ins, do not recognize XLSB files.  Having said that, I mostly work with this file type because of the advantages that you mention.
+-------------
+In my experience xlsb is the best format available. The only downside is that my job's email app can't open them so when I send out small executive sumary style reports I leave them as xlsx but anything too large or complex to read on a phone gets saved as xlsb
+-------------
+Off topic but I would like to know more about these projects using Python and Excel, if you're willing and able to share?

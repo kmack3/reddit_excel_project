@@ -1,0 +1,34 @@
+6fswqz
+Random Sample Excel, help
+In sheet 1, I have a list of 10,000 customers and their relevent data.
+
+In sheet 2, I'd like to create a summary. However, I would like to create a cell where the end user can input a number.  Say 2,000.
+
+And it will select a random two thousand rows amongst that 10,000
+
+and return summary statistics.
+
+is this possible?
+
+
+-------------
+Not sure what all statistics you want, but here's how you would start the setup.
+
+1. Create a helper field near data to hold random seed. Formula in this column (I'll assume this is col D) is `=RAND()
+2. Create a 2nd Helper field, which will rank the seeds. Formula here is `=RANK(D$1:D$10000, D1)
+3. Now, when user types in a number N, you can fetch all the records from 2nd helper column that are <= N. Can do this using either Advanced filter, SUMIF criteria, COUNTIF criteria, INDEX/MATCH array, etc. At this point, just depends what type of calculations you want.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

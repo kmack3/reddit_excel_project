@@ -1,0 +1,33 @@
+6igshe
+Need help creating a particular legend style
+I have been tasked to make a series of graphs, all of which have 6 or so series in them. I was wondering how the best way to format the legend like [this](http://imgur.com/a/LpbBv).
+
+Thanks in advance
+
+
+-------------
+I couldn't view your picture...My company isn't always friendly with imgur, but you may want to check it...
+-------------
+First delete all your built in legends.
+
+Now select from the Insert Ribbon the Shapes button then the rectangle button. Place this rectangle on your graph but don't type in it. 
+
+On your formula bar, type equals any cell on another page. Whatever you put in that cell will appear on your graph.
+
+Now go back to the graph and format the rectangle to have a clear background and no border.  Add as many of these as you need to create your legend.  Also add any lines for matter. Format them any way you want. Finally, select all and group them together so they move as one object.
+
+EDIT: Just thought of an easier way. 
+use your snipping tool to capture the example you made to show us what you want it to look like , then paste that on your graph.
+-------------
+Not sure, It seems to be working on my end.
+
+-------------
+Or op can change his/her line formatting in the chart to match those dashes... Right?  Right click on the series, edit series, line, line style, dashes line
+-------------
+He can get lines looking like that with graph formatting but he has words across top and along the left laid out like a mini data table.
+
+ standard graph legend has separate categories for each field. It would still be 6 separate fields if you use the built in legend.
+-------------
+I see what you mean; good point.  I like your edit, too.
+
+I might also suggest OP look for the "camera" tool.  That way they could have the manual table they made easy to update.  

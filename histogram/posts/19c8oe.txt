@@ -1,0 +1,25 @@
+PSA from XKCD: proper date formats
+Why not 41332?
+I agree with him.  Gotta love that the hover text does NOT use that format, though.
+When the US starts using metric, we'll talk. *starts playing ice hockey in Hell*
+I work with a lot of other countries militaries.  The NATO standard is 
+
+ 27-Feb-2013.   
+
+So there is no confusion.... except those countries who spell their month different.... ya, we are worse
+
+
+Anyone else notice the "wrong" date format in the alt-text?  (ISO 8601 was published on 06/05/88 and most recently amended on 12/01/04.)
+I appreciate this...but it should clearly be dd/mm/yyyy
+This made me rage for a second.
+The problem with that is unless you are using a special date datatype, it never sorts correctly. 
+*That's the joke*
+
+(He noticed that both dates are ones that are ambiguous if you use the usual trick of "Look for one of the first two numbers being above 12".)
+I am not sure if you are being a jokester or not, but one of the reasons the ISO is for yyyy-mm-dd is that it makes it really easily machine sortable chronologically, while still being fairly human readable.  dd-mm-yyyy would put all the firsts of the months together and all the second of the months together, etc.
+I now know never to joke about date formatting ever again
+If you could have only one piece of info, would you rather day, month, or year? Year is most important, so it should come first as it provides context for month and day. 
+
+Not to mention the sortability of yyyy-mm-dd. Or the fact that time is also listed by magnitude. Or the fact that no one in their right mind would use yyyy-dd-mm, so it instantly resolves the mm/dd vs dd/mm ambiguity. 
+[deleted]
+Still sorts probably by month and day then.

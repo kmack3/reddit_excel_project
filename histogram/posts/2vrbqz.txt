@@ -1,0 +1,154 @@
+Going for a new job soon - what are some of the 'must knows' about excel?
+Vlookups and Pivot Tables
+IF, AND, OR, IFERROR, VLOOKUP
+>credit operations case resolution executive" (not 100 percent what that involves at the moment....... )
+
+I think your first priority is you read up on what the role entails. Surely, there was a job description when you applied?
+I second Vlookups and Pivot Tables.  Is this an entry level job?  If so, I'm guessing that "credit operations case resolution executive" means debt collector.  Possibly accounts payable.
+Hot keys. Don't ever, ever scroll with your mouse. You'll be so much quicker.
+
+Also vlookups and pivot tables. 
+You should invest some time in watching some tutorial series, fx this one:
+https://www.youtube.com/watch?v=6QKOSRlxHf8 .
+
+There are hundreds others out there I'm sure, I just know this one and found it very decent. Good luck with the new job!
+You could find everything you need to know in Excel advice thread repository (Learning Materials & Advice Megathread)
+
+Given the job description I personally advise to get used to have a changelog of every modification you made on your files, complete with why, requestor and date. It will save your life in the long run
+I think one of the most important things is to know how to google stuff if you're not quite sure how to do something - that way you can learn to do most stuff without much difficulty
+You're probably going to be customer service from the title and the skills listed.
+What I believe constitute Excel best practices (I am actually writing a guide on this):
+
+* Color-code your cells. For example, formulas are black, inputs are blue, key outputs are yellow.
+
+* Use Document Themes (fonts and colors!). Make everything adhere to the corporate branding. This is an easy way to impress people. (Google XLSTART to find out how to automatically create new workbooks in a given template).
+
+* Split **data**, **analytics** and **layout** into three separate sheets. Usually this means having some understanding of what constitutes the correct approach for "database-type" spreadsheets (i.e. each row is one observation), then using Pivot Tables in the analytics sheet and using GETPIVOTDATA in the layout sheet (possibly combined with charts)
+* Learn how to create clutter-free charts. Don't just accept default parameters for axes, gridlines, markers, lines, etc. Tweak everything to make them look perfect.
+* Learn how to create *advanced* charts. [John Peltier](http://peltiertech.com) is ***the*** king of Excel charts. Bookmark him and read up on his articles and techniques as much as you can. At my former job, I created charts on a daily basis that probably nobody else in the building knew how to create, and often provided additional insight for decision makers just from presenting data in a way that was easy to analyze.
+* Always triple check your work. This can't be stressed enough, yet it is often overlook as a "skill". Trust me, it will make you stand out to not have mistakes -- or better yet, to catch other people's mistakes before it's too late.
+* Always innovate. Every role and every task has areas to be improved. I often did things once "as I was told" and then I squeezed some of my free time in between tasks to think about how to not have to do the same thing the same way in the future. One of my first tasks in one department was to copy-paste 99 charts into PowerPoint. I did it once, which took about an hour, then wrote a macro to do it for me in seconds in the future. Granted it took another hour to write it, but at least I -- or anyone else, for that matter -- never had to copy-paste zillions of charts again.
+* So 3-4 months into the job, start learning VBA. Soon enough you will be creating UDFs that automate tedious parts of your work. Later on you'll create much more complex subroutines that do all your work for you in seconds. 
+* Read everything available at [Chip Pearson's website](http://http://www.cpearson.com/Excel/MainPage.aspx). He will teach you the ins and outs of every. single. possible. aspect of Excel.
+Always use well labeled reference cells. Never hard code in your formula.... unless you have to.
+shortkeys.
+They won't even ask you anything specific about excel in the interview.
+Description makes reference to "credit operations", so knowledge of some financial formula may come in handy:
+
+pv()
+fv()
+rate()
+ipmt()
+npv()
+nper()
+pmt()
+ppmt()
+GOOGLE IS YOUR FRIEND.
+Learn to use the "left", "right", "mid", and "concatenate" with your vlookup.
+Index-match and pivot tables 
+couple of VLOOKUPS, thanks :)
+and IF ISNA, HLOOKUP, COUNTIFS, SUMIFS, SUMPRODUCT
+IFERROR is great, especially in combination with a VLOOKUP.
+thanks /u/united_fruit_company , updated the OP with the 'desired candidate qualities' or whatnot, not sure if it clears anything... seems quite general to me
+cheers /u/HuYzie , here's the description : 
+
+	THE DESIRABLE CANDIDATE WILL HAVE:
+
+	 Excellent interpersonal, verbal and written communication skills.
+	 Ability to work accurately with close attention to detail under minimum supervision.
+	 A professional, pro-active approach to work.
+	 Ability to learn quickly and adapt in a fast paced environment.
+	 Demonstrate good organisation and time management skills.
+	 Excellent Word, Excel and general IT skills and to be able to navigate through a number of systems.
+	 Previous credit operations experience in a similar industry would be desirable.
+	 Have a collaborative and consultative approach when either working alongside the team or
+	independently with other businesses units.
+
+It's kind of across the board 'cover all bases' sort of description, which makes me think that it's going to be the most specific skills required. 
+
+ 
+Go straight to your keyboard settings. Change repeat delay to the lowest setting and repeat rate to the highest setting. It's like cocaine for your keyboard. 
+ace cheers /u/Reapzo -> would this course apply to older excel version  / possibly Libre Calc ? (I don't have 2013) 
+
+nice one
+yeah thats a cool resource, thanks
+
+I'll look into the suggestion as well, cheers!
+yeah, google fu is the subtext to such things ha
+That's all I do. 
+"how to____ in VBA"
+chip's site didn't load
+What does hard code mean?
+I think it means collections
+I think it means collections
+cool, cheers /u/pricer45 
+I think it's better to learn how to use Vlookup first, learn the limitations and once you realize that you need something else learn how to use index-match.
+The beauty of vlookups is not as important if you don't know your way around pivot tables. With a pivot table you can take a query with all your invoices or orders from the past year or whatever and narrow it down to how much any specific item/customer/order/month/ etc... is costing or making your business 
+Yeah the ones I provided would be more than plenty for this job description; pivot tables would make you look like a rock star.
+* Excellent Word, Excel and general IT skills*
+
+Pressing CTRL + Down Arrow to go the the bottom of a list will be enough. (<<It's not a joke)
+they will hire:
+
+a) a hot chick, or
+
+b) someone who can talk a lot of shit
+They will probably want you to use Excel at work. Libre Calc and Google Sheets are nice alternatives in specific scenarios, and they can both do most of the things that Excel can do. But the actual skills don't transfer perfectly, since some of the formulas are different, especially (IIRC) in Libre Calc.
+If you can find a cheap version anything from office 97 if fine to practice. The only significant difference is the ribbon which is an interface
+If you write a formula in a cell, don't use a hard code like =A1 x .05
+
+Instead, have that .05 in a separate cell that is clearly labeled what it pertains to. Such as "rate of return" or "interest rate" etc. 
+
+A lot of people hard code things like that in there thinking it's no big deal, but if you go back to the sheet to make changes and done remember what that .05 is about you'll regret not doing what I'm suggesting. 
+I would recommend just starting on Index/Match, since VLookup requires you do a lot of charting to figure out where you need the field to go to.
+yeah it's really broad so I'm pretty sure they wouldn't know what to do  with someone who generally had excellent Excel skills... 
+
+Its annoying the way companies do this, as then applicants do the same thing and no one has a clue what anyone actually knows or wants.... hey ho
+
+I could do with a crash course though, so made this post :)
+
+cheers
+[deleted]
+ah fair, wasn't sure if I could follow along with tutorials using Libre, that would have been nice. 
+would that be more suitable than the latest libre then? thanks
+Great point, thank you.
+But probably everybody else in the office will be doing their stuff with vlookup, and sharing it with you. So I don't recommend not knowing about it.
+You're going to be the office problem solver. 
+
+Somebody needs the monthly sales sorted by region and then sent to the managers of each region? That's you.
+
+Conference in Vegas? Guess who's job it will be to book the hotel, flights, transportation, and itinerary. You.
+
+New price updates need to be loaded onto the website? You.
+
+It's not a glory position, but if you do it well there's a lot of room for advancement. 
+Sadly this is all too true. I've seen positions for receptionists who need to answer phones that are wanting excel skills. They have no idea what that actually means, they just know they want it. That's probably why they've never actually had a candidate who genuinely has those skills.
+I saw an interview with Spielberg. They were talking about analog versus digital editing system. Spielberg said: I know Digital is faster, that's why I prefer analog. I need that time that the machine spend rewind the film to think in what I'm doing.
+You can try, depending on how simple the tutorial is. For example you mentioned wanting to learn vlookups, those work [the same way](https://help.libreoffice.org/Calc/Spreadsheet_Functions#VLOOKUP), I think in all three tools.
+I couldnt find any cheap versions on sale. But you could buy office 365 for 1 month for £7 then cancel. It's not a lot of money and perfect for training.
+
+Libre is fine but some formulae are different and some shortcuts and no VBA. I usually recommend libre for general home users. But not for practising work stuff it will just confuse you with the differences 
+
+BTW noone will think less of you if you use the excuse 'I used a different version of excel in the past " but strange people will  turn their noses up at libre
+2003-2010 are all pretty close to 2013, less some new features. The stupid ribbon is the FILE-EDIT-etc menu with icons. 
+
+Check at your local library or unemployment centre, they might have computers with Excel that you can use. 
+Very good point, and not one I'd considered.  
+yep, seems about right, which is why I kind assumed that it wouldn't require much more than basics with excel. Cheers !
+
+exactly, and because people talk such tripe it muddies the waters for people who don't know the subject as to what constitutes 'excellent'
+
+Someone who can create email filters and update software might say they're good with computers or whatever and if someone who doesn't know better believes that then they're going to take further advice or whatever... Or ask for someone 'excellent with computers' for a job position because they don't understand all they need is someone to update software or something!
+
+grumble grumble ;) 
+I once worked for a small company where the receptionist also did data entry and other modest tasks in Excel, when there were no calls/visitors. 
+Seriously. This is exactly the job I started doing, and I lied and said I had Excel skills when I definitely didn't. I ended up only really using the SUM function, and learned how to do VLOOKUP and PIVOT tables in my spare time, which really were only useful once every couple months. You'll be fine if you can SUM, CTRL-F to find and replace, and Google how to VLOOKUP in the rare circumstance that you'll need it.
+
+Harder to learn but no less important is how to create spreadsheets that look nice and are intuitive for people not familiar with the use of Excel. 
+Data entry is not an excel skill. It's a proficiency. The user knows how to do it, but is not able to handle more advanced tasks like tabulating, summarizing, or analysis. 
+>not an excel skill. It's a proficiency.
+
+Skill & proficiency mean more or less the same thing. 
+Then data entry qualifies as neither. 
+I'm not going to argue that data entry is an advanced skill, but it does take some practice, especially in Excel. Can you imagine someone trying to type in a row of numbers, and they don't realize you can hit tab to get to the next cell? Or someone trying to type in a large chunk of text, and trying to use enter/return to get a new line, and getting frustrated because it keeps going to a new cell instead. And typing in January, February, March, etc. manually?
+

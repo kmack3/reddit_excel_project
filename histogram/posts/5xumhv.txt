@@ -1,0 +1,13 @@
+A technical guide on how to use Chart events in Excel 2010 and newer
+Flair changed to advertisement as it requires going offsite to own website for the information. 
+
+Thanks a lot for sharing, like you mention, a "working demo" of something is often super useful when trying to get started on something tricky like this! I've never had to use chartevents, but it's the kind of thing I could see wanting to do for something to have a more "fancy" functionality!
+Thanks for the flair change, I wasn't sure which one was right :)
+
+I am the same when it comes to examples. I find them usually much easier to understand than lengthy blog texts ;)
+
+I did this for a project where I needed to provide fancy data labels for a XY Scattergraph. Excel 2013 has much improved UI support for data labels but unfortunately I needed to support Excel 2010 as well and there the UI is a bit more limited while VBA has much richer functionality.
+Yeah that was what I was thinking, I've been messing about with a dashboard and it'd be cool to do some interactive graph stuff at some point, alas stuck on 2010 at work :D
+I was actually surprised how rich the VBA layer is in Excel 2010. It basically has most of the elements that Excel 2013 then just "exposed" in their UI. 
+
+I coupled this chart code with a few dynamic VBA functions I exposed as worksheet functions and got to a very cool place I didn't think possible with such an old Excel version.

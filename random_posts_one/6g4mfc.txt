@@ -1,0 +1,97 @@
+6g4mfc
+Converting multiple rows into a single column
+I have values example like so:
+
+    Row1    Cell1stuff Cell2stuff Cell3stuff ... Cell22stuff
+    Row2    Cell1stuff Cell2stuff Cell3stuff ... Cell22stuff
+    Row3    Cell1stuff Cell2stuff Cell3stuff ... Cell22stuff
+
+What I want is this:
+
+    Column 1
+    Row 1's Cell1stuff
+    Row 1's Cell2stuff
+    Row 1's Cell3stuff
+    Row 1's Cell22stuff
+    <Space>
+    Row 2's Cell1stuff
+    Row 2's Cell2stuff
+    Row 2's Cell3stuff
+    Row 2's Cell22stuff
+    <Space>
+    Row 40's Cell1stuff
+    Row 40's Cell2stuff
+    Row 40's Cell3stuff
+    Row 40's Cell22stuff
+    <Space>
+
+Can this be done?
+
+Transpose SORTA worked...
+
+I wound up with multiple columns, which I suppose I could get by with if I have to, but I'm trying to build scripts here. Easier if its one column.
+
+
+-------------
+Certainly a strange request but have at it!
+
+
+    Option Explicit
+    
+    Public Sub dataSpace()
+    
+    ' /r/Excel
+    ' Alex Powers - ItsNotAboutTheCell.com
+    
+        Dim lastCol As Integer, j As Integer
+        Dim lastRow As Long, i As Long
+        Dim k As Long
+        
+        Dim fromSheet As Worksheet
+        Set fromSheet = ActiveSheet
+        
+        lastCol = Cells(1, Columns.Count).End(xlToLeft).Column
+        lastRow = Cells(Rows.Count, 1).End(xlUp).Row
+        
+        Sheets.Add After:=ActiveSheet
+        Dim toSheet As Worksheet
+        Set toSheet = ActiveSheet
+        
+        k = 1
+        For i = 1 To lastRow
+            For j = 1 To lastCol
+                fromSheet.Cells(i, j).Copy toSheet.Cells(k, 1)
+                k = k + 1
+            Next j
+            k = k + 1
+        Next i
+    
+    End Sub
+-------------
+Suppose your initial table is B1 to X3, such that B1=Cell1stuff and X3 is blank (but W3 is Cell22stuff).
+
+At A1 have this formula: 
+
+    =""&INDEX($B$1:$X$3,CEILING(ROWS(B$1:B1)/23,1),MOD(ROWS(B$1:B1)-1,23)+1)
+
+drag down. 
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+This works! Thank you!
+
+-------------
+do respond to my post with "solution verified" to award the fake internet point. Thanks! 

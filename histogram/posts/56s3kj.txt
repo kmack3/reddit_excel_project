@@ -1,0 +1,48 @@
+Difference of one hour calculating to 0.99999
+Judicious use of ROUND is in order.
+Agreed with u/Antimutt. Six digits should be precise enough.
+
+I occasionally see this type of weird behavior, and I can only assume it is due to floating point calculations (not a computer science major, so I don't necessarily understand what a floating point is)
+
+https://blogs.office.com/2008/04/10/understanding-floating-point-precision-aka-why-does-excel-give-me-seemingly-wrong-answers/
+This one has always bugged the crap out of me, especially when I know I'm adding/subtracting whole numbers. [Here](http://excel.tips.net/T003354_Errors_When_Subtracting.html) is a brief explanation, with links to detailed explanations. Basically, it's related to the way the original coding is written, and there's no way around it (as far as coding goes). As others have stated, the ROUND function will be your friend here. 
+Ok, thanks! Do you have any advice for at what point in the formula should I use it - 
+
+>=ROUND(MOD(24*(V11-U11),12), 6) 
+
+Is there a way I could do it on the last sheet (that pulls from the first sheet)? Like 
+
+> ='Input Hours'!V19&"; "& ROUND ('Input Hours'!W19,4)&" off"
+
+
+Solution Verified
+Thanks for the article! I'm interested as to why it chose that particular cell or formula to go wonky in, and not all of them. 
+
+6 digits seemed to work perfectly! 
+Solution Verified
+> it's related to the way the original coding is written
+
+Actually, it's related to the way the numbers are represented in hardware. I'm not sure what you mean by "original coding".
+I answered my own question! It works the second way, which should hopefully save some hassle for me. Thanks so much!
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+It has to do with the numbers themselves. Calculations that can result in a lot of digits are subject to what's called "floating-point error". 
+
+Basically, most computers represent a number in bytes using a certain format (the [IEEE 754 floating point notation](https://en.wikipedia.org/wiki/IEEE_floating_point), to be precise). This format allows the computer to represent a large range of numbers or those with a lot of decimals. The problem is, since the number of bytes used is limited, it's impossible to represent every single number, or even a number with infinite precision. As a result, sometimes operating on two or more numbers will result in a small precision error (especially through multiplication/division), which will carry through the rest of the operations, resulting in the answer being slightly off from the actual one.
+It's probably due to the particular combination of numbers and calculation results.
+
+But then again, I have no background in computer science or mathematics, so... 
+
+ ¯|_(ツ)_/¯
+
+You have awarded one point to _sqylogin_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I meant the way Excel is programmed - but now that you mention it, I may have overestimated my understanding of this article. I had no idea it was a hardware thing! I just knew it had less to do with what you typed in excel and more to do with the design of the computer itself. Thanks for clarifying!
+Simple explanation: you can't represent all numbers, not even rational numbers, in a fixed number of digits. 
+
+Simple example: 1/3 takes infinite 0.333...
+
+Same problem for computers, so at some point you have to round to get reasonable answers. Only difference is that computers use base 2 rather than base 10.

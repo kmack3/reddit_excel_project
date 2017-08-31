@@ -1,0 +1,39 @@
+slow
+4lvkmi
+Formula causing large, slow spread sheet
+
+I know I'm not offering a whole lot of context here due to the sensitive nature of this document, but I have a multi-sheet excel workbook and it appears as though one page is slowing things down significantly, while also adding about 3 megs to the file size. Does anything seem glaringly wrong with the following formula (it's applied to hundreds of cells in this sheet)? It technically works just fine, but man does it slow down my workbook. Is there are a better solution to my usage of INDEX and MATCH functions? Appreciate any help ya'll can offer.
+
+Here's the formula:
+
+=('Projections'!$G$38*'Market Assumptions'!$H$30*'Projections'!$G$39*'Projections'!$G$40*(INDEX('Projections'!$G$9:$G$35,MATCH($C$11,'Projections'!$D$9:$D$35,0))))/Assumptions!$D$6
+
+Thanks
+
+
+
+-------------
+When using something sensitive, you just change the data.
+
+What is this lookup trying to accomplish?
+
+What is the data is it looking into?  Are these tables of formulas as well or are they static numbers?
+
+Do you need INDEX/MATCH for this?  [A VLOOKUP is faster than INDEX/MATCH](https://www.reddit.com/r/excel/comments/2537le/the_mechanics_of_index_match_a_tutorial_for/chdaxui).  Nearly 2x.
+-------------
+Try changing your calculation options to 'Manual'.
+
+To do this go to the Formulas ribbon > Calculation Options > click 'Manual'
+
+If your workbook is still lagging despite the switch to manual calculation, then your problem isn't with the formulas. 
+If it did stop lagging after switching to manual, I would advise you to continue working in manual and toggle back to automatic whenever you need updated formulas
+-------------
+Unfortunately, it's not a matter of manual vs automated calculations. What's strange about this sheet in particular is that it's 3 megs in size, yet it only consists of the aforementioned formula... Is that normal? No pictures, and there's only 123 rows of data... so it's not a huge model or anything
+-------------
+Well as I had stated in my earlier post, if your workbook is set to calculate formulas manually then your problem is NOT with your formulas because none of them are getting calculated. If it is still lagging despite manual calculation then your problem is something else
+
+Also, no it is not normal for a sheet with 123 rows of data to be 3MB. There is something else there. It can be unused named ranges, hidden objects, unused cells, etc. I would advise you to copy and paste the data over to a new sheet and delete the old sheet. If you are still having problems, the culprit is most likely within your workbook or in another sheet
+-------------
+Understood. With manual calculations on, everything runs smoothly. Could it be hundreds of Match/Index calculations all recalculating at once? 
+-------------
+Yes it seems like it. Upon closer inspection, your formulas seem to keep bouncing back and forth between sheets so it may be taking more resources than normal. Try to hardcode things and simplify the formulas as much as possible. For example, if you know that the divisor is a value like '5', just plug in '5' instead of a cell reference.

@@ -1,0 +1,141 @@
+Pimp My Excel. Add that wow factor to your worksheets
+11/10 - I used pimp my sheet on my latest TPS report and as soon as my boss saw it I was immediately promoted to VP of operations (even though it's a Sunday). I give this macro my highest recommendation!
+This is possibly the best use of a macro ever.
+
+It takes a clean, usable dataset and converts it into the fuck rainbow so that it is in line with the rest of my company's core workbooks.
+
+Thanks for giving me a tool so that my work will finally be accepted by my coworkers.
+
+Mod Message: If you are unhappy with the quality of a post, please use the up/down vote buttons to reflect and this, and please refrain from leaving any hurtful comments.
+
+I personally think this is hilariously delightful - and it pokes at those fools who choose to colorise every little cell. Have my upvote.
+
+Here's  quick dirty way of achieving simliar results
+
+    Sub colorise()
+    
+        Dim c As Range
+    
+        'FIRST, SELECT THE RANGE YOU WANT TO COLORISE - THEN RUN THIS!
+    
+        For Each c In Selection
+            
+            c.Interior.Color = RGB(WorksheetFunction.RandBetween(1, 255), _
+                WorksheetFunction.RandBetween(1, 255), _
+                WorksheetFunction.RandBetween(1, 255))
+            
+        Next
+    
+    End Sub
+
+It looks like something Jean Ralphio would do, 10/10 would definitely use.
+Actually, you do have managers who want this. I know, I've worked with a few of them.
+
+The joke would be on you when they ask you for the color matrix definitions within the hour because they're taking it to the VP of (insert department here).
+I have a guy that presents data using bright pink and teal. He will love this!
+Man, that's too funny.
+ 
+Edit: So the actual sub procedure PimpMyExcel is actually only about 16 lines of code, if you don't count comments. The .BAS file though in total is about 1700 lines. This is because PimpMyExcel calls on... 4? different functions, most of which is a bunch of randomly generated number arrays assigned to colors, and even then it's still randomized.
+ 
+This would've taken you forever. Bravo, sir or madam.
+ 
+One question: what is Function CalcLastRow doing that is different from just a normal rows.count line? I see you use rows.count in the function.
+Ha wow that is truely terrible..... good job? 
+lmaooooo, I'm doing this next week, I think my boss would quite enjoy it.
+I totally fell for this.  Read it at home and thought, cool - will check it out - I could do with beautifying my sheets.  Got to work and opened it.... BETTER THAN EXPECTED.
+I would probably fire you if you turned that in to me. There are way too many colors and it's incredibly distracting, taking away from the actual information. 
+I have seen spreadsheets that look almost like that in the real world. :/
+I LOVE THIS! 
+Glad this is a joke,  I nearly choked when I saw it. The worst part is that I have actually been given workbooks that looked like that by people in the past. 
+this is hilarious
+i guess it will rain promotions on Monday for all of us
+Is there any way you can code in some color-specific text formatting?  I feel like lime green calls for some Lucinda Blackletter, but yellow puts Georgia on my mind
+This is nothing short of absolute genius. You, are a man of subtle and exquisite taste.
+Yeah, I'm sorry, I'm sure a lot of work went in to it, but that looks terrible, and is not a good way to represent meaningful data
+function over form
+> the fuck rainbow so that it is in line with the rest of my company's core workbooks.
+
+I feel your pain. I once had a boss who took a spreadsheet I'd made for them, and, ahem, brought it in line with company stylings.
+
+It was like seeing your firstborn after a wild dog is through with them.
+It's called Pimp My Excel. Anyone who's expecting class and refinement needs to back up a minute :P
+Thanks. The reason why I unfortunately didn't do something this simple was because of the limitations that Excel imposes on the number of font types and cell formats. Excel has a maximum limit of 512 different fonts. In Excel 2000 and later the maximum number of cell formats is approximately 4,000 different combinations and in Excel 2007 and higher the maximum number of cell formats is 64,000. In order to prevent going over these numbers I hardcoded the font colors and cell background colors in the code.
+
+So if you run your code on a big enough data set enough times you will run into errors.
+Dayyyyuuummmm son, that be some *fresh lookin'* DAAAAATAAAAAAAA!!!
+Ha. It didn't take too long to make this, I promise.
+
+But yes there is 1 Sub and 4 Functions.
+
+* PimpMyExcel - runs everything
+* GenerateFontColor - generates semi-random font color
+* GenerateBackgroundColor - generates semi-random background color
+* CalcLastColumn - calculates the last column used
+* CalcLastRow - calculates the last row used
+
+As stated earlier I had to hard code the random colors due to Excel's limitations for 512 different fonts and 4,000 different cell formats (in Excel 2000 and up) or 64,000 different cell formats (in Excel 2007 and up) which make up most of the lines of code.
+
+CalcLastRow is something that I always use because I hate always figuring out the best way to calculate the last row. This function can calculate the last row of several things.
+
+    Function CalcLastRow(Optional sheet As Variant, Optional col As Variant) As Double    
+    ' CalcLastRow("Sheet1", 3) - will calculate the last row used in column 3 in sheet named "Sheet1"
+    ' CalcLastRow("Sheet1") - will calculate the last row used in sheet named "Sheet1"
+    ' CalcLastRow(3) - will calculate the last row used in column 3 in ActiveSheet
+    ' CalcLastRow() - will calculate the last row used in ActiveSheet
+
+So depending on what I need to calculate the last row and column of I just use those two functions for other work that I do.
+I would hope so.
+
+This macro is intended as a joke :)
+I would not work for someone like you because you are not able to understand when it is a joke and when not.
+
+Woosh. That was the joke going over your head. Sadly, I have been asked to recreate OP joke sheet in earnest.
+
+"I want bright colors! And thick borders for the most important stuff!" I made something similar to OPs version with thick borders and primary colors to let off steam myself.
+*Whoosh*
+Hah -- well I don't think many people would want to work for someone who takes themselves too seriously and doesn't understand a joke.
+Sure. There are a couple ways you could go about implementing this. You can check to see if the font color falls within a threshold for those colors.
+
+    If red < 50 And green > 200 And blue < 50 Then
+        ActiveSheet.Cells(1, 1).Font.Name = "Lucida Blackletter"
+    ElseIf red > 240 And green > 240 And blue < 50 Then
+        ActiveSheet.Cells(1, 1).Font.Name = "Georgia"
+    End If
+
+Or you can add fonts you are interested in to an array an randomly pick them like the macro does for the background and font colors.
+
+    Function GenerateFontType() As String
+    
+        ' This function generates random fonts
+    
+        Dim fontTypeIndex As Integer
+        Dim fontTypeArray(9) As String
+        
+        fontTypeArray(0) = "Lucida Handwriting"
+        fontTypeArray(1) = "Georgia"
+        fontTypeArray(2) = "Algerian"
+        fontTypeArray(3) = "Broadway"
+        fontTypeArray(4) = "Comic Sans MS"
+        fontTypeArray(5) = "Magneto"
+        fontTypeArray(6) = "Old English Text MT"
+        fontTypeArray(7) = "Snap ITC"
+        fontTypeArray(8) = "Tempus Sans ITC"
+        fontTypeArray(9) = "Wingdings"
+    
+        ' Randomly pick one of the 10 font types to return
+        fontTypeIndex = Int((10) * Rnd)
+    
+        ' Return the font type to the main program
+        GenerateFontType = fontTypeArray(fontTypeIndex)
+    
+    End Function
+It was only a little bit of work.
+
+But yes, the whole point is to make your data as bad looking as possible.
+Yet my comment is not only being taken seriously, but as some kind of war crime. Oh well. 
+[Whoosh](http://i.imgur.com/fMTvqDI.gif)
+I have no idea why you'd want to do that
+You wooshed the wooshers.
+For fun? Maybe OP was bored on a Friday and IT blocks Reddit :P
+
+I used to make stop motion cartoons in PowerPoint in junior high. And now that I'm in my 20s, I've found I wasn't the only one, haha.

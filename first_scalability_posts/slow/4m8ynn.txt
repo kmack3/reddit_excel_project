@@ -1,0 +1,11 @@
+slow
+4m8ynn
+Powerpivot data model is intolerably slow.
+
+Even something as simple as deleting an unused measure takes 5-10 minutes of loading/working from the data model.  Adding a measure to a pivot table takes anywhere from 10-30 minutes.  I tried restarting my system, changing the way the data source is stored, changed how the data is queried, and removed all unnecessary columns from all tables in the data model and nothing has made any difference.  It wasn't always like this so I suspect something may be broken in the data model but google hasn't been much help for me.  For reference.  My laptop is an I5, 16 gb of ram, 64 bit version of office. Any help fixing this is appreciated.
+
+
+-------------
+I figured out what it was, in case anyone comes across this via a  search.  I created a complicated calculate/filter measure then created two other measures based on it.  I was lazy and used if/then rather than calculate/filter which caused it to make, basically, 100.000 x 100,000 x 10,000 queries rather than the results of the first measure (a few dozen) times the results of the second (a few dozen) times 10,000.
+
+I also used an add on to find all unused columns and removed them via power query before importing my data and used power query to sort and "fold" the data so it could be compressed better.  I also switch the source data from xlsx to csv because csv files query faster. 

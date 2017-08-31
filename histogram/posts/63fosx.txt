@@ -1,0 +1,28 @@
+Turn your Excel model into an online app
+[deleted]
+Firstly, great app. Must have taken a lot of time to get right. Some questions:  
+
+What are some likely uses for this?  
+
+Does it create Android and iPhone apps?  
+
+Once created, does it appear in the Android Play or Apple app store?
+I forgot to mention - most excel formulas are supported and we have a few extra goodies as well :)
+Thanks for re-labeling my post, I didn't know how to change it. And, if you have any feedback for me on my video and Molnify, please let me know :)
+Love it. I will definitely be checking it out more.
+Very slick look'n'feel - congrats! Couple of techie questions: where are you parsing the .xls[x], and where is the formula graph executing? I guess you parse the .xls[x] on the back end. Do you use something like SpreadsheetGear? Do you then store the formula graph in a DB and execute it on the back end? Or do you generate some JavaScript that runs in the browser?
+Would this work for a .xlsm file with VBA that interacts with the SAP ERP system?
+[deleted]
+Interesting concept. Well done. Curious, why the particular colors?
+Hi, thanks for replying! No, at the moment it doesn't support SQL connections, but we are continuously developing the software, so this is something we might implement further down the road! Best regards, Mattias
+Hello, thank you for your questions! 
+
+The likely uses could be infinite! If you have an Excel model which you use, you can upload it as an app and then access it, fully functional online. It will work in your web browser on your laptop, tablet or mobile phone (its fully responsive). No one will see the calculations behind it, so its totally secure and no-one can of course alter it either. 
+
+So, I could think of many different use cases; which only are limited to your imagination (and Excel skills) really :)
+Thanks :)
+Good to hear you like it! Parsing and execution are performed back end, hence Molnify requires an active internet connection to run.
+Hi, thank you for your question. As of today we don't support VBA. We do have support for the vast majority of excel formulas and functions.
+Thank you for your question! Yes, Molnify can do both XML and json and parse dynamically - to for example do searches.
+Thanks! Those are the base colors (we thought they looked nice:)). But you can color your app anyway you like, even add a logo! It's easy and done in the excel file.
+When you get VBA support, message me.  I have Excel based tools that use a combination of formulas and VBA.  I have been looking for a method to turn these tools into apps.  Also, data is updated via Power Query, how are data updates handled?

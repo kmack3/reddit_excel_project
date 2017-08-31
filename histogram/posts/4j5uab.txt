@@ -1,0 +1,47 @@
+How create automatically updating lists that draw from a master list?
+Create pivot tables, master list sourced, in the other three tabs, filtered by a customer name.
+It would be better if you show what the results look like then people can figure out the code for you.
+I would suggest to use a helper column (which you can hide) to count the instances of either Martha, Steve or Joe. On the general sheet, create a helper column in Column A:
+
+`=B2&"_"&COUNTIF(B$2:B2,B2)`
+
+Then on the seperate sheets, first create a helper column in Column A as well (Table2 is the general table in my test-sheet):
+
+`=IF(COUNTIF(Table2[Customer],G$1)>=ROW()-1,ROW()-1,"")`
+
+And with VLOOKUP you can then find the appropriate matches for all the data:
+
+`=IFERROR(VLOOKUP(G$1&"_"&F2,Table2,3),"")`
+`=IFERROR(VLOOKUP(G$1&"_"&F2,Table2,4),"")`
+
+What it basically does, is it counts the amount of instances of a specific name in the general tab. Then on each of the separate tabs, there is a list of consecutive numbers which are looked up in the general tab. Then in the two other columns, you use VLOOKUP to find the exact matches of the name and number. The formula in the number-column is to prevent Excel looking for non-existent matches.
+
+Here's a [screenshot](http://i.imgur.com/WIiexxr.jpg).
+You can use =Vlookup and draw data from customers names.
+
+So you can have it =vlookup(Martha,Tab1 Array, Column,false) and it will pull data from what ever column is connected to Martha.
+
+Unless i am mistaking what you are attempting to do.
+In essence the other 3 worksheets would each contain extracts from the master table for only one of the options/names in the master table.
+
+If the goal is being able to view the records for just one of the options/names, adding an autofilter to the master table and using the drop-down list for the Customer column to select individuals would be simpler than using multiple worksheets.
+
+If you need to perform calculations on the single name extracts, you could just sort the master table by name and use dynamic named ranges to refer to each separate name's records. Assuming master list sorted on Customer column in column A and extending to column C,
+
+    JoeList:  =INDEX(Master!$A:$A,MATCH("Joe",Master!$A:$A,0)):INDEX(Master!$C:$C,MATCH("Joe",Master!$A:$A,0)+COUNTIF(Master!$A:$A,"Joe")-1)
+
+and similarly for MarthaList and SteveList.
+
+If you must do this with additional worksheets, then use a few cells in each of the other worksheets for supporting calculations.
+
+    Joe!X1:  =COUNTIF(Master!$A:$A,"Joe")
+    Joe!X2:  =MATCH("Joe",Master!$A:$A,0)
+    Joe!X3:  =IF(ROWS(X$2:X3)<=X$1,X2+MATCH("Joe",INDEX(Master!$A:$A,X2+1):Master!$A$1048576,0))
+
+Fill X3 down as far as needed. Then in cols A to C,
+
+    A2:  =INDEX(Master!A:A,$X2)
+
+Fill A2 right into B2:C2, then fill A2:C2 down as far as needed. I'm assuming you copied+pasted the row 1 labels from Master.
+This is very helpful, thanks.  I am working on the project in my free time at work so I couldnt get to exactly where I wanted to get to today, but I think I got the general idea.
+No problem! Though I must mention that the suggestion of u/Antimutt to use PivotTables could work perfectly for you as well, without all the fuss of creating formulas and helper columns.

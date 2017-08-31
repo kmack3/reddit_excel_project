@@ -1,0 +1,36 @@
+6gas49
+How to show pacing over 100% in donut chart
+I want to use a donut chart to show where I'm pacing towards a goal. Currently, I'm pacing to finish at 119% so my two cells for the graph shows 119% and -19%. This is causing the graph to look like I"m pacing behind.  I can delete the -19% cell, but I'm not always pacing ahead and would rather not have to change the cells/chart each day. 
+
+Anything I can do to make the chart show I'm pacing to 100% without having to manually adjust the excel sheet if I'm over 100%
+
+[Link](http://imgur.com/a/y5PQ0)
+
+
+-------------
+In your formula for the pacing, you should use 
+`=MIN(formula,1)`
+
+This will return a maximum of 1 (100%) 
+
+Then your other cell in the graph should just be `=1-FirstCell`
+-------------
+Thank you!!! 
+-------------
+That worked perfectly!! WishI could give you more than one upvote. 
+
+Edit: Clippypoint! woohoo. 
+-------------
+Solution Verified
+
+-------------
+[deleted]
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Thank you too! What a nice sub. 
+-------------
+We regulars think so too. Have a nice day.

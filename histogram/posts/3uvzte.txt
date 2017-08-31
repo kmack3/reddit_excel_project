@@ -1,0 +1,27 @@
+Looking to import live data from the entire NYSE (all 3300 stocks) into a spreadsheet that I can refresh, sort and manipulate.
+Do you have access to a Bloomberg terminal? They have an excel add on that I believe should be able to get what you're looking for. Granted getting one for yourself, if you don't have access, would be thousands of dollars.
+I've actually built something very similar in the past on Sheets using the built-in GoogleFinance and ImportFeed functions for importing real-time stock metrics and RSS feeds, respectively. Unfortunately, it was extremely slow (as Sheets tends to be with large volumes of data) and I never carried it over to Excel. I will provide my data sources below in hopes that someone more knowledgable than I can possibly expand on how to best integrate these in your spreadsheet.
+
+* [SEC EDGAR](http://www.sec.gov/cgi-bin/browse-edgar?CIK=xom&owner=include&action=getcompany) provides RSS feeds for company filings (using XOM as an example here). Form 4's are for insider trading activity.
+
+* [NASDAQ](http://www.nasdaq.com/screening/company-list.aspx) provides lists of stocks currently trading on the 3 major exchanges that you can download. [OTC](http://www.otcmarkets.com/research/companyDirectory) offers the same thing for all OTC exchanges.
+
+I know this isn't a solution, but I hope that it is a good starting point for what you're trying to do.
+You could use [smart tags](http://finance.zacks.com/stock-market-data-excel-10826.html) to grab stock prices. I don't know of any way of getting market cap.
+
+>  I'm looking to implement an insider information trading strategy
+
+... I'm sorry? Are you saying you intend to trade with insider information? You know that's illegal right?
+I don't have access to a Bloomberg terminal, unfortunately.
+This is a great starting point! Would you be willing to share your google sheets template with me? If not, I absolutely understand. 
+No, not insider trading. I'm referring to the strategy outlined [here](http://www.investopedia.com/articles/02/121002.asp?layout=infini&v=1B) Additionally, smart tags are useful for retrieving prices, but I was hoping to get more data than just that.
+I believe he's trying to detect insider trading
+This sort of information could be easily pulled (live) from Bloomberg into excel. Do you need it to be live or just a snapshot from a particular date? If you need live data, a subscription service may be your only way.
+[deleted]
+Trading in line with trades placed legally by insiders.  He should be scraping Edgar, not Yahoo Finance.
+Live is ideal, but not necessary. I just need to have a format where I can refresh the data daily.
+This will work, the only issue being that I cant pull the entire NYSE. I'll have to enter in ticker symbols manually. 
+NYSE, NASDAQ, and AMEX [lists are all available here](http://www.nasdaq.com/screening/company-list.aspx) as CSV files.
+
+Download and import to your doc.
+Gotcha, thank you for all the help! 

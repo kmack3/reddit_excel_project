@@ -1,0 +1,222 @@
+VBA Essentials: Dictionaries
+Excellent post.  This sub needs more posts like this!
+You're right, I don't approve. However, this excellent post makes up for the auto-instancing.
+
+You should include `With dictNew` here, for clarity:
+
+>    Cells(1, 1).Resize(, .Count) = .Keys ‘Row
+
+>    Cells(1, 1).Resize(.Count) = Application.Transpose(.Keys) ‘Column
+
+>    Cells(1, 1).Resize(, .Count) = .Items ‘Row
+
+>    Cells(1, 1).Resize(.Count) = Application.Transpose(.Items) ‘Column
+
+Really like your use of the Resize method here.
+
+Another item to add (see what I did there?) is the CompareMode property of the Dictionary. It can only be set when the Dictionary is empty, but allows you to control how the Dictionary accepts keys.
+
+    Dim dictNew As Dictionary
+    Set dictNew =  New Dictionary
+    ' Compare new key with existing keys based on a binary match. Essentially, case sensitive
+    dictNew.CompareMode = vbBinaryCompare
+    dictNew("Donut").Add "Sprinkles"
+    dictNew("donut").Add "Chocolate Glaze"
+    dictNew("donuT").Add "Maple Walnut"
+
+    ' Remove all keys
+    dictNew.RemoveAll
+
+    ' Set the CompareMode to Text. Case inSensITiVe. Donut == DONUT == donUt == dONUt
+    dictNew.CompareMode = vbTextCompare
+
+    dictNew("Donut").Add "Sprinkles"
+
+    ' ERROR! Duplicate key
+    dictNew("donut").Add "Chocolate Glaze"
+
+    ' ERROR! Duplicate key
+    dictNew("donuT").Add "Maple Walnut"
+
+You can also test if an item Exists in a Dictionary, which you cannot do as easily in a Collection
+
+    If dictNew.Exists("Donuts") Then Call EatEmAll(dictNew)
+
+    Sub EatEmAll(ByRef someDict)
+        someDict.RemoveAll
+    End Sub
+
+To do the same with a Collection
+
+    Set existsInColl = someColl("Donuts")
+
+    If existsInColl = Nothing Then
+        Call BuyDonuts(someColl)
+    End If
+
+    Sub BuyDonuts(ByRef someColl)
+        someColl.Add 12, "Donuts"
+    End Sub
+firstly, great post. 
+
+I dont really see what the benefit of dictionary vs array processing is from these examples?  whenever i do this kind of thing i tend to create an array using a variant and just loop to ubound(Array,2). whats the advantage of the dictionary? 
+Do you know the best method of saving/loading a dictionary on workbook close/open? 
+
+I'm thinking that loading and saving a dictionary to and from a worksheet would slow down the opening and closing of a workbook to much.
+Can someone tell me what a dictionary is?  I write simple code; I can do loops thru files or data, copy pasting, new work books, saving, etc. but I am not familiar with dictionaries.  I don't recall seeing it in the VBA books I've read, either. 
+> You're right, I don't approve. 
+
+I'd be interested in knowing why you think this way.  Generally it's far better to not use in-line declarations.
+Thanks for the reply! I added your stuff as an edit. 
+Dictionaries give you unique Key/Value pairs which can retrieved using the Key, which is not possible through an array.
+
+Collections also have this benefit, but, as pointed out by /u/ratt2581, you cannot test if the Key exists in a collection without trying to assign it.
+
+Arrays can have multiple copies of the same pairs, and are super quick. They can be populated faster and limited to a specific Type, while Dictionaries/Collections will hold any type. It just depends on your needs.
+
+Collections are static. Once a value is assigned you cannot change it, unless you remove the Item.
+
+Dictionaries values can be overwritten by using the same key.
+
+Array values can be changed but you need to know the Index number of the value to change, or loop through the array and test each for a match.
+
+    ' Dictionary example
+    If myDict(Key).Exists Then
+        myDict(Key) = SomeValue
+    End If
+
+    ' Collection example
+    Set myVar = myColl(Key)
+
+    If Not myVar Is Nothing Then
+        myColl(Key).Remove
+        myColl.Add NewValue, Key
+    End If
+
+    ' Array example
+    For i = LBound(myArr) to UBound(myArr)
+        If myArr(i) = Key Then myArr(i) = NewValue
+    Next i
+
+FYI /u/fearnotthewrath
+Check out this link about collections vs arrays vs dictionaries. 
+
+https://newtonexcelbach.wordpress.com/2013/08/29/arrays-vs-collections-vs-dictionary-objects-and-dictionary-help/
+> I dont really see what the benefit of dictionary vs array processing is from these examples?
+
+ Wondered the same thing...
+At face value, they pretty much do the same thing.  But when you dig a little deeper and start using them for more advanced purposes then it starts to become night and day.  Although Dictionaries are more advanced and hold more features than Arrays, that doesn't mean they can do everything Arrays can do.  Arrays are great for dealing with a wide range of consistent data. Arrays are also much easier to publish to a worksheet than Dictionaries.     
+&nbsp;
+
+The first big factor that sets Dictionaries apart is the ability to retrieve data.  Although there are functions like Ubound(Filter()) that can be used to search for data in an Array, there isn't anything that is simple or built it.  Dictionaries already have the .Exists feature built in which allows you to check to see if a value already exists in the Dictionary. It's also much easier to return data from a Dictionary with the use of Keys and Items.  By simply searching a value as an existing Key, you can return the matching Item.  With Arrays it isn't as simple and usually requires looping through the Array. Unlike Arrays, Dictionaries do not allow duplicates in the Key field, you can assure that you final list is unique.
+&nbsp;
+
+Another major advantage is the different types that can be added to Dictionaries.  With a Dictionary you can insert almost anything into Item portion.  Strings, Numbers, Arrays, Objects, you can even put a Dictionary into another Dictionary.
+&nbsp;
+
+Its good to start the learning process with Arrays, but as you start using them for more advanced reasons and find yourself getting held back by the functionality of an Array, chances are the Dictionary has a solution for you.
+
+I'm not sure what you're trying to get at here but creating a dictionary on workbook open should not significantly affect the speed of your workbook. 
+Sorry for taking so long to get back to you. check out this link for a great explanation on dictionaries.
+
+http://www.snb-vba.eu/VBA_Dictionary_en.html
+>    `Dim dictNew as New Dictionary`
+
+That creates an auto instancing variable. As soon as you touch it, the Object is defined which makes testing difficult
+
+    Dim myObject As New Object
+
+    If myObject Is Nothing Then
+        ' This will never evaluate TRUE because the New Object has just been instanced by the IF statement
+        Set myObject = SomeObject
+    End If
+
+    ' And now this results in unpredictable behavior because it is not necessarily the "SomeObject" that the user expected, but instead
+    ' a new object of type Object and not the assigned one.
+    myObject.SomeProperty = SomeValue
+
+For me, it is all about strictly controlling the code. Auto instanced variables are far better than not declaring variables at all, so if there's a choice to be made...
+Speed and referencing are the biggest two reasons I use it. You can use MyDict.exists(key) instead of having to loop through an array to find something.
+1) You can add items a dictionary whenever you want without having to worry about the size of the array.
+
+2) Searching a dictionary is a LOT faster than looping through an array. I was never able to find out for sure, but I think it uses a [binary tree.](https://en.wikipedia.org/wiki/Binary_tree)
+
+Which one is better is entirely dependent on the data and the exact problem. 
+
+Whether you want to use an array or a dictionary depends on what you're doing. 
+Great explanation!
+I'm creating a product database with 'product id' as the dictionary key. Each product has ~20 properties associated with it. The database has ~100k entries.
+
+I'm wondering if there is a way to store this dictionary other than storing it to a worksheet and loading it into a dictionary on startup. Any ideas?
+It is all situational. If you declare an object and intend to immediately use it, there is no reason not to 1 line it.
+Yes of course that's understandable, but from a debugging point of view "Dim dict as Dictionary" is far better practice. Also, intellisense can work it's magic.
+http://www.snb-vba.eu/VBA_Dictionary_en.html
+
+Is a really good reference for more information.
+by the same argument you can use isNumeric(match(key,array,0)) on an array. 
+Thanks.  Great post by the way, I really like this VBA Essentials thing.  We need more of these Pro Tip posts to keep everyone interested and always learning instead of only having questions all day.  Maybe /r/excel mods could set up a schedule of different learning posts.
+Honestly, with 20 properties, sounds more like an Access DB. Load the DB when the sheet opens.
+I don't think excel is the best way to go about this.
+This Object will be held in memory and destroyed at termination of the Sub. This is the wrong way to create your product database.
+Sure, one line assignments, like:
+
+    Dim Wkb As Workbook: Set Wkb = ThisWorkbook
+
+But, unless given a really good reason, I only see limitations and risks to auto instancing `Dim As New Object`
+
+Supported -  firstly, Chip Pearson who is one our foremost Excel VBA developers
+
+http://www.cpearson.com/excel/classes.aspxaspx
+
+http://www.bettersolutions.com/vba/VUA113/LI912711911.htm
+
+[Warning here in VBA developers handbook](https://books.google.ca/books?id=46toCUvklIQC&pg=PA436&lpg=PA436&dq=vba+dim+as+new&source=bl&ots=jnK-8pGGJ4&sig=oyWpV_dCnlfM_XY2m3PNp8kTbzY&hl=en&sa=X&ved=0ahUKEwju55zh3fjLAhWFbhQKHQbbDsY4FBDoAQgbMAE#v=onepage&q=vba%20dim%20as%20new&f=false)
+
+Oh, always use references and early bind. It helps you control what you can assign to a specific variable, makes your code a bit more readable, gives you intellisense (as you have pointed out). 
+
+I am solely disputing the use of New in the declaration.
+
+I used `Dim As New Object` for the purpose of illustration, to avoid limiting my reasons to just Dictionaries. Sorry for any confusion.
+
+Summed up:
+
+    Dim myDict As Object ' poor readability
+    Dim myDict As New Dictionary ' readable, but bad auto instancing variable
+    Dim myDict As Dictionary ' best. Controlled instancing, fully Typed variable
+
+Cool, this is a good solution and should bypass the N/A error if not found. It won't work on two dimensional arrays, I believe, if trying to simulate the Key/Value pair of a dictionary though. 
+I was thinking this was a job for a real database as well.
+Take a simple function like the one below. I see no reason not to declare in 1 line. The performance is the same either way (I benchmarked it). But like I said it is all situational.
+
+    Function IsValidZipcode(zip As String) As Boolean
+        Dim re As New RegEx
+        IsValidZipcode = re.Match("^\d{5}$", zip)
+    End Function
+
+Ah, then I'm not worried anymore! Sorry for the confusion, carry on!
+I said nothing about performance. I solely expressed my preference for controlling precisely when the Object is instanced and being able to test the Object for assignment, to test if it is Nothing.
+
+Dim As New results in an auto instancing variable that can't reliably be tested for state.
+
+To truly determine if there is any performance hit, you'd have to compare at volume. 10k, perhaps even 100k + iterations. Though I'm certain that, as you said, there is no performance hit. More time is lost arguing the semantics.
+
+On a different note, doesn't that function fail to validate ZIP codes with the extension (12345-6789)?
+Haha, thank you. I think I will quote you when I post code for others: 
+
+    Sub OverSub()
+    ' /u/Fishrage_ isn't worried about my code anymore
+    Dim Rng As Long
+    Dim i As Workbook
+    Dim Sht As String
+    
+How's that for starters? :)
+The function would only validate 5 digits. I was just using it as an example of when I would never need to test state. For my own curiosity, I ran both methods 100k times, and they both averaged 0.53 ms.
+Woah there! i as workbook?! I think you need to read my VBA guide on the sidebar ;-) /s
+So anything in excess of 5 digits would be ignored? I have not had much call for Regex (or since I don't know it, likely miss opportunities to use it).
+
+That's proof enough for me that there is no performance hit, which is good news in itself. 
+Ah, right.
+
+    Dim i As Walrus
+Anything not exactly 5 digits would return false. I have it on my agenda to do a regex guide eventually.
+Dim I as eggman ?

@@ -1,0 +1,11 @@
+Date and Time configuration problem. yyyy-mm-dd hh:mm:ss
+>obviously when I use this format with my current data, I am getting 1900-01-01 XX:XX:XX.
+
+I'm not sure why that's obvious to us. If you only have times, like `13:30` and want `2016-09-10 13:30:00` then type in `=A1+DATE(2016,10,9)` into a junk column, drag down, and then cut the data. Then go to paste over your original but do Paste Special -> Values. Format as needed.
+
+Or you could type in 42,652 (today's date number value), cut, and then Paste Special -> Add.
+Can't you just set up your own custom format?  Maybe I'm not understanding correctly.
+Thank you
+
+Sometimes it doesn't work for some reason, especially when generating a report. I have found myself pasting the whole thing into notepad and pasting back again then custom works. I don't know why.
+When importing data I've had that happen.  Sadly, my solution was putting formulas into the table that broke it up and then remerged it.  Hope someone else can solve it.  Sorry.

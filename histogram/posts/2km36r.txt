@@ -1,0 +1,66 @@
+I need the average of the last five cells, but i need the formula to ignore #DIV/0!
+i would suggest changing the formula that results in #DIV/0!.  Surround that formula (minus the equals sign, with IFERROR())   Like So:
+
+=Iferror(yourformula,"") 
+
+Then when the cell errors with DIV0, the iferror formula will leave the cell blank, then your array formula should work properly.
+
+EDIT: to fix the screw up in my initial suggested IFERROR() formula
+Do you want div0 to be treated as a zero, as an instruction to grab additional non-error data, or ignored (average 4 data points instead of 5)?
+You could also do the following:
+
+=AVERAGEIF(RANGE,"<>#DIV/0!")
+=IFERROR()
+
+Use it wisely.
+How about =sum(F4:F34)/COUNTIF(F4:F34,">0")
+Edit: Formatting.
+
+So, there's probably several easier ways to do this (especially using VBA code or multiple formulas across multiple cells), but I  figured out a way to do this that will ignore div errors, allow for blank spaces, and average the last 5 values in a column all using one formula. It doesn't scale well and is ugly, but I thought I'd share anyway.  
+
+Most of the ways I found online didn't actually work for me in 2013, so this was cobbled together from this link:  http://www.grbps.com/Excel7.pdf
+
+F:F is the column as well as anywhere you see , 6 as part of the Address function:
+
+    =AVERAGE(IFERROR(INDEX(F:F, MATCH(9.999999E+306,F:F)),0), IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))),0), IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1, 6)))),0), IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1, 6)))),0), IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1,6)))-1, 6))),0),0))
+
+
+The above code doesn't average correctly if there is less than 5 values. Below is an even uglier version that will handle each case from 0 up to 5 and average the proper number.
+
+    =IF(IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1,6)))-1, 6))),0),0)=0, IF(IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1, 6)))),0)=0, IF(IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1, 6)))),0)=0,IF(IFERROR(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))),0)=0,IF(IFERROR(INDEX(F:F, MATCH(9.999999E+306,F:F)),0)=0,0,INDEX(F:F, MATCH(9.999999E+306,F:F))),AVERAGE(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,F:F)))), AVERAGE(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,F:F)))), AVERAGE(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,F:F)))), AVERAGE(INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1,6)))-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,$F$1:INDIRECT(ADDRESS(MATCH(9.999999E+306,F:F)-1, 6)))), INDEX(F:F, MATCH(9.999999E+306,F:F))))
+
+So you're saying instead of trying to fix this formula, just adjust the other ones to return blanks instead of errors. Clever, I like it. 
+Clippy: IFERROR
+Ignored. I only want the average of the last five days (cells) that have actual information in them. 
+Do you know how to set the range to only count the last five real numbers?
+Glad we could help!
+
+If you would like to award a user that helped you a ClippyPoint, you can reply to their comment with "Solution Verified". Feel free to give points to as many users in a single thread as you feel appropriate, but we ask you only give each user one point.
+
+Thanks!
+
+
+[IFERROR](http://office.microsoft.com/en-001/excel-help/iferror-function-HA102753228.aspx)
+
+     IFERROR(value, value_if_error)
+
+
+Returns a value you specify if a formula evaluates to an error; otherwise, returns the result of the formula. 
+
+
+[deleted]
+=AVERAGE(OFFSET(F4:F34,MATCH("iz",IFERROR(F4:F34,"iz"),0)-6,0,5))
+
+Enter it as an array function (ctrl+shift+enter).  Sorry about the "iz," which is an arbitrary value.  It's to sanitize the error away.  If "iz" happens to be a possible value, change it to something else.
+Better late than never! Thanks for adding that function!
+thanks.  i think.
+Thank you very much, works like a charm.  Can you explain the "iz" part a little more?  Seems like a neat trick.
+IFERROR
+
+     Syntax: IFERROR(Value if not an error, value if is an error)
+
+Replaces the "value if not an error" with an alternative value.  Replaces if(iserror(Value if not an error),Value if not an error, value if is an error) construction, which required two evaluations of "value if is an error."
+
+Introduced in Excel 2007 (I think)
+Matching an error to an error in Excel tends not to work well, but replacing an error with an arbitrary value works fine.  To work around this, step one is to replace the error with something we can match to.  The array formula that gets triggered when you submit with ctrl+shift+enter is IFERROR(F4:F34,"iz"), which passes on each non-erroneous value, but replaces errors with "iz".
+that's some kung-fu right there.

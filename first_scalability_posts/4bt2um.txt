@@ -1,0 +1,134 @@
+big
+4bt2um
+VBA: I'm trying to copy a huge, fragmented range of cells but I'm getting an error when the range is too big.
+
+In VBA I'm looping through my worksheet and adding ranges to a string that that I want to copy to the clipboard via Range(strRange).copy.
+
+My string of ranges looks like this:
+
+    C6:L6,C11:L11,C16:L16,C21:L21,C26:L26,C31:L31,C36:L36,C41:L41,C46:L46,C51:L51,C56:L56,C61:L61,C66:L66,C71:L71,C76:L76,C81:L81,C86:L86,C91:L91,C96:L96,C101:L101,C106:L106,C111:L111,C116:L116,C121:L121,C126:L126,C131:L131,C136:L136,C141:L141,C146:L146
+
+Just for reference, the length of that particular string is 249.  Copying that range works fine.  However, once I add another row to the range, I get an error saying: 
+
+    Run Time error '1004': Method 'Range' of object '_Global' failed.
+
+The length of the string with another row is 259.  I assume I'm running into some kind of argument or length limitation.  Any ideas?  If I am running into a limitation of Excel, is there some workaround?  My end goal is to just have this huge range copied to the clipboard so I can paste it somewhere else.
+
+Edit:  The code is below:
+
+    Sub CopyCheckDetails()
+    Dim lastRow As Integer
+    Dim i As Integer
+    Dim checkRows() As Integer
+    Dim checkRowCounter As Integer
+    Dim firstBold As Boolean
+    
+    lastRow = ActiveSheet.Range("B" & Rows.Count).End(xlUp).Row
+    
+    For i = 1 To lastRow
+        If Range("B" & i).Font.Bold = True And firstBold = True And Range("B" & i) <> "" Then
+            ReDim Preserve checkRows(checkRowCounter)
+            checkRows(checkRowCounter) = Range("B" & i).Row
+            checkRowCounter = checkRowCounter + 1
+        End If
+        If Range("B" & i).Font.Bold = True And firstBold = False And Range("B" & i) <> "" Then
+            firstBold = True
+        End If
+    Next i
+    
+    Dim strRange As String
+    
+    For i = 0 To UBound(checkRows)
+        If i = UBound(checkRows) Then
+            strRange = strRange & "C" & checkRows(i) & ":L" & checkRows(i)
+        Else
+            strRange = strRange & "C" & checkRows(i) & ":L" & checkRows(i) & ","
+        End If
+    Next i
+    
+    Range(strRange).Copy
+    
+    End Sub
+
+TL;DR: It searches the B column for if a cell is bold or not.  If it is bold and contains a value, it adds that row to an array.  I had to add in the firstBold logic because the data is arranged in such a way that B5 is bold but blank, B6 is bold and contains a value and therefore is the row that I want, and B7 is bold but blank.  The second loop adds all the row numbers in the array to a string.  The string is copied at the end.  Like I said, the code worked fine until today when I tried running it on a bigger set of data than normal.
+
+
+-------------
+Where do you need to paste? I think it would be easier to create a string array.
+-------------
+Code?
+-------------
+This assumes you need every fifth row from 6 on, and you put in the last row. You can use the upper bound of your array to give the last row. 
+
+Note: The string limit is 255 characters but this uses a range object instead for the copy method. It uses the union method to join the ranges.
+
+Edit: I changed the Variant to a String because it didn't need to be a Variant. Also I put in the C:L as in your example.
+
+    Sub CopyEveryFifthRow()
+    'Author: /u/_Usari_
+    'For: /u/WorkSpeed
+    'https://www.reddit.com/r/excel/comments/4bt2um/vba_im_trying_to_copy_a_huge_fragmented_range_of/
+    Dim strRange As String
+    Dim lngLoop As Long
+    Dim lngLastRow As Long
+    
+    Dim rngCollection As Range
+    Set rngCollection = Range("C6:L6")
+    lngLastRow = InputBox("Enter the last row.")
+    
+    For lngLoop = 6 To lngLastRow Step 5
+        strRange = "C" & lngLoop & ":L" & lngLoop
+        Set rngCollection = Union(rngCollection, Range(strRange))
+    Next lngLoop
+        
+    rngCollection.Copy
+        
+    End Sub
+-------------
+I need to paste it into another Excel workbook.
+-------------
+Unfortunately it's not as simple as every 5 rows, that's why the bold detection part is in there.
+
+I did try using a range object to do the copying, rather than a string, via:
+
+    Dim rngCollection as range
+    Set rngCollection = Range(strRange)
+    rngCollection.copy
+
+However, that gave me the same error.
+-------------
+It's giving you the error because you can't pass a string greater than 255 characters to a range object. You need to add to the range iteratively in your array loop.
+
+> Set rngCollection = Union(rngCollection, Range(strRange))
+
+Did you factor this part in? ~~You still need to set rngCollection to the first incidence of the bold row (i.e. B6:L6), before the loop.~~ EDIT: No you don't... I read your example more carefully and saw that the array contains the full range rows. 
+
+EDIT: Thought I would provide an example for your loop (you don't need the comma since the union method will take care of that behind the scenes). EDIT 2: I realized in your example you were concatenating strRange onto itself again, it just needs the current checkRows version to add with the union method. 
+
+    For i = 0 To UBound(checkRows)
+            strRange = "C" & checkRows(i) & ":L" & checkRows(i)
+            Set rngCollection = Union(rngCollection, Range(strRange))
+    Next i
+-------------
+Solution Verified.
+
+Dude you solved it, thank you so much!  You can't do Union on rngCollection when rngCollection is empty, so I had to set it as something before the For loop.  The below worked:
+
+    Dim strRange As String
+    strRange = "C" & checkRows(0) & ":L" & checkRows(0)
+    Set rngCollection = Range(strRange)
+    
+    For i = 1 To UBound(checkRows)
+        strRange = "C" & checkRows(i) & ":L" & checkRows(i)
+        Set rngCollection = Union(rngCollection, Range(strRange))
+    Next i
+
+    rngCollection.Copy
+
+-------------
+
+You have awarded one point to __Usari__.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Nice, glad to hear! I didn't test your code, your implementation of my suggestion makes perfect sense.

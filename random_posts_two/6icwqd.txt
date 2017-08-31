@@ -1,0 +1,43 @@
+6icwqd
+How to systematically insert formulas that include cell references using VBA
+Hey Y'all,
+
+I'm trying to use VBA to fill out a table with formulas whose values depend on a cell whose location changes depending on user input.
+
+To be more specific, I am trying to calculate based on the total of a column whose number of rows depends on the user input. The total is at the bottom of the column, which is why I included the cell end code.
+
+Here's my code so far.
+
+    Cells(2, numProj + 3).Select
+
+    Cells(numProj + 5, numPer + 2).Value = "=R[-5]C/" & ActiveCell.End(xlDown).Address(True, True) & ""
+
+    Cells(numProj + 5, numPer + 2).Select
+
+    ActiveCell.Copy
+
+    'Start filling in mix percentages
+    For i = numProj + 5 To (2 * numProj) + 4
+        For k = 3 To numPer + 2
+        Cells(i, k).Select
+        ActiveSheet.paste
+    
+        Next k
+    Next i
+
+My problems:
+
+1. When I check the cells that this code generates, the address reference I made inserts the cell coordinates surrounded by quotes ('F5'), so Exel does not recognize it as a number and does not make a calculation.
+
+2. I make the table by creating a cell, then copy and pasting it so that Excel does the work making the various links for me. However, I cannot figure out how to make a reference in the original cell whose value I'm changing, and that I am copy and pasting, to a cell that varies. That is the '=R[-5]C' part. It is not correct to substitute a variable for -5 so I am stuck.
+
+I appreciate any help I can get, and will gladly provide more details.
+
+Edit: Another key detail. If it was not obvious from what I said before (I feel like I'm doing a pretty bad job explaining), I am trying to generate a table whose values will change if another table that I previously generated changes its values. That is I am not trying to do one time references to values. I am trying to systematically insert formulas that contain dynamic references to other cells. Thanks.
+
+
+-------------
+Why use VBA?
+
+- just put a formula in *every* cell and make sure that it only shows data under the conditions you mention.
+- Can you please post an example of what the actual data looks like? The reason you're not getting responses is because guessing what your code is doing is damned near impossible in the absence of the data.

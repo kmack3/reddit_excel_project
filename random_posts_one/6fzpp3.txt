@@ -1,0 +1,19 @@
+6fzpp3
+Input: column including duplicate strings and adjacent column with a number attached to each string (in a filtered table). Output: list of unique strings with the sum of numbers included in all the duplicates (picutre)
+Using excel 2016
+
+Here is a picture: http://i.imgur.com/eDrWNkZ.png
+
+Let's consider the color black:
+
+It appears three times in the column and each cell has its' own numeric value next to it. What I want, is to sum all the numbers adjacent to the individual color and produce a list with no duplicate strings but having the sum of numbers next to each string.
+
+To make things harder, this has to be done in a filtered table and there is also approx. +100.000 rows.
+
+I am adept in excel, but this problem goes way over my head. Perhaps VBA to do it pseudo-manually? Function would be even better.
+
+
+
+
+-------------
+I solved it. I made a new table from the original filtered values, removed duplicates, copied the list of individual strings elsewhere, re-inserted the duplicates and used =SUMIF(...) referencing the individual strings and the table strings.

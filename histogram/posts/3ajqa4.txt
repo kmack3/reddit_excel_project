@@ -1,0 +1,88 @@
+Anyone know a thing or two about VLOOKUP? ELI5 Please.
+=vlookup(C7,$m$8:$n$12,2,1)
+I am assuming the fee table is "For number of shares traded >= M charge N"
+That gives you this:
+
+    =VLOOKUP(C7,$M$8:$N$12,2,1)
+
+    =VLOOKUP(lookup_value,table_array,col_index_num,[range_lookup]
+The VLOOKUP **[range_lookup]** is defined as:
+
+* **0 or FALSE** = Exact Match
+* **1 or TRUE** = closest match *(not the closest less than the lookup value)*
+
+**As an aside:**
+
+It is better to use INDEX/MATCH because you can specify 
+
+* **0** = Exact Match
+* **1** = Largest value Smaller than lookup value
+* **-1** = Smallest value Larger than lookup value
+
+Giving you
+
+    =INDEX($N$8:$N$12,MATCH(C7,$M$8:$M$12,1))
+
+Where
+
+    =INDEX(array,row_num,[column_num])
+    and row_num = MATCH(lookup_value,lookup_array,[match_type])
+
+You do have to sort your table on the MATCH lookup_array according to these rules:
+
+[match_type]=
+
+* 0 or 1 = Sort Ascending
+* -1 = Sort Descending
+How about a screenshot uploaded to imgur for those of use who cannot download files 
+There is a comment in the Transaction Fee cell that I assume tells you how to work out the fee, because it is not obvious otherwise.
+
+Also, the link to the file requires a login.
+You could add some conditional formatting in too to go the extra mile. 
+I've been told that using index() is preferable to VLOOKUP from a performance standpoint. Is this true? Am i missing something?
+Based on the example provided, this would return no matches.. since none of the values in column C are 1,100,500,1000 or 2000
+
+^^^^edit ^^^^2000 ^^^^not ^^^^5000
+
+^^edit I R IDIOT, forgot to read bool.
+This worked! Thank you so much!
+do you know of a way to get the cell color to match using VLOOKUP?
+[Here you go](http://i.imgur.com/Do2Ncoo.png)
+It only says to use VLOOKUP without any instructions of how to do it. And thanks for letting me know about the link
+For performance to become an issue, you are talking about thousands of cells with the formula. Perhaps even tens of thousands. You are correct that an index match is superior in terms of performance and also flexibility.
+I used to use only Vlookups, and they worked but with massive datasets they are unwieldy. 
+
+If you have a spreadsheet with 40 or so columns, Index and Match is much easier. 
+
+Equally, learning why Index and Match works helps grasp the concept of nested formulas.
+You are incorrect. It will select the closest match. This is because of the last 1 or "TRUE". You would be correct if he had "FALSE" as the range_lookup.
+
+His answer is correct.
+This might also be helpful to know from the professor (if it changes anything)
+
+> The transaction fee is $10 for 100 shares or less; $20 for 101 to 500 shares; $30 for 501 to 1,000; and $50 for more than 1,001 shares
+You have awarded one point to Herdnerfer
+If you have excel 2010, you can use vlookup statements in conditional formatting formulas now. 
+Do any of the comments (red triangles) provide more information i.e. sums or calculations?
+
+It's not clear what value you are supposed to "lookup" against the table, since none of the existing values are present in the columns provided for lookup.
+You are indeed correct, damn bool got me.
+
+I tend to do most of my stuff in SQL these days.
+Using the closest match, would it lump 499 into the $30 fee instead of $20?
+Hhmm.. I must've done it wrong. I'll look into it further. Thank you!
+All the other triangles give basic formulas using other columns. For example, the triangle on "Total Purchase Price" says (Purchase Price * Number of Shares) + Transaction Fee. 
+
+The problem is I need to find the transaction fee (using VLOOKUP according to the prof.) before I can calculate the other values.
+Don't worry. I even had to double check what the Boolean translated to.
+I think this should be pretty easy to check and see. My feeling is its not going to go to the one you're wanting.
+/u/Herdnerfer's answer is actually correct, I misread his boolean state as I almost exclusively do exact matches only when comparing values so I always assume the state is FALSE (0) and in this case it wasn't.
+
+Clippy: VLOOKUP
+[VLOOKUP](https://support.office.com/en-US/article/VLOOKUP-function-0BBC8083-26FE-4963-8AB8-93A18AD188A1)
+
+     Syntax: VLOOKUP(lookup_value,table_array,col_index_num,range_lookup)
+
+
+Searches for a value in the first column of a table array and returns a value in the same row from another column in the table array.
+Ah I see, thank you for helping out!

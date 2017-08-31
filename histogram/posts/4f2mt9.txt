@@ -1,0 +1,42 @@
+Compare two columns of data leaving blanks where they don't match
+Can you do something in an adjacent column (col C) like:
+
+    =IF(A1=B1,B1,"")
+
+Then autofill down, copy, paste special (values) into Column A, then delete col C? Not the most elegant, but quick and dirty
+I have a script for this saved. I'll post when I get home. 
+If the entries are unique within their columns, copy both, paste into a single column **C** in a new sheet, one below the other. *Remove Duplicates* on this. Using the data that remains, `IFERROR(VLOOKUP(C1, col A, 1, FALSE),"")` filled down, will fill a column from **A** leaving blanks, and a similar formula will fill **B**.
+I'm so sorry it took me so long to get back to you man, it's been a weird weekend. [here's the link](http://sites.madrocketscientist.com/jerrybeaucaires-excelassistant/text-functions/line-up-matches) the option you're looking for is option #4.
+
+You can also try this macro:
+
+
+    Sub Macro()
+    
+    'formula in column c
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "=IF(RC[-1]<>"""",IF(RC[-1]=RC[-2],RC[-1],""""),"""")"
+    Range("C1").Select
+    
+    'copy and paste formula to column c
+    Selection.Copy
+    Columns("C:C").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    
+    'copy column c and paste special values to column a
+    Selection.Copy
+    Columns("A:A").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'delete column C
+    Columns("C:C").Select
+    Application.CutCopyMode = False
+    Selection.Delete Shift:=xlToLeft
+    Range("A1").Select
+    
+    End Sub
+That'd be really cool of you to post.
+
+If it's short enough, i've just been doing it by hand

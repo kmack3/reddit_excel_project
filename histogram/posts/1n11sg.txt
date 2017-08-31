@@ -1,0 +1,283 @@
+Introducing the new /r/Excel Add-In
+Shouldn't the caption for the shortcut be like "copy range in reddit format" or "Convert to Reddit Table?"
+
+EDIT: Also:
+
+* minimal dimensions for the table are 2x2 not 4x4 as in your description.
+* icon is very ugly (90s style) in Excel 2007 and 2013
+
+Therefore I propose the following changes in ThisWorkbook code:
+
+    .Caption = "Copy Table in Reddit format"
+
+    .FaceId = 2529
+
+
+EDIT 2:
+Also Reddit comments cannot be longer than 10 000 characters so maybe there should be a limiter. Something like this:
+
+    If Len(FinalString) > 10000 Then
+    MsgBox ("There are too many characters for Reddit comment! 10 000 characters copied.")
+    FinalString = Left(FinalString, 10000)
+    End If
+
+
+Other than that I tested it in Excel 2013 and it works as described.
+Woot!  I'm famous!
+
+> strFinal = MsgBox("Data copied to clipboard!", vbOKOnly, "Written by: /u/norsk")
+
+.....Wait a second...
+
+If nothing else, the addition of handling the ~~different~~ **ways** of displaying *fonts* is a win.
+
+**EDIT**:  Just dawned on me that people might take me seriously here.... Internet points are VERY IMPORTANT, after all.. ;)
+Thanks should go to /u/fearnotthewrath rather, for coordinating!
+Amazing job guys!
+
+Will test later
+This is (clearly) a test :-  
+  
+**Heading 1** | **Heading 2** | **Heading 3** | **Heading 4** | **Heading 5** | 
+:--- | :--- | :--- | :--- | :--- | 
+Data1 | Data1 | Data1 | Data1 | Data1 | 
+Data2 | Data2 | Data2 | Data2 | Data2 | 
+Data3 | Data3 | Data3 | Data3 | Data3 | 
+Data4 | Data4 | Data4 | Data4 | Data4 | 
+Data5 | Data5 | Data5 | Data5 | Data5 | 
+Data6 | Data6 | Data6 | Data6 | Data6 | 
+Data7 | Data7 | Data7 | Data7 | Data7 | 
+Data8 | Data8 | Data8 | Data8 | Data8 | 
+Data9 | Data9 | Data9 | Data9 | Data9 | 
+Data10 | Data10 | Data10 | Data10 | Data10 | 
+  
+  
+Very Nice - Thank you!
+Works great. It seems to wrap the text by default though?
+
+**[Edit]** Ignore that, it only appears wrapped in the post preview window.
+
+**title** | **first** | **last** | **address line 1** | **address line 2** | **address line 3** | **address line 4** | **postcode** | 
+:--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | 
+Mr | A | Sample | Sample House 1 | Sample Street 1 | Sample Town 1 | Sample County 1 | Sample Postcode 1 | 
+Mr | B | Sample | Sample House 2 | Sample Street 2 | Sample Town 2 | Sample County 2 | Sample Postcode 2 | 
+Mr | C | Sample | Sample House 3 | Sample Street 3 | Sample Town 3 | Sample County 3 | Sample Postcode 3 | 
+Mr | D | Sample | Sample House 4 | Sample Street 4 | Sample Town 4 | Sample County 4 | Sample Postcode 4 | 
+Mr | E | Sample | Sample House 5 | Sample Street 5 | Sample Town 5 | Sample County 5 | Sample Postcode 5 | 
+Mr | F | Sample | Sample House 6 | Sample Street 6 | Sample Town 6 | Sample County 6 | Sample Postcode 6 | 
+Mr | G | Sample | Sample House 7 | Sample Street 7 | Sample Town 7 | Sample County 7 | Sample Postcode 7 | 
+Mr | H | Sample | Sample House 8 | Sample Street 8 | Sample Town 8 | Sample County 8 | Sample Postcode 8 | 
+Mr | I | Sample | Sample House 9 | Sample Street 9 | Sample Town 9 | Sample County 9 | Sample Postcode 9 | 
+Mr | J | Sample | Sample House 10 | Sample Street 10 | Sample Town 10 | Sample County 10 | Sample Postcode 10 | 
+Mr | K | Sample | Sample House 11 | Sample Street 11 | Sample Town 11 | Sample County 11 | Sample Postcode 11 | 
+Mr | L | Sample | Sample House 12 | Sample Street 12 | Sample Town 12 | Sample County 12 | Sample Postcode 12 | 
+Mr | M | Sample | Sample House 13 | Sample Street 13 | Sample Town 13 | Sample County 13 | Sample Postcode 13 | 
+
+
+Installed | on | 2013 | 
+:--- | :---: | ---: | 
+and  | all  | seems | 
+to  | work | correctly. | 
+Nice | Work | Guys! | 
+
+Looks great. Some potential ideas:
+
+You need to declare DataObj, FinalString and strFinal and give a data type to cleanString.
+
+You don't use strFinal for anything once you've assigned it. Probably better just to call the msgbox using the "Call" keyword. 
+
+You need a Case Else in the Select Case as there are few more justifications than you have put.
+
+I would use the excel constant names rather than the literals (xlRight, xlLeft etc., if possible fully qualified eg "Excel.Constants.xlLeft")
+
+The decision upon which way to justify should be based on the data in the second row, not the header in the first. 
+
+You should arguably right-justify an xlGeneral column if it contains a number rather than text, just as Excel does.
+
+For cleaning the string, you’re just making extra work searching to see whether the string contains any of the bad characters first, I think you can just go straight to replace(). 
+
+You also need to clean for the backtick symbol \`
+
+When clearing the format maybe use vbNullString rather than ""
+
+There’s no Option Explicit!
+
+You re-use "MatrixArray.Columns.Count" and "MatrixArray.Rows.Count" many times, it might be worth putting them into a variable the start.
+
+Personally, I'd make passing the output string to the clipboad a seperate function. It's something that could be useful elsewhere.
+
+I'd not come accross *CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")* before. It's pretty nifty. will remember that for later!
+How do you use this if you don't have administrator rights?
+Sorry to appear dense, but the link goes to six files. Which one do I need to grab?
+/u/fearnotthewrath , it seems that the link for the add-in is not working. Can I get a re-link?
+
+Thank you so much!
+>To use the Add-In you simply add the file to your Add-In folder, and enable it via the Options in Excel.
+
+I'm using windows 8. How does one "simply" add the file to ones Add-in folder?
+1. ~~minimal dimensions for the table are 2x2 not 4x4 as in your description.~~ **Fixed**, sorry I was just thinking it was 4 cells.. hmpth math is hard...
+2. ~~icon is very ugly (90s style) in Excel 2007 and 2013~~ **Fixed**.
+3. ~~Len/Length~~ **Added!**
+
+Thanks for the suggestions!
+
+Did you have a macro to do this as well?
+**Heading 1** | **Heading 2** | **Heading 3** | **Heading 4** | **Heading 5** | 
+:--- | :--- | :--- | :--- | :--- | 
+*Data1* | *Data1* | *Data1* | *Data1* | *Data1* | 
+Data2 | Data2 | Data2 | Data2 | Data2 | 
+Data3 | Data3 | Data3 | Data3 | Data3 | 
+Data4 | Data4 | Data4 | Data4 | Data4 | 
+***Data5*** | ***Data5*** | ***Data5*** | ***Data5*** | ***Data5*** | 
+Data6 | Data6 | Data6 | Data6 | Data6 | 
+Data7 | Data7 | Data7 | Data7 | Data7 | 
+~~Data8~~ | ~~Data8~~ | ~~Data8~~ | ~~Data8~~ | ~~Data8~~ | 
+Data9 | Data9 | Data9 | Data9 | Data9 | 
+**Data10** | **Data10** | **Data10** | **Data10** | **Data10** | 
+  
+  
+Seems to handle some formatting quite well too - although I think it ignores ^superscript
+*You need to declare DataObj, FinalString and strFinal and give a data type to cleanString.*  
+**You are correct, this was sloppy! I pieced a lot of this together from different places and missed these. good catch!**
+
+*You don't use strFinal for anything, and if you're assigning it the value of a msgbox it shouldn't be a string, but a boolean. Probably better just to call the msgbox using the "Call" keyword.*  
+**I thought the same, I'll update.**
+
+*You need a Case Else in the Select Case as there are few more justifications than you have put.*  
+**Not sure how I missed that. Clearly I failed to tidy up a lot of these loose ends.**
+
+*I would use the excel constant names rather than the literals (xlRight, xlLeft etc., if possible fully qualified eg "Excel.Constants.xlLeft")*  
+**Good Call, I agree.**
+
+*The decision upon which way to justify should be based on the data in the second row, not the header in the first.*  
+**I also agree with this**
+
+*You should arguably right-justify an xlGeneral column if it contains a number rather than text, just as Excel does.*  
+**Unfortunately Reddit tables don't allow row or cell level alignment. However, I prefer it to Right-Justify always if it's general.**
+
+*For cleaning the string, you’re just making extra work searching to see whether the string contains any of the bad characters first, I think you can just go straight to replace().*  
+**Good call! For some reason I thought it would error if I didn't check.**
+
+*You also need to clean for the backtick symbol `*  
+**Added**
+
+*When clearing the format maybe use vbNullString rather than ""*  
+**Makes sense.**
+
+*There’s no Option Explicit!*  
+**And thus most of these problems!**
+
+*You re-use "MatrixArray.Columns.Count" and "MatrixArray.Rows.Count" many times, it might be worth putting them into a variable the start.*  
+**You're right, didn't realise how much that was used.**
+
+*Personally, I'd make passing the output string to the clipboad a seperate function. It's something that could be useful elsewhere.*  
+**I'd rather not, but only because that means that function would be imbedded in this add-in. It's a good idea, and one that I would probably pick up, but it's a function I would place inside of a utility add-in, instead of a specific purpose one.**
+
+*I'd not come accross CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}") before. It's pretty nifty. will remember that for later!*  
+**I hadn't either, It was in /u/norsk's original**
+
+**Very good recommendations, all. Proof that this was put together too hastily. I'll try to get /u/fearnotthewrath to add these changes and update!**
+I will have to do  a little digging, didn't think you needed admin rights.   You just add the add-in to the your "add-in" directory:
+
+     C:\Users\(your user name)\AppData\Roaming\Microsoft\AddIns
+
+And then enable it Excel.  Where are you having privilege issues?
+You want the xlam file...  yeah i need to clean out the other 3 useless files the, bas is the actual macro export and the cls is the class for the workbook...
+Is it redirecting to: https://github.com/fearnotthewrath/Reddit_Add-In
+
+It seems to be working, please let me know if you have any issues downloading it... 
+Save the file to your desktop, and when you go to enable the add-in, click "browse" and browse to the file on the desktop.  It will ask if you want to copy it to your add-in  folder, and that's about it.
+Nope, I tweaked /u/norsk's code when he posted it to eliminate the reference, and added the justification... in hindsight, not sure why I didn't handle the font switches, but c'est la vie.
+
+[Original(?) Post](http://www.reddit.com/r/excel/comments/uos5i/)   (yay RES Macros)
+
+Again, I'm not nearly childish enough to want the file changed, was more amused. :D
+> superscript
+Got it! I was trying to put it in the wrong folder.  Thanks a million!
+I hardly use excel but I needed it for this specific thing, to make updating sports results/standings in /r/leagueofireland less of a pain.
+
+Confused me also, but I just grabbed the zip and when I browsed for the add-in file with excel, it just showed the one I needed. Straightforward enough.
+
+Excellent work. Would have abandoned doing the results etc on my sub if I hadn't found this.
+
+Thanks very much.
+Ohp! Disregard what I said. I'm having some SSL connection errors. :<
+
+Thanks anyway!
+> and when you go to enable the add-in, 
+
+How exactly does one go about enabling an add-in?
+Ah should have read it all the way down, I am all for fixing wrongs... so I will adjust and add! :)
+Wha? We have a bot checking for ^superscript ?
+No problem, glad it worked!
+Glad you found it useful!  Btw, love the table formatting in your sub, might be borrowing it for /r/Excel!
+http://office.microsoft.com/en-us/outlook-help/enable-or-disable-add-ins-in-office-programs-HA010034127.aspx
+Thanks. The whole sub is a mish-mash of different things I've borrowed from different subs.
+
+Doing a major overhaul before the warm up games for our season start coming soon.
+
+I like your submit buttons.
+
+I was thinking of adding a hover-to-show dropdown in the sidebar, for a pinned threads of sorts like they have done on /r/footballdownload . It could suit you guys too. It's a matter of personal preference though perhaps.
+
+Because we have so much info the sidebar, I think it is a real necessity for us.
+
+I'll be implementing link flairs like /r/footballhighlights for /r/leagueofireland , adding images for the dozen or maybe more, common, trusted sites that people post.
+
+Thought it might be something you could use also, but all your submissions are text posts, so it would be pointless.
+
+I badly need to re-align the whole page to the left again too...
+
+Interesting making changes to reddit subs, but so many things are awkward to implement.
+
+Colour of the bolding on my tables makes it too hard to read, what do you think?
+I don't have a MS office button but this works:
+
+open excel
+
+File/options/add ins
+
+Manage excel add-ins click go button
+
+Browse, locate the file location, click on it
+
+add-in appears in list, checked
+
+then use the add ins tab to select reddit add-in.
+
+
+
+
+
+
+Head over to /r/Genealogy (another sub I mod) and I implemented a click, rather than hover, we tried to do that here, but people were all upset because of the change, so we changed it back.  They felt that, that extra click was too much and people would stop using the sidebar and just post questions that could be answered by the side bar.
+
+Yeah the submit buttons came out nice, we are worked on trying to make it look as much as like an "office product" as we could (other than the snoo).  People seem to like them.
+
+We have been tossing around the idea of flair, but have yet come to an agreement on what it should be used for.
+
+It doesn't look like you guys are using /u/AutoModerator (/r/AutoModerator).  You might want to take a look at that, it is a great tool, and you can do so much with it... helps with the more mundane stuff, and allows you and your mods to focus more on actual modding rather than browsing the spam..
+
+Yeah, I am going to change it up to try and match an Excel table.  I started to mess around with it, and I think it is the green on green that makes it a little hard to read, but does not look bad... 
+Sorry assumed you were 2010/13...  Glad you got it working!
+Commenting to read later.
+Having a look at auto-moderator now a bit confused as to what I need it for so far.
+Hey I have a quick question about the Addin.
+
+I have activated the Addin in Excel 2010, but I have not been able to use it.  Where does it appear on the ribbon?
+
+Thanks!
+We use it for all sorts of things, keeping self posts out of spam, removing certain links to websites, assigning link flair, removing reported links.. Really helps you keep from doing all the "little" things, not saying you need it but it sure does help...
+
+For example, we have it set all posts as unsolved when they are first posted in /r/Excel this helps us keep track of what posts still need help... If it finds certain "thanks" phrases it will send the OP a message asking them if it is solved to mark it as such...  
+
+So again, not saying that you need it, just take a look and see if there is abuse for it, we found it a great tool, and I always try and recommend it...
+There should be an add in option added to the ribbon, take a look here...
+
+http://office.microsoft.com/en-us/outlook-help/enable-or-disable-add-ins-in-office-programs-HA010034127.aspx#BM11
+Assigning link flair automatically might be a good one. Will have to look into that when we have the link flair itself set up.
+
+Thanks for the pointers.
+http://imgur.com/HISJy64
+
+I have it under active Add-in's, but how do I do the actual copy?  When I go to my Add-In Tab, it is not there.

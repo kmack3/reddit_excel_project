@@ -1,0 +1,60 @@
+6g6929
+Googlesheets Question- Can anyone help me with the below?
+https://docs.google.com/spreadsheets/d/1iqYxtxTFDwE5k7xG5eNAtAzWqSHe9qUk4KIiz3yGdas/edit?usp=sharing  
+
+My formula is:
+
+=SUMIF(SCORES 6-7-17'!$B:$B,$A5,'SCORES 6-7-17'!$W:$W)  
+
+It should be returning 1 or -1 but is returning zero and I cannot figure out why.  
+
+
+-------------
+A reminder to please read the [sub guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) about post titles.
+
+Your post title must contain a description of your problem, this makes searching for it again easier.
+
+Future posts may be removed.
+
+-------------
+In Column W you have an IF formula.
+=if(T11>T10,"1",if(T11=T10,"0","-1"))
+
+Between " means Excel/Sheets sees them as string/text, not numbers!
+Remove the " and it should work.
+
+Btw in sheet ML you had a bad formula too.
+=sumif('SCORES 5--9-17'!$B:$B,$A7,'SCORES 5-9-17'!$W:$W)
+
+Changed it to 
+=sumif('SCORES 5-9-17'!$B:$B,$A7,'SCORES 5-9-17'!$W:$W)
+
+Columns AC till AF all refer to the same date scoresheet.
+You should use Indirect here.
+-------------
+Thank you!
+
+What do you mean by use indirect here?  
+-------------
+On your ML sheet you have the dates.
+For each date you have a scoresheet. With INDIRECT you can dynamic refer to them.
+This way you can drag your formulas from left to right. Now you have an error in columns AC till AF because you didn't link to the correct scoresheets.
+
+SUM example that works, adjust to your liking:
+=SUM(INDIRECT("'Score "& TEXT(A1,"d-m-yyyy") &"'!"&"A:A"))
+
+Because you dates, you should always use 1 way for formatting because in the formula above I use "d-m-yyyy" (European here).
+If your format is US then change the formula the part to "m-d-yyyy".
+If a month or date has 1 number then don't put a zero in front of it.
+Example:
+1-1-2017 (correct format ("d-m-yyyy"))
+01-01-2017 (wrong format ("dd-mm-yyyy"))
+
+The wrong format could also be used, but then change the TEXT formula.
+-------------
+solution verified
+-------------
+
+You have awarded one point to _roodey86_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

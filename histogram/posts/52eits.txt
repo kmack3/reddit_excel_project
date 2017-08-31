@@ -1,0 +1,45 @@
+How can I do, FirstName LastName to X.LastName@domain.com
+    =LEFT(A1,1) & "." & RIGHT(A1, LEN(A1) - SEARCH(" ",A1)) & "@domain.com"
+
+This is assuming that the name is in A1 and there is 1 space between first and last name.
+=Concatenate(substitute(trim(A1)," ","."),"@domain.com")  
+  
+Where the name is in A1. 
+
+Here's what it does: 
+Trim(a1)  
+Removes leading and lagged spaces. Always a risk with name lists.  
+  
+Substitute(Text," ",".")  
+Turns the spaces between the words into periods.  
+  
+Concatenate(Text, "@domain.com")  
+Appends @domain.com onto the name.  
+  
+So: 
+Wozz Sta  
+will become  
+Wozz.Sta@domain.com  
+
+Name | domain | result | 
+:--- | :--- | :--- | 
+A Smith | yahoo.com | =SUBSTITUTE(A2," ",".")&"@"&B2 | 
+A Smith | yahoo.com | A.Smith@yahoo.com | 
+
+Is there a space between first/last names, and is that the format throughout?
+SOLUTION VERIFIED!
+
+
+Worked perfectly thanks so much
+Yeah there is a space and yes that is the format throughout. 
+Not sure if it was clear in my OP, but each users full name is in a different cell, but each full name is in 1 cell. 
+
+Hope that makes sense 
+
+You have awarded one point to _Mr_Cj_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+SOLUTION VERIFIED!
+/u/excelevator has your solution then.
+Needs to be in reply to my post for it to work :)
+=CONCATENATE("wozzsta"," is a dirty cheater!")

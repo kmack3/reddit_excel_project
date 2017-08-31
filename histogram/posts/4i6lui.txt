@@ -1,0 +1,55 @@
+Potential Employer asked for examples of projects in which I've used PivotTables and VLOOKUP.
+You can look for exercises on the internet :  [this](http://www.stat.ufl.edu/~fass/ExcelWorkshop-0408-VLookup.xls) is an example.
+
+The question of your potential employer seems weird, he probably is waiting for an  oral explanation showing you understand the usage of these functionalities rather than you forwarding him an excel table.
+If you're into sports, you could do a quick web query from ESPN.com, and extract all the data from baseball/basketball/football into Excel, then use Index Match to make it look for whatever you'd like.
+I use them for tax tables, where you have the income on one column, the marginal tax rate in another, and then an offset in the third column (total tax from previous rows' offsets). [Here's an example using the US corporate tax rates](http://i.imgur.com/W7cTWYH.png) that I did a couple of days ago for another r/excel post. You could get fancy and do Joint vs Single in one formula, too with an INDEX MATCH(text1&text,criteria1&criteria2....).
+Seems a bit overkill requesting previous projects that have that.
+
+Past employers would not be happy with you sharing data, general rule of thumb. 
+
+If you haven't got something, get a massive dataset online - I believe there's a website somewhere that has these in the public domain - and with that create a pivot table, throwing one or two calculated fields in, then do some Vlookups.
+
+If the data has no unique identifiers, you could add some sort of key reference to it.
+
+Way I see it is this - you tell them that you aren't able to provide past data for confidentiality purposes but you cite where your dataset is from so they can see what you are doing and look at the raw data.
+
+You are demonstrating initiative and flexibility to work with unknown material, which I think is a huge plus. Other candidates will be using old data which restricts their ability to discuss what they did.
+
+You are also then given an opportunity to explain exactly what you did to create the report you have built so you can showcase other Excel skills as well.
+
+As long as you can explain exactly what you have done in what you provide, you are showing that you made what they are looking at.
+I know it's not what they asked for, but the number of times I've used these features I'm sure that I can recite step by step how to do it or thoroughly explain how to use them.
+Given that you can teach a fairly intelligent person both of these features in half an hour this feels a rather redundant request... If they wanted to test you, why not just give you a problem in the interview...
+I could create a random data set in a blank workbook and show this in about 5 minutes. If you can't do this, you probably shouldn't take this job. Huge pet peeve of mine is when people misrepresent their software skills. 
+"I signed a confidentiality agreement with my prior employer that explicitly said I was not to remove confidential material from their site so I don't have any real world examples to share with you. I'm sure that you would not want one of your ex-employees sharing company information with a new employer. With that being said, here's an example of something I did on my own."
+If you want him to know that you know your stuff, just tell him you no longer use VLOOKUP because you find it too limiting. Tell him you prefer OFFSET MATCH.
+Well, I had a phone interview with a potential employer today. They directly/explicitly asked if I could send them copies of my past projects using PivotTables and VLOOKUP. Maybe I should have put that in the OP. They seemed pleased with my responses to all other questions, and it doesn't feel like my employment offer will be 100% contingent on the quality of my examples, but I want to go above and beyond.
+
+Thanks for the example, by the way!
+Ah, good idea. Thanks!
+Thanks for the example! I'm definitely considering just making up my own exercise, I don't want them to think I just pulled something off of the web and called it my own.
+Lol the first time I made a calculator like this I was blown away by how complex it had to be to work. 
+There have been quite a few helpful answers, but this is by far the most helpful. Thanks for giving me an idea to showcase my skills. I was hoping there was some public data set I could use so I can show them where I got that data and what I can do with it.
+Solution Verified
+Yeah, when I applied for the position I didn't think it was going to primarily entail using Excel. I knew that Excel skills would be needed, I just didn't think the majority of the job would be Excel, but it is, I guess.
+You make a fair point. I dunno what their motives are, but I didn't think the majority of my time would be spent using Excel, but now it sounds like it will be.
+You're absolutely right, I could do that. I was more looking for something along the lines of what Axius said above. A data set that's public domain so I can show them where the data is coming from and what I'm doing with it. Like I said in another comment, it was a phone interview so I couldn't do anything with them in person. And I didn't know(until the interview) that the major function fo the job would be Excel.
+This would be great except I'm fresh out of college. All of my projects are from my coursework and aren't confidential.
+Bier, man if he can't vlookup, how you gonna explain offset match?
+Ok, if you end up using an example from the internet, maybe you can make it go smoother by explaining something along the lines of "I cannot show you early projects because there are confidential, but here is an example of how and when I use VLOOKUP/pivot tables that I recreated"
+
+Good luck with the process !
+
+You have awarded one point to _Axius_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+That was the point I was making. 
+
+If you have to ask how to present an example of how to use VLOOKUP or PivotTables, but don't know how, perhaps you are not ready for a position that requires you use those tools.
+
+If someone were to provide him with a copy of their work that he could pass off as his own, he would be found out soon after he got the job.
+
+Offset match, if you can get your brad around the simple concept of x,y will be easier I feel than leaning vlookups.
+
+This is what I would recommend also. If any interviewee uses offset/match instead of yucky picots and vlookups, I would certainly give them bonus points.

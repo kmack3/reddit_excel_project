@@ -1,0 +1,19 @@
+Convert height presented in feet and inches (eg, 6' 2.5") into inches?
+    =LEFT(A1,FIND("'",A1,1)-1)*12+TRIM(MID(A1,FIND("'",A1,1)+1,LEN(A1)-FIND("'",A1,1)-1))
+Formula or macro. Here's a formula
+
+    =VALUE(LEFT(A2, SEARCH("'", A2)-1))*12 + VALUE(MID(A2, SEARCH("'",A2)+2,LEN(A2)-SEARCH("'",A2)-2))
+If you wanted to do this without a formula just highlight the column, then use the Convert Text to Columns wizard and split on a space character.  With the feet and inches now separated you could just find/replace for " and ' respectively, replacing those with nothing.  Now a new column could just multiply the feet by 12 and add the inches to give a total in inches.
+SOLVED thanks!
++1 Point
+[deleted]
+
+You have awarded one point to _Spovik_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You need to say "solution verified" to set to solved.
+Yeah.  I've done it a few times and every time I have to look up how to do it and usually come to this site.
+
+http://www.get-digital-help.com/2013/03/13/custom-data-labels-in-a-chart/
+
+EDIT:  That will get you part way, and doesn't help with vertical axis labels.

@@ -1,0 +1,22 @@
+Removing Numbers from Cells Also Containing Text
+Not a problem. Use this formula:
+
+    =MID(A2, 10, 999)
+
+That will give you everything starting at the 10th character in the cell and beyond. Copy formula down as needed.
+You could also use the 'text to columns' process and make it fixed width to not import the first 9 characters.
+Depends on which version you use, but a quick google of this process should help you understand it.
+Since this isn't an answer using functions, screenshots are the best way to go.
+[short YouTube video instructions](http://youtu.be/AUv4_WuahrQ) instead of clicking finish after assigning the line like in the video, click next and then highlight the first column to mark the instruction radio button as 'do not import'. That will leave you with one column of just the data you want.
+> =MID(A2, 10, 999)
+
+Thank you.
+
+I'm so sorry, but I'm still getting used to everything - how do I apply that? I get a circular reference warning if I just paste it into the cell.
+Here's an equally effective solution. Use SUBSTITUTE to replace the " - " and everything to the left of it with nothing. It's more dynamic because it will still work if the number of leading digits changes.
+
+> =SUBSTITUTE(A2,LEFT(A2,FIND(" - ",A2)-1)&" - ","")
+Sorry, you can't have the data and formula in same cell. If your data is in col A, put this formula in cell B2, and then copy down (with cell selected, double-click on bottom right of cell).
+> =MID(A2, 10, 999)
+
+Perfect. Thank you! I am very grateful :)

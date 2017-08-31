@@ -1,0 +1,168 @@
+Having a hard time using and understanding the INDIRECT formula.
+First, INDEX(F:F,COUNT(D:D)-1) would be one row above the bottommost row containing something in column D. Worse if there are any blank or nonnumeric cells in column D.
+
+While it may look odd, the most robust way to get the row number of the  bottommost cell containing anything in column D is
+
+    =MATCH(2,INDEX(1/(1-ISBLANK($D:$D)),0))
+
+Best to create a defined name, maybe _LASTROW_, referring to this formula. If you also want to add criteria, say, G:G = "x", create another defined name, _FIRSTROW_, referring to the formula
+
+    =LARGE(INDEX(($G$1:INDEX($G:$G,LASTROW)="x")*ROW($G$1:INDEX($G:$G,LASTROW)),0),MIN(3,COUNTIF($G$1:INDEX($G:$G,LASTROW),"x")))
+
+Then you can calculate the average of the bottommost up to 3 values in column F for which column G is "x" using
+
+    =IF(COUNT(FIRSTROW),AVERAGEIFS(INDEX(F:F,FIRSTROW):INDEX(F:F,LASTROW),INDEX(G:G,FIRSTROW):INDEX(G:G,LASTROW),"x"),"nada")
+
+FWIW, this allows for anything in column D, and it doesn't require a table.
+INDIRECT is for turning a string into an excel reference. 
+
+To average the cells in column F on the same row as criteria x vs column D, you want the AVERAGEIFS function
+
+    =AVERAGEIFS(F:F,D:D,CRITERIA)
+
+Setting up logic to figure out the most recent three rows is a little more complicated. We'd need to see screenshots of your data. 
+=averageif()
+
+clippy: averageif()
+
+edit turns out clippy doesnt know it.
+
+    =averageif(D1:D27,"x",f1:f27)
+Make the data into a table and then use this formula.
+Make sure to change the Table names and column names in the formula.
+
+
+
+    =AVERAGE(INDEX(Table1[Column1],N(IF(1,AGGREGATE(14,4,ROW(Table1[Column1])-ROW(Table1[#Headers]),{1;2;3})))))
+This seems pretty perfect based on your explanations, it's a bit above what I understand so rather than copy and pasting with my own data i'm going to work through your function and make sure I can follow what's happening. Thanks very much for the effort you put into helping me.
+So I discovered some of the row D's (I was using this type of formula for several rows) have blank spaces (not all projects use the same parts) any tips on finding the lowest non blank cell (no averaging needed for these parts)?
+Solution Verified!
+There's no type of function saying the last 3 non blank cells in row D? The only way I can even semi think of is a way someone else said in another thread which was using a combination of INDIRECT and COUNT, or using OFFSET and COUNT.
+How would I get average if to always average the bottom 3 rows, knowing more rows will be added in the future. I'm pretty sure indirect or Vlookup is needed.
+
+Hi!  It looks like you're looking for help with an Excel function!    
+Unfortunately I have not learned that function yet. If you'd like to
+change that, [message the
+moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)!
+
+If I make a table, can I keep adding more rows to the table as I go? I have never worked much with excel tables (Highly considering taking a course on them). I will try implementing this method and I will let you know how it goes. Also do you think I should turn all of the data into a table? Or would that mess it up?
+I suspect the bottommost blank row would be 1048576. Do yo mean the bottommost blank row above the bottommost nonblank row? If so,
+
+    =MATCH(2,INDEX(1/ISBLANK($D$1:INDEX($D:$D,LASTROW)),0))
+I think you can reference the last three rows if your formula is the 4th row.
+
+Example. I needed to sum the last 4 rows of a table with
+
+=sum(indirect(“D" & row()-3 & ":D” & row()-1)
+
+Ignore the sum for now.
+
+If your indirect formula is on D10, then the formula above will return "D7:D9"
+
+Then that is used for your "real" formula (in my case a sum). so. SUM(D7:D9).
+
+This is useful in the case if anyone ever inserts a new row between D7:D9 or above, you will always catch the last 3 rows.
+
+Hope that helps.
+Bottom three rows or bottom three rows that match criteria X? 
+is it always the last 3 rows and you want the average of those 3 where x is in d i.e the range is always 3 cells 
+
+or is it the last 3 rows where x is in d?   the range is potentially greater than 3 cells
+See my reply.
+for the bottom 3 rows every time you can use assuming your range is in rows 11:18 -my test sheet has different conditons eg - im checking c for x , adjust the ranges as required. 
+
+    =sumproduct(B11:B18*(C11:C18="x")*(row(B11:B18)>(match(9E+137,$B$11:$B$18,1)-2+row($B$10)))) 
+
+gives you the sum of the relavent rows, 
+
+    =sumproduct((C11:C18="x")*(row(B11:B18)>(match(9E+137,$B$11:$B$18,1)-2+row($B$10)))) 
+
+gives you the count of the relevent of rows divide one by the other to get the avg
+
+match(9e137,range,0) always returns the position of the last entry
+
+Yes, and the formula ranges will dynamically adjust. That's the advantage of using tables. I just read that you wanted to ignore blanks as well. This formula will do that, but you must enter it with CTRL + SHIFT + ENTER.
+
+Edit: See below instead.
+> =MATCH(2,INDEX(1/ISBLANK($D$1:INDEX($D:$D,LASTROW)),0))
+
+I am trying to pull the lowest not blank cell for row D, but the cell isn't technically blank, it has a formula in it which is returning 0 (looks like - in excel). That's messing me up.
+On an unrelated note, do you have any excel online courses, booklets, or tests&study materials you found helpful in increasing your excel knowledge?
+This idea was not mentioned before, although yesterday I became unusually familiar with indirect. Thanks for the input, but I am aiming for a formula which will auto update as I add more rows (which may or not meet my criteria), it's much appreciated though.
+Row three rows that match criteria x. 
+The average of the last 3 rows where X is in D. 
+This method requires I manually check and adjust the range based on the amount of data? There are hundreds of rows and 1-5 rows being added a month. I will look into this though, because the match(...) looks like a good function to understand for future use.
+I deleted the blanks, there are no blanks atm.
+Formulas returning 0 don't look _blank_. They look like zero. If you want to find the row index of the bottommost cell in column D which is BOTH nonblank AND nonzero,
+
+    =MATCH(2,INDEX(1/($D:$D<>0),0))
+
+The template is __MATCH(2,INDEX(1/(...),0))__. The MATCH call looks for 2 using binary search. If the array which is the 2nd argument to MATCH has only 1 and error values, which is so for the ones I've given, the MATCH function's implementation tries to bracket the range of cells containing 2, but when there is no cell with a value >= 2, it finds the LAST cell containing a value of the same type as the value sought. There's no documentation about this, but Excel's MATCH function has worked this way for more than 2 decades.
+
+The INDEX call is only needed to avoid array formula entry.
+
+The array which is the 1st argument to INDEX is always __1/(comparison)__. My 1-ISBLANK($D:$D) doesn't look like a comparison, but it's shorthand for NOT(ISBLANK($D:$D)). __1/(comparison)__ returns 1 for cells where the comparison is TRUE and #DIV/0! for cells where the comparison is FALSE. Picky: it returns other error values when cells/entries involved in the comparison evaluate to error values.
+
+MATCH(2,array_of_1s_and_error_values) returns the index of the last 1 value.
+
+I'm being longwinded so you can see how to change the formula for other scenarios.
+Sorry. I learned spreadsheets in the 1980s when the only info were books and magazines, and I don't still have any. Learning by doing is usually best. Follow Excel user-to-user support sites like this but also Mr Excel, Excel Forum and MSFT's own community support site, read the Q&As. Try to answer others' questions.
+
+I've looked at more current online stuff, and it generally DOESN'T focus on the indexing grunt work which is really the core of many spreadsheet problems/questions.
+tabulaise your data (ctrl+t) and reference the column name. the table will auto grow as you add more data so the ranges will always be correct. 
+
+to get the last 3 rows where x is in d you'l have to use something slightly more obtuse, - 5 mins to type / check it. 
+
+got it its a bit clunky but will always average the 3 items in b where x is in c for the 3 largest row numbers replace ranges with column names as suggested bu /u/itsjustanotherday. 
+
+    =(index(B10:B18, SUMPRODUCT(large((C10:C18="x")*row(C10:C18),1))-row($C$9))+index(B10:B18, SUMPRODUCT(large((C10:C18="x")*row(C10:C18),2))-row($C$9))+index(B10:B18, SUMPRODUCT(large((C10:C18="x")*row(C10:C18),3))-row($C$9)))/3 
+
+note: row C$9 should be the row on which your headers occur  (it serves to convert row number into index position) 
+
+
+Alright, I cleaned it up a bit. This will ignore blanks and any text. It will average the last 3 numbers in the table column you specify:
+
+Edited: See the formula below.
+I appreciate the longwinded, i'm going to spend the next hour or so going through and breaking it down. Thanks for the effort.
+Thanks for the detailed explanation I wish I had someway to repay the favor you have done me. 
+[deleted]
+Solution Verified!
+Yeah I have been answering others questions apparently I am not bad but there are many functions I have never had to use. I find excel fun and would enjoy taking some type of course on it. If you ever come across some type of workbook or program that you feel is adequate, do send it my way.
+I have never entered a forumal with ctrl shift enter, what does that do?
+Also which part of this function would I be able to squeeze in the criteria for D, I apologize you shouldn't have to hold my hand this much, i'm a bit braindead after working through a variety of different functions I don't normally use. I will comeback in a little bit and rework through the formula you posted, your effort is much appreciated. 
+Hello!
+
+**Posting a comment with 'Solved' does not mark the thread as solved.**
+
+Please read the sidebar on how to set the correct flair.
+
+Thank you for keeping the sub tidy - please take the time to familiarise yourself with the guidelines on the side bar and the submit page.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _hrlngrv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Unless you already know what Bessel functions are, you'll never have to use them. Ditto most of the probability distribution functions.
+
+INDEX, MATCH, lookup, ROW, COLUMN, ROWS, COLUMNS, LARGE and SMALL functions, in my experience, can handle 99% or more of all indexing problems. Also learn that __:__ is an operator in Excel. A9:B5:C7 is a legal Excel range which evaluates to the single-area (rectangular) range containing the topmost and bottommost rows and leftmost and rightmost columns of the various cells included, in this case, A5:C9. You can also use range expressions as operands to :, e.g., INDEX($F:$F,FISTROW):INDEX($F:$F,LASTROW).
+
+Maybe read Chip Pearson's site, http://www.cpearson.com/Excel/MainPage.aspx .
+Okay, first off I made the formula better so that you don't have to use control shift enter. Just enter the one below with enter. There's a lot to have to explain in this formula, but, in a word, 
+1) it takes the three largest row numbers in the table while ignoring blanks and text.  
+2) transfers the 3 numbers to index to return the 3 values. 
+3)Averages those 3.
+
+You don't need control shift enter for the one below, but it's the way to enter an array formula. You can do a bit more research on your own there.
+
+    =AVERAGE(INDEX(Table1[Column1],N(IF(1,AGGREGATE(14,6,(ROW(Table1[Column1])-ROW(Table1[#Headers]))/((Table1[Column1]<>"")*(ISNONTEXT(Table1[Column1]))),{1;2;3})))))
+To insert your own condition you'll have to insert it where I say Condition 1. This is an AND condition so this will have to be true **along with** any other conditions you add. (not an OR condition where either one has to be true). It should be inserted as (table[column3]=a5) or (table[column3]>2500)....etc. 
+
+
+    =AVERAGE(INDEX(Table1[Column1],N(IF(1,AGGREGATE(14,6,(ROW(Table1[Column1])-ROW(Table1[#Headers]))/((Table1[Column1]<>"")*(ISNONTEXT(Table1[Column1]))*(Condition 1)*(Condition 2)),{1;2;3})))))
+
+Thanks for going the extra mile, your formula and one other persons seem like they can do the trick, but rather than copy the formula in and place in my own conditions/cells i'm going to see if I can follow the formula and understand what happens in every step. Then after I fully experience both of your formulas I will hop back on and give you my thanks and feedback. I cannot express how grateful I am to you for helping me further understand excel.
+First understand this part: 
+
+
+    (ROW(Table1[Column1])-ROW(Table1[#Headers]))/((Table1[Column1]<>"")*(ISNONTEXT(Table1[Column1])))

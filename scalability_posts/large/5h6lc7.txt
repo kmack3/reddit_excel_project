@@ -1,0 +1,79 @@
+large
+5h6lc7
+Finding the maximum date in a large range based on one dynamic and one static criteria
+
+I'm trying have a calculation in one cell only which performs the following:
+
+Over a range, it finds the maximum date from one column which is before or equal to today, and also has a specific value in another column of the same row.
+
+Currently, i'm doing this by using three if statements to generate a new column where the maximum date is found which is of a value equal to or less than TODAY().
+
+I feel like there is an easier way to achieve this, without the extra column but can't see it. 
+
+
+-------------
+Hi, could you post the formulas you are using?
+-------------
+    =sumproduct(large(datecol*(datecol<(today()+1))*(column_for_spec_val=spec_val),1))
+
+where datecol is your column of dates and column_for_spec is the other column you want to check for your other condition. 
+
+
+might need ctrl + shift +enter to work. (i dont think it will though) 
+-------------
+SOLUTION VERIFIED
+-------------
+The current solution is to use 
+
+    =MAX(IF(X17:X102<=TODAY(), X17:X102))
+
+in an unhidden output cell
+
+and 
+
+    =IF(F17="N/A","",IF(N17=""," ",IF(N17="Mandatory",G17," ")))
+
+in every row for my array in column X.
+
+Not sure how much sense this will make without the full workbook
+-------------
+Nailed it! Thanks!
+-------------
+SOLUTION VERIFIED
+-------------
+Could you explain how this works? I've tried stepping through the evaluate formula but can't make sense of it
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+
+You have awarded one point to _Snorge_202_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+sure, 
+
+firstly ignore sumproduct() its there only to force excel to process the arrays correctly. 
+
+large(<arrayentries>,1) is the same as max, - the 1st largest value in array entries.
+
+datecol is just the dates in the column obviously, this is then dot producted  (note 1) by our two conditional arrays the first: (datecol<(today()+1)) , produces an array the same size as date col with true or false depending on if the condition is satisifed fro that entry of datecol. 
+
+the second conditional array works int he exact same way. 
+
+note1: when multiplying arrays in excel a dot product is performed, so each entry is multiplied by its corresponding entries.
+
+the true / false conditions set by the conditional arrays when multiplied are evaluated to 1/0.  
+
+thus the final multiplied out result for any given line where both conditions are true is: datecol * 1 * 1 = datecol, 
+
+if either condition is not true then you get datecol * 0 *1 = 0 
+
+large then takes the largest value from the resulting array, where either condition is not satisfied the entry is 0, where both are satisifed the entry is the datecol value, since dates are stored numerically, the largest date is therefore the one you want. 
+
+hope this makes sense, feel free to ask for more clarification. 

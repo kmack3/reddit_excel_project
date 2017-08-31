@@ -1,0 +1,102 @@
+6ivdt2
+Selecting a value in a column with a set interval, medical physician/researcher in need of help.
+Hello everyone!
+I´m a medical physician/researcher who have come to a grinding halt in an ongoing investigation due to a frustrating problem I have: I wish to make a selection of a value that appears with a set intervall (every 14th row) in a column and copy this value to a separate column + summarizing them and divide by a grouping of 5, generating an average. Sort of like a simple autofill - but the value I select needs to be every 14th column.
+I have exhausted my options, the Wiki on this subreddit, YouTube, random google searches and for the first few hundred rows I did a manual copy/past approach, but this was eventually exhausting. I have tried the offset function - but this leaves me with a situation where the reference cell is moved down one row between every 14th line and it therefore is not successful. To try and alleviate this I tried to fixate the reference cell with the $ sign - but this for some reason just leaves me with an immobile reference - so that the value does not change when I try to copy the function down the relevant column.
+Please refer this image for an illustration of what I am trying to accomplish and how my problem looks:
+http://imgur.com/a/CWlys
+
+(If anyone is curious, I am looking at prescription practice in Norway from 2004 to 2016 in regards to specific infectious diseases, my raw material is more than 150.000 rows long/(tall?) and I am therefore in sore need of some sort of automation of the selection process)
+
+Much appreciation to fellow Redditor /u/rnelsonee for previous valuable input on my Excel troubles.
+
+Thanks for any help, best regards! 
+Dr. H
+
+Edit:
+I am sorry for my somewhat unclear explanation, please see this image for the simplest presentation I was able to make:
+http://imgur.com/qY744XC
+
+I want to be able to use autofill in the F column, and making the selection in cell F1 move from 2004 values in column D to 2005 values (also in column D) in the below cell, F2.
+
+Any suggestions for functions or formulas to use?
+
+
+-------------
+Um, So, just looking at the screenshot, can yuo just use a pivot table in columns H:J?
+
+I think you can accomplish that a lot faster
+-------------
+Hey! So the way I figured out to do the first part is by using indirect(address()).
+
+Indirect is a function that looks at a reference of a cell and gives you the value in that cell. i.e. if your cell A4 has the text value A1 in it, it will supply the value of cell A1.
+
+The address function generates a cell based on a row and column you give it.
+
+Using your screenshot I used the following formula
+
+    =indirect(address(Q2,9))
+
+Where in cell Q2 is a cell that has value 2, then in cell Q3 you put value 15, and in cell Q4 you put 28. You can drag these values down and also drag down the indirect(address()) formula I gave you earlier and it'll give you every 13th value (which is what you had highlighted in your screenshot)! I didn't really know what you meant by dividing it into a grouping of 5 though. 
+
+Hopefully this helps!
+-------------
+Thanks for the reply.
+
+Essentially, what is going on left of K column is not really involved in the current data analysis/question at hand, or they are, but as a primary source of data.
+Collums I and J contain the raw data that I need to organize.
+
+What I am trying to compare is the average of antibiotics prescription among 4 different districts over a period of 14 years, but in order to do this I need to summarize the antibiotic use among 5 antibiotics, which is what is listed in the columns to the left of K column.
+
+I do not think a pivot table will do the trick.
+-------------
+Thanks so much for your reply.
+
+I do not this directly adresses my problem, I am sorry for my somewhat unclear explanation, please see this image for the simplest presentation I was able to make.
+
+http://imgur.com/qY744XC
+
+I want to be able to use autofill in the F column, and making the selection in cell F1 move from 2004 values in column D to 2005 values (also in column D) in the below cell, F2.
+-------------
+Ive uploaded a few more images, please see the second one:
+
+http://imgur.com/a/CWlys
+
+As I try to use the autofill function in the M column, I want to make the selection in the I column move down to 2005 from 2004, meaning I3, I16, I29 and so forth, but the selection in column I stays the same, at 2004 values - why is that? 
+-------------
+If you have your data nicely formatted like that then I think averageif would be good!
+
+The way averageif works is
+
+    =averageif(C:C,2004,D:D)
+
+What this does, is it checks to see if the value in the column C is 2004 (the second argument) and then it averages the corresponding value in the D column!
+
+If you want to make it really easy on yourself, instead of 2004, you can put D1, and then it'll reference that D1 is 2004 and you can just drag the formula down!
+
+If you want to see what value it's referencing, highlight the value D1 in the formula and press F9, it'll evaluate whatever you have highlighted!
+
+-------------
+The $ symbol goes right before the part of the cell reference you want to keep as you autofill. In your case the $ is before the row number so those stay the same as you autofill.
+
+Though really it seems like you just need to average in groups of 5 the values from 2004 then from 2005, etc. I might instead try this in cell M2:
+
+    =SUMIFS(I2:I66,H2:H66,H2)/COUNTIFS(H2:H66,H2)
+
+or
+
+    =AVERAGEIFS(I2:I66,H2:H66,H2)
+
+So in M2, it should average all the 2004 values in I2:I66 which, based on the dates repeating after 13 of them, should be the next 5 values. It should sum up 5 2004 values and divide them by 5.
+-------------
+I am sorry for my somewhat unclear explanation, please see this image for the simplest presentation I was able to make.
+
+http://imgur.com/qY744XC
+
+I want to be able to use autofill in the F column, and making the selection in cell F1 move from 2004 values in column D to 2005 values (also in column D) in the below cell, F2.
+-------------
+This worked beautifully!
+
+Thank you so much! 
+-------------
+Well is the formula you entered there in fact what you're asking for?

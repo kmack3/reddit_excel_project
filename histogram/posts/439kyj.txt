@@ -1,0 +1,32 @@
+Changing cell color based on a date.
+Conditional formatting.  You'll have to use the assumption of 30 days in the month, but something like this applied to column A will highlight all cells less than 180 days old.  Edit as needed. 
+
+    =A1>TODAY()-180
+
+EDIT - pic: http://i.imgur.com/nRdzvza.png
+
+and formulas that were cut off:
+
+    =A1>TODAY()-270
+    =A1>TODAY()-360
+    =A1>TODAY()-450
+    =A1<TODAY()-450
+Are you comparing to Today? Today - Training Day  < 9 months?
+I entered in the formulas with the correct column number and formatting color but it is still not working. It only changed them all to yellow for some reason. Is there anything additional i need to add into the formula for the program to recognize all of it? Also can I highlight the whole table as I do this or does it need to be done 1 column at a time?
+Don't change anything from those formulas, leave it as A1. Also, make sure they're ordered the same as in the picture.
+
+If you try that and it still isn't working let me know!
+I corrected back to the orignal formula  you provided and ordered them the same as in the picture. It is still not working. It highlighted everything red, even went and put in todays date and still shows up as red.
+Can you show us a screenshot?
+Ah crap, I think you were right about changing the reference.  Sorry about that.  Seems like you want the cell reference (where I have A1) to be the first entry in your range.  If that isn't doing it for you I'm not sure what the issue is, unfortunately.
+
+Edit - another pic: http://i.imgur.com/xEj4MoK.png
+[pic](http://imgur.com/RMrQJ89)
+I changed the refernce point and it didn't help. I even made a new sheet added some dummy dates and it didn't work. It would have anything to do with my side and top bars both being numbers would it? 
+I always have to fiddle around to get this to work. You may need to check the "stop if true" buttons for the first rules. The order of the rules also matters. 
+
+Also, /u/eirunning85 's instructions will only work if your dates are stored as dates in excel. Sometimes numbers or dates in excel are stored as text strings. If you have text strings this won't work. So be sure that you are working with date data types (which excel actually represents as numbers). Some of these intricacies can be difficult to learn at first but understanding them will really help out when it comes to using excel :)
+You're using R1C1 reference.  The formula should be:
+=RC>Today()
+
+Screen shot: https://imgur.com/gallery/zjCGY (and settings where R1C1 can be turned off)

@@ -1,0 +1,97 @@
+How do I make the time value of 18:00 display as 6:00?
+You could always try to compute a column next to 18:00 that subtract time past 12:59pm by twelve hours. Then display the new column in 24hr format. Column might look something like this, if 18:00 is in A1:
+
+=IF(HOUR(A1)>12,A1-0.5,A1)
+What you are trying to do is not very common as military or am/pm is typically something you *want* to see, but [I found a solution online](http://www.mrexcel.com/forum/excel-questions/497496-custom-time-format-12-hr-without-am-pm-2.html):
+>hide the am/pm part in a second line
+>
+>You can format the cell with a format this way.´
+>
+>In the Custom Format write 
+>
+>h:mmAM/PM  
+>position the cursor between the h:mm and the AM/PM
+>press CTRL-J
+>
+>Format the cell with wrap text
+
+>This format sends the AM/PM part to a second line. By keeping the default row height, this second line is not visible and so it's like you have the format you wanted.
+
+>Notice that in this case you still have the time value in the cell, you lost no information.
+
+I tested this method and it worked fine for me.  In addition, I had to change the format to be Top Align as originally it was only showing AM or PM.
+try =mod(B3,0.5)
+
+note: 0.5 is half a day or 12 hours.
+
+this will change all of the times to am.
+You could put an IF at the front that adds 12 hours if the shift time result is below a certain value. So, in the case of 10:30AM to 10:00PM, it would check if the shift is below some minimum, say 4 hours. If so, it'll add 0.5 (12 hours).
+
+But that sucks. One day, this will fail, when somebody actually works a half hour, goes home sick, and gets paid 12.5 hours.
+
+I'm familiar with idiots. Can you teach them military time? Can you use a super-friendly drop-down list with AM and PM beside each time?
+
+Another option: use VBA to enter all the information using prompts. The user presses a button, it prompts for each time, and in each case, whether the shift was at night or not.
+Closest you'll get is 6:00 PM and that's by changing the format to a custom "h:mm AM/PM" which is one of the presets there.
+This page got me past some problems
+http://www.pcmag.com/article2/0,2817,2316755,00.asp
+Maybe this is dumb, but Find and Replace might work? 
+I updated the post. I decided that typing the times needs to be easy and came across the 0":"00 trick. Now I need this to become a time value again on a different sheet.
+Are there any functions for this?
+Would please explain to me the -0.5?
+See the reason I didn't do that is because I have people that aren't that bright who are going to be using this and they need to be able to enter times without having to worry about entering am/pm. Otherwise they would complain about it being too difficult and wouldn't use it. This is going to be tool for managing the schedule at a Pizza Hut so it has to be idiot proof. but i also need to do calculations with the numbers. Anything i can do to make it simpler increases its effectiveness.
+
+ok I have an update. I have been able to format it without the am pm and have been able to do calculations with the time. except for one little bug..... if i want to say my shift starts at 10:30 in the morning, and it ends at 10:00 at night. I can't figure out how many hours I worked that day. It will say I worked half an hour. 
+
+this is the mess of a function i used
+=-1*((TIME(TRUNC(Schedule!F14/100),MOD(Schedule!F14,100),0)-TIME(TRUNC(Schedule!G14/100),MOD(Schedule!G14,100),0))*24)
+
+The example in the original post is on the "Schedule" sheet.
+Nice use of the mod formula!
+Can you explain how this function works?
+I am going to try this.
+Just FYI, I think I found a solution and wanted to mention it to you.  [Other comment.](http://www.reddit.com/r/excel/comments/258mcm/how_do_i_make_the_time_value_of_1800_display_as/chevsgg)
+
+I am not trying to spam, but as this subreddit is about sharing knowledge and tricks, I thought you might be interested.
+Seriously thats the closest I can get?
+Um...I dont think so, but again I am quite the newbie at excel.
+Are you copying and pasting to the different sheet?  You can paste values instead of formulas if that's what is giving you the trouble.  Also, is the AM/PM that big of a problem?
+Say the cell reads 3:00. How would the formula know whether to convert this text into 3am or 3pm?
+
+You should add another cell next to the 3:00 where the user can indicate whether the time is am ore pm. There, problem solved ;)
+0.5 is half a day, i.e. 12 hours.
+Like /u/DoWePlayNow said, .5 is half a day. This is because [Excel treats dates in the background as serial numbers.](http://support.microsoft.com/kb/214094) The link mentions that day 1 is January 1, 1900. Interestingly enough, this expands to time as well. So 12pm on January 1, 1900 is represented as 1.5 (half way through the first day).  
+
+When you're dealing with just time, it's stored as simply numbers between 0 and 1 so that it can easily be added to any date value.
+I am going to be harsh here.  Various people have told you that what you are asking to do is not possible because your original request was for Excel to strip away data and then somehow know that it needs too add it back in the future.
+
+It does not work that way.  If you want to do math using Times, then your source data represent that.  You can't just strip away am/pm and expect the formulas to adjust.
+
+I already told you how to hide the am/pm from being visible that for some reason you give a shit about.  Yes, they would have to type it military style or with am/pm at the end, and it would auto-format for the cell, but that is how data fucking works.
+Hey buddy, not sure if you still need an explanation for this one.
+
+MOD is the modulus function. It returns the remainder following division.
+
+It's handy for keeping results in a range. Like, if you MOD60 something, your result will always be between 0-59, otherwise, it'd divide cleanly.
+
+E.g. 120 mod 60 = 0 (60 goes twice into 120)
+121 mod 60 = 1 (60 twice, 1 remainder)
+119 mod 60 = 59 (60 once, 59 remainder)
+You can't remove the AM/PM or else Excel thinks it's 24 hours time instead of 12 hours. I mean, you *could* format it as text so it appears as 6:00 but then it would be text and not time.
+No I am not copying to a different sheet. I'm using the values in some math to figure out how the difference between two time.
+[Avpols Comment](http://www.reddit.com/r/excel/comments/258mcm/how_do_i_make_the_time_value_of_1800_display_as/chf25hj) I like this a little better. I'll let you know his solution solves my problem.
+Wow that is fucked up.
+
+Thanks for the explanation!
+I have to agree (mostly). You could put an IF at the front that adds 12 hours if the shift time result is below a certain value. So, in the case of 10:30AM to 10:00PM, it would check if the shift is below some minimum, say 4 hours. If so, it'll add 0.5 (12 hours).
+
+But that sucks. One day, this will fail, when somebody actually works a half hour, goes home sick, and gets paid 12.5 hours.
+
+I'm familiar with idiots. Can you teach them military time? Can you use a super-friendly drop-down list with AM and PM beside each time? 
+
+Another option: use VBA to enter all the information using prompts. The user presses a button, it prompts for each time, and in each case, whether the shift was at night or not.
+Yeah I know I'm being difficult. Im just wanting (not needing) a more elegant solution. Y'all are some of the more intelligent people on the internet. I knew you guys could figure it out. Y'all did mostly.Thanks. Lol
+Thanks for the explanation! Thats useful information for the future. 
+[deleted]
+Yeah this would work because it doesn't need to calculate the actual time they worked and nobody is scheduled for than 4 hours. This worked my problem is solved. 
+Wouldn't work. The TEXT function uses the same number/text formats as the formatting tool. 

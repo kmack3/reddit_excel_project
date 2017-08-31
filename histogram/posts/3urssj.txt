@@ -1,0 +1,19 @@
+Redesign spreadsheet to a more clean design
+it looks pretty straight forward to me functionally, color distinction between input cells and calculated cells, two inputs to compare. 
+
+Personally tho, I'd say cut the grey with teal background, just go basic white background, nice pastel colors for fills. There's a reason they're the standards and it's because they're nice on the eyes. Maybe further add borders around all of the 1 inputs/outputs and all of the 2 inputs/outputs. 
+
+Also do the buttons really do anything functionally? Like does the "new input data" button just clear the input data cells? Does the Help button do anything substantial? Does the compare button just execute formulas that are already there? 
+
+It might be worth it to get rid of the buttons completely, add some notes in small italic print next to the variables where people might need it, so they don't have so ask for it and read about it somewhere else. 
+
+Also reformat your graph so it doesn't have any decimal places, and personally, again, I would say to replace the dark grey with a white background, maybe expres the y-axis in thousands, and add x-axis and y-axis category labels, as well as a series which grabs the STI-STK crossing point (if any) and highlights it, then add a data-label with the relevant value. If you do that, you might also be able to get rid of the horizontal bars in the graph without really losing any information (you no longer need them to visually see at what value the two cross)
+
+The smartart (or whatever) under the graph, does it display something related to the information on the sheet? I can see it's like some stuff and some circles turns into some stuff and some lines, but I don't know what that means? If it doesn't convey any information, maybe cut it away?
+
+In the end, only your professor knows what he wants and I'm not him lol, but the above were my immediate thoughts. 
+
+now that I just look over it again, it seems like all your inputdata are excl. mva (I think) sometimes it can make it clearer to just put that above the input column, like put "SEK (eksl. mva)" above where you input the numbers, and then remove it from all the input data descriptions.  
+Check out Google's Material Design Guide, specifically the [Color](http://www.google.com.br/design/spec/style/color.html#color-color-palette) guide. Play around with the colors to see what your teacher likes best but making something less "flashy" is always hard since it's not defined.
+Hi, it looks like your comment got caught by the spam filter :O Possibly because of the google.com.br link? Either way it's approved now, just thought I'd let you know for future reference. 
+Thanks. I'll make sure to remove the .br from future links. 

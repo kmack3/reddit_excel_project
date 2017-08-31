@@ -1,0 +1,33 @@
+6fvxjn
+Excel file opens but nothing appears.
+97-2003 excel file e-mailed from another company contains spreadsheet data but when I open the file on my computer it is just the excel header and footer and no sheet. I can send it to a co-workers PC and he can open it and everything shows up. Running Excel 2010. I have searched online and everything is about opening blank sheets. It's opening a blank excel window a sheet doesn't even show up.
+
+
+-------------
+Maybe a dumb question, but is it just that you're viewing an empty worksheet (and the data is on another worksheet) or a location on a non-empty worksheet and you need to scroll around until you find where the data is?
+-------------
+Sounds like [hidden sheets](http://www.techrepublic.com/blog/microsoft-office/hide-excel-sheets-really-hide-them/) - a nasty little empire building trick.
+-------------
+Nope it has data on it. I just figured out from a spiceworks forum that clicking view {Full Screen} would show data and that indeed worked so the data is there. However if I minimize it back to normal screen size I cannot see the data again. So weird :\
+-------------
+Empire building? lol what?
+-------------
+Wha? Switching to full screen view mode (Alt-W-E) shows data but reverting back to a normal mode makes it disappear? What appears in the formula bar when you click on a cell that is supposed to contain data?
+-------------
+Office power. Illicit job security. Controlling data. Making yourself indispensable because only you can do xyz.
+-------------
+Mate if you're relying on peoples inability to do this:  
+  
+    Sub shwSheets()  
+    
+      For Each ws In ThisWorkbook.Sheets()
+        ws.Visible = True
+      Next ws  
+    
+    End Sub  
+  
+You're not building a very big empire...
+-------------
+Love it! Thanks for sharing.
+-------------
+90% of Excel users can't and we wouldn't have a subreddit without them.

@@ -1,0 +1,114 @@
+Automated email with refreshed excel sheet every Wednesday Morning
+I'm off to bed but this should be easily solvable with VBA. The excellent Ron De Bruin site has this:
+http://www.rondebruin.nl/win/s1/outlook/bmail10.htm
+
+Which should handle the sending. As far as the refreshing data on open simply call the sub listed here first:
+
+http://www.get-digital-help.com/2011/06/13/auto-refresh-a-pivot-table-in-excel/
+
+
+"Refresh"
+
+Please expand. 
+Oh, and does he send the spreadsheet as an attachment, a PDF, or some of the contents of the sheet int he body of an email?
+[deleted]
+Once you've refreshed the data do you save over the top of the previous workbook - maintaining the same file name - or do you save as a new workbook? Also, for the email addresses are these coming from a global address book, or an excel sheet with the email addresses in it (i.e. A fixed distribution list?).  
+Use PowerShell, check my comments o the thread below, with entire code, just require cleanup for the part you don't need 
+
+https://www.reddit.com/r/PowerShell/comments/4k2n9z/powershell_and_excel/
+I thought I was an intermediate user, but I didn't even know you could do this. Back to beginner status! 
+If you open his file and hit alt+f11 it will open the VBA window. You should see code or maybe a module on the left side bar with the code. That should get you started. Or, you could copy/paste it here for a walk through.
+In addition to Ron de bruin (if you are using outlook) you will want to look at the workbook_open VBA event. This will execute your macro for you and generate the email as soon as the workbook is opened. To automatically open the workbook every wednesday look into the Microsoft task scheduler. Just setup a basic task and schedule it wednesday at the desired time to open up your workbook. The task scheduler will open your workbook, the macro will execute send email then close your workbook and save it until next Wednesday. I have about 10 of these types of emails that go out every night/morning from a virtual machine at my office. 
+Was about to suggest Ron De Bruin's site too, I used the basis of one of my codes to send out a pivot table in an email (via outlook) to a set of stakeholders every time the workbook is refreshed. Very useful site.
+It is a pivot table that is connected to an outside source through SQL server. Once refreshed, the data is updated through the current date.  Sorry I wasn't more clear.
+tldr; sort of 
+Another thing setup this script to run in task scheduler every Wednesday 
+
+    # excel file path
+    $file = "C:\Users\hso\Desktop\EmailReports\CustomerAddedData\CustomerAddedDataReport.xlsm"
+
+    # directory path where PDF report will be saved
+    $reportPath = "C:\Users\hso\Desktop\EmailReports\CustomerAddedData\ReportSent"
+
+    $filename = "result"
+
+    $filepath = Join-Path -Path $reportPath -ChildPath ($filename + ".pdf") 
+
+    # kill all instances of excel if any
+    taskkill.exe /F /IM excel.exe /T
+
+    #region Start Excel
+    try
+    {
+        # Creating the excel COM Object 
+        $xl = New-Object -ComObject Excel.Application; 
+
+        # Setting up Excel to run without UI and without alerts
+        $xl.DisplayAlerts = $false; 
+        $xl.Visible = $false;
+      }
+
+    Catch
+        {
+        Exit
+        }
+    #endregion Start Excel
+
+    try
+    {
+            # Opening the workbook, can be local path or SharePoint URL
+            $wb = $xl.workbooks.open($file);
+
+            # Calling the refresh
+            $wb.RefreshAll(); 
+
+            # Save as PDF
+            $wb.ExportAsFixedFormat($xlFixedFormat::xlTypePDF, $filepath)
+
+            # Saving Excel & Closing Workbook
+            $wb.Save();
+            $wb.Close();
+
+            #Release Workbook
+            [System.Runtime.Interopservices.Marshal]::ReleaseComObject($wb) | Out-Null
+
+            #region SendSuccessEmail
+
+            $Username = "xyz@abc.com"
+            $password = Get-Content C:\Users\hso\Desktop\PowerShell\hsoSecurePassword.txt | convertto-securestring
+            $cred = new-object -typename System.Management.Automation.PSCredential `
+                     -argumentlist $username, $password
+
+            Send-MailMessage -Attachments $filepath -Subject "New Customer Added Report $($filename)" -Body "Hi XXX, `n`nPlease see attached for New Customer Added data report" -From xyz@abc.com -To xyz@abc.com -Cc xyz@abc.com,xyz@abc.com,xyz@abc.com,xyz@abc.com,xyz@abc.com,xyz@abc.com -SmtpServer "smtp.gmail.com" -Port 587 -Credential $cred -UseSsl
+
+            #endregion  SendSuccessEmail
+
+
+
+    }
+    catch {
+
+        #region SendFailureEmail
+
+        $Username = "xyz@abc.com"
+        $password = Get-Content C:\Users\hso\Desktop\PowerShell\hsoSecurePassword.txt | convertto-securestring
+        $cred = new-object -typename System.Management.Automation.PSCredential `
+                    -argumentlist $username, $password
+
+        Send-MailMessage -Subject "Failed to process report $($filename)" -Body "Failed to process New Customer Added data from $($filename) because of $($_)" -From xyz@abc.com -To xyz@abc.com -SmtpServer "smtp.gmail.com" -Port 587 -Credential $cred -UseSsl
+
+        #endregion SendFailureEmail
+
+           }
+
+
+    #region Exit Excel
+
+    #Quiting Excel
+    $xl.quit(); 
+
+    #Release Excel COM Object
+    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($xl) | Out-Null
+
+    #endregion Exit Excel
+He just sends the link to the excel sheet, which was refreshed and saved to become current.

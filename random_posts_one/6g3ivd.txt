@@ -1,0 +1,43 @@
+6g3ivd
+Weird Borders in Conditional Formatting?
+Hey guys. I'm having an issue with the border in my conditional formatting rule. Where I want to apply a solid border around a cell if it meets a condition, the rule is only applying the border to *part* of the cell. I've taken a screenshot to illustrate (Look at the gray row beside Int Mod 4):
+
+http://imgur.com/a/Az3Sr
+
+I'm assuming that the issue has something to do with the fact that I'm working with merged cells. Each bordered cell is actually two merged ones. Beyond that I'm confused. 
+
+The row in question uses the following condition to decide where to apply itself:
+
+    =$BC7=intMod
+
+Where $BC7 works its way down the Int Mod column and compares against a value held elsewhere. Can someone tell me what's causing the problem?
+
+
+
+-------------
+>I'm assuming that the issue has something to do with the fact that I'm working with merged cells. Each bordered cell is actually two merged ones. 
+
+this is your issue. as far as Excel is concerned, the data in any set of merged cells is *really* only in the top-left cell of the set of cells. the rest of the cells in the set are blank. because of this, the second cell in each of your merged cells is not triggering the conditional formatting.
+
+why are you using merged cells? 
+-------------
+That's not the case unfortunately. Were these cells merged vertically, you'd be absolutely right, but they're only merged horizontally which shouldn't cause the issue you're describing. It's triggering, because both left and right sides of the merged cells are turning gray. They're just not applying the border. I should mention that I've managed to do this elsewhere without issue:
+
+http://imgur.com/a/UgZ5s
+-------------
+just played around with it a bit; it seems like this happens if i merge the cells *after* applying the conditional formatting. when i merge the cells first, and then apply the conditional formatting rule to them, it works correctly.
+
+try removing all of the conditional formatting rules, and then re-applying them.
+-------------
+But still avoid using merged cells whenever possible. They are hell.
+-------------
+That did it! That's obnoxious to say the least. Thanks so much for the help.
+-------------
+My entire worksheet is actually an array of squares which I use to shape into the cells I need via merges. It's a unique way of using Excel and definitely comes with drawbacks, but now that I've started using it this way I doubt I'll go back.
+-------------
+Until you discover all the other shit that comes with using merged cells. Examples:
+
+- copy/pasting data into or out of them essentially doesn't work - so nobody who has to put data into them or take data out of them is going to hate it.
+- formatting idiocy
+- difficulty of use in pivot tables
+- troubles with power query

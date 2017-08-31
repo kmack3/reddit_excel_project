@@ -1,0 +1,55 @@
+Happy FRIDAY: Top Five VBA Development Tips
+Thanks for the tip on disabling the oh-so-annoying syntax pop-up, right up there with that dumbass paperclip in my book!
++1 for option explicit - I also tend to use option base whatever I'm doing as it makes life a lot easier for anyone trying to read the thing!    
+
+If we are going VBA specific then I think naming sheet objects properly and then calling them in absolute terms is a lot cleaner and nice than the alternatives. Happy to be disagreed with on that one though!    
+
+Anything in the Microsoft scripting runtime library - so FSO's and Dictionaries tends to be well worth investigating.    
+
+Lastly I guess would be interface inheritance which at least let's you do basic polymorphism...
+
+
+These are all solid suggestions. Rules, even! Allow me to expand, if I may.
+
+As for a VBA (or really any coding) font, the one I have chosen is Adobe's professional coding font called "Source Code Pro." Available for free here:
+
+http://sourceforge.net/projects/sourcecodepro.adobe/
+
+Indenting code properly is import. And a real pain to do by hand on a large project. As a result, you can't really live without an add-in that does this for you perfectly in an instant. So, we **need** this:
+
+http://www.oaltd.co.uk/Indenter/
+
+Where is this procedure being called from? Where in my whole project am I using this one variable? I want to press a button and have my custom procedure header pasted. The list goes on and on. You need to download and install MZ-Tools. Really, you do:
+
+http://www.mztools.com/v3/download.aspx
+
+Sometimes, it is best to look at your code in a different development tool. Notepad ++ really helps here (You have to tell it you're using VB as the programming language):
+
+http://notepad-plus-plus.org/
+
+**I didn't change a thing! Why is it all going wrong now? WTF?** This tool will show you even the tiniest differences in two files:
+
+http://winmerge.org/
+
+There are a few more, but it's Friday night. Happy coding!
+
+
+Feel free to add your own tips too!
+Great post - thanks!
++1 a million for option explicit, amirite? someone once told me they never use it because it's a "crutch." I almost cried. 
+
+I used to be stronger proponent of employing all the object oriented features of VBA (to the extent they exist in Visual Basic 6.0). But, the more I develop, the less I see the return on investment  particularly when it comes to interface inheritance. when it comes to charting, I usually use the hyperlink rollover method instead of the chart mouse move events. then again, I understand rollovers essentially exploit a bug in Excel and can be hard to understand and implement. so I don't begrudge anyone for working with chart events through inheritance. 
+
+I don't think enough emphasis is placed on encapsulation when it comes to variables and methods. instead of dumping every procedure and variable into an open module, that stuff should really go into the sheet object to which it belongs. if you put a procedure in the correct sheet object, you don't need to say "activesheet," you can just use Me. What do you think about that?
+
+Edit: I see what you meant by absolute terms. Yes, I do that, too! Rename them in the project explorer and then address them directly. This is the best way to do it. It keeps you from creating a new worksheet object. I'm with you 100% on that.
+What do you mean by 
+>...naming sheet objects properly and then calling them in absolute terms is a lot cleaner and nice than the alternatives.
+
+?
+Have you tried the OA Utilities in 2007 or 2010? Looks like the project hasn't been updated since '05.
+
+
+
+
+I'm still using them in Office 2013. No issues.

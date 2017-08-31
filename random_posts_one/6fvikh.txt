@@ -1,0 +1,59 @@
+6fvikh
+How can I stop formulas from changing when I sort?
+Aloha, I've been working on a small project to help rank houses objectively.  The problem I have is that when I try to sort by score (data, sort) the formulas change automatically and have to be rewritten. 
+
+Is there a way I can sort without the formulas changing? Also, is there a way to fill in the formulas in New cells (dragging to new cells also automatically changes the formulas? I want row 3 (the weighed score) to be used in every row, while it updates the score for each house automatically (row 6 and up)
+
+Thanks!
+
+Link to spreadsheet:
+
+https://drive.google.com/file/d/0BzBZi8LYN_77T3U1aC1EOF8xcDA/view?usp=drivesdk
+
+
+-------------
+Have you tried enclosing the cell values in dollar signs? For example, if your formula referenced cell C4, it would look like $C$4. This will lock the formula onto that cell. You can either manually type the dollar signs, or press F4 to apply them while your cursor is inside a cell value.
+-------------
+What formula is in A6?
+-------------
+Use tables and lock the weighting values like this  $C$3...
+
+Here's the conversion I made for you:
+
+https://expirebox.com/download/0a527ec98a97a169a27d9f657b22585a.html
+-------------
+Solution verified!
+-------------
+Fantastic, this works perfectly! Thank you!
+-------------
+Solution verified
+-------------
+Thank you, this helps a lot
+-------------
+Solution verified
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+
+You have awarded one point to _HookEm2013_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Can you also reply solution verified to me? Thanks.
+-------------
+
+You have awarded one point to _small_trunks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Cheers mate.
+-------------
+Sure thing! Thanks again, I like the color coding you included
+-------------
+It's called conditional formatting. I select the whole *table* column, Home -> Conditional formatting -> choose one you fancy.

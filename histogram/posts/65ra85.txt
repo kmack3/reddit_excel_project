@@ -1,0 +1,74 @@
+Need to reduce data entry time - does a software exist to pull specific data for me and export to excel?
+PDF to Excel isn't straightforward because Adobe has deliberately made it difficult.
+
+Is the PDF an actual text format on the page, or it a scanned image?
+
+i.e. Is there a cursor running through the letters?
+I make heavy use of https://docparser.com/ to extract data from PDFs
+I was looking for something to convert some images to Excel and these guys maybe have something for you:
+
+http://www.dynamsoft.com/blog/document-imaging/scan-documents-images-and-upload-online/
+
+And these guys:
+
+https://www.onlineocr.net/
+
+I can't vouch for them but they might have something you could use. Both have a try-before-you-buy thing going on.
+I have some experience with trying to use scanned documents in an automated system. We had OCR scanned documents to process, but unfortunately the OCR was simply not accurate and consistent enough to achieve anything close to acceptable results, especially with any form of handwriting. You may have better luck due to the regular nature of paystubs, but I suspect since you require 100% accuracy (for financial data), you will run into problems. 
+
+I would suggest you try to receive the paystubs in some electronic form where the numbers are embedded in the pdf (you can embed alphanumeric characters into the pdf that you can highlight and copy), then use a tool to pull into Excel. You will also need to address the issue of tabled data, OCR might not understand the structure of the paystubs, and how columns and rows interact. 
+
+Computer vision is an extremely complicated problem, but it is improving. If you find a way to accurately correlate a  tables headings with its data automatically, I would be interested in hearing how. And for a relevant XKCD, https://xkcd.com/1425/
+Is there any chance you can work with the source of your data to receive it in a non-paper/ non-fax/ non-PDF format to begin with? 
+Any ocr is going to take time to train.  It may be worth it, depending on what the forms are like.  Are they at least typed or are they handwritten?  If the latter, you're probably better off just keying them.
+Microsoft office lens (for iPhone or android) does a fab job of quick capture, then simply use a cloud drive (google / Dropbox ) to get your OCR files into your PC / server,  Here is a concept which should work, patient ID and hospital ID would be in different locations corners across lots 10,000's of say X-rays, I would add a TIFF OCR ifilter to sharepoint and full indexed the lot, then used some DLP software (Symantec) to find the patterns (detection criteria) and extract this the yield - DLP can do reasonably complex  regular expressions matching. 
+I have no idea if any of these work, but you could search amazon for "handheld pen scanner".
+
+I found a bunch:
+
+https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Delectronics&field-keywords=handheld+pen+scanner
+
+I have no idea if you could go from the scan to excel -- maybe you can use one of them like another "keyboard".
+I don't understand. You get PDFs then you scan them ? Do you scan them to join the files?
+
+
+You're probably better off using a mobile phone based OCR (like [Text Fairy](https://play.google.com/store/apps/details?id=com.renard.ocr)) and grabbing the texts directly off your source and pasting it into Excel.
+
+This does not exist.
+
+Your task can be automated, but it will take very powerful developers who are masters at parsing data.
+It a scanned image 
+> Adobe has deliberately made it difficult.
+
+It's postscript + text & fonts & compression.  First and foremost, it's designed to tell printers how to accurately and faithfully render ink.
+[Image](https://imgs.xkcd.com/comics/tasks.png)
+
+[Mobile](https://m.xkcd.com/1425/)
+
+**Title:** Tasks
+
+**Title-text:** In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene\. He figured they'd have the problem solved by the end of the summer\. Half a century later, we're still working on it\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/1425#Explanation)
+
+**Stats:** This comic has been referenced 1047 times, representing 0.6746% of referenced xkcds.
+
+---
+^[xkcd.com](https://www.xkcd.com) ^| ^[xkcd sub](https://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](https://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_dgd2tlz)
+Unfortunately no our clients are on disability so we have to take the stubs whatever way the client feels best in sending them in.  Most are emailed as an attachment that they downloaded from company website, but then they are also faxed and snail mailed
+Can you copy & paste data off of it at the moment?
+
+Yes but it pastes as an image and not into a cell, I really just need the data.  I'm wondering if an OCR pen might be better?
+You will spend more time proofing the OCR conversion then you are currently spending typing it in yourself. Don't go that route.
+
+A better solution would be to ask the client for an electronic copy. What ever software they use for pay stubs is already digital. Converting it to a paper report then back again only invites mistakes. 
+
+They probably have a choice when printing to export to excel or maybe a csv sheet. Get these instead of a scan or print copy.
+
+MS Access can import these types of files with a click of a button after the initial import query is run once. Then you will have a database with every clients information and not just 1 big spreadsheet.
+If it pastes as an image, then Excel can't read that data.
+
+You need something that can read image and generate text values from that - the OCR pen should help.
+I'm afraid that the error margin would be unacceptable. Think of the chaos. 
+Do you know of any software that will allow my cursor to act lime an OCR pen?
+SimpleOCR has a plugin that will convert images to Excel.  I've had best luck with Nuance Omnipage, and I've used Adobe Distiller plenty in the past.  If you need only a few documents scanned, Google Drive's OCR will do in a pinch.

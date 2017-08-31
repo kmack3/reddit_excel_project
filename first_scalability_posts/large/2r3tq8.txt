@@ -1,0 +1,79 @@
+large
+2r3tq8
+Help moving cells on a large spreadsheet
+
+I have data that is copying from the source and putting the information in separate rows.  I need to move the data up and over and then delete the separate rows...is there a way to automatically do this or do I have to do it manually.  There are nearly 400 Rows of this.
+
+[The top portion is how it looks now, the bottom is how I want it to look](http://imgur.com/pKdsgda)
+
+Thanks guys.
+
+
+-------------
+This can be done with a macro.
+
+SAVE BEFORE DOING ANYTHING!! MAKE A BACKUP!
+
+If the data is laid out exactly as you have shown above (but longer), then you can use this macro
+
+Click on the first cell of the last row that contains the data, in the example provided above, this would be cell A12. It will work through all of the rows until it gets to cell A2, when it notices it's empty and will auto-stop.
+
+
+    Sub mover()
+    
+        Do Until ActiveCell = ""
+            Range(ActiveCell, ActiveCell.End(xlToRight)).Cut Destination:=ActiveCell.Offset(-1, 2)
+            Rows(ActiveCell.Row).Delete
+            ActiveCell.Offset(-2, 0).Activate
+        Loop
+    
+    End Sub
+
+-------------
+In h3:
+
+=if(c3="","","x")
+
+In i3
+
+=if(c3="",a3,"")
+
+In j3
+
+=if(c3="",b3,"")
+
+In k3
+
+=if(c3="",a4,"")
+
+In l3
+
+=if(c3="",b4"")
+
+And so on until you have covered all the data. Autofill. Then filter h3 by x and delete all those rows. Then delete a:h.
+-------------
+Okay perfect. Thank you. I knew I had to use a macro but couldn't think how to repeat it and Mali it stop. I guess "loop" and starting at the bottom is the answer. How do I award you a point?
+-------------
+Solution Verified
+-------------
+
+Hi!
+
+It looks like you received an answer to your question!  Since the top is
+still marked as unsolved, I am here to assist you!
+
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?
+
+[Help Changing Your Flair?](http://www.reddit.com/r/excel/wiki/index)
+
+[Flair Descriptions](http://www.reddit.com/r/excel/wiki/index)
+
+
+-------------
+Simply reply to my post above with the words: Solution Verified
+
+Thanks
+-------------
+You have awarded one point to epicmindwarp

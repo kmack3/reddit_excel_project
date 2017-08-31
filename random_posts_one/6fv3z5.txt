@@ -1,0 +1,41 @@
+6fv3z5
+Determine if any cell in a list of dates overlaps a range of dates
+Looking to determine if any occurrences of an event overlap a list of date ranges. Everything I've searched for online only helps me with checking against a single date range.
+
+So in the end, the question I'd like to ask for each cell in Column A is "Does this event overlap any of the ranges in Columns B and C?"  
+
+
+http://imgur.com/a/AJKlR
+
+
+Thanks so much!
+
+
+-------------
+To count how many dates A1 is in the middle of column B and column C, you can use this formula: 
+
+    =COUNTIFS($B$1:$B$20,"<"&A1,$C$1:$C$20,">"&A1)
+
+But to get a true/false answer, put this formula in D1 and drag down: 
+
+    =COUNTIFS($B$1:$B$20,"<"&A1,$C$1:$C$20,">"&A1)>1
+-------------
+How about
+
+    =COUNTIFS(B:B, "<="&A1, C:C, ">="&A1)>0
+
+Result will be true/false to indicate it is in one of the ranges.
+ 
+-------------
+Thanks for your help. /u/CFAman's solution worked. 
+-------------
+SOLUTION VERIFIED
+-------------
+ok. the above formula should have been >0, not >1
+-------------
+Thanks so much, this worked great. 
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,83 @@
+Best way to create a model? Multiple sheets or one single "master" sheet?
+I think it comes down to the complexity of your model, and how many data sets you're using. I find it handy to separate large models into three sections: raw data, calculations, and summary. I'll use a separate sheet for each raw data set, potentially more than one calc sheet if there are different types, and finally a single summary sheet that contains only the answer you're looking to produce.
+
+In either case, the most important thing is that you're able to audit the formulas and know what they're doing.
+Multiple sheets, but then use Named Ranges to reference data on other tabs. 
+
+Named Range allows you to reference a cell by a common-English name, so your formula looks like "TotalExpense * ExpenseRatio" rather than needing to look up what "Expenses!$F$19" refers to. You can set a named range to a formula (vlookup is especially handy).
+My pref is multiple sheets. But that's just me. It might be burdensome to navigate from one page to another but if you're good at using shortcuts then it's not that difficult. Raw data calc, summary sheet should be separate for you to view all your outputs together. But it is really about preference. I usually build the core model on one page. DCF on another sheet. Comps on another and finally summary. I hope this helps. 
+Like anything, it really depends. But imo a fucking enormous monitor (and multiple monitors) plus one master spreadsheet is optimal in most cases.
+That's an interesting question/thread.
+
+Today I was working on my own personal valuation spreadsheet, this includes several valuation methods, including a couple of DCF models.
+
+I'm not an excel pro, by any standards, but this is how I do it:
+
+Set of Raw Data sheets: 1 sheet for queried data, 1 sheet each for balance sheet, cash flow, income statement, and "key ratios data" taken from morningstar. I like them separate, because I like to be able to see these figures on their own. I currently manually download the BS, CF, IS, and KR from morningstar, but I may to look at how I can pull that data in.
+
+I then have calculation sheets for each valuation/DCF. I like to have at the top left a quick clean summary of the important results, and on the top right I pull the most relevant info from the query sheet. All the calculations are done 'under the fold', meaning I have to scroll down to see them.
+
+Then I plan to have a summary first page, which includes all the results from all the valuation/DCF sheets.
+
+I'm currently working on revamping these sheets, so right now, they're still somewhat a mess. I originally designed it in a hurry just to get the results.
+
+This is one for /r/financialmodelling, though you won't get any more input than you've received here.
+
+I agree with others who say that it depends. The most widely agreed principal in modelling circles relevant here is that if separation: most modellers agree that it is worthwhile to generally separate inputs, calculations and outputs; such that future users can easily find and identify various items.
+
+In this case, preferences would likely be split between single- and multi-sheet (and perhaps other options that we don't need to complicate this discussion with). Most people would be accepting of the other view, provided it was done well. If single-sheet, have sections within each sheet so that users know where to find inputs etc. If multi-sheet, ensure the sheets are logically named and arranged so that users intuitively know how to navigate the workbook. Either way, it is probably a good idea to strictly apply consistency across the models within the model.
+I'll provide a standard example of laying out your sheets 
+
+Sheet 1 If you are using CapitalIQ or Thompson One for industry metrics and ratios then you can input them
+
+Sheet 2 -  Company provided financial statements if the company is not public (P&L, CF ,BS, DEP SCH, Debt SCH, WORKING CAP) 
+
+Sheet 3 - if company is not public then you can use references from sheet 2 and build your own model with metrics provided by you or your team or research. 
+
+Sheet 4 Comps
+
+Sheet 5 DCF
+
+Sheet 6 precedent transactions 
+
+Sheet 7 football field and related calcs 
+
+Sheet 8 Summary for printing 
+
+Sheet 9 Case Scenarios 
+
+Sheet 10 anything else ...
+
+I hope this helps. 
+
+
+I guess it really just depends on personal preference.  I like multiple pages but I had a contract recently where he wanted all the entities stacked on one sheet.
+Multiple is the way to go.  Not so much for coursework, but in the real world.  You're going to want to update your data--easier and safer if it's in a separate sheet. 
+
+There's no reason you can't create a sheet simply to help compare and contrast stuff for checking.
+
+At one time there was an efficiency gain from keeping everything on a single sheet but those days are long gone.
+What type of raw data are you using ?
+I usually do each distinct part on its own sheet and then have a summary sheet to link all numbers together so you know what goes where.
+
+Or if you are into automation, just have one sheet as input interface (and perhaps a few config sheets) and automatically generate the sheets and formulae as you pull the data. 
+I would put all my data on a single sheet.  But each line with enough indicators to show what they belong to.
+
+Then I could autofilter, subtotal, pivottable and even split my data into separate worksheets if I had to.
+
+It makes it lots easier for updates, too.  What to add a field (or 8) that you missed.  Just insert those 8 columns in a single worksheet.
+
+Fixing a formula?  Just fix that one cell and drag down through your data.
+
+And when your supervisor asks for an overall summary, you don't have to combine worksheets.
+
+If your co-workers want just their data, you can create reports from that single sheet (autofilter, copy|paste to a new workbook).
+
+Multiple workbooks/worksheets would drive me nuts!
+I've recently made a 27 sheet Footy tipping spreadsheet, and I've found it much easier to use different sheets because it allows me to organise my thoughts, and its easier to just click from sheet back to sheet rather than scrolling and panning around a single sheet. For my spreadsheet 23 or the 27 sheets are "input" sheets for the results of each round. the only issue with that was that you cant autocomplete a sheet column/row, as in, if I wanted =SUM(Round 1!M15:Round 1!N15) and then =SUM(Round 2!M15:Round 2!N15) I would have to copy it over and change each sheet name (i.e Round 1 to Round 2 in the calc cell.) But apart from that, it was worth using the excess sheets.
+If you're going to use Data Tables (e.g. for sensitivity analysis) use one single sheet. Using multiple sheets with Data Tables can get messy.
+I follow this teen as well. But I like to add a test/debug sheet for each unique calculation sheet. This way the reviewers of my work can check the formulas/calculations against good and bad data checks. 
+I second the use of named ranges. My preferred method is to use a dedicated page that houses all of the raw data, and then use multiple tabs to compile and display the data based off of reporting type.  The named ranges make it easier to troubleshoot errors and/or add data sets.  It also makes it easier to navigate if someone else needs to pull data from your model.
+Thanks. Is the best to have raw data in one sheet and create multiple sheets to refer back to it? Is this the most common method?
+Company's financial statements and industry data 
+Yes - that's typically the best route to take. It keeps it clean, and easy to walk through when you need to audit your data and results.

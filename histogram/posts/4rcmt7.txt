@@ -1,0 +1,39 @@
+Which is computationally faster: VLOOKUP+COLUMN or INDEX+MATCH?
+Based on the research of u/fiernt, it depends on whether your list is sorted.  In practice, 1% differences probably slip in under the radar.
+
+https://m.reddit.com/r/excel/comments/4jea6j/vlookup_vs_indexmatch_showdown/?ref=search_posts
+Here is an interesting link comparing lookup techniques: http://analystcave.com/excel-vlookup-vs-index-match-vs-sql-performance/
+
+It turns out that if you can sort your data, there is a way to use two VLOOKUPs to make your formula extremely fast. 
+I also did some testing at some point. They come out out at pretty much exactly the same speed, maybe a sliiiiiiight advantage to VLOOKUP, but the difference is miniscule even at tens-of-thousands of lookups. 
+
+The primary gain is in having sorted data and using the TRUE (of vlookup) or -1/1 (of MATCH). This will reduce the search time to a fraction of the time an exact search will take. 
+
+
+You should also ask yourself that if you are running into performance issues, if this should be ran inside of a proper database as opposed to Excel.
+Search less.     I had a sheet where I had a couple hundred thousand rows, and I had to find matching data on ANOTHER sheet that had close to a million rows (ouch)
+
+What I wound up doing was sorting both sheets by common keys, and only have the vlookups work on ~10k rows at a time.     I had to check the formulas every now and then to adjust it if it wasn't finding anything at all, but it worked rather well for a one-off.
+use MS Access / real Database
+Thanks! Too bad there aren't really any gains, though it seems INDEX+MATCH is overall superior still.
+Solution Verified
+https://www.reddit.com/r/excel/comments/4jea6j/vlookup_vs_indexmatch_showdown/
+
+Non-mobile link.
+And since index match is significantly less likely to break if you change your workbook, it's generally a no-brainer to use over vlookup. 
+Wow, that's pretty amazing! I don't think I'll use the SQL even though it is technically the best option. It seems cumbersome to set up. But I'm going to give those double true Vlookups a try.
+This is interesting! Thanks for sharing the link. 
+
+Looking at the result data, VLOOKUP, INDEX/MATCH, and VBA all seem to operate in [O(N)](https://en.wikipedia.org/wiki/Big_O_notation) time on both sorted and unsorted challenges. Surprisingly, SQL correlates best with O(N^2 ), but emerges as the quickest solution--sort of. The 'double true VLOOKUP' wins in the sorted challenge, but if I understand the technique correctly, it requires knowing the key values actually exist in the table (otherwise you will get spurious results), so it is not suitable for applications where an exact match is required and the target keys are not controlled.
+
+Anyway, more thoughts on the SQL approach: As u/AthiestCowboy [points out](https://www.reddit.com/r/excel/comments/4rcmt7/which_is_computationally_faster_vlookupcolumn_or/d50hgt6), a proper database is often a good choice when confronted with lookup performance problems. I am surprised, however, that SQL (at least here) seems to perform in O(N^2 ) time. I did not inspect the test set up, but it seems like at some point, if N grows sufficiently large, the N^2 correlation will kill SQL's performance relative to the others. If you can use a SQL environment that gives you the power to create proper indexes, I would expect the SQL performance to be more like O(N), and consistently outperform all other techniques.
+That's a fantastic read! I've always just used Index Match for small stuff (<500,000 rows and maybe 50,000 in the index) and switched to VBA for anything bigger. I stopped using VLOOKUP years ago because you have to presort (which I think he should have added to the time) and breaks everytime you move things but this looks like it might be worth reconsidering that for places where the result is pretty static. I've also got to look through the rest of that site I guess to see if they do stuff like this often. Thanks!
+I find your response funny. After working with Excel for so long, what's a proper database? :p
+
+You have awarded one point to _MikeyAZ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Thx.  On vacation and lazy.
+I feel like their comparison of vlookup and index match vs their "double true" on sorted data is a bit of a misrepresentation in an otherwise good article. It looks like they're comparing index-match and vlookup, and forcing it to do an exact search, and comparing this with a vlookup that is being told to search sorted data. And of course the "double-true" vlookup that is looking at sorted data is faster. 
+
+The "double" aspect just sort of helps you stay out of trouble in terms of returning a value corresponding to a value that isn't actually there, I want to match the value 50, but the nearest value is 45, and a normal vlookup or match returns the corresponding value for that instead, but actually I wanted it to tell me "50 isn't there". When you're working with sorted data, doing this check has a very low cost, so if you aren't certain of your data it may be a good idea to do. If you are certain of your data, however, then there's not really any reason to go for the "double true", you're just making formulas longer and messier than they have to be. 

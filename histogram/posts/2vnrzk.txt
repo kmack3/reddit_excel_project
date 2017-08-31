@@ -1,0 +1,44 @@
+What all can VBA & SQL do together?
+A LOT. You can query information from sql server databases and have them print out directly into to excel sheets, which can be formatted however you please. This is a relatively cheap and easy way to provide real time reporting if your business isn't quite ready for tableau or any expensive bi tool. 
+
+I'd love to tell you more as this is 100% of my job but I'm currently taking a dump. Google it!
+make the life of the person who supports the sheet after you living hell
+Usually when connecting Excel to a database and use SQL queries, you can use ODBCs ([like this](http://stackoverflow.com/questions/15844633/using-excel-as-an-odbc-database)) to connect to a database.
+
+Or, if you want to parse your data in Excel with SQL, [check this link out.](http://stackoverflow.com/questions/18798522/run-sql-on-excel-table) There's plenty of options out there. Also, if you have the Excel BI Suite (Power Query, Power Map, etc.) I believe you can do SQL queries that way too, but I'm not sure, it's not my area of expertise. 
+The short answer is "whatever you want to do".
+
+First off, with VBA have full control over Excel/Access and if you reach out to the Windows API, you can make the PC do just about anything as well. Remember when Macro Viruses were a thing? Those were written in VBA. 
+
+If you can figure out how to connect to other programs, you can talk to and/or control them as well. What you can do depends on what their API lets you do. Around here we've used that to control some terminal emulator programs to navigate the systems, read and write data.
+
+As for SQL, you can use the VBA to build the SQL, query the DB, bring back the data and either save it or loop through it to update info you already have, or do some processing on it that may not be possible in SQL (Normalizing merchant names! Hooray! Also, fuck you VISA!).
+
+Once you get the recordset back, it's just like any other local data, you're only limited by your imagination. 
+
+
+weeeelll I scaled up a reporting job in my small company to cover about 8000 annualized reports automatically so I spent about 35 of my 40 hours a week imagining new shit to do instead of wasting my life preparing reports.
+Internally, we have a web based system for viewing budgets, spent, etc, but it's clunky in that you need to query by project number or client or manager or director. We have people who work on 10-15 projects across multiple clients and directors, so querying their projects was cumbersome. Not to mention that total dollars/hours spent was on one report, while hours spent in the current period was on another and invoiced to date was on a third. Meh.
+
+I created an Excel file that does the SQL query for the full data set, dumps it onto a hidden data sheet and then I have another tab that lists all their project numbers and does lookups to the data sheet. With a little more VBA here and there, I gave it to those guys to put on their desktop. Every morning they can open the file, it grabs the data automatically and shows them everything they would want to know about all their projects, in one place.
+You can do anything. setting up a frontend for users to interact with an oracle db is what I'm generally tasked with. you can have vba parse data, buildup a sqlldr ctl file and then mass import. or you could simply add/delete/drop via a form. reporting from access for a oracle db is pretty easy as well.
+Better yet, use an ODBC query in a Pivot Table. I've used it with PSQL and SQL Server. I'm sure you can access other flavors as well.
+
+Hi!
+It looks like you are trying to ask a question!
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+Would you like help?
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+>  I'm currently taking a dump. Google it!
+
+No thanks.
+[deleted]
+Only?   Man, you're wasting 4.9 hours a week there... build more automation to make sure the initial automation ran successfully.    Add error checking, and reduce your job to you checking an emotion occasionally. :)
+There are queries that describe the table definition to you. See [this Stack Overflow question](http://stackoverflow.com/questions/6215459/t-sql-query-to-show-table-definition) for an example.
+I use a tool called HeidiSql which is a GUI for manipulating databases and writing queries. Once I have a query tweaked just so, I'll put it in Excel and give out the spreadsheet to others. Real time reports!
+Oh the other five hours is advising various people on how to screw up less.  I have about 150 reports.  It's pretty fun and no one gives me crap about screwing around :-0 

@@ -1,0 +1,55 @@
+6g76tv
+Section breaks in Pivot Table
+I am just wondering if there is an easier way to present data.
+
+Currently, I have about 5 pivot tables which have a very similar layout. 
+Only the values it pulls are different. To for example, 
+
+People|Area 1|Area 2|Area 3|Area 4|Area 5|Area 6|Area 7|Area 8|Area 9|Area 10|
+:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+Type 1|58|6|11|87|91|5|3|555|41|98|
+Type 2|12|16|7|8|66|65|610|2|4|485|
+
+
+Trained|Area 1|Area 2|Area 3|Area 4|Area 5|Area 6|Area 7|Area 8|Area 9|Area 10|
+:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+Type 1|YES|NO|YES|YES|YES|NO|YES|NO|YES|YES|
+Type 2|YES|YES|NO|NO|NO|YES|NO|YES|YES|NO|
+
+
+
+This works and works well, but I didn't know if there was a way of having one table or pivot table which could combine this information easily.
+
+So the end result would be:
+
+|Area 1|Area 2|Area 3|Area 4|Area 5|Area 6|Area 7|Area 8|Area 9|Area 10|
+:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+**People**| | | | | | | | | | |
+Type 1|58|6|11|87|91|5|3|555|41|98|
+Type 2|12|16|7|8|66|65|610|2|4|485|
+**Trained**| | | | | | | | | | |
+Type 1|YES|NO|YES|YES|YES|NO|YES|NO|YES|YES|
+Type 2|YES|YES|NO|NO|NO|YES|NO|YES|YES|NO|
+
+
+I just can't get my head around doing it, if it is even possible.
+It just seems a hassle to have to maintain 5+ pivot tables separately.
+
+
+-------------
+Have you tried Get & Transform (in the data tab)? Or Power Query in older versions of Excel than 2016?
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

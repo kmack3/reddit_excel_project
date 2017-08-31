@@ -1,0 +1,53 @@
+crash
+1p8ipx
+Excel 2011 (Mac) crashes when selecting an add-in
+
+(Unsolved).
+
+Hello everyone.  Excel crashes when I select a new add-in I'm trying use for my training seminar tomorrow.  Everything is up to date, and I'm wondering if it's a security issue that's causing Excel to crash.  
+
+
+It says this: 
+
+Error Signature:
+
+Exception: EXC_BAD_ACCESS
+
+Date/Time: 2013-10-26 02:49:35 +0000
+
+Application Name: Microsoft Excel
+
+Application Bundle ID: com.microsoft.Excel
+
+Application Signature: XCEL
+
+Application Version: 14.0.0.100825
+
+Crashed Module Name: MicrosoftOffice
+
+Crashed Module Version: 14.0.0.100825
+
+Crashed Module Offset: 0x0036783e
+
+Blame Module Name: MicrosoftOffice
+
+Blame Module Version: 14.0.0.100825
+
+Blame Module Offset: 0x0036783e
+
+Application LCID: 1033
+
+Extra app info: Reg=en Loc=0x0409 
+
+Crashed thread: 0
+
+
+
+-------------
+Addin name?
+
+You sure the addin is Mac compatible?
+-------------
+WSTMacros3.4.4e.xla
+
+I would assume it's Mac compatible, but I'm not sure. Would there be a way to check?

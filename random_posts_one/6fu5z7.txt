@@ -1,0 +1,28 @@
+6fu5z7
+How to select and move 9 cells at a time
+Hello all,
+
+I have a long string of data, 108 cells vertically. I want to separate this data into side-by-side columns of 9 cells. So, instead of a 108x1 table I want a 9x12Table (9 down, 12 across). Normally, I would just do this by hand, but I have tons of spreadsheets I need to do this to, and I would love to find an easier way. Any advice? I'm assuming there is an easy way to convert tables to other formats?
+
+Thanks!
+
+
+-------------
+You can record a macro of you doing it once, and just apply it to all of the other sheets. There should be a button in the lower left of your screen that looks like a play button. Just hit it before you start, do everything exactly like you want it and hit stop when you're done. Then when you get to the next sheet, you can just run the macro, should knock out the move in seconds. 
+** Edit, sorry, the button actually looks like a little sheet with a circle in the upper left corner, didn't have excel open when I wrote that comment. 
+-------------
+Make a helper column beside the data with: 
+
+    =INT(ROW(A1)/9.01)+1
+
+which will group the data into 9-unit blocks. 
+
+Then, pivot the data by using something like [PowerQuery]
+(https://support.office.com/en-us/article/Pivot-columns-abc9c8da-3be9-44c4-886e-0be331ab387a) or [Tableau](https://www.tableau.com/about/blog/2012/03/reshaping-data-made-easy-16353).
+-------------
+Ok, I am familiar with macros, but I'm a fool and didn't think of it like that. I tried to record myself doing 9 cells at a time, rather than record the whole sheet!
+
+-------------
+Solution Verified
+-------------
+Cheers! That's right in a macros wheelhouse. 

@@ -1,0 +1,45 @@
+large
+540l15
+VBA - Import specific lines from large text file
+
+I'm trying to get a macro setup that will import specific lines from a text file into a spreadsheet. I am currently using the instr function to locate a specific word then read how many letters over I need to import data into the cells.
+
+The reason I am doing it this way is due to the file being around 350 pages and is not delimited or comma separated in any sense. Some of the data is the same as well which I run into problems with the above tactic.
+
+What I need help with is how to import specific lines from around 15 different pages into the spreadsheet(multiple sheets will be used, but can reuse this code for each), while using a technique like I mentioned earlier so I can decide where its reading from.
+
+If there are any other questions or anything, I'll be glad to answer them, pretty new to VBA and macros.
+
+Thanks!
+
+
+-------------
+[This thread](http://stackoverflow.com/questions/11528694/read-parse-text-file-line-by-line-in-vba) explains how you can create a VBA code to loop through each line of a text file. This may help you to achieve your goal.
+-------------
+Do you know the line numbers you need or is it random?
+-------------
+Yeah, I know each line that I need to import. The file may change every once awhile but the line numbers should stay the same.
+-------------
+OK I left for the day. I have some code that you can specify the line you want. I'll post tomorrow
+-------------
+Thanks a ton! That would be great. Just getting started learning this and little over my head, ha. Thanks again!
+-------------
+So there are a few ways you can do this. I just looked at the link /u/Bechara provided, and it gives one example: using Split() on new lines. You can also use FSO. FSO is not the best performance wise, but you may find it easier to work with. Here is an example I posted on this sub a while back to get the 7th line from the bottom of a text file. You could adapt it to your needs:
+
+	Sub FileTest()
+		Dim objFSO As Object, objFile As Object
+		Dim seventhLineFrombottom As String
+		Set objFSO = CreateObject("Scripting.FileSystemObject")
+		Set objFile = objFSO.OpenTextFile("C:\users\pmo\desktop\test.txt", 1)
+		objFile.ReadAll
+
+		seventhLineFrombottom = objFile.Line - 6
+		Debug.Print seventhLineFrombottom
+
+		Set objFile = Nothing
+		Set objFile = Nothing
+	End Sub
+
+You could also use FSO and utilize a loop with SkipLine to get the lines you need.
+-------------
+Thank you for the code, I will give this a try as soon as I can.

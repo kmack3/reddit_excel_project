@@ -1,0 +1,46 @@
+Making the most out of excel?
+The answer to your questions is PowerPivot. 
+Macros are my friend to take care of tedious formatting and I get get right to analyzing the data. 
+[deleted]
+Just to point out some of the issues I've been having.  Perhaps I have much to learn, perhaps I need to think outside the box some more. But any insight to make my work in excel less of a hassle would be very much appreciated.
+
+1) Have an excel tool that's been in production for years.  It uses VBA to calculate certain formulas and outputs them into different sheets.  The problem?  The VBA that drives the calculations is a monstrous subroutine that uses 200+ PUBLIC variables, no Option Explicit, and has On Error Resume Nexts embedded in certain areas.  The variables are used freely in other modules since they're all public.  During an update, adding a single column in a sheet meant literally changing 20 different lines in the VBA.  
+
+My ongoing solution to this was to data mine the code using... VBA.  Parse the code into different strings to list out variables and whatnot.  No way in hell I'm going to get a comprehensive understanding of it by jumping line by line.
+
+2) Have another tool that has formulas built on top of formulas built on top of formulas.  Again, this tool has been in existence for years.  It's utilized by an inhouse program - in cannot use VBA and making structural changes requires approval by a dozen different people.  Changing a tiny thing such as a table means having to change formulas in one sheet layer... then another sheet layer... then another.  It kills my soul looking at this workbook, as I would probably save a lot more time and sanity if I just rebuilt the thing from scratch, but I can't.
+
+My ongoing solution with this is to somehow try learning the schematic foundation of the workbook, similar to accessing schema tables in SQL.  I've heard something like this can be done using XML.  I've never learned about it before... but I sure as hell ain't going to get anywhere by cell tracing when I have to jump through 5 different sheets to find the base calculations...
+
+I can go on, but if I can figure out ways to do these things first, I'd be in a much better position...
+Adding to this, I think MS is doing a pretty good job with the entire Power BI suite. Particularly, (in addition to PowerPivot)  Power Query and Power Map (if you have a need for geomapping) 
+A simple yet very good answer.  Just reading about it online makes it sound like a very good data tool to learn and use, and as a free add in, I don't have to go through my crappy IT department.  Good stuff.
+Right.  But the issue comes to replicability - will the next person down the line both understand what I laid down, and be able to adapt it to their own needs?  Quite often, at least in my field, I find that people get way ahead of themselves in producing VBA code that caters to how they think and do things, only to leave a huge maintenance hazards for others that're difficult to decipher and understand.  
+
+Dissecting some guy's code who left the department years ago isn't something I want to do in the long term.  Excel should be a tool to speed up work, not a ball and chain that bogs everything down.
+Oh, that does sound interesting.  Would need approval from my IT department to make out-of-box installations though (ugh).  
+
+Also another potential problem is that a lot of work done in the department end up with other people (end users and future developers).  So there would be a need to port that python code to people who neither know nor care what python is.  Have you ever encountered that scenario, and if so, what did you do to address the problem?
+
+... geeking out with something new would make my work more exciting though, and I have heard good things about python.  Thanks the for suggestion.
+I'll just leave this here
+
+http://msdn.microsoft.com/en-us/library/bb814696%28v=office.12%29.aspx
+If you know VBA, I think learning SQL will not be a problem. My guess is the time has come to abandon the Excel approach and get an application developed in SQL server + C# 
+[deleted]
+Visual Studio... I would be interested in seeing my excel tools in a code project, though admittedly, I don't know much about VS.  But, the VBE is not doing me any good anymore, so let's see what I can learn from it.  Thanks.
+I felt this way for quite some time, but for me to abandon excel, I would need to justify it to people above me and to produce the same results and more in a short amount of time.
+
+In my prior job, I was constantly pushing for automated solutions (pull data from servers, instead of having it pulled by end users and interpreted it a bunch of different ways) only to get shot down for being too "technical" or too time consuming, even though it wasn't.  So toiling long hours in excel in excel is what people prefer doing, even though more efficient methods exist out there.
+>Does your IT department allow you to install to your individual machine?
+
+In the next few days, I'll find out.  But given the choice of doing my own thing and learning something new vs. continuing to repeat the same ol' thing, I think I have more than enough reason to pursue more efficient processes as best I can.
+The refactoring tools will help you replace all the globals. You might even be able to run best practises analyser.
+
+At the very least you can press ctrlk ctrld and prettify the code lol
+You can use SQL on excel workbooks if they are completely tied to excel.  You don't even need to open the workbook that has the data. 
+
+BTW, your work sounds like shit I have to deal with...it really does suck.  I would push for change....put your job on the line and prove there is a better way.  Research the shit out of it and fix it....no reason to do it the same way just because  it has been done this way.  Also, this will be a great exercise early in your career about politics and getting things done. 
+Definitely.  I think I have more to gain in trying something new than dragging on with the old, which has already proven to be risky and inefficient.
+
+I may stumble and make a few wrong turns along the way (hell, venturing in unknown territory is dangerous), but I rather take that risk instead of safely spending 2 weeks updating a table due to really poorly written excel design and/or code.

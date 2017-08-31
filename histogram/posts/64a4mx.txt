@@ -1,0 +1,59 @@
+Wich is better vlookup o index (matc) and why?
+There are pros and cons to each
+
+Vlookup pros:  
+Easier for other people to understand    
+Faster to write if the columns are near each other    
+
+Index - Match pros  
+Slightly faster calculation time  
+Can do right to left and left to right  
+Easier to write if the columns are really far away from each other  
+Easier to adapt to your data columns shifting around  
+  
+Index match can search right to left and left to right. Vlookup is strictly right to left. 
+I think it is just personal preference, but I think most people on this sub prefer INDEX.
+#Use whichever suits your purpose..
+
+Opinions mean little for this commonly asked age old tribal question.
+If you have very large tables and your lookup column is sorted, you can make a super efficient and fast lookup using nested vlookups. See [here](https://www.google.com/amp/s/fastexcel.wordpress.com/2012/03/29/vlookup-tricks-why-2-vlookups-are-better-than-1-vlookup/amp/) for how to do it.
+For small lists, if you're not familiar with index match, vlookup is easier and more easily audited by folks who may not know Excel.  However, index match is much better because it looks at data the way excels engine intends for data to be processed.  Very large tables can take vlookup minutes in some cases to return results.  You can run an index match on the same data in seconds.  For best results use named ranges for the data, row and column.  One formula can then be created and used repeatedly and call the  referenced cell dynamically.  
+The last point I would add is volatile vs non-volatile. Index match isn't volatile, vlookup is.
+Index match is more flexible. Once I learned it, I have never once even thought about using vlookup again. Just write the match function, first, and verify its output looks right, then get your bearings and figure out what to wrap around it with the index function.
+Personally I'd say index Match is 'better' my manager who set up most of my spreadsheets only knew vlookup and had constantly had to edit data to get round the limitations of a vlookup. Now every time a sheet 'breaks', I replace the vlookups with index match and we're off again. I'm waiting for the right point to ask to redesign them all from scratch. 
+Most of the differences have already been stated however one additional key differences I find pushes index match over vlookup is the ability to use arrays within the index match to have multiple conditions. For example you can use the array to look for Apple in column B and grenade in column C and if both are found then pull the SKU from column A. 
+Many people have pointed out the pros and cons so I'm not gonna repeat them. I'm just going to say that the biggest con of index Match for me is that you have to be wary if you filter or sort the data in the table because the references in the formula will get messed up
+No love for SUMPRODUCT?
+I could be wrong about this, but I seem to remember that lookup relies on the data being sorted smallest to largest. If it isn't sorted, the vlookup stops looking once it finds a larger value. 
+
+I don't think Index Match cares about sort order. Someone correct me if I'm wrong on this.
+In my experience, vlookup can't reference table columns (table1[column]), but index/match can. That was the big selling point for me. 
+this
+
+also easier to modify the formula
+Another pro for index/match is it can reference a table column by name
+Do you mean, top to bottom? 
+This primarily for pretty much the same reason. 
+Source on VLOOKUP being volatile? I've never seen this claimed in this discussion or others, and it seems to be something that would be mentioned if true. 
+If you make sure it's set to an exact match it doesn't need to be in sort order for either method.
+Absolutely false.  
+You just agreed with a question.
+Isn't that also possible with vlookup? 
+>table column by name
+
+I feel like at this point you should just make a DB. 
+Column wise
+Logically it is more volatile. Vloookup has a much larger source range (every column between the match column and the retrieve) index only had two columns
+Nope. It can take a table or column range of a table for the table_array argument, but not the col_index_num argument. It needs to have a number of the column there, which can lead to people counting columns to figure out what the formula is referencing. You can get around that by using COLUMN() or MATCH(), but if you're going to add in another formula in there, you might as well just use INDEX & MATCH.
+Yup
+Actually it's possible with pretty much any formula, if defined properly 
+That's the story of about half of my projects.
+The two of you are correct. It technically isn't a volatile function but the nature of its design (i.e. Second argument in vlookup being *table_array*) means it often recalcs unnecessarily.
+You seem to have a misunderstanding of what it means for a function to be [volatile](https://msdn.microsoft.com/en-us/library/office/bb687891.aspx#sectionSection2). It is a binary characteristic of a function that indicates whether the cell always recalculates when any cell calculates. It doesn't make sense to describe one function as more or less volatile than another. 
+Just a friendly piece of advice, there is a tooltip when you drag select columns, so you get a readout of the number of columns selected. Vlookup may be slightly less efficient, but the simplicity/speed sure helps.
+Ah, I see what you mean now, and yes during typical use, VLOOKUP is more likely to be flagged for recalculation. However, so is INDEX when its array argument includes a changed cell. (You can confirm this by checking Application.CalculationState when set to manual calculation.) This suggests that a 2d lookup with INDEX doesn't maintain this advantage over VLOOKUP. 
+
+I still prefer INDEX-MATCH though. 
+I think /u/stoneeus explained it better - it isn't a volatile function, but it is very volatile in performance.
+
+Incidentally INDEX used to be defined volatile, but not anymore (unless you are REALLY behind the times)

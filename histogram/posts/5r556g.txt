@@ -1,0 +1,55 @@
+If I'm not maxing out on RAM, would 64-bit Excel help any over 32-bit?
+Is your OS 64 bit?
+My comment is less about 32 vs 64 bit but have you started transitioning to the M Language and using the new BI features - PowerQuery, PowerPivot, etc.
+How much RAM is excel using? Windows will use the pagefile (which is swap in Linux, basically like using your hard drive/SSD as extra RAM) as often as it wants. You can try disabling it, or forcing it to use RAM before it touches the page file, but this might not help you much and can cause problems (when something requests more RAM it will close the program or whatever). Just a thought, might be worth investigation.
+~~32-bit Excel can only use up to 2 GB of RAM.~~ EDIT:/ The 32-bit versions of Excel 2013 and 2016 can access 4 GB of RAM under 64bit Windows, after a patch from last June. /EDIT ~~This is the maximum amount of RAM it will use, not necessarily all the RAM that Excel will be allocated. Just because you do not see Excel running with that much RAM doesn't mean that you won't be better off with 64-bit Excel.~~ EDIT: The last bit before still holds true, but seems less relevant, I have never had Excel access more than 3 GB.
+
+Aside from files with a lot of data, the amount of RAM accessible by Excel will improve handling of large Excel files. More RAM will help with files that have a lot of formatting or worksheets, or images\embedded docs. It will also improve the handling of multiple Excel workbooks. And for PowerQuery, a lot of RAM is a must.
+
+Since you mentioned CPU, I still find people saying that computers will run faster with more RAM, when they are using ultrabooks with 8 GB of RAM, and a 1.7 GHz processor that throttles itself. Excel runs into huge compute issues based on how a spreadsheet is set up, or if it runs VBA code. VBA is only single threaded, so it doesn't matter how many cores you have. And poorly set up spreadsheets tend to not be compute friendly.
+64-bit installation had too many known issues for me to justify using it. And to answer your question, no it wouldn't help in this case. 
+I'd also like to know the answer to this one. 
+I know that for me there's a world of difference, in terms of stability, with running large datasets in the 32 bit and 64 bit versions of excel and I need the 64 bit version. Routines that might routinely crash 8-10 hours in with the 32 bit version almost always work with the 64 bit version.  I haven't had any negative stability issues in the last year. The only downside is that you have to make sure that every office application you have is also 64 bit (depending on licenses could get expensive). 
+I run what I think are fairly large datasets.  I say what "what I think" because they are larger at this company than I have ever done and we try to transition permanent functions to SQL.
+
+At work I have a 2.8 Core old-as-shit-2 Duo with 16GB running 64 bit 7 on 2016.  My home tower is a 3.0 older quad i7 with 16GB and 64 bit 10 and the same 365 2016 install.
+
+I run many lookups and matches and ifs and some VB at work, and they do run better at home.
+
+So, based on that, I would say it comes down to threads and clock.  I will know more when the AWS VDIs we are testing get real use in Excel.
+
+May datasets are usually around 50-100k rows and 30-40 columns.  Have no idea how that benchmarks.
+Without 64 bit excel the ram usage on excel caps out at about 1.6 gb (less than the theoretical 2gb max) so if your seeing close to that then think about the upgrade 64 bit is well worth it
+[This is Microsoft's take](https://support.office.com/en-US/client/results?Shownav=true&lcid=1033&ns=O365ENTUSER&version=15&omkt=en-US&ver=15&services=EXCHANGE_S_FOUNDATION%2cSWAY%2cINTUNE_O365%2cSHAREPOINTWAC%2cONEDRIVESTANDARD%2cOFFICE_BUSINESS&HelpID=O365E_Why32) on Office 32 vs 64-bit....
+32-bit applications are limited to a 32-bit memory space, so with Excel loaded, all of the open workbooks (and addins) have to fit together in about 1.4G of space, regardless of how much memory is in your computer.
+
+That's not too bad, except if you have a lot of big workbooks or habitually leave a bunch of them open at the same time.
+
+To speed things up and free up memory, get rid of conditional formatting of large areas.
+Yes, 64-bit Windows 10
+Occasionally, yes.  I know Power Query is a million times better with big data. 
+
+< 1 GB.  So again, it's not capping out on RAM at all. 
+It's 4 GB, actually. Excel (since version 2013) is [Large Address Aware](https://support.microsoft.com/en-us/help/3160741/large-address-aware-capability-change-for-excel).
+What are these issues?
+Is it 1.4, not 2.0?  (I keep reading 2GB online). 
+
+I don't think I've seen my Excel RAM usage go above 1GB though, so I think maybe that's not a limiting factor? 
+
+
+If you want my honest opinion those who say 64 bit is unstable often rely on an outdated marketplace of 3rd party add ins that are developed in 32 bit.
+Didn't know about this. Apparently MS issued a patch\update last June. Excel 2013 and 2016 can now address up to 4GB in 64-bit Windows, but 2GB still remains the limit in 32-bit Windows OS.
+
+Edit: added which Excel versions applied.
+Can't use some VBA declare statements, and it doesn't work well with 32-bit OLE servers. There are a few other legacy compatibility issues that are laid out in the MS support site. I'm on mobile and can't easily link it. Google "Choose the 64-bit or 32-bit version of Office"
+TL;DR: It's 4GB for Excel 32-bit.
+
+It's 2 GB or 4 GB for programs that have a flag, but Excel needs some memory for itself. I doubt it's 0.6 GB though.
+
+Sources: 
+
+* https://msdn.microsoft.com/en-us/library/aa366778.aspx
+* https://social.technet.microsoft.com/Forums/en-US/e029e271-2c53-4e23-8da4-ac48e2092a76/memory-limits-of-32bit-application-running-on-64bit-os-windows-2008-server-64bit
+* http://stackoverflow.com/questions/639540/how-much-memory-can-a-32-bit-process-access-on-a-64-bit-operating-system
+
+[Excel does have the IMAGE_FILE_LARGE_ADDRESS_AWARE flag](https://support.microsoft.com/en-us/help/3160741/large-address-aware-capability-change-for-excel), but I'm using 64-bit Excel, so I can't test it.

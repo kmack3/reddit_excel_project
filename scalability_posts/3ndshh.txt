@@ -1,0 +1,37 @@
+big
+3ndshh
+In a big data sheet, removing only entire rows with weekend dates (Sat, Sun) out of multiple years with historical exchange rates
+
+I have a huge data sheet with exchange rates for USD-RUB that I need to apply to another set of historical prices, the only problem is that the USD-RUB rates show every exchange rate for the last 15 years, including weekend-rates, but my other data sets only shows weekdays. 
+So I need a formula, or even a filter or "find & delete" function that would delete every row with historical Sat, Sun dates. It would need to delete the entire row. 
+http://postimg.org/image/ul3mwr7tp/
+I have spent a lot of time trying to figure this out, and searching online, but what stops me is that I don't know the specifics of what to search for as I haven't stumbled on any example like this one. 
+
+
+-------------
+You could use WEEKDAY() to find out which dates are Saturday and Sunday, 
+
+For example 
+
+    =WEEKDAY(TODAY(),2) 
+
+will return a 6, and for tomorrow will return a 7... so 6 and 7 are Saturday and Sunday... you could fill down that formula to the column on the right and then you could filter for 6 and 7 and delete those rows... 
+
+Clippy: WEEKDAY
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 3 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+thanks that worked!

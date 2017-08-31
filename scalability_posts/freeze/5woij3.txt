@@ -1,0 +1,43 @@
+freeze
+5woij3
+Need help freezing the headers of a column, but I have other info in those rows I don't want to freeze.
+
+I read about the freeze rows and columns tool, but that isn't giving me what I want. My issue is:
+
+- I have a header and then hundreds of rows and info
+
+- But I also have tables and charts to the right of that in the same rows.
+
+- If I freeze the headers, the charts still "scroll" away.
+
+I want the header and the charts to be locked and always visible, but to be able to scroll the rows of info.
+
+Even better than that would be have the chart always stay scrolled to the bottom, so when I need to enter more info, I don't need to scroll all the way down again.
+
+Im logging the time of an event, and have it auto output the date and day, then am showing that in several different charts and tables. Is there a better way to go about doing this?
+
+[Here is a pic of my sheet](http://i.imgur.com/zxNCMgx.png), you can see the layout and why just freezing the header row wont work.
+
+
+-------------
+Freeze Panes.  See if this helps.  https://support.office.com/en-US/article/Freeze-panes-to-lock-rows-and-columns-dab2ffc9-020d-4026-8121-67dd25f2508f
+
+Personally though, I would keep my data on one sheet and keep all the charts/reporting on a summary tab. 
+-------------
+Seems like you want only the data to scroll.  You could create a scrolling table like [this](https://www.youtube.com/watch?v=Z7tdtJsaVUI).  But that necessitates moving your data to a separate sheet and you've indicated you don't want to do that.
+
+As far as I know there's no way to freeze an "L" shaped area like you want.
+-------------
+I've tried freezing just the panes, but I get the same result, the charts wont freeze.
+-------------
+I'm not against another sheet, just not use how to reference that in.
+-------------
+Did you try the "Split pane" option? It might not be exactly what you're looking for but it's a step closer.
+
+I would 2nd splitting charts onto a different sheet, though
+-------------
+You have to move the graphs entirely onto the frozen section
+-------------
+you could make a hyper link to the charts and graphs that are on the other sheet.  
+-------------
+Yea but then I have to freeze like 20 rows of data also

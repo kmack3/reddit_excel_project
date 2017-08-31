@@ -1,0 +1,35 @@
+slow
+46aroc
+Worksheet sorting SUPER slow/hanging?
+
+How do I diagnose this?  I have a list of 400 rows  (12 columns) that sorts SO slow that is crashes Excel.  It's a list of invoices and on a separate sheet I have 4 different pivottables that are run off the data.  
+
+I don't even know where to begin diagnosing the issue.  Google says to remove styles and conditional formatting (done) but it's still super slow.  Help?
+
+EDIT: It turns out my slowness was due to the base data sheet that ran the PivotTables.  Even after removing all formatting, etc., it was still slow.   I ended up saving the sheet as a CSV, deleting the *old* worksheet, creating a *new* one with based on the CSV data, and re-pointing my PivotTables there.  Thanks all!
+
+
+-------------
+4 800 cells shouldn't be causing any noticeable slow-down.
+
+Can you do three things to check : 
+
+* Ctrl+End : is the last cell for Excel where you expect it to be? If for some reason Excel is trying to sort another 10 000 rows and 10 columns of blank values, that might be the cause.
+* Check for what range the pivot tables are linked. Is it just the 4 800 cells, or is it the whole 12 columns? This can seriously slow down the pivot table calculations.
+* Check if there are formulas that link to these 4 800 cells in an array or something that could cause a slow down. Excel will re-calculate formulas based on dependency chains, and if for some reason you're triggering some long chains this could cause lots of calculations to take place.
+-------------
+Are you sure it's not your computer?  Have you tried sorting the file on a newer/faster computer?
+-------------
+Try saving it as a binary workbook (xlsb)
+-------------
+set calculation to manual before doing the sort? 
+-------------
+Don't add multiple Pivot Tables - copy the Pivot Table that you make and paste it all over again and edit as needed, so that it resides in the same Pivot Cache.
+-------------
+What kind of formulas you got in the cells?    4800 by 12 is tiny in size but you may have some volitile functions in there that keep updating.
+-------------
+UPDATE: It turns out my slowness was due to the base data sheet that ran the PivotTables.  Even after removing all formatting, etc., it was still slow.   I ended up saving the sheet as a CSV, deleting the *old* worksheet, creating a *new* one with based on the CSV data, and re-pointing my PivotTables there.  Thanks all!
+-------------
+Yes, I just tried on a brand new fast computer.  Also, I tried copy-pasting the worksheet to a new XLSX doc and it's still really slow (so it's not the PivotTables, I presume?)
+-------------
+I would copy and paste values into a new workbook. Start adding pivot tables one at a time and then checking for performance.

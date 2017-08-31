@@ -1,0 +1,76 @@
+How to handle a table with large number (>500.000) of rows?
+Access is built for this, or SQL. Excel can accommodate over 16,000 columns and 1 million rows, but you'd better have a lot of time on your hands. If you get up to those larger data sets, like yours, best to move it into an application for databases.
+
+Look up Normalization if you do. Essentially don't store repeated values. E.g. Country names. Say you have 20 different countries represented in your data. Average name length is 15 characters. Over 500,000 rows, that is 7.5 million characters. Instead, use an ID (1 to 20) to represent them, most frequent in the top 9, and you reduce that character count a whole lot and reduce the size of your data set. Those 20 names would all go into a separate table and reference them by key Value 1-20.
+> What would you recommend, and where can I go for further elucidation on the whole Access/Excel thing?
+
+* [[How to: Install Sample Databases]](https://msdn.microsoft.com/en-us/library/8b6y4c7s.aspx)
+* [[Data Programming with Microsoft Access 2010]](https://msdn.microsoft.com/en-us/library/office/ff965871.aspx)
+* [[How to: Connect to the Northwind Database]](https://msdn.microsoft.com/en-us/library/bb384568.aspx)
+* [[Connect to an Access database (Power Query)]](https://support.office.com/en-us/article/Connect-to-an-Access-database-Power-Query-ae74f370-5ddb-4380-aaf1-fca4e81563a3?ui=en-US&rs=en-US&ad=US)
+
+you're absolutely right. access is good for two things, one is relationships, the other is dealing with large amounts of data.
+
+it's hard to know exactly what to advise without knowing what you have, but storing data in access and using excel to get at it may well be the way to go.
+access /  sql is the way to go, that said if you cant then you really really really want 64bit excel, as the memory requirements just to index/match that much data is non trivial.  
+
+I've got a current sheet with 543403 rows of data, that does a few calculations it takes a good 30 secs to even open. For usuability i threw a named range onto the data and then used query to get the data i wanted from it. 
+It might not fit for your use case, but if you're planning on utilizing a pivot table somewhere along the lines, powerpivot will handle that much data and won't make you jump out of Excel. 
+Yes, Access is probably a better system for handling the large amount f data. Now, that said, if you're unfamiliar with Access or do not feel comfortable using it, here are two things I would recommend to speed up your spreadsheet. (I apologize in advance for the poor instructions, I'm on mobile)
+
+
+1) In the "formulas" ribbon on the right side, there should be an area for calculation options. Excel defaults to "automatic" - meaning when you make a change to your spreadsheet, it automatically updates. However, this can be problematic with large data sets. Changing your settings to "manual" update can help speed up your work. The spreadsheet will only update when you tell it to or when you save, but this means you can do several changes at once without waiting for the document to recalculate. 
+
+
+2) Remove all conditional formatting. This takes up a lot of memory and excel is constantly trying to update and recalculate the formatting. 
+
+
+Hope this helps!
+If you need to keep it in Excel, get rid of all formulas. Just store the values.  And if you need to add columns with formulas, do them one at a time.  Then immediately copy/past values over the formula column.
+
+Otherwise.... yeah, Excel is gonna choke at some point. 
+
+Access will do better, but it's still not going to give you amazing performance with that many rows.  It gets worse as the database gets bigger regardless of how many rows you have in the table you're interested int. Especially if you have it on a network drive. I work with a number of 1gig+ Access db's. Whenever possible, I just pull them down to my C drive before I do my thing.
+
+You can look into SQL Server Express. It's basically SQL Server, but free, and you can run it locally. Learn to connect your Access front end to it and that will help performance a LOT. Obviously, you can't just share that the way you can Excel or Access. There's a bit of a learning curve, but it's not that bad. Install it at home and play around with how to do basic stuff for an evening and you're well on your way.
+Ya. Access.
+
+Once you apply a formula, your processor will bottleneck at the idea of running 500k vlookups every time you touch something.
+Sorry for the shameless plug, but take a look at a plugin I've built if you're handy with SQL (link [here](http://www.thingiequery.com)). It lets you do SQL operation on Excel tables. It's SQLite under the hood but I've extended it to allow it to "see" Excel tables and it also exposes some cool additional functions for fuzzy text search, regular expressions and a bunch more. I've just implemented a SQL parser for it so it now understands the SQL you're typing, it highlights errors and gives pretty good context sensitive autocomplete suggestions. Depending on your use case it could be a good fit because you can do everything in place in Excel without losing formatting, but it might also be the case that you're better off just moving the data to a proper db, really depends on the use case. In any case the 30 day trial is free, there are some tutorial videos on the site too. The videos are dated, but the plugin is very active (it's a one person project and I like developing more than I like making videos:)). 
+Yes database, Access NO. 
+
+Get SQL Server. 
+
+https://www.microsoft.com/en-gb/download/details.aspx?id=42299
+
+Your database doesn't have to be normalised, it is just good practise.
+
+Import your table and then use data connection/MS Query.
+I would absolutely *love* to make a proper relational database that's normalized for the roughly 9 attributes in each row that are repeated; unfortunately, this is information pulled from a database that people want to at least be able to see (and preferably manipulate) in Excel. Not having access rights to the database itself is also a major cramp in my style.
+
+As I understand it, a non-normalized JET database that Excel can connect to is probably the closest I'm going to get to balancing speed/reliability with the "usage requirements" of some of the stakeholders on the project.
+
+Is there guidance on how to use Excel for dashboarding and query purposes when grabbing data from Access? Obviously I don't want to just import the whole thing, but I'm not sure how to properly make that distinction within Excel.
+
+Thank you!
+Plus you can try to save the book as Binary Excel File, I find that it speeds up quite a bit the calculation of the book
+I may be wrong but a "production" use of express may fall foul of the terms. There are plenty of floss alternatives if access is cost prohibitive or you're looking for something that will grow with you
+Fair enough, however that can be managed using an Access query to knit it back together for public consumption. Build your queries in Access to shape the data then, from Excel, DATA> Import External Data> New Database Query> select the database from the list and then the query you saved. From there you can pivot off of the query table to build your dashboard or other reports.
+What the shit?  It's too much data for a desktop tool.  No human being can consume it all.  
+There are [software companies](http://www.actuate.com/) that make applications for this.  But really you need to have a conversation with the stakeholders that can't define their business questions.  
+The job of management isn't magical soothsaying by gazing over a vast field of data and arbitrarily deciding which rows are important.  
+If they only need the top 10, bottom 10, and some aggregates, then that's all they should ask for.  
+You can put those 500K rows in a free database like Postgres and answer those questions in seconds while they are still waiting for the Excel document to open.  
+Thanks for the tip! Can you tell me what this functionally changes for the workbook? 
+In essence it stores the infromation in binary, It speeds up because from what i undestad this format is easier for excel to read. I find that saves memory and loading times making large files still usable. I don't know this for sure but i think one drawback is that this kind of files cannot be compressed but since it makes the file smaller there's no need to worry about that.
+
+I believe that there are some drawbacks for this kind of file but for the average excel user it's just the same and you can do pretty much everything normally. 
+
+The differences from .xlsx are:
+a) it's half the size
+b) you can actually store macros, and
+c) only microsoft excel can read it and not other spreadsheeting tools such as open office
+
+I can't recommend this enough, it's my default file type for both work and home.
+Great info. Is there any significant drawback that has stopped it from becoming the de facto file format for Excel?
+None that I know of, besides the compatibility thing. That might be seen as anti-competitive?

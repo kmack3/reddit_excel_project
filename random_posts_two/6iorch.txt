@@ -1,0 +1,69 @@
+6iorch
+Adding Data to a Pool
+Hey guys
+
+I have pool of data, for example
+
+    1
+    2
+    3
+    5
+    6
+    8
+    9
+    10
+
+When I receive new data such as, 4 and 7, I want to insert a line above the 10 then sort the data.  However, sometimes I will have to add new data like 11, 12, 14, 15 ... etc
+
+Question is, how can I make a macro that will count the new data and add it into the data pool.  Duplicates are OK.
+
+
+-------------
+Why do you want to insert it above 10?
+-------------
+Can you clarify a bit?:
+Do you mean you want to add new data (from wherever) into the line above 10? Or do you want to add the new data together first, then insert above 10?
+-------------
+Just as a work around.  Say I have Cell A10 name AEnd, if I insert something above that, the cell name will stay the same, but will now default at cell A11, which I'd want
+-------------
+I want to add the data above 10 as a workaround.. I have the last cell named so i can pull a range.. if data is inserted after the 10, it will not be included without more modification
+-------------
+So learn to use tables instead.
+
+- the tables expand when you drop data at the bottom of it (or in the middle)
+- you can determine the length, width and column names easily.
+- you use table column name references instead of old-fashioned cell references.
+- https://support.office.com/en-us/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c
+
+-------------
+Ok I think I understand. I'll try some things when I get home.
+-------------
+So when adding a table, i am able to insert data in.  Now my question is, how can I compare the data in the table with the data I receive and only add the ones that do not already appear?  At one point there may be 3 new items.. another there might be 5 new items
+
+I would have used .removedupes before, that's why I said it wouldn't be a problem
+
+    Sub Macro2()
+    Dim TableList As ListObject
+    Dim TableRow As ListRow
+    
+    Set TableList = Sheets("Table").ListObjects(1)
+    Set TableRow = TableList.ListRows.Add
+    
+    TableRow.Range(1, 1).Value = "Z"
+    End Sub
+
+This is my code so far - simple enough ... I'd want to change "Z" to the new letters that do not already appear in the table, excluding the ones that are already in the table
+-------------
+Typically, you'd get the size of the listobject and simply drop your new data in the cell UNDER the bottom left corner cell.
+
+- table grows to include this data.
+- any calculated columns (containing formula) copy down into the new row.
+
+You might find it easiest to calculate that cell OUTSIDE of the VBA in a cell (which you give a name to) and which you access inside your VBA. 
+
+      =Range("nextCellToFill").value
+
+-------------
+This is required reading:
+
+https://www.thespreadsheetguru.com/blog/2014/6/20/the-vba-guide-to-listobject-excel-tables

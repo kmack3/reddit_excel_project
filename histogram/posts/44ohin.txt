@@ -1,0 +1,37 @@
+Was going to ask a question about a metric clock, solved it while I was typing the question, so posting my solution instead.
+Haha, glad you got it worked out!
+
+And just to be clear, since I'm not sure how exactly metric time works, just letting you know if you see 08:35:33.22, that means it's 83.5% through the day (so about 8:05 PM). I'd imagine that's how metric time works (10 hours in a day) so I think you're all set. Although I think you can drop the ROUNDDOWN if you wanted.
+
+I like the NOW()-TODAY(), it's intuitive. I use MOD(NOW(),1)) or NOW()-INT(NOW()), both of which are less intuitive/harder to read that your solution.
+Yeah I'm a big fan of marking time with a metric clock, it's a shame it never caught on. That is exactly how a metric clock works. 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute. 100,000 seconds in a day. Really simple to do math with.
+
+I could drop the rounddown, but then if the time shows 23.5 milliseconds, then my clock will display 24 milliseconds, which is a little inaccurate.
+
+Not that it makes much of a difference, but I am a perfectionist.
+
+But then INT is much more simple and has the same effect. I changed it to:
+
+    =INT((NOW()-TODAY())*10000000)
+
+Thanks for the help!
+"which is a little inaccurate"
+
+I'd argue it's about as accurate as you need for an excel based time?  Especially if you also care about the number of hours (ie aren't timing a couple of VBA functions to see which one is fastest)
+~~You can also just format the cell with "hh:mm:ss.000" to get the same result~~
+
+Wait, nevermind. That will format normal time, not metric time.
+Doesn't INT(NOW()-TODAY()) give you the integer, in this case 0? I think you want the part after the decimal: so either without the INT or use MOD(NOW(),1). 
+Oh it's not used for anything quite so interesting.
+
+I just wanted to see a metric clock because "I wonder what time it is in metric right now."
+
+Which means being a millisecond off doesn't matter at all. But I know it's there, and that I can just put in that tiny function to fix it, so it bothers me until I add it. Does that make sense? It's more about how I feel than what it does.
+Try pasting that formula into Excel, it works.
+
+That's what the "*10000000" is for. It places hours, minutes, seconds, and milliseconds to the left of the decimal. Then INT clears the rest.
+Makes perfect sense.
+
+In my day job I sometimes see people getting worked up over numbers to 8 or 9 significant figures and there's no way the inputs and calculations are that accurate hence why I have an almost reflex reaction when I see people trying to use spurious accuracy for anything meaningful.
+If you're trying to get to the hour, minute and second of the day, how about just using =NOW() and then custom format as hh:mm:ss.00?
+This is for a metric clock, meaning 10 hours a day, 100 minutes an hour, 100 seconds a minute.

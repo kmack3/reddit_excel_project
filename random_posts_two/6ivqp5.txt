@@ -1,0 +1,153 @@
+6ivqp5
+What am I doing wrong in this code?
+I am tying to learn how to write macros and I am having trouble with  my first run. 
+
+Here is my code: 
+
+
+    Sub AP_subledger()
+    Dim datasheet As Worksheet
+    Dim reportsheet  As Worksheet
+    Dim lr As Integer
+    Dim i As Integer
+    Dim ICP As String
+    
+    
+    ' set variables
+    Set datasheet = Sheet1
+    Set reportsheet = Sheet2
+    ICP = reportsheet.Range("M1").Value
+    
+    datasheet.Select
+        lr = Cells(Rows.Count, 1).End(x1up).Row
+    
+    For i = 2 To lr
+        If Cells(i, 16) = ICP Then
+            Range(Cells(i, 1), Cells(i, 26)).Copy 'Copies colums 1 to 26
+            reportsheet.Select ' goes to sheet 2 to select it
+            Range("A500").End(x1up).Offset(1, 0).PasteSpecial x1Pasteformulasandnumberformats
+            datasheet.Select
+            End If
+        Next i
+    reportsheet.Select
+
+
+I am getting a run time error 1004. I am wondering if I messed it up with setting my dimensions as sheet1 and sheet2? These sheets/tabs exist in my workbook and that is their name...
+
+
+oh lastly I can't get the ICP to show up. I have "IC33" in M! on Sheet1 and I thought I declared it/set it in the above code but when I select just that line and run it the ICP shows up as ""
+
+
+-------------
+You got a typo.... It's xlup not x1up
+-------------
+>    Set datasheet = Sheet1
+>    Set reportsheet = Sheet2
+>    ICP = reportsheet.Range("M1").Value
+>    . . . .
+>I am getting a run time error 1004. I am wondering if I messed it up with setting my dimensions as sheet1 and sheet2? These sheets/tabs exist in my workbook and that is their name...
+>
+>
+>oh lastly I can't get the ICP to show up. I have "IC33" in M! on Sheet1 and I thought I declared it/set it in the above code but when I select just that line and run it the ICP shows up as ""
+
+Instead of Sheet1 and Sheet2, try using their names in quotes.
+>    Set datasheet = Worksheets("Sheet1")  
+>    Set reportsheet = Worksheets("Sheet2")
+
+If you add and remove worksheets, which one is internally referred to as Sheet1 can be different from what you expected.  
+-------------
+I got it working! But it isn't the cleaniest. here is the code I am now using:
+
+    Sub AP_subledger()
+    
+    Dim lr As Integer
+    Dim i As Integer
+    Dim ICP As String
+    
+    
+    ' set variables
+    Sheets("Sheet1").Select
+    ICP = Range("M1").Value
+    
+     Application.ScreenUpdating = False
+    
+    Sheets("Sheet2").Select
+    lr = Cells(Rows.Count, 1).End(xlUp).Row
+    
+       
+    For i = 2 To lr
+        If Cells(i, 16) = ICP Then
+            Sheets("Sheet2").Select
+            Range("A" & i & ":Z" & i).Copy
+            Sheets("Sheet1").Select ' goes to sheet 2 to select it
+            Range("A1800").End(xlUp).Offset(1, 0).PasteSpecial xlPasteFormulasAndNumberFormats
+            Sheets("Sheet2").Select
+        Else
+        End If
+    
+    Next i
+    
+    Application.ScreenUpdating = True
+    
+    End Sub
+
+
+So the end goal of this is to search this data table and pull records that meet the criteria I am looking for. I am currently copying the row out to 26 columns, and then pasting. Is there a more efficient way to do this?
+-------------
+Me, I'd rewrite this as
+
+    Sub AP_subledger()
+      Dim reportsheet As Worksheet
+      Dim destination As Range
+      Dim lr As Long
+      Dim i As Long
+      Dim ICP As String
+    
+      ' set variables
+      Set reportsheet = ActiveWorkbook.Worksheets("Sheet2")
+      Set destination = reportsheet.Range("A500").End(xlUp).Offset(1, 0)
+      '** following line problematic if the M1 cell doesn't contain text
+      ICP = reportsheet.Range("M1").Value
+    
+      '# datasheet.Select
+      With ActiveWorkbook.Worksheets("Sheet1")
+        lr = .Cells(Rows.Count, 1).End(x1up).Row
+    
+        For i = 2 To lr
+          If .Cells(i, 16).Value = ICP Then
+            .Range(.Cells(i, 1), .Cells(i, 26)).Copy 'Copies colums 1 to 26
+            destination.PasteSpecial xlPasteformulasandnumberformats
+            Set destination = destination.Offset(1, 0)
+          End If
+        Next i
+      End With
+    
+      With reportsheet
+        ':
+-------------
+ah, that is helpful. 
+
+thanks! Anything else going on in there that is obviously wrong?
+-------------
+You really shouldn't use .Select
+
+The better way to do it is reference the sheet in your cell value call. 
+
+So instead of:
+
+    Sheets("Sheet1").Select
+    ICP = Range("M1").Value
+
+You would have:
+
+ICP = Sheets("Sheet1").Range("M1").Value
+
+Calling .Cells and .Range without a sheet reference can create mistakes when you forget what the last active sheet was. 
+-------------
+I don't think so I put it in a test workbook and changed a couple of references and it ran once I fixed the typo. 
+-------------
+I might be having an object issue. in VBA when it list the objects in the left side panel it will say sheet1 (Sheet3) Which one do I reference to get the correct sheet?
+-------------
+Rename all of your sheets to have meaningful names.  I would ordinarily not give this advice, but you currently have sheet names that have been changed to be a mismatch from their underlying names.  You can change them all to match, so Sheet1 = "Sheet1", but if you're going through and scrubbing them all, might as well make them meaningful.  Having things like Sheet1 named "Sheet3" is just going to cause a very difficult to debug bug down the road.
+-------------
+That depends on how you reference them. There are a lot of different ways. Here's a good article http://www.techrepublic.com/blog/10-things/10-ways-to-reference-excel-workbooks-and-sheets-using-vba/

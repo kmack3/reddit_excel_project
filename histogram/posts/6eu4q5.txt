@@ -1,0 +1,16 @@
+Detecting Non-Empty Cells
+Well space is just as a valid character as "a" or "1". But `TRIM` will remove leading and trailing spaces, and `CLEAN` will remove nonprinting characters (space is a printing character). So something like `=IF(LEN(CLEAN(TRIM(A1)))>0, ... , ...)` would work
+
+>For context, I'm trying to detect the cells with dates in them, so if there are any better ways to do that, that would work as well
+
+So dates are just numbers to Excel. `ISNUMBER(A1)` is what you want. And if you want somewhat valid dates, `AND(ISNUMBER(A1),A1>=DATE(2017,1,1))` is good, or `AND(ISNUMBER(A1),YEAR(A1)=2017)`.
+
+Although it's worth noting that unless you manually changed the cell alignment, I can see from your screenshot that you don't have dates in there now. The text "06/02" is not a date. So I would very highly recommend that you use dates (if you're not already, I just know numbers default to right alignment, text defaults to left). Otherwise you can use workarounds like `NOT(ISERROR(DATEVALUE(A1)))`, but that's just not a good solution vs using dates in the first place.
+Try search replace to remove those pesky spaces.
+
+Select all the cells and search replace space with nothing > Options > Match entire cell contents > OK
+Solution Verified
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

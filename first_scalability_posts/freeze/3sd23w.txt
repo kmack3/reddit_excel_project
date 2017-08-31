@@ -1,0 +1,373 @@
+freeze
+3sd23w
+Macro causes computer to freeze
+
+Hi all,
+
+I'm trying to construct a macro to take data from one worksheet, copy it to another, and then perform vlookups on 6 columns. It seems to mostly work, but whenever the script gets to the vlookup functions it freezes Excel completely and I need to force-quit by hitting CTRL+ALT+DEL.
+
+The script is below, apologies if it's messy as I've been tying to make it work all day.
+
+    
+    Sub ICPIAFilter()
+    
+    Application.ScreenUpdating = False
+    
+    Dim sFormula1 As String
+    Dim sFormula2 As String
+    Dim sFormula3 As String
+    Dim sFormula4 As String
+    Dim sFormula5 As String
+    Dim sFormula6 As String
+    Dim ICPIAReport As String
+    Dim MacroSource As String
+    
+        ICPIAReport = Application.GetOpenFilename(fileFilter:="Excel Files, *.csv", FilterIndex:=1, Title:="Select Itemised Charges per Invoice Account CSV file")
+        If ICPIAReport = "False" Then Exit Sub
+        
+        MacroSource = Application.GetOpenFilename(fileFilter:="Excel Files, *.xls; *.xlsx", FilterIndex:=2, Title:="Select Cost Code Source file")
+        If MacroSource = "False" Then Exit Sub
+    
+    'Workbooks.Open Filename:=ICPIAReport
+    
+    Dim ISOSWB As Workbook
+    Set ISOSWB = Workbooks.Open(ICPIAReport)
+    
+    'Sheets(1).Name = "RawData"
+    Dim ISOSWS As Worksheet
+    
+    Do While Worksheets.Count > 1
+           Worksheets(2).Delete
+        Loop
+        Worksheets.Add(After:=Worksheets(1)).Name = "SourceSheet"
+        
+    Set ISOSWS = ISOSWB.Sheets("SourceSheet")
+    
+    Dim CCWB As Workbook
+    Set CCWB = Workbooks.Open(MacroSource)
+    Dim CCWS As Worksheet
+    Set CCWS = CCWB.Sheets("CCs")
+    'CCWS.Range("B:J").Name = "SourceLook"
+    
+    CCWS.Range("A:I").Copy ISOSWS.Range("A1")
+    ISOSWS.Range("B:I").Name = "SourceLook"
+    CCWB.Close (False)
+    
+    ISOSWB.Sheets(1).Select
+    
+    ' Prepares raw data for filtering
+    
+        Range("W1:AR1").Select
+        Selection.Cut
+        Rows("2:2").Select
+        Selection.Insert Shift:=xlDown
+        Columns("P:P").Select
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Columns("O:O").Select
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Range("N1").Select
+        Selection.Copy
+        Range("O1").Select
+        ActiveSheet.Paste
+        Range("P1").Select
+        Application.CutCopyMode = False
+        Selection.Copy
+        Range("Q1").Select
+        ActiveSheet.Paste
+        Range("O1").Select
+        Application.CutCopyMode = False
+        ActiveCell.FormulaR1C1 = "Duration (Mins)"
+        Range("Q1").Select
+        ActiveCell.FormulaR1C1 = "Data Usage (Gb)"
+        Range("O2").Select
+        ActiveCell.FormulaR1C1 = "=RC[-1]/60"
+        Range("Q2").Select
+        ActiveCell.FormulaR1C1 = ""
+        
+        Lastrow1 = Cells(Rows.Count, "N").End(xlUp).Row
+        Range("O2:O" & Lastrow1).Formula = "=N2/60"
+        Range("O2:O" & Lastrow1).Value = Range("O2:O" & Lastrow1).Value
+        
+        Lastrow2 = Cells(Rows.Count, "P").End(xlUp).Row
+        Range("Q2:Q" & Lastrow2).Formula = "=P2/1024/1024"
+        Range("Q2:Q" & Lastrow1).Value = Range("Q2:Q" & Lastrow1).Value
+        
+        Range("U:V,S:S").Select
+        Range("S1").Activate
+        Selection.Delete Shift:=xlToLeft
+        Range("A1").Select
+    
+    ' Adds 5 Cost Code Tier and Path columns
+    
+        Columns("B:B").Select
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Range("B1").Select
+        ActiveCell.FormulaR1C1 = "T1"
+        Selection.AutoFill Destination:=Range("B1:F1"), Type:=xlFillDefault
+        Range("B1:F1").Select
+        Range("G1").Select
+        ActiveCell.FormulaR1C1 = "Path"
+        Range("A1").Select
+        
+    ' Calculates GST on only GST-applicable charge categories (which is everything except Roaming)
+    
+        Selection.AutoFilter
+        Cells.EntireColumn.AutoFilter Field:=13, Criteria1:=Array( _
+            "ADJUSTMENT", "CALLS TO MOBILES", "DATA", "DATA - PKT", "DISCOUNTS", "EQUIPMENT", _
+            "INTERNATIONAL", "MISC. CHARGES", "NATIONAL", "NW ACCESS", "TAX"), Operator:= _
+            xlFilterValues
+            
+            Lastrow2 = Cells(Rows.Count, "A").End(xlUp).Row
+            Range("AA2:AA" & Lastrow2).Formula = "=Z2*1.1"
+            
+            Selection.AutoFilter
+        
+    ' Adds GST Column
+                    
+        Range("Z1").Select
+        ActiveCell.FormulaR1C1 = "Ex GST Amount"
+        Range("AA1").Select
+        ActiveCell.FormulaR1C1 = "Inc GST Amount"
+        Columns("AA:AA").Select
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Range("AA1").Select
+        ActiveCell.FormulaR1C1 = "GST"
+        Range("AA2:AA" & Lastrow2).Formula = "=RC[1]-RC[-1]"
+        Range("A1").Select
+    
+        
+        
+    ' Performs VLOOKUP to add Cost Code allocations
+    
+    Dim FormulaWs As Worksheet
+        
+        Set FormulaWs = ISOSWB.Sheets(1)
+        
+        FormulaWs.Name = "Raw Data"
+        
+        With FormulaWs
+      
+        sFormula1 = "=VLOOKUP(K2,SourceLook!$B:$D,3,FALSE)"
+        sFormula2 = "=VLOOKUP(K2,SourceLook!$B:$E,4,FALSE)"
+        sFormula3 = "=VLOOKUP(K2,SourceLook!$B:$F,5,FALSE)"
+        sFormula4 = "=VLOOKUP(K2,SourceLook!$B:$G,6,FALSE)"
+        sFormula5 = "=VLOOKUP(K2,SourceLook!$B:$H,7,FALSE)"
+        sFormula6 = "=VLOOKUP(K2,SourceLook!$B:$J,9,FALSE)"
+        
+                       
+        Lastrow3 = Cells(Rows.Count, "A").End(xlUp).Row
+        .Range("B2:B" & Lastrow3).Formula = sFormula1
+        .Range("C2:C" & Lastrow3).Formula = sFormula2
+        .Range("D2:D" & Lastrow3).Formula = sFormula3
+        .Range("E2:E" & Lastrow3).Formula = sFormula4
+        .Range("F2:F" & Lastrow3).Formula = sFormula5
+        .Range("G2:G" & Lastrow3).Formula = sFormula6
+        
+        Calculate
+        
+        Range("B2:F" & Lastrow3).NumberFormat = "@"
+        
+        End With
+        
+    ' Clears all formulas
+    
+    Range("A2:AB" & Lastrow2).Value = Range("A2:AB" & Lastrow2).Value
+    
+    ' Adds leading 0 to Mobile Numbers
+    
+    Set ws2 = ActiveSheet
+    
+    With ws2
+    
+        sFormula7 = "=0&RC[-1]"
+    
+        Columns("L:L").Select
+        Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+        Range("L1").Select
+        ActiveCell.FormulaR1C1 = "Mobile #"
+        ActiveSheet.Range("L2:L" & Lastrow3).Formula = sFormula7
+        Range("L2:L" & Lastrow2).NumberFormat = "@"
+        Range("L2:L" & Lastrow2).Value = Range("L2:L" & Lastrow2).Value
+        Columns("K:K").Select
+        Application.CutCopyMode = False
+        Selection.Delete Shift:=xlToLeft
+    
+    End With
+            
+    ' Inserts Pivot Table and formats to International SOS requirements
+    
+        Dim PrevSheet As Worksheet
+        Set PrevSheet = ActiveSheet
+        Range("A1").Select
+        Sheets.Add.Name = "Pivot"
+        PrevSheet.Select
+        ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, _
+            SourceData:=ActiveSheet.UsedRange, _
+            Version:=xlPivotTableVersion15).CreatePivotTable _
+            TableDestination:="Pivot!R3C1", _
+            TableName:="PivotTable2", _
+            DefaultVersion:=xlPivotTableVersion15
+        Sheets("Pivot").Select
+        Cells(3, 1).Select
+    
+      With ActiveSheet.PivotTables("PivotTable2").PivotFields("Mobile #")
+            .Orientation = xlRowField
+            .Position = 1
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("Service Name")
+            .Orientation = xlRowField
+            .Position = 2
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("T1")
+            .Orientation = xlRowField
+            .Position = 3
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("T2")
+            .Orientation = xlRowField
+            .Position = 4
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("T3")
+            .Orientation = xlRowField
+            .Position = 5
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("T4")
+            .Orientation = xlRowField
+            .Position = 6
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("T5")
+            .Orientation = xlRowField
+            .Position = 7
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("Account #" & Chr(13) & "")
+            .Orientation = xlRowField
+            .Position = 8
+        End With
+        ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+            "PivotTable2").PivotFields("Ex GST Amount"), "Sum of Ex GST Amount", xlSum
+        ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+            "PivotTable2").PivotFields("GST"), "Sum of GST", xlSum
+        ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+            "PivotTable2").PivotFields("Inc GST Amount"), "Sum of Inc GST Amount", xlSum
+        Range("A4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("Mobile #").LayoutForm = _
+            xlTabular
+        Range("B4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("Service Name").LayoutForm _
+            = xlTabular
+        Range("C4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T1").LayoutForm = xlTabular
+        Range("D4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T2").LayoutForm = xlTabular
+        Range("E4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T3").LayoutForm = xlTabular
+        Range("F4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T4").LayoutForm = xlTabular
+        Range("G4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T5").LayoutForm = xlTabular
+        Range("H4").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("Account #" & Chr(13) & "").Caption = _
+            "Account #"
+        Range("G5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T5").Subtotals = Array( _
+            False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("F5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T4").Subtotals = Array( _
+            False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("E5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T3").Subtotals = Array( _
+            False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("D5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T2").Subtotals = Array( _
+            False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("C5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("T1").Subtotals = Array( _
+            False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("B5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("Service Name").Subtotals = _
+            Array(False, False, False, False, False, False, False, False, False, False, False, False)
+        Range("A5").Select
+        ActiveSheet.PivotTables("PivotTable2").PivotFields("Mobile #").Subtotals = _
+            Array(False, False, False, False, False, False, False, False, False, False, False, False)
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("Sum of Ex GST Amount")
+            .NumberFormat = "$#,##0.00"
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("Sum of GST")
+            .NumberFormat = "$#,##0.00"
+        End With
+        With ActiveSheet.PivotTables("PivotTable2").PivotFields("Sum of Inc GST Amount" _
+            )
+            .NumberFormat = "$#,##0.00"
+        End With
+    
+    Application.ScreenUpdating = True
+    
+    End Sub
+
+
+
+-------------
+These formulas should not work (at least from what I read in your code).
+
+    sFormula1 = "=VLOOKUP(K2,SourceLook!$B:$D,3,FALSE)"
+    sFormula2 = "=VLOOKUP(K2,SourceLook!$B:$E,4,FALSE)"
+    sFormula3 = "=VLOOKUP(K2,SourceLook!$B:$F,5,FALSE)"
+    sFormula4 = "=VLOOKUP(K2,SourceLook!$B:$G,6,FALSE)"
+    sFormula5 = "=VLOOKUP(K2,SourceLook!$B:$H,7,FALSE)"
+    sFormula6 = "=VLOOKUP(K2,SourceLook!$B:$J,9,FALSE)"
+
+ They refer to a worksheet named "SourceLook", but according to these lines, you have a range called SourceLook and a sheet called SourceSheet.
+
+    Set ISOSWS = ISOSWB.Sheets("SourceSheet")
+
+    ISOSWS.Range("B:I").Name = "SourceLook"
+
+If referring to the range, adjust your formula like this:
+
+    "=VLOOKUP(K2,SourceLook,3,FALSE)"
+
+And increase the range of your SourceLook to include column J and limit the size to include just the used rows
+    
+    Dim lastRowISOS as Long
+    lastRowISOS = ISOSWS.Cells(Rows.Count, 1).End(xlUp).Row
+    ISOSWS.Range("B1:J" & lastRowISOS).Name = "SourceLook"
+
+If referring to the sheet then change the formula like this:
+
+    "=VLOOKUP(K2,SourceSheet!$B$2:$J$" & lastRowISOS &",3,FALSE)"
+
+To figure out where your code is snagging, put in a bunch of break points, every 25 lines perhaps (read [this](http://www.cpearson.com/excel/DebuggingVBA.aspx) regarding debugging and breakpoints to understand how). Press play and your code will pause at each break until you press play again.
+-------------
+How much data?  Are you giving the script enough time to run before you kill out of it???
+-------------
+For this type of cases, I have a macro that simply does 
+
+    Application.ScreenUpdating = True 
+    Application.StatusBar = False 
+
+to "unfreeze" Excel in case any other script breaks at mid execution. 
+
+Yeah, run step by step (F8) to see what's happening... Or use **On Error Goto** to handle the error properly. 
+-------------
+Thanks again, you've been my saviour lately!
+
+Increasing the range of SourceLook and adjusting the vlookups seems to have fixed it. Thanks for the other tips!
+
+Solution Verified
+-------------
+The source data for the vlookups is about 200 rows across about 8 columns. I left it running today for an hour before I had to kill it. I did a CTRL+BRK at one point and went to debug and it highlighted
+
+    .Range("C2:C" & Lastrow3).Formula = sFormula2
+
+Edit: Clarity
+-------------
+
+You have awarded one point to _fuzzius_navus_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+No problem. Just browsing at the right time - up late trying to get my kid to sleep.

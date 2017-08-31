@@ -1,0 +1,9 @@
+How to remove rows from a table/selection.
+https://www.extendoffice.com/documents/excel/815-excel-remove-rows-based-on-cell-value.html
+
+On this page follow the instructions under 'Remove Rows Based On Cell Value With VBA Code'
+
+It doesn't create a new table just deleted them when they say they can't come. It's as close as I can think of with my tired brain.
+Might want to try a pivot table, put the attendance result in the table filer area and filter out the results you don't want.
+The problem I encounter with this is that the pivot table seems to only use the results that exist when it is created. If I change the attendance of 1 person the pivot table does not update with that info
+

@@ -1,0 +1,127 @@
+Why should i learn to use VBA in excel?
+It allows you to perform more sophisticated tasks that most people would do manually using the keyboard and mouse, and permanently automate them, saving lots of time. 
+
+It allows a level of analysis and manipulation to be performed that cannot always be done using formulas. 
+
+The addition of being able to design user forms makes Excel more UI friendly for an end user if you develop it using user form vba. 
+
+Almost anything rule based can be macro-fyed. 
+
+Imagine trying to delete 10000 rows based on the content of cell A. Can be done a number of ways, but with VBA it'll do it almost instantly. Code it well and you can be sure it's done properly first time around. 
+I think it is a great thing you can mention in a job interview. If you can talk about automating repetitive tasks while also increasing efficiency, any employer is going to eat that up. 
+Learning VBA in Excel is like learning Redstone in Minecraft. 
+
+Sure, you can live your life without it, but you're missing out on all of the really cool stuff. And it's not necessarily a giant walking slime robot that shoots out TNT, but also having simple automatic doors and that kind of real life stuff. 
+Kinda depends what you want to use excel for. 
+You can do a lot without it but any I am sure that you have used a macro in your time as they can do all the repetitive stuff that some spreadsheets require and then loops can save you hours of time. 
+
+I tend to just learn the VBA I need to do a certain task as I go along as generally if you can think it, you can likely pull it off
+Err... why not?  I always like to have more tools in my toolbox.  I guess if you're asking what VBA can offer that basic functions and recorded macros don't, it can be used to automate many tasks or fine-tune macros.  For instance, I used VBA to create a script that allowed me to select a directory which it would scan for files of a certain type, open each one, and copy specific data into several different sheets in my workbook.  This task would take me a couple hours by hand, but only took my script about ten seconds.
+It allows you to automate tasks. This is most useful in two opposing scenarios: when you have to perform some dull, repetitive task that takes hours to complete, and when you have some complex task that would require the usage of entire sheet of temporary cells; but, of course, the only limit is your imagination.
+
+But it should be noted that VBA is hardly anyone's programming language of choice and IDE built in into MS Office is rather inconvenient. So, thinking outside of the box, another question should be asked: do you **have to** use Excel? If not, you should consider learning something else, such as Python, JavaScript or R. They are more modern, more consistent and much more powerful. Often they are also easier to work with, because you have hundreds of third party libraries to choose from. Probably the only downside of them is that they don't integrate with Excel so seamlessly as VBA does.
+It kind of depends on what you're trying to do. If you need to automate repetitive tasks, absolutely you should learn it. If you're trying to manipulate data in predictable ways, using the native formulas is sometimes better.
+Same reason you should learn excel. Vlookup,etc
+No.  Learning is dangerous.  Do not learn.  Do not use books.  Turn off Internet.  Live in cave.  
+If you have to ask, don't bother learning it. 
+Exactly. Since starting my new job I've automated about 4 hours of work into 20 minutes
+Precisely that. 
+
+I work for a major bank at one of their offshore offices where some back office processes have been moved. Ever since I started working there, I saw just how much manual work is done and wondered if anything will ever be done about it. At one point I just started automating parts of that myself, small step at a time, like a small button to insert a standard comment in the active row at a fixed column, a more advanced conditional formatting that took into consideration 5-10 factors (which enabled us to reduce human errors to almost nil), or some excel to word automation (but not mail merge), excel to outlook. 
+
+Eventually, I got a green light from my line manager to attempt at excel to internet explorer automation and the next thing you know, I was able to lay off 5 people (with an even bigger project being worked on that has a potential to be sold to other banks).
+
+VBA is powerful but I already feel the need to learn other languages (currently familiarizing myself with SQL for Access and Apache server), even though there's still a bucket-load to learn about VBA. 
+
+EDIT.
+
+I'm also trying to convince my friend to learn VBA as he's working at a corporation that's using SAP and that can also be automated from Excel.
+Would be please go into more detail?
+
+That sounds amazing...
+I haven't played with it yet, but I believe there is a fairly strong support for Python for excel. It's not cheap, but could be way more powerful than VBA... But, as I said, I haven't played with it yet
+when people say "powerful" when referring to programming languages, what exactly does that mean? just the computational speed of the script is faster? personally, VBA works plenty fast for me, although i'm not doing anything particularly complex or sophisticated.
+I have, shamefully, made someone redundant since starting my new job 6 weeks ago through the use of macros.
+I had a boss that said she had never seen someone work so hard so that they didn't have to work in the future.
+Follow up question- in your opinion what is the best resource to learn VBA?
+If he has scripting enabled and basic knowledge of concepts (like me) he can automate a lot in SAP. It doesn't Eben take that long as everything is pretty straight forward. I can only recommend VBA for SAP automation
+I work for a big corporation where if you automate anything SAP you will get fired. I have automated most of my manual work using VBA. I then started to learn python and java to develop complex GUIs to manage my workload. 
+
+
+5 people without jobs. DARN!
+Sorry about the super late response - been out of town.  The first thing I needed to figure out was how to enumerate the files in a chosen directory.  [This StackOverflow post](http://www.mrexcel.com/forum/excel-questions/294728-browse-folder-visual-basic-applications.html) has a lot of the basics for opening a directory and iterating over the files and opening them.  
+
+The files I was importing data from were all CSV files and had a particular structure: a column of labels with rows of data.  The labels changed depending on if they had values for that export or not, so I needed to add logic to select the correct destination in the aggregate sheet.  Then it was a simple as [copying the data](http://stackoverflow.com/questions/19351832/vba-copy-from-one-workbook-and-paste-into-another) in that row to the cells offset from the determined destination.  Once this operation has been completed for each labelled row, the file is closed and I move on to the next one.
+
+I'm sorry if this isn't super detailed, I put this together several years ago.  The links are just examples, but Google was definitely my best friend.  The aggregate workbook was of my design, so having control over that helped immensely.  The task I was automating was essentially aggregating a month's worth of reports into a single table which populated some charts.  Besides speeding up the whole process, the automation also greatly improved the accuracy of the data.
+Won't matter because the average person who is using Excel for automation is probably doing it for a business that won't install something like that even with the ones that are free.
+When people refer to programming languages as "powerful", they mean multitude of different things, sometimes even contradicting each other.
+
+What I mean when I say that one language is more powerful than another, I mean that one language is more robust than another. If their robustness is on par, I mean that accomplishing the same task in first language is easier (takes less effort to write and maintain) than in second. So, language X is "more powerful" than language Y when there are tasks that can be done in language X, but not in Y, or when you would prefer to accomplish that task in language X (because it provides required libraries or language constructions).
+That's my full time job. :(
+There's no shame in that. You do what you have to do for you to succeed. 
+There are different kind of people that you can be replacing... Nice, hard working people that the company might move somewhere else instead of hiring outside or the lazy person who worked themselves into a corner thinking the company can't fire them because they're the only person who knows how to do this one thing. I'm working on trying to replace the latter, fuck that guy. 
+Don't want to sound mean but I googled 99% of my problems at the very beginning and I had some previous experience at coding, mostly C++, I understood algorithms, loops, if statements etc.
+
+I recommend [stackoverflow.com](http://stackoverflow.com/questions/tagged/vba) for a myriad of solutions readily available and [msdn.com](http://msdn.microsoft.com/en-us/library/office/gg264383(v=office.15\).aspx). 
+
+Also, if you have an urgent problem, go to /r/vba, folks there are very helpful, provided a solution is not readily available from google.
+Excel2010 VBA for dummies is excellent. Really excellent.
+What resources did you learn to script SAP?  I haven't been able to find anything.  I have years of vba under my belt, so I'm OK with reading through technical docs if that's all you can point me to.
+Why are there sanctions against automating SAP?
+That's awesome, thank you!
+Be careful not to make a script that's designed to make scripts to take others out of a job - or you'll  be out of a job!
+
+*mindwarp*
+Not really, you've replaced an entire person with 80 lines of code.
+
+That's someone's livelihood I've just ended.
+Not mean at all, Google is where I find most of my solutions!  Just trying to find a good source as there is a lot out there.  Many thanks! 
+MrExcel.com is a (arguably) better resource than stackoverflow.
+I prefer *anything* by John Walkenbach.
+
+
+I've used the same method I used for VBA, script recording. I'm pretty sure I had some  documentation somewhere, but a-z list of methods wouldn't help much when the field names are impossible to guess
+I had trouble when I first started working there understanding why they would not allow it. It boils down to trusting the end user. They do not want someone copy and pasting code from a web page. Is it the best policy? Probably not, but it is easier for them to have a no automation policy than to monitor it.
+
+We do have automation projects where we identify some repetitive transactional task that adds no value. Then we will form a team, identify the affected processes and write the ABAP code. 
+
+I was not trying to say no company allows this or that it is bad to automate SAP, just to check with your boss or someone else to make sure you won't lose your job. 
+>Milton replied: "Oh, I thought you were trying to build a canal. If it's jobs you want, then you should give these workers spoons, not shovels."
+
+At the end of the day I don't have an issue with work smarter instead of harder, and giving people pointless work just because we can isn't really desirable IMO.
+
+If someone can be replaced with 80 lines of code, they really are not providing much value.  Technology itself constantly sheds thousands of jobs through efficiency and automation, and I don't see any reason to fight that.
+I do what I have to do to climb up the ladder. A lot of people have been done away with or retired since I joined my team a couple years ago. That really doesn't bother me.
+
+My advice, since that seems to bother you, think of new projects to throw together in your down time. Projects unrelated to anyone's current work load. QC some database or something, find some error that was slipping through the cracks. Using VBA in an office where other people don't though, you're bound to accidentally start eliminating people. 
+And robots and software are going to replace millions of jobs in not too distant future.
+
+This is our reality.
+personally, i've really enjoyed [Power Programming with VBA](http://www.amazon.com/Excel-2010-Power-Programming-VBA/dp/0470475358) by John Walkenbach. It is very elementary, with lots of examples and a disc included. If you are a total noob (like me) and want to speed up repetitive BS at work, this isn't a bad one to pick up.
+My mistake, I forgot to add MrExcel.com, it's also an amazing source. I mentioned stackoverflow because it aggregates problems from other programming languages.
+I'm not sure I get your comment, but I found the book very helpful. 
+I got Excel 2010 VBA power programming, from the same author after, but I found the "for dummies" to be excellent. 
+
+It doesn't assume any prior programming experience and actually explains things in detail. 
+I agree with you, and you are right.
+
+I just worry Im going to macro myself out of a job LOL
+I'll rephrase:
+
+John Walkenbach writes VBA Excel books, and they are excellent.
+
+[Link here](http://www.amazon.co.uk/s/?ie=UTF8&keywords=john+walkenbach&tag=googhydr-21&index=stripbooks&hvadid=29164406413&hvpos=1t1&hvexid=&hvnetw=g&hvrand=2116470379611617410&hvpone=&hvptwo=&hvqmt=b&hvdev=c&ref=pd_sl_7fdn4jigt1_b).
+
+His writing style is easy to read and understand and his examples are excellent.
+
+
+I did that once. Reduced a 3 person team to only needing one person. When it was down to me or another person, I took the severance package because I wanted to move on. Late 08 - timing could have been better...
+Make it so that no one knows how to run the macros but you. 
+I genuinely feel bad when that happens, especially if the cost is reabsorbed by the business instead of reinvesting it back.
+
+I've implemented features like this for small companies and charities, and that's great but I don't like doing this for multi-billion pound companies I've worked for - especially if you end up taking more work or responsibility as a result on the basis of "you do less work now, why do you need to be paid more".
+Which is why I started adding secret expiry dates and passwords into everything.
+Lol! That's one way to go about it. Until they ask you for your password.
+
+What I do is just save all my macros to my personal.xlsb and keep that to myself. >.>

@@ -1,0 +1,23 @@
+VBA Date Filter
+Your Date1 and Date2 variables are just going to return true/false in the above code. Essentially the way you have it written Date1/Date2 are checking whether the number format in that cell is mm/dd/yyyy. Also you'd want to remove the quotes around your variable names when setting the filter range. Give this a shot: 
+
+    Sub Macro2()
+    
+    Dim Date1 As String
+    Dim Date2 As String
+    
+    Date1 = Format(Sheets("Sheet1").Range("G2").Value, "mm/dd/yyyy")
+    Date2 = Format(Sheets("Sheet1").Range("H2").Value, "mm/dd/yyyy")
+    
+    ActiveWorkbook.SlicerCaches("NativeTimeline_Date").ClearDateFilter
+    ActiveWorkbook.SlicerCaches("NativeTimeline_Date").TimelineState. _
+        SetFilterDateRange Date1, Date2
+    
+    End Sub
+
+Solution Verified!  
+    Sometimes you need to step back and have someone else find your error hahaha, I was looking at it for a while and could not for the life of me figure it out!  Thank you
+
+You have awarded one point to _manpretty_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

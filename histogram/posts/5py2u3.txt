@@ -1,0 +1,139 @@
+Have an interview in 16 hours and I'm dying here!
+[58 examples of Pivot Tables](https://www.youtube.com/watch?v=e-yuYNgsHAk) video is good as is [this one](https://www.youtube.com/watch?v=i5WiYh2jmG8).
+
+For data manipulation, that's a broad term. I'd make sure you've got a handle on INDEX and MATCH, I use SUMPRODUCT a lot as a filter, too. And learn Calculated Fields and Items for Pivot Table, although I jettison them in favor of Power Pivot. *That's* useful and maybe impressive, depending on your interviewer.
+Clean,trim, proper all of them together.
+
+Also search and mid or right/left together for text functions.
+
+Power shortcuts (tell them you don't need the mouse while ur on excel, they get crazy when they hear that) 
+
+Lots of index and match, vlookup functions, always sumifs and countifs instead of regular ones. Ctrl c and past styles. Drag and drops, pivot tables and charts. Ctrl+t to create a table instead of using a datasheet.
+Be honest in the parts you don't know - maybe make notes of the logical steps in which you would have taken if you're not familiar with certain features of Excel. Anyone can learn the program over time - but if you lack logical or critical thinking to even try it will be very evident.
+Check out Excel is fun on YouTube. I am in an analyst position and that's how i learned excel skills. Clear, easy examples with examples you can download. 
+Depending on what kind of role it is, I might brush up on data cleansing formulas. Trim, concatenate, date functions, etc.
+Let us know how it goes! Good luck! 👊🏼
+Never underestimate the importance of VLOOKUPS, HLOOKUPS, IF, AND, OR statements. Lot of companies like it if you got a solid handle on these, especially V and H lookups. Also, if you find yourself with extra time and want to take on something else, try to learn a little VBA (recording or writing). Even something super basic. Companies love when you can automate analysis. I'm in a Business Analyst role so I have to use Excel a lot. If you need more help, let me know. Best of luck! 
+Check the links, hope will help you :
+
+https://www.youtube.com/watch?v=qMGILHiLqr0
+
+https://www.youtube.com/watch?v=Q-OFPxZkgv8&list=PLtNErhYMkHnEKgjbWuGwyHIbG96hwpgxk
+
+http://career.guru99.com/top-25-microsoft-excel-interview-questions/
+
+It's been 17 hours... how'd it go?
+Hey guys just to let you know the interview sucked...the test was so hard! 😞😞
+Thank you so much for this. I watched that video today, it's so useful! That sounds great and what about sumif? Is that the same as sum product?
+I second the ExcelIsFun youtube channel. I watched some of his most popular videos before my interview as well and it really helped. He has anything you need if you search enough
+That guy made me the excel guru I was in my internship. 
+advantage of creating a table?
+The text functions are so important.  Data dumps can be so ugly.  My last job had an excel test.  After about an hour I came in and said, "Your data is inconsistent but I cleaned it up as much as I could."
+This is key.  If you show that you can logically think through the problem to come up with the answer then you can easily figure out how to do it later with more complex functions.
+Thank you for the tips. I'll have a look into them too. In regards to the 'etc.' How many formulas does that consist of? Lol
+!remindme 1 day
+what kind of problems were you asked?
+>That sounds great and what about sumif? 
+
+Honestly, SUMIF is not worth learning, and SUMPRODUCT can do every SUMIF can, but much, much more. And if you do only need to do very "light" work, SUMIFS is better anyway. No reason to learn two different formats (the arguments are switched around between SUMIF and SUMIFS) when SUMIFS also does everything SUMIF can.
+
+[Look at this example](http://i.imgur.com/N7es6A6.png). How would you sum the number of beers drank in January? Well, with SUMIF, you think you would do [this](http://i.imgur.com/KLYE8Fa.png)
+
+    =SUMIF(MONTH(Date),MONTH(D2),Beers_Drank)
+
+Will it work? Nope. SUMIF (and COUNTIF and AVERAGEIF, and the IFS counterparts) don't let you put functions inside the `range` criteria. There's no way to do it [unless you make helper columns](http://i.imgur.com/zzLZTii.png)
+
+Enter SUMPRODUCT - years ago people realized SUMPRODUCT, which is just an easier way for the array formula version of SUM, but doesn't require Ctrl+Shift+Enter, can be used to filter and create sums as well. TRUE and FALSES turn to 1's and 0's when any math is applied (I use multiplication, sometimes you see double negative like `--`), and 1\*X = X and 0\*X = 0, so \* acts like "AND" and + acts like "OR". So [check this out](http://i.imgur.com/4F6go0s.png)
+
+    =SUMPRODUCT((MONTH(Date)=MONTH(D4))*Beers_Drank)
+
+Note this is the same as 
+
+    {=SUM(((MONTH(Date)=MONTH(D4))*Beers_Drank))}
+
+We can see this works by evaluating it:
+
+    =SUMPRODUCT(({1;1;1;1;2;2;3;3}=1)*Beers_Drank)
+    =SUMPRODUCT({T;T;T;T;F;F;F;F}*Beers_Drank)
+    =SUMPRODUCT({1;1;1;1;0;0;0;0}*{5;4;1;1;2;3;4;3})
+    =SUMPRODUCT({5;4;1;1;0;0;0;0})
+    =11
+
+It's very versatile. If you look at my post history, I've made 900 solutions here in the last year, I'd bet 300 of them involve SUMPRODUCT.
+
+mentioning u/eight26 just so he knows why I didn't mention SUMIF. SUMPRODUCT allows you to define which values to sum and which to ignore based on criteria, but is much more powerful that SUMIF since it allows nesting of functions.
+No. Sumif(s) allow you to define which values to sum and which to ignore based on criteria. Sumproduct is the matrix multiplication of two arrays.  
+add the data to the background data administrator. Then you can call the data from different tables to a single pivot table (assuming they have a connecting field in common)
+Pros: 
+
+* Automatically-named ranges.
+* Dynamically-expanding ranges without the use of formulas
+
+Cons: 
+
+* Can be overly verbose
+* Different behavior when using the fill tool to extend formulas across columns, than Copy & Paste.
+I will be messaging you on [**2017-01-26 05:35:10 UTC**](http://www.wolframalpha.com/input/?i=2017-01-26 05:35:10 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/5py2u3/have_an_interview_in_16_hours_and_im_dying_here/dcvjw04)
+
+[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/5py2u3/have_an_interview_in_16_hours_and_im_dying_here/dcvjw04]%0A%0ARemindMe!  1 day) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! dcvjx4e)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+Well I was asked to draw pie charts and stuff which was fine but then there was concatenating and that's when I go super confused and just wanted to die! 😞😞I really do appreciate the help you guys gave me and am very grateful! Xx
+Using Month(Date) is a little unclear without some explanation to those less experienced that you are referring to a named range.
+Yes, sumproduct() is godly for pulling what you need out of a big data set.  I hadn't seen it until I reverse-engineered it out of a big sheet created by the financial analyst at my company.  Now I use it for tons of stuff.
+You're naming your range as Date and Beers_Drank right?
+
+I believe the way I always use sumproduct is like this:
+    
+    =sumproduct( --(Month(Date)=Month(D4)),Beers_Drank)
+
+I was under the impression that the -- created a true false statement, but you seem to be doing it slightly differently with easier syntax.       
+I hope OP gives you reddit gold for this comment. Awesome explanation.
+In your opinion, would an extensive sumproduct formula operate faster than an equivalent sumifs? 
+Ok....I don't understand what those words are but I'll do my research tonight! These videos are awesome btw. You're my hero! X
+[deleted]
+pros: 
+
+* easily referenced in macros, has its own object model
+Yeah, I know - whenever I post named ranges in a comment, I always [include a color-coded screenshot](http://i.imgur.com/KLYE8Fa.png) to show what's going on. Maybe I'll stop using them altogether, though.
+>You're naming your range as Date and Beers_Drank right?
+
+Yeah. I used Ctrl+Shift+F3 to make it automatic.
+
+>I was under the impression that the -- created a true false statement,
+
+So not quite - it's almost the opposite because it gets rid of the true falses (by turning them into numers).
+
+ Comparative operators (`<`, `>`, `=`, `<>,` etc) create `TRUE` and `FALSE`s. But `SUMPRODUCT({TRUE,FALSE...},{1,2...})` fails since there's mixed data types.
+
+Excel is smart enough to turn trues into 1's and falses into 0's if there's any math operator involved. So `TRUE+5` equals 6, and `FALSE/15` is 0, etc. So you can also us unary operators, like the negative sign. So `-TRUE` or `-FALSE`, but that's a problem because if you're doing a `SUMPRODUCT`, you'll get the opposite value. So you do *two* negative symbols to get back to `{1;0....}` vs `{-1,0...}`.
+
+But also note `SUMPRODUCT(A, B)` is always exactly the same as `SUMPRODUCT(A*B)`. So I figure, why waste two negative symbols per 'filter' when you can just multiply them all together (and drop the comma)? Hence, no `--`. Unless it's just one array by itself, and you're using `SUMPRODUCT` more like a `COUNTIF` than a `SUMIF`.
+I'm not sure - I haven't tried it. There is code out there test INDEX an MATCH vs VLOOKUP, so it might be possible to check with that code.
+
+SUMIFS does have to convert text to equivalence statements, but I'd bet SUMPRODUCT uses more memory.
+well, it doesnt go much farther than that. 
+
+Whenever you create a pivot table (or a data table), all that data gets loaded in the background data handler (I cant remember the official name).  If you have more than one table you can connect them, kinda how you would have different tables of a data base connected to one another by a key field. 
+Then you can load those different tables into the same pivot table and do crossed analysis. If you want to add rows or fields in the table, the data gets updated in the data handlers as well, so you dont have to redefine the range of the pivot table, you just refresh it.
+
+Plus with tables you can do pretty much the same you would do if the data was just not formatted as a table (eg vlookups, sumifs, etc). Theonly problem is that the syntax is not quite the same, in particular the referencing is very different, so its almost like learning the whole thing again.
+Yes, definitely interested in this.  
+Interesting. I normally do all calculations inside formulas, if at all possible.
+Chiming in. I was very interested and appreciate your write up - that named range with no reference or additional information threw me off. 
+sumproduct explicitly consumes the whole range so done on whole columns its probably slower.
+Going to have to have a play about with this. Use pivots regularly but having two data sources might come in handy. Thanks for the input!
+Is this using PowerPivot and those data analysis plugins provided by Microsoft?
+yeah, me too, depends on the scope though, lately I've been doing a little more some more "application" kinda things, csv in -> process -> csv out, and there's a single table that needs to be maintained by the user. Having that as a "table" makes it easier to reference in the macro, and makes it easier for the end-user to maintain correctly. 
+
+Different sheet I have is basically a "template" for normalizing and collating different data sources. Each sheet has a data table, different number of columns, different things, whatever. using tables there is no need to deal with scoping or whatever, you just point to the table in a sheet. 
+
+now it wouldn't be the end of the world not to use them, but it just makes it feel so much more smooth that you just have your data right there in an object. If someone inserts rows above it or whatever, doesn't matter, 
+
+as far as I remember PowerPivot makes it easier, but its not necesary to do all that I've described.
+One thing that I wish they would do would be to make it so that clearing the contents of a row of a table deleted that table row. I would be so happy if that was an option.

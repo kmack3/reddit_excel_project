@@ -1,0 +1,46 @@
+6it50z
+Mail merge macro creating and naming individual PDF files, and potentially emailing - possible?
+I have around a thousand pay upgrade letters that are going to be emailed out to the workforce. I have an Excel table with all the relevant details to be added into letter templates. Does anyone know of a macro script which would take each line of the list, enter the details into the form letter and save them individually as PDFs including the name of the recipient from the list in the title? Absolute bonus if it could attach file via Outlook and email to addresses in the list. All suggestions appreciated!
+
+
+-------------
+[Mail Merge](https://www.exceltip.com/vba/mail-merge.html)
+
+[Email from Excel](https://www.rondebruin.nl/win/s1/outlook/bmail5.htm)
+-------------
+I do a similar project at work. I print to PDF with adobe pro, extra all as separate folders, use powershell to rename them all 001-999, then there is a script to rename 1 to the first entry on the spreadsheet,2 to the second entry and so on and so forth.
+
+So that parts pretty possible.
+
+I don't email them though.  
+-------------
+Thanks! I can do mail merges and Ron is the guru for emailing via Excel it's just that missing any step from using a list to create mail merged form letters, renaming PDF files based on name in line, attaching to Outlook email with a set text will mean steps that need to be done 1000 times manually. I do appreciate your help!
+
+-------------
+These templates are Word docs, correct?
+-------------
+Yes.
+-------------
+Look at [this](https://www.mrexcel.com/forum/general-excel-discussion-other-questions/713478-word-2007-2010-mail-merge-save-individual-pdf-files.html) thread, especially Cindy Ellis's post.
+
+That should get you to the one pdf per record. You'll know the filename then as well so attaching and email the pdf shouldn't be too difficult.
+-------------
+Thanks! That really helps. So I snip that into the mail merge macro to have PDFs saved with names in filename, then snip that into the mailing macro? Would that work? I note that creates them as .docx, would it cause an issuoe if I replaced that with .pdf in the script? Thanks for your help!
+-------------
+> So I snip that into the mail merge macro to have PDFs saved with names in filename, then snip that into the mailing macro? Would that work?
+
+You'll want to have your Excel macro run the mail merge macro, then have your Excel macro loop through the table to create the emails (you should know the pdf filename and path at this point).
+
+>I note that creates them as .docx, would it cause an issuoe if I replaced that with .pdf in the script?
+
+User kryptonian from the thread changed the macro to export as pdf, as shown below:
+
+	ActiveDocument.ExportAsFixedFormat OutputFileName:=docName, _
+			ExportFormat:=wdExportFormatPDF, OpenAfterExport:=False, OptimizeFor:= _ 'set OpenAfterExport to False so the PDF files won't open after mail merge
+			wdExportOptimizeForPrint, Range:=wdExportAllDocument, From:=1, To:=1, _
+			Item:=wdExportDocumentContent, IncludeDocProps:=True, KeepIRM:=True, _
+			CreateBookmarks:=wdExportCreateNoBookmarks, DocStructureTags:=True, _
+			BitmapMissingFonts:=True, UseISO19005_1:=False
+
+-------------
+Well I can see see this is going to be a challenge to parse, but I love a challenge! The main mailout needs to be done by Friday next week so I have a while to test and learn. Thanks so much, if you have any further suggestions I'd appreciate. If I hit any walls, I will ask! If I can get this working it will save an absolute mountain of work, work people will think I'm a wizard, and add a wonderful tool to the toolshed! I'll share progress reports, all this is happening so quickly. Thanks again mate.

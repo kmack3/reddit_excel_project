@@ -1,0 +1,13 @@
+crash
+44wyfz
+Macros Causing Excel Sheet To Crash
+
+The excel sheet that I created to track our work orders uses macros to copy and paste information from one sheet to another depending on the work order ID. When I save the spread sheet to my desktop there are no problems working in the spreadsheet. However, when the spreadsheet is saved on the network drive none of the macros work and when you try to run a macro, a loading wheel pops up and it will do this until you force excel to quit. Has anyone ever had a problem with saving macro-enabled sheets on a network drive?
+
+
+-------------
+Sounds like a problem with your network, not the file.
+
+Try opening it in Protected Mode (shift right click on the file) and then checking trust center settings.
+-------------
+What would I be checking for in the trust centre? I have changed the macro settings to "Enable All Macros".

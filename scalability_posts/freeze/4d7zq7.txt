@@ -1,0 +1,13 @@
+freeze
+4d7zq7
+As a document is scrolled down, I would like the headings in the freeze pane to change. How can I do this?
+
+Hello /r/excel, I have a spreadsheet with around 4,000 rows of data. There is currently a freeze pane with headings for this data. However, as the page scrolls down (say at row 700) I would like this heading to change, as the data becomes different. How can I go about adjusting the text in the freeze pane only once the user has reached a certain point in the document? Thank you!
+
+
+-------------
+To dynamically change the freeze panes, you'll need a VBA solution [like the ones listed here](http://stackoverflow.com/questions/3232920/how-can-i-programmatically-freeze-the-top-row-of-an-excel-worksheet-in-excel-200).
+-------------
+I don't think this is what OP looking for. As an example, if his cursor is in  the first 100 rows, he wants rows 1:2 to be in the freeze panes part. But when his cursor is in rows 101 to 200, then the  freeze panes should be a rows 101:102, and so on. 
+
+You need a VBA events macro that checks where the current cursor is and based on that position, adjusts the freeze panes rows.

@@ -1,0 +1,61 @@
+So I've started trying to force Excel to work around IEEE 754
+I don't know that excel gives you the option to adjust the precision of a float. You might be able to do it with Matlab if you're interested. 
+Instead of splitting your number into individual digits and adding / mutiplying / etc one by one, split them into larger number.
+
+Use 7 digit number for example, so a 35 digit number would be a list of five 7 digit numbers A1 A2 A3 A4 A5 say.
+
+You could then do C=A\*B by calculating C1=A1*B1, ..., C5=A5*B5.  You would then need to set C5 to be the last 7 digits and take any higher order digits and add them onto C4.  Then take last 7 of C4 to be C4 and bump the rest onto C3, etc.
+
+(I used 7 digits so that if you'll be able to multiply without being forced to round.  If you're only every going to add you can bump up the length of the numbers you're dealing with to 14 I guess)
+
+Also do all of the addition / multiplication in VBA in a custom function.  If you continually access the spreadsheet from VBA then it slows things down.  Instead have a BIGMULT or BIGADD which takes two arrays, treats them as lists of numbers with a given size (say 7 digits), and returns the result array.  Would have to use as an array function.
+http://www.tushar-mehta.com/misc_tutorials/project_euler/LargeNumberArithmetic.htm
+Couldn't you try to reduce the precision need?
+What I mean is that do you really need (for those big numbers) the precision down to the unit? Maybe you could round up and count the millions, or the billions. I know this is a workaround, but it may save you the headache! (and be easier to read to!) 
+Yep, I know Matlab can do it, I have it, but only touched on it during a semester at uni, so don't know how to use it for what I need. Which is updating calculations constantly, as my calculations are affected by the current time.
+
+As an example, I run this:
+
+    =(ROUNDDOWN(((((Birth_Rate/1000)/Time_Now)+1)^Time_Elapsed)*Base_Population,0))-Base_Population
+
+This is a calculation where I've set a base population for a planet, and a birth rate, then calculating the population increase since "Time_Elapsed", or when the planet was colonised.
+
+I have no idea how I'd implement this sort of thing in Matlab.
+Yeah, it occurred to me that instead of splitting it into groups of 1, I could do the same with larger groups of digits.
+
+I do plan on doing this as a function, so that I can actually usefully use this with my other formula. Though I have less experience with functions so will need to spend a bit of time working with it, learning how this would be set out. But that's definitely something I can learn.
+
+Thanks for the pointers!
+Now this is interesting. It seems of my own accord I've done an extremely basic version of splitting numbers and adding/carrying over. Thanks for the link!
+Do I really need it? No, not at all. I have all these calculations split down into much smaller manageable ones, they just become too big when all added together. Which is "acceptable"
+
+But I have a vision for this little world, inspired by [worldometers](http://www.worldometers.info/), and it doesn't work as well if everything's being rounded. I enjoy watching the numbers flying up, watching my people being born and dying and going about their life in my spreadsheet. It's fun, I don't think it looks as good if it's rounded.
+
+So it's more of a want, than a need.
+You could do it with a for loop that increments the time upwards every loop. If you're just redoing the same formula every time it would be pretty easy. I can try to help if you're interested. I've spent a lot of time with Matlab. 
+> It seems of my own accord I've done an extremely basic version of splitting numbers and adding/carrying over. 
+
+That's good!  
+Understood! What about just dividing the big numbers into two smaller?
+Simplify your life too and yet keep the precision!
+But anyway, what matters is that you bent it to your will and made it work! Nice job! 😀
+I am redoing the same several hundred formulas repeatedly simultaneously. Matlab has its own version of NOW(), so no need to increment the time. The main thing I really need to learn to do in Matlab is create a continuously updating table. If I have that then I can do the rest.
+
+In Excel all I have to do is hold F9 and all my formulas update for the current time roughly every millisecond.
+If you use the "now" function, you're vulnerable to random slowdowns due to other processes that will change your results - you're essentially feeding the calculations random time intervals (within a certain range). If you want consistency and accuracy, you should do it with a fixed time interval. This way you can see the effect of adjusting the time interval and get the same final answer given the same starting conditions. Debugging with a random time interval will give you plenty of headaches and I don't think it adds anything to the calculation. 
+Really, if you're just running the same calculations again and again, your code can look something like :
+
+for time = 0:1e6    % unit milliseconds
+%calculation 1
+data(1)= % formula goes here, use time or delta time in formula 
+
+%calculation 2
+data(2)= % formula goes here 
+
+%calculation 3
+data(3)= % formula goes here 
+
+end
+
+This will run very easily and will give you predictable results. I don't think Matlab understands constantly updating tables - you would have to create a script that updates the table, which would look like the one above.
+The time intervals still need to be linked to the real time, as in, if I run it now, then run it in eight hours, the code must be aware that eight hours have passed.

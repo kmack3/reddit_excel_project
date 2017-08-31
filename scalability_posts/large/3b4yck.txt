@@ -1,0 +1,60 @@
+large
+3b4yck
+Sorting a large dataset by a drop-down list
+
+I have a question about sorting that I have not been able to find the answer to. Using Excel 2010
+
+My problem: I would like to sort a large table ('Participant Table'!A1:AG47638) based on a value of around 50 different values in drop down list ('Choose your Location'!G7), which matches values in 'Participant Table'!I:I
+
+I have been successful using a third sheet to copy the people I need using and array index formula, but due to the size it takes a LONG time to compute, and is not useful:
+
+=IFERROR(INDEX('Participant Table'!D$2:D$47638,SMALL(IF('Choose your Location'!$G$7='Participant Table'!$J$2:$J$47638,ROW('Participant Table'!$J$2:$J$47638)-MIN(ROW('Participant Table'!$J$2:$J$47638))+1,""),ROW('Participant Table'!A1))),"")
+
+
+Does anybody have a solution that would require less resources? I think vba is the route to go but I've never used it so I'm ignorant in it's use but am very open to it if somebody can walk me through a bit- I would say that I'm an intermediate user. 
+
+Thank you SO much in advance. 
+
+
+-------------
+I'm a big fan of Access if only to make queries and import or link them to excel to save the smaller/quick calculations for Excel. It's really not that hard to learn. I had an excel dashboard that took 30 minutes to calculate and I minimized the calculating time greatly by doing the long calculations with Access.
+-------------
+Can you try to make a first column that finds the row you are looking to reference (say 341), and then use that inside your INDEX functions?
+
+This way, you only calculate the row you are looking at once per line, instead of once per cell. Does that make sense?
+-------------
+You would be better bringing your data into powerpivot then using slicers and a pivot table to issolate data selected. From this you can also create DAX formulas to provide key metrics that could be pushed to a chart/dashboard for the end user. Powerpivot can handle millions of rows and will be quicker and take less resources. 
+-------------
+Hi for those interested I found a sufficient solution to my example that populates a third sheet. 
+
+http://stackoverflow.com/questions/26911168/excel-return-whole-row-when-it-matches-cell
+-------------
+I should have included in my description. I'm attempting to distribute the workbook as a tool to others and I'm unsure of if they'll have anything besides Excel. I'm trying to keep it all within one worksheet and as user friendly as possible. 
+
+But your option does peak my own curiosity. I've never used Access actually.
+-------------
+Interesting I'm not sure I understand the row function, could you link an example?
+-------------
+From my understanding slicers are not in Excel 2010. Is that incorrect?
+-------------
+Can you simplify the data by linking just the values into a separate workbook and then using a pivot table? Or are they going to be updating this for their own needs and need the formulas?
+-------------
+[removed]
+-------------
+Clippy: ROW
+-------------
+They will be changing the value in the drop down menu, which is what I've conceptualized as the search criteria
+-------------
+Just a a quick heads up, the reddit spam filter removes any shortened URLs, so you may want to steer away from them.
+-------------
+[ROW](https://support.office.com/en-US/article/ROW-function-3A63B74A-C4D0-4093-B49A-E76EB49A6D8D)
+
+     Syntax: ROW(reference)
+
+
+Returns the row number of a reference.
+-------------
+Well that is the [actual URL](http://my.cl.ly/), not a shortened one...
+Do I need an URL lengthener?
+-------------
+Oh, odd... nope just your post was caught in the spam filter and that url looked odd, but all is well...

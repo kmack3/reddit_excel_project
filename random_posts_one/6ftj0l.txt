@@ -1,0 +1,52 @@
+6ftj0l
+How to alter repeating (and zero-inflated) sequences in a large dataset.
+Hello,
+
+I have a massive dataset (50k rows) that contain lunar visibility and illumination for a period of several years (so, 0 being if the moon is present, and a number ranging from 0.1-1 regarding slight illumination all the way up to a full moon). 
+
+while the present not present components are accurate, my main issue is that half way through a lunar sequence (on some nights), the illumination value will change from what it is supposed to be for that night into what it is for the next night..this change occurs at midnight. 
+
+For example,  [here](http://i.imgur.com/LJ51VXi.jpg) you can see that at midnight (row 47), illumination changes from 0.81 to 0.71. 
+
+Likewise, the next night (when 0.71 is supposed to be the only value) [here](http://i.imgur.com/9sh97PC.jpg), you see illumination changing to 0.64 at midnight (and so on). 
+
+As the moon can either be visible or not visible, all periods in between each cycle are zero. 
+
+My question is whether there is a way for excel can change all of the values between these periods of zero, into the first number that isn't zero in this massive sequence. 
+
+That is, to change all of the values in the first example into 0.81 (thus replacing 0.71), skip through to the next set of zeroes, and then once again, change all of the 0.64s into 0.71 (so, the first value after a set of zeroes).
+
+I am really sorry for such a poor explanation, however..I honestly cant think of another way to articulate it! 
+
+Thank you
+
+
+-------------
+you could try making a second column then set the first cell to its corresponding value 
+
+    b1 = a1
+
+ then fill all subsequent cells with the following formula.
+
+    b2=IF(A2=0,0,IF(B1=0,A2,B1))
+
+-------------
+Thank you for your response!
+
+It kind of works...[Imgur](http://i.imgur.com/kO312Mq.jpg), however, it simply provides a true or false statement rather than a number (although, it does show whether it is false right before the transition). I am not sure if I am doing it correctly though...
+-------------
+I am Sorry If  I was not clear 
+
+so you need to set the first cell of your new list equal to zero(if that is your first value)
+then for rest of the cells use the formula below
+
+    =IF(A2=0,0,IF(B1=0,A2,B1))
+
+[example](http://i.imgur.com/8sBjiKS.png)
+
+
+
+-------------
+thank you so much! I won't be able to respond as quickly as unfortunately, my router just broke at home (so, I am responding through work or at a public place).
+
+Nonetheless, I will give it a shot tomorrow. Thanks again

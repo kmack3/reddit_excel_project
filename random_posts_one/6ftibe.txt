@@ -1,0 +1,25 @@
+6ftibe
+How can I tell my formula to lookup another word to display a result?
+I have cell AP6 where I have two statuses: Complete and Escalated. And AS6 where it shows only Complete status. And if the conditions are met in cell AP6 and AS6 to display the result in E6.
+I would like to add into my formula to include the escalated status on cell AP6. So far I have this:
+=IF(AND('CloseOut Report'!AP6="Complete",'CloseOut Report'!AS6="Complete"),'CloseOut Report'!E6,"")
+
+
+-------------
+You can't make another cell value equal what you want, formulas can only take data, not send.
+
+In E6 put your formala
+
+    =IF(AND('CloseOut Report'!AP6="Complete",'CloseOut Report'!AS6="Complete"),"Result of something here","")
+-------------
+I guess what I'm trying to do is if cell AS6 has the value of Complete or Escalated to give the result on E6. Right now my formula only has to include value of Complete. 
+-------------
+I need to run off to work, so I can't code it atm.
+
+Basically you want to nest the "IF" statements.
+
+something like this 
+
+    =IF(AS6=Complete, E6, IF(AS6=Escalated, E6, <all other results>))
+
+this is the same concept as an IF/ELSE IF in coding. [here](https://www.techonthenet.com/excel/formulas/if_then.php)'s a tutorial for this concept in VBA (what excel uses for macros)

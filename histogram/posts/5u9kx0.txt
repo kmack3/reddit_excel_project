@@ -1,0 +1,29 @@
+Returning values based on two drop down lists. Not sure which formula or setup is right.
+Have you considered just making your range an Excel Table and adding slicers to it? 
+Ideally, rather than having your date be a text, can you just type in a number/date? Then, your downstream analysis will be much easier, and PivotTable can naturally group by month/quarter/year.
+
+If you don't want to "see" the whole date, could format cell with number format of `mmmm`
+Throw up the workbook.
+Here:
+
+https://drive.google.com/file/d/0B7cXs2aNxDC8QnNNM253VGFQR0U/view?usp=sharing
+
+The detail list is where you plug in the information you want to. Currently I just used randbetween() for sample numbers.
+
+I changed the unit number association from an IF statement to a cleaner vlookup on the page called 'ANNUAL'. The data on the annual page is populated from the detail list and the double dropdown for the index/match/match pulls off the data on the same annual page. To solve your pressing 'too many clicks' issue - I cheated by adding a 13th column and calling that 'Total'.
+
+I believe this does what you need. Also, the way you setup the 'Expense Reports' section is kind of goofy - but that is more work to fix and is more stylistic than anything.
+I am somewhat of a novice, so I have no idea what that means sorry.
+
+I used an Index, match function to figure this problem out however. Thank you for the help!
+
+Thank you for this, but that's actually not what I need, I don't need the totals, but rather i need to multiple a single month by 12 and then divided by the amount of units for that property. When I say that I am clicking too many times I mean that I need to run 60 individual calculations to get that number. I was wondering if there was anyway to do all 60 calculations at once or as I put them in one by one in the detail list. 
+
+Edit: also when you say the expense reports are goofy, can you elaborate on why? Is it just stylistic? I was just trying to get the formulas first and then I'd clean it up later but any advice would be appreciated 
+Select the table, press control-T. 
+
+Go to Table Design, insert slicer, select fields you want. 
+
+You should get a pop up box to filter your table. 
+I second this. Slicers are great and can be intimidating but they are surprisingly easy
+Ok I will check that out tomorrow at work and report back, cheers 

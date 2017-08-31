@@ -1,0 +1,79 @@
+How Can I Import a Line of Text From a Webpage into Excel
+On a PC, you can literally just use the data from web tool and then it highlights the bit that you want and it imports it and then you can refresh all you like. 
+Ie that took my about 5 seconds to see you have a (rather nice) 44+ bitcoins :)
+
+On a mac it is much harder for no helpful reason and thus (rarely - I use a mac) the windows is just easier all round until Mac2014 eventually appears!
+Check my response to /u/sloof70 .
+
+I made something like this in Google Docs because I could never figure out how to do it in Excel.
+
+https://docs.google.com/spreadsheet/ccc?key=0At0nmE8ev9mSdDFOMVU0d0c3WnRhWVZOOU0xRW5BQnc&usp=sharing
+This works for me using VBA.  As long as the web page stays in the same format, this should continue working.  Yes, it is ugly, and makes a lot of assumptions. 
+
+    Option Explicit
+    
+    Private Sub pullData_Click()
+    
+        Dim htm As Object
+        Dim strText1() As String
+        Dim strText2() As String
+        Dim strText3() As String
+        Dim strText4() As String
+        Dim dblBalance As Double
+        Set htm = CreateObject("htmlFile")
+    
+        With CreateObject("msxml2.xmlhttp")
+            .Open "GET", "http://blc.cryptocoinexplorer.com/address/Ba4X2t5GcrpJ5FT466X3xDMwrX4xqNkoXe", False
+            .send
+            htm.body.innerhtml = .responsetext
+        End With
+    
+        strText1 = Split(htm.body.innerhtml, "<TH>")
+        strText2 = Split(strText1(2), "<TR>")
+        strText3 = Split(strText2(1), "<TD>")
+        strText4 = Split(strText3(2), "</TD>")
+        dblBalance = CDbl(strText4(0))
+        MsgBox dblBalance
+    End Sub
+
+[deleted]
+Can I add something to this? I want to be able to have a rather large list of Amazon.com ASINs (Amazon's internal product identifier), create a link from these (which would be amazon.com/gp/product/ASIN), and then pull a field of text such as current price. I'd like to be able to set this up for one and then drag it down for hundreds or thousands of ASINs. Can this be done?
+[deleted]
+On 2010 it is under the 'Data' tab and then in the 'Get external data' section. 
+
+On 2013 I believe they made it even easy with web queries but my office is cheap and won't upgrade SAP so none of that goodness for me.. 
+My approach to this would be to set up a connection to a product page, modify the connection url to take the ASIN as a parameter, then record/write a macro to copy the relevant fields to the master table and a second macro to iterate down the list of AISN.
+A while back a user on this subreddit had similar needs. While I was never able to figure it out in Excel, I did whip together a quick thing in Google Docs that does just that:
+
+It pulls data from thepricegeek.com and by using regular expressions, pulls the pricing information.
+
+https://docs.google.com/spreadsheet/ccc?key=0At0nmE8ev9mSdDFOMVU0d0c3WnRhWVZOOU0xRW5BQnc&usp=sharing
+If you could post an example, that would be appreciated.
+
+I'm assuming those four cells are dumped into a single cell on the Google Doc spreadsheet? If so, you might need to play with some regular expressions in the column adjacent to get the data how you want.
+
+In my link, column C pulls that part of the web page, and column D uses regular expression to find and pull just the price from column C.
+That sounds spectacular! If only I had half the know-how to do that...
+Hmmm... I'm going to fool around with that and see if I can make it do my bidding.
+[deleted]
+You're going to need to use the IMPORTXML function and XPATH syntax. 
+
+You'll need to view the website's source code, find where that price is nested (in this case it is HTML/BODY/DIV/DIV/DIV/DIV[@class='price']). I tried playing around with the URL you provided and had no luck.
+
+You should be able to pull both BTC and USD. You will need two columns for it, one to target and pull the USD price and the other to target and pull the USD.
+
+The formula *should* have been as simple as:
+
+=importxml(B2,"div[@class='price']/@content") (where B2 targets your base URL + search query).
+
+Anyway, the chunk of HTML to target will look like:
+
+    <div class="contents">
+    <div class="cont"><div class="leftcont">
+    <div id="info">
+    	<div class="mprice">0.00001800 BTC (1800 Satoshi)</div>
+    	<div class="price">0.011133 USD</div>
+
+If you'll notice, BTC and USD results each have their own class tag, making it possible to have both results display on your spreadsheet (price and mprice).
+
+Anyway, I can't seem to get this to work because XPATH syntax is such a pain in the ass to get working. Good luck. :P

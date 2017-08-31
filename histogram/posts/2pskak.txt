@@ -1,0 +1,71 @@
+I freely distribute a random test generator but it's HUGE and bulky. Can you guys help slim it and make it faster/easier? Wall of text inside!
+Jesus Christ 30 MB!
+
+Even as somebody who works professionally with Excel, this workbook is simply too much for me to dig through.
+
+So here's what I'm going to do, and bare with me here. Let us take your question and work it a bit differently. What if, instead of "can we find a way to make this wb more accessible?", we pivot to "is there another way to get this functionality?"
+
+The answer to that is a clear, resounding "yes." Now, I don't want to take away from the clearly enormous amount of work you have put into this wb, but in the interest of finding a better solution why don't we try to rephrase/re-work your question by starting with what you would like to be able to do. E.g: 
+
+"I am trying to make a workbook that will draw from a bank of test questions, and automatically build a test for my students. Bonus if it can keep stats. Where should I start?"
+
+That should get the ball rolling.
+Have you considered implementing in Access instead? A project this size with so many lookups is certainly doable in Excel, but like you've discovered it's often clunky and indecipherable to inexperienced users.
+
+
+Exactly.  Every time I've tried to dive into this to make it smaller I get so overwhelmed.  You are exactly right.  The workbook is made up of years of formulas to add one more thing.  And then each formula makes it that much more unmanageable.
+I played around with Access for another project but I was having to teach myself everything from new and I just didn't have the time to learn it at that time.  I might revisit Access though and start digging into everything that I can.  Thanks for the suggestion!
+There are a few approaches here. My first suggestion would be to change the layout of your "bank of questions."
+
+A better format would look like this:
+
+ -Make an Excel Table
+
+ -Columns (ID, Question_Text, Question_Answer, A, B, C, D, E, F, G, H, I ... -> choices)
+
+ -Blank (not included) choices' value = "Null"
+
+Now you can pull questions FAR easier. You may also want to include columns for things like: Difficulty, Topic, Format, etc -> I'm sure you can think of more. These things allow you more control to choose which questions to ask.
+
+Off the top of my head, for example, if you have a question where the "Format" = "Short Answer", maybe the {A, B, C, D} choices are key words you should be looking for in a good answer. Idk if you want automated grading or not, but it's certainly possible.
+
+How does that sound for a start?
+Sounds great.  I just started using Tables this year(!) and I have liked how easy they seem to be.
+
+One question: What is the "Blank (not included) choices' value = "Null"?
+While I don't think 30mb is unusable, it's getting bulky at that point (I use 40+mb workbooks daily).
+
+I'll see if I can help when I get home tonight.  Will be back
+For you're table, you may want to include upwards of 10 (A-J) "choice" columns to give flexibility looking forward (see other comment).
+
+Okay, so now we have a format for storing questions. Next we need a way to "build" a test from them (stats comes next). For this, I must defer to you a bit because I do not know precisely how you go about making up a test. BUT here it goes...
+
+My vision is something like this: We create an area/WS that we use to specify Test parameters. Here we define exactly what you want on this test (maybe x4 Questions where 'Format' = "Short Answer", x15 Q's where 'Format' = "MC" AND 'Diff' = "medium", x5 Q's where 'Format' = "MC" and 'Dif' = "Hard" etc.)
+
+Then we use VBA to actually make the test (and record everything appropriately).
+So when you make the table, you will need to have as many "Choices" (A,B,C, etc) COLUMNS as you want to provide for the question for which you wish to give your students the most options (terrible wording.. i know).
+
+For example, you may ask something like, "How many Neutrons does Mg have?" and you want:
+
+ A) 9
+
+ B) 13
+
+ C) 12
+
+3 choices. For another question, you may ask, "How many electrons does Mg2+ have?"
+
+ A) 10
+
+ B) 12
+
+ C) 13
+
+ D) None
+
+4 choices. Your source table MUST have at least A-D columns so that there is a place to store the answer for the second question. So, as a method of nixing unused choices, you can just label the field "Null" and handle it appropriately. There are many other options of course. You could also just leave it blank (""), or "NA" etc. 
+
+I would stay away from leaving it blank though.  Although it may be easier to handle  using built-ins, leaving a field blank is not very explicit and could make things messier as you build the WB out.
+
+EDIT: My BS is in Biochemistry btw. Forgive my sample questions :)
+Thanks!

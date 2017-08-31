@@ -1,0 +1,13 @@
+A stupidly simple macro trick I use to navigate workbooks with dozens of worksheets
+I came up with this trick last week after working on a workbook with almost 50 sheets that was intended to be distributed and modified by people who have no ability to work with VBA.  The best part of this, is you can very easily add extra sheets to groups without modifying the code.
+
+If someone uses this at work and promptly gets a promotion because of it, I accept paypal :)
+This is a pretty good idea, thanks OP!
+Sorry for being a noob, but how do I get it to work after I've added the code?  Do I need to have color tabs added before hand?
+Fancy! Thanks for posting, I'll try this tomorrow. 
+In the developer tab, click "Visual Basic".  In that window, select Insert -> Module.  Paste the code there.
+
+Then on a worksheet, select on the ribbon Insert -> Shapes ->whatever shape (I recommend a rectangle).  Choose it's color give it some text.  Right click it and select "Assign Macro" then choose ShowSheetByColor.  It will now execute the macro when you run the code.  I recommend that you put that rectangle on a sheet titled "Navigation".  Make another rectangle on that worksheet and assign the macro "ShowAllSheets" to it.
+
+Now, on the sheets you wish to show - right click on the tab and select "Tab Color".  Pick a color that matches one that you used on a button.
+Check it again - I just updated it so you no longer have to write a new sub for each section of worksheets.  The sub ShowSheets will grab the text of the shape that called it and look for a worksheet or chartsheet with that text as a name.  Even more non-vba savvy friendly.

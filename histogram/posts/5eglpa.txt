@@ -1,0 +1,29 @@
+I was looking up how to copyright a piece of work I've done so it couldn't be legally copied
+Everything you create is actually already copyrighted - *registering* the copyright I think it's as easy as registering with copyright.gov, although if it's not a piece of art/literary work, copyright isn't really the right protection.
+
+A patent provides the proper protection, although [algorithms are explicitly excluded from patent protection](https://en.wikipedia.org/wiki/Patentable_subject_matter#The_algorithm_exception_and_the_patent-eligibility_trilogy), but people get around that by calling it a process.
+
+For what it's worth, Excel's 2010+ encryption is good, and considered to be not breakable out in the field, at least not by us normal people. For example I think the guy that [has a 1040 tax spreadsheet](https://sites.google.com/site/excel1040/) has been doing well and I don't think he's been hacked.
+Probably you are looking for [workbook copy protection against piracy](http://doneex.com). 
+/r/firstworldanarchists
+What encryption are you referring to?
+I was under the impression that copyright can apply to software - or specifically to the source code.
+
+A patent will give broader protection, but it also costs money and time to get one. I also thought you could patent an algorithm, though maybe that's a specific programming implementation of an algorithm and not the underlying mathematics (i.e. I can patent a slick new way to calculate a least-squares optimization, but I can't patent mean squared error as a concept0.
+Oh, just the encryption used when you protect a newer (XML style) document (AES-128, but can be increased to 256-bit) - I'm assuming the OP wants cells/formulas locked and password protecting or locking cells is good enough.
+Your right about source code & copyright. It counts as a literary work or something to my understanding like that under US copyright law
+I was under the impression that you could crack it by saving as an older file type, and opening with an older version of excel that used weaker encryption, then running the encryption breaker (if you had access to the file itself). Am I wrong?
+Ah I see, thanks for the info!
+I want my VBA locked down, I've transcended formulas! 
+I'm not sure, but I don't think that works if the file is originally saved as a newer version. So if you password-protect a document, an unauthorized person can't open it, so they can't save it as an older version. Not sure about protection as well, but if it's locked via AES, and 2003/2007 doesn't even have AES algorithms built in, I think the structure of the document is locked.
+Going to try this at work today, should be slow. I'll get back to you!
+Oh good, thanks. I'm too lazy to try it!
+Findings:
+
+1) You can take a sheet completely locked down (file, workbook, and sheet), and save it as a .xls file, with no corruption issues.  
+2) The file protection is good, and I wasn't able to break it with 15 minutes of effort.  
+3) The workbook and sheet protection is terrible. I broke it by simply uploading the file to google docs. 
+Ah, good to know! I had forgotten about that Google Docs tricks, too. So it looks like if someone can view a workbook or sheet, then there's no way to lock it down?
+Well, they can get their own copy, but the original is preserved. So someone can grab and tweak a sheet on their own, but since the main purpose (in my mind) of locking a sheet is to prevent unintentional changes, it all works out. 
+
+

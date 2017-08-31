@@ -1,0 +1,115 @@
+More on never using nested IFs again [WARNING: even longer post than last time]
+Keep posting quality content mate. I found this very useful! You should create a blog or something - I'd be your first follower
+All good stuff.... but what of boolean addition? It's ugly looking, but keeps the size down, and can often salvage a multi-line formula into a single line. Mainly used when testing for multiple independent variable, particularly those with binary outcomes.
+
+Say I'm choosing a gift for a child, and I don't know whether it's a boy or a girl, or whether it's older or younger than 2....
+
+    =if(and(A1="Boy", A2>2),"blue bike", [... I haven't used IF for so long, I can't even.... but I've seen it tried]
+
+    =choose(1+(A1="Boy")+(A2>2)*2),"Pink baby stuff", "blue baby stuff", "pink bike", "blue bike")
+
+For trinary outcomes, SIGN()+2 can occasionally be used, depending on what's being tested for.
+Ifs and vlookups aren't better or worse, they're different, sometimes nested ifs do work better.
+
+Sometimes boolean logic is more clear, sometimes it isn't. Ifs are typically branching trees if you have things on both sides it can make sense, if you don't they might not.
+
+A nested vlookup can sometimes be not only more confusing but harder to edit and slower.  
+
+Edit:
+I should add if statements are nice because if I recall correctly, the rejected statements are not calculated, by contrast a boolean statement will be.
+/u/FuggleyBrew said it. IFs and LOOKUPs are different. Props for all of the effort, but I'd opine that many of the formulas you suggest are far more complicated than necessary. 
+
+For example, for that last one, a helper column containing the "Adjusted Percent Payable" for each tier could reduce that function to a single INDEX/MATCH. There is NEVER a substitute for simplicity.
+Im going to have to look into CHOOSE more. My issue usually arises when I have to do nested vlookup functions (multiple same values in an array) or do a index, match, array for multiple values.
+This is extremely detailed, and is probably now everyone's go to IF cheat-sheet. Thanks!
+
+Honestly, this like this are what drove me to learn how to code, where you can nest as many damn conditionals as you want.
+I think: 
+> =INDEX($AB$2:$AB$5,MATCH(a2,$AA$2:$AB$5,0))
+
+Should be:  
+ =INDEX($AB$2:$AB$5,MATCH(a2,$AA$2:$AA$5,0))
+
+
+Wow, that's a wall of text!  Lately, as often as possible, I use Power Query and Power Pivot to replace more complicated formulas.  
+Thanks for putting these together! I can't believe how reliant I was on nested IF functions before these posts.
+
+Has anyone had speed improvements with their spreadsheets using these methods? I tried with an old sheet that takes about 8 seconds to calculate and replaced all the nested IFs with the methods above. I have found no difference in speed, but curious if anyone else has with an even larger data set?
+Thanks for this, and for your first post. I can give one reason why it would be preferable to use some of your other methods over vlookup (which I use so often that it's almost second nature now): if you have a workbook with several 100k lines, vlookups make calculation really slow. Thanks for giving me some alternatives to play with!
+The 2nd to last formula could be replace with
+
+    =SUBSTITUTE(TRIM(IF(A2,A$1," ")&IF(B2,B$1," ")&IF(C2,C$1," ")&IF(D2,D$1," ")&IF(COUNTIF(A2:D2,1)=0,"none",""))," ",", ")
+
+Note that these aren't *nested* IFs. There's no compelling reason to use REPT(s,condition) rather than IF(condition,s,""). Yes, the REPT idiom is 1 character shorter, but it uses more system resources. Poor trade-off.
+There are a few useful tips in this.
+SAVING THIS FOR THE FUTURE
+
+You can put line breaks in your nested if formulas by hitting alt-enter so it can read like VBA code so it CAN make sense when you come back to it years later. Don't hate on nested if statements, they have their place in the tool bag.
+
+http://imgur.com/0NHHJv4
+[deleted]
+Cheers for the support :)
+This is really cool...I've been trying to figure out how to use choose more...never thought about using boolean addition. 
+I've used `CHOOSE` in such a manner, but never `SIGN` :)
+
+I never know how much detail to go into with these posts, and never expect them to be as long as they are!
+[deleted]
+I'm glad you liked it.
+
+You can nest up to 64 IFs in a worksheet, but I think `CHOOSE` is kind of like the worksheet equivalent of `CASE`
+Yep, you're right.
+
+I did it all straight to the browser, and got this one wrong
+I'm glad you enjoyed the posts!
+
+Knowing that at least a few people get something out of them makes it worthwhile, even if I upset the militant nesters :D
+Yep!
+
+I've had discussions over and over with people on here who are convinced that "Excel is too slow if you have over 65,000 rows, that's why the old versions limited you to that"
+
+While it's true to say that, sometimes, Excel isn't the best tool to use with specific data or for specific purposes, it's also true to say that people write inefficient formula, at times, and *that's* what slows everything down.
+
+If you use the right tool for the job, you can spend more time at the pub :)
+I think that's a TERRIBLE idea, and that suggestion is what prompted me to write the first post!
+> There are **certain** times when they're appropriate and the easiest choice
+
+(Emphasis mine). Agreed
+
+> Choosing to not use them, or really any formula, because you think it will be too long is a poor way to look at doing data analysis
+
+Agreed
+
+> Honestly, ~~you're~~ [your] formulas are more complicated and create unnecessary work
+
+OK, don't use them :)
+
+There, that was easy
+I do think OP just has a bias against If statements (Which is fine, so do I). If statements can be useful.
+
+But the point of the post? Just general spreading of knowledge. It's always good to learn more. Anytime I learn what a new thing in Excel does, my mind races with how I can implement it into my current tools, or what I could possibly do now that I know it.
+I use IF statements all the time.
+
+This post is designed to show people there are other ways to do things.
+
+If, knowing there are alternatives, you want to used nested IFs, it's not going to keep me awake at night.
+
+But some people don't even know there *are* alternatives, and that's the audience for the posts. I gave you fair warning not to read it, if you're a dedicated nester.
+
+
+I know a few people (who didn't know about alt-enter) would skip past your wall of text and use alt-enter because it's simple and reads like an actual statement they would read out loud in order to make sense. These are baby steps to lookup functions, it has its place. For you to flat out say that it's a terrible idea is a disservice to those who are moving past formatting/graphing to actually learning to think logically in excel.
+I use IF statements all the time, but, with a few more tools in the toolbox, they're not the only way to achieve the outcome I need.
+
+I'm against nesting 7 IFs because you want to return 1 of 7 different values depending on the value of another cell.
+
+The first post was designed to help people with a few more tools, because there was a post suggesting that using `ALT+ENTER` to add line-breaks to formula makes them easier to read, and the discussion was specifically around this technique for nested IFs.
+
+This post was because a few people commented on the last that `VLOOKUP` or `CHOOSE` were also good options.
+
+IF has it's place, I'm against over-use
+The whole point of my posts is that, if you're nesting IFs to such an extent that you're getting lost in the tangle, there are alternative ways to achieve the goal.
+
+Breaking up a formula over 4+ lines in the formula bar is **not** a good solution to the problem of getting lost in the nesting. 
+
+Avoiding them entirely is a **much better** solution, and I'm providing ways to avoid them entirely.
+
+But if you want to use line breaks in your formula, and keep nesting IFs, good luck to you

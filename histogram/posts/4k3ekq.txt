@@ -1,0 +1,17 @@
+conditional formating. highlight columns based on 8 weeks from today.
+Conditional formatting >New rule...  > Use a formula to determine which cells to format.  Enter:
+
+    =C$8>NOW()+56
+and set the yellow highlight format.
+The dollar means it just looks at row 8, and checks if it is greater than NOW() (which returns the current date and time) plus 56 days (8 weeks x 7 days) (dates and times are all stored as decimals of a day, so 7.5 means 7 days 12 hours... NOW()+7 means one week from now, NOW()-0.25 means six hours ago, etc)
+
+then go to Conditional formatting > Manage rules... in the 'applies to' box, type 
+
+    =C:Y
+
+This 'spreads' the conditional formatting over all columns from C to Y.  It still only looks at row 8 (because of that dollar) but the "C" Will virtually change to whatever column the cell is in. 
+solution verified
+
+You have awarded one point to _zacktionman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

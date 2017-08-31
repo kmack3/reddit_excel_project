@@ -1,0 +1,76 @@
+6ilipo
+COUNTIF with cell reference as the criteria but generates the count of exact match? Is it possible?
+So, I have two columns of data:
+
+* **column A** contains 50,000+ rows of raw tweets
+
+* **column B** contains 3,000 rows of words (e.g. *love*, *apple*, etc)
+
+I need find out how many times each word in column B occurs in the raw tweets. Suppose cell B1 contains the word *love*. If I use cell reference, e.g.
+
+    =COUNTIF(A:A,"*"&B1&"*")
+
+then it will return the frequency of **not only** the word *love*, but also *loves*, *beloved*, etc. That's not what I need. I need it to count **only** exact match (i.e. *love*).
+
+However, If I use this formula:
+
+    =COUNTIF(A:A,"love")
+
+then it would be a tedious task, because I need to manually type **3,000 different COUNTIF formulas** :(
+
+Is there a way to use cell reference as criteria in COUNTIF formula, but have it generate the count of exact match? Maybe something needs to be added to the formula? 
+
+Or is there a different formula altogether for this kind of task?
+
+Help :(
+
+
+-------------
+What if you use something like the following to eliminate longer words:
+
+    =COUNTIF(A:A,"* "&B1&" *")
+
+The spaces would kick out things like 'beloved' but it would also kick out punctuation like 'love,' or 'love.'. I guess you could just make something like this to count some common exceptions:
+
+    =COUNTIF(A:A,"* "&B1&" *")
+    +COUNTIF(A:A,"* "&B1&",*")
+    +COUNTIF(A:A,"* "&B1&".*")
+    +COUNTIF(A:A,"* "&B1&"!*")
+    +COUNTIF(A:A,"* "&B1&"?*")
+-------------
+You, sir, are my hero! Solution verified
+-------------
+One problem that I haven't solved is when the word appears at the beginning of the tweet.. Oh well :/
+-------------
+
+You have awarded one point to _Passeri__.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+I was just thinking that since they're tweets, '#love' might also be a common occurrence so you could add that one in as well if you feel so inclined i.e.
+
+`+COUNTIF(A:A,"*#"&B1&" *")`
+-------------
+Hmm, you could just create a second list of raw tweets where each cell is:
+
+`=" "&A1`
+
+And you'd have a list of tweets where the first word always has a space before it.
+-------------
+That's what I thought, too :D
+
+Also, the question mark (?) will be treated as an extra character just like how asterisk (*) is treated as a wildcard. To look for a word followed by actual question mark, then that part of the function needs to be changed to:
+
+    +COUNTIF(A:A,"* "&B1&"~?*")
+
+Thanks again for your help! :3
+
+-------------
+Oh dear, why didn't I think of that... How embarrassing. Thanks, man!
+
+Solution verified
+-------------
+
+You have awarded one point to _Passeri__.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

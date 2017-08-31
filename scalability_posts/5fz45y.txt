@@ -1,0 +1,74 @@
+big
+5fz45y
+I adapted a VBA script to split a big table into several sheets, and it works great. But the table has formulas, and those formulas aren't getting copied.
+
+Office 2016. [Link to the XLSM](https://drive.google.com/file/d/0B-eImg-rTggdVThReUEzV21kTWc/view). Names are fake.
+
+Here's the macro:
+
+    Option Explicit
+    Sub CreateSheetsCopyData()
+    
+            Dim ar As Variant
+            Dim i As Integer
+            Dim LR As Long
+            Dim c As Range
+            Dim ws As Worksheet, ws1 As Worksheet
+    
+    Set ws1 = Worksheets("SplitIntoSheets")
+    LR = ws1.Range("A" & Rows.Count).End(xlUp).Row
+    ar = ws1.Range("A2", ws1.Range("A" & ws1.Rows.Count).End(xlUp))
+    
+    Application.ScreenUpdating = False
+    
+    For Each c In ws1.Range("A2:A" & LR)
+            Set ws = Nothing
+            On Error Resume Next
+            Set ws = Worksheets(c.Value)
+            If ws Is Nothing Then
+            Worksheets.Add(After:=Sheets(Sheets.Count)).Name = c.Value
+            End If
+      Next c
+    
+    For i = 0 To UBound(ar)
+             Sheets(ar(i, 1)).UsedRange.ClearContents
+             ws1.Range("A1", ws1.Range("A" & ws1.Rows.Count).End(xlUp)).AutoFilter 1, ar(i, 1)
+             ws1.[A1].CurrentRegion.Copy Sheets(ar(i, 1)).Range("A" & Rows.Count).End(xlUp)
+             Sheets(ar(i, 1)).Columns.AutoFit
+        Next i
+    ws1.[A1].AutoFilter
+    ws1.Select
+    Application.CutCopyMode = False
+    Application.ScreenUpdating = True
+    MsgBox "Sheets created/Data transfer completed!", vbExclamation, "Status"
+    
+    End Sub
+
+**What works**
+
+In the "SplitIntoSheets" worksheet, to the right of the table is a button. Clicking the button runs the macro which splits the table into three sheets (or as many sheets are there are students). The sheets are named for each student and the contents of the table are copied over.
+
+**What doesn't work**
+
+The "SplitIntoSheets" table has a simple =SUM() formula in column AH to calculate the total minutes for each month. I would like for this formula to be included in each of the new sheets. However, only the *first* sheet created captures that formula.
+
+Does the VBA code need to be tweaked so that each sheet receives formulas from the "SplitIntoSheets" table?
+
+
+-------------
+Note that `Range.Value` is different from `Range.Formula`. You have to know which thing to copy over if you are being specific.
+-------------
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 5 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+

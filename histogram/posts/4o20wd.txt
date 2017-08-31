@@ -1,0 +1,37 @@
+How do I make Excel 2013 ask me for a date when I open a sheet for the first time?
+Buy it flowers?
+
+But seriously I think this should work:
+
+    Private Sub Workbook_Open()
+    Dim answer As Integer
+    answer = MsgBox("Use this Monday's Date?", vbYesNo + vbQuestion)
+    If answer = vbYes Then
+    Range("D1").Formula = "=today() - Weekday(today()) + 2"
+    Else
+    'do nothing
+    End If
+    End Sub
+I initially thought you were looking for an extremely nerdy way to ask someone to prom. Still might be worth considering 
+There is a today() formula you could use. If it needs to be the most recent Monday,
+I would write a if statement using weekday().
+Snort, that was a good one - I walked right into that one. :D
+
+I threw this VBA in and went to test it by saving the sheet and re-opening it, but the pesky "Macros have been disabled" security feature seems to have blocked the prompt. I enabled, saved, closed and re-opened but the prompt didn't appear. 
+
+Any idea how I can get around that?
+
+Thanks :) 
+do i just put these values in one cell, i have never used visual basic code, sorry .
+I screwed it up sorry.  I edited my response to reflect this.  Just make sure you're throwing the code into "ThisWorkbook" and not the sheet.
+You have to open up the visual basic editor. You may need to activate the "developer" tab if you don't see it already in the ribbon. Go into options --> Customize Ribbon --> check the developer tab.
+
+Then go into the developer tab in the ribbon and on the far left side there should be an "editor" that you can go into. Type that code into the editor and then exit - it should now work.
+Flawless!! You're the best, thank you so much. :) 
+
+Solution Verified
+Thank you so much! I appreciate your help!
+
+You have awarded one point to _ExceluallyFrustrated_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

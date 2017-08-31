@@ -1,0 +1,67 @@
+VBA: Inserting new row at end of list
+Change line 8 to 
+
+        LastRow = Range("B" & Rows.Count).End(xlUp).Row + 1 '### NEED TO LOOP THE COUNT?
+
+Thanks for the response! Unfortunately, the output is unaffected. 
+
+
+Edit: and what a coincidence - you had helped me with another part of this project the other day! 
+Haha the code looked familiar. Could you double check on that? The way you had it would produce your problem exactly. If you're positive, add the following after Line 8 and see what it says that variable is
+
+    Msgbox(LastRow)
+
+
+Sure thing! The MsgBox confirms the improper line selection:
+
+
+[Imgur](http://i.imgur.com/LZWm4U5.png)
+
+
+And that is with the corrected line:
+
+
+    LastRow = Range("B" & Rows.Count).End(xlUp).Row + 1 '### NEED TO LOOP THE COUNT?
+Just to cover our bases - the screenshot is from sheet "Provider Totals" and the text seen is in column B, correct?
+That is correct =]
+Hmm well line 8 is definitely the problem then. I'm getting the correct answer when I try to duplicate it. Can you provide a screenshot with the columns and sheet name showing?
+Absolutely:
+
+
+[Imgur](http://i.imgur.com/ACRj4Xr.png)
+
+
+(The horrid appearance is someone else's doing, I assure you!)
+Ok this one is going to drive me crazy. It's working for me. Do you have code before what you posted that may be affecting things? Is there any reference to LastRow in your code before what I can see? 
+
+If all that is no, try creating a new sub just to test it and put this in to see if it works in a vacuum.
+
+    With Sheets("Provider Totals")
+        LastRow = Range("B" & Rows.Count).End(xlUp).Row + 1
+        MsgBox(LastRow)
+    End With
+That worked (returned "13")!
+
+
+Well, here is the rest of it, which appears above the above excerpt:
+
+
+&nbsp;
+
+	Dim LastRow As Long
+
+	Sub Insert_Provider()
+
+		Application.ScreenUpdating = False
+		
+		Sheets("Master").Visible = xlSheetVisible
+		Sheets("Master").Copy After:=Worksheets(Worksheets.Count)
+		NewPageName = InputBox("What would you like to call your new Worksheet")
+		ActiveWindow.ActiveSheet.Name = NewPageName
+		Range("B7").Value = ActiveSheet.Name
+		Sheets("Master").Visible = xlSheetVeryHidden
+
+
+&nbsp;
+
+This is used to create the new tabs, prompting the user for a name.

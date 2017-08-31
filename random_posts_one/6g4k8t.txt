@@ -1,0 +1,52 @@
+6g4k8t
+Need Help with an excel MOD function
+I need help modeling a function that will return a fixed value (x) every N months beginning at month N. For example, I want to project $100 In sales every 6 months starting at month 10.
+
+Bonus: It would be helpful to also have a set quantity of sales. For example, 11 total sale events. 
+
+
+-------------
+Hey,
+
+I made a formula according to your latest request which includes repeat duration. In cell A1:
+
+    =IF(AND(COLUMN(A1)>=$A$5,COLUMN(A1)<($A$5+($B$5*$C$5)),MOD(COLUMN(A1)-$A$5,$B$5)=0),$D$5,0)
+
+Then copy and paste across all column months. I made all the values dynamic, corresponding to:
+
+* A5 = What month to start the repeat
+* B5 = How many months between each repeat
+* C5 = How many times to repeat
+* D5 = Amount of projection
+
+In your example, it would be 
+
+* A5 = 10
+* B5 = 6
+* C5 = 11
+* D5 = 100
+
+Logic: checks if current cell's column is all of the following:
+
+* larger than the "starting" month
+* smaller than the starting month + the entire duration of your repeat rule
+* cleanly divisible [no remainder] by the repeat frequency, starting at the start month
+
+If all is true, then output the projection amount. If not, then output 0.
+-------------
+I've used the function: IF(MOD(Cell("col",A1),6)=0,100,0) which works well, but I can't seem to adapt it to start in month N.
+-------------
+Incredible. Thank you so much. Formula works flawlessly. :)
+-------------
+Solution Verified
+-------------
+hello, you can edit and update your main question for all to see clearly.
+-------------
+Glad to help! If you can, please respond to my original comment with "Solution Verified" to mark the thread as solved =)
+-------------
+
+You have awarded one point to _lifenoodles_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Hi there. I'm trying to think of a better way to explain. Say I have a 100 month spread with 1 month in each column starting at month one in column A. I want to be able to model a value (say $100 in sales) every six months starting in month 10, for 11 times in total.

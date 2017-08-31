@@ -1,0 +1,17 @@
+6ie0v5
+Using FIND function to remove Characters after a space occurs
+I have text that says "363.04000 $ USD" "326.20040 € EUR" etc. I am trying to just extract the numbers and not include anything else. I was hoping I could use the FIND and LEN function to find the first space from the left and extract the numbers.
+
+
+-------------
+You could use the Mid or Left function.  You need to find where the space is and then extract up to the position one character before it..  Just say your data was in cell D17, your formula would be like this:
+
+    =LEFT(D17,FIND(" ",D17)-1)
+-------------
+solution verified
+
+-------------
+
+You have awarded one point to _IrishFlukey_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

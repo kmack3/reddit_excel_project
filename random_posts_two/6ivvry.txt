@@ -1,0 +1,33 @@
+6ivvry
+Index Match: Search by one value in multiple places.
+I have created a chart that I am using to pull a lot of different data from a lot of different places (in one worksheet) all into one place using multiple index match formulas. Here is one example of my current formula:
+
+=IF(IFERROR(INDEX('Russo - Purchase Workbook'!AZ:AZ,MATCH(QuickCheck!E20,'Russo - Purchase Workbook'!D:D,0)),"")="","Not Yet Assigned",IFERROR(INDEX('Russo - Purchase Workbook'!AZ:AZ,MATCH(QuickCheck!E20,'Russo - Purchase Workbook'!D:D,0)),""))
+
+This of course searches column D of my purchase worksheet for the value entered into cell E20 on the QuickCheck worksheet. Is there a way to set the formula up so that if no value is found in column D it will then search in column AZ (and then BA and BB if there is still nothing found)?
+
+I can add a screenshot if you think that would help you understand what I am trying to accomplish.
+
+
+-------------
+It just sounds like you'll need a series of IF statements. IF(INDEX()="",IF(INDEX()="",IF(INDEX()="",INDEX()),INDEX(),INDEX())
+
+Yes, that's a very long formula. You could potentially set up helper cells/columns that do those individual lookups and then base your IF statements on them instead. E.g. Cell ZZ1 does the first possible lookup, ZZ2 does the second, etc... then you can do IF(ZZ1="",IF(ZZ2=""...
+-------------
+Yes. You want to set up a truth table to save yourself the headache of nested if/ifs
+
+Wherever you'd like, write your index match statements with E20 as the lookup value in a column (Column 1, let's call it), starting with column D and going in order (to BB and beyond if need be) that you want to search. 
+
+In the adjacent column (Col2), write an if formula testing your index/match. A simple if(value<>"", True, false) should suffice. 
+
+In the next adjacent column (Col3), list your desired outputs. "Assigned", "Not Assigned"... whatever output you need on your report sheet. 
+
+Now, in the cell on your report sheet where you want that output:
+
+=Iferror(index(Col3, match(True, Col2,0)), "No Result")
+-------------
+I actually was able to figure this out myself using a bunch of IFERROR functions. 
+
+What do you think of this? See anything that looks like this could cause me any issues going forward?
+ 
+=IFERROR(INDEX('Russo - Purchase Workbook'!I:I,MATCH(E37,'Russo - Purchase Workbook'!D:D,0)),IFERROR(INDEX('Russo - Purchase Workbook'!I:I,MATCH(E38,'Russo - Purchase Workbook'!AZ:AZ,0)),IFERROR(INDEX('Russo - Purchase Workbook'!I:I,MATCH(QuickCheck!E39,'Russo - Purchase Workbook'!BA:BA,0)),IFERROR(INDEX('Russo - Purchase Workbook'!I:I,MATCH(QuickCheck!E40,'Russo - Purchase Workbook'!BB:BB,0)),"Not Found"))))

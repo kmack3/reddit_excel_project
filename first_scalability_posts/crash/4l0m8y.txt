@@ -1,0 +1,48 @@
+crash
+4l0m8y
+What's the best way to cross-check two columns of values against each other (that won't crash Excel...)?
+
+I need to send an email every-day to users who've taken a certain action. Right now, there's no automated way to make sure we're not emailing people we already emailed with this message, so I do it manually. 
+
+Column A: People I've already emailed (~100k IDs right now)
+Column B: People who should be emailed today  (~12k IDs per day)
+
+Originally I was doing a simple conditional highlight for duplicate values, sorting column b by the highlighted values, and then removing those. What's left over in column b was my list. 
+
+I used a macro (cross-check) but it runs too slow / crashes the window. Column A (those who have already received the email over the past few weeks) is about 100k values. 
+
+In a few weeks this will be automated, but it's getting so slow these days that I'm not sure that doing it manually will continue to be an option. 
+
+
+-------------
+I'd use the below, copy down for all cells in "B", then email those that are FALSE 
+
+    =ISNUMBER(MATCH(B1,A:A,0))
+-------------
+Hi,  
+
+Did you try MATCH? If it returns a number it is a duplicate else it is a unique ID. 
+The formula in C2 would look like:  
+
+    =MATCH(B2,$A$2:$A$100k,0). 
+
+Then you drag it down. You can then filter out the names with numbers. If possible do this on a different sheet filtering 100k rows can be long...
+
+Good luck
+-------------
+delete my email from that list while your at it #nospam
+-------------
+Also works. Thank you :)
+-------------
+Awesome! This works. Appreciate your help. 
+-------------
+By the way, if you see solutions that work, reply "Solution Verified" to each.
+-------------
+You're welcome, generally speaking if you have an heavy file all kind of conditional formatting will slow it down.
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _Starwax_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

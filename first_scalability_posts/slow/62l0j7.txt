@@ -1,0 +1,67 @@
+slow
+62l0j7
+Problem in Excel 2016 when rendering multiple charts (e.g.: 100). Extremely slow. Any workaround or alternative?
+
+Hi all!
+
+So... I have to create and update some PowerPoint slides that contain, literally, dozens of small pie charts together, [like this](http://i.imgur.com/QQdBpKn.png).
+
+This worked perfectly fine in previous version of MS Office, but ever since my corporate PC was updated to W10 + Office 2016, the situation has become a living hell.
+
+My best guess is they must have changed *something* in the chart rendering engine that makes the process terribly slow. Maybe they were storing a cached screenshot of the chart in previous versions?
+
+I really don't know, but opening up the PowerPoint slide where these charts are contained will trigger a total freeze that will last around 1 full minute. And you better not minimize it... because it will probably start over again when you open it back up!
+
+Just to be clear, it happens both in Excel and in PowerPoint when you open the corresponding sheet/slide.
+
+So... my questions are:
+
+* Does anyone know why this happens, and any possible solutions?
+
+* If not... is there ANY way you can think of to somehow represent this data in a SINGLE Excel chart? Keep in mind all dimensions are relevant: rows represent variables, colums represent series and the pie charts represent the actual values.
+
+Really... ANY help would be greatly appreciated!
+
+
+-------------
+Hmmm
+
+- Did they *also* change you over to a shared network drive or into a Citrix environment? Both of those things have slowed me down in the past.
+
+- Is Office locally installed or on a network?
+- What's the source of the data used in excel?
+- 32bit or 64bit Office?
+
+I'm not sure I understand your question regarding "represent this data in a SINGLE excel chart" - do you mean to only use Excel instead of a combination of the two?
+-------------
+It doesn't matter if I'm on a shared drive or not. It also happens to me on my powerful desktop PC at home, which has no connection to my corporate network.
+
+Office is installed locally in both cases.
+
+The source of the data is in another sheet inside the same file... no connections of any kind. In the case of PowerPoint, the source is embedded onto the ppt obviously.
+
+64 bit office.
+
+You can easily replicate this yourself... just create a random table with lots of values (percentages) and create one small pie chart for each of them. Then place all of those pie charts (like 100 of them) in the same sheet / PowerPoint slide... and see what happens. Unbearably slow to draw.
+
+This didn't happen on previous versions of office.
+
+With my last question I meant some way to transform this into one single, big excel chart (instead of 100 little charts), as the rendering engine seems to struggle with the number of charts... not the data itself.
+
+
+-------------
+And do you have Excel open at the point that Powerpoint is opened?
+-------------
+Doesn't make a difference. It can be only Excel, only PowerPoint or both at the same time.
+
+The issue seems to be with Excel's chart rendering engine itself, no matter which app is using it. As said it never happened with previous Office versions.
+-------------
+Seems you're not the only one:
+
+https://excel.uservoice.com/forums/304933-excel-for-mac/suggestions/10542297-improve-graph-drawing-performance
+
+Is it essential that the chart (which looks almost like an icon to be honest) is quite so detailed? I mean could you not use pre-rendered icons in one of 8 or 10 pre-filled slices?
+-------------
+I guess I could, if my bosses don't notice... lol. But this data is taken straight from a table which contains all values (in some of the slides it's more than 100 pie charts), and that happens in a dozen slides or so. Would that approach require a lot of manual work?
+
+

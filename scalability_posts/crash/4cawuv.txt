@@ -1,0 +1,63 @@
+crash
+4cawuv
+[Excel 2013] Seeing daily Excel crashes, event logs are ambiguous (ntdll.dll related), does anyone else have these issues?
+
+Hi guys.  For the last few months I've been having increasing crashes of Excel.  Anecdotally they seem more common when I have multiple Excel windows open.  It shouldn't be a memory issue, these are modest-sized spreadsheets and I'm running 64-bit Excel with 16gb RAM.
+
+Here's the event log from the most recent crash:
+
+Event Generated: 3/27/2016 1:01:13 PM
+
+	EventID    =1000
+
+	Source    =Application Error
+
+	Faulting Application Name    =EXCEL.EXE
+
+	Faulting Application Version    =15.0.4805.1001
+
+	Faulting Application Timestamp    =56c43cf4
+
+	Faulting Module Name    =ntdll.dll
+
+	Faulting Module Version    =10.0.10586.122
+
+	Faulting Module Timestamp    =56cbf9dd
+
+	Exception code    =c0000005
+
+	Fault offset    =000000000002fe34
+
+About 80% of the errors reference ntdll.dll, the rest reference KERNELBASE.dll.  I haven't had any luck googling ntdll.dll or error codes.  I've updated/repaired/reinstalled Office, the problem persists.  Not using any add-ins. 
+
+**I also have less frequent crashes of Outlook, though no crashes of Word/Powerpoint**.  This is really frustrating, I've had to tweak office to autosave every few minutes to prevent data loss.  Anyone have and solve similar issues?
+
+Thanks much!
+
+
+
+-------------
+Does your sheet have any macros/VBA?
+
+Is it pulling in data from other workbooks?
+-------------
+I have the same issue. I havnt been able to find a resolution in the internet
+EXCEL.EXE 
+   16.0.6001.1068 
+   56d18024 
+   ntdll.dll 
+   10.0.10586.122 
+   56cc16f5 
+   c0000005 
+   00026d79 
+   3118 
+   01d191e17a27cdc1 
+   C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE 
+   C:\WINDOWS\SYSTEM32\ntdll.dll 
+
+-------------
+any update on this? im having the same issue.
+-------------
+Some do, but I've replicated the issue with only sheets without Macros/VBA open.
+-------------
+No. I just sucked it up and turned autosave to every minute 

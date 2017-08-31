@@ -1,0 +1,67 @@
+Adding 1 to similar VLOOKUP formulas at the same time
+Change the Vlookups range to wherever your lookups are located. Try it on just once cell first to make sure it doesn't break your spreadsheet! I assumed your formulas were written exactly as posted here -- i.e. the formula ends in "FALSE)" with no additional characters.
+
+    Sub FixLookups()
+        Dim VLookups, Cell As Range
+        Dim OldFormula, NewFormula As String
+        Set VLookups = Range("A1:A4")
+        
+        For Each Cell In VLookups
+            Cell.Formula = Left(Cell.Formula, Len(Cell.Formula) - 8) & (Mid(Cell.Formula, Len(Cell.Formula) - 7, 1) + 1) & Right(Cell.Formula, 7)
+        Next
+               
+    End Sub
+
+The simplest way to deal with this is to have a number in a row above the vlookup in each column that you want to be the colindex_num ie. in A1 have 1, in B1 have =A1+1 and then drag that across your columns. Then in your vlookup refrence the number above ie. 
+
+    (VLOOKUP(B4398,'New Rate Sheet'!px_830_NEW,A1,FALSE)
+
+    (VLOOKUP(B2115,'New Rate Sheet'!px_130P_NEW,B1,FALSE)
+
+    (VLOOKUP(B108,'New Rate Sheet'!px_130_NEW,C1,FALSE)
+
+If that isn't desirable you need to use the VBA function formulaR1C1 to populate your vlookup formulas. If you like I could put together a script that does that.
+A simple approach that doesn't involve scripts: Find and Replace.
+
+Highlight the entire column of VLookups that you have. Now press CTRL+H to do a Find and Replace search. Click Options and make sure it's going to "Look in" = formulas".
+
+Search these, without the quotes:
+* Find ",6," and replace all with ",7,"
+* Find ",2," and replace all with ",3,"
+* Find ",4," and replace all with ",5,"
+
+It'll edit the entire column's formula with the new colindex numbers. Make sure not to neglect the commas! It's important to keep otherwise it'll change your array references too.
+
+
+Sorry, I am still a beginner when it comes to VBA's. How exactly do I run this?
+Actually one more problem (so sorry!) I have an IfError statement built around all the VLOOKUPS, so it actually reads:
+
+    IFERROR(VLOOKUP(B2,'New Rate Sheet'!px_130_NEW,2,FALSE),"")
+this is causing an error in the macro that i cannot figure out
+If you could put together a script, that'd be awesome. I see where you're going with the A1, B1 thing but for this I do not think it will work 
+Say you replace all your 6's with 7's.
+
+Now when you go to replace your 7's with 8's, you'll also be replacing those 6's you just turned into 7's. Not the best approach :)
+Nevermind, I figured out how to run it. Thanks!
+Try...
+
+    Sub FixLookups()
+        Dim VLookups, Cell As Range
+        Dim OldFormula, NewFormula As String
+        Set VLookups = Range("A1:A3")
+    
+        For Each Cell In VLookups
+            Mid1 = InStr(Cell.Formula, "NEW,") + 3
+            Mid2 = InStr(Cell.Formula, ",FALSE") - 1
+            Cell.Formula = Left(Cell.Formula, Mid1) & (Mid(Cell.Formula, Mid1 + 1, Mid2 - Mid1) + 1) & Right(Cell.Formula, Len(Cell.Formula) - Mid2)
+        Next
+    End Sub
+
+I was going to do something but I see pancak3d has a better solution than the one I was going to do
+Oh I know, but he specifically said he was "looking to change the 6 to 7, 2 to 3, 4 to 5 all at once", and didn't specify any other numbers =) I think it would be easier to do a find -> replace on just 3 changes than for him to learn VBA.
+
+Otherwise you're absolutely right. If it was a cycle of numbers, I would work down from 9 and use a placeholder number. Like change all 9s to "XXXXX", and then all 8s to 9s, then 7s to 8s, 6s to 7s, etc. That way there wouldn't be that conflict. Buuuut that's only feasible for small numbers and wouldn't work if, say, his colindex went up to large numbers like 50. Working downwards from 50 would just be nutso haha.
+I think that was just an example but fair point!
+Ooo, another fun easy alternative method: copy all your source data except for the first column and paste it one column to the left (also don't overwrite the first column). Bam all your vlookups are now pointing to the correct data despite the same colindex.
+
+It's not stupid if it works? ¯\\\_(ツ)\_/¯

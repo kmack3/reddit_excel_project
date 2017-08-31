@@ -1,0 +1,19 @@
+6g5kj7
+Looking for a way to search and total a specific amount from a database of invoices.
+I am looking for a formula or function with an ELI5 explanation on how to get it to work. I work with a database with several hundred invoices of various prices, I also get checks that require finding all the money based on those invoices, sometimes dates and provided info matches up other times it’s piecemeal picking to get them to add up. Is there a way to have my invoices listed and then search to find my matching amount?  If this is not possible or you need more info please let me know.
+
+
+-------------
+You can use solver to do it but it will be hit and miss as you will mostly likely have multiple "correct" solutions depending on how many transactions you're pulling. See this link for how to setup your workbook to do it: 
+
+http://www.k2e.com/tech-update/tips/147-using-excel-to-identify-entries-that-add-to-a-specific-value
+
+Are there any other identifying traits that could be used? E.g. a reference number etc
+-------------
+Ctrl + f is the quickest way
+-------------
+maybe i wasn't clear. The amounts are various numbers,  dollars and cents out of a column. These various numbers I am looking for a way to compile the individual amounts.  That equal the total amount relevant to an account.   
+
+
+-------------
+i will try this today and see what happenes, the article you linked is very good and has key details , like restraints , that may have caused a problem

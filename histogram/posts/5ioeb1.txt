@@ -1,0 +1,176 @@
+How do YOU use SQL with Excel to retrieve data?
+ODBC connection - Excel's built-in query tool - does everything I need it to do - if I need a more complex query, I just set it up in SQL Mgmt Studio and copy the SQL select statement 
+I build macros that use the connection string through  ADODB to query the database and then write the results to the spreadsheets as I see fit.
+
+This skill has actually come up quite a lot in my work; lot of folks want the power of a database but only know excel, so they love this result.
+[deleted]
+Most of the time I just build the SQL Query in SSMS or Notepad++ if I'm not connected and then I just copy and paste that bad boy into PowerQuery.  However, you can do ADODB connections as well and I've done them.  They're less friendly to one of my co-workers who knows SQL and PQuery but not VBA, so I don't use it that much.  
+
+You have to add references from Microsoft ActiveX Data Objects Library.  I use 6.1, but I think previous versions will work, and I'm not sure if there are newer versions.  This is the basic structure of what I do.  Obviously you could set up variables in the worksheet to affect how the query builds itself or you could just straight up build the query in this.
+
+    'Define Variables
+        Dim wb1 As Workbook, wb2 As Workbook
+        Dim sh1 As Worksheet, sh2 As Worksheet, FileName As String, FileLocation As String
+        Dim lrSh1 As Double, WorkRange As Range, i As Integer, lrData As Double, lcData As Double, Data As Range
+        Dim cnn As New ADODB.Connection
+        Dim rst As New ADODB.Recordset
+        Dim ConnectionString As String
+        Dim StrQuery As String, LookUp As Range
+    'Set initial variables
+        Set wb1 = Excel.ActiveWorkbook
+        Set sh1 = wb1.ActiveSheet
+    
+    '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    'DATABASE CONNECTION
+    '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+            'Opens connection to the database
+            With cnn
+                .Provider = "SQLOLEDB.1" 'MSSQL Standard
+                .Properties("Integrated Security") = "SSPI" 'Use Windows Authentication
+                .Properties("Persist Security Info") = True
+                .Properties("Data Source") = "DATASOURCE NAME"
+                .Properties("Initial Catalog") = "CATALOG NAME"
+                .Open
+            End With
+    
+            'Timeout error in seconds for executing the entire query; this will run for 15 minutes before VBA timesout, but your database might timeout before this value
+            cnn.CommandTimeout = 900
+    
+            'This is your actual MS SQL query that you need to run; you should check this query first using a more robust SQL editor to ensure your query is valid
+            StrQuery = "QUERY HERE"
+    
+            'Performs the actual query
+            rst.Open StrQuery, cnn
+            'Dumps all the results from the StrQuery into cell A1 of the second sheet in the active workbook
+    
+            sh2.Range("A1").CopyFromRecordset rst
+    
+        rst.Close
+        cnn.Close
+    
+    Set cnn = Nothing
+    
+    '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    'END DATABASE CONNECTION
+    '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+*Quick ninja edit: I copied MOST of this from someone else on the internet as we all do.  I unfortunately can't remember who, so I can't properly source, but know that academically, this is plagiarism. :)
+I use ODBC connection with the query tool built in to allow for simple grabs with parameters prompted to the user based on DATE and other various filters they would want.
+
+I also use it for a VBA macro where you have the parameters directly on the excel sheet, and can insert up to a 1000 item numbers and have that converted into a SQL IN clause 
+Power pivot
+I have implemented many many sheets which access data via SQL for both DB2 and MS SQL environments. I was able to do this by writing a couple of SUBS in VBA to execute them and then push the results into (mostly) excel tables.
+
+- I use ADODB from within VBA
+- I wrote a small SUB to load the SQL (as text) from a file on disk into a cell (so that I can test the SQL outside of Excel , or have it provided to me by an SQL programmer.
+- I pick up *all* query parameters from a sheet (the SQL to execute, the connection string and the address of where to put the results - generally a table name, but I also support loading to a sheet address for speed). It does not need an ODBC data connection to exist in advance, all the parameters can be passed in from outside and the connection created dynamically - including passwords etc.
+- I use an environment table/sheet to enable be to switch between DEV, UAT and PROD environments (and thus am able to pick up different connection parameters which I substitute into the SQL parameter cells with index/match functions). In DB2 I also need to pick up different Table names...
+- I dynamically support parameter substitution within the SQL cell (Substituting client numbers etc) to enable me to restrict the amount of data I retrieve.
+- To get the column headers, I call the same sql execute SUB with a particular parameter. This is useful the first few times time when I need to set the header names in the table (listobject) but once I start referencing the tables it's hard if not impossible to modifying column headers without causing a world of pain.
+- It supports loading data into the first few columns of a table (thus retaining all existing functions in the right columns).
+
+**Conclusion**
+
+- SQL from within excel works well, can be entirely self contained and fully implemented with a relatively small number of VBA subs (which I can sell you for a very modest sum :-) )
+- It's flexible - I can copy a few buttons and a few cells to any sheet and I can start an entirely different query maybe to an entirely different database vendor's system.
+- it supports multiple flavours of database access
+- Excel itself can be used to pick up variables, different connections and perform parameter substitutions in queries
+-if I were to do this again, I'd almost certainly consider PowerQuery (my Excel 2010 at work didn't have it so I had to roll my own anyway) - but I'd worry about the flexibility I'd lose for parameter substitution and connection switching.
+
+Is this the sort of thing you were looking for?
+The moment I began using SQL for keeping track of assets, I ported everything over to the .NET Framework for managing data. Haven't used SQL alongside Excel so far :[
+I create an ADODB connection (check connectionstrings.com for the syntax) then run regular SQL directly. 
+
+For the sort of work I do, I build my sql on the fly then write it back to excel either line by line, or by dumping the whole record set into a worksheet. 
+
+It's very easy to do, once you know how. 
+
+If you don't find any good resources, remind me in a few days when I'm back at work and I'll send some examples.  
+Another vote for ADODB in VBA. It's allowed me to create report automation that runs entirely in Excel, which keeps things familiar for my co-workers.
+I can do everything I need for data analysis with Perl, Postgres & PL/pgSQL.  I use Excel just to create charts and pivot tables and the like from the results, imported via CSV.
+Honestly I  just build my query and run it in SQL Studio Manager. Copy paste dataset into Excel for a one time analysis, or toss the query into an SSRS RDL if it needs to be accessed by users on the fly/recurringly. With good formatting, SSRS exports results to Excel very cleanly.
+If you search this sub about a year back, you'll find a user who developed a great plug-in that basically runs SQL queries against database servers.  It handles all the setup and runs the code.  I'll do a quick search to see if I find it.
+
+Edit: [here it is](https://www.reddit.com/r/excel/comments/4e7e2k/can_i_interest_you_in_my_excel_plugin)  Was called thingiequery, now Querystorm
+Any useful tutorials you can throw my way? 
+Are there any alternatives to SSMS to build your SQL statements? For someone who's not super solid on SQL? 
+I'm thinking along the lines of a pivot table + filters then load. Rather than load and filter out, or using an initial SQL?
+I hate it, but I've had to use Access to build views/queries over a database over ODBC, then connect Excel to the Access DB (it's right there in the data tab). Other options are ADODB/VBA to connect into the database directly to pull the data, PowerQuery, and PowerPivot.
+
+Thankfully now most things for me are Python/Numpy/Pandas and similar tools in other languages.
+I recently started doing this as well. Rather then having to export data from our various internal programs, it is quite convenient to just query the database directly for the information I want. If you can use VBA, it's fairly easy to learn the necessary ADODB commands and the basics of SQL. 
+Same, works great if you have to do the same query with slightly different parameters. I have a few input cells that users can use to customize the query (e.g. different time periods, etc.) and then a button to run the query.
+Okay, what is the best method for learning sql in relation to this type of dynamic in a company. Everytime I try and find a learning source,I get bogged down. My company does a lot of Excel and our financing uses a combo of sql and dynamics to gather our data. I would love to learn some basic sql or even excel macros to manipulate our data, but always fall short.
+I agree power query is great, but if you have a lot of data and 32-bit Excel because your work forces you to, you are SOL.
+!RemindMe 4 Days
+Code, or it didn't happen. 
+I do the same thing that the original comment mentioned, this is how I do it:
+
+1. Set up your query in SQL Management Studio
+2. From Excel, Data-Get External Data-From Other Sources select From SQL Server
+3. Log into your SQL Server
+4. The database connection wizard will ask for a database and a table, I select any table that is in the database I'm querying, but which one is not important as we are later going to just paste in our query language.
+5. Click Finish
+6. From the Import Data window that pops up, select Properties...
+7. From the Connection Properties window select the Definition tab
+8. Change the Command type drop down to SQL
+9. Paste your query language into the Command text box (replace what is in there).
+10. Click OK and OK again at the Import Data window.
+
+That should do it, it should return your SQL results as a table. I'm using Excel 2013. Sometimes you may get some other popup messages I didn't mention but just click Yes or OK and it should still work. Good luck.
+
+Try here first https://support.office.com/en-us/article/Use-Microsoft-Query-to-retrieve-external-data-42a2ea18-44d9-40b3-9c38-4c62f252da2e
+You could simply use powerquery, get everything and then use the visual query editing features to prune the data you actually need.
+Wise owl tutorials on YouTube. 3 videos at around 1 hr each and you'll know everything you need to know, on top of learning tricks and best practice. 
+
+Look for the videos with ADODB in the title. I think it's something like no. 33 to 36, but I'm going off memory; I could be wrong. 
+
+And the guy's voice is, to my North American ears, absolutely whimsical. 
+
+It's amazing. 
+I will be messaging you on [**2016-12-20 14:21:40 UTC**](http://www.wolframalpha.com/input/?i=2016-12-20 14:21:40 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/5ioeb1/how_do_you_use_sql_with_excel_to_retrieve_data/db9phvf)
+
+[**3 OTHERS CLICKED THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/5ioeb1/how_do_you_use_sql_with_excel_to_retrieve_data/db9phvf]%0A%0ARemindMe!  4 Days) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! db9pifx)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+You might want to investigate the possibility of building your own add-in using the ADODB connection. It's definitely not going anywhere.
+
+I had a decent, though unstable, setup at my previous job:  
+
+* I built a workbook that had tons of lists on one sheet, and those lists could be updated in that worksheet whenever. 
+
+* The workbook had a control sheet where I could select which query set I needed to run. That query set was also a list on the other sheet. 
+
+* I had flat query files in a specific folder with the query written out, but wherever I had a dynamic part of the query such as a list of arbitrary length or a variable that I couldn't easily create in the query, I had a placeholder in the flat file.
+
+* I had a VBA routine that would open each query in the queryset, search the file for placeholder text, and replace it with the content of the lists from the lists spreadsheet. It then ran the query against the database and spat that out into a csv file in a different folder
+
+The reasons this was unstable: 
+
+1. Maintaining that level of content in an excel file is unwise. Fortunately I was 1 of 2 people who had access to the file, and the other guy didn't like messing with it because it was very complex.
+
+2. Maintaining the queries was a pain, because you had to be very cognizant of how the placeholder would be replaced.
+
+Other than that, it was a tidy little solution. If I had to do it again, I would do all of the list maintenance on database tables (which I did not have access to before, so I made do). That would also allow me to build perfectly cromulent queries without the need for placeholders.
+I can't share my proprietary code. But I use it to connect to an iseries DB2 database if that helps.
+
+Note that I don't use this to allow people to run arbitrary queries (although I can imagine such possibilities); I have specific queries written with some parameters.
+
+I've made a module I use across a few workbooks that wraps a lot of the ADODB housekeeping and lets me easily run asynchronous queries. It does need to be paired with an appropriate control module though, which first sets up the query object, passes the name of a sub that gets called whenever the query finishes a task, and when the events fire in the query object it calls that controller function.
+
+That way I can easily plug in the same asynchronous query object into multiple workbooks with different VBA instructions for what to do next. Prior to that method I had to write all the code in the query object itself, which made it absolutely unportable, and seemed like definitely the wrong approach.
+Is there some advantage to this verse just setting up a view in SQL management and querying that straight into an excel table ? 
+Right, but the full data set is >4GB.
+
+I'll give it a try. Thank you for the suggestion.
+Commenting to find this later.
+I don't see an issue.
+
+I have excel sheets that use 5.5GB when in memory...

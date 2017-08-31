@@ -1,0 +1,16 @@
+Is there an easy way to scrape web data into excel fields?
+https://www.dropbox.com/s/bnmbwslcy6xcczb/FF2016-6.xlsm?dl=0
+
+This is a fantasy football project I did for this year that has a live scrape in it. All the vba and work is unprotected so you can see how it works
+
+Basically what it does is use the internet controls and html reference library (you need to enable these) and will load an IE window. From there it searches elements by class name to get the particular data I'm interested in, but you could always return the full html and parse it your own way within excel.
+
+Requires windows Excel and updated IE to work
+Yes. Go to data tab of the ribbon. Use the web external data thing. 
+Why are you trying to query the database through the GUI? Do you have a data team, Data Admin, or Web developer? 
+
+If the database is in your possession and not an external database, just go directly to the source and get your data all at once.
+Will this allow me to pull just the data I need through regex or some other means?
+Try it out. It's at the least going to allow you to import raw HTML. Don't use regex for HTML parsing. You'll pull all your hair out trying to get it to work. 
+Thanks. Looking into it now.
+A lot of people ask why, so for future reference, tag based languages like HTML are inherently multi-line, whereas a regex by default only searches line to line. It has no memory of the line just before or just after so if you try and do a simple regex like `grep <body>*</body> index.html` you won't actually get anything in return, because those two tags are on separate lines. Best to use the HTML parsing methods available in, IIRC, the System.Data .NET class methods.

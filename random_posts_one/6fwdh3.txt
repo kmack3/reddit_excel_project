@@ -1,0 +1,13 @@
+6fwdh3
+Hyperlink After Text
+I have a link to a site I want to put after text. 
+
+So in the cell I have text, explaining what the hyperlink does, and then I want to have a colon or period after the text. Then in that same cell, right after the text I want to insert the hyperlink.
+
+From searching the internet and this forum, I haven't seen anyone detail how to do this. I paste my link after the text and no hyperlink comes up. But if I just pasted the link by itself in a new cell, it works.
+
+
+-------------
+Can't be done, even if you try to hyperlink a single word in a cell by using something like `="The link is "&HYPERLINK("http://www.google.com","here")&" , enjoy!"` , Excel will turn the entire text into a clickable hyperlink. If you just want one word hyperlinked, it will have to be in it's own cell.
+-------------
+Oh dang. OK, that explains why I didn't see an answer when I searched.  I'll wait a bit longer to see if anyone else has a trick, but if not 'll mark it as solved and give you credit. Thank you.

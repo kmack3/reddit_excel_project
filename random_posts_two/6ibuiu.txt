@@ -1,0 +1,67 @@
+6ibuiu
+Conditional formatting based on month difference
+Hi guys, 
+
+So I have an invoice at the moment that I have to update monthly and I want to automate the process using Excel. I currently have it set up to look something like  this http://imgur.com/a/A1vc0.
+
+The Date button would be pressed and adds + 14 days to all the date fields (since work is being done once every 2 weeks). But what I find is that sometimes, the dates would match up and all of them would be in the same month but more often than not, one of the date would be an oddball that belongs to the month after. So if I pressed the date button in the pic shown on imgur, I would get 25/04 -> 09/05, 09/05 -> 23/05 and 23/05 -> 06/06. 
+
+I want to know if there is a way (conditional formatting or another) that would check if the month value in one of the cells is different from the others and then automatically hide the row containing that date if there is a difference. 
+
+Cheers,
+Andy. 
+
+
+
+
+-------------
+> is a way (conditional formatting or another) that would check if the month value in one of the cells is different from the others
+
+this can be done with conditional formatting
+
+> and then automatically hide the row
+
+this cannot
+
+----------------------
+
+To automatically hide the row you will need VBA. Simple enough.
+
+    for i = 17 to 26
+        x = month(cells(i,1).value)
+        y = month(cells(i+1,1).value)
+        if x <> y then rows(i).group
+    next i
+
+This could be implemented as a standalone macro or within the *Date* macro.
+
+-----
+
+If you really want conditional formating, to do this you would
+
+1. select A18
+
+2. Go to... Home > Conditional Formating > More Rules > Use formula.. 
+
+3. set the formula to =month(a17)<>month(a18)
+
+4. copy cell A18
+
+5. paste formatting (right click, paste special...) in the other cells
+
+Important to *not* have any $ in step 3.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

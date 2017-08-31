@@ -1,0 +1,54 @@
+Can someone please walk me through an index and match?
+I'd prefer to break down how the two formulas work. 
+
+INDEX returns the value of a cell where the row number and column number that you provide intersect. For example, if you enter =INDEX(A1:C2, 2, 2), the value you will get is whatever is in B2 (2nd row and 2nd column of the array).  Note that the column numbers are relative to the location of the array.
+
+MATCH on the other hand, is like the opposite of INDEX. It finds a given value and then gives you the row number where it found that value (relative to the array). 
+
+So why don't we combine the two functions. First, MATCH will find the row number of the value you are looking up (note that in the INDEX MATCH formula, the MATCH function is embedded in the row parameter of the INDEX function) . INDEX will use that row number to return the value in whatever column you are looking for 
+=INDEX(column that has the values you want the formula to return,MATCH (single cell value that you need to match something to, Column that contains the previous value in the data that has the value that you want to return,0))
+
+OR in other words
+INDEX(give me/return?,MATCH (by looking for?,in this list,0))
+I've found [this page](https://www.ablebits.com/office-addins-blog/2014/08/13/excel-index-match-function-vlookup/#how-to-use-indexmatch) usually helps me when I struggle with this function combination.
+I can't find the original place I saw this but this link has it covered [here](https://eimagine.com/say-goodbye-to-vlookup-and-hello-to-index-match/)
+
+It's fairly straightforward, but the formula will be =index(range of return value), match(value you are looking up, range where you are trying to match, 0 or 1))
+
+
+Index (col contains ur RESULT, match (condition, col contains ur CONDITION, 0 for exact match)
+=index(a:a,match(c1,b:b,0))  there is an example. I'll assume you get vlookups and you want something more sophisticated. I'll put the same equation together but this time I'll put a description instead of the cell references like this, *definition*. Ready? Let's do it!
+=index(*column with the data you want this function to return*, match(*lookup value just like a vlookup*,*column with the data that will contain the lookup value*,0*because 0*))
+I commented a breakdown on another post a while back. Maybe it will help also:
+
+https://www.reddit.com/r/excel/comments/5fd45q/comment/dajbd2q?st=IWW5P0BI&sh=194d5995
+You've had a bunch of very helpful replies here, so I won't go into the specifics of the formula as much as some others have, but I do want to give you a little mnemonic device that a friend came up with a few years ago that has stuck with me. It's a little silly, but bear with me:
+
+**Index what you want, match what you have.**
+
+Basically, when you write the INDEX part of the formula, you put the stuff that you want to find inside it. Then when you write the MATCH part of the formula, you put the stuff that you already have inside it.
+
+I hope that makes sense and maybe saves you just a tiny bit of confusion as you use this in the future.
+Solution verified
+
+You guys are awesome, I've been trying to figure this out for some time!
+Good responses already here, so only thing I'd add is that it's a much simpler vlookup method, especially if you wish to index multiple columns.  
+This needs to be higher,  most people treat index matches like a vlookup,  it's more like bingo,  in that it returns a cell based on vertical and horizontal numbers
+Yep, this is how I explain it to people, as well.  Once people get the "INDEX is like a chart point with x,y"), the match part comes easy to them.
+Yes, this is a pretty intricate nested formula. When I first started using it, i ran each one in two different cells. To this day, I still flesh out the match, then put the index around it after. 
+Solution verified!
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Or right to left column references instead of vlookup's strict left to right. 
+Yeah, I always struggled to remember the formula through rote memorization and would constantly be googling how to do it until I sat down and started learning about the actual functions that it's composed of
+
+You have awarded one point to _skippingisfun_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I've always had the same problem. Thanks for breaking it down.
+Welcome to the brotherhood of Jedi analysts!

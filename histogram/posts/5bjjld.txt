@@ -1,0 +1,31 @@
+Anyone ever have excel program "partially freeze"?
+Yeah. You are right this happens with large files. You can check task manager to see how much memory or CPU is being used. Sometimes, closing out of other "heavy" programs like Chrome can fix this.
+This started happening to me at work after I was upgraded to the newest version of Excel.
+
+It always happens when I try to open several spreadsheets at once.
+I've had this issue since upgrading excel to the newest version, big files or too many spreadsheets can cause this issue.   
+  
+I've found that increasing ram and turning off animation on windows helps, but I still have freezing issues at times. 
+I've been having this happen off and on for the past week or two.  The files I'm working on are not large at all.  One has 3 tabs, but only one has more used cells than can be seen at once on the screen.  The other has about 20 tabs, but each is only about 90 rows and 15-20 columns.  Neither has external references or vba or anything more complex than a data table and a little index/match.  Been using the files for nearly a year, but I've only recently started seeing this problem.
+maybe you can save as a binary file to help your large file.
+
+try saving it as .xlsb
+Definitely a problem I have encountered multiple times. 
+
+The only time I "solved" this was close out of all my chrome browsers. Used Ccleaner. Open up another Excel file and it worked once.
+
+Datapoint: using 365 Excel 2016 on a corporate license
+
+Wish there was a better solution or a fix for this.
+I have experienced this when I accidentally CTRL+Down Arrowed to Row 1 million plus, and typed a number there, and then saved the file.
+
+So basically, big data causes it to hang.
+I get this behaviour when I've given it a large formula or dataset to go through. I find clicking save and waiting for the save operation to finish fixes it. 
+Might not be related but sometimes I've had Excel freeze oddly but still be sort of responsive. I've fixed it by going into the vb editor (ALT+F11) and in the Immediates window typed "application.screenupdating = true" and pressed enter.
+
+I know it's a long shot but worth a try if nothing else is working for you.
+It can happen when converting a big column from text to number via the popup. To get around it, copy, paste special and multiply by the number 1. 
+Hmm, didn't think to close out Chrome. I'll think about this for next time.
+
+Unfortunately, I just finished this project, so likely the next time this happens again I'll have forgotten about this thread and can verify the solution :(
+Hmm, sounds interesting. I'll try to remember this.

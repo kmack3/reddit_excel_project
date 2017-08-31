@@ -1,0 +1,36 @@
+Fun LOOKUP exercise I put together to teach some coworkers about flexible dataset searching: OFFSET(A1,MATCH,MATCH)
+[deleted]
+I just tried this out with a really large comparison work sheet tracking price changes.  Was running several million vlookups.  Because of this setup it would theoretically reduce calculation burden by a factor of four (four rows desired in each lookup.)  I'm running a variant of the spreadsheet to see how it performs.  If there's a method even more efficient (like i_ll_do_one seems to suggest) please be specific.
+
+A fool believes he knows everything while a wise man knows he knows nothing.
+
+Edit: Since it seems to be a lost art around here let me be clear.  I have learned something from the OP here and have upvoted them.  That should be standard so that material which is interesting and informative actually reaches people beyond the person asking the question.
+The way i sometimes use this (for very large arrays) is to set C7 and C8 as Validation drop-down menus, referencing the row/column labels.
+  
+  
+Questions are welcome - I use this type of formula for so many things, it's crazy. Index/Match, Offset/Match.... and when I need to get really tricky, Offset/Index/Match :)
+Interesting stuff. IIRC you can also incorporate the OFFSET and COUNTA function with VLOOKUP for those data tables with rows that are constantly changing.
+That's a good point. For my purposes, volatile functions are necessary because of the fluidity of data locations.  For more static workbooks, index would be a much better option.
+  
+  
+To put the fluidity of data in my key metrics workbook into perspective, here are some of the ideas to consider.  It's a metric ranking dashboard that allows the users to select beginning & ending date ranges for the data being looked at.  It then will rank the performance of each store/district/region among its peers from a selection of any one of 34 metrics.  Because our stores frequently change the district/region they're associated with, any change requires dynamic references and lookup tables.  
+  
+  
+All the raw data lives in other sources.  I link to those data sources for the full year, hardcoding the values monthly.  There is no manual updating in the dashboard and no macros...
+  
+  
+So you select fiscal week 1-4, ranking the stores by year-over-year sales comp.  The district/regional alignment is checked.  All raw data metrics are re-ranked once the data (via offset) is sum/aggregated from the appropriate range (weeks 1-4).  Another offset looks for YoYSalesComp in the ranking table and returns the store/values in ranked order....
+  
+  
+It's difficult to explain, but does it make sense?
+Agreed - and one must keep in mind that there are many ways to do things in Excel.  What may be inefficient in one scenario may be the most efficient in another situation (not to say anything I do is the "most" efficient).  See my response to i_ll_do for extrapolation on that my methodology of this particular example :)
+Hi, sorry for replying from the future. Wouldn't:
+
+=SUMPRODUCT(($B$1:$F$1=$C$7)* ($A$2:$A$4=$C$8) *$B$2:$F$4)
+
+Be the most processing efficient way to do this?
+I don't think so, no. I LOVE the sumproduct function, there's no doubt about that.  However, it's an array formula... and as such, the amount of "work" it has to do goes up exponentially as the ranges extend outwards.  On a small dataset, you'd be fine, but otherwise, it could start to bog down a bit.
+  
+  
+Does this make sense/seem right?
+Yeah I think you might be right, I just thought having to run two matches would require more

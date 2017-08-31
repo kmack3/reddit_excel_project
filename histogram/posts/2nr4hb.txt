@@ -1,0 +1,37 @@
+Is it possible to take information from a website, say price from a supermarket website and have it automatically appear/update on a spreadsheet?
+Data Tab -> From Web button.
+
+You can use it to select information from a website, although the layout of the website will affect how much it pulls.
+[Scrape the web with import.io](https://import.io/)
+Someone's price matching ;)
+VBA solution anyone?
+Power Query.
+Super easy with importHTML or importXML functions in Google sheets. 
+Thank you, seems like my little idea might take more work than I intended but I get the general gist of what needs to be done.
+
+I'm happy for the mods to consider my problem solved.  
+This is great. Is there a way to choose data to show from selected web page? I've tried this, but I get too much data, otherwise it's great. 
+this. also, off topic, but you can easily copy/import data from a table using the chrome plugin TableCapture. Check it out!
+Actually the intent is to monitor ingredient cost per cupcake that I bake. 
+They always do ;-) 
+
+But it's definitely doable. 
+String manipulation is one way - combining the FIND and MID functions let you search for a specific piece in it.
+That's awesome and very smart! 
+How are you planning on doing this? I am interested in your process as I may want to do something similar.
+Still learning that, thank you for direction.
+Thank you. Now I just need to get it to work! 
+
+*foams at the mouth*
+The process is twofold and I already have a system in place already.
+
+First you need an [inventory sheet](http://i.imgur.com/eFSO9OA.jpg) and your [recipe sheet](http://i.imgur.com/G7if6yn.jpg). The recipe sheet is a basic template with a few different commands attached to it. I'll get to those in a minute. The important sheet is your inventory (and it's the one I'm trying to automate). Basically, you add all your ingredients and to those ingredients you include the price and gross weight/measure. So 18 eggs cost me £2.10, hence £2.10 and 18 in those two columns. The unit isn't as important but it helps me keep track of things, like if I need to convert a recipe sheet to match an inventory unit.  
+The recipe sheet is designed so that when I put eggs in the ingredients column, it pulls the eggs information from the inventory sheet and places the bulk cost and the bulk unit into the columns next to it. By putting the amount of eggs the recipes in the fourth column, the spreadsheet then does all the math for me and tells me how much the eggs is going to cost me for this batch of cakes. I can adjust this as I go, so if I want to double my recipe I can add 4 to this column instead of 2 and it'll adjust the cost per column. By inputting all the ingredients and then telling the spreadsheet how much the batch should make, it'll add up the ingredient costs and then divide that by the batch.  
+I then just have to add labour charges and misc.
+
+I usually update the inventory sheet every two-three months but as my inventory gets larger it's getting more time consuming to do this by hand.
+
+I hope that helps. 
+>*frosts at the mouth*
+
+ftfy

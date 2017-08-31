@@ -1,0 +1,46 @@
+How can I count the number of unique text cells?
+    =SUMPRODUCT(--(FREQUENCY(MATCH(A1:A10,A1:A10,0),ROW(A1:A10)-ROW(A1)+1)>0))
+
+Adjust the ranges as necessary. The final entry should be your first cell of data.
+Pivot Table!
+
+Specifically the Filter section (although you don't need to apply the filter).
+
+http://www.excel-easy.com/data-analysis/pivot-tables.html#filter
+
+Or I prefer, copying the column, remove duplicates button, then use a a COUNTIF formula against the original data.
+FWIW, another alternative is
+
+    =SUMPRODUCT(1/COUNTIF(range,range))-SIGN(COUNTBLANK(range))
+just use your fingers man
+You could always paste it into another column and remove duplicates and count them.
+SOLUTION VERIFIED!
+That's brilliant. I think I get most of it, but what's the double-minus ("--") for?
+thank you! here's a gold.
+I think I simplified it a little:
+
+`=SUM(--(FREQUENCY(MATCH(column,column,0),ROW(column))>0))`
+
+If not please let me know how so; I'm just learning this stuff
+
+use
+
+`=SUM(--(FREQUENCY(MATCH(column,column,0),ROW(column))>0))-1`
+
+if there's a heading for column
+Would you please give a breakdown of what's going on in this function step by step?
+
+Why use sumproduct? Why does it return true or false? Because it's summing text? Using Match, row-row was used for what and what's the point of the > 0 at the end?
+
+
+This was going to be my suggestion too. Easy to do without a formula. Pivot Tables combine duplicates.
+
+You have awarded one point to _sHORTYWZ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+It is to transform a valid formula from true/false to 1/0 since sumproduct is counting numbers not letters. Try any formula that returns true and wrap it with that and you will get 1.
+If you hadn't of asked, I was going to! I agree, awesome solution!
+There's a great breakdown of the formula here :
+
+https://exceljet.net/formula/count-unique-text-values-in-a-range
+Cool! Thanks!

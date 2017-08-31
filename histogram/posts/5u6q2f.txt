@@ -1,0 +1,58 @@
+How do I use VLOOKUP with different dimension cells?
+I would stop using merged cells - they're a nuisance and Excel just isn't designed to handle them at all (merged cells may be used in presentation, but not storing data). Excel is designed to have data in columns, so if you had four columns, this would be much easier (make, model, tire type, price).
+
+Like if you keep it as is, identifying the make is tough and I'd use a helper column [and figure it with this](http://i.imgur.com/mEQEF70.png) (*edit*: Oops, that looks at Toyota vs grabbing the cell, but that's an easy thing). And that helper column [is with this formula](http://i.imgur.com/NejdX1T.png). 
+
+If everything is lined up [here is a solution](http://i.imgur.com/ACkc0N6.png)
+Keep design and data separate! These tables are designed for humans to look at, not for storing data. For data use tables where one row is an item with whatever data is needed for that item. Think simple relational database here. 
+
+
+This is a lousy format for matching 
+
+- you wouldn't normally hold lookup data  this way.
+
+- Merged cells are fine for text and reports, but effectively are useless this way.
+
+This is how you hold such data - the key is calculated and used to lookup a price
+
+Car | Model | tyre | cost |key
+---|---|----|----|----
+Toyota|1|1|30000|Toyota11
+Toyota|2|1|35000|Toyota21
+Toyota|3|1|20000|Toyota31
+Toyota|1|2|29000|Toyota12
+Toyota|2|2|33000|Toyota22
+Toyota|3|2|19000|Toyota32
+Fiat|1|1|31000|Fiat11
+
+Your table is garbage.
+
+Make | Model | Tyre | Price(USD)
+-|-|-|-|
+Toyota | Model 1|Tyre 1| 31000
+Toyota | Model 2|Tyre 1| 32000
+Toyota | Model 2|Tyre 2| 33000
+Toyota | Model 3|Tyre 1| 31000
+Here's the excel
+
+https://expirebox.com/download/60f1084591f23072a0bb9e08a6931ef5.html
+Dont hold data in such a bad format.
+
+You can glue data in c2 (formula =a2&a3) and h2 (formula =f2&g2) plus in d2 make a copy of b2.
+Then vlookup will work.
+
+But dont hold data this way and dont use merged cells
+ouch on the merged cells
+I learned from an employer a while ago the evil of merged cells and never looked back. You are totally right on. We would give the appearance of merged cells through formatting (Format cells, Text, Horizontal Alignment, Center across selection). And hidden helper columns give you so much more control. 
+This. Stop using it.
+:)
+https://www.reddit.com/r/excel/comments/5u6q2f/how_do_i_use_vlookup_with_different_dimension/ddrqxzn/
+Was to say the same, always try to use one sheet just for the data and another one to display it, that way you won't have to bother, how stretched the table gets.
+I see, but my problem is that if I want to add more info like the color of the model and tire then suddenly the table becomes very stretched over time! Otherwise, this was my first idea as well.
+Most platforms where I work have merged cells in their data dump outputs.  So annoying.
+You really need a flat file, with a single column for price.
+
+That makes lookup trivial, with a simple SUMIFS taking care of business.
+
+Demo: http://upload.jetsam.org/documents/pokimonz.xlsx
+And this is why cars have a base price and options are added on.  Normally you'd have the options in an options table...separate from the price of the vehicle. 

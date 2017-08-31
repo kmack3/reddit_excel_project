@@ -1,0 +1,118 @@
+How can I generate the numbers from 1-100 randomly in a column but ensure that each number (1-100) is chosen?
+in A1 to A100 put RAND().
+
+in B1 to B100 put:
+
+    =RANK(A1,A$1:A$100)
+Not sure how to do it directly but here's one way (uses 2 columns):
+
+1) Place 1-100 in Column A
+
+2) Place =rand() in Column B
+
+3) Sort Columns A and B on B (ascending or descending shouldn't matter)
+
+4) ???
+
+5) Profit
+
+Edit: If you want to do it using one column check out this: http://www.get-digital-help.com/2009/07/03/how-to-create-a-random-list-of-unique-numbers-in-excel/
+If you want to get fancy and be able to reset the numbers with a click of a button you can use this macro...
+
+    Sub random100()
+    
+    Dim oRange As Range, oCell As Range
+    
+    For i = 1 To 100
+    Range("A" & i) = Int(100 * Rnd + 1)
+        If i <> 1 Then
+        Set oRange = Range("A1:A" & i - 1)
+    again:
+            For Each oCell In oRange
+                If Range("A" & i) = oCell Then
+                Range("A" & i) = Int(100 * Rnd + 1)
+                GoTo again
+                End If
+            Next oCell
+        End If
+    Next i
+    
+    End Sub
+I see you have your solution but alternatively you could put numbers 1-100 in column A then in column B put rand() in each field then sort both columns on B.
+I went through the solutions posted and determined that none of them so far actually achieve the effect you requested.  Do you still need a valid solution that delivers the effect of dealing a deck of cards?  If so, I have some VBA that can do the job.  It does NOT deliver some pseudo-random gobbledy gook like several of the posted methods.
+If all numbers were included then it would not be random, there is some order.
+This will do the trick! Thanks! Solution Verified.
+Solution Verified
+Just an FYI, .find is much quicker than looping through a range.
+Party pooper. ;)
+It's entirely possible for them to be in a random order.  
+  
+I think what you're saying is that the selection of numbers would not be random...
+Hello!
+I noticed that you thanked someone in a comment in your post.
+
+If you're happy with the answer, please **separately reply** to the user with **Solution Verified**.
+
+This will give the user a [ClippyPoint](https://www.reddit.com/r/excel/wiki/clippy) and change the flair to **solved**, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _monstimal_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Aaahhhh damn I knew there was an easier way but I couldn't think of it. I'm getting a bit rusty. Good call!
+
+    Sub random100()
+    
+    Dim oRange As Range, oCell As Range
+    
+    For i = 1 To 100
+    Range("A" & i) = Int(100 * Rnd + 1)
+        If i <> 1 Then
+        Set oRange = Range("A1:A" & i - 1)
+    again:
+        Set oCell = oRange.Find(Range("A" & i), , , xlWhole)
+            If Not oCell Is Nothing Then
+            Range("A" & i) = Int(100 * Rnd + 1)
+            GoTo again
+            End If
+        End If
+    Next i
+    
+    End Sub
+
+They are constrained so they can't be random. You can predict the final number, that's not random. There can only be one of each number, that's not random. It's not randomly ordered because once a number has occurred you know it's not going to follow another number; that is, you can predict its nonoccurrence. Each number is influenced by what has gone before. This is ok for bingo numbers but for anything else, no.
+So you're suggesting that the phrase "random order" is nonsensical and that it's impossible to put a list of items into a random order?
+Oh go on then, downvote math.
+No, that's not what I was saying. There are constraints on the system so it isn't random. The order isn't random because every number has to occur. At some point in the exercise you can make an absolute prediction, not a probability that a number will not occur.  If the OP tried to submit research based on numbers obtained this way it would be thrown out. Like I said, it's okay for bingo and if that's what the OP is looking for then good.
+Let's simplify it a little.  
+  
+Instead of the numbers 1 - 100, let's cut it down to just 1, 2 and 3.  
+Now, let's swap the numbers for fruits.  
+An apple, an orange and a pear.  
+  
+Would it be possible to put these 3 fruits into a random order?
+>  if that's what the OP is looking for then good.
+
+It's pretty obvious that's what he's looking for:
+
+>How can I generate the numbers from 1-100 randomly in a column but ensure that each number (1-100) is chosen?
+I copied the following from here
+https://www.random.org/analysis/
+"When discussing a sequence of random numbers, each number drawn must be statistically independent of the others. *This means that drawing one value doesn't make that value less likely to occur again*. This is exactly the case with our unloaded die: If you roll a six, that doesn't mean the chance of rolling another six changes." My emphasis.
+Now, I have to go get dinner ready for my family. Don't interpret my non-reply for the next couple hours as anything but family time :)
+That's not really an answer to my question:-  
+"*Would it be possible to put these 3 fruits into a random order?*"  
+  
+I think what you're saying is correct - IF we were talking about a random *selection* rather than a random *order*... but we're not.  
+  
+  
+Enjoy your meal and your family.  
+I'm in the UK, so may have gone to bed by the time you get chance to reply.
+OP specifically stated that he's not looking for independent events.  He wants to ensure that each number is selected once, but in a "random" order.
+Dude it's like picking a random number between one and six, the outcome is random even though there are constraints.
+I think this is one of those situations where mathematicians get too smart for their own good and overthink it to where they miss the point.
+>Don't interpret my non-reply for the next couple hours as anything but family time :)  
+  
+How should I interpret your non-reply for 4 months?
+Haha. I got a big family.

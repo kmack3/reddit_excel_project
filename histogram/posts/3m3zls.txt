@@ -1,0 +1,21 @@
+Inherited a spreadsheet. Could you explain what the purpose of this formula would be?
+The other posters are correct, an easier way of putting it would be 
+
+    =IFERROR(INDIRECT($C55& "!$h$9"),0)
+
+For more, see [Using IFERROR() formula](http://iheartexcel.com/iferror-error-checking-prayers-answered/)
+
+It's looking at cell H9 of the sheet with the name that is found in C55, and if filled up/down other cells in C. If it doesn't find a sheet with that name it returns a zero.
+It's checking to see if cell H9 in whatever sheet name is in C55 is returning an error or not. If it is, it's displaying zero. If not, it's displaying cell H9 in the sheet name that is referenced in C55.
+Solution Verified
+
+THANK YOU! I couldn't figure out that it was using the cell for the sheet name. This make sense. 
++1 Point
+Could you tell me what a good use for this is?
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+The resulting data is probably being used in a formula (even if it's just as part of a SUM), and having an #N/A as a formula input will make the entire formula throw #N/A. Returning a zero allows whatever other formula is there to work nicely
+I meant the indirect function. I apologize. 
+it lets you dynamically change where formulas point to - change cell C55 (maybe with a dropdown box), and all the formulas change to point to the new location (useful for changing options on a dashboard and having things recalculate)

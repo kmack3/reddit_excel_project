@@ -1,0 +1,37 @@
+slow
+1o07qu
+Slow xlsx even after blanking the whole spreadsheet
+
+I'm trying to figure out why this xlsx(which I recently converted from xls) is acting so strangely. 
+
+It's a 2-tab file. The second tab is perfect, no problems. The second has a few calculations and some circular errors. The first thing I did was CTRL-A clear all. So I have a white sheet here(with certain cells elongated) and it's still very very slow to maneuver around. If I try to copy and paste these BLANK cells, it will lock up excel(on any machine)
+
+Any ideas on what could be causing this? The next tab over is perfectly fine, it's just this one strange tab. I'm a bit of an excel newbie by the way, I'm just trying to help someone out. 
+
+
+-------------
+Try selecting all the "blank" cells, and then right click > delete.
+-------------
+edit: I meant the first tab has all the circular calculations. The second tab is very basic
+-------------
+Check for data connections, etc on the Data tab.  You can also try setting Calculation to Manual (on the Formulas tab).
+
+If running a "delete all" locks things up, try a partial delete, starting with a single cell, and saving in between each attempt.
+
+Also, how is the file size?  Given the amount of data in the sheet, does the size seem excessive?
+-------------
+Start from scratch.  It's only two worksheets.
+-------------
+I have a couple spreadsheets that I intentionally use circular references in (my phone autocorrected references to "refresh mess"... Prophetic). It's to excel what a flying spin kick is to a bar fight.
+-------------
+You might also want to try [this addin](http://xsformatcleaner.codeplex.com/), it works like a charm at lowering file size.
+-------------
+Completely locks up if I do that, even after clearing all the cells first. 
+-------------
+File size used to be 15mb as an xls, is now 800k as an xlsx. 
+
+The cell deletion did work after I left it for a couple minutes, and then the spreadsheet was fast again. I'll try setting the calculations to manual, thanks
+-------------
+Circular references with automatic calculation can lead to nasty snags.  Since you've already got them I assume they are intended, but if they can be eliminated it can only be beneficial
+-------------
+I ended up deleting two tables completely that had circular references and that fixed the speed issue. There were still circular references left however so that part doesn't make sense. There's something about those certain cells. Anyway this is a solution, they'll just rebuild these two small tables and everything should be fine, thanks for your help

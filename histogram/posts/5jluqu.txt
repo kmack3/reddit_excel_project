@@ -1,0 +1,453 @@
+I have an Excel file that suddenly quadrupled in size.
+A lot of times, Excel will think there's data beyond the range you're actually using (e.g., you might only be using columns A to Z, but Excel will show a really tiny scroll bar allowing you to scroll right all the way to column XFD).  If that's the case, the file is storing all that information for 16,384 columns rather than just 26, which increases file sizes and can make files pretty unwieldy pretty fast if you've got multiple tabs like that.  Same thing can happen with the rows. 
+
+To diagnose, hit CTRL+End on one of your sheets.  It should take you to bottom rightmost cell in your data set.  If it doesn't (e.g., by taking you to cell XFD100), you've got a problem. To fix, delete all offending columns (e.g., columns AA to XFD that should be blank), and resave the file.  The saving part is important: deleting the empty portion without resaving will do nothing.  However, after you resave, if that's indeed the problem, the file size will go down considerably, and the scroll area will be more aligned with your dataset.   
+Did you feed it after midnight?
+You can save as an .xlsb for binary format. Or try Ctrl+A then Alt+E,A,A or the Clear All button on the Home tab. 
+Use the Clear Formatting option, opening and updating will be fast.
+Click the Review tab.
+In the Changes group, click Share Workbook.
+On the Editing tab, click the name of each user whom you want to disconnect, and then click Remove User after each name.
+Ctrl+A then Alt+E,A,A
+Clear All button on the Home tab.
+
+Here are some tips, hope will help you !
+Open VBE and see if you have hidden sheets w user forms or shit like that.
+Go to the Data tab and check if you have any connections under Data sources. Sometimes excel stores data tables in those data connections for pivot tables.  
+If you do, just delete them (provided that you know they're not needed).
+Copy/Export the data into a new workbook... not worth trying to figure out this problem.
+How many rows are there? Can you go to the last row of data, then select the whole row after that and everything after that, delete, and then save to see if file size decreases?
+
+Same with columns
+Try to see if you have some empty rows beneath your data? I have had that problem before and it could be fixed by deleting the sheet rows (using ctrl+-) to remove them.
+Press ALT+F10, it opens the shapes window. 
+
+Any entries?
+Depending on what you are doing in the spreadsheet, this may be an option. If you are using some of the more advance features or formatting, thas ain't gonna help.
+
+Simply save it in Xls format, the Excel 5.0/95 format. This will strip away a lot of the extra functionality but if you are not using, then you don't need it.
+
+Even if you are using some of the features, it may give you an idea of what may be going on.
+Hidden worksheets perhaps?
+Try method 2 here: https://support.microsoft.com/en-us/kb/244435 in case it is the row issue after all. If that doesn't help, remove all conditional formatting, save as a new workbook and aee if that helps. If neither does, copying the data to a new book should be the final approach. Cumbersome, but should fix it
+Like some other have said, it could be that excel thinks there's data in some blank rows/columns. 
+
+Another solution to this is to highlight all columns that should be blank (according to your usage/data), then go to home > editing > clear > clear all
+Repeat for rows. 
+
+Another note: IIRC, if you added a lot of formatting;  font color, cell fill, etc, this could be taking up more data. 
+There are a couple of other things I can think of you could try.
+
+If your file is saved as XLSX, go to windows explorer, change the file extension of the file to .zip.
+Open the zip file, look in xl/worksheets, this will let you see what sheet is causing the problem. This will help you narrow down your search.
+
+There are also some macros that could help. 
+DISCLAIMER, none of these are my code, just passed on to me by a colleague. I have used them though but they may affect some desired formatting.
+
+This macro tries to clear unused rows, formatting etc. 
+**WARNING** It may clear wanted formatting too. 
+     
+    ' ******************** '
+    ' ** CODE DATE      ** '
+    ' ** 6th Jan 2014   ** '
+    ' ** 09:35am        ** '
+    ' ** Version 6.0    ** '
+    ' ******************** '
+     
+    Sub ExcelTrim()
+         
+        Dim j               As Long
+        Dim k               As Long
+        Dim LastRow         As Long
+        Dim LastCol         As Long
+        Dim ColFormula      As Range
+        Dim RowFormula      As Range
+        Dim ColValue        As Range
+        Dim RowValue        As Range
+        Dim Shp             As Shape
+        Dim ws              As Worksheet
+         
+        Application.ScreenUpdating = False
+        Application.DisplayAlerts = False
+         
+        On Error Resume Next
+         
+        For Each ws In Worksheets
+            With ws
+                 'Find the last used cell with a formula and value
+                 'Search by Columns and Rows
+                On Error Resume Next
+                Set ColFormula = .Cells.Find(What:="*", After:=Range("A1"), LookIn:=xlFormulas, _
+                LookAt:=xlPart, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious)
+                Set ColValue = .Cells.Find(What:="*", After:=Range("A1"), LookIn:=xlValues, _
+                LookAt:=xlPart, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious)
+                Set RowFormula = .Cells.Find(What:="*", After:=Range("A1"), LookIn:=xlFormulas, _
+                LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlPrevious)
+                Set RowValue = .Cells.Find(What:="*", After:=Range("A1"), LookIn:=xlValues, _
+                LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlPrevious)
+                On Error GoTo 0
+                 
+                 'Determine the last column
+                If ColFormula Is Nothing Then
+                    LastCol = 0
+                Else
+                    LastCol = ColFormula.Column
+                End If
+                If Not ColValue Is Nothing Then
+                    LastCol = Application.WorksheetFunction.Max(LastCol, ColValue.Column)
+                End If
+                 
+                 'Determine the last row
+                If RowFormula Is Nothing Then
+                    LastRow = 0
+                Else
+                    LastRow = RowFormula.Row
+                End If
+                If Not RowValue Is Nothing Then
+                    LastRow = Application.WorksheetFunction.Max(LastRow, RowValue.Row)
+                End If
+                 
+                 'Determine if any shapes are beyond the last row and last column
+                For Each Shp In .Shapes
+                    j = 0
+                    k = 0
+                    On Error Resume Next
+                    j = Shp.TopLeftCell.Row
+                    k = Shp.TopLeftCell.Column
+                    On Error GoTo 0
+                    If j > 0 And k > 0 Then
+                        Do Until .Cells(j, k).Top > Shp.Top + Shp.Height
+                            j = j + 1
+                        Loop
+                        If j > LastRow Then
+                            LastRow = j
+                        End If
+                        Do Until .Cells(j, k).Left > Shp.Left + Shp.Width
+                            k = k + 1
+                        Loop
+                        If k > LastCol Then
+                            LastCol = k
+                        End If
+                    End If
+                Next
+                 
+                .Range(Cells(1, LastCol + 1).Address & ":IV65536").Delete
+                .Range(Cells(LastRow + 1, 1).Address & ":IV65536").Delete
+            End With
+        Next
+         
+        Call StyleKill
+        Call DeleteStyles2
+        Call ShowAllNames
+        
+        Application.ScreenUpdating = True
+        Application.DisplayAlerts = True
+        MsgBox "Cleandown Done"
+         
+    End Sub
+
+
+You can also check if there are additional hidden named ranges
+
+    Sub ShowAllNames()
+    Row = 1
+    For Each n In ActiveWorkbook.Names
+    n.Visible = True
+    Next n
+    End Sub
+
+Last macro, style kill, deletes unused styles
+
+    Sub StyleKill()
+         Dim styT As Style
+         Dim intRet As Integer
+         On Error Resume Next
+         For Each styT In ActiveWorkbook.Styles
+             If Not styT.BuiltIn Then
+                 If styT.Name <> "1" Then styT.Delete
+             End If
+         Next styT
+     End Sub
+
+In case it is helpful, see below my code of analysing the file size. It only runs on xlsx and xlsb files. If you want to use it you need to put this code in a fresh excel file and run it (your file with the issue needs to be closed).
+
+You should get a list of all the components and their uncompressed file size. As they are the uncompressed sizes they are likely far bigger than your actual file size but it usually helps me find the culprit sheet or other component of file size explosion.
+
+I've used this loads of times, but pls use at your own risk and save a back up of your file just in case.
+
+    Option Explicit
+    
+    Private Const BtoKB As Long = 1024
+    Private Const strSheetPrefix As String = "Sheet"
+    Private Const strXMLSuffix As String = ".xml"
+    
+    
+    Private Sub run()
+    
+    'Record and set initial conditions
+    Dim Calc As XlCalculation
+    Dim Scrn As Boolean
+    
+    With Application
+        Calc = .Calculation
+        Scrn = .ScreenUpdating
+        .Calculation = xlCalculationManual
+        .ScreenUpdating = False
+    End With
+    
+    Dim strUnzippedFolder As String
+    Dim fso As Scripting.FileSystemObject
+    Dim fFolder As Scripting.Folder
+    Dim fWorksheets As Scripting.Folder
+    Dim strSourceFileFullPath As Variant
+    Dim lonFileCounter As Long
+    Dim lonSheetsCount As Long
+    Dim myArr() As Variant
+    Dim i As Long, j As Long
+    Dim wbkNew As Workbook
+    
+    strSourceFileFullPath = SelectandZipFile
+    
+    If strSourceFileFullPath = False Then
+        
+    Else
+    
+        Call UnzipFile(strSourceFileFullPath:=strSourceFileFullPath, _
+                    strUnzippedFolder:=strUnzippedFolder)
+                    
+        Name strSourceFileFullPath As Left(strSourceFileFullPath, Len(strSourceFileFullPath) - Len(".zip"))
+        
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set fFolder = fso.GetFolder(strUnzippedFolder)
+        Set fWorksheets = fso.GetFolder(strUnzippedFolder & "xl\worksheets\")
+        
+        myArr = GetWorksheetInfo(strUnzippedFolder & "xl\workbook.xml")
+        
+        lonFileCounter = 0
+           
+        Call OutputFileSizes(fFolder:=fWorksheets, _
+                                lonFileCounter:=lonFileCounter, _
+                                myArr:=myArr, _
+                                booSort:=True)
+    
+        Call OutputFileSizes(fFolder:=fFolder, _
+                                lonFileCounter:=lonFileCounter, _
+                                myArr:=myArr, _
+                                booSort:=False, _
+                                fIgnore:=fWorksheets)
+     
+        fso.DeleteFolder Left(strUnzippedFolder, Len(strUnzippedFolder) - 1)
+        
+        Set wbkNew = Workbooks.Add
+        
+        For j = LBound(myArr, 1) To UBound(myArr, 1)
+            For i = LBound(myArr, 2) To UBound(myArr, 2)
+                wbkNew.Sheets(1).Range("a1").Offset(i + 1, j).Value = myArr(j, i)
+            Next i
+        Next j
+        
+        With wbkNew.Sheets(1)
+            .Range("a1").Value = "XML Filename"
+            .Range("b1").Value = "Excel Worksheet Name"
+            .Range("c1").Value = "File size (kB)"
+            .Range("c1", Range("c1").End(xlDown)).NumberFormat = "#,##0"
+            .Columns("A:C").EntireColumn.AutoFit
+        End With
+    
+    End If
+    
+    With Application
+        .Calculation = Calc
+        .ScreenUpdating = Scrn
+    End With
+    
+    End Sub
+    
+    
+    Private Function SelectandZipFile() As String
+    
+    'Function opens file picker and adds a .zip extension to the file if it
+    'does not have one already and then returns the new filename including path
+    
+    Dim strFilename As String
+    
+    'Open file picker limited to xlsx or xlsm file
+    strFilename = Application.GetOpenFilename("XML Excel files (*.xlsx;*.xlsm), *.xlsx;*.xlsm")
+    
+    'Check if filepicker was cancelled
+    If Not strFilename = "False" Then
+        'Check if file is a .zip
+        If Not strFilename Like "*.zip" Then
+            'Add .zip extension to the file name and also to strFilename
+            Name strFilename As strFilename & ".zip"
+            strFilename = strFilename & ".zip"
+        End If
+    End If
+    
+    SelectandZipFile = strFilename
+    
+    End Function
+    
+    
+    Private Sub UnzipFile(ByVal strSourceFileFullPath As String, ByRef strUnzippedFolder As String)
+    
+    'Function extracts the xml subcomponents of a .zip file and saves them to a new folder
+    
+    Dim strFolderPath As String
+    Dim strSourceFileName As String
+    Dim fso As Object
+    Dim oShellApp As Object
+    Set fso = CreateObject("scripting.filesystemobject")
+    
+    'Extract folder path from full filename
+    strFolderPath = Mid(strSourceFileFullPath, 1, InStrRev(strSourceFileFullPath, "\"))
+    'Extract filename from full filename
+    strSourceFileName = Mid(strSourceFileFullPath, InStrRev(strSourceFileFullPath, "\") + 1, Len(strSourceFileFullPath))
+    
+    'Create name for the new folder that will contain the xml components
+    If Right(strFolderPath, 1) <> "\" Then
+        strFolderPath = strFolderPath & "\Unzipped " & strSourceFileName & "\"
+    Else
+        strFolderPath = strFolderPath & "Unzipped " & strSourceFileName & "\"
+    End If
+    
+    'Delete contents of folder
+    On Error Resume Next
+    fso.DeleteFolder strFolderPath & "*", True
+    Kill strFolderPath & "*.*"
+    On Error GoTo 0
+    
+    'Create new folder
+    On Error Resume Next
+    MkDir strFolderPath
+    On Error GoTo 0
+    
+    'Copy contents into new folder
+    Set oShellApp = CreateObject("Shell.Application")
+    oShellApp.Namespace((strFolderPath)).CopyHere oShellApp.Namespace((strSourceFileFullPath)).items
+    
+    strUnzippedFolder = strFolderPath
+    
+    End Sub
+    
+    
+    Sub OutputFileSizes(fFolder As Scripting.Folder, ByRef lonFileCounter As Long, ByRef myArr As Variant, booSort As Boolean, Optional fIgnore As Scripting.Folder = "")
+    
+    Dim fFile As Scripting.File
+    Dim fSub As Scripting.Folder
+    Dim lonArraySize As Long
+    Dim lonPos As Long
+    
+    For Each fFile In fFolder.Files
+    
+        If UBound(myArr, 2) > lonFileCounter Then
+            lonArraySize = UBound(myArr, 2)
+        Else
+            lonArraySize = lonFileCounter
+        End If
+           
+        ReDim Preserve myArr(3, lonArraySize)
+        
+        If booSort Then
+            lonPos = ExtractFilenumber(strFilename:=fFile.Name) - 1
+        Else
+            lonPos = lonFileCounter
+        End If
+        
+        myArr(0, lonPos) = fFile.Name
+        myArr(2, lonPos) = fFile.Size / BtoKB
+        lonFileCounter = lonFileCounter + 1
+        
+    Next fFile
+    
+    For Each fSub In fFolder.subfolders
+        If Not fIgnore Is Nothing Then
+            If Not fSub = fIgnore Then
+                OutputFileSizes fFolder:=fSub, _
+                            lonFileCounter:=lonFileCounter, _
+                            myArr:=myArr, _
+                            booSort:=booSort, _
+                            fIgnore:=fIgnore
+            End If
+        End If
+    Next fSub
+    
+    End Sub
+    
+    Public Function GetWorksheetInfo(strFilePath As String) As Variant
+    
+    'Define DOM variables
+    Dim oXMLDoc As MSXML2.DOMDocument60
+    Dim oXMLNode As MSXML2.IXMLDOMNode
+    Dim oXMLNodeList As MSXML2.IXMLDOMNodeList
+    
+    'Define other variables
+    Dim i As Long
+    Dim arr() As Variant
+    Dim strRID As String
+    Dim lonRID As Long
+    Dim strName As String
+    
+    'Load xml file
+    Set oXMLDoc = New MSXML2.DOMDocument60
+    oXMLDoc.async = False
+    oXMLDoc.Load strFilePath
+    
+    'Check for errors in loading
+    If (oXMLDoc.parseError.ErrorCode <> 0) Then
+        
+        Dim myErr
+        Set myErr = oXMLDoc.parseError
+        MsgBox ("You have error " & myErr.reason)
+    
+    Else
+        
+        'Cycle through worksheet nodes and populate array with sheet name and sheetId
+        Set oXMLNodeList = oXMLDoc.DocumentElement.SelectNodes("//*[local-name()='sheet']")
+        
+        ReDim arr(3, oXMLNodeList.Length - 1)
+        i = 0
+        
+        For Each oXMLNode In oXMLNodeList
+            strRID = oXMLNode.Attributes.getNamedItem("r:id").NodeValue
+            lonRID = Right(strRID, Len(strRID) - 3)
+            strName = oXMLNode.Attributes.getNamedItem("name").NodeValue
+            arr(1, lonRID - 1) = strName
+            i = i + 1
+        Next oXMLNode
+    
+    End If
+    
+    GetWorksheetInfo = arr
+    
+    End Function
+    
+    Function ExtractFilenumber(strFilename) As Long
+    
+    Dim strExtract As String
+    Dim lonPrefix As Long
+    Dim lonSuffix As Long
+    Dim lonExtract As Long
+    
+    lonPrefix = Len(strSheetPrefix)
+    lonSuffix = Len(strXMLSuffix)
+    lonExtract = Len(strFilename) - lonPrefix - lonSuffix
+    
+    strExtract = Mid(strFilename, lonPrefix + 1, lonExtract)
+    
+    ExtractFilenumber = strExtract
+    
+    End Function
+
+Did you paste some data from another document and use embed?
+It could have to do with the formulas you're using - using a lot of SUMPRODUCT for example can bog down calculation times, though I'm not sure if this would also lead to larger files as well.
+
+Is it something that you can break across multiple workbooks?
+I tried the CTRL + End thing and it didn't bring me anywhere outside what I expected.  Even still I did a CTRL + A (2x - so I could make sure I got all Data) then deleted **all** cells.  I also did that with the Clear All thing.  Neither fixed it.
+I tried the Clear All also.  Didn't change anything.    
+edit:    
+Saving as a .xlsb didn't change anything either.
+I agree, this is what I've found to be the solution many times.
+I tried this already.  It took 5 minutes (i had my stopwatch on) and still didn't fix the issue.
+Make sure you're not clearing the cells rather you're deleting the actual rows. 
+Triple check all the sheets using the aforementioned keyboard shortcut. A good indicator that was mentioned is the scroll bar size on the right. 

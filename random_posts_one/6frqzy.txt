@@ -1,0 +1,53 @@
+6frqzy
+Need help fixing a formula to run based off a subset only
+I am attempting to write a formula in excel 365 that will calculate the number of days between 2 rows (Column H and closest dates together) but only if the text column D (PI) matches exactly. I have been able to write the formula so that it will calculate the dates closest in range to each other but the problem I am having is that I also want the formula to only pull from dates when column D is the same (kind of like filtering). For example I have TEST 1, TEST 2, and TEST 3 options in column D, I would only want the row the formula is in (example row 6 where column D is TEST 1 to look for other rows where column D is TEST 1, then look for the closest date and subtract the number of days since the last visit for TEST 1.
+
+Here is the part of the formula that I have gotten to work for me:
+
+    =IFERROR(H4-(IF(E4="IMV",MAX(($H$3:$H$999<H4)*$H$3:$H$999), IF(E4<>"IMV",""))),"")
+
+Here is the complete formula I have tried but am not getting the results I need:
+
+    =IFERROR(H6-(IF(E6="IMV",MAX(($H$3:$H$999<H6)*$H$3:$H$999,IF(VLOOKUP(D6,$D$3:$D$999,4,FALSE))), IF(E6<>"IMV",""),"")
+
+
+http://i.imgur.com/qGKhuwf.jpg
+
+
+
+-------------
+If I understand your problem correctly, try the following as an array formula (use control+shift+enter, not just enter):
+
+    =SMALL(ABS($H3-IF($E$3:$E$999="IMV",$H$3:$H$999,0)),2)
+
+This should give you the number of days between a given date, and the nearest other date in column H (past or future), as long as the corresponding visit type for that other date is "IMV".
+
+I also **strongly** encourage you to use a table (select data, Home > Format as table), instead of defining your formula ranges all the way out to row 999. If you do that, your formula will instead be:
+
+    =SMALL(ABS([@[Visit End Date]]-IF([Visit Type]="IMV",[Visit End Date],0)),2)
+
+Again, as an array formula (control+shift+enter). You'll know if you entered it properly, when {curly braces} appear around the formula.
+-------------
+You could use MAXIFS for this, it tidies up the formula somewhat. Type this into I3 and copy down:
+
+    =IF(H3-MAXIFS(H:H,E:E,E3,H:H,"<"&H3)=H3,"",H3-MAXIFS(H:H,E:E,E3,H:H,"<"&H3))
+
+No need to enter as an array formula. Will show as blank if no suitable match is found, or the number of days difference otherwise.
+-------------
+Thanks for the reply, the problem I am having is that I also want the formula to only pull from dates when column D is the same (kind of like filtering). For example I have TEST 1, TEST 2, and TEST 3 options in column D, I would only want the row the formula is in (example row 6 where column D is TEST 1 to look for other rows where column D is TEST 1, then look for the closest date and subtract the number of days since the last visit for TEST 1. 
+
+-------------
+With this formula, is there anyway to also have the formula filter/search for specific text in another column and only look for dates if column D met specific requirements as noted in my response above?
+Thanks for the reply!
+-------------
+What should a cell show if there are no previous instances of that TEST? Can you show us which values you expect to get?
+
+This update does what my previous answer did (still an array formula), as well as requiring that the TESTs match, and only looking for most recent previous instance (it therefore must show "No match" for the first instance of each TEST).
+
+    =IF(OR(COUNTIF($D$3:$D3,$D3)=1,ISBLANK($D3)),"No matches",SMALL(ABS($H3-IF(--($E$3:$E3="IMV")*--($D$3:$D3=$D3),$H$3:$H3,0)),2))
+
+
+-------------
+    =IF(H3-MAXIFS(H:H,E:E,E3,H:H,"<"&H3,D:D,D3)=H3,"",H3-MAXIFS(H:H,E:E,E3,H:H,"<"&H3,D:D,D3))
+
+The above does everything as before but now column D has to match as well.

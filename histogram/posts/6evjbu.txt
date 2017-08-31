@@ -1,0 +1,11 @@
+Help with Sumif formula that uses a row in summary tab to determine which tab to pull said information from
+Try Indirect - B1 = Sheet Name and C1 equals the cell - obviously just an example and you would need the exclamation point as well for pointing to another sheet.
+
+    =INDIRECT(B1&"!"&C1,TRUE)
+Perfect. I knew I was missing another step. SOLUTION VERIFIED!
+
+SOLUTION VERIFIED!
+
+You have awarded one point to _itsnotaboutthecell_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

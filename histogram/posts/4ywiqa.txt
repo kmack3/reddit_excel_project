@@ -1,0 +1,71 @@
+Does Excel use multiple cores
+yes, excel makes use of multiple cores. 
+
+not sure about 2007, 2010+ does for sure. 
+
+Not every part of excel does though, like macros don't as a rule, but almost all built-in formulas do, so recalculating workbooks usually speeds up tremendously with more cores. 
+
+If yoiu want to test it (even on a dual core) you should be able to turn off multi-core processing in the advanced settings. You can then try and calculate your workbook and see the difference. 
+
+In general though, you'll want more RAM as much much as you want more processing power. 
+Any tips or tools for analyzing Excel slowness. Some users at work complain about some very complicated spreedsheets bogging down their system, and we're not sure what the root cause is.
+Multi thread support is an option in the advanced settings. I can't say that it makes a huge difference as the few times I have needed to use it the files were so large that it was taxing the memory more.
+Mine consistently uses all 4 cores available for computing.
+
+Then again, depends on what formulas, how much data, and how complex the macros are. If they pull lots of data from elsewhere, apply formulas, then organize it, that's a good amount of processing.
+
+**tl;dr** More cores can't hurt and most computers come with 4.
+It should - unless you're running it on a Mac, which Excel only supports 1 core :(
+I find excel never uses more than 6g of ram. I always assumed a better CPU was more of a defining factor. 
+Hi tjen -
+You wrote the kind of response I wanted, confirming that more cores are better, but doing your test (turning cores to manually use only 1 core) made little-to-no difference. That confirms what knxdude1 wrote earlier. 
+
+I have read that Excel 2010 implemented important performance wins. That will be my first cost-efficiency win. Perhaps there will be a more observable win if I got the most current version, but I'm looking for information on this question about cores and their effect.
+
+Do you know how to search for documentation that will find something definitive? All my searches find lots of results unrelated to the effect of cores on Excel.
+
+I understand that the i7 series of intel tend of optimize along the line of more cores.
+
+Thank you, tjen, and sleuthysteve and knxdude1, for the responses.
+
+Doug
+Excel 2007 and beyond I believe have multi-threaded recalc. (though not Mac like someone else commented :-/
+
+Excel recently updated 32bit to use more ram as well. 3GB if you have 32bit Windows, and 4GB if you have 64bit Windows. (only Excel 2013/16)
+
+Blog post here on it: http://www.excelguru.ca/blog/2016/05/10/32-bit-excel-memory-limit-increase/
+
+If you have 64bit Excel, you can use something like 8TB of ram.
+If the file's not gigantic and the computer's not meager then look for the heavy usage of volatile functions (rand, randbetween, now, today) or offsheet references.
+
+OPs response is pretty good, those are indeed good places to look. If it's Excel formulae that are causing the slowness, the problem could be more complicated however. Check out "fast excel" and the "decision models" website to learn more (fast excel is an excel add-in you can purchase, decision models is a website by the creator of fast excel that succinctly gives away lots of fantastically helpful information.
+Hi knxdude1 -
+What I'm looking for is some kind of definitive statement that going from 2 cores to - for example, 8 cores - will cause file reading, memory management, recalc all to have dedicated cores working on them. Without some definitive statement that such is the case then the advanced setting is just window dressing. In that case, a single superfast processor could be just as good.
+
+Separately, I've also read that Xeon processors - which seem to use multi-cores in their architecture - don't perform as well on benchmarks. That's from my own personal memory and could well be dated.
+
+FWIW, that advanced setting appears to be a default. Both the computers I am writing about already had the correct number of cores when first I looked at them.
+
+Thanks.
+Doug
+The convenient thing about a single core is that programming is easier; a single core does not involve parallelism. If you're going to use multiple cores independently then the software architecture has to make sure that data structures are handled one at a time; can't have two processors getting at the same data at the same time without coordination. Semaphores and all that. That's why I'm asking.
+Excel's memory limits vary based on the version and whether it's 32-bit or 64-bit. Starting with Excel 2007, the 32-bit version is limited to 2 GB of memory. The 64-bit version has a way higher limit though. I couldn't find an actual number for this limit anywhere, but it's significantly higher than 6 GB.
+
+I did see some speculation that VBA might be limited to about 4 GB, though (nothing concrete, unfortunately).
+You can't assume that throwing more cores at a problem will increase efficiency without identifying what the actual bottleneck might be, though.
+
+A 200MB file taking an age to load could as likely be a massively fragmented low RPM HDD as it could be insufficent RAM or maybe the CPU throttling due to a temperature spike or.. yeah, any number of things.
+
+Throwing better hardware at the problem (especially when the problem is something as unwieldy as Excel) might solve your issue, but it's going to be the most expensive way to do so, for sure.
+This is good insight. If you haven't already, I'd recommend checking out the resources mentioned in the parallel response I just made. 200 meg is indeed a very big workbook by most people's standards, but some workbooks of that size can calculate pretty quickly. Obviously it all depends on the task you're trying to achieve and how well the solution is executed.
+In theory, the 64-bit version should be able to use all of your RAM. 32-bit applications typically had a 2 GB limit due to a compiler switch, and could use 3 if you turned it on. Apparently, Microsoft didn't.
+
+VBA might still be 32-bit, which would explain a 4 GB limit. In 64-bit Windows, applications can access 4 gigs easier 
+OK. So...
+
+I'm asking for info before a purchase. I'm pretty confident that I'm asking too much from this 2 core machine. It was hard work for the 4 core machine before it.
+
+Doug
+Vba is still 32bit. However, with 64bit excel it no longer has to share that 4gb of address space with the rest of the excel application so it can at least have access to the full 4gb. Vba in 32bit excel tended to overflow at around 2gb.
+Open task manager and watch it when your machine is doing the slow thing. If ram a single component is maxed out but others are not, then that component is likely to be your bottleneck. 
+I'd buy an SSD to be honest

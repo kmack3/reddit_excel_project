@@ -1,0 +1,142 @@
+Excel Best Practice: Use Power Tools!
+Any chance you would be willing to post some kind of instructional? I'd love to see some practical examples 
+
+Good timing too, since [the mods just opened up the Wiki](https://www.reddit.com/r/excel/comments/4q0a1w/guides_writeups_and_the_wiki/).
+Totally Agree! We use 2010 in my office, so I could request admin access and install powerPivot and PowerQuery, but I'd have a harder time sharing it with anyone, and I'd be the only one using either. I'm hoping it'll get a little easier to get an opportunity to use the tools in a workplace setting once we go 365 - it's something that's on my wish-list to get to know better! 
+
+We've had a few requests on the sub regarding the Power-suite before (from people who primarily worked with that, and were interested in seeing only those questions), but it's hard to balance usability / simplicity of the subreddit with the scope that Excel covers. 
+
+Right now, the only difference is that posts with the word "power" in them, have red text, instead of  green ("VBA") or blue(default), to at least give users a visual cue.  Other solutions we've been thinking of usually end up being impractical or confusing (like expanding the number of flairs - I've changed this one to discussion btw - or having people add tags [VBA] [POWER] [EXCEL] to their posts)
+
+ 
+
+In general we get very few questions regarding Power-tools, and very few answers that advise people to use them. Hopefully people like you can help change that :) Because I do think there is a demand for getting to know it better. We've had a couple of PowerPivot book give-aways earlier this year, and a lot of people expressed a desire to become more familiar with it. 
+
+I'm a little wary of putting more links in the side-bar, it's already a bit cluttered and not a lot of people read it in the first place, so I'm not really sure of the efficacy of linking to the Power Query download page. Maybe if we had some really good content about the power-suite to link to though.... (wink wink nudge nudge) 
+
+
+
+
+
+
+
+I agree. Also if you're still set on not using these tools for the love of dog use named ranges and tables. If you find yourself nesting if statements 4 or 5 deep, write a custom function.
+Very bold claim, but with no direct examples! I'm in genetics and use SQL & VBA all the time for stuff like looking at a list of 800,000 sequence results and finding every patient who has specific combinations of results at specific frequencies (diploid haplotypes). I've looked at power pivot in the past and couldn't see that it did anything that a few minutes of coding wouldn't do with much more flexibility. What does power query offer (or power pivot, if I missed something) that's useful for anything but simple analyses? Why do you thing that this combination is better? Is it faster to execute? Can you do or help automate complex analyses (e.g. stuff that would take more than 100 lines of code)?
+
+I'm curious what you think since you took the time to suggest it. Thanks
+Totally agree with this, especially Power Query! People seem to know about Power Query but power pivot is my go-to tool. I've answered quite a few posts with "use power query, it will do this perfectly and you can repeat it at will".  The most common question this solves is when someone says "I have data in a sheet that I need to get into a master sheet" power query will do this in a snap. Have a look through my comments for some examples.
+If Microsoft would add it to the Mac version I would love to.
+I'm somewhat unfamiliar with it.  I realize you can pull data from the web, but what else can it do?  I agree that if you could do a write up on power querry, I would be interested in learning more.  
+Ok, so this will sound probably pretty amateur (edit, and it probably is, but perhaps that is part of the point). But the UX for all of the 'power' tools is a barrier to me. I honestly found it more enticing and logical to use awful stupid complex formulas, learn VBA, and use 3rd party tools to do what I know the power tools could do for me. 
+I would use it more for sure but every powerpivot tool I create has some kind of issue eventually.  Not just from my crappy development.  It will be great working fine, but then for some reason the file gets corrupted.  Won't save.  Won't use data correctly.  
+
+If they fixed reliability I would use it.  Maybe it is just user error but it has happened to other people in my office as well.  
+read 
+Discovered fuzzy lookup Friday. I have never been happier
+[deleted]
+Have started playing around with these but I've found the DAX and MDX functions difficult to parse, to the point that I'm no better or worse off using VBA.
+
+If you've got any resources on getting a better handle on the other function languages I'm all ears.
+I've never used PowerQuery since I can't install it on my work machine. 
+
+Can it scrape web data that is loaded dynamically (js) and not present in the source file? That's a lot of what I see posted around here and what I still regularly use VBA for. 
+Cool. When I started with excel, I got a lot out of the user created resource [excel exposure](http://www.excelexposure.com). If somebody created a resource like that for power BI I'm sure it would help out a lot of folks like myself. 
+I look at the new features of Excel and say "That will be cool when I can use that in about 5-10 years." - It's not we the developers that are behind it's the program's infinite life cycle - type numbers and text in cells - obtain results. Hard to convince people who don't give a shit to upgrade - work in consulting, write an Excel blog [It's Not About The Cell](http://www.itsnotaboutthecell.com), and work in the reporting division of a Fortune 500 company. Who cares if I know DAX if the end user is still using Office 2007 products. BTW - PowerBI will put me out of a job and I'm anxiously looking forward to that day.
+I'm an experienced-but-not-power user.  Right now my Excel tasks are focused more on formatting and automation, and less on data processing/analysis/visualization.  Am I correct that the "power tools" you're referencing are more (strictly?) for the latter?
+Consider the problem in the following recent post.
+
+https://www.reddit.com/r/excel/comments/4owe2p/creating_overlapping_calculation_windows/
+
+A pain to solve just using formulas. It may be possible to solve using Power Query, but it'd be interesting to see how understandable such a solution would be.
+> I understand that many people use Excel 2007 (or earlier) or may be limited by company policy, but I would estimate that ~85% of visitors to this subreddit use Excel 2010 and up. These redditors should be made aware of newer techniques. These tools solve at least 30% of all posts on this forum with a few clicks of the mouse. Power Query alone has eradicated the need for VBA in 90% of workflows I've developed since its release several years ago.
+
+Dude, you're just pulling numbers out of the air here.
+Seconded.
+This is the big problem. In Excel 2003 and prior days, it was hard ensuring everyone had the Analysis ToolPak or ODBC add-ins loaded. One thing which VBA can do through Workbook_Open event handlers is to ENSURE the expected environment exists.
+
+The next big problem is that most people using Excel barely understand simple formulas. My favorite example of this is formulas lile  =SUM(B3+D3). People unclear on the concept of simple arithmetic formulas would be utterly lost using Power Query.
+
+Finally, pivot tables and Power Query are fine for database-like processing and numerical aggregation calculations, but they suck at complex string handling. Not that Excel without VBA is all that great, but it handles many things which Power Query can't. Add user-defined functions implemented in VBA and using VBScript regular expressions, and you have text manipulation capabilities which Power Query can't match.
+Yeah I'm fairly skeptical.  Way I see it there are 2 excels.  There is Excel for the business world, and excel for the science world.  I see stuff all the time for excel and its always coming from the business perspective (which, hey no problem it's the dominant userbase).  This seems a lot like something very useful for the business world, but not that good for the science world.  The stuff I do in excel goes so far beyond simple aggregate queries and 100k rows etc.  Honestly some of the queries I write take 10+ minutes to run in an actual relational database, I can't imagine what that would do if I tried to do it in excel.
+You bring up some great points which I would be happy to address -
+
+I note that you are consuming 800,000 records of data.  If you were to create a Power Pivot data model then you could consume 800,000,000 records of data (if you have ~12gig of RAM) and perform your analyse in <5 seconds.  Yes, that is ~1 billion rows, inside excel, on your laptop, performing advanced calculations in less than 5 seconds.
+
+To your first question - Power Pivot is just that, an analyses engine (DAX stands for Data Analyse E*x*pression).  It is an incredibly powerful engine that consumes data and provides insight into it.  It does not do recursive calculations like Excel Solver, e.g. an optimization engine. It can only do normal calculations similiar to Excel's "cell" capabilities.  Interestingly, it was originally designed specifically to integrate with SQL Server, which I note is in your workflow, which performs the heavy lifting, i.e. running complex calculations prior to loading into Power Pivot to draw insight.
+
+To your second and third points.  Microsoft is directing all of its energy to these tools.  These tools are at the forefront of it's roadmap (read: Power BI) and will continue to grow over time.  Using this combination is not only quicker (orders of magnitude faster than a standard SQL Server) but it is guaranteed to stand the test of time.
+
+To your last point.  I'd be more than happy to consult on any complex analyses using these tools.  If you would like to message me then we can discuss this further.
+
+Full disclosure - I am not a geneticist and therefore cannot speak to the complexity of your calculations.
+
+Edit**  I totally forgot to mention. You'll eventually be able to execute R scripts that are calculated in database (SQL Server 2016 only) via Power Query.  Somehow I think this might be right up your alley! :)
+Tangent: have you been burned by Excel interpretting some gene sequences as dates?
+This is a little off-topic but please put your vote towards this:
+
+https://ideas.powerbi.com/forums/265200-power-bi-ideas/suggestions/7546645-power-bi-designer-for-mac
+
+Power BI is a separate tool from Excel but it combines Power Query and Power Pivot.  If this gets enough votes then they create a mac version of Power BI.  If they do, it won't be long until Excel receives mac versions of Power Query and Power Pivot :)
+This is a loaded question so I'll try to keep it short!
+
+Correct, Power Query can pull data from the web and many other sources (e.g. your emails, facebook account, Google Analytics etc...) but one of its best features lies in transforming data in the *current workbook*.  This is where users on this subreddit will see it shine.
+
+Have you ever wanted to unpivot columns in a table?  Excel can't do it.  VBA can but it requires half a page of *ugly* code.  Power Query can do it in about 3 clicks.
+
+Have you ever needed to reconcile something in Excel?  It can be a pain to setup.  Power Query can perform what is called a "Full Outer Join" that reconciles both sides, i.e. A to B and B to A, in seconds.
+
+It can merge wide tables of data into a few clicks without having to write 50+ VLOOKUPs.
+
+A bit of an unknown feature is it can do all of these transforms and load the results straight to a pivot table so it doesn't increase the size of your workbook.  You'll have to untick "save source data with file" though!
+
+The best part is that Microsoft releases monthly updates to Power Query... Want to know what was updated in VBA in Excel 2016? ... a Power Query object model **drops mic**
+Power Query I find gives a great user experience. However, I totally understand where you're coming from with Power Pivot!
+Interesting... Do you mind telling me which version of Excel you use?
+
+I believe they made dramatic improvements in Excel 2016 that may prevent some of the issues you listed.
+Power BI is new but it's taking parts of the market at incredible rates.  It'll be interesting to see where it's at in a year or two!
+My suggestion is to become proficient with Power Query to begin with.  PQ is a tool that can be used in many more scenarios than Power Pivot (DAX).
+
+However, if you'd like to take the leap into Power Pivot and attempt some dimensional data modelling then please go for it!  It's a very rewarding experience that will open up doors into other technologies such as SSAS, SQL Server and Power BI/Tableau.
+If the JS data is encapsulated by <table> tags then yes, it can scrape it with ease.
+Automation is what these tools focus on. Can you give me a few examples of what you automate and perhaps I can suggest how these tools may help?
+I tried my best to estimate based on some of the (few) posts that I've seen and a general knowledge of the Excel user base.  The numbers are not precise by any means.
+
+However, I can attest to how much these tools have changed my design practices in Excel.  These days I usually only use VBA's events to refresh PQ scripts, for example on worksheet_activate.
+Thirded. 
+Is there a difference between "=B2+B3" and "=Sum(B2+B3)"?
+It's not that bad if they're well written, even large datasets with complex (1000-3000 line) scripts usually finish within a few hours or overnight (you'll want the 64-bit vesion of excel/windows, of course). It's got a bad rep since so many people code for the GUI and use clipboard commands and the like, but it can run OK and, more importantly, provides easily portable code that anyone can run without having them install python or something. But, I agree about the assumptions about business needs vs scientific.
+Great points and spot on.  Always pick the right tool for the job.  Power Pivot and Power Query are not designed to perform recursive calculations.  These should always be performed in database or in an external purpose built engine, e.g. R.
+
+I can't imagine anyone doing this in Excel via VBA...
+I tried to install it (Windows 7, excel 2013, 64 bit, 32 gb ram) but it failed because I've still got I.E. 8 for one of our old legacy programs. I'll have to try it on a different machine. 
+Not sequences directly, but sample identifiers, haplotyping designations, basically everything else. The thing that really kills me there is that even if you change the type to text to force it not to be dumb that it does it anyway every time you try to do a find and replace on them or something. It drives me a bit crazy. 
+Not sure will have to check.  I think 2010 or 12
+Fourthded.
+Nope :) 
+The SUM call is unnecessary. Maybe =SUM(B3) would have been clearer.
+I may give it a shot, I'm curious what it will do to be honest.   My ugly queries aren't particularly long, they are just incredibly ugly.  There was one that's only about 6 lines long but takes forever because it's a bunch of nested subqueries doing a numerical integration of a large (2k+) series of experiments each of which has a few hundred values in them.
+Actually fair point, it's not done in VBA, at least not really.  Kind of forgot that.   The main use of VBA for me is in doing the pre calculations of complicated stuff in the txt and csv files that can't easily be handled with aggregate queries and then using ODBC to feed that into a database.
+Modded.
+
+____
+
+> include a link on the right that directs users to an MS Power Pivot, Power Query and (maybe) Power BI link.
+
+You're right that there's a lack of Power Tools being used in the sub.
+
+If we had a library of resources (even a small one) where everyone could learn from then we'd happily advertise it on the side-bar and the front page.
+Oh phew, had me worried I was missing something for a second! Thanks!
+or =SUM(B2:B3)?
+Are you stuck with Excel? MATLAB is beastly expensive, but I've heard good things about Scilab as a reasonable open source replacement.
+
+Excel works okay for the stuff I do now (data analysis for some engineering stuff - small amounts of data) but I wouldn't have wanted to touch it for the analyses I did in the neuroscience world (lots and lots of linear algebra/matrix math... a.k.a. what MATLAB was built for)
+> Modded
+
+o snap...
+Nope! Just some good old associative property
+=SUM(B2:B3) is fine. Almost the same as =B2+B3. SUM() would skip cells containing text. + would include them, converting text to numbers if possible, returning #VALUE! otherwise.
+
+OTOH, =SUM(B3+D3) is redundant. B3+D3 performs the addition, so SUM is unnecessary.
+
+Looks like unnecessary redundancy is a more wide-spread preference than I had figured.

@@ -1,0 +1,60 @@
+Tomorrow, (4-21-15), the real date will exactly match up with the Excel format (days since 1-1-1900): 42115
+This is why I subscribe to /r/excel
+Post this over at /r/mildlyinyeresting tomorrow. They might get a kick out of it. 
+Advantage of being Australian... Reading this en route to work. I'm gonna be king of the nerds! 
+What a great example of the [Fixed-Point Theorem!](http://en.wikipedia.org/wiki/Fixed-point_theorem)
+
+*yeah okay maybe not whatever*
+This is cool, thanks for that!
+[deleted]
+The next time this will happen is 5/27/2044 ( using US dates mm/dd/yy) it has never happened before (excel only supports dates from 1/1/1900 forward) and will never happen again after 2044.
+
+The Europeans missed both of their chances to celebrate this day (as they happened before excel was released), September 7th 1921 and February 29th 1980, and won't have another chance to see this anomaly again until November 11th 2614
+Edit: Typo, Europeans will have to wait 15 days more than what I said before. the actual date is Nov 26th 2614
+I have been starring at this for 3 minutes and still dont get it. I must be really stoopid. 
+Looks like I won't see it again until 2614. Enjoy your day you smug american bastards.
+A mild kick
+Americans write the date wrong though. 
+Disadvantage of being English... this doesn't work :(
+Excel stores fractions of a day (hours, minutes, seconds, etc.) as decimals, i.e., 4/21/2015 6:00:00 am is 42115.25
+> will never happen again after 2044.
+
+How did you figure that out? I've been trying to solve this for a bit.
+Just you and the Morlocks then I guess.
+[deleted]
+This is how I did it:
+
+    Sub blah()
+        s = CDate("1/1/1900")
+        For d = 0 To 2958463
+            pdate = DateAdd("d", d, s)
+            sdate = CLng(pdate)
+            If sdate = CLng(Month(pdate) & Day(pdate) & Right(Year(pdate), 2)) Then Debug.Print "(US) Match: " & sdate & " = " & CDate(sdate)
+            If sdate = CLng(Day(pdate) & Month(pdate) & Right(Year(pdate), 2)) Then Debug.Print "(UK) Match: " & sdate & " = " & CDate(sdate)
+        Next
+    End Sub
+
+Column A: Dates as serial numbers.
+
+    A1: 1
+    A2: =A1+1
+
+Copy/paste A2 down the column.  
+
+Column B: Dates as dates (for reference).  Copy column A.  Paste as values in column B.  Format Column B as date.
+
+Column C: Comparison logic.
+
+    C1: =TEXT(MONTH(A1),"#") & TEXT(DAY(A1),"##") & RIGHT(YEAR(A1),2) = TEXT(A1,"#####")
+
+Copy/paste C1 down the column, then copy column C and paste as values (to prevent Excel slowdown caused by filtering a column that has formulas)
+
+Select all columns.  Autofilter.  Select TRUE from Column C. 
+
+~~It's because you can store the entire date and time as a single data point~~
+
+I'm just realizing you are talking about Unix time, which is also a single data point, and an integer, which presumably takes less space than a floating point decimal.  
+
+So, I don't really know.  I'm assuming there's some historical reason they chose decimals instead of seconds -- compatibility with an older program like Lotus maybe?  Maybe the ability to store time units smaller than a whole second?
+
+

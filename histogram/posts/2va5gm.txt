@@ -1,0 +1,189 @@
+In your opinion, what are some of the best function combinations that are mostly outright superior to more widely-known functions (e.g. INDEX-MATCH vs. VLOOKUP/HLOOKUP)?
+If you like the right/left/len functions, you should always consider the "[find](http://www.techonthenet.com/excel/formulas/find.php)" function part of your arsenal.  It allows you to find a specific character in a string, and you can pair that with right/left functions, especially when cleaning up data.
+
+So if you have a bunch of text like this:
+
+    A1: textshort_xyz
+    A2: text2_abc
+    A3: textloooong_123
+
+obviously the text before the underscore are all different lengths, so you can find the underscore's position in the string and only take the left() function up to the underscore:
+
+    =find("_",A1,1) 
+    returns: 10
+finds the underscore, returns the number within the string.  So in "textshort_xyz" that return would be 10 for the 10th character.
+
+So you can couple it with left/right... 
+
+    =left(A1,find("_",A1,1)-1)
+    returns: textshort
+
+    drag down result:
+    A1: textshort
+    A2: text2
+    A3: textloooong
+
+that will return "textshort", "text2" and "textloooong" all with the same formula.  [note: the -1 is to remove the actual character that you are finding, otherwise it would return "textshort_"]
+
+Obviously if all your text ix the same length then you can just do left/right functions, but for varying text it's a fantastic way to clean your data.
+One of my favourites is:
+
+    =choose(sign(A-B)+2,"Less","Equal","More")
+
+instead of....
+
+    =if(A>B,"More","Less/Equal")
+
+On it's own it doesn't look like much, but then if you add another IF() to split out "Less/Equal", it starts to look better using SIGN.
+As a controller, I'm betting your people hate when there are additions made to the G/L.  Keep a central spreadsheet of your G/L line-items, categories, allocation methods, etc., etc., that you update regularly.  Have all your other tools point to it (KEEP BACKUPS!!!)
+
+Now, in each of your other tools - use the 'offset' function to define your ranges (dynamic named ranges).  This way, you can paste in your complete ledger (irrespective of how lengthy it is), Excel will know the complete range to analyze, and since you now have all your tools pointing to a single G/L library, all your other stuff updates without having to spend development time on multiple tools.
+SUMPRODUCT and SIGN for conditional sums using OR criteria, e.g.,
+
+    =SUMPRODUCT(SIGN((A3:A22="x")+(A3:A22="y")),B3:B22)
+
+Given numerical limitations in Excel's GEOMEAN function, more robust to use
+
+    =EXP(AVERAGE(INDEX(LN(X3:X1002),0)))
+
+Note: some Excel functions don't treat ranges as arrays, thus requiring array formula entry. In many cases, wrapping those function calls inside INDEX(function_call(...),0) [1D] or INDEX(function_call(...),0,0) [2D] returns an array result which Excel treats like an array constant. One unfortunate exception is Excel's IF function. If you expect an array result from IF, you have to use array formula entry.
+
+Finally, IFERROR is a very useful function, but it's even more useful if you let it propagate some error values. For instance, there's seldom a good reason to trap anything but #VALUE! and #N/A errors. So best to use partial trapping, e.g.,
+
+    =IFERROR(A11,CHOOSE(ERROR.TYPE(A11),#NULL!,#DIV/0!,"--",#REF!,#NAME?,#NUM!,"--"))
+I don't think that functions are really superior -- some are more powerful, but everything has its place. For example, while INDEX/MATCH is more powerful, sometimes, VLOOKUP is all that's needed to get a job done; given the choice, I'd rather use the latter for speed and ease of understanding (for anyone else looking at my spreadsheets).
+
+One that I like though is to use VLOOKUP rather than a nested IF for multiple conditionals. I also like the SMALL function, rather than the MIN function because it gives you a lot more control (eg, the ability to look for the nth smallest number in an array).
+
+
+You can do some pretty advance stuff with the SUMPRODUCT() function, which takes column references (or row references) as arguments.
+
+    =SUMPRODUCT(<col_1>,<col_2>,...,<col_n>)
+
+The above will simply multiply common row cells from each column **and then sum the products**. However, the real power of SUMPRODUCT() is in its ability to handle column conditionals. There are probably cases where this isn't equivalent, but you can also multiply terms instead of using commas. I always use "*" and lead with "--".
+
+Note: you can use wildcards with the SEARCH() function.
+
+Another note: I really recommend using "Excel tables" because this will allow you to take advantage of the powerful structured references syntax.
+
+
+favorite color|Country Code                       
+--:|--:
+orange|US
+blue|UK
+black|MX
+yellow|NL
+orange|US
+
+This formula will tell you how many times "orange" appears in column 1.                          
+
+    =SUMPRODUCT(--ISNUMBER(SEARCH("orange",[col ref])) >> 2
+
+This formula will tell you how many times "US" appears in column 2.
+
+     =SUMPRODUCT(--ISNUMBER(SEARCH("US",[col ref])) >> 2
+
+Note: you have to use the "--" operator in single conditional formulas. This will convert the boolean result to an integer.
+
+Bi-conditional
+
+    =SUMPRODUCT(--ISNUMBER(SEARCH("orange",[col ref])*ISNUMBER(search("US",[col ref])) >> 2
+
+
+Fun fact, all of these results are two, but that is just a coincidence.
+
+EDIT: basic syntax for the SUMPRODUCT()+ISNUMBER()+SEARCH() type formula.
+
+    =SUMPRODUCT(--ISNUMBER(SEARCH(<condition 1>,<col 1>))*ISNUMBER(SEARCH(<condition 2>,<col 2>)))
+
+Anyway, this is just an introduction, but I think you'll find that this function will help simplify certain problems.
+
+
+EDIT: just clarified what the most basic usage of SUMPRODUCT() does.
+
+
+A lot of good stuff has been said already, I'm a big fan of array formulas and the fun stuff you can do with them, it's not always efficient though. In terms of efficiency, I like to break it down into more formulas, more, smaller, steps that are faster than massive formulas. It doesn't yield the same level of satisfaction lol but it often performs better. 
+
+
+One thing I'd just add to what has been said already is using index: index or reference: index instead of offset. One of the nation problems of the offset formula it's that it's volatile, so if you have a lot of them or use them in computationally intensive formulas, they can slow down the spreadsheet a lot because they recalculate all the time. Index: index doesn't and isn't volatile, so in the 99% of cases that you can replace it, it's a good idea to do so.
+I started using SUMIFS and SUMPRODUCT to do some things that used to be used with array formulas.
+Combine Find (case-sensitive) or Search (case-insensitive) with Substitute and you can replace the nth occurrence of anything and use that as your MID LEFT LEN anchor point. Great for parsing bits of URLs out in web analytics reporting 
+This is fantastic thank you! 
+I really wish Microsoft would add split() as a worksheet function. It would clean up that find left right mess quite a bit.
+or you could do it in one step using delimiting... ;)
+Interesting. So far, most of what I've had to clean up is usually at the end of the text string, so LEN works just fine. However, this sounds like the perfect solution if the cut-off point is somewhere specific within the text string.
+
+I need to commit that one to memory. Thanks.
+This one is nice!
+This is cool. I'm trying to think how I can use this.  I have some nasty nested if/then in VBA I'm using.  Everything works well, but I'd like to see if there is something more efficient or someway it helps make the code easier to read/change.
+
+Finally updated everything to IF/THEN/ELSE and saved about 10% of my lines of code.  I investigated SELECT/CASE but there is apparently no real advantage in speed as my nested statements don't go more than about 5 deep.
+Great suggestion. I should probably adopt this method more often. I've used OFFSET once or twice before, but not enough for me think of it every time I actually need it.
+
+This would probably correct some of my poor modeling practices. For example, when I'm linking my "tools" to a data dump (often G/L transaction history), I know the number of line-items will vary quite a bit. My lazy approach is to simply assign the lookup range to significantly more rows or columns that I'll realistically need just to guarantee that whatever I dump in there is captured. For obvious reasons, this isn't ideal, and I should actually adopt the method you outlined instead.
+Yeah, sometimes vlookup is all that is needed. Sometimes I like to use the match function with vlookup for the row count variable... adds some flexibility to the formula and is really easy to add in. 
+You make a fair point. I guess I try to stray away from VLOOKUP primarily because you're only allowed to use it with the first column. It's true that what you need to lookup often *is* in the first column, but just in case I want to add another column to the left later on, I just avoid it in favor of INDEX-MATCH. Part of it may be that I enjoy the practice of using INDEX-MATCH...
+SUMPRODUCT (--(... is by far my favorite function.
+I know what you mean. I was working on this project where the formulas just became unruly and downright nasty. Eventually, I learned enough VBA to populate my tables programmatically -- so much easier and less resource intensive!
+
+Very good point regarding volatile functions. I was trying to find this great article on the subject, but in the process found an even better one by [Chandoo](http://chandoo.org/wp/2014/03/03/handle-volatile-functions-like-they-are-dynamite/). Still got plenty to learn myself.
+How about text to columns?
+That would be great.  However, they would need to implement multi-cell outputs... which currently don't exist unless using arrays which 99% of people don't understand (and you need to know your output array size to do them).
+But that's not dynamic
+I have a little shiver every time I imagine nested IFs more than three deep.
+
+Have you considered boolean multiplication?
+
+    =CHOOSE(SUM(1,B2=TRUE,(B3=TRUE)*2,(B4=TRUE)*4,(B5=TRUE)*8,(B6=TRUE)*16),"All false","A-----","-B---","AB---"...)
+Select Case might not speed things up, but generally it greatly improves the readability of the code.  Probably not worth swapping it in for a current project if it already works and other people don't need to work with the code, but I'd recommend you keep it in mind for future projects.
+
+If you have very many ElseIf statements, that is when I suggest using Select Case instead.  Nested Ifs, not so much.
+Ooh, that's clever! 
+I'm with you on this one.  I always use Index-Match (or index-match-match) now.  I don't see any good reason to use vlookups anymore.
+Not dynamic. You have to run it with every change in input
+Not necessarily. I have a UDF that returns the nth item when split on a certain character. I'm sure MS could come up with some other user friendly and program friendly solution
+Exactly. That's why I like RIGHT/LEFT-LEN for the "trailing negative sign" problem. It's dynamic; I don't have to run it every time I copy in a new data dump...
+I would love to learn how I can potentially apply this. I will have to walk through how this kind of format works though.  What you've shown for example at the end looks like what I have to deal with but I don't know how to apply it to what I'm doing.
+
+Is it possible you could somewhat walk me through how this works when you can find a moment? It may or may not help to know that I am hidding or revealing ranges of rows (named ranges) based on criteria if each of the other named ranges are revealed or hidden at the time.  I have these all attached to check box form controls.
+
+In as best I can explain it..
+
+If Checkbox A = True Then
+    If Checkbox B = True Then
+        If Checkbox C = True Then
+            If Checkbox D = True Then
+                If Checkbox E = True Then
+(Named_Range_CheckboxA, Named_Range_CheckboxB, Named_Range_CheckboxC, Named_Range_CheckboxD, Named_Range_CheckboxE).Hidden = False 
+ELSE
+(Named_Range_CheckboxA, Named_Range_CheckboxB, Named_Range_CheckboxC, Named_Range_CheckboxD, Named_Range_CheckboxE).Hidden = True
+
+And I go through the whole thing to cover off all combinations of when some of these Checkboxes are false, then hide or unhide the appropriate Named Ranges referring to those I'm connecting to the form control.
+
+Recently I at least changed what I could into IF/THEN/ELSE IF to consolidate a few lines worth of End If's and saved about 10% of my lines of code.  I would love to learn how to use a more streamlined way to do nested if's.  I only have about 3 sections that are about 5 deep but I have some 4 deep and many 3 deep.
+
+I've been dwelling over this for months now and looking online and youtube and here.  If I've seen this option already, I've failed to grasp it and how I can use it.  I apologize for the formatting of this post, I'm not sure how to make it look nicer.
+That way if the lookup reference column number changes your formula flexes with it :)  Nothing worse than adding columns and screwing up your vlookups!
+I'll explain how it works with an example of three variables.
+
+    =sum(A=True,(B=True)*2,(C=True)*4)
+
+These are like the digits in binary. If C is true, B is false and A is true, it returns =sum(1,0,4), i.e. 5. There's no other way that it can return 5. Thus all of the possible combinations of true/false are reduced to a set of eight numbers.
+
+All that remains is to sort your outcomes into the correct order for choose or index. For this task, it may help to create a table on scrap paper of the outcomes, in order to assign them to the correct numbers.
+
+In your example though, you have five inputs with five outputs that appear to correspond exactly to each other. Does this all have to be in the same formula? It looks as though you could just do five IF()s, not dependent upon each other?
+
+    =IF(A,hide A, unhide A)
+    =IF(B,hide B, unhide B)
+    ...
+
+oh cool that's pretty awesome :)
+
+thanks
+I generally just do vlookup("whatever",range,columns(range),0) (range being the range, whether or not it's actually a named range.)
+Thank you for this explanation.
+
+I have to deal with If A is true B C are false but D is true then I need it to Unhide A and D but not B and C and all possible combinations like that.  I basically need 5x5 IF/THEN's/ELSE IFS etc.. which is what I'm trying to make more efficient if possible.
+
+I'll try to keep exploring how I can use this CHOOSE/SUM concept you've shared. I'll have to take some time to sit down and figure out how this works.  Making a map like you say is a great idea.  I'm doing this all in VBA.

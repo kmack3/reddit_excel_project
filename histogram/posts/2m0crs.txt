@@ -1,0 +1,32 @@
+Make graphs display empty cells as gaps and not zeros
+Put  #N/A in the empty cells to get them to appear as gaps
+Try putting the formula =NA() into the blank cells, this puts a value of #N/A, which excel will then output as gaps in the graph.  It's not pretty in the datasheet, but it works.
+Are you sure the blank cells are actually blank?  Is there a chance that they actually have a space in them?
+
+There's a guy in my company that clears cells using the space bar instead of backspace or delete.  He's occasionally the bane of my existence when I'm trying to format things nicely.
+Is this a scatter plot with lines added? If so try a line graph with line points shown. These act differently.
+Paint the color of the missing data points as transparent
+This! Took me forever to figure out. I switched from 2003 (which treats blanks as blanks) to 2010 (which treats blanks as 0 on graphs) recently at work, and little changes like that are infuriating! 
+Yep this works! It screws up other numbers being calculated, but as for the graph it works! Thanks for the help!
+
+    
+    Solution Verified
+    
+I'll try this when i get to work tomorrow and post my results! Thanks for the help!
+This works too, putting =NA() or just #N/A works. It breaks calculating averages or Max/Min but the graph works
+
+    
+    Solution Verified
+    
+I just double checked that. I selected the supposed blank cells and used the 'clear all' tool which should do the trick. 
+
+The Graph still shows the blank cells as zero.
+This is a graph with three scatter plots, and two linear trend lines on the blue and green data sets
+Great! Can you help with ClippyPoints by replying with "Solution Verified"?
+
+Thanks
+I think you have to have #n/a for gaps instead of blanks.
+Yes, So change it to a line graph instead of a scatter plot this should then skip the blanks for you.
+That makes my graph look way off. 
+
+http://i.imgur.com/JQtXgcZ.jpg

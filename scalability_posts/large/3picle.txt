@@ -1,0 +1,98 @@
+large
+3picle
+[Question] Large Excel Function not working.
+
+So I have a large function that is supposed to return a number.  It worked fine until I started to add in logic about a date.  Now it just returns nothing.  Here it is:
+
+    =IF(AND(C1485>="7/1/2015"+0, C1485<="7/31/2015"+0), H1485/SUMIFS($H:$H,$D:$D, D1485,$A:$A, A1485), IF(AND(C1485>="8/1/2015"+0, C1485<="8/31/2015"+0), H1485/SUMIFS($H:$H,$D:$D, D1485,$A:$A, A1485), IF(AND(C1485>="9/1/2015"+0, C1485<="9/30/2015"+0), H1485/SUMIFS($H:$H,$D:$D, D1485,$A:$A, A1485), "")))
+
+Where am I going wrong?
+
+
+-------------
+It looks as if none of your criteria are being met, so it's displaying the "" (blank) that's set if everything is FALSE. To clarify, whatever value is in cell C1485 is currently not >= 7/1/2015 or <= to 9/30/2015, so all the AND statements are receiving one TRUE and one FALSE return. This makes the result of the AND statement FALSE, since it requires all arguments to be TRUE in order to count as TRUE. 
+
+Can you provide an example of mock data to show what the setup looks like and what you're trying to accomplish?
+
+EDIT: Clarification
+-------------
+Try switching the dates out with the actual cell values in the Excel dating system.
+
+So 7/1/2015 would be 42186, 8/1/2015 would be 42217, etc.
+-------------
+Hard to tell without reviewing your actual table.
+-------------
+This formula works for me, but only if I make sure that all the ranges have values. It's possible to get a divide by 0 error if the denominators here come out that way -- it's the job of the formula to make sure that does not happen.
+-------------
+Yeah, good catch.
+-------------
+Also, the TRUE portion of all your IF arguments is exactly the same. Why the decision to break it into three pieces? Without seeing your data, I can't tell you why it's displaying a blank other than the formula's criteria isn't being met at all. However, This is a shorter version of your current formula that would produce the same result. 
+
+    =IF(OR(AND(C1485>="7/1/2015"+0, C1485<="7/31/2015"+0), AND(C1485>="8/1/2015"+0, C1485<="8/31/2015"+0), AND(C1485>="9/1/2015"+0, C1485<="9/30/2015"+0)), H1485/SUMIFS($H:$H,$D:$D, D1485,$A:$A, A1485), "")
+-------------
+Can't upload files at work unfortunately.
+-------------
+When you evaluate the formula, Excel does the conversion, so that's not the issue. Plus it would display an error if it were having trouble with it. 
+-------------
+The true portion will change.  I wanted to make sure this date part worked before I jumped into a different problem.
+-------------
+Can you describe it without revealing any sensitive information?
+
+For example: "Column A has a set of numbers" "Column C is all dates". "This formula is being copied for every row" or "This formula will reside in one cell"
+
+Stuff like that. 
+-------------
+Ah, I see. Well the date portion, as far as Excel examining the syntax and not throwing an actual error, seems to be working fine. If you took just the AND piece and give it its own cell, then place a value in the target cell, it returns either TRUE or FALSE. So you know the structure is fine. It's whether or not your criteria is being met. 
+-------------
+ok.  So column C is dates only, besides a column header at the top (Process Date).  The formula is for every row.  H is volume (just a number).  D is the type of work being performed.  A is employee name.
+
+What I want to do is find the % of volume in each row.  This % of volume is going to be a % based on each month (ex. July will total 100%, August will be 100%, etc.).  It's also going to be based on employee and type of work in the same manner as the months are.
+
+End goal is each row will tell me something like this:
+
+John was picking raspberries in July.  The amount picked was equal to 33% of the total amount of raspberries picked by john that month.
+
+I am terrible at explaining things, so I am sorry if this doesn't make sense.
+-------------
+This makes sense. I'll throw something together. Should only take me a couple of minutes.
+-------------
+The formula below can be placed in every row and will return the percentage of H in relation to the sum of all rows that have the same Name (A), Month (C), and Type (D) as the row it is pasted into.
+
+Rounded to the second decimal place:
+
+    =ROUND(H2/SUMIFS(H:H,C:C,">="&DATE(YEAR(C2),MONTH(C2),1),C:C,"<="&EOMONTH(C2,0),D:D,D2,A:A,A2),2)
+
+Unrounded:
+
+    =H2/SUMIFS(H:H,C:C,">="&DATE(YEAR(C2),MONTH(C2),1),C:C,"<="&EOMONTH(C2,0),D:D,D2,A:A,A2)
+
+    
+-------------
+solution verified
+-------------
+trying it now.  So far it gives the #div/0!.  I am trying to break it down to see where the error is at.
+
+edit: I assume I just copy/paste the formula and change nothing, which is what I did.
+-------------
+OK, it's working now.  I found out that my date column is all messed up.  This is from a SQL query I made in Access.  The dates are formatted oddly as follows:
+
+" 7/ 1/ 2015"
+
+or
+
+" 7/11/2015"
+
+Excel doesn't recognize the dates until I highlight it, go into the formula bar and press enter... I will try and find a quick fix for this.
+-------------
+Glad I could help. It was a fun distraction from work. 
+-------------
+
+You have awarded one point to _bitchpotatobunny_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+In the future, please read the submission guidelines and please do not use the [Question] tag as your post may be removed. 
+-------------
+You can highlight the range and do a Replace All. Just replace "=" with "=" or "/" with "/". Basically any one character that exists in every cell in the range, and just replace it with itself. This is the same as manually going into each formula bar and then pressing Enter.
+-------------
+right on.  Thanks a bunch!  The formula works perfectly!

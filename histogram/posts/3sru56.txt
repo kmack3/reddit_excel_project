@@ -1,0 +1,7 @@
+VBA loop help for a beginner
+Gah, the R1C1 formatting is making my face hurt. Can you post what the formulas are supposed to be for each cell, or better yet upload the sample spreadsheet to dropbox or something? I could probably write out the loop for you fairly quickly but it's 5:30AM and my brain isn't working right. 
+The sticky on the front page: https://www.reddit.com/r/excel/comments/3sp9r6/simple_loops_in_vba/
+I'm in my bed so I can't type it out but there's a really simple For loop that'll do the trick. I'm sure someone would have answered you by the time I'm up and able to answer properly (for those sweet sweet clippy points) but if not I'll follow up here.
+You need some way for the macro to work out how many times it has to run. How do you the human know how many times to run it and when to stop? For example, is the data all in one big block and you run it once per row? 
+
+Also do you do anything between runs like selecting another cell or something, or do you just run the macro back-to-back hundreds of times?

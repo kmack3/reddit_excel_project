@@ -1,0 +1,195 @@
+Do you know of any good Excel pranks?
+Well, here's my "bad deed" for the day....
+
+Randomize the timer (remove this if your code already does it)....     Generate a number from 0-1, if it's greater than .5 see if the present day of the month is odd, if it is, see if we're in an even hour, if we are, see if the minute is odd.... if it is... BEEP!
+
+        Randomize Timer
+        If Rnd(1) >= 0.5 Then ' 50% chance
+                ' 0 = Odd, 1 = Even
+                If Day(Now()) Mod 2 = 0 Then
+                        If Hour(Now()) Mod 2 = 1 Then
+                                If Minute(Now()) Mod 2 = 0 Then
+                                        Beep
+                                End If
+                        End If
+                End If
+        End If
+
+
+That will probably remain dormant for ages before it finally triggers.
+
+Could make it even more insane by rolling the dice a few more times.   Instead of 0 or 1... use
+
+      Int(Rnd(1) * 100)  mod 2
+
+Generate a random number, multiply it by 100, and drop the decimal, then MOD 2 (is it even?)...   So, then value and the RNG would have to be both Even/Odd in order to pass that if.
+
+Best of all, all this code will do it make the PC Speaker go "Beep".   Running the script, and suddenly your computer makes a single beep, with no error message, and no discernible cause.   They would have to think to Ctrl-F "Beep" to track it down, if they didn't just stumble on it.
+
+There are more "malicious" things you can do, but nothing that is as easy to place in the code and let remain dormant.   
+
+Opening a URL could generate an error, creating directories leaves "proof", ditto with creating files...
+
+Just make CERTAIN this doesn't make it to the customer, if one exists.
+It's not a coding prank, but I'm a big fan of putting a user's name in the auto-correct for Office, then setting the replacement for it to 'Butthead'. This will apply to all of the Office applications, and it may be months before they realize it.
+This is actually the geekiest thread in this subreddit.  Love it.
+For something a bit more insidious, when they lock their computer, turn on Scroll Lock.
+
+Turn it on and try navigating around Excel.   If you don't know about it, that can really stymy you.   Had users call in all enraged about "Excel not working right"
+I dont have it accessible right now but you can use vba to change the background of windows.  So I created a macro which would infect the user with a specific environ name (to target one user out of a group of users of a specific network file) and the infection copied an .xla to XLSTART.  The .xla looked at a specific network folder and copied a picture to the users computer and would make this their desktop background.  So each time they opened excel, the xla would fire and would copy down any new image I would place put out on the drive.
+
+Months of fun were had
+
+edit: also this is an oldie but many laughs where had with these pranks
+http://www.mrexcel.com/forum/lounge-v-2-0/27058-good-excel-practical-jokes-pranks-mean-tricks-etc.html
+This makro randomly changes the font of any used cell in the active sheet to a random installed font:
+
+    Public Sub Analysis_No_12_3()
+        Application.ScreenUpdating = False
+    
+        Dim c As Range
+    
+        Dim fontlist As CommandBarControl
+    
+        Set fontlist = Application.CommandBars("Formatting").FindControl(ID:=1728)
+    
+        For Each c In ActiveSheet.UsedRange.Cells
+        
+            c.Font.name = fontlist.List(Int((fontlist.ListCount - 1 + 1) * Rnd(Time) + 1))
+        Next c
+    
+        Application.ScreenUpdating = True
+    
+    End Sub
+Here is a fun one I recently used on my boss, he's a good sport and still just about crapped his pants when he realized what happened.
+
+What this does is, when the boss opens his excel file - it prompts him with a message, "Does <employee> deserve a promotion?" and gives him a yes/no option. If he chooses No, it closes the excel. If he chooses Yes, it says, "Great answer! An email confirmation has been sent to <employee@email.com>" and then it actually opens their outlook and emails a confirmation email to the email listed.
+
+My boss didn't realize it had actually emailed me a promotion confirmation, so it was a good laugh once he realized it - but I tried not to make it look too official, so he wouldn't get upset that it happened.  Cheers!
+
+    Private Sub Workbook_Open()
+        Dim myOutlook As Object
+        Dim myMailItem As Object
+    
+        Response = MsgBox(prompt:="Is John Smith deserving of a promotion?", Buttons:=vbYesNo)
+            If Response = vbYes Then
+                MsgBox ("Great answer, an email of your promotion confirmation has been sent to John.Smith@pranksarefun.com!")
+                       
+        Set otlApp = CreateObject("Outlook.Application")
+        Set otlnewmail = otlApp.CreateItem(olMailItem)
+        With otlnewmail
+            .To = "John.Smith@pranksarefun.com"
+            .CC = ""
+            .Subject = "Congratulations on your Promotion!"
+            .Body = "John Smith," & vbNewLine & "Your promotion request has been accepted, Congratulations!" & vbNewLine & "-Boss"
+            .Send
+        End With
+  
+        Set otlnewmail = Nothing
+        Set otlApp = Nothing
+        Set otlNSpace = Nothing
+        
+            Else
+                MsgBox ("I'm sorry, you have selected the wrong answer. Goodbye.")
+                Application.Quit
+                    ThisWorkbook.Save
+        End If
+    End Sub
+Could you have it open a hyperlink after a random number of seconds and then "full screen" it...
+
+Something tame like [link](http://hackertyper.net/135120784493)
+
+Or something worse.. >_<
+Oh, and to counteract my bit of chaotic evil there..
+
+[The File System Object(FSO) is damn handy to be aware of.](http://www.w3schools.com/asp/asp_ref_filesystem.asp)
+Set the Excel options so that every time you press enter the cursor goes up or to the left. 
+
+Or change the Normal style from General to ;;;    Nothing will appear on the screen!
+Can VBA set system volume?
+
+Periodically setting volume to max would fuck me right over...
+
+You'd click a youtube link and the whole office would know lol...
+Set cells to a custom format of ";;;"
+
+It's a step further than setting the text to the color white. If it's white and you highlight over it you can see the text. ";;;" codes to not display any text within a cell, at all. The only way to tell that cell is populated at all is to select the cell and look in the formula bar.
+
+I actually use this when I want to clean up appearance (such as a concatenation of cells which checks for duplicate entries). I don't need to display the duplicate entries, but conditional formatting still works when they exist. 
+
+Regardless, in the right situation you could probably drive someone crazy.
+I was thinking of a prank where anytime Excel is opened the code will go into the recent documents and open excel files, move data around, change data around, save the file(s) and move on.  
+
+I was thinking it could be installed in the users personal macro workbook so it would run everytime excel was opened.  
+Instead of beeping, open the CD Tray
+
+    Declare Sub mciSendStringA Lib "winmm.dll" ( _
+        ByVal lpstrCommand As String, _ 
+        ByVal lpstrReturnString As Any, _
+        ByVal uReturnLength As Long, _ 
+        ByVal hWndCallback As Long) 
+  
+    Sub OpenCDTray() 
+        mciSendStringA "Set CDAudio Door Open", 0&, 0, 0 
+    End Sub 
+That is actually evil...
+I really like this one! 
+Awesome!  Didn't even know the "Beep" functionality existed.
+Ooh, lots of fun things in here!
+Heh, slight modifications and you can create a Comic Sans bomb.
+
+    Dim ws As Worksheet
+    For Each ws In Worksheets
+        ws.Cells.Font.Name = "Comic Sans MS"
+    Next
+Oh, this code gets placed in the "ThisWorkbook" spot on VBA. (I used it on the company Time sheet, so he didn't have much choice but to say yes eventually! Bahahaa)
+Ah, yes.  
+
+    ThisWorkbook.FollowHyperlink "URL"  
+
+Also, random numbers in VBA seems like it has crazy syntax, but  
+
+     Variable = Round((Rnd() * (100 - 1) + 1), 0)  
+
+Or alternatively  
+
+    Int((upperbound - lowerbound + 1) * Rnd + lowerbound)
+
+Seems like it gives you a pseudorandom number between 1 and 100.  Good for somewhere in the beginning of the camo code to declare a variable that seems like it belongs, then later checking it's value to decide if you want to execute the prank code.
+How do you do that in VBA?
+
+My current delivery system is via a few shared templates that get actually updated every couple of weeks.  So whatever prank code I insert has to be relatively small and easily overlooked.  
+
+Also, without some obfuscation, this prank would get noticed immediately and rectified before anything else happened.  It would have to be something like every 20th-50th "return" the cursor moves the wrong way.
+If you want to delve into API calls... 
+
+http://www.pcreview.co.uk/forums/api-commands-turn-volume-control-t1008148.html
+Probably not.  And if so, I highly doubtI could pull that off without going to my co-worker's computer and including libraries he does not already have included.
+That moves from harmless to "fire-able offense"
+The amount of havoc that would wreak is pretty tremendous, especially if the changes it made were minor.
+
+Ie in a financial model Find replace all '1%' with '(1+RAND())%'
+
+
+
+
+That certainly would be annoying, but a little less harmless than I would like.  There is potential for actual data damage, rather than annoying "How'd that get there?"
+What about Beeping and then 5 seconds later opening the CD tray.... 2 out of 3 times....
+
+They'd be sitting there waiting for it to open... It'd be like Pavlov's dogs!
+
+I feel like the kid from the Old El Paso add...
+
+EDIT: SO I am going to do this to my boss... the XLSB file on our system hides in this directory:
+    C:\Users\Kieran_n\AppData\Roaming\Microsoft\Excel\XLSTART
+
+Can anyone tell me whether a module inserted in that will catch the BAWS when they log into the VPN as well as when they log into a work terminal?
+
+To clarify we can log into any computer on the network and get the same Docs/Pics/Video etc folders...
+
+i love the beep, but opening the CD tray, inspired!
+Ah, ok. Missed that part about having to be in VBA. I don't know how those changes could be implemented by VBA.
+
+On the cursor movement, most users I find don't know where the control is. They'll probably find it sooner or later, but it would be fun watching them for that 20-50th time...
+I store my addins in the equivalent folder structure (Windows XP) and they are available when I remote access in to my computer.
+Set it up so for an incrementally faster beeping that leads to the CD tray opening...  Like an action movie bomb sequence.

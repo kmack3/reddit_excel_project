@@ -1,0 +1,195 @@
+How do I make sure that other people don't take credit for my spreadsheets? Is there a tasteful way of putting in "Developed by" info?
+I think it's tasteful to put a statement along the lines of, "contact xxxx for support with this document. Created 2/4/15".
+> For example, i put together a dashboard yesterday for someone and they were credited with its creation when they sent it on to their boss. What do you think is a tasteful way of crediting your work without seeming obnoxious?
+
+Were you copied into the mailchain? If the manager emailed back and said it was good jump in and say "Thanks for the feedback. Is there anything else you would like me to add into it?"
+
+Don't let people take credit for your work.  It's shady practice i nthe business world yet happens all too often.
+**Create a giant text box with your name on it and put it over the Dashboard.**
+   
+   
+   I don't think there is a good way of letting the reader know who the spreadsheet author is without coming off as obnoxious.  You can have a small cell in the corner with your name in it and lock that cell but that still seems a bit annoying for readers.
+  
+  
+
+I know with VBA, I usually put my name in the beginning of the code as a comment so anyone who goes in there (No one I work with ever looks at the code) will see that I wrote the code.
+Once I need to tell every user of my sheet who to contact if they got any problems. Since I didn't wan't to be a pain and show a msgbox everytime they open the file, i came up with a solution.
+
+I used the code Environ("username") and an auxiliary hidden sheet.  
+This way, the first time the user opens the file, I show a msgbox and write it's name to this auxiliary sheet.  
+Next time he opens, I'll check this auxiliary sheet and since his name is there I won't show the msgbox again.  
+I don't have the code now, but it's not hard to do. Use evaluate("countif") to check if the username already exists in the auxiliary sheet it's that fastest way I think.
+
+By the way, at the msgbox I just said somethink like: If you need any support with this file, please contact me at "my email" or "my phone number"
+Been there,  my friend. Had a couple worker take credit for a massive Access / Excel project I created that saved a tonne of $. She got a $500 reward for it and even bragged to a friend that it was my work. My manager refused to do a damned thing about it. I refused to provide support going forward, but I wish I'd had a way to make it clear it was my work to begin with.  I love some of the ideas here! 
+That behavior will only bite them in the ass later.   Then if they're asked to produce something else, and you're not available, they either have to fess up, or turn in something "sub-standard" since the bar was set so high.
+
+Eventually, people know who to talk to though... I get random questions from people at work whom I only recognize by sight...
+VBA lock it so if they try to edit different parts, it will pop up and say please contact XXX to ensure originally quality of spreadsheet 
+What you can also do is force the Statusbar to display 
+
+"Created by xxxx"
+
+Useful only if the end-user won't be using the status bar at all.
+
+You can set it on Workbook_Open to set it and on Workbook_Close to clear it.
+watermark it with a picture of your face?
+I have a similar issue.  I am the excel wizard in my office and many people (specially lazy clients) would take my spreadsheets as their own. What I did is I modify the defaults in excel so my spreadsheets had a "unique" taste and feel. I develop some sort of branding that it would be very difficult for others to copy.
+
+ When someone presented four gorgeously crafted tables and one shitty one, those four would stand out and it would be very clear that one person developed four, and a second person develop the other one. 
+
+I created some macros (stored in my computer - not on the spreadsheet itself) that would remove any blank sheets, add dates, titles last edit date and modify page breaks so everything would print nicely in either 8 by 11 or 11 by 17.
+
+I change the defaults so all my sheets use "Anonimus Pro" as its default font, always use narrow margins and only use certain type of line types and fill colors. When you see a spreadsheet, you will know if its made by me or not. 
+Its a great idea to add "contact xxxx for support with this document. Created XXXX" I will add that to my formatting macro. 
+
+I am on the school of thought that macros should be stored outside the spreadsheet itself.  Most of non-power users get scared when they open an excel file and its locked due to macros, or when they need to lick on the warning Windows pops up about  this file potentially harming their computer. 
+
+
+Add a Log tab to track changes and updates to the spreadhseet. Have column for Date, Name, and Notes.
+
+That way, you can keep track of what changes you made and why, as well as noting authorship. Very helpful if you're working on a group project too.
+Create a VBA form as a splash screen. Have it open on WORBOOK_OPEN and hide after three seconds. Lock down the VBA with a password. 
+I just put in Created by... and in collaboration with ... if I worked with anyone.  Then I just lock the cell and password the file.
+I'd put it in a footnote. My department has to produce weekly documents that are distributed system wide and we need to make it known where they come from so everything in put in footnotes, including who generated the document.
+I just put my name in the headers or footers:
+
+My Name-Date, Time-Spreadsheet, Worksheet
+
+Company Confidential
+Mod Message: Flair changed to discussion.
+really cool stuff here.
+I create UDFs with my name like "AirstrikeLookup()" so that everyone who ever uses them gives me instant credit.. not sure it's tasteful, though
+Agreed. I think that is a professional way to do it.
+
+Another thing I do with my sheets is put whatever info I want into the document properties. I'm not sure if people ever look there but it's a place to put info that's out of sight, slightly.
+[deleted]
+Further, you could put it in a narrow first row and make the rest of the cells not lockable and then lock the sheet or WB. 
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+[deleted]
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+You can always hit alt + F11, go to ThisWorkbook in Project view, and add the code below:
+
+    Private Sub Workbook_Open()
+        MsgBox "Created by alitanveer"
+    End Sub 
+
+Now, whenever someone opens the workbook, your name will be known.
+
+Just make sure you protect the VBAProject itself.
+Save as .xlsb - macros still work and they load faster and smaller file size.
+So you go to the boss " I heard you like the report subordinate based on my report, I'm upgrading it a bit, is there anything extra you thought was missing?"
+
+Don't say "copied" or ," stole". This way you claim back what was yours, you don't put the other guy down (even if deserved) and they know where future stuff probably came from
+I might have a chat with subordinate and ask them to credit you for your work, in this insurance and in the future.
+
+If they didn't see things my way I might stop doing things asked of me by subordinate.
+Wait till something breaks, you will mysteriously regain ownership... 
+
+I once worked for a company over a period of six years, during which I set up numerous macro driven document processes, mainly contracts. 
+
+I moved - job / department /city / state - and had been in my new role for over two years when IT called to ask how to remap the save location of the documents. They'd renamed the server the contracts saved to, and the account management team couldn't generate new contracts. 
+
+Never received a 'thank you' for the time saving macro...but the moment someone else breaks it...suddenly it's mine again! 
+
+
+Open your file, press ALT+F11, the VBA window will open up.
+
+On the left hand side, click on the "ThisWorkbook" module.
+
+Paste this in.
+
+    
+    Private Sub Workbook_Open()
+    
+        Application.StatusBar = "Designed by epicmindwarp, Jan 2015"
+    
+    End Sub
+    
+    
+    Private Sub Workbook_BeforeClose(Cancel As Boolean)
+    
+        Application.StatusBar = False
+    
+    End Sub
+
+
+It will run on open and run on close.
+Lick this stamp icon to put your mail in the outbox! 
+I have a meeting in 2 minutes, I'll upload shortly.
+A slightly less intrusive way could be to use application.statusbar = "Created by John" 
+
+Less annoying than a message box and possibly not noticed always
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+Just keep in mind that protecting a VBA project is about as secure as [this](http://imgur.com/gallery/XmWdEbT). It literally takes about 60 seconds to unprotect a VBA project in a workbook, without knowing the password.
+This is the best advice in the entire thread. Putting macros or scripts in that force acknowledgment are passive aggressive. The advice provided by /u/johnfbw is proactive enablement and shows you're working with the team. In the mind of the boss, they'll come straight to you later. In the eyes of the colleague, they'll hop on board with the collab. 
+
+And maybe in the email, SPECIFICALLY ask the colleague if they liked a [specific area] and how it can be done differently. (This is a way of calling out any future bluff)
+Agree! Just say that you're working on an upgrade and do they have any wishlist items that would make it even better address their needs.
+I love this, it's also appearing to show initiative and caring about things outside of your direct responsibility.
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+This comment has been overwritten by an open source script to protect this user&apos;s privacy. 
+
+   If you would like to do the same, add the browser extension [GreaseMonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) to Firefox and add [this open source script](https://greasyfork.org/en/scripts/10380-reddit-overwrite).   
+
+ Then simply click on your username on Reddit, go to the comments tab, and hit the new OVERWRITE button at the top.
+Apparently work has imgur blocked. So in the bottom right I put:
+
+Department Name
+My Name
+Date of Release for Document 
+
+On every single page in the footer. 
+Exactly what I thought of. And it has the benefit that they probably won't be able to change easily
+Instead of msgbox, you could create an userform, you can display much more than just simple text with that.
+
+Or you can make an info worksheet in your report, which is the only worksheet displayed for first 10 seconds since opening of the workbook.
+I have something like that for you. The excel doc is on my work computer though. If this isn't answered by the time I get to work I'll reply to this comment again.
+Use the wait function then clear the status bar 
+Timed message box:
+
+Dim cTime As Long
+Dim WSH As Object
+Set WSH = CreateObject("WScript.Shell")
+cTime = 10
+Select Case WSH.Popup("Created by alitanveer", cTime, "Title for msgbox", vbOKOnly)
+
+Why not get a few examples together of other things that the boss would appreciate and send it to them just as future ideas?
+Have the co-worker bring it up?   "Boss, you know that subordinate got help with that from alitanveer?"
+You have awarded one point to epicmindwarp
+Awesome. Make sure you protect your project with a password so they can't edit anything.
+Yeah, additionally, you can protect the sheet the dashboard is in rom being copied and only allow editting the cells that need to be modified.
+Except if they break the password, which is not impossible... but I don't think anyone would go through that hassle just to remove your name from credits.
+[deleted]
+Protect the workbook as well, set to structure and then the sheets can't be deleted

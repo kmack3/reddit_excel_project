@@ -1,0 +1,57 @@
+I need help finding a user on /r/excel...
+Y'know.... that might have been me.   Of course, I can't find evidence in messages, and Reddit search is...well.. Reddit search.
+
+Mutha' Fukkin' BUCKETS!
+[deleted]
+[deleted]
+>Mutha' Fukkin' BUCKETS!
+
+Haha this is the one line I remembered the most from our conversation. I also remember your name now that I see it. If you PM me your e-mail address we can discuss getting you at the very least a reference.
+Hey can you explain the mutha fuckin buckets or tell me where I can read up more on this? Sounds like something I need to know about, but it is not ringing a bell...
+>This is fricking amazing. Honestly, it blows my mind how productive the entire world could be if the power of ~~Excel~~ **automation** was applied by everyone. Here's the ultimate case in point!
+
+I barely remember it.   It was something that I think took me an hour or two to scribble up and debug, then promptly forgot about it.
+
+>shaved off thousands of man hours of tedious work
+
+That statement right there is why I **thrive** on automation, *and* why I like to help out in /r/Excel.   Done right, anyone can be an astonishing [force multiplier](https://en.wikipedia.org/wiki/Force_multiplier) with very little initial effort.
+
+Hell, that was one post, from a year ago.... who knows how many thousands of hours of drudgery my little off-the-cuff macros have eliminated.
+
+Feels Good, man.
+I tried both, actually.  I remember shortly after Blue got a functional answer, the account was deleted.   I know for a fact that we were communicating via PMs as well, but even going back two years, they aren't there.   Go fig.
+Like BornOnFeb2nd said, the account was deleted a long time ago so I wasn't able to search. Thank you for the advice though.
+I wish I could find the original post... I think "Blue-Skies22" deleted their account after than conversation, and it would appear Reddit does Clean-up.
+
+
+[Not very helpful, but a Wiki link](https://en.wikipedia.org/wiki/Bucket_%28computing%29)
+
+Buckets is just a general term....  First time I encountered a problem needing buckets was thus...
+
+* You have X telephone agents staffed across a 24hr basis, here is the times that they worked (list of login and logout times), I need to know how many agents we had staffed during each five minute interval.
+
+So, what you do is figure out how many "buckets" you need (24hrs / 5 minutes =288 buckets), then you step through and simply examine each record.
+
+* Agent A - 0700 - 1159 
+* Agent B - 0706 - 1159
+* Agent C - 0800 - 1159
+*  etc
+
+Using a time example, it's simpler to switch it from "human readable" to buckets...
+0700 = 7am, =
+
+7hrs past midnight * 60 = 
+
+420 minutes since midnight / 5 = 
+
+
+Starting Bucket is 84
+
+So, you'd then figure out where the Ending bucket is with the same method (144), so then we'd use a For loop to go from 84 to 144, "tossing in +1 to each bucket" as you go.
+
+To handle partials depends on the circumstances... If you care if an agent was staffed the majority of the time, or if you just add up all the staffed minutes, and divide by the bucket size.
+
+Maybe Blue-Skies22 can post the original code for a slightly less contrived example. :)
+Not just the man hours, but also the elimination of human error. You increased our fidelity and accuracy by a minimum of 30%. You have been the toast of a few beers in my intel shop. Haha. It even enabled us to do some long term analysis that was impossible given the amount of data we were analyzing. It is not an exaggeration to say that you changed the way we do daily analysis. 
+This sounds like it could be a linear programming problem.... I'd be very interested to learn more!
+Very interesting, thank you. I will keep this in mind the next time something like this comes up. 

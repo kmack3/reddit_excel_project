@@ -1,0 +1,153 @@
+Can someone ELI5 Ctrl+Shift+Enter {Array}. I've read about it a few times but still cannot got my head around it.
+I think the easiest way to understand it is to start with a very basic example...
+
+Say you have dates 3/15/15, 3/16/15, and 3/17/15 in cells a1 a2 and a3 respectively..
+
+Then in column b you have sales volumes of 50,60,and 70 units in row 1,2,3 respectively and in column c you have sales price of $10, $11, and $12 respectively..
+
+Now in column d you can calculate revenue by selecting cells d1 through d3 (all three cells at the same time) and typing the formula =B1:B3*C1:C3 and pressing ctrl+shift+enter. What this does is treats each section (ie your b and c cells) of your multiplication formula as an array (or group of cells) and gives you seperate results for each cell row in the corresponding cell of the array you entered the formulas into.
+An array function results in an intermediate that you don't see, called an array constant. The array constant is then used to calculate whatever function there is.
+
+So for example, if you have like {AVG(A:A-B:B)}, you'd get an array constant{A1-B1, A2-B2, so on so forth}. The function would then calculate the average of the numbers in the array constant.
+Fruit|Items Sold|Price Sold|
+-:|-:|-:|
+Banana|5|$1.00 |
+Apple|4|$1.25 |
+Pear|2|$1.50 |
+Orange|7|$0.75 |
+
+
+
+So lets assume you have the table above which shows the total sales of different fruit.  In column A you have the name of the fruit, column B is the number sold for each, and column C is the price each fruit is sold for.  You're looking to find out which fruit generated the most money.  Now the easy way out would be to create a "Total" column in column D then use this formula and drag it down:
+
+    =B2*C2
+
+Then you would just need a MAX() function to find the max of column D:
+
+    =MAX(D2:D5)
+
+This works but can become unnecessary when dealing with a lot of data.  So instead we can just use 1 single array formula to get the answer we need.  So instead of using the above MAX formula, you can use this one:
+
+    =MAX(B2:B5*C2:C5)
+
+Now if you tried to enter this formula by just pressing enter, you would be telling Excel that this is just a regular formula.  Excel would then get confused because it wouldn't know how to multiply a grouping of four cells by another group of four cells (B2:B5*C2:C5).    
+  
+&nbsp;
+
+*Think of an array as a grouping of something.  It can be a group of cells(A1:D1), it can be a group of numbers (1, 2, 3, 4), etc.  In this case, our array will be a grouping of cells.*
+
+&nbsp;
+
+So instead of having Excel try and hard calculate this formula, we press Ctrl + Shift + Enter to tell Excel to treat this as an array formula.  Now if Excel comes across an array within our formula, instead of trying to calculate the whole thing (B2:B5*C2:C5), Excel will break it down into each piece and calculate those pieces.  (B2*C2, B3*C3, B4*C4, B5*C5). By doing this, Excel will have created a grouping of all the answers from the calculations (5, 5, 3, 5.25).  Now Excel is able to find the MAX value of the new grouping of numbers (5.25).  
+  
+&nbsp;
+
+Try the example I put above.  Then when you have your formula already entered, select the cell, the press the "Evaluate Formula" button under the "Data" tab.  This will allow you to watch how the formula is being calculated, step by step.
+As the size of your data increases linearly, the amount of RAM your computer takes to run array calcs increases exponentially.   
+
+Other than that, arrays are cool for combining formulas that normally are incompatible.  For example, if I want to average all student score but only male, I would do ={AVERAGE((A:A="Male")*(B:B))}
+
+Arrays are very flexible and cool tools, but can be annoying to troubleshoot or audit and take up a ton if resources available to Excel (unless you're on 64 bit office).
+In math, there is a thing called a matrix, which is a table of numbers. Depending on the field, matrices can represent different things. And there are some operations you can do between, say, matrix A (which is a group of numbers) and matrix B (which is another group of numbers), and you will get a new matrix C (which is another group of numbers). Example: [Matrix multiplication](http://en.wikipedia.org/wiki/Matrix_multiplication)
+
+Well it turns out Excel has formulas for this (MMULT). Of course matrix A will span several cells, and matrix B spans several cells. But it turns out the result must also span several cells! That is when you use Array Formulas. 
+
+Matrix operations are the clearest example IMO, but you can apply Array Formulas in several ways with other functions.
+
+It is not because it's a similar operation, that returns a single number, copied to several cells. It's because the operation returns a group of numbers as a result, so it is one single formula that spans several cells.
+
+Hi!
+
+It looks like you are trying to ask a question!
+
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?    
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)    
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+I'm still wrapping my head around it but this is what worked for me. If I've got it terribly wrong here someone can correct me.   
+  
+It's like the difference between a vlookup and an index/match. With a vlookup, the function looks down the list of things, finds the first one that matches and returns that data. It's a linear search that returns the first result that matches. So if the data set is   
+  
+no  1  
+no  2  
+no  3  
+yes  4  
+yes  5  
+no  6  
+yes  7  
+  
+then Vlookup returns "4" after finding it's first yes.
+  
+Contrast that with an array function in an index/match. That function looks at the whole data set and pulls out a list (an array) of entries that match. You then have to give it more information about *which* one in the set you want it to return, or what you want it to do with the set. But the important thing is it doesn't just give you the first answer it finds, it gives you the whole list of possible answers.   
+  
+So an array function would see   
+  
+no  1  
+no  2  
+no  3  
+yes  4  
+yes  5  
+no  6  
+yes  7  
+  
+And return [4,5,7].
+It is kind of complex especially when you get into other formulas, but starting with basic math and going from there is the easiest way to learn it
+What is the difference between this and typing a regular formula into D1 and dragging it down?
+Could you give an example of what that formula would look like?
+You can't change a single cell in an array, so in that sense it "locks" your output range so it can't be overwritten manually. This is really only a minor benefit and sometimes a nuisance. 
+
+You can use array formulas the way /u/kelyndm, i used it a lot for working with matrices when I was in school, showing the steps between different operations. However, the real benefit of array formulas are the possibilities they give you to work with arrays and return a single output from those calculations. 
+
+To use a very simple example, use what /u/kelyndm said, but instead of of putting the information in the cells in column D, let's say you just want to return the maximum value on any one day in cell F3: 
+
+    =MAX(B1:B3*C1:C3)
+
+Would give you that amount, but you wouldn't need to create another column. 
+
+Let's say you didn't want the highest amount, but you just want the date that sold the largest amount, you could do: 
+
+    =INDEX(A1:A3,MATCH(MAX(B1:B3*C1:C3),B1:B3*C1:C3,0))
+
+Which would then return 3/17/15
+
+This is still a pretty basic calculation, but the benefit of array formulas is that you can add pretty much any number of calculations and conditions in there. 
+
+ 
+Got the same question. I assume it just automates that?
+You wouldn't quite use an index/match, MATCH returns the position of the first value it hits, and can't really handle multiple hits. 
+
+Instead you'd use something like SMALL(IF(A1:A7="YES",B1:B7,""),row(1:3))
+
+That would return an array of {4,5,7}
+
+If you then wanted to display those in three different cells, you'd have to select the two cells under the cell you're writing in, and then write your formula. This would always only write in the top 3 values. 
+
+If you're unsure of how many values you're returning, you would just replace ROW(1:3) with ROW(1:1) in your cell, and then drag it down until it starts returning errors. 
+
+Here's an example of what you're "getting" in the example above: 
+
+Col A | Col B | IF "imaginary" array | 
+:--- | :--- | :--- | 
+no | 1 | "" | 
+no | 2 | "" | 
+no | 3 | "" | 
+yes | 4 | 4 | 
+yes | 5 | 5 | 
+no | 6 | "" | 
+yes | 7 | 7 | 
+
+
+the IF formula you're using inside the small, gives you the "imaginery" array in the third column above. When you feed that to the SMALL formula, it ignores everything that's not a number, and you can then use it to safely extract the numbers that fulfill your conditions. 
+I just tried the =index formula to get the date but forgot to do an array so did't work. Why does it have to be in an array to work?
+
+
+Also thank you I think this will be pretty helpful in my work!
+Because if you don't tell Excel that this is an array operation, it doesn't know how to treat the array multiplication B1:B3*C1:C3 .
+It has to be entered as an array formula because you're doing an array calculation inside the MAX formula. The MAX formula expects a range input, or a number of arguments entered manually, where it then has to find a max. If you give it a range that has to be multiplied with another range before it has to use that range as an input, it gets confused, and returns a #VALUE! error, you didn't feed it the kind of value it expected. 
+
+By pressing ctrl+shift+enter, you're telling it that "oh, by the way, this is an array formula, so you're going to have to do some calculations and stuff before you use the expression as an argument for the MAX"

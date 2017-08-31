@@ -1,0 +1,45 @@
+Study: What Really Helps to Reduce the File Size of Your Excel Workbook
+Based on my personal experience, sometimes I'm too liberal with keyboard shortcuts, and sometimes find myself tabbing straight to row 1,048,576 or column XFD and accidentally typing something there. That usually does a number on load times and file sizes.
+I find that a lot of files pick up a lot of excess styles and named ranges and other things as sheets get copied to and fro over the years. I use XLSTylesTool to cleanup files with those excesses:
+
+[Link](https://www.microsoft.com/en-us/store/p/xlstylestool/9wzdncrfjptg)
+
+
+For files with formulas I need to keep, I often copy -> "paste values" on all but the first and last row, reducing the file size but making it easy to re-animate on the other end.
+><Named Ranges> The problem: Most of them are not visible to the user (e.g. not shown in the name manager)
+
+How, then, may one detect these?
+Advice 5, aren't the German characters fairly normal though? Has there been any test with even more exotic chars? Arabic, Korean, wingdings, etc?
+> Advice 10: Don’t use pictures in your workbook Pictures by nature take a lot of disk space.
+
+... and if you are going to use pictures, use the smallest/cleanest version you can.
+
+One time a guy at work asked me to take a look at one of his files, it had 6-7 tabs and was a ridiculous file size (I'd be lying if I said I remembered, but it was a lot). So I open it up and start to take a look. The tabs were no more than 9-10 columns wide and only went down to row 120 or so, nothing major. I went through the normal steps of deleting all rows/columns outside the used range, checking the conditional formatting and named ranges, etc. Nothing looked out of the ordinary.
+
+Then I noticed that each tab had an image, different client logos that he, presumably, grabbed off the internet. Well, some of them ended up being HUGE .bmp files, the original size of which were something like twice the size of my monitor resolution. I pulled them out, resized them in photoshop, put them back in and immediately saw something like a 95% reduction in file size.
+A lot of my workbooks involve 'live' data feeds... I typically export my books as values only and then email it all out.
+i once had a workbook with all sorts of lines and stuff in it (like the kind where you 'draw a line' or an arrow?)
+
+turned a 100k workbook into 21 mb
+
+since it had to be on a shared/network drive, it was a real slug, and i dreaded any time i had to open it.
+
+
+Informative post. Thanks for sharing with us!
+I've always used small fonts, but I I guess that doesn't work too well. ;-)
+On number 4 - haven't the last ten years of excel all had shared pivot caches? Or at least since 2010?
+I didn't see this in there but I've had workbooks that would be reduced in half or more by deleting the blank rows and columns. I'm guessing there is something that can cause a hangup in the cache somewhere that is causing the file to store phantom data. 
+To my experience it did with older version of Excel. But since the XML format was introduced in 2007, that should only be a problem when the formatting alternates. 
+You could do a simple test: Save one blank file and one with your tabbing straight to the bottom or right. Save both and rename the file name from .XLSX to .ZIP. Now you can just enter the files and see all the XML contents. Is there a big difference?
+If you want *actually* no formulas (e.g. to save as a CSV), you can also insert a row above your first row, and populate it with *="'" & FORMULATEXT(...)* to get the formula text for each column (prepending the apostrophe stops it from re-calculating the formula in the *FORMULATEXT* row when you re-open the CSV in Excel). Then if you export it as a CSV it'll retain the actual displayed values for those formulas.
+Yes, I do it a similar way: Usually I copy the formulas in an extra row above the actual data and highlight them so that I always know where to find the original formula.
+There are some hints: 
+1. You might notice that when you copy a worksheet, Excel asks you to select a new name. Sometimes you got these messages hundreds of times before Excel creates the copy. 
+2. When opening an Excel file it might say in the bottom status bar "Linking... [and then the name]"
+3. The only reliable way: You can see (and remove) them with a VBA macro or a suitable Excel add-in.
+German characters are ä, ö, ü and ß. Yes, they are comparatively normal. But on the other hand we've seen that those region specific settings seem to have a huge impact on the calculation performance (like 6x slower with German region settings). That's why I tested them (and I'm not very certain with Arabic and Korean letters...).
+Intuitively, I would expect Excel to use the same size variable to store all characters, unless they maybe use something like a 1- or 2-byte variable for the standard ASCII characters and then maybe 4 bytes per character for any extended character sets. But I'd be a little surprised if they did that.
+Yep, I send my boss the same report every month. Far too big to send as a workbook and he doesn't need to see the data behind the report, so I just have a formatted tab labeled "report". I paste the values of my pivot table into it, copy the tab to a new workbook and send it off.
+Unfortunately in reality often they don't have shared caches.
+You will be asked if you want to use a shared cache when you set up a new PivotTable with exactly the same cell range. Another - more reliable way - is to copy an existing PivotTable.
+Could be. My guess would be that the formatting code in the XML file is "interrupted" by blank rows in between and therefore needs twice the space.

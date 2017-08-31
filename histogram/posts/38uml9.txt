@@ -1,0 +1,197 @@
+The Most Advanced Excel Trick
+The most advanced trick I know of involves using INDEX(). For instance, you can reference multiple columns simultaneously.
+
+For instance,
+
+| column 1 | column 2 | column 3 |
+|:- |:- |:- |
+|A|1|sauce|
+|B|2|toast|
+|C|3|mayo|
+|D|4|jam|
+|E|5|grape|
+
+    INDEX([col1]&[col2]&[col3],4)
+
+    => "D4jam"
+
+Wicked.
+
+
+EDIT: Wow, thanks, guys. I had no idea this would be so popular.
+
+
+EDIT2: It seems my post was a little muddier than I thought -- my apologies. Here are some further thoughts to share.
+
+Where it says [col1], [col2], [col3], etc I was referring to the columns of an Excel Table, which has a nice structured reference syntax; however, this should have been indicated by me.
+
+This works just as well when referring to, say, "A2:A6","B2:B6","C2:C6"...So, for the sake of the example, assume the above columns are stored in the range A1:C6
+
+The formula, using explicit cell referencing takes the following form: 
+
+    INDEX(A2:A6&B2:B6&C2:C6,4) => "D4jam
+
+Of further interest is the fact that you can actually concatenate the cell references with literal strings. Example:
+
+    INDEX(A2:A6&"+"&B2:B6&"+"&C2:C6,4) => D+4+jam
+
+Adding another layer of interest, the referenced columns don't have to be adjacent/contiguous.
+
+
+INDEX() also as a second "mode" whereby you reference multiple "areas." That's a story for another time though.
+
+
+
+Not advanced per se, but always appreciated when I show it to people. 
+
+In a data set where a column doesn't have repeating values (as in, there's a single row that lists a product category for example, but the lines below it don't repeat that value so it's blank), you can quickly fix that. 
+
+Select the full range of the column. F5, special, blanks. Click in the first blank cell and in the formula bar, type =A1 (where a1 is the cell directly above it) then hit CTRL+ENTER. 
+Array formulas that require Ctrl+shift+enter
+When I learned I could dim an array of workbook names in the same folder, then use a for loop and ArrWorkbook(I).open to make changes to the 400 some excel docs my boss needed dates changed on
+Just like articulate people use "good" words that aren't necessary "big" (by number of syllables), often "Advanced" in Excel means judicious application of simple functions.
+
+For example, instead of "=IF(VLOOKUP(params)<50,50,VLOOKUP(params))" which runs your vlookup twice and is hard to read, use "=MAX(50,VLOOKUP(params))".
+
+Another one I use a lot is checking if a value is on a list.  I used to use "=COUNTIF(List,LookupVal)>0".  Now, if the list is sorted, I use this: "=VLOOKUP(LookupVal,List,1,TRUE)=LookupVal".  This has the benefit that it doesn't need to check the entire list--only until it finds a value equal to or greater than the lookup value.  So it runs much, much faster.
+The most impressive trick when you're showing  someone how to create a chart:
+
+Highlight the data range, then Alt+F1/Alt+F11
+
+Edit: Changed 'Table' to 'Chart'.
+=indirect()
+It is probably one of the most useful ones I know.
+
+
+The most advanced without VB that I had the opportunity to use was this:  a "VLOOKUP" that matched more than one column. 
+
+It uses the INDEX() function combined with MATCH() and the formula has to be entered with Ctrl Shift Enter - I had never used any of that before.
+
+
+https://allfixes.wordpress.com/2012/04/02/excel-vlookup-with-multiple-criteria-emulating-sql-in-excel/
+Using a formula in a named range to make a dynamic list for content validation. For example if the user chooses a make of car (e.g. Toyota), the next cell could provide a list of models (Avalon, Camry, Corolla, etc.) based on the value of the make cell.
+
+Another really cool thing you can do is make a filterable validation list as shown in this video:  https://www.youtube.com/watch?v=vkPoViUhkxU
+It's not an advanced technique, but I use =SUMIF every single day at work.  I built worksheets that filter our vendors' terrible, terrible canned financial and stat reports into usable reports.  For those reports that we pull daily, I just copy and paste in a worksheet and let Excel extract the necessary info and dump it into our forms.  My boss had spent 3 hours each month translating the monthly canned stat report into different reports for different audiences.  It literally takes 5 minutes now.  
+
+It kills me to see my coworkers doing weird, laborious tasks in Excel when there are so many easy tools at hand.  I think Pivot Tables, for instance, are easy to learn and can take the basic user to the next level.  Also, my boss thinks I do conditional formatting color coding by hand. I tried to show her, but she went all, "Oh, I don't know anything about Excel. I don't like Excel."  *sigh*. Oh well.
+When I started automating Internet Explorer from VBA I loved going to work.
+
+It might only be a few lines of code, but having this program included on 80% of people's computers be able to control so many other programs is nuts.
+Not advanced...personally, the best "trick" I show others is knowing how to do vlookup and nested IF statements. Instead of taking csv files and bringing them into tables to do sql queries, I find it faster for one off analysis to do it in excel.
+Flair changed to discussion
+EXCEL GANGSTER
+I bow to you. 
+At first I thought it was a multicolumn (concatenated) lookup but its not that....what would one use this for?  
+Beautiful.
+I was hoping to use this principle and combine with MATCH to create a way to set up multicolumn lookups faster, but apparently MATCH can't merge columns into one big lookup array unless using array-form.
+
+So here's an idea: Apparently your trick works with SUMPRODUCT. So I combined it with with a suggestion by /u/Haeso [below](https://www.reddit.com/r/excel/comments/38uml9/the_most_advanced_excel_trick/crydcps) for looking up non-numeric columns:
+
+    =INDEX($C$1:$C$5,SUMPRODUCT(--(A1:A5&B1:B5="c3")*(ROW(C1:C5)-0)))
+
+(returns "mayo". The "-0" is to adjust the return row to line up if we're not starting at row 1)
+
+Not earth shattering, but I think a lot faster than setting up each column individually.
+I hate to muck up an advanced thread with a newbie question, but could someone explain this one to me? Im not quite getting it, and Excel is blowing up when I try it! 
+
+This is gold, Jerry, gold!
+This is super late, but I use this a lot. There are times where I need to reverse this process though too, like after doing the calculations or filtering to make it look "pretty" again.
+
+Instead of selecting all blanks, there is another option for "select formulas" and it will select only the cells filled in with "=A1" and you can delete them all at once. 
+That's an amazing tip. I was using VBA as a workaround for this problem.
+I've being using excel for nearly 20 years and am just now getting into arrays.
+
+Compared to normal formulas they don't look like they should work and that's what confused me for years. But am now playing around with them and they are such an elegant option in the right place.
+Exactly, this is what takes Excel from basic data manipulation to something in line with a traditional programming language.
+This is the sort of thing I use a lot, though I didn't know you could declare an array of workbooks as a variable.
+
+I have a table where each row has the workbook name, filepath, filename, sheet name, and column references that I need for ~60 different sheets.
+
+It's a beast to go through them all because most are shared workbooks which can get really slow on an already slow network drive.
+
+A colleague just recently thought of using FileDateTime() on each before opening. No need to open a workbook if there haven't been any changes since the last time it was checked.
+Like this one: http://word.mvps.org/FAQs/MacrosVBA/ReadFilesIntoArray.htm or did you create the ArrWorkbook() array without looping?
+For your second example, if you use MATCH instead of VLOOKUP it should run even faster.
+
+The boolean check would be a little different, if MATCH returns a number then it is present, otherwise it would return an error. So i would use something like =NOT (ISERROR (MATCH (lookupval, list, 0)))
+When do you use tables? I have played around with them but haven't really seen the benefit.
+If the target column has numeric data, SUMPRODUCT is great for multi column lookup. And you don't need to use the Ctrl shift enter thing. 
+...can you expand on this?
+Tell us more...
+You should look into Index(Match()), and Index(Match(Match())), more versatile implementations of vlookup.
+You could create a dynamic argument for a SUMIF or SUMIFS or other similar functions. 
+> At first I thought it was a multicolumn (concatenated) lookup but its not that
+
+What do you mean? It's not a "lookup" in the Excel sense; it let's you index multiple columns simultaneously. In the end, it's a tool/method. Play around with it and some ideas may come to mind. If not, then you still have a new trick up your sleeve ready for the day when you'll need it.
+> INDEX($C$1:$C$5,SUMPRODUCT(--(A1:A5&B1:B5="c3")*(ROW(C1:C5)-0)))
+
+See, what you've constructed is a proper lookup formula that leverages the neat index/concatenation trick. That's awesome and will be adding that to my "bag of tricks."
+
+Thanks for sharing!
+
+
+Sorry to hear that. Please see my addendum in the OP.
+I always like how complex an array can appear at a glance when you have a simple goal in mind.
+My programmer friends laugh at me for using Excel.   They have no idea how powerful this tool is
+You can use MATCH in the same way, but not like that.  MATCH(x,x,0) operates on an unsorted list; for huge lists, this is dramatically slower.  You would want (x,x,1) or (x,x,-1), depending on the sort.
+
+It's not actually faster than VLOOKUP, but it is non-volatile.
+Automatic dynamic named ranges.
+Sumifs is a good one for this purpose, also...especially when you have a cost column and various columns describing the line item...sumifs can make great automated reports. 
+Also, if the target column hasn't numeric data, combine sumproduct, index and row, such as this: 
+
+    =INDEX(C1:C13,SUMPRODUCT((B3:B13="lookupValue1")*(D3:D13="lookupValue2")*ROW(C3:C13)),0)
+
+edit: [example](http://answers.microsoft.com/en-us/office/forum/office_2007-excel/vlookup-with-multiple-criteria/c43ff8eb-8b6f-4034-97fa-f4212a55950d)
+
+
+   
+http://www.teachexcel.com/excel-help/excel-how-to.php?i=87073
+
+this is the code that started me off, you have to add a reference to Internet explorer from the vba editor.
+
+Just gettin IE to open up from excel was enough to impress me but there are ways to select things on websites and use the websites JavaScript.  If I was at work I'd post the code and get the exact reference name I used.
+I saw your addendum, wonderfully described! Thanks so much OP! 
+They are mostly right to laugh.
+
+Excel is a great option when you are working with low complexity data and small data sets, but as either of these factors increase you have to employ ever more elaborate formula hacks whilst Excel grinds to a halt.
+
+The only reason Excel is used in the workplace for anything else is ignorance. 
+This and slicers.  Makes a world of difference for anyone using the spreadsheet who has only the most basic skill in Excel.
+This is the big one.  It makes writing countifs, sumifs, and sumproducts much easier to write and edit later. 
+Filters that stick around and the ability to have more than one array with filters activated on the same page (not the best practice since filtering one table can mess up the view of another, but there are situations ive found it handy)
+It doesn't work when you're using multiple files though. That's where sumproduct comes in handy. 
+Fantastic! 
+
+I've been trying to find a general way to use sumproduct to lookup non-numeric data. Rather "obvious" now that you show it. Previously, instead of ROW(), I would create an array like {1,2,3,4,5,6,7,8} (this was a short lookup table).
+
+Edit: Caveat - the Row function returns the absolute row, not the relative row. So we'd need a way to convert by subtracting how far down the formula starts, e.g. (ROW(C3:C13)-ROWS(C1:C3))
+Very cool, thanks!
+Typically you'd just do ROW($C$3:$C$13)-ROW($C$2), that would give you an array of 1-11. 
+
+In the formula above though, the INDEXed range is C1:C13, so if the data you actually want to return doesn't start until C3 (two header rows), then you might not want to start your ROW value at 1. 
+
+Anyway, a neat thing you can do with this is that you can create dynamic ranges by doing ROW(C3:INDEX(C:C,COUNTA(C:C))) (for an example). Use INDEX in the same way for the rest of the ranges in the formula, and you have a nested INDEX that expands as you add data (or use the table function.) 
+
+All in all, INDEX is pretty neat! 
+I've discovered a couple of small problems with [the formula](http://www.reddit.com/r/excel/comments/38uml9/the_most_advanced_excel_trick/crydcps) though: 
+
+If there is no match for one or both of the lookup values SUMPRODUCT returns 0. -->
+
+    =INDEX(C1:C13,0,0)
+
+using that formula gives you either 
+
+* the value in the cell on row x, column C (if you have the formula in a cell on row x, where 1 <= x <= 13)
+
+or
+
+*  #VALUE error (if you have the formula below row 13)
+
+
+If there is more than one match  - say for example on both row 2 and 4 - SUMPRODUCT will return the sum of those matches = 6. INDEX will then give you the value in cell C6.
+
+---
+
+tldr; Use the formula when you know you've got one and only one match for the combinatinon of lookup values.

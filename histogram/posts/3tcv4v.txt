@@ -1,0 +1,67 @@
+What does this crazy formula do?
+    VLOOKUP(SUMPRODUCT(MID(0&R$2,LARGE(INDEX(ISNUMBER(--MID(R$2,ROW($1:$26),1))* ROW($1:$26),0),ROW($1:$26))+1,1)*10^ROW($1:$26)/10),MLS!$B:$E,4,FALSE)
+
+Let's break down the VLOOKUP: First argument `SUMPRODUCT(MID(0&R$2,LARGE(INDEX(ISNUMBER(--MID(R$2,ROW($1:$26),1))* ROW($1:$26),0),ROW($1:$26))+1,1)*10^ROW($1:$26)/10)`
+
+Second argument `MLS!$B:$E`
+
+Third argument `4`
+
+Fourth argument `FALSE`
+
+The 2nd, 3rd and 4th arguments indicate the VLOOKUP function is going to search for a value equal to the first argument in column B of worksheet MLS and if it finds it, will return the corresponding value contained in column E.
+
+Now breakdown the SUMPRODUCT: `MID(0&R$2,LARGE(INDEX(ISNUMBER(--MID(R$2,ROW($1:$26),1))* ROW($1:$26),0),ROW($1:$26))+1,1)` multiplied by `10^ROW($1:$26)/10`
+
+Say R2 contains the string "a42f3bc"
+
+The innermost function `MID(R$2,ROW($1:$26),1)` returns a 26 element text array of one character each of the contents of cell R2. **{"a";"4";"2";"f";"3";"b";"c";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""}**
+
+The `--` operator on that array basically turns all of its text characters which are the digits 0 to 9 to numbers and the rest to #VALUE! errors.  **{#VALUE!;4;2;#VALUE!;3;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!;#VALUE!}**
+
+The `ISNUMBER` function that wraps that resulting array returns a 26 element array of TRUEs or FALSEs with TRUEs appearing in the places where there were numbers.  **{FALSE;TRUE;TRUE;FALSE;TRUE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE;FALSE}**
+
+This is multiplied by `* ROW($1:$26)` resulting in an array of 0s where there were FALSEs and the element number where there were TRUEs.  **{0;2;3;0;5;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0}**
+
+This is wrapped in `INDEX(,0)` which I must admit doesn't appear to have any function as the result is still the same. Perhaps it's needed to ensure array formulas continue to work.  **{0;2;3;0;5;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0}**
+
+This is in turn wrapped in `LARGE(,ROW($1:$26))` which returns an array of the largest value of the above array, followed by the second largest, etc.  **{5;3;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0}**
+
+`+1` adds one to all of these values.  **{6;4;3;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1}**
+
+This is wrapped in `MID(0&R2,,1)` resulting in a text array of the digits of R2 in right to left order followed by a fill of 0s  **{"3";"2";"4";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0";"0"}**
+
+After the multiplication by `10^ROW($1:$26)/10` which multiplies each successive number in this array by 10, results in **{3;20;400;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0}**
+
+Finally the SUMPRODUCT adds these values together for the value **423**.
+
+So the VLOOKUP is searching that range for value 423 and returning the corresponding value in column E.
+You could use the "evaluate formula" tool in order to see what does it do. I do that when I have to figure out what the other guy intended to do.
+Good read! It is an efficient way to strip non-numeric characters from a string. Here they credit it to Ron Coderre:  http://www.mrexcel.com/forum/excel-questions/459758-how-do-i-strip-out-all-non-numeric-characters.html#post2270027
+Nice work mate!
+holy, shit.
+awesome work man!
+> The innermost function MID(R$2,ROW($1:$26),1) returns a 26 element text array of one character each of the contents of cell R2. {"a";"4";"2";"f";"3";"b";"c";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""}
+
+Why does it return an array? Shouldn't it return a string?
+but what would be a situation where this would be useful?
+oh, i didnt know this existed.
+thats crazy intelligent!
+**Proposal**: Include an option on the excel bot to give +3 extra ClippyPoints if OP include the expression "Holy Shit" in his reply instead of "Solution verified".
+ROW($1:$26) is the 26 element array {1;2;3;4;...;26}, so MID(R$2,{1;2;3;4;...;26},1) is {MID(R$2,1,1);MID(R$2,2,1);MID(R$2,3,1);...;MID(R$2,26,1)}
+I didn't, either. Good stuff.
+To go along with his suggest, you can also highlight parts of the formula and press F9 to see the results of that particular part.(Hit CTRL+Z to escape from it)
+It is indeed a piece of art.
+
+However, it's a touch sloppy -- the SUMPRODUCT function supposedly returns a numeric value of up to 26 digits, but [Excel cannot handle numbers with that amount of precision](https://support.office.com/en-nz/article/Excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3)!
+
+There's also that INDEX(,0) function which appears to do nothing, but upon testing, taking it out requires the whole function to be entered as an array function and plenty of peeps get antsy with those curly brackets.
+Unfortunately I've seen people reply to COUNTIF formulas with "Holy Shit!" - so I don't think it'll go down well!
+Whoa. So it's like a way to loop through a string without vba. That's very cool.
+;; is here shattering everyone's double precision dreams.  And {} are more "oh, there is an array there" than "why won't this work, burn it to the ground".  
+
+I could see the SUMPRODUCT causing problems.  I am thinking about if you were compiling international phone numbers with extensions, you could have 3 digit country + 3 digit area + 3 digit local + 4 digit user + 4 digit extension = 17 digits.  I had a simple idea that turns out not to work, using CONCATENATE to build a string which doesn't work for the array unfortunately.  You can find VBA user function example that can work with arrays, which might be the best option for >15 digit numbers.
+I was trying to make a joke and at the same time call OP's attention to let him know that he forgot to reply properly and the question still "unsolved".
+
+Apparently it didn't work in any sense.
+/s is your friend!

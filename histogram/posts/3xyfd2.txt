@@ -1,0 +1,74 @@
+Email an individual if a cell is blank, do nothing if not?
+I'd imagine this can help: http://www.makeuseof.com/tag/send-emails-excel-vba/
+
+Regarding the loop, I'd just do something like this...
+
+    Dim NumRows As Integer
+    Dim i As Integer
+    Dim myRange As Range
+    
+    Set myRange = Range("A:A")
+    
+    NumRows = Application.WorksheetFunction.CountA(myRange)
+    
+    For i = 1 To NumRows
+        If Cells(i, 4).Value = "" Then
+            [Code for sending email to Cells(i, 1)]
+        Else
+        End If
+    Next i
+That is a great help, I didn't think of using offset in that way - I was working on two seperate for loops, one for each column
+
+You've helped massively!
+
+Solution verified
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+No problem, happy to help.  Thanks for the clippypoints and Merry Christmas!
+Is there any reason it would exit out after sending one email? By my reckoning next i should take it all the way to the end of numrows, but it stops at the first line that is "", sends the email and stops going through the for loop?
+Unless it's an issue with OutMail, I added a bit to my code and it is running all the way through (I made it produce a magbox) but only sends one email 
+I think the other script was written a bit poor, try this
+
+    Sub SendEmailsWhereBlank()
+    
+        Dim lastrow As Long, i As Integer
+        
+        'FIND LAST ROW OF COLUMN A (1)
+        lastrow = Cells(Rows.Count, 1).End(xlUp).Row
+        
+        'LOOP FROM ROW 1 TO BOTTOM
+        For i = 1 To lastrow
+            
+            If Cells(i, 4).Value = "" Then
+            
+                'INSERT EMAIL CODE
+            
+            End If
+        
+        Next i
+    
+    End Sub
+Hmm, very odd.  I don't know much about the email sending portion of it, but the loop part seemed to be something I could handle.
+
+You could try just throwing in:
+
+    MSGBOX NumRows
+
+to make sure it's retrieving the right number of rows, and if it isn't working, try /u/epicmindwarp 's take on it.  He seems better-versed in the topic at hand!
+
+Sorry I can't be of more help!
+Just out of curiosity, you only used a different method to find the number of rows (yours will work if there are any blank entries in Column A where mine will interpret them incorrectly), and you dropped the Else from the If statement (which shouldn't have any effect).
+
+Is there anything that made mine poor (other than the potentially wrong assumption that there wouldn't be blanks in column A)?
+
+Still new to VBA so any tips would help!
+Using Integers instead of Long - Long is native whereas Integer requires a transformation.
+
+Setting the myRange range when you don't need to.
+
+And ofcourse, the counting of the rows.
+
+But at least you declared your variables!
+Awesome, thanks for the tips!

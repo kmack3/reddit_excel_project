@@ -1,0 +1,52 @@
+ProTip: Save your files as .xlsb instead of .xlsx for faster opening and saving and smaller file size
+What does the b stand for? Like xlsm for macro.
+I saw this tip on here a few months ago and since then it has saved me and some of my office-mates countless time.  Thumbs up.
+.xlsb files absolutely support macros. Your point about other programs being unable to read xlsb's is correct in my experience, and the only downside to using the format in my experience. 
+You can have a custom ribbon in an xlsb, you just have to create it as an xlsm first, then save as xlsb.
+you cant have custom ribbon buttons in xlsb, (not that i've ever needed them) but yeah generally they are great for massive files. 
+.xlsb files cannot be opened by 3rd party programs as well. Thus no viewing spreadsheets on your phone unless you're on of the dozen people that had a Windows phone. 
+
+However they're awesome and I am preaching them hard where I work. 
+Certainly useful for really big files!
+
+A word of caution on this, however: I read somewhere (I cannot remember where, so sorry for the lack of citation) that not having the XML markup means that if the binary file gets corrupted, you may be up a creek without a paddle more than if it were in .xlsx format.
+With disk capacity what it is today, are large
+Excel files a common concern?  I'm just curious why those interested would be interested.  
+And additional note on this: Interesting to see that when I tried renaming the file from xlsx to xlsb, the file became corrupt. I had to change it back to xlsx, open it and then save it as xlsb. 
+
+I like to change my file formats by simply renaming them from file type A to file type B on the desktop. Proves to be quicker in most cases. 
+XLS**B** = Binary
+
+XLS**X** = XML
+it stands for binary
+Updated, thanks! Didn't know that macros were supported.
+I found this too, then I also found that you can customize the ribbon in the xlsb without going through the xlsm step, it's just that Custom UI Editor doesn't have an option in its File Open dialog for xlsb. You just need to stick \*.xlsb or \*.\* in the filename textbox when opening then you can select the xlsb and customize its ribbon straight off the bat.
+Added, thanks!
+Yes, you can, actualy. I have xlsb files with custom ribbons.
+I have an apple phone and have excel. It's free. 
+Hmmm, a source on this would be awesome. If that's the case, that's a big potential issue.
+It's not the size of the file as much as the shortened time in opening and saving when you use the xlsb extension.
+It's not disk capacity. In a network environment, this taxes the server load when users have to access different huge files at the same time. This becomes worse as the use of wireless networks come into play, which are slower, and usually not well designed\implemented for dozens of users at once. The xlsb format reduces time spent having to download the file from the network and upload it back into the network. It also reduces the time for local computer to save the file as well, before transport back to the server, since xlsb is the Excel native binary format, and does not have to be translated to a more verbose open\compatible xml format.
+This makes perfect sense.  Its not just about the extension.  Saving as xlsb makes a completely different time type.  Renaming would leave the file the same type, just with different extension.
+The Custom UI Editor has a dropdown for the type of file to open. The .xlsb file does not appear in the default list of files to open but if you change the default in the dropdown to read "All files", the xlsb file appears on the list and you can work with the CUIE to add the custom ribbon to that file.
+Huh. I didn't know that. I guess it's just us Android people then that are left out. 
+I think this use to be an issue, but no longer the case:
+
+http://superuser.com/questions/390742/downsides-to-microsoft-excel-2007-xlsb-binary-format
+
+http://blog.datasafexl.com/excel-articles/advantages-of-xlsb-excel-binary-format/
+
+
+**Although** further research indicates it's a table/table size limit in the xlsb format (unverified though).
+
+http://answers.microsoft.com/en-us/office/forum/office_2010-excel/excel-2010-found-unreadable-content-within-xlsb/d3139097-05bf-4847-85f8-bdfd4b6097fd
+Sure, but from some fraction of a second to a smaller fraction of a second, or are you guys dealing with giant excel files that take minutes to open?
+As far as I'm aware the whole mobile office suite is free on iOS devices. I use outlook on my phone for email as well as word and excel intermittently when needed. 
+
+I thought with the majority of things they're available on iOS and android. Unlucky Google fanboys I guess. 
+Some just posted an issue in /r/excel with similar symptoms to your link to the answers.ms site. I wonder if it's related.
+It depends on the file. But some of the ones I have come across would have easily exceeded 30 MB, as an xlsb file.
+So... I just looked at the store. Office Mobile also free on Android.
+
+Turns out I'm just lazy and don't check things.  Thanks for setting me straight. You still can't open .xlsb files with 3rd party software though. :-)
+I guess it would make a difference at that size.  

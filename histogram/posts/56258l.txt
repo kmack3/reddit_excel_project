@@ -1,0 +1,40 @@
+How to Reduce Human Error when managing a growing spreadsheet with dozens of sheets and thousands of linked cells?
+If you want to prevent users _innocently_ pasting over formulas, make sure all cells containing formulas are locked, then protect all worksheets. Users can no longer paste into cells containing formulas.
+
+As for migration, depends on how many cells contain constants vs how many cells contain formulas. Lots of data with relatively few formulas, you should be using a database already.
+You are probably already past the point where  this is going to help,but:
+
+Isolate and flatten all user inputs. Perhaps on a separate sheet, or even  workbook. Use cell reference to get those values where needed. Separate data entry from calculation and presentation as much as possible. 
+
+If you're asking the question then you should already be looking for software. What type of info are you tracking in the spreadsheet. I'm sure someone either has already made software for it - or you have a nice business opportunity on your hands to create and sell software for what you're tracking. 
+It sounds like you're outgrowing spreadsheets in general.  MS Access and input forms would be one way to go.  
+As well as implementing appropriate workbook/cell protection consider creating a documented process, and check list for using the workbook. Ideally a workbook would be designed around this to make the whole process easy to understand and easy to learn.
+Besides what has been said, consider using formatting to help your users. Like grey background for calculated fields that shouldn't be touched and/or green fields that the user should be filling. You can also have some sort of checks to find the edits in case they happen the ISFORMULA function can help you check critical cells.
+There's an echo in here, listen to it! :)
+I routinely lock spreadsheets without a password. For most users seeing the locked dialog box is enough to step back and reconsider.
+OK. I'm sniffing out something promising here, but, as a liberal arts major, some of the terminology isn't as intuitive for me when I apply it to my understanding of information architecture. 
+
+3 things we struggle w/ are: 1.) accuracy of the report; 2.) speed of producing the report; 3.) resolving inconsistencies/errors. 
+I'm sure other organizations struggle w/ this, too, and there MUST be information out there that helps organizations *organize* their information. Should I maybe be reading up on relational database knowledge? 
+Our accountant says the same thing lol. 
+Totally with you there. 
+
+I'm new to the team, so I've been turning my notes on the process into an official process document. 
+
+THanks!
+My accountant buddy suggested the same thing with regards to checks. I'm just trying to figure out how to conduct the check. 
+
+For example (this is hypothetical), I have two sheets:
+1.) Monthly Revenue
+2.) Daily Revenue
+
+In Daily Revenue, I sum the monthly total b/c why not? Then in Monthly revenue, should I just create a reference to the total already being calculated in Daily Revenue? OR, in the Monthly Revenue sheet, should I write in a formula that does a calculation from the Daily Revenue sheet? 
+
+I'm leaning toward creating a simple reference, where I just flow in the Sum-value of the calculation (that is occurring locally in Daily Revenue) into the Monthly Revenue.  
+While I've never implemented something like that, I've seen it done at several companies I've worked for.  I've also seen Excel workbooks used as an interface to an Access database, using a bunch of VBA.  It gives you the more forgiving/polished Excel interface, but with everything important locked down in something the average user could never hope to find without seriously trying.  
+
+Gotcha. 
+
+Unfortunately VBA/Access probably isn't something our team is willing to learn or put resources toward adopting :/ 
+
+Thanks for the input though. Very helpful to see how others are doing it. 

@@ -1,0 +1,61 @@
+6iuqme
+Excel trick for separating First/Last names
+Hey there,
+
+I'm wondering if anyone knows a quick trick in excel to automatically sort a column with full name (first + last, separated by a space) into two separate columns (column 1: first name; column 2: last name)? 
+
+Essentially, when i download data from an ad set I'm running on Facebook, the leads are delivered as both first and last in one single column, but I need to separate them out into two columns so they can be uploaded into our CRM. Is there an easy way to do this?
+
+Thanks in advance :)
+
+
+-------------
+Data -> Text to columns -> Delimited -> Space
+-------------
+Menu Data -> Text to columns -> Use Delimited as Space
+
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+Install this add in, it's so useful and will help in all future similar cases.
+
+https://www.microsoft.com/en-us/garage/stories/2017-05-16-Transform-Data.aspx
+-------------
+
+
+Full | First | Initial | last
+---|---|----|----
+John Doe | John || Doe
+Mary Duncecap | Mary || Duncecap
+Jane Donner | Jane || Donner
+Frank Wiener | Frank || Wiener
+Susan B. Anthony | Susan | B. | Anthony
+
+If this is what you are looking for:
+
+*Column B (for first name):*
+
+=IFERROR(LEFT(A1,FIND(".",A1)-3),LEFT(A1,FIND(" ",A1)-1))
+
+
+*Column C (for initial):*
+
+=IFERROR(MID($A1,FIND(".",$A1)-1,2),"")
+
+*Column D (for last name):*
+
+=IFERROR(RIGHT(A1,LEN(A1)-FIND(" ",A1)),RIGHT(A1,LEN(A1)-FIND(" ",A1)))
+

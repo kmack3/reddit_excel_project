@@ -1,0 +1,63 @@
+My VBA code is extremely inefficient. Evaluate and help me tighten it?
+Look at what is repeated over and over and what changes between each iteration. Then wrap it in a For Next loop using the incrementing variable within the loop to change the instructions within it as appropriate.
+
+    For y = 1 to 8
+       Set WWks = Worksheets("Week" & y)
+
+       Set CellToStart = WWks.Range("f20")
+ 
+       For iCtr = 1 To HowManyGroups Step 1
+           CellToStart.Resize(RowsToCopy, ColsToCopy).Copy
+           DestCell.PasteSpecial Paste:=xlPasteValues, transpose:=True
+
+           'come down 32 rows
+           Set CellToStart = CellToStart.Offset(OffsetToCopy, 0)
+
+           'come down 34 rows (after transpose
+           Set DestCell = DestCell.Offset(ColsToCopy, 0)
+
+       Next iCtr
+
+    Next
+
+
+
+Also, if it needs to see what it does realtime, turn off screenupdating at the beginning, and turn in again at the end and will move much faster if you are processing any large number of records.
+Unrelated, but work on naming your variables better with the data type in the variable name. It will be sooooo much easier for others to help you in the future. Ex:
+
+Dim rngDestCell as Range
+
+Dim lngCntr as Long
+
+Dim oObjX as Object
+
+Dim strTest as String
+
+etc...
+
+iCntr is the worst one, because your counter isn't an integer, but you make the variable look like one
+Have a look here for Microsoft's suggested coding style: https://msdn.microsoft.com/en-us/library/aa240822(v=vs.60).aspx
+those longs would be better as integers if your numbers stay small. also, deleting a bunch of rows interspersed with other rows can be pretty time consuming. you may be better off just sorting all the rows so that the blank stuff is at the bottom.
+Your code seems to be repeating itself a lot. In programming this is a very bad thing. Could you possibly add helper Subroutines or something of the like to reduce the amount of code?
+Solution Verified
+That's what was given to me on a previous post. I really appreciate your input. Can you point me to a resource that might help with naming? Or how would you have renamed the iCntr?
+Ok I'll look into how to change those longs to integers.
+
+What command would I want to use to sort the blank cells?
+I'm aware of that but unfortunately do not have the programming skills to fix it. Hence the post.
+You are awesome man!
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+No problem, I struggled with this stuff and was self taught as well, so it took me lots of mistakes and time to learn and understand some of the more common best practices. 
+
+I don't have any resources off the top of my head that I can recall, but you should just google for coding best practices and regardless of the language, you will find many useful tips and tricks. Then as you learn more or get more curious can search for things specific to VBA. 
+
+Classes will be something that you will want to research more specific to VBA if you get advanced enough to use them. Think of them as wrapper modules that you can load into new sub routines as an object and use their methods, that you custom programmed to fit your needs.
+
+As for iCntr, because you used a data type of Long, I would have used lngCntr or lCntr, I try not to use the lowercase "L" by itself though as it often looks like a capitalized I. 
+
+This doesn't really cover using the correct data types, but you will find that in your best practice research. For example, you don't want to use Long if your counter is only going to a very small number. In your case, I would have used an integer data type, as it takes up less memory. Google Visual Basic Data Types and you will get the full list and their byte sizes to help guide you for this.
+Read the book " Clean Code ". Plenty of great stuff in there. 
+Google 'Hungarian Notation'. It's my understanding that it's still used quite a bit in VBA.

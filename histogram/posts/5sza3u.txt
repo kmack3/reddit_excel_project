@@ -1,0 +1,77 @@
+INDEX & MATCH help
+If dates are not matching, then the underlying data type is usually the issue..
+
+The value AND datatype must match
+
+Feel free to dropbox the file
+Here is what I did:
+
+1. Use ADDRESS to convert the YEAR of your data search query into a ranged reference (via OFFSET and INDIRECT).
+2. Use an array formula to return the row number (ROW) if anything in the range matches the query, otherwise return FALSE.
+3. Use LARGE to grab a single row, which is our match. If there are no matches, a #NUM error is returned. I cannot use MAX, because INDEX(0) will return an array.
+4. Use INDEX to return the name of the holiday, if there is a match. If there is no match, this returns a #NUM error.
+5. Use IFERROR to catch all instances of errors and change them to "No".  
+
+Demo: http://upload.jetsam.org/documents/Holidays%20DATE.xlsx
+
+I know this is probably more complicated than you are ready for. But, INDEX(MATCH) can only be used if you are sure of the lookup data. Here, we must first translate the 
+[Also I recommend to you watching this video](https://www.youtube.com/watch?v=bMWv0AN-hSs) (I think it's somewhere on r/excel wiki). It really helped me understanding this combo.
+MATCH and VLOOKUP only search single columns OR rows..
+
+We need to dynamically create the address range to search use MATCH on the Year to the correct column
+
+Have a play with the following.. a bit simpler than u/Drakoon's answer
+
+American Holiday
+
+    =IFERROR(INDEX(A6:A15,MATCH(B38,INDIRECT(ADDRESS(6,MATCH(YEAR(B38),A3:AK3,0))&":"&ADDRESS(15,MATCH(YEAR(B38),A3:AK3,0))),0),1),"No")
+
+Italian Holiday
+
+    =IFERROR(INDEX(A24:A35,MATCH(B38,INDIRECT(ADDRESS(24,MATCH(YEAR(B38),A3:AK3,0))&":"&ADDRESS(35,MATCH(YEAR(B38),A3:AK3,0))),0),1),"No")
+Thanks a lot kind sir! 
+
+Here the file (google drive) I'm struggling with, I'm 100% sure a match do exist since it finds the match with the conditional formatting. 
+
+Sorry for luck of experience I'm trying to learn
+
+https://docs.google.com/file/d/0B4qx1oOviuHgVWltWHh4TVRTTjg/edit?usp=docslist_api&filetype=msexcel
+Your lookup table is unecassary. 
+
+A dynamic lookup across the headers can find the column with the year.
+Thanks!! I appreciate any replay!
+
+Drakoon beated you for few minutes :)
+Thanks a lot! Your skill level is so high I can't even comprehend 
+
+At least now I understand why I was stuck, and couldn't have any possibility to solve my problem with only simple  index and match 
+
+
+Where did you learn all this?
+You meant like this? I've done it for american holidays.
+
+https://drive.google.com/file/d/0B7R0Rgpc7lx0ZnpsaURRbTNueDA/view?usp=sharing
+Yeah, I modified it into ADDRESS. But I'm sure there are even more time-saving ways to do it.  
+
+I kind of just started with a lookup table and doggedly pursued that course of action :)
+Darn. At least I can console myself with the fact that my formula is much shorter (~48%) in terms of characters :)
+Arent people magical?
+
+By the way, to award clippy points to the contributor, have a lone comment replied to the correct comment like:
+
+    Solution Verified
+[VERIFIED SOLUTION #1]
+
+My god you're a sorcerer!! You solved it!
+
+Thanks very much for spreading your wisdom 
+
+Best luck
+Definitely shorter! Amazing skills I see
+Ok
+Nah, I just like excel.
+You should at least give Drakoon a Clippy Point so he can have some bragging rights here. Just reply to his solution post with SOLUTION VERIFIED :) 
+Not really. As you can see, excelevator beat my pants off with a formula that's only 132 characters long. That's a further reduction of 22%! 
+
+Plus, he didn't need no stinking array formula to do it...
+That's the spirit!

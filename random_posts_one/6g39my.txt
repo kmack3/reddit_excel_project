@@ -1,0 +1,33 @@
+6g39my
+Trouble using VLOOKUP with chosen variables that repeat portions of text (ie. a1, b1, c1, a2, b2, c2)
+[Screenshot](http://imgur.com/SwdtRe9)  
+  
+As you can see, I compared a list of variables and numbers with my preferred list of variables and the same numbers.  
+  
+I have no idea why the VLOOKUP formula produces inconsistent results.  I imagine there's some sort of text rule that I'm unaware of.  Thanks for looking at this!
+
+
+-------------
+[deleted]
+-------------
+Try setting the last parameter in the VLOOKUP to False
+-------------
+Solution Verified  
+  
+Thanks a lot!
+-------------
+Exact matching is definitely the problem!
+-------------
+Solution Verified (am I doing this right?)  
+  
+Thanks so much; you were exactly right!
+-------------
+
+You have awarded one point to _ThePhoenixJ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _d3skjet_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

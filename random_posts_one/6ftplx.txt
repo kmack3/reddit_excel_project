@@ -1,0 +1,7 @@
+6ftplx
+Creating Dynamic Named Range Based on Blank Rows
+Every day, I use an automated process to get updated statistical data from Minor League Baseball for the team I work for, and paste it into an Excel spreadsheet to help with my work in media relations. I want to use the MAX function to have an automatically updating list of our team's leaders in various statistical categories. However, the data from MiLB [comes with a blank row in between batters and pitchers.](http://imgur.com/Pg7OdYL)
+
+I need to find a formula to define a named range such that I take only what comes before (or after, if I want pitcher data) the blank row between the first "Team Total"  and "Pitchers" in Column C, and use that as a reference for an INDEX/MATCH function that I can use [to populate the leaders of various categories in this chart.](http://imgur.com/M3fjlOn) Any ideas? Thanks in advance!
+
+

@@ -1,0 +1,53 @@
+6io3a4
+Phase in revenue based on ramp up percentage
+I am trying to build a revenue forecast model that takes the number of sales reps and multiplies by a known average of revenue per rep. The problem I am having is building in the assumption of a delayed "ramp up" time - so for example, in month 1 of employment, a rep might hit 25% of quota, 50% in month 2 and so on.
+ 
+My model also has the reps being hired in different months, such that I start with none, then each month add 1 or more additional reps. 
+ 
+I have it set up so that the revenue comes in based on when the rep is hired, but I haven't been able to figure out how to phase it in based on a variable "ramp up" percentage per month. I want to avoid hard-coding so that I can adjust the % for each ramp up month and have it change for all the reps.
+ 
+Any ideas? 
+
+
+-------------
+Is each rep on their own row, with # of months they've been working? 
+-------------
+Each rep has their own row and a start date. 
+ 
+My thought was use some logic around the start date that says:
+ 
+- Subtract start date from current month (in header)
+- If the result is 0-30, use the "month 1 ramp up percent"
+- If the result is 31-60, use the "month 2 ramp up percent"
+- and so on
+
+The downside there is I would need to nest an IF for as many months of ramp-up factor as I want to include.
+ 
+Any other potential ideas that would be cleaner?
+-------------
+You can do it by days or months, up to you. If days: 
+
+Make a table somewhere with the day # that each percentage is achieved. i.e. 
+
+|   | A  | B   |
+|---|----|-----|
+| 1 | 0  | 25% |   
+| 2 | 30 | 50% |   
+| 3 | 60 | 75% |    
+
+Say this is on a sheet called "RampUP"
+
+To reference these values, use `=VLOOKUP(TODAY()-StartDate,RampUp!A1:B10,2)`
+
+This will return 25% if in day 0-29, 50% in days 30-59, 75% in day 60+. Add/modify the table as needed.
+
+-------------
+Perfect, thanks!
+
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

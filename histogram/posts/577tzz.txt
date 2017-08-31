@@ -1,0 +1,188 @@
+Does anyone here work in "Data Analytics"?
+SQL will be more important than VBA, but definitely learn both. I'm FP&A as well, but I work with a lot of data analysts. If you can do analysis and then make pretty and easy to understand reports, you'll be golden to start. 
+In my experience the combination of SQL, R, and Excel has been very effective. In the past year I've been delivering reporting from our data warehouse in ways that people haven't seen in the past. I'm supporting product management, sales, and marketing with analysis that relates our sales in different geographies with external data that can I find from public sources that gives us clues to how big the markets are in those geographies. I'm at a pretty big public company and we're really just getting serious about this, so it feels a bit risky and cutting edge. Really just been winging it, but it's very interesting and creative work. I'd say some basic data competencies with some creativity and business sense can go a long way, and the business sometimes doesn't even realize what you can do until you show it to them. Feed the bears and they keep coming back to you, similar to anyone who can generate some good reporting.
+Microsoft has launched something called the Professional program, and they have a Data Science track. 
+
+It consists of a curriculum of courses on EdX. You can take all the courses for free, or "certify" for a nominal fee, and have a qualification of sorts at the end of the program.
+
+They cover a broad range of topics from Excel and Power BI to SQL, R and Python, as well as some data science courses.
+
+Worth a look!
+
+https://academy.microsoft.com/en-us/professional-program/data-science
+I do risk management and disaster recovery. I do data analytics for disaster prediction through tableau. I also use spotfire and r to look at predictions of risk to crops or to identify dependencies among commodities. So yes I work in it, excel is a last resort, and I use it any chance I can.
+Yes.  My primary tools are python, SQL (TSQL, Oracle, and SQLite,), and Excel.  VBA and M (PowerQuery) when necessary.
+
+Started on the finance side and moved over.  Eventually I spent more time writing tools for finance people, and my role naturally shifted.
+If you want to expand your use of excel in regards to data analysis I recommend [this book](https://www.amazon.com/Data-Smart-Science-Transform-Information/dp/111866146X). 
+
+If you want to start learning some python and SQL, I recommend [dataquest.io](https://www.dataquest.io/)
+First and foremost, I strongly recommend SQL and a high degree of familiarity with pivot tables and table structures in excel.  VBA is a nice-to-have because it can bail you out in a pinch or make some things faster or possible that otherwise wouldn't be, but the truth is I make it a point to avoid VBA whenever possible because it is less transparent and generally overkill.  My main uses for VBA are writing subroutines to refresh data connections or to automate the creation/emailing of a report.
+
+More than anything, it sounds like you need to get a different job that pushes you into analytic work.  Hands-on is the way to go.
+SQL, R, Excel and PowerBI. I use them everyday.
+No one has yet mentioned it yet, but PowerPivot is a natural extension of Excel and is learning pivot tables on steroids. Learn PowerPivot and Power Query and you can accomplish a lot of what you used to need to learn programming/SQL/VBA to accomplish before.
+
+I really think PowerPivot and Power Query will be big in the future of data analysis. Also, learning PowerPivot and Power Query are the same tools used in PowerBI, so you're getting lots of bang for your buck.
+
+Edit: wanted to recommend some fantastix sources to learn these:
+
+PowerPivot book: https://www.amazon.com/gp/aw/d/1615470395/ref=mp_s_a_1_1?ie=UTF8&qid=1476332714&sr=8-1&pi=SY200_QL40&keywords=powerpivot+and+power+bi&dpPl=1&dpID=51I46fQbVoL&ref=plSrch
+
+Power Query book: https://www.amazon.com/Data-Monkey-Guide-Language-Excel/dp/1615470344
+[deleted]
+I will say as an analyst 4 years into my career and 2 months into a new role, it's really cool to see that all of us else are successful with the same toolset! SQL+Excel+Python sounds like a proven combination for success to me. 
+
+I am working for a tech company as a systems analyst. I'm an expert with SQL (Oracle, TSQL, PostgreSQL), Excel, and Access. I'm advanced with VBA and novice with Python, and Batch. I use Python and Batch for automating and scheduling more complex, recurring tasks.
+
+Moving forward, I really want to learn how to use PowerShell since I hear batch is becoming deprecated. Although I will say it still gets the job done in combination with task scheduler!
+When your customer asks for a report ask them what question they are trying to answer.   Learning the workflows and data points along with an understanding the basics of db's and table joins will help in giving them useful data.  Also being able to explain your report in simple terms is a valuable skill.  If applicable,  give them the high level and then the data set behind it rather than a huge data dump.   
+Also interested in this field! I am pursuing an accounting degree and have tried to look into learning some languages to help in FP&A! Any suggestions on where to learn the languages?
+
+I'm a data analyst specialising in fraud detection. SQL, SAS, Excel, R & Python  are the skills i'd recommend trying to obtain in that rough order. All of these are quite easy to learn if you get to reinforce them day in, day out in your job. Some are going to be organisation dependent some will come quite naturally as the result of the others. I highly recommend trying to do a course in statistics.
+ADO here.  SQL is an absolute must, you won't even get in the door without it.  
+You may also want to look into MDX (used for Microsoft analysis services cubes and multidimensional relational databases). It's relatively easy and there isn't much to it. It's basically meant to complement SQL for cubes, and you can come out of it saying you know how to handle those. 
+In addition to learning SQL, install [MS Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop/) or [Tableau Public](https://public.tableau.com/s/). They're excellent tools in data visualization which is important in most data analysis.
+Knowing SQL is a great skill to have for most analyst positions, and is extremely easy to learn. If you're thinking about learning a programming language like python or vba, pick one and stick with it until you're fluent. I'd suggest starting with excel vba since you have a high interest in ms excel.
+
+Transitioning from one language to another is much easier when you have a strong foundation/understanding of the concepts of OOP/programming, as opposed to trying to learn two or three at the same time.
+What do you do in FP&A. I was contacted about working in that field but I don't really know what the job is about. Do you do any analysis? What is your day typically like?
+Python is the way to go. VBA is a good base but Python let's you get very creative in how far your can mine large datasets. My favorite package is Pandas and use it everyday at a NYC fin inst. It reminds me of R but pipes the flexibility and support of the Python community seamlessly. Hacker News tends to have good posts and commentary on some of the more advanced/ cutting edge developments in the space, I recommend browsing their front page periodically to keep up to date.
+
+http://pandas.pydata.org/pandas-docs/stable/
+
+
+Good book to get started:
+http://shop.oreilly.com/product/mobile/0636920023784.do
+
+Google "Learn Python The Hard Way" for an online primer on Python if you don't know where to start.
+
+
+Im in process improvement / business analysis in the maritime shipping industry. SQL and VBA are hugely beneficial and used everyday for me. SQL queries are quite easy to pick up, VBA is a bit harder and I'm still working on that but its very, very useful After I get a good handle on that I'd like to try either python or R.
+mathematical statistics is a fantastic area of study. Also Python, Bash, and SQL are tools I use every day to analyze data and put it into excel docs that I use to present the key findings
+Python is bae. Syntax is easy to learn, there's a LOT of preexisting packages for some pretty heavy duty analysis that are almost 100% plug and play, but you still have the general usefulness of a full programming language.
+I'm a Data Analyst working on my programming skills to become a Data Scientist.  SQL is going to basically be mandatory in any Data Analyst position at a largish company, as will use of excel.  However depending on your specific role you may or may not have access to another Business Intelligence tool that you will use for reporting.  Learning the basics of *nix will help you interact with servers and write scripts to automate your data pulls and sometimes add additional functionality to basic SQL queries (like loops and dynamic variables).  Learning Python (strongly recommend) will allow you to do additional number crunching via packages like Pandas, SciPy, Numpy, and SciKit Learn, as well as a set of transferable skills to other object oriented coding languages.
+
+Do your best to stay away from SAS. It is slowly dying and although many jobs will desire it they (in my experience) tend to be at older, set-in-their-ways companies whereas the current trend is towards Python and R.
+FB&A? I know one of the Big4's has a national data analytics team, which I was previously on.  The accounting firms are shifting towards using analytics a lot more in their processes.
+I've moved from an FP&A role to more of a data analysis/business intelligence role and a lot of it came from self-initiated process improvement projects using my SQL and VBA skills in Access and Excel to show managers how to better clean/use/visualize our data. There was a gap needed for an analyst that could balance between an IT/ERP and the business function. 
+SQL is the call of data while VBA typically automates a repetitive excel task. It you are looking into deeper analytics look into R or Stata. 
+Great post and like your career objectives. We can help if you need support and guidance. CVM People (UK). 
+[deleted]
+Awesome. Do you enjoy FP&A? I think the routine of it may get tiring.
+>the business sometimes doesn't even realize what you can do until you show it to them
+
+This hits home a bit.  What I've found is that every time I have impressed the hell out of upper mgmt, it is because I went out of my way to put extra effort into presenting something in a unique/innovative way.  And every single time I went into it feeling like I absolutely should not be spending so much time on it making it super fancy because they probably won't appreciate it anyway.  The truth is, sometimes they don't...but when they do, it makes up for the other times.  I know we're getting away from OP's question a bit, but you made an interesting point.
+I'll echo everything you've said, but also add Tableau to the list.  In terms of visualizing large datasets, it seems that it's rapidly becoming an industry standard.
+I feel like I am decent at making reports and just figuring stuff out but I lack on any statistical knowledge.  How difficult is that to relearn and how necessary is it ?
+very interesting and definitely in!
+That looks awesome, have you gone through this track? I'm wondering what the work load is like, if I can take a few courses at a time even though I'm working full time. The estimated effort seems like it's managable.
+Lordy, I having trouble merging two datasets in Tableau. Kicker is, they're from the same site. 
+
+New columns will appear, but extracting is just not happening. The platform is making 100 million+ rows for a database that has, like, 400,000 new rows. 
+
+I don't have the software open, but do you have a suggestion? My new and old data, for example, has at least one similar column to help unification. 
+I missed a big part, ask people if you can help them I work with our traders to do quantitative analysis of commodities on the side. If you ask people they will give you data to analyze.
+I, too, am interested in Data Analysis.  Learning SQL a bit better now, very knowledgeable in Excel and VBA, but have never touched R or Python (which I plan to learn soon).  My question is: What sort of business knowledge is needed for a role like this?  Is simply being able to manipulate raw data enough, or do you need to have a more fundamental understanding of business ?  I'm a college graduate, but my degree is in Marketing and Sociology, not Business.
+That is awesome!
+
+Any advice on how to do this if my current role requires or even has the potential to utilize this skills?
+
+What side do you prefer?
+thanks!
+What types of jobs or roles can I look into that might put me into that path without starting at absolute entry level?
+Is Power Pivot free? Would probably need to request permission to add it to Excel.
+I just went to a Power BI session at Microsoft yesterday. They said the long term plan is to phase out PowerPivot and PowerQuery in favor of having all the functionality reside within Power BI. So I'd advise OP to stay ahead of the game and learn to use Power BI.
+took courses in stats in college. probably could use a refresher. 
+
+i guess my issues is that if my current role doesn't really need or even have the ability (?) to dabble in some of these languages, even SQL, how i could go about training myself. seems like it might be hard without some type of context or problem to solve. 
+
+i am starting to be trained on Qlik but i don't think that's really widely used or all that interesting?
+Also in fraud detection. Any book, tools, etc you would suggest for some one just starting out? I'm getting pretty good with SQL and have been a over average with Excel for a while. Just looking for how to look at data differently or new tools I can leverage really
+interesting. are there any classroom-instructed courses (NYC area) that you can recommend or is it something that can be self-taught? 
+interesting. will do. 
+
+i'll need to get the OK from the big wigs i'm sure but i can't see why not. although are either of those free?
+May I ask how you learned?
+very interesting. it seems like a very tough field to crack into. do you agree there?
+
+do you think i could "learn" (at least attain basic working knowledge of) SQL, polish up my Excel skills and utilize my financial analyst/FP&A switch to make a lateral move?
+Can you tell me a bit about the career?
+
+Do you enjoy it? How can I set myself up for something in data analytics?
+Well, forecast cycles and monthly reporting can get pretty repetitive. I'm lucky enough to work in a role where I get to do a lot of ad hoc analysis and reporting which keeps things interesting. In my spare time I work on automation which is actually challenging and gives me something to really get in to. But yeah, I totally get the desire to get into a pure analysis role. 
+If you're interested in going deeper into analysis, I would suggest looking into data science coursework.  As someone who left FP&A for data science, I can say there are benefits to both. FP&A is stable and pays well without requiring much (or any) knowledge of programming. In addition to learning the financial structure of companies, you will also get a solid foundation for understanding data structures. Data science offers greater depth and breadth for those who want to venture farther down the rabbit hole of analysis, but at the expense of having to learn some statistics and programming. If you get bored easily, data science might offer you more variety when it comes to learning new types of analysis.  However, if you're like me you will sometimes miss using Excel because it can be so dang fun(!) to manipulate data by hand and watch your work in real-time.
+Good point, in conversations w others in the field I'm sometimes pitied for not using it yet, prolly need to get on that.
+It depends on the job, but in general (in life)  it can't hurt to get handle on the basics, which are not difficult. Right now the heaviest stats I'm working with is correlations and regression forecasting.
+I've just gone through the first few units. I put in about six to eight hours a week and finished the tsql class in about 7 weeks. I skipped some of the labs but those can definitely take longer if you are struggling with a concept. 
+Only partway in but so far I've found them manageable. 
+Merging with Tableau should be avoided if at all possible. I was on site there with one of their senior trainers and he agreed that you should only merge data in tableau if you have exhausted all other options. 
+
+Merge data outside of tableau.  Clean the data outside tableau. Put it into a nice format outside of tableau. THEN plug in tableau and make your chart. 
+You are not alone. We tested tableau where I work and had big issues with getting our native data to merge with their system. If its not in tableau ready format, it's just like a square block in a round hole *all* the time. Very frustrating. But their sales team is apparently good at what they do because we're still using it...
+We use ETLs. I use Alteryx and some colleagues use Information Builders Data Migrator. Neither is cheap, but Tableau isn't either. I like Alteryx quite a bit. 
+I think that this functionality was greatly improved in the new version of tableau. I would have to see the data to understand your trouble, I have done it minimally and it has always worked fine.
+If you haven't already paid licensing costs, try QlikView. You'll probably have a better time importing the data without issues.
+Find ways that you can automate manual processes (in our FP&A Dept there were/are many).  Start small, build a reputation, and discuss with your manager what you would like to do in the future.  
+
+Asking for stretch opportunities outside of your current responsibilities in an area you're interested couldn't hurt either (unless your manager is protective/jealous of staff).
+
+As your reputation grows your manager may not have a choice were you end up (your reputation may precede you).
+
+
+perhaps operations or sales analyst?
+General "business analyst" roles can give you a fair amount of exposure to those types of projects. I wouldn't worry too much about seniority, not all entry level positions are alike. If you're good enough and motivated to learn you can make a nice living that grows quickly.
+Free in Excel 2010, need a certain version of Excel 2013.
+It's the exact same tool in PowerBI. If you're learning PowerBI, you're still learning PowerPivot and Power Query.
+~~Exel~~ *Excel*
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+I got a DBA certificate from a local community college.  It covered basic database fundamentals, then Access specific stuff, then a SQL class.  After that I took a SQL for Developers class at a larger community college.  The Access class I did online, the others I did seated in the evenings.  Community colleges are overlooked a lot but offer great classes.  In NYC I am sure you would have a ton of options.  
+Yes, they're both free. Even if you can't install it at work, they're good tools that you can play around with at home too!
+No I don't think it's overly difficult to get into but that depends on the level you are trying to enter at.  I was an engineering major so when I got my first job I already had most of the skills that they needed.  However MOST of my new-hire coworkers didn't know much other than some excel (many not even including vlookup).  SQL (Structured Query Language) is actually extremely simple so you shouldn't have a problem picking it up as long as you have something to practice on.  Just like every other coding language reading a book ins't going to suffice you actually have to type out the code in order to learn it.
+
+Data Analyst positions can have a pretty wide range of responsibilities.  Right now for example I actual do very little analysis in my day to day job.  Instead I have been tasked with owning a couple datasets (so I serve more as a Product Manager of the data) and it's my responsibility set the requirements for data collection and ensure the data is accurate and good quality so that it is useful for Data Analysis.  I want to get back to actually doing the mathematical analysis instead of data warehousing, data pulls, and simple reporting which is why I am trying to make the jump to Data Science.
+
+PS if you want another resource for learning Python check out [Project Euler](https://projecteuler.net/).  It's a series of math/comp sci problems that will help you get used to manipulating various data structures and developing/using algorithms
+great insight here. i can see myself eventually getting bored with the monotony and routine of FP&A and want to add to my skills toolbelt anyway. 
+
+how did you make the change and did you do it within your company or did you have to jump?
+
+also, what made you want to change?
+100% this. Tab is great at using the data. Not good at making the data useful, despite everything they'll tell you.
+Haha, thanks! 
+
+Yeah, I'm just doing a school project at this point, but couldn't believe it would just keep loading like that. 
+Thanks. Yep, I'm just using it for a few months for school right now. Not sure why (we've been on JMP Pro for a bit), but I'll power through this. 
+
+Cheers! 
+The issue with my company is that IT locks everything down.  I don't have access to any of the databases and can't even get MS Access on my PC. I try to create reports on large data sets by manually pulling data and then hosting it in Excel.  Usually ends badly as excel can't handle the data.  Have you ran into similar issues before ?
+
+Do you have a good basis in math/stats?  I feel like I am decent at report building and automating of tasks but I don't remember a lot of average math abilities and totally blank on anything involving stats like z scores and standard deviations.  
+I already almost completely automated our monthly reporting package linking Excel to Outlook via VBA
+I'll look into it. I'm in FP&A now so not sure if Sales Analyst would be all that different.
+Agreed just tough at 30 years old to take on that kind of risk.
+
+Would hope to make more of a lateral move but I imagine that's not so easy!
+cool. wonder if it would be something i could just download or if i'd have to somehow run it past IT or something. 
+I probably misunderstood. Perhaps they're trying to shift it away from being an Excel plugin?
+interesting. is it something that, in your opinion, is better learned in a classroom setting? or are there enough solid resources to teach yourself online?
+Awesome
+Hey can I message you to ask about Data Analytics?
+
+The motivation for the change came from being sincere about exploring my interests.  While working in finance I really enjoyed creating tools in VBA, and I found predictive analysis to be the most interesting topic.  But I also felt that the forecasting methods we used in FP&A were somewhat basic and often limited by a reliance on extrapolating historical trends.  When I found out that developments in computer science had made it possible for the average person to do predictive modeling on large datasets using a laptop computer (a privilege once reserved for the fortunate few who had access to supercomputers) I got really excited and knew that I had to get a taste.
+
+I'm lucky to have been making the change gradually while staying within my company and simultaneously working towards my MBA at heavily quant-focused business school.  I'm always looking for ways to apply data science to the work we do at my company, and recently I was fortunate in finding an opportunity that evolved into an internal R&D project.  
+
+If you want to get your feet wet for free, try out some of the tutorials on kaggle.com.  If you decide to pursue data science further, one of the best things you can do is talk to people currently in the field and seek out opportunities to collaborate with other people on data science-related projects.
+How did you guys get into FP&A? I'm a new accounting grad working in Internal audit and i absolutely hate it. I would like to work in either FP&A or data analytics. I'm trying to learn python and SQL but not really sure what to learn..its confusing me quite a bit because i'm not sure how they're are actually utilized in real work.
+If you don't mind trying new things you could go with Anaconda (python plus all the analysis goodies you can handle).  Anaconda  may be installed in the user directory, bypassing IT.
+I hope you wrote up a lot of documentation on how that all works, or may god help those who come after you.
+What I was getting at is that your specific company and job don't seem to be analytical enough. Some other job with a similar or even the same title that is more analytical is what you need to get hands on experience to actually learn SQL in depth.  I was an ops analyst and learned SQL on the job and we did some pretty technical stuff all the time.  It also gave me the opportunity to lead a data conversion for an ERP implementation project. Job title means squat. 
+30? That's nothing.
+FWIW this is what I used at my last job to automate a TON of stuff for finance. I made a finance-specific mini database and plugged power pivot into it. Then with some basic training for people, finance became very self sufficient making pivot tables for all those ad hoc or monthly reports they needed. 
+Personally I liked learning this in a classroom setting.  I am pursuing my degree online and so 95% of my classes have been online and I love it, but for SQL and SAS (which I am taking now), seated has been great.  I've found I have a lot of questions and conversations cement the knowledge better than anything online.  
+
+Also you mentioned Python.  I don't know Python but I can say the handful of people in my department who know it have a big competitive advantage. 
+Sure go ahead
+just networking tbh. i came from middle office ops at a BB. 

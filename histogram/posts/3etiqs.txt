@@ -1,0 +1,146 @@
+Why all my jobs can be automated
+I think there is a huge disconnect between people that know coding and what it can do and the majority of people that work in certain areas.  I've worked in finance for the last decade or so and there were certainly pockets that coded everything, but the majority could barely use Excel, let alone know that you could automate their jobs with it.  
+
+I've redesigned certain processes and automated a vast amount of things for big companies too.  The upside is that my department was really efficient.  The downside was that no one else knew we were doing it that way. When that department was shut down, and I moved to another one doing a similar job, I basically started over re-coding their job into chunks of automated tasks.  If it goes to corporate IT then they have to re-code/QA/create documentation etc etc.  All I had to do was make it and show the team how to use it so my overhead was massively lower.  
+I've been doing this shit for 25 years.  I go into every job with the goal of automating myself out of a job.  I'm not even good at VBA but I can automate so much, but there is always a part that requires human intervention.  Usually because of GIGO.  There is also the tick and tie aspect.  Sure you can use check figures and conditional formatting to make it easier, but someone has to look and figure out why they don't tie.
+
+
+No matter how well you build something, when dealing with data dumps, a user will fuck you up.
+I could automate a lot more of my tasks if all of my time wasn't taken up with said tasks.
+From what I've seen, the Excel skills of the vast majority of individuals in accounting and finance seem to top out at =SUM().
+
+Not one in a hundred could distinguish a line of FORTRAN from a line of Java from a line of Python, and VBA might as well be ancient Greek.
+Hop on over to /r/automation where you will learn how fast every single job is going to be automated in a couple decades or less.
+If we automate everything, then we can only ever do it that way without incurring technical debt, or worse, we have to re-hire the capability to do the things manually again.
+
+In most industries there is enough regular change to justify a bit of thinking before over-automating all of our processes.
+Automate the task, never tell anybody you automated it, make money off the digital slave, drink beverages and surf the web, welcome to reddit.
+What kind of jobs have you had? That has not been my personal experience at any job I've had.
+The gap between people who work in analytics and can code vs those that can't is huge. There are positions that expect you to do both (see data science) where it's often not about automating an existing report, but more about prototyping the report or an analysis.
+I'd say 30% of my role can be automated (and it already is). All of my reporting is mostly semi automated (some of our data sources don't play well with VBA commanding it. BEx)
+
+However the other 70% of my role that's actually Ad Hoc analysis, people skills and strategy cannot be automated and that's why I still have a job.
+Well, if you're talking most entry level jobs out of college, you may not be wrong.  For the most part, first post-college jobs are typically grunt work, testing you for aptitude.  
+
+You also have to realize that to *truly* automate something, you have to devote a lot of time; it's really no different than in-house development work with release timelines, customer feedback, etc.  You may be able to help automate some of the basic tasks, but if the end-user is unable to diagnose or fix minor bugs, the task can never remain automated.  You will own the spreadsheet *ghost voice* foreeeeeveeer.
+
+Source: worked/work with a lot of people that have difficulty writing emails, much less using Excel.
+Just like a long time ago you may be cobbling to realize that that process has become more automated, such is this.
+Agreed, I'm no excel wiz compared to people on this sub but I'm miles ahead of anybody at my office. 
+
+My first job out of college I was a price estimator and to calculate the price out would cost the customer. I was given a spreadsheet to use, it was extremely simple only using addition abd multiplication formulas. Once I started working there after about 3 months a realized that what would normally take me 15 minutes, could be automated and I could have it done in 1 minute or less. So I put in a bunch of if/then statements, taught the sales team how to use it, basically making my job obsolete. My bosses recognized this early on and keep my just to do small tasks until they found another job I could use my skills in. I believe most good employers will recognize when you automate jobs and keep you just because they know you can keep doing things like that too make the job easier for everybody in the long run. 
+
+Plus, I'm still the only person that can use excel in the office so if something goes wrong or it needs updating then I'm always there to correct it. 
+> but the majority could barely use Excel, let alone know that you could automate their jobs with it.
+
+I once heard someone call another co-worker a genius for creating a basic form in excel.
+I have to prepare an analysis that is due every month. 
+It’s to figure out the customer satisfaction, in different locations, countries, different aspects of the product. 
+I get the survey results as an excel sheet. My predecessors didn’t automate shit, I had to do everything by hand. 
+
+
+I’m a student worker and only have a 20hr contract, but after a month or so I was fed up with this boring shit:
+Add this, devide by that, count this and so on. So I sat down and started automating the thing. Some of it I figured out by myself,
+with other things I needed your help (sumproduct, yay). Basically I killed my job and they could cut the hours in half now, since you don’t need as much time as before.
+I don’t really care, since it’s my last month, but my successor will be bored to death as they most of his work is now automated. My bosses reaction was like “oh, okay, cool” –
+honestly he doesn’t understand half the work that’s behind it, but it’s cool.
+
+ I’m pretty sure at some point somebody will change something in the reporting layout and they’ll have to adapt the functions 
+to keep it working. Unless somebody is willing to invest time in order to understand the stuff I built, I’m pretty sure all that stuff is useless 2-3 months from now, as they will go back to 
+doing it manually.  
+
+
+There's a good point here.  Many many things can be automated in Excel. However, corporate structre (and often regulations) are such that it's a tactical solution if it's possible at all.  Corporate oversight, documentation, proper QA, and security mean that sometimes even though you *could* automate something, you shouldn't.
+
+In response to OP, I think it's also important to note the role of the analyst. The people with the business knowledge that are needed to put the automation together, configure the systems, analyze the client's inbobound and outbount data structures, and so forth.  A good analyst with strong VBA skills can work efficiency magic.  Try hard to get on that side of the fence if you're in danger of having your job automated into redundancy.
+
+Edit: also [The XKCD I have printed and hanging at my desk](https://xkcd.com/1319/)  
+I am not sure if you are aware that you might get the same salary despite the fact that you did the job of few people.
+I feel you. These users. I feel like I create Excalibur and hand it to a baby.  Can't lift it, can't resist and ultimately just put it in there mouth and poop it out. 
+[Relevant XKCD](https://xkcd.com/1319/)
+Sometimes talking to your boss helps. I told one of mine I could spend a half hour creating a custom report for each participant in a class, or take two days to develop the automation that would take a couple of clicks by the end. It was easy to figure out by the number of participants where the break even point would be. 
+Can confirm: 4th year finance student. =Idon'tunderstand(mosteverythinginr/excel) 
+I'd hope the FORTRAN looks more like Greek than VBA. At least VBA has some similarities to .NET. 
+thanks for sharing that!
+FA and now DA
+>  Ad Hoc analysis
+
+That's where the job security is.
+There was a 2 point question in trivia the other night asking "The vertical fields in Excel are known as columns, what are the horizontal fields called?".  The people that come up with the questions and the people that play are largely 20s-30s, so I was kind of shocked.  I probably just take my knowledge of technology for granted because it seems so basic to me, but most people don't even think about it.
+> honestly he doesn’t understand half the work that’s behind it, but it’s cool.
+
+That's forever going to be an issue with non-technical managers. They don't know what needs to be done, how long it takes, can't help you with advice, and don't really appreciate the complexity of what you do.
+
+I'm currently a software developer for a company where nobody has ever seen a line of code, so I feel your pain.
+>Unless somebody is willing to invest time in order to understand the stuff I built, I’m pretty sure all that stuff is useless 2-3 months from now, as they will go back to 
+doing it manually.  
+>
+
+This is exactly why you comment your code. 
+
+Just when you think you've made something idiot proof, they keep on inventing better idiots.
+>Excelibur
+[Image](http://imgs.xkcd.com/comics/automation.png)
+
+**Title:** Automation
+
+**Title-text:** 'Automating' comes from the roots 'auto-' meaning 'self-', and 'mating', meaning 'screwing'.
+
+[Comic Explanation](http://www.explainxkcd.com/wiki/index.php/1319#Explanation)
+
+**Stats:** This comic has been referenced 201 times, representing 0.2711% of referenced xkcds.
+
+---
+^[xkcd.com](http://www.xkcd.com) ^| ^[xkcd sub](http://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](http://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](http://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_ctivbpr)
+Hyperbole.
+ELI5 those acronyms please?
+Can't teach a computer that... Yet.
+But... what are the horizontal fields called?  Don't leave us hanging like that.
+I, like many other of generation y, grew up with computers and played games as well as unintentionally crashed hard drives by installing some bullshit program since I was a kid.
+I’m by far no programmer nor an expert when it comes to excel, however I claim to have some experience when it comes to the *general* understanding of software,
+computers and such. 
+
+During my last internship at a well-known automotive manufacturer, I worked with a lot of reports all the time. 
+The management wanted a report which can do this, that and this. I was like “oh, okay – let me check, but I highly doubt that we can do this with excel”. 
+So I started my research. Turned out you could do *maybe* 90% of the stuff they wanted and have a working excel list, which everyone could use easily and I could build the excel sheet. 
+
+However, the window-dressing was missing. It didn’t look suitable to present the management. So I asked one of the IT guys, who knew VBA fairly well. 
+He sat down for a couple of days and programmed all the fancy stuff they wanted. There it was. It looked good, but it was fucking useless. You couldn’t really work with it, because you couldn’t sort it, you couldn’t properly search for things, people could screw up all these things easily and so on (I’m sure there’s a way that someone can incorporate all these things, but then again it’s only an excel sheet that has to look good for one or two management reports a month, so I’m talking about the cost-benefit ratio). 
+
+Long story short, they scrapped the whole thing (after the management complained) and went with the quick & dirty method, which – surprise – worked really well. 
+
+And then I sit there as the intern, thinking to myself “I told you so…”, after everyone’s ressources got wasted… 
+
+I didn't even code. I used functions. Sophisticated functions, but functions. I don't even know if I can comment there...? 
+Haha, this is so true.
+It is very likely Financial Analyst and now Data Analyst, but you can never really be sure with vague acronyms like that.
+http://acronyms.thefreedictionary.com/FA
+
+http://acronyms.thefreedictionary.com/DA
+
+Good luck!!
+Yeah but if/when they crack that will anyone have a job/need to work?
+I think they're called "rows".
+
+Then again what do we know, it's not like we visit internet forums talking about Excel or anything.
+[My story begins in nineteen-dickety-two. We had to say dickety because the Kaiser had stolen our word twenty. I ***row***ed after that rascal to get it back, but gave up after dickety-six miles.](http://i.imgur.com/6qoiZAM.jpg)
+> And then I sit there as the intern, thinking to myself “I told you so…”, after everyone’s ressources got wasted…
+
+Good ole management! That'll be us one day.
+Ah, I see. Well, there is a way to do it still. If you right click a cell and select insert comment, then it makes a hover over comment box where you can type what the cell does. I only do it if the functions get complicated. 
+I'm going to assume OP was a "Force Analyzer" and is now a "Dragon Amulet."
+Until AI's can become personable - yes.
+I sure hope that, forty years from now, I remember some of this and can be a bit more open towards new things.. 
+Ah I know that version. I don't think it's practical though. I think I'll create another table with a manual or something 
+Yeah here he is at his new job;
+
+http://www.starlinksgifts.com/product_p/fb04.htm
+Free Agent
+
+Dangerous Anarchist
+I don't know, lack of personality hasn't stopped some of the people I work with from finding jobs.
+RemindMe! 40 years
+As you said, being in Generation Y, I think the world of technology is going to be utilized so much better in the next few dozen years as the people who love and use technology come to positions where we can actually make decisions. 
+We're just kidding OP! Feel free to share with us what you actually do haha.
+Sounds like quite the promotion to me!
+Hell yes, holograms! 

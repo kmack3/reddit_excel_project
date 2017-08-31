@@ -1,0 +1,48 @@
+6fzqym
+Moving cells to other columns and up
+So well, here it goes. I have an Excel sheet which I need to transform into a dictionary. The terms are given in Italian and English, and they (unfortunately) are sorted vertically. It means that in A1 I have the English term "bearing", in A2 I have the Italian translation for "bearing", in A3 I have the English term for "truck", in A4 I have the Italian translation for "truck", and so on. 
+Now, what I need to do. I need to move the content in even-numbered cells by one cell to the right side (in other words, to another column to the right side), and then I need to move them up by one cell so the Italian translation matches the English term. The English terms, if it is possible, should be also moved up by one cell so that there are no blank spaces between. It should look like that: A1 "bearing" - B1 Italian translation, A2 "truck" - B2 Italian translation, etc. I am sorry if this question has been asked before or if it is obvious; I am no IT-related person (and I am not good at Excel, even though I tried to learn it), and I've been looking for a solution for a long time. Please don't go hard with me, I really-really looked for it, in three languages, and maybe I am just unlucky this time.
+
+
+-------------
+Run this subroutine in VBA;  Alt+F11 copy paste into worksheet module
+
+Select A1 and run the code.. try on sample data first...
+
+It will copy A2 to B1, move to A2, delete Row2, repeating down the column moving the value under the active cell to next to the active cell, then deleting the row underneath...
+
+    Sub movetext()
+    Do While ActiveCell.Value <> ""
+        ActiveCell.Offset(0, 1) = ActiveCell.Offset(1, 0)
+        ActiveCell.Offset(1, 0).Select
+        Rows(ActiveCell.Row).EntireRow.Delete
+    Loop
+    End Sub
+
+-------------
+How many rows in total? Is it in a table form?
+
+e:
+This is a very crude method, but it should work:
+
+Make a second column next to the words. In the first cell, next to truck, put the number 1 in there. In the second cell, next to the translation, put the following function: =IF(A1=1;0;1) and drag the function (or double click the black corner). Then you should have two columns: one with all the words, and another with numbers either 0 or 1. 
+
+1 meaning the english word, 0 meaning the italian translation.
+
+Next you make a table (insert table) from the two columns. You can now filter the table to show only the values next to 1. Do it, and copy all the english words. Paste them in a different sheet. Then filter to show only the 0's and repeat.
+
+/note, that in the function you should use either semicolon ";" or a comma "," depending on your excel version
+-------------
+> Sub movetext()
+> Do While ActiveCell.Value <> ""
+>     ActiveCell.Offset(0, 1) = ActiveCell.Offset(1, 0)
+>     ActiveCell.Offset(1, 0).Select
+>     Rows(ActiveCell.Row).EntireRow.Delete
+> Loop
+> End Sub
+
+Thanks for your answer, it does work. What should I do if there are a few Italian definitions below English one? It's pretty much mixed as I see (the file contains over 15000 rows...). There's an English word e.g. in A15, and three Italian definitions in A16, A17, A18. Then, another English word in A50, and two Italian definitions to this word in A51 and A52 respectively. Is there any macro that could help me?
+-------------
+If there is some kind of identifier that could be used yes.
+
+

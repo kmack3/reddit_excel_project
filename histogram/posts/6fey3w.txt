@@ -1,0 +1,54 @@
+[help] need to mass delete "false" rows
+This macro should do what you need. Replace A with whichever column has the TRUE/FALSE. Make sure to do this in a new copy of your workbook in case something goes wrong you don't lose data.
+
+    Sub DeleteFalseRows()
+    
+    Dim ws As Worksheet
+    
+    For Each ws In ThisWorkbook.Worksheets
+    
+        For x = ws.Range("A" & ws.Rows.Count).End(xlUp).Row To 1 Step -1
+        
+            If ws.Range("A" & x).Value = False Then
+            
+                ws.Rows(x).Delete
+            
+            End If
+        
+        Next x
+        
+    Next ws
+    
+    End Sub
+This can be done with VBA
+
+Note, do a backup before you try this
+
+    Sub Delete_Rows()
+
+    Dim rng As Range, cell As Range, del As Range
+    dim sht as Worksheet
+
+    For x = 1 To 250
+    set sht=Sheets(x)
+    set del=Nothing 
+
+    Set rng = Intersect(sht.Range("Z1:Z5000"), sht.UsedRange)
+    For Each cell In rng.Cells
+    If (cell.Value) = "FALSE"
+    Then
+        If del Is Nothing Then
+            Set del = cell
+        Else
+            Set del = Union(del, cell)
+        End If
+    End If
+    Next cell
+    If not del is nothing then del.EntireRow.Delete
+    Next x
+
+    End Sub
+
+This assumes the TRUE/FALSE is in column Z and it goes 5000 rows. Adjust as you see fit.
+This appears to be working,  its been running for about an hour and i am getting a little antsy.  Do you know if it is reading each value line by line? 
+An hour sounds way too long, but if it's legitimately 250 sheets with a lot of rows per sheet, I guess that's possible. If you want to stop code while it's running, hitting the Escape key multiple times usually does the trick.

@@ -1,0 +1,36 @@
+Having trouble with website login macro
+Wow, I had no idea excel could do any of this. I am slowly teaching myself vba, but this is impressive. 
+At what part is the macro not working? Have you tried stepping through it line by line to see what works and what doesn't?
+Yep, it breaks down at the username input step.  I get the "Object doesn't support this property or method" error 438
+Replace
+
+    .getElementByID("USERNAME-citiTextBlur").Value = "Username"
+    .getElementByID("password").Value = "Password"
+
+with
+
+    .document.getElementByID("USERNAME-citiTextBlur").Value = "Username"
+    .document.getElementByID("PASSWORD").Value = "Password"
+
+Note the password element in all caps is necessary.
+Awesome, thanks man.  It works like a charm. If you have another second, the sign on button code is a little funky too.  I tried switching between getElementByID and getElementByName, neither seem to work...
+Solution Verified
+Replace 
+
+    Set button = .document.getElementsByName("Sign In") 'id of the button control (HTML Control)
+    button.Submit
+
+with
+
+    Set a = .document.getElementsbytagname("input")
+    For Each e In a
+       If e.alt = "Sign On" Then Exit For
+    Next
+    e.Click
+
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Perfect, thanks
+No probs.

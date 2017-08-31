@@ -1,0 +1,28 @@
+big
+3gpylh
+NFL Fantasy Draft Big Board indexing/matching Issues
+
+Hi all - 
+
+Spent a good amount of time learning Excel VBA to create a button that allows me to enter name of player drafted, and team selected. 
+
+Now I am trying to transcribe that information onto a "Big Board" in excel to show exactly what friend drafted which player in a given round. 
+
+We draft in a system of: 1,2,3...10,11,12 Then the next round will start with 12,11,10...3,2,1, and back again starting at one, you know, the best way. So to have Team 1's picks relayed onto the big board, just having an equation that adds 11 (11+1 = full 12 teams) to the match (then multiplying by the round number), will not work. I do not know how to organize the equation where the "match" in the "index" will skip the 1st time the match occurs (for a second round pick, 2nd time the match occurs (third round pick), so on and so forth to the 17th round. 
+
+
+http://i.imgur.com/ehbMfVc.png
+
+
+-------------
+Try this. On your first sheet, have an absolute number for each selection. 1-12, 13-24, 25-36, etc.
+
+Then on your big board page, set up a table to the right (or below) that has those numbers. 1-12 in the first row, 24-13 in the second row, and so on.
+
+Then you can use an index/match to populate the big board by referencing the off set table and matching on the overall pick number.
+-------------
+So instead of indexing the entirety of the draft, just index by round, and have the round numbers next to it. Match like that. OH.
+
+Thank you good sir.
+-------------
+You could index by Round and set up a different named range for each round. Or just index on the overall pick number since on a grid, you will know the number of each spot on the grid, and the number of each slot on the list.

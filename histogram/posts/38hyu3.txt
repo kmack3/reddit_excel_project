@@ -1,0 +1,20 @@
+Autosum by using 'Alt+='
+[deleted]
+Also does subtotal(9,[range]) if the column is filtered.
+Flair changed to `Pro Tip`
+Finally! Thank you! Even the most obvious stuff of Excel is still very new to me. I'll be using this in the future for sure!
+
+Have a great day and thanks again!
+Probably my joint favourite shortcut after ctrl+d which copies the cell from above.
+Read this as "Autism caused by Alt +=". Immediately wondered if AltJ's music had been the cause
+dangerous trick, alt + = also sums across and excel isn't smart enough sometimes.
+Also works if you have multiple columns to total, highlight the bottom row where you want the totals and Alt+=.
+and if you hit "=" one more time, it will finalize the formula without having to hit enter. not that hitting enter isnt just as easy, but its faster to hit "=" twice.
+CHeck out our advice thread repository which can be found in our wiki, or on the sidebar.
+I was wondering this myself.
+Just the pro tip
+If you really want a trick to copy the cell from above, put the cursor in the cell under a formula and try control +' (the apostrophe). Works most impressively with a longish formula with no absolute references. 
+I wouldn't really consider this dangerous; Excel does highlight the range that it will use for the sum.
+This is how Autosum works as well, I think it tries to determine which range you want to sum and  Autosum it.
+
+If you have a single cell selected, autosum looks up from that cell first, then if it doesn't see any numbers it looks left. 

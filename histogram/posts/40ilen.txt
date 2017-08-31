@@ -1,0 +1,144 @@
+Hiding sheet macro
+Try this
+
+    Sub HideSheets()
+    
+        Dim ws As Worksheet
+    
+        For Each ws In ThisWorkbook.Worksheets
+
+            If ws.Name = "Summary" then Goto NextSheet            
+
+            'CHECKS SHEET1, COLUMN A (1)
+            If Sheets("Summary").Columns(1).Find(ws.Name) Is Nothing Then
+                
+                'HIDE SHEET IF NOT FOUND IN THAT LIST
+                ws.Visible = xlSheetHidden
+            
+            End If
+        
+    NextSheet:
+        Next
+    
+    
+    End Sub
+
+    Sub User53881()
+    
+    Dim ws As Worksheet
+    Dim lastrow As Long
+    Dim i As Integer
+    Dim j As Integer
+    
+    Set ws = ActiveWorkbook.ActiveSheet
+    ws.Range("A1").Activate
+    lastrow = Cells(Rows.Count, "A").End(xlUp).Row
+    
+    For j = 1 To lastrow
+        For i = Worksheets.Count To 1 Step -1
+            If Worksheets(i).Name = ws.Cells(j, 1) Then
+                Worksheets(i).Visible = xlSheetHidden
+            End If
+        Next
+    Next
+        
+    End Sub
+
+Slick. Much cleaner than what I was about to post. 
+error 9, subscript out of range :\
+
+debug =        If Sheets("Sheet1").Columns(1).Find(ws.Name) Is Nothing Then
+Friendly comment, this will also hide Sheet1, or whichever sheet has the list of sheets unless OP included that in the list (which I wouldn't do because it would probably be named something like Summary or Master).
+After changing "sheet1" to "summary" this wound up giving me an error and hid everything :[ .  Even my macro to "unhide all" is failing.  I had to exit and reload the file.
+Hey, you helped me make this a few months ago and it just started failing. Any idea why I get a "run time error "1004" 
+
+method 'visible' of object '_worksheet' failed"? I haven't changed the code at all...
+Didn't work...but it didn't give me any errors..... D: ??
+Cheers. Let's see yours?
+Hey, you helped me make this a few months ago and it just started failing.  Any idea why I get a "run time error "1004" 
+
+method 'visible' of object '_worksheet' failed"?  I haven't changed the code at all...
+Works fine for me, do you have a sheet called Sheet1?
+Do you perhaps not have a "Sheet1" in your workbook?
+I'm not sure what you're doing wrong - it works without any problem for me.
+Which line does it break on? Hit debug.
+    Sub User53881()
+    
+    Dim ws As Worksheet
+    Dim lastrow As Long
+    Dim i As Integer
+    Dim j As Integer
+    
+    Set ws = ActiveWorkbook.ActiveSheet
+    ws.Range("A1").Activate
+    lastrow = Cells(Rows.Count, "A").End(xlUp).Row
+    
+    For j = 1 To lastrow
+        For i = Worksheets.Count To 1 Step -1
+            If Worksheets(i).Name = ws.Cells(j, 1) Then
+                Worksheets(i).Tab.Color = rgbRed
+            End If
+        Next
+    Next
+    
+    For Each ws In Application.Worksheets
+        If ws.Tab.Color <> red Then
+            ws.Visible = xlSheetHidden
+        End If
+    Next
+    
+    For Each ws In Application.Worksheets
+        With ws.Tab
+            .Color = xlNone
+        End With
+    Next
+    
+    End Sub
+
+It's embarrassingly clunky in comparison but....
+
+    Sub hide_sheets()
+    
+        Dim oWS As Worksheet
+        
+        For Each oWS In Worksheets
+            If oWS.Index <> Sheets(1).Index Then oWS.Visible = xlSheetHidden
+        Next oWS
+        
+        On Error Resume Next
+        For Each cell In Sheets(1).Range("A8:A" & Sheets(1).UsedRange.Rows.Count)
+            Sheets(cell.Value).Visible = True
+        Next cell
+        On Error GoTo 0
+        
+    End Sub
+
+/u/epicmindwarp wrote this not me.
+
+Solution here
+
+https://support.microsoft.com/en-us/kb/210684
+
+or, I posted a different way to do it in this thread that might not encounter this error.
+
+Good Luck!
+No I don't have a sheet named sheet1.  The active sheet that I'm doing this in is called "Summary" and as per Fuzzius' point, I would like to NOT hide this sheet.
+It was protected...somehow.  It's fixed!  Thanks!
+In the code, change where it says "Sheet1" to "Summary" and make sure you add the Summary sheet to the same column!
+So I don't want to add Summary to the column...this sheet is kind of blank.  It gets populated by a macro that refers to a list (employees).  So it gets filled up with names/sheets (column a) and their corresponding hours worked (column b, c, d, etc).  There's a macro that removes rows (employees) who have 0 hours worked for that time period.  So bam, what's left are employees who have actively worked for that time period.  I want this macro to simply check column A and hide every sheet that is not listed there.
+
+If this macro were for me then I would say it's not a big deal for me to type in summary in column a everytime and then hit the macro.  But the person who is using this is (shockingly) worse at excel than I am.  HA
+Not in the column, in the VBA code.
+
+On Line 8, change Sheets("Sheet1") to Sheets("Summary")
+
+Edit: Sheet is one of those words that starts to look really weird after you type it a few times...
+I've edited the original code for you so it doesn't hide the Summary sheet, and it's already linked to it. Try it out.
+> After changing "sheet1" to "summary" this wound up giving me an error and hid everything :[ .  Even my macro to "unhide all" is failing.  I had to exit and reload the file.
+
+
+solution verified
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

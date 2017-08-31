@@ -1,0 +1,34 @@
+Do you use VLOOKUP in Excel. Now try Index Match - A good alternative with better capabilities.
+Big fan of the index match. I've recently had to use a data file with countless variable pivot table ranges and it's eliminated the need to chop and paste alot of data.
+
+It does take a few tries to get it down but, one you do, it's a definite time saver.
+Tangential question that has nagged me for a while:
+
+For both MATCH and VLOOKUP, why is the default "match_type"/"range_lookup" value 1 (TRUE) rather than 0 (FALSE)? In my use I have yet to ever have a need to use the approximate match that would call for.
+
+I'm always looking for exact matches (and prefer to not need to have the data sorted).
+
+Any thoughts? Am I just using the functions in a less common manner and the rest of the world uses TRUE here?
+I know they say the exact opposite in that article to what I'm about to say, but I have attempted to use index/match as an alternative in a number of different workbooks.  In all cases, the calculations became so slow that it bogged down the entire sheet.  I'm talking 100's of index match calculations.  In the end, vlookup worked fine.
+
+Still a good article and a good alternative to vlookup.
+INDEX-MATCH is my go to every time. VLOOKUP is just as complicated in syntax but much less versatile. VLOOKUP demands that your lookup column be to the left of your return column; INDEX-MATCH can pull from any column in the worksheet, or even another worksheet entirely. INDEX-MATCH is also much faster than VLOOKUP because you're only working with two columns/rows instead of an entire range (if it's slow then you should simplify your ranges - problem solved). VLOOKUPs are a pain because you have to count the columns to return the values you want; INDEX-MATCH does not require hardcoding anything and the columns are adjustable, therefore it is less prone to pulling the wrong data if you are chainging the worksheet. VLOOKUP by definition only looks up your value in a column, but by using two MATCH statements you can query a 2d array or use multiple criteria without using an array function.
+
+VLOOKUP is just plain awful and I have yet to find any instance where INDEX-MATCH is not a thousand times better.
+And use  [named ranges](http://www.contextures.com/xlNames01.html)! **INDEX(marks,MATCH(B11,name,0))**
+
+It's very powerful and also logical for the end users. 
+Why use Index Match when you can use Vlookup or Hlookup Match? Best of both worlds!
+[deleted]
+Definitely not, as far as I can tell. I don't know under what circumstances you'd really be looking up the closest approximation, I either want the exact match or none at all.
+I've never had performance issues with index/match unless I'm using an array formula (in which case I use index/small). Tens of thousands of index match in less time than it takes to move my hand from the enter key to the mouse. 
+Dynamic named ranges (using offset() ) were quite powerful in the excel 2000/2003 days.  Tables, introduced in 2007, are far simpler to setup and use in most scenarios.   They automatically create range names, fill formulas and expand chart series.  The only places I use dynamic ranges anymore are for advanced charting.
+To an index match user, it sounds like you're saying "my abacus is fine and does everything I need to. That calculator thing just gives me a headache with all those buttons!"
+If you only need vlookups then use them. But they have limitations that index match does not.
+
+If you're not willing to extend your repertoire and avail yourself of the greater functionality in excel then that's on you.
+I do agree it is a little difficult to write two functions. But once you use it for a few times, it becomes much easier. For large number of data sets, Index-Match really is a time saver.
+it really isnt that complicated, i thoguht that at first too but when it boils down it is actually easier to understand than vlookup i think.
+Hm, tell me more! 
+I'll defer explanation of tables to the University of Reddit course by VertexVortex here:
+http://excelexposure.com/2012/07/23/introduction-to-tables-guest-excel-lesson-by-vertexvortex/

@@ -1,0 +1,30 @@
+All Excel functions by category, with actually helpful examples. My favorite function reference.
+Great resource. Thank you!
+That was an awesome source, and thank you very much for sharing it.  I use Excel a lot and foresee spending quite a bit of time on that site.  
+
+Thank you!
+Nice coverage, but why is it missing "like"?  example of code using it:
+
+    Public Function IsAZ(CellRef As Range) As Boolean
+        Dim UsedCell As Range
+        Dim TexVal As Long
+        Dim Alph As String
+        
+        IsAZ = True
+    
+        For Each UsedCell In CellRef
+            If Len(UsedCell.Value) > 0 Then
+                For TexVal = 1 To Len(UsedCell.Value)
+                    Alph = Mid(UsedCell.Value, TexVal, 1)
+                    If Not (UCase(Alph) Like "[A-Z.,!?;: ]") Then
+                        IsAZ = False
+                        TexVal = Len(UsedCell.Value)
+                    End If
+                Next TexVal
+            Else
+                IsAZ = False
+            End If
+        Next UsedCell
+    
+    End Function
+

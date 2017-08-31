@@ -1,0 +1,24 @@
+Correlation or regression - when to use which?
+Think of regression as doing a lot of correlations while accounting for the other variables. 
+
+So, let's say you've got 4 variables,  age,  height,  weight,  and foot size.  If you're only interested in the pairwise relations, you can correlate each pair of variables. 
+
+Now, let's say you are interested in predicting foot size.  If you just looked at the correlations between age and foot size, height and foot size,  and Weight and foot size, you would have three values. You wouldn't know how much they overlapped. Regression lets you combine the partial correlations in a way that tells you how much each factor adds to the picture.  Since we can assume that height and weight increase with age, and that all three variables have some contribution to door size, we are able to say something like, "age is correlated with foot size 0.35, taking that into account,  weight adds another 0.1, and height another 0.05. So together they account for 0.5. (I'm ignoring corrections and other factors here). 
+
+If you do a regression between two variables, it is the same as a correlation. If you want to understand a bigger picture,  go with regression.
+
+All that being said, I'd start by correlating all the variables to get an understanding, then conducting regressions that attempt to answer interesting questions - - does your organization want to understand how to do something better, or to reduce costs for something? Those questions should guide you. 
+Exploratory data analysis. First step is always a correlation matrix, identifying highest correlations in absolute values, then building regression models for those variables. Plotting different variables with high absolute value correlations against each other is usually the best place to start when hypothesizing regression models. If you have linear or monotonic relationships between variables, linear, polynomial, logarithmic or exponential regression would be indicated. Oscillatory behavior would indicate ARIMA time series modeling rather than regression modeling.
+Yes, so I have multiple variables here, so apart from correlation which, as you've said, focuses on pair-relations, I can then conduction a regression analysis (as u/hrlngrv29 has added below). 
+
+Thanks to both of you. Much appreciated!
+Solution Verified
+Solution Verified
+
+You have awarded one point to _SubtleXKCDReference_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _hrlngrv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

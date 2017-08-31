@@ -1,0 +1,50 @@
+How do I use my Dates as a reset?
+`=IF(YEAR(A2)<>YEAR(A3),100, C2+LN(B3/B2)`
+=b1/averageifs(b:b,a:a,"<=1/1/"&right(a1,4),a:a,">=12/31/"&right(a1,4))*100
+[deleted]
+[deleted]
+Thanks for answering. Unfortunately your formula does some very funny things like this:
+
+http://oi68.tinypic.com/wlpvmc.jpg
+
+There should be only one "100" each year in June. Any ideas what went wrong? 
+SOLUTION VERIFIED!
+I'm on mobile so you may have to format the two dates into a date
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+difficult to say without access to the source..
+Hmmm, I get a value error. Is that right? I want to make my index in column C.
+Sure. Here we go :)
+
+https://www.dropbox.com/s/j0xz9ec2loornvt/Workbook1.xlsx?dl=0
+
+Also my previous formula C2+LN(B3/B2) was wrong so I changed it to C2*(B3/B2).
+in c1, put:
+=B1/AVERAGEIFS(B:B,A:A,">="&DATE(YEAR(A1),1,1),A:A,"<="&DATE(YEAR(A1),12,31))*100
+As I suspected, the answer has nothing to do with my part of the formula. You can use just your part of the formula and get the same answer for each answer given.. it just maybe looks wrong to you as it happens to equate to 100.. or I do not fully understand the expected result
+Thanks for your replies. I used your formula in column C but I think its wrong. I've made the index manually for the first calendar year in column D and if your formula worked, column C should match column D.
+
+http://oi63.tinypic.com/whfkfq.jpg
+The expected result is that on the first day available in June, the index resets at 100. So if you were to refer to June 1st, 1973 then it should be 100 instead of 94.616974
+
+Edit: Okay I see what you did there. You reset it at the first day in January. How would I reset it on the first day in June?
+
+That is not what you describe in your post. You state that for the start of each CALENDAR year.. it restarts at 100.. June 1st may be the first day of the FINANCIAL  year for some countries...your post even states 1st January..
+Sorry, my mistake! I'll make the change to the post.
+`=IF(AND(MONTH(A3)=6,MONTH(A3)<>MONTH(A2)),100,C2*B3/B2)` for June 1st 100 :)
+Solution Verified!
+Hey thanks for the help. If you can give me one last piece of advice. I just need to make a modification to the "B2" value in that formula.
+
+That B2 is the first price of the 1st financial year. When it comes to the second financial year, that B2 value will need to change to the first price in the second financial year. In the third financial year, that B2 value will need to change to the first price of the third financial year. Any ideas on how to do this?

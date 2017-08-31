@@ -1,0 +1,56 @@
+6iovtb
+How to combine values into one total based on cell value
+That title makes my head hurt.
+
+So, what I'm trying to do is figure out a way to have a list of items with no duplicates and then pull the quantities from a report where there *are* duplicates into a total of quantities for all the items.
+
+This for example is a report of the data I have. Duplicates make me have to go line by line and count, and in my *actual* report I have thousands of different items. It's not just A, B and C.
+
+Item | Quantity
+---|---
+A | 9
+A | 32
+B | 2
+C | 6
+B | 0
+C | 3
+A | 12
+
+This is what I want to create as quickly and painlessly as possible:
+
+Item | Quantity
+---|---
+A | 53
+B | 2
+C | 9
+
+
+
+-------------
+You're looking for a Pivot Table my friend :)
+-------------
+Lol I live and die by pivot tables all day I never thought to pull a pivot table out of a larger table. That's it!
+
+Solved
+-------------
+Solution verified
+-------------
+reply to his post with "solution verified" to award the point!
+-------------
+
+You have awarded one point to _8BallRunOut_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Solution verified
+-------------
+no no, *his* post
+-------------
+
+You have awarded one point to _wiredwalking_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Can we have a giggle about this, you and me
+-------------
+once I hit 400 :)

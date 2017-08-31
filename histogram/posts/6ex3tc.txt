@@ -1,0 +1,55 @@
+Need help coming up with a formula to mark a 24-hour workday that doesn't start at midnight
+try
+
+    =INT(A1-TIMEVALUE("6:30 AM"))
+
+the `INT` will throw off the formatting, so just reformat the result as a date.
+This is an interesting one.
+
+Let's assume your time stamps are in column A.  
+
+Place this formula in column B:
+=IF((A1-ROUND(A1,0))<0.2708333333,A1-1,A1)
+
+
+How I got here:
+If you convert 7/19/2015 6:30 to a number, it gives you 42204.2708333333
+
+What this tells me is that .2708333333 is the 6:30AM portion of the underlying value.
+
+So, if we round the date value to trim off any decimals using the round function and then subtract the original date value, we are left with just a value that translates to the time of day.  From there, we plug in what we found to be 6:30AM in excel speak.
+
+So if the decimal value in the excel timestamp is greater than 6:30AM it spits out the date in column A.  If it is less than 6:30AM it spits out the date in column A minus 1.
+
+Give this a shot and see if it works with your data -- interested to see if any bugs crop up and we can troubleshoot.
+I think the formula you just posted extracts the date value, regardless of the time.  
+What I need the formula to do is take all times between midnight and 6:29AM, and give me the date for the previous day. If that makes sense.
+
+
+The dates that I have for column A span several years. So I think that converting 7/19/2014 at 6:30 am to a time, and leaving that time in the formula is problematic.   
+When the timestamps for column A hit noon on 7/19, your formula actually gives numbers for the previous day. For example 7/19/2014 12:04, the workday that the formula gives me back is 7/18.  
+  
+I think, and obviously there's more than 1 way to skin a cat here, that the formula should involve something like   
+IF 12:00<Time of A1<6:30 then subtract 1 from the date value.  
+That's my logic, obviously I'm having a hard time expressing that in a formula. So I'm open to suggestions on the logic.
+> What I need the formula to do is take all times between midnight and 6:29AM, and give me the date for the previous day
+
+It does exactly that. 
+
+It also returns the same date if the time is 6:30 AM or later. Did you try it?
+I solved the issue at least for the noon thing -- use:
+
+=IF((A3-ROUNDDOWN(A3,0))<0.2708333333,A3-1,A3)
+
+My understanding on the formatting piece of it is that you can have timestamps in the date value but format the cell to only display the date and not the time.  This way you dont have to do any conversions or anything, just change the format to "short date."
+
+Let me know if I am not understanding that part of it.
+> =INT(A1-TIMEVALUE("6:30 AM"))
+
+What the fuck. Yes. It totally works. I am a dummy. I don't know what I did wrong the first time around.  
+Thank you so much!
++1 Point
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,109 @@
+We have a "beer club" at work. Every friday someone brings in a different kind of beer that everyone rates on a whiteboard. They asked this week if I could "digitize" it.
+You could use a PivotTable to show how each person rates each type of beer. This way people could get a quantifiable look at their taste preferences.
+The "standard drinks" calculation doesn't seem correct to me. 12 oz of beer @ 5% would equal 0.6 oz of alcohol (total) in a standard drink. So 12 oz of a 5.6% beer should be 1.12 drinks -- not 1.5. 
+
+12 oz * 5.6% = 0.672 oz of alcohol per 12 oz
+
+0.672 oz of alcohol per 12 oz / 0.6 oz of alcohol per standard 12 oz drink = 1.12 standard drinks
+
+So the Vale/Ale and Steam Rail @ 4.5% should equal 0.9 standard drinks -- not 1.4.
+
+Some of these drinks come in containers that aren't 12 oz, right? I'd add a column in there to note container size. A 22 oz bottle of 5% alcohol would equal 1.833 standard drinks*, so if you all drank one bottle apiece, you can see how that would add up more quickly. 
+
+\* 22 oz * 5% = 1.1 oz of alcohol (total)
+
+1.1 oz of alcohol (total) / 0.6 oz of alcohol per standard drink = 1.833 standard drinks
+Haha, no scores lower than 3.7, you guys like your beer! If I were to nit-pick, I'd move your running total out of that column since it suggests that those numbers belong with those rows.
+I like what you did.  For the numbers, I would center justify all of the ratings. Then I would bold the weighted averages.  
+
+You could also have maybe a stoplight, which could be based on a specified rating value.  Maybe if it's higher than the average, it's a green color, lower than the average than it's red, and at average, yellow.  That way, you can see what people like instantly, without having to read the numbers.
+
+Lastly, maybe a graph showing the average ratings for the group for each beer, with a toggle where you can switch it to individual people.  Then a plot graph showing where everyone falls with ll the beers.  
+
+I think it's cool though what you're doing.  And you don't need a pivot.
+We do this exact thing at my workplace!
+
+Column 1: Beer name
+Column 2: Rater
+Column 3: Score out of 100
+Column 4: Free Text
+Column 5: Person who brought in Beer (just add one per beer)
+
+Run it through a pivot table - I make sure it covers about 2000 rows so that I'm not constantly updating the table as time goes on - it'll ignore the blanks.
+
+I have one PT showing beers by average score (sorted), one showing max/min of each beer, and one showing the tally of who brought in beers (so that there aren't slackers.
+database with columns: Employee_Name, Beer_Name, Volume_of_beer_in_liters, Alcohol_Percentage_in_Beer, Score, Number_of_beers_of_this_type_consumed, Alocohol_consumed
+
+could be summarised in a pivot table
+
+Alocohol_consumed should be simply = Volume_of_beer_in_liters * Alcohol_Percentage_in_Beer * Number_of_beers_of_this_type_consumed
+
+please note: the names of variables I provided are stupid
+Here's a pic of a report I did recently.. I formatted it quickly to look like something you might be able to use for something like this.
+
+In each cell, the top number would be that individuals rating and below it would be min-max ratings of the group.  Extrapolate that to average for each beer and each person on the corresponding axis
+
+http://i.imgur.com/8nzxR6f.jpg
+
+*apologies for shitty quality.. I can't upload screenshots so I had to pic w/ phone -.-
+Sigh... I wish I could go back to the days when I didn't care about normalization.
+
+Good luck with this! It looks great!
+As small-ish set of data that will be regularly collected, it sounds like a job for Google Forms and Sheets. You could even have everyone rate more flavor aspects, too. 
+MAKE ALL OF THE DECIMAL PLACES THE SAME, YOU GODDAMN ANIMAL
+
+Seriously though, make all of the decimal places the same (1 or 2 decimals) and add a right indent to keep the numbers off the cell borders.
+That's a great idea! Thanks
+It doesn't have to be a pivot table.  You can do the same thing, and have greater control over the look, as well as make it dynamic.  
+
+Just a make a table with index match.  Much better IMO.
+Standard drink is different in Australia. Almost all the containers would be 330mls, but a standard drink is 10grams of alcohol heere. 
+>  I'd move your running total out of that column since it suggests that those numbers belong with those rows.
+
+Seconded.  It took me a while to figure out what was going on there.
+I thought about that, but Google's Sheets doesn't look as pretty :P
+
+As for flavour aspects, it would probably be too much hassle to get everyone in the office to break down the beer into so many ratings, but I'll raise the issue :)
+Shit you're right, good spot. 
+And if you keep it running, then you'd be able to tell a person what kind of beer they like. If they say "oh! I LOVE IPAs" you can be all "actually Steve, you rate IPAs lower than any other type of beer, regularly. You hate IPAs. Quit being a hipster."
+
+then you follow the preference profile of the cute girl and make sure you bring in the beer you know she's going to like and/or get drunk on. 
+
+...If you're evil. 
+in this situation, INDEX MATCH sounds like walking on knees on a road that could be quickly travelled with in a car
+It's easier for everyone to use - you can just export it to Excel when you have the data
+> As for flavour aspects, it would probably be too much hassle to get everyone in the office to break down the beer into so many ratings, but I'll raise the issue :)
+
+You'll quickly see how futile collecting attribute data is with an untrained panel, especially with a scale with such low resolution (hint, observe the standard deviations and despair).
+People like you open my eyes to just how powerful excel *really* is!
+I like the way you think.
+I see this going well...
+Fucking Steve.
+Where as a pivot table sounds about as aesthetically appealing and dynamic as IKEA furniture.  
+
+Pivot tables are great for cookie cutter bland tables that don't require much thought.  
+
+If you're going to make a chart for beer, put some personality in it.  This isn't a work requirement, or based on a deadline.  This is a labor of love.  If you're going to work on something, really make it fun.
+
+It's the difference between writing a personal thank you note, or giving a store bought thank you card.  Is one harder than the other?  But which one lets you have it be the way you want it?  
+
+Pivots are not the end all be all of excel.  They are great, but too many times is the boiler plate answer "pivot table."  
+Why not just do both and use GETPIVOT to populate a nice looking report?
+
+Then again, I have made pivot tables very pretty in the past..  it just takes some wherewithal to do it right.
+
+I work with pivot tables daily, and while yes, standard format is pretty ugly, there's a LOT you can do to improve the look.
+No, you miss the part where you can filter and adjust the pivot table nearly on the god.
+
+Want to see just Billy's favorite brand? Want to see the favorite brand across whole company? Or maybe make a ranking of people who drink the most? All-in-one, nearly in real time, without having to rebuild your table or data from scratch
+
+I guess you are one of those people who prefer to have one decent looking report, over something that can be adjusted on the go, to have an ad hoc analysis
+I never said Pivot Tables are not useful, or that they suck.  I did say that you don't always need a Pivot Table, and if you're going to be making a presentation, I would rather make my table than adjust a Pivot. 
+
+As with excel, there's always more than one way to do something.  Many people on this sub forget that.
+
+Haha, don't forget to hit refresh though!  
+
+Everything you've said can be done just as easily with a custom table, and you'll learn more about excel that way as well.  And I would go for real time, over nearly real time every time.  
+
+Sorry that I have a different point of view than you, but I'm the type who knows what I'm presenting and what data is relevant.  But yes, the table is very important, and not only does the data have to be correct, but the layout and format have to be presentable.  

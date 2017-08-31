@@ -1,0 +1,175 @@
+What would you consider Beginner, Intermediate, and Advanced Excel skills?
+Totally feel you. To answer your question, the levels, as I expect them to be, are:
+
+* Beginner: Graphs, tables, basic formulas (SUM, AVERAGE, etc.)
+* Intermediate: Pivot tables, more advanced formulas (IF-THEN, TRANSPOSE, VLOOKUP, etc.)
+* Expert: Custom macros and automation
+
+The levels, as I've discovered them to be:
+
+* Beginner: Use less than 8 fonts and font sizes, understand that you can't see data because you accidentally hid 14 columns
+* Intermediate: No circular formula errors, be able to print reports with all columns on the same page 
+* Advanced: Format spreadsheets in an easily-readable manner. Know the word "Macro" and have some intent of eventually learning how to record one. 
+Beginner: Point and click interface. Only doing simple math.
+
+Intermediate: Can type out formulas, have dynamic fields and complex calculations.
+
+Advanced: Can use more logical excel formulas, chiefly vlookup, if, concatenate, and left/right/mid.
+
+Expert: Know what VBA is and be able to identify a problem that can only be solved with it (even if you cant actually solve the issue).
+
+The thing about the curve is that 99 percent of office workers know word and outlook pretty damn good and act like Excel will give them cancer. The ones that "know excel really good" know how to cram data into a pivot table and move things around until it looks like whatever they want it to look like. These people also generally have no idea what they did to the data and dont really know what their analysis says "but sales are up 3 percent according to the pivot!"
+
+In terms of what Excel is capable of, it should be much harder to get to my definition of "Advanced", but when out of 5000 people, you are one of the 15 that can run a nested if with vlookups, that makes you the one eyed man in the land of the blind.
+
+edit: Lots of people putting Macros as Advanced. I think you people are talking about making space shuttles in groups that are working on getting their bicycles working. If you are doing VBA, you have beginner to advanced developing skills. It isn't really saying anything about your "excel" skills. You've left excel pretty far behind. Its just the framework you use to develop your custom code.
+> Is everyone really this hopeless at Excel or did I just happen to stumble across an office full of tech illiterate mouthbreathers?
+
+Both.
+
+People are too scared to muddle around in Excel to see what it can do. Also people don't care. It can do SO much and you can learn everything you want to do just by referring to the toolbar buttons and nothing more.
+
+And in an office, people just learn from the predecessor, who also knew nothing so the flow of nothingness continues.
+
+There are wizards out there that can change an office completely (I have done something similar), and unless they make things stick - people forget!
+____
+If you can use formulas, simple formatting, validation and graphing tools, then you're a beginner.
+
+If you can use everything in the Excel menus and ribbon confidently, then you're an intermediate user. 
+
+If you can make your own macros from scratch, then you're approaching expert.
+
+There is no true expert in Excel, because there's always something new to learn!
+
+*P.S. Flair changed to discussion. Let's keep this place tidy!*
+Is there a site I could go to that teaches me better excel use. Aside from a MS Office class at a community college?
+Beginner: Basic formulas, tables, and layout/formatting
+  
+Intermediate: Pivot tables, SUMIFS, VLOOKUP, HLOOKUP
+  
+Advanced: Macros, VBA, DAX, Data Modeling
+I Googled a formula that automatically worked out the age of a person to the day. My colleagues are still amazed when they use it, with some even suggesting I take a Mensa test.
+Great question that poses no right answer. To put this in perspective Excel is only comprised of 4 layers - Application, Workbook, Worksheet, Object - to go a bit deeper into objects (cell objects specifically) their values can only contain - Text, Numbers, Formulas and Boolean. Realistically 50% of Excels functions are in typing text and numbers into cells the other 50% is in manipulating those text and values (Formulas, VBA, etc.).. Excel is a great program because of it's ease of use both to a positive and a detriment. Unfortunately the issue I have found is company's are unwilling to give employees the means or environment to fully develop into an efficient Excel user because its so simple to just jump in and do much of the same that everyone else has been doing. I consider myself a 4/10 in Excel and I work a 40 hour a week job for a Fortune 500 company with a group that automates more than 200++ reports an hour using various Microsoft Office products - Excel / Access / SharePoint lists. To really answer your question about what makes an Advanced Excel user - once you have reached black belt status you realize you are back to the beginning as a white belt with more to learn.
+When you say you made a drop down menu do you mean you enabled a filter on a ranged data table on their sheet? What'd you do for them exactly?
+Beginner --> sort/filter, <50% of ribbon features, formatting 
+This level will get a lot of non-analytical work done and I imagine the vast majority of people in corporations at this level. 
+
+Intermediate --> junior analyst / sales account manager
+Easily manipulates graphs (knows series, axes, format)
+Comfortably uses pivot (getting good at pivot takes time because it really is about understanding how data works)
+Knows most common functions (ie match/index, vlookup, offset) really well and applies it at right scenarios.
+Can look at pretty much any graph or problem and knows where to research and has a vague idea about how to approach it. In other words, has a broad understanding of what excel can do even though hasnt tried most of them.
+Expert --> we go into the VBA world. Solid understanding of the excel object model. Can turn an excel file into a full fledging desktop style apps with GUI and connected to data warehouses. 
+
+I have to say that being able to apply what you know how to do in excel to solving real business problems is what makes an excel expert in my mind. Regardless of the actual depth of knowledge you possess of excel, once you start using it to automate analysis and feed systems the newly acquired BI...I'm going to call you an expert. Even if you never create that sexy dashboard, manage to create a VERY basic SQL server by using the table functionality, or hell...creating a slick GUI for data entry for the know-nothing sales team, I will be impressed by you showing me the trends of my business, factors involved then recommending the actions to take afterwards.
+
+I've seen novice excel users that used nothing but vlookups() provide more business value using excel than the newly hired excel wizard that boasted all the skills needed to make excel do things no one thought it should.
+One of my co-workers couldn't figure out how to press control+q to run my basic data export macro.
+
+ I consider myself some where as an intermediate because although I can read and write in VBA, I can't teach it. However to my co-worker, I'm an excel god. 
+TIL I am an Expert :D
+great thread idea!
+Beginner: Able to enter data, do arithmetic with cell values (not =1+212, rather = A1 + B2), reference other cells, simple charts, simple formatting, simple use of built in functions in formulas, basic filtering, sorting, able to read tables
+
+Intermediate: know more than the beginner, reference other sheets and workbooks, complex formulas (conditionals, arrays, error handling), index+v/h/lookups with matches, array formulas, named ranges, simple data structures (e.g., lists, simple tables), data validation, conditional formatting (including formulas), able to record macros and manipulate the recording, filtering, formatting with styles, subtotal function, data consolidation, pivot tables with calculated fields, for data analysts - able to use data analysis, evaluate formulas, debug formulas using precedents and dependents, data types (including "1" vs 1 vs '01), text functions (concat, using & instead of concat, mid, left, right, etc.), understanding the difference between =search and =find, add new buttons to ribbons, create custom lists
+
+Advanced: know more than the intermediate; reference other data systems; understand complex data structures; recover corrupt workbook data; use vba to: create new functions, forms, event handling, able to automate processes and complex behaviors with multiple workbooks;create custom addins; able to tell when there's a space in a blank cell; knows what ctrl-` does; for data analysts - power pivot and power query
+Beginner: using Excel
+
+Intermediate: Formulas & basic VBA
+
+Advanced: Advanced VBA, Power Query (M) and Power Pivot (DAX)
+
+Advanced++: SSAS
+>Know the word "Macro" and have some intent of eventually learning how to record one.
+
+This cracks me up. People in my office do it too. They think because they used the word macro once and tried to record one they are experts...
+> Format spreadsheets in an easily-readable manner. Know the word "Macro" and have some intent of eventually learning how to record one.
+
+This qualifies for the title of Wizard is some offices.
+
+Source: Am Wizard.
+I had a coworker say I was doing "rocket science" with Excel. So fucking funny. 
+
+>* ...be able to print reports with all columns on the same page 
+
+Hahaha. I remember the day I learned that skill! 
+>Format spreadsheets in an easily-readable manner.
+
+Oh yes. The office I referenced in my OP had *the worst* designed spreadsheets I had ever seen. I came across the spreadsheet used for tracking invoices, and the genius who designed it thought that having the company logo take up 2/3 of the top of the page while having a tiny sliver of space down the bottom to enter any data in size 8 font was acceptable. The company logo was a freeze pane so you couldn't get away from it either. To be fair, they knew it was a horrible design; they just didn't try to fix it because no one knew how to make new one and were terrified of messing up this one because it would fuck up their whole business.
+
+Most of their spreadsheets had random fucking colours everywhere too. I don't know why.
+Pretty much this.
+
+In my work environment, I'm considered by peers an advanced user on excel just because I can write a couple of complex array formulas, know a lot of keyboard shortcuts and have a good logical understanding of Excel. I guess it also depends on the type of work you do and how it can open up doors to more advanced solutions.
+
+Compared to the people I've seen in this sub, I'm more or less a beginner to them. Everyday at work I learn something new on Excel and I love it!
+> There is no true expert in Excel, because there's always something new to learn!
+
+I learned how to write macros from scratch years ago, and usually write basic thermodynamic iterative simulations in excel. The point is, I just learned last week that I can get polynomial curve fit coefficients for a data series by using an array form of "linest()", thereby bypassing the tedious graphing curve fit method. Always learning new tools.
+Yikes. Everyone I work with is beginner. No wonder the whole office comes to me :(
+lynda.com has some great Excel courses. There is a monthly fee, but I believe you can sign up for a trial period and see if you like them. 
+It really depends on what level you're at and whether you're performing general office functions or something in a niche field. Assuming you're not trying to do astrophysics or something like that: if you don't know how to sort, filter, or pivot, I suggest starting there. 90% of things I've seen done in a work setting could be covered by those. You should also know some basic lookups, either VLOOKUP or INDEX-MATCH (or the mythical HLOOKUP). Rather than find a specific site, just find one that explains these concepts in a way you can understand.
+
+If you're beyond that level, I'll give you some advice my buddy gave me: find something you do repetitively and find a way to automate it. Google like crazy, and possibly buy a book on VBA. Hope that helps as a starter.
+Take a look at ExcelIsFun on Youtube. Best Excel lessons on internet by far.
+Not a site but I've found that the 'For Dummies' book series is really good. I'm an intermediate/advanced user and I learned loads from the 'Excel Dashboards For Dummies' book. I'm now reading through 'VBA Programming For Dummies.'
+All sites are great. The problem is curriculum. What to learn first when how which using which site. Learn these in this order:
+1. sort + filter
+2. Data Format (numbers, date)
+3. formulates and ifs
+4. text manipulation (concatenate(), &, text to columns, left(), mid(), right()) 
+5. vlookup, sumif
+6. Graphs (takes a bit of practice)
+7. pivot (takes a bit of practice to get your head around)
+
+If you have come this far, you will generally know how and what to learn next.
+
+
+
+
+/r/learnexcel
+Also using VBA to build a SQL query via ODBC.
+Agree with this Advanced list.  I am not required to do a ton of VBA.  It is not necessary for me in the day to day stuff.  DAX for sure.  
+I would probably include Index/Match as an "Intermediate+". Something that intermediate users might be able to get by without but not enough to qualify as Advanced. 
+Lol and rofl.  
+
+I wonder if we should issue degrees in filosophy... the ability to file documents alphabetically......
+
+No, I didn't come up with this, it was in a sci-fi short story I read several years ago.  It inferred that people were "dumbing down" with time until a truly intelligent person was extremely unusual.  Time travel was involved with a medical bag getting transported into the past.
+Excel is a tool like any other. And it can do many things. Companies hire people to do their job. In some cases it's to use Excel, via some company built spreadsheet to do that job. The manager should be concerned if someone cannot do their job, but not so much if they don't know Excel. The people that built the spreadsheet should not have made it so that only an Excel expert would be able to use it, just like everyone that drives a car is not a mechanic.
+
+Also, not everyone takes well to formal logic, or data structures. But unless that's there job, it's not a problem.
+
+My professional background with Excel began with work involving inherited spreadsheets. Some had dozens of tabs referencing a data tab. I streamlined it because I could never find anything. My background with VBA started the same way so I could repeat the same processes over time. I had a need to be efficient, though part of this is because I have always been lazy.
+If they were entering data, it was likely a data validation. Excel's own in-column auto-complete feature isn't very consistent. A more sophisticated way could include some event handling to trigger a form with a combo- or list box.
+> They think because they used the word macro once and tried to record one they are experts
+
+Basically how I roll.
+> Obligatory "I know some of these words" gif <
+You're either way smarter than the average person, or you just made up half of those words. 
+Really? No way! Gonna go rewrite some macros now...
+Regression analysis
+Thanks. I'll look into that.
+Since I learned INDEX(MATCH) a few months ago I haven't used VLOOKUP.
+I agree - 100% lazy developer. Not lazy out of choice but out of necessity, if you can't make a spreadsheet that can be used by anyone - you will be responsible to everyone when things start to break.
+That sounds awesome, where could I read more about that?
+Heh. I wasnt trying to be pretentious, but that probably just makes it worse.
+They aren't made up but he should instead be writing this stuff in a proper programming language instead.
+I've also heard chandoo.org is pretty good.
+I still use VLOOKUP just because it's a faster formula if i only need to do one or two columns. But INDEX is more versatile
+Microsoft's own Office support (including its help text from F1) have some useful (albeit generic) information.
+
+[Data Validations in general](https://support.office.com/en-sg/article/Apply-data-validation-to-cells-c743a24a-bc48-41f1-bd92-95b6aeeb73c9)
+
+[Data Validations for filling items in a LIST](https://support.office.com/en-sg/article/Insert-or-delete-a-drop-down-list-fdde2fb6-e257-4c62-b794-1427762428c6?ui=en-US&rs=en-SG&ad=SG). It's important to note that the "reference" can be a specified range (with addresses), a manually entered list with items separated by commas, or a named range (preferred).
+
+There are some limitations in the data validation method. It's effectively a "cell format" which can be overwritten if someone pastes over it. The drop down list that appears will always have a font that's a degree smaller than the font of the cell. The list will always appear in the order  of the cells you reference or the list you typed. There is no auto-complete or smart-complete to narrow down the selection when you start typing. If you have more than 10 or so items, let alone dozens (it happens if you deal with colors, names), it's a hunt and peck exercise and self-defeating. This is also why it's smarter to use a named range. This way you manage the range, and can extend it to include more rows without touching the original data validation setting again, AND sort the range's contents in alphabetical order. 
+
+If a form is implemented, you can format the combobox (which is what the in-cell drop down is) to have a larger font, it has it's own self-contained auto-complete (if you type C, it will prepopulate and scrolldown to items that start with C), and can be made smarter with a smart complete (if you type CAT, you can write vba code that displays only things that contain CAT as a substring).
+Excel's a great tool, but it's overused to death in so many situations. In R, the second use-case he mentioned is a one-liner, and the first is probably far faster (even without using e.g. Rcpp) and easier to implement.
+Ok great. Thank you. I'll look into this also.
+This is a great site. Thanks again!!
+I think this is important for a lot of people.  They learn Index/Match and give up on V/H Lookups.  Everything has it's place.  Sometimes simpler is better or faster.  You could code everything you do in VBA, but sometimes, maybe you just need to add 2 things together and don't need to make that program.
+I don't know why I never utilized this before, thank you!
+I think I've heard of one more but the name escapes me

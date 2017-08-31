@@ -1,0 +1,50 @@
+Excel 2016 animation making me crazy!
+Modifying the registry entry that controls them is your best bet. 
+
+(I don't recommend the "Animate controls and elements" workaround because it's a global Windows setting and affects all kinds of other helpful animations: buttons, scrollbars, popup windows, taskbar icon progress bars, etc.)
+
+&nbsp;  
+Excel 2013:
+
+    [HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Common\Graphics]
+    "DisableAnimations"=dword:00000001
+
+Excel 2016:
+
+    [HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Graphics]
+    "DisableAnimations"=dword:00000001
+
+&nbsp;  
+Simplest way to apply them is to copy/paste to a new notepad document, save as filename**.reg**, double-click, confirm that you want to apply the change.
+
+Although if you're locked out of the Windows performance settings, chances are you don't have permission to make registry changes either, so you'll still have to bribe an admin! The registry modifications are pretty self-explanatory, not too cryptic, so hopefully they'll trust them enough to be ok with applying them for you. I completely sympathize about the animations -- argh.
+Maybe try this link: http://www.thespreadsheetguru.com/blog/2014/4/9/turn-off-excel-2013s-in-window-animations
+
+I had the same problem in 2013, I imagine it is the same thing.
+When I first started using 2013 this really bothered me too and I looked around for ways to turn it off, but eventually I grew to like it. Now when I make changes I have a split second to actually see which cells update and I find people using my spreadsheets that aren't as Excel-savvy tend to like it. 
+
+Not saying you won't always hate it, and that may be just me, but wanted to give my two cents...
+Anyway to do that on MAC? pls?
+Thank you!!!
+I wasn't loked out of regedit.. go figure!
+thanks, I'm on a work machine and am locked out of that screen.. will get someone to change it for me
+i like the numbers rolling down, it looks cool and its also helpful in pointing out when something's recalced successfully. i also like the animation in general although it never felt like it was slowing me down.
+It's nice when you're USING a spreadsheet. Not when you're building one; when you have half a million rows and you highlight to the end and you have to wait for the animation to scroll through before you can hit ctrl-v; which you've probably already hit due to muscle memory just kicking in, suddenly it doesn't make so much sense. It's not a matter of getting used to it, it literally makes it slower to do things which is an unambiguous disadvantage and not a matter of personal preference; Microsoft should consider this important distinction before making features mandatory! 
+Hello!
+
+I noticed that you thanked someone in a comment in your post.
+
+If you're happy with the answer, please **separately reply** to the user with **Solution Verified**.
+
+This will give the user a [ClippyPoint](https://www.reddit.com/r/excel/wiki/clippy) and change the flair to **solved**, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Solution Verified
+Hello!
+I noticed that you thanked someone in a comment in your post.
+
+If you're happy with the answer, please **separately reply** to the user with **Solution Verified**.
+
+This will give the user a [ClippyPoint](https://www.reddit.com/r/excel/wiki/clippy) and change the flair to **solved**, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*

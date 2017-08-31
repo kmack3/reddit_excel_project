@@ -1,0 +1,112 @@
+large
+51yhq7
+How to transpose large amounts of based off a unique ID
+
+I have a large group of data, several thousand rows to be exact where each row has a unique ID.  There is data associated with this ID which is the same such as  name and location.  There is other data that differs as you change rows, such as product.
+
+Is there something that can be down to transpose the data in that last column based on the ID so that there is only 1 ID listed in the report per row?
+
+Here is an example of how my data looks now:  http://imgur.com/a/Wt3iN
+
+Here is how I want it to look:  http://imgur.com/a/wCy3f
+
+Any ideas or help are greatly appreciated.
+
+
+-------------
+Hello Cisco,
+For the purpose of this post, let's assume your dataset is in cells A1:D10 (such as in your picture).... to make it easier, I'm going to refer to that range as "MyData".  
+
+First of all, I don't think transpose is the right word you're looking for, if you were just looking to transpose a lot of data without the "TRANSPOSE" function, you could use a formula such as **=INDEX(MyData,COLUMNS($B$1:B$1),ROWS($A$2:$A2))** and then copy it over and down...  But it would *transpose* the data, not reform it such as your other picture suggests you're after.
+
+Here's one method of doing what you're talking about...
+
+* Start by creating a new column at the right of your data, let's call it "Key".  In E1 type "Key", and in E2 imput this formula:  **=COUNTIF($A$2:A2,A2)&A2**  then copy it down to E10.
+* For ease of this post, and for your formulas, name some ranges (highlight the following ranges and then type the following names over the cell address in the name box):  A1:A10 - "IDs", B1:B10 - "Names", C1:C10 - "Locations", D1:D10 - "Products", E1:E10 - "Keys", A1:E1 - "Headers"
+* Wherever you would like your reformatted data to live, say on Sheet2, type the same headers into A1:D1 (ID - Name - Location - Products).  Make sure these are identical to the other dataset.
+* Type each unique ID number you wish displayed in column A (just like you had in picture #2)... 12345, 98765, etc.
+* In B2, enter this formula, then copy it down next to the other ID #s: **=INDEX(MyData,MATCH("1"&$A2,Keys,0),MATCH(B$1,Headers,0))**
+* Highlight those cells (probably B2:B4), copy, and then paste them in cell C2.
+* To populate products the way you want, it'll need to be a little different... Here's the formula to paste into cell D2, under the Products header:  **=IFERROR(INDEX(MyData,MATCH(COLUMN(A1)&$A2,Keys,0),MATCH($D$1,Headers,0)),"")** 
+* Copy that cell over as far as you want, maybe to column "Z" or something.  Then copy that down next to each row with data in it.
+
+You should be done!  Let me know if you have any questions.  This is done off the top of my head, but I'm fairly certain it will work to accomplish what you're after.
+-------------
+What are you doing with this data after its transposed? A pivot table would unify each unique ID and make your data easy to read. 
+-------------
+OK, this is really simple to do without any VBA or complicated formulas.
+
+Assuming ID is in A1 and that all is sorted based on the ID.
+
+In E2 put this
+
+=IF(A2=A3,D2&","E3,D2)
+
+Then copy and paste values.  Then highlight column A and remove duplicates.  Remove based on column A but remove all columns.
+
+Then use Text-To-Columns on the column E, delimited, based on a comma.
+
+Then delete the column D.
+
+Good to go!
+-------------
+The following will describe this screenshot http://i.imgur.com/JW1vcay.png
+
+* Enter these formulas, assuming your data is in columns A:D.
+
+Cell | Formula
+---|---
+E1 | =MAX(E2:E100000)
+E2 | =COUNTIF(A:A,A2)
+F2 | =IF(A2=A1,"",A2)
+G2 | =IF(B2=B1,"",B2)
+H2 | =IF(C2=C1,"",C2)
+**I2** | =IF(COLUMN()-COLUMN($H2)>$E2,"",IF(AND(OR($H2="",OFFSET($H2,COLUMN()-COLUMN($H2)-1,0)<>""),COLUMN()<>9),"",OFFSET($D2,COLUMN()-COLUMN($H2)-1,0))&"")
+
+* From E2 to I2, copy and paste the formulas all the way down to the end of your data in columns A:D. This step will take time to calculate.
+* Note the new value of E1
+* Take the formulas in column I, and paste it the number of columns that E1 has. If E1 = 4, then column I should be pasted into J, K and L, so there are 4 columns of formulas. This step will take time to calculate.
+* You should have something that resembles the top of the screenshot.
+* Highlight Row 1, and turn on Filters.
+* Filter in column F to hide blanks. This will take time to calculate.
+* Copy and paste Columns F and to the right into a new sheet.
+
+
+-------------
+My ranges are actually columns A - D and goes down to row 7054.  I have copied the COUNTIF and renamed the ranges A1:A7054 - D1:D7054.  This is all on Sheet 1.
+
+On Sheet 2 I have typed my headers the same as Sheet 1 and I have entered the ID numbers with duplicates removed but when I enter the =INDEX(MyData,MATCH("1"&$A2,Keys,0),MATCH(B$1,Headers,0)) under column B, which has the header Name, I get a #NAME? error.
+-------------
+I am submitting.  The end user needs it in this format before I submit.
+-------------
+Solution Verified
+-------------
+Thanks!
+-------------
+Solution Verified
+-------------
+I think I neglected to tell you to select Sheet1 A1:E7054 (all of the data, including the new column you created with the COUNTIF formula), and name that "MyData".  All I told you was that I was referring to that range.  My apologies... see if that works. 
+-------------
+Do you know why they need it in that format? I don't mean to be difficult -  it's just that the format you're aiming for doesn't make a lot of sense if someone will be working with /manipulating the data afterwards. And if it's just for display purposes, you can make a pivot table that's just as easy, if not easier to read. 
+
+-------------
+
+You have awarded one point to _TheChad08_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _Mdayofearth_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Solution Verified
+-------------
+As far as I know, it needs to be in the format so they can load it into whatever legal system they are using.  That was the format given and that was the reason given for that format.
+
+I understand you're not trying to be difficult, it makes no sense to me either when there are better ways to do it but I have been told to comply.
+-------------
+
+You have awarded one point to _LawCamp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

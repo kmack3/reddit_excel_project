@@ -1,0 +1,82 @@
+How do I tell Excel to look at the week number in a given cell and days in a given range, and put the dates next to the days?
+Cell A1 02/02/2017
+
+Cell B1 =WEEKNUM(A1)
+Cell C1 =IF(MOD(A1,7)=0,7,MOD(A1,7))
+
+Output B1 = 5 for the 5th week
+Output C1 = 5 for the 5th day
+
+The above assumes that you want the days of the week numbered 1-7, Saturday-Sunday.
+Does Week 1 always begin on January 1?
+It depends what you need it to do - why do you need these dates?
+
+If you just need the listing of dates to look at, I would just manually enter the date of Monday in Week 1 and use a formula like "=A3+1" for the cells below. You can make it so the monday of each week references the previous week (eg A11 is "=A3 + 7") and then copy that down for all of the weeks in the year. My guess would be that you won't need more than about 5-10 years worth of sheets like this, so you will only have to manually input the monday about 5-10 times. Would this be a good enough solution?
+VLOOKUP with True not False
+Hi, Since this is a formula problem, might be easier if If you upload your sheet to google sheets and use the add-ons feature and add Formula Helper.  I'm using it myself. It looks for complicated formulas and helps you solve it.. Regarding your question I'll be able to get to it in 10 minutes.
+I gotta run now, duties await. I'll have a look at this tonight. 
+Tricky question. I had to check this, and the answer is no. There have been years where Jan 1 was not in the first week of the year.
+
+See this comment.
+
+https://www.reddit.com/r/excel/comments/5rjh1l/how_do_i_tell_excel_to_look_at_the_week_number_in/dd8bniy/
+Then when does Week 1 begin? The first Monday of the calendar year?
+Well, for instance, in 2017, week 1 began on Jan 2. At least according to the ISO-8601 standard.
+
+http://www.epochconverter.com/weeks/2017
+I think [this](http://imgur.com/rzHCqRp)'ll work.
+
+Formula in A3 is 
+
+    =DATE(C1,1,IFERROR(1/(1/MOD(10-WEEKDAY(DATE(C1,1,1)),7)),7))+(VALUE(MID(A1,6,2))-1)*7
+
+Formula in A4 is just `=A3+1`. Copy this down.
+Not quite what I want it to do.
+Let me clarify it.
+I have this weekly overview of my worked hours, where I keep track of my start time, end time, break etc.
+
+Each week is separated and the days range from Mon to Fri.
+I do not want to input the dates myself; I want to avoid errors first of all and I am not really fond of adding it manually for each week. So I want Excel to do that for me.
+
+This is what it actually looks like: http://imgur.com/a/5UCx7
+
+From row 6 to 14 is week 1, but the dates are in A8 to A12 for week 1.
+
+Same goes for week 2. It goes from 16 to 24, but the dates are in A18 to A22.
+
+For instance week 1, I want Excel to look at A6 (where it says Week 1), then look at the day in B8, and then return the date in A8.
+
+Dragging the formula down is not possible in this case because each is separate and there are other cells in the way.
+
+So, the only thing I want to change is the week number and then I want Excel to give me the date for the respective day.
+Yes, my solution should work. Put my formula into A8 but change `A1` to `A6` and replace 2 instances of `C1` with either `2017` or an absolute cell reference that contains the year. 
+
+The formula finds the date of the first Monday of the year specified. To that it adds 7 times the Week Number (minus 1), which adds the correct number of days and therefore returns the desired date. I assume the first cell in your list of 5 is always a Monday. Then the simple formula in A9 of `=A8+1` will put the next date into  the Tue row, etc. This block of cells can be successfully copied and pasted to each week down the column. It's a bit of an ugly formula but I tested it an it appears to work.
+It seems to be working but it messes up certain years. For instance, 2019, week 1 is showing me the dates of week 2. It could also be that I am doing something wrong, so feel free to test 2019 and upward and let me know.
+
+I can't quite understand what's happening and why it messes up.
+
+I let a colleague have a look at the problem and he came up with this formula instead. This one seems to be working.
+
+    =IF(WEEKDAY($B$5)=1,$B$5+((A7*7)-6),IF(WEEKDAY($B$5)=2,$B$5+((A7*7)-7),IF(WEEKDAY($B$5)=3,$B$5+((A7*7)-8),IF(WEEKDAY($B$5)=4,$B$5+((A7*7)-9),IF(WEEKDAY($B$5)=5,$B$5+((A7*7)-10),$B$5+((A7*7)-11))))))
+
+I am using the same template (http://imgur.com/a/5UCx7), although everything has been moved 1 row down since I am using an absolute cell reference for the year in cell B5. It's the first day of the year, so 01-01-2017 and is formatted as yyyy. For the week numbers, I am simply using the numbers 1 to 52 but they have a custom format like this "Week "0.
+
+EDIT: disregard the above, I was wrong. The formula is not working.
+Don't know what you've done, but I tested my formula using 2019 for which the first Monday is Jan 7. My formula returns January 7, 2019. Here it is with C1 and A1 replaced with 2019 and "Week 1", respectively. Try it for yourself.
+
+    =DATE(2019,1,IFERROR(1/(1/MOD(10-WEEKDAY(DATE(2019,1,1)),7)),7))+(VALUE(MID("Week 1",6,2))-1)*7
+
+At any rate, if your formula works for you (although I cannot tell what is $B$5 and what is A7:  *1-Jan-2019* and *1*?), then that's great! Is it that Week 1 for 2019 actually begins on December 31, 2018? I suppose I could have checked that epochconverter link you supplied. 
+
+In that case, I can simplify my formula and remove the horrible bits. Use this instead:
+
+    =DATE(C1,1,MOD(10-WEEKDAY(DATE(C1,1,1)),7))+(VALUE(MID(A1,6,2))-1)*7
+I have to apologize to you. What I stated previously is not correct. My colleague's formula is not working.
+
+Indeed, the problem with your first formula is exactly what you said. It returns 7-Jan-2019 as the first day of week 1 of 2019. However, 7-Jan is actually first day of week 2 of 2019.
+
+I am on mobile right now, I test your new formula tomorrow morning. Will let you know.
+
+Solution verified
+Your new formula did it. Thanks!

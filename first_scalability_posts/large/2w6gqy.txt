@@ -1,0 +1,60 @@
+large
+2w6gqy
+How can I improve performance/load time of large workbooks?
+
+I have a few large spreadsheets with lots of data and calculations in it. Are there any tricks I can use that would decrease the time it takes to recalculate every time I load the file? 
+
+
+-------------
+If you don't use any 3rd party software that links to your workbooks, try saving them as .xlsb (Excel Binary Workbook) - this will drastically reduce file size and at the same time, possibly the recalculation times.
+
+You should also try to avoid using volatile functions such as OFFSET and INDIRECT. What this means is if you make a change anywhere in your workbook, the formulas will recalculate regardless if it's related to the change you made or not.
+
+This article will explain it better http://www.decisionmodels.com/calcsecretsi.htm
+-------------
+If you have formatting - especially one that you changed multiple times - remove it all (or at least re do it).
+
+Sometimes formatting inflates size and dwarfs performance. For instance if you colour an entire column that has negligible impact, but if you then add some rows, colour some of the individual cells, add some conditional formatting on part of rows etc. Excel gets confused and rather than hold that info as 'column J is green' it starts to do weird stuff kinda like 'J1 green, J2 green, J3 green and bold,.....etc
+
+Generally its good idea to avoid formatting entire rows/columns in big files.
+
+This obviously will not solve all the issues and might not even be the case in your workbook, but I had that problem a few times in my workbooks.
+
+-------------
+I do this in some of my larger files...
+
+If it is more of a report that needs to be updated after data is added, then I will get all my formulas set up and write a macro that creates all the formulas and then pastes as values removing the formulas.  Now I have a formula less workbook report to print.
+
+Then the next time I open the workbook and add data I run the macro again which creates all the formulas, does the calculations and then saves as values.
+-------------
+If any of your formulas link to other files, like vlookups, they will calculate much faster if the other file is also open in the same instance as the file you're working on.
+-------------
+if these are too complicated/doesn't fix anything, what I do is I set formulas to manual calculation, make all my changes then set it back to automatic. Don't leave it on manual or you will go crazy later though.
+-------------
+also if you only have 4gb of ram, I've heard 8gb helps.
+-------------
+The above site is very informative. 
+
+What really helps with lookup type formulae is to limit the range it needs to search. Instead of selecting a whole column, give it some row limits. You can  set up a defined name which calculates the range of you data. 
+
+It is also sometimes better to have more helper columns/rows than to try and do everything in one cell. Depending on  the situation this can limit the recalculation to part of the whole formula instead of redoing everything. 
+-------------
+I use the today() function frequently. Would using it in one cell (such as A1) then referencing it (=A1) improve performance? 
+-------------
+Excel 2010 and earlier is limited to 2 GB of RAM per instance. If you get a later version **and** 64-bit, Excel has access to unlimited RAM.
+-------------
+You would be better off implementing a very simple function in VBA that inserts the date in a particular cell when the file is opened and then use that as opposed to today() as should speed everything up (and remove the constant calculating depending how big your file is)
+-------------
+I wouldn't expect much. 
+
+Every time Excel builds the calculation chain it identifies every dependency/precedent for a given cell and adds them all to the chain (read: it will know every cell pointing to A1 and recalculate all of them). 
+
+So adding a reference to TODAY() will not accomplish much other than replacing a short calculation with a pointer to a short calculation (which could possibly save time... I will look into this).
+
+EDIT: nope
+-------------
+Possibly. You can certainly give it a go.
+-------------
+I remember reading somewhere that cells that are linked to others like A1 (which would equal today() ) are effected just as much as having all the cells having today().  
+What I do is have a sheet labeled 'Set Date', and have B1 = TODAY() , and copy the date into B2, and base any and all calculations based on B2, so its static and not volatile.  
+Just a thought

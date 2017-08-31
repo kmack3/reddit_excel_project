@@ -1,0 +1,44 @@
+10 little tips & tricks to work faster with database (25K+ rows)
+Nice list, here are some additional points I find useful: 
+
+* Break your calculation down into multiple smaller steps, and just remove / hide extra columns afterwards.  
+* [Avoid volatile formulas](http://www.decisionmodels.com/calcsecretsi.htm) (offset, indirect, now, today, rand, cell, info)
+* Avoid conditional formatting (it is volatile). If you need to "find" something visually, create an additional column with the criteria in it. 
+* Avoid arrays if there is a built-in function for it or you can just use an extra column. 
+* Sort your data appropriately before doing lookups/matches on whatever column you are looking up. [Use the "double true" MATCH/vlookup](https://www.reddit.com/r/excel/comments/50j3jl/never_use_vlookup_the_same_way_again_after/) to speed up lookups. If necessary use an extra column from 1 to # of items to capture your original sort order. 
+* Write down your calculation steps (especially if you are deleting them / pasting as values) in a separate sheet. 
+
+ 
+
+
+I'm really surprised the number one thing here isn't make your data set a table. It makes life so so so much easier. 
+No-one has mentioned Table Nomenclature:
+
+https://support.office.com/en-us/article/Using-structured-references-with-Excel-tables-f5ed2452-2337-4f71-bed3-c8ae6d2b276e
+"• Only keep the formula in the 1st cell below the header • Copy and paste the rest as values" 
+Great tip!  I manage and distribute a hugely complex scorecard with thousands of formulas. Once it's ready for sending the data sheets won't change, so this tip here is gold. I'll try it next time.  Thanks. 
+Good list. 
+
+> * Consider Access (data dump)
+ * For database bigger of 100+ rows
+
+Did you mean 100,000+ rows? Surely a few hundred (or even a few thousand) rows is fine in Excel.
+
+A tip I often encourage people around me to follow: colour the text in cells with only hard coded numbers blue and for cells with formulas black. Then for every blue cell, ensure there is a documented source of the value, either with a comment in the cell, or elsewhere in the workbook.
+Is it pedantic to say that a spreadsheet is not a database?
+As someone with limited access experience I am wondering how much faster it would be using this compared to power query / power pivot. I am often working with data sets that are +100k rows and find that querying into power pivot seems to handle data in even the range of 1M-2M rows quite easily.
+Not the simplest method, but the best way to deal with large datasets is to use VBA.  Applying calculations to thousands of rows can be done faster with VBA rather than individual formulas for each row.  This also takes away the volatility so that formulas aren't recalculated every time there is a change. Sorting, Coloring, Categorizing, can all be done with VBA, and if you want to take it a step further, create a Jet database object so that you can run SQL within Excel for even faster results.
+Tables pretty much changed everything I ever knew about Excel. CTRL + T - FTW!
+I agree, tables are really a game changer, also when using SQL. I can of forgot this one to be honest, since I can't use them for the work I am doing now (creates some bugs with Excel add-ins). But tables makes life easier especially as it makes formula much more visual.
+This can significantly reduce the file size, which is excellent when distributing to others.
+Yep! 100K rows THX :)
+That's a good tip, I colour header of the column with formula in black. I usually colour the header with the same colour that the tab it's referring to. It's quite helpful especially for workbook with a lot of columns.
+A bit. Some of the sheets I've worked with have essentially morphed into and become a database. 
+Well I have been using Access lately combined with power pivot, even with limited knowledge you can really build something that will be faster to work with in the long run. Sometimes the issues is coming from the number of columns as well. And combination of 100K rows and 20+ columns makes things soooo slow.
+Would you care to elaborate or give me a link with info about that? I barely use tables so I'm pretty interested !
+Sure thing *COUGH - shameless self promotion - COUGH*
+
+[A FIVE STAR DINNER ON A TABLE WITH A BROKEN LEG](http://itsnotaboutthecell.com/2015/05/18/use-excel-tables/)
+
+[THE MILLION DOLLAR BRACKET](http://itsnotaboutthecell.com/2015/05/18/structured-reference-in-excel/)
+The thing i really liked about tables is that you don't have to use offset() kind of formulas to dynamically update charts.

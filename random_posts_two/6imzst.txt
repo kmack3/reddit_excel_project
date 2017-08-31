@@ -1,0 +1,28 @@
+6imzst
+Time between first and second purchase
+Hi all,
+
+I have a data set with email, order #, order date, order qty, and order $total as my columns (left to right). The data is sorted by customer email (alphabetically), then by invoice date (oldest to newest). Each row represents one order, so customers that have purchased multiple times will be listed multiple times, one after another. For all customers that have purchased at least twice, I need to determine the time (in days) between each customer's first and second purchase. What would be the best way to go about this? Thanks!
+
+
+-------------
+Rank each order by date then do a datedif on the order dates where the rank =2
+-------------
+In Col F (or the next open column), beginning in row 2 (assuming row 1 is headers)
+
+`=IF(COUNTIF($A$1:A1,A2) = 1, C2-C1, "")`
+-------------
+Yep, row 1 is headers. I wasn't able to get this working through. I'm confused at the range in the countif part of the formula though. 
+-------------
+Solution Verified
+-------------
+I wrote the COUNTIF backwards, I fixed it. Note this will only calculate the difference between the first and second purchases, not additional purchases afterwards.
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Yep, that's all I'm worried about at the moment. I'm able to pull average time between all purchases through the report, but we wanted to see time between first and second for all repeat purchasers.
+-------------
+I did have to change the formula slightly, adding 1 to all of the cell values.

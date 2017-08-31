@@ -1,0 +1,97 @@
+Using a VBA button in Excel 2013 that composes a new email in Outlook 2013 with a pre-defined body (and inserted name from another cell)?
+Ok so having a button next to every single entry is not an efficient method. You would have to rewrite the vba X times to change the target cells and such.
+
+A better way (IMO) is to have it run based on the selected row. So first you would have to select any cell in row 2 to send to that person.
+
+Let say the name is in column 1, and the email is in column 2
+
+
+    Sub EmailTest()
+
+         Dim myOlApp As Object
+         Dim mailItem As Object
+         Dim myRow As Integer
+
+         myRow = ActiveCell.Row
+         Set myOlApp = CreateObject("Outlook.Application")
+         Set mailItem = myOlApp.CreateItem(0)
+
+         mailItem.Subject = Cells(myRow, 1).Value & ": you missed work!"
+         mailItem.To = Cells(myRow, 2).Value
+         mailItem.Display
+         mailItem.Body = " predefined text"
+
+    End Sub
+
+Okay - so I've tested this and it works brilliantly, thank you! 
+
+A few follow up questions - 
+
+1. Is there a way to pull the first name and change the body of the email to insert it? If not that's okay, but if there is it would make it so that I don't need to edit the email at all (all in the spirit of laziness). 
+2. The predefined text is several lines of text - how do I express this in VBA? I tested it whereby the text was all on one line, and that's precisely what Excel sent to Outlook. This works - but again, just a thing that I need to edit some more before sending (and the goal is to have no edits). 
+3. When the predefined text is sent to the e-mail window, it replaces my signature. Is there any sort of code that would tell Excel to add, instead of replace? 
+
+Either way - solution verified :) Thank you! 
+1. You can add the persons name into any of the strings with + Cells(myRow, 1).Value +
+
+2. You can add lines using + vbNewLine +
+
+3. Yes, try this. 
+
+
+         Sub EmailTest()
+   
+        Dim myOlApp As Object
+        Dim mailItem As Object
+        Dim myRow As Integer
+   
+        myRow = ActiveCell.Row
+        Set myOlApp = CreateObject("Outlook.Application")
+        Set mailItem = myOlApp.CreateItem(0)
+   
+        mailItem.Subject = Cells(myRow, 1).Value & ": you missed work!"
+        mailItem.To = Cells(myRow, 2).Value
+        mailItem.Display
+        mailItem.Body = "Hi " + Cells(myRow, 1).Value + "," + vbNewLine + "predefined text" + mailItem.Body
+     
+        End Sub
+
+You have awarded one point to _nosubstyle_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+This worked fantastic. 
+
+One final question ... 
+
+The code here inputs my signature but does so in plaintext instead of the HTML formatting, so it strips the picture and any other formatting the signature has. 
+
+Do you know how to amend that? :) I was doing some research into it and found [this](http://windowssecrets.com/forums/showthread.php/163512-Add-Signature-to-HTML-email-using-VBA) but it looks specific to Outlook though it is VBA. 
+
+Thank you again! 
+Yes the link you provided is the correct way. You would change all .Body to .HTMLBody
+
+And in HTML, for line breaks you would use "<br>" instead of vbNewLine
+    
+    Sub EmailTest()
+    
+    Dim myOlApp As Object
+    Dim mailItem As Object
+    Dim myRow As Integer
+    
+    myRow = ActiveCell.Row
+    Set myOlApp = CreateObject("Outlook.Application")
+    Set mailItem = myOlApp.CreateItem(0)
+    
+    mailItem.Subject = Cells(myRow, 1).Value & ": you missed work!"
+    mailItem.To = Cells(myRow, 2).Value
+    mailItem.Display
+    mailItem.HTMLBody = "Hi " + Cells(myRow, 1).Value + "," + "<br>" + "predefined text" + mailItem.HTMLBody
+    
+    End Sub
+
+That worked flawlessly.
+
+Thank you so much!! You've been a huge help, I wish I could give you more than one point. :) 
+Just a heads up: you should use the & operator to concatenate strings, not + (to prevent both VBA and yourself experiencing confusion, in case you're concatenating two variables which are both numbers for example).
+
+Also, this is slightly petty but it's technically correct HTML to encase paragraphs like: <p>Hi There,</p><p>predefined text block</p> and so on. Use <br> to break *within* a paragraph where it is appropriate for the content, such as in a poem or postal address, like: <p>Lorum ipsum doodle,<br>dum dah dee blahblahblahblah</p>

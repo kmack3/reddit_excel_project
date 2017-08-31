@@ -1,0 +1,15 @@
+freeze
+4fpnox
+Excel 2013 freezes: Working with 1 million rows. filter/vlookup/pasting advice?
+
+Hello all,
+
+I'm working on a file that has a little less than a million lines.
+
+I need to perform filtering, vlooking up (to a manageble 500k line file), filtering, and pasting/special/values.
+
+Any tips on how to speed it up?  Right not its taking 5 minutes to just fill down a non formula value.
+
+
+-------------
+This is something that power query would be better suited for, but really at that size, I would suggest working directly in the database system you got the information out of in the first place. 

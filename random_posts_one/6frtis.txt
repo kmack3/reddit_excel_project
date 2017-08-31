@@ -1,0 +1,11 @@
+6frtis
+Importing new data and tracking updates
+Hi All,
+
+I have data that is constantly updating.  I import the data into a table on Tab 1 and in Tab 2 have a pivot table summarizing that data.  On Tab 2 I have a column where a manager has to manually mark a column as "Yes" or "No" (discretionary) causing some IF() statements to populate based on the answer.
+  
+My problem is that I want a user to consistently be updating the Y/N column as I import new data into Tab 1, but every time I do so the pivot rows change.  What should I be using to keep the Y/N responses linked to the pivot data? (maybe another tab...an array formula?)
+
+I appreciate the help! 
+
+

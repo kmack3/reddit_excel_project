@@ -1,0 +1,86 @@
+6iehjb
+Organizing and counting dozens of actions by dozens of users
+I have a list of several dozen users. Most users are listed multiple times in column D (almost 400 rows with a few dashes for "User Name" when that info was not available). Actions they have taken are listed next to each user with one action per cell up to 9 cells out. Some users are listed 10 times with 2 actions listed next to them. Others are listed once or twice with 9 actions. The actions are in no specific order, and there's probably 100+ available actions.
+
+What I need to do is have a new spreadsheet with each user listed with a count of how many times they did each action. If they did not do an action, I don't need it to show a 0, but it would be fine if it was there.
+
+I'm guessing there's a relatively simple path to do this, but I haven't had to work with this much non-numeric data in a long time. Thanks.
+
+
+-------------
+As long as your data is standardized and the actions are all in a single column you can highlight the table and make a pivot table out of it. then, drag usernames to the left side (rows) and the actions to the top (columns) and the center (values). That should auto-count each action per user.
+-------------
+Pivot table!
+
+Rows: User
+Rows2: Action
+
+Value: Count (any value thats there)
+-------------
+I would probably make a middle man table. There's intelligent ways to make the table automatically but it's probably just as fast to create it yourself. I would start by copying the initial table to a new tab and deleting the Action columns 2-9, then copying the initial table again but without headers and paste it below your new table and delete action columns 1 and 3-9. You'd do this in that pattern until you've got a new table 9x longer than the original but all the actions are in one column.
+
+Then you can pivot that table with 'Names' and 'Action' in the rows, then 'Action' again in the values.
+-------------
+Unfortunately, the actions are spread across 9 columns, so the pivot table just ends up counting how many times each user had an action in column 1, 2, 3, etc. The actions are effectively randomly spread across the columns for each user.
+-------------
+Copying my response from the other pivot table suggestion:
+
+Unfortunately, the actions are spread across 9 columns, so the pivot table just ends up counting how many times each user had an action in column 1, 2, 3, etc. The actions are effectively randomly spread across the columns for each user.
+
+-------------
+Thanks for the suggestion. I'm basically doing something like this now for the pivot table suggested before, but your method would be cleaner. 
+
+I'll look into an automated method if I like the outcome, since I'm going to have to do this for 50 total groups.
+-------------
+Oof that's annoying. Ok, here's a workaround.
+
+Create a single-column pivot table where you're just displaying the user names. The next 9 columns should have a header with the name of an action. Then, create a countifs for each column and user name, such that the cells match the column and the row. The [video on the Microsoft website](https://support.office.com/en-us/article/COUNTIFS-function-dda3dc6e-f74e-4aee-88bc-aa8c2a866842) shows how to make countifs really well, I definitely recommend checking it out. Then you can click and drag this down and across if you lock the proper cells. 
+
+If the pivot "table" starts in A1 and B1-J1 are your action headers, then you can make this formula in B2:
+
+"=countifs(useridcolumn,$A2,action1column,B$1)"
+
+I believe you should also lock the useridcolumn and the height of the action1column.
+
+Hope this helps/works, let me know if you have any more questions.
+
+edit: sumifs, not countifs
+
+double edit: I changed my mind, it should probably be countifs. Sorry.
+
+-------------
+Ok here's how I automated the table creation.
+
+Assuming the original table has names in column A, Action1-Action9 in columns B through J, and headers in row 1. In my case the formula assumes the table ~~has 400 entries (and thus 401 total rows in the original table) and~~ is in a tab called OrigTable.
+
+In a second tab I type Name in A1 and Action in B1. In A2 my formula for looking up names is:
+
+    =INDEX(OrigTable!A:A,2+MOD(ROW(A1)-1,COUNTA(OrigTable!$A$2:$A$9999)))
+
+In B2 I have the formula for looking up the actions and that is:
+
+    =INDEX(OrigTable!B:J,2+MOD(ROW(B1)-1,COUNTA(OrigTable!$A$2:$A$9999)),ROUNDUP(ROW(B1)/COUNTA(OrigTable!$A$2:$A$9999),0))
+
+Then I highlight A2:B2 and drag that down until I start getting #N/A errors meaning the column part of the B2 index formula exceeded the B:J selection and the table is finished.
+
+From there you can make the pivot and you should be good to go. Hopefully that helps.
+
+Edit: Changed to [COUNTA(OrigTable!$A$2:$A$9999)]. Also, I use mod in those formulas to make the index count back through the same rows at the same time the column part starts looking at the next column.
+-------------
+Thanks for the follow-up.
+
+That would likely work if I knew the names of every possible action. Unfortunately, there are just about 100 different actions available... 
+
+I think I've just found a way to get a list of each unique action, so if that works, then this solution should work. I'll try it out and let you know. Thanks again.
+-------------
+This looks great. I will try it in the morning. Have a great evening. Thank you so much!
+-------------
+If this data is going to be used into the future I recommend looking into changing the data structure itself, because that doesn't sound fun to work with. I'm sure it's not your fault/problem but it might save you time in the long run. Good luck! Also I think it should be countifs, not sumifs now. Sorry. 
+-------------
+Yeah, that's part of my issue. I'm pulling the data from a poorly organized source, and this is the largest of 50 groups that will require the same treatment for my purposes. I'm hoping to find a relatively smooth process that can be automated or hammered out with minimal suffering.
+
+I think I'm going to look into an automated "middleman table" as suggested below, since that's basically what I'm building right now to test your pivot table suggestion. 
+
+Thanks again for all of your help. Hopefully I can get something figured out by tomorrow morning.
+-------------
+"With minimal suffering" is the IT way. Good luck. 

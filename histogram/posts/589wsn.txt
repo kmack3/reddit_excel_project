@@ -1,0 +1,53 @@
+[Project] Want to create a "fill in form" in excel that creates a PDF file
+I'm actually working on a similar project right now for my company using web forms. What you're looking to do is called a merge and you'll probably need software specific for that task. I know that Adobe Acrobat can handle it, or at least they used to 10 years ago the last time I did this. I have no idea what the current license structure for Adobe is. But I also know that there are other third-party software applications that can create PDF forms.
+
+I'm going to save this thread so that I can see if there any other answers that are more helpful.
+Depending on what you are doing this should be fairly straightforward. I'd probably have one sheet for input, then when you generate, build the content on a new sheet, then save that as a pdf, that can all be done in code quite simply. 
+You could create a word template with fields and write a macro that opens the template and populates your values to the fields, then prints it to pdf.
+Adobe acrobat used to be awesome, but I think in the latest version they have removed livecycle which was the program that was great for this. 
+You don't need software specific to the task. VBA can easily create a pdf output from excel.
+
+Collate info in one page, format it in another, use code to make a pdf output of said formatted page. Bish bash bosh.
+I have a company template that I need the text to appear on specific areas. For example:
+
+Agenda for today
+
+Attendees:  John Johnson (I want this name to appear here on the template from the input in excel)
+                  Steve Stephenson (I want this name to appear here on the template from the input from excel)
+I've got the template, can you give me an example of  code that could do the rest?
+Yeah, livecycle became an 'enterprise-only' solution, which is insanely expensive.
+That could work.  It would mean recreating our form in Excel, but I've done crazier things with Excel.  
+
+I was actually hoping to do it in google sheets, but it should still work.  
+So yeah I'd mock it up on a second sheet, then use code to generate that, then save as a pdf, the latter is just one line of code when saving to say pdf instead of xls. 
+Basically you need to define bookmarks in the word template. Then in your code you populate the bookmarks with the stored values.
+Excel will do it so easily, I'd recommend at least building a prototype in excel that does it all, and using it for feasibility and testing.
+
+Then once you have it updated to final spec, maybe consider whether excel is the right tool or whether you need a more bespoke web service. It's much easier to build a tool with a fully functional prototype than to work of a list of requirements and make changes on the fly.
+Makes sense. I would need guidance on what code I would need to write, I'm not expecting you to write it for me of course, but just some tips please.
+So if you have two sheets, Config and PrintMe
+
+If its just going to be a list of names on the first page, you could loop through that range then use something like below, to just copy one cell from the config to the print page.
+
+    Worksheets("PrintMe").Range("A1").Value = Worksheets("Config").Range("A1").Value
+
+You may also want to combine the names before output:
+
+    var Attendees string
+    Attendees = "Attendees will be :" & Worksheets("Config").Range("A1").Value  & Worksheets("Config").Range("A2").Value 
+    Worksheets("PrintMe").Range("A1").Value = Attendees
+
+
+Not sure how much help you need so if you need more or less, just let me know
+    
+Hi again,
+
+Please bare with me as my knowledge is very limited, but I understood your code yipeee! 
+
+My next question is how to insert the pretty word document template I have into the PrintMe spreadsheet so It doesn't lose the formatting it has? Also, if I type the names in the Config spreadsheet will it format them automatically as per the template? Provided I can insert the word template into the PrintMe spreadsheet of course.
+If you have to use the word document it will get a lot more complicated. If you can make a fake, close approximation in Excel that will be a lot easier. 
+> Hello again,
+> Many thanks for your reply, I seem to understand everything. Can you share a best practice to move a word document into an excel spreadsheet and keep it as pretty as it is now? I've tried copy pasting but it just doesnt do it right. Also when the text will be entered into the cells, is the final document going to keep the same template formatting?
+
+
+The only time I've done it, involved a table in the word document, then you open the file using via code, the file isn't added to Excel. Then you can reference it similar to excel and addi the text you want from Excel, then save it. 

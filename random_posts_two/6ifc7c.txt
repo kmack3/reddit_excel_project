@@ -1,0 +1,34 @@
+6ifc7c
+This code doesent run for integers 3,4 or 5?
+When i choose i = 2 it works perfectly. But if is choose other integers the code doesent run. Can anybody see the problem?
+
+    Sub date_transf_bank()
+    Dim y As Integer 'Search through rows for persons in ark 1
+    Dim x As Integer 'Search through colms for person in ark 1
+    Dim i As Integer 'Choose name to search from Database
+
+    i = 3 'myRangeDatabase.Cells.Range.Count
+    For x = 6 To 14
+    For y = 1 To 407 'myRangeArk1.Cells.Rows.Count
+    If Sheets("Ark1").Cells(y, x) = Sheets("Alle lande og 
+    sponsorer").Cells(i, 23) Then
+    MsgBox y
+    Sheets("Alle lande og sponsorer").Cells(i, 20) = 
+    Sheets("Ark1").Cells(y, 3) 'myRange.Cells(y, 1).Row
+    End If
+    Next y
+    Next x
+    End Sub
+
+
+
+THanks in advance
+
+
+-------------
+What error message are you getting?
+-------------
+Thanks for your quick reply. I found out that it work but it was sensitive to capital letter in the text string which it was matching. Long story short. its solved. thanks
+
+-------------
+SOLUTION VERIFIED

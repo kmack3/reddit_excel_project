@@ -1,0 +1,30 @@
+6ftrtp
+Trying to generate separated dates for weeks from a given month.
+I'm making an efficiency sheet for work that has data input from supervisors on a daily basis.  I'm wanting to summarize this weekly for each month.
+Right now, I have each day as it's own tab named as the day of the month (1-31).  I'm looking for a way to group dates into weeks given a month.  
+For example.  If May is input, it would output that days 1-6 are in  the same week, 7-13 are in the same week, and so on. So I can then use the week dates to summarize the rest of the data.
+
+I'm open to having extra sheets for any extra legwork.
+
+Thanks!!
+
+
+-------------
+So I would just hook up the final values into one master column, then sum up 7 at a time. So you'd have week one, week two, ... week 52. 
+
+But it sounds like you actually want to start over the weeks each month. So the last week in January may only have 3 days in it, for example. Is that correct?
+-------------
+Yeah, so each month is its own file. Each week within the month gets broken down dynamically. There are multiple inputs by day that needs some logic applied. 
+
+
+I'm close, I can post what I have in the morning. 
+-------------
+It's the short weeks that were throwing me off, but here's how I handled it.
+
+Single word month is input, through a vlookup this gets converted to the first day of the month, this date is thrown into a table that has 0-31 added to it and the weeknum function applied to it.
+
+The dates are then grouped by week by comparing the first week to week numbers from the other table.  The second week uses nested ifs to check when the week ends.  The subsequent weeks add 7 to the second week.  Basically a sideways calendar.
+
+I'm now going to use the indirect function to use these numbers to grab data off of tabs named 1-31.
+
+Any months that don't have 31 days won't have any data input on those days tabs to summarize.

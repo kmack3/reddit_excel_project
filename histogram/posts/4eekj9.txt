@@ -1,0 +1,237 @@
+Why all of the hate for VBA?
+VBA is very good in a very limited use case. Outside Excel, VBA is nearly worthless and little, if any, experience can transfer to other languages. (.Net excluded.) 
+
+That said, for what it does, it does pretty well and is easily implemented. It's a godsend to be able to automate repetitive Excel tasks and distribute a working template instead of creating documentation the end user won't end up reading anyway. 
+For the last 10 years I have exclusively been an independent software developer using only Excel and VBA.  It's far more powerful than most people realize.  I can mimic most fundamental software UI including Tabs, slide out menus,  fading messages,  popup menus, "call in" license activation and checking and a host of other features.  I would be jobless without Excel.  I have been able to sell thousands of applications to business owners over the years.  I sure hope Microsoft never kills VBA or I will need a resume. 
+Here is what I mean.  I created this short video from a client job : https://plus.google.com/+RandyAustin/posts/AAcP48AhtET?_utm_source=1-2-2
+
+R and Python integration is coming. 
+
+https://excel.uservoice.com/forums/304921-excel-for-windows-desktop-application/suggestions/10549005-python-as-an-excel-scripting-language
+As a professional developer with proper computer science degree -- 10 years ago I'd be that very guy to give you a death stare. Not anymore. I saw horrendous code written in the purest of all object oriented languages as well as elegant brilliance in windows batch files. For anyone who tells you that VBA is not "object oriented" or "proper programming language" or just about any other nonsense -- tell them that is it Turing-complete, and it is all that really matters. Ability to code well transcends any language, environment, tool or paradigm. Use the best tool for the job - and Excel is a really, really, really good tool. IMHO, the guy who came up with the spreadsheet concept deserves a Nobel prize. People who state that "VBA is not a "good" language" (in general) are just not worth your time. But be open minded -- one day you will "outgrow" VBA, not because of the language, but because there will be a better tool for the task at hand. The task will evolve, you will evolve, context (i.e. your situation) will change -- be mindful of that -- take a step back and ask yourself a question -- VBA got me here, is it still the right tool to get me there? It is not the strongest who survive, it is those who adapt. 
+Well, VBA lacks some features that most modern programming languages have. For example: VBA is sort of object oriented, but inheritance? Nope, not possible. 
+I mean, this is an excel forum, of course we all dig VBA. I think that you chose to post here instead of /r/programming, for instance, says a lot. Now, I am no programmer by any stretch of the imagination(no smart person would pay me to program) but I do know some VBA. I think that part of the issue is that Basic is very old as languages go, and is not used in a lot of modern application development, particularly external to the Microsoft office suite. There's even been rumors of Microsoft getting rid of it in future versions of excel.   But VBA is super useful in the financial world, you've got a better chance of getting a job in New York than San Francisco being a VBA expert.  To me, its like a programming language that your boss might not even know you know(or even that it exists). You can efficiently complete a lot of repetitive tasks with it, but it wont make you rich in and of itself. A lot of posters here have also noted that VBA may be overused by people who know it, excel has so many marvelous built in functions, don't get too promiscuous with your use of Alt+F11 that you ignore some simple, built in features, which will always be more time efficient. 
+Because it isn't widely understood and can be very difficult for others to follow if the code isn't well documented, and because if there is only one person that truly understands the code then the software loses value or becomes useless when he leaves.
+
+Quoth ex manager, almost verbatim. 
+Use the right tool, for the right job.
+
+VBA gives you great control over MSOffice applications. That's what it is for.
+
+Things to consider:
+
+**Sustainability**
+
+I've never worked in a company where there have been any other staff who know anything about VBA (forget programming) so every tool I create is built with the expectation that it will likely die after I leave.
+
+However, VBA means there is some hope that it will live on because it is not terribly difficult to learn, and it is very easy to get support through an online forum. I have been able to post a fair bit of code without even seeing the original workbook or data because VBA is very readable and limited to the Office Object Model.
+
+**Usability**
+
+Most workplaces rely on MSOffice products for core administrative tasks. Even in heavy development environments the accountants still use Excel, marketers still use Powerpoint and Word, and VBA allows for some easy automation that they can get their hands on without the development team getting involved.
+
+Buttons in workbooks or toolbars, or custom add-ins, allow users to easily take advantage of a tool without ever looking at any other interface than MSOffice.
+
+**Cost**
+
+Perhaps this falls under sustainability, but I wanted another point.
+
+I love to dabble with other languages, but would not dare introduce a tool I built in another language to an environment where it will likely cost the company a premium to find an individual with a specialized talent to maintain something I built.
+
+The company I work for is in the business of WIDGETS, and I want then to be able to focus their expertise on those WIDGETS. I work hard to make myself obsolete by building tools, or finding cost neutral alternatives (read outsourcing) so that when I move on, the business is notably improved in some small way and I feel good about leaving.
+
+Anything that requires a specialized skill often comes with a premium cost. Sure, I want to be paid more, and I want my successor to be paid well, but also want to business to continue to be successful independent of me.
+
+---------------------
+Aside from all that, why the hate? No idea. I think programming in any language takes a fair bit of effort and dedication, while VBA generally allows anyone to do it without specialized knowledge. It has its own Object mode that you interact with, while most other languages, even if Object Oriented, still require you to build/define those Objects before you can use them. 
+At least in finance, most of the workflow tends to revolve around Excel spreadsheets and knowing how to automate things in VBA is a big plus. A big plus is that there's no need to install programs to get it working on your buddy's computer and there's a short learning curve to get simple routines working. From a programming point of view its not the nicest language out there, but its practical and ubiquitous enough to be worth it.
+If you work in the insurance industry (which is ultimately finance), then VBA makes complete and total sense. Without a doubt, there is at least *some part* of your business that is entirely dependent on people being able to manipulate spreadsheets in fancy ways. *Of course* you would use VBA; it's only logical.
+
+The problem is: the rest of the world doesn't see it like that. For most people, VBA is a niche tool, with specific use cases, and some cheeky limitations that you may not expect. It definitely isn't as robust as some other languages out there.
+
+The fact that VBA isn't even properly object-oriented is enough to make most devs shudder. Which... I mean, I see it from both perspectives. As someone who is already familiar with VBA, I have a personal attachment to it, and I can justify its use in a whole bunch of corporate settings. But at the same time, I would never recommend it as "the go-to tool" for people to learn. I would always recommend another language to start with. Something that teaches good all-round habits. Something with a cleaner syntax, and probably a nicer IDE if they are new to it. If they happen to find *extra* value by adding VBA to their toolbelt, then great!
+> I work in the insurance industry with people who are not technically savvy.
+
+There is your answer. 
+
+The longer answer is that like other people are pointing out VBA is not incredibly useful outside of MS office program automation and interaction. It has been eclipsed by more modern languages, it is object oriented but isn't at the same time, and most people just associate it with "old". I have without a doubt gotten numerous jobs(short temp ones) while I was in highschool simple because I could tell people "hey you know that huge spreadsheet you have that you have to do hundreds of edits to everyday? Yea I can automate that entirely". 
+
+On a side note I notice people who think they know tech and programming but actually don't tend to only know buzzwords and they assume everything outside of those words are bad. People are all fine and dandy while i'm mentioning python or matlab but as soon as I tell people i'm mainly a C programmer people look at me like I killed their first born.
+Not all of the hate stems from the technical merits of the language.
+
+1) Some folks have never worked with it but they've heard it sucks so, it must suck right? Also, hating on VBA is popular and folks like to fit in.
+
+2) Some have worked in it a little bit, but not enough to get good at it. They never got past the part where you're frustrated a lot, so they blame the language. Or they were forced to work in it and never gave it a fair shot.
+
+3) Most of us have had to deal with horrible existing code.  There aren't going to be any stats on this, but I suspect that VBA, due to it's low entry barrier, has a much higher percentage of terrible coders than other languages. That's not the fault of the language, but if you're one of the people who is forced into fixing the crap, it can influence your opinion of the platform.
+I have been told in the past by managers to not use VBA in excel assignments I'm given.  He said it was like "Magic" to those who don't know VBA.  So the creator of the VBA code knows what is going on, but anyone down the line who uses it will not understand what is happening because they can't easily see the code.  I don't necessary agree, but just a perspective from a non VBA user I received.
+Some of the hate comes from situations where a business user creates something typically Excel/VBA. Then other users start using and modifying it. After a while, a whole team is using it. Then one day, someone changes something and it no longer works The team panics, contacts IT to fix it. IT looks at the code and thinks "UGH".
+There is nothing wrong with VB that anyone but a hardcore programmer is going to notice. 
+
+VBA is itself very cool because MS took the time to expose an object model and build on the IDE so you can customise Office.
+
+Yes python or whatever might be modern, flexible and trendy, but it owes a lot to languages like VB that many years so tried to achieve what python is doing today. 
+
+In short, ignore anyone that scoffs at one language and States the whole world should be using their fave - they are being as narrow minded as they are arrogant. 
+
+Nobody likes a Fanboi
+VBA is a great language for what it's meant to do.  It's outdated, but it's easy and it works.  The problem arises when people build full-scale systems with VBA, Excel, Access, etc.  Compared to a full language like C# in a stack with SQL Server, it's quite limited.
+
+The other point of contention is the title of the creator.  People who write only in VBA aren't programmers.  They are coders.  Likening yourself as a programmer when all you do is VBA will get you a death glare or two.
+
+EDIT: LOL, struck a nerve with someone.  Truth hurts, buddy.
+Side note, you can package a Python script with PyInstaller and run it on another machine without Python installed.
+I am versed in many languages but have always been on the business side of companies doing BI work.  As such, I am often using VBA just because it works great with the reporting that people want to see (Excel spreadsheets).  
+
+When I have had projects transitioned from Access\Excel to an IT platform, they always give me crap because the code is VBA and not some fancy IT language.  Often, they'll spend several weeks or months trying to transition the project and often will come back with a less versatile version of the things I was able to create in VBA and tell me they just weren't able to do the same thing that I was able to do.
+
+It gets a lot of crap but it does allow for quick and versatile reporting when businesses need a quick turn around rather than going through a bunch of IT red tape.
+>I work in the insurance industry with people who are not technically savvy.
+
+Actuary, UW, finance?  
+
+As a tech and data guy in my actuary area, I would love to use R, Matlab, or python, but like yourself, as Excel is the tool of choice in my area, then VBA is my only option to automate processes.  I'll give VBA a solid reason as to why I'm currently employed, but as many people here have commented already, it comes down to tooling options and Excel is my only option given its universal use in my company.  But based on my experiences with large data sets and writing complex algorithms, I've had better experiences with R and python as compared to VBA and Excel, the latter of which I have crash on me at least 3 times a day...
+
+I think a reason programmers give VBA users the death stare is that they're typically the ones who have to port VBA projects into actual code.  As someone who has had to port poorly written, poorly documented code into newer processes, I know EXACTLY how they feel.  Too many VBA coders feel empowered by what they can do once they figure it out from google or a macro recording, but don't think things through all the way when they bring their code to actual production.  I've had to spend many hours and many sleepless nights retracing, reverse engineering, and troubleshooting just really poorly written VBA code.  Yeah, VBA code can save a lot of time but it can waste A LOT of it as well if put into the wrong hands...
+Why learn the intricacies of a useless language when you can learn python (or already know python) and use xl wings or similar, with far more functionality? 
+> Outside Excel, VBA is nearly worthless
+
+IMO: Outside MS Office. VBA lets you interact between main Office products easily and fast. Example: Populate a word document with set cell values, create a pdf and get it ready to send in outlook with a tailored message in one click.
+Perhaps I just want to disagree but now I work for a big data company with huge amounts of SQL and some development of Python and Java procedures within it. I started as a business analyst at another company and the first experience I got that set me up for the mindset of developing tools was VBA. Perhaps I feel an "emotional" attachment to it but I'd dispute that it didn't have any transfer into it python and Java in terms of making you think about variables. It's also a lot less forgiving in debugging which Is probably a plus nowadays from that experience. 
+> Outside Excel, VBA is nearly worthless 
+
+I have done tons with VBA and Outlook. It is also used extensively in Access.
+We process millions of dollars in revenue via VBA excel reporting templates. Much easier to use than many web based applications.  Workflow is more intuitive.
+VBA should be decent for Word, though it's been over a decade since I wrote my last Word macro.
+
+VBA isn't unlike batch files.
+I've curious, do you ever work in Access? Some of the UI elements in that video are out-of-the-box using Access forms and you'd still have all the same VBA capability as in excel.
+WUBALUBADUBDUUUUUUB!
+nice! any ETA? :D
+It just says "under review" - doesn't necessarily mean they will implement.  That said, with their focus on R for SQL Server, I think there is a good chance we will minimally see R.  Python integration would be awesome.
+Man, now I *really* need to get around to learning python
+This pleases me!
+I was going to respond to OP, but this is the perfect essence of what I want to get across. 
+
+VBA is the unfortunate victim of many professionals who aren't aware of the fundamentals of writing good code.
+Can you define inheritance as it relates to a programming language? 
+Woah, personally I'm indifferent at best about VBA. Probably because I've not really done anything in it for the best part of 15 years (when it was just VB).
+
+Honestly I quite enjoy the limitation I set myself to solve everything just using formulae ;)
+
+Edit: Getting a lot of downvotes for my personal preferences regarding VBA, where's the love guys? :(
+But isn't that true of any code used for a business setting? If I wrote the solution in Python then no one could use it later.
+Interesting view, the formula bar is more transparent by design.
+It's sort of like linguistics: Anything you can express in one language you can express in any other language.  Having said that, lack of inheritance is kind of a big deal.
+
+
+Haha, this is how I think of myself, I can code some stuff in vba, scripting maybe if I big myself up, but my colleagues are like "wow you're good at VBA you're a programmer!" and I think about what my programmer friends do and I just think to myself "I have no clue how to program..." 
+I wouldn't say it's a great language for anything, frankly. It's just that it's the language of excel macros, so it has its uses, but if i could handle arrays in vba like i do in python i would be extremely happy. But maybe that's because i mainly use vba to "escape" from the excel framework, so i end up manipulating a lot of data inside variables (usually before i put it in a proper dbms).
+Wow this truth really did rustle someones jimmies. 
+> People who write only in VBA aren't programmers
+
+I'm a programmer. I write in VBA primarily as a full-time independent consultant.
+
+You probably just haven't seen any VBA-based full-scale applications used by 1000s of people for over a decade.  They exist.  
+
+Just like the English language, there are many who only know enough to get by, ignore standards and make a hash of it.  So?  Doesn't make all English speakers hacks.  Some are poets, lyricists and essayists.
+Which library are you referencing, PyExcel? Does it compile to an .exe? You would need privileges to execute the files in that case.
+I agree, people are very quick to bad-mouth what you have done (which matches the business use case very precisely), but when tables are turned and IT tries to implement it "properly" -- you often get an underwhelming, expensive "something". Some say it is easy to work in "isolation", meaning your spreadsheets are quick to develop, but hard to maintain. But do we really need an app that is easy to maintain, yet not doing everything business needs? Who counts all the opportunities lost because of the sub par technology solutions...
+Do you have recommendations for how to write better VBA code? 
+Poorly written code can exist anywhere.  
+
+The reason we see it in VBA is because of the easy entry for Excel power users via recorded macros.  More of it.  More untrained people using it.
+There are also a lot of terrible guitar players. Don't hate on the guitar. ;-)
+Where would you go to learn how to do this stuff?
+Well yeah VBA has variables. That's kinda par for the course for a programming language. But like someone mentioned earlier, things like inheritance are nonexistent. People often start with VBA because they've automated a ton of work at their job and needed something to tinker with to stay busy on the clock. It's a very good spark to start someone off on a more development focused route but can also lead to some very bad habits with other languages. 
+I'd add that VBA will teach you some basic programming structures (variables, for-loops, conditionals, data types, etc) and even object-oriented programming if you really go deep into it, but it doesn't teach you computer science concepts as concurrently as other languages
+I guess that would read better as "Outside Office products..." 
+Hi sorry for the delayed reply, as I had not been on reddit for some time. I don't usually work in Access as my customers seem more comfortable with Excel. With that said I know Access is more database and UI driven and a natural application for programming.
+I'm not sure what that means but I would sure put it on my car as a bumper sticker
+It is already implemented in PowerBI, in addition to SQL Server. It is also the single most voted suggestion. 
+The ability for an object to "inherit" the properties of another as an extension of the original object.
+
+I.E. I have class "Admin" which has several unique variables, but also inherits the class "User" and possesses all of their variables, properties, methods. At any point I can treat my "Admin" object like a "User" because "Admin" is effectively a super set of "User". I can chain these inheritances to as far as I would like to reduce code reuse and variable redeclaration, making another inheritance of " Admin" for example to "SuperAdmin"
+I kinda used to think this, but then I started getting asked to do complex things with with huge datasets, so VBA was a must
+Can't really have an absolute position on VBA vs.  formula, they have pros and cons. All things being equal in terms of accomplishing a task with the same efficiency, I think well written VBA is superior to a mega-formula in terms of comprehensibility. 
+> if i could handle arrays in vba like i do in python
+
+You can make that sort of statement about, something, in any programming language comparison. 
+
+I wish I could handle strings in C like I can in VBA.
+I think the word you're looking for is [truthiness](https://en.wikipedia.org/wiki/Truthiness).
+No reference to excel.  OP just mentioned Python, so I brought it up.  You can compile to exe.  I mainly use it with tk for GUI stuff and some socket stuff.
+I see a lot of this.  I basically write prototypes for one client because as soon as solution becomes popular, IT comes in and wants to copy it in their platform of choice.  They assume because its in VBA there's something inherently wrong with it and that it must be a trivial job to reproduce its functionality.  "Underwhelming, expensive" and disappointing results follow.   
+Here's some of my preferences.
+
+* Comment and document.  Perhaps my biggest peeve.  It doesn't do anyone good for you to write a long, complicated procedure and not write a single comment about purpose or direction.  If I have to pick up that code (which happens often), I'd rather not waste my time trying to dissect why the code was written the way it was due to the original coder being lazy about documentation.
+
+* Use Option Explicit.  Simple two lines can go a long way in preventing bugs or typos.
+
+* Segment long production code.  It's easier to diagnose problems and enhance by pieces, instead of having a large procedure that can potentially fail to work as expected due to its size and length.
+
+Documentation can go a long way... I've had way too many VBA superstars create heavy duty scripts without at all commenting or documenting what or why they went the direction they went, and it just becomes a major headache not only to support a procedure you can't fully understand, but to enhance it in a way that doesn't make end users jump down your throat about something that doesn't work anymore.
+Format your code well. Use proper indentations, line things up, don't be afraid of white space. 
+
+Don't try to cram as much functionality as you can onto one line. Example: If you have to perform 4 steps to clean up a string, don't nest them all together into one confusing mess, put each one on it's own line. 
+
+After you've gotten your function working, revise it, make it better. THAT'S where you learn where you learn how to code. Don't just make it work, make it work really well. Over time, this really helps your "first drafts" get better.
+
+Take a course or two in another language. Read programming blogs. This will help you learn proper techniques and expose you to ideas you never would have thought of. 
+When I first started emailing with VBA [this](http://www.rondebruin.nl/win/section1.htm) helped me out tremendously.
+all the replies are good. still: my advice is to have a problem to be solved. Then figure it our yourself. The best way imo is to use the (i am german so i don't know the proper english name) "record macro" tool. Activate it and do what you want the macro (coded in vba) to do. then stop the record. afterwards, check the macro and you will see all the details that you have done. By this, you will learn the commands of vba very quick.
+Google.  Or a VBA book.  There are probably classes you can take too.  
+
+But really, if I don't know how to do something in VBA, I just Google around until I find someone who is trying to do the same thing.  Someone inevitably posts code in whole or parts.  And for gaps, you come here or a more populated Excel forum for help.
+Same place as where you go to learn VBA - the internet. MSDN documentation is reasonably good and forums usually fill any gaps it might leave.
+Both things I agree on. Exactly what happened with it as a spark, and yes then I had to unlearn a couple of bad habits when I moved on to Python.  
+> but it doesn't teach you computer science concepts as concurrently as other languages
+
+Can you rephrase this? What are you trying to say?
+Well, considering that you can use references to other software  like IBM Personal Communications and other mainframe interfaces, BusinessObjects, Internet Explorer, Windows API, Adobe Acrobat, telnet, you can do quite a lot of fancy coding.
+
+I'd say VBA is currently (still) the king of the big finance corporations and is only slowly replaced by more able environments.
+/r/rickandmorty
+I can't speak to SQL Server, but I don't see where Python is natively implemented in Power BI.
+How is this different from having a User as a member of your Admin class?
+If you have huge datasets (>100k rows), you should probably consider MS Access or even setting up an SQL Server. Switching from Excel to Access for my 1m rows (16 columns) allowed me to increase performance/calculations 20 times (down from a couple of hours to 1-2 minutes per query).
+I just demanded increasingly powerful PCs and got smarter with how I wrote formulae ;)
+Not to mention controlling flow... Good luck looping with formulas!
+I'd agree about having an absolute position and as I said I don't use VBA, which is why I'm not bothered by it.
+
+It's on my list of things to learn, but until something properly stumps me it's not going to be top of the pile any time soon.
+
+Also I find reading formulae pretty straightforward, but maybe that's just the way my brain is wired ;)
+I'm not sure what you mean here? 
+That's what I do for the most part, it's knowing how to iterate and automatically shift etc that throws m
+e 
+Sorry, that was poorly put.
+
+Learning other languages, it felt like learning the language was the same as learning basic computer science concepts. Learning VBA, the computer science concepts seem to be mostly abstracted away and you don't really directly interact with underlying structures as much.
+
+One example is inheritance, which pops up several times in this thread. To code in Java, you need to know about inheritance (which I would classify as a "computer science concept"). In C you deal with pointers and - more broadly - how the computer handles the data itself, so learning how to code in C teaches you how the computer interacts with memory - another concept thing. In VBA it's largely Parent.Child.Property and Parent.Child.Method without needing to worry about how the computer is accomplishing what you're asking, so learning what's going on behind the scenes is not an immediate necessity to writing a lot of VBA code.
+
+That may be an artifact of the fact that I'm learning VBA more recently than any other language (and thus already have some exposure to computer science concepts), but it was the sense I've gotten so far in the learning process. I am admittedly on the "biased-against" end of the attitude spectrum. I know VBA can do a lot and is very useful, but I also think people dislike it for legitimate reasons.
+Because separating your objects and inheriting them means I can have infinite variations of User object or any of it's super sets, where as every time you want to apply the properties of User to a class you have no alternative except copy and paste or rewriting.
+
+Now imagine a project where you might want say, a Document class. Document class includes a file path variable and some file modification methods like Delete() or Rename(). There are often times you need more information about a document, say you want to do certain things if the document is an excel document and other things if it's a word document and still others if you had a PDF document.
+
+So I need an ExcelDocument class as well as WordDocument, PDFDocument, and just plain Document.
+
+In a world without inheritance you would copy and paste the properties of Document into the class definitions for ExcelDocument, WordDocument, and PDFDocument as they all need a file path variable and the relevant Document methods. This works all fine and good until you realize half way through building your project after having copied and pasted the properties of Document a million times that you need to change the properties of Document as well as every location you've copied and pasted it.
+
+With inheritance there is no copy and paste, if you need a class to have the properties of another class you simply inherit them. Any changes to the base class or any class along an inheritance chain will propagate upwards through the chain. This makes design more efficient, it makes maintenance and changes an actually reasonable task, and it organizes code increasing readability.
+
+It also means that while consuming all of these classes if I don't need their special properties at that time I can treat them all like Document classes, making for more generalized and efficient code.
+I understand it may be the only possible method for some people, but Access is just horrible. It's just a glorified place to store data. Any subqueries that take up significant memory (i.e. too big for Excel) it's so counterintuitive and clunky for me. SQL if at all possible.
+"sure I can add all these cells together. But you will have to buy me a new PC..." muhahaha!
+i guess that part just comes from practice. not everything can work perfectly from the beginning :D most formulas you use so often that you will remember them quickly. but i also forget a lot of formulas and feel like an idiot when i read the code months later to optimize it.
+Except that you don't have to copy and paste the code. You can declare a public Document object in your Excel/PDF/Word/Whatever class modules, do a "Set Document = New myClassDocument" in the class initialize event and when you need to reference the Document object use "Excel.Document.Whatever" in your code. 
+
+Then, if you change the Document class, you've changed everywhere it gets used as well.
+
+Not that that is perfect, but it's far from the situation of having to copy/paste code into a bunch of modules when there's a change.
+Well, you can just write SQL queries in Access straight away, no need to use the clunky design tool they created.
+It's been the single most successful way of getting a hardware upgrade I've ever known :P
+You still lose your ability to generalize your consumption of objects though! Inheritance isn't just about code reuse and organization.
+But it doesnt validate at all (from what i remember)?

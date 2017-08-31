@@ -1,0 +1,21 @@
+Importing CSV from URL on excel in mac similar to sheets =IMPORTDATA
+Have you tried Power Query?
+If it were me who had to solve this, I'd write a Perl script using Perl's many web parsing tools.  I'd wrap the script in an Applescript that kicks off Perl and feeds the output into Excel.  It's probably a day or two of work for someone good at Perl and basic knowledge of Applescript.
+Excel on Mac is just terrible. I've had the misfortune of working with it before. Half the standard functions don't work right or don't work at all. Undocumented missing functions everywhere.
+
+Run, run as far and as fast as you can from this project.
+You could just download the csv file or do you need for it to update on the fly?
+I didn't think power query existed for mac excel. Thats half my issue right now is it has to work with excel for mac
+Yeah I get it Microsoft doesn't give a shit but my exec doesn't want to work with sheets despite all the "hard core" excel stuff He's doing is basically fixing the issues of not auto importing. Sigh. 
+
+
+Update on demand or better. 
+God help you.
+Can you script it to autodownload for Mac?
+Yeah that's not a problem it's breaking the CDC formatting into cells is hard to do
+Is there a Data/Import tab on your Excel? You can import the data there & Excel deliminates bass on the comma. Atleast on the Windows version of Excel 2013.
+
+I 
+Yeah it should but it doesn't that's the whole point. It will if your bring the data in any other way, save the webpage as an HTML file no problem save it as a csv no problem, import from a saved query NOPE. 
+If you expand the data by double clicking the top column does it expand? Also it sounds like a bug on MS part. I'd file a bug report.
+Nope. It will expand to columns using the command but that's not a dynamic function. 

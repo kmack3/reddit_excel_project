@@ -1,0 +1,105 @@
+Self-taught basic excel skills, been shortlisted for a junior analyst position at my company. What should I learn/research?
+If you haven't dabbled in any VBA, get some of that in there :]
+I'd recommend perusing some of Chandoo's articles. Guy was a data analyst before running his website full time. Here's a crash course on some basic data analysis ideas.
+
+http://chandoo.org/wp/2015/07/01/how-to-analyze-business-data/
+
+Beyond that, I'd undertand the 3 basic charts (column, bar, XY), and understand the pros and cons of each.
+Pivot tables and basic data visualization. Microsoft virtual academy has some nice intro courses. Learning some VBA will be useful.
+As a senior analyst, from my perspective you know all of the necessary formulas. If you ever have issues, have no shame in asking us here at /r/excel.
+
+The challenge will be knowing when to use each formula. It isn't always so clear. Ive spent days scratching my head on a problem, wjen the solutoon (ie fotmula) was starring me right in the face. This is all a natural part of the analysis process.
+P  I  V  O  T   C  H  A  R  T  S
+
+seriously
+I watched all the videos on YouTube user ExcelIsFun's 2010 "Highline" (?) class, and it was pretty thorough, and will take you  a couple of weeks.
+
+Once you've got that basis down (which will put you above most Excel users), look into more advanced Pivot Tables (relationships, Data Model), Power Tools, and DAX. And VBA, as mentioned.
+[This](http://www.randalolson.com/wp-content/uploads/data-ink.gif)
+
+Formulas I use daily: INDEX MATCH, SUMIFS, SUMPRODUCT, IF
+
+Formulas I use infrequently: OFFSET, INDIRECT
+
+Most importantly: I can always teach someone excel. I'd rather hire someone with a desire to learn and cultivate them into a productive employee.
+in my experience, a basic knowledge of formulas enough to get the job done is sufficient. you're not going to wow them by using a more elegant formula, as long as you can get the job done.
+
+
+the thing that has blown people away in my experience is not needing a mouse to use excel. learn all the shortcuts, hit alt+...+... to find what you need, and be able to navigate around a workbook without a mouse and you'll really impress someone looking over your shoulder. 
+
+
+vba is awesome, and can also impress, but you're not going to get to a level of proficiency in a matter of weeks that's going to enhance your skills in an interview. just my two cents.
+I've been an analyst at two billion dollar companies, non accounting, trust me when I say, people's understanding of Excel is basic. Vlookups will be your best friend. Index match will make you look God like.
+Learn simple sumifs and sumproduct and go from there. 
+
+Depending on what type of analyst, Excel has an addin that does basic statistical analysis that is fairly accurate, but has some limitations. Data analysis addin
+Pivots, constructing good tables, vlookup, sumproduct, if statements.
+
+If you have examples of other people's work that you like look at how the formulas work and learn how they did it.
+Is there any way you can talk to one of the analysts in that department and ask them?
+Index Match vs vLookup will be a lift saver especially if you are dealing with a lot of large data sheets. 
+
+I'd also recommend reading up on the combined functions like SUMIF etc. these expand just barely past the simple functions but can really help when parcing through data. 
+
+Best of luck and I've seen this sub help people a ton so we're here for you! 
+
+Edit: also Ctrl + ~ will show all formulas, use the same button combo to switch back views. A useful tool when you're using someone else's spreadsheet. You can also check relations in the formulas tab. I'm thinking through my first few weeks at my last job, it was a bit of a mess. 
+What applications or instances have you used offset for?
+alt 3 and alt 4 to merge/unmerge cells is a lifesaver and looks like magic to people too.
+
+I hate when I get spreadsheets someone else created with weird, illogical merges all over the place because they were trying to format it, or the users who still use crystal reports (most are legacy and before my time) that when exported to excel result in the the most FUCKED UP display of data with merged cells all over the place.  And you can't simply highlight the sheet or a couple columns and click unmerge because it's done in such a haphazard way you totally lose sit of the data or accidentaly overwrite something, etc.
+
+being able to ctrl+shift+right  arrow (enough times to get to the last column) +same thing down to get all the rows and then I can just use tab to move the the active selection and alt+3 to unmerge or alt+4 to merge (if I wanted to for some reason).
+
+The difference between me doing this and someone individually find all the cells to unmerge is probably at least an hour.
+
+It's hard to explain unless you see some of these reports some of the old manufacturing engineers run, these crystal reports have been in use probably as long as I've been alive and there untouchable because everyone is afraid if I work on them they'll break and the world will end.
+
+But yeah, I'd say just focus on learning lookup functions, understanding operators, the common problem of numbers stored as text, then understand how to select columns of data and filter/sort, then learn how to make a pivot table (learn this inside out - especially check out calculated fields), and as you go try and learn shortcuts.  Google a Excel Shortcut list and print it out and hang it by your computer. 
+
+I think data tables and data connections are fantastic for creating low maintenance reporting workbooks, but I'd save that until you at least feel comfortable with lookup, all the if (and ifs) functions, and pivot tables.  
+
+Maybe look into array's but not until you're feeling fairly comfortable in excel.  super helpful but trip a lot of people up because it doesn't seem intuitive to them.
+
+
+Also, solver and goal seek are kind of cool, and the data analysis add in can help you create summary statistics and what not.  Not really sure what kind of analyst you're trying to be.
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 10 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+I use pluralsight and lynda,com...download certain videos for offline viewing and listen as I commute around;;;ok I'll admit it, I peak at it too;;redlights, mind you
+I second this. It will save you hours by automating all sorts of things you would otherwise have to step through manually. 
+This is key stuff
+I know you got some upvotes on this, but I wouldn't prioritize this. 
+alt 3 and alt 4 to merge/unmerge cells is a lifesaver and looks like magic to people too.
+
+I hate when I get spreadsheets someone else created with weird, illogical merges all over the place because they were trying to format it, or the users who still use crystal reports (most are legacy and before my time) that when exported to excel result in the the most FUCKED UP display of data with merged cells all over the place.  And you can't simply highlight the sheet or a couple columns and click unmerge because it's done in such a haphazard way you totally lose sit of the data or accidentaly overwrite something, etc.
+
+being able to ctrl+shift+right  arrow (enough times to get to the last column) +same thing down to get all the rows and then I can just use tab to move the the active selection and alt+3 to unmerge or alt+4 to merge (if I wanted to for some reason).
+
+The difference between me doing this and someone individually find all the cells to unmerge is probably at least an hour.
+
+It's hard to explain unless you see some of these reports some of the old manufacturing engineers run, these crystal reports have been in use probably as long as I've been alive and there untouchable because everyone is afraid if I work on them they'll break and the world will end.
+
+But yeah, I'd say just focus on learning lookup functions, understanding operators, the common problem of numbers stored as text, then understand how to select columns of data and filter/sort, then learn how to make a pivot table (learn this inside out - especially check out calculated fields), and as you go try and learn shortcuts.  Google a Excel Shortcut list and print it out and hang it by your computer. 
+
+I think data tables and data connections are fantastic for creating low maintenance reporting workbooks, but I'd save that until you at least feel comfortable with lookup, all the if (and ifs) functions, and pivot tables.  
+
+Maybe look into array's but not until you're feeling fairly comfortable in excel.  super helpful but trip a lot of people up because it doesn't seem intuitive to them.
+
+
+Also, solver and goal seek are kind of cool, and the data analysis add in can help you create summary statistics and what not.  Not really sure what kind of analyst you're trying to be.
+Sure, there are more sophisticated tools and methods, but being able to concisely summarize data is important, and pivot tables and charts are a low hanging fruit that can be pretty easily learned. They're obviously not the solution to everything, but you can save a lot of time when you understand how they work.
+Yeah I agree. Just thinking that with the OP knowledge level working on basic formulas, data pivots (adding fields, etc) may be more beneficial. I only say this because your comment has sky rocketed to the top, and I just don't believe it's what their focus should be. But. Yes, pivot charts are helpful
+ Good point, can you elaborate on what you mean by data pivots? I'm thinking pivottables... but that's kind of an assumed prerequisite to pivot charts in my mind.
+Yes, data pivots = pivot tables. Long day.  :P 

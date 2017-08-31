@@ -1,0 +1,20 @@
+Using excel for study guide?
+Create or use sheet two and duplicate the headers there. Then highlight the cells that would have the data and go to Conditional Formatting > New Rule > Use a Formula.. > Insert the formula below in the box 
+
+    =AND(B2<>"",B2=Sheet1!B2)
+
+Click format button > Fill Tab > Select green > OK > OK
+
+Then repeat the steps but use the formula below and select red
+
+    =AND(B2<>"",B2<>Sheet1!B2)
+Check out conditional formatting if you specifically want to use colours. I just use an "if" statement in an adjacent cell that displays "OK" if my answer is correct. 
+Will do! Thanks!
+thank you so much! do you know if theres an easy way to ignore text order?
+
+http://imgur.com/a/mt6X3
+
+so like here where it says "big shoulder" if i type it in exactly like that im good but if i type "shoulder big" it comes incorrect
+
+i want to try and set this as a study guide where memorizing word order isnt as important as making sure i have all the words there to speak. if i could do that as easily as creating the original spreadsheet for the rest of my studying that would be awesome!
+I think there is a "fuzzy match" add in that can do something like that but I've never used it. 

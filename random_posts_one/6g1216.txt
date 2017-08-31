@@ -1,0 +1,31 @@
+6g1216
+Question about repeatedly filling Pivot Tables with the same fields from different Excel files?
+I'm not entirely sure if it's possible, and please excuse the poor wording of my question. My problem is this:
+
+I am using a program that creates Excel spreadsheets of raw data about the number of disclosures completed weekly by each staff member of a medical records company. I have found myself, with each Excel file, repeating the exact same process of creating a pivot table from the data and dragging the exact same fields over to the pivot table, thereby organizing each file into sheets that I rename based on the data that is organized/created. Is there any possible way to streamline this process in order to organize all the data at once by filling the pivot tables with the correct fields? I am by no means an Excel expert, but I imagined that it might be possible to write a script on the terminal to execute this process repeatedly, changing only the name of the files as they are accessed?
+
+Thank you for any help or information, and please let me know if I can reword anything to make it make more sense!
+
+
+-------------
+You can use macros to assort your pivot table fields, but vba doesn't play nice with pivot tables.
+
+Maybe leave the headers and paste the raw data into your data dump and have a dynamic named range instead?
+-------------
+Power Pivot
+-------------
+I apologize for asking, but could you dumb this down a little? I don't really have the time to learn much about Excel, since this is for my job. If this is the kind of thing you could put in layman's terms it would be much appreciated; if not, I can look up the terms I don't understand and try it. 
+-------------
+Totally willing to download this and add it in; would you care to give me instructions on how to use it specifically for my situation?
+-------------
+Sure, if what you're saying is that the headers/categories stay the same every time, just replace the data only (delete the old data and paste the new set).
+
+And to make it so you don't have to change the reference (data source), go to "Formulas", "Name Manager", "New", and Add with a name of your choice. The formula should be:
+
+    =OFFSET('Sheet1'!$A$1,0,0,COUNTA('Sheet1'!$A:$A),COUNTA('Sheet1'!$1:$1))
+
+And whatever you named the range, put in that value into the "Table/Range:" field:
+
+    Table/Range: =data_range
+-------------
+I appreciate the response but I ended up just doing it manually. Thanks for explaining it though!

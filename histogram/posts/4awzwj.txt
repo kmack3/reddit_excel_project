@@ -1,0 +1,57 @@
+I'm an amateur in a professional world. How can I apply conditional formatting to attain my desired result?
+http://imgur.com/ZJNuofd
+
+This is just an example and the actual spreadsheet is much larger than this.
+Are you working with whole months or number of days?
+
+For instance, this formula would return the number of whole months from the date in A1 to today, rounded down to the nearest whole month.
+
+    =IF(DAY(NOW())>=DAY(A1),0,-1)+(YEAR(NOW())-YEAR(A1)) *12+MONTH(NOW())-MONTH(A1)
+
+If you were to add a >18 to the end of it, it becomes boolean, which should satisfy your 1st conditional. You can modify the formula to fit the range using AND.
+
+Let me know if this is on the right path.
+Cheers.
+rule for red in C1: =(TODAY()-A1)/30.417>18
+
+rule for yellow in C1: =AND((TODAY()-A1)/30.417>14,(TODAY()-A1)/30.417<18)
+
+30.417 is the average days in each month of the year. 
+
+
+based on this you should figure out the rest...I'm off to bed
+Quick question, is this how you want the formatting? 
+
+* Under 14 months: No format (white)
+* 14-18 months and IC: Yellow
+* Over 18 months and IC: Red
+* 14-18 months and Complete: Green
+* Over 18 months and Complete: Orange
+Use Conditional Formatting for Column B and C.
+
+Click on Column B > Conditional Formatting > New, then use [this formula.](http://i.imgur.com/PYApqpK.png)
+
+Click on Column C > Conditional Formatting > New, then use [this formula.](http://i.imgur.com/VXCSXfT.png)
+
+=C1>A1+180
+
+and
+
+=C1>A1+14*30
+Months would be fine. I am honestly brand new to excel and don't comprehend the process of changing around a formula to fit my needs. I'm going to try your formula and see if that works though. 
+I tried both of these formulas and played around with the date to check and I didn't get any results. 
+That is all correct except if it is complete it will be green regardless 
+I actually need the color of C to reference between A and today's date, not the date in C
+you did put these rules under conditional formating right?
+So who gets orange?
+Yeah, that's why you should put the formula that I showed [under the column called "Rule":](http://i.imgur.com/VXCSXfT.png)
+
+=C1>A1+14*30
+
+and 
+
+=C1>A1+180
+
+Only the incomplete cell in column B will be orange
+OK, I think /u/speqter's solution gets you there.  Have you tried it?
+

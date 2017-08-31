@@ -1,0 +1,55 @@
+6imjlj
+STDEV.P returns innacurate value
+Hi, 
+
+I am working on a way to remove intervals listed in my data that would represent "holidays" and therefore "useless" data. It is quite a large data set (50k+ rows). This is for a callcenter environment. There is 9 queues and about 30minute intervals from 9 until 22.
+
+The follow up to this is to make a calculation that checks the average per interval +/- standard deviance and lists the interval as either above/below normal or as abnormal.
+
+So far my formula looks like this: (this is the issue)
+
+=IF(AND(interval range=time in cell, queue number=queue in cell),STDEV.P(range of calls)
+
+The outcome is unfortunately 2.67 for everything... which is wrong. I tried adding a condition that removed all zeroes because there is a lot of them but then the outcome is 0..
+
+Please help!
+
+
+
+
+-------------
+You're looking for `=STDEV.P(IF(AND(logicals),RangeOfCells))`
+entered as an array formula (ctrl+shift+enter)
+-------------
+This was amongst the first i tried but unfortunately this shows 0 in all the cells.. i will try it again tomorrow at work
+-------------
+Make sure you enter as an array formula or it will not work. We may need to see a sample to help you more -- your logicals could be set up incorrectly. 
+-------------
+Luckily had a version at home! So the file spits out 0 even after making sure it's an array. Without array it gives 3.02 in all cells...
+
+The logical statements that ive entered are:
+W:W=W2 (queue number range=queue number in cell W2) 
+And
+I:I=I2 (same as above but for interval) the cells in I are formatted as time if that matters.
+
+
+Maybe this is where it goes wrong? Since i need the resulting std dev for all queues in the sheet i thought this would be correct.
+-------------
+Oh, my bad, you can't use AND since we're dealing with arrays and AND can't return an array. Use: 
+
+`=STDEV.P(IF((Logical 1)*(Logical 2),RangeOfCells))` still an array formula
+
+Also just FYI it's not a great idea to be calculating this array formula 50,000+ times. Might cause Excel to crash. There will also be a lot of redundancy, i.e. you'll calculate the same formula again every time a interval/queue combo is repeated. The better approach would be to make a table of all the unique queue numbers and intervals combinations and calculate the STDEVs there. You should also limit your criteria ranges, i.e. use $W$1:$W$50000 rather than use the entire column. 
+
+You could make this table quite quickly by copy-pasting your existing I and W columns to a new spot, then using excel's "remove duplicates" tool on both columns. You'll get a list of all the unique combinations of interval and queue number. Then use this as your criteria in the formulas.
+-------------
+Solution Verified!
+-------------
+I think I will take you up on that suggestion. Running it at my computer here at home took almost 5 minutes... I don't want to know how it will go tomorrow at work!
+
+Thank you very much for the quick help, this will make sure I keep yet another deadline :)
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,104 @@
+If you could add any new feature/improvement to Excel, what would it be?
+A programming language other than VBA. Ideally a Python clone, but the set of things I'd settle for is very broad. If I could use something within excel that was modeled after any of Python, R, Matlab, or Julia I'd be ecstatic.
+
+Even half-decent matrix algebra and statistical programming functionality native within VBA (I know, there are some third-party hacked-together libraries for it, but... nothing really ready for prime time) would be a big deal. 
+
+And while functionality is a big part of this, aesthetically VBA doesn't hold a candle to most other languages. Not nearly as intuitive as Python, R, etc or even low level languages like C++, C#, and Java. Especially with Python around, it's extremely tempting to use that instead for anything remotely complicated just for ease of getting what you want and reading someone else's code.
+
+(Investment analyst for a pension fund, currently moving one of our portfolio management platforms to Python instead of spreadsheets)
+I dream of the day Excel will retain what I have copied after it has been deselected.
+MAXIF(s) / MINIF(s)  
+I know you can do it with arrays, just seems like a simple addition to the suite of functions  
+Find the most a customers have used/purchased of a particular product group in a particular time period
+Performance? It doesn't use all the cores or ram to do its things so everything is just slow.
+I want to blend types of charts in the same object. Charts need a lot of improvement IMHO.
+The ability to set an option to open each spreadsheet as a separate instance instead of having to modify the registry to do it.
+For me one biggie would be the trace precedents and dependents. It's a useful feature, and is fairly good. However, it misses a bunch of stuff (and it's not too clear about this), so improving that would be great (albeit a fairly hefty task).
+I'd add a function for linear interpolation.
+Ability to run SQL directly on Excel tables without needing to make an ADO object and then 'reopen' the Excel file in the process.
+
+JavaScipt, Python, C, ANYTHING else besides VBA.
+The ability to embed .NET code into workbooks in the same way that VBA code works now. Or at the very least bring some features from VB.NET into VBA like lambdas and true OOP.
+An easy way to copy and paste exact cells. Currently use my own code which works but I'm just not sure why they didn't make that a built in functionality.
+Copy and paste menu that will allow you to paste from a list of the last several things you copied.
+Unique count
+[Lots of feature requests here.](https://nr.reddit.com/r/IAmA/comments/3rid26/we_are_the_microsoft_excel_team_ask_us_anything/)
+if you press Ctrl+ D or Ctr+R you can fill in rows/columns with the last cells data.
+
+to sequence numbers in a linear fashion without using the mouse, you need to pres  alt+HFIS which is time consuming. It would be nice to have this be in a different shortcut 
+
+
+
+
+
+also..more string manipulation functions.  
+
+
+i work as a data analyst and have worked in a few different industries so i am used to dealing with all kinds of messy spreadsheets be they financials or reports for ops metrics
+Zombie Cell Eliminator.
+I'd love for vba to natively support other browsers. IE has made huge leaps and bounds compared to how it used to be but I still avoid it like the plague. I usually use Firefox at work(so no Selenium on the company computer :/) and if I could get vba functionality plus some of the shit I tinker with in greasemonkey I wouldn't ever have to work again. 
+
+Maybe implement some kind of 'command line' in vba so I don't have to go searching for a macro that does formatting, I can just type "call ColWids" to format my columns or something.  
+Native support for weighted metrics in pivot tables.    
+
+After that better database integration would be handy - especially into pivot tables.
+Auto-updating lists/tables/arrays without having to drag the selection down each time.
+
+I'm an analyst for a forensic accounting firm and I spend way too much time compiling disparate lists of data. If I have two lists of checks, for instance, I would love it if I could write an array formula that includes everything from both lists and doesn't require me to drag the formula every time I add a new item to either source list.
+This may not be popular (or even helpful), but...
+
+As a basic user, my biggest issue with excel is the amount of knowledge you need to use intermediate or advanced features.  It can be daunting to learn how to do stuff that many in this sub can probably do in their sleep.
+
+I know, I know - get off my dead butt and learn is a good response to this.  I have taken some courses, but the pace of my job and the ROI of being an advanced Excel user really doesn't lend itself to learning.  This is totally on me, but I think you would have more people able to utilize the power of excel if it was a little friendlier to get into its advanced features. YMMV
+I'd just download some special application/tool for Excel, happily, there are lots of them. 
+As far as I am concerned, https://zebra.bi/ is one of the latest financial planning and analysis software to improve reporting , you may implement one directly to Excel doc. 
+[deleted]
+Yes, yes, yes. VSTO doesn't count either. 
+Yes!
+Definitely seeing a lot of this in this thread, and from talking with my Excel power user friends as well! 
+We use datanitro for this (python within excel) and have been very happy) 
+Or C++ for shits and giggles. 
+I would love to use R in Excel 
+This. So much.
+They kind of addressed it in their AMA.
+
+https://www.reddit.com/r/IAmA/comments/3rid26/we_are_the_microsoft_excel_team_ask_us_anything/cwoczc2
+Huh. Interesting. Is this the case across all systems? I'm trying to replicate this in my Mac Excel but can't seem to do so, though I had a friend demo for me in his Windows Excel and this did happen. (Yes, I am a relative novice to Excel). 
+this!
+yeah this is what i came to say. sometimes doing this a lot with array formulas just makes workbooks really big and clunky.
+And while we're there, AVERAGEIF and COUNTUNIQUE.
+Adding STDEVIF(s) and MEDIANIF(s), although I'm sure there are other worthy contenders.
+Vba doesn't even use two threads. 
+So something like Pareto charts? FYI From my digging around there are Paerto charts in Excel 2016 (see slide 18 of [this deck](https://docs.com/ExcelDemos/7981/excel-2016-top-features)).
+
+What other pain points of charts do you experience?
+That was fixed in 2013 - all new spreadsheets are their own window, at least.
+To make sure I'm understanding things correctly, are you talking about [this feature](https://support.office.com/en-us/article/Display-the-relationships-between-formulas-and-cells-a59bef2b-3701-46bf-8ff1-d3518771d507)? 
+
+If so -- I'd love to know what things that it ends up missing/isn't clear about. 
+It's a simple formula that you can use to make a custom function in VBA
+I'd be happy with explicit declarations (`Dim x as Integer = 1`), Try/Catch blocks, and LINQ... 
+Just wanted to mention that a pretty quick solution (assuming you don't know VBA, don't want to use a plugin, and only need this every so often) is to just copy the formula, which you can do pretty quickly with a few shortcuts.
+Ctrl+c+c opens the clipboard. Once open,  you can start copying and it will remember each selection. 
+You can do this in PowerPivot. 
+Awesome, thanks! This is a goldmine. 
+Zombie cells? There are ZOMBIES IN EXCEL?!?
+So perhaps something like a better onboarding process -- ex. [these kinds](http://blog.invisionapp.com/an_intro_to_user_onboarding_part_1/) of things or [these kinds of things,](http://firsttimeux.tumblr.com/) to borrow from a lot of mobile precedents?
+
+I wonder how much Excel does or doesn't have of this, especially the newer mobile versions of it... time to do more research!
+I'm a Mac person as well (and have been for a while), so my Excel perspective has been biased within whatever constraints come with that. 
+
+At a high level -- would you happen to know the level of discrepancy between Mac and Windows Excel? And are there any very notable features missing on Mac Excel otherwise present on PC? 
+AVERAGEIF (and AVERAGEIFS) exist in 2013 - not sure if that;s new to this release. I only know this because I needed it yesterday so decided to have a look.
+That's what I want. It just need it to be easier. The problem is that Excel mess to much with the axis.
+Yes. Superficially, it appears to be the perfect in-built calculation tracking system. However, in reality it's missing a few things. Eg table references aren't tracked if the table is on another worksheet, and cell references generated in unusual ways (offset and indirect functions for example) also aren't tracked well. To get this sorted would be a pretty big task, since you have to parse and there are so many ways to reference cells, worksheets and workbooks. However, it would be very good.
+I *know* what linear interpolation is and at least two different ways to perform it without using VBA. My assumption was that, like returning the double factorial of a number, it would be universally useful to the point that it could have its own standard function.
+Let's say I want to move all of A to column B. What shortcuts can you use to do that?
+This has changed my life!
+Yep,  they have no data in them,  no conditional formatting,  yet they take a butt load of space.  Sometimes you can have a spreadsheet that comes out at 20mb and lagging like hell, but it should only be 2mb and like lightning. 
+You have to go one cell at a time, but that's typically fine because every cell isn't typically an entirely new formula. 
+
+If that's the case, you can always use Ctrl + ~ and then copy the column into Notepad. That's still pretty quick despite sounding like a hassle and you'd probably only need it here and there.
+
+These aren't ideal solutions obviously, but they're not too demanding and are easy even if you don't know VBA and don't want to install a plugin (or pay for one).
+Thanks! Honestly just use VBA and it's often helping others update their spreadsheets for a new year (so moving stuff to last year). Thinking about, the notepad trick should work.

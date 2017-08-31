@@ -1,0 +1,66 @@
+6gb5i5
+How can I get this to run in the background?
+    Sub my_Procedure()
+        Dim Sh As Worksheet
+    Dim Rng As Range
+    Dim Cell As Range
+    Dim strBatchName As String
+    strBatchName = "C:\Users\yty\Desktop\downloadcleanup.bat"
+    Shell strBatchName
+    strBatchName = "C:\Users\yty\Desktop\downloadcleanup2.bat"
+    Shell strBatchName
+    Set Sh = Worksheets("sheet1")
+    With Sh
+        Set Rng = .Range("A1:A2")
+        ' & .Cells(.Rows.Count, "A").End(xlUp).Row)
+    End With
+    For Each Cell In Rng
+        ThisWorkbook.FollowHyperlink Cell.Value
+    Next Cell
+    Call test ' for starting timer again
+    End Sub
+
+    Sub test()
+    Application.OnTime Now + TimeValue("00:15:00"), "my_Procedure"
+    End Sub
+
+trying to find a way to get this to run in the background, can anyone point me in the right direction with this?
+
+
+
+
+-------------
+A reminder to please read the [sub guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) about post titles.
+
+Your post title must contain a description of your problem, this makes searching for it again easier.
+
+Future posts may be removed.
+
+-------------
+You can't. VBA isn't multi-threaded.
+
+However, with Power query (G&T in 2016) you CAN get it to execute a query every so many minutes...
+-------------
+Gotta ask: why run 2 separate batch files sequentially rather than combine them into one batch file, have the first call the second, or just call a 3rd batch file which runs the first 2?
+
+Looks like every 15 minutes you want to run the 2 batch files then follow some hyperlinks. Using __Shell__, the batch files run in separate processes. Is the problem that they run in console windows covering the Excel windows? If so, change lines 7 and 9 above to
+
+    Shell Pathname:=strBatchName, WindowStyle:=vbMinimizedNoFocus
+-------------
+You can most definitely run this in the background - though I would recommend doing so on a virtual machine if possible and building logical restrictions. Research the OnTime VBA below.
+
+    Application.OnTime
+-------------
+Based on the answers so far, it's not clear what you mean by 'background'. 
+
+Do you mean a process that runs in Excel while you continue to work in Excel without interruption? (u/small_trunks has that answer)
+
+Or do you mean a process that runs on a schedule? (u/hrlngrv and u/itsnotaboutthecell have that... and I would add that the batch script can be executed as a Windows process using the task scheduler, in case that works for you. 
+-------------
+You'd have to use a workbook event (based on what I'm reading, most people are using the workbook open event.) You can see how to do so [here](https://stackoverflow.com/questions/2319683/vba-macro-on-timer-style-to-run-code-every-set-number-of-seconds-i-e-120-secon)
+-------------
+Damn, the way I have it going now I just created another user in Windows and have just that running in it. That's the best way I can come up with
+-------------
+I'm running two because I don't know what I'm doing, ;) I'll try this here in a sec and let you know. Thank you for your help
+-------------
+Go look at power query...

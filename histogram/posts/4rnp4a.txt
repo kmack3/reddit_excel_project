@@ -1,0 +1,209 @@
+What questions should be prepared in a test that checks if someone is an advanced Excel user?
+Give them an ungodly buggy spreadsheet to reverse engineer and make whole "and efficient" again. I'm glad they can navigate their own spreadsheet designs but testing how well they can handle someone else's work and getting into their mindset is a true test of advanced users.
+Ask them about a feature they don't know in excel and see if they can Google and self learn.
+* Dynamically Named Ranges
+* Advanced Conditional Formatting Methods
+* What-If Analysis, Goal Seek, Solver Add-In
+* Pivot Table Calculated Fields
+* Pivot Table Formatting (Tabular Format, Show as % of, Slicers, etc.)
+
+* More Advanced I would Say PowerPivot and Power Query. They are game changing once you start to learn how and when to utilize them. 
+
+Edit: Formatting
+
+Give them a large messy sheet with understandable data and ask them to display the data in an organized readable way they see best. Make sure you ask for data in a way that requires multiple different skills. 
+I'd ask them them to explain some of the limitations of Excel formulas and how they can be overcome using VBA and Power Query.
+
+Edit: Wait...
+> (ignoring VBA)
+
+How could you claim to be advanced without VBA knowledge?
+Have them reorganize a large set of data using INDIRECT/ADDRESS. Bonus points if they talk through what they're doing and sing, "comma comma comma chameleon."
+Make a dynamic list of RPG weapons (swords/axes/ect) with associated damages, appropriate range listings, and accurate price list.  I basically taught myself excell making this type of list in college.  
+Do you have some context? I.e. what kind of task will this person need to solve, or what is the job?
+I was going to suggest having them automate the interview, but then I read "...ignoring VBA"
+H and v lookups within tables
+Custom cell formatting (Format Cell...Number tab...Custom...then enter a format string).  Tell them you want zeroes to be blue, positive numbers to be left aligned, negative numbers to be padded to 8 digits, text to be hidden, etc.
+Have them efficiently clean up extracted data...data that is multiple rows, merged columns, skipped columns, inconsistently laid out, etc.
+Have them make a rolling 12 month graph that will automatically update as a new month's data is added. 
+
+Or better yet, let them create their own workbook to impress you. 
+Have them deal with errors returned by a VLOOKUP.  
+
+i.e. nest the VLOOKUP within an IFERROR to return "" instead of an error.
+
+This will validate your users understand formula nesting, order of operations, and conditional statements.
+Another idea, give them a task that can't really be done well in Excel, like a 2 million line text file that needs to be parsed, searched and data pulled from. See if they know when excel has hit its limits. See if they suggest another method to solve the problem.
+See this on the front page:
+
+https://www.reddit.com/r/excel/comments/4rkv5c/interview_for_a_financial_analyst_next_week_will/?st=iqc66hqs&sh=e231588c
+
+Also, try running a search - we get similar types of questions regularly.
+Simplest tasks can be the most devious.
+
+Give the subject some standard test papers, all with closed questions on them and answers pre-written.
+
+------
+
+Participant Name:
+
+Age:
+
+Question 1: Is the world flat?  
+
+Question 2: Does a door usually have hinges?  
+
+Question 3: Is God in the bible?
+
+------------
+
+Something like that.
+
+Make sure you have them all pre-filled out just 4 entries will suffice.
+
+All you want the participant to do is create a database with the information on the sheet.
+
+In an ideal world, the participant will create three tables.
+
+One for the Participant information.
+One for the Results of the test, tying the Participant ID to the results.
+One linking the questions to the headers of the table.
+
+
+
+ID | Forename | Surname | Age
+---|---|----|---
+1 | John | Hughes | 
+2 | Steve | Jones | 21
+3 | Matt | | 19
+4 |  | Smith | 32
+
+The idea behind leaving the last names blank, is simple. If the participant doesn't at least create a table with first names and last names separate, they are not normalizing the data down to individual criteria, and if they don't assign ID's to the names and use the ID's then they are not practicing protecting data.
+
+The next table would be the questions.
+
+ID | Question
+---|---
+1 | Is the world flat?  
+2 | Does a door usually have hinges?  
+3 | Is God in the bible?
+
+The last table would link the participants to the actual answers
+
+Participant ID | Question ID | Correct?
+---| ---|--- |---
+1 | 1 | True
+1 | 2 | True
+1 | 3 | True
+2 | 1 | False
+2 | 2 | True
+2 | 3 | True
+3 | 1 | False
+3 | 2 | True
+3 | 3 | True
+4 | 1 | False
+4 | 2 | True
+4 | 3 | True
+
+It is devilishly simple in terms of a question, but an inexperienced excel user may decide to put it all in one table and that one table will have names tied to results in a manner that would be hard to pivot later on.
+
+Such as.
+
+Name | Age | Q1 | Q2 | Q3
+---|--|--|--|--
+John Hughes |  | True | True | True
+Steve Jones | 21 | False | True | True
+Matt | 19 | False | True | True
+Smith | 32 | False | True | True
+
+I suppose to some this would be a perfectly valid way to arrange the data, but in terms of protecting data, it's pretty terrible, because during meetings, people's names would be exposed along with their performance, to complete strangers.
+
+Once the table is complete, get them to relate the data, if they have more than one table and then pivot it.
+
+The pivot table should have, Question ID in the Columns, Participant ID in the Rows and the Correct populated in filters and values, filtered to either true of false.
+
+It's simple but requires the proper set up.
+Thanks, I was thinking of doing something similar e.g. with hidden sheets, hidden columns, typical "the users are idiots" level of evil.
+Or give them an actual spreadsheet and ask them to explain what it does.
+In my job the "tools" we use generally have the following:
+
+1. A set of data (even better if it's actually a connection to a database, either file or an SQL server)
+2. Mapping / Lookup / Helper tables
+3. Pivot tables referenced by GETPIVOTDATA
+4. Lot's of SUMIFS
+5. Potentially some INDIRECT() cell references
+6. Maybe dynamic OFFSET() (meaning row/column arguments are formulas themselves)
+
+Nothing really that is difficult for a person who claims he is an advanced user, but when all is put together spreadsheets can seem quite complicated.
+How can I know they wont lie? "oh, I dont know advanced conditional formattnig"
+In addition:
+
+* Being able to make GETPIVOTDATA() dynamic
+* Basic knowledge of Array formulas
+* Ability to combine simple formulas
+* Ability to google excel questions (seriously, the internet knows excel better than any of us)
+I don't see =SUM in that list...
+Out of curiosity I looked at the official MS guide on Dynamically Named Ranges and it seems to miss the fact that there can be empty rows with no data. Thus the offical guide wont work.
+
+https://support.microsoft.com/en-us/kb/830287
+I'm curious what you mean by Advanced Conditional Formatting Methods.  I use conditional formatting a lot.
+I have a set of tasks to check vba knowledge.
+I never use those. I much prefer INDEX / MATCH instead.
+This is not terribly useful most of the time. I'd rather test on more critical features and functions.
+I actually saw that question and all the things there are between beginner and intermediate. Nothing advanced.
+Protecting PII is really important, but there are a ton of very proficient Excel users (myself included) who don't work with PII and thus have no need to do anything like this. I get what you're going for but it's really oddly specific and not what I would be looking for in terms of evaluating a candidate's Excel skills. I think it goes without saying that anyone who has basic Excel skills could easily create IDs to mask PII -- so test for those skills rather than if they already have a protect-all-PII mentality.
+If they bust out the Inquire tab and start tracing the cells precedents and dependents just stop the interview and give them a big hug right there. You got a keeper.
+Lock cells!
+Merged cells, inconsistent formatting, hard coded values in formula, IF() chains
+That's more like "trick questions" in an interview.  Almost always extremely negative for both parties.  
+
+If you want to understand their level of knowledge and sophistication, just give them a hard problem to solve; don't try to trick them.
+Seems like it shouldn't be a big problem.
+
+> "Are you familiar with the HLOOKUP function?"
+> 
+> "No" (Oh man, I hope this is the trick question)
+> 
+> "What about VLOOKUP?  It's pretty similar."
+> 
+> "Nope" ( /sweats )
+> 
+> "What about the MATCH function?"
+> 
+> "Uhh, nope" (Shit, am I supposed to pretend I don't know anything?)
+If they don't know the reason for you asking the question would they know to lie? I guess that could be tricky otherwise.
+I consider myself an advanced user, and an efficient Googler. I hate when people want to stand behind me when I problem solve, because they often scoff at needing to use Google. Knowing what is possible and how to find it quickly is incredibly valuable, but a lot of folks don't get that. "Why are you on Google? I thought you were an expert? What do we pay you for?" Maybe not so hostile as that :)
+
+Sheesh, just walk away from my desk and let me deliver you a solution in 10 minutes that would have had you crunching numbers for the next two days. 
+I always forget about Array formulas. Definitely Arrays and also knowing and understanding how/when to lock cells. 
+
+Definitely agree with the google comment. If I was testing someone I would absolutely want to see how they google questions. 90% of the process is knowing what to search for and how to type it into the search bar. 
+Thanks, array formulas will be a nice start
+[deleted]
+You found your interview question:  Create a dynamic named range that allows blanks.  Pretty straight forward.  Separately, you could ask them to create dependent drop down lists (i.e., first drop down selects a state, second drop down then only lists cities from that state).
+Sparklines (and other type of visualisations) and I assume using formulas to evaluate whether the formatting should be applicable.
+> Inquire tab
+
+What is this? :( 
+Those are not advanced functions.
+It's always curious that people who notice the excel expert is using google don't then use google to do it themselves.
+Regarding Array formulas I wasn't even thinking of the super advanced stuff like you find at the end of Ctrl+Shift+Enter book by Mike Girvin.
+Sometimes you can just simplify a 2 row formula into a half row, just with some smart { } usage.
+Curious as to what would be considered a good search? I've gotten by fine so far just googling "excel 2010" + my search term or if I don't know my search term "how to _______"
+Is there a way to quickly do that? Or do you need to click or type all of those separately? 
+https://support.office.com/en-us/article/What-you-can-do-with-Spreadsheet-Inquire-ebaf3d62-2af5-4cb1-af7d-e958cc5fad42
+
+Looks like this: http://imgur.com/g0Wlemt
+
+Dunno. Isn't that stuff on the Formula tab?
+Pssssst - Check out my blog post - [For Inquiring Minds](http://itsnotaboutthecell.com/2015/11/18/inquire/)
+These comments gave me another idea: ask the person to tell you what's on mrexcel, chandoo and stackoverflow. If they know these (and of course there are more), they probably are smart enough to figure out most of excel :)
+Goddamn, my workplace is stuck using 2003/2010, I'll have to thoroughly inspect the 2013/2016 I've got at home >_<
+I guess none of you are advanced users :P
+Yeah a very basic version is in the Formula tab for tracing. I would equate the Inquire tab to Excel on Crack if you are forced to reverse engineer people's workbooks. Though I believe it's limited to Office Professional copy's - the Spreadsheet Compare tool would also be acceptable.
+Well, there's tons of stuff on stackoverflow, but mrexcel kind of gives it away with the name, don't you think?
+we're not worthy! 
+I'm not sure if what you say about Inquire being limited is right, but I do know that Trace Precedents/Dependents are available to add to the Ribbon (via Customize) on sub-Professional versions of Excel.
+Per Support.Office "If Microsoft Office 365 or Office Professional Plus 2013 is installed on your computer, the Spreadsheet Inquire add-in is available in Excel." - the trace precedents or dependents is already in the Formulas tab - but Inquire pretty much shows you the entire DNA of your cells. Pretty awesome feature that I wrote about - [For Inquiring Minds](http://itsnotaboutthecell.com/2015/11/18/inquire/)
+Ah, you're right. Appreciate the write-up! Impossible to overstate how powerful a tool it is.
+I can't fault people for being products of their environment. If their leadership doesn't put a high value on their choice of software (Excel in this case) I fully expect a lot of inefficient designs. Inquire really let me delve further into others psyche - and there's been nothing more satisfying then finding that one thing in someone's workbook that makes them TICK and being able to reverse engineer a more efficient solution. Often everything leads back to why the hell are you not using a table object more often :)

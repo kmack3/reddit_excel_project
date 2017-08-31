@@ -1,0 +1,21 @@
+Can an IF statement be written for an entire column of numbers?
+=sumif() should solve this.
+
+    =SUMIF(B:B,"Yes",A:A)
+Alternatively, instead of sumif you can use this as an opportunity to learn about array formulas.
+
+=SUM(IF(B2:B17="yes",OFFSET(B2:B17,0,-1),0))
+
+After entering this formula instead of pressing <enter>, press combination of <alt><shift><enter>...  if will change the formula to look like this
+
+={SUM(IF(B2:B17="yes",OFFSET(B2:B17,0,-1),0))}
+
+And will then recursively sum all of the rows in the array while evaluating each if statement individually.  The same net result as sumif, but the array method of formulas can be used for so much more.  
+Solution Verified 
+I was doing some research before posting here, and all I could find were extremely complicated IF statements. This worked perfectly, thank you! 
+Why would you use offset() here instead of just A2:A17?
+
+You have awarded one point to _yellising_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Direct reference works fine and in this case would be simpler.  Generally, however, I prefer to use offset bc I can reference the range dynamically ie use variables in other cells for the number of cols or rows to reference in offset formula.

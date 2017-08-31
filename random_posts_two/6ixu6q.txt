@@ -1,0 +1,76 @@
+6ixu6q
+VB copies row for me, how do i delete it if source is changed?
+Hi there,
+I've got a VB that, if sheet 1, Column A contains the word "Urgent", it copies the entire row to the next free row in sheet 3.  So far so good.
+
+Sheet 1/Column A is data validated to be either blank, Urgent or Upload Required.  How can I change it so that if I change from Urgent to either of the other options, it will delete from sheet 3.
+
+As a bonus, I'd LOVE to have it so that in addition to what it does already, setting Sheet 1/Column A to Upload Required, it does the same copy, but to sheet 4!
+
+I know I'm asking a lot,but you guys are so good at this that i've become addicted.
+
+This is what I have so far:
+
+
+    Option Explicit
+    Private Sub Worksheet_Change(ByVal Target As Range)
+    Dim nxtRow As Integer
+    'Determine if change was to Column F (6)
+     If Target.Column = 1 Then
+    'If Yes, Determine if cell = B
+      If Target.Value = "Urgent" Then
+    'If Yes, find next empty row in Sheet 2
+       nxtRow = Sheets(3).Range("A" &             
+    Rows.Count).End(xlUp).Row + 1
+    'Copy changed row and paste into Sheet 2
+        Target.EntireRow.Copy _
+          Destination:=Sheets(3).Range("A" & nxtRow)
+      End If
+     End If
+    End Sub
+
+
+
+-------------
+Hey,
+
+Copying over to the next empty row is one thing, but deleting a row where we don't know its location or the cell's prior state is another. First thing is you'll need to know what the value was before the change, so worksheet_change is no longer going to cut it, next you'll need a unique key that IDs the record for deletion. 
+
+If this is being done manually probably a combination of worksheet selection change and worksheet change, or with a clever use of application.undo to get its prior state. 
+
+Then simply search  for the corresponding key in your other worksheet with range.find and delete that row.
+
+As for the sheet4 thing, just replace sheet3 with sheet4 and Urgent to Upload Required in your existing macro. 
+
+Watch out for loop firings of events, use application.enable events or set a Boolean variable to control them. 
+
+Hope this helps 
+
+
+
+-------------
+Can I add the sheet 4 thing while keeping sheet 3 thing (sorry to be so technical)?  Ideally I'd want it to do both functions 
+-------------
+Haha fair enough, yes here's your macro but adjusted for the sheet4 thing: 
+
+    Dim nxtRow As Integer
+    
+    If Target.Column = 1 Then
+        If Target.Value = "Urgent" Then
+            nxtRow = Sheets(3).Range("A" & Rows.Count).End(xlUp).Row + 1
+            Target.EntireRow.Copy _
+            Destination:=Sheets(3).Range("A" & nxtRow)
+        ElseIf Target.Value = "Upload Required" Then
+            nxtRow = Sheets(4).Range("A" & Rows.Count).End(xlUp).Row + 1
+            Target.EntireRow.Copy _
+            Destination:=Sheets(4).Range("A" & nxtRow)
+        End If
+    End If
+
+Just expanded the if test to include an ElseIf, that performs another test for Upload Required should the first test return false. 
+
+Also, i'd add another test  to your macro to make sure 1 cell is changed as this will return a mismatch error if someone tries to change more than one cell in column A at the same time... or alternatively increase its scope to be able to handle multiple changes at the same time (a little more complicated)
+
+thanks
+
+

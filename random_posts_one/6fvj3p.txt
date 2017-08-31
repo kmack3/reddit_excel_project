@@ -1,0 +1,100 @@
+6fvj3p
+Help counting unique values which have the same leading digits or a specific value in an adjacent cell.
+Here is a snapshot that should encompass everything I'm working with.
+
+. | A | B | C | D
+ ---|-----------|----------|----------|---
+1 | model 1 | 1234 | 1234-01 |
+2 |  |  |  |
+3 | model 1 | 1234 | 1234-02 |
+4 |  |  |  |
+5 | model 1 | 1234 | 1234-03 |
+6 |  |  |  |
+7 | model 1 | 1235 | 1235-01 |
+8 |  |  |  |
+9 | model 1 | 1235 | 1235-01 |
+10 |  |  |  |
+11 | model 2 | 1236 | 1236-01 |
+12 |  |  |  |
+13 | model 2 | 1236 | 1236-02 |
+
+I want to put a function in column D that will either:
+
+Count how many unique values there are in column C that have the same 5 leading digits 
+
+or 
+
+Count how many unique values there are in column C that have the same value adjacent to them in column B.
+
+The desired result would look like:
+
+. | A | B | C | D
+ ---|-----------|----------|----------|---
+1 | model 1 | 1234 | 1234-01 | 3
+2 |  |  |  |
+3 | model 1 | 1234 | 1234-02 | 3
+4 |  |  |  |
+5 | model 1 | 1234 | 1234-03 | 3
+6 |  |  |  |
+7 | model 1 | 1235 | 1235-01 | 1
+8 |  |  |  |
+9 | model 1 | 1235 | 1235-01 | 1
+10 |  |  |  |
+11 | model 2 | 1236 | 1236-01 | 2
+12 |  |  |  |
+13 | model 2 | 1236 | 1236-02 | 2
+
+Does anyone know how to do this?
+
+
+-------------
+For the top question
+
+    =Left(C1,5)
+
+Then do a pivot table on the data, and use that column as an indicator.
+-------------
+place this array in D1: 
+
+    =SUM(--(FREQUENCY(IF($C$1:$C$100<>"",IF($B$1:$B$100=B1,MATCH($C$1:$C$100,$C$1:$C$100,0))),ROW($C$1:$C$100)-ROW(C1)+1)>0))
+
+meaning after pasting, press contrl+shift+enter. 
+
+drag down. 
+-------------
+This table is going to be given to someone who is excel illiterate and everything left of column D will be updated daily. I need a function that I can just leave in column D. This solution also does not handle duplicates. It would tell me that there are 2 beginning with 1235 when there is actually only 1 unique value.
+-------------
+I just tried this and it worked on a sample of the data but when I tried applying it to the full set of data it BSOD'd the PC I was working on. (why I'm just getting back to you now, gotta love arrays)
+
+Do you know of a solution lighter on processing power?
+-------------
+>  it BSOD'd the PC
+
+That is not normal for any PC or processing.. 
+
+Suggest you have someone re-seat the memory and CPU, and maybe a new installation of the OS and software.
+-------------
+Sure. it involves a helper column. At d1 have this formula: 
+
+    =COUNTIF($C$1:C1,C1)
+
+And E1 have this formula: 
+
+    =SUMIFS($D$1:$D$100,$D$1:$D$100,1,$B$1:$B$100,B1)
+
+drag both down. assumes your data goes down to 100th row. column E is your solution. 
+-------------
+I was running some other things at the time and I guess it didn't like having the sudden added load of calculating 50,000 lines of an array.
+
+I tried again after the BSOD with nothing else running but timing the"calculating" percentage at the bottom of the window made it look like it would take two hours to complete so I killed it and reset it again.
+-------------
+Thanks! 
+
+I'll test this out when I'm back at work first thing tomorrow morning and award verification if/when it works.
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _wiredwalking_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

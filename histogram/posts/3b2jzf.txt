@@ -1,0 +1,77 @@
+Is there a "friendly" way to nest IF statements in Excel?
+You would write a userdefined function and then code the same logic in vba. Vba isn't the nicest language but easier to code and read logic.
+
+You can also press Alt+Enter when using the formula bar to go to a new line. I do this for large complex formulas to help organize arguments.
+You can use SUMPRODUCT.  
+
+Set up columns for SS, U, CTR and a column for the numerical equivalents of your 6 results. The SUMPRODUCT returns the corresponding numbers. Then you can use a VLOOKUP or a CHOOSE function to convert the number back to the text.
+I often break up if statement into columns where I check for each condition and return true or false tip: equivalent to 1 or 0 (sum(true) results in 1). Then you can either build binary lookup 1001001, for each result of condition (or ranges); or elegant if statement with only cell references as excel is smart enough to get that when content of cell A1 = True/False, meaning if(A1,"...","..."). This makes it very easy and transparent to audit the conditions. I then group the columns.
+You could make a lookup table and do an INDEX-MATCH.  That's even easier to modify than a VBA function.  Here's a good article on using INDEX-MATCH with multiple criteria: http://blog.contextures.com/archives/2012/07/12/check-multiple-criteria-with-excel-index-and-match/
+You can use
+
+http://excelformulabeautifier.com/
+
+	=IF(
+	    J2 > SETTINGS!$B$5,
+	    IF(
+		D2 > SETTINGS!$B$6,
+		IF(
+		    TAGS!M212 > SETTINGS!$B$8,
+		    "Keep - healthy performance",
+		    "Keep - low CTR)"
+		),
+		"Use more often"
+	    ),
+	    IF(
+		D2 > SETTINGS!$B$7,
+		IF(
+		    M2 > SETTINGS!$B$9,
+		    "Keep - ok performance",
+		    "Use less often"
+		),
+		"Deactivate - poor performance"
+	    )
+	)
+You can replace if/then constructs with =REPT(string expression, numeric excursion)
+
+Put the following nested IF in cell F1
+
+=IF(a1=1,"first",if(a1=2,"second",if(a1=3,"third","loser)))
+
+Put this in cell F2
+
+=REPT("loser",a1<1)&REPT("first",a1=1)&REPT("second",a1=2)&REPT("third",a1=3)&REPT("loser",a1>3)
+
+Then put a 1, 2, 3 or 4+ on cell A1
+
+The formula looks longer in this simple example but becomes more readable with more complicated nested IFs. 
+You can use anything that returns a numeric value in the second argument of the REPT function.
+It's all string concatenation, no nests.
+A friend at work mentioned a binary approach to it, not sure if its more readable, but works w/o vba and all the logic is pretty condensed in the start of choose, that with alt enter and names may make it a bit easier:
+
+pic
+http://i.imgur.com/hFjeRQu.jpg
+
+workbook
+https://www.dropbox.com/s/z9y39zf5hrib48c/reddit%20q.xlsx?dl=0
+This doesn't help with your problem as its already solved, but Check out Microsoft lense. Great for whiteboard pics
+> You can also press Alt+Enter when using the formula bar to go to a new line. I do this for large complex formulas to help organize arguments.
+
+You just changed my life
+> You can also press Alt+Enter when using the formula bar to go to a new line. I do this for large complex formulas to help organize arguments.
+
+[oh my god](http://cdn.alltheragefaces.com/img/faces/large/surprised-omg-l.png)
++1 Point
+[Here](http://i.imgur.com/ESkHji0.png) is an example I found a while ago on Reddit of Alt+Entering on IF statements. 
+Yes, break it into digestible chunks. No one minds an extra column off to the side or something, but inscrutable formulas are terrible for checking your own work or sharing with others. 
+nice! glad to help ;) I had a similiar reaction when someone showed me that.
+I spent that last 5 minutes saying it doesn't work when I look down and see I'm pressing Shift+Enter
+Also I'm sure you've noticed this but the coloured brackets when typing in the formula bar really help follow what you're doing when you have nestled statements, works for me at least. 
+wut!
+WHAT!
+WHOA.
+
+this is gonna change so many formulas on my spreadsheets
+lol, im gonna have to use that image... url saved xD
+There is also a little down arrow in the formula bar to get a multi line view 
+You have awarded one point to pleasebenicetome-_-

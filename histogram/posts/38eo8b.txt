@@ -1,0 +1,230 @@
+/r/excel - reddit Sourced - Template 1 - June - August 2015
+[deleted]
+I've given this a short go over, used the Original Base Macro file, and added the following:  
+
+Added overtime rate  
+Updated pay formula in monthly summary to include overtime and overtime rate  
+Separated Sick, Holiday and Unpaid holiday in monthly summary  
+Macro: Added check to see if value for today already exists  
+Macro: Added force autofill after updating, in case user types over a formula  
+Macro:  Added Change Summary Table Interval (Change value in N3 and it changes the table).  Needed to add a helper column to table to accomplish this  
+
+I also added a worksheet called Changelog where I have listed the exact same info.  
+
+No additional libraries are required.  
+
+What I'd Like to See:   
+  Someone make this prettier.  [Yes, I know how vague and useless that request is]  
+Simplify the data entry process for the user (if they are not using onscreen button.    
+It Might be better to have a separate worksheet that the user interacts with, which extracts the data they need from other hidden pages, so eliminate the risk that the user changes a cell they shouldn't be touching.  
+
+No others collaborated with me, but I'd be happy to work with someone in the future.  
+
+Type of template next time:  I'll answer that closer to the end of July.
+
+Link to the file:   https://www.dropbox.com/s/z6hirk0yg6adyrc/reddit_excel_1_TIMESHEET_1.1.xlsm?dl=0
+
+Just spent a few hours playing around and adding things, it is good fun but is going to be one heck of a job for you mods to pull it all back into one template.
+The next Template should be a practice test.  People are always coming on /r/excel looking for some sort of benchmark to test their skills.  Since their really isn't any good tests, we should create a workbook with different tabs/questions where a user can truly see how good they are.
+I'd like to see an "expected shift" option thrown in there.  So HR/Managers could see the variance of when they were supposed to work vs what they actually logged
+Clock In/Clock Out Code - feel free to copy for your projects!
+
+[excel sheet](https://www.dropbox.com/s/8cv7vb6to55xkhq/Timesheet.xlsm?dl=0)
+
+        Sub ClockIn()
+        
+        Application.Calculate
+        
+        Application.ScreenUpdating = False
+        
+        ce = Sheets("Timesheet").Range("a2")
+        
+        
+        Sheets("Timelog").Activate
+        tllr = Sheets("Timelog").Range("A" & Rows.Count).End(xlUp).Row
+        Cells(tllr + 1, "A").Value = ce
+        Cells(tllr + 1, "B").Value = "Clock In"
+        Cells(tllr + 1, "C").Value = Now
+        
+        Sheets("Timesheet").Activate
+        
+        Application.ScreenUpdating = True
+
+
+        End Sub
+        
+        Sub ClockOut()
+        
+        Application.Calculate
+        
+        Application.ScreenUpdating = False
+        
+        ce = Sheets("Timesheet").Range("a2")
+        
+        
+        Sheets("Timelog").Activate
+        tllr = Sheets("Timelog").Range("A" & Rows.Count).End(xlUp).Row
+        Cells(tllr + 1, "A").Value = ce
+        Cells(tllr + 1, "B").Value = "Clock Out"
+        Cells(tllr + 1, "C").Value = Now
+        
+        Sheets("Timesheet").Activate
+        
+        Application.ScreenUpdating = True
+        
+        
+        End Sub
+
+Hello All,
+
+Mine is just under 11.5 mb so... oops lol
+
+Uhh I used the original xlsm macro based.
+
+There were lots of other things I wanted to add but I ran out of time.
+
+Changes I made:
+
+-----------------------------------------
+
+...User Interface
+
+...Over Time
+
+...Many HR settings
+
+...Log ins
+
+...Check in/ out
+
+...Auto check out after 12 hours
+
+...Employee self service
+
+...History
+
+...Leave
+
+...Paybands with adjustable rates
+
+...lots of other stuff, it needs testing though.
+
+--------------------------------------------------------
+
+The admin log on is 
+
+User: 001
+
+Password: Password
+
+-----------------------------------------------------------
+
+to see the vba code, close the log in form (this can of course be adjusted to close the workbook so you don't show your code if you need but I thought that would be a pain for all.)
+
+Please test and tell me what you think.... I kinda rushed bits... but I tried not to be too lazy and stick to best practise... I used a lot of different loops (do while, for) and if statements and case selects so that it could help people learning vba... it's a bit complex though.
+
+
+Link: https://dl.dropboxusercontent.com/u/74930196/reddit_excel_1_TIMESHEET_missreah.xlsm
+[DropBox Download](https://www.dropbox.com/s/p390m765teywzbu/Reddit%20Excel%20Timesheet.xlsm?dl=0)  
+I wasn't sure on the Gross Pay - I would think of that as being both the Regular Hours + Overtime Pay so that's what I went with - Added the $ Pay Rate for the Overtime. Really I think if I take another stab at it I would want to affix the pay rate to the individual records created so people could see raises over time.   
+Added Multiview - Day, Week, Month  
+Added FormControl Range("A1")  
+Hid Data Entry Sheet  
+Added Charting (Trying to get better at soft colors - mehhh)  
+Rewrote the code from scratch  
+Added MonthView selector to review prior entries  
+Added Windows UserName and Photo to the UserForm (Sorry Big Mac Attackers)  
+
+Only had a couple hours last night to work on it before the day time job (surprise, surprise - Excel based). Sorry if it's a bit rushed - figured better to get it out there and let the next person take a stab.  Also terrible person alert - but I threw in a shameless self promotion of the [Excel blog](http://www.itsnotaboutthecell.com) I just started, I'm trying to become an MVP so gotta drive that traffic.  
+I was just trying to get some things done, but as I'm just beginner I couldn't for the life of me figure this out.
+
+I wanted to add a feature where you mark what project you were working on, for example I was working on Company A from may 5th to may 8th and from may 11th to may 13th I was working on company B. 
+
+Now what I wanted to do with this was generate invoices. Say at the end of may I create a sheet with all the hours I have worked on company A. I know this should be doable with a Filter but A filter doesn't have live updates as far as I know. 
+
+So my question: is there a way to do this using formula's? Because I wasn't planning on learning VBA.
+So... I'm doing this whole thing using User Form interface with VBA... is that ok?
+
+I used to have a sheet which auto-updated with the week's dates (even took into account late timesheets on Mondays and filled in last week's dates) but that might be too 'hacky' for something production level?
+Is there any way I can easily keep up with these? This should be interesting
+Awesome idea but I have perhaps a silly question, but just thinking aloud to see if this would still qualify! 
+
+Does it have to be for one person? I.E loads of little sheets that mirror this one then feeds into a master sheet full of data for HR etc? 
+As a suggestion to people who are actually submitting...  there should be some data validation on the "pay code" columns!
+I downloaded the latest rev and tried enabling macro's it is asking for a password....what is the login password?
+Christ this is gonna be amazing.
+
+
+I see some cool stuff in here, thanks so much for the first submission!
+Don't worry, I'll get it done! 
+Don't worry, /u/epicmindwarp will get it done!
+/u/epicmindwarp is great at getting things done.
+... Holy smokes that's a brilliant idea.
+FYI I had to download this
+
+https://support.microsoft.com/en-us/kb/297381
+
+to get it to work.
+Can you double check your download link, it's giving me an error.  
+
+
+check out SUMIF(), COUNTIF(), etc
+Perfectly okay!
+Its always worth submitting! There are plenty of people here who can smooth out any bugs
+Just follow the thread! Everyone's going to keep submitting until end of July. 
+If you can build it - then go right ahead! It'll make it into the showcase!
+How so? 
+At the top it says link removed, where do I download this?
+Someone had to take this contest's cherry, happy to be the one.  I'm really curious to see how this project ends up and  I'll add on more next week sometime when I have more time. 
+Would love this!!  Use excel and vba extensively in my every day job so would love to see how I compare to the wider world!!! That and it would be a great way to learn from other users 
+Give that a whirl. (PS - I'm terrible with DropBox :/ )
+i guess I'll have to keep an eye out for template 2 then
+I presume a list so they don't choose/enter an invalid code.. 
+
+With regards to this though, I made a super sexy new day entry page that was to be the start of a full submission but feel time will elude me if that is of interest to the project as well? 
+Else will toil away and try and finish it.. 
+The drop box link was the one I used
+FYI
+
+Dropbox has changed and you can view the person's name on the page (right hand side bar, one of the links). Suggest you change it to Google Docs.
+That one works.  FYI, as /u/epicmindwarp mentioned to me [here](http://www.reddit.com/r/excel/comments/38eo8b/rexcel_reddit_sourced_template_1_june_august_2015/crvpgij) your name is shown on the right hand side of the drop box link, so you may want to change your name on your account to keep some anonymity 
+Having a look through the file, it looks pretty, but when it loads it has a popup saying:  Microsoft Forms - "Could not load some objects because they are not available on this machine", not sure why I'm getting that.  
+
+ I can hit OK to get past that, but clicking Shift Assistant gives a "variable not defined error", turning off option explicit gets past that, but then I get a "File Not Found" Error.  Likely due to the user image picture.   
+
+An ugly work around is to include On Error Resume Next, but it should probably have an error check specific for that file
+
+After that, the form looks great, you got much further along than I did.  Awesome work.  I've got a couple of minor ideas for improvements, but I'll try those myself when I get time.
+
+
+No need, you can still participate in this one!
+I'll take anything and everything! 
+I see a drop box link, but that is in the comments. I do not think that is the final product.
+Oh, thanks for the heads up.  Ironically, I actually went with Dropbox because I had problems with anonymity with Google Docs in the past.  I'll try publishing through Google instead.  
+
+Edit:  Turns out if you publish a Google Doc it's not easy to download and the macros don't work online so it's pointless, and I also have my name associated with my Google Drive, so that doesn't solve the problem.  Am I doing that wrong?
+What year is your office? (2013 over here) I didn't add any extra library references so it should be standard with the Microsoft Excel 15.0 Object Library or Forms 2.0 Object's - maybe a difference in the MonthView is what I'm thinking.. Good call on the Error Handling of the photo didn't even think of that one. As far as the DropBox - the internet already has every shred of my existence - what's one more right? lol
+Sort by newest that will be the latest rev, can email u copy if pm me. Promise not hacker am using /r/excel for help :p
+I think you can use the "Share with Link" option on Google Drive and not have any user information attached to the file being shared, but I'm not sure. Try that with a friend or just log out and check the link yourself to see how that works.
+I'm on Excel 2010, with Excel 14.0 References, and Forms 2.0, so maybe it's some compatibility issues between 2013 and 2010?  Unless you have some other addins turned on like Analysis ToolPak?  
+
+
+The issue you have is the date picker used is no longer standard with Office or compatible with any 64-bit version of Office.
+
+You can retrospectively install the control into any 32-bit version, but it will not work with 64-bit as Microsoft haven't updated it - AFAIK.
+Ok, the wiki is working and I got the timesheets. Other than the original, the others give me a "object not found" when I hit the log shift buttons.
+I tried exactly that, and looked at the file in another browser that was logged out.  Saw my name all over it
+Assuming the 14.0 vs 15.0 References but that makes little to no sense. Does the calendar work when you click on different days? - I use a similar setup with the Monthview and Office 2010 at work so I'll have to research more. Thanks for the heads up and dissecting into it.
+How about OneDrive?  I've been trying with both but haven't been paying attention to anonymity 
+The monthview appears to be working, no error messages when I change the selector.  Year also works, and it can go back to the day view with no problems.  The data and fields are all updating, and the scroll on the right works perfectly too (which I need to look into how you did that, because it's awesome).  
+
+The only errors I get are the ones I described earlier, and the form seems to be working.   
+
+If you want a couple of minor improvements, I suggest having the form pull the information from the spreadsheet if data is already there for the day, and likewise, close the form after you click confirm.  
+
+Actually I just found another bug, if you leave lunch and break blank (the default value), it gives an error, probably should set some defaults for that.
+Good call on the lunch and break. I'll have to think on that, assuming if employees worked shortened days they might not have lunch or breaks so null values.  
+I tried to base the form around a "Current Day" approach that someone would be entering new data for today's timecard. If you click on the calendar days it should pull up past records to edit - but now that I'm thinking on that might need to re-evaluate the Remove Duplicates I have going and possibly build in an adjustment button (had one originally but I talked myself off the ledge). I agree the Unload Me was definitely considered after the entry was made but once again I went back and forth so I think you set the tipping point.
+I just had a brief look through your code, and I think I'm misunderstanding what you meant by monthview.  I see it included as a private sub on the userform, but I don't see how to get it to run.  
+
+Also what do you mean by click on a calendar day?  Are you referring to the timesheet page, values in column E? Or somewhere else, because clicking on those doesn't do anything.

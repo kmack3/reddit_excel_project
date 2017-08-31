@@ -1,0 +1,44 @@
+crash
+37q3is
+Countif formula crashes Excel when trying to Copy/Paste values
+
+First time posting here, I guess I need help with more of an efficiency issue than writing a formula. I am writing a countif formula that the criteria range gets bigger the further down the page it gets copied. I need this because I have a list of part numbers that have been ordered over the last year, but they can have orders placed for the same part number multiple times in a month. I have to assign Point of Sale data to the part number for a Pivot chart and I cant have the sales duplicated multiple times. I figured if I wrote something like
+
+=Countifs(A$1:A1,A1,B$1:B1,B1)
+
+Where column A is the part number and Column B is the month. This way I can only assign the POS data to the "ones". The formula works as designed, but when I try to copy paste values my Excel freezes and does not come back. I am running 64 bit Excel 2013. I have 24 GB of RAM and I have a Xeon 6 core processor dual threaded. Should this be happening? Is there a better way to do this? Thanks for your help!
+
+
+-------------
+How many rows are we talking about?
+-------------
+How about sorthing data by date and using countif only for last 100 rows?
+
+E.g a1000=countifs(A900:A1000,a1000,B900:B1000,B1000)?
+
+That way you can cut a lot of computation out of it. Of course 100 is number pulled out of the hat.
+-------------
+392000
+-------------
+Is column B in chronological order? i.e. do you really need to go all the way back to row 1 even when you're in the thousands?
+-------------
+I sorted the file by part number. Then I sort it by Month, oldest to newest. 
+-------------
+So if you sorted by month second, that would mean the data is in month order. I don't know how many sales per each month you have but if you just estimate it at 1000, I would do something like this for row 2000:
+
+    =COUNTIFS(A1000:A3000,A2000,B1000:B3000,B2000)
+
+and drag that down.
+
+You could use this because of the boundary issues:
+
+    =COUNTIFS(INDIRECT("A"&max(1,row(A1)-1000)&":A"&row(A1)),A1,INDIRECT("B"&max(1,row(B1)-1000)&":B"&row(B1)),B1)
+-------------
+Unfortunately the amount of lines by part by month is variable month to month. I dont think i can put in a static range and have it apply to all the different amount of month's data
+-------------
+It took a while to calculate but it worked. I didn't think to limit the size of the range as I went down. Thank you very much!!
+-------------
+What is the month with the most? Take my edited formula above and change the "-1000"s to whatever is worst, 10,000, 20,000....
+-------------
+Solution Verified
+

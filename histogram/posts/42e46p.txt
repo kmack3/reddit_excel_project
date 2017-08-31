@@ -1,0 +1,20 @@
+How can I simplify this formula?
+    =SUM('BAR 1:BAR 20'!H9)
+[deleted]
+Solution verified
+Note I think you have to have the sheets Bar1 to Bar 20 in order (or at least to have bar 1 and bar 20 bookending the others, with no other sheets inbetween).
+
+Hello!
+
+I noticed that you tried to award a ClippyPoint by editing your post!
+
+Please **separately reply** to the user with 'Solution Verified' as edits are not detected by Clippy!
+
+This will give the user a ClippyPoint (see side-bar) and change the flair to solved, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Yeah good point: it's not iterating over the numbers in the sheet names, it's iterating over the sheets themselves

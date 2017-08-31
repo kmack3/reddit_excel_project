@@ -1,0 +1,53 @@
+Excel needs regular expression support
+Excel's developers wants to [hear these types of things](https://excel.uservoice.com/).
+Regular expressions are supported with VBScript/VBA so you could create a UDF to perform a VLookup with regex compatibility. With the out-of-box functions in excel you can't use any regex, although you can use wildcards to help with alot the issues you might run into. 
+Depending on the use case, I would just clean up the records to eliminate near dupes and consolidate to just LastName, FirstName. You could do this by counting the number of characters after the last space in the cell to identify if it is a MI (depending on the quality of the data this could vary), and if so only take what is to the left of the last space, if not take all. But I agree generally, Excel could use better search syntax/logic, I end up using Notepad++ for that type of stuff and then converting back to excel. 
+Why didnt you add a separate column to clean the " MI"? Even something simile like "IF it ends with (space)MI, remove (space)MI"? Sounds a bit like overengineering to me.
+To be fair I have yet to come across a task, such as these, that cannot be solved by use of Excel native wildcards... Then again I use VBA for 90% of what I do in excel... Which narrows down limitations further.
+
+Besides as /u/LaughingRage pointed out, ReGeX is supported in VBA.
+[deleted]
+Already an item for regex support, so I voted for it. Thanks for the link.
+I'm aware of the VBA support, though it involves a reference to a VBScript DLL. I use a few of my own regex udfs regularly, but it's usually not something to recommend to others, and VBA udfs are slower than built-in worksheet functions, so it'd be good for worksheet functions to support them.
+
+Picky: in the example I give in my OP, I couldn't use wildwards alone. I also had to append spaces in order to delimit names without initials, the Rose* matches Rose and Rosemary problem, but the regex Rose\b just matches Rose.
+In this particular case I'd also clean up the data. However, clean-up would become problematic if there were thousands of records. Sometimes it's necessary to use the data as it's received.
+
+There are other situations, such as working with street addresses with all sorts of abbreviations and full words. Yes, sad to say, even in the modern, database-driven world, all too often users type in addresses manually. In those cases, regular expressions would be mighty handy.
+
+Myself, I tend to use awk for a lot of ETL before using Excel.
+Try solving the problem I worked with. First table
+
+name | other
+---|---
+Smith, Joe | aaa
+Smith, Joe P | bbb
+Jones, Rose | ccc
+Jones, Rosemary | ddd
+Jones, Rose E | eee
+
+If you search for __Jones, Rose__ with and without middle initial, how do you use wildcards alone and not match Jones, Rosemary?
+
+Are regular expressions ___necessary___? No. Would they be useful (arguably more so than the IFS worksheet function, and definitely more so than the BAHTTEXT)? Yes.
+
+please share
+Given some of the things with which Excel has been encrusted over the years, I can think of at least 100 things I'd happily give up to get regular expressions.
+
+I also thought of a work-around Excel could handle, but it requires either array entry or INDEX(.,0,0) wrappers. Excel would be more efficient with regular expressions.
+The cleanup is the same with fifty records or fifty thousand records. It's really a matter of if the problem is a one-off or something that needs to be repeated often. Cleaning up addresses is a solved problem, lot's of various methods for standardizing that type of data.
+
+I'm actually vetting a few ETL solutions right now...haha
+Probably try splitting the names into two columns and then match it that way.
+In this case you can also use len() to help you out. But honestly I would do what you did initially and append a "." onto the end of the data.
+
+Though at this stage it depends what your use case is. Granted it's not very generic though :)
+use len to match the criteria exactly 
+
+    =sumproduct((isnumber(search("jones"<range>))*isnumber(search("rose",<range>))*len(<range>)=len("jones, Rose"))*row(<range>))
+The clean-up procedure is the same, but the time involved is O(N).
+Where do you split a name like "John Ah Chee" vs "Sarah Marie Smith"
+
+You can count the number of spaces within the string, then determine what kind of split you want. 
+The point was more how do you differentiate the fact that the first one has a single first name and two word  surname and the second has two word first name and a single word surname. 
+It doesn't matter if you're just trying to match the entire string.
+He said he wants to do a substring match not a whole match. 

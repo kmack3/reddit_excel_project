@@ -1,0 +1,113 @@
+Let's all share our useful macros / spreadsheets!
+Mine is simple but I use it every day. I recorded a macro for ctrl-d to do Paste Special/Values.
+I'll share three simple macros: 
+
+1] A macro to list worksheets and worksheet colours in a "HowTo" worksheet
+
+      Sub SheetNamesAndColours()
+        Worksheets("HowTo").Select
+        For i = 2 To Sheets.Count
+          Range("A1").Offset(i - 1, 0).Value = Sheets(i).Name
+          Range("A1").Offset(i - 1, 0).Interior.Color = Sheets(i).Tab.Color
+       Next i
+      End Sub
+
+---
+
+2] A macro to automatically format my pivot tables with the format I almost always use ("database" style), and which converts "Sum of Field1" in "Field1 " for clarity.
+
+    Sub UpdatePivotTable()
+    ' Keyboard Shortcut: Ctrl+u
+
+    Application.ScreenUpdating = False
+
+    With ActiveCell.PivotTable   
+        .RowAxisLayout xlTabularRow
+        .RepeatAllLabels xlRepeatLabels
+        .ColumnGrand = False
+        .RowGrand = False
+        .HasAutoFormat = False
+        .DisplayContextTooltips = False
+        .ShowDrillIndicators = False
+        .TableStyle2 = "PivotStyleMedium9"
+    End With
+    
+    On Error Resume Next
+      For Each pf In ActiveCell.PivotTable.PivotFields
+        pf.Subtotals(1) = True
+        pf.Subtotals(1) = False
+      Next pf
+    
+      For Each pf In ActiveCell.PivotTable.DataFields
+        If (Left(pf.Caption, 6) = "Sum of" Or Left(pf.Caption, 10) = "Average of") Then
+            pf.Caption = pf.SourceName & " "
+        End If
+      Next pf
+  
+    Application.ScreenUpdating = True
+    
+    End Sub
+
+---
+
+3] And finally, a macro which automatically inserts these bloody =index(column2,match(value,column1,0)). I select 4 cells with ctrl+click: the first one is the destination cell for the formula, the second one the value to search, third one is the top cell of column1, and fourth one is the top cell of column 2. Once the cells are selected, I press ctrl+q. It saves me so much time!!
+
+    Sub InsertIndexMatch()
+    ' Keyboard Shortcut: Ctrl+q    
+    Dim rngDataCell As Range
+    Dim rngIndexArray As Range
+    Dim rngIndexRange As Range
+    Dim rngFormula As Range
+    
+    Dim strDataCell As String
+    Dim strIndexArray As String
+    Dim strIndexRange As String
+    
+    If Selection.Areas.Count <> 4 Then
+        MsgBox "Select 4 cells first"
+    Else
+        Set rngDataCell = Selection.Areas(2)
+        Set rngIndexRange = Selection.Areas(3)
+        Set rngIndexArray = Selection.Areas(4)
+        Set rngFormula = Selection.Areas(1)
+        
+        Set rngIndexRange = Range(rngIndexRange, rngIndexRange.End(xlDown))
+        Set rngIndexArray = Range(rngIndexArray, rngIndexArray.End(xlDown))
+        
+        strDataCell = rngDataCell.Address(0, 1, , True)
+        strIndexArray = rngIndexArray.Address(1, 0, , True)
+        strIndexRange = rngIndexRange.Address(1, 1, , True)
+        
+        rngFormula.Formula = "=INDEX(" & strIndexArray & ",MATCH(" & _
+        strDataCell & "," & strIndexRange & ",0))"
+        
+        rngFormula.Select
+    End If
+    
+    End Sub
+
+
+I used Snippet Manager (http://www.snippetmanager.net/) to store the useful macros or wrappers that I write. That way instead of re-writing or reinventing the wheel each time, I simply paste the snippet in.
+
+Place the Snippet Manager folder inside a DropBox folder and you now have a synchronized snippet collection anywhere!
+Here's a simple one I use pretty often.  Say you have a column of information, names, cities, etc... Click on the top item in that column (not the header) - and run this macro.  
+
+[CountUniques.xlsm](http://www.sendspace.com/file/upbtmt) - make sure you click "Click here to start download from sendspace"
+
+It will insert two new columns to the right with the unique items and their counts. I have this saved on my Quick Access toolbar, so it's easy to run quickly.
+
+Click on the top item in the Count column (not the header) and run it again, and it will give you a distribution of how many times each frequency appears.  So 5 things are listed 1 time, 10 things are listed twice, etc...
+
+I guess it depends on what you need to figure out, but I use it pretty frequently!
+A good idea, but then don't you lose the Fill-Down feature of CTRL+D? For paste special I use ALT, E, S, V, ENTER.
+Hah! Me too.
+I have a similarly simple macro that saves a backup of my file (with date / time in the filename) to a specific folder.
+
+Helpful when I'm working on an intense model and want to be able to revert back to an old version (or for error-checking).
+I really like that third one!
+
+Love innovative ways of making things easier.
+Along similar lines I use [MZTools](http://www.mztools.com/v3/mztools3.aspx) a lot when writing VBA class modules.  
+I double click to fill down.
+Same, it takes less than a second to do it once you get used to it. 
+In fact I had to look down to see what I was pressing since I just do it out of memory, haha

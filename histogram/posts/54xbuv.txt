@@ -1,0 +1,74 @@
+Can anyone point me towards good resources for learning data analysis on Excel at a professional level?
+TBH as a guy who's pretty damn good with excel I wish I had spent time learning R or SQL or even access.  I'm finding my work with spreadsheets just gets too damn complex and hard to manage, and having to close workbooks each time I delegate something to a staff is a PITA that wouldn't exist if I were good at creating databases.
+Get powerpivot and learn to use it. Learn SQL. Watch YouTube videos on how to do cool shit in excel. Learn how to make dashboards, make them dynamic. Learn VBA. 
+
+You do all of those things and you'll be above 99% of your colleagues. 
+If you want to do serious stuff, install the Power Pivot add-in, it's free and pretty powerful. If you are also learning SQL you'll get it very quickly, http://www.daxpatterns.com, is a great place to see real life examples.
+IMHO, people go way too far with VLOOKUP or INDEX/MATCH, when pivot tables and database functions (DGET,DSUM, etc.) are very simple and powerful to use. 
+There are a few Excel data analysis courses on [edx.org](https://www.edx.org/course?search_query=excel+data) as well as ones that teach R and SQL. I did the one from Delftx and it introduced me to a lot.
+For online courses for Microsoft excel, you can check out [Career Academy](http://www.careeracademy.com/page/CA99slsignup). They have excel course for beginners, intermediate and advanced.
+
+Here is a look on the course outline:
+Microsoft Office 2013 Excel Basic Series
+Course 01 - Getting Started with Microsoft Excel 2013
+Course 02 - Performing Calculations
+Course 03 - Modifying a Worksheet
+Course 04 - Formatting a Worksheet
+Course 05 - Printing Workbook Contents
+Course 06 - Managing Large Workbooks
+Course 07 - Customizing the Excel Environment
+
+Microsoft Office 2013 Excel Intermediate Series
+Course 01 - Creating Advanced Formulas
+Course 02 - Analyzing Data with Logical and Lookup Functions
+Course 03 - Organizing Worksheet Data with Tables
+Course 04 - Visualizing Data with Charts
+Course 05 - Analyzing Data with PivotTables, Slicers, and PivotCharts
+Course 06 - Inserting Graphics
+Course 07 - Enhancing Workbooks
+
+Microsoft Office 2013 Excel Advanced Series
+Course 01 - Automating Worksheet Functionality
+Course 02 - Auditing Worksheets
+Course 03 - Analyzing and Presenting Data
+Course 04 - Working With Multiple Workbooks
+Course 05 - Exporting Excel Data
+I second the notion of learning something other than Excel for data analysis. Datacamp.com has some good courses for learning either R or Python for data analysis. The best part is you can use these languages in place of VBA to perform analysis on data stored in Excel spreadsheets, and then write back results and charts. 
+Seconded
+Duly noted and I appreciate the reply. I am also currently learning SQL which I also started in college. I'm just looking for some resources for excel in particular since thats what the jobs that I'm applying to call for.
+Access is an excellent starting point for learning SQL and it's how I learned SQL. Access is so simple and often it can get the job done. It took me 1-2 months of goofing off in it in my spare time to figure out Access. A few months later to turn 7 step queries into 1 big query.
+If you learn 10 lines of VBA you will be the "smart guy" in your office. People don't even try to learn whats outside of their comfort zone. Be good at it and people will think you're a god. I'd love to say that I'm overstating, but I've been in multiple offices where this is the case.
+Solution verified!
+Vba in this example would be to connect excel to a database correct? 
+DGET, DSUM? Never thought about it.   
+
+You just gave me some activities for my next hours in the office! 
+Is there any sort of programming you'd have to know before starting to learn R or Python?
+People are probably gonna say it's bad practice and shoddy and all, but I like using Excel as a front end GUI with the ADODB library to interact with a database as back end.
+
+Everyone knows how to use Excel and it takes care of the user interface for you. Then you can just dump the data in a database and retrieve it / manipulate it as needed.
+You're right man. It's magic to most people unless you work with a lot of programmers, to the average office worker though? Magic. 
+VBA is funny. You become the smart guy while there but you're the ass hole when you leave. since no one knows VBA, once your legacy process breaks, all hell breaks loose
+
+You have awarded one point to _double_whiskeyjack_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Nah I primarily use VBA to add extra functionality to a dynamic dashboard or write macros that automate day to day tasks. 
+
+PowerQuery and PowerPivot handle the database connection and data pulls. 
+You're welcome! After discovering them, I kinda felt that it was my calling in this world to tell people about them, and wean people off VLOOKUP :)
+Nope.  But if you are a totally coding newb, Python is probably easier.
+It would make it would make it easier, but by no means required. The stuff on datacamp is geared towards complete beginners and you can try some of the intro lessons for free.
+
+* Not affiliated in any way. Been using their courses for the past month and found them very helpful and approachable.
+My understanding is python is easier to learn and more visatile. Meaning you can use the language for more than data.  I think, from my understanding, R is better for data analysis.
+
+
+Edit: whoops misread the question.  You don't necessarily need to know a language prior to learning.  Go to r/learntoprogram for a  place to start.  Even if you start with vba since you know excel well. Knowing vba really helped me when I started to learn.
+If it's stupid, but it works, it ain't stupid.
+I usually use autohotkey for macros.  Would VBA do similar things?
+Reddit is built on Python. Python also has tons of libraries for data analysis and visualization.  Numpy, pandas, scipy package, seaborn, matplotlib to name a few.
+Python is Object Oriented and much more versatile.  R is a statistical programming language that only does data analysis.  For data analysis in Python you want to look at [Pandas](https://www.google.com/url?sa=t&source=web&rct=j&url=http://pandas.pydata.org/&ved=0ahUKEwiS5ryM2rTPAhUJcT4KHbhYDLgQFggcMAA&usg=AFQjCNEZuvyE0M5ZO8tUGa-NnbWMi3Qh0A&sig2=wYfgDUayYnSwnS_l8ENsFQ), [Sci-Kit Learn](https://www.google.com/url?sa=t&source=web&rct=j&url=http://scikit-learn.org/&ved=0ahUKEwi73pnk2bTPAhWMcD4KHYGWCrMQFggcMAA&usg=AFQjCNHaWzGt8pVwF2H5JqFrCmnzaSzhwQ&sig2=DZPJo5C1EYKyDO-GyNfqwQ), and [NumPy](https://www.google.com/url?sa=t&source=web&rct=j&url=http://www.numpy.org/&ved=0ahUKEwi3naek2rTPAhWEdz4KHe32D70QFggbMAA&usg=AFQjCNEN-XKZnvvnUV0ZkdbbQbR-GHVEzg&sig2=ttnhbKNoAjsoBHAucsXS9w).  I would prioritize learning Python 3.x over Python 2.7
+I don't use autohotkey but from what I know about it, it's very similar to VBA but interacts with a lot more than excel. 
+yea i know. i wasn't knocking python as a data analysis tool. Personally i would have liked to used/learned python because of the options available if i leave data analysis. 
+I use it a lot to interact with excel--> Sage 50

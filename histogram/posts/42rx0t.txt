@@ -1,0 +1,405 @@
+Financial Analyst - What Excel functions MUST be known?
+Vloopkups, hlookups, concatenate, pivot tables, locking a spreadsheet, sum if are what I remember on my interview test.
+
+You may also want to know how to rename ranges and use them, and index match if u want to be above average.
+In my experience administering excel tests for interviews, if you can prove that you can do index match you will be a big step above most everyone else. Also try to use sumifs/index-match etc whenever you can. When we ask candidates to pull data from another tab, a lot just use "=sheet1!A4" instead of a dynamic lookup, and that alone puts them at a big disadvantage.
+In Corp Fin myself - here are sum (bad pun intended) of the formula's that I find useful (I'm also open to being informed of better ways of doing these things):
+
+* **sumif/s, countif** - these are great for adding up long lists with product codes with sales next to them. You can also use this to turn monthly data into annual data by indexing the years.
+
+* **indirect** - this is possibly the most time saving of all my functions. Let's say you have annual reports that have the monthly data in different sheets (named Jan-15 through to Dec-15). Use indirect and you can get all the info into one sheet with Jan-15 to Dec-15 as the headers (=sum(indirect("'"&A$1&"'A1")))
+
+* **concatenate** - nice for making sentences (=concatenate(if(A1<0,"Loss","Profit")," for the period is",text(A1,$#)). You can also use & (so "text "&A1)
+
+* it's likely that your interviewer will know hlookup/vlookup more than they would index(match) - **index(match)** is significantly more powerful (and from what I've heard more resource friendly). Learn it and learn to love it.
+
+* **subtotal** - can be quite useful. I haven't fully explored this though.
+
+* Data Tables!!! - so good for doing sensitivity analysis and displaying them efficiently.
+
+* **offset** - can be very useful depending on the data you use (I use it more for my personal projects than at work though).
+
+* name your ranges - =$A$1 vs =interestRate is a massive difference for readability
+Learn how to use Pivot Tables well. About 20 minutes on youtube and you should be able to use them. Most people think its wizardry, but the secret is that its just about as easy as drag and drop once you get the concept. Once you learn this, add Pivot Charts with Slicers to make dynamic graphs. Again, super easy and people will think you're a genius.
+
+Source: use excel at work and people think I'm a genius. I'm dumb like everyone else, I just took the few hours to bother to learn how to do it.
+In addition to the lookups, pivots, and named ranges already mentioned, the financial functions that deal with amortisation and compound growth are handy: RATE, NPV, IRR, PV, FV, PMT, and the rest of them.
+Reading this discussion made me realize I have a real shot of being a Financial Analyst.
+
+I know all of those functions and more but currently work in tax.
+
+Can someone suggest what would be a good way to get in the door?
+VLOOKUP is the most important one. Also know that VLOOKUP can be replaced by INDEX-MATCH as it sometimes makes the formula easier. 
+I'd say the skill in making things dynamic. Most of the time you may need to use the same model or approach to deal with different data sets. If formulas are dynamic then it won't need much time to recalculate. And that means you would have higher productivity by doing other stuff. Indirect() comes to mind.
+LEFT, RIGHT, MIDDLE, SUBSTITUTE, FIND
+
+All great for parsing data.
+
+DSUM
+DCOUNT
+DAVERAGE
+
+All great for when you want fancier conditonal aggregations than typical SUMIF(S), COUNTIF(S) can provide.
+
+The VLOOKUP/HLOOKUP or INDEX/MATCH are bare necessities.  The latter are awfully powerful if you can get the hang out of them.
+
+With these I can perform black magic that most of my peers never fully grasp.
+
+Also, for the love of God, use named variables wherever possible.  I hate reading Sheet1!A:B when I could read ZipcodeTable, etc.
+Learn VBA ASAP. You can create your own functions that make you better and faster that you can set to hot keys. 
+
+This is for post interview too, BTW. Learn this shit and people will bow to you like you have bestowed upon them the holy grail. Learn to use data as is without manipulation using a combination of lookups and nesting IF with iferror.
+
+People are saying to learn index match like you truly need it. Be familiar with it, it is great, but being able to nest functions together is really the key. Pivots are a must learn.
+
+Lastly, once you are in, use raw data. I cannot stress this enough. If you have a report out of the system that you may need to analyze again then creating your tool so that you can redrop the data will make you super fast and more accurate than anyone there.
+Beyond the basics (MIN/MAX/STDEV/SUM/AVG/MEDIAN) and what's already been said, I'll add SUMIFS, COUNTIFS, AVERAGEIFS, RANK and array formulas, depending on how deep their tests go. Also be sure to brush up on Pivot tables.
+sumproduct for weighted averages.
+array functions -- the ones enclosed in the curly brackets {}. Absolutely invaluable.
+Just make sure you don't touch the mouse.
+I have not seen it mentioned here, but there is a YouTube channel called ExcelIsFun.  It has something like 2000 videos explaining all kinds of features in excel.  Multiple examples and clearly explained.  In fact, I'm about to watch one on Index-match cause that's a new function to me.  
+Definitely vlookup, pivot tables, if statements, and know how to string different functions together. I switched to index match from vlookup for a lot of formulas. It seems to be more efficient, and it can really save time if you use the name manager to name different fields that are commonly used. 
+As others have said: Vlookup, Hlookup, concatenate, index match, sum/countif(s), IF, And, Or, Left, Right, Mid and a bit more advanced or lesser known stuff like Sumproduct and array functions. I didn't know much when I started out, you pick things up as you go along.
+
+Something that I personally use a lot is conditional formatting. Can really give your reports that extra sparkle.
+
+ Good luck!
+In addition to what else has been mentioned, the CHOOSE function is a more elegant way of using a complex if/then statement.  If you are looking up how to do each of these, check out "Excel Magic Trick" and the function you are looking for on youtube.  There's no better way to learn.  Once you get down the basic ones here, just start going through the magic tricks.  Once you've learned the first 200 in the videos, you'll be considered an expert.
+On top of everything else mentioned here, I would learn how to effectively use Goal Seek, since you will oftentimes be working with equations that involve several (dozen) variables. Doing multivariate algebra on your own can be a time suck and excel does all the work for you via Goal Seek. That also helps out from a sensitivity analysis perspective as well. 
+great thread
+The functions mentioned here are all on point but if you really want to crush an analyst role you should learn VBA.  Not all "financial analysts" do the same thing and if you're just starting out you won't be banging out financial statements, you'll need to look at the same data scenarios and break them down over and over.  You'll probably have an existing model and be required to manipulate it to get an output.  You need to understand formulas to understand the mechanics of financial modeling but from there VBA can really take you places.  You'll be amazed how many things you'll do over and over, if you know VBA you can automate these tasks and that adds value FAST.
+A lot of love for sumifs in this thread, yet only a few mentions of sumproduct. Sumproduct can do the same thing as sumifs and more. It can be a little more complicated to understand, but there's one key reason I think sumproduct is the only choice.
+
+If you are summing over a range that is stored in a different spreadsheet, sumif will return value errors if that spreadsheet isn't open. Sumproduct will return a value regardless.
+Not functions, but still: Keyboard shortcuts. To me someone who is proficient hardly ever reaches for the mouse, and is subsequently much faster.
+
+Also - formatting. Nicely formatted (no gridlines, correct font size, cell shading, colors, etc.) sheets will set you apart. 
+I would say "what if"  saves me a lot of time and makes my boss think I am second incarnation of Newton (first  being Einstein) 
+Some minor/slightly more advanced ones others haven't said but I've been tested on as a financial analyst applicant: Importing a text file or csv., text to columns, filters, conditional formatting, macro basics (non-vba), and goal-seek.
+Honestly, I've just started learning arrays, and they've changed everything for me. Any arithmetic formula can be an if function with arrays.
+SUMPRODUCT if you're feeling ballsy
+I have no idea what will be on the test but if you can learn index/offset, match, counta and array formulas you can build almost any other function in excel and recreate the same functionality as pivot tables without any of the annoying parts. Also learn indirect.  
+A little late but I recommend AGGREGRATE. It's only available in 2010+ I believe. It let's you use aggregate functions with the option to ignore hidden rows and errors in your data set. My only wish is that it ignored hidden columns as well. [More info here.](https://support.office.com/en-us/article/AGGREGATE-function-43b9278e-6aa7-4f17-92b6-e19993fa26df)
+Why is everyone so uppset with concatenate? I'll guess you can just use "&"-statement instead?
+ 
+Personally I would go for: sumproduct (or sumifs/countifs), vlookup, array formulas {}, named ranges, if/iferror, index & match and other lookup formulas in general 
+Date and name manipulation. 
+
+Let's say you have an event on 1/23/15. Can you create a column that rewrites the date as Jan-2015? There are many approaches to do so. I personally use =text(A1,"mmm-yyyy"). You can also use the month function and a choose function with some concatenation.  Can you tell me what Saturday ended that week? Again, many ways... I like = A1 + (7 - WEEKDAY(A1,1)). 
+
+For names, how would you go about creating a column with names in John Doe format when they currently exist as DOE, JOHN? Will your solution still work if he is a junior or has a middle name? How would you choose only his last name?
+
+Text and date functions can be just as important as the reference and calculation methods listed here. 
+
+Still, if you only have time to master one thing- go with pivots. 
+I use these all a ton, however I prefer Index-Match to vlookup.  I think vlookup is easier to explain to most people in my firm, though.  And they think it's some sort of magic.  
+
+Indirect and Offset have been life savers as well.  
+
+    
+This is what I do and I strongly recommend being very comfortable with pivot tables 
+I would add SUMIF to that list
+Index(match* and hlookups
+Converting formulas to static values. 
+Could you please elaborate on your aversion to "=sheet1!A4" and what you mean by a dynamic lookup?
+Could you please explain how to do dynamic lookup?
+Sometimes that is not practical if you're just looking to return individual cells.  I have a lot of worksheets at work and on managerial reports they just want aggregated $ values from mine.  What I use to not lose my reference is name manager.  Give your cell a name (e.g. ProductionOutput) and on managerial reports I just hit the cell =sheet1!A4 and rename the A4 to ProductionOutput.  This way if I insert rows or columns, the reference is preserved. 
+
+Of course if you're dealing with larger data sets index match is a must
+awesome. thanks!
+do you know if there are any sample test to practice online? or do you have any examples?
+Great stuff. Director FP&A here, and almost never name ranges, as the model (depending on how complex) makes it harder to navigate and, if you're moving a model into a different platform, can make it harder to actually make the transition into whatever other system you're using. 
+
+I have people on my team who do name their ranges, which is fine, its just not something I've ever found value in. I've also had CFO's who just dislike it on principle (those who actually dug into excel models themselves rather than have their analysts do the dirty work for them). So, as a potential hiring manager, named references aren't a deal breaker, but it would be a value add if you at least knew how to do it and how to reconfigure your formulas to incorporate if necessary. 
+
+Also: a good excel model is like a work of art. You work with someone long enough and you can just tell based on the look and feel of the model who built it, because everyone favors different styles of formula structure and formatting. So don't think there's a "correct" way to do anything, unless the firm you end up working at requires it.
+A note on INDIRECT and OFFSET - these are what are called "volatile" functions and they will slow your worksheet down significantly if you have a good amount of data in there.
+
+Excel basically only recalculates cells that it knows have changed since you last calculated. Because an INDIRECT or OFFSET formula can refer to ANYTHING, it has to recalculate every single cell in your worksheet every time you recalculate.
+
+There are situations where they're useful (I love INDIRECT when I have a ton of standardized worksheets to reference), but they should be used sparingly and replaced with non-volatiles where possible.
+How do you name a single cell? I can name ranges, but not individual cells
+Extremely helpful. Did you learn these as you progressed in the position or did you already have a strong understanding of various excel functions? 
+save
+If your goal is to find a sum based on multiple criteria, sumifs is awesome. But using true/false criteria with sumproduct can do so much more and it's quite impressive.
+
+Indirect is amazing when used with range names to create user toggles (using validation) in larger models where the same formulas can apply to multiple columns. Range names do have a negative stigma sometimes, but they have some really great uses.
+
+Concatenate is good, but you can often just use &. For instance, =Concatenate("Yes"," ","No") results in 'Yes No' as does ="Yes"&" "&"No". However, concatenate is particularly great it you're writing a lot in Excel because cells have a 255 character limit, which concatenate can overcome (but it's a bit annoying). 
+
+Subtotal has a few great qualities, but my favorite is that it can ignore grouped cells when performing calculations.
+> In Corp Fin myself - here are sum (bad pun intended)
+
+Sorry, this first line just reminded me of [Parks and Rec](https://giphy.com/gifs/NIrsmhsT2fKZW/html5)
+I work as an analyst, and almost never use indirect. Can you give a few real life examples?
+Yeah, but the best part is when you learn some of the more complex formulas you can do stuff in a lot less time, which means more time for reddit.
+Not genius. Magician.
+Me too and I just advise on UK student funding. 
+And can make it go left!
+Anyone recommending vlookups clearly doesnt know index-match very well.
+If you don't already know vlookup well then I'd suggest learning index, match and becoming familiar with that first.
+Vlookup is very useful, but the syntax is confusing.
+If you don't already know vlookup well then I'd suggest learning index, match and becoming familiar with that first.
+[deleted]
+My rule is named ranges for continual reports but leave it alone on ad-hoc reports. Even then if I name stuff on a report and I want to move a piece of that report to build something else,  it makes it tougher with named ranges. 
+For the named ranges - for the love of God, don't make name references to the other files somewhere else on the network.
+
+It takes ages to open an Excel file if it has invalid names that refer to the network, if that file is moved.
+Combining left/right/Mid with Find and especially with Len can be very useful for manipulating data when it is not the form you need. I have tested people I've hired on some of the most common ways of working with text fields. Can you turn John Doe into Doe, John? What if it is James Ray Vaughn IIi?  
+
+If we have a bunch of closing dates, can you create columns that identify the month in Jan-2015 format? Can you provide the week ending Saturday of they week? 
+> Learn VBA ASAP. You can create your own functions that make you better and faster that you can set to hot keys.
+
+Erm... I wouldn't say ASAP, it's a useful skill, but not something required.
+
+Some complex things are easier with VBA, but I know a fair share of guys who create macros everywhere without even trying to make use of built-in functions. I've seen MID, VLOOKUP, OFFSET and other really common functions replicated via macros, which is really excessive. And the bulk of Financial Analyst work can be done without any VBA knowledge - and no loss of quality.
+
+The problem with VBA functions is that they need time to debug, and you can't easily handle them to anyone else (unless you're a fan of adding tons of comments for your own functions). Another point is that directly using a macro clears Undo list, which is a deal-breaker in many cases.
+Trackball4life
+wow. this is a fantastic resource. thanks!
+
+I think I forgot to mention that, but yeah.  If you know just the absolute basics like ctrl-home to get back to the top of the page you save so much time over people that just scroll up for ages.
+
+also, getpivotdata is a pretty significant one to learn that isn't formatted quite like what most people are accustomed to.  Powerful tool once you get the hang of it.
+Non vba? Please explain
+I think it is just that A1&" "&B1&"- Cases" would be much cleaner than a bunch of concatenates showing up. 
+Anything you can recommend for learning indirect and offset?
+I never use vlookup or hlookup, just index/match, but I've yet to encounter anyone at work that is even aware of either.  Vlookup is the one everyone expects you to know if you're going to use excel a lot.  For companies that use SAP you'll need to be able to quickly convert values stored as text to numbers, be able to turn a data dump into a pretty chart, and preferably write macros to pull the data for you.  I do a lot if checking to see if checks have been cashed, so a macro that enters each check number into SAP and returns the check cash or void date (if either exist) saves me a LOT of time.
+
+(Staff accountant at global hq of a billion dollar corp)
+In my opinion, one must always use index match, but must understand how to use vlookup because so many people use it. 
+SUMIFS is more usable
+I actually did. But it split the word in two. Good catch
+If you're going to cut out VLOOKUP in favor of INDEX-MATCH, why would you keep HLOOKUP? INDEX-MATCH handles both tasks.  
+index and match lookups are great, but are less known.  Vlookup's are huge, sumif/sumifs.
+
+If you really want to get fancy Sumproduct is nice 
+You mean copy and paste special?
+Say you have a table of data in sheet1, for example, employee Names in A2 through A4 (James, Joe, Shane) and number of sales in column B2-B4 (20. 25, 30). On Sheet 2 you are asked to find the number of sales made by Shane. You could just use "=Sheet1!B4" to return Shane's Sales (30). A better way to do it would be to have a cell with the word "Shane" (say cell A1) and then use =vlookup(A1, Sheet1!$A$2:$B$4, 2, false) to find Shane's salary. This way, if you change "Shane" to "Joe", your formula will update to pull 25 instead of 30. Using =Sheet1!B4 will not change, which is why it is not an ideal way to do it.
+I've always thought dynamic lookups were not possible.  E.g.  =vlookup(A1,[dynamic range name],2,false)
+If your data is in Sheet1 A2:A15, name cell A1 "dog", then use =offset(dog,ROW(A1),0) copy down and it will reference the data from your main sheet
+I agree in practice it doesn't always make sense to do it how I described. However, in an excel test (which is often timed - making naming ranges less practical and harder to review) where the goal is to demonstrate knowledge of formulas, it is much better to use a more complicated formula over a simple cell reference.
+Interesting
+
+I tend to name variables that it makes sense naming - so things like inflationRate, interestRateBond, etc
+
+But I'm interested into understanding why you would dislike naming? Is it purely a transferability thing?
+Thank you for the info...do you know if there are any sample test to practice online? or do you have any examples?
+I'm also not a fan of naming ranges. Makes it much harder to audit a formula.
+I often replace all functions with macros that just replaces the functionality - makes your document significantly quicker and takes up a lot less space (I've reduced a 20Mb file to under 1Mb just by replacing arrays of formulas with macros), opening time was also reduced to next to nothing.
+Your point on volatile functions is extremely important and not everyone knows that. Likewise, VLOOKUP is also considered volatile which is why INDEX / MATCH is preferred. It's especially important as a financial analyst that leverages on the Bloomberg API to pull data into your spreadsheet.  
+  
+If your model is chock full of volatile formulas then you're going to hit your data limit in no time.
+I re-engineered a ~10 yr old speadsheet a few years ago that had a massive amounts of indirects and offsets, made the file calc much faster (order of minutes) after replacing them with vlookups.
+A single cell is a valid range.
+Or you can click on the cell then look in the upper left where it shows the cell name (like a4, for example) and just click in there and change the name.
+Formulas tab -> define name -> give name -> scope (sheet name) -> in the refers to field select the cell or cells you want with that name (works with 1 or many cells)
+Slowly built up my knowledge.
+
+I picked up a book on VBA - and have recently been learning Java. The whole concept of programming makes sense to me and so it follows when I play around in Excel - because it's something I actually enjoy doing.
+I sometimes set up a workbook with 30 identical tabs for different properties my company owns. I want to create a summary sheet that grabs one cell from each tab. 
+
+Well, since the tabs are all identical, I can write an INDIRECT formula that keeps the cell constant but changes the name of the tab it's grabbing the cell from. This greatly reduces the amount of time it would take to create summary pages. 
+Hopefully this gives an idea of how to use INDEX, MATCH and INDIRECT when dealing with the sort of issue you can get in real life (monthly information in separate sheets without a consistent pattern):
+
+https://docs.google.com/spreadsheets/d/11AVuppmyr5b6KEyYXIkpiQ5a-OWIwSW_Lm6SdXNTMYQ/edit?usp=sharing
+Indirect lets you "indirectly" reference other any range of any tab of any OPEN file by using a string\text to represent the address location of a range
+
+These forms show the same result, where A1 would sum the values of A2:A20 in Sheet2.
+
+    A1 :: =sum(Sheet2!A2:A20)
+
+OR
+
+    A1 :: =sum(INDIRECT("Sheet2!A2:A20"))
+
+OR
+
+    A1 :: =sum(INDIRECT(A2))
+    A2 :: Sheet2!A2:A20
+
+OR
+
+    A1 :: =sum(INDIRECT(A2&"!"&A3))
+    A2 :: Sheet2
+    A3 :: A2:A20
+
+OR
+
+    A1 :: =sum(INDIRECT(A2&"!"&A3&":"&A4))
+    A2 :: Sheet2
+    A3 :: A2
+    A4 :: A20
+And you can insert columns and not lose your reference (annoying to have to edit the column index # in vlookup).  It leads to more errors.  No such worries with Index(Match())
+Why the hate for vlookups? I use vlookup-match all the time, when I know I need to look in one dimension.
+If you start using it, it kind of becomes intuitive, assuming you are reading what is in front of your face, which I often have difficulty accomplishing =)
+It seems that everybody recommending INDIRECT and OFFSET has never used a worksheet with more than a couple of thousand rows.
+Actually, I kind of like using indirect() but as others mentioned I don't use it  a lot as it really slows down your whole spreadsheet. But it's useful to determine the name of column when using index and match for example.
+It s a good rule.  Too often I see files that are institutionalized apps that lack fundamentals.  Just once I'd like to inherit a report that isn't a disaster. :)
+Oh, I just hate linked Excel files in general, named ranges or otherwise.
+
+That guarantees a disaster.
+Just ran into this today. My company uses a bimonthly excel file that references a table from 2013 on the server. The best part is that the exact same table is on the second sheet of every one of those excel files. It's also a 97-03 file. God this company sucks.
+Yep.  Len is another good one.  I failed one of those hiring tests about 4 years ago and promptly went home and learned myself.  I'm better for it.
+Good points. However, I am an true programmer, so I note the hell out of my code. 
+
+That said, the bulk of what I use scripting for is usually these small conveniences and ETLs. For instance, I have one function that can take the entire sum of all the cells that I am highlighting and copy just the values to my clipboard for pasting into other programs. I have to work between many different programs and the usual c/p doesn't pass the variables to the clipboard correctly. 
+
+I also create reporting with it so that I just have to do it once. You are correct; it takes a lot of debugging, if you are not familiar with how it works. However, in the end, after tinkering for a few years, you soon will find that you have well notated modules with little errors. Just takes time and practices, hence my point of As Soon As Possible because it will take time to get good. It's the fact that he/she is learning it over time that is a good quality in a candidate, not necessarily that they are a beast at coding.
+there's some solidarity i didn't expect.  Nothing but logitech marble mouse (which is a trackball) for me since the late 90s.
+Glad to help! 
+It was done online through a program not with someone next to me... It had me record a macro and then run it on a different location. So it showed macro basics without actually going in and hard-coding the VBA.
+
+Still technically used VBA but wasn't testing on it, sorry for being unclear!
+Learn to understand it. Then never, ever use it. If you find yourself needing it, your design is wrong.
+Also, putting data into tables is huge.  Pivot tables too, sometimes.  Little things that will make you look better than most are iferror (so you don't show a lot of errors where there should be 0s), sumproduct (a must for calculating things like adp (average days to pay), knowing where to use absolute references, text to columns, remove duplicates, conditional formatting, how to chain multiple formulae into one cell using & (=counta(a2:a99)&" invoices for "&text(sum(a2:a99),"$0.00") for example).
+
+One of the biggest pet peeves of mine is when people don't use a sensible naming convention for their files.  Or when they type the same thing (such as the month-end date of a report) over and over across multiple sheets instead of just setting it once and having the other cells reference it.
+Yea that was lost on me as well.
+Index and match is more taxing on ram in my experience. That's the only reason I can think of. 
+On my interview quiz, I was told to specifically use lookup and hlookup so it is good to know. 
+Sumproduct is life changing and really enables anyone to do some basic data breakdown
+    Sub wsValues()
+
+    For Each ws In ThisWorkbook.Sheets()
+        ws.UsedRange.Value = ws.UsedRange.Value
+    Next ws
+
+    End Sub
+That's not what I mean but yes that is how you do it. 
+Excel yams
+Thanks
+dynamic range can be set nicely with VBA if you know what you're doing. But it can be performed via offset and countif with relative ease.  Then you just reference the named range.  However, if the lookup value you're using is not in the first column of the named range that changes then yeah, it won't work, at least not easily.
+You can use OFFSET or INDIRECT but it'll slow you down on the calculation side of things and just generally isn't a best practice.
+As long as the naming is specific and done well, I don't really mind. 
+
+For instance (real life example from this morning), I found a named cell reference "IntRange2". Based on the model, I couldn't tell if it was an interest rate, an integer, an interim value of some sort, or some reference to an international assumption.  All of the above could have been used in this model, which made it confusing.
+
+Also, I didn't understand what IntRange1 was for and why there were two references. IntRange2 was also not a range, but a specific cell. Turned out IntRange1 was an actual integer range and IntRange2 was an interest rate. 
+
+So, I was able to find out what was going on under the covers of the model, but it was confusing, somewhat hard to follow, and essentially lazy modelling. 
+
+So, for me, I don't do it out of aesthetics... its more an ease of use, as that's how I learned how to model  and it's frankly just my style. 
+
+I recognize it is much more efficient for long formulas (like nested If/Then statements, or a formula with lots of variables), but assuming it's done well, I don't really care. 
+
+As a hiring manager, I care about how clean and efficient your model is, and if you understand the core logic behind the model and can pivot it quickly if the business requires it!
+I was in consulting and often had to show clients or VPs my models. Most of them didn't understand VBA.
+
+Most of them didn't understand the models either, but it's at least transparent and nobody would admit they didn't get Excel.
+FYI, that's called the Name Box. 
+Or Ctrl+Alt+F3
+VBA is based on VB6 which is from 1998. If you want to stick around Excel, try looking into VSTO (Visual Studio Tools for Office) where you can build addins using more modern MS-focused languages.
+I would argue the setup of excel is the perfect introduction to object oriented programming. you learn things like functions, arguments, different objects and how they can have certain properties, etc. I first got comfortable with excel, then naturally VBA, and now I'm learning Python and I don't want to say it's easy, but there is an incredible amount of overlap in terms of syntax.
+So indirect is a reference to tab names, not specific cells?
+fyi you can do a vlookup and then put the match function in the part where it asks for column number if your data has headers, but yea if you know index/match it's probably better
+There's a pretty neat combo of VLOOKUP(MATCH()), that will serve you better than simple INDEX(MATCH()) in some niche cases.
+
+For instance, if you have a table with years as columns (2012,2013,2014,2015), you can set up 
+> VLOOKUP(lookup_value,lookup_table,MATCH(needed_year,header_row,0),0) 
+
+to always lookup the needed year. It's a bit harder to do with a simple INDEX(MATCH()). This is useful when you make the header row volatile, via using references and/or validation drop-down list.
+Index/match is inherently better, but you have to know vlookup in business.  Most of the people at my office don't even know how to do a countif, but everyone is expected to know vlookup.
+My problem is that I don't need it that often.  So basically I have to retrain myself every time, because it isn't intuitive for me, and I have to remember do I want the Vlookup or the Hlookup etc.
+So what do you recommend using instead?
+I don't know about that, I recently had a spreadsheet with an index match and an indirect inside an if statement - and this was copies into several thousand cells. My computer is not great either, but it only lagged a bit when editing.
+Exactly.  Most of the data I work with is 20k-80k rows and 20 or more columns.  I almost never use indirect or offset.
+Someone downvoted you, but you're right
+I have used indirect to reference tabs in formulas. Any other way to do this?
+If you find yourself making absolute claims without absolute knowledge,  your way of thinking is wrong. 
+
+> Or when they type the same thing (such as the month-end date of a report) over and over across multiple sheets instead of just setting it once and having the other cells reference it.
+
+And, sparingly, between documents. Any task that involves opening a load of excel files to look at their contents is crying out for a summary sheet that draws from them programmatically instead.
+
+Part of the skill of this one is knowing when you've got beyond a load of excel files and seriously need it in a database instead.
+Depends on how you use it, if you create the array as the whole column your going to have issues, if you combine it with the use of named ranges it will be much more effective and efficient. It has added benefits due to the arrays of 1's & 0's, with this you can combine multiple arrays or conditions and have a more complex and understandable system of matching. 
+you were told to use lookup? O_O
+
+Good luck using that after someone resorts the source data lol
+Of course. I always recommend learning the various lookup formulas. Even if someone always uses INDEX-MATCH, other people will use the others as well. (I use the lot of them.) 
+Yeah, I think index match is growing but you'll even see "must know lookup" in job adverts. 
+
+My feeling is spelling it out on excel tests is either a prompt for people who don't really understand when it's useful or micromanaging people who, after all, you're hiring for their excel skills and might know something better.
+sumifs is faster than sumproduct where sumifs can be used instead of sumproduct.
+I would just love to know how to do it.  Can you give me an example?
+It sounds like whoever built that model needs a refresher on proper naming.  If you can't readily decipher what the formula references from the name, then the naming needs to be reworked or removed altogether.  
+Of course - this isn't always an option.
+
+More something I do with my own sheets rather than client ones. Then again the models that are being used for Renewable Energy bids are getting more and more black box in my experience.
+right, but someone asking how to change the name of an individual cell probably isn't going to be helped much by me saying "just change it in the name box"
+I've been having a lot of joy with Google Spreadsheets and Google Scripts for my personal projects.
+
+
+I went to learning some Python via codeacademy, I didn't fully grasp everything fully. 
+
+But needed to learn a lot of excel for a few things and to have another string to the bow. Found building up these skills much easier. 
+
+Now I've gone back to Python, knowing excel has greatly improved my understanding. Especially of functions.  
+Tab names AND specific cells
+[deleted]
+[deleted]
+Depends on the size and general flexibility of your sheet. If it's a small workbook that never changes, use the volatiles.
+
+Otherwise, it's usually more worthwhile to just manually change the sheet reference or use index-match instead of offsets. Not worth messing with the volatiles.
+Depends on the situation. If there aren't tons of other sheets you AREN'T referencing, indirect won't slow you much. But in bigger models it is objectively slower. 
+I believe those are best practices, but OFFSET() allows users to remove/add entire rows without messing up formulas. Formula without OFFSET() after row deletion might generate #REF error.
+
+Thanks to OFFSET() I managed to create customizable spreadsheet without the need to apply VBA code.
+Not that I can think of. My argument isn't that there are better equivalents, just that it indicates your data structure isn't right or you're in the wrong tool. It's like using GOTO in programming, it works and in rare circumstances it's the best approach. Most of the time though it's just patching over the fact you needed to add functionality at a later time and didn't have time to redesign. It makes unpicking a book for someone else in the future a nightmare and given it's volatile can quickly cripple performance.
+true, but a lot of companies (in my experience) have excel/word/powerpoint for everyone but limited licenses for access.
+
+Side note, in my experience it really impresses middle management if you have an SOP tab for each workbook you create.  In a way it does make you replaceable, but pretty much any manager remembers the agony of trying to teach a new employee to do what their last one did without proper documentation.
+It was a quiz. They just wanted to know if I could. This data isnt being used
+Due to increasing complexity by necessity or the convenience of a black box model?
+Fair enough. 
+And workbook!
+Really? I personally just remove all formulas before I send something. Usually. Not always. 
+I thought they were referencing the other equations because it's easier to use across different sheets?
+What are volatiles?
+Ahhh yeah, that makes sense.
+Although OFFSET and INDIRECT are insanely useful, it's pretty much recommend to avoid using them if you have a fairly large dataset. This is because both of these functions are volatile and can cause your workbook to become sluggish.
+If you post an example using offset I will show you a better way to do it without offset.  
+  
+
+Complexity
+You can use index and index-match across sheets too. With index you'd just change the name of the range.
+INDIRECT and OFFSET. Basically any kind of truly dynamic formula where Excel can't tell just by looking at it what cells it references.
+Volatile functions, like indirect and offset, must recalculate every time a calculation is made in Excel. 
+
+If you change A1 from a 1 to a 2, non-volatile functions will only want to recalculate if they reference A1 directly or indirectly. 
+
+Volatile functions will always want to recalculate even if they do not reference A1 in any way shape or form.
+Offset aside, Indirect has been very useful for me because of the type of data that I pull into my models.  My portfolio analysis models are typically built to accommodate up to 25 different holdings and any return period I want.  Helper cells measuring how many rows of returns or how many holdings I have at any given period, and Indirects referencing those helpers, allow the models to easily handle 5 holdings and 200 rows of returns or 25 holdings and 500 rows of returns, or any other combination of holdings/returns. 
+In my example I've done it two different ways.  One using Offset to create dynamic named ranges and the other using helper cells (with Match & Max) to tell me the last populated row of data.  In both cases I'm using these to calculate trailing returns.  
+
+I don't have access to my models right now, but they evaluate either a portfolio of investments or a group of them over a given time period.  I may have 50 rows of returns or I might have 500.  I use my data provider's API to pull that data, so all I have to do is define the time range and the investments (and weightings depending on the model.)  The data fills in and my formulas calculate what they need to calculate and I can go straight to examining the output without having to do anything else.
+
+In the model with the ranges, I have a billion named ranges since I'll typically have 5 or 6 for each security (a portfolio of 25 securities would then require up to 150 named ranges... :| .)  
+
+In the model with the helper cells, I'll use Indirect to utilize the helpers to calculate trailing returns for each security.   Admittedly I haven't been using ranges to do this for quite some time since it takes literally forever to set them up.
+
+Now that I think about it, the helper cells are probably the easiest way.  More recently, that's how I've been doing things.  
+Nevermind, as soon as I browsed the spreadsheet I made, it was actually INDEX() function...
+So I have 12 months of data in a data tab (comes in externally, data refreshed monthly). Sets of this data, present year, forecast, prior year etc. Feed a front page where there is a drop down for month you want. One area of that has a YTD, uses offset to get the sum you want for those sets of data (it goes from Jan to the month in the dropdown based on offset).
+Do you know a better way to make dynamic named ranges?  that's the only time I use them.  Would love to learn a new way!
+I disagree, but show me a better way to do the following and I'll change my ways:
+
+Let's say I have a long list of sales data from stores, with their corresponding market listed. Let's say I want to find the 1st, 2nd, and 3rd quartile amounts inside of each market. Currently I sort the data on Market then use.
+
+    =QUARTILE(OFFSET(top_of_sales_data,MATCH(market,list_of_markets,0),0,COUNTIFS(market,list_of_markets),1),quartile_number)
+
+to dynamically get the range of that market's stores's data to then run the quartile function on. How would you do this without the OFFSET function? I run a bunch of other analyses using the same given structure so fundamentally changing the layout is not viable.
+Sure man, two ways.  
+  
+1. Use a table (Ctrl + T on a boxed range, then ctrl + shift + F3)  
+  
+2. Use =INDEX():INDEX() / =A1:INDEX()  
+  
+Examples here: [Mega dl Link for an xlsx](https://mega.nz/#!lI9TgZqJ!XbgXuBU_HBeNzqfJ984CmWWYrYKUS14m_33GfyxLAQ0)
+Hey man, sorry for the late reply, saw your comment on mobile and forgot about it!   
+  
+     =QUARTILE(INDEX(sales_data,MATCH(market,list_of_markets,0)):INDEX(sales_sata,MATCH(market,list_of_markets,1)),quartile_number)   
+  
+
+That is an interesting way to use the index function. I will start playing around with that instead of using offset. Thanks for the tip.

@@ -1,0 +1,325 @@
+Excel Sins
+You covered a lot of the "sins" I see, but here's a couple more:  
+
+* File names with suffix's like "new" or "latest".  Especially when it's saved in the same folder as the original file.  "New"/"Latest" is generally only true on the day it's made.  
+
+* A general lack of formulas in general.  I'm not expecting everyone to use complex formulas, but when I see someone with Excel open and a calculator in their hand I die a little.  
+
+* Inconsistencies in the layout/data format making any analysis very difficult.  
+
+* Random cells with text in them, breaking any formulas in that column.  
+
+* Getting to a line break by pushing space over and over, rather than Alt+enter.  
+How about not trying to learn excel?
+
+I am known for making complex formulas that are capable of doing really cool things. While that is sometimes true, a lot of times it just IF(A>B, Index(Match()), 0).
+
+The problem I have is that if the formula throws an error, people just freeze and call me instead of trying to figure out what the formula is doing and how to fix it on their own.
+
+Index-Match is not that complicated, especially if you already know vlookup.
+My sin? Instead of using few "helper" columns I squeeze shit ton of formulas into one mother of all formulas. It's weird satisfaction I get from not having to create additional column to make calculations more clear. Of course when I need to revisit these formulas after sometime I end up staring at the screen trying to figure out what the hell is going on.
+My biggest "sin" -  I build many, many workbooks that have formulas that do a lot of cool things for people
+  
+  When I hand those workbooks over, those people then hard key over most of my formulas and then come back to me wondering why it isn't working when i update the data ಠ_ಠ
+So, just to drag the discussion out a little further, what do you see as the most under-used habit/function/feature in Excel - the one you always make a point of showing people how to do it and why?
+
+In the 2003 and earlier days, it was SUMPRODUCT - 
+so many uses (and still does, the most popular article on my site relates to SUMPRODUCT)
+
+Of course, most of what SUMPRODUCT was often used for has been replaced with purpose-built functions.
+
+These days, it's Excel Tables - genuinely don't understand why people are reluctant to use them - makes life so much easier.
+[deleted]
+Merged cells. Never use them.
+
+Inconsistent formatting
+
+Using the grey cell border as a background, and complaining it doesn't print.
+
+Manually coloured cells that don't change with the cell value.
+
+Cells that contain multiple data points, making it unusable in formulas.
+
+Inconsistent column widths based on the data instead of using line breaks and wrap text.
+
+A thousand different styles in the styles menu due to copying and pasting.
+
+Wrong zoom level
+
+A million pages in the page breaks,
+
+This is just one file I'm looking at right now.
+Personal favourite, magic numbers - what do they mean?
+
+    =47*32687-55.13/668.20+2^15
+
+OR
+
+Company ABC was given 3 invoices
+
+| Company | Invoice number | Invoice total |
+|---|---|---|
+| ABC Inc | Z1587, Z1942, Z2366 | $176.12, $4,907.33, $828.08 |
+
+Yep, those are really 3 different amounts for 3 different invoices.
+
+*"Hey, I can't get these to add up, can you give me a hand?"*
+What is everyone's beef with merged cells? 
+Recorded macros.  
+
+I'm not against recording macros, but I'm talking about in depth macros where no attempt has been made to tidy it up after recording.  So when you're trying to fix a broken macro it's just full of random selections and ActiveCell or R1C1 references.  Opening the VBA editor to see page after page of this:
+
+
+    ActiveWindow.ScrollRow = 2
+    ActiveWindow.ScrollRow = 3
+    ActiveWindow.ScrollRow = 7
+    ActiveWindow.ScrollRow = 8
+    ActiveWindow.ScrollRow = 11
+
+Using Comic Sans MS!
+
+Worked for several ftse100 (top 100 listed companies in the UK), and people still use it for 'professional' work.
+
+But on a more serious note - Pivot Table Groupings - these are a royal p.i.t.a - there's little indication it's been done, and very hard to un-do / figure out what has been grouped / change the groups - without just re-doing the whole pivot table.
+Damn it. There are too many!!
+
+One of my biggest annoyance comes from people who never research and keep making things over-complicated and messy. So people know vlookup but they don't know match + index so they need to duplicate an entire table into another "temporary" worksheet and move the reference column to the front so they can do their vlookup. But then they forgot to delete the duplicate so there are more and more worksheets. After several months, people forget what those worksheets are and they're too afraid to delete them so they have to keep them. A year later, the file is too big and it takes ages to open or save so they ask for your help.
+I had to fix a spreadsheet for a bunch of nurses one time who formatted a whole column as text then proceeded to use 4000 different date formats in it. Someone wanted to know something along the lines of duplicate dates or something. After an hour or so using the left or right formula pasting out of excel and back into it I had if usable
+How about this one:
+
+Rows of data. Some rows color coded in red, some in green. But no explanation anywhere, not a comment, not a separate legend tab. 
+
+Just color code. No need to explain the reasoning behind what the colors mean. 
+The worst forme that I see everyday is just generally terrible structured data. And it's 90%+ of the people I work with. Even the people that halfway know how to use excel have no clue what data structure is.
+
+Making a pivoted report with raw data, and manually adding numbers inside of the cells as they grow drives me absolutely insane!
+
+And the worst part of it is that no one will listen to me when I tell them that their spreadsheet is horrible, and can be done so much more efficiently. They all say, "Well this is how xyz bossman has seen it for years and I don't want to change it on him." That doesn't mean it's the right way to do it. Not only are you are wasting time for yourself, but you are robbing him from using features such as pivot tables, and just general sort and filter, because you don't want to listen! Not to mention: when I come and try to extract the data from your spreadsheets, it takes me way more time with power query to get the data out of your stupid spreadsheet that I need.
+
+/rant
+
+TLDR: Structure your data better! Quit trying to store your data in a report format. 
+* Not using line breaks and indentation in long formulas.
+
+* Not using tables for tabular data.
+
+* Not using named ranges for non-tabular data. 
+
+* Performing logic in Excel that should be done in SQL as you import the data.
+
+* Using VLOOKUP or INDEX/MATCH instead of SUMIFS for numeric tabular data, especially in SQL Server linked tables.
+
+* Storing data that should be in a database in Excel.
+
+* Using macros for things that can be done in "vanilla" Excel.
+
+* Using PivotTables excessively. They're great for ad-hoc analysis, but if you're making a report that will be used regularly, there's probably a less cumbersome way to summarize your data.
+Oh shit, there is this co-worker... She "knows how to use advanced Excel functions", like she likes to say. You know, like "=x-y" (don't get me wrong, she does not do actual algebra, I mean, something like "=A1-A2")... and that's pretty much it. But she says, seriously, that she knows "advanced Excel functions". But then, she says that her computer is always messing with her work, so she sends me her file so I can take a look at it. It's actually a mess. First, she uses a different cell for every step of a formula; for example, when she needs to calculate a percentage, she makes a copy of the number to convert in a cell, then she make a copy of the total in the cell next to it, then she  uses a third cell to add this formula "=a x 100", then she uses another cell to pursue the operation and so on... She works in a way that a small equation can take like ten columns. It's ugly, but whatever. But everytime she sended me a file, Excel would complain about broken links; every new version of the files, some links were fucked up. I systematically searched the files for links... so long story short, she linked some files with formulas (one of her "advanced functions"), but as she periodically cleaned her files, she systematically erased older files, so there was always some broken links... But not only that: as I tried to teach her to organize her files, I asked her to make a backup copy of her working file so we can start all new. Shen then proceed to open Excel, copy tabs, one by one, by right clicking on it and by doing copy, sending all the mess to the new file. I asked to just copy the files  "I don't understand, this is what I'm doing"  "No I mean, copy the Excel file, in Windows"  "Seriously I don't understand what you mean"  "Just copy paste the file, in your folder, like any other file" "...what?"  "Do like you would do if you had to copy a file to a usb drive"  "Seriously, you have to show me what you mean!"   *Teaches the advanced function "copy a file in the advanced Windows environment"*
+12;50
+
+Then set an alignment in the column because: "Some of the data was misaligned"
+
+"Why isn't my time calculation working!"
+Similar to yours, but huge comprehensive tables that aren't actually tables.  I inherited a mass of manual reports that were done manually like yours, except instead of formatting, these things were huge and sprawling with no way to filter or easily look up values, and would require poster sized paper to print legibly.
+
+They would also repeat this process across many worksheets within the same workbook.  One I think had 30 pages all with these manually entered and formatted tables that were updated weekly.  It was a mess.
+Oh, and one of my favorites:  Split worksheets!
+This guy on the train next to me a few months ago - dear god. He was trying to make some sort of table, but it was just text. He had a paragraph in each cell - I guess he at least figured out how to enable word wrap. There were only about six cells that could fit on the screen, and they were mostly whitespace. It made me nauseous. I guess some people see Excel and think "boxes!"
+Cross-workbook references
+OMG. Your coworker. They need to learn pivot tables! This thing is making me twitch.
+
+Sins:  
+
+* I agree about merged cells. It can cause a mess later if it's in your headers and you want to filter/sort.  
+* Hiding columns/rows while also turning on freeze panes without having a worksheet that is a "key" to what you are doing.  
+* Not making a "key" to explain your workbook. This is important if your workbook will ever be used by other people. Even if you think no one will ever use it, it's helpful and can unlock the secrets for your boss/coworkers and help them appreciate your skills more.  
+* Linking to files that are on your DESKTOP or C: drive.  
+* Highlighting an entire row. As in, the ENTIRE row. Or column. Instead of the data itself. I hate this so much.  
+* Not understanding that there are cell alignment options and so everything is aligned bottom left.  
+* Failure to wrap text.  
+* Aggressive use of comments.  
+* Putting blank rows between tables in the same worksheet. Just make a new freaking sheet people! A new sheet! Just do it! It's not hard!  
+* People who split data across 60 sheets that belongs in one table.  
+* Hiding worksheets without saying you did it in the key.  
+* Unnecessary cell/sheet/book protection.  
+* Failure to use Data Validation.
+Overwriting my formulas,; justifying rows instead of clearing filters; storing numbers as text, and not waiting for the sheet to calculate.
+Worked with someone today who was using Excel Online who didn't understand what he did wrong after trying to send me the saved HTML webpage instead of downloading/saving the actual excel file.
+For me, it's just lack of basic header formatting.  The first thing I do when starting a new workbook is make sure my headers are clear, centered, and color-coded appropriately.  
+There is someone in my org that always sets his grids up in 10pt font, but scales the worksheet to 80% so it's exactly the same size as 8pt font... Everyone else in the org just uses 8pt font like a normal person. 
+
+Probably not applicable to many other situations, just ridiculously annoying
+Saving a new spreadsheet as .xls just because they're stuck in the 90s.
+
+New sheet for every day/week/month instead of a continuous report. 
+Hard coded numbers are fine but they *need* to have their source documented in an adjacent cell or in a cell comment. Damn, I've seen people not do this so. many. times.
+My coworker has 6 files of reports from 2015 to 2009 instead of ONE file with 6 *tabs*
+A table of data/ formulas where formulas are not the same for every row in the column. Hell to the no.
+I think a mistake is using the Header for the Report title.  Most people don't print shit out anymore, so put the title in cell A1.
+Here is my top 10 list ranking from most to least annoying:
+
+1. Adding text strings to number codes (a single space at the end is the worst).
+2. Subtotals in a database between lines in the database.
+3. Deleting rows / columns in such a way, that you misaline data or break formulas
+4. Merging cells.
+5. Overwriting a cell with a formula with a static value.
+6. Colour coding long lists of cells instead of adding new criteria.
+7. Adding relevant information into comments of specific cells within a database.
+8. Adding a lot of different values / text strings into a single cell.
+9. Printing out excel files and manually checking them with info on screen.
+10. Making huge files due to formatting huge areas of empty cells.
+There's a special place in Excel Hell for those who used Merged Cells. Also using a worksheet for each day of the month, each month of the year, each year in the span of creation. Stop. Just stop.
+
+
+>* File names with suffix's like "new" or "latest".  Especially when it's saved in the same folder as the original file.  "New"/"Latest" is generally only true on the day it's made.  
+
+Anything other than YYYYMMDD formatting for a date stamp is useless.
+
+DDMMYYYY does not easily filter, please do it properly.
+
+
+> Random cells with text in them, breaking any formulas in that column.
+
+This.  So many perfectly innocent workbooks destroyed by having their formulas updated with literal text/values.
+I title all of mine with versions... Start at v0.1 and just update the version any time I make a major change. 
+My current problem is trash from databases... Like storing data in long strings instead if unique values and dates... The data is littered with duplicates and the strings come out in alphabetical order... So useless to work with, I basically only do data cleaning these days which is such a waste of time.
+shhhh. This means us excel gurus all have job security.
+
+Mostly kidding...I hear you on the lack of people's ability to go even 2 inches outside their Excel comfort zone and just figure it out themselves. It can be a real time drain.
+
+I'm guilty of this.  I feel like I've failed if I need to use a helper column.
+Don't feel bad. In my senior semester of college for one of my finance classes, I had the [Dupont analysis equation](https://takloo.files.wordpress.com/2011/03/image0025.png?w=595) and it dragged on for 3 lines in the formula bar within one cell block, doing the calculation for say EBIT in the same cell instead of just referencing another cell where that number is already calculated. Took me over an hour to get it working just right but once I did it saved me countless problem-solving on my homework.
+Damn didn't even think of helper columns for stuff like this. That would probably make my life much easier huh. Nothing is worse than when something breaks or updates on these months later and there's just a wall of text you need to parse through to get it to work 
+Lock those cells down!
+I managed to improve reporting time from 8 to 3 working days by doing a lot of excel magic. Once I was leaving for new position I tried to handover the file to the next guy. I still remember his desperate look. In the end report got cut to different parts and ownerships tranfsfered to different departments. It was my pride that report. Everything worked so perfectly in sync, too bad it's life ended with me leaving.
+I've found that a comment at the top of the column can help with that. Something telling them "this is a formula!" can work.
+
+But you can't fix stupid, right?
+Hmm.  I'm a big proponent of INDEX/MATCH over H and VLOOKUP. 
+
+I'm also always surprised how many people don't understand pivot tables, even very basic ones. 
+How do you solve the thousands of styles replicating like there is no tomorrow. 
+
+I run a macro every now and then that deletes all non default styles whenever I stumble on a file with tons of style replication, but firstly, this assumes that none of the styles are being legitimately used, which is a pretty safe bet at my work, and secondly its more of a cure than a prevention. Is there a setting which would stop the replication occurring in the first place. 
+
+I once found a workbook with 33,000 styles in it. I know this because I made my macro tell me how many it had deleted, and I used an integer type variable to do the counting, and was amazed when I got an overflow error. 
+I kind of like using merge cells :/
+
+I find it useful if I'm repeating the same column headers across multiple years/categories, etc. Above each grouping will be a color-coded merged cell that designates the category.
+>Inconsistent column widths based on the data instead of using line breaks and wrap text.
+
+I'll counter with inconsistent row height because somebody used text wrapping when a slightly wider column would allow it to fit on one line.
+I just made a post about my headache tonight with merged cells. Ugh.
+> Personal favourite, magic numbers - what do they mean?
+> =47*32687-55.13/668.20+2^15
+
+This is probably #1 on my list. Any hard-coding really.
+I saw something like this in January. From someone that should NEVER have had such crap formatting. I spent 15 minutes cleaning it up because I wasn't about to try and fill in the info they needed from me in those merged cells given that it was about 20 columns and what ended up being 300 rows. Nope.
+This thread is teaching me I'm a horrible person, apparently, lol.
+Merged cells cause havoc with VBA.
+You can't sort/filter merged cells.
+Everything already mentioned plus when you hit ctrl space or shift space to select a column or row, merged cells mean you get all the columns and rows that are part of the merge
+If you have a 'summary'  or 'output'  tab they are useful for formatting. 
+Beyond that however they just mess stuff up. They can break copy/paste, they stop formulas from populating down a column, they are difficult to reference on a formula dragged across columns, etc. 
+...and the duplicate table isn't linked to the original table, so when someone else comes along and updates the first table they have no idea that the vlookup isn't taking the correct data anymore.  No one notices this, and now the spreadsheet is outputting incorrect data and no one knows why, so they add another worksheet to try to correct this
+My coworker does this and goes so far as to use different shades of each color. *shudder*
+I freaking hate tables, but maybe that is because I don't see how to use them properly.  Can you give me one example where a table is right right solution?
+/r/facepalm
+What is a split worksheet?
+I don't understand why anyone would want this. I've seen people use it...and I still don't understand. WHY?
+> Saving a new spreadsheet as .xls just because they're stuck in the 90s.
+
+Makes me think of Portlandia.
+Why not just one tab with a column for date? Then they could just show the info based on desired date range?
+Yes. This. Like, add a date column to your table and just populate it! Then, if you formatted those cells based on DATE, Excel can help you with smart filter/sort!
+
+*sigh*
+Oh that's a good one, see that far too often.  People that save files as DDMMYYYY or "March 2016" make it far too much work to sort in the correct order.  Just as bad are the people that can't stick with a consistent format, ie YYYYMMDD followed by YYYY_MM_DD followed by YYMMDD
+I do File_Title_YYYYMMDD_NN.xlsx, where NN is the file number for that day so if its the first copy it'll be 01 if i made a few changes that day to 01 it'll become 02 and so on. Still trying to come up with a good way to note changes between 01 and 02. I guess I'll have to use a change log  worksheet in the workbook.
+I do YYYY.MM.DD, generally omitting the day as I don't use it regularly
+Ugh one of the guys I work with will mostly follow that, except that when he does a file where the day or month is only one digit, he won't include the zero. Ever. It drives me up the wall that he's not consistent with us! 
+This is what I do. I also do this when I am building something complicated. I'll make a version with each major change. Then if I screw something up (i.e. scramble the data or remove too much data), I just go back to the file that didn't have that problem.
+No, but really, that's a very small part of my job and a huge part of my job security.
+
+I'll get about an hour a week of random Excel questions, and it builds a limitless supply of political clout and guru confidence.
+I have a couple like that... They are practically magic with the amount of stuff they do with almost no interaction from the user. I shudder to think what would happen to it in the hands of an inexperienced user. 
+All day with me. I'm not even an excel guru, I have a few basic macros, and am too lazy to do things the "hard" way, so I've taught myself some shortcuts.  My 40 hr workweek could be cut down to 5.  No one else understands any of the formulas and doesn't care to.  Mind boggling.
+
+
+I'm moving departments in a month. I expect a non-stop barrage of questions for several months from my current department.
+Someone in this sub just taught INDEX/MATCH when I was asking about a V-LOOKUP, and I'm blown away. That's been so freaking helpful!
+Index/Match saved my life. In the past I need to use nested IFs just to look up between 3 tables!!!
+I made a pivot chart the other day.... Heads exploded at my work. No one knows how to do pivot tables here, showing then that you could quickly change a chart based off dragging stuff around was astonishing to them
+Pivot Tables certainly used to be one of those perceived 'black magic' parts of Excel, where you either got it or you didn't bother trying.
+
+It feels like to a more novice user, pivot tables are a bit more accessible these days, and I get far fewer people asking me for some help with them.
+
+I'm reckoning Data Model / Power Query are going to be the 'next pivot table' area. (Heck, still figuring some of this out myself)
+I love index/match but I tend to work with a lot of data that needs sorting and those formulas cause issues. 
+You can add it to the workbook as a before save macro. 
+You can replicate merged cells using center across selection. 
+what is the clever part here?
+Wow I was so confused why everyone was hating on merged cells but now reading your comment I realized that 100% of my merged cells are on a tab that is actually called "Output". I guess this call makes sense then.
+Haha damn, so true. You got the full picture. :/
+I'm not opposed to a visual sort system but just tell me what the colors mean!  
+
+Red- to be deleted. 
+
+Green - this data has been verified. 
+
+Orange - number is an estimation. 
+
+Something. I don't care as long as you tell me what they are. 
+Again, it's generally just a good idea to use them whenever you have tabular data. Dynamic named ranges are the big draw:
+
+    =SUMIFS(TblSalesData[total_price],TblSalesData[customer],"John Doe",TblSalesData[payment_date],">=1/1/2016")
+
+is much easier to read than
+
+    =SUMIFS('Sales Data'!E:E,'Sales Data'!A:A,"John Doe",'Sales Data'!G:G,">=1/1/2016")
+
+especially when the columns aren't obvious just based on the content (maybe there's not only a payment date, but also an order date, for example).
+
+You can also use named ranges on their own, but on top of needing to add them individually (including a named range for the column header to reference when using INDEX/MATCH), you have to maintain them and add new ones when you add data (they sometimes extend on their own when you add rows, but in my experience that's unreliable). Conversely, the named ranges for the columns, header, and entire area of a table update automatically when you add data. All of this is also true for the formatting. On that note, I'm not crazy about Excel's standard table styles - feel free to create your own styles if you feel the same way.
+
+There are other minor benefits too - always-visible headers, column totals if needed, no need to drag down formulas when adding data, etc. - but the named ranges are the big one in my opinion.
+When you have different scrollable areas in the same sheet. 
+I've just started using version names like they do with software. So it'll be FileName_1.02.35.xlsm or something like that. I tag the ones I'm working on with DNU (Do Not Use) and a B at the end of the version (beta), eg. DNU-Filename_1.03.00b.xlsm. My end users know which version to avoid. 
+Ah, the ol 1312016
+I legit make backups of all my formula/macro-heavy excel sheets if I take a vacation and someone else will use them.
+I'm building our spreadsheets to that level currently. The rest of my department just looks at me funny and still asks where their data went (they hid a column). Should be fun when I eventually leave.
+That last bit is the part that always surprised me so much. My coworkers all would benefit so much from a better knowledge of Excel and would probably have about a quarter of the work they have now, but everyone just thinks it's all some kind of black magic and won't ever even consider learning something as simple as a vlookup. On the one hand, it makes me look amazing that I can do stuff like this, but it's not hard! I don't get it
+I need to learn this.
+I will make quick tables/charts for people with a slicer and/or timeline. They call me and say, "How did you do this? I can never get this to look like you did it!"
+
+I walked my boss's boss through making a pivot table a few months ago. Did I have time for that? Not really but it's the boss's boss. You make time, right?
+I just wish pivot tables worked better with text data.
+Data model / power query. What is this and where can I learn more?
+
+EDIT: wait, is "data model" just combined sources with data that can link multiple tables together into a single pivot table? Is "power models" the visualizations (Power BI) like Tableau?
+Agreed with PQ. I am still looking for cases to use it, but have yet to stumble upon anything. It seems like something  that is *super* powerful, but I don't know how to use it :(
+I am still waiting for Power Query to become a usable product.  Not worth using for me yet - more work that it is worth.
+Huh? Same information is pulled no?
+Wow TIL. Thanks. I was getting annoyed with merged cells but thought it was the only way.
+I love center across selection. Too bad all my co-workers can't figure it out and end up merging all the cells anyways.
+Forgive me for asking, but do you mean selecting something and using the center option, or is there an actual option somewhere called "center across selection"? My experience with Excel is extremely limited, but there are times when I find myself merging two cells and every time I think, "there has got to be a better way than this..."
+Life changing, thanks!
+It would be nice if the same worked vertically. I still end up merging cells vertically on occasion as a result.
+That's exactly what she uses it for, but she doesn't use the SAME green each time. She just picks the first green she sees.
+Thank you. Good info.
+I think that's grounds for justifiable homicide. 
+I do vX.Xa/b etc. That way my numbered versions still sort correctly and my alphas are only for me, beta when I'm getting feedback, and neither once it's deployed
+When you sort your columns using an index/match without pasting as values it can cause problems with the references. Might only apply if you try to sort the columns with formulas in them. I'd have to fiddle with it to see where it goes wrong. 
+There is an actual option. 
+
+Select cells, right click format cells, second tab and first drop down
+Dear god. 
+
+At least you can sort by color now and fix it easier. 
+Yea I know what your talking about, you can avoid it if you use tables. Or break your data with a blank and hidden column, but that causes other issues obviously. 
+
+I always keep raw data in the left and manipulations on the right. Summary tables put it all into place.
+Just tried it and it works exactly as I need it to.  Thanks!
+Great, thanks for the path!
+Wow, I used merged cells a lot, but this is WAY better!  Thank you!
+Do not be afraid young padawan

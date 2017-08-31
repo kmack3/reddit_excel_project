@@ -1,0 +1,22 @@
+How to count a value/character in a row but resets to "0" once new value/character is introduced in that row and restart counting old value/character?
+Not sure if this helps, but this will record your current streak in Row 1, where "Y" is a success and "N" is a failure.
+
+`=MAX(SUMPRODUCT(MAX((A1:AZ1="Y")*COLUMN(A1:AZ1)))-SUMPRODUCT(MAX((A1:AZ1="N")*COLUMN(A1:AZ1))),0)`
+Unfortunately it gives me an error.
+What's the error? Did you copy and paste directly or did you try to modify it? Works fine for me.
+
+https://www.dropbox.com/s/kcvrenpg0ky5z0u/Habit%20Tracker%20Sheet.ods?dl=0
+
+Check it!
+Help me out with what you're going for here -- what's a "win" and what's a "loss" in each row?
+"o" is for win and loss is "x" as they should appear with their respective color. Sorry for the delay
+
+For the Prayers row:  
+`=MAX(SUMPRODUCT(MAX((H3:ZH3="o")*COLUMN(A3:ZA3)))-SUMPRODUCT(MAX((H3:ZH3="x")*COLUMN(A3:ZA3))),0)`
+
+Drag down to the other rows.
+SOLUTION VERIFIED!
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

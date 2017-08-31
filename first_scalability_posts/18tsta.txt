@@ -1,0 +1,154 @@
+big
+18tsta
+Is my spreadsheet idea too big?
+
+So, I am trying to compile a new spreasheet. The basic jist is that I have 2 columns, one for Retail Issues and one for Contract Issues. In that, each issue has a corresponding template that needs to be used in order to document which steps have been taken in order to resolve it. 
+
+An example is Retail_Issue1(Customer smells funny)\Spray Perfume-Cologne. Retail_Issue2(Customer has candy)\Take Candy
+
+I have got the data validation set up so that the issues column is INDIRECT of whether the first section is set on Retail or Contract. I can't figure out how to get the template to change, according to which issue is selected. However, I am wondering how to get the templates to populate based on which issue is selected. I would like for the info to be in a format that can use CONCATENATE, so that people can just copy the info and paste it into a documenting program.
+
+Is this too big of an idea? I'm just trying to make things more efficient for people at my work. If they can input data in one place, and it would automatically fill out the most common parts of the templates, it would really help.
+
+If you have any ideas, I'd love to hear them!
+
+Edit: [**Here is a link to a Dropbox folder with a few files in it**](https://www.dropbox.com/sh/qx4om7ung9lzcuj/WtqdaRSEkp), including the actual document I'm working on in both Excel in Access (very basic). If you'd like to mess around with it, I would really appreciate the help!
+
+[**Here's a pic of what I'm talking about, because words are hard.**](http://i1001.photobucket.com/albums/af134/swolfe2/excel_zpsbbd13144.png)
+
+Thanks for taking the time out of your day to read. : )
+
+
+-------------
+Alright swolfe2!
+
+Here is what I did. It's just a start, mind you, but if this is the right idea you can grow it from here:
+
+The database is broken into cells on the "Templates" tab
+
+When you click "Run me!" it will run the code (below) and prompt you to select a template cell. It then generates a series of prompts **based on the line feed of the template cell (one prompt per line)** it then adds slashes between inputs and dumps it on the first page!
+
+Now we can do a TON of other stuff with this model, here are some ideas:
+
+* Form to select what template your working on instead of clicking cell
+* Adding dates and tags the the data dump so users can keep a history log 
+* Anything you can think of!
+
+Here is the code dump and a link to the file (I also emailed it to you!)
+
+Take care!
+
+[File here](https://www.dropbox.com/s/wrxhg337nz742xq/Book2.xlsm)
+
+    Option Explicit
+    Private actionString() As String
+    Private formattedAnswers As String
+    
+    
+    Sub run()
+    getActionItems
+    getActionInput
+    End Sub
+    
+    
+    Sub getActionItems()
+        Dim iBreak As Integer
+        Dim strTemp As String
+        Dim iRow As Integer
+        Dim templateCell As Range
+        Sheets("Templates").Activate
+        Set templateCell = Application.InputBox("Click on template cell", Type:=8)
+        strTemp = templateCell.Cells(1, 1)
+            iRow = 0
+            iBreak = InStr(strTemp, vbLf)
+            Do Until iBreak = 0
+                If Len(Trim(Left(strTemp, iBreak - 1))) > 0 Then
+                    
+                ReDim Preserve actionString(0 To iRow) As String
+                   actionString(iRow) = Left(strTemp, iBreak - 1)
+                   iRow = iRow + 1
+                End If
+                strTemp = Mid(strTemp, iBreak + 1)
+                iBreak = InStr(strTemp, vbLf)
+            Loop
+            
+            If iBreak = 0 Then
+                ReDim Preserve actionString(0 To iRow) As String
+                   actionString(iRow) = strTemp
+            End If
+    
+         
+    End Sub
+    
+    Sub getActionInput()
+        Dim userAnswers() As String
+        Dim i As Integer
+        
+        formattedAnswers = "" 'erase old input
+        ReDim userAnswers(UBound(actionString))
+       
+        For i = 0 To UBound(actionString)
+            userAnswers(i) = InputBox(actionString(i), "Input answers:")
+                If i = 0 Then 'Or i = UBound(actionString) Then
+                formattedAnswers = formattedAnswers & userAnswers(i)
+                Else
+                formattedAnswers = formattedAnswers & "/" & userAnswers(i)
+            End If
+        Next i
+        
+        With Sheets("Formatted Answers")
+        .Range("A1").End(xlUp).Offset(1, 0) = formattedAnswers
+        End With
+         Sheets("Formatted Answers").Activate
+    End Sub
+
+
+
+
+-------------
+I guess I don't understand why you wouldn't just make all your formulas based on a simple if() statement.  The statement would be looking to see if it's type 1 or type 2 and the result would be to push out the response for it's type.  You can do that in each cell or area that you need.
+-------------
+I think you're on the right track but you might need to use helper columns and CHOOSE functions.  Helper column takes the data from one of your validation boxes and converts it to a number based on a VLOOKUP table.  The rest of the dependant boxes can reference to the cells with the CHOOSE formula.
+  
+  
+  
+For example:
+  
+Validation cell is set to "Meatballs".  Since Meant balls is number 2 in the vlookup table, a choose formula like this CHOOSE(A1,"Something","Goes good in pasta","Something Else")
+  
+  
+Get where I'm going?
+-------------
+This has 'database project' written all over it.  If you decide to stick with Excel, then CG_Ops's CHOOSE() using a lookup cell is a good suggestion.
+
+I would alter it to use INDEX() and MATCH():
+To illustrate, you would create a helper cell
+
+    =MATCH(B3,Sheet2!$C$2:$C10,0)
+
+This helper cell will output a number from 1 to 9, indicating which row INDEX() will use to pull out the Template data.  This formula assumes you use a validation dropdown in B1 to set the issue type to either Retail or Contract
+
+    B10:    =INDEX(Sheet2!$D$2:$G$10,helpercell,IF(B1="Retail",1,IF(B1="Contract",4,NA())))
+
+
+Going further, if your issuenames are unique I would take your 4 x 10 range and convert it into a 3 x 20:
+
+    IssueName  IssueType   Template
+    RetIss1    Retail      RetTemp1
+    ConIss1    Contract    ConTemp1
+       ...        ...        ...
+    ConIssN    Contract    ConTempN
+
+This would allow you to switch to a single helper cell that references the IssueName column, dropping the validation dropdown in B1, and simplifying the formula in B10.
+
+Food for thought, at least.
+-------------
+I'm not sure I understand what you mean. Since there are so many different options, and there can only be 7 IF() statements, how could that work?
+-------------
+I think that I do. I am going to post the link to the files in the OP. If you get a few free minutes, I would really appreciate an example.
+
+Thank you for the awesome suggestion!
+-------------
+That's what I'm afraid of. I have zero experience with any type of database management program, and my Excel skills aren't quite where they need to be. I definitely thank you for your insight, and I'll try to apply your help to it! : )
+-------------
+http://www.mediafire.com/view/?hd5qd8pb032xj9p

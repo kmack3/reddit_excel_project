@@ -1,0 +1,47 @@
+Can you use index match for more than 2 items?
+Why yes, you can! The magic happens in the MATCH formula:
+
+    =INDEX(Table,MATCH(Value1&Value2,Array1&Array2),ColumnNumber)
+Cool, starting a project now and i'll give this a go
+
+Solution Verified
+
+Just gotta make sure you use this as an Array formula with CTRL+SHIFT+ENTER
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Was using 5 points to match, but it seems to absolutely kill excel. Depending on table size, currently sitting at 300 rows with columsn C-T and trying to match up a new list 225 rows.
+
+Will this generally  destroy excel and i'll need to just power through?
+Performing this many comparisons for every single row of data you have will certainly come at a performance cost. You can picture this as Excel needing to search each column of data for each of your criteria. Upon finding it, it needs to also do so for all the other columns of data. From there, it needs to find the one row that matches all five criteria. After that, it needs to do this for the next row of data until it has performed this operation for each row.
+
+What exactly are you trying to do that requires matching 5 criteria for 225 rows of data?
+try using a helper column with a concatenation of all the values to match.
+
+something like
+
+=ID&broker&currency&cashamount
+
+then perform an index match on that
+
+If the result column is a number, just use a sumifs formula.
+Matching up cash movements for trades. Matching up by ID, broker, currency, cash amount
+
+Trying to track differences day to day, so i'm looking at todays breaks and comparing it to yesterdays. (breaks being a trade that didn't trade as expected)
+Hm, from the sound of it, I think a VBA UDF would perform faster. By matching up, are you simply trying to list the information of all the breaks for that day? Not completely sure on how you're trying to display your data.
+What exactly is this VBA UDF?
+
+Yea, so for example, Goldman sachs trades apple for $110 a share, but the cash amount isn't equaling what it should be, We research why. 
+
+
+Sometimes these breaks carry over from the previous day as they take some time to be fixed, but if i found out why it broke i dont need to look at it again today
+
+
+So essentially i'm trying to find a way to take this huge table of breaks and figuring out which ones are the new ones
+The Microsoft Office Suite comes with a scripting language called Visual Basic for Applications (VBA) which allows you to extend the abilities of Excel to achieve what you need it to do. VBA is able to be utilized similar to a formula as you can define your own custom functions, hence User-Defined Function (UDF).
+
+What we could do that is more efficient than INDEX/MATCH in this case (Because you have 5 criteria to match up) is to search row by row for something that matches all 5 criteria at once. This means the maximum amount of times we would have to loop through all of our data is only once, versus a minimum of 5 times per formula.
+
+If you are willing, are you able to post screenshots, or even a document of sample data (Nothing confidential) so that a VBA solution can be created? Along with exactly how you want to output identified breaks.
+Yea, give me sometime and I'll get a couple of screenshots set up

@@ -1,0 +1,221 @@
+How do you use VBA, besides formatting?
+I use VBA to pick up a report from my an email that I received in the form of an attachment.
+
+It then iterates through the report, looking for rows that meet a specific criteria and copies them into another sheet.
+
+It generates all of them into a list, runs some calculations for me and generates some numbers.
+
+Those numbers are all added to another report, and emailed out to certain people. The file is also made into an XML ready for internal database upload by saving it down into a folder.
+
+It then opens up Internet Explorer, navigates to a page, and then enters all of those numbers into specific fields. It submits the page, copies the response, pastes that into another email and emails that out to me as confirmation or failure, archives everything it has done and then moves the email into another folder.
+
+At 3am. Every day. With no human intervention. All written in VBA. In Excel.
+can someone please recommend a beginner VBA guide that I could use to learn and eventually develop my skills?
+I use it to connect to different access and SQL databases and pull realtime data I need for various reports.
+
+
+I've also used it to make an interactive calendar where you click on a date and an area and it shows you the relevant data for it.
+
+
+VBA can do nearly anything 
+You can use it for just about anything.  Everything you do in Excel without VBA can be done with VBA.  A lot of things you can't do in Excel without VBA, that you wish you could, can be done with VBA.  It's most commonly used for automation.  Taking long manual tasks and turning them into a simple button.  Anything that is repetitive in Excel can be automated with VBA.
+write down every thing you do in excel that can be automatized, then write code for it.
+I like to use forms for creating an input GUI of sorts. Those are fun for me. I've used it for opening up spreadsheets and copying over applicable information into other sheets for accounting reasons and then closing other spreadsheets. I've written some prank code that changes desktop backgrounds or mouse pointers for my coworkers (but I made sure that it doesn't do it to me). I once made minesweeper with forms and lots of buttons, I wish I could find that again but it seems to have been lost over the years.
+I created a VBA script that takes Excel data and uses it to generate visual schematics of the data in PowerPoint. The Excel sheet includes a few dropdowns that allow the user a lot of control over the finished product (size, color scheme, color assignment, any fields they would like in a textbox, scaling options). I had originally just created it for personal use to save time when updating client schematics year over year, but it ended up being used company wide for a Fortune 500 firm, and I also was asked by top management of other departments to customize it for their needs.
+A lot of these files are quite old, so may not be the best coding, but some stuff I've dug out of my dropbox folder:
+
+[Unicode csv export](https://www.dropbox.com/s/sonypsm2u1vmm4e/Unicode%20CSV%20delimiter%20macro.xlsm?dl=0) (Excel usually fucks up unicode text when exporting it to CSV files, particularly annoying if dealing with international local language stuff)
+
+Report automation (import shitty data, merge, normalize, pivot, control) (can't share, work)
+
+Assigning named ranges to [vertical table structures](https://dansteer.files.wordpress.com/2013/09/table-2.jpg) (~~can't find sheet now~~ [found it - not a spreadsheet, but an old thread I made here with the code](https://www.reddit.com/r/excel/comments/2kznv5/vertical_tables_named_ranges_macro_feedback/))
+
+[Organizational diagram creator](https://www.dropbox.com/s/7eh8kzynjftgjhw/organizational%20chart%20macro.xlsm?dl=0)
+
+[split a string, join partials based on custom list, sort based on custom list, output list](https://www.dropbox.com/s/bjyah7wir0a8ytr/splitjoin%20sort%20ranks%20macro.xlsm?dl=0)
+
+Different online scraping stuff:
+
+[Google feeling lucky search results](https://www.dropbox.com/s/x8pb0icf3hb1mps/Google%20feeling%20lucky.xlsm?dl=0)
+
+[Looking up driving and straight line distances on distance-cities.com](https://www.dropbox.com/s/djs4iedmqu8grpn/Book11.xlsm?dl=0)
+
+[Looking up registered owners of aircrafts in the US](https://www.dropbox.com/s/cibzd2at0106r9r/aviation%20scraping%20.xlsm?dl=0)
+
+[Scraping source of energy production for different european countries](https://www.dropbox.com/s/33qxvzj69qssm2q/decode.xlsm?dl=0) (don't even remember wtf is going on in this sheet lol)
+
+
+
+I use it a lot for combining multiple files into a single workbook or multiple sheets into a single sheet, but my best use for it is using VBA code on a pivot table to force the pivot table with enterprise information to spit out reports for different divisions into different workbooks and then name the workbook after the division + report title. It uses the show detail functionality to divide up the raw data and then I have it open a template with graphs etc that populate, then I have the macro save the graphs as a PDF report. 
+I use it to open a file, import the data, reformat columns, erase rows with specific information missing, validate zip codes, create a folder structure for the date, save the output, move the original file, and print to a specific printer. 
+It largely automated a process where a co-worker was manually checking hundreds of zip codes a day. 
+I taught myself VBA last year (or relearned it, I guess, since I used it a bit in the early 2000s for college).  I had to design a machine around some sales data.  We sell powdered products, and give customers machines to dispense them.  Using a giant sales spreadsheet that listed customers, locations, and annual usage, I set out to determine what size bins would be required to hold the most commonly used products for most of our customers.  Basically, I was trying to find a solution that would accommodate 80% of our customers, cover 80% of the products and give them at least one days worth of material most of the time.  The spreadsheet was formatted for sales reasons, and not at all for what I was doing, so half the code was just formatting.  Now that it's done, I can take any monthly report, and generate new values.  This way, I can check to see if the thing I designed last year continues to meet most customer needs whenever I get a new set of data.  It was one of the more fun engineering exercises I've been able to do at my company, and I was glad the result was a tool I can continue to use.   I suppose for my next trick, I can use the output to directly drive my CAD models, but I'm not to that point with it yet. 
+I work in debt capital markets.
+
+I use macros to automate goal seek when I'm sizing debt repayments in financial models.  Otherwise I avoid them as much as possible- a good financial model has minimal macros.
+Database management for a few legacy Access databases I still have floating around.  Mostly generating dynamic SQL that feeds reports based on parameters entered by the user. Essentially, a self-serve station for them to create custom reports within the constraints of the form (they can only interact with certain tables/fields/etc).
+
+Used for updating dozens of dashboards in excel that use flat file data to feed a bunch of different pivots and presentations.
+
+Most importantly, I used VBA as a way to learn programming fundamentals.  This allowed me to branch into C#, C++ and recently Python and really improve my dept's capabilities (as well as my pay grade). 
+
+I also us VBScript to launch some SAS EG projects that output data I need for excel dashboards.  OOP is my jam.
+
+Just keep tabs on this sub and you'll see some of the creative things people do with it :)
+
+As /u/LaughingRage stated, the possibilities are nearly endless.
+
+[Here's one](https://www.reddit.com/r/excel/comments/44xofi/counting_names_in_columns_to_produce_an/) I just worked on last night that was pretty cool, except OP ended up using Google Sheets in the end because of their UNIQUE function (which I'm admittedly jealous that Excel doesn't have).
+Write your own excel formulas. For example , I use my own interpolate function a lot. 
+
+
+Vba+excel is also a godsend for any repetitive task.
+I have to say I am a vba noob, but I recently had a big risk management project and needed to make vba to customize points on a scatter chart.  It was pretty difficult but there is no way in excel to do what I needed
+We use VBA to automate everything from moving data to e-mailing files to creating/renaming folders. If it can be realistically automated with VBA, we do it.
+I use VBA in outlook to filter my incoming emails. I parse the email body of multiple reports to see if there is a problem or not. VBA in Excel is invaluable. I couldn't imagine working without it. When I get freetime, I am also working on a VBA game.
+I have an odd use that I don't see many using it for. If I need to write a bunch of oddly specific if statements off data in an excel book I will use VBA to generate the series of ifs based on the data in the book. Saves me massive amounts of time working in SAS and dealing with format catalogs.
+I've used it for formating, as you describe, for sure.
+
+I've used it to auto-archive files.
+
+I've used it in conjunction with WinSCP to auto-send files to another computer.
+
+I've used it as a sort of advanced filter to remove unqualified rows of data.
+
+In short, for all things automation VBA is king.
+importing /exporting and processing data, - can process text files over a million lines long on a line by line basis and only keep the critical cases i need from it. 
+We got a system that generates a weekly report in excel. I created a macro to compare it with previous year result, create a summary comparison, split it by sections save it in PDF format and email each section to a different person. When I started a group of 8 people waste a few hours doing that reports manually one person per section. With my macro the whole thing takes less than a minute to a single person.
+
+
+
+__________________
+Disclaimer
+
+We still being an 8 people team (no one has been fired because of my macro) we are just simply more productive now. 
+I frequently create custom functions to simplify what might otherwise be either complicated or impossible with regular formulas. I also have some lookup functions with the reference tables stored in the add-in with the function (like to look up codes specific to my work using a name I'll actually remember).
+These days I'm using it to help translate AutoCAD drawings, from English into Spanish. One of the first steps is to extract all the text from each drawing. The software I use for that dumps it into an Excel file, which isn't absolutely necessary, but it makes other steps more convenient. This text includes a lot of stuff that should not be translated, often half or 3/4 of the text. Much of that is equipment tag numbers, such as "XRV-1901". It's obvious to my eye which lines must be translated and which should not, but that decision takes time and I have about 100 more drawings to translate for this project, with the possibility of another set of 100. So almost anything that can be automated is worth doing. I have a set of VBA routines that examine each bit of text and decide whether it's a code or other "untranslatable" item, or not. The untranslatable items are converted to red text. Then the Excel file is imported into a "translation memory" program (NOT the same as Google Translate). That program ignores the red text and lets me focus on the rest. There are more steps and more possible problems, but that bit of VBA saves me time and improves accuracy.
+I really want to be able to do this but it's so foreign I don't know what to do. Need to make it a mission to hit up the basics!
+Can I....can I see the script?
+Very cool!
+
+I've done similar things in the past.  The only comment I have is related to iterating through the source data.  This seems like something that a SQL statement could do in one shot.  But, if the rowcount on the source data is relatively small, the time savings would be barely noticeable.
+
+Anyhow, glad you were able to sell your code! 
+Wow. Wish you still had the script. This is incredible. 
+Ha this sounds like what I do. 
+
+Have you ever worked with adobe's shitty API?
+That's pretty solid stuff... To read your mail did you use Outlook, EWS, CDO, or something else?
+[Try Excel-Easy](http://www.excel-easy.com/vba.html)
+Look at the course on Lynda.com.  Although it's a subscription-based site, some schools and libraries offer access to it for free.  Also, you can try it out for free for 30 days (I think). 
+
+I've also taught one and two day classes in Excel VBA.  We cover a lot in that time, but I've been able to get people with little programming experience to the point where they can create various tools (data importer from a website, email automator, and a very simple game - usually poker) by the end.  See if you can find one of these classes in your neck of the woods (should cost like $200-$300).
+
+Good luck!
+
+Edit: Here's a direct link (www.lynda.com/Excel-tutorials/Up-Running-VBA-Excel/62906-2.html) to the Lynda.com course.
+See the sidebar 
+There is a book on Amazon called Practical Standards For Visual Basic I can't recommend enough. http://www.amazon.com/gp/aw/d/0735607338/ref=mp_s_a_1_1?qid=1455158272&sr=1-1&pi=SY200_QL40&keywords=practical+standards+for+visual+basic
+This.
+
+Also, if you're like me, you've come to rely on [connectionstrings](http://www.connectionstrings.com/) to get you in the door to your data sources.
+I've been doing a lot of this with linked tables. Does VBA work better? What are some of the pros and cons?
+write down every thing you do in excel ~~that can be automatized~~, then write code for it.
+
+FTFY
+Anyway to use it to get power pivot 2010 to refresh table data and refresh pivot data on a specific schedule?? 
+Although Excel doesn't have a specific function like Google's UNIQUE function, there are a couple of workarounds. An example of one is touse an array function containing an INDEX combined with either a MATCH or SMALL function to find the next occurrence in a list while avoiding anything that previously appeared above.  In VBA, a quick, simple method would be to use Range.AdvancedFilter to create another list, either in place or somewhere else, that only contains Unique values.  If this is a something that is part of a continuous task or requires a bunch of different information pulled from the Unique list, then a better option would be to store the Range/List inside a Dictionary object.  This would allow you to hold a unique list, store the amount of occurrences for each value in the list, and even put store other information that might be useful like the row number the value first appeared in.  
+  
+I agree though (hopefully the MS Team on here is listening), a UNIQUE function would definitely make things simpler.
+Oh yeah, I have a function for retrieving sheet names that I use all the time. 
+Doing this, I assume it requires the workbook to be xlsm right? Do you find your custom functions perform well or does doing the clunky work around a in excel process faster?
+I automated some AutoCAD stuff a few years ago, I used AutoLISP. Had no idea that VBA could have been used? Is there some sort of library for accessing a .dwg files?
+Company Property now =/
+
+But I have re-built it from scratch and sold it to some other people...
+SQL is better you say? Pray tell.
+I do still have it, but it takes ages to write so I only write it now when I get paid for it as it's pretty custom and quite long. 
+Nope, what can it do. 
+Outlook 
+The Cracked podcast has a sponsor code for a free trial, I think it's just "Cracked". 
+Pros of VBA is that you can often manage memory better by doing things in smaller chunks to avoid crashing the application, whereas with large datasets using queries, pivots and formulas it chokes quickly.
+
+Cons: often there are not many, if any, on staff at any company that know VBA enough to use, change or maintain your code when you are gone.
+My main reason for using VBA instead of data connections is that my SQL code is pretty long and wouldn't fit in the data connection field, plus it's easier to make cell references in the code as well. 
+If you put the functions in an add-on, then the workbook doesn't have to be .xlsm. It also makes them easier to share.
+
+It depends on what you're doing, since frequently there's no good way to do something without VBA. Some of my custom functions are actually just calls to WorksheetFunction and so the custom function is just for convenience i.e. lkpCode("thingIRemember") rather than typing out a full index/match every time...even though it's doing that behind the scenes.
+Sorry, I wasn't as clear as I should have been. 
+
+Yes, there is [VBA in AutoCAD](http://www.cadalyst.com/cad/autocad/vba-lives-autocad-2016-25369). But that's not what I use. Here's the process: 
+
+1. I open the drawing in AutoCAD and do some cleanup. For example, I do a PURGE, because I don't want to translate text entities inside a block that is not being used. I check for about ten things that can screw the process.
+
+2. Next, I run this [AutoCAD add-in](http://www.dwgtexttranslator.com/dwgtexttranslator.htm). It is probably written in AutoLisp, but I don't see the code. It sends a copy of all the text in all the TEXT and MTEXT entities to an Excel file, along with some tracking information for each entity.
+
+3. In principle, I will take the content of the Excel file and turn it into Spanish. But most of the content should not be changed at all. Along with the tracking information, the drawing usually have alphanumeric code numbers (mentioned in my earlier post), So I use a macro to "hide" those "nontranslatables", by turning them red. That's when I run the VBA macro, in Excel (not in AutoCAD).
+
+4. Next, I import the revised Excel file into a "translation memory" (TM) program. Here's [how they work](http://www.star-ts.com/about/translation-faq/how-does-translation-memory-work/). For these drawings, I tell the program to ignore the text in red, so that cuts down the amount of text that I actually see. Then, the program helps me translate the text in each cell. As I add complete sentences, paragraphs, or individual words and phrases, its output gets better and better over time. And unlike Google, the translator is in control. 
+
+5. Then I open the now-translated Excel file, and do a few other 'sanity checks'.  
+
+6. Then I open AutoCAD and run the add-in. It asks me for the name of the Excel file, and then reads the information inside. That tells the add-in which AutoCAD files to open, and then all the text in each drawing is replaced with the text in the appropriate cells in the Excel file. Most of it goes back the same way it came out. But the result is a drawing, in Spanish in my case.
+
+P.S. I did a lot of this work in 2000-2002. It was similar, except that the key program was a standalone program and not an AutoCAD add-in. It used libraries developed by [this organization](https://www.opendesign.com/), to open .DWG files and let their content be stored (in an Access style database, I believe). 
+
+
+Yous should have added a bit of script that makes sure you have hot coffe at your desk every morning
+If all you're doing is to pick out rows depending on a set of criteria, then you can use the data source as a table, create the SQL statement as a string (e.g. "SELECT * FROM tbl WHERE columnA > 10"), set up an ADODB connection to that file containing the source data, and then execute it.  If you have thousands of rows to iterate through, it could take some time compared to the single execution of the SQL statement.  I have many examples of this which I can show here if interested.
+I'm just starting to mess with it. I was able to read into the PDF files, but the objects are difficult to obtain.
+
+After an hour of tinkering I got it to search for values from my spreadsheet within a PDF the script opened.
+Don't drink tea or coffee, but I could get them to get me a sandwich.... 
+Hey, I'd love if you have an example of this. 
+
+I'm looking into joining a couple of different tables, so making them into "tables" setting up connections to them, using some SQL join command (I havent had any experience with SQL so far, why I haven't ventured into doing this yet) to merge them based on the values in two different columns, and then outputting the final table to a new sheet. 
+
+I'm not sure if it's possible, but if you've played around with this more, maybe you can tell me if it's at least a good idea? 
+
+Currently the iteration between the tables is slowing things down a bit and I could imagine a query would be faster. 
+Brilliant
+Did you crack the code??  I've been working on the sandwich script for months.  
+You can try something like this (be sure to turn on ActiveX Data Objects + Recordset Libraries under Tools>References):
+
+    Sub ExcelSQL()
+
+    Dim cn As ADODB.Connection
+    Dim rs As ADODB.Recordset
+    Dim myFile As String
+    Dim myConn As String
+    Dim mySql As String
+    Dim myTbl As String
+    
+    myFile = ActiveWorkbook.FullName 
+    'If the tables are contained in this workbook; otherwise need the full path and name of workbook
+
+    myConn = "Provider=Microsoft.ACE.OLEDB.12.0;" & _
+             "Data Source=" & myFile & ";" & _
+             "Extended Properties=""Excel 12.0 Macro;HDR=Yes"";"
+
+    Set cn = New ADODB.Connection
+    Set rs = New ADODB.Recordset
+
+    cn.Open myConn
+
+    myTbl = "[Sheet1$A1:Z10000] " 'Range of source data; first row must contain the column headers
+    
+    mySql = "SELECT col1, col2, col3 " & _
+            "FROM " & myTbl & _
+            "WHERE col1 IN ('A','B') " & _
+            "ORDER BY 1, 2, 3"
+
+    rs.Open mySql, cn
+    Range("A1").CopyFromRecordset rs 'Will output the results into range A1 of active sheet
+    
+    rs.Close
+    Set rs = Nothing
+    cn.Close
+    Set cn = Nothing
+
+    End Sub
+Cool thanks! Saved! I'll give it a go

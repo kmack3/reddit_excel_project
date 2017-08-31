@@ -1,0 +1,21 @@
+6iof9z
+Trying to calculate the percentage of a total.
+Hi,  
+  
+I'm designing a simple spreadsheet for our house renovation, wherein I have all of our expenses laid out, with a total at the end of all my entries. I want to calculate the VAT of that total (20% in the UK) and none of the obvious formulae are working as expected, either returning bigger numbers or negatives. Is anyone able to pose any suggestions for making this silly little thing work correctly?
+
+
+-------------
+Sorry if I understood incorrectly, but let's say that the total is in cell A1. In another cell you write:
+
+    =A1*0,2
+
+Or if you want the total including VAT
+
+    =A1*1,2
+-------------
+If your total includes the VAT, and it's in cell A1, then to get the amount excluding VAT you'd use `=A1/1.2`, to get the VAT amount, you'd use `=A1-(A1/1.2)`  
+  
+If your total doesn't include VAT, to get the total inc VAT you'd use `=A1*1.2`, and to get the VAT amount you'd use `=A1*.2`
+-------------
+That's exactly what I was looking for! I eventually figured it out by messing around and (eventually) using simple math, but this clears things up also - thanks so much!

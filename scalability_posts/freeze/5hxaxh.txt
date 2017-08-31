@@ -1,0 +1,17 @@
+freeze
+5hxaxh
+Isolate group of Controls, Textboxes etc from Freeze Panes
+
+I have a worksheet where the first four columns need to be shown at all times, so I've used freeze panes accordingly. However, at the top of the sheet are a group of controls and textboxes that give the user control over filters and some other settings. They all need to be visible but as they are spread across the top of the worksheet (taking up about 12 columns and 10 Rows), they are cut off by freeze panes as the user scrolls across the sheet.
+
+Is there any way to isolate a one or more groups or controls and textboxes from freeze panes? The various controls are all set to not move or size with cells (so I can hide/show columns as desired), but that doesn't stop them from being hidden behind the freeze panes limit.
+
+
+-------------
+It sounds to me like your issue is that your controls need to stay on the screen, but they're too wide to fit in the portion of the screen that's frozen and freezing all the cells with controls would reduce the moving part too much.
+
+There's no way to do this as far as I know.  You could rearrange your controls to fit into the top-left frozen part of the workbook I guess?
+-------------
+That's pretty much right - I think this problem is as much one of design as it is of functionality. I've tried re-arranging the controls a few times but ultimately it limits the worksheet.
+
+I'll keep plugging away at this one, thanks for the response anyways!

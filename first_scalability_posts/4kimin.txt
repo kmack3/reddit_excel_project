@@ -1,0 +1,114 @@
+big
+4kimin
+Developing macro to analyse/sort big symmetric matrix
+
+Dear All, for my phd I'm trying to create a little macro that would order a fairly large symmetric matrix into a descending list with corresponding variable descriptions. 
+
+
+Some background:
+
+* My PhD is a social science enquiry into privacy engineering, looking at engineering decisions that were made as a result of privacy conflicts. 
+
+* I have used 160+ codes to analyse the interviews with stakeholders.
+
+* The database is a matrix that shows co-occurence of codes throughout all the interviews. Here are two screenshots of what the database looks like: [http://imgur.com/a/LxDdL](http://imgur.com/a/LxDdL)
+
+* I will need to do this operation several times during my phd.
+
+My Excel experience:
+
+* I have Excel 2011 for Mac
+
+* I have no real experience with macros in Excel, but can do some basic programming. I understand the concepts.
+
+My question:
+
+* I would like to make a macro that sorts the data in order of frequency (highest to lowest combination frequency), along with the codes in the (A) column and (1) row.
+
+* After doing some research, I'm thinking about making a macro that uses things like 'get max value', then records the value and the corresponding codes (in column A and row 1) in a separate sheet, then deletes this highest code, and continues until all fields have been sorted.
+
+* **Do you know whether such a macro has been developed, or could you help me find the right approach for this?**
+
+
+Any help is much appreciated!
+
+
+-------------
+I don't know if Mac excel version has power Query yet, but it's fairly easy operation in power query. What you would need to do is unpivot the column into rows and then sort by values. 
+-------------
+Just paste a sample dataset into a fresh workbook, (assume you've enabled the Developer tab) click 'Record Macro', run through the data analysis steps (data in order of frequency etc) and only the steps per column or whatever that are common to what you're trying to achieve, click 'Stop Recording' and you have your macro. You can then delete the data, save the workbook as .xlsm and paste in and run the macro over the new dataset any time you choose via Developer > Macros > [select macro] Run. There are sexier ways to do it, like add a big button and assign the macro to it, but if you're just after a repeatable thing on a bunch of data, that's baically it. A macro is just a bunch of repeatable commands in a workbook. I'd do formatting etc too, run it and copypaste to a new workbook. But that's just pure simple basic macro gruntwork. You can go into the VBA you've created and fiddle with it/learn how it works. That's how I started out. You'll build from there.
+-------------
+so you want a function to give you the largest (or nth largest) value in a given row / column?  
+
+or do you want the most common occurence from a given row / column ? 
+
+you can do both of these in a single cell formula using sumproduct. 
+
+I've used named ranges to simplify - currently this works for the largest value of the specified row. im just refining it to be able to get the second / third largest values if required. 
+
+    =sumproduct(large((index(Matrix,Row_check,0))* (countif(index(Matrix,Row_check,0),index(Matrix,Row_check,0))= max(countif(index(Matrix,Row_check,0),index(Matrix,Row_check,0)))),Frequency_N))
+
+See google doc here (vastly simpliifed matrix but will scale) 
+
+https://docs.google.com/spreadsheets/d/1y5hNSaQj7K9tB_UfsJ8t3exedLIAFNzAdTqUvD4wmxE/edit?usp=sharing
+-------------
+Out of interest, can you provide an example of an engineering decision that was made on account of a privacy conflict?
+-------------
+Thanks, I don't seem to have power query. I'll need to wait till I get back into the office for that unfortunately. But thanks, I'll mark this as solved once I've tried it out!
+-------------
+Thanks! I tried this, but I have difficulty making it compile the list for me. Do you know of a good tutorial on recording macros? 
+-------------
+Oh a high level, some of the decisions by secret government surveillance after Snowden's revelations. On a lower level, for example decisions about the technology or governance of databases with things like public transport smart cards.
+-------------
+assuming this is the final result you are looking for http://imgur.com/uMDy4Yq
+
+here is the power-query sample code, just make sure your table looks like this http://imgur.com/Zpz5coX just replace the Table1 to the your Table name and call your first Column "Attribute1"
+
+Line 5 should already give you the result you need but i noticed it contains duplicates, rest of the code is to just remove duplicates. everything until Line 5 you can just do it through power query GUI
+
+    let
+        Source = Excel.CurrentWorkbook(){[Name="Table1"]}[Content],
+        #"Unpivoted Columns" = Table.UnpivotOtherColumns(Source, {"Attribute1"}, "Attribute", "Value"),
+        #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "Attribute2"}}),
+        #"Sorted Rows" = Table.Sort(#"Renamed Columns1",{{"Value", Order.Descending}}),
+        #"Added Custom" = Table.AddColumn(#"Sorted Rows", "TableOfSamilarRows", each let 
+    currAttr1= [Attribute1],
+    currAttr2 = [Attribute2]
+    in 
+    Table.SelectRows(#"Sorted Rows", each 
+    if [Attribute1] = currAttr1
+    then 
+    if [Attribute2] = currAttr2
+    then true 
+    else false
+    else
+    if [Attribute1] = currAttr2
+    then
+        if [Attribute2] = currAttr1
+        then true
+        else false
+    else false  
+    )),
+        #"Added Custom1" = Table.AddColumn(#"Added Custom", "SelectFirstRow", each Table.First([TableOfSamilarRows])),
+        #"Removed Other Columns" = Table.SelectColumns(#"Added Custom1",{"SelectFirstRow"}),
+        #"Expanded SelectFirstRow" = Table.ExpandRecordColumn(#"Removed Other Columns", "SelectFirstRow", {"Attribute1", "Attribute2", "Value"}, {"Attribute1", "Attribute2", "Value"}),
+        #"Removed Duplicates" = Table.Distinct(#"Expanded SelectFirstRow")
+    in
+        #"Removed Duplicates"
+-------------
+Macros are simply recorded procedures. If datasets are not what they were written for, like if data is in different columns, or there are less or more, this simple approach won't work. 
+-------------
+Ah I see. Interesting topic. Best of luck. 
+-------------
+Wow, amazing thank you! I'll try this when I get to a computer with the new Excel versions!
+-------------
+Thanks again, I sent you a PM!
+-------------
+Solution Verified
+-------------
+Yeah I think I need a more complex procedure.. I'm looking everywhere for tutorials, but can't seem to find any. Too bad..
+-------------
+
+You have awarded one point to _bellicose100xp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

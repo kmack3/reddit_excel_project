@@ -1,0 +1,157 @@
+Is learning basic Access worth it for employability? (Field: Finance)
+Yes.  Learn Access and SQL.
+If you're asking this question you're likely young.  If you're young you need to consider not what is in place NOW- BUT what will be in place in the future.
+
+SaaS and true data driven solutions will be it - not a rats nest of shitty MS Access DB's from some near-defunct XYZ manufacturer who, by the time this matters and you're a few years into the job will then go under b/c of their shitty back office practices (see use of MS Access above).
+
+Learn SQL.  Learn Excel.  Learn HOW web applications utilize data and what SaaS/Cloud/lifehacked type solutions you could know that very few others could.
+
+Then think about what kind of company you WANT to work for.  Probably one that will a) be around in 5 years and b) isn't stuck in the stone age - even if this means they're willing to change BUT don't know how.
+
+Voila - you're now a very cheap <to them> but very well paid <to YOU> solution to bring them into the realm of emerging tech/cloud/web/SaaS.
+
+These are also much more fun companies to work for.
+
+Source: I'm an employer in the internetz industry.
+Yes, specifically SQL.
+
+Get good at SQL - there's a strong demand for it!
+[deleted]
+I'm continually blown away by how my small knowledge in sql has made me significantly better than anyone at my company in dealing with data. 
+
+I started learning it because of Access but it applies to basically every database. 
+Learning access is very useful.  I currently work at a med school / hospital.  The amount of data is way beyond what excel can handle.  I run everything through access queries and then link to those of just copy and paste into excel.
+[deleted]  
+ ^^^^^^^^^^^^^^^^0.4466 
+ > [What is this?](https://pastebin.com/64GuVi2F/12545)
+Try asking in /r/msaccess and /r/rsql !
+In my experience you wont use access very extensively in a larger company because usually a large organization will table information in a network database which you can query using oracle or microsoft sql server. I would say to know at least the basics of access but focus on learning sql.
+YES!  Do it.  I didn't really know much about access until recently, but it can really take you to the next level by removing a lot of complex calculations from Excel, which take much more time power to do the same. 
+
+I have access doing most of my data manipulation and spitting out a flat file that makes doing pivots far easier.  
+
+SQL helps a lot too since that is the predominant query language I've seen.  
+As someone that is decent with excel and got tasked with something in Access this week LEARN IT. Very few people like it or understand it where I work. Even the team that specializes in SQL/EDW hate access. I am going to expand my knowledge about it just for that reason
+yes!! its worth it. lots of finance departments and small-medium sized companies use it
+Data. processing, and bandwidth are so cheap these days that hopefully no company thinks Access is tool that should be used for anything.  You should jump directly from Excel spreadsheets to SQL Server (or PostgreSQL if you are cheap).  
+However, SQL is a very valuable skillset that translates to any business.  You can learn the esoteric stuff just by learning one DB and Googling for the equivalent in whatever system you find yourself.  
+Do you recommend me to get the Microsoft EXCEL Certification by microsoft? 
+
+https://www.microsoft.com/learning/en-gb/office-certification.aspx
+
+And does it really help in terms of salary/employability, etc? Thanks a lot =). 
+meh, I agree with you for the long term, but Access is relatively easy and quick to learn, and it's powerful for those small companies that don't have/need big data. There are tons of small businesses out there who have no need of anything bigger than Access. Yeah, Access probably won't get you far in a Fortune 500 company, but it's a helpful "gateway drug" to proper SQL and database solutions, as well as being useful in and of itself. I work for a big data company and I still occasionally fall back on Access when I want to design something to spit out a pretty Excel report automatically, or do an off-the-cuff analysis on some flat files I'm too lazy to import into Oracle.
+Should I get the Microsoft Excel Certification?  https://www.microsoft.com/learning/en-gb/office-certification.aspx
+
+And my doubt about SQL is, I am offered a course on MySQL, is it the same as SQL or should I get a specific SQL course. 
+What jobs specifically have a demand for it? I've been working with access and Oracle SQL for a few years in an environment with multiple large databases with thousands of users(government job). I create reports, QA certain work processes and help people with more efficient ways to gather data. What kind of jobs can I pursue? I don't think DBA is the right path so I don't know what to look for to advance my career 
+Sadly a ton of companies are still stuck with 2007 version of Excel that does not have PowerPivot. I know some companies that still use... 2003.
+I worked as a financial analyst and the VP of Finance didnt even know what powerpivot was..
+Can I start learning basic Access and then do SQL? 
+Why not set up a connection to run a pivot table off the dataset?  Excel caches the data so you don't need a "physical" table in your workbook, and you can fly in that workbook.  
+For SQL, I started with the following YouTube series about 2 months ago.
+
+https://www.youtube.com/watch?v=ZNObiptSMSI&list=PL08903FB7ACA1C2FB&index=1
+
+I've gotten busy with work, so I haven't gotten around to continuing the videos for the past month, but the series is quite helpful.
+We have this, but to do a lot of our reporting, we take the datasets from current reports, blend and enrich in access, normalize, then spit out a big flat file and connect to excel via pivot/data connection.  So far, we have an access file that's at the 2gb mark and are in the process of transitioning to Sybase.  It's a huge pain at the moment but it is nice to replace 30-40 daily/weekly reports with one that has everything. 
+I don't know if I'd recommend it but then again I never went ahead and got it myself so I cant speak from experience.  If you're fresh into the financial job market then I'm sure it can help.  It will act as actual proof to show the employer you know what you're doing and not just writing "proficient in XYZ application" all over your resume.  Once you have you're foot in the door though, you need to be able to actually prove yourself.  A lot of jobs that require Excel/SQL skills will have a test during the interview periods to show you know what you're doing.
+Honestly, I haven't heard of anyone in my field having this certification (accounting). But it obviously wouldn't hurt and would look good on a resume.
+I'm certified as both a specialist and expert in Excel. The most I can say is the job paid for them and they look nice and shiny on my e-mail signature but that's about it. I'm going to continue down the road of getting master certification though if possible and see what doors that can hopefully open as far as working towards a Microsoft Valued Professional (MVP).
+Don't know about the certification, but I have talked to many excel "experts" who really aren't experts.  Heck I thought I was an expert back in the day, boy was I not... now... I suspect compared to the majority of excel users I am probably in the top few % of people.  
+
+With that said, when I go into an interview I bring a sanitized portfolio of work, including vba code etc.  It isn't something I give to them, unless they want copies, but I will refer to it throughout the interview.  Your experience with real word model creation and working with data will probably be more important than a certification in a tool, thought there might be exceptions.  
+
+I was actually overjoyed that they wanted to test me during the interview, but disappointed that the task was very simple... I think they didn't know enough about excel themselves to know how simple the task was.  In the end we had a difference of opinion on how much someone with my skillset was worth so I went somewhere else.  It felt pretty good to get a call a few months later asking if I was still available, and the HR person told me off the record that she had told her bosses they should have ponied up more funds.  She didn't say they went with someone cheaper who didn't work out, but I suspect that is what happened.
+
+I only mention it because you don't want to short change yourself in terms of salary once you do have a good handle on the skills you need to add value.  All this said, the cert program may very well be a great way to learn excel better.  Another thing that might help is taking a stab at the problems people post here daily.  Just look up stuff on google and get better and better each day.  Maybe say to yourself, I'll help one person each day.  Or if someone already posted an answer, come up with a different way to do the same thing, or improve on it, or create something residual off of it.
+
+I would say expert excel/vba skills are something people don't realize they could use to augment almost anything.  One of the nice things about vba is, even the most strict IT policies likely will give you access to be able to do things in VBA.  That said, I would probably want to look at R as well if you are looking at finance.
+
+Personally I would say access isn't worth your time as much as REALLY getting to know excel.  But access isn't a waste per se... I do use it, but it is sort of a middle tool that isn't easily strong enough for the big stuff, but is enough of a pain, esp. when you have users... for the small stuff... 
+Fortune 500 companies use access. trust me
+Isn't access being discontinued next year? Or at least support/active dev is paused? Thought I read that about a year ago.
+SQL comes in a bunch of (very similar) flavors that all essentially let you manipulate tables of data. There's a great program called [GalaxQL](http://sourceforge.net/projects/galaxql/) that walks you through the basics of SQL if you'd like to get a taste.
+Take the course.  SQL is the coding language for database applications the same way that VBA is the coding language for Excel.  MySQL is just another database tool just like Access is.
+I have the full qualification (thats a 1/4 of it). It's worth only brownie points, but isn't recognised otherwise.
+Also note access uses a more simplified query processor. 
+Business Analysts are hot in demand right now, especially in areas such as data interrogation - specifically within the finance environment. 
+
+They need to be able to pull data from large datasets, analyse, interpret and provide data in legible formats. 
+
+I wish I could go into more detail, but confidentially agreements and all that. 
+was concerned that i didnt know what it was, but im just on excel 07
+Yes. In fact "true" SQL programmers often despise Access, since they do not consider it a real tool to do the heavy lifting job.
+
+Yet they fail to realize that Access has a gigantic advantage over those "big" solutions: it is quick and dirty. Also it is "cheap" (you invest time, but no other resources) and most people have it on their corporate machine without having to install anything / setup servers / have IT projects. In a corporate environement this is a big advantage.
+
+To use Access you do not need to understand SQL, you can "click through" things to build queries, since under the hood Access is building the SQL queries for you - in fact you can see them in a separate window. The more you learn it, the more complicated queries you might want and at some point you might start typing your custom ones instead of "clicking them out".
+
+Access is like a natural solution for those who need something that can deal with more data than Excel, but that do not want to use a "big" database solution. Although there are tons of companies who run their solutions on Access :D
+The guys who deal with gigantic databases (hundreds of gigabytes) laugh at Access and its 2GB database limit (or was it 4GB now?). But they completely fail to realize that often Access is a solution that simply does the job. A bigger brother of Excel that allows you to import your spreadsheets and do calculations on amounts of data that are too much for Excel. Also it allows you to use SQL.
+
+To sum up, the natural way for you might be Excel -> Access -> SQL. You can also learn Access and SQL at the same time. 
+
+Basics of SQL are quite easy, it is mostly "understanding the keywords to filter stuff pit" and "understanding different versions of VLOOKUPS" (all the JOINs).
+Yes. In fact you can be pretty decent at Access and impress a lot of people without any sql at all.
+
+Then when you are comfortable it will actually be a lot easier to learn sql.
+If I'm understanding you correctly, I do that for a bunch of workbooks using MSqry.  Maybe you are talking about something I don't know?  I'm interested in learning more.
+
+
+However, I stand by my statement that learning access is very worth it.  I see questions in this sub all the time that could be much better handled in Access.  There is a reason that both programs exist; they do different things well.
+Access is a natural bridge between big data and Excel.
+
+Using Excel to pull directly from a small database is appealing. However, when you're talking about an Oracle database with 300+ tables, you need something (Access) that allows complex joins across tables and custom calculations.
+
+So, 300+ Oracle tables becomes 10 queries in Access resulting in 5 local tables which can be combined into a single "Export" table which Excel uses to create very fancy reports and Pivot Tables.
+
+Schedule the Access pull over night and have VBA create and post the Excel reports.
+
+Ta Da.
+Your answer is awesome and I value it a lot. What do you mean by "R" for finance? 
+Friend of mine at one of the major banks was hired only to do access. It's definitely still used. 
+Well, that's basically my point - a fortune 500 company isn't going to use Access as the backbone of their ERP system or anything, but there are always uses for it. I worked at 2 Fortune 100 companies that both used Access for various things. One of them was my first job out of high school, working in their mail room, which was powered by Access, hah. The other used it for project management reporting.
+Note, VBA is also the coding language for Access, and other Office products. SQL is geared toward manipulating the database, as I understand it. (But I've never used it, so take that with a grain of salt.) You'd still use VBA to do things like open, close, and save. Some stuff, you could use either.
+If I could redeem brownie points for actual brownies, I'd totally take those as a salary supplement.
+
+&nbsp;  
+&nbsp;  
+
+^(I skipped lunch. I might be hungry.)
+Is CBAP worth it for BAs? Been thinking about it but a lot of people are telling me to get the PMI instead for career growth. 
+Yes, MSqry is one way of doing it.  We've set up a few of our own ODC files to connect to Access, which is the same thing as this in Excel.
+
+I'm not OP but I am pretty sure he is referring to [R, the statistical computing software](http://www.r-project.org/). You might be familiar with similar programs like SAS, SPSS, or perhaps Minitab since I think they are used often in education.
+
+I'm a bit surprised that he chose R to mention specifically for finance... I worked in M&A for a time, and never had to move beyond Excel and Access. Both programs were VITAL in almost every job I've ever had, from real estate to finance. 
+To follow up on /u/hamzeatlambz...He's almost assuredly referring to R the statistical language. I've got zero experience with R, but what I can tell you is that learning SAS has been the greatest boon to my career thus far. I use SAS to get data, I use VBA to make data pretty for the user (navigational macros and such for large data).
+
+I work with clinical data. I don't think finances is quite as hefty in size of data...but I wouldn't trust VBA with numbers from systems over SAS any day.
+
+yep..the thing is,  for 'average' sized data it works good and its already there. no teams of dbas and developers needed and your granny can use it!
+Then sometimes, you reference an Access Table in SQL that you've written in VBA to dynamically run queries and output them in an HTML table in Outlook. 
+
+I think all of the features are useful in their own way and learning to blend them is important (or at least useful)
+As a recent BA, I can attest to needing to know SQL as I dove right in learning it on the job.  I also build a rules engine in Excel and stored/enriched the data I got using SQL queries, in Access.  On top of that, communicating well with others allowed me to put together a BRD and verify the FRD with our tech leads.  
+
+There is a lot of demand for this type of role in finance specifically, due to a highly dynamic regulatory environment.
+Indeed you are correct.  Maybe it is specific to the area I am in.  I agree excel is Number 1, Access... I've found it being used less and less, especially as excel has expanded its capabilities in terms of rows and columns, and the interconnections being made easier.  I would almost add sharepoint to the list.  I will say I am on the investments side of things, so perhaps that influences the tools I am seeing in the wild.  When I was on the accounting reporting side of things it was more Oracle Business Intelligence packages, so SQL was probably the more helpful language to know, but 90% was dealing with interfaces (unless you wanted to make the full jump to IT).
+Commenting because I'm an expert in Excel.  Interested in the SAS angle.
+Thanks for the advice! I got hired on as a BA two weeks ago although I suspect I've been filling a lot of BA requirements at my previous position. 
+
+What's your FR meeting strategy with stakeholders? Do you have any tips? It seems like people only contribute 50% at the meeting and 50% after the FRD draft goes out. 
+I'm not entirely sure how people generally get into SAS. I just happened to pick it up at work. I have been unable to actually get a copy of SAS for my home computer to run locally on. It seems like all SAS now (with enterprise now, but even prior) is run on virtual machines. Maybe someone will comment proving me wrong. I'd be genuinely happy about that. It is an immensely powerful language, but access is hard to come by..which really lessens the value of knowing it, in my opinion.
+
+I had a few other side hobby languages I barely knew under my belt when I picked it up and I "learned" how to use it within a week or two. However, I worked with large data and SQL prior. Full time, not side hobby. VBA was obviously a big stepping stone too, it is invaluable in getting people to actually be able to understand what I want to show them.
+
+By "learned"; I figure something cool out in that language that blows my mind on a bi-weekly basis.
+It took you two weeks to learn SAS??  Wow. There's hope for me.  I know a little VBA and that's it.  You think I'll be able to learn it?
+/u/atcoyou is correct. "Learned" probably wasn't the most appropriate word, hence the quotes. I just don't know a word for "started to grasp it". Knowledge does escalate quick once you figure out the basics though, regardless of language, in my experience.
+
+Most of my first SAS programs were based on Proc SQL, which I was very comfortable with at the time. As I got more familiar with SAS, I've almost entirely stopped using SQL (there are still certain things I fall back on it for from time to time). The step from VBA to SAS would be difficult. They're entirely different concepts. SAS is observational. VBA just lets you do whatever you want (potentially mucking things up along the way, since it's only going to do exactly what you tell it). My SQL base is what made SAS "easy" to pick up I think. SAS and VBA are nothing alike. They both serve a completely different purpose.
+
+I suspect by learn /u/drunkferret means was able to do stuff.  I can tell you I would have said I learned VBA in 2 days when I went on a course for it in 1998, but I still figure out new and interesting ways to use it every so often.  I would say with anything there is a continuous spectrum of expertise for anything non-trivial.
+
+
+Thank you!

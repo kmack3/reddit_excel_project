@@ -1,0 +1,142 @@
+Is there a way to remove the password protection in a sheet (Excel 2016)?
+I use this macro when people send me protected sheets and expect me to do something with it.
+
+    Function findPassword()
+
+    'Breaks worksheet password protection.
+    Dim i As Integer, j As Integer, k As Integer
+    Dim l As Integer, m As Integer, n As Integer
+    Dim i1 As Integer, i2 As Integer, i3 As Integer
+    Dim i4 As Integer, i5 As Integer, i6 As Integer
+    On Error Resume Next
+    For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+    For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+    For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+    For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+        Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+    If ActiveSheet.ProtectContents = False Then
+        MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+            Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+            Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+         Exit Function
+    End If
+    Next: Next: Next: Next: Next: Next
+    Next: Next: Next: Next: Next: Next
+
+    End Function
+
+You can also technically unzip an xlsx file and just turn off password protection in the XML.  [Here's a walk-through for that.](http://blog.bitcollectors.com/adam/2011/10/how-to-unprotect-a-password-protected-xlsx-file/comment-page-2/)
+
+This is probably the fastest way.
+
+http://blog.bitcollectors.com/adam/2011/10/how-to-unprotect-a-password-protected-xlsx-file/comment-page-2/
+Other good suggestions already, but here's a workbook I put together with macros to remove various passwords.
+
+http://forum.chandoo.org/threads/remove-password.23208/
+[deleted]
+There's this 👍
+
+[SO answer I have used](https://gist.github.com/spences10/6f41f68a40f878ed8497824c0c04b3fd)
+Are you still looking? I have a macro somewhere I can dig up if you need it.
+~~Can try importing it to Google Docs. Use it as a google doc, then export it as excel from there.~~  Welp, this used to work. (Edited).
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+Do not know how secure the files you wish to unlock are, but I have used online password unlockers like xartifex to remove protection from docx and excel format files..
+If you save it to xls you loose content? If it is possible to save it as xls, then do it. Then run this macro and save it back to xlsx.
+
+    Sub quebraSenha()
+    
+        Dim clipboard As MSForms.DataObject
+        Set clipboard = New MSForms.DataObject
+    
+        Dim i, i1, i2, i3, i4, i5, i6 As Integer, j As Integer, k As Integer, l As Integer, m As Integer, n As Integer
+        On Error Resume Next
+        For i = 65 To 66
+        For j = 65 To 66
+        For k = 65 To 66
+        For l = 65 To 66
+        For m = 65 To 66
+        For i1 = 65 To 66
+        For i2 = 65 To 66
+        For i3 = 65 To 66
+        For i4 = 65 To 66
+        For i5 = 65 To 66
+        For i6 = 65 To 66
+        For n = 32 To 126
+        ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+        If ActiveSheet.ProtectContents = False Then
+            senha = Chr(i) & Chr(j) & Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+            If MsgBox("Planilha desprotegida com sucesso!" & vbCrLf & "Senha utilizada: " & senha & vbCrLf & vbCrLf & "Deseja copiar para a área de transferência?", vbYesNo) = vbYes Then
+                clipboard.SetText senha
+                clipboard.PutInClipboard
+            End If
+            Exit Sub
+        End If
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+        Next
+    End Sub
+
+Bingo. I use this all the time, quickest and super efficient method.
+Very basic knowledge of macros here... How would you use the above macro to unlock the workbook? Do you have to run it in personal.xlsb?
+I've used that macro on .XLS files, but it hangs up on .xlsx. but if you save the an .xlsx as .XLS and then run the password breaker it works fine.  
+Just used this technique on a workseet someone asked me to break into. Nice one, saved me the hassle of figuring it out myself.
+ 
+Anything similar for google sheets? Colleague shared us a sheet, but forgot to undo the 'cannot copy and cannot print and cannot export' on the sheet. 
+Op, do this to a copy. You can corrupt the file if you are just a little off. Also if there are about locked sheets you can do the same thing.
+Excellent, this worked!! Thank you very much!
+Solution verified
+Does this work on the latest version(s) of Excel?  I know it worked on the older one, however I heard the encryption on the newer versions was less susceptible to hash collisions like this.
+
+Just ran a quick test (Office 365+ here at work) and Excel hung.  No idea if it was taking a long time to check all the options, or if it was a genuine crash.
+Just tried this for science. It does not [work](http://imgur.com/a/6Q7HZ).
+
+
+Saving it in your personal xlsb gives you the quickest access to it from any file you are running on that pc.  However, you can just insert the module, and run it.
+
+Instructions for Excel 2016
+
+1. [Enable Developer options by going to File -> Options -> Customize Ribbon](http://i.imgur.com/BOXJuzU.png)
+2. [Click the Visual Basic icon on the Developer Tab of the Ribbon](http://i.imgur.com/Gbg53xt.png)
+3. [Insert a Module that we will paste the VBA into](http://i.imgur.com/tEBv4QY.png)
+4. [Paste the VBA into the module in its entirety, and run the module with the play button or by pressing F5](http://i.imgur.com/RcRPLpp.png)
+
+The file should be unlocked.
+
+Edit:  This worked in earlier versions of excel, just seems to hang excel in 2016.
+
+
+I wouldn't know, sorry.
+
+You have awarded one point to _mismanaged_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Ah, good point. You could convert it to XLS file, and then run it, and it might work.
+It doesn't work on versions later than 2010. There is a very quick way to remove worksheet protection by changing the XML of the locked sheet inside the xlsx file (which is just a ZIPped archive).
+Thanks for the update.  I made an edit.
+How would I apply the module to the workbook I want unlocked? 
+I thought that was for VBA protection 
+It's slightly different. For VBA protection you make a change to a non-text file. To just remove worksheet protection you can remove a tag from the relevant worksheet XML file inside the unzipped xlsx.

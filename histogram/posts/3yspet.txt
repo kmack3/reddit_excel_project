@@ -1,0 +1,11 @@
+Easiest way to compare data between two columns to find the differences?
+Conditional formatting - select the "highlight duplicate values" option in the drop-down in the home tab - is probably the easiest way to do this, or at least how I normally do it. You can then filter by color to find the ones that are missing. 
+I think you could use EXACT function.  there is another that does is not case sensitive forgot about it. 
+I usually make a 3rd column and copy down the formula "A1=B1" (it might be == instead of =). Anyway, this returns FALSE where column A doesn't match column B. Then I filter for all of the falses. 
+wow, such an easy workaround and here i was dealing with an annoying formula. thanks!
++1 Point
+No problem! It's super handy. If you're not aware, you can also add the "select visible cells" button to the quick access toolbar at the top (or press alt+;), which is handy if you need to paste the list of just unmatching/matching values you've filtered somewhere else. 
+
+You have awarded one point to _terpichor_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

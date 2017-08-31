@@ -1,0 +1,110 @@
+TIL Excel 2013 allows Emoji as tab names
+I guess I could try it myself, but are you able to refer to those tab names in formulas? `='[car emoji]'!A1`
+This is neat... how do I do this?
+I can confirm this also works in 2010, but because the tab size is smaller, the effect isn't as good as for 2013+
+Very interesting. Question though, how would you go about referencing that sheet in VBA?
+
+I suppose you could say something like 
+
+    Sheets(1).activate
+
+or something to that effect. But if you're like me and you like to have the exact sheet name in VBA then this doesnt work out. Recording myself selecting a sheet named 😃 for example gives me the following code:
+    
+    Sheets("??").Select
+
+and therefore it also gives me the out of range error.
+This is cool. 
+http://imgur.com/CKsFw5u
+Is this really a pro tip. I mean really. 
+
+&nbsp;
+
+Cool find though. 
+
+&nbsp;
+
+While we are talking about non-default characters I would like to put a formal complaint to the /r/excel comments: Why is " " that a thing. 
+
+#wait 
+
+Before you go complaining about my stupid post If you copy the contents of those parentheses into A1 and put a space into A3 of a document and in between you  put =A1=A3 You will see, That it isn't a space! **Its completely different?** 
+## Why must this be
+
+Sorry about that Its been annoying for so long
+
+Update: So this rabbit hole goes a lot deeper (and scarier).
+
+If you say put =UNICHAR(128) in A1 you will be greeted with a seemingly blank cell. If you repeat this for all the numbers between 128 and 160 you will see a row of blank. 
+
+
+
+&nbsp;
+
+So the "scary" part is if you go =A1 = B1 (=unichar(129)) **They will be different**. Even though they are both seemingly blank. This is the case for all 32 of them. 
+###Why?!?!??!
+Well... This is awkward...
+Hah, brilliant. [You can use emoji in formulas](http://imgur.com/QtOWCpv)
+1. Find emoji
+2. Copy emoji
+3. Paste emoji
+Well to find them you could use the char and spend ages fliping through all the posiblities
+You can name your sheets in the VBA object browser and reference the sheets via that name. If the worksheet tab name is changed it won't change the VBA name. 
+This should be assets, and sad face = liabiloties 
+They are different because they are different characters, see https://en.wikipedia.org/wiki/List_of_Unicode_characters
+
+Generally they are special characters that tell the word processor to do certain things.  It's just in excel, they are all rendered in the same way so that visually they look the same.
+
+Consider two cells formatted to show 0 decimal places.  Put 1.0 in one, and 0.9 in the other.  They will both seemingly show "1" but if you compare them using =(A1=B1) they will be different.  As they should be.
+
+Short answer - just because things visually look the same doesn't mean they are.
+This isn't Excel specific, as ethorad says, it's just that they're different chars that look the same. 
+
+This can cause all sorts of havoc when copy pasting, I've been part of a team of about 10 engineers that lost several hours while deploying a critical piece of software because a double quote or a space or something in config file was copy pasted through several applications and somehow was replaced by an identical looking but different char.
+-4. ???
+
+-5. Profit
+Or you could look here: https://en.wikipedia.org/wiki/Emoji
+Thank you :) Learn something new every day.
+That doesn't answer my question of why? Thats a what and possibly a how but not a why.
+Ouch. That dwarfs all problems I have had with it.
+>-4. ???
+
+>-5. Profit
+
+You mean 5. $
+Well for starter, off the top of my head, there's one that can't be carried over to a new line. [Example](http://imgur.com/a/8iiXk).  
+Then there's space characters that are not omitted as 'blank', for programming purposes and whatnot.
+
+IIRC there's a shitload of space characters.
+Why does unichar(128) not equal unichar(129)?  
+Or why does unichar(128) look the same as unichar(129) in excel?
+
+If the former, then it's as per my post - they are different characters.
+
+If the latter, then it's a design decision from excel.  They are special control characters that don't lend themselves to having a visible character.  If they did have an associated character it would cause problems when someone wanted to have the control character's functionality but without the visible character.  Excel (and the font design) wanted to show something with length 1 when those characters were used, and opted for a space.  Could have been anything, such as a box with a little "128" or "129" etc written in it, however they opted for a space.
+When I tried to list it normally it renumbered it to 1 and 2. Had to get lazy.
+Okay. Thanks for that.
+So is it for say a =substitute you could select one of the unichar to be picked up by something else?. But they are not even spaces as if you go = "dog"&Unicar(130)&"cat", the result will be dogcat.
+Ah, so they didn't opt for a space, they are instead effectively showing those unichar comments as "" - hence you get dogcat.  Note also that if you take LEN of that, you get 7 as it's counting the unichar character as 1.  (and if you paste-value, then you can see the character is still there by stepping through the text with the arrow keys)
+
+Makes sense I guess.  It is a character (hence length 1) but has a null representation in the font (hence dogcat)
+
+The upshot seems to be by using unichar(128) to unichar(160) you can pad the LEN() of text without increasing its displayed length.  Now I have to think of either a way to use / abuse that!
+
+Interesting, thanks
+
+
+
+Your welcome. I think it could be useful for substituting. So if you want to find the len of the first to words you could subtitute the first space with a unichar128... Sorry I am to tired to explain my twisted thought. If you remind me later I will share (unless you can figure it out based on what I have said)
+
+&nbsp;
+
+Thanks though for the info though.
+So replace first space with unichar(128) then look for the now first space?  May have to deduct 1 if you just want the number of characters in the first two words though.
+
+Don't think you need unichar stuff to do that though.  FIND takes an optional third argument for where to start looking so you can do this to find the space after the second word (and thus the length of the first two words):
+
+    =FIND(" ",A1,FIND(" ",A1)+1)
+
+
+But that doesn't work well if you want to do the third or fourth word (it gets very long)

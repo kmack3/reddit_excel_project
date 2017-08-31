@@ -1,0 +1,51 @@
+Workplace manually copies and edits monthly tracking, cant find and replace due to cells not continuously aligning with dates, ie 1st isnt always Monday
+I think this will do the trick for you...
+
+https://www.dropbox.com/s/mv3q180a497l0e8/Calendar_kieronboz.xlsx?dl=0
+
+It relies on a formula like this (in cell A4):
+
+    =IF(WEEKDAY(DATE($B$1,$A$1,1),2)=ROW()-3,DATE($B$1,$A$1,1),"")
+
+Basically, you specify the month and year in A1 and B1, then it looks to see if the day of the week of the first of that month (in the year you specified) is equal to ROW()-3 (for 1 Jan 2016, weekday would return a 5, is 5 = 1? No, so make it blank).  Once you get down to row 8, 5 = 8 - 3, so it fills in the first date, and then just increments one day at a time, until the end of the month, where it will hide dates from February, because this is for January.
+
+There's also a full year sheet if you'd prefer that (or don't want the beginning days of the next month hidden).
+
+Hope this helps!
+This appears to be perfect!
+
+I will save the file and formula, unfortunately id already finished doing this manually on 8 files by the time i checked reddit again, lol.
+
+Im a new starter and when i was told the process I thought god there has to be a better way, i knew you guys would help, thanks man! :-)
+
+Solution Verified < am i doing that right? :-)
+No problem! Please consider replying with "solution verified" to one of my posts to throw me some clippypoints and change the flair to solved.
+
+PS - sorry it took so long, I took my lunch break in the middle of working through it.
+Hello!
+
+I noticed that you tried to award a ClippyPoint by editing your post!
+
+Please **separately reply** to the user with 'Solution Verified' as edits are not detected by Clippy!
+
+This will give the user a ClippyPoint (see side-bar) and change the flair to solved, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+solution verified.
+
+No dude you were timely, we had a christmas buffet so i disappeared to that myself haha! thanks again.
+Isn't it strange that AutoMod detects an edit with Solution Verified yet Clippy can't detect it...
+Ah, nice.  Hope it was good.  Merry Christmas!
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Hey mate, sorry to bring this back! Which part of the formula refers to the data input cells, ie if I want to move year and month down to like a config section, how do I change the formula to reflect the new location of 1 and 2016?
+
+Thanks
+
+Edit; think I see it!
+No problem! Easiest thing to do would be to grab the cell and drag it somewhere else, that way all formulas will still look for it.  It's hard to describe that process if you don't know it well, but this does a good job explaining it. You want to move it, not copy it.
+
+https://exceljet.net/lessons/how-to-use-drag-and-drop-in-excel
+Ah of course I didn't think about moving the cell! Cheers mate.

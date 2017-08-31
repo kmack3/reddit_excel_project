@@ -1,0 +1,31 @@
+big
+2w5xkf
+How do I break a big CSV file (more than 1.5 million line items) into smaller files so that I can open them in excel ?
+
+
+
+
+-------------
+With that amount of data I would suggest [importing](http://databasesuperstar.com/ms-access-tutorial-how-to-import-csv-file/) into MSACCESS (or other database) to query chunks and [export the result](http://support.spatialkey.com/export-data-from-database-to-csv-file/) into a text file for [import into Excel](https://support.office.microsoft.com/en-au/article/Import-or-export-text-txt-or-csv-files-e8ab9ff3-be8d-43f1-9d52-b5e8a008ba5c?CorrelationId=f17aadc1-aa0b-49d2-9a56-127ef2286822&ui=en-US&rs=en-AU&ad=AU),
+
+You may even be able to do your analysis of the data in MSACCESS depending on your skill level.
+-------------
+If it's just a one time thing you need to do, [Notepad ++](http://notepad-plus-plus.org/) does a pretty decent job of handling large text files. You could use it to paste chunks of your file into smaller files. 
+
+
+-------------
+Instead on opening the file in Excel, import the data into a PowerPivot data model. You can then work with and manipulate the data in-memory instead of loading it to a worksheet. 
+-------------
+There is a macro for this kind of thing, though I'm not sure I can insert it here, because the word count is over 25k symbols. I will try today later at home, where I can upload a file to something like paste.bin (can't at work).
+
+You can also try a macro [here](http://www.cpearson.com/excel/importbigfiles.aspx), though I personally didn't try it out.
+-------------
+python.
+-------------
++1 point
+-------------
+Says the file is too big for notepad++.
+-------------
+Thanks but even Powerpivot Runs out of memory. I guess I will have to split-download the file again from the DB. :(
+-------------
+You have awarded one point to excelevator

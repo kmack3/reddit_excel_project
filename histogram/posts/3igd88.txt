@@ -1,0 +1,40 @@
+Trending and comparative / statistical analysis on Excel?
+One of my favorite links on displaying results:
+http://i.imgur.com/ZY8dKpA.gif 
+Statistical analysis is a vey wide field.. Mind being a bit more spesific? :)
+Excel has an [Analysis ToolPak](https://www.add-ins.com/Analysis_ToolPak.htm) that has all kinds of tools for statistical analysis, including regression tools and confidence interval tools.
+Pivots make workbooks huge, I avoid them. How did you get a job in fraud prevention without solid excel skills? I should fraud more
+It's a nice way to present small amounts of relatively simple information, but it doesn't scale well to large amounts of data (which should be graphed). Also, it doesn't lend itself to presentation *for* analysis, only for presentation.
+I like Calibri. Prefer it in most cases 
+
+This is ok for simple tabular summary but I'd say this is after you've crunched your data and want to present the top line to stakeholders. 
+
+If OP is looking at regression analysis, predictions and correlation then the Toolpak and simple pivots will be a start but more complex comparisons and pattern/cohort grouping is going to be with PowerPivot and PowerQuery. 
+
+At that point it's basically SQL plus DAX so that's a whole different skillset but arguably easier to round-trip between the various modes of Excel than have to learn R + Shiny or R to Tableau from scratch. 
+I work on the fraud department.. So i have to analyze trends and.. stuff like that.. Sorry i dont kniow how to explain it. Im fairly new to this job. :/
+Based on what I've seen, the mandate for financial institutions to internally monitor and prevent fraud is expanding faster than the available pool of skilled talent. Lots of entry-level people are learning on the job. Also, you might be surprised at how little analytical ability there is in old-guard, established industries. Even their marketing departments, which are often the most reliable source of analytical expertise in big corporations, haven't had a need for advanced analytical skills for some time.
+Its actually just an entry-level job. They didnt even explain exactly what im gonna do when i was interviewed. The position was just "business process assistant" 
+
+But our boss expect a lot from us newbies.. As if we were formally trained about all these! There literally was no training.. I was just immersed and ask stuff. And learned on my own.
+
+Anyway, ur right, pivots are both the best and the worst. This morning i was comparing % increase PER 2 days of the whole month. Speaking of that, ill ask about it and make a new thread in here.
+it doesn't replace a graph, but a normal dashboard will consist of a fun mix between tables and graphs.  You can fit exceptionally complex metrics in this format, but the calculations and other parts of the analysis would be done elsewhere.  (For example, a YoY % change in X would have 'this year, last year, and then the delta. How X is calculated would be done elsewhere)
+If you want free software, learn R. If you want easy to use software, use STATA. If you want the biggest and most powerful, use SAS. 
+if you're doing fraud detection, you want classification models. these include logit regression and (parametric) and things like k-nearest neighbors (non parametric). excel is probably not the best tool for this, but it's also not impossible.
+
+if you just want to extrapolate from a time series, try this (blog post)[http://analyticsmadeskeezy.com/2013/04/25/prediction-intervals/]. the framing device is kind of annoying but it's a good introduction to time series simulation in excel. this is part of a broader class of models called either exponential smoothing or state space models, so if you google those terms you'll come up with lots of info on implementing them in excel
+[deleted]
+Weka is good and free as well. 
+I was just gonna ask a tool esp. for stats.. Havent looked into R yet but i will check it out.. Cause we changed our process and turns out we need to update the stats DAILY. So the "30-day" basis is moving every fucking day. 
+"Statistical analysis" they said. On my head i was like "am i fucking statistician i dont know anything bout this shit".
+
+
+[deleted]
+YES. i know only basic stats i learned in college. lol. 
+
+Yeah i kinda hate my boss honestly.. like theyre expecting a lot.. I mean its just my first month.. but my team leader kinda understand me... and the whole situation. Like she said "this is a job of a statistician! and not urs!" ANd they attempted it previously with past employees and was not successful..
+
+Maybe theyre just testing my limit.
+
+Im just thinking maybe i can just do basic stats? maybe theyre not expecting that much.. i just want to show something.

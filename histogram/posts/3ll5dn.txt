@@ -1,0 +1,111 @@
+Microsoft Office Excel 2016 - Released September 22nd 2015
+I'm new to using Office 365. Do I have to do anything to trigger the update to Office 2016, or does it just happen in the background automatically?
+I am very excited about the ETS() functions. My long term project at work is taking our budgeting model from running off annual averages to state space simulations with bootstrapped intervals, and it has to be in excel. Having the ETS equations all in one command dramatically simplifies the tedious part - I typically need 3 or 4 columns to do this, which doesn't scale naturally across the 50-60 programs I need to project. Add in the fact that you no longer have to set the parameters and you've got a really powerful tool.
+I like that histograms are easier to draw.  This will introduce many people to the concept that not everything is normally distributed.
+Question: I get the Office 2013 programs through Office 365 for free because I'm a student, will I automatically get Office 2016 for free, or how does that work?
+Anyone notice that the quick access toolbar has huge icons now? So all the icons I had that nicely fit on one line take up two lines. How is that an improvement?
+Here's a couple of additional links: 
+
+[Rob Collins @ PowerPivotPro going over PP and DAX improvements](http://www.powerpivotpro.com/2015/07/excel-2016-heartwarming-improvements/) (from a few months ago, there are some other newer updates that uses some of the new functions on the blog)
+
+[Excel 2016 top features slideshow / walking deck, provided by the MSExcel product team](https://www.dropbox.com/s/dsplzmkr9di4wub/Excel%202016%20Top%20Features%20-%20Walking%20Deck-1.pptx?dl=0) (Decent overview of the excel-specific new features, just put it on my dropbox)
+
+Scanned some of the other blogs but not much has been put out yet, pilfered the first link from [Jon Peltier's slightly grumpy release update](http://peltiertech.com/microsoft-releases-excel-2016-for-windows/)
+
+
+
+
+The date is upon us! Stickying this! 
+FYI links 6 and 7 are the same, link 8 should be link 7 and the correct link for 8 is https://blogs.office.com/2015/08/18/visualize-statistics-with-histogram-pareto-and-box-and-whisker-charts/
+Is office 2016 subscription based?
+* Still not possible to adjust the size of the Evaluate Formula window
+* Still not possible to scroll in said window using the mouse wheel
+
+-__- ...At least they brought back the dark theme.
+Does anyone know of a list of new native functions?  Anything for nonparametric statistics?
+Upgraded to Office 2016 at work today. I keep getting a popup saying "Because of your security settings, macros have been disabled. To run macros, you need to reopen this workbook, and then choose to enable macros. For more info click help etc etc..". 
+
+I have followed several guides for how to change these settings, but every time I reopen the workbook the same popup shows. Has anyone dealt with this before? I figured it might be something to do with my administrator privileges, and wondered whether this is something I can change on my own machine, or whether I would need to get my IT admin to change a setting somewhere?
+
+Any help massively appreciated! :)
+I haven't installed it myself yet but one of the other mods pointed to this link:
+
+https://stores.office.com/myaccount/home.aspx
+
+
+And choose "install"
+I'm also trying to figure this out
+so does this mean Matt Damon has a chance?
+Can someone explain what is an ETS() equation? I am a daily Excel user.
+Hey mate - i was reading the what's new in Excel 2016, and I saw one-click forecasting as one of the things. Just like you, forecasting is a critical part of my work and if I can make it easier, all the better. Can you tell me if forecasting is going to be a new thing in excel from 2016 or is it already part of it and they have just made it easier? Can you tell me how I can currently use the existing functions to do some exponential smoothing or linear models etc? Thanks!!
+Totally agree, the addition of histograms is probably one of my favorite parts. 
+
+What I'm curious about is if I create a histogram and send it to someone who opens it in anything besides Excel 2016, what happens to the chart?
+I think we figured it out on the thread in /r/windows10 but to just post it here too, I think as a student you have a volume license, which means office2016 will be available for download on October 1st: 
+
+https://blogs.office.com/2015/09/10/admins-get-ready-for-office-2016-rollout-begins-september-22/
+[deleted]
+Thanks for letting us know, my bad on the links, I pinged /u/epicmindwarp so he can change it around when he has time.
+Thanks, that's all corrected (I hope).
+If you have office365 it is subscription-based, but I believe you can also buy a one-off license. 
+Trust Centre settings under Options in Excel
+Thanks! That appears to be doing something. :D I'll report back in a few minutes.
+Yep, that did the trick. You sign in there and hit "Install" a couple of times, it'll trigger a small EXE file download, you run that, then about 5 minutes later it's all done. :)
+
+Thanks again!
+it stands for exponential smoothing. the equations are pretty much bog standard for time series forecasts. there is no model fitting, no statistics or anything like that. it is an algorithm for making forecasts, simple as that, and that's part of why they are so popular.
+
+you can have multiple levels of "smoothing" but to start its easiest to think about single exponential smoothing. if you are trying to forecast something that has no obvious trend or seasonality, then you might just take the average of that factor and project it forward. but as you get new data, you want to adjust your forecast. exponential smoothing gives *exponentially* more weight to more recent observations than older ones. the extent to which it weights more recent observations can be adjusted (and optimized). so if i have values like this:
+
+     10, 11, 9, 12
+
+Then I might want to forecast something like 10 or 11. But if the next value in the series is 25, this is a major departure! and because i don't have a history of large changes like this, the ETS model is likely calibrated to be relatively sensitive to changes. so i might forecast 17 or 18, and then if i get another high value like 22, my forecast will "catch up" to the actual. and again, the speed at which your forecast catches up to the actual is based on the smoothing parameter you set. 
+
+Now you just apply this same logic to other things like changes in seasonality or trend: "growth is slowing - how much and how quickly should i adjust my forecast to reflect this new information?" "the Christmastime peak is intensifying - should I expect it to be this big again next year?" ETS models give you a quantitative framework for answering these questions without requiring model fitting which is tedious in excel.
+sure! there is a forecast( ) function which essentially fits a line to data and that has been available for a while, but that is not the most complicated thing in the world and you could implement something very similar yourself. For instance, if you have 12 observations starting in A1 and ending in A12, you could just write: 
+
+    =number of periods to forecast*(A12-A1)/12
+
+That would essentially do the same thing. It's hard to show the ETS equations in a compact format because they all reference each other. I've found the [Wikipedia page](https://en.wikipedia.org/wiki/Exponential_smoothing#Triple_exponential_smoothing) really helpful because it has the equations and implementation info. This old [blog post](http://analyticsmadeskeezy.com/2013/04/25/prediction-intervals/) has a good explanation of how to simulate prediction intervals, and it links to an earlier blog about implementing ETS in excel.
+
+Because the calculation is iterative, it would be really painful to condense this into one formula. What you need now is something like this - and this is not strictly going to work because you need to initialize everything
+
+    #Column A contains data; G1:G3 contain the smoothing parameters
+    #In B25 - seasonally adjust value or "level" (assuming you left the first 24 obs. for initializing seasonality)
+    =$G$1*(A25/D24)+(1-$G$1)*(B24+C24)
+    #In C25 - local trend
+    =$G$2*(B25-B24)+(1-$G$2)*C24
+    #In D25 - seasonal adjustment
+    =$G$3*(A25/B25)+(1-$G$3)*D13
+
+It's not super clear without data, but the basic idea is that in Office 16 you can do all that by just typing 
+
+    =forecast.ETS(data, some arguments)
+
+And with that you can spend a lot more time doing the interesting part, which is altering the smoothing parameters and generating simulations, stuff like that.
+I'm not 100% sure but it might not. towards the end of this [video on new visualizations](https://channel9.msdn.com/Events/Ignite/2015/BRK3564) (like minute 52) they explain something about the new charts running on a new charting engine that allows for richer formatting, but the old charting engine runs alongside it. So earlier charts are forwards compatible for sure, but don't think new charts will be backwards compatible :/ Maybe we can get someone to test it out though. 
+Thank you.
+On oct 1 do i just update it via the normal way?
+
+Normal way being log into office 365 and hit install, or do I have to do something else?
+Unfortunately not. It's the spacing between the icons. It's only for the quick access toolbar in Excel.
+Sorted.
+Tried it, no luck. 
+
+It either doesn't seem to be saving my settings, or just isn't changing them at all. 
+yw, got the tip from /u/midevilpancake !
+Mate thanks so much for such a detailed reply. And that blog post you linked is absolute gold. 
+
+I have been using LINEST function until now, but this demonstration of excel Holt winters is awesome.
+
+Since you know what you're talking about obviously, I need to incorporate marketing spend as a function of the forecast, which means that I need to consider historical marketing spend with past sales and also have an ability to change projected sales if I input what the company plans to spend on marketing. Theoretically, we could do that with LINEST, but don't know if we can use it with exponential smoothing. 
+
+You've been great - thanks for your help so far.
+awesome, thanks!
+Thanks for the credit!
+
+They hid this pretty well, unfortunately. I wish it was automatic, but then again they probably didn't want to pound their servers into the ground this morning haha.
+well actually you have a classic regression problem, i think. exponential smoothing is great for making simple time series forecasts without any supporting information, which is what i have to do.
+
+but what you're describing is a textbook regression problem. you have an input that is partially responsible for an output, and people ask you to predict how increasing/decreasing marketing spend will affect sales. that is so cool! i think generally you would want to put that in a time series framework and see how they are correlated across time - after all the company is growing for lots of reasons, not just marketing dollars. if your company is just generally growing and adding stores, then you want to control for that, either by analyzing the impact *relative to trend* or by adding a variable for stores into your model.
+ 

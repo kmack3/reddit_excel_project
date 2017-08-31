@@ -1,0 +1,32 @@
+6i8wqd
+How to make a dynamic formula to distribute a pre-set number of customers evenly throughout 12 months
+I'm working on a model to forecast a company's cash flows.  One of the features I need the model to have is a changeable number of customers (i.e. 25 customers) and I want Excel to take that number and relatively evenly distribute it throughout 12 months in the year.  25 being an odd number, I'd expect something like 2 customers/month and 3 customers in December.  
+
+Any ideas on how to make this dynamic calculation so I can change  the number of customers with one click?  Obviously, the number of customers need to be integers.  Thanks in advance for your help.
+
+
+-------------
+Let's say your month numbers were in B2:M2. In B2, put this formula:
+
+    =INT($A$2/12)+(MOD($A$2,12)>=COLUMNS(B$2:$M$2))
+
+Copy to the right. Now you can change the value of A2 (your customers) to anything you want. Note that this formula is back weighted, so extra customers go in latter months.
+-------------
+Did I do something wrong here?  The sum = 24, not 25.
+
+http://imgur.com/a/EF2yf
+-------------
+Never mind, figured it out, thank you!
+-------------
+Solution verified
+-------------
+Wonderful. Mind replying with "Solution Verified" to give me a ClippyPoint? :-)
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Sorry - still new here! Let me know if that didn't work, but should be all set.  Thanks again.
+-------------
+All set, thanks!

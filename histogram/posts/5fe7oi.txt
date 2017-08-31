@@ -1,0 +1,13 @@
+Can I embed a shape in an Excel chart that changes dimensions based on inputs?
+Why dont you create a pivot table, and then create a pivot graph off of that? You could even get a little fancy and create a slicer with your dropdown list values. 
+Yes, I do alot of this kind of thing.  You can drive the position  and size of a shape with vba, it keys off the top left of the spreadsheet, and goes by points.  I've never done polygon shapes, but I'm sure you can control those points too...record some macros and see.  You can position the shape on a chart using chartobjects property, I think it's plotarea.left, etc. I'd have to look up some old code to say for sure.  The point is, you can do exactly what you want...I don't know your vba experience, but this is not beginner stuff.  But that's how you learn...start playing around.  If I remember, I'll get you some code tomorrow.  Remember, Google is your friend 
+If you want the shaded area to always be between 90% and 110% then can't you just create an area series which is 0 up to 89%, then some arbitrarily large number from 90% to 110% and then 0 again?
+
+If you want the shaded area to always be in the middle of the chart regardless of what the axis changes to, you can just draw a box on top of the chart, and apply some transparency.  (Or put it beneath the chart and don't fill in the chart background).
+Hmmm, I think this might be my best option.  I'll play around with this idea and what how it works out.
+
+Solution verified.
+
+You have awarded one point to _ethorad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,42 @@
+6g1zf3
+Date range IF statement
+I'm trying to achieve the following :
+
+Date in column C gets checked against today's date. 
+
+If the C date is more than 45 days away, return value 3
+If the C date is 45-30 days away, return value 2
+If the C date is less than 30 days out, return 1
+
+This is what I have, 
+
+=IF((C1>NOW() +45), 3, IF(C1>NOW() +29), 2, 1)
+
+but I have messed with it so much I don't honestly know how I started. I'm usually not this hung up with simple formulae. 
+
+Your help is appreciated with this. It's giving me a headache at this point.
+
+
+-------------
+I think you just have some missing/misplaced parenthesis:
+
+    =IF((C1>NOW()+45),3,IF((C1>NOW()+29),2,1))
+-------------
+=If(datedif(today(),c1,"d")>45,3,if(datedif(today(),c1,"d")>29,2,1)
+-------------
+That doesn't work. It returns 3 no matter what the date is.
+-------------
+hm.  it works for me.  I get 1 for any date before 7/8/17, 2 for 7/8 - 7/23, and 3 from there on.  Sorry I can't help you!
+-------------
+Check and make sure your formula calculation options is set to automatic
+-------------
+Oh man, that did it. I don't know how that changed. 
+
+Thank you very much. 
+
+Solution Verified.
+-------------
+
+You have awarded one point to _KarmaIsAFemaleDog_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

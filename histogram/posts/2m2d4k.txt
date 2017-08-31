@@ -1,0 +1,173 @@
+To Macro or not to Macro
+Okay, where to begin.  First when I use the term "you" and "your" I am speaking in general terms and in no way talking about you personally...
+
+> I am of the belief that one should move heaven and earth to not use macros when developing sheets others may use.
+
+I disagree with this, on so many different levels.  Macros are a tool of Excel that should be used just as a formulas should.  People are just afraid of the word macro because they think they have to know how to code to use them, not knowing that the recorder exists... A macro as a tool is no different than a pivot table, just another tool that people should get more familiar with.
+
+If there is an exercise that needs to be done daily, why not have it run though a macro to save time and effort? Why do you want to repeat the exercise daily when excel has a built in tool that can help you?
+
+> I assert that the time it takes to support a macro enabled book is GREATER than the time saved using the macro. Even a small one.
+
+Error Trapping, Error Trapping, Error Trapping, if you are having to "support" your macro then it was not designed for public consumption.
+
+For example, count columns, column headers, On Errors, Err.Numbers.  If you have macro that others are using and you don't have checks and balances in them, you are failing at providing your customer a complete tool.  If you are not tracking errors in your customer macro enabled workbooks, then you are providing something that is incomplete.  If you have to ask a customer what the error was then the tool is incomplete.
+
+Here is a quick example of a good way to capture errors:
+
+         For Each rngCell In Range("A2:A100")
+              On Error GoTo ErrorHandler
+                   rngCell.Value = rngCell.Value / rngCell.Offset(0, 1).Value
+         Next
+    
+    
+    ErrorHandler:
+         If Err.Number > 0 Then
+              Open strFile For Append As #1
+                   Write #1, Err.Number & " (" & Err.Description & ") was recived on " & Now() & " at Address " & rngCell.Address & " by user " & Application.UserName
+             Close #1
+             Resume Next
+         End If
+
+Basically on error, go to the Error handler and append a text file with the Error Number, Description and location... so when someone says hey I got an error, you don't have to ask, you have a file that is tracking the errors that occur and who is getting them...
+
+
+> I've spent too many hours providing technical support on my sheets because someone didn't allow macros to run. 
+
+This can be solved with many tools, status bar updates, an actual progress bar, and message boxes.  User like to know that it is working, and if you are not providing a tool to show them something is happening then of course they don't know it is done.  
+
+
+> Additionally, there are so many versions and other twists and tweaks people can do to their systems that using macros is a dangerous proposition.
+
+Care to expand this a little more?
+
+> IF, however, you can do something amazing or magical and it's worth it then I think macros are the ONLY way to go.
+
+Macros are not mythical and magical, they can process a worksheet and work though an exercise in a much more efficient manner then any user can.
+
+> That is my supposition. I'm interested in how you professionals handle supporting macro enabled sheets and how you know when it's time to use them.
+
+I user macros anytime an exercise will have to be repeated more than once, even if I know it is only going to be run 3 times over the next year, I will write a macro so that when it does come up, I don't have to mess with anything, just run it and forget it... 
+Yes. 
+
+Sometimes Macros are a bad idea and I avoid them unless I think they are a good idea and the maintenance makes up for the functionality. 
+
+This is just a sort of rough estimate as it's not something I have really given much though before, but depending on what I am working on, I would say that if the instructions on how to "work" the spreadsheet are more than 3-5 steps, then I would start considering whether I could use a macro. 
+
+While macros allow for one kind of error, having people mess about too much with too many things allow for a different kind of error. If there is any kind of "copy this data here then drag down that formula then remove these columns then copy the values and then adjust the formatting..." involved, then it's macro time. 
+
+It's also a question of frequency of use. If it is something that is done 3 times a day, even just shaving off 10 minutes each time can be a big time saver, if it is something that is done 3 times a month, well, fiddling about with a macro to save 10 minutes each time is maybe less relevant. 
+
+Data size is also a factor. When dealing with very large data extracts formulas can easily become very "heavy" unless you are very mindful of the way you are working, and any messing about with the original data risks someone accidentally mistyping something somewhere, and it never being discovered. In this case, Macros are almost a security precaution. 
+
+I would say though, that you can often do _a lot_ without macros, and I prefer to come up with solutions without using macros, it feels a little more easily accessible to the layperson, and the constraint makes the challenge more fun :D
+Pro Macro : 
+
+Say you have a long tedious process that requires a 50 page SOP binder and all the tasks are labor intensive, and each week there is a new intern doing it...  Like "each morning, total all the timestamps from 500 of employee type A thru F and enter them one by one in this spreadsheet..." those processes scream out for a Macro.  When making them for others, I put in a lot of up front effort to make them crazy user-friendly.  Macro initiation is a Big giant button that says,  "Press here to run timesheet aggregation."  I write the macro to query for input file locations but then I have it save the location for future runs.  If the locations or variables aren't there, I have it query for them again.   I also use this to save variable values off to spreadsheet locations, (kind of like a static "debug watch") so that I can just have them email the workbook when it errors and I can see if variable so-and-so is FALSE where it should have been a filename or something. 
+
+Anti-Macro:
+Once your users see one of the behemoths described above in action, they'll have all kinds of nifty ideas about how you can code macros for them that duplicate perfectly good functionality that already exists within Excel, if they'd take the time to learn it.  ( I once wrote a macro to duplicate the Pivot-Table functionality of double clicking a table value to gen a "fly out" table showing all the records that led to that variable, because my boss liked the "double-click drilldown" that he saw in pivot tables, but he didn't want to have to manipulate a pivot table if he needed to demonstrate something to his higher ups.)
+For me... I decide to automate something when I find myself doing the same thing over and over again to get the results that I need. I do it to save time.
+If I can spend some amount of time to save an even greater amount of time then I'll do it. I got into a huge argument once about how much time I was "wasting" on writing a macro to do some "small piddly little thing." I did the math and showed that the 2 hours I spent writing the macro would save one person about 30 min on a task that took 2 hours to do. 30 min a day is 2.5 hours a week, and that is 120 hours in a year for each person who use the macro in the workbook. It turns out that with the number of people who used the macro it would save the company about $30,000 USD each year in labor costs.
+If time is money is any part of an evaluation about when to macro or not... the macro often can save a lot of money.
+I would agree completely that you should only use macros if you absolutely cannot use normal formulae and it saves a significant amount of time. 
+
+Using macros has three main problems:
+- Support
+People who don't know macros won't know how to fix/improve minors things. (I have known big companies employ people exclusively to maintain VBA)
+- Training
+People will be scared of macros and won't know what they do - they are effectively little black boxes (I once worked with a guy who didn't realise that the magic button at the top of the sheet just put a couple of auto-filters on. When it didn't work (macros disabled) he panicked and didn't do his work for a week) 
+- Execution
+IT often disable VBA for security reasons (and often refuse to issue certificates on very useful ones); making them completely useless. 
+
+I have never really had an issue with the version differences - most macros are internal use only so all computers (should) be running the same version of Excel. When you upgrade it is fairly rare for old macros to not work. And if you are doing so complicated that it is tied to a version you should probably be using a 'real' programming language with a real life cycle
+
+I have had issues in the past where compliance departments want code auditing for VBA for SOX (et al) purposes and I have never really found a good solution other than an automatic daily backup of the file (with data). But I suppose if the code is really that critical it shouldn't be in VBA anyway - and the data shouldn't be in Excel either - there are more appropriate tools for the job like SAP, Essbase, Tm1, Oracle, .Net, CRM's
+
+I've seen it go both ways. I'm lucky enough that I work in a group where having macros enabled is mandatory to getting our job done so I don't have to worry about whether my workbooks will function... I have seen overuse of macros though. There was a process in place when I started my current position that used a macro (three actually, run consecutively) to import, arrange, and analyze a large set of data. Running the macros could take 40-60 minutes to complete. I decided to gut the tool, leaving just then import function, and had everything else run through formulas. In the end, it was actually taking longer because it would have 2-3 minutes of processesing on every recalculate.
+
+I eventually ended up with a little of both: I left it heavily formula based but used a few macros to save time by, for example, having it calculate and hard code my item drivers which were 1. used as a denominator in most of my formulas, 2. didn't change, and 3. took a great deal of processing to calculate. So it goes both ways.
+
+I'd say (other than people not having macro enabled) that the biggest reason to favor formulas over macros is transparency. I generally will want my VBA protected if I am sharing a workbook, so if others want to understand how a tool is manipulating data, I would rather it be visible in the form of a formula.
+I thought about this and realized that I use social engineering.  The sheets that I build fall into one of two groups: don't need macros to start with, or  the people using them rarely have to run the macros because they are just using data from the sheets.  It is important to me that sheets having macros have external methods of triggering them.  I either assign a macro to a button (rare) or set up a sheet event that makes the macro run automatically or enable a doubleclick event to trigger the macro from a blue text underlined cell that looks like a hot link.  The only issue I've ever had with using doubleclick cells is users occasionally do not have macros enabled, and that is both rare and easily corrected.
+
+I cannot agree with the op's statement to "not use macros".  My experience is that macros should be used any time mass manipulation of data is needed.  There is a point where relying on detailed steps and formulas in the sheet becomes so complex that a macro becomes the lesser of two evils.
+Completely agree.
+
+Other than distribution issues (e.g. the end-user has macros disabled or a different version of Office) macros are almost always slower than an equivalent formula.  When you use workbooks greater than 100MB every second counts.
+So I am just starting in the world of excel, but the place I work other people have had macros written that I use. Trust me it saves time for repetitive tasks. For example lets say you have a report you have to create every day. Pull some spread sheets from the internal website and have create charts and tables.
+
+Granted building the macro will take a while, yet when you build the macro it will complete cut the report creation time in half or more (depending on how fast your companies system is). Also less room for mistakes, as well as you can now focus on the bigger problems you might not have had time to do before. So macros are really useful for tasks like this.   
+These helpful discussions are so welcome that we even have our own flair for it :)
+> I've spent too many hours providing technical support on my sheets because someone didn't allow macros to run
+
+I love this one.  When distributing a workbook that doesn't function without a Macro, I will literally hide all tabs except one.  On that tab will be a huge disclaimer explaining why the workbook won't function without a macro, tell them how to enable macros, and why in this case, it won't destroy their computer.
+
+Then I put in an auto_open to hide the disclaimer and unhide all other sheets, and a before_save macro on the ThisWorkbook code to hide the content tabs and unhide the disclaimer tab, thus ensuring that the casual user won't even be able to use the workbook *at all* without enabling macros.
+Very good points! I especially liked the error handling part. This is such an important thing while distributing macros. I usually just write a bare code(no comments or error handling) when I'm writing it for myself, but I've leant through experience that it's always good to cover all bases by implementing error handling and progress bars. It really cuts down on the post-distribution support needs. 
+
+I really liked the idea of writing errors to text file. Thanks for that! I'll use it in future.
+It should be added that creating a documentation describing the various functions, adding a process flowchart for the more complex automation macros, listing constants etc. is also highly beneficial, although obviously I suppose that concise comments within the code are sufficient for those less complex ones.
+
+
+
+>If there is an exercise that needs to be done daily, why not have it run though a macro to save time and effort? Why do you want to repeat the exercise daily when excel has a built in tool that can help you?
+
+Nice reply, just wanted to add-on to this specific point.  There are daily and weekly reports I do, many of which require multiple VLOOKUP's to pull in all sorts of different data.  I have macros just for that; it will pull over the data from the day before, or other cross reference checks, and do some formatting.  
+
+I feel it keeps the formatting consistent, and the end user never sees the macros or has to use them, they just benefit from quicker turnaround on my end.
+Macros are amazing and magical. They are the hands of god in the eyes of people that don't know how they work. I have extensive experience writing them and even I am surprised at the power they have sometimes. If I can save someone hours with the press of a button to them I seem like I've got some magical power.
+
+It sounds like you've had good luck with your IT support solutions. I can't say I've been as lucky and usually end up doing self support. Macros introduce a challenge that is much more difficult than simple formulae. Yes, I can build you a fancy macro to do this and save you time now but I don't want to support you for the next 10 years because no one else knows how they work.
+
+In the environments I've worked I'm often the ONLY guy that even knows how macros work.
+But most of what you are referring to is basically designing an application which happens to be in VBA and happens to look a little like Excel (except you have disabled certain things in it)
+
+Why not use a 'proper' language and if you need a little Excel use calls to the appropriate API
+
+I hope I didn't miss anything setting up the question! Thanks for flair-ing...me? I've been flair-ed?
+This is brilliant! I will have to remember it!
+> I really liked the idea of writing errors to text file. Thanks for that! I'll use it in future.
+
+It really makes you look good when a customer says "hey I ran that file and I got an error" and 3 minutes later you have it fixed without having to ask them for more details, then you explain what it is doing and they are shocked and awed by your excel prowess... 
+
+I have a few macros that will actually save out the workbook before it runs the macro.  I do this because the report takes 4 different data sets and combines them into one, nothing is worse when you have to ask them to export all that data again so they can run it again, just to get another error and tell you what it was, just makes it that much easier to rerun the report with their data and fix the error knowing what you are looking for... 
+
+
+> It should be added that creating a documentation describing the various functions, adding a process flowchart for the more complex automation macros, listing constants etc. is also highly beneficial, although obviously I suppose that concise comments within the code are sufficient for those less complex ones.
+
+Working Documents are invaluable for the next guy that has to look at your code...  I will admit I am the worst at this, but I do comment my code as much as I can... 
+> But most of what you are referring to is basically designing an application which happens to be in VBA and happens to look a little like Excel (except you have disabled certain things in it)
+
+Writing a macro that has a loop that looks for a value and evaluates it, returns a new value is not "designing an application", it is just a simple loop...
+
+What if you have a daily report that needs to be run every morning that requires excel functions, why would you waste the time of going though it every day when you can just use a macro to automate it?
+
+What if you are out?  What if someone else needs to run the file, what if you are asked to make it so someone else can run the file?  Don't you want to make your co-works life just as easy as you have it?
+
+What if you have an exercise that requires you to determine what item is in column 3, every 9th row and determine change it based on that value of the cell?  What if that exercise has 22k rows of data... 
+
+So why would you not use a built in tool to accomplish things quicker than adding helper columns and nest IF statements?
+
+What if your direct report sends you a report every 2 days and he wants to make a dashboard from the raw data? Would you want to automate that process to free up your time to browse /r/excel?
+
+I am not saying that that EVERY instances you should use a macro, I am saying that people should not be afraid of macros and that you should not "move heaven and earth to not use macros" and instead learn how to use them effectively.
+
+There are times where you have a one off report that you need to analyze, and in those case, yes do it with formulas, but if this is an exercise that is going to be run over multiple workbooks, why do it multiple times, when you can do it once and run your macro in the other workbooks? 
+
+I have written actual apps that do some things, just to make them easier, but seeing as most corporate offices are locked down, trying to get them installed on client machines sometimes a fight that is not worth fighting when you can run the macros in excel all the same.
+
+Error trapping only helps me, Sue in the cube next door does not care if I have error tracking in my macros or not, she just wants it to run and if it does not run, fix it...
+
+For me it's a painful requirement, but I oblige and create the documentation anyway as I'm given access to documentation done for other macros and they're literally mines of information.
+If your data is coming in a format that isn't appropriate wouldn't you want to change at source rather than in Excel?
+Unless Excel is your main CRM/accounting/whatever package you should be ensuring as much information is available in the source system rather than changing it in your own spreadsheet?
+Most systems have dashboarding functions within them - often exporting to excel
+There are times when macros are appropriate, but if your direct report (ie not you) sends you reports and he doesn't know VBA he won't be able to change it when the raw data inevitably changes - formulae he would
+If (when) your raw data changes - Sue in the next cube might well get a nice error checked message, (and I do like your codelet) but it will need more coding in VBA. Formulae should be easier for her to fix
+
+I sadly get this regularly with VBA - either the source or the target changes because someone in a foreign country changed their minds and your VBA just doesn't work. Usually they do it when you are on holiday (sods law) and everyone freaks because they get a nice message ("Source Data not right") 
+
+I've had a few jobs where they have specifically stated I should remove as many macros as possible to avoid these issues (as well as the SOX issues). I don't remove all of them because there are certain jobs that are just much better with macros, but I try not to.
+
+Also I have worked in a few banks that lock down macros at the same time they lock down the apps (it is a right arse) for the same reasons as the apps

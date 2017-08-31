@@ -1,0 +1,16 @@
+How do I make excel count the number of cells that contain something in a column?
+Try using COUNTA. 
+
+=COUNTA(A1:A10) 
+You could also do 
+
+    COUNTIF (A1:A10,<>"")
+If you just need to take a quick peek, you can highlight the entire column or subrange you are interested in.  There is a status bar at the bottom right of Excel that shows basic formula results for the selected cells.  I forget if Count is visible by default, but [the right click menu](http://www.excel-easy.com/ogi/examples/status-bar.png) lets you customize what shows up.
+
+Just be sure to subtract your header rows from the count when selecting the entire column or row.
+Solution Verified
+Sweet man, thanks!
+
+You have awarded one point to _impactplayer_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,73 @@
+Using Vlookup to match names
+I'm an index/match zealot, been a long time since I used vlookup, but maybe this will help you regardless.
+
+{=INDEX(Title,SMALL(IF(LEFT(artist,1)="h",ArtId),A2))}
+
+Put that in K2 and copy down.  Note that it will return errors once you run out of artwork from artists who's name start with h.
+
+Note that I used named ranges, you can replace them with absolute references.  Like B$2:B$117 instead of artist, etc.
+Note that your ArtID column has sequential integers. That's why your instructor(?) said it'd be beneficial to use it.
+VLOOKUP won't help you here because you want a list to be returned, and VLOOKUP is only useful for returning single values.
+
+It may not be what El Profesor was going for, but [here](http://imgur.com/hI6xyN0) is how you can do it using an array formula (use ctrl-shift-enter to enter it).
+
+The function in cell F2 is `=IFERROR(INDEX($C$2:$C$11,SMALL(IF(LEFT($B$2:$B$11,1)=$H$1,$A$2:$A$11),E2)),"")`.  Copied down.
+This is what I got when I put that in
+
+http://imgur.com/a/U9WFc
+I'm just having trouble linking the names together
+
+Like how do I make the vlookup function to pull up names with matching first letters
+Thats the problem I'm having, I know the Vlookup isn't the best way to do it, but he specifically asks for the Vlookup formula and results, so I have to use it.
+
+Thanks for the trouble of making a work around though
+the { } around it mean it's an array formula, you have to control-shift-enter instead of just enter
+
+and if it's not named, replace artid with A$2:A$117
+VLOOKUP won't return multiple results. You'd need multiple formulas each calling VLOOKUP.
+
+Anyway, given your first screen image, Artist is col B in the ArtObjects worksheet. You can find the first artist with a name beginning with __H__ using
+
+    =VLOOKUP("H*",ArtObjects!$B:$H,1,0)
+
+You can find the title of the corresponding object using
+
+    =VLOOKUP("H*",ArtObjects!$B:$H,5,0)
+
+You could also find the corresponding ArtID using
+
+    =INDEX(ArtObjects!$A:$A,MATCH(F2,ArtObjects!$F:$F,0))
+
+Note I'm assuming your results are in another worksheet beginning in cell A2 with the same field names in row 1 as in the ArtObjects worksheet.
+ok. Then change the portion of the formula in F2 that was $C$2:$C$11 to $A$2:$A$11. And add a VLOOKUP function in another column like [this](http://imgur.com/ItMhPSk).
+
+edit: or a multicell array, like for example in cell H2 you could put formula `=IFERROR(VLOOKUP(INDEX($A$2:$A$11,SMALL(IF(LEFT($B$2:$B$11,1)=$H$1,$A$2:$A$11),E2:E8)),$A$2:$C$11,3,),"")`, highlight range H2:H8 and then hit F2 and then ctrl-shift-enter.
+with control-shift-enter
+
+http://imgur.com/a/dLnGf
+i don't have time to fiddle myself, but would it be possible to take that second vlookup to a fixed array of B1:H117 on row1, and then put a second vlookup on row2 but use Match (and something else) to get the rownumber of the first hit and change the array. So if you can match back the first hit to row 17 of the source data, then the second vlookup would check B18:H117 and so on?
+If this part is like the others I've completed, I have to use the function for Vlookup as the main function, so I cant use Iferror first
+
+I know this is confusing and thats why I'm having the trouble that I am
+go cubs go
+replace artid with A$2:A$117
+Yes, subsequent lookups should start at the row after the previous result, but that's possible always using VLOOKUP if the OP is required to use VLOOKUP.
+Just tell your teacher that a ***stranger on reddit*** said the teacher's wrong because you cannot use VLOOKUP to return more than one value.
+
+By the way, you can remove the IFERROR function. Just that without it you will get error values after excel runs out of H authors.
+What's the purpose of the list on your second screencap?
+Yeah, that's where I was going.  Someone beat me to it.
+
+If you really think he'll have a problem with the iferror, then just don't use that part.  Leave off iferror( in the beginning and ,"") at the end.  You'll just get errors when it runs out of matches.
+Fixed it, thanks
+
+I'm going to go ahead and submit this, and talk to my professor in class
+
+Should I put this as solved since I found the right way to do it?
+
+Is there a way I could upload the excel file so you guys could work with it?
+
+I know thats a lot of trouble but I've been stuck on this part for awhile.
+That was just included in the file, its all the artist's names in alphabetical order.
+
+I don't know what us guys would do with your file. We've given you all you need to know.

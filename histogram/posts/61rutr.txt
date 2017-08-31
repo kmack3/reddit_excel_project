@@ -1,0 +1,159 @@
+Best CPU for Excel Heavy Work?
+most likely the issue is 32 bit excel/office install and it's 1 GB  ram limit.
+I gotta go with the "time to skill up into another analytics solution" crowd.
+
+But, if you must stick to Excel, just ask your purchasing department what the most expensive vendor-configured desktop is.
+I would say the first thing you should do is not buy another Mac for Excel uses. I have found nothing but trouble trying to deal with Excel in a Mac environment.
+The hardware you listed runs Excel just fine. If Excel is becoming extra slow for you, then you may need to move onto better tools suited for data analysis.
+That's a lot of machine, way more than most. I suspect there is another issue causing the slow down. 
+
+That hardware is dated so a new machine is in order regardless. E5-1600 Xeon for single Xeon setup should get it done. Very curious to find out what you go with, price and your new performance. Be sure to post so we can all learn! You can see that some concrete info would be beneficial.
+Your hardware is actually overkill for Excel. Like others have said, your best way forward is to transition away from Excel. PowerPivot is another MS product that has a shallow learning curve and scales with RAM which you have an abundance of.  
+Recovering PC hardware addict here.
+
+Based on what you listed excel should run fine. Your processors single threaded performance is terrible compared to modern consumer processors, bit that doesn't mean it should run very slowly.
+
+That ddr2, might have something to do with it but we aren't talking much of a speedup.
+
+I'd be more than happy to put something together for you if you are looking to build or if you want I can even test your sheet(assuming that is doable) for both multi and single threaded limitations.
+
+In all my experience with excel it has always come down to how you do something rather than what it is running on.
+Are you looking to build the workstation yourself or buy one premade?
+here's what we just went with. seems to do the job pretty well, and not a terrible price point at around 2k.
+
+Dell Precision T5810 
+
+
+Intel Xeon Processor E5-1620 v4 (4C, 3.5GHz, 3.8GHz Turbo,
+2400MHz, 10MB, 140W) 
+
+Dual NVIDIA Quadro K620 2GB
+
+
+32GB (4x8GB) 2400MHz DDR4 RDIMM ECC
+
+2.5" 256GB SATA Class 20 Solid State Drive
+I have found that the cores make a difference, so I would rec a 4 core CPU
+Sounds like a 64-bit processor and software might be the way to go. Also you might be better suited using a program like R that is designed to handle insane levels of data. 
+Fast excel - assuming like on the concept "trading platform" - money no object, and we don't care about power consumption, noise or heat, as you will RDP then it's going to be server hardware with specialist Intel Low latency CPUs. so not just about CPU GHz speed but also north/south bridge bandwidth thus high end motherboard, and fastest memory,  fusion io, and TOE network cards to not distract the cpu. 
+
+Hardware optimisation will see improvement note diminishing returns as you spend beyond 20K USD, also keep core count low 8 or 10 per CPU max and go for L1 L2 max cpu cache.  
+
+Once you have you tin sorted you, you will need to consider a fully optimised OS and spread sheet, Microsoft Excel can by design offload (distribute) excel cpu workload - not suitable for all calculations but some excel queries taking days or weeks can drop to hours with HPC see (https://channel9.msdn.com/Events/TechEd/NorthAmerica/2010/WSV08-INT ) 
+
+Lastly knowing the computational cost for the functions will help example what's more costly index&match or vlookup ?  Taking a careful review of the functions used and pipeline of execution, in trading  a requirement may be for ultra low latency but you may have a requirement for in memory array and a 3TB of ram is an option. 
+
+I have designed and commissioned systems for global pharmaceuticals, and large banks money no-object and costing millions, 
+
+If your constrained by cost then consider a Fast desktop or gaming rig. 
+
+Beyond the above if it's still not giving you the computing performance you need I suspect your into custom API solutions using GPU memory and 1000's of cores as found in the likes of HPC nodes and graphic cards. 
+
+Letting go of Excel will open lots of options. 
+
+
+If a hardware upgrade is coming anyway I'd look at higher clocked CPUs and faster RAM. Throw in a newer SSD for giggles if your data is local too. You won't necessarily see a performance boost with what you're doing but they're the areas that count with large dataset processing. 
+
+As others have suggested though, I'd check the version of excel you're using to ensure its 64 bits to ensure your actually using all that RAM. 
+
+Lastly, are you able to describe the workload and how data is imported into the spreadsheet? There might be some optimisations here the folks can help you out with. 
+Op take a look at  /r/Buildapc. They should have you covered.
+If you're staying in the Apple world, just get their newest model, max out the RAM and get a SSD. I'm not real familiar with what they have, but I know their product line is pretty limited.
+
+If you're going to move to Windows, get a 7^th generation i7, DDR4 RAM (maxed out), and an SSD. And you may as well go 64-Bit Excel 2016 while you're at it. There are multiple models of i7 to choose from, so you'll need to do your research on that. 
+
+And while this will all help, your major pain point will still exist: Doing everything with formulas. I've got a pretty darn good laptop sitting next to me, but when I start working with formulas that have to look at really large ranges, it's gonna go slow. 
+
+One solution is to learn how to do things in VBA on the backend. I've never met a dataset I can't blast through at 500k rows per minute or better. And to go that slow I'd need to be doing a lot of work on each line.
+
+Another solution is to go one column at a time. So do your formula in Column X, then Copy/Paste Values in Column X. Then do the formula in Column Y, then Copy/Paste Values in Column Y. And so on. That can make a pretty dramatic improvement because Excel is dumb as hell when it comes to knowing which formulas need to be refreshed when things change.
+
+If you're able to process all your data in Excel with formulas, you probably don't need to move to a server hosted database, but you might want to look into Access. When you run DB's that are on your C drive, it can crank through data at a pretty good rate.  "On your C drive" is very important, btw. Access DB's sitting on a network drive can get pretty darn slow fairly quickly because your data has to keep moving back and forth across your network which is a terrible bottleneck.
+You need at the very least, a dual CPU with 32 cores each.
+Agreed-this is a huge issue at our office and we can't upgrade because our ancient Oracle financial plugin can't be used on 64 bit Excel.
+Have to, end product users choose to use excel. That is the sticking point. I have no say with that :/
+The Mac Hardware is Bootcamped to run Windows 10
+I would agree with this I've only had one spreadsheet ever be extremely slow and that was a home made built out supply chain system that was hyperlinking hundreds of thousands of cells from dozens of spreadsheets. Would not recommend doing something like this in Excel ever again. 
+The single core performance is lacking. From what I understand, if the formula chains are dependent on previous functions, only one core handles that string. 
+
+Also, my hardware is years old and I am experiencing hardware faults due to high volume usage. 
+> Edit 2: Saga Updated! https://www.reddit.com/r/excel/comments/65hee2/update_best_cpu_for_excel_heavy_work_part_2/
+
+
+PowerPivot and PowerQuery are a godsend.  We use both of them extensively at my office and they cut down so much time.
+Dual GPU? Little unusual for a workstation for Excel. What else are you doing on that?
+How many gigajoules does that store?
+This.  Plus the add-in for Hyperion can make Excel extremely unstable, even when you aren't logged into HFM/Smartview/Essbase.
+[deleted]
+http://www.ntcore.com/4gb_patch.php if you're on a 64 bit os
+part of the reason has to do with calling the location of each hyperlink and confirming its existence. faster network speed and storage I/O (e.g. everything on SSD) would help make it faster.
+
+but yeah, would not recommend doing something like that ever...
+> hyperlinking hundreds of thousands of cells from dozens of spreadsheets
+
+☠️☠️☠️
+
+That made me shudder.
+Formula chains will always be a slow point for Excel because of its limitations in design. If Excel is becoming too slow for you (It's literally taking minutes to edit a worksheet) then you need to move on from Excel and use other applications such as porting your data over to MSAccess, or an full scale DB.
+If your hardware is from 2012 you need to upgrade. I think these other posters are crazy.
+I did see the update and REALLY appreciate this comment!
+Ditto. Power Pivot is so nice for cranking out loads of DB stuff from sql server. 
+My bet is porn. Lots of porn.
+4 monitors, 2 per gpu 
+You nailed it-wish there was more competition in this area, everyone seems to runs with HFM/Essbase...
+I've used for ~2 years now. Minus the occasional 'app crash' never had an issue. What errors are you getting?
+You ain't kidding.  And everytime we have someone bring in an alternative our IT shuts it down, or someone proposes some garbage tool for 1/10th of the price for 1/100th of the abilities and some moron almost makes the switch.
+No, me either. It was for a startup, it didn't help that the system was all on a public drive.
+So programs aside, what hardware should I be looking at?
+No kidding. I've never seen a group of folks look at 5 year old hardware and say "oh, that's fine.'
+Also this 
+There are alternatives to Hyperion. I use Axiom quite a bit with none of the draw backs Hyperion seems to have.
+Try to copy a tab, excel freezes, crashes, restarts.  Sometimes I am copying/pasting a number, excel freezes, crashes, restarts.  Every time I completely close Excel, I get messages that excel has crashed and do I want to restart.  Everyone in my department has the same problems with Excel instability, even with blank files.  We're running Office 13/16.
+The fastest everything!
+
+This question is outside the scope of r/Excel
+For CPUs, the faster the clock speed the better, and multi-core of course. DDR4 RAM, it's relatively futureproof for the time being. You can roll-over the SSDs and such. It's the CPU and RAM that would play the largest role hardware-wise.
+I would recommend the WOPR computer.
+Your hardware is fine, it's not the bottleneck here.
+
+It just sounds like you are pushing the limits of what Excel is made for. If your crunching that much data seqencially you should look into using a database abs Python or R.
+two possible bottle necks here
+
+1) if formula chains cannot be re-worked, they'll make the CPU single thread performance speed the bottleneck. this can be looked up relatively easily on lists of single thread CPU performance VS price and find yourself your sweet spot. i dont know how your company thinks about the i5/i7-k series, they're fast but generally companies go for non-overclocking hardware to avoid individual tickering and prioritise stability
+
+
+2) storage I/O - SSD's are cheap now, so e.g. a RAID 1 using 128gbx2 SSD's can speed up your read speed (not write speed tho). for good speed and stability, having 128gbx4 in a RAID 10 setting means you have fast read/write and data redundancy, but it doubles your $$/storage space. it all depends on how fast it needs be and how much is worth spending on it. i propose this solution because SSD's are now at very reasonable costs and they're worth it for the speed.
+Yeah my i5 from 2014 is having trouble keeping up with my models now days. I can't imagine a single core from 2012. I'm pretty sure my computer would melt.
+It's why god invented alt-tab.
+
+Also, might have ya beat. GeForce GTX 970. 
+That is exceptionally bad. When copying tab it won't carry over the connection, but it shouldn't crash. Nor should it crash when closing excel (obviously...).
+
+If it's office-wide, that warrants a call to their tech support or whoever. Then they either help you or your company shouldn't be paying for a product which isn't helping.
+I disagree, nothing wrong with looking for insight on what runs excel best from heavy excel users.
+Facts. 
+
+Op needs to visit /r/Buildapc . They should be able to help you out.
+Does it measure our responses to their responses, and so on?  I'd piss on a spark plug if I thought it would do any good.
+That still not what he was asking though.
++1
+If OP is dealing with datasets so large that Excel/VBA can't handle them fast enough, Python, which can be generously described as "slow", is not the answer. They'd need to move to Java/C/C#/C++. 
+
+R is OK for statistical analysis, but it sounds like their building out data here (ie - adding columns), which is not really what R does.
+The CPUs OP listed were 6-core processors. (Unless I was looking at something entirely different) They can run Excel just fine. 
+You make the flawed assumption that tech support even has the resources to do anything.  Hell, its a crapshoot as to whether my U.K. Colleagues can access their WAN/LAN when they visit one of the US offices.
+> So programs aside
+
+
+Or, if he wants a laptop, /r/SuggestALaptop 
+I mean, a new PC will likely correct poor perfomance generally, especially if he is experiencing issues outside of Excel. That said, if he is really looking to optimize the situation for performance issues explicitly tied to Excel, then the software solution will probably be a bettee long term solution. 
+Nah.  I can bring Excel to it's knees long before Python or R would be "too slow."
+
+And I disagree that R is so circumscribed as you say it is.
+I think Python might be OK if the data is stored in a database and they use the strengths of a database to reduce what should be done in Python. A lot of the business logic might be done in the database and Python for some analysis and presentation logic. It's not big data we are talking about. 
+> or your company shouldn't be paying for a product which isn't helping
+hardware still impacts excel performance, i think its a valid question albeit a little leftfield
+Since they're doing everything in Excel now, I'm assuming it's not.
+
+I'm not trying to knock Python, it's a fine language, but for working with Excel files, just use VBA. Besides the ease of sharing solutions with minimal training, and no additional software needed, there's nothing in this context Python can do that VBA can't. 
+Of course if they want to work with excel then  vba is the obvious choice. You can get plugins for Python or r but no point in most cases really. 

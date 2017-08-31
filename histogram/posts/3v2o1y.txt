@@ -1,0 +1,53 @@
+I'm trying to learn VBA. What do you use it for?
+I automated a large part of my job with it. What do you do that you'd like to have a program for? 
+I just bought power programming with VBA. It's solid. 
+Can't recommend this series more for just starting out - [Wise Owl]( https://www.youtube.com/watch?v=KHO5NIcZAc4&list=PLNIs-AWhQzckr8Dgmgb3akx_gFMnpxTN5). I also love me some John Walkenbach.
+In short, VBA is fantastic for anything that involves importing data from one or more files, running metrics/pivots on the data, and creating a summary of results. I've done at least a dozen such things at my current job.
+
+One or two of them are extremely complex, and these have saved the company from buying dedicated software to achieve the same result.
+
+Absolutely recommend learning VBA. Good luck!
+Recently used it to create a template to summarise a weekly stats report.
+
+My coworker just has to fetch the data from another program into excel then clicks a button and it dumps data into a table along and refreshes a pivot table to display it in a dashboard.
+I started off just looking at the code produced from the macro recorder. I then looked at my daily processes that I would like to make simpler (or automate completely) and started looking on Stack Overflow to see if it was possible to use VBA to do that task. 9 times out of 10, it was. I now have VBA web scrapers, VBA geolocators, VBA image manipulation, VBA to upload files via FTP (by creating and running a batch file on the fly), VBA to pull info from Outlook to Excel, full excel history logger and search tool in VBA (as often the "Recent" tab just wouldn't cut it - I'm thinking of releasing this one as an addin at some point), Outlook VBA to reply to emails based on content with relevant information, VBA eBay advert creators (creates an advert for use in the description on eBay, with all relevant html code etc). After these kinds of projects, I made the transition into VB.Net using Visual Studio and made some applications.
+
+Really, the key is that you keep trying things. Keep asking questions. Keep thinking "there surely *must* be a way to do this", because chances are, there is. And if there's not, then try to think about it in a different way and you may still come up with a workable solution (an example I gave above was using VBA to write and run a batch file to upload to FTP - there is more than one way to skin a cat!).
+I wrote a program to generate a bunch of graphs from a data set then save them as .gif files that I then incorporate into a Word mail merge.
+
+I wrote another one to facilitate importing comma delimited data files into their own separate tabs and applying a lot of formatting based on certain rules. 
+
+Custom functions are great for solving really complicated calculations based on lots of extensive criteria that go beyond IF, THEN ELSE scenarios. 
+I use it to write macros that automate small tedious parts of my job or add quality-of-life options for things I sometimes have to deal with. 
+
+- one of the tasks I often have to do involves using another piece of software to create a .csv, then printing it and attaching it to a report. But since it's a CSV it has awful formatting so we have to do a few different steps to get it ready for printing. I made a macro to do it all for me. It deletes some columns, reformats others, changes print options etc.
+
+- another thing I often need to do is get prints from Sage of nominal accounts, but again the formatting is terrible and full of merged cells and useless information. So I wrote a macro to tidy the nominal up. Then I expanded it to cater for cases where I output more than one nominal at once from Sage - it now copies each nominal onto a separate tab, renames the tab with the nominal code and name, and then reformats the nominal.
+
+- sometimes the spreadsheets we get from our clients have useless rows that interfere with things that we want to do. For example they often have subtotals all over the place which we don't want and which interfere with the formulas we want to use. So I wrote a macro to delete rows based on user's choice of column and criteria. For example the user can specify to delete every row where the cell in column B says "Subtotal:". I then expanded it to allow for deleting rows where a cell is blank as well, which a user can specify by writing "!BLANKS" in the criteria.
+
+- often clients will give us spreadsheets that have that issue where the scroll bars are tiny, as if all rows are filled even though almost all of them are empty. So I wrote a little macro to fix it by detecting the last row and column in use, deleting all rows past that point, and then saving the spreadsheet to reset the scroll bars.
+
+Obviously none of these are exactly necessary. They make my life a little easier when I next encounter a situation where I need to use them. They're also very handy to distribute to other people in my department who are less fluent in Excel or VBA. And they are a great way of experimenting and learning.
+I primarily use it to automate interactions with SAP.  My biggest timesaver is a script that runs through a spreadsheet with 500+ check numbers and pulls them up in SAP to see if they've been cashed or voided, then if so puts the cash/void date in the spreadsheet.
+I am an independent contractor that makes serious money just doing Excel VBA. At least when I'm employed that is, which can be spotty TBH.  But when companies need it, they need it bad and are willing to pay good $$ to have it handled. I started on a Help Desk and noticed that Excels IDE looked like VB (it is). I also noticed my manager spent 3/4 of each month creating reports, same reports different month, lather, rinse, repeat. So I automated a small wildly annoying thing for him then, as no good deed ever goes unpunished, he started handing me other things to code up. Fast forward a few years, a few promotions and my messing with code was turned into a full time position. By the time I was done with this particular job 95% of my job was handled by a series of automated scripts that ran overnight. I would wander into work about 9ish, review my logs and email, check to see if I had any AD-HOC requests and go home around 11. I provided stats covering every aspect of help desk reporting from managerial overviews to individual stats for each of the 50+ agents manning the phones, daily, weekly, monthly, YTD, all the stuff a healthy help desk needs to know about itself. The system was still running, with modifications of course, more than a decade after I left the firm. It was the most amazing thing I had accomplished up to that point in my programming life.
+Do you work in an office? Most low level tasks in offices can be done completely or at least aided by a VBA job aid.
+
+It's pretty widely applicable. Someone made a VLC emulator using it IIRC on this sub.
+I would suggest YouTube to get your feet wet.
+I taught myself last year in the workplace (during an internship), practicing everyday was the biggest but a VBA for dummies book is where I started. Forums are probably the biggest help though
+In addition to what everyone else said, I recently started visiting /r/dailyprogrammer and codeabbey.com. Both pretty awesome.
+At the most basic, VBA does what Excel does but automatically and faster (and without mistakes assuming you do it right). I mostly automate data tasks:
+
+* prepare a table for a new set of entries
+* update graphs in another workbook based on that table's data
+* format data from CSV files into nice, human-readable format with pretty graphs (I have a couple data acquisition programs we wrote in VB.NET and LabView that spit out CSV files)
+* create reports that are formatted and ready to send to managers/clients based on data tables I often use
+Yes this.  I used to spend hours copying and pasting data or entering data points. Now I spend hours writing vba code to do it for me. 
+John walkenbach? I have the same book.
+I credit my entire professional existence to John Walkenbach.  His books are the best resource I ever picked up, 
+I'm going to be using SAP for the first time in my current gig, and I was wondering about doing just this. Do you have any good resources on using vba with sap?
+Each takes about the same effort, but the second one has an exciting button push at the end!
+Me too. When it first arrived, I didn't expect it to be that thick! (I bought the Excel 2013 version)
+
+Within 100 pages, I already learnt some new stuff and wasn't even on the VBA section yet

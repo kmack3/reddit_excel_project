@@ -1,0 +1,44 @@
+6io5t5
+Multi-Column LOOKUP with Criteria
+Hey there I have what I consider a unique VLOOKUP problem which might be achieved using something besides VLOOKUP but I am not sure since this is beyond the scope of my Excel knowledge. I have a worksheet structured as such
+
+Column A | Column B | Column C | Column D
+---------|----------|----------|----------
+A1 |      |      | 
+A1 | B1 |      | 
+A1 | B1 | C1 | 
+A1 | B1 | C1 | D1
+
+Now I want to lookup values from another sheet and put them in Column E. `E1` should correspond to `A1`, `E2` should correspond to `B2`, `E3` to `C3`, `E4` to `D4`, and etc... Basically it should lookup the column next to it if the column next to it has an empty space alongside it. I hope that makes sense, and I will try to answer questions that I can.
+
+
+-------------
+I think I might have your solution.
+
+Try entering this formula in your column E as an array formula (ctrl+shift+enter).
+
+  
+     =VLOOKUP(OFFSET(INDEX(A2:D2,1,MATCH(TRUE,ISBLANK(A2:D2),0)),0;-1),Sheet2!A1:B4,2,0)
+
+I assumed columns for the second sheet
+
+*edit: the formula is made for E2 obviously. But I found out it doesn't work if there is no blank, but I suppose you could counteract that with the following.
+    
+     =VLOOKUP(IF(ISBLANK(D2),OFFSET(INDEX(A2:D2,1,MATCH(TRUE,ISBLANK(A2:D2),0)),0;-1),D2),Sheet2!A1:B4,2,0)
+-------------
+I'm not exactly sure what the second sheet looks like.. In column E in row 2 you could use the following, assuming you want to look at what the value is in the same spot on the OtherSheet tab:
+
+    =LOOKUP(2,1/(A2:D2<>""),'OtherSheet'!A2:D2)
+-------------
+Solution verified
+-------------
+the other sheet is 1 column with `A1`, `B1`, etc.. and another column with numbers
+-------------
+
+You have awarded one point to _FabricatedBoard_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+I see so for row 2 in your example, you want to look in the other sheet and see which number is associated with A1 and return that number?
+
+    =VLOOKUP(LOOKUP(2,1/(A2:D2<>""),A2:D2), 'OtherSheet'!A:B, 2, FALSE)

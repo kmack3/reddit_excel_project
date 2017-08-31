@@ -1,0 +1,807 @@
+Common VBA Mistakes
+##Option Explicit
+Go to **Tools | Options** and turn on **Require Variable Declaration**. This will always add Option Explicit to new modules. While you are here, you might consider turning off "Auto Syntax Check" to stop the flow breaking error boxes popping up every time you make a mistake. When you are coding, you are constantly moving around look this or that up. Those message boxes can be quite pesky. 
+
+Fix your descriptions in **Incorrect Definition**. It states x, y and z, yet you don't use those variables in the examples. 
+
+##Naming Conventions
+ I used to use Hungarian Notation and then different variants. I did the iNumSheets thing, but changed that to nNumSheets. Then I started programming in C#...
+
+I don't even bother putting on type definitions any more. Instead, I use [camelCase](https://en.wikipedia.org/wiki/CamelCase) and I let the name define the usage. DestinationSheetName has no confusion that it's a string. No need for prefixing str or even s. Too many times when dealing with numbers, we have to change the size from int to long. So why bother defining the variables to the actual type. That just means you'll need to rename all of this instances. See the section on "additional info" below. Furthermore, I spell it out so there's no confusion of the meaning. Instead, I may use sheetCount or workSheetCount for the number of sheets and then currentSheet if I'm doing some sort of loop:
+
+    Dim sheetCount As Long
+    Dim currentSheet As Long
+
+    sheetCount = Worksheets.Count
+    For currentSheet = 1 to sheetCount
+        <your code here>
+    Next 'currentSheet
+
+When I'm using a variable as a parameter that is passed in ByVal, I will prefix it a lower case p for parameter. 
+
+    Public Function CheckSheetForPeanuts( pCurrentSheetNumber )As Long
+
+Oh, btw, when I have Private vs Public Routines, the private routines will be prefixed with usb_ (Private Sub) or ufn_ (Private Function). The Public ones aren't prefixed. So that way you can easily tell scope.
+
+With that all being said, sometimes I'll still use just x especially when it's just incrementing a number and it can't be confused for anything else. 
+
+##Commenting
+In most cases, try to have your code (variable names) to be self-commenting, and then limit your comments to when it absolutely needs it. Furthermore, when you reduce the size of your loops and routines, the less commenting that you really need. 
+
+Oh, I've also gotten into the habit of using an asterisks to donate a comment versus commented out code. 
+
+    '* This is a comment that isn't code. Whereas what is below is commented code.
+    ' Dim DestinationSheetName As String
+
+#Additional Info
+Most, if not all Routines (subs and functions) should be able to fit on your screen. Beyond that and it's trying to do too much on it's own and it's much harder to debug. Break them down logically into smaller routines. makes them easier to debug and they become self-documenting as a result of the routine names. 
+
+##Error logging
+Create a global sub that logs errors I usually set this on a module named "Globals".
+
+    Public Sub gWriteLog(pFileName, pMessage)
+        On Error Resume Next '* you don't want an error occurring when trying to log an error!
+        Dim hFile%
+        hFile = FreeFile
+        Open strLogFile For Append Access Write Lock Write As #hFile
+        Print #hFile, Format(Now(), "mm/dd/yy hh:mm:ss") & " *** " & s$
+        Close #hFile
+    End Sub
+
+You can call this in multiple cases like to write an error log or creating debug logs for troubleshooting weirdness in black boxes (this practice carries over to VB6 programming). 
+
+##Error Handling
+In blackbox situation (like when using classes) use Functions that return a long. The long represents error levels. zero (0) = Success, all other numbers represent an error. 
+
+    Public Function RoutineName() As Long
+        On Error Goto err_RoutineName
+        Dim errorMessage As String
+
+        <Your Code Here>
+
+    exit_RoutineName:
+        On Error Resume Next
+        <clean up code here>
+        Exit Function
+
+    err_RoutineName:
+        RoutineName = Err.Number
+
+        '* If you have a way of adding the user name in here, then do it! You'll thank yourself later.
+        errorMessage = RoutineName & "[" & Err.Number & "] " & Err.Source & ": " & Err.Description
+
+        gWriteLog(ErrorLog, errorMessage)
+
+        Resume exit_RoutineName
+        Resume
+    End Function 
+
+Basically when calling that routine you'll do the following:
+
+    Private Function CallingRoutineName() As long
+        On Error Goto err_CallingRoutineName
+
+        Dim hr As Long
+        hr = RoutineName
+        If hr <> 0 Then RaiseError hr, "CallingRoutineName", "Error Message" '*(might have these parameters backwards)
+
+The error logging would be similar here and it will trickle the error up, eventually to the calling routine, logging each time.
+
+##Classes
+Learn to use them! They allow to you create a blackbox (object) that accomplishes whatever task you want. You can set properties to them and expose only the routines needed by the outside code. 
+
+
+**Disabling Application Functionality**
+
+Often, users are told to disable a bunch of things in Excel to speed up performance of the Sub (definitely valid)
+
+    Application.DisplayAlerts = False
+    Application.Calculation = xlCalculationManual
+    Application.EnableEvents = False
+    Application.ScreenUpdating = False
+
+And then add the cleanup at the end of their code:
+
+    Application.DisplayAlerts = True
+    Application.Calculation = xlCalculationAutomatic
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
+
+However, if the Sub fails midway, and the functions are not re-enabled, they remain off and can interfere with regular expected operations.
+
+Best to introduce an error handler as well
+
+    On Error GoTo ErrorHandler:
+
+    Application.DisplayAlerts = False
+    Application.Calculation = xlCalculationManual
+    Application.EnableEvents = False
+    Application.ScreenUpdating = False
+
+    ' do some code
+
+    Cleanup:
+    Application.DisplayAlerts = True
+    Application.Calculation = xlCalculationAutomatic
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
+    Exit Sub
+
+    ErrorHandler:
+    Debug.Print Err.Number, Err.Description
+    GoTo Cleanup
+> Explicit Sheet Names
+
+Change the names in the VBA editor directly and reference it there! This is because `Sheets(1)` is dependant on the sheet STAYING in position 1!
+
+So if you change Sheet1 in the VBA editor to "MainMenu" - referring to MainMenu every is awesome.
+
+Also add With. I love With.     
+End With
+
+P.S. You rock <3
+Disagree re: macro recorder.  I think as a place to get started it is wonderful for people to be able to learn by "doing stuff".  
+
+That said, you correctly pointed out that people naturally tend to outgrow, and that is the point where people need to be mindful... 
+
+All that said, I will tell you from experience, for some dumb reason, everyone I have shown macros have been more impressed with something that looks like it is "doing something" vs. a progress bar.  Makes me so sad, but oh well.
+Excellent list. I always enjoy opening files I made 10 years ago and looking at how poorly I coded then when I was first learning. Probably was guilty of every single thing listed above. 
+
+Nothing teaches the value of naming conventions, sub routines, and comments better than working on a project without any.
+I'd also add that if you want to speed up long operations, especially those that would involve charting or writing values to cells or ranges, use application.screenupdating=false at the beginning of your code then turn it on again at the end.  I've had massive sheets that ran routines to compile summary  tables and charts go from taking classes to 10 minutes to sort 1.5 minutes.
+I believe ByVal actually uses more memory because it requires a local variable to be created (and memory allocated) within the subroutine, whereas ByRef passes a pointer to the memory location. Also, the default behaviour if not specified is ByRef.
+Definitely good stuff... I'm certainly guilty of breaking a couple of these rules, frequently I do it intentionally. But you have know the rules to know when/how to break them.
+
+Minor side note, your "passing variables" section needs an End Sub and maybe some tabbing ;)
+I feel like the ScreenUpdating tip is an intermediate level trick that hinders you eventually. If you write a lot of beginner code that reads and writes to Excel cells, ScreenUpdating = false will speed up your shitty code. But a more advanced trick would be to minimize your read and write operations. Dump the values of from a range of cells into a variant:
+
+    Dim vArr as Variant
+    vArr = ThisWorkbook.Worksheets("Data").Range("A1:D10").Value2
+
+Now you've got a 1-based two dimensional array with all the values your program needs, and you've gotten it in one near-instantaneous read operation, instead of dozens or hundreds of costly read operations to individual cells within your loops.
+
+When you're done making changes to your variant, you can output the whole thing back in one simple write operation as well:
+
+    Thisworkbook.Worksheets("Data").Range("A1:D10").value2 = vArr
+
+If you make liberal use of this tip, you'll find that turning off ScreenUpdating is a crutch that you only need in scenarios where you have code that messes with filters or formatting or some such.
+Great tips. I started working with vba year ago. Hated admin part of my job so much and management wouldn't hire consultants to automate most mundane tasks in SAP. One day I got fed up and started learning vba. Started by recording macro and copy pasting same line of code multiple times (loops? what's that?). Now I'm semi rockstar in my business area. It  was best decisions I ever made.
+
+Funny part is, I have advanced, but after reading these tips I realize how shitty of a coder I am. Option explicit? Was too much work to keep declaring values. Early binding? Have no fucking idea what values to bind to. Classes? Never heard of them.  This Module1 looks like it can fit all my subs and thousands lines of code. Error logging? Goto ErrHandler: msgbox "you got error you twat".
+
+I guess I got lazy once I reached level that meets my needs. But posts like these makes me want to continue learning and doing things better, more efficient. So thank you for putting your time.
+Thank you! This is very helpful.
+Thank you for this post! I was actually coursing through my codes today changing the variables names and putting comments all over the place to make it easy if a person had to oversee my work for whatever the reason. 
+
+There are definitely a few tips I can use from that. However, sometimes I'm obliged to do the whole... .select  .selection even though I know can simplify it. It's like VBA sometimes doesn't want to accept the ranges that I input nor the syntax even though on other macros it'd work just fine! 
+
+But, my story aside. Thank you. Honestly.
+For referencing sheets, I'm more of a fan of referencing by name at the beginning of the code for readability.
+
+Set data_sheet = Sheets("Data") 
+or
+Set data_sheet = Sheet1
+
+I've seen projects where the developer references 20 sheets using Sheet1, Sheet2, Sheet3, etc.  Its a headache trying to read something like that on the fly.
+Quite a common "General Speed improvement" is 
+
+    Application.Calculation = xlCalculationManual
+
+at the start and
+
+    Application.Calculation = xlCalculationAutomatic
+at the end. 
+
+This definitely does help with large spreadsheets, but I would suggest an amendment to this to prevent turning calculation on for users who work the majority of the time with it off. (I work with very large spreadsheets and most of the time calculation is off). 
+
+At the start of macros put something like
+
+    CalcStatus = Application.calculation
+    Application.calculation = xlCalculationManual
+
+then at the end put
+    
+    Application.calculation = CalcStatus
+
+This then sets calculation back to whatever it was before your macro started running. It is generally a good idea to leave things how you found them. This type of approach can be used with all sorts of things like checking what worksheet a user is on before bouncing around a workbook, so that you can bring them back to that sheet at the end (if appropriate). 
+
+
+Why couldn't Microsoft employees follow these naming conventions in the Help for VBA functions? I'm looking at you, InStr:
+
+    String1
+        Required. String expression being searched.
+    String2
+       Required. String expression sought.
+Talking about naming conventions, you really should use something like [Leszynski Naming Convention](https://en.wikipedia.org/wiki/Leszynski_naming_convention)
+
+A number is not always a number, you have double, integer, long, so use something more descriptive like:
+
+     Dim intDoor as Integer, intWindows as Integer
+     Dim lngWalls as Long
+     Dim rngFloor as Range
+     Dim varFamily as Variant 
+
+Using a more descriptive naming convention make it easier for everyone, especially those that have to come behind you.
+
+Sooo, what's the best way to learn VBA? I prefer books. 
+This is great, thanks! I have been learning VBA at work in my free time for a couple months now, and I am gratefully at the point where I understood everything in your post! I would love for you to continue posting these VBA tips on a variety of topics.
+Mother. fucking. sidebar.
+
+Fantastic advice all through here.
+I'm a complete beginner at this, but I recently overhauled my main module to improve its performance.  Some of it was quite slow, and there were two macros in particular that I could never run in the same Excel session - I'd have to restart my spreadsheet to get it to run.  When I monitored it with the Task Manager, I found that my physical memory was getting taken up and not being restored after the macro finished running.
+
+The first thing I did was eliminate the Clipboard everywhere I could.  The second was to eliminate eliminate references to entire columns or rows inside of any formulas.  I watched my code get much faster, and saw my physical memory restored after the code was done running. 
+
+The Clipboard is almost never really necessary.  If you use:
+
+    Range("A1:A" & rowCount).Value = Sheets("Datasource").Range("B2:B" & rowCount + 1).Value
+
+you will see a lot of improvement over using the Clipboard to move that data around.  Also, I found that:
+
+    Range("D1").FormulaR1C1 = "=SUMIF(C1:C1,R1C1,C3:C3)"
+
+is less effective than:
+
+    Range("D1").FormulaR1C1 = "=SUMIF(R1C1:R" & rowCount & "C1,R1C1,R1C3:R" & rowCount & "C3)"
+
+I don't know if anyone else has had similar experiences, or can more clearly explain why this worked for me, but it helped me out a lot.
+
+PS  -  Why so down on the Macro Recorder?  Everyone's got to start somewhere, and if you learn Excel on the streets, fancy book-learnin' just isn't an option.
+Great stuff, thanks for this! I'm fairly new to VBA, learning it on my own, so a lot of these tips are really helpful. I took some uni courses in java, python, and c and worked quite a bit with Matlab but never any bigger projects so I never got used to cleaning up my code and thinking about resources. It's something I've been thinking about more now so this came at a perfect time!
+Amazing post, thanks!
+Where's the best way to learn VBA from scratch? I've compiled and tinkered around, but never truly know the full logic and convention behind. Would greatly appreciate advices :) 
+Thank you so, so much. I'd love to see more content like this on this sub!
+I'm a bot, *bleep*, *bloop*. Someone has linked to this thread from another place on reddit:
+
+- [/r/msaccess] [Common VBA Mistakes (xpost r\/excel)](https://np.reddit.com/r/MSAccess/comments/3uyj4e/common_vba_mistakes_xpost_rexcel/)
+
+[](#footer)*^(If you follow any of the above links, please respect the rules of reddit and don't vote in the other threads.) ^\([Info](/r/TotesMessenger) ^/ ^[Contact](/message/compose?to=/r/TotesMessenger))*
+
+[](#bot)
+[deleted]
+I know this post is months old, but I have what I think is a really simply question, if you don't mind.
+
+> **General Speed Improvements**
+
+> Adding the following to the top of a lengthy piece of code (such as a complex loop) will speed up processing. This will stop the Screen from showing you exactly what is happening during your run.
+
+    Application.ScreenUpdating = False
+
+> Make sure you turn it on afterwards!
+
+    Application.ScreenUpdating = True
+
+> /u/fuzzius_navus :
+Note: If your code fails half way through, then it may miss the "screenupdating = true" part. Check out the Error Logging section on fixing this.
+
+^ This whole part. When I turn screen updating off, all that means is that the user won't *see* excel moving stuff around, changing cell values, hiding cells, etc., right? You just stare at the screen for a second during which nothing happens, and then *pop*, it all happens at once, right?
+
+So as long as my code is sandwiched between turning screen update off and turning screen update on, there shouldn't be any problems, correct? I just do this:
+
+    Define some variables
+    Turn off screen update
+    Code that does stuff
+    Turn screen update back on
+    End Sub
+
+And I'm all good and saved a little time the process. Yes?
+One tip I like is when referencing a single cell:
+
+    Sheet1.[a1]
+
+This references range A1 on the first sheet.
+
+Also on IF statements, if you keep your IF and THEN on the same line you don't need to do ELSE and END IF. For example:
+    
+    If sheet1.[a1]="" then sheet1.[b5]="That's Blank"
+
+
+
+I am on mobile so please excuse no clarification but when you are talking about variables and memory, please add a tip to set the variables (especially object and variants) to null when they are no longer needed. This should save memory and speed it up a bit.
+
+I have no reference to that but I remember reading about it and now I always do this.
+Well, you just saved me a job. Have a point.
++1 point
+I have been trying to learn about classes for quite some time now. All the literature I have read up on I think I understand, but it still hasn't helped me break into common usage of classes. I think I get it, and then try to use it in a real world scenario and just get debug errors on things where I cant see any difference between what I am doing and what the tutorial I just read is doing. 
+
+Does anyone have any goto tutorial that I may not have seen yet, or just some examples of "real world" uses
+>Application.Calculations = xlCalculateManual
+
+This works until your macro depends on a formula to calculate work. Most of my legacy subs use cell formulas rather than VBA... I guess it's a good way to force learning :-\
+Depending on the situation, I occasionally set up a pre and post set of code to do this for me...
+
+    Sub setStatus(ByVal status as Boolean)
+          Application.DisplayAlerts = status
+          Application.EnableEvents = status
+          Application.ScreenUpdating = status
+          if status then
+                   Application.Calculation = xlCalculationAutomatic
+                   application.statusbar = false
+          else
+                   Application.Calculation = xlCalculationManual
+          end if
+     end sub
+
+
+And I will often use a calcStatus variable to capture the initial Calculation state, as I cannot assume the user of the macro will want the Calculation status to be Automatic.
+Oops, should have read: Sheet1.Range("A1")
+
+The problem I have with With is that it can make code harder to read.
+
+
+Came here to comment on this. I find explicit sheet names work much better. I actually contributed on this sub by helping a user who used Sheets(1) and then moved them around and his code broke. I find there are more chances that a user will move tabs than will outright rename them.
+
+In any case, when I build solutions for users, I lock the shit out of them.
+
+But what you're describing is even better.
+
+Important thing to note (and that I wish I had learn before I started building The Master Spreadsheet to launch production and inventory control at my job) is that you're much better defining a worksheet object in the top of your routine once and then reference that object all along your code.
+
+Right now, if I wanted to rename a sheet, I'd have to go change manually the name in countless instances.
+After reading this, I've been changing all of my `Sheets("Main Menu").range("A1")` type references to use explicit VBA codenames, i.e. `MainMenu.range("A1")`.  Much easier to follow (and type out) in my opinion.
+
+Having done this though, I've realised that it doesn't work when referencing another workbook.  For anyone that runs into the same problem, a useful piece of code that I [found](http://yoursumbuddy.com/using-worksheet-codenames-in-other-workbooks/) to get around this problem is here:
+
+
+    Function GetWSFromCodeName(wb As Workbook, CodeName As String) As Worksheet
+    Dim ws As Worksheet
+
+    For Each ws In wb.Worksheets
+        If ws.CodeName = CodeName Then
+            Set GetWSFromCodeName = ws
+            Exit For
+        End If
+    Next ws
+    End Function
+
+
+Then you can do something like this:
+
+
+    Set TargetSheet = GetWSFromCodeName(OtherWorkbookName, "mainmenu")
+    MsgBox TargetSheet.Range("A1").Value
+I find people who have learnt from the macro recorder generally pickup the worst habits (.Select etc).  
+
+It's a great tool to look at how it does certain things (pastespecial/autofilters etc), but I would certainly tell new users not use it to learn how to program in VBA.
+I opened one the other day, quickly closed it and deleted it.  Was tempted to burn my hard drive and melt it in a volcano...
+
+Went something like:
+
+    Range("A1").Select
+    Range("A2").Select
+    Range("A1").Select
+    Selection.Copy
+    Range("A1").Select
+    Selection.Copy
+    Selection.Paste
+    ActiveWindow.SmallScroll Down:=48
+    ActiveWindow.SmallScroll Down:=50
+    ActiveWindow.SmallScroll Down:=1
+    ActiveWindow.SmallScroll Down:=43
+    Selection.End(xlToRight).Select
+    Range("C4").Select
+    Selection.Value = 2
+
+This is why I hate the macro recorder ;-)
+Good point. Will add 
+But... how MUCH more memory? And is there a negative impact?
+Was not aware, but makes sense. Will change
+Will change later. Was written in word so formatting is likely messed up
+Newbie here: but then how do you address (read or change ) the values in this  array?
+ Say, the equivalent of Range("b5") = Range("a1") + Range("a2")
+I think you make some valid points, but there are exceptions. I do a lot of work connecting to Active Directory or other databases. I'm sure that's not the only situation where sometimes big ugly loops are required.
+
+Both screen updating AND resource efficiency can impact overall performance.
+It may seem like an hindrance, that I will agree with you. However, the sooner someone gets used to the ScreenUpdating function, the faster that person will learn how to deal with it and make the best usage out of their macros.
+
+Personally, I'm quite "unlucky" to have a lot of popups or MsgBox thorough my codes. There are so many different variations and warnings that must be issued in order for the procedure to be respected. So yes, in that perspective it can be a hassle to rewrite it often. But, remembering that can save time and that's what matters on the bottom line I believe.
+
+Just my 2 cents.
+You'll need to set a range variable first, then set a variant equal to the range. Otherwise, your just assigning the variant to the range (which can still use For Loops, but will inadvertently execute worksheet change events if Application.EnableEvents is set to True).
+
+In addition, you're also writing values to the cell instead writing the entire range at once.
+
+For example:
+
+1) dimension range variable and assign range
+2) dimension variant and assign equal to range variable
+3) do calculation in variant array
+4) write output array back to the range variable previously set in step 1. 
+
+I'm pretty sure this was implied by your previous post, but I would hate for someone to skip step 2 and inadvertently cause problems later. I learned from personal experience that skipping step 2 will cause headaches with regards to worksheet change events.
+Keep working on it! I actually work as a SAP developer!
+If a sheet or cell reference doesn't work you should try fully qualifying it.  
+Can you give me an example of where you have used .Select?  This should never* be needed.
+
+
+*The only time I've used it, is when I actually want to tell the user "look, we are now in THIS cell"
+Yeah that's a fair point.
+I tend to use hungarian notation
+A caveat to this is that if you expect your code to be constantly evolving overtime, it might be better to use a camel case naming convention that you would expect in an object oriented programming environment, like in [java](http://www.javatpoint.com/java-naming-conventions).
+
+For example:
+
+    Dim intDoor as Integer
+
+intDoor might be good as an Integer in when you initially write your code, but what happens when you find that you need decimals, as you would expect in Double?  What do you do with intDoor now?  You can do a find all with intDoor and change it to dblDoor, or perhaps cast it to another variable, like dblDoor = CDbl(intDoor).  Both require some work though.
+
+I would have found it easiest just to name intDoor as something like door_num, then the issue of simply changing its declaration at the very beginning of the code becomes trivial.
+
+John walkenbach books, the interwebs and just start coding!
+Link to learning thread in the sidebar!
+VBA for Dummies. 
+I will likely add this to the sidebar later
+> PS - Why so down on the Macro Recorder? Everyone's got to start somewhere, and if you learn Excel on the streets, fancy book-learnin' just isn't an option.
+
+There are so many good resources online that it's very easy these days to learn VBA.  The macro recorder, whilst good to see how to 'pastespecial' or whatever, teaches users very bad habits (.Select etc).
+
+ 
+VBA is a very simple language to learn, compared with Java/Python.  If you come from that background you should pick things up fairly easily.  Although its OO section is a little confusing at first! (WHY CAN'T I EASILY PASS A VARIABLE TO A CLASS CONSTRUCTOR!?!??!)
+https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+Yes exactly. Although be careful because if your code fails for whatever reason it won't be back on again. Shove in a quick "on error goto errorcatch........ errorcatch: screenupdating = true" or something.
+
+Awful formatting and lazy writing due to phone and just woken up
+Basically, yes, that is correct. However, something more like:
+
+    Define some variables
+    Turn off updating
+    On Error GoTo ErrorHandler:
+    Do some code
+    Cleanup:
+    Set all Objects = Nothing to prevent memory leaks
+    Enable updating
+    Exit Sub
+
+    ErrorHandler:
+    If Err.Number = SomeNumber Then
+        Do something to correct the error
+        Resume / Resume Next
+    Else if Err.Number = SomeOtherNumber Then
+        Do something to correct it
+        Resume / Resume Next
+    More Else Ifs as required
+    Else
+        MsgBox "There was an unexpected error. Number " & Err.Number & " Description " & Err.Description
+        GoTo Cleanup:
+    End If
+    End Sub
+
+**EDIT** Just saw the reply from /u/Fishrage_ Consider this an elaboration.
+Thanks for the reminder
+
+You have awarded one point to _woo545_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Here you go: http://www.cpearson.com/excel/classes.aspx
+
+Best site out there for VBA stuff.
+
+Classes are wonderful, but can be very daunting coming from a functional programming background.
+
+A real world example: I created a 'post-it note simulator' which was basically a userform with frames in (frames were the post-it notes).  The user could move these around and add info to them.  Each frame was created dynamically at runtime, using classes.  My code was very small as a result, even though there could have been hundreds of frames created.
+Yes indeed. And imagine how that would affect you if you disabled calculations, Sub crashed midway (before the reenable cleanup) , you update you data set for your reports, save and close the book but none of the formula have updated.... Horror.
+When I need values that are determined by formulas, I will calculate a specific range, or worksheet, as needed, depending on the situation. 
+
+When I apply formulas, I will literally set the formula, and rarely copy and paste. This will make Excel calculate when the formula is applied. 
+
+    myRange.Formula = someFormulaAsAString
+    myRange.Formula = someOtherRange.Formula
+    myRange.FormulaR1C1 = someR1C1FormulaAsAString
+    myRange.FormulaR1C1 = someOtherRange.FormulaR1C1
+
+Then follow through with...
+
+    myRange.Value = myRange.value
+
+And if the formulas I set are pretty verbose, I tend to have a sheet that stores the formula as text in a cell so I don't have to mess with it in VBA.
+Does it? When working with one page, I find it's a lot cleaner.
+
+    With log
+    
+        lastrow = .Cells(Rows.Count, 1).End(xlUp).Row
+        
+        On Error Resume Next
+        For i = 2 To lastrow
+            'EXTRACT TIME FROM THE TIME COLUMN
+            .Cells(i, 21) = TimeValue(.Cells(i, 18))
+            'EXTRACT DAY FROM TIME COLUMN
+            .Cells(i, 22) = Format(DateValue(.Cells(i, 18)), "Ddd")
+        Next
+        On Error GoTo 0
+        
+         'EXTRACT REQUESTED BY AND REMOVE DUPLICATES
+        .Columns(14).Copy Destination:=.Cells(1, 24)
+        .Columns(24).RemoveDuplicates Columns:=1
+        
+        'SORT A-Z
+        Range(.Columns(24), .Columns(25)).Sort .Cells(1, 25), xlDescending, Header:=xlYes
+        
+        'ADD HEADINGS - PASTE SPECIAL COS YOU'RE LAZY
+        .Cells(1, 20).Copy
+        .Cells(1, 21).PasteSpecial
+        .Cells(1, 21) = "Time"
+        .Cells(1, 22).PasteSpecial
+        .Cells(1, 22) = "Day"
+        .Cells(1, 25).PasteSpecial
+        .Cells(1, 25) = "Yearly"
+        
+    End With
+
+But with two pages, I guess it can get a little bit difficult.
+Yes, especially when it spans most of the Sub. Chip Pearson, however indicates that With improves performance in VBA. Just can't find that post at the moment.
+
+Either way, great post!
+I actually prefer using Global Declarations and then using a Sub called "Declarations" and then using that throughout. Only ever have to change the names in one place.
+You've probably already thought of this.... but Notepad++ has find and replace all - replace the current hardcoded name ("SomeSheetName") with (SomeSheetVariableName) and then dim the variable and set it equal to "SomeSheetName".
+
+Unless you're calling routines all the time.... in which case using a public variable and the technique above would be the only way it would work. But I'd consider a one off public variable better than having it hardcoded in the way that it sounds like you do (no offense).
+You can also reference a cell without saying range if you want to get even shorter. For instance:
+
+    MainMenu.[a1]
+
+I suppose it depends on the audience.  Certainly for /r/excel I would encourage people to look beyond it true... but for the person sitting beside me who doesn't know how to use index/match yet, telling them to learn the debugger/and read help documentation is more overwhelming... that said, I suppose it is also true that with vba/macros a little knowledge can be pretty dangerous, as I know many don't have the rigorous versioning most of us here should be using.
+
+I think I am still more torn on the issue.  But I do agree that when you really get down to it, it is usually better to not use it.  For myself, I think the only thing I use it for is setting up final report formatting, as I tend to see that is what is most likely to change and go through iterations when I go back to people, so it won't make sense to optimize anything until later.
+I learned via macro recorder, over a decade ago. I still record quite a bit of "actions" through it, then strip all the nonsense, like .select and scroll (oh god, the scrolls). I tend to record the pastespecials and autofilters a lot, as needed since I usually forget the syntax.
+I find the macro recorder being a good way to show people that Excel knows everything you do, but Excel does not recognize what you do in the way you think it does. 
+
+For example, I use how Excel records formulas in VBA as a means to teach R1C1.
+In my haste to add my 2c I forgot to mention, that's a good list you built there.  Good stuff.
+As TheCryptic says, good form is usually more important. However, this may come into play if you're calling the function a lot. I don't know how VBA architecture works, but since the programming is interpreted on the fly, it likely needs to allocate the memory each time the function is called. If you're calling the function a few times it's not w big deal, but if you're calling it 10 000 times you may begin to see some performance issues.
+I ask this question a lot. I constantly remind myself that, with modern hardware, good form frequently trumps some resource efficiency. Not that I'm an expert on good form either, but I like to think of these things as I develop my own skills.
+You're a brave soul :)
+
+For anything more than 2 or 3 lines I always mock something up in the Excel VBE and try to verify it works. Things always go wonky on me when I try to stay in my head. Maybe the confidence will come with time.
+Look up Chip Pearson's multi-dimensional arrays page for general learnin's. For your specific question, you would write:
+
+    Dim vArr as Variant
+    vArr = ThisWorkbook.Worksheets("Data").Range("A1:D10").Value2
+    vArr(5,2) = vArr(1,1) + vArr(2,1)    ' b5 = a1 + a2
+    ThisWorkbook.Worksheets("Data").Range("A1:D10").value2 = vArr
+
+In most programming languages, arrays start from an index of 0. VBA, the lovely mongrel that it is, has some functions that return 0-index arrays (like Split), but also has functions like this one that convert a range to an array, which always start from an index of 1. Oh, VBA.
+
+Since this is a hint to avoid looping through your spreadsheet range, the only other thing you'd need to know is how to get your looping done in your nice speedy array. Here's a dumb example of a loop:
+
+    Dim vArr() as Variant
+    dim iCol as long    'column index
+    dim iRow as long    'row index
+    vArr = ThisWorkbook.Worksheets("Data").Range("A1:D5").Value2
+    for iRow = lbound(vArr) to ubound(vArr)    'loop through rows
+        for iCol = lbound(vArr,2) to uBound(vArr,2)    'loop through columns
+            vArr(iRow,iCol) = "Coordinates are " & iCol & ", " & iRow & ", matey! Arrr!"
+        next iCol
+    next iRow
+    ThisWorkbook.Worksheets("Data").Range("A1:D5").value2 = vArr
+
+Note that lbound and ubound have an optional second argument to specify the dimension you want for multi-dimension arrays.
+When is it ever better to loop through a spreadsheet instead of looping through an array?
+PLZ teach me your Active Directory ways, Jedi Master.
+Have you considered having the Sub/Function return a string with error text in it, and then in your calling routine you have 1 message box displaying the error dynamically?  Something like (this is pseudocode):
+
+    sub stuff
+
+        dim error as string
+
+        error = do_thing
+
+        if error = vbnullstring then
+            'do something else, as it didnt error
+
+        else
+            msgbox error
+            exit sub
+        end if
+
+    end sub
+
+    private function do_thing() as string
+
+        if something_happened then
+
+            do_thing = "something happened"
+            exit function
+
+        end if
+
+    end function
+> Otherwise, your just assigning the variant to the range
+
+That would happen if you omit the .value2 suffix. So you are right, it is important to not omit that suffix.
+
+Insta-edit:
+
+I made another reply a little later in this comment thread with a fully fleshed out example. Feel free to try it and see if it encounters the errors you describe. :)
+Oh sometimes I do. And it still doesn't want to budge. It tends to be weird sometimes over at the office. Never happens at home though. Go figure, I still manage to find a few ways to work around them one way or another. Unless I'm at a loss then... Hi /r/Excel :P
+Simple codes where I just copy a range for instance or use a range for a function, sometimes it doesn't want to take in account even though it did earlier in the code. 
+
+IE: The code would repeat itself a few times, yet I'd make sure the variables are well saved and aren't overriding each other. I'd have to dig for a concrete example. As to answer your other post, I can't say that I have considered that. What I mean by popups is mainly the MsgBox and whether I want to save a file or not after I handled it to acquire the information I want. 
+
+Cheers!
+It's quite useful when you build spreadsheets that try to limit users' actions.
+
+Ie. in one instance, the user of a shared worksheet will select his workspace from a menu, and a SheetSelectionChange then makes sure he never leaves it (if he ever does, .Select is used to bring him back to the last cell he was at/to the beginning of the workspace).
+Speaking of this, it's worth noting in the bit about Option Explicit and declaring your variables that good naming convention with camel case helps you see typos quickly. And Option Explicit can be turned on by default.
+Easier for you, yes, but when you are no longer working on that project or have moved into a new position/job and I have to rework your code I don't want to have to guess what you defined a variable as.  Scrolling from top to bottom every time I find a new variable... 
+
+Nothing I hate more when I am asking to fix something in a code block and some ambiguous variable shows up and I have to track it back to where it is defined and what it is defined as...
+Don't mess up my formatting >_>
+Thanks! The error thing makes sense. Will do!
+Here is the explanation:
+
+http://stackoverflow.com/questions/517006/is-there-a-need-to-set-objects-to-nothing-inside-vba-functions
+
+It might not be useful for everyone but since we are listing good practices this should be included.
+I once created a Sudoku solver in Excel VBA. Never really played Sudoku since then.
+In VBA?
+
+Does this Workbook still exist?
++1 point
+I don't think I was clear. Imagine a sub where you're using cell formulas to do some type of calculation. At the end of the sub, you call a routine to export the fresh numbers. You create a new workbook, copy the calculated values, and then to pastespecial xlpastevalues into the new workbook. Apply some formatting, save the new book and clean up. In the case above, wholesale use of the .calculations property at the start and end will be counter productive. You'll end up with a bad sheet of exported nonsense, likely #N/A. It's not a bad property to use, but if you're like many people who learn using the recorder adding it at the start and stop of your routine can do more harm than good if you're not intimately familiar in the flow of your routine. 
+Just throw in an Application.Calculate fore you read the value of the cell.  That always works for me.
+As you are an advanced programmer, this line can bite you in the ass:
+
+     lastrow = .Cells(Rows.Count, 1).End(xlUp).Row
+
+Because, as an advanced programmer, you won't be .Selecting or .Activating for the most part. The fix is easy
+
+     lastrow = .Cells(.Rows.Count, 1).End(xlUp).Row
+
+Notice the dot before "Rows"? Ahhhhh!
+
+Also, I'm a fan (just because it can be done) of nesting With statements.
+
+    Option Explicit
+    Sub NestedWiths()
+    
+        With Sheet1
+        'Do stuff with Sheet1
+            .Name = "Sheet1's New Name"
+
+            *Do stuff with Sheet1's UsedRange
+            With .UsedRange
+                .Font.Bold = True
+            End With 'UsedRange
+                
+        End With 'Sheet1
+    End Sub
+Yes! I read this somewhere too, I think it's too do with the fact that using "With" - it picks up the range/sheet only once and then keeps it in memory until End With - which is quicker and easier than explicitly stating each time as it is constantly picking it up and dropping it with each line.
+
+Looping in /u/Fishrage_
+Fair enough
+This is an excellent idea.
+Don't use globals!!!!!
+
+Instead, have a 'declarations sub' that has local variables and pass them between the routines.  It's so much easier to read as you can see where the variables are coming from, ratehr than going "where the hell is this variable defined?!  Oh, it's a global... I guess I have to scroll to the top and then find out where it's used"
+
+    Public Sub lp_execute() ' lp_ stands for local procedure, just a naming convention i've adopted from ABAP
+
+        Dim iSomeNum as integer
+        Dim bBadgerFlag as Boolean
+
+        Call lp_do_stuff(iSomeNum, bBadgerFlag)  ' I use Call because it's easier to read
+
+    End Sub
+
+    Sub lp_do_stuff(byref xSomeNum as integer, byref xBadgerFlag as boolean) 'I like to always state byref, even though it's defaulted
+
+        xBadgerFlag = True
+
+        iSomeNum = 42
+
+    End Sub
+Exactly. While you want a worksheetchange piece of code to be lightning fast; I don't care if users have to wait an extra second when running a subroutine they run once an hour at most.
+Oh I still do this.  My muscle memory starts typing code using ABAP syntax.  I get  confused when VBA errors on the following:
+
+    Sub doStuff().
+
+        DATA: lv_var TYPE i.
+
+        lv_var = 1.
+
+        WRITE:/ lv_var.
+
+    End Sub.
+
+Like, dude... This should work!  OH... that's ABAP, wrong language.  Stupid muscle memory
+Thank you!
+Well one example would be when the spreadsheet is blank and you need to populate it with data from an adodb recordset. If the recordset is small enough then you can use the range.copyfromrecordset method, but large recordsets cause that to barf.
+
+*Edit:* Typo
+It is always faster (by a high factor) to deal with arrays, rather than cells.
+
+Cell-by-cell reads / writes is one of the slowest things VBA does. While VBA will blaze through a large array.
+
+The larger the dataset, the more using arrays speeds the code.
+Not sure how serious this is, but I might be able to provide some help if you need it. The biggest challenge for me was getting all the bits put together to connect in a way that was useful for me.
+
+http://www.remkoweijnen.nl/blog/2007/11/01/query-active-directory-from-excel/ is one of many places with good examples, and this code looks a lot like mine. In my case I need to crawl a forest, and it took longer than it should have to figure out the "Chase referrals" property.
+
+So for example there have been times that I needed to dump all the accounts across our domains. This is what I used (with bad form, not declaring variables.)
+
+	const ADS_CHASE_REFERRALS_NEVER = &h0
+	const ADS_CHASE_REFERRALS_SUBORDINATE = &h20
+	const ADS_CHASE_REFERRALS_EXTERNAL = &h40
+	const ADS_CHASE_REFERRALS_ALWAYS  = &h60
+
+	Set AD = CreateObject("ADODB.Connection")
+	AD.Provider = "ADsDSOObject"
+	AD.Open "Active Directory Provider"
+	Set ADCmd = CreateObject("ADODB.Command")
+	Set ADCmd.ActiveConnection = AD
+	ADCmd.Properties("Page Size") = 100
+	ADCmd.Properties("Timeout") = 30
+	ADCmd.Properties("Cache Results") = False
+	ADCmd.Properties("Chase referrals") = ADS_CHASE_REFERRALS_ALWAYS
+	
+	ADCmd.CommandText = "<GC://dc=contoso,dc=com>;(&(objectClass=user)(objectCategory=Person)); samaccountname, displayname, mail, distinguishedname;subtree"
+	Set rs = ADCmd.Execute
+
+From there you really just need to look into [LDAP querys](https://technet.microsoft.com/en-us/library/aa996205%28v=exchg.65%29.aspx) and how to work with [ADO Recordsets](https://msdn.microsoft.com/en-us/library/ms681510%28v=vs.85%29.aspx). Once you get the basics of working with AD you'll find that the biggest challenges come from AD itself, not from how to connect to it.
+
+On a side note, most things with AD are better with PowerShell. But if you need the data in Excel then it can be done.
+
+*Edit:* Had to escape parenthesis in the URLs.
+I actually say that based on code that has been inherited from the past.  Variables should be defined at the beginning of the subroutine/function, and they should be understandable based on context.
+
+I have a project that's more than 5 years old where the developer thought it was a great idea to declare 200 variables globally as integers.  The current trend of the calculations now require that those variables require that they require decimals.  However, that totally ignores that you have 200 variables to have to work with - it would have been even better to lump all those variables into a class object or limit the scope of all those variables locally to specific subroutines where they are needed.
+
+The basic idea is that your code should not be married to its environment or structure.  I've seen uses of integers where doubles are more appropriate, or use of strings when arrays are more appropriate, etc.  Combining data type with your variable naming convention basically locks that variable into the logic of your code, when the code itself might be refactored into something easier.  Part of that refactoring process requires flexibility in how you declare those variables.  
+
+If you have to scroll up or down to figure out data types, then I'd question how modular your code is - for my lovely project, those 200 variables are not required throughout the entire project.  Going back to the example of using intDoor vs. door_num, I can easily tell by context door_num can do in a subroutine that's 10 lines long and which is called by other parts of code than figuring out what door_num does in block of code that's 100 lines long.  If I need to use door_num as a Double instead of a Integer, at least I don't have to worry about renaming the variable.  For your scrolling up and down situation, you can use bookmarks or use Ctrl+J to see your variables that are declared in scope...
+
+But I digress.  It really depends on your style.  I personally find a declarative style (such you would find in Hungarian notation) being too structured in logic, whereas a imperative style (where you would find more in object oriented languages like java or python) to be more versatile...
+You can avoid scrolling:
+
+Shift+F2 with cursor on a variable or procedure will jump to the declaration, CTRL+Shift+F2 will take you back to your last position.
+
+Aside from that, I agree with you. Either develop your code to be future tolerant and name your variables in such a way as their use is clear, or edit your code in the future and still name variables by typeVar.
+> Scrolling from top to bottom every time I find a new variable...
+
+Made so much easier if you pass variables between routines! ;-)
+Have you considered making the source public? This sounds very interesting and I'm always looking for new projects to work on and sharpen my vba sword.
+Ah! I am currently working on a Sudoku Solver myself in Excel VBA.. it works for easy through some hard puzzles currently. Need to work on more advanced solving techniques to get it to work for the more difficult puzzles. While I'm sure some sort of class would help me I have not mastered classes in VBA (i have some knowledge of classes in Java). 
+Yes in VBA, and yes it still exists somewhere..... I think?
+Only moderators can do this I'm afraid.
+Oh yes, of course. Definite misinterpretation. I've actually got a couple of subs that I call to enable/disable. I'm going to have to rethink those. I almost never use worksheet functions in my code. However, in solutions I've posted for redditors I've definitely used them.
+> cause, as an advanced programmer, you won't be .Selecting or .Activating for the most part. The fix is easy
+
+/u/epicmindwarp - This is what I mean when I say hard to read!
+
+     lastrow = .Cells(.Rows.Count, 1).End(xlUp).Row
+
+VS.
+
+     lastrow = logSheet.Cells(logSheet.Rows.Count, 1).End(xlUp).Row
+Interesting, wasn't aware of this
+How do I keep a class object that I need stored for later use without using a global?
+
+As in -> I store some info in a class object regarding the current 'session' (it's stored when an initial UserForm is called.), and then I want to use the settings and other info for later use. Is it possible to accomplish this without declaring Public/Global variables?
+Whilst you don't care, and the user's don't notice a difference, I find it's good practice to ensure your code is the most efficient you can make it.  Makes you a better programmer.
+> It is always faster (by a high factor) to deal with arrays, rather than cells.
+Cell-by-cell reads / writes is one of the slowest things VBA does. While VBA will blaze through a large array.
+The larger the dataset, the more using arrays speeds the code.
+
+.Find is even faster.
+
+In the language I use (ABAP) we use hungarian notation.  Basically every variable starts lv_ whether it's of type int, string, <custom variable> etc etc.
+
+Makes it much easier to change the type later, but can make it harder to understand what type it is.
+    '* Concept
+    '* Load data in 4 arrays.
+    '* - All Data
+    '* - One each for Row, Column and Box - this stores bit
+    '*   flags to see if the value was actually used.
+    '* Use recursive programming.
+
+The total length of my program is less than 230 lines, 66 lines were for loading the current data from a spreadsheet.
+Ahh, I think I've even tried to do this before as well... I was just so happy to see what he showed!!! Amazing stuff!
+And I don't blame you - they're easy. It's the same reason I use them - easy to compartmentalize, easy to explain and easy to write and then use the macro recorder and edit the & "0" off the end of them once you've got it right. Even most of what I use today is still copying a set of cell formulas from the 'formulas' sheet and pasting it into  some 'data' sheet. It's inefficient, but as someone who learned scripting (as opposed to real programming) cell formulas are much easier for me to intuitively understand and debug. I will say that I've started to transition to VBA only equations and the results are oddly satisfying. 
+You can pass the object to the other class when it's instantiated; As long as the other class is expected an object passed to it.
+
+http://stackoverflow.com/questions/14470427/passing-classes-variables-in-vba
+With the caveat that you code for efficiency without losing readability.  Someone may need to support that code in the future. I will happily write something that runs in 20 minutes instead of 15 if it's considerably easier to support...  Bearing in mind that most of my stuff runs while I'm asleep.
+My program is currently at 300 lines and I still can't solve the difficult puzzles, definitely doing something wrong. 
+How did you manage to program in the logic so that if, let's say, in Row 3, square 3 (columns 7-9) there are 2 cells that have to include the number 7 because it doesn't fit anywhere else in the row, so you can eliminate 7 as a possibility from the rest of square 3?
+
+Edit: I believe the concept i'm describing is "locked candidates"?

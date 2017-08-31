@@ -1,0 +1,13 @@
+What's wrong with this syntax? =sumif($R$27:$R$2900,"PARCEL",$I$27:$I$2900,"="&B1,$H$27:$H$2900)
+SUMIF can only do one criteria at a time. You are checking for two things. 
+
+Try SUMIFS. It's basically the same thing, just allowing multiple criteria, the only thing to note that is different is you put the stuff you want to sum first instead of last. So the format would be
+
+    =SUMIFS($H$27:$H$2900,$R$27:$R$2900,"PARCEL",$I$27:$I$2900,"="&B1)
+I always liked the sumifs syntax better than sumif. Putting the cells to be summed first just feels right. 
+SOLUTION VERIFIED!
+Same. I use SUMIFS for single criterion sums too.
+
+You have awarded one point to _Golmaia_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

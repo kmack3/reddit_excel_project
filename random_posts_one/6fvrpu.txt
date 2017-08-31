@@ -1,0 +1,52 @@
+6fvrpu
+Using a variable to define a Sheet Name in a chart
+I have been trying to make a workbook to log info about various customers, with each customer's info on a separate sheet. I want every sheet to be set up with a template, where a chart on each sheet refers to the cells on the same sheet. 
+
+The Sheets follow the naming convention of 'company2017' & 'othercompany2016'. I have some VBA stuff to make =SheetName(A1)  output the name of the sheet, and =SheetName(A1,1) output the name of the sheet, wrapped in single quotes and followed by ! 
+EX: 
+
+In cell | Output
+:--|:-:
+=SheetName(A1,1) | 'Sheet1'!
+=SheetName(A1) | Sheet1
+
+My question is-- can I use that formula as a variable, (or put that formula in a cell that I can name) in a chart. 
+A formula I have now would be:
+> =SERIES('company 2017'!$I$38:$I$40,,'company 2017'!$I$38:$I$40,1)
+
+When copied to a different sheet the Sheet is still defined. 
+I've tried :
+> =SERIES(SheetName(A1,1)$I$38:$I$40,,SheetName(A1,1)$I$38:$I$40,1)
+
+as well as several variations with =INDIRECT(SheetName(A1,1)) and putting =SheetName(A1,1) in a cell and setting that cell as the variable. 
+
+I feel like it should be simple but I've been searching for several days and can't figure it out. Thanks to anyone that might have some tips!
+
+EDIT: Trying this 
+> =SERIES(INDIRECT(SheetName(A1,1)&'$I$38:$I$40'),,INDIRECT(SheetName(A1,1)&'$I$38:$I$40'),1)
+
+also didn't work. Warns me "that function isn't valid"
+
+EDIT 2: 
+Maybe I'm going about this the wrong way:
+I need to make a template for a sheet that is all self-referencing. It has one chart and simple formulas. I want to be able to create more copies of this sheet (an rename those sheets) where the chart doesn't always refer to the original sheet. 
+
+
+
+-------------
+I would put double quotation marks (") rather than single (') but honestly that might just be equivalent or only in the UK version - don't have access right now!
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

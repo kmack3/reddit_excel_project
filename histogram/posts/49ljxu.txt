@@ -1,0 +1,27 @@
+How do you call an outlook macro from Excel?
+I did something like this before, using vbs as the bridge. Call the VBScript from excel then have the VBScript send email through Outlook. You have to install redemption though, or there will be a confirm box every time an email is send by macro.   
+Edit: Found the vbs code   
+
+    Sub SendEmail(addresses, attachments, strSubject, strBody, ccAddresses, bccAddresses, sendAsHTML)
+        Dim olApp, olMail, olItem, i
+        Set olApp = GetObject(, "Outlook.Application") ' get currently running Outlook instance
+        If (olApp Is Nothing) Then Set olApp = CreateObject("Outlook.Application") ' open new Outlook instance if it's not running
+        Set olMail = olApp.CreateObject("Redemption.SafeMailItem") ' Create a new email, using Redemption
+        Set olItem = olApp.CreateItem(0) ' Create a new email
+        olMail.item = olItem
+        ' enter email content
+        With olMail
+            ' set various things like subject, body, To, etc...
+            .Send
+        End With
+        
+        Set olApp = Nothing
+    End Sub
+What about grabbing the values from Excel instead? Control Excel from Outlook to get what you need.
+I had this same question a few months ago because running it through excel gave some security errors but I couldn't find the answer so I figured out how to run an excel macro that sends emails through outlook and bypasses the prompt boxes. If you don't have an answer by the time I get to work I can send you my excel code if you'd like. 
+Click on the developer tab, or right click customize and enable that tab. You can also press alt+F11
+What is redemption?
+How does the developer tab help? Like I said I'm looking for the syntax in VBA to call a macro from the Outlook application.
+[This](http://www.dimastr.com/redemption/home.htm)   
+When you use VBA to send email without user interaction, a popup will appear to confirm your intention. redemption is needed to subvert that popup.
+Sorry I misunderstood, I thought you were trying to pull up the macros in excel.

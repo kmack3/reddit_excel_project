@@ -1,0 +1,66 @@
+Is there a keyboard shortcut for the green square pull( explained better in the body)?
+CTRL+D (down) and CTRL+R (right) will copy a selected formula into the adjoining cells.  Select the cell you want to be copied and the others (shift+arrow or use the mouse) then press either CTRL+D or CTRL+R.
+
+This will copy the formulas or data in the first cell.  It won't auto-fill day, week, month or sequence numbers.
+Double click the full handle! Not quite a keyboard shortcut, but a shortcut. 
+If you must use a keyboard shortcut, you're looking for: 
+
+Select the cells to fill (the fill sample and the blank cells as well) and use this: 
+
+Alt-H-F-I-S, Alt-F, enter. 
+
+I prefer the fill handle, myself. 
+
+I'm not sure.
+
+If you want to try googling etc, that square is often called the "fill handle".
+
+From memory there might be an option that does the same thing in the context menu that appears when you press Ctrl after pasting (or by clicking the temporary button that usually appears at the bottom-right of the pasted range).
+Hi. I google it and the best solution I found was to:
+
+CTRL-C of source cell
+CTRL-G (go to) enter last cell in a column
+SHIFT-ENTER (highlights that whole section)
+ENTER (pastes values in all cells)
+
+
+Ctrl Enter.
+I think the easiest is just control-shift-down arrow and then control-d. 
+
+Likewise, as someone else said, you can control-shift-right and control-right. 
+
+The c-s-arrow approach highlights until end of contiguous and the control-d/r fills until end of selection. 
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+Mine's blue
+Damn, that's a useful one. 
+
+Is there a list of keyboard shortcuts like this around anywhere that you're aware of?
+[This is the list I use usually.](https://exceljet.net/keyboard-shortcuts)
+TIL about Flash Fill
+Column A is a list of first and last names "john smith".  
+In column B and C you want First and Last "John" Smith"
+Go to B1 and type John.  
+Go to B2 and hit CTRL+E.  Flash Fill will attempt to populate all the cells in the column with the pattern matched (first name).  Repeat in column C.
+
+I'll only use this once in a while, so I'll probably forget, but wow - cool.
+
+[Youtube video](https://www.youtube.com/watch?v=YPG8PAQQ894)
+
+
+Holy shit that's a lot of shortcuts. Thanks!
+Yup, I'm always a little surprised at the little conveniences built in. 
+
+And then I'm always a little surprised at some of the unintuitive elements or lack of certain conveniences.

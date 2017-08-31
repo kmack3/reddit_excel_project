@@ -1,0 +1,52 @@
+6itc11
+[VBA] Copying Range.Value to another Range.Value - getting error
+I have some VBA code (that works in most cases). However, in specific circumstances it appears to fail. The line which fails is (simplified for an example):
+
+Sheet("Sheet1").Range("A2:M12").Value = Sheet("Sheet2").Range("A15:M25").Value
+
+99% of the time this will work, however in a recent running of the program I received an error. After some troubleshooting I discovered this was because one of the cells had a leading "=" - and presumably excel was treating it as a formula and then failing. After removing the leading sign the program worked fine as expected.
+
+Is there a way I can achieve the same effect, and avoid cases such as this from causing the program to fail? (without specifically looping through the beginning range and check that each individual value is valid).
+
+For reference, the data is imported from another database as a CSV, there's no process in place to sanitize the input/export from the external database.
+
+
+-------------
+If the cell begins with a =, Excel will treat it as a formula no matter what. There's no way around that. My suggestion would be to do a find/replace on your range before moving it -- either remove the = or replace it with '=
+-------------
+Can't you make it as a copy/paste? Like so:
+
+    Sheets("Sheet1").Range("A2:M12").Copy
+    Sheets("Sheet2").Range("A15:M25").PasteSpecial Paste:=xlPasteValues
+
+-------------
+Hey, 
+The cell containing a formula shouldn't trigger any errors because .value will evaluate formulas.. So I'm not quite sure how the "=" plays into it, i think you may need to dig in a little more to find out what's going on... What is the error you get? 
+tip: try using .value2 to get underlying cell value without any formatting (for currency / date), see if that helps
+-------------
+i.e. 
+
+`Sheets("Sheet2").Range("A15:M15").Replace What:="=", Replacement:="'="` to keep the =  
+
+`Sheets("Sheet2").Range("A15:M15").Replace What:="=", Replacement:=""` to remove it
+
+-------------
+Okay, I didn't think about using replace on a full range like that, so that's useful, but is there a way I can specify "=" at the start of the cell? I don't want to end up editing cells which contain = signs inside the string.
+-------------
+Ah, good point. I don't know a one-liner way to do this, I think you'd need to loop through every cell. i.e. 
+
+    Dim Cell As Range
+    
+    'to remove the =
+    For Each Cell In Sheets("Sheet2").Range("A15:M15")
+        If Left(Cell.Formula, 1) = "=" Then Cell.Value = Right(Cell.Formula, Len(Cell.Formula) - 1)
+    Next Cell
+    
+    'to keep the =
+    For Each Cell In Sheets("Sheet2").Range("A15:M15")
+        If Left(Cell.Formula, 1) = "=" Then Cell.Value = "'"& Cell.Formula
+    Next Cell
+-------------
+Yeah thanks, I thought I might have to loop through every cell myself but thought I'd ask if anyone had any better ideas.
+
+Thanks for the help.

@@ -1,0 +1,77 @@
+How do I sort Excel sheets alphabetically?
+There's no built in sort function. However, Microsoft has provided [this macro](https://support.microsoft.com/en-us/kb/812386) to sort worksheets. Just paste it into ThisWorkbook and hit run.
+
+    Sub Sort_Active_Book()
+       Dim i As Integer
+       Dim j As Integer
+       Dim iAnswer As VbMsgBoxResult
+       '
+       ' Prompt the user as which direction they wish to
+       ' sort the worksheets.
+       '
+       iAnswer = MsgBox("Sort Sheets in Ascending Order?" & Chr(10) _
+         & "Clicking No will sort in Descending Order", _
+         vbYesNoCancel + vbQuestion + vbDefaultButton1, "Sort Worksheets")
+       For i = 1 To Sheets.Count
+          For j = 1 To Sheets.Count - 1
+       '
+       ' If the answer is Yes, then sort in ascending order.
+       '
+             If iAnswer = vbYes Then
+                If UCase$(Sheets(j).Name) > UCase$(Sheets(j + 1).Name) Then
+                   Sheets(j).Move After:=Sheets(j + 1)
+                End If
+       '
+       ' If the answer is No, then sort in descending order.
+       '
+             ElseIf iAnswer = vbNo Then
+                If UCase$(Sheets(j).Name) < UCase$(Sheets(j + 1).Name) Then
+                   Sheets(j).Move After:=Sheets(j + 1)
+                End If
+             End If
+          Next j
+       Next i
+    End Sub
+
+Thankyou, I've seen that online, just didn't know how to use it. How do i paste it into the workbook?
+Right click on the ribbon up top. Hit customize ribbon. Check the box next to Developer tab. 
+
+Go to the Developer tab and click Visual Basic to open the VBA window. You'll want to look on the left side where you'll see **VBA Project(<workbook name>)**. Double click *ThisWorkbook* in the Microsoft Excel Objects folder. Paste in the code.
+
+Click Macros in the Developer tab. Then click on the macro and hit run.
+Hello, thanks alot it worked.
+
+You've also just unlocked the doors the underground excel network. I feel like I'm in the matrix.
+
+Also,is there a way to do this on the online shared google spreadheet versions of excel?
+https://www.google.com/sheets/about/
+Now that you know how to use macros, there's a lot more you can do with them than just basic formulas. 
+
+There is a way to do this with Google Sheets too. You will need to click "Tools --> Script Editor..." and paste some code in. Then save it, hit the run button, give it the permission it asks for, and click back into your spreadsheet.
+
+ I have included the simplest code I found for this below. However, for some reason, it does not rearrange sheets that have been left at their default name of "Sheet#", but it will put all other sheets in order. If it doesn't work for you, you can find similar code using a Google search that may give you better results.
+
+    function sortSheets () {
+      var ss = SpreadsheetApp.getActiveSpreadsheet();
+      var sheetNameArray = [];
+      var sheets = ss.getSheets();
+     
+      for (var i = 0; i < sheets.length; i++) {
+        sheetNameArray.push(sheets[i].getName());
+      }
+     
+      sheetNameArray.sort();
+     
+      for( var j = 0; j < sheets.length; j++ ) {
+        ss.setActiveSheet(ss.getSheetByName(sheetNameArray[j]));
+        ss.moveActiveSheet(j + 1);
+      }
+    }
+
+And it works. You are very good at Excel. 
+Thankyou Very Much. :)
+SOLUTION VERIFIED!
+
+You have awarded one point to _badaccountant7_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

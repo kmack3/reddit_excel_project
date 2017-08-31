@@ -1,0 +1,39 @@
+Where to go when outgrowing Excel? Database or Learn to Code?
+Depending on what you need to do with the data, transferring it over some sort of SQL database is probably the next logical step.  There are a bunch of ways that you could go about doing that, the easiest is probably to save the sheet as a CSV file and load it into into a [MySQL](http://www.mysql.com/) DB.  See this [guide](http://dev.mysql.com/doc/refman/5.1/en/load-data.html) for how to get started.
+
+There are lots of benefits to using a proper DB over excel, [here's](https://datanitro.com/blog/2013/5/23/Excel_and_sql/) a good blog entry.  What's more, you can [use Excel to access the SQL DB if you really need to](http://office.microsoft.com/en-001/excel-help/create-a-pivottable-to-analyze-external-data-HA102895232.aspx)
+
+From there you can go about learning to execute SQL queries on the dataset.  For learning SQL I'd humbly suggest starting with [GalaXQL](http://sol.gfxile.net/galaxql.html) as it will give you a good understanding of how to use SQL to manipulate and search you data.
+
+If it's just a single user working on the dataset, MySQL should be fine. If you're looking for something that supports multiple users and could scale up to provide an enterprise solution, take a look at [PostgreSQL](http://www.postgresql.org/).
+Python & pandas will change your life*. Then learn a bit of SQL -  basic will do. 
+
+*opinion of someone who was in your position 12 months ago. 
+
+You can learn both at the same time.  However, I first learned SQL and then started learning Python.  SQL was almost immediately useful on the job, in my case.  Python requires more time to learn but is starting to become much more helpful now that I have started to learn Pandas, and SQL alchemy.  I temporarily still use excel, but only to display reports.  And only because there a few things I don't know exactly know how to do in Python yet.  I feel that in the next 3 to 6 months I will be using only Python and SQL for all analysis and of course data storing/cleanup.  Models in Python are so much more elegant and simple then building in Excel!  
+If you want to stay in Excel, your 50x300 segments could be stored down in text(.csv or custom) files in a structured format and handled on demand by a master workbook.  Reading/writing via a textstream object is incredibly fast.
+
+You could include validation checks to ensure data integrity and backup/restore each block rather than the workbook as a whole. You could probably add a lot of functionality to your process if it was done well.  
+
+Aside from that, it's really a database problem when you get this big.  Maybe you want to create an Excel front-end, but any workbook with that many datapoints, and presumably formulas is going to be slow, and susceptible to corruption unfortunately.
+The answer is it depends. If you are doing a lot of statistical analysis or math you should look at R. If you are doing a lot of data entry, look into a database.
+I would second taking a look at PostgreSQL. If you're doing a lot of statistical work on the data, you can embed R or Python code as a stored procedure directly into the database.
+
+Also, you may want to look at normalization (300 columns sounds a bit excessive) and materialized views to limit repetitious data and limit the amount of calculating that your system may have to continually redo (e.g. refresh the materialized view only once after the daily/weekly data load), respectively.
+thanks!
+thanks!
+To learn SQL, start with this book:
+  http://www.amazon.com/Sams-Teach-Yourself-Minutes-Edition/dp/0672336073/ref=sr_1_1?ie=UTF8&qid=1407993921&sr=8-1&keywords=sql+in+10+minutes
+
+Then once you need more ideas with SQL, go to this book:
+  http://www.amazon.com/gp/product/0596009763/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
+
+For Python, I would start with this book:
+  http://www.amazon.com/Python-Programming-Introduction-Computer-Science/dp/1590282418/ref=sr_1_1?s=books&ie=UTF8&qid=1407994104&sr=1-1&keywords=python+programming
+
+SQL may come almost naturally to you.  For me at least, the basics of SQL came rather easily.  With Python, expect to be a little lost, not with the programming concepts but with setting up your computer and getting Python packages installed, etc...  Once you get all that done though, you will be golden.  
+
+  
+
+
+thanks!

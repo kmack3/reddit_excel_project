@@ -1,0 +1,28 @@
+6g6sb4
+Using LOOKUP function for dates
+Below is a sample of data relating to the movements of a vessel in and out of a harbour:
+
+http://i.imgur.com/h3lYcgH.png
+
+What I want to do is have a function which will tell me the trip number that we were on by the end of each day.
+
+So for example, by the end of the 21st the vessel had made 2 trips, by the end of the 22nd the vessel had made 9 trips, by the end of the 23rd the vessel had made 17 trips, and so on-so-forth.
+
+Let's say I want the number trips by the end of the 21st for example then:
+So what I'm thinking is maybe it needs to be some kind of lookup function where it looks up the last cell corresponding to "21-05-17", and then with some offset, output the corresponding trip number which is 2.
+
+I have no idea, I'm open to anything
+
+Cheers
+
+
+-------------
+You could easily obtain this with a pivot table. Date on the Rows field, and count of trip on the Values field.
+-------------
+You can accomplish this with a countifs statement. Create a cell for day, month and year input (say, cell D1, D2 and D3, respectively). Then, based on your data, you could use:
+
+=COUNTIFS(B:B,">="&DATE(D3,D2,D1),B:B,"<"&DATE(D3,D2,D1+1))
+
+EDIT: Obviously you can also explicitly use a full date in one cell for the reference, but it looks like you want to change just the day of the month. Hope that helps.
+-------------
+If you then want to access this data, either VLOOKUP or INDEX/MATCH on the pivot table.

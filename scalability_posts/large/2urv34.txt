@@ -1,0 +1,168 @@
+large
+2urv34
+How can I highlight only those numbers from a large list of numbers that, when summed, add up to specified total?
+
+I have a list of numbers, and several of these numbers were earmarked for further analysis, however, the list of those that were earmarked was lost. The only info I have is that the total of the earmarked numbers was X. Is there any way to run through a list of numbers and highlight those that, when added together, total to X, so that I can know which ones were earmarked?
+
+I realize there are multiple possible sets of numbers that add to my total, but the list isn't gigantic and the numbers are out to the penny, so it's unlikely that there is more than one solution.
+
+Thanks!
+
+
+-------------
+So out to the penny...are you open to VBA help or is this strictly a formula solution?
+-------------
+This isn't exactly a trivial problem: http://en.m.wikipedia.org/wiki/Subset_sum
+
+How big is your data set? 
+-------------
+I'm comfortable with VBA, but as this would be billable to my client, I'd like to spend as little time as possible, so simpler is better. Thanks
+-------------
+30 numbers, approximately 1/3 of which are in the subset.
+-------------
+VBA will take just about no time. Unless you bill by the millisecond, it won't even show up.  Do you have any sample data (made up numbers) with an expected result I can test against?  I'll start crafting my own sample data as well.
+-------------
+Oh,  want to just post it and the sum then
+-------------
+Awesome, thanks. Sure, how about this:
+
+5.28
+
+5.62
+
+4.22
+
+7.24
+
+1.4
+
+1.91
+
+6.43
+
+2.55
+
+5.21
+
+2.85
+
+9.87
+
+1.44
+
+1.31
+
+5 of these numbers total to 15.58.
+
+Thanks again!
+-------------
+Sorry, but I don't have them in front of me, I need to bring a solution to my boss, who has the exact numbers.
+-------------
+    Sub subSetSum()
+
+    Dim endRow As Long
+    Dim checkSum As Double
+    Dim answerCol As Integer
+    
+    endRow = Cells(Rows.Count, 1).End(xlUp).Row
+    answerCol = 2   'CHANGE TO USER INPUT
+    checkSum = 15.58  'CHANGE TO USER INPUT
+    
+    
+    For x = 2 To endRow Step 1
+        If Cells(1, 1) + Cells(x, 1) = checkSum Then
+            Cells(x, answerCol) = "x"
+            answerCol = answerCol + 1
+        End If
+    Next x
+    
+    For x = 1 To endRow Step 1
+        For y = x + 1 To endRow Step 1
+            If Cells(x, 1) + Cells(y, 1) = checkSum Then
+                Cells(x, answerCol) = "x"
+                Cells(y, answerCol) = "x"
+                answerCol = answerCol + 1
+            End If
+        Next y
+    Next x
+
+    For x = 1 To endRow Step 1
+        For y = x + 1 To endRow Step 1
+            For Z = y + 1 To endRow Step 1
+                If Cells(x, 1) + Cells(y, 1) + Cells(Z, 1) = checkSum Then
+                    Cells(x, answerCol) = "x"
+                    Cells(y, answerCol) = "x"
+                    Cells(Z, answerCol) = "x"
+                    answerCol = answerCol + 1
+                End If
+            Next Z
+        Next y
+    Next x
+    
+    For x = 1 To endRow Step 1
+        For y = x + 1 To endRow Step 1
+            For Z = y + 1 To endRow Step 1
+                For a = Z + 1 To endRow Step 1
+                    If Cells(x, 1) + Cells(y, 1) + Cells(Z, 1) + Cells(a, 1) = checkSum Then
+                        Cells(x, answerCol) = "x"
+                        Cells(y, answerCol) = "x"
+                        Cells(Z, answerCol) = "x"
+                        Cells(a, answerCol) = "x"
+                        answerCol = answerCol + 1
+                    End If
+                Next a
+            Next Z
+        Next y
+    Next x
+    
+    For x = 1 To endRow Step 1
+        For y = x + 1 To endRow Step 1
+            For Z = y + 1 To endRow Step 1
+                For a = Z + 1 To endRow Step 1
+                    For b = a + 1 To endRow Step 1
+                        If Cells(x, 1) + Cells(y, 1) + Cells(Z, 1) + Cells(a, 1) + Cells(b, 1) = checkSum Then
+                            Cells(x, answerCol) = "x"
+                            Cells(y, answerCol) = "x"
+                            Cells(Z, answerCol) = "x"
+                            Cells(a, answerCol) = "x"
+                            Cells(b, answerCol) = "x"
+                            answerCol = answerCol + 1
+                        End If
+                    Next b
+                Next a
+            Next Z
+        Next y
+    Next x
+
+
+    End Sub    
+
+This will place a tick mark in column B (assuming your data is in column A starting in row 1) and continue onto column C, D, etc for each correct set, up to 5 numbers.  The data you sent actually has two answers:
+
+7.24
+1.91
+6.43
+
+and
+
+5.62
+1.4
+1.91
+5.21
+1.44
+-------------
+Just noticed in your post you don't specify how many numbers it will take to sum up to the specified amount.  So this might take me a minute.
+-------------
+In that case,  here: http://superuser.com/questions/204925/excel-find-a-subset-of-numbers-that-add-to-a-given-total
+-------------
+Thanks! I've given this a try, currently approaching 13,000 subproblems tested...
+-------------
+Best of luck! 
+-------------
+I let it run overnight, and when I got in this morning it was well over 700,000 iterations without finding a solution, so I called it quits. Do you think I did something wrong, or should it really take that long to run?
+-------------
+The number of subsets is 2^30, if you have 30 total numbers,  or about a billion. You were 0.065% complete running the total sets if you had tried 700,000. If you know the solution is about 10 numbers,  it probably isn't going to show up early.  
+
+You probably need a quicker programming language than excel,  or a quicker computer,  or both.  If you want to test out the excel method just to make sure it works,  do it with a set of 6-7 numbers. Sorry man,  told ya it was complex. 
+-------------
+No problem, thanks for the explanation

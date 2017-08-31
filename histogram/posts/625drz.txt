@@ -1,0 +1,55 @@
+Kitchen inventory system
+Honestly, this is not the kind of thing that will get solved with a few tips from reddit...unless you are an excel super user, which I'm guessing you aren't because you are asking for help, complaining about slow calc times, etc.
+
+You should hire an excel professional to build the sheet for you.  This is for a business, it manages alot of product and money, you need to invest and get it done right.  This feels like a $3-4k job to me.
+This sounds more like a complete database, look into MS Access if you want to get started with that. Its easy and prob free if you have a office license.
+
+I made an automatic inventory tracking system for my internship and it worked out pretty good in Access
+[deleted]
+Furthering what others have said; I would even look into Access for something like this. You're referring to multiple tables and with the right research by you or finding a pro, this IMHO would suit your needs better.
+
+I've done many templates for tips, invoice tracking, etc for a restaurant but in terms of inventory and tying it to customers, you need multiple tables and Access would definitely suit you better. You can find many templates online as well to get you started.
+
+Good luck
+
+[Lightweight Example](http://www.wikihow.com/Make-an-Inventory-Database-in-Access)
+Thanks for your input. I'm a volunteer at the centre and there is no budget for hiring a professional. As I say, they currently have no system at all so even the most basic stock record is helpful, I'd just like offer something more. 
+
+I was wondering if Access would be better. The issue is that I have lots of experience with Excel and nearly none with Access.
+Input! To advise if there is a more efficient way of calculating stock depletion for example or just any input about how I've approached it
+General rundown
+
+1. Tables. This is the place you store your data in. In general you only want data stored 1 time and link multiple tables together instead of having duplicate data spread out over multiple tables(normalisation)
+
+2. Query's. Here can you calculate stuff and combine data from multiple tables together
+
+3. Forms. These things are generally used for data input but they have a lot more functions for displaying data or manipulating data
+
+4. Reports. Good for printing specific data
+
+I suggest you google some of the basics further online. I've included a practice database so you can test some stuff out(Columns are in dutch tho but its understandable)
+[Link](https://www.dropbox.com/s/jrccv3nfzyjad8a/Alco.accdb?dl=0)     
+Thank you!
+
+Concerning access my main question is whether it would be possible to obtain the stock depletion data that I have obtained in my *Calc* sheet, is this something that could be done with a query?
+
+Also, how complex would it be to create this in access? The centre has some leeway for me to learn new skills but I don't know how much I'd have to learn before I could do this?
+
+
+Yes this easily done in Access. You can link tables live tables from Excel to Access or you can semi automate imports. 
+
+The biggest advantage i've found is that Access is multi user. The inventory system I have set up subtracts inventory level from the factory pc downstairs and i can fill in new inventory up in the office.
+
+edit: It can be set-up within a couple days if you have knowledge of Access, I dont know how long it takes if you have to start from scratch. 
+
+
+Ok, thanks for your input. I expect that I can use the system I have created to collect the data in the short-term whilst I learn how to create an access database that can handle the analysis. One other other reasons that I chose excel was that I wanted to create pivot charts for dynamic analysis. Can Access offer anything equivalent or must I import the data back into Excel?
+Thanks :)
+Yeah there is a query function to create a pivot table with Access but i always import the data back to Excel cuz its much more prettier :).
+
+Import en Export can be saved and can be automated so its not much of a hassle actually.
+
+Ok, great thank you very much! 
+
+Looks like I'll learn me some access :)
+

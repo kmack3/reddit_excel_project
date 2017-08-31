@@ -1,0 +1,165 @@
+[9/17/2013] Excel Challenge #1: The Titanic
+So, multivariate binomial logistic regression is the way to go on this I guess. I'm gonna have to brush up on my stats.
+Any where I can discuss things I have tried and to get help on some of the formulas that have stumped me and cant seem to make google help? I feel like starting a thread here wouldn't be fair to new people trying.
+on Row 55, you have an error.
+
+I don't remember the syntax for spoiler text, so PM me if you need. You will probably be able to spot it though :)
+This is cool. The medium formula questions are making me learn a little bit.
+Thank you for doing this!
+Falling over on two on the answer sheet. Could anyone confirm they are ok (with the right answer) so I don't go nuts looking for an error in my formulas?
+
+Rows 51 & 136
+
+Have the other just not those so far. 
+
+
+Loving this by the way, so many things not getting done while I do this instead.
+How did people do D75-85.. I used three if functions but it didn't seem very efficient.. Was that the proper way to go?
+
+Also, I see the Anna - 108 has stumped a few people, obviously the *anna* doesn't work... how did others figure this out?
+
+As for the difficult... any hints on a couple of forumulas I should be using.. just something that could give me a push to get it going..
+Which answers can be solved with a pivot table, I have solved some but certainly not all can be... It would be interesting to know which should be attempted
+~~The only trick I see to this being; there's often more than one way to get some of these values.  By using IF to see if the cell formulas match, alternative methods are marked incorrect.~~
+
+I'm a sucker for using array formulas, which are ~~completely~~ invalid for ~~any~~ some of these, even the difficult level, where I feel like they could be used the most.
+
+~~Sure, if you had it check for the actual value, someone could type that in, but considering this is for self improvement, I doubt that would be a huge factor.  They'd still have to do the work anyways.~~
+
+Edited to hell.
+Damn.  I got a c in stat.
+Just post here. There's a formatting technique for hiding spoilers in a thread
+I don't think so but take care to read the question explicitly, not what you might expect from real-world data.
+It seems right to me, and the formula the conditional in column D checks looks right, for averaging the length of the name column.
+Having some trouble with the first medium section, but I managed to get most of the other medium sections. This is exciting.
+
+What value are you getting for Row 136?  I performed a manual calculation and confirmed the value was correct, but I still could be wrong...
+Never mind 51, found it with a pivot so need to find my error.
+I have everything correct on the Answer sheet. I believe they are all correct.
+**SPOILERS**
+
+The most elegant thing I could find for D76-85 is
+
+> =LOOKUP(C76,{"C","Cherbourg";"Q","Queenstown";"S","Southampton"})
+
+For C104-113 the below makes the spreadsheet tell you you've got them correct...
+
+> =SUMPRODUCT(1*NOT(ISERROR(FIND(B104,'Raw Data'!D2:D892))))
+
+However, for "Richard" this gives 18, some of which are people with the surname Richard and Richards. That's arguably OK as the question ask you how many "times this name appears in 'Raw Data'!D:D", not "How many people with this first name".
+As far as hints to the difficult questions, I would suggest looking into how array formulas work as well as unique uses of the SUMPRODUCT function.
+I have my suggestion for "anna" here: http://www.reddit.com/r/excel/comments/1mjvkj/9172013_excel_challenge_1_the_titanic/ccauupa
+
+For D75-85 I have also three IF's.
+i made a lookup table. is there a better way?
+There's lots of tricks to cheat the right answer out. But you're right, self-improvement and all that.
+
+And to be honest, array formulas will help on several of these.
+*"By using IF to see if the cell formulas match, alternative methods are marked incorrect."*  
+
+- This is incorrect.  The formula within the IF statement is evaluated first so whether a row is marked incorrect vs. correct is based on the output value, not the formula itself.  
+
+*"I'm a sucker for using array formulas, which are completely invalid for any of these"*  
+
+- This is also incorrect, since I've used many array formulas in this workbook
+  
+Make yourself a helper column on the raw data and check it again.
+
+If it's telling you 50 is right, it isn't.
+Working on the hard section. Woohoo.
+
+D108 in the answer sheet seems to be wrong.
+Meh. Having tried it during lunch break I thought my formula should be right but it was coming up incorrect. I tried it a more manual way (extracting the fares required and just using MEDIAN on them.
+Came home to try and replicate and the formula I remembered worked first time. Will check tomorrow to see what I did but all seems well.
+Thanks for the reply, I'll post if it was anything interesting rather than simple screw-up.
+Upvote for your D76-85 formula!  The intent with that was to help people through nested IF functions, although your solution is certainly more elegant!
+> =LOOKUP(C76,{"C","Cherbourg";"Q","Queenstown";"S","Southampton"})
+
+why do the C, Q, S have to be in alphabetical order?
+If you want the count of First Names with Richard use an array formula:    
+
+    =COUNT(SEARCH("Richard",RIGHT(Table1[Name],LEN(Table1[Name])-SEARCH(",",Table1[Name])-1)))
+
+Note I converted the data to a Table, hence the "Table1" reference in my formula.
+I saw what was typed, and I'm used to assuming quotes involved in IF's, so that is my bad definitely.
+
+**Edit**: The way column D checks array formulas, it doesn't evaluate them properly, see line 55.  The formula used should be an array formula, but the way it's checked, the array formula is marked incorrect, even though it has the correct value.
+
+If you make the corresponding column d formula an array formula, it does mark it correctly.
+I see what you're saying.  You're right.
+
+The formula only is correct if it's not an array formula.  As soon as you make it an array formula, it no longer is marked correct by column d.  But it needs to be an array formula to show the correct average.
+i got 50 for #55 (The avg name length in 'Raw Data'!D:D). Can you explain?
+Double-check your assumptions  Hint: 'anna' != 'Anna'
+Like so? 
+
+=if(C76="C";"Cherbourg";if(C76="S";"Southampton";"Queenstown"))
+Because LOOKUP is a really old Excel function that was written with sorted data specifically in mind. If you don't sort the data it will give you the wrong answer. In most applications you should avoid LOOKUP as it's been superseeded by other functions, but occasionally it does have it's uses. A more robust solution, without the need to sort, would have been:
+
+=CHOOSE(MATCH(C76,{"S","C","Q"},0),"Southampton","Chergbourg","Queenstown")
+
+CHOOSE is another really old function that people don't seem to use much anymore but has some great uses.
+Yeah, line 55 is incorrect.  I must have accidently clicked in and out of that cell which removed the array format.  I'll fix that in a bit
+Sure. When you refer to an array in a non-array, non-aggregating formula, Excel will either bug out or only consider the first value in the array (SUM is an aggregating formula, COUNT is an aggregating formula, LEN isn't. LEN is only supposed to work with one string)
+
+When the formula is entered as an array formula, the function is repeated for each item in the array.
+
+In this case, it's like saying `=AVERAGE(1)`, but what we need is more like `=AVERAGE({1,2,3,4,5,6,7...})`
+=COUNTIF('Raw Data'!D:D,"*Anna*") returns 24.
+
+Darn * showing up as italics.
+Likewise 'John' != 'Johnston'
+
+please see /u/bakuj 's response below.  
+http://www.reddit.com/r/excel/comments/1mjvkj/9172013_excel_challenge_1_the_titanic/ccauupa
+Alternatively, you could use:
+
+    =INDEX({"S","Southampton";"C","Chergbourg";"Q","Queenstown"},MATCH(C76,{"S","C","Q"},0),2)    
+
+Edit: I often use CHOOSE when doing scenario analysis models and the scenarios are numerically numbered.  Set up a cell with data validation set as a list, and allow users to pick.  Still a nifty function.
+I just discovered this yesterday, and put it in a sheet to protect it from other users.  However, after building a spreadsheet with it on, I love it.  It cancels all double clicking.  As long as you don't have to correct a really long formula it's nice.
+
+    Private Sub Workbook_SheetBeforeDoubleClick(ByVal Sh As Object, ByVal Target As Range, Cancel As Boolean)
+    Cancel = True
+    End Sub
+i made the helper column and found that the average should really be 26.96. Can you explain how to do this one with the array formula? Thanks.
+As an example, 'Rosa' is a female first name.  If D:D contains 'Frank Dela**rosa**', should you count it?
+Yep:
+
+**SPOILER**
+
+`{=AVERAGE(LEN('Raw Data'!D2:D892))}`
+
+to enter the array formula, you hold CTRL+SHIFT when you hit ENTER to enter the formula. This makes Excel pull ALL of the results into a single array for the formula. As opposed to just pulling the first one, or whichever one shares a row with the formula being entered.
+
+I think /u/MysteryOfTheAges must have clicked in D55 and hit enter afterwards without CTRL+SHFT. It's a very easy way to mess up array formulas.
+
+
+I think you are looking for following formula (in C108):
+
+[=SUM(--ISNUMBER(FIND(B108;'Raw Data'!D:D;1)))](/spoiler)
+
+since it gives correct answers, BUT:
+
+When you type this formula for Richard, the correct answer in the sheet is 18. It should be 14, since 3 people have LAST name Richard**s** and one has LAST name Richard.
+http://i.imgur.com/GzBg523.png
+
+Same with John -> John**ston**/John**son** as LAST names.
+
+Therefore more correct answer should be:
+
+[=SUM(--ISNUMBER(FIND(B108;'Raw Data'!D:D;FIND(". ";'Raw Data'!D:D;1))))](/spoiler)
+
+But it would still generate errors for names like John -> Johnny.
+
+EDIT: Spoiler tags are not working.
+Spacing!
+I did "Anna" I did " Anna", " Anna ", and "Anna ", (all with asterisks), still got the wrong answer.
+And we wonder why there's so many wonky spread sheets running around in finance.
+I had similar concerns. I've been stumped on getting a formula to work for this.
+It took me a while to understand your formula. I was not familiar with coercion. Very interesting. Thank you for teaching me that. 
+
+I agree with you. I think the answer the sheet is looking for is not correct. I hope OP addresses this or at least sees this! you need to be at the top!
+The asterisks are throwing you off because they don't distinguish between an upper and lower-case 'a'.  You will probably need to find another method.  Solutions will be posted next week!
+Oh man, the stories...
+OOoooooo. I really do like this. I have learned so much today.

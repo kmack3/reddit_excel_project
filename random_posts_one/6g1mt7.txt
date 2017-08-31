@@ -1,0 +1,38 @@
+6g1mt7
+allowing user to enter data into cell if logical conditions are met, otherwise calculating value
+In a spreadsheet I use an IF as follows:
+
+in cell A5     =IF(*logical test*,*calculation*,85)
+
+This works well. But I would like to change it so that if the logical test is false, the user would be able to enter a value into the cell; if the test is true the calculated value would be placed into the cell.
+
+
+-------------
+    =IF(logical test,calculation,that column which is for manual input)
+
+It sucks but as far as I know the only option really. (usually hide the calculation column) 
+-------------
+[deleted]
+-------------
+The OP:
+
+I really was hoping to not have to have a separate cell for user input, or to use VBA. But it does look like I will have to do one or the other. At least I know and regularly use VBA.
+
+Thanks for the help.
+-------------
+This is what I was thinking too, as a quick way to get it to work, but I don't know if OP is willing to use another cell for the input. Not sure of his constraints, but I think in your last "section" of the formula you meant reference the cell that you will have somebody input, right? Or is there something I'm missing?
+-------------
+Thanks. The only problem is that if the user entered a value it would overwrite the "=IF(..." equation. I may well have to use VBA.
+
+What I need is a function that, when true, would place a calculated value into a cell, but when false would do nothing allowing the user to enter a value into the cell.
+
+I will see if there any others have suggestions.
+-------------
+Yes absolutely correct. :)
+-------------
+What it sounds like you are trying to is protect/lock single cells in excel based on conditions. I'd try messing with conditional formatting. Use it you can make it so that if a condition is met, an 'error message' will instead popup preventing entry.  
+So in this case, if cell is 85, user would be unable to input a value.  
+However, to place 85 there you would probably need VBA otherwise if entry was needed it would overwrite the formula code. I believe you can do this with cell and range VBA functions by setting the value to 85 when a certain condition from other cells is met.  
+I'm curious about this though, so I'll look into it later if someone else hasn't come up with a solution.  
+My last solution for this was to just have 2 columns, one for entry, and one for the formula. The formula column was always protected while the entry column had selective entry based off conditional formatting.   
+Hope this helps some, cheers.

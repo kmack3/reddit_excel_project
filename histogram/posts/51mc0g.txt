@@ -1,0 +1,39 @@
+The Excel team has answered our request from their AMA! No more warnings about saving as CSV
+We did it reddit!
+Can they address the issue that you can't ctrl+A select within the FIND text box next? I do loves me some having to manually drag cursor and delete every time I want to change a search/replace query...
+Hurrah!!! Good to know. :)
+Does anyone know if they will add an option for the pivot tables to have "sum" instead of "count" as default?
+
+Or some mass method to change it.
+
+And yes, I know that this often comes from the fact that the source data has empty cells instead of zeroes - and this is partially caused by shitty state of the files downloaded from other systems.
+I wonder if this means that VLOOKUP to the left is coming soon...?
+Have they fixed the biggest bug of all - that opening a .csv file triggers a calc/refresh of all other open workbooks??
+Can you also get them to have Excel to stop talking like it is a sentient collective? Having it tell me "we couldn't find anything" rather "no results found" never cease to bother me.
+I worry for the users who need the warning. 
+I'm so happy.
+Now if I could just get my other 7 processing cores working on calculating my workbooks! #justmacprobs
+This is amazing. Can we get rid of the clipboard warning now? It's 2016.
+Off the top of my head, I think Shift + Home works.
+Ask https://excel.uservoice.com/
+I think if you esc close the box and hit ctrl f again it will be highlighted?
+I thought it did sum if the source values are all numerical, if not then it uses count.
+Even when it exists you won't be able to use it for a decade because someone in your office will still be running Office 2003
+or when you open a CSV containing telephone numbers they get converted to scientific notation and the precision changes so you loose a couple of digits from the end of the number. Even if you convert the column to text you be left with a few zeroes at the end of the number that used to be digits. Very frustrating.
+Actually they couldn't get their search engine to work very well, so they outsource it to a bunch of folks in India with large binders of the printed documentation.
+what would've been nice is perhaps an ability to disable the warning after being prompted with it for the nth time
+Pretty sure you're right. Though if you don't start at the end of the text box then you of course want to first hit End
+Yep, but it would be nice to have an option to force it to treat everything as numerical by default.
+It hasn't for me so far, though I guess most of my pivot tables are hours reports so the source values are in date/time format
+Convert the number to phone number under number formatting instead of text?  
+This would be pretty easy for a macro to fix on command instead of by default. Think BaconBits already did it, or its in the 101 macros ready to use book rather.
+Sounds like they are responding to this happening automatically by default as soon as the file is open. 
+
+I run into a similar (albeit highly edge case). My org works in schools and ends up with a lot if cells containing "3-5" and "6-8" for grade ranges.  These immediately default to dates, and when i format them back to text they appear as the 4xxxx number, losing the original data. 
+
+My issue is pretty specific and in site not worth then addressing.  But the telephone issue seems like it might be more frequent. (I don't mess with unformatted phone numbers enough to experience it myself)
+You can but the precision is already lost.
+You need to save the csv as a text file and import it using the wizard so the column is a text column - then you are safe.
+But if Excel opens the CSV and the number is too large for the cell you will loose digits.
+The solution below would work in this case. Save a s a text file first. Then when you open in excel the text import wizard will allow you specify the "3-5" is a text column.
+I can understand the convenience of Excel making an educated guess as to the column type - but you do end up with these inconveniences!

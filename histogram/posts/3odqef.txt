@@ -1,0 +1,36 @@
+Any good sites to learn VBA for an absolute beginners?
+A good way to learn syntax and basic commands is the macro recorder in all honesty. It may be the single best resource. 
+
+Flip on the macro recorder and do a normal task, it'll generate the VBA. I'm comfortable with VBA and I still record fairly frequently just to get most of the code laid out. Particularly recording an action that'll act as the innards of a loop. Lay it out and alter as necessary.
+youtube channel [Excelvba is Fun](https://www.youtube.com/user/ExcelVbaIsFun)
+https://openeducation.blackboard.com/mooc-catalog/catalog?tab_tab_group_id=_10_1  
+VBA doesn't change much from 2007 to 2013.
+I've found some useful nuggets about Access VBA on Allen Browne's site. Might be a little dated now and it's not really a foundational resource but he does have some stuff worth reading. I found the article on error handling in VBA useful as well as some of the custom functions he's posted.
+
+http://www.allenbrowne.com/tips.html
+[deleted]  
+ ^^^^^^^^^^^^^^^^0.2231 
+ > [What is this?](https://pastebin.com/64GuVi2F/44267)
+The only one you need:
+
+http://www.youtube.com/playlist?list=PLNIs-AWhQzckr8Dgmgb3akx_gFMnpxTN5
+go through this sub, there was a 7-8 week course, i think its still up and free.
+
+Best resource if you are a visual learner.
+Did you not see the sticky on the front page? Or the first link on the side bar?
+Good Idea. Do you know how similar the stuff would be to vba for access?
+Thanks. shall check it out. 
+Thanks for that. Shall check it out. I thought this may be the case but I wanted to be safe. 
+thanks. Shall check it out.
+even if it doesn't answer my questions, it sounds useful. thanks.
+no... I asume thats an answer. THank you.
+VBA is VBA is, basically, Visual Basic. Any VB or VBA course will give you the basics of the language - syntax, loop constructs, etc. The real trick with VBA is to learn the application object model, and that is completely different for Excel than for Access than for Word or PowerPoint. 
+
+Don't worry too much about material applying to 2010 or 2013; for the most part code written in one will work in the other. It's only the new features that won't be discussed in the older material.
+
+The macro recorder works, and might be a way to get started, but it is *not* the best way to learn VBA. It's "monkey see, monkey do" macro recording and will teach you nothing about how to write efficient, performant macros or construct automated loops properly. Where it does help is to get some insight into the object model, because you will see how the macros refer to specific objects.
+You could build a macro in Access and convert it to a module, and it would be similar.  You can't record macros in Access the same way you can in Excel, though.  You have to already know the steps you want to accomplish and build those steps from scratch.  There is a whole world of stuff that you just can't do with macros in Access that you can do in VBA, so you won't be able to build those out and convert them to modules.  But it's at least still a good way to get familiar with how VBA works in Access.
+Not similar at all in my opinion. I've made a few things in Access for work and they look nothing like how they'd be done in Excel. Due to it being a Microsoft product though; very easy to google about it.
+Yea it was the start that I was struggling to find anything about. BUt thanks fo the headsup.
+Yea. THanks. I used the Vba system like access and it helped a lot. It has a lot more structured. A bit like functions. But thanks a lot 
+I tried but as I said above.

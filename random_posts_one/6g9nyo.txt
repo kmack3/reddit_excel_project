@@ -1,0 +1,55 @@
+6g9nyo
+Calculations with multiple criteria
+I'm looking for a way to do calculations based on multiple criteria. I basically have about 1500 (Z) values with two indices, one spanning from 1 to Y, the other from 1 to X. For each individual XY combination (right now I have about 3 of each, but with a higher Z that's more; order matters) I need to calculate the average (Axy) and the sum of squared differences from this average. 
+
+By default it's not a complicated thing to solve, I can just SUMIFS/COUNTIFS the two indices for the average, and do IF(AND(-index criteria-);calculation;"") but that's actually ridiculous with a X*Y*Z sized table if those numbers are big enough. 
+
+The workbook has to do this calculation on 15 different parameters, the end result is a file that takes up about 75mb and takes ages to open. 
+
+I've been thinking about concatenating the indices some way then doing something more complicated than what I've been doing, but I'm all out of actual knowledge at this point...
+
+Is there any way to made this thing smaller and faster?
+
+Please share ideas!
+
+
+-------------
+Providing a visual of what you're trying to do might help. I can't really picture what you're after right now. That being said you will likely find at least slight speed improvements if you save your workbook as an excel binary file. 
+-------------
+75MB?? is this an old file that has been re-used, with lots of detritus in the save history.. try starting with a new file.
+
+Your current average formula can be replaced with `AVERAGEIFS` for the same result.
+
+If the indexes never change then you only have a few cells that require the formulas.. You only need to populate those columns that intersect with a formula. If they change then a simple sub routine could populate the few intersecting cells.
+
+Rather the RANDBETWEEN that triggers on open and every small change, , have a small subroutine that populates that column with random numbers when you want it to.
+
+Save file as binary .xlsb for faster operation.
+-------------
+Oh sorry for not being perfectly clear. I quickly made a short demo of the thing. I hope this dropbox link works: https://www.dropbox.com/s/gdobu610lgfwy3y/problem.xlsx?dl=0
+
+What I'm trying to get to is the value in the highlighted cell. Imagine the same table as like 400*1500 cells (or even more). 
+
+If that's better I can also post pics with annotations. Nobody has to worry about opening files from the internet then :)
+-------------
+The indexes change sadly, so that's not an option. Averageifs is something I did not know about. Thanks for that. 
+
+The random number generation is just to see if my solution works with different sets of data. It's an old habit of mine that's hard to get rid of.
+
+Will try it as a binary and see if it's faster.
+-------------
+This subroutine fills the appropriate cells with the formula, select the range and run it
+
+    Sub fillformula()
+    Dim h As Integer
+    Dim v As Integer
+    For Each cell In Selection 'or Range( address )
+    cell.Clear
+    r = cell.Row
+    c = cell.Column
+    If Cells(r, 1) = Cells(1, c) And Cells(r, 2) = Cells(2, c) Then
+        cell.FormulaR1C1 = "=(R" & r & "C" & 3 & "-R" & 3 & "C" & c & ")^2"
+    End If
+    Next
+    End Sub
+

@@ -1,0 +1,1276 @@
+To stimulate this community, I am hosting a Coolest Macro competition for a 10$ Amazon gift-card!
+[deleted]
+Macro for adding a consistently formatted footer to every page of an excel workbook.  I set up a separate footer workbook with fields for Client, Project Number and and description, and date, and then can use keyboard shortcut ctrl+q in my other active workbook to add the footer.  for a workbook with a lot of tabs, I'll just ctrl+page down to flip through the tabs, and ctrl+q to add the footers (hold down ctrl and alternate page down and q).  This cut down the time it took to finalize documents from hours to minutes.
+
+     Sub Footer()
+     '
+     ' Footer Macro
+     '
+     ' Keyboard Shortcut: Ctrl+q
+     '
+     Dim Client As String
+     Client = Workbooks("Footer.xlsm").Worksheets("Footer").Cells(8, 2).Value
+     Description = Workbooks("Footer.xlsm").Worksheets("Footer").Cells(12, 2).Value
+     Project = Workbooks("Footer.xlsm").Worksheets("Footer").Cells(11, 2).Value
+         With ActiveSheet.PageSetup
+             .LeftFooter = "&""Arial,Regular""&8" & Client & Chr(10) & Description
+             .CenterFooter = "&""Arial,Regular""&9Page &P of &N" & Chr(10) & ""
+             .RightFooter = "&""Arial,Regular""&8Our Company Name" & Chr(10) & Project
+         End With
+     End Sub
+
+I posted this a few weeks ago, but I doubt anyone saw it. This macro highlights the cells used in the formula of the selected cell. It has to be inserted into the Workbook code area.
+
+
+    Private Sub Workbook_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
+        
+        ' If multiple cells are selected, do not execute module.
+        If Target.Columns.Count <> 1 Or Target.Rows.Count <> 1 Then Exit Sub
+
+        ' Disable events so one event doesn't fire off others.
+        Application.EnableEvents = False
+        
+        ' Determine if cells which have been selected and highlighted already exist.
+        Static DelimSplitStrings As Collection
+        If Not DelimSplitStrings Is Nothing Then
+            If DelimSplitStrings.Count <> 0 Then
+                Debug.Print DelimSplitStrings.Count
+                Debug.Print DelimSplitStrings(1)
+                Dim i As Long
+                For i = 1 To DelimSplitStrings.Count
+                    If DelimSplitStrings(i) <> "" And DelimSplitStrings(i) <> " " And Not IsEmpty(DelimSplitStrings(i)) Then
+                        On Error Resume Next
+                        Range(DelimSplitStrings(i)).Interior.ColorIndex = 0
+                        On Error GoTo 0
+                    End If
+                Next i
+            End If
+        End If
+        
+        ' Determine if cell has a formula within it. If so, assign string to variable "FormulaString".
+        Dim FormulaString As String
+        If Target.HasFormula = False Then
+            Application.EnableEvents = True
+            Exit Sub
+        Else
+            FormulaString = Target.Formula
+        End If
+        
+        Dim ConvertedString As String
+        
+        ConvertedString = FormulaTranslation(FormulaString)
+        Debug.Print ConvertedString
+        
+        Call DelimiterSplitter(ConvertedString, DelimSplitStrings)
+        
+        Dim j As Long
+        For j = 1 To DelimSplitStrings.Count
+            If DelimSplitStrings(j) <> "" And DelimSplitStrings(j) <> " " And IsNumeric(Right(DelimSplitStrings(j), 1)) Then
+                Range(DelimSplitStrings(j)).Interior.ColorIndex = 6
+            End If
+        Next j
+        
+        ' Re-enable events.
+        Application.EnableEvents = True
+            
+    End Sub
+    
+    Function FormulaTranslation(FormulaString As String) As String
+            
+        Dim ConversionCounter As Long
+        Dim MidLetter As String
+        FormulaTranslation = ""
+        For ConversionCounter = 1 To Len(FormulaString)
+            MidLetter = Mid(FormulaString, ConversionCounter, 1)
+            If (Asc(MidLetter) <> 58) And (Asc(MidLetter) <> 36) And Not (Asc(MidLetter) >= 65 And Asc(MidLetter) <= 90) _
+                And Not (Asc(MidLetter) >= 48 And Asc(MidLetter) <= 57) Then
+                FormulaTranslation = FormulaTranslation & " "
+            ElseIf (Asc(MidLetter) = 36) Then
+                FormulaTranslation = FormulaTranslation & ""
+            Else
+                FormulaTranslation = FormulaTranslation & MidLetter
+            End If
+        Next ConversionCounter
+    
+    End Function
+    
+    Sub DelimiterSplitter(ConvertedString As String, DelimSplitString As Collection)
+        
+        Set DelimSplitString = New Collection
+        Dim newStr As String, SplitString() As String
+        If InStr(1, ConvertedString, "  ") Then
+            Do While InStr(1, ConvertedString, "  ")
+                newStr = Replace(ConvertedString, "  ", " ")
+            Loop
+            SplitString() = Split(newStr)
+        Else
+            SplitString() = Split(ConvertedString)
+        End If
+        
+        Dim i As Long
+        For i = LBound(SplitString) To UBound(SplitString)
+            DelimSplitString.Add Item:=SplitString(i)
+        Next i
+        
+    End Sub
+You stimulate anguish amonsgt the mods by not setting the flair to challenge.
+
+Also, not sure how comfortable people are about using FB and reddit. Not 100% sure on this.
+Quick and dirty little reflex game! Made in 10 minutes, lots of room for improvement, I was aiming for short code. 
+
+Just paste this in a module and run "start" macro ;)
+        
+    Dim shapeA As shape
+    Dim starTime As Single
+    
+    Sub start()
+    Set shapeA = ActiveSheet.Shapes.AddShape(msoShapeRectangle, 10, 10, 100, 60)
+    With shapeA
+        .TextFrame.HorizontalAlignment = xlHAlignCenter: .TextFrame.VerticalAlignment = xlVAlignCenter
+        .TextFrame.Characters.Text = "Start !!!1"
+        .OnAction = "'" & ActiveWorkbook.Name & "'!click"
+    End With
+    End Sub
+     
+    Sub click()
+    If shapeA.TextFrame.Characters.Text = "Start !!!1" Then
+        starTime = Timer
+    ElseIf Right(shapeA.TextFrame.Characters.Text, 1) = "!" Then
+        shapeA.TextFrame.Characters.Text = "Start !!!1"
+        starTime = Timer
+    End If
+        shapeA.TextFrame.Characters.Text = Right(shapeA.TextFrame.Characters.Text, 1) + 1
+        shapeA.Left = (700) * Rnd
+        If shapeA.TextFrame.Characters.Text = "1" Then shapeA.TextFrame.Characters.Text = "Your Time: " & Round(Timer - starTime, 2) & "!"
+    End Sub
+    
+Post your highscore!
+
+A quick functions for sending emails with outlook from excel - I usually attach the current workbook. This might not work for everyone.
+
+    Sub SendEmail(Toadd As String, Sbj As String, Optional Msg As String, Optional CCadd As String, Optional BCCadd As String, Optional Action As String, Optional AttachPathorActive As String)
+        Dim OutApp As Object
+        Dim OutMail As Object
+        Set OutApp = CreateObject("Outlook.Application")
+        Set OutMail = OutApp.CreateItem(0)
+        With OutMail
+            .to = Toadd
+            .CC = CCadd
+            .BCC = BCCadd
+            .Subject = Sbj
+            .Body = Msg
+            If AttachPathorActive = "Active" Then
+                .Attachments.Add ActiveWorkbook.FullName
+                Else
+                    If AttachPathorActive <> "" Then
+                    .Attachments.Add (AttachPathorActive)
+                        Else
+                        'Do Nothing
+                    End If
+            End If
+            If Action = "" Then
+                .Send
+                Else:
+                .Display
+            End If
+        End With
+        On Error GoTo 0
+        Set OutMail = Nothing
+        Set OutApp = Nothing
+    End Function
+Is there a way to participate without facebook?
+Refresh multiple pivot tables in a specific order.
+
+    Sub RefreshPivots(ParamArray Args())
+        For Each Worksheet In ActiveWorkbook.Worksheets
+            For Each PivotTable In Worksheet.PivotTables
+                On Error Resume Next
+                For i = LBound(Args) To UBound(Args)
+                    Select Case PivotTable.Name
+                        Case Args(i)
+                            PivotTable.RefreshTable
+                        Case Else
+                    End Select
+                Next i
+                On Error GoTo Dangit
+            Next PivotTable
+        Next Worksheet
+    Exit Sub
+    Dangit:
+    'Error Catch here
+    End Sub​
+Just for fun.
+
+    Function Speak(InputText As String)
+    Application.Speech.Speak InputText
+    End Function
+
+Drop this into a module and type the following in any cell:
+=Speak("Howdy from reddit.com/r/Excel")
+Commenting so I can look back at this
+    Sub LastSuperscript()
+         ' makes the last character in cell a superscript for footnotes
+         Dim intlen As Integer
+         intlen = Len(ActiveCell.Value)
+         With ActiveCell.Characters(Start:=intlen, Length:=1).Font
+              .Superscript = True
+         End With
+    End Sub
+I think I've posted this before, and it might go beyond being a "Macro" but it does run with one button press :-P
+
+Excel Ant Farm:
+https://dl.dropboxusercontent.com/u/107539298/Ants%200.2%20-%2064bit.xlsm
+Not exactly very useful, but here is a macro that finds prime numbers. I cheat with the first three numbers.
+
+    Sub PrimeNumbers()
+    Dim X As Long, Y As Long, pRow As Long
+    Application.ScreenUpdating = False
+    StartTime = Timer
+    Cells(1, 1) = 2
+    Cells(2, 1) = 3
+    Cells(3, 1) = 5
+    pRow = 4
+    For X = 7 To 10 ^ 8 Step 2
+        If Right(X, 1) <> "5" Then
+            For Y = 3 To Int(X / 3) + 1 Step 2
+                If X / Y = Round(X / Y, 0) Then GoTo NotPrime
+                If Y > (X / Y) Then Exit For
+            Next Y
+            Cells(pRow, 1) = X
+            pRow = pRow + 1
+            If pRow > 100000 Then Exit For
+        End If
+    NotPrime:
+    Next X
+    EndTime = Timer
+    Application.ScreenUpdating = True
+    MsgBox EndTime - StartTime
+    End Sub
+I'm in the process of writing a macro which scans the web for news articles related to certain key words, scrapes the webpage and analyzes its contents. I'm hoping that I can integrate a trading API and, with enough tinkering, set up an automated trading system which runs off realtime news data.
+
+It'll never have the frequency required to keep up with the real trading houses but I reckon if I target niche investment areas I might just get lucky with it. And if it all fails then I'm learning a lot about the stock market and VBA in the process anyway.
+'This Paramaterized Subroutine takes various inputs including SQL Server information and PowerQuery table information to create an insert query from the contents of a power query table or normal excel table.
+
+    Sub SQLBatchInsert(Server As String, DBName As String, SchemaName As String, TableName As String, SourceSheet As String, PQTableName As String, UserName as String, Pass as String)
+
+
+
+    Dim InsertSQL As String
+    Dim conn As ADODB.Connection
+    Dim strConn As String
+    Dim strSRV As String
+    Dim strDB As String
+    Dim LoopCount As Byte
+    Dim Row As Double
+    Dim Column As Integer
+    Dim Table() As Variant
+    Dim StartTime As Double
+    Dim BatchCount As Integer
+    Dim BatchEndRow As Integer
+    Dim BatchStartRow As Integer
+    Dim BatchIteration As Integer
+    Dim Rows4Load As Double
+    Dim Cols4Load As Integer
+
+    StartTime = Timer '{Setting a variable to the starting run time}
+    Table = ThisWorkbook.Sheets(SourceSheet).ListObjects(PQTableName).Range.Value
+    Rows4Load = ThisWorkbook.Sheets(SourceSheet).ListObjects(PQTableName).Range.Rows.Count
+    Cols4Load = ThisWorkbook.Sheets(SourceSheet).ListObjects(PQTableName).DataBodyRange.Columns.Count
+    BatchCount = Math.Round(Rows4Load / 1000)
+
+    If BatchCount >= (Rows4Load / 1000) Then Else: BatchCount = BatchCount + 1
+
+    If Rows4Load <= 1000 Then BatchEndRow = Rows4Load Else: BatchEndRow = 1000
+
+    BatchStartRow = 2
+
+
+    For BatchIteration = 1 To BatchCount
+
+    If 1000 * BatchIteration > Rows4Load Then BatchEndRow = Rows4Load Else: BatchEndRow = 1000 * BatchIteration
+
+    If BatchEndRow > Rows4Load Then BatchEndRow = Rows4Load Else: 'do nothing
+
+    Debug.Print "Prepping load for rows: " & BatchStartRow & " through " & BatchEndRow & " as Iteration number: " & BatchIteration & " of " & BatchCount & "."
+
+    
+
+        InsertSQL = "INSERT INTO [" & DBName & "].[" & SchemaName & "].[" & TableName & "](" '{Start building the insert query}
+
+        For LoopCount = 1 To UBound(Table, 2)
+            If LoopCount = UBound(Table, 2) Then
+                InsertSQL = InsertSQL & "[" & Table(1, LoopCount) & "]) Values("
+                Else
+                    InsertSQL = InsertSQL & "[" & Table(1, LoopCount) & "],"
+            End If
+        Next
+
+        For Row = BatchStartRow To BatchEndRow
+            If Row = BatchEndRow Then
+                For Column = 1 To UBound(Table, 2)
+                    If Column = UBound(Table, 2) Then
+                        InsertSQL = InsertSQL & EnQuote(Table(Row, Column)) & ")"
+                        Else
+                            InsertSQL = InsertSQL & EnQuote(Table(Row, Column)) & ","
+                    End If
+                Next
+            Else
+                For Column = 1 To UBound(Table, 2)
+                    If Column = UBound(Table, 2) Then
+                        InsertSQL = InsertSQL & EnQuote(Table(Row, Column)) & ")" & vbNewLine & ",("
+                        Else
+                            InsertSQL = InsertSQL & EnQuote(Table(Row, Column)) & ","
+                    End If
+                Next
+            End If
+        Next
+
+        If BatchEndRow + 1 >= Rows4Load Then BatchStartRow = Rows4Load Else: BatchStartRow = BatchEndRow + 1
+
+        'Debug.Print InsertSQL  '{For troubleshooting the insert query string}
+
+        'Create the connection string
+
+        strSRV = Server
+
+        strDB = DBName
+
+        strConn = "Provider=SQLOLEDB;" & _
+
+        "Server=" & strSRV & ";" & _
+
+        "Database=" & strDB & ";" & _
+
+        "User ID=" & UserName & ";Password=" & Pass 
+
+        Set conn = New ADODB.Connection '{Create the Connection and Recordset objects}
+        conn.Open strConn '{Open the connection and execute}
+        conn.Execute (InsertSQL)
+
+        Debug.Print Timer - StartTime & " seconds to execute insert.."
+
+        StartTime = Timer
+
+        'Clean up
+
+        If CBool(conn.State And adStateOpen) Then conn.Close
+        Debug.Print "Batch Number " & BatchIteration & " loaded."
+    Next
+
+    End Sub
+
+    
+
+    Call like SQLBatchInsert(Server As String, DBName As String, SchemaName As String, TableName As String, SourceSheet As String, PQTableName As String)
+Great idea! 
+Hello, how to participate? 
+One of my favorites - A get parameter function that returns string values from a specially named ListObject found in the current workbook.
+
+    Public Function GetParameter(ParameterValueToReturn As String)
+    On Error GoTo Dangit
+    GetParameter = WorksheetFunction.Index(Range("Tbl_Parameters[Value]"),WorksheetFunction.Match(ParameterValueToReturn, Range("Tbl_Parameters[Parameters]"), 0))
+    Exit Function
+    Dangit:
+    GetParameter = "The parameter (" & ParameterValueToReturn & ") is not located in the table (Tbl_Paramters) or the table does not exist in this workbook."
+    End Function​
+Great idea op! Fo sho 
+I call this "The Jealousy Module". Use these two subs in ThisWorkbook any time you need the workbook to always open in its OWN Excel instance...for example, if you are going to be modifying the ribbon, or if you will be using Application.Visible or Application.ScreenUpdating, but you still want to be able to view and interact with other workbooks.
+
+First part: when the workbook opens, if there are already other workbooks open, close self and open in a new instance:
+
+    Private Sub Workbook_Open()
+     If Application.Workbooks.Count > 1 Then
+      Call CreateObject("wscript.shell").Run("%comspec% /c timeout 1 & excel.exe """ & ThisWorkbook.fullname & """", 0)
+      ThisWorkbook.Close False
+     End If
+    End Sub
+
+Second part: if another workbook is opened, close it immediately, create a new Excel instance, and open it over there:
+
+    Private Sub Workbook_Deactivate()
+     If Application.Workbooks.Count > 1 Then
+      Dim fullname As String
+      With Application.Workbooks(2)
+       fullname = .fullname
+       .Close False
+       With CreateObject("excel.application")
+        .Visible = True
+        .Workbooks.Open fullname
+       End With
+      End With
+     End If
+    End Sub
+
+P.S. - For slow computers, if you get an error message that the workbook is already open, change "timeout 1" in the first sub to "timeout 2" or a higher number, to increase the amount of time the computer waits before attempting to reopen the workbook.
+Can we enter more than once?
+I made this macro to unite the data on one excel sheet which exists on different excel files. Locate the excel files in one folder which have the data you want to gather up. Paste this macro on new excel and change the name of the sheet as "base" and run the macro.
+
+here is the magic spells :)
+
+
+    Sub birlestir()
+    Dim i As Integer 
+    Dim z As Integer 
+    Dim ws As Worksheet
+    Dim ws1 As Worksheet 
+    Dim alan As Range 
+    Dim say As Long 
+    Dim alan2 As Range  
+    Dim say2 As Long 
+    Set ws = Worksheets("base")
+    Dim adres As String 
+    Dim ad As String 
+    Dim dosya As String 
+    Dim sayfa As  Integer 
+    Dim sınır As Integer 
+    ws.Range("a1:ax200000").ClearContents
+    'this path shows where you have to lacate excel folders. cahnge the path  accordingly
+    adres = "C:\Users\Ozgur\Documents\gather\" 
+    ad = Dir(adres)
+    Application.ScreenUpdating = False
+    Do While ad <> "" 
+    Workbooks.Open adres & ad 
+    dosya = ActiveWorkbook.Name 
+    MsgBox   dosya 
+    sınır = ActiveWorkbook.Worksheets.Count 
+    For sayfa = 1 To  sınır 
+    On Error Resume Next 
+    say = 1 
+    Do While   ActiveWorkbook.Worksheets(sayfa).Cells(say, 1) <> "" 
+    say = say + 1
+    Loop say = say - 1 
+    MsgBox say
+    say2 = 1 
+    Do While ws.Cells(say2, 1) <> "" 
+    say2 = say2 + 1 
+    Loop 
+    say2 = say2 - 1
+    For z = 1 To 10 
+    For i = 1 To say 
+    ws.Cells(i + say2, z).Value = ActiveWorkbook.Worksheets(sayfa).Cells(i, z).Value 
+    On Error Resume Next    
+    Next i 
+    Next z 
+    Next sayfa
+    ActiveWorkbook.Close True 
+    ad = Dir() 
+    Loop
+    Application.ScreenUpdating = True 
+    End Sub
+File size analyser for those annoying times your spreadsheet blows up to 10s of MB. Need to be run on a closed .xlsx or .xlsm file. You will also need to have the Microsoft Scripting and Microsoft XML references enabled.
+
+    Option Explicit
+    
+    Private Const BtoKB As Long = 1024
+    Private Const strSheetPrefix As String = "Sheet"
+    Private Const strXMLSuffix As String = ".xml"
+    
+    
+    Private Sub run()
+    
+    'Record and set initial conditions
+    Dim Calc As XlCalculation
+    Dim Scrn As Boolean
+    
+    With Application
+        Calc = .Calculation
+        Scrn = .ScreenUpdating
+        .Calculation = xlCalculationManual
+        .ScreenUpdating = False
+    End With
+    
+    Dim strUnzippedFolder As String
+    Dim fso As Scripting.FileSystemObject
+    Dim fFolder As Scripting.Folder
+    Dim fWorksheets As Scripting.Folder
+    Dim strSourceFileFullPath As Variant
+    Dim lonFileCounter As Long
+    Dim lonSheetsCount As Long
+    Dim myArr() As Variant
+    Dim i As Long, j As Long
+    Dim wbkNew As Workbook
+    
+    strSourceFileFullPath = SelectandZipFile
+    
+    If strSourceFileFullPath = False Then
+        
+    Else
+    
+        Call UnzipFile(strSourceFileFullPath:=strSourceFileFullPath, _
+                    strUnzippedFolder:=strUnzippedFolder)
+                    
+        Name strSourceFileFullPath As Left(strSourceFileFullPath, Len(strSourceFileFullPath) - Len(".zip"))
+        
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set fFolder = fso.GetFolder(strUnzippedFolder)
+        Set fWorksheets = fso.GetFolder(strUnzippedFolder & "xl\worksheets\")
+        
+        myArr = GetWorksheetInfo(strUnzippedFolder & "xl\workbook.xml")
+        
+        lonFileCounter = 0
+           
+        Call OutputFileSizes(fFolder:=fWorksheets, _
+                                lonFileCounter:=lonFileCounter, _
+                                myArr:=myArr, _
+                                booSort:=True)
+    
+        Call OutputFileSizes(fFolder:=fFolder, _
+                                lonFileCounter:=lonFileCounter, _
+                                myArr:=myArr, _
+                                booSort:=False, _
+                                fIgnore:=fWorksheets)
+     
+        fso.DeleteFolder Left(strUnzippedFolder, Len(strUnzippedFolder) - 1)
+        
+        Set wbkNew = Workbooks.Add
+        
+        For j = LBound(myArr, 1) To UBound(myArr, 1)
+            For i = LBound(myArr, 2) To UBound(myArr, 2)
+                wbkNew.Sheets(1).Range("a1").Offset(i + 1, j).Value = myArr(j, i)
+            Next i
+        Next j
+        
+        With wbkNew.Sheets(1)
+            .Range("a1").Value = "XML Filename"
+            .Range("b1").Value = "Excel Worksheet Name"
+            .Range("c1").Value = "File size (kB)"
+            .Range("c1", Range("c1").End(xlDown)).NumberFormat = "#,##0"
+            .Columns("A:C").EntireColumn.AutoFit
+        End With
+    
+    End If
+    
+    With Application
+        .Calculation = Calc
+        .ScreenUpdating = Scrn
+    End With
+    
+    End Sub
+    
+    
+    Private Function SelectandZipFile() As String
+    
+    'Function opens file picker and adds a .zip extension to the file if it
+    'does not have one already and then returns the new filename including path
+    
+    Dim strFilename As String
+    
+    'Open file picker limited to xlsx or xlsm file
+    strFilename = Application.GetOpenFilename("XML Excel files (*.xlsx;*.xlsm), *.xlsx;*.xlsm")
+    
+    'Check if filepicker was cancelled
+    If Not strFilename = "False" Then
+        'Check if file is a .zip
+        If Not strFilename Like "*.zip" Then
+            'Add .zip extension to the file name and also to strFilename
+            Name strFilename As strFilename & ".zip"
+            strFilename = strFilename & ".zip"
+        End If
+    End If
+    
+    SelectandZipFile = strFilename
+    
+    End Function
+    
+    
+    Private Sub UnzipFile(ByVal strSourceFileFullPath As String, ByRef strUnzippedFolder As String)
+    
+    'Function extracts the xml subcomponents of a .zip file and saves them to a new folder
+    
+    Dim strFolderPath As String
+    Dim strSourceFileName As String
+    Dim fso As Object
+    Dim oShellApp As Object
+    Set fso = CreateObject("scripting.filesystemobject")
+    
+    'Extract folder path from full filename
+    strFolderPath = Mid(strSourceFileFullPath, 1, InStrRev(strSourceFileFullPath, "\"))
+    'Extract filename from full filename
+    strSourceFileName = Mid(strSourceFileFullPath, InStrRev(strSourceFileFullPath, "\") + 1, Len(strSourceFileFullPath))
+    
+    'Create name for the new folder that will contain the xml components
+    If Right(strFolderPath, 1) <> "\" Then
+        strFolderPath = strFolderPath & "\Unzipped " & strSourceFileName & "\"
+    Else
+        strFolderPath = strFolderPath & "Unzipped " & strSourceFileName & "\"
+    End If
+    
+    'Delete contents of folder
+    On Error Resume Next
+    fso.DeleteFolder strFolderPath & "*", True
+    Kill strFolderPath & "*.*"
+    On Error GoTo 0
+    
+    'Create new folder
+    On Error Resume Next
+    MkDir strFolderPath
+    On Error GoTo 0
+    
+    'Copy contents into new folder
+    Set oShellApp = CreateObject("Shell.Application")
+    oShellApp.Namespace((strFolderPath)).CopyHere oShellApp.Namespace((strSourceFileFullPath)).items
+    
+    strUnzippedFolder = strFolderPath
+    
+    End Sub
+    
+    
+    Sub OutputFileSizes(fFolder As Scripting.Folder, ByRef lonFileCounter As Long, ByRef myArr As Variant, booSort As Boolean, Optional fIgnore As Scripting.Folder = "")
+    
+    Dim fFile As Scripting.File
+    Dim fSub As Scripting.Folder
+    Dim lonArraySize As Long
+    Dim lonPos As Long
+    
+    For Each fFile In fFolder.Files
+    
+        If UBound(myArr, 2) > lonFileCounter Then
+            lonArraySize = UBound(myArr, 2)
+        Else
+            lonArraySize = lonFileCounter
+        End If
+           
+        ReDim Preserve myArr(3, lonArraySize)
+        
+        If booSort Then
+            lonPos = ExtractFilenumber(strFilename:=fFile.Name) - 1
+        Else
+            lonPos = lonFileCounter
+        End If
+        
+        myArr(0, lonPos) = fFile.Name
+        myArr(2, lonPos) = fFile.Size / BtoKB
+        lonFileCounter = lonFileCounter + 1
+        
+    Next fFile
+    
+    For Each fSub In fFolder.subfolders
+        If Not fIgnore Is Nothing Then
+            If Not fSub = fIgnore Then
+                OutputFileSizes fFolder:=fSub, _
+                            lonFileCounter:=lonFileCounter, _
+                            myArr:=myArr, _
+                            booSort:=booSort, _
+                            fIgnore:=fIgnore
+            End If
+        End If
+    Next fSub
+    
+    End Sub
+    
+    Public Function GetWorksheetInfo(strFilePath As String) As Variant
+    
+    'Define DOM variables
+    Dim oXMLDoc As MSXML2.DOMDocument60
+    Dim oXMLNode As MSXML2.IXMLDOMNode
+    Dim oXMLNodeList As MSXML2.IXMLDOMNodeList
+    
+    'Define other variables
+    Dim i As Long
+    Dim arr() As Variant
+    Dim strRID As String
+    Dim lonRID As Long
+    Dim strName As String
+    
+    'Load xml file
+    Set oXMLDoc = New MSXML2.DOMDocument60
+    oXMLDoc.async = False
+    oXMLDoc.Load strFilePath
+    
+    'Check for errors in loading
+    If (oXMLDoc.parseError.ErrorCode <> 0) Then
+        
+        Dim myErr
+        Set myErr = oXMLDoc.parseError
+        MsgBox ("You have error " & myErr.reason)
+    
+    Else
+        
+        'Cycle through worksheet nodes and populate array with sheet name and sheetId
+        Set oXMLNodeList = oXMLDoc.DocumentElement.SelectNodes("//*[local-name()='sheet']")
+        
+        ReDim arr(3, oXMLNodeList.Length - 1)
+        i = 0
+        
+        For Each oXMLNode In oXMLNodeList
+            strRID = oXMLNode.Attributes.getNamedItem("r:id").NodeValue
+            lonRID = Right(strRID, Len(strRID) - 3)
+            strName = oXMLNode.Attributes.getNamedItem("name").NodeValue
+            arr(1, lonRID - 1) = strName
+            i = i + 1
+        Next oXMLNode
+    
+    End If
+    
+    GetWorksheetInfo = arr
+    
+    End Function
+    
+    Function ExtractFilenumber(strFilename) As Long
+    
+    Dim strExtract As String
+    Dim lonPrefix As Long
+    Dim lonSuffix As Long
+    Dim lonExtract As Long
+    
+    lonPrefix = Len(strSheetPrefix)
+    lonSuffix = Len(strXMLSuffix)
+    lonExtract = Len(strFilename) - lonPrefix - lonSuffix
+    
+    strExtract = Mid(strFilename, lonPrefix + 1, lonExtract)
+    
+    ExtractFilenumber = strExtract
+    
+    End Function
+
+Information flow analyser that reports how many formulae in each sheet link to which other sheets. Needs to be run on a closed .xlsx and will also need to have the Microsoft Scripting and Microsoft XML references enabled.
+
+    Option Explicit
+    
+    Private Const BtoKB As Long = 1024
+    Private Const strSheetPrefix As String = "Sheet"
+    Private Const strXMLSuffix As String = ".xml"
+    
+    
+    Public Sub run()
+    
+    'Record and set initial conditions
+    Dim Calc As XlCalculation
+    Dim Scrn As Boolean
+    
+    With Application
+        Calc = .Calculation
+        Scrn = .ScreenUpdating
+        .Calculation = xlCalculationManual
+        .ScreenUpdating = False
+    End With
+    
+    Dim strUnzippedFolder As String
+    Dim fso As Scripting.FileSystemObject
+    Dim fWorksheets As Scripting.Folder
+    Dim fFile As Scripting.File
+    Dim strSourceFileFullPath As Variant
+    Dim myArrNames() As Variant
+    Dim myArrPrec() As Variant
+    Dim wbkNew As Workbook
+    
+    strSourceFileFullPath = SelectandZipFile
+    
+    If strSourceFileFullPath = False Then
+        
+    Else
+    
+        Call UnzipFile(strSourceFileFullPath:=strSourceFileFullPath, _
+                    strUnzippedFolder:=strUnzippedFolder)
+                    
+        Name strSourceFileFullPath As Left(strSourceFileFullPath, Len(strSourceFileFullPath) - Len(".zip"))
+        
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        Set fWorksheets = fso.GetFolder(strUnzippedFolder & "xl\worksheets\")
+        
+        myArrNames = GetWorksheetNames(strFilePath:=strUnzippedFolder & "xl\workbook.xml")
+        
+        For Each fFile In fWorksheets.Files
+            Call GetPrecedents(strFile:=fFile.Path, _
+                            strFileName:=fFile.Name, _
+                            myArrNames:=myArrNames, _
+                            myArrPrec:=myArrPrec)
+        Next fFile
+               
+        fso.DeleteFolder Left(strUnzippedFolder, Len(strUnzippedFolder) - 1)
+        
+        Set wbkNew = Workbooks.Add
+        
+        wbkNew.Sheets(1).Range("a2").Resize(UBound(myArrNames, 1) + 1, 1).Value = Application.Transpose(myArrNames)
+        wbkNew.Sheets(1).Range("b1").Resize(1, UBound(myArrNames, 1) + 1).Value = myArrNames
+        wbkNew.Sheets(1).Range("b2").Resize(UBound(myArrPrec, 1) + 1, UBound(myArrPrec, 2) + 1).Value = Application.Transpose(myArrPrec)
+        
+    End If
+    
+    With Application
+        .Calculation = Calc
+        .ScreenUpdating = Scrn
+    End With
+    
+    End Sub
+    
+    
+    Private Function SelectandZipFile() As String
+    
+    'Function opens file picker and adds a .zip extension to the file if it
+    'does not have one already and then returns the new filename including path
+    
+    Dim strFileName As String
+    
+    'Open file picker limited to xlsx or xlsm file
+    strFileName = Application.GetOpenFilename("XML Excel files (*.xlsx;*.xlsm), *.xlsx;*.xlsm")
+    
+    'Check if filepicker was cancelled
+    If Not strFileName = "False" Then
+        'Check if file is a .zip
+        If Not strFileName Like "*.zip" Then
+            'Add .zip extension to the file name and also to strFilename
+            Name strFileName As strFileName & ".zip"
+            strFileName = strFileName & ".zip"
+        End If
+    End If
+    
+    SelectandZipFile = strFileName
+    
+    End Function
+    
+    
+    Private Sub UnzipFile(ByVal strSourceFileFullPath As String, ByRef strUnzippedFolder As String)
+    
+    'Function extracts the xml subcomponents of a .zip file and saves them to a new folder
+    
+    Dim strFolderPath As String
+    Dim strSourceFileName As String
+    Dim fso As Object
+    Dim oShellApp As Object
+    Set fso = CreateObject("scripting.filesystemobject")
+    
+    'Extract folder path from full filename
+    strFolderPath = Mid(strSourceFileFullPath, 1, InStrRev(strSourceFileFullPath, "\"))
+    'Extract filename from full filename
+    strSourceFileName = Mid(strSourceFileFullPath, InStrRev(strSourceFileFullPath, "\") + 1, Len(strSourceFileFullPath))
+    
+    'Create name for the new folder that will contain the xml components
+    If Right(strFolderPath, 1) <> "\" Then
+        strFolderPath = strFolderPath & "\Unzipped " & strSourceFileName & "\"
+    Else
+        strFolderPath = strFolderPath & "Unzipped " & strSourceFileName & "\"
+    End If
+    
+    'Delete contents of folder
+    On Error Resume Next
+    fso.DeleteFolder strFolderPath & "*", True
+    Kill strFolderPath & "*.*"
+    On Error GoTo 0
+    
+    'Create new folder
+    On Error Resume Next
+    MkDir strFolderPath
+    On Error GoTo 0
+    
+    'Copy contents into new folder
+    Set oShellApp = CreateObject("Shell.Application")
+    oShellApp.Namespace((strFolderPath)).CopyHere oShellApp.Namespace((strSourceFileFullPath)).items
+    
+    strUnzippedFolder = strFolderPath
+    
+    End Sub
+    
+    Private Function GetWorksheetNames(strFilePath As String) As Variant
+    
+    'Define DOM variables
+    Dim oXMLDoc As MSXML2.DOMDocument60
+    Dim oXMLNode As MSXML2.IXMLDOMNode
+    Dim oXMLNodeList As MSXML2.IXMLDOMNodeList
+    
+    'Define other variables
+    Dim strXpath As String
+    Dim strSheetName As String
+    Dim arr() As Variant
+    Dim lonSheetCounter As Long
+    Dim rngDestination As Range
+    
+    'Load xml file
+    Set oXMLDoc = New MSXML2.DOMDocument60
+    oXMLDoc.async = False
+    oXMLDoc.Load strFilePath
+    
+    'Check for errors in loading
+    If (oXMLDoc.parseError.ErrorCode <> 0) Then
+        
+        Dim myErr
+        Set myErr = oXMLDoc.parseError
+        MsgBox ("You have error " & myErr.reason)
+    
+    Else
+        
+        'Cycle through worksheet nodes and populate array with sheet name
+        lonSheetCounter = 0
+        strXpath = "//*[local-name()='sheet'"
+    
+        Set oXMLNodeList = oXMLDoc.DocumentElement.SelectNodes("//*[local-name()='sheet']")
+        ReDim Preserve arr(oXMLNodeList.Length - 1)
+        For Each oXMLNode In oXMLNodeList
+            strSheetName = oXMLNode.Attributes.getNamedItem("name").NodeValue
+            arr(lonSheetCounter) = strSheetName
+            lonSheetCounter = lonSheetCounter + 1
+        Next oXMLNode
+        
+        GetWorksheetNames = arr
+        
+    End If
+    
+    End Function
+    
+    
+    Private Sub GetPrecedents(strFile As String, strFileName As String, ByRef myArrNames As Variant, ByRef myArrPrec As Variant)
+    
+    'Define DOM variables
+    Dim oXMLDoc As MSXML2.DOMDocument60
+    Dim oXMLNode As MSXML2.IXMLDOMNode
+    Dim oXMLNodeList As MSXML2.IXMLDOMNodeList
+    
+    'Define other variables
+    Dim i As Long
+    Dim strSheetSearch As String
+    Dim xpath As String
+    Dim lonNumberofSheets As Long
+    Dim lonSheetNumber As Long
+    
+    'Load xml file
+    Set oXMLDoc = New MSXML2.DOMDocument60
+    oXMLDoc.async = False
+    oXMLDoc.Load strFile
+    
+    'Check for errors in loading
+    If (oXMLDoc.parseError.ErrorCode <> 0) Then
+        
+        Dim myErr
+        Set myErr = oXMLDoc.parseError
+        MsgBox ("You have error " & myErr.reason)
+    
+    Else
+        lonNumberofSheets = UBound(myArrNames, 1)
+        lonSheetNumber = ExtractFilenumber(strFileName:=strFileName)
+        
+        For i = 0 To lonNumberofSheets
+            strSheetSearch = ConverttoFormulaStyle(strSheetName:=CStr(myArrNames(i)))
+            
+            'Cycle through worksheet nodes and populate array with sheet name and sheetId
+            xpath = "//*[local-name()='f'and contains(text(),""" & strSheetSearch & """)]"
+        
+            Set oXMLNodeList = oXMLDoc.DocumentElement.SelectNodes(xpath)
+            ReDim Preserve myArrPrec(lonNumberofSheets, lonNumberofSheets)
+            myArrPrec(i, lonSheetNumber - 1) = oXMLNodeList.Length
+        Next i
+            
+    End If
+    
+    End Sub
+    
+    
+    Private Function ConverttoFormulaStyle(strSheetName As String) As String
+    
+    Dim strConverted As String
+    
+    'Function converts plain English file name to file name with apostrophes and !
+    
+    If InStr(strSheetName, " ") = 0 Then
+        strConverted = strSheetName & "!"
+    Else
+        strConverted = "'" & strSheetName & "'!"
+    End If
+    
+    ConverttoFormulaStyle = strConverted
+    
+    End Function
+    
+    
+    Private Function ExtractFilenumber(strFileName) As Long
+    
+    Dim strExtract As String
+    Dim lonPrefix As Long
+    Dim lonSuffix As Long
+    Dim lonExtract As Long
+    
+    lonPrefix = Len(strSheetPrefix)
+    lonSuffix = Len(strXMLSuffix)
+    lonExtract = Len(strFileName) - lonPrefix - lonSuffix
+    
+    strExtract = Mid(strFileName, lonPrefix + 1, lonExtract)
+    
+    ExtractFilenumber = strExtract
+    
+    End Function
+
+What ever happened with this thread?
+Do you mind explaining how this works? To me it just looks like code to select the previous sheet (ignoring hidden sheets),  not any specific sheet in particular (like the one you came from) 
+Wow, this is a sweet implementation. Good thinking. I like this a lot. Must have saved you lots of unnecessary mouse movement!
+Why not simply do this:
+
+    Public LastSheet As Worksheet
+    Private Sub Workbook_SheetDeactivate(ByVal Sh As Object)
+     Set LastSheet = Sh
+    End Sub
+
+And this:
+
+    Sub Select_Last()
+     LastSheet.Activate
+    End Sub
+
+?
+I want to add this to my personal.xlsb so have it available for all my workbooks - but it only seems to work there and not on others I have open. Can this be modified to work across all workbooks?
+This one seems super useful. Efficiency at its finest. Thanks for the entry!
+Going to test this in a bit. I love clicking into formulas to see the input cells on the sheet, this seems like a step above it.  Well done!
+GERRRRRRR, I sux. My bad, I am still riding the learning curve.
+
+Also, I appreciate you fixing that for me.
+If there is an issue, I have my own website. I am happy to create a submission page!
+Whatever works best for you, works best for me. :)
+Holy crap this is addicting! I got 4.62 seconds. I think I got lucky with the spawn points for the shapes in that run. Thanks a lot!
+commenting so i can try this later
+Example:
+    Call SendEmail("whatever@gmail.com","Subject Line", "Hello buddy", "","","","Active")
+
+This would attach the active workbook in an email to whatever@gmail.com with the subject line "Subject Line" and the message "Hey Buddy".
+I've made something similar but it was in my earlier days and it was oooooogly as hell. This looks clean, I like it a lot. Thanks for this!
+I add a simple OK Cancel Message reminding the user to open outlook first.
+
+If outlook isn't open, the email will go out using the outlook profile selected, but won't be saved in the sent folder.
+Just changed it, realized it was a bad idea to FaceBook it ;). My bad. Hope you're still interested!
+How else are they going to mine emails for unsolicited ads??
+I think this would help a lotta people. Seen too many people read into stale data. Thanks!
+Cool, I never knew about ParamArray...when I need a variable-length list of parameters, I've always just used a regular array, but this is much cleaner. Thanks!
+
+Out of curiosity, why do you need a Select Case there in the loop? Wouldn't it be easier to just do
+
+    If PivotTable.Name = Args(i) Then PivotTable.RefreshTable
+
+?
+TIL. This pairs nicely with an auto-execute macro:  
+
+    Sub Auto_Open()
+    Sheets("Sheet1").Range("A1").Activate
+      SendKeys "{F2}", True
+      SendKeys "{ENTER}", True
+    End Sub    
+  
+  
+Now the reports can read *themselves* to our VPs instead of them asking me to do the hand-holding in person.
+I like it, and props on a function and not a Worksheet_Change. Can we geta Samuel L voice in dis bitch?
+
+
+Responding so I hold ya to it!
+This is one of the coolest formatting macros I have seen. Thank you for contributing!
+You could do this in a single line, if you wanted to:
+
+    ActiveCell.Characters(Start:=Len(ActiveCell.Value), Length:=1).Font.Superscript = True
+I am super interested. I might be dense, but do you know if there is a short intro blurb on this? 
+
+Similar to how my older brother used to give me the unplugged controller - I felt the thrill, but was not actually doing anything.
+Well, [as long as we're posting entire workbooks](https://dl.dropboxusercontent.com/u/590152/3d.xlsm)...
+
+Did it two years ago and haven't gone back to clean up any of it. The code is ugly, but I still think the idea is fun. It works best on a 1600x1200 monitor with a relatively fast CPU...if your computer is slow it will be VERY laggy.
+Why are you using Int (x/3)+1 as your upper limit? Surely square root of x (rounded) should be your upper limit?
+That sounds pretty awesome. When I was at my hedge fund job I emulated some bloomberg functions in Excel to save on licensing costs.
+
+I have full faith in you- seems like you're onto something! Must be a little slow in VBA right? That's the sacrifice we make.
+Forgot to mention - you'll need this:
+
+    Function EnQuote(text As String)
+    EnQuote = "'" & text & "'"
+    End Function
+Thank you! So far it looks like if you give me a 1 line message box macro you'll be in the lead :). Good luck!
+Just post your VBA here in the thread. I will make a GIF of all the macros and what they do. Once all together I can make a call, or post for voting. :)
+Example:
+
+    Debug.Print GetParameter("TheParameterName")
+This is badass. I would love to see what kind of stuff you're messing around with. Thanks a lot for the input!
+Thanks for the support fam!
+Holy crap this is unreal. I always go to my taskbar and shift-click Excel. Never ever like having one instance but multiple projects open, ugh.
+I don't see why not!!!
+Going to test this later today. Looks pretty sweet if I do say so myself! Thanks for the submission :).
+This is pretty sweet. Sorry for my lack of knowledge but does this tell you more than checking a files properties?
+
+Thanks!
+Now this is pretty freakin awesome. I would have loved this one at my last contract. Thanks for the submissions!
+Check the edit! I sent out the gift-card to /u/icantcontrolmyself . I have e-mail confirmation if you want proof. Thanks a lot for being active and I plan to hold another similar, more specific one soon :).
+You are absolutely right, I herpaderped on accident and pasted the wrong code. Must not have been paying attention (don't reddit at work!). See my edit for updated code!
+Agreed, this seems to just cycle to the previous sheet (ie, ctrl + page up)
+
+Edit: trust me to comment as the original is updated
+I updated my post. I pasted the wrong code on accident but have now corrected it, just FYI.
+Thanks man, it took me longer to figure it out than I'd like to admit. 
+Just got around to pluggin it in. Going to be using this now for funsies and less strain on the eyes. Thanks!
+Good idea. In the past I've queried for all outlook profiles and made the user select. In this case the process is  usually 100 percent automated so user input is avoided and we check to see if outlook is open/ open outlook before this sub is called.
+I just wanted to get people over there, I wouldn't spam anyone ever! Took the FB option out as I totally see your point, it is now strictly Reddit! Thanks for the patience.
+
+Although website is here if you want to add your e-mail to my list hehe.
+
+http://everything-excel.com/blog
+
+Edit: And they is me. One guy, pretty cool dude, I swear.
+It's been helpful for me. 
+
+Example Call RefreshPivots("PivotTable1", "PivotTable3", "PivotTable4","PivotTable2")
+Sometimes specific things would happen to specific pivots. I've found this useful in the past.
+Hahaha automation at it's finest. Soon- what will be the point of you and me!? I kid I kid.
+Might be an old topic, but how excatly can you auto-execute that part? 
+I wish.
+Now to figure what to do haha. Tempted to submit one of my work programs. Its very specific, but its useful for me. 
+True, I was actually going to have it check each character from the end and make any numbers superscript to account for two digit numbers, I just never got around to it.
+Ha, sure I could give something.  
+
+Basically there are 4 colonies, each starting with a single queen ant, that are competing against one another in a shared overworld for food.  The goal was to try and make realistic ant behavior without giving them 'omniscient' information about the world, so all of their decisions are based on their own senses, and scent information provided by other ants in the colony.  I did it in excel because I use it daily and figured that was a quicker way to results than learning another language (I can always get the backbones working, but I am terrible as soon as a GUI enters the picture)
+
+All of the interaction is up front, on the parameters/genetics sheet (can't remember the exact name as I can't open it atm) you can set the various variables that determine the ant behavior.  After that it is simply hit run observe what happens.  At the start, they tend to grow pretty consistently until a certain population threshold is reached where food becomes scarce, and then the competition kicks in for the limited food.
+Ha, I am totally fine if mine is disqualified.  It definitely is pushing the limits of the 'macro' definition.  I am definitely going to try that when I get home.  Tempted to try now but not sure my boss would appreciate :-P
+I just put it there in case I fucked up and sent it looping. There no need for an upper limit at all.
+> Must be a little slow in VBA right?
+
+It is but I doubt that'll matter too much for the industries I'm targeting. My day job is a rare metals trader (Cobalt, Tantalum, Molybdenum, Rhenium etc) and I've noticed that when mining companies announce that they've found deposits their share price spikes. So once everything's set up I'm hoping that my macro will download a news article, scan for relevant key words an put through a trade in around 20-30 seconds. That should be plenty fast enough to temporarily hijack some penny stock gains.
+
+If nothing else I'm learning a lot about webscraping in VBA which will help my day job if I want to get info from online pricing sites. It's all about the journey, not the destination!
+Super super cool. I've made local access databases but this allows you to do it all in Excel, if I understand correctly?
+
+But in this case you can insert a record in Excel and it will solidify in a SQL database? Sorry if I'm off, I don't have time to test this on and fake the data.
+    sub Iwin()
+    msgbox "I win"
+    end sub
+haha go me!
+
+Any vba? Is it not a 'challenge' them?
+Not sure If i can post files here - I created a mass emailer using the SendEmail function and this GetParameter function. 
+
+It loops through a listobject of addressing and variables and injects them into outlook templates and sends. 
+You may prefer this, then...make a plain text file, paste this in there, and save it with a .vbs extension (like "Excels.vbs"). 
+
+    for i = 0 to wscript.arguments.count - 1
+     with createobject("excel.application")
+      .visible = true
+      .workbooks.open wscript.arguments(i)
+     end with
+    next
+
+Then, associate Excel file types with that file instead of Excel.exe like they normally are (you can do this with Control Panel>All Control Panel Items>Default Programs>Associate a filetype> do it for everything starting with .xls*). 
+
+Now, EVERY time you open an .xls*, it will open in a brand new Excel instance! Drag the windows anywhere you like. You can also drag-and-drop multiple files at once onto the .vbs file.
+>  Iteration number: " & BatchIteration & " of " & BatchCount & "."
+> 
+
+Line 38 is for the column count for the excel sheets to be gathered up.
+if you have more than 10 column , just cahange the line 38.
+if you come accross any problem, i can help.
+cheers
+Haha, yeah. It looks at the underlying xml and tells you how much memory is taken up by each sheet, chart sheet, VBA module, the styles, etc etc.
+
+It's the uncompressed size so the totals will be way bigger than your file, but it's a super quick way to find relative contribution to your file size. I usually find I accidentally copied a formula down all 1 million rows or something but you can also see if your calc chain or styles have got messed up.
+/u/icantcontrolmyself here. Can confirm, prize received!
+I am glad we have a vigilant community. I just trusted ya on that one, didn't dig into the VBA. I am going to ensure I test them from now on. Thanks for the honesty, and good submission!
+Can you detail how you went about forcing Outlook to use a specific user profile? This could save me some hassle..
+well now what I'm I supposed to be cynical about!?
+Ah, I see. It's nice to be able to add/remove Cases as needed, without rewriting the whole logic.
+Naming a sub "Auto_Open" will call that macro automatically whenever the file is opened. You can put any code between "Sub Auto_Open()" and "End Sub" and it'll run at launch.  
+  
+You know those warnings excel gives you about trusted sources or the .xls file extension not matching the filetype? This is why.
+If it is a secret sauce, keep it! But it would be great to see whatever you want to share. Specific can be cool, me thinx.
+Oh, I see. Yeah, that can be tedious...I usually spin off that sort of functionality into a separate function.
+
+    Function howManyDigits(str As String) As Long
+     Dim i As Long
+     For i = Len(str) To 1 Step -1
+      Select Case Mid(str, i, 1)
+      Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9": howManyDigits = howManyDigits + 1
+      Case Else: Exit Function
+      End Select
+     Next i
+    End Function
+
+Then, you could do this:
+
+    Sub LastSuperscript
+     Dim numOfDigits As Long
+     numOfDigits = howManyDigits(ActiveCell.Value2)
+     ActiveCell.Characters(Start:=1 + Len(ActiveCell.Value2) - numOfDigits, Length:=numOfDigits).Font.Superscript = True
+    End Sub
+Wow man, I am impressed. This is dope and I can't wait to use it properly. 
+
+Next let's model human pop trends and see where it goes! Thanks for the submission!
+Ah, I see what you've done with your y > (x/y) line now. Clever.
+I wasn't trying to knock it, just impressed with such a feat in VBA! I would love to talk more about this if you ever want to down the road. PM me if you'd like.
+
+If not, good luck and I hope this beauty grows into fruition!
+1. There are companies that provide keyword mentions (signals).
+
+2. Your competition probably has this and they use dedicated solutions that are faster to scrape and faster to act.
+This let's you insert a table ( I usually use a power query generated table) directly into sql server if the power query table is identical in structure. Very helpful when getting data/ business Mashups into a server environment for POC testing or just general reporting. Definitely not used for production apps though ;)
+lolol you savage! Change that to "I'm in the lead". Competition ends Friday. Woulda been helpful to include that huh?
+It is a challenge. For example, I pranked my boss at SpaceX by putting a few lines in so that every time he click or arrowed to a  new cell, it would change to a random color. It was a good time and helped me learn more about VBA at the time.
+
+Fun macros, cool macros, unique macros, anything you want macros. The coolest one, and we can hold a vote for that, will get a 10$ gift card from me to Amazon through their e-mail.
+I'm not quite sure how to post files here either but that that explanation was perfect. 
+
+I did some email stuff for a contract I had and I think I was able to just use windows built in features to bring in <variables> from an Excel file, TOTALLY forget though, this seems like a great permanent solution.
+This is abso-fuckin-loooootly going to be used by me. Thanks for this, I am learning here :).
+Digging through this, this would have came in super handy at my last job. Very useful.
+
+The bloke before me wrote a 1.5 hour runtime macro to gather data from other sources and I believe it was done by worksheet open and copy paste, make smaller book, etc. It was not nearly as clean as this and I could literally go to the gym while it ran. Wasn't up to me to fix it so I just went with it. Good addition, thanks!
+Thanks for that great explanation. I really like how it breaks it down granularity for us! Much appreciated Gazpage.
+Absolutely. I appreciate /u/herpaderp1995 calling me on that one because I would have never realized I pasted the wrong thing otherwise. Definitely check them!
+Sure - you will need to use:
+
+     .SendUsingAccount = OutApp.Session.Accounts.Item(x)
+
+Where x is the account number.
+
+You can find the account number with something like this:
+
+    Sub ListAccounts()
+    Dim OutApp As Outlook.Application
+    Dim i As Integer
+    Dim Options As String
+    Dim Accountnumber As Integer
+    Set OutApp = CreateObject("Outlook.Application") 
+    For i = 1 To OutApp.Session.Accounts.Count
+    Options = Options & vbNewLine & i & " : " & OutApp.Session.Accounts.Item(i)
+    Next i
+     Accountnumber = InputBox("Please enter the account you want to use from the below options:" & vbNewLine & Options)
+    End Sub
+*About what am I now supposed to be cynical?*
+
+Here you go 
+I should have been clearer. I knew what that part did, just not the other F2 and enter part...
+Not really secret sauce, bit hard to share the input data it takes because they're employee info/hours. I'll try to remember tomorrow to grab the latest version and post it up here with a sanitized input file for demo purposes. 
+
+Basically though, the company I work for uses HCSS Heavyjob on a remote client to track our employees, subs, and equipment. Each week we run off reports, and send them to payroll for processing. Payroll kept hitting us back with errors, usually equip/employees were being charged to cost codes without money associated to them. I found HeavyJob can print its reports to text files. I wrote a "Sanity Check" that pulls in the report it generates, parses it, puts it into a sheet, and displays any errors.
+
+Currently it checks:
+Cost Codes have money assigned to them
+Equipment has been charged each day, and to its 40 hours
+Employees have been input each day
+Any employee trainee hours
+If specific pieces of equipment are charged to their respective cost codes
+Overtime hours that need to be input into HeavyJob
+
+Fair warning, this was one of my first ventures into VBA (not that I've got any better), so the code will be messy as hell. 
+
+Ha, I have a hunter-gatherer society simulation also that does just that... :-P
+Thanks. You probably wouldn't have said the same had I pasted the code as it was when I wrote it in 2012. I edited it now mainly to make it somewhat understandable in English, but I also rewrote it quite a bit. As it was before, it took 38 seconds to find 100,000 prime numbers. Now it takes 19 seconds. I'm sure it can be optimized even more. My computer at work is four years old, so it will probably take less time for pretty much anyone else who tries it. 
+
+I have another macro that checks if a given number is a prime number. I'm not going to paste it here, because it's a mess! Not sure how efficient it is either. It takes 14 seconds for it to confirm that 1,000,000,000,000,069 is a prime number.
+Give me a couple of weeks to work on it and I'll gladly discuss it further!
+Thanks for number 1. At the moment I'm using a real time RSS feed based off a Google alert for a given element  (e.g. "cobalt"). My macro downloads the page and checks for key words.
+
+I'm sure I won't be the fastest or the most efficient - I'm just doing this for my own interest more than anything. Who knows? I might just stumble on something unique as I go - and if not I'll learn a lot about VBA and stock trading along the way.
+Hahaha yeah def not! But it is super helpful, I am a big fan of this however. Thanks for the submission :)
+Got it. Great idea. 
+Heh, that's cool. Reminds me of the Word VBA script I wrote a while back that generated hundreds of pages of "All work and no play makes Jack a dull boy." in random fonts and colors and sizes.
+http://imgur.com/cC2XAOP
+Ah, I see. If you highlight a cell and press F2, it toggles between Edit and Enter modes. I'm using it here to force cell A1 to become active (as if being edited), then sending "Enter" so that's it's picked up by /u/VVat's Speak function. In short, the file will read whatever is in cell A1 on Sheet1 whenever it's opened.  
+  
+http://www.wizardofexcel.com/2011/06/21/f2-the-most-useful-key-in-excel/
+That sounds pretty dope though. Adding an (very repeatable) extra step to reduce rework down the road- always a good choice.
+
+It will be cool to see this, no worries if not though- I understand the importance of keeping employee data safe.
+Unreal... I waunt that. I want to get around to making a zombie TD base building game. One day..
+Could you speed it further by putting some limitations on the y value?
+
+For example if you've already checked the number in question isn't divisible by 7 then it follows that it won't be divisible by 21, 49, 63, 77, 91 etc. 
+Take your time! Good luck my friend.
+Thank you! Maybe if I get some more Amazon money I will host more specific requirements. For now, I want to see what we can create without limits!
+Little stuff like this makes it all a teenie bit better! I like it.
+I failed at getting a sanitized report but here is the code. 
+http://pastebin.com/SvMMRJU7
+Ha, I always wanted to do that too.  Got as far as a guy that could wander around and gather food from houses and bring it home, no zombies though :-P
+I'm not sure. If Y = 21, is there any time to save by calculating that Y is a factor of 7, compared to calculating that X / Y isn't an integer? 
+
+One thing I could try, is to put all the prime numbers in an array instead of adding them to the sheet one by one. Not sure if that saves any time either.
+Wow that is one big sanity check! You got a good mind for process improvement, seems like you see the bigger picture and want to ensure transparency throughout the process. Thanks a lot for the submission!
+I couldn't quite let this rest just yet. I replaced **If X / Y = Round(X / Y, 0)** with **If X Mod Y = 0** which brought the time down from 19 to 12 seconds. Then I put all the values into an array and pasted it to the sheet. Now it only takes 3 seconds. Old code: 38 seconds. New code: 3 seconds.
+Good work together guys. That's what I love to see. Thanks for the participation :).

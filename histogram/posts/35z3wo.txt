@@ -1,0 +1,40 @@
+Breakout Game in Excel
+This is awesome. How'd you get started with VBA? I've taken a university course on it and would still say I'm a beginner/novice.
+
+I'm looking to practice/improve over the next few months...do you have any project ideas or recommendations on getting started? Any particularly helpful resources you'd recommend?
+
+Would definitely be interested in seeing the workbook as well once you've decided it's ready for release. Great work.
+I haven't watched the video yet, so this might be a dumb question, but does the game have sound? You can use the Windows API to play sounds, but I'm not sure if that would slow things down, or if they get played asynchronously. You might be able to play some background music in addition to effects...
+
+www.cpearson.com/excel/PlaySound.aspx
+That is pretty cool, I think you should go with everything you just mentioned. Maybe different difficulty settings causing the bricks to drop faster, the paddle to shrink, etc. It would be cool to have custom levels as well as the random ones if people decide to create them. Also maybe some sort of power ups like in the real games that have positive and negative side effects?
+Very interested in seeing the code for this, as a VBA beginner, if you wouldn't mind when you're done.
+Did you use OO for this?
+https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+I saw an Excel file with programming in it and went, 'That is neat..  I want to be able to do that,' some time 6-7 years ago.  I had a distinct advantage as at this point in my life as I had a degree in engineering and had coded in multiple languages already so picking up VBA was quite frankly a breeze.  Everything I do is self taught just through google and experimentation.  
+
+Like this game, this is an Experiment for a future business project.  I have a potential client right now that wanted some type of drag-drop organization where you can move names & projects around on a 'board'.  I wasn't sure if I could do that in Excel as they wanted everything else Excel based so I experimented.  But then I started to wonder, if I could move the project object with the mouse, what if I made the object move through some dx+dy vector.  That object eventually became the ball.
+
+Once you understand how to code and how the object hierarchy is organized, you can code in any language fairly quickly.  Google is a great resource for VBA, and just sometimes recording a macro and then cleaning them up is good practice as well.
+Sure does.  Async waves.  Balls hit the wall is a sound, ball hits the paddle, ball hits a brick and ball is lost.
+Like arkanoid?  That was a favorite break game of mine.  You got power ups to expand your paddle, allow you to capture and hold the ball, make the ball split into multiple copies, fire lasers at the bricks, slow down the ball, etc.
+
+That is definately a possibility.  Just a matter of making maybe a power up class object that will fall at a slow rate and if it collides with the paddle you get the power up.
+Me too! :)
+OO?  That could be a couple acronyms.
+
+If your asking if I followed the once and only once principals, I try to when ever I can, but that usually comes down to the final editing to clean up the code.  Still to early in dev to force only once stuff just yet.
+
+If you're asking if I use classes, yes, I did.  I used a MSForms.Label class I called CBall which maintains the velocity vectors of the ball With Events so I can track mouse clicks on the ball among other events.
+Even the spam filter doesn't like you.
+Wow, for the amount of searching I've done on reddit for Excel/VBA crap I'm surprised I didn't come across that link yet. Thanks
+Makes sense. I have rudimentary knowledge of C++/Python/VBA...VBA was definitely easiest of the three (although Python isn't bad either). I like the idea of just messing around with your own project and seeing what you can create.
+Exactly, that sounds like it would be fun lol.. and if your at work you can just tell your boss your working in Excel :)
+I meant Object Orientation (classes etc).
+
+Is each block an instance of a class, or are they literally many labels copied and pasted?
+:-(
+Each block is not a class yet, but will be.  The blocks are created dynamically at run time right now and added to an array of objects.  Right now a class doesn't add to anything yet until I begin to expand block functionality, then I will need the class so I can track events.
+
+Class in VBA aren't needed that often, but if you are intenting to do a bunch of mouse move, mouse down, on change, events among others, rather than making 100 labels worth of MyLabel1_MouseDown(), MyLabel2_MouseDown() and so on, you create the class, assign the label a control in the class and then in the class you set the MouseDown() event handler and now all labels which get their control assigned to one of these class objects will share all the classes event handlers.
+I am more than aware! I use classes quite a bit, and mouse events are something I do often . They are very useful to stop any memory issues, which you may face later on. Good job so far though.

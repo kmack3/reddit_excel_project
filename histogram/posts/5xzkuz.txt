@@ -1,0 +1,121 @@
+VLookup doesn't seem to work logically (warning: nsfw)
+"Oh what can be NSFW about a spreadsh.... Oh. Oh my."
+1. Unmerge header C:D
+2. Make 4th argument `FALSE` to force exact match, otherwise closest match is returned...
+3. Consider limiting range to used range only and not whole columns
+
+
+Payment method: worthless slut
+Is this the first NSFW Excel post? Amazing.
+I can't help, sorry. I'm just curious though, what exactly is this?
+Change F11 to `
+=VLOOKUP(B11,Database!C:D,2,0)`
+Got a report that the link exposes personal information when clicked: 
+
+AFAIK you are anonymous on google sheets unless you join the chat?
+
+If I have misunderstood what was referenced, please PM/modmail.
+Can I ask where the data is from and what it's used for? Excel and NSFW is not a common combination.
+WTF, OP.
+my reaction exactly. but then i saw it was a 4chan thing and it all made sense!
+Thanks! But wait, what's wrong with leaving the C:D header merged? Also, how is "entertainment" a "close match" if it doesn't have absolutely anything to do with it? Is the part about limiting range merely for performance reasons?
+
+Solution Verified
+I prefer depraved pervert but it's a matter of taste! :)
+Here's the word that served as a basis of this, please share or better yet, help out and write your heart out! :) : https://docs.google.com/document/d/1YwgN0O9bHHKMYH9SGM_2UEyqpGeiXpxdR0iF7zrQfxE/edit
+
+Check this thread: http://boards.4chan.org/d/thread/7286604 (warning, NSFW)
+
+There are many examples there of CYOA games based on hentai. The excel is a number-crunching system for this: https://docs.google.com/document/d/1YwgN0O9bHHKMYH9SGM_2UEyqpGeiXpxdR0iF7zrQfxE/edit (warning, HYPER-NSFW).
+
+If you're into crazy hentai thingies or otherwise fetish stuff and/or 4chan-style CYOAs you might want to check it out!
+Someone else fixed it already though, but may I ask the purpose of the last 0? I mean, how is "entertainment" a close match to the point that I need to disable it as to get the exact result?
+
+Also, it isn't even within range!
+WHAT???
+
+Oh my god tell me what happened, last thing I want is people thinking I'm going to hack them or something. It's from google drive! What could have gone wrong!
+Oh, here it is: https://docs.google.com/document/d/1YwgN0O9bHHKMYH9SGM_2UEyqpGeiXpxdR0iF7zrQfxE/edit
+
+Warning: Ultra-NSFW (only text though)
+It's a bit crazy but that's why I pointed out it was nsfw!
+/u/jimrob4 /u/green_mm 
+
+Let the magic of /d/ flow through you!
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Maybe you don't need to unmerge headers, just rechecked and it is OK with merged.. just poor practice in my opinion. 
+
+If you do not include FALSE (or 0) then TRUE is assumed and an ordered list is required for the search. Without the ordered list and TRUE random results are returned.. this is the most common issue with VLOOKUP that I have seen..
+
+Limiting range, yes performance, and good practice to limit errors.
+Just to clarify, CYOA means Choose Your Own Adventure.
+The last argument can take a 1 or 0, or TRUE or FALSE
+probably nothing - I checked it out and couldn't see anything, but I might have missed whatever it referred to. 
+
+The only person who doesn't show up as "Anonymous animal" is you :P But as far as I can tell, no personal information on your google account.
+Thanks! But it's still a total mystery how would it work like that. I mean, is it literally random? What kind of algorithm could reach such weird result?
+Mind lending me a hand here please? Thanks :)
+
+https://www.reddit.com/r/excel/comments/5xzzcw/no_more_and_no_less_than_one_y_is_allowed_in/
+I know, this is more of a "choose your own set of fetishes" kind of thing. The adventure is kind of implied to happen after you choose. It's a 4chan thing.
+I meant, about the weird way VLOOKUP decides what results are "close enough" when you put a 1 (or TRUE or simply leave it empty). But thanks still!
+Is that bad? This is my alt account after all, nobody shall know my true identity you know.
+If one thing is expected and another thing is presented, then in life you will get random results... :)  Excel is no different.
+
+TRUE searching is much quicker than FALSE searching, but a sorted list is required. Simples.
+The approximate match will go up to the point where it can no longer match and then goes back 1. If you search aaa abb abc and your lookup is aba it will return aaa
+
+Maybe a bad example..
+nope
+I mean, if I write =1/0 I get an error, not 353! If you expect me to give you a handshake and I don't, then I might be ignoring you or wave my hand instead, but I'm certainly not to start breakdancing to the tune of the simpsons theme song! Life is not THAT random and neither can a deterministic computer program!
+I don't actually understand that... what would it mean "go up"?
+
+Also may I ask you for a tiny favour? Could you go to the excel document, add something (say a 0) anywhere and that's it? I need to check one thing :)
+I learnt something new today from this post.. I had not really understood it either, just accepted it at face value
+
+https://teylyn.com/2015/01/15/vlookup-why-do-i-need-true-or-false/
+
+edit: Important part 
+
+Vlookup with the 1 or TRUE as the last parameter (omitting the parameter defaults to TRUE), works differently. Vlookup will now assume/expect that the list is sorted ascending in the first column. In order to find the lookup value, it does not inspect each cell, but cuts the list in half. If the value at the half point is a match — Bingo! If not, it compares the value at the half point with the lookup value and decides: If the lookup value is greater than the value of the half point, then continue with toe lower half of the list. Cut the lower half of the list in half and see. If the lookup value is smaller than the value of the half point, then continue with the upper half of the list. Cut the upper part of the list in half and see.
+
+So Vlookup will start with 1/2 of the list,  then reduce to 1/4 of the list, then to  1/8,  then 1/16, etc. until it finds the match. If it gets down to only one value, but that value is not an exact match, this value will be treated as the match and the corresponding column value will be returned.
+The TRUE modifier returns the next largest value that is less than the lookup value. So since you are working with text, I am assuming the numeric equivalence of "entertainment" fits this parameter. Also note that vlookup searches from top to bottom and returns the first value that fits the lookup parameters. Hope this clarifies what is going on here.
+I'm on mobile, can't edit. 
+
+Someone correct me if I'm wrong.. if we look at it numerically it might be easier to understand. =VLOOKUP( 9 , ARRAY={2,4,6,8,10,12} , 1 , 1 ) will return 8 because it says is 8&lt;=9? Yup. Next. Is 10&lt;=9. Nope- we went too far let's go back one, that's the most approximate match.
+
+Those are less than/ equal signs not ampersand lt; - maybe that's the mobile formatting or something
+Same here, I'll just believe in this math thingy.
+Thanks for quoting my blog. Hope it doesn't upset you to learn that I'm not a "he".
+But here's the thing, if I have something like this:
+
+Word 1
+
+Wordywordword
+
+Actual thing I'm looking for
+
+Then why would vlookup EVER choose wordywordword when the EXACT thing I'm looking for is right next to it?
+Mind lending me a hand here please? Thanks :)
+
+https://www.reddit.com/r/excel/comments/5xzzcw/no_more_and_no_less_than_one_y_is_allowed_in/
+Makes sense, but it only applies to numbers. Also I think I've pieced it together, VLOOKUP assumes you got an ordered list and it might somehow interpret text as data. I think that's how it wroks.
+I had to scan my text to see what you meant.. it was a typo *this post* not *his post*.. corrected above now!
+
+I often wonder if I seem like a non native english speaker when I re-read my comments sometimes, with missing letters and words all over the place!!
+
+
+So the only time word 1 would be chosen over wordywordword is if the approximate match comes up first in the column if you are using the "TRUE" parameter. If you re-sort the column so that wordywordword comes up first, you will get that result. That is why if you know you need a specific word, you should be using exact results ("FALSE" parameter).
+
+To expand on this, it is not looking through the entire column, it is only looking for the very first value that fits the parameters of your vlookup. This is also the case if you have multiple exact matches, the one that is listed first in the column will be matched.
+Yeah, ordered data is a requirement for the normal default mode.  VLOOKUP and MATCH use a [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) where they cut the range in half, look at the value, then go to the spot 25% the way through, or the spot 75% the way through (depending on the value of the 50% being + or - the lookup). It keeps this up until it finds a number larger than the lookup value, but the previous value was <= to the lookup. This is very fast, and considering the first LOOKUP function was written circa 1979, this stuff mattered. Now speed isn't so huge of an issue, but backwards compatibility keeps VLOOKUP using a binary search.
+
+For example, [VLOOKUP starts at 110 here](http://i.imgur.com/ZgQfy8k.png), goes to 30, then 40, then 50, then sees 110>50, so it reports 50. Now [check this out](http://i.imgur.com/UIF9k2j.png) - we highjack the 30 so VLOOKUP thinks all the low values are in rows 1 and 2. [But if we put 110 to 60](http://i.imgur.com/GK9nBrP.png) then it never even sees that whole bottom half.
+
+Also, text and data area all the same when it comes to lookups - numbers come first, then special chars, then alphabetical order.
+Sure. But "wordywordword" has NOTHING to do with "Actual thing I'm looking for", so shouldn't vlookup skip it just like it did with "Word 1"?
+Kind of makes sense! Though I still don't know how those words could be close according to that criteria, but thanks! :)

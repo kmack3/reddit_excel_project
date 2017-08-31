@@ -1,0 +1,18 @@
+How Do I Graph by Zip Code Data
+Yeah take a look at [Power Map](https://support.office.com/en-us/article/Get-started-with-Power-Map-88a28df6-8258-40aa-b5cc-577873fb0f4a). It will plant the data on a map and has the capability to do a heat map as well. Best part is it's free.
+Yeah, look up [Power View](https://support.office.com/en-us/article/Power-View-Explore-visualize-and-present-your-data-98268d31-97e2-42aa-a52b-a68cf460472e), a free Microsoft tool for Excel. If you qualify for it (2013 or later), there's some example code out there to get familiar with it.
+https://www.ablebits.com/office-addins-blog/2014/01/21/excel-maps/
+Google offer the capability graph zip codes. I wish I could the recall the exact process. I think it was Google fusion..."tables"?
+I know this isn't exactly the most affordable solution, but Tableau offers this functionality built in, and it's pretty easy. 
+Download tableau public...that's how.
+Google Fusion Tables and [CartoDB](http://cartodb.com) are both good options.
+
+Have fun! I love working with geographical data.
+This is actually built in to the most recent iteration of Excel -- nothing extra to have to install.
+Thanks this is very close to what I am looking for. Is it possible to see the data in a heat map that shows higher density with darker colors?
+Tableau public is free
+No idea.
+
+If you need more functionality than what Power View can give you, look into [feeding your Excel file to R](https://uchicagoconsulting.wordpress.com/2011/04/18/how-to-draw-good-looking-maps-in-r/).  It has a steep learning curve but is extremely flexible.  I know for a fact you could do a map with [color gradients with very little code](http://blog.revolutionanalytics.com/2009/11/choropleth-challenge-result.html).
+Cartodb  will do a heatmap  (chloropleth). You just need to genocode the data first! Cartodb is awesome. 
+It's called choropleth, not a heatmap. Don't know if that software has it. 

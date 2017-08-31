@@ -1,0 +1,43 @@
+VBA Essentials: Manipulating Tables with Autofilter
+Edit: Stickied this for now just to give it some visibility as an example of a quality post and hopefully encourage others to do their own writeups. We'd love to see more of this kind of input, any other feedback on how to make that happen, let us know! (in a message or separate post)   :D
+
+
+
+
+as always a nice writeup! I'll have to work my way through after my exams lol.  
+
+I was implementing an autofilter in a listobject based on selection  the other day and it was a bit of a headache, especially getting the table to unfilter before doing some operations and then re-filtering afterwards, couldn't figure out how to unfilter properly lol, now that I look at it again, should probably just set filter to blank... 
+
+I think I ended up disabling the autofilter entirely to make sure no filters were enabled, then doing my operations, but I need to revisit that sheet some time next week and will make it less retarded lol. 
+[deleted]
+The mods, with help from the community, should create a list of interesting topics and then create a schedule to post a write-up on each.  You can reach out to different members or have people volunteer.  Then every day/few days/week someone will post a write-up on the topic that was listed for that day.
+I prefer to just ShowAllData before applying any filters.
+
+    Sheets(1).ListObjects("Table1").AutoFilter.ShowAllData
+Hey! Thanks for the support!
+
+A quick fix to your problem would be to simply re-autofilter your header. I know it seems a bit improper but I'm not beneath an easy win. 
+
+Ex:
+
+    Range("header range").Autofilter
+    Range("header range").Autofilter
+
+
+I'm glad I could help! Yeah, one of the major ideas here is to not have to consider the whole data-set (I wrote that in bold in the conclusion).
+Hey, just wanted to let you know that I saw this post and I think it's a pretty great idea, my last exam is tomorrow so don't have much time right now, but I'm going to try and sit down and put something together over the weekend. 
+IIRC I tried to do that, but even after I used showalldata, the filter wasn't "unfiltered" correctly or something, and when I removed some rows, everything got messed up :/ 
+
+I'll have to get back to you on exactly what went wrong lol
+I'll try to pump more out over the next few months. I'll shoot for one a month. I want to do a QueryTable one once I feel comfortable using it.
+
+If the range does not have filters on or if the range is not filtered, then it will fail. The generic code to mitigate that is...
+
+
+    If activesheet.filtermode then activesheet.showalldata
+
+Otherwise, I would also actually test for the autofilter...
+
+    if not activesheet.autofiltermode then activesheet.range("a1").autofilter
+
+Note that the above line assumes the data simply starts at a1, otherwise you should have it be a range object.

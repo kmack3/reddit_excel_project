@@ -1,0 +1,60 @@
+Is there a quick way of putting 2 $ signs on a specific cell function on multiple cells.
+Also, a shortcut to getting the dollar signs on your numbers is F4. 
+Are the 12 columns next to each other? if so then make it =(Sheet1!A2*Sheet2!AF$2) and drag across
+you want to remove the $ sign or keep it, can you explain a bit more as to exactly what you want to achieve
+
+
+Thing is the second cell reference changes. 
+So there are loads of headers with values that I want to times by some numbers, which relate with the name of the headers. The side numbers go down vertically. 
+what to?
+can you share screenshot and then explain by giving references?
+$AF$3,
+$AF$4
+etc etc
+Well to give a better example
+
+
+
+
+A,B,C,D,E (headers)
+125,130,121,111,97 (numbers under)
+
+Then on the side of the same spreadsheet:
+A, 12
+B, 17
+C, 11
+D, 9
+E, 4
+
+In the (numbers under) I want a formula which times the number in there with the corresponding side number. 
+just remove second $ sign, use like this, $AF3 and then drag downwards
+So you want 125* times 12, 130 times 17, etc?
+still not clear but I assume you want something like this
+
+       =A$2*AA$2
+
+it assumes your headers in first row and values in 2nd row and 2nd data starts from column AA
+
+
+Not entirely certain but what you are looking for is [this](http://imgur.com/tPDmcuL)?
+Downwards as in the side sheet values? When I do that I get an error.
+When I drag that it seems to think that the next cell is the column next rather than row next.
+Precisely
+if you want to increase the row number and keep column constant use "$" sign in front of row like $A2 and vice-versa A$2 for keeping row constant and column increase, I guess in your case the formula will be
+      
+        =(Sheet1!A$2*Sheet2!$AF2)
+
+or else solution by u/semicolonsemicolon is also correct
+If your issue is solved, then please update the post's flair. Thanks.
+TYVM. 
+
+SOLUTION VERIFIED!
+(Sheet1!A2*Sheet2!$AG$2:$AG$21,2)
+
+Can you tell me what the error is here? 
+
+You have awarded one point to _hitesh102_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+[deleted]
+I get #VALUE!

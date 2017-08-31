@@ -1,0 +1,62 @@
+What are some thing I should know that will impress someone on a Data Analysis Interview?
+If we're talking ACTUAL analysis - What If? and Solver. If we're talking about a vague term of "Data Analyst" which is really just cleaning up data - functions (lookups, arrays, logical), Power Query (depending upon their software version), also being able to deconstruct someone else's workbook I think gives more credence than just the skills people write on paper/say out loud.
+Knowing SQL helps if you can connect excel to an OBDC or access.
+
+Some great Excel tools are pivot charts & graphs, as well as adding the filters or slicers to make your charts very dynamic.
+
+If possible, learn the basic of VBA to show interesting things that can be done such as sending an automated email.
+I am currently a data analyst. Yes--pivot tables, cleaning data, and writing the occasional macro is helpful; however, don't overlook the non-'technical' skills. How you deconstruct and approach a problem, and what logic you apply, is critical...it's a lot easier to look up a solution on stack overflow than it is to learn those skills. Also SQL
+Write a macro that opens an email attachment when it's received, insert functions, pivot data, save and redistribute to a group of people.
+And although you probably shouldn't be using Excel for that purpose (there are better specialized tools), show them Monte Carlo simulation using the Data Tables approach with an auto updating histogram. :P
+Pivot tables for sure.
+Know where you are applying, what they do, and bring an idea of how you can add value. 
+* Effective use of the offset function. 
+* Having your own macro library.
+See is there are any extension software packages they use and be familiair with those. 
+My title is Data Analyst.  I clean up data before building predictive or prescriptive models using R and RapidMiner, and excel sometimes.  
+I've used What If and Solver only while I was at University. When I worked contract jobs, no one asked me to do that kind of analysis.
+I can send emails through vba programming already. where does that put me?
+This right here
+
+I mean for bigger companies they'll get a real engineer for the job, but small shops would love anyone that can automate tasks using a basic tool like excel
+I can do that and make it in about an hour. Where does that put me?
+I'm looking to find a job lol
+Phew. I've known pivot tables for a few years now.
+What kinds of routines do you have in your macro library?
+Check an check!
+It's just a vagueness of the term that I would ensure he gets clarity on. My title is "Technical Analyst" I build / automate / data cleanse where applicable but my position is not one of offering analysis of the information - only in structuring it in a usable format for end users.
+You sure bout that? It's large and small.
+IDK that's simple and intro so IMO that could get you a first round of interviews. But you won't impress the 2nd round if you can't walk through and explain a problem/solution you implemented. And the problem with that is;
+
+Sure you have relative entry level experience with the necessary skills and problem solving but there are other candidates. Your solution, the impact and it's complexity may be less than another person. Which you obviously have no control over. 
+
+Solution: find the real business impact in terms of hours saved or dollars spent. 
+
+Edit: tell me what you think about this video https://youtu.be/6m3rRFM5D7A
+I have it saved not watched.
+Showing the drilldown feature of PivotTables is cool eye candy for people who haven't seen it before.
+* I have one called check_if_directory_exists(), which creates an empty directory if one doesn't exist (for example if you are saving to folders based on a date and a new year or month comes along).
+* Get the number of rows used in the worksheet (for formula insertion purposes), which uses the usedrange in the worksheet or the first column to get the number of rows based on your preference.
+* Create a dynamic table of contents for the workbook with hyperlinks to each sheets sorted alphabetically or by workbook layout, depending on the option chosen.
+* Many, many, more. My thoughts are that you should only write something once and make it as flexible as possible. Working with other programming languages more got me into this mentality.
+I've got tonnes of stuff in mine all stored in an add-in. The add-in itself also has some useable functions such as:
+
+- a keyboard shortcut launches a form that let's you select a macro. The macros are for common tasks like deleting blank rows, formatting charts, exporting charts, exporting to word or PDF, etc.
+- keyboard shortcuts for paste-special values and formulas.
+
+The add-in also has code split into groups in modules:
+
+- manipulating and sorting arrays
+- manipulating strings
+- dealing with file I/O
+- various date functions
+- error handling
+- various formatting functions
+- UDFs
+- macro/worksheet security and protection
+- stats
+- lots more
+Same job here but with the title of "Reporting Analyst" woo
+Cool. I have the table of contents one too. Agreed on making ALL the repeat things automated :)
+Is that something you can share? I can dm you my email address.
+PM me some topics you're interested in and I can send code in a reply. I can't share the add-in itself as it has a mix of my work and proprietary work stuff.

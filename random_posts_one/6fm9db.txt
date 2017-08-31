@@ -1,0 +1,29 @@
+6fm9db
+Is there a function to identify data in variable [X], then numerically rank duplicate data based on variable [Y]?
+Problem I am trying to solve is: create column that gives the # of the videogame release by date.
+
+For example: there are three dates for same videogame:  
+2/2/2002, 3/3/2013, 4/4/2014  
+
+the row with 4/4/2014 should have a '3'   
+3/3/2013 should have a '2'   
+and 2/2/2002 should have a '1'
+
+If there is a single entry for a videogame, it should only have '1'
+
+
+-------------
+[deleted]
+-------------
+I think that is part of the function needed. Not sure if I managed to explain it well though - here is a [screenshot](http://imgur.com/a/6wkwe). So essentially what I would need is a function that would put a "1" next to Arclight, and then a "1' next to the first Beyblade date and a "2" next to the second Beyblade date. 
+-------------
+[deleted]
+-------------
+Oh yes you are right! Thank you so much!
+-------------
+ Solution Verified
+-------------
+
+You have awarded one point to _ThePhoenixJ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

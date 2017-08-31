@@ -1,0 +1,58 @@
+6g2qkp
+Reduce the size of an array to be considered in a MATCH?
+I have an array A1:M1 say, and I've hit a result in C1 using a match function, returning 3. Is there a simple way to in the next cell apply the same formula except this time only checking D1:M1?
+
+I've found a janky solution using the INDIRECT and CHAR functions, where my array will be something like INDIRECT(CHAR(65+3)&ROW(A1)):M1, but I wondered whether there is a more elegant way?
+
+
+-------------
+Are you starting at D1 because you want to find the 2nd match? If so I'd recommend [this](https://exceljet.net/formula/get-nth-match) approach to find the nth match.
+-------------
+Yeah sorry I should have clarified. I usually use SMALL and LARGE functions but the reason I'm using MATCH is because it's an array formula where I'm checking whether the quotient of arrays meet criteria and I couldn't see how I could adapt that to this approach.
+
+This is the kind of formula I'm using: 
+
+    {=MATCH(TRUE,IF(C9:F9/$C$8:$F$8>0.7,TRUE,FALSE),0)}
+-------------
+`=SMALL(IF((C9:F9/$C$8:$F$8)>0.7,COLUMN(C8:F8)-MIN(COLUMN(C8:F8))+1),N)`
+
+Where N is 1 for first match, 2 for second match, etc. Evaluated as an array formula.
+-------------
+Yep just got it working. For some reason it failed on me once and I thought the array interfered with it and didn't go back. Thanks!
+-------------
+Okay I remembered why I had some trouble before. I'm trying to use an AND function within the IF statement and it's not working. 
+
+    =SMALL(IF(AND(C9:F9/$C$8:$F$8>0.7,$C$7:$F$7<>0),COLUMN(C8:F8)-MIN(COLUMN(C8:F8))+1),N)
+
+This just returns 0 for some reason and I'm not sure why (C7:F7 is just some 1s or 0s).
+-------------
+If it's a binary 1/0, this will work fine: 
+
+`=SMALL(IF(($C$7:$F$7*C9:F9/$C$8:$F$8)>0.7,COLUMN(C8:F8)-MIN(COLUMN(C8:F8))+1),N)`
+-------------
+Yeah I ended up using multiplication tricks, though was a bit more complicated than that since I wanted <0.4 in the actual sheet and had to do some IFERROR div/0 antics.
+
+Know why AND doesn't work with this function? Seems like it would be useful in the future if I got it working.
+-------------
+Try going to "Evaluate Formula" in the Formulas ribbon and you can follow along with Excel's way of thinking. Basically, AND can't return an array.  Excel gets to something like: 
+
+`AND({FALSE;TRUE;FALSE;TRUE},{TRUE;TRUE;TRUE;FALSE})` 
+
+This AND will just evaluate to FALSE, rather than array of TRUE/FALSE values which is needed for this syntax to work. You could use this approach for multiple logicals: 
+
+`=SMALL(IF((C9:F9/$C$8:$F$8>0.7)*($C$7:$F$7<>0),COLUMN(C8:F8)-MIN(COLUMN(C8:F8))+1),N)`
+
+You could multiply together as many logical statements as you want -- arrays multiplied by eachother will return arrays.
+-------------
+Right that makes sense. I did try to multiply the arrays but it came out as an error; I'll check the exact nature of it next time I'm able. Does that work the same way as AND? Does {TRUE,TRUE}*{TRUE,FALSE} give {TRUE,FALSE}?
+
+Thanks for all your help by the way, I always get it working in the end but you've helped me replace so many janky formulas with more elegant ones!
+-------------
+Yes exactly -- `{TRUE;TRUE} * {TRUE;FALSE} = {TRUE;FALSE} `
+
+Or, really, Excel evaluates as:   
+
+`{1;1}*{1;0} = {1;0}` 
+
+Reply with "solution verified" to close the topic :)
+

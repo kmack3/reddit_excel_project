@@ -1,0 +1,88 @@
+PowerPivot users, what do you use it for?
+If you aren't in the business of gathering multiple data sets together to try and tell an aggregate story I would say there is little to no use for it. If your data is a nightmare you would also need to incorporate using Power Query and the Data Model to even get Power Pivot into a workable state. Tread lightly based upon your business needs is my recommendation.
+Distinct Count.
+It's completely changed my view on the power of Excel. Once you make the switch you'll never go back to using "old" Excel. 
+At first you will use it because it can handle much much more data than a plain excel pivot + can eliminate most vlookups between tables.
+
+Then you will use it for DAX formulas.
+Use it to gather 50M rows of transactional data and manipulate it using trees I've built within another excel document. Similar to building a cube really, but without the need of a server etc, great for testing ideas on it too
+Ability to use much more powerful DAX formulas that are context and filter aware, allow you to do nearly any calculation you could think of 
+I use 2013 excel, so I use it mainly for distinct count. The DAX functionality is also very, very useful for answering questions easily with your data. It's not a mile away from regular pivot tables either.
+I recommend getting the book "Learn to Write DAX: A practical guide to learning Power Pivot for Excel" by Matt Allington.
+
+I have the kindle version so it is searchable and has live links to datasets used in examples.
+
+You can probably download the preview which, if chapter one, gives a great explanation of the differences between standard Excel pivot tables and power queries/pivots.
+
+DAX is an incredibly powerful language for comparing and calculating multiple datasets and is the power behind power pivot.
+Dashboards. Fully automated dashboards as far as the eye can see.
+
+PowerPivot and PowerQuery turn Excel into a self-service business intelligence tool like Tableau or QlikView.
+I work for a school so I use it when I export enrollment data. It comes across as one line per student but over 50 columns of data per student. It's an easy way for me to give quick counts, sums, averages etc of things like what percentage of our students are freshman, how many are full time, male vs. female ratio, etc. 
+As an accountant, It's good for storing account mappings so you can group things up for different reports. It's also good for calculations like '% of income' (which you can't get for every line in a regular pivot table if you have multiple fields in the row area.) I use it for some gross margin calcs too. 
+
+I actually bring in my transaction detail and then I've got account mappings and customer type mappings so I can run customer margin calcs or full income statement calcs, all with the same data. 
+I also have cumulative DAX calcs for when I need balance sheet balances, vs. income statement calcs where I just want period information.
+
+The only table I manually update each month is the month end I'm reporting on. I've linked that to a date table (which is linked to the transaction table) and all my graphs pull the right ytd and current month information. 
+ 
+Dax formulas can get crazy specific but these are some simple accounting things it can do that are just beyond regular pivot table features 
+
+
+[deleted]
+Please be careful.  Users that don't have Powerpivot can not adjust your pivots and manipulate the data.
+Can someone ELI5 what DAX is? Are DAX formulas significantly different than traditional excel formulas? 
+My problem is that, lets see how to put this, everyone I do work for is utterly helpless and stupid.  They would never use a dashboard.
+
+Even now with a simple pivot that shows them sales by region they cant be bothered to select the region as a filter, they want one pivot for every region on 5 tabs.
+
+It sounds nice, but I just dont think the group I send stuff to would use it.
+Do you have an example where it was more useful than regular pivot tables?
+As long as they have Excel 2013, the PowerPivot engine is there and they'll be able to interact with the pivots. They just wont be able to modify them unless they turn the full component on (which is also there).
+I did point that out to my boss.  
+
+I feel like its a useful tool, but not something I could currently use.  
+Syntax wise it's fairly similar (and was done so on purpose to help Excel people transition). *[MeasureName]=FUNCTION(FUNCTION(param, param), param = value) etc.*
+
+Usage wise, it's a little different:
+
+* Much easier to build contextual formulas e.g. RedCars = CALCULATE(COUNTROWS(Cars), Cars[Color] = "Red")
+* Within your formulas you can reference table relationships, build calculated tables, iterate over a dataset, perform dynamic filtering based on user input - LOTS of power (see [Basket Analysis](http://www.daxpatterns.com/basket-analysis/) for one example)
+* Lots of syntactic sugar formulas e.g. time intelligence (SAMEPERIODLASTYEAR(), TOTALMTD(), etc.)
+* You don't have to generate the formula results to see them in a Pivot Table like in vanilla Excel, just drag the new measure onto your table and the model generates the results for you.
+
+I would say DAX has three layers:
+
+* the 101 layer is very similar to Excel, easy to get into, SUMS, COUNTS, basic filtering.
+* the 102 layer which mostly means wrapping your head around how DAX and PowerBI/PowerPivot keep track of context, cross-table filtering, etc.
+* the 201 layer which is just edge case, rare stuff, but can be (and has to be) particularly complex to achieve its goals.
+
+Basically, I believe DAX is about the least complex it could possibly be to still achieve those 201 scenarios.
+Yes, it's more quasi-sql than excel formulas
+I totally get it. Management here likes PowerPoint slides. Lots and lots of static PowerPoint slides. I hate them, but, using the dashboard concept, I've built tools that automatically generate the data I need to populate those slides. PP and PQ are automation tools.
+* Scale: billions of rows.
+* Complex calculations: blows vanilla Excel out of the water.
+* Integrating multiple data sources: waaay easier modeling setup.
+* Upgrade path: can push Power Pivot models into PowerBI and SQL Server Analysis Services. Also supported as an ODC in SharePoint and an Azure Data Catalog asset.
+* IT support and collaboration: much easier for IT to provide and manage  datasets and models. No more shadow IT.
+* Also, Excel is not a database. PowerPivot is at least a step into sane data management.
+
+So if none of those apply then yeah vanilla pivot tables would probably be fine.
+
+EDIT: Mobile ate my bullet points.
+Sure. Say I have a data set with a years worth of transactions. Takes me almost no time to summarize the transactions by month. Then say I want to further split each month into say expenses and salary. No problem at all. 
+Good to know, thanks!  Unfortunately, we're using 2010 right now.
+Hey thanks so much for that explanation. I'm starting to get a better understanding of it now. It's a similar yet separate formula language that lets you do more complex relationships and lookups? And you reference whole tables or columns when using DAX, not cells? It seems very interesting and very cool. I'm hoping one day I can get to where I can use this at work. 
+But db maxes out at 2gb so it still has its limitations
+What's the best resource for learning power pivot?
+The company i work for is also using 2010 at the moment. God i hope we're upgrading soon.
+DAX formulas only work on aggregations, not individual cells. When you are creating a formula in DAX, you are not doing something like A1 / C5, it's more like the 'sum of all costs' (cost being a measure in a 'Fact' table), divided by the 'number of products' (products being a dimension in a dimension table).
+True, but if you're pulling more than 2GB of data down into userland memory, you should be looking at moving to a database anyway.
+Rob Collie and Bill Jelen's books basically cover the entire thing and are very approachable (they're basically written for Excel power users):
+
+[PowerPivot and PowerBI](https://www.amazon.com/Power-Pivot-BI-Excel-2010-2016/dp/1615470395/ref=sr_1_1?ie=UTF8&qid=1481295013&sr=8-1&keywords=powerpivot)
+
+[PowerPivot Alchemy](https://www.amazon.com/PowerPivot-Alchemy-Patterns-Techniques-Excel/dp/1615470212/ref=sr_1_4?ie=UTF8&qid=1481295013&sr=8-4&keywords=powerpivot)
+Thanks for the clarification.
+Yea. But jumping from excel to power pivot is easier than jumping to SQL. At least that's what I'm struggling with now! Haha
+thank you

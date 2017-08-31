@@ -1,0 +1,90 @@
+Excel VBA Examples - progressive learning
+I learned to do this by reading this subreddit.
+
+People will come and have a problem, regardless of what it was, I would solve it using VBA. Most of the time no one wants a VBA solution, I was just doing it for my own personal gain really. 
+
+VBA is really simple. Learn the basics first (variables, for, do, looping in general) then you'll find yourself having really specific questions about exactly what you're trying to do. If you can do it manually, record it using the macro recorder, view the code and make it dynamic and use-able in your script..if you don't know how to do it manually, or the recorder won't record it, then just consult google for your problem. I seriously doubt you'll ever have a problem no one else has had.
+
+Really though, just solve people's problems on this sub. You'll start picking it up in leaps and bounds. You don't even have to tell the respective OP that you solved it in VBA, usually they won't want to use the VBA solution unless they explicitly state that's what they want.
+
+Also, solving problems for work in your free time (I know it sounds crazy) can be a highly valuable learning experience. Again, you don't have to mention you ever did it, you're doing it for yourself. 
+The best thing to do is just hop in and try to write something out.
+
+I would start by recording macros.  Do different things with formats, and selecting cells, then you can look at the code and see how it works.
+
+Once you have a general understanding of how the code works though excel, you can start throwing in loops and variables and you will be on your way.
+
+What I did when I was first started was I would try and answer things on Mr. Excel with only VBA.  Most of the time I would not post answers, but they were good challenges.
+
+Two starting tips if I may.  
+
+First, Indent, Indent, Indent...
+
+It is much easier to follow your code when it is indented properly, for example:
+
+	Sub Indent()
+		Dim lngLstRow As Long
+		lngLstRow = ActiveSheet.UsedRange.Rows.Count
+
+		For each rngCell in Range("A1:A" & lngLstRow)
+			If rngCell.Value > 1 Then
+				rngCell.Value = rngCell.Value + 50
+				rngCell.Font.Bold = True
+			End If
+		Next
+	End Sub
+
+You can easily follow the Start of the Loop, and the IF statement and the ENDs...
+
+The second use Explicit Declaration!
+
+Nothing bothers me more when I come into a new project and the variables are named all sorts of crazy things.  By adopting a common naming convention, it will make it easier for you to follow as well as others...
+
+For example: 
+
+Boolean  | bln  | blnYesNo | 
+:--- | :--- | :--- | 
+Byte | byt | bytWeekdayValue | 
+Date (Time) | dtm | dtmStartDate | 
+Double | dbl | dblCost | 
+Integer | int | intTotals | 
+Long | lng | lngLstRow | 
+String | str | strValues | 
+
+If you have questions, or need help, that's why we are here!  Just let us know!
+
+Anyways, hope that helps!
+
+
+
+http://dailydoseofexcel.com/archives/category/VBA/
+
+
+They have examples from pretty basic to insane
+if you ever do anything twice in Excel, record a macro for it.  Then learn about ".offset".  Then have patience.
+It looks like in your post  you did not specify which version of Excel you are running.
+
+Please be sure to edit your post to include this so that we are able to better help you with your specific problem.  If you have received this message in error, please disregard.
+
+*[I am a bot](/r/AutoModerator/comments/q11pu/what_is_automoderator/), and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose?to=%2Fr%2Fexcel) if you have any questions or concerns.*
+www.chandoo.org
+
+It's a pretty useful site.  Not entirely devoted to VBA but you'll learn a lot of neat excel tricks.  
+Some great advice here, but you should know that Excel VBA is just another computer programming language.  I say that because of programming languages, VBA the **most annoying** to work with.  If you're completely new to computer programming, you might want to consider learning the basics (such as loops, defining variables, building functions, etc) in a different language (Python is a good choice) and then go back and see how Excel implements those ideas.  
+That's a great idea. Thank you!
+
+That is great advice. Thank you!
+Actually, I stopped using Hungarian notation a long time ago.
+
+* f = Byte (flag)
+* dt = Date
+* n = Number (double, Integer, Long) Actually, I never define anything as Integer.
+* s = String
+
+Most recently, I've been doing my best to conform to .Net style naming in my VBA projects because honestly, "startDate", "userName" is pretty damn self explanatory. BTW: I've been a VBA programmer for over 15 years.
+offset() and .offset are ahmahzing! I automate so much more of my sheets with these tools.
+A coworker spent two days googling and writing VBA code to automate changes to a series of word documents. The references and functions looked horrid. I'll stick to my Excel, thanks. I can see what you mean about annoying.
+
+I'd consider using python or ruby to create little programs to help at work, but activation energy to learn to: create a window, show two fields to enter numbers, and display the sum seems *way* to high for me. Excel provides the framework within which I can write a quick loop and not worry that much about display externalities.
+Then you can use python within excel!
+http://pythonexcels.com/python-excel-mini-cookbook/

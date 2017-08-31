@@ -1,0 +1,64 @@
+freeze
+5l91vd
+How to freeze 2 column, 16 row table and nothing else?
+
+Hi guys, so as the title states I'm trying to freeze the first 2 columns and only the 16 rows of those 2 columns (and also the first row in its entirety if possible in conjunction) and nothing else so that when I scroll down the main spreadsheet I can always see that 2x16 table on the left.
+
+Is this possible at all and if so how?
+
+I've managed to freeze it for horizontal scrolling easily but I can't figure out how to do it for vertical too.
+
+Thanks!
+
+
+-------------
+Click on the cell at the outside bottom intersection of your 2x16 cell group and select Free Panes
+-------------
+You can't freeze something in place and have everything else around it move.
+
+You can only lock rows/columns above and to the left.
+-------------
+If you're willing to use a complex and fragile event handler, your _frozen_ area could be a picture link, and you could use the SelectionChange event handler to keep it in the upper-left of the worksheet window as you move around in the worksheet.
+-------------
+Thanks for the reply. Unfortunately when I do that it freezes all of the rows above that cell and not just the 2 columns.
+
+-------------
+You can have a floating window! sort of!
+
+1.  Highlight the rows and take a camera snapshot.
+2.  Paste the snapshot on the page.
+3.  Click on the snapshot and in the cell reference field change the name to PictureX
+4.  Open VBA (alt+F11) and past the following code in the worksheet module for that worksheet. The code re-positions the image to the top corner on a cell click.
+
+.
+
+
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+     If Target.Cells.Count > 1 Then Exit Sub
+     With ActiveWindow.VisibleRange
+     ActiveSheet.Shapes("PictureX").Top = .Top
+     ActiveSheet.Shapes("PictureX").Left = .Left
+     End With
+     End Sub
+    
+
+-------------
+Might be able to get away with the split screen bars here as well. https://m.youtube.com/watch?v=15Oejw3CLuc
+-------------
+There is also the  [Watch Window](https://support.office.com/en-us/article/Watch-a-formula-and-its-result-by-using-the-Watch-Window-d72fc6f3-4c9d-4c13-bd15-bb074ba7c784) to monitor cell values in real time. TIL :)
+
+[Video example also here](https://www.youtube.com/watch?v=jbLZW_vQ-yA)
+
+You can have the watch window floating or drag it onto the menu bar.
+-------------
+Picky: OP wants the top row to be a frozen pane, so the .Top property would need to be modified.
+-------------
+That will not work with this workaround..
+
+If the shape is placed at the top top row all its contents are hidden where the scroll occurs past the 1st row as you scroll.
+
+Though [you seem confident](https://www.reddit.com/r/excel/comments/5l91vd/how_to_freeze_2_column_16_row_table_and_nothing/dbv2azh/) so curious to see your solution  :) ... I am just a hacker!!!
+-------------
+I'm not using a Windows machine today, so can't confirm today.
+
+Maybe necessary to use picture links for both top row (which would need to adjust for different columns in view) and 2-column table on left side.

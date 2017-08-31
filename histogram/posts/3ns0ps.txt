@@ -1,0 +1,95 @@
+Trying to create an idiot proof spreadsheet to track employee hours
+> idiot proof
+
+Holy Grail.
+
+Good luck.
+After getting your formulas right, leave only the cells that need to be X'd unlocked, and lock everything else down, protected by a password.
+I think you mean the last row is where you're struggling. I'm going to assume you're working on total hours in the last row of your sheet. Also, your total hour doesn't look to include any breaks. I may be wrong, but take a look. There may be simpler ways, but here's my take.
+
+Cell C5 would get
+
+=(IF(C2="X",1,0))*$I2+(IF(C3="X",1,0))*$I3+(IF(C4="X",1,0))*$I4
+
+Drag across the row to fill other employee's. 
+
+Basically I'm using if to check if there's an "X". If X is there, give me a 1, if not, give a 0. Then multiply by your total hours column for that row. 
+
+The last column doesn't look like the problem to me. It faithfully counts the non-blank ('X') marks under Employee 1-5. 
+
+The Total Hours formula needs to be cleaned up by inserting '*' for multiplication:
+
+    =((IF(B2<A2,B2+1,B2)-A2)*24)*I2
+
+And the Total Hours total needs to be cleaned up too:
+
+    =SUM(H2:H4)
+
+With the Total Hours column formatted correctly, (e.g., format as normal number) it calculates correctly. 
+
+O WAIT. You meant "last row", not "last column". Total Hours per employee is (formula for employee 1):
+
+    =24*ArrayFormula(sumproduct(C2:C4="X",if($B2:$B4<$A2:$A4,$B2:$B4+1,$B2:$B4)-$A2:$A4))
+
+Idiot-proofing is another matter. 
+
+
+Google forms do this so much better than Excel ever will.
+To try and make something idiot proof is to seriously  underestimate the ingenuity of idiots.
+Honestly, they can fuck that up too. I've started doing two things:   
+  
+1.) write my formulas for reports in VBA and have them fill down after the user inputs parameters.  
+  
+2.) Keep blank backups on one USB stick that goes home with me and data filled backups on a different USB that goes home with me. Since implementing this system I've reduced the number of users I want to kill from all of them to just several. 
+Ah yes, I did mean last row -- not column, my apologies! Who is the idiot now?
+Breaks aren't a factor for this spreadsheet, I appreciate the insight though!
+
+So to clarify, your formula is totaling all shift hours worked for each employee, correct?
+
+
+Thanks for deciphering what I was trying to say and for putting together that epic formula. It might be user error, but when I apply it to my coordinates I get an error. To make it easier to explain, I had minimized the amount of columns and rows.
+
+A & B are actually J & K
+
+C - G is actually M - S
+
+H is T 
+
+I is U
+
+
+and the rows actually span from 2 - 86
+
+Here's what I've come up with and it's turning out a #NAME? error. Any suggestions?
+
+    =24*ArrayFormula(SUMPRODUCT(L2:L86="X",IF($K2:$K86<$J2:$J86,$K2:$K86+1,$K2:$K86)-$J2:$J86))
+I've tried google forms and I'm not a fan. I prefer the old fashioned way.
+After checking the top bar and then the URL, I can safely confirm that, yes, I am indeed in the *Excel* subreddit.
+You've got special users. I've always been able to just lock the whole thing down, except for 3 or 4 specific cells, and they haven't been able to screw anything else up. That's actually pretty impressive!
+Not OP but Basically yes 1*(#hours worked) will give you that result.
+yup, that's the plan.
+=arrayformula() isn't in the standard library.  Not clear where he's going with that.
+
+I would advise to keep it simple.
+
+ * Add a helper column with the hours per shift in column C
+ * Have the manager enter "1" for a worked shift rather than "X".  They could then enter .5 for a half shift, etc.  Adds functionality, and makes it easier to implement.
+ * =sumproduct(hoursPerShift,Employee) to multiply the hours per the portions of shifts worked.
+
+
+Fair enough, I track all my contractor hours and autogen client and contractor invoices from a simple Google form.
+Is this how people in /r/Gaming feel when they bitch about something and /r/PCMasterRace ~~tries to show them the light of Lord Gaben~~ ~~busts in and drops some truth bombs on their pity party~~ ... Shows up?
+A lot of my creative excel work is done for the movie theatre I work at. We have these sheets that have to have a list of all the titles playing in each screen. It used to be a manager manually looking up what was playing and typing the whole thing out. I reduced it to a button push. Someone forgot to enable macros (our security settings suck), couldn't figure out why the button wasn't working, and then unlocked the sheet and deleted all the formulas that aren't in the code typing out the titles. They wasted half an hour ruining my work, and *of course* they saved over the sheet. I created a userform for editing staff schedules and then had to go back and write a huge function with literally a dozen different ways someone could improperly format the time. 1830 6:30PM 6:30 PM 630PM 630P )*&#)(*908723408523-4ojisfl;kvs/kldja;ls
+Thanks! This is essentially what I ended up doing, albeit in a more roundabout way. I appreciate the input!
+> =arrayformula() isn't in the standard library
+
+You are correct -- Just to clarify, I absentmindedly used Ctrl+Shift+Enter when I entered the Sumproduct (because it is using arrays). Sheets wrapped ArrayFormuala(); I did not type that explicitly. 
+
+But Ctrl+Shift+Enter was not necessary here -- sumproduct can handle arrays.
+You strike-through'd the wrong section of text there pal. WOO-WOO-WOOO sup dude! You PC too?! GTX 660.
+PC 4 Lyfe! Our lord has blessed me with a GTX 780ti.   
+  
+You ever want to bring your rig in from home to do work on? I sometimes write and text macros at home and they run in an instant, and then when I try to bring them to work on our Vista era, Core 2 Duo 2GB RAM dinosaurs it takes fifteen minutes to do the same work. One day when I have $1000 to burn I'm going to build one of those portable rigs. 
+Nice bro nice. Nah I don't get down and dirty with macros like that. They run fine on the i3s at work. Beats using a console that's for sure!!
+Lol, at least the Core 2 Duos can run excel in 60FPS 1080P. 
+Remember that game that's built into like Excel 97? Where you have to go to a certain cell, highlight it, then alt click an Excel logo and it'll start this car game?

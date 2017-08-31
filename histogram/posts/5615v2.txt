@@ -1,0 +1,204 @@
+Excel basics for co-workers - brainstorm
+Keyboard shortcuts such as using Ctrl + PgUp/PgDwn to nagivate between Sheets or Ctrl + Tab to navigate between workbooks.
+
+If you can get your colleagues to spend more time on the keyboard than the mouse, work efficiency will increase tenfold
+Pivot tables. 
+
+So much of what people do is "how many do I have of X, how many do I have of Y, How many of X does Z have in his back yard compared to his front yard". 
+
+More and more data gets fed to people in a normalized table, it is extracted from various programs, reports, whatever, and most of it conforms to data that is good for pivot'ing.
+
+Pivot tables takes the user away from fiddling with the data, with formulas, sumifs, weirdness, and into just drag-n-drop'in the data. 95% of what people want to do, can be done by just drag-drop and maybe some grouping. 
+
+Afterwards they might take the result of the pivot table and copy-paste it somewhere and add it together with something else in a less-than-elegant way, as people (myself included) are wont to do. But if you can make them unafraid of just tossing the data into a pivot and playing around with it, I think that would be really useful to a lot of people. 
+
+Unfortunately it is often repeated that "pivot tables are advanced stuff!" so the mere mention of using them makes people blank out.
+
+
+The one tricky thing to teach people is to make sure their data is formatted correctly. 
+ 
+Will you post when you are done? Plenty of people around the office could use a booster on excel basics.
+I always find basic users do not understand how Excel handles dates.  They do not understand the excel date stamp.  
+I also think a basic rule to teach is that if something is taking you a long time in excel, your probably doing it wrong. Excel has so many functions and a quick google search can get you on the right track
+
+Also, v lookups and filtering
+Rule number one of excel club - you never merge cells.
+
+Rule number two of excel club - YOU NEVER MERGE CELLS.
+
+Edit: Also conditional formatting mod(row(),2)=1 and paste special would be nice. I waste a lot of time doing this for people that refuse to learn.
+People in my office didn't understand:
+
+Format painter
+Text to columns
+Filtering
+Identifying duplicates 
+Conditional formatting
+
+
+Without even getting into formulas that's a huge efficiency boost right there.
+* Manual vs. Automatic calculations.  Can't tell you how many times I've had coworkers confused by that functionality and/or didn't know it exists.
+
+* Keyboard navigation funcionality like Ctrl-Direction or Ctrl-Shift-Direction for selecting multiple cells quickly or maneuvering quickly through a sheet
+
+* How to use =LEFT/RIGHT/MID/LEN/FIND functions to get text out of a potentially concatenated or complex cell
+
+* How to concatenate a couple cells to make something combined
+
+* How to make a complex (2+ part) key for a vlookup or Index/Match.  Sometimes there isn't just one column that makes up a key; it can be two or more (such as Date + Customer Name).
+
+* Custom conditional formatting of cells/rows
+Depends on how basic you want to go...so basic that they don't even know how to switch between sheets/tabs and don't even know how to use formulas? Anyways, in my office, I feel like the biggest improvement would be if people learned vlookup. There's a lot of cross referencing done and people still manually look up values because they either don't know or are afraid of the formula. 
+There were three VERY basic things that saved me a lot of time when I started with Excel. 1) CTRL-home to go to A1 and CTRL-end to go to the last cell containing data. 2) Double-click the line between columns or between rows to make the column or row resize to fit the largest entry. 3) Click on the square that is to the left of A and above the 1, to select all columns and rows for formatting.
+Accountants deal with a ton of data so pivot tables are imperative to learn. They don't display information well anymore though so learning how to format the pivot table to the classic format and removing the totals will get you a pivot table that looks like a table. 
+
+Accountants will frequently want to use that pivot table as a base and do a VLOOKUP on that information. The problem with that is that the information you would want to use as the lookup key isn't repeated on every line on the way down. 
+
+What they do is copy paste special on another tab and they backfill all of the cells in the rows where the information is missing. A shortcut for that is highlighting all of column A and clicking on the DATA tab, then "GO TO SPECIAL", then clicking on "BLANKS". 
+
+This will highlight and select all cells that are blank or null. While they are highlighted, hit the "=" sign, the up arrow key, and then CTRL + ENTER. 
+
+This will create a formula that references the cell above it for all of the blanks. These couple of steps complete the painstaking process of backfilling the pivot table information so you can do a VLOOKUP. 
+
+This comes up all of the time and they are always saying how it saves them hours. 
+
+Edit: Be sure to remind them to copy, paste, special values to get rid of the formulas. You don't want to sort your information and have the formulas start to reference other cells. 
+Good suggestions here. If they are basic users you might want to show them the ability to add items to the quick access toolbar or whatever it's called (the Taskbar that stays below the ribbon). Pretty  basic but handy if they don't use it!
+
+The use of vlookup is nice, maybe index match if they are ok with that. 
+I'm actually doing the same thing accept in the HR function. And we do A LOT of cross referencing so our biggest need right now is vlookups. But as other posters have said my colleagues don't trust formulas. I'm having to literally break it down into it's components to say it's not Excel that you don't trust it's yourself!
+I've trained coworkers on Excel! The most productive sessions were ones with small groups where they could show me a spreadsheet that wasn't behaving, and we could work through a solution together. That ensured that we covered topics that were truly useful and  working together really helped the techniques stick.
+
+If you can't make it a workshop, ask your audience what issues they've run into lately. For example:
+If the issues are related to formatting & printing. Talk about Wrap Text, Page View, and using Alt + Enter to add more than one line to a cell
+If it's Formulas talk about Insert Function, Evaluate Formula, and common errors (####, VALUE!, etc.).
+
+I also found that it helps to mention your latest Ah-Ha moment to get them talking. (I *just* learned that you can hide the menus with the tiny carrot at the bottom right of the menu bar!)
+A lot of good suggestions. 
+
+One thing I'll add is proper usage of anchors. Sumifs and countifs and index matches are all great, but they'll be next to useless if you don't anchor all the right bits. Or worse people will pull the wrong data without even realizing.
+I spend my day as a computer trainer, mainly training office staff.  I think that so many of the ideas here are great but way to complex for most staff.  I think the first step is to identify the level of the staff.
+
+I then break it into two streams
+
+Managing lists
+------
+Shortcuts
+Autofilter
+'Tables'/Structured tables
+Conditional formatting
+basic pivot tables
+Flash fill/text to columns
+Data Validation
+Charts/Sparklines
+
+Formulas
+------
+Absolute cell referencing
+IF Functions
+VLOOKUP Functions (Basic)
+COUNTIFS/SUMIFS
+Calculating with dates
+How to use range names and calculate using a separate sheet for variables
+
+If you look at most courses. There constitute a core 'Intermediate' excel course.  The trick is to have simple example files to show people what each feature does.
+
+If your staff  are more advanced then you can target their area of interest (More pivot table features, More functions (TEXT functions etc) .  But if the staff members could do the tasks above, they would be seen as fairly efficient at excel by most people
+
+PowerPivot/Power Query - Expert only
+INDEX/MATCH - Great for specialists only
+INDIRECT/Arrays/ Volatile functions 
+
+Look at training company websites for what they put in INTRO/INTERMEDIATE/ADVANCED Courses.
+
+My advice.  Do less, make sure they practice, don't overwhelm people.  You want them to walk away positive about what they can do, not feel like it was over their head.
+
+Oh..and whoever said NEVER merge cells....  Yup!
+Show them how marking down the black dot sums the cells. 
+
+if that's too easy my favourite formula is below:
+
+If you have 2 sheets of data and want to know if there is some unique data in sheet 2 compard to sheet 1 there's a good formula: =antal.om(sheet1!a:a;sheet2!;a1).
+
+change the antal.om to english version from swedish and I think you guys use comma instead of semicomma. What the formula do is that it looks for values that exist in A1 in sheet 2 and checks how many of those exists in sheet 1 column a. Then when you put this formula in b1 and double tap the black dot a1 will cahnge to a2 and then a3 for every row below.
+I would email the users you're going to train or are interested in training and ask them for examples of their biggest constraints and go from there. One thing I have noticed is people don't retain pieces of information that do to pertain to them. I've showed numerous people valuable formulas in excel but if it's just a one time use they don't bother to learn it
+A brief explanation of the concept of absolute vs. relative references in cells is an important concept that is very helpful to new users.
+Hahahaha nerdy comment of the year?? I love it 
+Agreed. Shortcutfoo.com is amazing for this. I'm doing some of that and excel exposure.
+A good "201" class for this would be Power Pivot or Power Query.  Once people get Pivot Tables, setting up specific people with the power to build mini data models to pivot is very powerful.  It's what I did at my last job to automate 75%+ of the reporting I was doing (no exaggeration).
+Great ideas. Thank you!
+I'll second this. And the more you practice with pivot tables, and people just have to realize it will take a little time, the more effective and creative you become with structuring it such that you can pivot it. Most of my formulas these days are within a field in a column that is going to be pivoted, with much less use of "way up the page" reference formula stuff.
+Great feedback! Thanks.  
+What do you mean "how excel handles dates?"
+Yeah totally. If they're panicking and doing a mundane task over and over they should call me! That's a way we could increase efficiency. Open the door to recognizing a problem and learning opportunity. Thanks!
+Can you explain the mod(row(),2)=1 further? What does that do? And when is used?
+Haha thanks. Do you  use center across selection in the cell format ever?
+Great ideas thanks!
+Put some punctuation, man :)
+Thank you!
+> Manual vs. Automatic calculations
+
+Can you give more info on this? Is there an easy way to switch between the two instead of going deep into settings?
+Shift + End to scroll to first or last column or row as well. 
+Another way to deal with this is to right click pivot table -> field settings -> layout & print -> Repeat item labels. 
+Neat trick! Thank you! We will likely talk about pivots and I didn't know that back fill trick. 
+Good idea. To build on that just becoming comfortable with options and tool bars in general. There is so much up there. That could be an interesting group session.
+Similar issues. I've had success and failure with one on one vlookup training sessions. 
+
+Recently I was teaching someone vlookup, I had to tell her about everything I was doing cause she was so amazed. We did it all twice, cause like she's gonna wanna see that again.
+Yeah. It's hard to get em to open up. Today someone remembered that her boss had asked her to update something and it was a panic and had to be fixed by someone above her. I was like, "exactly! Find it and let's talk about what happened."
+
+Small groups. Actual issues they've had. Good ideas thanks.
+Anchors. Do you mean formatting the lookup values appropriately?
+How'd you get into training full time?
+
+I made an interactive worksheet to teach cell referencing, vlookup, and index(match. It was the most fun I'd had at work in awhile. 
+
+I'd love to teach entry to intermediate excel for a living! Any tips to transition to this from being a financial analyst?
+"Countif" in english ;)
+"Making down the black dot sums the cells" - What does that mean?
+
+I'm trying to translate anal.om. Section if. Is this a countif?
+Yeah, I've sent emails. I get excited replies saying they'll learn anything! No details on what confuses them. I'm trying to get actual historic examples from them, no luck on that either.
+It's cool to be a nerd when you get older. We make a lot more money...
+Include the date and time keyboard shortcuts - big time saver
+A date is stored as a number that shows how many days have passed since January 1, 1900. So any number is literally a date. You can format "0" with the short date format, and it will show you 1/1/1900. Today's date (10/5/2016) is actually saved as the number "42,648."
+
+A lot of people get confused, because they have a date in "this format," but they need it in "this format," and usually all they need to do is change the formatting. If date is stored as text, then this is often impossible without some manual modifications to convert a text string into an actual date. 
+
+Another thing is that since dates are stored as numbers, they can handle mathematic operations. January 1, 2001 - December 31, 2000 will return "1", because you are subtracting to numbers from each other. 
+
+The time value can also be stored  in there too. So "0" is January 1, 2016 12:00:00 AM, but 0.5 is January 1, 2016 12:00:00 PM (0.5 = halfway through the day). So if you wanted to find the precise days/hours/minutes/seconds difference between dates, you can do that too.
+
+It's also helpful to know, because sometimes your cell formatting defaults to a date. If you didn't know that a date is just a number, you'd probably be confused and wonder "WTF?" before pressing CTRL + Z and trying to do the same thing again.
+Not the food. He means dates as in time. /S
+Excel is typically reserved on date 1, but after date 2 is totally down to round 2nd base. /S 
+Conditional formatting. Will apply formatting (like a color) to odd rows only. Makes thing easier to read especially when printed.
+This is the easy way to do the trick! But If I remember correctly this doesn't work on Mac...
+Correct but then all of your new formulas use GETPIVOTDATA instead of VLOOKUP. 
+I actually never used the quick access tool bar for quite awhile! I found it pretty handy when I found out about it. Even some newer features (if they have used excel for a long time), like conditional formatting or finding duplicates, might be useful to cover.
+Good luck!
+Yep.
+
+Knowing where to throw them dollars so you can drag formulas. 
+solution verified!
+1. marking as it said. meaning you might have  a range of cells from a2:a7 with values inside of each cell. If you press a2 once youll see a black dot appear in the marked "window". drag that dot down to a8 and you have now summed the values of a2 a3 a4 a5 a6 and a7 
+
+2. what level are your coworkers? they know how the sum function works?
+
+3. antal.om is what you said , - countif.  I get very tunneled when doing swe version of excel.
+Ah I thought I had been missing something all this time
+If this annoys you as much as it annoys me, you can go to Pivottable -> Options -> under the "options" in the leftmost tab, click little arrow -> untick "Generate getpivotdata"
+Thanks
+Thanks! There are so many good ideas here! This is gonna be fun.
+And to build on that, using F4 instead of $$$
+F4 to lock in the dollar signs! 
+
+Another vote for index-match. My little mantra to remember the order is:
+"return something from HERE, if THIS matches something from HERE". 
+Oh absolute versus relative references. Yeah, that's important.
+Oh yeah. I think the black dot is a black + for us.
+Aww, but what if I'm wanting to drop washingtons like...wait what did Washington die from?
+
+Edit: maybe someday I'll switch to the more productive f4, but for now it's more fun to me to make it rain on my functions. 
+As far as remembering the match, match order: it's like being drunk. You start vertical, you end horizontal. 

@@ -1,0 +1,29 @@
+Simple VBA Crashes Excel in Mac
+If you run this below row 32767, you should get a runtime error due to using Integer rather than Long for SRow.
+
+Maybe Excel for Mac handles the VBA differently, but under Windows you could just use
+
+    Sub CopyRow2()
+      With ActiveCell.EntireRow
+        .Copy
+        .Insert Shift:=xlDown
+      End With
+      Application.CutCopyMode = False
+    End Sub
+
+Alternatively, it may be a recalculation problem following the insert operation. If the macro above still has problems, try the following.
+
+    Sub CopyRow3()
+      With Application
+        .ScreenUpdating = False
+        .Calculation = xlCalculationManual
+      End With
+      With ActiveCell.EntireRow
+        .Copy
+        .Insert Shift:=xlDown
+      End With
+      With Application
+        .CutCopyMode = False
+        .Calculation = xlCalculationAutomatic
+      End With
+    End Sub

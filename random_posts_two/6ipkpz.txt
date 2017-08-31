@@ -1,0 +1,34 @@
+6ipkpz
+How to remove leading space?
+So my mum was trying to use excel, and she was making an entry of the prices of some things. Instead of just typing the value then formating the cell as currency, she put a '£' sign, then a space after, then the number. The '£' sign was easy enough to remove with the replace tool, but it didn't allow me to include the space after in the selection, so after removing the '£' sign with nothing, the space before the numbers still remains. The reason this needs to be sorted is because it doesn't allow me to include the values in functions in that state. 
+
+So to list what i've tried, I've tried setting another cell to =TRIM(cell) and trying to copy and paste the result of that function as a value, but the space remains still after that. I've tried =TRIM(CLEAN(cell)) with the same results as the first method.
+
+I found a site where they recommended me to use this in the Visual Basics window to remove the space:
+
+    Sub RemoveLeadingSpace()
+    'Updateby20131129
+    Dim Rng As Range
+    Dim WorkRng As Range
+    On Error Resume Next
+    xTitleId = "KutoolsforExcel"
+    Set WorkRng = Application.Selection
+    Set WorkRng = Application.InputBox("Range", xTitleId, 
+    WorkRng.Address, Type:=8)
+    For Each Rng In WorkRng
+        Rng.Value = VBA.LTrim(Rng.Value)
+    Next
+    End Sub
+
+But that didn't work either. Not really sure what to do right now. Any help would be appreciated. The worksheet has over 400 entries, so going and replacing every entry individially probably isn't a viable solution.
+
+Thanks for reading.
+
+
+
+-------------
+Click in one of the cell, and then, in the formula bar, select the empty space at the front of the value, then copy it to the clipboard
+
+Then, `CTRL+H`, paste the whatever-it-is into the 'Find what', make sure there's nothing at all in the 'replace with', then click 'replace all'
+-------------
+Omg. I cannot believe I didn't think to do this. Thank you so much! You've saved me so much hassle. Solution verified!

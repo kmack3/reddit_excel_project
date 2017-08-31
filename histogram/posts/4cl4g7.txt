@@ -1,0 +1,71 @@
+Looking for a way to protect my workbook from being copied by a 3rd party
+This is really not possible. Any security you put in place can be over-ridden.
+
+Additionally, a tool you developed for one employer is likely owned by that employer. Selling it may effectively represent a breach of contract. I'm not an expert on employment law, but most other redditors on here would agree.
+
+[This](https://redd.it/47rfbq) thread provides some illustration of that.
+Hey Buddy, I have gone through this and here are my findings...
+
+1. People on every Excel Forum will tell you that any way of Protecting a WB is just a temporary solution to comfort you and instead of trying to protect it, just find some law protections. (this is really bad and its true what they say because I have tried it, its hard to implement a code to protect your WB) 
+
+2. I have found a script that disables all keyboard shortcuts, I only did enable some important ones like Ctrl+f etc. This is very important because some shortcuts lets you export and stuff.
+Use VBA to take out formula bar, status bar etc. 
+
+3. Protect WB internally(protect cells) and externally(protect wb) also your VBA Code. If you have EXCEL 2013 it really is not THAT easy to crack I have investigated much to know this. 
+
+4. Use a software like MyLockbox to hide your WB in a folder where it can not be accessed by explorer.exe (Windows basically), this will make your folder invisible and remove any history registers. Then use another excel file to open it, don't recommend a batch file. ** You need to enable EXCEL.EXE as a permission to access the folder.** So only EXCEL.EXE can access this folder. Now this is important, how will you protect your vba code? obfuscators? thats a choice, you need to protect this because if they get your WB location, they will use another Wb to open it because EXCEL.EXE has permission to access it.
+
+This way, not even an uninstall of the program will disable the cloak. 
+
+There are multiple ways to get through this but of course lets not spread it as we do not want people to know. 
+
+Currently I know only 1 way of accessing it.. and its not easy for casual people.
+
+edit: btw, I have made a script that unlocks the folder then opens the file, then locking the folder again, this will make the file not being able to open even by Excel itself lol. (stuffs like recent opened documents, they will say the path is wrong or file deleted) of course this is some extreme cases scenario where you REALLY want to protect your file 101%
+Just makes it REALLY tough for beginners and pretty  hard for casual users to see wth is going on since a keyb shortcut that does all of this silently in the background.
+I'd worry more about people constantly pestering me for support than whether someone might copy it and get into the same mess.
+Careful you don't conflate someone making a copy of it with you losing a sale.  There is absolutely no guarantee that the person would have bought it in the first place (RIAA/MPAA have *real* problems with that concept).    Someone making a copy literally costs you nothing.
+
+You could invest many hours and copious neurons attempting to fight the boogeyman of piracy, or embrace it as the free, highly valuable, word of mouth advertising that it is.    
+
+Rather than put code to lock down the sheet, maybe put a brief "splash screen" when it opens up thanking the person who bought it, append your contact info, and put a simple password on the VB code so it's annoying to try to disable it.
+
+Bonus points for moving some of the logic in the sheet into a VBA UDF, so they can't just copy everything out into a new sheet.
+
+
+I'm also interested in this.  I stumbled across a software that claims to do this (XLS Padlock) but don't know enough about computer science to try and break into it and see if my information in the workbook is truly protected.  Does anyone have experience with this program or something similar?  
+[deleted]  
+ ^^^^^^^^^^^^^^^^0.0120 
+ > [What is this?](https://pastebin.com/64GuVi2F/80844)
+The only fool-proof way would be for you to not allow any 3rd party to view it. If someone can view it, someone can copy it, plain and simple for pretty much anything.
+If there are multiple people who want a copy, and you're hesitant because one person might pay for a copy and then share it with everyone else, one solution might be to crowd-fund it for the x number of people interested. Do a very small kickstarter where each individual kicks in their share and when it reaches that amount you're looking for, you release it for everyone and then it's just out there, but you got compensated for your time spent developing it.
+Thank you everyone for your suggestions. some really interesting stuff mentioned here that I am going to look into further. 
+And sorry I wasn't quicker to respond. I was gone for a week and I am just getting back. you guys are great.
+If your code is in VBA, this article should help you tremendously. 
+
+http://stackoverflow.com/questions/16363621/protecting-code-in-an-excel-workbook/28968867#28968867
+Go to Review Tab, then Protect Workbook to password lock it. 
+
+That being said, as others already have, this protection is easily bypassed. If you don't want other people stealing your work plainly don't share it. 
+
+You might notice that there is a Share Workbook button next to the Protect? Same thing, Excel isn't mean for sharing (multiple users accessing the same SS at the same time). That's why people either avoid this feature or are very careful about making frequent backups [edit: because the file corrupts and becomes unusable]. 
+
+MS has Access for multi user access to files. Excel is not for sharing or security. 
+In this case I am self employed. 
+But if it is not possible then I will not dwell on it.
+
+Thank you
+Sorry I was off for the week. But Thank you very much.
+
+I think that I will pursue the legal options for protection paired with excel password protection for the VBA, all of the logic is in VBA and i really just use the cells of the sheets as a form which i read and write to.
+This. This guy has been there.
+
+I dont lock my spreadsheets anymore because of this. They just call you incessantly looking for you to make minor fixes or change something to fit their specific need.
+Unless they've completely overhauled everything, if you can open the file, it's basically trivial to take it over...
+
+Feel free to create a file, strip it of PII (File: Prepare), and post it somewhere.   We'll see how long it survives. :)
+Apologies, self employed is definitely a different situation.
+How do you respond to those folks, in that situation?
+If its a locked spreadsheet its probably locked with good reason. Normally for changes based on preference its a hard no. For minor fixes i'll note it and tell them it will be fixed when its convenient for me. If it's something major I'll consider working on it, depending on the situation, their need vs my schedule etc. 
+
+I now keep them unlocked until someone tells me otherwise, to mitigate how much i'm harassed. 

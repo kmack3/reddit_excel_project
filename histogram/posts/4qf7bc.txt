@@ -1,0 +1,38 @@
+VBA beginner question: is this possible with VBA?
+This is entirely possible. To make things even easier, you can store all this code within the destination workbook, as information stored in closed workbooks can still be accessed!
+Great thanks.
+
+Now to learn VBA.  How long will that take?  Kidding of course.
+Solution Verified.
+I thought I was decent at VBA and had no idea you could do that, that's awesome thank you!
+Wait, what? You don't need to open a workbook to access their content with VBA?
+
+ Can you still do it if the worksheet is hidden? As in xlveryhidden? 
+Well that depends upon how much data you're trying to import, and how it needs to be formatted. The code itself is relatively simple, here's the bit you'd need to import strings from a closed workbook:
+
+    Public Function PeekFileCellString(ByVal FilePath As String, ByVal FileName As String, ByVal WorksheetName As String, ByVal CellRow As Long, ByVal CellCol As Long) As String
+        PeekFileCellString = CStr(ExecuteExcel4Macro("'" & FilePath & "\" & "[" & FileName & "]" & WorksheetName & "'!" & Cells(CellRow, CellCol).Address(1, 1, xlR1C1)))
+    End Function
+
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+It's a great way to aggregate data without having to open every single file you're pulling data from!
+I'll have to experiment with hidden worksheets, but my best guess is yes, even if the sheet is hidden, you should still be able to access it if you know it's name.
+
+And yes, you can read cell data without needing to open the file, read data, then close it. I have a document that aggregates information from lots of other spreadsheets that only takes seconds on start up.
+**[CONFIRMED]**
+
+You can access cell data on hidden worksheets. Including when they are hidden using xlveryhidden.
+
+--
+
+On the other hand, attempting to get other pieces of information such as the number of worksheets and worksheet names isn't as easy to accomplish without completely opening up the workbook and obtaining the information that way. I'll still be looking further into this because this is a side of this that I haven't explored before. I have an idea of how to go about obtaining this info, but I'll need to do more testing to see if it's feasible.
+Uhhhh I had no idea you could actually pull the cell references without opening the file. 
+
+Time to go back and rework a few of my programs. 
+Ah, but you need to know where it is exactly, no? Can I, for example, find the information in the last row of column D, if I don't know which row is the last row?
+
+This is very interesting, thanks for sharing this. 
+I don't see why you couldn't, but I'll definitely be experimenting with hidden worksheets in the office tomorrow.

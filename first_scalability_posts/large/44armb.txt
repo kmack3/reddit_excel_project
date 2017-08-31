@@ -1,0 +1,78 @@
+large
+44armb
+How do I work with very large numbers in vba?
+
+Here's my code. Trying to figure out the largest prime factor but vb seems to yell at me with an overflow error.
+
+The problem is from here (might not have access if you don't have a login):
+
+https://projecteuler.net/problem=3
+
+The prime factors of 13195 are 5, 7, 13 and 29.
+
+What is the largest prime factor of the number 600851475143 ?
+
+
+    Sub Demo_Double()
+    Dim gpf, x As Integer
+    gpf = 600851475143#
+    x = 2
+    
+    While x < gpf
+        If gpf Mod x = 0 Then
+                gpf = gpf / x
+                x = 2
+            Else
+                x = x + 1
+        End If
+        
+    Wend
+    MsgBox (gpf)
+    
+    End Sub    
+
+
+-------------
+    Sub Demo_Double()
+    Dim gpf As Double
+    Dim x As Double
+    gpf = 600851475143#
+    x = 2
+    
+    While x < gpf
+        If gpf - x * Int(gpf / x) = 0 Then
+                gpf = gpf / x
+                x = 2
+            Else
+                x = x + 1
+        End If
+    
+    Wend
+    MsgBox (gpf)
+    
+    End Sub
+
+-------------
+Integer is limited to +/-32K.  Long is +/-2.1B and I suspect what you want to use.
+-------------
+I highly recommend solving large mathematical algorithms using a language such as C. It is much faster than VB in general, and will yield better control of your data.
+-------------
+> gpf - x * Int(gpf / x)
+
+how did you know to do this? Would you be able to explain this please?
+-------------
+solution verified
+
+-------------
+Thanks for the advice! I only am familiar with VB and haven't gotten around to poking in other languages. I thought python, if I have time/drive, would be my next.
+-------------
+As /u/sarelon said, Integer can't handle numbers as big as in your example. The Double data type can, but it's fractional which causes the Mod function a few headaches so you need to write it longhand converting back to Int in the process. For clarification the Int() function just removes decimals, it doesn't care how long the number is unlike the Integer data type.
+-------------
+
+You have awarded one point to _beer_nuts_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Using Double for large number arithmetic is likely to lead to errors, especially for applications such as factorization of large integers. Yes, VBA will produce a result, but it's precision is not sufficient to produce perfect answers. I learned this lesson the hard way while attempting to solve Project Euler problems using VBA. In the end, I had to create a whole set of functions to do large number math, largely using strings to store the large numbers and then breaking them into smaller chunks to perform the arithmetic, then putting the results together back in string form.
+-------------
+Guess I'll try some other programming language if I want to continue this little puzzle quest.

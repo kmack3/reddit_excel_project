@@ -1,0 +1,50 @@
+crash
+5p6owg
+Excel 2016: deleting worksheets with slicers causes crash. Anyone else see this?
+
+I've been wrestling with my new version of Excel that has been crashing on macros that worked fine on the 2010 version.    With much troubleshooting, I have figured out why:   my pivot table worksheet has slicers on it, and when deleting the sheet it crashes.   If I inhibit the creation of the slicers and then delete the sheet, it works fine.
+
+Has anyone else seen this with Excel 2016?   Can I get some confirmation that it's an Excel issue, rather than my workstation?
+
+Thanks!
+
+
+-------------
+Yes I have experienced it, I just isolated a "crash on sheet delete with VBA" problem to the presence of slicers on the sheet.  (That is how I found your post.)
+Running: WIN 10 and Excel 2016.
+Failure is with code that worked in previous versions of Excel.
+Bad news is that deleting Slicers in VBA looks like a nightmare! Meaning no workaround except manual deletion.
+-------------
+I've found that if you insert code that deletes the slicers before the sheet is deleted, it works fine.   Let me know if you find something different.
+-------------
+Deleting the slicers looked like more than I wanted to do at the moment - last time I looked slicers seemed to have an odd implementation. If I remember correctly, a slicer can be used on multiple sheets?
+Was it complicated?
+
+
+-------------
+Didn't seem that difficult to me.    After making a pivot table on a worksheet, here is the code to add a slicer (for a *pivot table* variable called "Sample Number").
+
+---
+
+ActiveWorkbook.SlicerCaches.Add(ActiveSheet.PivotTables("PivotTable1"), _
+    "Sample Number").Slicers.Add ActiveSheet, , "Sample Number", "Sample Number", _
+    10, 710, 144, 150  
+ActiveSheet.Shapes.Range(Array("Sample Number")).Select
+
+---
+
+Here's the code to delete it:
+
+---
+Dim shp as Shape  
+
+For Each shp In Sheets("Analysis Table").Shapes  
+       If shp.Type = msoSlicer Then shp.Delete  
+Next shp
+
+-------------
+Thanks for the code!  When I get a few minutes I'll see if I can use it, or a variation, in my project.
+-------------
+Thanks! This was driving me nuts! It worked.
+-------------
+Duuuuude! Thank you so much. I've been banging my head against my desk for the past three days trying to figure this out. We just switched from windows 8 to windows 10 and my code starting acting up for some reason only on the new computers. This definitely fixed it, thanks again!

@@ -1,0 +1,26 @@
+6g8c83
+Excel Comparing Data
+I have two spreadsheets. One has extra orders on it and I want to highlight all the extras. However, the columns are not exactly identical. They both have order #, which I want to compare, but the one file has extra fields like address and stuff. How do I compare just one column but highlight the full column for differences 
+
+
+-------------
+Use `MATCH` with wildcard.
+
+`=MATCH( "*" & value & "*" ,  RANGE  , 0 )`
+-------------
+I solved it in a pretty complicated way. By pasting both lists into one column and removing duplicates. Now that I have the order #s I need, how do I make the columns with matching order number highlighted?
+-------------
+Assuming my formula above works, use it in conditional Formatting formula.
+
+With more detailed information it is hard to help further.
+-------------
+Ah okay thanks. How do I change the flair ?
+-------------
+Reply to this comment with *solution verified*, the flair is set for you.
+-------------
+*solution verified*
+-------------
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

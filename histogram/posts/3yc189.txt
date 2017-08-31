@@ -1,0 +1,72 @@
+VBA multiple conditions
+     Sub LearnAboutCase()
+    
+        Dim x As Integer 'First example will use numbers
+        x = 3 'Let's try three!
+    
+        Select Case x
+        Case Is > 3
+            MsgBox "x is larger than three"
+        Case Else
+            MsgBox "x is three or less"
+        End Select
+        
+     '''''''''''''''''''''''''''''''''''''''
+
+        Dim y As String 'Now, let's do strings
+        y = "D" 'Let's try "D"!
+        
+        Select Case y
+        Case "A", "B", "C"
+            MsgBox "y is A, B or C"
+        Case Else
+            MsgBox "Y isn't A, B or C"
+        End Select
+    
+     End Sub
+Another option is if/elseif/else.  As in:
+
+    If x = 3 Then
+       <code>
+
+    Elseif x=4 then 
+      <code>
+
+    Else
+       <code>
+
+    End If
+
+I find if groupings like this to be a lot more flexible than Case blocs.  If you need to check all three to run a single bloc of code, then it would simply be 
+
+    If (x = 3 OR x = 4 OR x = 5) Then
+           <Code>
+    Else 
+           <Code>
+    End If
+
+A bit counter-intuitive but try this:
+
+    If !(value=A and value=B and value=C) Then
+
+I learn something new every day. This was the perfect solution for what I'm trying to do. Thanks!!
+
+Solution verified
+Yay success!
+
+Feel free to jump in next time you get stuck. We're friendly here.
+Select case is a good option if you understand the syntax but if you want to stick with If/Then, you would do:
+
+    If  X <> A And X <> B And X <> C Then
+        'your code
+    End If
+
+Where X is your variable. 
+
+You have awarded one point to _nolotusnotes_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+How would you say if x = a, B, or c. Without doing nested if.
+    If X = A Or X = B Or X = C Then
+
+    End If

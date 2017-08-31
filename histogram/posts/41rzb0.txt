@@ -1,0 +1,30 @@
+How to find cell that contains ONLY a specific character when other cells in the formula may have the character I want
+[This should work](http://i.imgur.com/mUFbKdZ.png). Hit Ctrl+Shift+Enter:
+
+    =SUMPRODUCT(IFERROR(FIND("H",A1:F1)/FIND("H",A1:F1),0),IFERROR(FIND("W",A1:F1)*0,1),IFERROR(FIND("F",A1:F1)*0,1),LEFT(A1:F1,IF(LEFT(A1:F1,1)+0>1,1,2))+0)
+
+How it works is it finds H's, and divides their locations by themselves to turn those into 1's, and 0's if not found (the error). Then with W and F it's the opposite, multiply location by 0, make errors 1. Now you have three arrays of 1's and 0's, where you only get 1\*1\*1 if only H is there.
+
+Then we multiply by the first character or, if the first character is a 1, the first two characters. Add zero to convert text to numbers so we can compare and then multiply by our three 1/0 arrays.
+How about this?
+
+    {=SUM(IF(MID(A1:F1,2,1)="H",0,IFERROR(LEFT(A1:F1,2)*1,LEFT(A1:F1,1)*1)))}
+
+Array calc so CTRL-SHIFT-ENTER
+    Solution Verified
+
+Thanks! That worked wonders for me! Thanks for the explanation on how it's working as well!
+Actually, is there any way to make it work to ignore a blank cell? Say cell A2 was blank, how could I modify the formula to "skip" that cell so I don't get the "#VALUE!" error message when there are blank cells?
+Thanks for the effort! It didn't quite work for me though. Gave me 310. /u/rnelsonee 's solution worked for me.
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Wrap an IFERROR around that last part (before the LEFT) and if there's an error, make it a 0.
+That's awesome! Thanks so much! Let's see if it works again...
+
+    Solution Verified
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

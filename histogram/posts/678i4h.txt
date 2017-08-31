@@ -1,0 +1,278 @@
+What useful tools do you have stored on your Quick Access Toolbar at the top?
+Just a few useful macros mostly, 
+
+of note: 
+user1c1, converts the reference to A1 / R1C1 on the fly - makes vba a lot easier. 
+
+calculation options for switching between manual / automatic 
+
+some other common but bespoke macros. 
+some basics that I use a lot
+
+select visible cells
+
+paste values (USE THIS ALL THE TIME, ALT + 4 TO PASTE VALUES)
+
+Pivot table
+
+fill colour
+
+send in email
+
+nothing too special
+Hey, i simply add Paste Values and Paste Formulas to my bar, it's very useful and i don't need anything else for my job...(i'm a reporting analyst)
+One I really like is a macro to change the selected sheet to "Very Hidden." It allows me to hide some sheets but not make them visible if someone was trying to I hide sheets(unless they went through the code editor).
+
+Just makes it easy for me to hide some underlying support sheets knowing no one will really look at it so it feels cleaner.
+
+I also have one that would unhide all sheets, pretty convenient because going one by one can be annoying.
+
+Some other random stuff, like one that changes all column names from SQL format to a regular title.. E.G. "sales_territory" -- "Sales Territory". Or for certain acronyms it knows to put it in all caps "account_guid" --> "Account GUID."
+I have a Clear Text to Columns macro that resets the delimiters, and also a Rotate macro that lets me enter an arbitrary rotation increment - the Size and Position box only does 1° increments. I find myself pulling data from scanned graphs frequently, which usually don't have the axes quite aligned vertically and horizontally, so I drop some lines over top that are aligned, then rotate the image until it matches the lines. (Then I'll make a transparent graph to overlay on the image, scale it to match, and add points to get a good fit to the original plot.)
+I only have two besides the defaults: Edit Links and a macro to Center Across Selection.
+The back arrow. 
+
+When dealing with a huge workbook with too many spreadsheets (the kinda thing that seems to have had too many people add to it over the years, should probably be in a database, and would take days / weeks to fully understand) which had an 'index' page with hyperlinks to the important parts adding the back arrow saved me loads of time scrolling along spreadsheets at the bottom.
+Nr 1.
+
+	Sub EveryCelInSelection_ShowDependents()
+		Dim rng As Range
+
+		For Each rng In Selection
+			rng.ShowDependents
+		Next rng
+	End Sub
+
+Nr 2.
+
+	Sub EveryCelInSelection_ShowPrecendents()
+		Dim rng As Range
+
+		For Each rng In Selection
+			rng.ShowPrecedents
+		Next rng
+	End Sub
+
+Nr 3. Remove arrows
+
+Nr 4. Evaluate formula
+
+And ~~that is about it. Using more numbers isnt so usefull as it requires more then 1 hand or looking at the keyboard.~~ after reading this post I added:
+
+Nr 5. Data validation
+
+Nr 6. Name manager
+
+Nr 7. ~~Remove borders~~ No borders 
+
+Nr 8. Bottom border
+
+Nr 9. Top border
+
+Nr 10. Undo
+
+Nr 11. Redo
+
+Nr 12. Sort & Filter
+
+
+
+I am less VBA and more commercial analyst.
+
+1. Save
+2. Undo
+3. redo (IDK... CBF removing default)
+4. Paste Values
+5. Pivot Table 
+6. Sort ZtoA 
+7. Sort AtoZ
+8. Custom Sort 
+9. Text to Columns 
+10. Filter 
+11. Clear Filters 
+12. Colour Scales 
+13. Copy as picture 
+The ones I have:
+
+I have one that saves a copy of PERSONAL.XLSB to a network drive as a backup.
+
+I have two macros that move the row of the selected cell to the bottom of a given worksheet.  
+
+I have one that inserts a row into a dataset and conserves all formulas from the above data.
+
+I have one that takes all selected columns and moves to them to a new worksheet with a user-prompted name.  
+
+Those are my "generic" ones.   I have many others that work specifically with a macro system I built for a projet, and they do things like take the selected chart and put it into a PPT file, or into an email, or creating pivot tables/charts with specific formats and slicers, etc.
+
+
+Paste value
+Freeze pain
+go to
+format painter
+%
+refresh (for pivot tables)
+increase decimal
+decrease decimal
+
+I have a ton of keyboard shortcuts memorized - these are the things I use frequently but not all the time so they were harder to remember (except paste values, I use that a ton)
+I have compare sheets macro which i prepared long time ago. It compares two sheets on cell level
+Like everyone else I pin useful functions and macros...a couple I haven't seen mentioned however:
+
+Show personal macro workbook...I spent a dull afternoon once sprucing up my personal macro workbook, setting as shared so it works across instances and adding some buttons to save/hide it to make it easy to dump in new macros as well as my personal notes/pto/projects etc, also an index for all my custom keyboard shortcuts and macros but I stopped maintaining that
+
+I have 2 buttons to expand/contract my current excel instance from one monitor to two monitors...this is probably my most used quickbar buttons and it frustrates me when I hop on someone else's machine
+http://imgur.com/54BDtxQ
+
+My typical setup:
+
+* New
+* Save
+* SaveAs
+* Close
+* Open
+* Print Preview
+* Spell Check
+* Undo
+* Redo
+* Gridlines
+* Evaluate Formula
+* Options
+* Add-Ins
+* Visual Basic Editor
+A few macros:
+Run my QC macro
+Highlights spelling mistakes
+Convert the selection text to proper case
+
+There's some good stuff in this thread!
+Oh man, I have a bunch... aside from some shortcuts to otherwise difficult-to-reach features, I have some macros:
+
+* Enable/disable events toggle (very useful for debugging)
+* Refresh only local pivot tables (that is, not connected to an OLAP source, which can be slow)
+* Put the formulas of the selected cell(s) inside of an IFERROR formula, with a user-supplied value_if_error
+* Unhide all tabs
+* Convert a pivot table to the format that I prefer: classic layout, no grand totals, repeat all item labels
+
+Happy to share the code for any of these if anyone is interested.
+I have one that allows me to select some columns and then it will change the background color of the rows each time something changes in one of the column I selected. It's a quick way to highlight related groups of data when doing exploratory analysis.
+
+I also have one that takes a selected range and makes it a CSV list and a second one that puts quotes around each value. Nice for dumping into queries.
+A macro to unhide all sheets and one to clear slicers.  Oh and one to add iferror to selected cells.
+Format Painter, Comma number format, Thin-top/Thick bottom border, Remove Borders, Number Formatting (Mostly use it for short date, (Alt-5, S). Haven't needed a macro up there yet, but I'm sure the day is coming.
+I have a __Menu Commands__ item, and within it I use a startup macro to add the still existing Worksheet Menu Bar (Excel 2003 menu) and a personal menu. I also have a __Custom Toolbars__ item. These mean I don't need to use the Add-Ins ribbon tab.
+
+In addition
+
+* normal view
+
+* toggle read-only
+
+* cell styles drop-down
+
+* protect sheet
+
+* VBA controls group
+
+* formula auditing controls group
+
+* switch windows
+
+and a few others. Along with keyboard shortcuts these mean I almost never use the ribbon. I don't use the old-style menu much either, but I like to have it available.
+ALT+1. Remove decimal
+ALT+2. Add decimal
+ALT+3  Paste values
+ALT+4  Paste formulas
+I've got a couple of macros too but as an Add-In, mainly to format cells with a specific custom format, Protect All sheets with a password and vice versa
+> Just a few useful macros mostly,
+
+Mind sharing? 
+
+I always change that R1C1 with ALT + TOG , bottom arrow, ALT + R, enter. Where is that one button switch?
+Select visible cells and paste values are the only 2 I use.
+Do you mind share the code to hide and unhide thats sound amazing. Thanks in advance.
+Have the same centered alignment macro...people think I'm a wizard when I hand in a deck or lead sheet with clean formatting but zero merged cells
+
+I remain completely baffled why Microsoft buried the function within the alignment/justify text dialogue box...I can align upper/mid/lower in a cell with a default toolbar button but not this?
+Control+page up/down will also accomplish this. I've also created Hyperlinks on each page in very large workbooks, for other users who don't know the tricks.
+Any links to the macro you could share?
+Fellow Gridlines mate! It's what I always add first to QAT. They bug me!
+Ooh I have if errors as well! One for numbers to default to 0 and another for "na" in text fields
+What's the code for unhide all tabs, if you don't mind me asking?
+add to your personal workbook 
+
+       Sub useR1()
+    '
+    ' useR1 Macro
+   
+    With Application
+    If (.ReferenceStyle = xlA1) Then
+    .ReferenceStyle = xlR1C1
+    End
+    Else:
+    .ReferenceStyle = xlA1
+    End If
+    End With
+    
+    End Sub
+
+on the add commands button on the QAT select more commands -> macros 
+yeah same really i just have the others there 
+
+
+Hope this helps! Sorry for shitty formatting this, I typed it out on mobile...
+
+Sub veryHidden()
+'Can select multiple sheets if you want!
+
+Dim ws as Worksheet
+
+For Each ws in ActiveWindow.SelectedSheets
+          ws.Visible = xlSheetVeryHidden
+Next ws
+
+End Sub
+
+--------------------------------------
+
+Sub UnhideAllSheets()
+
+Dim ws as Worksheet
+
+For Each ws in ActiveWorkbook.Worksheets
+         ws.Visible = xlSheetVisible
+Next ws
+
+End Sub
+I just don't like that we can't center vertically without merging. So dumb.
+Control page up page down go to the next / previous worksheet though, they don't take you to the worksheet you were on when clicking the hyperlink.  The back arrow would always return you to the index page.
+I made it on my work computer and we can't open any file sharing or mailing website :(
+    Sub unhideAll()
+        Dim ws As Worksheet
+        For Each ws In ActiveWorkbook.Worksheets
+            ws.Visible = True
+        Next
+    End Sub
+
+What's the purpose of using End? I would've thought to use Exit Sub; is there a difference?
+I always think about adding more but I never actually do it.
+Thank you very much, ill try at my work. You are the best man
+Ah, I understand. Yes, either that button or a hyperlink on each page will do this. 
+Did you write it or pull from stack exchange/etc
+Ideal - thanks very much!
+End sub is required for all macros / subroutines. Exit sub is optional.
+erm, tbh i just grabbed this from stack exchange a whil back, i think end ends the current scope (if / while for etc... ) 
+You should NEVER use the End keyword. It will halt all code execution, this includes removing all instantiated objects, classes, etc. In more robust programming environments it halts code execution without going to any Finalize or Dispose methods, meaning you don't give any executing code (yours or otherwise) any chance to close out properly. This is a very bad practice and could be very bad. 
+
+Depending on the method used, the recommended way to exit would be:
+    Exit Sub
+    Exit Function
+    Exit Property
+
+This should *only* be done after properly handling errors and logic in your methods. 
+i modified the compare sheets macro created by cpearson according to my needs
+
+http://www.cpearson.com/Zips/Compare.zip
+Yes. Another good way to say it is : 
+
+Every sub has its End. But subs can have none or multiple (early) exit.
+Gotcha, thx for the lead

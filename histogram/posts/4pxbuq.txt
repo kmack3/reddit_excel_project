@@ -1,0 +1,34 @@
+Excel checks value; if negative excel ignores it and sums only positive values
+Here you go:
+    
+    =SUMIF(A:A,">0")
+There's also:  
+
+    =sum(max(A:A,0))  
+Entered as an array formula.  Consider that solution as a learning opportunity. /u/speqter's solution is the better one.
+May not be the most efficient way but you could create a column next to the one you want to have the values checked for. Let's say column B
+
+B2 formula:  If(a2<0,0,A2)
+
+Then have a cell add up all of those values and hide the column. 
+> =SUMIF(A:A,">0")
+Thx don`t know why i could not think of that :D
+
+
+
+
+
+
+
+SOLUTION VERIFIED
+Why are there quotes?
+
+I thought quotes were only for text values.
+It`s a database. I can`t really make other columns =/ Sadly it should be one-cell formula- if possible 
+Thanks for response
+
+You have awarded one point to _speqter_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+They are needed for sumif. If you wanted it to reference a cell it should be ">"&A1. 
+Thanks!

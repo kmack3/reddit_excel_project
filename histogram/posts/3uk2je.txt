@@ -1,0 +1,34 @@
+Edit Formulas Like a Pro!
+Have to admit the F9 bit is something new for me. Thank you. :)
+A subtle but **extremely** useful feature of edit mode is that as you cursor left or right and pass over a left or right bracket, Excel momentarily pauses and highlights its sister bracket. This minor inconvenience pays off big time by eliminating the annoyance of trying to locate yourself the exact phrase to evaluate with F9.
+I did not know that you could click the inline help and have that section highlighted. That makes Excel formula editing borderline tolerable. Borderline.
+This is excellent, thank you
+Press ESC when you are done and the cell reference will reappear. Pressing ENTER will replace the cell reference with the hard coded result.  
+  
+Edit: A few more tips on this feature.  
+
+* You do not have to limit yourself to a cell reference. F9 will work on any formula snippet that will resolve to an answer. For example, you can use it for the entire logical test of an IF statement.  
+  
+* If you  highlight a range, F9 will list out the values in an array. Highlighting A1:A3 in SUM(A1:A3) will show you the values in A1, A2, A3.  
+
+* This works beautifully when debugging complex SUMPRODUCT formulas. Highlight a single range and you will see the results (similar to the previous example with SUM). Highlight TWO ranges and you will see the multiplication of those ranges (e.g. {TRUE;TRUE;FALSE}). This will help you figure out where the SUMPRODUCT is messing up.  
+ 
+* For SUMPRODUCT debugging, use a small range. There is a limit the text string the formula bar will display.  
+
+Obligatory edit: Thanks for the gold internet stranger!
+Yesss, i finally can try to put those two more needed IFs into that undocumented formula i made a year ago!
+
+    =IF($A27="","",IF(AND($AB$3=2,$W27<0,($X$1-COLUMN())<=$W27),$AJ27,$AJ27*(1/SUM(INDIRECT("Z"&MATCH($V27,$V$1:$V$23)&"S"&$X$1+(12-MAX(0,$W27))*($W27>0)&":Z"&MATCH($V27,$V$1:$V$23)&"S"&35-(12+MIN(0,$W27))*($W27<0),0))*SUM(INDIRECT("Z"&MATCH($V27,$V$1:$V$23)&"S"&IF($AB$3=1,COLUMN(),$X$1+(12-MAX(0,$W27))*($W27>0))&":Z"&MATCH($V27,$V$1:$V$23)&"S"&COLUMN(),0)))*IF($W27>0,(($W27+COLUMN()-$X$1-11)>0),(($X$1-COLUMN())>$W27))))
+Holy crap
+TFS lol
+
+I used to do Ctrl + Z 
+Very nice addition. Thank you!
+Put these in your main post.
+I mean, that does look pretty horrendous, even to me 😊That said, my normal modus operandi has been to copy paste the crazy formula into Notepad2, then line it up line by line, properly indented like code. Only way to make heads or tails of it.
+Try using Alt-Enter while editing. And spacebar. Go ahead and try it. I'll wait.
+That's the trick I tend to use.
+Mhm nice idea actually, never tried that. Thx for the hint :)
+Oh you've got to be shitting me.You're not.Facepalm.
+Admittedly, I use this feature far less than I should.
+Looks like you should use it more often, goldilocks!

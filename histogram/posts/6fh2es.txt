@@ -1,0 +1,30 @@
+How to automate the merging of multiple spreadsheets?
+Try this: https://support.office.com/en-us/article/Combine-files-in-a-folder-with-Combine-Binaries-Power-Query-94b8023c-2e66-4f6b-8c78-6a00041c90e4
+You can automate the opening of all the Excel files if they always have the same name/location (or the name is consistent in some other way)
+
+Alternately you can just open them all manually and run this code in your "Master"
+
+    Sub MergeWBS()
+        Application.DisplayAlerts = False
+        
+        Dim wbk As Workbook, Master As Workbook
+        Dim ws As Worksheet
+        
+        Set Master = ThisWorkbook
+         
+        For Each wbk In Workbooks
+            If wbk.Name <> ThisWorkbook.Name Then
+                For Each ws In wbk.Worksheets
+                    ws.Copy After:=Master.Sheets(Master.Sheets.Count)
+                Next ws
+                wbk.Close
+            End If
+        Next wbk
+        
+        Application.DisplayAlerts = True
+    End Sub
+
+
+
+
+

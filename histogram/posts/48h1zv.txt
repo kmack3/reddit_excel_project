@@ -1,0 +1,122 @@
+Here is a function I created to find the last row in any workbook, worksheet, or column. Please share your own custom excel functions!
+    'Returns the number of worksheets currently in this workbook
+    Public Function GetSheetCount() As Long
+        GetSheetCount = ThisWorkbook.Worksheets.Count
+    End Function
+    
+    'Returns the row number of the currently selected cell
+    Public Function ActiveRow() As Long
+        ActiveRow = Application.ActiveCell.Row
+    End Function
+    
+    'Returns the column number of the currently selected cell
+    Public Function ActiveCol() As Long
+        ActiveCol = Application.ActiveCell.Column
+    End Function
+    
+    'Returns the last row of the specified worksheet number
+    Public Function GetLastRow(ByVal WorksheetIndex As Long) As Long
+        GetLastRow = Application.Worksheets(WorksheetIndex).UsedRange.Rows.Count
+    End Function
+    
+    'Returns the last column of the specified worksheet number
+    Public Function GetLastCol(ByVal WorksheetIndex As Long) As Long
+        GetLastCol = Application.Worksheets(WorksheetIndex).UsedRange.Columns.Count
+    End Function
+    
+    'Function returns with cell data as a DWORD
+    Public Function PeekCellLong(ByVal WorksheetIndex As Long, Columns As Long, ByVal Rows As Long) As Long
+        PeekCellLong = Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value
+    End Function
+    
+    'Function returns with cell data as a STRING
+    Public Function PeekCellString(ByVal WorksheetIndex As Long, ByVal Columns As Long, ByVal Rows As Long) As String
+        PeekCellString = Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value
+    End Function
+    
+    'Function returns with TRUE if cell data was successfully written
+    Public Function PokeCellLong(ByVal WorksheetIndex As Long, ByVal Columns As Long, ByVal Rows As Long, ByVal DataLong As Long) As Boolean
+        Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value = DataLong
+        If Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value = DataLong Then: PokeCellLong = True
+    End Function
+    
+    'Function returns with TRUE if cell data was successfully written
+    Public Function PokeCellString(ByVal WorksheetIndex As Long, ByVal Columns As Long, ByVal Rows As Long, ByVal DataString As String) As Boolean
+        Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value = DataString
+        If Application.Worksheets(WorksheetIndex).Cells(Rows, Columns).Value = DataString Then: PokeCellString = True
+    End Function
+    
+    Public Function PeekFileCellString(ByVal FilePath As String, ByVal FileName As String, ByVal WorkSheetName As String, ByVal CellRow As Long, ByVal CellCol As Long) As String
+        PeekFileCellString = CStr(ExecuteExcel4Macro("'" & FilePath & "\" & "[" & FileName & "]" & WorkSheetName & "'!" & Cells(CellRow, CellCol).Address(1, 1, xlR1C1)))
+    End Function
+    
+    Public Function PeekFileCellLong(ByVal FilePath As String, ByVal FileName As String, ByVal WorkSheetName As String, ByVal CellRow As Long, ByVal CellCol As Long) As Long
+        PeekFileCellLong = CLng(ExecuteExcel4Macro("'" & FilePath & "\" & "[" & FileName & "]" & WorkSheetName & "'!" & Cells(CellRow, CellCol).Address(1, 1, xlR1C1)))
+    End Function
+
+Sometimes I need to remove carriage returns or other special chars.  I have a boatload of char removal macros, they are all built like this, but have different char values depending on the hidden ascii value I need to remove:
+
+    
+    Sub RemoveCarriageReturn13()
+        Dim MyRange As Range
+        Application.ScreenUpdating = False
+        Application.Calculation = xlCalculationManual
+     
+        For Each MyRange In ActiveSheet.UsedRange
+            If 0 < InStr(MyRange, Chr(13)) Then
+                MyRange = Replace(MyRange, Chr(13), "")
+            End If
+        Next
+     
+        Application.ScreenUpdating = True
+        Application.Calculation = xlCalculationAutomatic
+    End Sub
+
+
+edit:  as an aside, I love posts like this, helpful macros are much more fun to read than someone complaining they can't figure out homework all day :-)
+Nothing too fancy but I've used these two functions to automatically add filters to my report. (Credit for this goes to Microsoft)
+
+This is just a demo code but I've added inputbox prompt to get start and end date from user.
+
+Macro:
+    
+    Sub Date()
+    
+    Dim startDate As Date
+    Dim endDate As Date
+    Dim firstDayWeek
+    Dim lastDayWeek As Date
+    Dim totalWeeks as Integer
+    
+    startDate = 3/1/2016
+    endDate = 3/2/2016
+    
+    firstDayWeek = dhFirstDayInWeek(startDate)
+    lastDayWeek = dhLastDayInWeek(endDate)
+    
+    totalWeeks = DateDiff("ww", firstDayWeek, lastDayWeek)
+    
+    End Sub
+
+
+    Function dhFirstDayInWeek(Optional dtmDate As Date = 0) As Date
+        
+        If dtmDate = 0 Then
+            dtmDate = Date
+        End If
+        dhFirstDayInWeek = dtmDate - Weekday(dtmDate, vbUseSystem) + 1
+    End Function
+    
+    Function dhLastDayInWeek(Optional dtmDate As Date = 0) As Date
+        If dtmDate = 0 Then
+            dtmDate = Date
+        End If
+        dhLastDayInWeek = dtmDate - Weekday(dtmDate, vbUseSystem) + 7
+        
+    End Function
+
+
+Thanks for sharing!  So the last two return the cell data either as long or string in any wb? Interesting. I can think of some uses for that. 
+Indeed, they're useful for extracting data from external worksheets that are not currently open. Can't write to them though without opening the file making your changes then saving. (At least as far as I know, I wouldn't want to accidentally start altering other files)
+[deleted]
+All the Excel work I do always fills in data by rows. So the last row of data is always the same across all columns.

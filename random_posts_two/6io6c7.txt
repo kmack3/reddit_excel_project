@@ -1,0 +1,21 @@
+6io6c7
+Dividing By an Average for a Percentage
+Hello r/excel
+
+I'm essentially a beginner with Excel but I've created a spreadsheet to help me track production at work. Fiscally, some months consist of 4 weeks and some consist of 5 weeks. I have the average billing totaled for each week, then wish to average that (for a running month to date average) and divide it by what we pay our employees each week to get a payroll to billing percentage. The formula I use is:
+
+=D132/(AVERAGE(H133:L133))
+
+As you can see in the [picture](https://imgur.com/gallery/tQWzC), all 5 weeks are averaged, even if there is no value indicated yet. I was wondering if there was a way to only include the weeks that currently have a value so I can get an accurate month to date percentage as I update the sheet week to week.
+
+
+-------------
+I'd probably just have it do the averaging the long way so you can count just the weeks with numbers greater than zero:
+
+    =D132/(SUM(H133:L133)/COUNTIF(H133:L133,">0"))
+
+Edit: Oh actually I totally forgot there's an averageif function:
+
+    =D132/AVERAGEIF(H133:L133,">0")
+-------------
+Not all heroes wear capes, but I sure hope you do. You've earned it. Thank you so much!

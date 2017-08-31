@@ -1,0 +1,87 @@
+What's in your Customize Toolbar ?
+A few things, mostly macros
+
+* Refresh all pivots
+* Toggle what happens when clicking on a pivot table after typing "=" between bringing back the cell refference and bringing back the getpivotdata function
+* Toggle direction when pressing enter (between right and down),
+*Toggle if the active cell moves at all when enter is pressed
+* Add IfError to all formula's in a selected range (or take them out), 
+* Select all data not counting the first row, 
+
+and a few more which I can't think of off the top of my head.
+Refresh All, Paste Special, Conditional Formatting, Field Options, Com Add Ins, Pivot Wizard
+Camera tool
+Remove all filters
+Select Current Region, Select Visible, Format Painter, Form.
+Number formatting to the most common number format in my country that excel doesn't have as a preset. 
+Paste values, insert row, clear filter, freeze panes, pivot table, switch windows, sort! 
+
+Love the customised toolbar function! 
+Nothing. I prefer hot keys. So, I have a battery of hotkeys that fire macros in my personal add-in. I use most of these every day:
+
+* Make a data table and set up a pivot table in one step
+* Format selection as text
+* Format selection as accounting with 0-2 decimals (rotate through decimal setting on rapid repeats)
+* Change pivot table category to use Sum and apply accounting format with 0 decimals
+* Format automagically selected range with bold headers, remove word-wrap, and auto-width the columns
+* Format columns with the string 'date' in the header to be mm/dd/yyyy
+* Remove page-break overlays
+* Paste Values / Formulas / Formats  *(although I typically use R-click V|F|R)*
+* Filter | Clear Filter
+* Sort | Sort A-Z | Sort Z-A
+* Handful of macros
+
+I should really add Text-To-Columns and Remove Duplicates since I get a ton of use out of those. Other than that I sit the menu on the Home tab and work with hotkeys.
+
+Most-used macro simply sets the entire workbook to 10-pt Calibri, Zoom 100%, auto-size all columns, select A1. I deal with a *lot* of CSVs, poorly formatted sheets, and sheets saved in Excel for Mac. (Our entire office runs Macs; I run Excel in a Windows VM because it doesn't suck.) The latter type typically has zoom set to 150-200% due to the Windows/Mac native DPI disparity. And the added fact that many of our employees are 50+. Overall the macro saves me a ridiculous amount of time manually making things readable.
+You're all missing Document Location 
+Auto height.  Auto width. Set pivot table to tabular. Remove subtotals from pivot table. 
+Removed Save then standard undo + redo.
+
+Apply Filter
+
+Clear Filter
+
+Record Macro
+
+A link to an exe I use a lot
+
+A link to a folder I use a lot
+
+Open Recent Files
+
+A link to an SQL query to run on the current sheet
+
+Format selected region into a pretty table
+
+Turn on / off macros with notification.
+Mostly macros but also the formula auditing drop-down and some home-brewed menus under the Menu Commands container. One of the macros deletes all styles, something I find myself needing to do way too often.
+Could you link your iferror macro?
+> Select all data not counting the first row,
+
+but how ?  it would be very great if you explain all. 
+How do you toggle the enter direction/how do you toggle whether it moves the active cell at all?
+Can you do just select visible? I thought you could only tag the special tools in general and then select visible only. I need dis.
+Hey fun fact for you!  You can filter / unfilter with CTRL + SHIFT + L.
+
+This is probably my most used keyboard shortcut besides copy/paste.  
+This one's one of my favorites. It's actually gone through about 3 revisons as I kept changing what it does so it's a bit hodpodegy but works for me now. http://pastebin.com/hUtyE57k
+It's a macro I made. I use it at work and I don't have it on my home computer, but I'll e-mail it to myself tomorrow and update then.
+I use a pair of macros, One toggles the direction and one toggles if it turns on or not. The macros can be found here http://pastebin.com/w0GmWsYT
+
+If you need instructions on adding the macros to your own excel, follow the instructions here: https://support.office.com/en-us/article/Copy-your-macros-to-a-Personal-Macro-Workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566 then paste them into a module in the personal workbook.
+
+There's even a shortcut to do it: select the filtered table and press CTRL+: 
+all macros if you can. I amazed by now. really enchanted me.
+Here's my entire macro set http://pastebin.com/6ExPhKEE
+
+The select entire data set one is the top one. It was one I wrote when I was first starting to learn VBA so there's probably a better way to do it, but it does the trick for me. 
+
+Other macros which I forgot include:
+
+* Dragging formulas down. I tend to have a data sheet, then I manipulate the data with forumlas on another sheet. This macro asks for the sheet's names then does the dragging for me to make dragging the formulas down each week easier.
+* Clear Filters takes off all the filters but leaves auto filter on. 
+
+When it comes to VBA I'm entirely self taught so I'm sure other people would be able to write these in a tidier manner that follows best practice better.
+You're the man.
+

@@ -1,0 +1,102 @@
+Let's build a "Challenge Yourself"-Repository
+How about some family finance? A practical application seems relevant, yes? 
+
+I literally spend hours working on this one today. I am happy to say now I have a great model, and a five-year plan. Here is my specific example.
+
+**Description:** 
+
+You are the family finance manager and the bread-winner. Among your duties is to ensure your Healthcare Savings Account (HSA) is properly funded and will attain certain goals. The **main goal** is to ensure the total discounted balance of your HSA is at least 100k by your retirement year. The **secondary goal** is to ensure the total discounted balance reaches $10k within 5 years. 
+
+**Particulars of the HSA**
+
+Your HSA funds are divided between two accounts. One is a basic savings account, which earns interest on the average daily balance and accrues monthly. The interest rate is variable based on the balance (table to follow). The other piece is an investment option, and you can allocate funds between a stock index fund and a bond fund. The index fund claims a long-run return of 7%; the bond fund is at 1.5%. 
+
+You must determine your annual contribution to the HSA anew each year. Fractional contributions are made each pay period (26 times per year, and pre-tax, yay!). Also, your employer pays a flat $1000 annually into your HSA on the same schedule, but you expect the employer amount to decline over time. 
+
+You can freely transfer funds between the savings side of the HSA and the investment side whenever you want and without penalty, but the balance of the savings account can never be less than $2000 after you transfer from savings side to investment side. 
+
+The HSA imposes a 0.03% per annum service charge (compounded monthly) on the balance of the investments. 
+
+    HSA Basic Savings Account Variable Interest Rates
+    Min Balance	Rate
+    $1	0.05%
+    $2000	0.10%
+    $7500	0.20%
+    $10000	0.40%
+
+**Other Information**
+
+You routinely withdraw $3000 per year from the HSA to cover medical expenses, usually in the first quarter of the year. Medical inflation is currently 2.5%, so you expect the annual draw to go up every year, but maybe not by 2.5% because your insurance company mitigates inflation somewhat. 
+
+You have a starting condition: $8000 is already in the savings account.
+
+**Tasks**
+
+* Determine the annual amount you need to add to the investment to meet the main goal.
+* Determine your annual contribution in order to meet the main goal and the secondary goal.
+* Ensure the strategy has the funds needed to cover expenses in the first quarter every year. You don't want to draw from the investment side if at all possible.
+
+[ed: typos] [ed+: clarifications]
+
+There was a competition a while back to create a calculator for the date of Easter for any given year. Formulas are readily available online, but the task could be undertaken as a personal challenge.
+Long post. I just created this out of boredom (at work) and curiousity (since I'm an options trader) but I challenge /r/excel to do the same.
+
+The [Bittman strategy](http://docs.hamzeianalytics.com/JB_121030.pdf) is a strategy used in trading weekly options based on the Market Index: SPX. (No options knowledge needed for this challenge)
+
+**The strategy is as follows:** 
+
+* Take the [VIX closing price](http://finance.yahoo.com/q/hp?s=^VIX+Historical+Prices) on Wednesday of the current week. We'll set this equal to V. 
+
+* Take the [SPX opening price](http://finance.yahoo.com/q/hp?s=^GSPC+Historical+Prices) on Thursday of the current week. We'll set this equal to X.
+
+* Take the standard deviation would is found using the following formula:
+X * (V/100) * [sqrt(7)/sqrt(252)]. Set this equal to S. 
+
+So one standard deviation up would be X + 1S. One standard deviation down would be X - 1S. 
+
+Take a note of the following numbers (we'll need them):
+
+* (1/2) S
+* (1/4) S
+
+Bittman's play states that if SPX moves up 1/4 our standard deviation or down 1/4 our standard deviation, then our play gets "triggered" and we open up a trade for next week's play. This play starts every Thursday of the week (because that's when we'll have the values we need for V, X, and thus S). 
+
+**Stop Losses:** 
+
+If SPX moves +1/4 S, our play gets triggered. However, if there's a certain market reversal and SPX moves -1/2 S, then we have to exit out. 
+
+The same goes for the other way. If SPX moves -1/4, our play gets triggered. But if it moves to the 1/2 standard deviation in the other direction while our play is open, we have to exit. 
+
+The challenge I did was to import historical values for 2014 for both VIX and SPX and determine the percentages of "triggers". As well as any exits. 
+
+**So here's a sample scenario (fake numbers):**
+
+It's Thursday. 
+
+Our numbers for V and SPX are 20 and 2000 respectively. 
+
+The standard deviation S = 2000 * 20/100 * [sqrt(7)/sqrt(252)] = 66.67
+
+Our numbers are:
+
+* 1 S = 66.67
+
+* 1/2 S = 33.33
+
+* 1/4 S = 16.67
+
+At anytime between this Thursday and next Thursday, if SPX moves up 1/4 S or down 1/4 S, (so if it moves to 2016.67 or 1983.83), we get triggered. At which point we stop looking for triggers and start monitoring for exits. 
+If it moves to 2016.67, we get triggered. Within the same week, (Thursday to Thursday), if it moves back down to -1/4 S, (1983.83), we exit. We can determine whether or not triggers were hit based on the historical prices (the high and the low of each day). 
+
+How many triggers and how many exits did we have in 2014?
+Why not start a subreddit similar to /r/dailyprogrammer, but for excel?
+Nice, thank you! 
+Sounds like an interesting challenge, I will definitely look into it. Thanks :)
+This is great, thank you!
+That would be great, but the last attempt failed miserably:
+
+https://www.reddit.com/r/excelchallengeideas
+
+https://www.reddit.com/r/excelchallenge
+
+No real interest in that at all it seems, so I thought gathering existing stuff would at least be a good start :)

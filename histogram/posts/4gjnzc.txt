@@ -1,0 +1,39 @@
+How to: VLOOKUP alternative with multiple criterias using INDEX and MATCH
+nice post! 
+
+Another way of doing the same thing is to do MATCH(criteria1&criteria2,criteria_range1&criteria_range2,0). That can cause issues if you have numerical values though (1 and 10 being the same as 11 and 0..)
+
+If you have unique combinations, you could also use INDEX(C2:C8,SUMPRODUCT(ROW(C1:C7)*(A2:A8="Apple")*(B2;B8="United Kingdom"))) 
+
+but evaluating each criteria range individually and matching is probably the most generally applicable and easily readable. 
+
+Concepts of what's going on should be familiar after reading your  post! :D
+An excellent post! This is a very nice way of returning a text value.
+
+For a number this would be an alternative (based on the same principles):
+=SUMPRODUCT(--($A$13:$A$19="Apple")*--($B$13:$B$19="United Kingdom")*$C$13:$C$19)
+Awesome. TLDR: Learn what a VLOOKUP does, then never use it again.
+Love those kind of posts. Awesome work dude
+A multi-criteria VLOOKUP is also pretty easy:
+
+http://chandoo.org/wp/2014/10/28/multi-condition-vlookup/
+Array would have to be 1D. Alternative: use INDEX's 3rd argument to specify column index for its 1st argument Array.
+
+There could be multiple matches for the criteria, so this can be generalized as
+
+    =INDEX(Array,SMALL(IF((criteria1)*...*(criteriaN),ROW(Array)-MIN(ROW(Array))+1),instance),column)
+You are my hero
+I had a problem a few weeks ago that could have been cleanly solved with this! Thank you so much for sharing :)
+I always use Index(Match,Match).    
+
+INDEX(ARRAY,MATCH(VALUE,RANGE,0),MATCH(VALUE,HEADING_RANGE,0))
+
+Second Match being the headings of the column I want returned.  99% of the time I'm using structured ranges from ACCESS, but works even if normal range.
+Im a big fan of the sumproduct(row()) structure as it allows for more versatility than the match, - for example you can use it to check if a value is in another list (i.e. multiple acceptable values) by nesting an isnumber( match()) 
+
+but more importantly the sumproduct cant be easily broken by end users who dont understand / expect array formula.
+
+bonus point: because sumproduct isnt an array formula if you use the function wizard to investigate the formula you can see the internal arrays its using which is handy for debugging. 
+Yes, but look at how much OP wrote about simple ol' Index and Match... Do you really want to explain these two approaches?
+You can add a separator between the concatenates to prevent number issues being a problem. I use this approach by setting up a helper column - makes it much easier to follow than an array formula.
+Index/Match is generally faster and more versatile than V/HLookup. There are some instances where it's not faster, but it's generally a better idea to use index/match.

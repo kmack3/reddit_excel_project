@@ -1,0 +1,65 @@
+6in2ex
+Conditional Formatting: Colorizing Text based on an array of other Cells with the same text
+This is driving me crazy. I'm pretty sure Excel is telling me this is impossible, and I can only find hardcoded examples on other sites that work. Hoping someone knows what I need to do here, I'll simply the problem as best I can.
+
+My problem is this. On Sheet1, I have a single column with hundreds of text strings. On Sheet2, Sheet3, and Sheet4, I have one column in each that contains reference strings. I want to apply conditional formatting to Sheet1 that colorizes the text based on which sheet the text was found in.
+
+I can successfully generate a TRUE/FALSE statement using =IFNA(MATCH(A1,Sheet2!$A$1:Sheet2!$A$1000,0)>0,FALSE). This causes MATCH to return NA if the value isn't found (causing FALSE), otherwise it finds the row it's located in, which is above 0, and returns TRUE. This works fine to look it up in the list and tell me if it's there.
+
+But when I want to apply this in conditional formatting, it refuses, saying ranges/arrays are not allowed. I've found examples of text strings being compared fine but they're all hardcoding the check against each individual cell and I have hundreds of possibilities in each sheet to compare to (and more are added continually).
+
+Is there any way for a conditional formatting formula to look through a column of cell text values and apply the formatting if the value of the cell is found in it? I'm about to tear out my hair here in frustration.
+
+
+-------------
+Use COUNTIF. 
+
+`=COUNTIF(Sheet2!$A$1:$A$1000,A1)>0`
+-------------
+This is returning the same thing as I have (but it's a lot cleaner, thanks) of TRUE/FALSE when I test changing the formulas to it, but when I plug it into a conditional formatting rule (use a formula) I get the exact same error. "You may not use reference operators (such as unions, intersections, and ranges) or array constants for Conditional Formatting criteria."
+
+I can get it to work fine if I change it to be a hardcoded comparison (check if A1="value of Sheet1!A1", then A2, then A3, etc) but it's unfeasible for me to have that check hundreds of values and continuously update the rule.
+-------------
+Are you typing it in EXACTLY as written above? AFAIK the only error you might get is a "You cannot reference other worksheets" if you're in an older version of Excel. I just tried the formula myself as a conditional formatting rule and it works fine.
+
+Usually that error means you're inputting getting an array result from the formula, such as if you did `COUNTIF(Sheet2!$A$1:$A$1000,A1:500)` by mistake
+-------------
+Ah, I made a mistake. You're correct. I entered:
+
+    =COUNTIF(Sheet2!$A$1:Sheet2!$A$1000,A1)>0
+
+And the second Sheet2 reference was causing it. Now I'm curious why that causes the issue, and if even my original formula (yours is still far cleaner) would have avoided the error if I didn't have that there.
+-------------
+When you're in a spreadsheet formula, Excel says OK, `Sheet2!$A$1:Sheet2!$A$1000` means you want to turn the area from Sheet2!$A$1 to Sheet2!A$1000 into a single range criteria. This is technically a "reference operator" because you *could* be merging ranges from multiple sheets together with this syntax. In your case, they happen to be on the same sheet, so Excel converts it into `Sheet2!$A$1:$A$1000` before continuing. The conditional formatting tool evidently isn't capable of handling "reference operators"
+-------------
+Ah, alright. I guess I took the implicit conversion for granted and didn't think about it before.
+
+One other random question, sort of related to the topic question, but different. I'm trying to have a "sum value" field that basically would be a COUNTIFS of the above formula, but with the criteria as every cell in Sheet1. Is this possible?
+
+Like, to extrapolate, thanks to your answer I now have all three conditional formatting running on Sheet1 (the reference arrays on Sheet2, Sheet3, and Sheet4) and each highlights the strings based on which sheet the string is located in. What I'm trying to do now is have a "total" count, basically, "total number of strings in the Sheet1 data set that were found in the Sheet2 list", etc. Essentially giving me a total count of the highlighted cells from each sheet.
+
+I can provide COUNTIFS with an array of criteria, but it appears unless it's a hardcoded array, it won't check a range. Rather:
+
+    =COUNTIFS(Sheet2!$A$1:$A$1000,Sheet1!$A$1:$A$1000)
+
+doesn't work at all, while something like
+
+    =COUNTIFS(Sheet2!$A$1:$A$1000,{"test","string","here"})
+
+would work, but again, not really feasible with a constantly evolving data set. I'm just looking for something that would be able to look through all the strings on Sheet1, compare each to all the Strings on Sheet2, and return how many were found in total.
+-------------
+There's probably a formula solution but I can't think of it right now.
+
+One solution would be to make a helper column for each of the sheets with the formulas:
+
+`=COUNTIF(Sheet2!$A$1:$A$10000,A1)>0` 
+
+`=COUNTIF(Sheet3!$A$1:$A$10000,A1)>0`
+
+`=COUNTIF(Sheet4!$A$1:$A$10000,A1)>0`  
+
+These will return a 0 if no match in the respective sheets and a 1 if there is a match. Then you can sum up each respective column to determine how many matches there were. You could also very easily use these columns for your conditional formatting, i.e. your formatting rules for A1 would be as simple as 
+
+`=(B1=1)`
+`=(C1=1)`
+`=(D1=1)`

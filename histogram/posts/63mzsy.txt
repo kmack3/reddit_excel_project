@@ -1,0 +1,17 @@
+Possible to make excel a little more clear about which row im operating on?
+Not quite what you're looking for, but pressing Shift+Space Bar will select the entire row of the currently selected cell(s) while keeping the same active cell. That may be enough visual indication for your comparison needs. 
+You can use conditional formatting with the formula
+
+    =CELL("row")=ROW(A1)
+
+and in the Worksheet_Change event just put `Calculate`
+
+This can be slow if you have a lot of formulas in your sheet, but I haven't figured out a way to only calculate the conditional formatting without turning on manual calculation.
+I'm about to sign off for the night but a possible fix for removing all of your previous cell highlighting is to create a part in the macro that stores the current cell highlighting before overwriting it, and then restores the highlighting as you click away.
+
+Alternatively there may be a way to make the macro make the colors similar to the conditional formatting options where it returns to the previous format once the condition is gone.
+TIL shift + space bar.. great tip!
+
+and there's more: ctrl+space for horizontal selection,, shift+ctrl+space for whole sheet selection
+
+

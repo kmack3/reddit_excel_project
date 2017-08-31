@@ -1,0 +1,84 @@
+Must-know Excel
+vlookup, index(match), pivot tables
+Congrats! There is an [Advice Thread Repository](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/) full of lots of info.
+Pivot tables should be your priority, then any of the references. Countif,averageif, etc if pivot is unwieldy. 
+First pivot tables, then PowerPivot, then Power Query, then THE WORLD
+You can test yourself at: http://smarterer.com/tests/excel 
+it really depends on the specific role. Are you going to be processing large volumes of data, or are you going to be building models for things like real estate deals?  
+
+That said, I use vlookup and pivot tables often, I have index(match) on my list to learn, and I have started dabbling in macros and VBA.  
+
+You might need to be able to build models using functions like PMT or know the difference between 30/360 and actual/360 accounting. 
+Really dependent on the role you're going into. If it's for a business consulting/ strategy/ finance type role:
+-know-how to build the 4 financial statements (income most important)
+-make a nicely formatted sheet that others can understand and access
+-hardcode as little as possible
+-summarize data with basic formulas
+
+bonus if you:
+-know VBA
+-are really good/ creative with if statements and other formulas
+-know how to use excel to produce nice graphics with mekko or some other program
+I'd throw in Text to Columns. Learn the shortcuts: Paste Special, Drop Fill, Select entire row/column, insert row column, etc...
+vlookup, match, index, pivot tables!
+
+others have said it, but wanted to re-state it
+You should have the general ability to sort data as well.
+
+To do SAS functions in Excel? Microsoft Query
+Use Shortcuts like:
+
+SHIFT + arrows
+
+and
+
+CTRL + arrows
+
+To select group of cells. With a little bit of practice it becomes easier, faster and more reliable than selecting cells with your mouse and anyone watching you doing it will think you are a professional.
+How did things turn out?
+I build resource models so it'd be nested ifs, index/match,  pivots.
+If you have to ask, you're not proficient.
+
+If I were interviewing you, and you tried to bullshit me about your knowledge, it would be over instantly.
+Throw in a dash of nested ifs, iferrors, and/or, text, find, left/right/mid, mix it up with simple VBA macros, top it with VBA loops, some basic understanding of object coding and you've can say you know some Excel.
+This guy nailed it 
+Perfect. I've looked a little at pivot tables and vlookup, but index is new to me. Thanks. 
+I'll check it out.
+I'm taking the call poly Pomona vba class then moving on to power pivots
+I did the test and it's **very** basic.
+Awesome. Thank you.
+Vlookups, match, index, and pivot tables!
+The test went fine. It was well beneath my skill level. As for the job, they're supposed to let me know some time next week. 
+Damn, chill bro. 
+Relax. I'm not attempting to bullshit anyone. I am new(ish) to Excel and, as a student, I have had very limited chance to use a lot of the more advance features. This is an entry level position, and it's likely they'll be forgiving of my lack to expertise. 
+... You'd kill him? That's a bit harsh. 
+I am happy to see you mention text functions.  They don't get much love, but clean/trim/left/right/mid/find/search are used all the time on data dumps.  I worked with FEMA after Hurricane Ike.  Their database didn't break out first and last name and so much data entry error.  It was shit to deal with.
+
+
+Also, I don't know when it came out, but iferror is probably my favorite function in the world.  So much cleaner than if(iserror).  I always worry that there are great new functions I have no idea that they exist.
+That's a good point.  I use left or right almost daily
+Dude, if you have just "looked a little" at those, you don't know excel or how to handle data.  I consider myself a medium user because my vba and arrays knowledge is lacking.  And I'm the best at excel it any job I've held.
+Remember to include ISNA / ISERROR in some formulae.
+
+You can avoid ugly #DIV/0 errors and all sorts with it.
+Power Pivot is neat but it's kind of a niche thing. If it makes sense for your company, then great! It's easy to pick up as a lot of the DAX functions are similar to regular Excel functions. Power Query is legit though and has a lot of uses and flexibility.
+Yeah, it is. Just knowing a lot of basics I was able to correctly narrow down and answer a number of the questions. It did teach me the ctrl + ; shortcut though.
+What do you mean, "Damn, chill bro"?
+
+What makes you think I'm not "chill", bro?
+
+I'm just stating facts.  If you're interviewing and trying to present yourself as something you're not, you've already lost.
+Came here to say this. I always get a little frustrated when people say something to the effect of "proficient at excel" and then have no idea what I'm talking about when I ask them even basic excel questions like how does a m vlookups work or what is a pivot table?
+
+Typing =1+2 into a cell does not mean proficient at excel, it means you know how to type, and have a rudimentary understanding of syntax. 
+
+/endrant
+
+To op: please look more than a little at these basic functions of excel. It could be a core part of your job. There's more to excel than pretty table formatting, graphs, and sum formulas.
+
+Ok... Now /endrantforreal
+It's an entry level position. I need to find out what I don't know that I should know, which is why I asked. With some experience and hard work I, too, hope to be the best medium user at all the jobs I will ever had held. 
+Can you elaborate on how you believe PowerPivot is niche? It extends Excel into millions of rows and is basically the same as SSAS tabular and SharePoint awesomeness. Not to mention that the PP/PQ/PowerView combo is also the 'same' as PowerBI, which Microsoft is marketing pretty hard.
+3
+Gotcha.  Good luck!
+It's useful to work in conjunction with PQ but only to a certain point. After, say 4M rows it's better to use a more specialized software. It does a lot of things *okay* but nothing really great. It makes creating data models accessible to the layman but doesn't really excel like it should.

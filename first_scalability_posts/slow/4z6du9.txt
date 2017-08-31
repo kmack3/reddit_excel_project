@@ -1,0 +1,65 @@
+slow
+4z6du9
+Slow macros in Excel 2016?
+
+I have a bunch of macros that I wrote while using Excel 2010.  All of them run VERY slowly in 2016.  One in particular, usually takes about 10 seconds per product.  Now, it's about 10 minutes per product.  During this time, Excel goes to "Not Responding" for very long periods at a time.  I'm unable to use Outlook during this time as well.  
+
+Has anyone else noticed a severe depreciation in performance using macros in 2016?  Any advice?
+
+Thanks in advance. 
+
+Edit: I have my processor priority set to High for Excel
+
+
+-------------
+Perhaps the macros can be further optimized?
+-------------
+I'm sure that it could, but I'm still curious as to why the difference in 2016. 
+-------------
+My guess is that the recalculation is made more often in the most recent versions of Excel, but it is something you will have trouble finding documentation on.
+
+Try to block automatic calculation while macro is running :
+put this around your code (the first line at the beginning, the last at the end)
+
+    Application.Calculation = xlCalculationManual
+
+    Application.Calculation = xlCalculationAutomatic
+
+You can also disable scren update, that can waste time to display stuff. Put these around your code
+
+    Application.ScreenUpdating = False
+
+    Application.ScreenUpdating = True
+
+
+If the problem comes from Excel trying to update useless stuff while the macro is runnning, this could improve your performance
+-------------
+Thank you.  So, I opened Excel 2010 and ran the macro there.  It took 1 and a half minutes for 32 products (filters from a list of 250,000 lines and copies the filter of multiple lines to another sheet) without using that code.  Then I added the code snippets you supplied and opened in 2016, and started the macro. Since I can't see the screen updates, I don't know how far along it is, but it's been at it for over 8 minutes and still hasn't done anything (Not Responding).  I waited over 2 hours for the last one (before I added your code in 2016).
+
+I'm wondering if I'm just going to need to perform macros in 2010.
+
+Incidentally, running the macro in 2010 using your code snippets brought the time down to under a minute.
+-------------
+OK so my snippets might help you a bit.
+
+If you want to dig into this (let me warn you that digging into computation optimization in Excel is [long](https://social.technet.microsoft.com/Forums/windowsserver/en-US/b8d2c9b0-9c0e-466e-bf96-40bf3c9fe910/excel-filter-slow?forum=officeitpro) and [tough](http://answers.microsoft.com/en-us/office/forum/office_365hp-excel/solved-excel-20132016-performance-issues-after/9f107817-8deb-4685-970d-9b702c97256b)), maybe you can reduce the length of your macro (try to put only 1 or 2 products), and make both your macros alert you at intermediary times so you can check when exactly your macro takes so long.
+
+If it actually uses the filter of Excel, I am not amazed it takes a long time. Probably the macro you're using was originally created by recording stuff in Excel, which is rarely optimal in terms of computation.
+
+Maybe an optimization of your macro would be to store the whole table in VBA and filter it there, because it won't have to drag the whole Excel UI behind it. This would require a bit of rework, and might not be a very easy solution if you don't know VBA well. 
+
+-------------
+I actually wrote the macro by hand, (not recorded).  A long time ago I had it looping, and then adjusted it to filter and copy filtered rows, and that saw a substantial decrease in execution time.  I'm not the best at writing macros, though, so there could be some slow spots.  I'm just wondering how the same code can take so much longer in 2016.  
+
+I'll look at your links and do the suggestions you suggested.  I'll google how to store the table in VBA, as I'm not experienced in that.  Thank you for your help.
+-------------
+If you need help with the VBA, I'd be more than happy to assist.
+-------------
+I truly appreciate the offer.  How would I go about doing that?  Post the code here?  It's a little long (about 350 lines).  If i post the code here, how should I format?  four spaces?  Does that have to happen on every line?
+
+-------------
+You can post it to a site like pastebin if it's really large. Just be sure it does not contain anything proprietary that was paid for, or contain any sensitive data.
+-------------
+Like I said, there's probably a lot of selects where there don't need to be, etc.  I appreciate any advice you have to offer, for sure.  The way the workbook is formatted (in short) is that I input style numbers into the INPUT sheet, it looks up that sku in the SDL sheet (about 250k rows), and gets all variants of that sku (colors, sizes) by filter.  It goes through some copying and pasting to various sheets (because it was all I could do to transfer the information safely from one sheet to another), then I believe it all ends up on the COPY SHEET for me to copy and paste into a sheet for upload into a program to add the items.
+
+http://pastebin.com/PqHXrnEp

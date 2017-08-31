@@ -1,0 +1,33 @@
+6fxqpv
+Work around for volatile function OFFSET
+Here is my formula below.  I am using it, because I want to subtotal only the negative numbers in a range.  howevere, offset is destroying my workbooks performance
+
+=SUMPRODUCT(--(Q24142:Q28161<0),SUBTOTAL(9,OFFSET(Q24142:Q28161,ROW(Q24142:Q28161)-ROW(Q24142),0,1)))
+
+
+-------------
+I don't think you need `OFFSET` for that reason, is there some other reason you are using it? (The formula example is missing BTW)
+-------------
+sounds like you should be able to achieve this via `=sumif([range],"<0")`
+-------------
+The problem is you're using an array 2nd argument to OFFSET, which produces the undocumented array of range references. They're useful, but OFFSET and INDIRECT are the only ways to produce them.
+
+If you want to eliminate volatile functions, you'll have to add a column to the table, say column X containing formulas like
+
+    X24142:  =SUBTOTAL(3,Q24142)
+
+then replace your formula above with
+
+    =SUMIFS(Q24142:Q28161,Q24142:Q28161,"<0",X24142:X28161,1)
+-------------
+I don't know if this will improve performance, but here's a slightly more concise formula (enter it using ctrl-shift-enter):
+
+    =SUM(IFERROR(SUBTOTAL(9,OFFSET(Q24142,IF(Q24142:Q28161<0,ROW(Q24142:Q28161)-ROW(Q24142),""),0)),0))
+-------------
+updated.
+
+im using it because sumif sums all fields, even the ones that are being hidden by a filter.
+
+
+-------------
+that filters are cells, even the ones that are being hidden by a filter. subtotals and this formula omits those fields which is my desired result

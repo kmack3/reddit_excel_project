@@ -1,0 +1,13 @@
+AutoFill & Fill Date Series
+I routinely see people waste a lot of time typing dates in, so I thought I would throw this up here.  Hope it is useful.
+I have been throwing around the idea of setting up some online "live" training, or walkthroughs, free of course... just help help people out, maybe do it once a month with different options and where people can ask questions.  Think you would interested in helping set that up?
+how did you create the gif? Did you record a video and then convert with photoshop?
+So much better than using formulas!  I really want to apply this to a project document some of our team has been fumbling around with that has reached maximum capacity - do you think this would help scale down the bulk?
+That's damn handy. I'd never noticed that before, usually used formulas to achieve what I needed.
+Yeah, I might be interested. My schedule can be a bit wacky and it would probably be better for me in the evening.  I would also have to rely on one of you VBA Studs for those types of questions. My forte is formulas, I play around with the VBA, but I'm no match for any programmer with half a brain.  
+I used an old version of [Camtasia.](http://www.techsmith.com/camtasia.html) Best thing I've found for quick GIF creation, but its not cheap.
+You might have to expound a little. I'm not sure what you mean via the max capacity and what type of project documentation.  
+Glad to help a fellow redditor! 
+The document is getting to the size where excel is failing to open it with available resources.  It's a bastardized project rollout best suited for a database.  Instead it's an excel fill with multiple tabs, each with their own formulas and conditional formatting.  About 2700 rows and 80-100 columns on the main page, generally dealing with dates. 
+Ah, I see. Yes, if you can hard code the dates, your spreadsheets will generally speed up. 270,000 formulas can certainly test your system resources.  As long as there is a discernible pattern, Excel does a pretty good job of figuring it out and repeating it.  You can use beginning of the month, end of months, quarters, weeks, etc.  If you run into some specific problems trying to build it out, come back and post something, I'm sure we can help you speed it up.  
+This has been the most useful Sub I have ever encountered.  I should pay more attention to it so that maybe I can help out too.  Thanks!

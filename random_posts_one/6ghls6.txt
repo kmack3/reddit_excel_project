@@ -1,0 +1,11 @@
+6ghls6
+Is there a tool in Excel for validating hyperlinks?
+I have a spreadsheet with over 2000 columns of hyperlinks. I've found a few of them to be broken. I want to see (and fix) any others, but don't want to spend hours on this.
+
+Is there a simple way of doing this w/o touching VBA? I'm not very experienced with VBA at all so I'd probably mess it up. :S
+
+
+-------------
+Click the link.  Thats probably the easiest way without code.  A link is just a string of text until its clicked or activated.  You could pull up the a command prompt and nslookup each link and see if that returns an ip.
+
+If you want something automated, code.

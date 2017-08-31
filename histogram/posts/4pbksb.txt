@@ -1,0 +1,71 @@
+I am trying to calculate the grades of my students. Using excel for the first time.
+Here you go. Paste this in F1 and then drag down.
+
+    =0.2*B1+0.15*C1+0.15*D1+0.5*E1
+
+Just modify the weight accordingly.
+
+Or in your example where you want to put it in column H, paste the following formula in H1 and then drag down.
+
+    =0.2*B1+0.15*C1+0.15*D1+0.2*E1+0.15*F1+0.15*G1
+You are very close. For the sum that is to appear in, say, cell H3 (the cell in row 3, column H), put this formula `=0.2*B3+0.15*C3+0.15*D3+0.2*E3+0.15*F3+0.15*G3`
+
+Then copy and paste down to the other cells in that column as far as you have students. Excel will automatically update the formula to reflect the fact that it's in a new row.
+
+edit: typo
+You could also use a free program call [Engrade] (https://www.engrade.com/teacher/?rand=643496). It works like Blackboard if you are familiar with that. The students get a log-in to so they can see their grades etc.
+I'm glad you got a working solution, but i think i may be able to offer some advice to make things faster and more flexible in the future. 
+
+I would suggest you make a seperate table (on the same spreadsheet, just off to the right), that will be a list of all your assignments(rows) and the % of the total grade associated with it. 
+
+	column y	column z
+	assignment1	0.1
+	assignment2	0.25
+
+
+        x	      columnA	columnB	columnC
+        row1	Student assignment1 assignment 2
+        row2	Billy	    85	         70
+        row3	Janet	   92	         85
+
+
+.... 
+
+when you are calculating the total grade for each of your students, you can make your function reference the table (rather than inputting the values yourself). 
+
+when calculating the score for the student in row 1 your function would then look something like:
+= ($z$1*B1)+ ($z$2*C1)+($z$3*D1)...
+
+note: the $ in front of the column (z) or row(1) value essentially "locks" the value in place. The benefit of this is that you can then just drag the equation (or copy paste) to all of your students and it will adjust the students scores, but not the weight of each assignment. 
+
+the benefit of locking the assignments in place as described above is that you can easily change the weights of each assignment, or even reuse the function when you get a new set of students. This would mean all you would have to do is type in either the scores or the % the students got on each assignment, and their grade would be calculated. There's a few other tricks i could show you, but in the reddit format, it can be a bit difficult. I hope this helps
+
+Wow you're fast!
+
+I think it works. Thanks a lot!
+
+    Solution verified!
+wouldn't sumproduct be better than hardcoding here?
+It works! Thanks a lot!
+    Solution verified!
+I'm not familiar with either. I'll give it a try next year, thanks!
+
+
+You have awarded one point to _speqter_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Yup
+For future use you can add a row under the header with each projects weights. In row 2 then put 15% in B2, 20% in C2 and so on. In H2 I would put sum(B2:G2) to make sure you're adding up to 100%
+
+In H3 type
+
+    =sumproduct($B$2:$G$2,B3:G3)
+and drag that through column H. 
+Gives you a more dynamic solution with flexibility to change weights visually without digging through the formula in H
+
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+this is the best answer.  That way you can see and edit the weights for each assignment/exam, making the formula/sheet reusable and easy to edit.
+This is what I would suggest as well, and often how I make similar spreadsheets.

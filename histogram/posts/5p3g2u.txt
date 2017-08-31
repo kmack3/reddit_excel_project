@@ -1,0 +1,23 @@
+Ted Talk on the First Electronic Spreadsheet by its creation
+Thanks for posting the link - I'll check it out later today. I do like this stuff. And how Lotus and Excel (and by extension, Sheets) have used the same interface to ease adoption of their software from people coming from VisiCalc. The letter column/number rows, being able to just type `+A1+A2` into the formula bar, the quirky LOOKUP function, even the intentional bug that says Feb 29 1900 exists.
+http://www.npr.org/sections/money/2015/02/25/389027988/episode-606-spreadsheets
+
+Here's a cool podcast about spreadsheets 
+Great video. Thanks for posting! I wonder how other spreadsheet programs like Lotus 123 and Excel came about and weren't involved in big patent battles. 
+For those who TL;DR: leap days occur every fourth year, EXCEPT on years ending in 00 (1800, 1900), EXCEPT they still occur on every fourth century (so 2/29/2000 occurred).
+
+This is because the solar year is close to 365.2425, which produces 1 extra day above 365 according to the timing above. The best source I could find was a NASA statement of 365.2422 days - but there are multiple claims on the web, all approximately ~=365.2425 Note that this estimate of 365.2422 as 365.2425 will produce an error (a missing solar day) every 3,333 years... so we're pretty much good to go in the short term. (The Earth's rotation is steady to within a few 10s of millions of parts, so we won't need to adjust our calendars for solar day changes before then, either.)
+They were involved in big patent battles:  
+
+https://en.m.wikipedia.org/wiki/Lotus_Development_Corp._v._Borland_International,_Inc.  
+
+Also, Lotus bought the company that made VisiCalc. 
+And another tidbit is that it's possible this guy and his partner knew that, but the Apple ][ being memory-constrained for a program like this, maybe they didn't want to have to write a special case for 1900, and instead use mod(year,4) as the only leap year test since the bug only affects dates for the narrow range of 1/1/1900 to 2/28/1900 anyway. But when Lotus and Excel came out, they didn't want to break everyone's spreadsheets or formulas, so they kept it in.
+[deleted]
+Non-Mobile link: https://en.wikipedia.org/wiki/Lotus_Development_Corp._v._Borland_International,_Inc.
+***
+^HelperBot ^v1.1 ^/r/HelperBot_ ^I ^am ^a ^bot. ^Please ^message ^/u/swim1929 ^with ^any ^feedback ^and/or ^hate. ^Counter: ^20549
+I'm 99% certain this is the case - sounds perfectly apt, anyway. Figuring out how to save a line of code was a big deal back then.
+
+And backwards-compatibility? That was part of the early lines drawn between PC and Apple. If Apple released OS 4, all your OS 3 programs were like a pile of radioactive poop. OTOH, if you wanted to do something in Windows 3.11, you had to follow rules written for DOS 1.0 (with tons of graphical overlay).
+Well, it's not wrong.

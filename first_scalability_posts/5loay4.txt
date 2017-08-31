@@ -1,0 +1,50 @@
+big
+5loay4
+I found out that UDF and add-ins can prevent big xlsm files to be opened, but I don't get why.
+
+So today I had to work on a big xlsm file, nearly 80mb with formulas and VBA inside.  
+There was no way to open it, it was going in a loop:  
+- content is unreadable;  
+- do you want to recover it?  
+- try 1;  
+- try2 ...  
+- ...  
+I tried disabling the only add-in I was running (done by me, but it was basically silent: it take action on click of custom menu) and uninstalled some UDF...aaaannnnd magic, it took its time but Excel (2010) was finally able to open it.  
+Why is it happening now?  I had this combination of UDF and add-in for months.    
+Thank you for whatever idea you have :D  
+
+------------------------------------------------------------------------------  
+
+edit: I was able to narrow down the problem only to COM add-ins, xlam add-in (like UDFs ...) don't cause any problem.
+
+
+
+-------------
+~~80MB - seriously?,  what on earth have you got in there?~~
+
+~~[The Bible](http://www.o-bible.com/dlb.html) is only 5MB~~
+
+~~Excel.exe is only 25MB~~
+
+~~Something is not right!~~
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+A few pivot tables on sizable data sets can do it pretty easily
+-------------
+Already flaired as Discussion since I believe I'll not get an answer on this :)
+-------------
+Oops, I was thinking .xlam   doh!

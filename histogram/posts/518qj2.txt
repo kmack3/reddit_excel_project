@@ -1,0 +1,27 @@
+How do I properly use the =INDEX and =MATCH functions for what I want to do?
+You could do that by:
+
+= INDEX(C25:C35;MATCH(C38;C24:C34;0))
+
+Essentially use an array in the index which is one down from the array with the numbers you are using in the match.  Then if value 200 is in the 7th place in the number array you'll look up the 7th one in the array one down, or the cell immediately below the 200, giving you "Downwards"
+
+Incidentally it would probably be better to rearrange your table so that each supplier is only on one row, so:
+
+Suppliers - Region A - Method A - Region B - Method B - etc
+
+That way you can do fairly normal index/match or lookups without having to worry about offset one row.
+
+Not sure if that's possible with your source of data or what else you're doing with it.
+
+You probably want to also use offset and possibly indirect
+I fixed it myself already but you do have the same solution as the one I identified. 
+
+So therefore SOLUTION VERIFIED!
+
+Thank you for your comment and taking the time to answer my question. I do appreciate it!
+To add an additional comment I find myself using vlookup 90% of the time and index match when appropriate. Instead of returning the nth row, index match can return a column title such as amount supplied no matter where that column is in the range. Unlike vlookup it is dynamic so it is good for very large data sets or when many users have access to a file and may potentially edit columns/rows
+No problem.  Glad you managed to work out a solution by yourself
+
+You have awarded one point to _ethorad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

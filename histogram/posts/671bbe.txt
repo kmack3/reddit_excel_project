@@ -1,0 +1,88 @@
+What are your top Excel add-ins?
+FlexFind. Quality add in.
+
+Power Query andPowerPivot if you count those. 
+ActiveData- adds a lot of the functionality that you'd get from ACL or Idea into excel. 
+For VBA Developers, MZ-Tools.
+Solver
+Fuzzy match add in. Great for marching two days sets containing the sadness days, but with slightly different spellings and spacing.
+ASAP utilities, KUTOOLS, Power Query I use daily. 
+ASAP & AHK (not an add-in but v. useful)
+I just started trying to database stuff, so Power Query is nice. I've used the data analysis one for years if that counts too. Excel is awesome. 
+I really like SolverTable. And at school we use Palisade Decision Tools. 
+ASAP Utilities. I used to use it a lot when =if(iserror(A1),"",A1)  was a lot more confusing than it is now.
+Erlang-C add in. It's a (Call centre) industry specific tool, but I'd be lost without it.
+Fred. Economic information at your finger tips.
+I use one called JET at work that syncs with our ERP system. I can do some pretty good pivot tables with general ledger data, and I can write formulas that pull data in real time. Makes doing reports a hell of a lot easier.
+[Slightly off topic] If I want to share a workbook that uses Power Query for others to use, do they have to download Power Query also? I would love to get all of these addins and invest a lot of time in learning them, but if I have something that updates and uses 5 addins, won't it be a pain in the ass to share?
+These programs are not open source. 
+ACL and idea are not excel add ins. I noted them here only because ActiveData is an excel add in and it replicates many of the functions of these other programs. 
+
+Here is a [Link](http://www.informationactive.com/ia.cgi?f=asv)  to ActiveData. 
+
+For converting PDF to excel, you can also use Monarch. Again, not an add in but still useful. 
+Could you describe at a high level what FlexFind and Power Query do?
+Can you explain what ACL, IDEA, and Active data does? 
+MZ is ok, but it's a 30day shareware.  It hasn't changed much for office 2016, right?
+>>Fuzzy match add-in. Great for matching two data sets containing the same data, but with slightly different spellings and spacing.
+
+ 
+Agree here. Fuzzy match is a great addin.
+Can you explain what these are and their functions? 
+I can't get power query to link to my servers 
+Practical management science, or business analytics? Either way, probably Winston and Albright... 
+Can you explain what ASAP is?
+> Erlang-C
+
+I'm a Workforce Management Analyst in a call center. If I already have WFM software like IEX Totalview and Avaya CMS (if you know what those are) would this give me any added benefit?
+Not necessarily. You could freeze the data that you munge together, and they could view the output file in just about any older version of Excel.
+
+Note that PowerPivot, and PowerQuery both come out of the box with Excel 2016 and higher.
+Power query can link excel directly to databases that only access could do previously
+Power Query allows you to import, modify, and transform data prior to its import in either the Excel worksheet or the Data Model (Power Pivot.) You can connect to a variety of sources like Excel workbooks, databases, and websites. 
+One of my favorite things for power query is to link multiple sources, even in the same workbook. For example, if you have 12 different sheets that can link together using specific columns as keys, you can use PowerQuery to combine them all rather than having to use a bunch of vlookups. If you're only combining one column from each then vlookups may be easier, but if each sheet has multiple columns you're trying to combine, then PowerQuery is much easier and faster (and less processor intensive) than like 30 vlookups.
+People have described Power Query, it is an ETL (Extract, Transform, Load) software. 
+
+Flex Find is described on its website: http://www.jkp-ads.com/officemarketplaceff-en.asp
+
+I have nothing to do with it, but note it is supported by donations. It's a more comprehensive version of find and replace, and in particular can work on graphs, objects, names, validation etc. Helped me with an uncountable number of those annoying External Links that I couldn't locate. 
+Sorry to only pile on regarding power query (never used flexfind), but the only use I've had is to query both a SQL db and my sales force db. Before we had SF data in the database it was great for making reporting easier to update to open a doc, refresh the connections (which updated both SF and SQL data), and then distribute without having to also copy and paste from a SF export file.
+ACL and IDEA are used to manipulate data in ways that excel cannot. It allows you to do very complex analysis, stratifications, and other manipulations such as inner joins, and outer joins. Additionally, these two programs will allow you to convert a PDF into excel. This is very useful when you have a computer generated PDF files that you need to be able to manipulate in an Excel environment. Active data allows you to do many of these functions inside of excel. 
+All three of these programs also allow you to do things like clean up your data. With the click of a button or two you can remove spaces, punctuation, formatting, and fill in blank spaces. With this now clean data, you can then do deeper analysis such as look for duplicates, Benford analysis, fuzzy analysis, stratification, sampling, etc.
+
+Active data is essential for quick and dirty ETL, helps clean data, and so much more. 
+The add-on I have isn't shareware. It's plug-and-play.
+
+Looks like they're changed their business model. This happens a lot.
+
+Just look for a slightly earlier version on the Internet.
+Is this deliberate? 
+AHK is auto hotkey, its a key stroke recording program at its basic level can be quicker than using a macro often, - See also: using a macro keyboard like the logitech G15/19 
+Trust me, as a PQ beginner, I have almost no idea how I get it to work sometimes. It's a ton of trial and error processes and I often don't even know I arrived at a solution. It's tricky. 
+Business Analytics
+Im familiar with the tool but not with all their features. I use the add in to predict headcount required to meet a certain call volume, based on an AHT, SL% and SL(s). By default it works on hour intervals, but can be manipulated to any interval length. 
+
+In short, I use it because I don't have IEX.
+
+Edit: I realise now I am probably misrepresenting this awesome tool. Check it out for yourself: http://www.erlang.co.uk/excel.htm
+Is there an easy way to make an executable that downloads the required addins and make the spreadsheet equally functional? 
+And so much more. 
+
+It's the perfect data cleansing tool, you do it once and then if the data refreshes you don't have to do it again. 
+Holy, this is exactly what we would need for our stuff... if I hadn't fixed it all Friday >_<
+This. This sounds glorious 
+wow I need to look into this. I do a monthly report i created with a few hundred vlookups from 4 different workbooks and it takes a good 5-6 minutes just to open. Probably ~10mb file.
+This would've been great if i saw your comment a week ago, I JUST  finished up re creating a 15 page PDF application form in excel... 
+
+
+I tried searching for "IDEA Excel add in" and "ACL Excel add in" and it didn't really get me far (i found an auditing tool like u/tasha4life), are you able to provide more information or a link?
+When I looked up ACL for excel, it sums it up as an auditing tool for excel. 
+> This is very useful when you have a computer generated PDF files that you need to be able to manipulate in an Excel environment. 
+
+Open source?
+ok
+Yes, because within that fuzzy data is only misery without the add-in.
+Can you give an example? An Excel macro can do a lot more than AHK in Excel...
+Love that book. I use it w/ my students regularly.
+VBA can definitely do everything inside excel, i've used AHK to auto pass data from my finite element program to excel, just faster copy activate excel paste activate patran. 
+I assign formulas i frequently type to hotkeys. Also allows you to have a wider range of shortcut keys (e.g. i use the arrow keys for calling a macro which translates some cells about the sheet)

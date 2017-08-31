@@ -1,0 +1,66 @@
+My macro only deletes half the rows I ask it to!
+When deleting rows, you need to go in reverse as rows re number as you delete them.
+
+So, when you delete row 2, row 3 is now row 2, so when it moves to row 3, it's now actually old-row 4.
+
+Here's a different way to do it, that works.
+
+Option Explicit
+
+    Sub Example()
+    
+        Dim LastRow As Long, i as Long
+    
+        'LAST ROW IN COLUMN 1 (A)
+        LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+    
+        'LOOP BACKWARDS FROM THE BOTTOM ROW TO TOP ROW
+        For i = LastRow To 1 Step -1
+        
+            If IsNumeric(Cells(i, 1)) Then
+                Rows(i).Delete
+            End If
+        
+        Next
+    
+    End Sub
+
+
+
+c equates to a row number as it loops through your code, the problem is when you delete a row, the row numbers all change.  I.e if you delete row 13 then row 14 becomes row 13 and since your for each aready did row 13, it won't do it a second time so it gets skipped. 
+
+Try putting Application.ScreenUpdating = false and the beginning of your sub and Application.ScreenUpdating = true at the end.   that might keep your row numbers intact despite the deletion. 
+
+Otherwise you'll need your for each to go from the bottom up. 
+
+Solution Verified
+Thank you!! I hadn't even considered.
+> that might keep your row numbers intact despite the deletion.
+
+Sorry mate, that's not how it works.
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+For performance reasons, it's even better when you are going to delete a large number of rows to create a range object and add each row you want to delete to the range, then delete the range once.
+Can I see some of this code?
+    Dim r1 As Range
+    
+    ' Run your code to check if the row should be deleted
+    ' In this case I am returning the row number as RowToDelete
+    
+    ' Check if r1 is defined. If undefined, then set r1 to this row
+    if r1 is nothing 
+    then r1 = Cells(RowToDelete,1).EntireRow
+    'Else, add the row to r1
+    else r1 = Union(r1,Cells(RowToDelete,1).EntireRow)
+    end if
+
+    ' Do whatever else you need to do (i.e. return the loop)
+    
+    r1.Rows.Delete
+
+This is much more efficient because you're only deleting rows once rather than once per loop, and range unions are much 'cheaper' in excel than row deletes. If you have hundreds or thousands of rows to delete, this can lead to significant performance improvements.
+
+(The code might need to be tweaked, I haven't tested it at all, but it's the general gist of how it should work)
+I thought it might be a union, I used it for the first time last night to format some non sequential columns. 

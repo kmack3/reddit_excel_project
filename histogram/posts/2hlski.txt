@@ -1,0 +1,73 @@
+New inventory analyst
+Practice functions like VLOOKUP, INDEX/MATCH, IF, SUMIF/SUMIFS, COUNTIF/COUNTIFS, SUMPRODUCT, MAX/MIN, CEILING/FLOOR, ROUND. You'll find videos on Youtube explaining these quite well, or if you prefer to read, just google them.
+
+Must practice **PivotTables**. Download free data samples from internet and play around with the PivotTables; you'd be really amazed at the fast learning curve. **[Here's some practice data](http://blog.tm1tutorials.com/wp-content/uploads/sample-sales-data.xls)** to get you started.
+XlViki is spot not with the list of formulas that you'll need to use. I'm a purchasing/planning and inventory control supervisor for a large manufacturing facility and truly what the executives usually are looking for a couple of key factors when it comes to inventory:
+
+~ Inventory turns based on the entire value of all of your inventory or occasionally to impress them right down to the sku level. Here is what you are going to need for data to do this in Excel.
+
+This one is relatively simple to calculate but if your company doesn't already archive inventory on a daily basis you are going to want to do so immediately. Hit up the bi software that the company is using and start archiving the valuation of your inventory (I use Microsoft access to do this) - on this report I would include warehouse or if you have separate sub warehouses include those too, product category, item number, description, quantity and extended value and the date compiled.
+
+What you can do with this data: 
+
+@ monitor daily inventory changes by part, product category or warehouse using a pivot table. This way you can monitor the entire value of your inventory on a daily basis and also calculate the changes right down to the part number. This also ensures that you watch and maintain an inventory level that is good for the business and hits 10 turns- meaning you turn your inventory over once a month.
+
+@ You can now use this pivot table report that uses your access database connection to see the average inventory valuation at the end of each month by simply adding your date compiled field in the column section of your pivot table. This is going to allow to calculate your average inventory for a time range which will then allow you to use that value in your turns calculation.
+
+@its also just nice to have an archive of your inventory so that you can show your inventory valuation trend. This was great for me because I could show that I was able to reduce inventory by 12M in a two year period through monitoring, tracking and working with the buyers.
+
+~ Calculating and building a report to pull your usage and consumption out of your ERP system.  Here you are going to want your report to use the material transactions  report so you can see everyday exactly how much inventory is being used right down to the sku level again.. What data you will need for your report:
+
+💹 depending on whether it is a distribution centre or a mfg facility you will want to include product category, item, description, quantity , transaction types that only draw inventory out of your stock ( wip issue, sales transactions,), date of transaction, cost of transaction.
+
+Why are we using this instead of simply the total COGS value from accounting? 
+
+This is because if we have usage in another pivot table right down to the sku and we have avg inventory value right sown to the sku we can also calculate inventory turns and days on hand right down to item level or product caregory. This should impress them that you were able to get the data. Also note that you have your total inventory values for each day as well as your total usage for any time period that you would like- just by using pivot tables to summarize your data.
+
+~ Now that you have your usage we can calculate turns by part , by product category or as a whole by using VLOOKUP OR INDEX MATCH FORMULA as Viki had mentioned in her note. 
+
+Inventory turns = COGS/Average inventory
+
+Days On Hand= Number of days in the period/inventory turns for period
+
+Ideally you want your turn to be around 10. This would mean inventory is turning almost every month.
+
+~ My last point is using your usage blended with your on hand inventory to calculate and show your monthly usage or burn down rate to tell you how many months you have on hand for each part or even product category. You can also calculate how much inventory you should keep on hand for each part to meet a goal of 10 turns with this data.
+
+ANyway if you read this entire spiel thank you for listening to the ramble. In short my favorite Excel functions to summarize for an inventory analyst:
+
+- VLOOKUP
+- INDEX WITH NESTED MATCH FORMULA
+- pivot tables (these are definitely your friend)
+
+If you need clarification on anything leave a note below. I'm sure this post is riddled with mistakes as I'm writing this through my iPhone. 
+
+Cheers
+
+Brad
+ 
+
++1 Point
+[deleted]
+I was told pivot tables was a need to learn but I wasn't sure where to start on functions. Thank you very much! 
+Well worth the read! I will be doing inventory for a large scale nursery and im sure to turn some heads with this. Thank you Brad for the info.
+You have awarded one point to xlViki
+CEILING and FLOOR are similar to ROUNUP/ROUNDDOWN, with one very distinct difference. CEILING would round a number to the next multiple of a second number that you provide.
+
+For ex: =CEILING(25,10) would give you 30, since it would round-up in the multiples of 10.
+
+it is helpful in inventory analysis because there are several things which go out in a pack, like a pack of 6 beers or a pack 12 beers. Now if you're planning to send some stock to a store and your calculations indicate that a store can sell 200 bottles of beer in a week, you won't send 200 bottles, you'd send =CEILING(200,6) or 204 bottles.
+
+FLOOR is similar, it just rounds-down to the lower multiple.
+
+Whenever I am using Excel and think "I need to do xyz to some tabular/spreadsheet data" it is likely someone has needed to before and that means there is probably a function or combo of them to do what you need. 
+
+Do not waste time coming up with your own formulas until you have at least googled the problem first. You will pick up new formulas all the time doing this. 
+
+Also check out the formula tab in the ribbon and read through the categories to see what things Excel can do, this will give you ideas.
+
+Last: excel-easy.com is very good in my experience. It is organized in an odd way, but the info is pretty straight forward and top notch.
+
+
+Hopefully it helps - good luck in your new endeavour!
+MROUND is helpful too. It rounds to the nearest multiple, so you can round to the nearest 2, 5, 10, or even fractions like .25, .5, etc.

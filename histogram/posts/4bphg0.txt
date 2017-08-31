@@ -1,0 +1,197 @@
+Experienced macro builders: what do you consider best practice for writing clean and effecient code?
+Comment nothing, obfuscate everything, leverage it for huge raises.
+Couple of points:  
+  
+1. when dealing with large volumes of data try and do the manipulation of it in an array and then put it back into the sheet. WAY quicker than looping through a range  
+  
+2. I try and indent in a quasi python way, it makes it way easier to keep track of what's inside and outside a loop  
+  
+3. If your code repeats itself think about putting that section into it's own function.  
+  
+EDIT:  
+  
+Bonus: You can reference a named range with [myRange] instead of range("myRange")
+Can't really speak for efficient code as most of my code never has been more than 50ish lines total. The only thing I can say is if your code can't explain itself, comment. 
+
+At my last company there was a guy who was a genius when it came to writing macros. Except the guy didn't comment anything and used random naming conventions. There was an update to the machine PLC and now this data collection sheet wasn't working. We had to go through 100s of lines of code trying to pick it apart just to figure out what was going on. Luckily the change that we had to make was easy as the only thing the update did was change where the files were being saved. 
+Indent, use functions for things can that be separated easily. Try not to to have too many nested if statements. Make sure variable names makes sense and try not to reuse variables even if it makes your code shorter. Use the build in excel functions when you can.
+I organize modules based on the process or "files" they touch. These tend to be very specific to the task, and not very modular in the sense that they handle peculiar irregularities that are useless to other tasks. For less complex files, I have subroutines as separate modules. I would also have the subroutines that run these complex subroutines in a separate module.
+
+For common or general subroutines, I create a separate module. What I consider a common subroutine would be something that would set Excel settings (.displayalerts, .screenupdating, etc) before and after running code. These modules would literally be modular, in the sense that I would maintain a copy of it to import into new files as is. Maintaining a universal module is also a good way to keep your code and references consistent across all projects.
+
+Code wise, I tend to create public variables (data or object) to be referenced between subroutines instead of passing byref or byval. This includes public constants. It's a bad habit.
+
+I have always used a helper worksheet (or two) as general parameter inputs my code would reference. For example, if two (usually more) teams need the same functionality (i.e., it's literally the same Excel file otherwise), but require different network paths, I have the network paths in that helper worksheet for the code to reference. This means I don't have to mess with the code, and I can literally replace the module for updates, and that helper sheet itself maintains the various team-based differences. I usually name that sheet admin and make it veryhidden and red. I do the same with formulas, since they are easier to maintain in a cell than in code. 
+
+For launches of new tools, I would use a master template and a separate deployment macro to create copies of the master template, and change values in that admin worksheet for each team. I also make updates to modules the same way. Make sure your Excel permissions are set to actually enable code based code changes ;).
+
+Side note, to prevent subroutines that are dependent on other subroutines to run first, I typically create the dependent subroutines to include a boolean argument. This prevents the macro from appearing in the run list when someone hits Alt-F8. 
+
+For example, I always have a subroutine that imports data and a separate subroutine that manipulates the data. I would write the subroutine that manipulates the data so that it has a boolean argument in the declaration, so no one can accidentally run it without importing data first. 
+
+The example of a modular module for setting Excel settings before and after running code above is another example where I include a boolean argument (which also sets the settings). I do not want to accidentally turn screenupdating off, even though I have an addin that turns it back on.
+
+VBA is loose enough so that you can get away with many things that would not fly normally.
+There's a mega thread in the sidebar with more information. 
+Use meaningful variable names, such as rowCounter, destRow, searchCol, etc. Don't just use single letters such as y, z, c. I used to include the type in the variable name, such as lngRowCounter, but it turns out if you name them correctly then you know what they are used for and you don't really care if it's a Long or an Integer (as long as you have DIM'd them correctly).
+
+Speaking of using DIM correctly: start every module with [Option Explicit](http://www.vbforums.com/showthread.php?461140-Classic-VB-What-is-Option-Explicit-and-why-should-I-use-it) to catch any mistyped variable names during your coding.
+
+Double space and indent your code, and add brief descriptive comments after you close loops (whether they are FOR...NEXT or DO...WHILE loops):
+
+    Loop   'end of looping through search range
+
+This helps massively when you have a set of nested loops and you end up with 4 or 5 lines that just say Loop:
+
+             Loop
+    
+          Loop
+    
+       Loop
+    
+    Loop
+
+compared to
+
+             Loop   'end of replacing values
+    
+          Loop      'end of looping through columns
+    
+       Loop         'end of looping through rows
+    
+    Loop            'end of search loop
+
+When you write a DO WHILE or DO UNTIL loop you'll normally be incrementing a counter, which it's very easy to forget to do and you can end up with an infinite loop. So write the DO..,. line, then add some blank lines then add your increment and Loop statements.
+
+    DO WHILE (Worksheets("Data Input").Cells(rowCounter, "C") = "")
+    
+    
+    
+       rowCounter = rowCounter + 1
+    
+    Loop   'end of looping through blank data rows
+
+Now go back and fill in the actual code in the loop, if it's needed.
+
+Any code that's used more than once (if it's long or two or three times if it's short), with just some different starting requirements, should be moved to a function/subroutine. If you use a function/subroutine with variables then make sure you know the difference between ByVal and ByRef. Excel defaults to ByRef, which means you WILL change the value of the variables you pass to the function - this can be a good thing but might not be what you expect or want.
+Here is some basic advice:
+
+Proper indentation of if statements, for loops, with constructs, etc. 
+
+Double space to increase readability (i.e. between dim/sets at the beginning and the meat of the sub/function).
+
+Use the variable type in the name of the variable (i.e. Dim strFilePath as String, Dim intSheetTotal as Integer). Along the same lines, avoid using vague variable names like a, x, etc. unless they are for some kind of algorithm. A lot of people like to use a single character like 'x' for a loop, it is much more helpful to use intLoop or lngLoop (integer & long) to help deal with overflow errors.
+
+If a macro gets longer than 2-3 screen lengths it can probably be segmented out to separate subs, or similar code can be set into functions, with parameters passing to them. (I am super guilty of having a 1-macro solution but you asked for best practice).
+
+Commenting is nice when you can do it, but don't go overboard (i.e. 'dimension the variable "myNum" | Dim myNum as Integer), basically avoid redundancy because you want the comments to be helpful.
+
+If you do decide to copy a macro example/function from the Internet, include the author and the URL. Always helps to go back if additional context is needed, or if there is an uncommon bug, etc.
+
+
+* Avoid using "select" to change cell values, usually it can be avoided.
+* Personally I try and use modular marcos and just call them in a certain order, easier then trying to have one big all encompassing macro
+* Avoid do while loops when possible, they are not very efficient. They seem logical but are usually overused.
+* Disable screen updating and automatic calculations, make sure to re-enable them at the end and also make sure any error handling process re-enables them. On that note use error handling. Disabling those speeds up code greatly. I have two macros saved in my personal.xlsb file that I copy to each project to disable and enable these.
+
+   
+Make sure to turn off screen updating.  Instantly makes parsing long lists and similar tasks much faster.  Don't forget to turn it back on at the end of the program though.
+
+Also, comment everything.  It's not so much for your coworkers, but you in a few weeks when the macro needs to be changed.  You don't want to have to relearn your entire macro when a couple comments would have made all the difference.
+Probably not the best thing to do if it's not your sole job to write macros (i.e. if you write them to help yourself). But I get the point.
+I like to use biblical or historical references in my obfuscation. 
+
+For flood = Noah to Cane
+> Bonus: You can reference a named range with [myRange] instead of range("myRange")
+
+TIL - many thanks!
+
+Never knew you could reference a named range like that.  Thanks!
+Are you able to expand on your first point a bit? I often work with large data sets, and looping is generally my go to method if I need to (for example) add 1 to every cell or something. How would you do it differently with an array?
+Reminds me of me lol. -.-
+
+Never had time to document when code is changing every other week or month. I would literally write something, and the needs or something changed out of my control, and I have to rewrite half of it the next month. Go Agile development and rapid application development... for when you don't know what you want, and don't know how to get there.
+
+As far as where the files were being saved, the debugger should have stopped at a point where it was trying to save something.
+I agree here. Pretty much use established best practices for coding in general. I'm too lazy to look it up now, but Microsoft has a webpage with a list of best practices for VBA somewhere. I'm sure Google will find it for you. Try "excel vba best practices".
+
+In any case, to elaborate on the parent comment:
+*Always be consistent. Please. I honestly don't care how you style your code so long as it has style and it's applied religiously across the project. It may look weird to an outside observer at first, but once they figure out your style, they'll be able to read everything fine.
+
+*And please always indent and keep your indents properly in line. Use the same number of spaces per indent...or just use tab, which I prefer.
+
+*Comment your code religiously. If you comment every line, it'll look like crap, but I won't be mad about it. At least I know what you were thinking. I'm not saying you should, but I'm not going to bitch about it if you do.
+
+*Option Explicit at the top of your module to force explicit declarations of variables. That said, always explicitly declare your variables.
+
+*Prefix the name of your variables with a three-letter identifier that shows the variable's type and use "As" to indicate the type at declaration:
+    Dim blnShowTitle As Boolean
+    Dim lngLetterCount As Long
+    Dim strUserName As String
+    Dim rngNameList As Range
+
+*Descriptively name your procedures and explicitly declare their return type. Avoid shortening words if they can't be absolutely clear in their shortened form. Basic was made to be human-readable. Let's keep it that way:
+    Function CalcOverhead() As Long
+
+*Properly and fully declare a procedure's arguments:
+    Function CalcOverhead(ByVal lngMaximum As Long, ByRef rngCell As Range, Optional ByVal blnDeepCalculation As Boolean = False) As Long
+
+*Add a comment to the top of your module describing what's in it. As the author, it doesn't hurt to put your name up there, too. And, if you really want to be awesome, list the dependencies this module has. What other procedures from what other modules are the procedures in this module relying off of?
+
+*Avoid Goto. Don't write spaghetti code...but sometimes it's the best thing to use.
+
+*Avoid Globals. This is peculiar for Excel. Normally I personally wouldn't care too much about Globals. They can make code hard to understand and less portable, but in Excels case in particular, Globals can be reset when there's an error. This can really screw things up if you don't handle things right.
+
+*[Handle your errors.](http://www.cpearson.com/excel/errorhandling.htm) Don't let Excel trip up and give the user a chance to "debug" a problem, possibly bringing them into the code where they can wreak havoc.
+
+There's some other stuff I always do, too, but it's rather complicated. I use compiler directives to turn on and off blocks of code to help with debugging. I have a dedicated procedure for giving the user information (perhaps in the form of a popup box), so that whenever there's an error, the procedure is called. This allows me to change how errors are handled across the board.
+
+I regularly use a separate spreadsheet to hold a database of settings. One column has the setting name (usually in all caps) and the adjacent column has the value. I use a GetVar function to look for the setting and return the cell with the value:
+    lngRowCount = GetVar("V_MAXROWS")
+
+Because GetVar returns a range, I can use it to set a value, too:
+    GetVar("V_EDITMODE") = True
+
+This has helped immensely. If what I'm writing is an application, this is the method I use to store data about the state of the application.
+
+I should write something up about this application, actually. It's a very complicated and very stable application implemented in VBA in Excel. That should say something in itself. The error handling system actually keeps count of the number of errors happening in a certain period of time. After, say, 5 errors in a 15 second time span, the program stops and says something similar to:
+> Okay, let's hold on for a minute. I'm sensing a lot of errors, so I stopped everything and refreshed and reset everything. You might want to try to save before quitting.
+Personally I find that just having descriptive variable names is better then adding the type prefix to the variable since it makes your code harder to read.  Within the vba IDE you can right click a variable to see it's type by selecting quick info.  Adding a type prefix is only helpful when your dev environment doesn't allow you to quickly find information about a variables type, and since vba allows you to view the type in a tooltip or simple jump to the declaration having type information within the variable name is too verbose.
+Yeah that one blew my mind!
+so instead of looping through each cell you read the entire array of cells to an array variable, - this stores the data sequentially in the memory (so the first item might be at address 0 the second at 1 etc...) where as the data on your sheet is at an arbitary location that has to be fetched on each loop. 
+
+so for your example you'd probably not bother since adding 1 is pretty trivial. but the easiest way to achieve it is create a named range for the data you want to add 1 too  then use 
+
+array_1=range("named_range") 
+
+for i = 1 to ubound(array_1,1)
+
+ array_1(i,1)=array_1(i,1)+1
+
+next i 
+
+(note you'd need to nest a j loop for 2d arrays) 
+
+then write the array back to the cells. 
+Practical Example: http://stackoverflow.com/questions/34387929/looping-through-rows-in-a-listobject-to-delete-them-is-very-slow
+The debugger flund it for us. My badly said point was that if anything but the file placements had changed we would have been fucked becuase we had no clue what was going on
+> *Prefix the name of your variables with a three-letter identifier that shows the variable's type and use "As" to indicate the type at declaration: Dim blnShowTitle As Boolean Dim lngLetterCount As Long Dim strUserName As String Dim rngNameList As Range
+
+No. Please don't ever do this.
+
+ It's called Hungarian Notation and all it does is clutter up your code for very little practical benefit. After a short while, you find yourself just "skipping over" the prefix as you read the code anyway. Soon after that you start wishing it just wasn't there. But oh.... some article on the internet said it was a best practice so I guess I have to keep doing it! No. You don't. And if you read examples of code in ANY OTHER LANGUAGE, they never use Hungarian. If it's such a great idea, why is nobody else using it?
+
+If your code is written properly, A) The variable name and how it's used in the code will make it really obvious what type it is. B) Most functions will be relatively small so you don't have to go very far to find the declaration to see what the type is. C) VBA is strongly typed language, so it will prevent you from some of the more serious mistakes.
+
+And over time I came to realize that.... almost everybody using Hungarian was either just a copy/paste Google jockey or wrote shitty code.  Which should tell you something about most of it's proponents. 
+Agreed. Didn't know before!
+I find it really helpful, saves lots of time for me and I don't mis use variables. 
+Are you...is this a big joke? None of that is practical advice.
+Again: If Hungarian notation is such a great idea, why isn't everybody else using it? 
+
+EDIT: Let me ask a different question. Why is it not practical advice?
+Because not everyone works on huge projects that require teams of people to understand their code.
+
+If I write code just for myself, I can afford to be a little sloppy...especially if the algorithm is so common that it can be recognized outright. But if I'm doing something very complex and big, then it pays to keep the naming convention consistent. It's less I have to remember, less for everyone else to figure out. I prefer the naming convention I stated, but there are others worth reading up on.
+
+Procedures aren't always small. Because it's good practice to put variable declarations at the top of the scope, a reader will have to scroll up to see variable types if they're not written in the name. VBA is *not* strongly typed, so you can't always conclude what type a variable is just from context. As a matter of fact, I follow these practice specifically to force myself and VBA to be stronger typed, sts.

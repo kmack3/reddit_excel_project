@@ -1,0 +1,17 @@
+How can I eliminate the PIVOT TABLE from always reformatting when data is refreshed. And NO it is not by selecting "Preserve cell formatting on update" or deselecting "Autofit column widths on update"
+Right click, field value settings, then bottom button "number Format"
+
+Setting the field format this way makes it stick 
+OP I have this same problem.  Let us know if either of the two solutions solved the problem and maybe expand on the solutions.
+Have you tried un-checking "adjust column width" ?
+I'd set up a custom pivot table style if I was you, I'd guess that you've applied a format to part of a pivot table component but not the whole thing.  
+  
+On refresh, the default for that area is still the old format etc...  
+  
+using a style should circumvent that
+Thanks.  Setting up a custom pivot table style is the way to go.  However there are still a couple of regions of the Pivot Table that I cannot seem to format properly.  Mainly around the borders.  But this is good enough for me for the time being. Thanks!
+SOLUTION VERIFIED
+
+You have awarded one point to _kieran_n_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

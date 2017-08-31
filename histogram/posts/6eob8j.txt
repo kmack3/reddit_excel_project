@@ -1,0 +1,32 @@
+Custom Ribbon button does not trigger macro
+Is the macro loaded into your personal macro workbook?
+If you save the macro as a module in your personal workbook, it should be accessible via ribbon button on an sheet you load.
+Post the XML for the ribbon button please.
+I exported all modules/forms/classes from my file
+
+created a new empty file
+
+imported everything
+
+edited the xml again (exactly the same as the old file)
+
+and now it is working. I have no idea what happened.
+
+No. It is a separated workbook. My goal is to create an addin, but for now is just a regular xlsm file. 
+But I don't want to save it on my personal workbook. I want it to be saved on the same workbook as the ribbon is.
+
+The ribbon appears just in this file. I edited the XML for this particular file and added the ribbon and the button.
+
+I have done this a dozen times, but know it is not working for this file and I don't know why.
+    <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+        <ribbon startFromScratch="false">
+            <tabs>
+                <tab id="toolboxSopeo" label="TOOLBOX">
+                    <group id="AbrirFormChamadosBDO" label="Chamados BDO">
+                        <button id="btnChamadosBDO" label="Chamados BDO" imageMso="HappyFace" size="large" onAction="AbrirFormChamadosBDO" />
+                    </group>
+                </tab>
+            </tabs>
+        </ribbon>
+    </customUI>
+

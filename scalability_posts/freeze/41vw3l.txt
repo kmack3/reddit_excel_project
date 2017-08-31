@@ -1,0 +1,58 @@
+freeze
+41vw3l
+Too much CF - Excel freeze if I clear CF
+
+Hi!
+
+I created a database for a company a while ago and it was working fine and fast then. But now, the document is taking way too much time adding rows and I'm pretty sure it's related to the crazy amouth of duplicate CF rules in there.
+
+The problem is that if I press ''Clear all CF from this sheet'', Excel freeze (I waited near an hour). Even browsing in the CF rules cause microfreezes and deleting one at a time takes about 5 minutes each and I got hundreds!
+
+I also tried selecting only a few cells and a VBA:
+
+Sub DeleteConditionalFormats()
+'Update 20130912
+Dim WorkRng As Range
+On Error Resume Next
+xTitleId = "KutoolsforExcel"
+Set WorkRng = Application.Selection
+Set WorkRng = Application.InputBox("Range", xTitleId, WorkRng.Address, Type:=8)
+WorkRng.FormatConditions.Delete
+End Sub
+
+But still freezing with no sign of a result. I'm using french Excel 2010 and I cannot shows the content as it is delicate informations. Also there's little I can do in term of redoing all the document, it is a massive database with dependant macros and stuff I don't want to spend weeks again reworking.
+
+Thanks a LOT!
+
+
+-------------
+Have you tried any of [these steps](https://support.microsoft.com/en-us/kb/2735548) to narrow down possible causes?
+-------------
+What if you copy paste everything to another sheet, except for formatting (first only column width, then formulas, etc except for formats)?
+-------------
+Well I'm at the step 3, but unable to do it as ''Clear all CF from this sheet'' freeze Excel. I looked at the amouth of different rules in my sheets and it's massive!
+
+I'm pretty sure that we copied and pasted cells which have duplicated the rules in obscene numbers...
+-------------
+Hold on, the little VBA finally gave sign of life after 90 minutes -_-.... 
+''Edit'': Yep, that was it, the VBA made it but I had to be VERY patient and my boss too XD
+Thanks anyway!! Solution verified
+-------------
+Solution Verified
+-------------
+Hello!
+
+I noticed that you tried to award a ClippyPoint by editing your post!
+
+Please **separately reply** to the user with 'Solution Verified' as edits are not detected by Clippy!
+
+This will give the user a ClippyPoint (see side-bar) and change the flair to solved, keeping the sub tidy.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+
+You have awarded one point to _l3ob_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Nice! How did you fix it eventually?

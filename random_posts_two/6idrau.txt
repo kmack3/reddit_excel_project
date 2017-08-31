@@ -1,0 +1,33 @@
+6idrau
+Can't open 1 specific file name
+Every morning my supervisor sends an email with an excel file dor all of our job assigmoments for the day.
+
+If I open the file it says:  Cannot create file: zzzz zzzz zzzz.xlsx. Right click the folder you want to create the file in, and then click properties on the shortcut menu to check your permissions folder.
+
+I can open other excel files from him and if someone else sends it to me I can't open it either.  However if the file name is changed and then sent to me I have no problem opening it.
+
+Does anyone have any suggestions to fix this?
+
+
+-------------
+The solution seems to be in your question, in that if he uses a different name for the file, it might be ok.  There could be other issues, like if he is re-saving the file each day, so it is the same updated file.  There could be a legacy issue with the file, like it having been created in an older version of Excel or something in the file.  Maybe he could create a completely new file from scratch, if that is practical.  Otherwise, create a new file and copy the data in from the old one and save it in the current version of Excel with a completely new name.   So basically, a new file with a new name might sort out your problem.
+-------------
+Clear %TEMP% from previous copies of this file zzz zzz zzz(n).xlsx  
+where n is number from 1 to 255.  
+Every time you open the attachment from mail the copy is saved in %TEMP% but for some reason isn't deleted.  
+When n reaches 255 you got message you quoted.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

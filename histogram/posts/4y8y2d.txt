@@ -1,0 +1,90 @@
+How to automate opening ~20 excel reports, copying some cells, and pasting those cells to a specific location in a template excel doc?
+A macro can absolutely do what you described! The Offset and Cells property of the Range object will be your best bet for selecting offset cells. The difference between them is that the "home" for Offset is at (0,0) and Cells starts at (1,1). The location is the same, but the method of counting to get to the right offset location will be different for each. 
+
+As for finding the instance of a name such as "chris", if you know where to start looking it will make running the program/macro much faster. You could always loop through all columns and rows with data in them (or to a specified number) to make sure nothing is missed, but it will take longer than standardizing that all names go in column A or cell D6 and only having to look in specific places rather than search the whole sheet. 
+You say formulas will not automate to the level you want. You can paste links from one file to another. When you open the master template you can just tell excel to update all the links. Does the data vary in size or complexity in each file?
+
+
+What is the criteria for which 20 reports to open? Does the directory contain ONLY those 20, or is it say, 20 reports that all have today's date in a folder filled with other reports?
+If you're simply trying to aggregate the data into one spreadsheet, power query might be easier than trying to figure out a macro. Its a lot gentler of a learning curve, and can do a lot when it comes to pasting data in the correct format. However, there are a lot of things that VBA can do that Power Query simply can't, so keep that in mind when you're choosing your method.
+Can't he just create an ODBC source for each of the 20 workbooks and then simply do sqlopen in his template?
+can you just use links?
+
+in Book1 cell put this in:
+
+=[Book2]Sheet1!$A$1
+That's a good tip, I think I can try to use the macro recorder, have someone at my office more knowledgeable at VBA than me try to add functionality.
+
+The only question I have at this point is how/if I can pull in all my reports using the Power Query that alexisprince suggested, and use a macro to copy and paste all the 20 reports info onto my template.
+Yes, part of the complexity for someone who doesn't code is that the data is varying in size. For example, I have a work book with pages 1,2,3,4 and then the 5th page is the new format I want pages 1-4 summed in. I know how to make forumlas on the 5th page to sum the correct cells from 1-4 BUT it's a manual process. If I'm going to automate this I:
+
+A- don't want to have to pull all the pages into 1 workbook. As you can imagine, if I'm going to copy and paste sheets or import sheets into my workbook I might as well just go the formula route almost?
+
+B- I have data for each employee at my company and as soon as they leave the company it changes the location of each person's data to an extent. Imagine I take out Row 12's data, now everything below it is moved up 1. With my extremely limited knowledge of coding I can't figure out how to do loops, or VBA to search people's name, copy that row's data and put it in my template row for that person.
+
+I still really appreciate your comment though of course :)
+Short answer is your first option.
+
+My thought process on this is actually that I'm going to put all the 20 reports in a folder, just those reports in that folder so the criteria is open everything on "desktop>June 2016 report" 
+I actually had never hear of Power Query since this, which from my reading today looks like it's a good match to at least pull in the 20 report's info onto 1 workbook. (The reason I will have 20 reports in the first place is that Salesforce exports to .xsls and so I can have my reports come from Salesforce, then they need to be formatted by me so that certain people can understand them x.x)
+Unfortunately I don't know what ODBP is :( at least someone I work with here knows some VBA so now that I have 5 awesome people here telling me that this can be done I think I will ask the VBA person for help.
+or
+
+=VLOOKUP(A1,[Book2]Sheet1!$A:$Z,1,0)
+
+=VLOOKUP(A1,[Book2]Sheet1!$A:$Z,2,0)
+etc.
+
+where Book1 would have a list of names, such as A1 = "bob", and Book2 column A would have all the names, so "bob" could be in any row followed by the rest of the data in columns B and up.
+
+Though some prefer INDEX
+
+http://www.mbaexcel.com/excel/why-index-match-is-better-than-vlookup/
+
+I haven't used book in a formula so that's good to learn!
+
+I don't think this would quite work because it's not dymanic enough. I know where the cells are that I want to copy and where I want to paste it today but with people coming and leaving a company the rows will change quite frequently and so I need to incorporate a type of look up for names in a formula I think.
+Power Query (in an oversimplified manner of speaking) is a point and click version of writing a macro. Assuming your reports come in the same format (same number of columns, number of rows doesn't matter), then this might be the tool you're looking for! The best part is that the learning curve is incredibly gentle.
+Open Database Connectivity (ODBC)
+
+It has been a while since I have done this, but once you set up your ODBC Data Sources on your PC, you can then run queries against these data sources.
+
+https://msdn.microsoft.com/en-us/library/2x0tte0f.aspx
+
+To use an Excel file as a data source
+Configure the file with the ODBC Data Source Administrator.
+On the File DSN tab, click Add.
+In the Create New Data Source dialog box, select an Excel driver, and then click Next.
+Click Browse, and select the name of the file to be used as a date source.
+
+then you can use the SQL.REQUEST function in a cell to pull the data from the other spreadsheets, I remember doing this with arrays and filling out columns with data in my spreadsheet getting from other ODBC sources.
+
+https://support.office.com/en-us/article/SQL-REQUEST-function-4da47f3a-ff08-46ed-886c-3329aa5df008?ui=en-US&rs=en-US&ad=US
+
+no VBA needed.
+
+This might be closer, I haven't used vlookup much, so is there a way to have it index (or use index) to actually look up the cell that corresponds to the row and column that I signify?
+
+For example, something like:
+
+=vlookup(A1,[book2]Sheet1$A:$Tom,fills)
+I tried this today, I got to the point of being able to load a page into excel with ODBC. At this point, I'm having trouble getting what I need done. Can anybody here give me an Excel class? I am willing to pay or can trade if you want lessons in Photoshop, social media marketing or business models, etc.
+
+Please let me know if you're interested!
+I am not sure what you mean, but if you mean that you want to just pull a value from a specific row / column from another sheet you can use
+
+=OFFSET([Book2]Sheet1!$A:$A,A4,B4,1,1)
+
+Where A4 has the row and B4 has the column offset.
+
+VLOOKUP will find the row that has the value (Tom) and then return the column you specify.
+
+=vlookup(A1,[book2]Sheet1$A:$Tom,fills)
+
+using $Tom does not make sense to me, just look in the entire column A with $A:$A.
+
+"fills" does not make sense either, it has to be a number.
+
+if A1 is set to "Tom" then it will find the row that has Tom in column A, and then return the value going across columns staying in that row by whatever 'fills' is set to.
+
+(FYI VLOOKUP is probably the only thing you will ever need to know to separate yourself from the masses of Excel users.)

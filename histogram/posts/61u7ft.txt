@@ -1,0 +1,224 @@
+Password protect individual worksheets from viewing
+If you want to just prevent people from editing specific worksheets, then you can probably use the 'Protect Sheet' option in the 'Review' tab and avoid any code.
+I'd save down each sheet as its own file, and put a password on the file itself. This is if THEY ABSOLUTELY CAN NOT SEE AND MIGHT TRY TO levels of security. Not "keep out the curious" security. 
+Note: If this is sensitive information you are trying to keep people from seeing, then it is best to never include it in the document to begin with. Internal document passwords are ridiculously easy to bypass, and anyone can do so. If they have a copy of the document, and the entire document isn't encrypted, then they have access to everything stored within.
+    Private Sub Workbook_SheetActivate(ByVal Sh As Object)
+        If Sh Is Sheets(1) Then Exit Sub
+        With Sh
+    
+            .Visible = xlSheetHidden
+            If InputBox("Enter Password for this sheet") <> Sh.Name & "Password" Then
+            Sheets(1).Activate
+            
+            Else
+                .Visible = xlSheetVisible
+                Application.EnableEvents = False
+                .Activate
+                Application.EnableEvents = True
+    
+            End If
+    
+        End With
+    End Sub
+
+
+Put this in "THISWORKBOOK" module, and delete everything else.
+This doesnt Protect, it just HIDES.
+Password is always equal to name of the worksheet and "Password"
+
+Would not recommend this solution. seems kinda silly. lol
+
+Even if you password protect from viewing, sending that data means other sales rep's can retrieve that data with another simple macro.
+
+Wouldn't you benefit more if you made a macro to export each sheet to 'REPNAME - SHEETNAME.xlsx' and send that to each respective representative?
+[deleted]
+[removed]
+In addition to preventing them from editing, I only want person A to be able to view worksheet A, person B - worksheet B, and so on.
+Perfect, thanks for the response. I think I'm leaning towards a macro that will split l worksheets into separate workbooks.
+Yeah I'm really leaning towards a macro that can split all the worksheets into their own workbook and then mail them out to the reps individually. Just don't want to have to copy/paste & re-pivot data over and over again.
+Just so I'm clear, if the first worksheet is "Sheet 1", the password would be "Sheet 1 Password", correct?
+I don't think our reps are that skilled with excel, but I could be wrong.
+
+Maybe I should back up and that'd help find a better solution to the problem. The main problem is:
+
+* 4 different reports need to be run every Monday AM
+* Each of the 4 reports needs to be pivoted and sent to each rep (14) + three sales managers
+* Ideally, I'd like to only have to schedule 4 reports to run and not need to pivot these reports all morning
+
+It would be cool if I could have the report template for each of these 4 reports pre-pivoted, so when Monday comes around I can just plug in the report that auto-ran and send 4 reports to the entire salesforce, instead of 4 reports each to 17 different email recipients. That's why I was hoping to hide or password protect worksheets on this larger workbook.
+
+edit: more clarification
+Do you have a link to that type of macro? I can't get seem to get the ones I've tried to work.
+Sure, but most of these folks don't know how to run a VLOOKUP. I know I shouldn't assume, but still. 
+The quick and dirty way to do this would be to go into the Visual Basic Editor (alt+F11) and double-click into each worksheet.
+
+
+Copy and paste your code above into the editor. Change "Sheet2" in line 2 to the name of the tab and change "Sheet2Password" in line 5 with the password for that tab.
+
+
+The macro will only run when the worksheet is selected.
+"sheet 1" has password "sheet 1Password"
+at the moment the object Sheets(1), does not apply to this though because of this line:
+
+    If Sh Is Sheets(1) Then Exit Sub
+
+you might want to change it to
+
+   If Sh Is Sheets("NAME OF SHEET YOU DONT WANT TO APPLY THIS CODE TO") Then Exit Sub
+
+
+I don't have a macro ready right now (I have it on my work PC so I can get it for you later in the week) but it'd require something in the following direction:  
+
+Copy sheet 1 to new workbook. Save workbook as Rep Name 1 - Sheet. (Perhaps some tweaking to make overwrites etc.)
+
+As for the amount of e-mail work, you can automate that too! It's some older code but it seems to check out: http://www.vbaexpress.com/kb/getarticle.php?kb_id=758 
+
+
+If they open the spreadsheet, and do not allow macros, then they will be able to go to other sheets without any code.
+That worked, but when I click the tab for sheet 1 I get the password prompt box but sheet 2 is shown in the background - which I'm trying to avoid. 
+Gotcha. I'm back to working with the code I posted and found this snippet to work around the workbook displaying the next worksheet's data:
+
+https://www.reddit.com/r/excel/comments/24jx4z/password_protect_multiple_worksheets_from_viewing/ch7xn8x/
+
+Unfortunately, it will display the following sheet. Is there any way to get around that?
+Awesome, yeah I'd really appreciate that. I've done some digging and found a few pieces of code to split/save but none have worked and this is really my first foray into VBA so I'm unsure of what to do/how to fix it.
+I tried this code to split by inserting a module in "ThisWorkbook" but I still had password code for each worksheet - do I need to remove the code on each worksheet for the code to run properly? Currently it just splits out the first worksheet in my workbook.
+
+    Sub SaveSheets()
+    Dim strPath As String
+    Dim ws As Worksheet
+
+    Application.ScreenUpdating = False
+
+    strPath = ActiveWorkbook.Path & "\"
+    For Each ws In ThisWorkbook.Sheets
+        ws.Copy
+        'Use this line if you want to break any links:
+        BreakLinks Workbooks(Workbooks.Count)
+        Workbooks(Workbooks.Count).Close True, strPath & ws.Name & ".xlsx"
+    Next
+
+    Application.ScreenUpdating = True
+End Sub
+
+Sub BreakLinks(wb As Workbook)
+    Dim lnk As Variant
+    For Each lnk In wb.LinkSources(xlExcelLinks)
+        wb.BreakLink lnk, xlLinkTypeExcelLinks
+    Next
+    End Sub
+
+I'm getting an error on the line "For Each lnk In wb.LinkSources(xlExcelLinks)"
+Ah gotcha, thanks.
+You probably need to create a Dashboard. 
+
+
+Create a new tab. Then, create some buttons. When the button is clicked, it will run a macro to hide/unhide tabs. Does that sound like what you need?
+Before making the sheet in question 'hidden', activate another sheet or capture a reference to 'current active sheet' outside of the code and activate that reference to the 'current active sheet' before/after hiding the above sheet.
+I've used this to export a sheet. You can even choose to still protect the individual sheets but you could also leave them unprotected by simply removing those lines with ActiveSheet.Protect. It is important to correctly name the sheets you want to copy and the name you want to give to your final file. In this case I will always save it as Worksheet_YEARMONTHDAYHOURMINUTE, but you may want to save it as Worksheet_JOHN, Worksheet_PAM etc. This can be tweaked if you need to.
+
+You can even let one macro do all the work by picking one location and reusing that location to batch export all sheets to individual workbooks. Instead of selecting a specific file like in my example, you could edit the line to select a path only and add your own file part to it for John, Pam, etc.
+
+I hope this helps you a bit
+
+
+    Sub ExportWorksheet()
+    Dim intChoice As Integer
+    Dim strPath As String
+    Dim Wb As String
+    Wb = "Worksheet_" & Year(Now) & Month(Now) & Day(Now) & Hour(Now) & Minute(Now)
+    '//Let the user pick a file to save to.
+    Application.FileDialog(msoFileDialogSaveAs).InitialFileName = Application.ThisWorkbook.Path & "\" & Wb & ".xlsx"
+    intChoice = Application.FileDialog(msoFileDialogSaveAs).Show
+    '//If selection is not empty, then a location was picked and the following code will be executed
+    If intChoice <> 0 Then
+        '//Put filepath into a variable for later use
+        strPath = Application.FileDialog(msoFileDialogSaveAs).SelectedItems(1)
+        
+        '//Copy the sheets Worksheet and Timesheet to a new workbork
+        '//This will be done step by step (copy Worksheet, save, copy Timesheet, overwrite)
+        ThisWorkbook.Sheets("Worksheet").Copy
+        ActiveWorkbook.ActiveSheet.Protect "!!!YOUROWNPASSWORDIFNEEDED!!!", True, True
+        ActiveWorkbook.SaveAs strPath, FileFormat:=51
+        ThisWorkbook.Sheets("Timesheet").Copy After:=Workbooks(Wb).Sheets("Worksheet")
+        ActiveWorkbook.ActiveSheet.Protect "!!!YOUROWNPASSWORDIFNEEDED!!!", True, True
+        '//Hide pop-up notifications for overwriting
+        Application.DisplayAlerts = False
+        ActiveWorkbook.SaveAs strPath, FileFormat:=51, AccessMode:=xlExclusive, ConflictResolution:=Excel.XlSaveConflictResolution.xlLocalSessionChanges
+        Application.DisplayAlerts = True
+    End If
+    End Sub
+I've used this to export a sheet. You can even choose to still protect the individual sheets but you could also leave them unprotected by simply removing those lines with ActiveSheet.Protect. It is important to correctly name the sheets you want to copy and the name you want to give to your final file. In this case I will always save it as Worksheet_YEARMONTHDAYHOURMINUTE, but you may want to save it as Worksheet_JOHN, Worksheet_PAM etc. This can be tweaked if you need to.
+
+You can even let one macro do all the work by picking one location and reusing that location to batch export all sheets to individual workbooks. Instead of selecting a specific file like in my example, you could edit the line to select a path only and add your own file part to it for John, Pam, etc.
+
+I hope this helps you a bit
+
+
+    Sub ExportWorksheet()
+    Dim intChoice As Integer
+    Dim strPath As String
+    Dim Wb As String
+    Wb = "Worksheet_" & Year(Now) & Month(Now) & Day(Now) & Hour(Now) & Minute(Now)
+    '//Let the user pick a file to save to.
+    Application.FileDialog(msoFileDialogSaveAs).InitialFileName = Application.ThisWorkbook.Path & "\" & Wb & ".xlsx"
+    intChoice = Application.FileDialog(msoFileDialogSaveAs).Show
+    '//If selection is not empty, then a location was picked and the following code will be executed
+    If intChoice <> 0 Then
+        '//Put filepath into a variable for later use
+        strPath = Application.FileDialog(msoFileDialogSaveAs).SelectedItems(1)
+        
+        '//Copy the sheets Worksheet and Timesheet to a new workbork
+        '//This will be done step by step (copy Worksheet, save, copy Timesheet, overwrite)
+        ThisWorkbook.Sheets("Worksheet").Copy
+        ActiveWorkbook.ActiveSheet.Protect "!!!YOUROWNPASSWORDIFNEEDED!!!", True, True
+        ActiveWorkbook.SaveAs strPath, FileFormat:=51
+        ThisWorkbook.Sheets("Timesheet").Copy After:=Workbooks(Wb).Sheets("Worksheet")
+        ActiveWorkbook.ActiveSheet.Protect "!!!YOUROWNPASSWORDIFNEEDED!!!", True, True
+        '//Hide pop-up notifications for overwriting
+        Application.DisplayAlerts = False
+        ActiveWorkbook.SaveAs strPath, FileFormat:=51, AccessMode:=xlExclusive, ConflictResolution:=Excel.XlSaveConflictResolution.xlLocalSessionChanges
+        Application.DisplayAlerts = True
+    End If
+    End Sub
+Yes. I'd basically like each rep to be able to click a button, put in a password, and be able to view the sheet containing their data.
+    Private Sub Workbook_Open()
+    Dim ws As Worksheet
+    
+      For Each ws In ThisWorkbook.Worksheets
+        If ws.Name <> "Dashboard Tab Name" Then
+          ws.Visible = xlSheetHidden
+        End If
+      Next ws
+    Set ws = Nothing
+    End Sub
+    
+    Sub test()
+    
+    If InputBox("What is the password for this sheet?") = "change me" Then
+        ThisWorkbook.Sheets("Sheet1").Visible = xlSheetVisible
+    End If
+    
+    End Sub
+
+
+Double click into ThisWorkbook in the Visual Basic editor (alt+F11) and paste the code above.
+
+
+The first macro will run whenever someone opens the workbook. It will hide all of the tabs except for the tab named "Dashboard Tab Name". You can change this to whatever you want. One thing to note is that this is just hiding them. If the user right clicks on a tab and clicks Unhide, they will be able to unhide any of the tabs they want. If you do not want that, then you will need to change the line that says 'xlSheetHidden' to 'xlSheetVeryHidden'.
+
+
+The second macro will make tabs visible. Create a new macro for each tab in the worksheet. Each macro will need a unique macro name (test1(), test2(), etc.). Once you have created all of the macros, then you will need to assign them to the buttons on your dashboard.
+
+
+I hope this helps.
+
+This is a really dumb way to set it up because they can just run a macro and strip the passwords off each sheet and reveal them all.  
+  
+If it's just for convenience then you could have a macro that shows/hides the sheets depending on the username of whoever opens the file
+ 
+What would be your take on the not dumb way then?
+I'd probably run a macro that stripped each sales person's data into a new workbook and emailed it to them. That's the only way you're going to get data security.  
+  
+Although if I was in a sales environment, everyone's numbers would be live, on a wide screen TV, on the wall of the office for everyone to see...
+Yeah that sounds like the solution I'll go with. Wish we could go with the sales display but our reps are all over the country.

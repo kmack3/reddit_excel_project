@@ -1,0 +1,219 @@
+Looking for advice on how to create a system to answer if...then questions
+This can be a very complicated task if you don't plan out how you will implement this process.
+
+1. What method are you using to collect the customer requirements?
+2. How are you saving these requirements?
+3. Do you have a decision tree already in place based on the requirements? (Is it a step-by-step process?)
+
+
+At first glance, your problem seems like it'll be solved using bit flagging, but I'd like to get more feedback before continuing that process.
+2 options for 7 conditions = 128 possible outcomes. 
+Do you have a table already set up like this? 
+
+E.G. 
+
+
+
+C1 | C2 | C3 | C4 | C5 | C6 | C7 | Result
+---|---|----|----|----|----|----|----
+A | A | B | B | A | B | A | AABBABA process
+B | B| B | B | B | B | A | BBBBBBB process
+etc for all 128 possible outcomes? (It's okay to have more or less than this depending on the way you present the data) 
+
+If not, you'll need to generate this reference table first, then presenting the data will have a couple of options (Slicers, DataValidation+LookupFunctions, macros)
+
+I'm unsure if it will help, but here is a [Google sheet](https://docs.google.com/spreadsheets/d/13r0-8DF25OjIShDRHGjeaetCnc0Gzx-xmCwYEGgWR34/edit?usp=drivesdk) wherein I made certain conditions spit out based on race and class picked for an RPG character sheet. It was a little awkward to set up, but something like this may help.
+So you can can use a form. And just have a shit ton of if statements in VBA or even do it in cells if(condition,true,false) false and if both contain other if statements. This is called nested ifs. Not recommend to use for lots of stuff but might meet your needs 
+Easy. Make a table with all the combos and outcomes. Then plug data in and use vlookup.
+
+If you dont want to mess with vlookup: Watch a 2 minute video about making a pivot table and filtering it with slicers. This is as easy as clicking a few buttons and is super intuitive to learn.
+
+If listing out outcomes is long and tedious, then theres either a pattern, or you will have to do this no matter what program or method you use. If there's a pattern, you can probably use excel formulas to generate the outcome from the inputs right in your big table and just drag down to apply to everything.
+
+Its difficult to give you a good answer with limited info on what kind of output you are trying to generate
+Thanks for responding!!!  
+    *1. For now I'm simply having them fill out a sheet and then manually entering the choices on my end. This is a new process though so this can be changed to make everything easier if necessary  
+    *2. No method has been thought out yet - still in the early stages and trying to figure out the best way to do this  
+    *3. It's basically a set of options that are not really related to one another for a service (not a product). In order to begin using our services, we need to know how they want to use them, so this is one of the first steps.  
+
+I'll try to explain with an example.   
+It would be similar to if we were providing a service for people to get food delivered to their home, and we have a number of different options for them.  
+*1. We can use their vehicle to get food or we can use ours  
+*2. They can set a budget and have us spend within the limit, or we can spend based on what they want, regardless of price  
+*3. We can come once per week or once every two weeks  
+*4. They can provide us with their own grocery list, or we can provide a continued list of essentials that they add to if necessary  
+
+Of course, each option has different implications. If we use their vehicle, there's no charge for mileage. If we use our own, we have to charge mileage for the time spent driving. 
+So once we have all the options set out, we send them a summary of the program and the steps they need to take to get it working. 
+
+What I want to do is have a program template for each set of different options already set up and ready to go, so that when we have a new customer, they choose their options, we plug their options into a spreadsheet, and the spreadsheet tells us which program template to give them. 
+
+I hope I've answered all of your questions. Let me know if this helps make it a bit more clear.  
+  
+  
+So sorry for formatting...
+SOLUTION VERIFIED
+I was just beginning to do this but didn't want to do it if it wasn't necessary. I will make one now! 
+Thank you!
+Is there an easy way to do this or is it going to be as tedious as I think?  
+Honestly, I've been trying to google this issue and I don't even have the language to describe what I'm trying to do.
+SOLUTION VERIFIED
+This is really cool! So much work and it's sooooo pretty. Great job!  
+None of my stuff is actually number based, so I'm going to be using OneNote to set up each process for the customers. But thank you! I enjoyed this :)
+Thank you' 
+Thanks, I appreciate it! 
+Awesome, so you've got the process outlined already. Here's where VBA can help you out (It's simplest in VBA, you might be able to do this with ridiculous Formula, but it's relatively straightforward using actual coding).
+
+You are definitely describing bit flagging, where we compare certain values for true/false(yes/no) answers. here's a simple example of bit flagging determining what choices were picked:
+
+    Option Explicit
+    
+    Public Sub BitFlaggingExample()
+        'We could store these in a byte array, but for simplicity's sake of
+        'being easy to understand we're just going to use separate variables
+        Dim Option1 As Boolean
+        Dim Option2 As Boolean
+        Dim Option3 As Boolean
+        Dim Option4 As Boolean
+        Dim Option5 As Boolean
+        Dim Option6 As Boolean
+        Dim Option7 As Boolean
+        Dim Option8 As Boolean
+        Dim Result As Long
+        
+        Option1 = True
+        Option4 = True
+        
+        If Option1 = True Then Result = Result + 1
+        If Option2 = True Then Result = Result + 2
+        If Option3 = True Then Result = Result + 4
+        If Option4 = True Then Result = Result + 8
+        If Option5 = True Then Result = Result + 16
+        If Option6 = True Then Result = Result + 32
+        If Option7 = True Then Result = Result + 64
+        If Option8 = True Then Result = Result + 128
+        
+        If (Result And 1) <> 0 Then MsgBox "Option 1 Selected" & vbNewLine & (Result And 1)
+        If (Result And 2) <> 0 Then MsgBox "Option 2 Selected" & vbNewLine & (Result And 2)
+        If (Result And 4) <> 0 Then MsgBox "Option 3 Selected" & vbNewLine & (Result And 4)
+        If (Result And 8) <> 0 Then MsgBox "Option 4 Selected" & vbNewLine & (Result And 8)
+        If (Result And 16) <> 0 Then MsgBox "Option 5 Selected" & vbNewLine & (Result And 16)
+        If (Result And 32) <> 0 Then MsgBox "Option 6 Selected" & vbNewLine & (Result And 32)
+        If (Result And 64) <> 0 Then MsgBox "Option 7 Selected" & vbNewLine & (Result And 64)
+        If (Result And 128) <> 0 Then MsgBox "Option 8 Selected" & vbNewLine & (Result And 128)
+    End Sub
+
+If you were to execute this code, it would verify that only `Option1` and `Option4` were picked. This means we're able to:
+
+1. Store the value of a customer's requirements within a single number.
+2. Retrieve all the requirements from said number, so we can formulate an exact outcome of what is needed based on their requirements.
+
+---
+
+This may seem daunting at first, but if you'd like to proceed, all of this can be done using VBA.
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I'm not that great in VBA either -/u/ViperSRT3g's amazing with that - so here's how I'd approach building this kind of table. 
+
+C1 | C2 
+---|---
+True | 
+False|
+
+So start with the above - that's the first condition done. For every subsequent condition, copy and paste the previous rows down, fill the first half with true and the first half with false. 
+
+
+C1 | C2 
+---|---
+True | True
+False| True
+True | False 
+False| False
+
+then becomes 
+
+C1 | C2 | C3
+---|---|-
+True | True | True
+False| True | True
+True | False | True
+False| False | True
+True | True | False
+False| True | False
+True | False | False
+False| False | False
+
+It's easier with Excel fill handles, of course :) And you can use other things than True or False when you add each successive column. You're on your own with the results column though. 
+
+EDIT: Once you've got that table done, I recommend [naming the table](http://www.contextures.com/xlExcelTable01.html) (pressing Ctrl-T) and then [adding slicers](https://blogs.office.com/2012/10/24/beyond-column-filters-slicers-on-tables/) (in Excel 2013 or later) to quickly and visually run the questionnaire. 
+
+You have awarded one point to _solarpool_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I was thinking, specifically, of the talents and feats portion.  Wherein you are only able to choose talents and feats associated with your race/class combination.  The interesting part is how it selects which ones you are able to choose from, which is found on the corresponding tab.  Unsure if that further helps, but either way maybe you can find a way to use the information down the road ... or anyone else, for that matter.
+I... don't even really know what I'm looking at. I mean, I see what it is and I understand, but I don't know how to make it work in Excel.    
+I will pay you 5 Canadian dollars to help me. 
+Thank you very much! Can I mark this as solved twice?
+Right yeah. I thought of doing something similar, but I thought it might be too much work and I'm extremely lazy.
+Amazing amount of work you put into this!
+Haha, lemme create a quick rough draft document that you can look at. It'll become clear as day once you have something to work with.
+Yes :)
+In reality, if you have Gmail, you could save a copy of that and just change the words on most of it.  No shame in my game!
+
+Thanks though, it was weeks of me and another guy throwing this together.
+You are a life saver. Thank you soooo much!!
+Thank you very much.
+[Play around with this document.](https://drive.google.com/open?id=0Bx6qbYbtBah6a1lGdHNhZ2otWUE) (You'll need to allow macros as this has stuff built into it to show you how everything is calculated) It'll show you what I was talking about, and probably looks similar to what you'd want it to look like. It also looks similar to what /u/solarpool was showing you.
+
+This can be a single document that you send per customer *(We don't need multiple customers on there, I just included them to show different values at once)* to fill out and send back to you. Since the document has all the customer requirements, we can then dynamically alter our procedures to adjust based on their selections.
+
+---
+
+So after you've played with this, what are the various steps you would like to adjust based on the different customer requirements?
+
+---
+
+Edit for visibility: Here's the code used in this document demonstrating everything described above.
+
+    Option Explicit
+    
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        Application.EnableEvents = False
+        If Target.Row = 0 Then Exit Sub
+        Dim Counter As Long, Result As Long
+        
+        'Analyze selected customer requirements
+        For Counter = 2 To 9
+            If Cells(Target.Row, Counter).Value = True Then
+                Result = Result + 2 ^ (Counter - 2)
+            End If
+        Next Counter
+        
+        'Display unique customer requirement value
+        Cells(Target.Row, 10).Value = Result
+        
+        'Output confirmed customer requirements
+        Dim Output As String
+        For Counter = 0 To 7
+            If (Result And (2 ^ Counter)) <> 0 Then
+                Output = Output & "Option " & CStr(Counter + 1) & vbNewLine
+            End If
+        Next Counter
+        Cells(Target.Row, 11).Value = Output
+        
+        Application.EnableEvents = True
+    End Sub
+
+Thank you for this!  
+So if I'm reading this correctly, my options, using the example from before, would ALL show up across the top? Like this:  
+&nbsp;  
+| Your Vehicle | Our Vehicle | Budget Based | List Based | Weekly | Biweekly | Custom Lists | Essentials Lists |  
+&nbsp;  
+And then what do the numbers at the end correspond to? The ones that change based on my options?
+
+
+
+The number at the end changes according to the bit values of each of your choices. Selecting only `Option1` means our result value is just 1. Selecting only `Option2` means our result value is 2. Selecting both of those means our result value is 3. This allows us to know exactly which options were chosen, no matter the combination! This means we can test whether or not they've selected a particular option and add a procedure for that option or not.
+Okay wow this is great. So how do I change the names of everything without breaking the spreadsheet? lol

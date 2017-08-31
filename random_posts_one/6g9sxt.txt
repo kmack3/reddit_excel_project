@@ -1,0 +1,43 @@
+6g9sxt
+How to find the number of primes between two numbers?
+For example if I want to find the number of primes between 2-11 the number of primes would be 5 (2,3,5,7,11) including the numbers 2 and 11. I found an [if statement](https://www.extendoffice.com/documents/excel/3687-excel-generate-prim-numbers.html) that would give me the list of primes within a range and I can use that to count the number of primes via VBA. I was wondering if there was an if statement that will only return the number of primes within a range?
+
+
+-------------
+If you're looking for a vba solution, just insert a variable that works as a counter (i = i + 1) and count the total number of primes. 
+
+Or you can just use a formula to count the number of commas/string in the output if that's what you're looking for.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+I used this as the VBA code:
+
+Sub PrimeBetweenNumbers () 
+Dim num As String  
+For R = n1 To n2  
+For n = Cells(R + 2, 2).Value To Cells(R + 2, 3).Value  
+    For m = 2 To n - 1  
+        If n Mod m = 0 Then GoTo nextstep:  
+        Next m  
+        Cells(R + 2, 5) = Cells(R + 2, 5) & n & ","  
+nextstep:  
+Next n  
+Next R  
+End Sub  
+
+Then is used the LEN function to count the number of commas
+
+However this code is very slow for very large ranges, anyway to fix that?

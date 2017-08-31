@@ -1,0 +1,52 @@
+Inserting row with just one click or shortcut?
+I'm going to break r/excel tradition here and say that I *dont* like using custom VBA solutions for things like this. Running any macro clears your undo stack. So I'd rather have the ability to undo than a slightly slicker way of doing such common actions.
+You can use VBA, and set it to a keyboard shortcut to insert it for you.
+
+    Sub InsertRow()
+    
+        Activecell.EntireRow.Insert
+    
+    End Sub
+
+Set the keyboard shortcut to CTRL+SHIFT+I or something
+.
+You can also use they keyboard command "ALT + H + I + R"
+
+You can substitute R for C to insert a column. Substitute I for D to delete instead of insert.
+
+Using Alt commands are my favorite way to access the ribbon. 
+You can click the context key and hit "i" 
+Keyboard shortcut - alt i r   (Inserts rows)
+
+alt i c  (inserts column)
+
+
+No need to select entire row to do either
+I have a question now that you mentioned undo stack, and maybe you know the answer. Is there a way to have separate undo stacks for different workbooks? I hate hitting undo in one workbook and it starts undoing steps in another. 
+I agree. OP knows the best ways. I like Shift+Space & Ctrl++. That is easy and fast. 
+
+Ctrl+Z is the best, though. 
+This is actually perfect. I've all but forgotten about the existence of VBA in MS office! And for once I'm actually glad that it does :) 
+Solution Verified
+That works if you need to insert many at a time. What if you need to perform operations between inserts? 
+
+I'm a developer, and thus used to being able to configure the UI and its functionality as I see fit (Visual Studio). Excel is a little bit conservative on the customisation side... until you decide to go for VBA :D
+Uhhh! :P That's actually a good one for someone with  good memory! A VBA macro I can place on a toolbar, however, and just fire and forget. Thank you though!
+You don't even need the H. ALT-I R works just as well. It's probably my second most used shortcut after ALT-E S V (paste special values).
+It looks like unfortunately the only way is to open each workbook in a separate instance of Excel :/
+Awesome, if it works, please reply with `Solution Verified` to close the thread.
+You could add a prompt with how many lines to add. That would require more clicks or key presses but could be great for adding like 10+ rows. 
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I find excel shortcuts require very little memorization. All you really need to remember is "Alt-H". After that it's extremely intuitive. For example to **I**nsert **R**ow it's Alt-H **I R**. If you want to **D**elete **R**ow it's Alt-H **D R**. If you can remember Alt-H, and know how to spell, most of the common shortcuts can be figured out without actually looking them up!
+Is that a legacy command? I've never pasted special values but my two most used are ALT- H V V (paste values) and ALT- HVR (paste formatting.) 
+Have you ever tried the menu key* on the keyboard? Menu and then V gives me Paste Special Values. 
+
+* https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/KB_United_States-NoAltGr.svg/400px-KB_United_States-NoAltGr.svg.png
+I'm sure there are plenty of people who find memorizing a single keyboard combination in an application they use not-that-often rather easy, but when they don't, some little irritating things just need a little bit of a fix-me-up, and if VBA works, so be it :D Admittedly, I agree with FrankMcDank on not having to rely on VBA, but in absence of other options, I'll take it :)
+I think paste values is just a more up-to-date way of saying paste special, values. ALT - H V V does the same as ALT - E S V. Similarly, ALT - E S T does the same as ALT - H V R. However, my way brings up the paste special dialog, so needs an extra <RETURN> key press to activate, so I guess your way is more efficient. My way is legacy like you say - ALT-E activated the pre-ribbon Edit menu, S selected "Paste Special", and V selected "Values".
+That's a good shout, I didn't know that. Unfortunately, of the 3 UK layout keyboards I have available at home, only one has a menu key (and not the one that I tend to use mostly). I'll have to check the one at work next time I'm in the office.
+Shift+F10 is equivalent to the menu key
++1 for TIL :)

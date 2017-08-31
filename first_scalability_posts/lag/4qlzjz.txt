@@ -1,0 +1,19 @@
+lag
+4qlzjz
+Excel lags when switching sheet tabs or copying cells
+
+Even copying just about 20 cells and pasting into another sheet will lag for 3-5 seconds. It blows my mind because I'm sitting on 32GB of RAM and a decent processor (Intel(R) Core(TM) i7-4820K CPU @ 3.70GHz)... Never had anything lag my computer until now. My formulas are very straight forward. Just a row of =PRODUCT formulas and some columns of =SUM formulas. But nothing too extensive. Any idea how to fix this? 
+
+The lag is not so bad if I copy the cells and paste in the same sheet, but copying cells from one sheet and pasting to another sheet causes extensive lag.
+
+I noticed it lags every time I come back to the sheet. So if I am on chrome and click into the excel sheet it will lag. Or going into another sheet, it will lag. Every time I return to the sheet it will lag for 3-5 seconds.
+
+
+-------------
+You could try setting the formula calculation from Automatic to Manual. Once you've made your copy/pasting you can click "Calculate Sheet". 
+-------------
+Do you have conditional formatting in your document?
+-------------
+most likely you have a bunch of cells that use something like =OFFSET() or =INDIRECT() or something. I learned recently that if you don't switch calculation to manual that these cells will recalculate any time you do basically anything, even if you're not changing cells that they reference. 
+
+ordinarily, supposing you had something in cell A1 that was like, =A2, then A1 would recalculate only when A2 was changed... but if it's one of those two functions I listed, then it will recalculate any time anything happens anywhere in your workbook pretty much. 

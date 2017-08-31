@@ -1,0 +1,34 @@
+=+ Probably an easy question
+In the good old days, pre-Excel, people needed to press + to enter a formula instead of = in spread sheets (such as Lotus Notes etc).
+
+A lot of people still use this convention as Excel has allowed this to work.
+I use + because its faster and easier for me to hit the large + key on a keyboard with a 10-key than it is to hit the =. They are interchangeable to start a formula.
+1-2-3!
+
+Good observation. This fad appears to only be used by older people who were likely originally trained on Lotus.
+I came across this as well before. Google brought me to [this](http://www.mrexcel.com/forum/excel-questions/369789-why-do-some-people-use-plus-sign-beginning-formulas.html).
+I came from Lotus 1-2-3, you'd start equations with a "+". In excel you start with a "=" but they included "+" for compatability.
+
+Out of habit I still start with "+". 
+
+It turns out to be a cool way to see if an old timer has worked on a spreadsheet. Similar to double spaces after a period in Word. 
+You can use this to force a positive, the same way =- would force a negative. It's a bit of a grandfather-ed in practice so many older users will use this method. The issue is that if you are dealing with negative numbers, it important to note that this method of creating a formula will force them positive and hence, alter the outcome of the formula. Whenever I find these in older books or when older users have entered them, I always change them unless I know 100% they are trying to force a positive number. 
+Thats how I learned to type formulas in excel and I always find myself explaining it to people who see my work. Its just so much faster for me.
+I did not know that!  I learn something new about excel all the time. Thanks
+I use the + key on the num-pad for starting  equations pretty often, even though I only learned about it a couple months back.  It makes it a lot faster to type simple equations with nothing but my right hand.
+I've never used Lotus, but I am an accountant and a programmer, and I use =+ all the time because of my background in these two disciplines.  It's common in both to explicitly show signs because using the wrong sign is one of the most common errors both accountants and programmers make.
+So it is a throwback to earlier times and probably does not actually have a purpose? 
+[deleted]
+This isn't true.  Enter +(4-5) and you still get - 1. "+" is not a substitution for ABS(). 
+Interesting. Are your equations all numbers? like `+35*12`
+That and also you can use "+" as a quick alternative to entering "=" when writing up a formula.
+Old timer by proxy!
+Old timer by proxy!
+Sometimes I type equations with all numbers.  Mostly, I can also reach the arrow keys with my right hand if I need to reference cells.  It makes doing simple equations really easy, like multiplying one cell by another.  
+
+If I need to add in a function, it's easier to use both hands and the "=" sign, but if I don't need to call any functions, it's often easier to just use the num-pad and the "+" sign to start a formula.
+Believe it or not, I use + to start a formula too, out of habit. I hit the + on the 10-key, and move all the way back to the letters to type the formula. Its inefficient, yes.
+In some languages, + is a type annotation, =+ could just be to make sure, the value to the right of it is treated as a numeric value, rather than a string.
+
+[I tested it](http://i.imgur.com/AHsiZ6Y.png) and excel absolutely did not care. You can also use minus signs, but this will obviously invert the number. You are allowed to use multiple minus signs in a row, but an equal number of signs will cancel out, so `=----------A1` is basically `=A1`
+Good tip

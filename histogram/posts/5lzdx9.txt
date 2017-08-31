@@ -1,0 +1,39 @@
+VBA Code that Writes Email No Longer Working
+Upon simplifying your code, you end up with this error here:
+
+    "W:\TYG-Engineering\5 Production and Forecasts\1 EOM and Flyovers\2016\EOM Summaries\" & MonthName(0) & "2016\Total Monthly Report\"
+
+Particularly this bit right here: `MonthName(Month(Now()) - 1)` You could take out the `- 1` to fix everything.
+Ahh. I didn't think of that.
+
+So basically you can't go from January to December by subtracting one.
+
+I did not catch that. I'll give it a try.
+
+(edit) That was it. Thank you.
+Solution Verified
+You can potentially go back to December by subtracting 31 from `Now()` which would put things back a month. `MonthName(Month(Now() - 31))`
+
+---
+
+Edit: I'd like to point out that there is a [more reliable solution](https://www.reddit.com/r/excel/comments/5lzdx9/vba_code_that_writes_email_no_longer_working/dbzkxsm/) posted below.
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+This will probably work much better than what I'm currently doing.
+
+Thanks again.
+Here's a more reliable solution to retrieving the previous month: `MonthName(Month(Now() - Day(Now() + 1)))`
+You fixed this in your reply below, but as a note to future readers: do not use this solution. Subtracting 31 days does not always yield the previous month; for instance, on March 1, Now()-31 would yield a date in late January.
+
+Edit: oops, replied to the wrong post. I meant to reply to the comment above this comment's parent. 
+So this always goes to the end of the month. I had used 15 instead of 31 because some months are less than 31. This would also take care of that because you're always going back one more day than what today is.
+
+Clever. I wish I could give you more clippy points.
+That is a great way of fixing this issue! I have a script I just didn't run this month due to a similar error which would of happened. I just did it manually. However I like this a lot. 
+It's alright, I edited the post to let people know that there's a better solution.
+Yep, you understand exactly what it's doing. I just want to make sure people get a reliable solution, versus something that simply works. And if they understand *how* it works, then that's even better.
+Thanks again. 
+
+I hate using something that just works. I like what little code I do have to be precise. I just love the cleverness of a good bit of code.

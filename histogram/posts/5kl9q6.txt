@@ -1,0 +1,20 @@
+Why do I have to put operators in quotes to attach them to a function?
+Note you only need to do that for the SUM/COUNT/AVERAGEIF(s) functions. The why is something Excel developers will know the best answer to. The help says:
+
+>criteria   Required. The criteria in the form of a number, expression, a cell reference, text, or a function that defines which cells will be added. For example, criteria can be expressed as 32, ">32", B5, "32", "apples", or TODAY().
+
+>Important: Any text criteria or any criteria that includes logical or mathematical symbols must be enclosed in double quotation marks ("). If the criteria is numeric, double quotation marks are not required.
+
+I think it's because Excel is coded to always evaluate expressions on either side of a logical expression. Note 3+1>2 evaluates first to 4>2, and not 3+FALSE, so I think ever since the early days of Excel, it was coded to always evaluate expressions, then compare the expressions. No expression on either side of the logical operator was a cause for error. So then they come up with stuff like SUMIFS, which separates the expression (`C69:C74`) from the logical operator (`<=`), because they don't want to type the same expression multiple times. 
+
+So now they have a choice to make - futz with all the code to tell Excel to not need expressions on either side, or just make a rule that says it needs to be text, and then throw in a quick piece of code to treat the very first "<" like less than, rather than the actual character of "<". They already had the functions working with text I bet (`SUMIFS(A1:A10,"Beer")`, e.g) so it was probably easier to just say it always had to be text.
+
+I think they chose wrongly, and I personally hate all those functions for that reason. It's inconsistent with the rest of Excel, and I'd bet is part of the reason you can next functions -- like `=countif(left(A1:A3,1)="A")` won't work. So it's all a pile of dog squeeze as far as I'm concerned.
+<=84 isn't a valid argument to pass to a function, but "<=84" is. The first doesn't have a logical interpretation, while the second is just a String that the function can then parse however it chooses to. Excel could just treat <=84 as "<=84" but I think it's good that it doesn't - this keeps consistency and avoids confusion if this doesn't work anywhere.
+Thank you!
+My best guess on the logic behind these functions is of two scenarios.
+
+1. The Excel has a rudimentary SQL-like query feature that it uses to compose a query string using the parameters passed to it via the functions in question.
+2. The function itself literally uses string comparisons to figure out the intended logic being passed via parameters.
+
+I sincerely hope #1 is the case, and not the latter, as that would mean certain functions in Excel are not optimized for scale, and as a result would slow down a worksheet severely if the function is used often.

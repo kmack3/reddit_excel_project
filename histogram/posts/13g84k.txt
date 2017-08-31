@@ -1,0 +1,16 @@
+Why use the IF function in Excel when you can use Boolean Logic?
+you can then do something based on the result of your boolean expression
+If, Then, Else is much easier to explain to a common user. I really only use boolean logic if I have several different criterias, or very large sets of data.
+
+FYI, here is another link that helped me learn about boolean logic a few years back
+
+http://www.excelhero.com/blog/2010/01/i-heart-if.html
+My users don't really know what to do with TRUE and FALSE.  Gotta hand hold them a little bit and return English phrases like, "Too low" or "Too high"
+Boolean is a good practice, but IFs are far easier to explain and learn before you move on to boolean.
+All good comments below, but this is a good reminder for those of us who just default to if() when there might be a better way.
+I'll use this for a quick comparison between 2 numbers, but aside from that, my use kinda ends.
+
+If I'm color coding the results, I'll just sort or use a data filter then color code them; if there was a benefit to using conditional formatting, then it would still be easily accomplished, maybe an extra 5 seconds because I'm not using boolean logic?
+
+I do see the application though for large formulas that would require more then 5 nested if statements.
+You can set the logic to match multiple different criteria.

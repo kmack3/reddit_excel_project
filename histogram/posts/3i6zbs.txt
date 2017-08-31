@@ -1,0 +1,307 @@
+What's something you did the hard way in Excel that you later realized could have been finished in seconds?
+Pretty much everything, before I discovered the format painter. 
+I used SUMIFS to find totals per month. For example, if column A was the date and column B was the number, I'd do:
+
+    =SUMIFS(B:B, A:A, ">="&C1, A:A, "<="&D1)
+
+and do this for multiple ranges. Probably had 10+ tables of this kind of stuff.
+
+Then, I learned pivot tables and did the same thing in 10 seconds.
+The Norwegian version of Excel uses "." as a decimal seperator, instead of "," as in the US version. I used to manually replace "," with "." in order to make the input numbers. Then I learned find and replace.... 
+I used to use my mouse to select from the top left cell to the bottom right cell of a table to delete it. My tables would be in the thousand rows!
+
+Then I discovered the keyboard shortcut for navigating through worksheets
+
+I also used to type in the '$' manually in formulas to lock cell references...
+Calculated fields in pivot tables. They've made my life so much easier especially for forecasting.
+For me it was the job of VLOOKUP. Doing VLOOKUP the brute force way is no fun and prone to constant error. I cringe when I look back on the days before I knew how to use this software.
+
+Another one was toggling 'fill series' with 'copy cells' down. That was a breath of fresh air.
+I was using this array formula to extract unique values from a list.
+
+=INDEX($A$5:$A$12003,MATCH(0,COUNTIF($B$4:B5,$A$5:$A$12003),0))
+
+Then I saw the remove duplicates button.
+SUBTOTAL for when dealing with filters.  I've seen a lot of people's sheets where they have issues between SUBTOTAL and SUM.
+
+Lots of people know of SUBTOTAL(9,range) to show only the filtered data, but fewer people know of SUBTOTAL(109,range) to only show visible data.  If you filter, they both work the same.  If you hide rows, only SUBTOTAL(109,range) will adjust for that.
+=trim
+I discovered this way too late. Too many manual edits to count for nothing!
+Wrote a custom macro to basically do what SUBTOTAL does (sum all cells except the other SUBTOTALs in that range). Felt pretty stupid when I discovered SUBTOTAL.
+Converting MMDDYYYY into DDMMYYYY using Text to Columns. 
+
+I used to use a custom formula each time! 
+transpose. copying and pasting multiple cells and arranging them in the right order was such a pain.
+I add a lot of text to my excel sheets to make sure my coworkers understand what's going on. Sometimes the text ended up to span too many columns. To solve this I'd cut and paste parts of the text from one cell to another, and on and on.
+
+Until I learned about Justify. [This is how it works.](http://i.imgur.com/X3olHiL.gifv)
+Replacing five nested 'ifs' with a single 'if and'. *Sigh*
+Using a mouse at all. Life is a million times easier when you learn alt codes.
+I concocted an elaborate nested IF statement to calculate the day of the week using the Doomsday algorithm just so I could have, "Mon", "Tue", etc. placed in a worksheet.
+
+
+I was taking an Excel for beginners class that I thought was below my skill level and learned all I had to do was format the cell as, "ddd".
+
+
+I paid great attention to the rest of that class!
+Having to do something multiple times like adding color to a cell. Learning that I can use F4 to repeat the last function that I used. And that I can use F4 to repeat a whole bunch of different type of repeatable functions. Like Delete a row, select the next row you want to get rid of and hit F4 instead of right click deleting.
+
+Another thing was the format painter. Before I would use copy paste special formats. 
+I probably have a million of these and I have a lot of the workbooks from when I first started working that I'm scared to look at for fear of how dumb I'll feel. My worst was probably creating a Pivot Chart manually using list/combo boxes, a bunch of indirects, and some giant nested IF statements.
+
+I think the biggest time saver was hot-keying convert formulas to values. Next is probably Ctrl+Shift+3/4/5 for fast formatting of numbers.
+Text to columns. I used to use a combination of the len function and the mid function, it was terrible
+[deleted]
+I don't know if it counts. But with big data samples I often bulldoze my way through in excel because it always just seems like one or two more sorting steps. Next revision of studies I do the sorting and matching Ina few access or SQL queries and visualize in excel and save a ton of time.
+Taking a macro-run report that used to loop through thousands of lines of code (for about 5 minutes) and rewriting the code to use filters instead.  Duh. Runs in 5 seconds now.
+I used to regularly get a spreadsheet that had multiple duplicate lines in it (something weird the creator was doing to get his pivot tables to work like he wanted) that I needed to cull down to a palatable reference list (from around 3k records to about 300).  Well, I manually deleted the duplicates on like 3 or 4 report versions until one day I came across the "remove duplicates" button and tried it.  I felt so dumb considering the text-to-columns button is right next to that one and I use it multiple times daily...
+Almost every single thing I did before I learned how to use pivot tables. 
+Manually typing $ when I wanted a fixed formula.  Then I learned of F4 and felt ashamed.
+Not mine, but a co-worker.  He was showing me how he took month-end inventory data and converted it into a massive sheet with longs, shorts, etc.  
+
+After ten minutes of him right-clicking, entering formatting, copying & pasting, etc., I said "you look like you've got this down pat."  He says, "Yeah, I've been doing this same process the exact same way five times a month for four years."
+
+"Exactly the same way?"
+
+"Yup."
+
+"Wow, have you tried recording a macro to save time?"
+
+"....a what?"
+
+He almost cried when I explained how to do it.
+I created a shift scheduling calendar for work. Supervisors had the authority to make changes, but it was great because employees could view it anytime via the web.
+
+I had set it up so that if a supervisor wanted to mark an employee using a day off, they would change the cell's fill to black and text to white. I had even made a sample cell which could be selected and then use the format painter to change the employee's cell. This proved to be too difficult to understand for 1 supervisor, who ended up getting the whole thing shut down.
+
+When I fixed it later, I just changed the system to use conditional formatting, and to mark and employee off (we use ID numbers), the supervisor would just change the number to a negative. It worked, and all was well.
+
+We've since adapted this to change to a negative for vacation days and add 2 for sick days. Now the calendar is used for staffing statistics, and provides us with very accurate details of attendance and scheduling.
+I can't figure out json parsing so I made my own half assed parser that works for the one thing I handle.
+
+But in the process of figuring it out I  wrote the info into cells and then iterated through that... somehow just lived with it even though the macro took like 1-2 minutes.
+
+After switching it to in memory stuff with some arrays and applying some best practices for perf optimization I got it down to 2seconds.
+
+(Learning new stuff is fun)
+This is not exactly answering the question, but seems like as good a forum as any for this question: can anyone tell me the difference between "General" format that happens when you use the right-click menu and the "General" format that occurs once you've completed Text to Columns? 
+
+I kind of saved someone from continuing to have to do things the hard way by showing her that trick in relation to VLOOKUPs. The trick being that sometimes if you try to use a VLOOKUP, it doesn't work, even if you set both relevant columns to General via the right-click menu. It usually will work if you Text to Columns both relevant columns. I've worked with a lot of data migration dealing with tons of messy data coming out of old systems and this trick is most often needed on "old" data. 
+
+Hopefully someone understands what I'm talking about and has an answer. I've always been curious. 
+I just sorted through 9000 lines of college courses to put a program together.
+
+I deleted lines manually, and individually, that weren't relevant. There are 3 sheets (fall, winter, summer) which contained a lot of the same lines (just winter instead of fall, same course. etc). Was there a way I could have deleted rows from the other sheets at the same time? Could I merge the sheets and then "un-merge" them? I just feel like I wasted a lot of time, and I've got to do the same job again here soon.
+    =A1 + C1 + D1
+
+With totals inbetween.
+
+I made a full GP2 points calculator the slow way.
+
+Never again.
+[deleted]
+Filling in blank cells with the information from the cell above it. 
+
+As an example, column A will have an account number and name on the first line of each account only, column B will have a transaction description, and column C will have a dollar amount of a transaction. So if I wanted to sort the entire thing by the dollar amount, I wouldn't know what account it came from since there might be hundreds of transactions in each account but the account number/name is only referred to on the first line the account is used (if you want a visual on what I'm talking about, ask - I will stop being lazy and bust out the laptop).
+
+So I select the entire range of account numbers and names. Press F5, then press special, then blank cells and press OK. Then press =, then press the up key to reference the cell that has the account name/number, hold control and press enter. Select the column and do copy/paste special values and you are good.
+
+Much easier than futzing around with adding columns and doing an if statement.  
+Goal Seek. Once upon a time I would set up my formulas so I could tweak a cell by as little as 0.0001 and get the output as close as possible to a given number as possible. Then I found Goal Seek which literally does this in a second..
+I used to use access to sum up unique values and the copy the results back in to excel. The day that I discovered that you can do the same with pivot tables was the first day of the rest of my life. I was such an idiot!
+When I first discovered vlookup, my entire professional life took a U-turn.
+
+Something that I taught one of my students the other day:
+
+Double click on the bottom right of a cell to fill the series down.
+
+.
+
+Having said that, is there a way to quickly fill horizontally? 
+Most recently, I discovered the "change data source" option in pivot tables.  I make a weekly report in which I keep YTD data (so I open last weeks file and "save as" with the new date and add new data). Until a couple weeks ago, I was deleting the two pivot tables and creating them from scratch.
+linking cells from another document
+Double format painter.  Keeps the formatting endlessly!
+Alt H F P (in order, not pushed simultaneously) is the hotkey for format painter. This saves me a surprising amount of time.
+Format painter is life
+oh boy. I jumped with joy and squealed just a bit when I first saw a pivot table elegantly take a ludicrous number of data and just... work. 
+I wish I knew how to do Pivot Tables well!  I've played around with it but haven't gotten anywhere useful with it yet. 
+[deleted]
+"substitute" formula can also do this
+For those curious, here are a few fun shortcuts that /u/HuYzie is referencing (I think):
+
+* `CTRL + ARROW`: Go to the end of a table (stops just before the next blank cell)
+* `CTRL + SHIFT + ARROW`: Highlights everything from current position to next blank cell
+* `CTRL + A`: If active cell is inside a table, selects the entire table (finds next empty row/column and selects everything inside it)
+* `F4`: Changes `A1` to `$A$1` when selected inside of a formula. Press this multiple times to shift through options.
+I'm convinced Excel for Mac is a joke because the keyboard "shortcut" for absolute references is Apple + T.
+Can you recommend any resources on this? I can never get these to work.
+You are gonna LOVE PowerPivot.  ;)
+Can you elaborate on how they help you to forecast?
+Pretty much everything with Pivot Tables and Pivot Charts.
+I'm scared to ask, what is the brute force way?
+I agree that VLOOKUP was an amazing tool to find, definitely a game changer for me.  However, can you explain the second point about toggling fill series?  Not sure exactly what you mean by that.  Thanks.
+**Ctrl-Enter** fills your selection with whatever you have typed in the formula bar. If it is a formula it adjusts the formula for each cell in the selection like copy/paste does. Complicated formula? Get it right in the top cell of your column > Shift-Ctrl-Down to select the whole column > F2 to edit > Ctrl-Enter to fill. In some circumstances it takes a fraction of the time of copying and pasting.
+Still a nifty (and impressive) formula to have around in case you can't alter the original data!
+I did the exact same thing!! Oh, the embarrassment I had when I learned of the remove duplicates button!
+awesome, awesome, awesome
+also =MID
+That's great! I love this one because the amount of knowledge you had to perform this was great and excel is just so expansive that you simply hadn't heard of/learned the easier way
+On that note, for some reason (presumably to make my life difficult) Oracle formats dates as DD-MMM-YYYY. DATEVALUE() helps quickly change that into an Excel date format, which then becomes a cell format exercise. 
+I love you long lime.  Nice one. For bonus points show me how I can quickly make the gif demo like you did.
+My most used alt codes are:
+
+Alt, H, F, I, S - fast fill a series
+Alt, H, V, V - paste values
+Alt, H, V, T - paste transpose 
+Alt, A, S, D/A - sort down and up
+Alt, A, M - remove duplicates 
+Alt, M, V - evaluate formula 
+I love this because I *just* had excel print me a bunch of dates (YYYY.MM.DD) and corresponding day of week so I can have this little paper to carry around and practice the DDay algorithm!
+PRO-TIP: Double-clicking the Format Painter "locks" the format. So you can apply it all over different places. Click, click, click.
+Oh really? I use Ctrl+y for redo.
+[deleted]
+[deleted]
+Brilliant, simple, and cheap (in terms of man-hours).  I love it.  :)
+Would I be able to see that at all? 
+I've never heard of someone dealing with large amounts of JSON data in Excel. 
+
+Where did you run into JSON data? Was it the return value from an API call? Or just a download from a web app of some sort?
+I'd recommend making a new post with your question. Even if it's discussion based (like this question), you're far more likely to get a response that way than at the bottom of a thread.
+
+Thanks!
+I think it's because you can still have different formats when you're under general such as "text" and "number'. If they don't match up in the columns you're referencing in your look up, they won't be an exact match and register as N/A. 
+I always use text or number. I assume that this might be the cause of having something being labeled as "general" in the first place. 
+Sounds like a good time to learn VB and write a macro for it. 
+Have a column that keeps track of what term (fall, winter, summer) the row is. After you are done cleaning the data it'll be easier to sort. 
+
+If you are more specific about what you are doing that would help people give you better answers too.
+Not sure if I understand your question correctly but have you tried Advanced Filter? If you already have a list of courses that you want to filter out, you can use advanced filter to apply it to any sheet
+Select all the relevant sheets.  Then suppose you want to delete lines 13 and 39.  select both of them ad delete them.  It deletes them in all selected sheets.  Obviously the layout of the sheets must be identical for this to be of use.
+You can copy paste formulas across a range and it'll update your references relative to where you moved. 
+select the cells you want to fill and ctrl r to fill right - it can be quicekst to do this if theres a completed row above by doing 
+
+up, ctrl+right, down, 1, ctrl + left, ctrl + shift + right, ctrl + r 
+
+bind to an auto hot key / keyboard macro for easy abuse.  
+Howwwwwwwwwwww?
+Is there a good way to use Alt+H+F+P and then use the keyboard to get to the cells you want to format? It seems like whenever I use the keyboard shortcut and then press the arrow keys, it just wants to format the adjacent cell. 
+Don't count out conditional formatting, it is equally useful
+Enlighten me please...
+I did the same exact thing, especially when I realized how graceful they were. And easy to use, too!
+Check out excelisfun pivottable videos on YouTube, you'll be an expert in an hour/hour and a half
+> you can change this setting in excel (decimal separator), hence you don't even have to replace anything
+
+*Use system separators* can be found in the *Editing Options* of section **File | Options | Advanced**
+You can also make a custom number category for that. 
+Terrible idea.  Just use Options, advanced.  Excel fully supports European currency formats and different currency symbols such as the Euro € or Pound £ symbols.
+F4? It was that easy?  
+...  
+thank you
+In an Excel Table (the built in table function, not just any old data table), if you hit ctrl-a once, you select the whole table without headers, second time it's table with headers, third time entire sheet.
+> Press this multiple times to shift through options.
+
+I did not know this. That's pretty useful. 
+I don't even know how people do anything business related on Mac's OS. VMware Fusion is worth the purchase for anything business related.
+http://www.contextures.com/excel-pivot-table-calculated-field.html
+
+This was helpful when I first started looking into it. You can pretty much do any formula you want within the calculated fields with the exception of functions like now(), Random etc. You also cannot reference cells outside the pivot table so if you need a variable of some sorts your best off creating a new column in the data table that contains that variable
+I actually just updated to office 2013 but it is not in my Com ad ins? Power view is pretty sweet but I need to spend more time with it.
+Sure! I work as an analyst for a large investment manager. We forecast quarterly for new Assets Under Management (AUM) and our fees on that business. This is a very simple process but usually involves having 18 columns of forecast AUM and another 18 Columns of forecast Fees. Growth is applied as a % of beginning AUM based on historical averages and the fees are simply the AUM X the basis points for a particular client/portfolio. 
+
+Doing this all with formulas in about 36 columns becomes cumbersome to update and analyze. Using calculated fields allows us to let the pivot table perform the 36 columns worth of calculations for thousands of rows. We just maintain a single database of our business, run the pivot off that data and we can now have a forecast done in less than a day versus the week or more it used to take. We spend more time analyzing and less time worrying about whether all the formulas were correctly copied down (across) or if we left out a portfolio etc...
+I've seen people use nested IF functions for example
+
+    =IF(A1=001,"Apple",IF(A1=002,"Pear",IF(A1=003,"Orange"...
+Filtering, copying, pasting I'm ashamed to say, haha^haha^haha...
+When you have a list you're generating and dragging or dropping down, often if a number is in there excel will increment the number aka filling the series. When you are finished dragging/dropping it to the correct distance, a little box pops up and the bottom right of your selection that allows you to change this back to simply copying the cells
+just use ctrl + d to fill down once you've selected the column. 
+Yep. I still use it if I want the results to be dynamic, but that's only been useful one time ever. It's much less processor intensive to just copy and paste to another location and remove duplicates. 
+Also the fact that it's in the Text to Column function, the last thing I wanna do in that function is format cells. 
+add alt e s v for paste special - values, - theres a full list of the undocumented old codes here http://www.shortcutworld.com/en/win/Excel_2010.html 
+Easiest way for me is to add paste values to the quick access toolbar, then I can just access it with ALT+1
+Yep. Although I also used some left() and right()'s to sort out issues with strange names.
+Thanks! It makes access for employees and on-call supervisors a breeze. We actually use google sheets for ease of access. Everyone loves it. Well, except for that one person.
+I'm going to second this, would love to see it! 
+Yup it's an api response for league of legends stats
+There is no need for a macro to do this.  Select all the relevant sheets.  Then suppose you want to delete lines 13 and 39.  select both of them ad delete them.  It deletes them in all selected sheets.  Obviously the layout of the sheets must be identical for this to be of use.
+That's a good tip. I just added a column for term.
+
+What I'm doing is trying to create a 1 year program (certificate) at a college, using existing courses, that are relevant to my industry. My industry is aviation, so I want to pick courses relevant to working in the aviation industry. Fundamental business, communications, QA, safety, shit like that.
+
+I need a total of 8 60 hour courses per term. So I'm going through the giant list of courses offered (1 spreadsheet, 3 sheets, 1 for each fall, winter, summer) and deleted the ones that aren't relevant. Each course is one row. There are multiples of each course, showing what campus it's offered at, multiples of some courses with different profs, etc.
+
+http://i.imgur.com/ZWK5rIl.jpg
+
+So when I see a row/course that says "Anatomy", I delete that row. As suggested above, I would like to combine the sheets for the sake of deleting/filtering out the stuff I don't want (anatomy) and then reverting to the 3 sheets after I'm done to build the program.
+
+I'm plugging away and I'll get through it, but it's fun to learn new tools and ask the excel gods around here. Thanks for reading.
+I posted above with some more info, if you want to take a crack at it.
+Seems rather complicated. I'll give it a go. Thanks. 
+Instead of clicking the little paint brush once, double click and the formatting continues until you hit escape. It's awesome
+There probably is, but I don't know of it myself. Anyone else wanna jump in here? 
+https://www.youtube.com/watch?v=eFN9e_iR8ok
+
+That is the best youtube channel for excel. I especially love Bill Jelen's "Dueling Excel" podcasts with excelisfun. Amazing stuff. 
+"Terrible"? That seems a bit strong. I try to avoid solutions that involve manipulating menus and prefer programmatic solutions, in which case substitute seems an acceptable route.
+Don't press ALT
+
+⌘-t on a Mac
+Nice! I didn't know that specifically about formatted tables. Nifty little feature!
+Awesome, thanks!
+Not every version of 2013 has powerpivot, though I'm not sure if you can have a version with powerview that does not also have powerpivot. It is somewhat of a hassle to decipher which versions contain powerpivot. I just know that if you got Excel as a standalone product(outside of office) you're good, and if you have the least cost friendly versions of 2013 you're good
+I think you need Office Pro or Pro Plus to get PowerPivot.
+Fill Series could probably help you write that! There is a perverse pleasure for when you start to need formulas to write your formulas :3
+[deleted]
+OMG, this is amazing! I've always struggled with this because sometimes I want it to copy/paste and sometimes I want it to finish the pattern but I could never figure out how to do it deliberately. I guess whenever it did the thing I didn't want I would just immediately undo it without looking. 
+I find it copies more often than it increments (when I want it to increment). Can't seem to find out how to do it that way (ctrl+d only changes to copy/paste). Any thoughts on that? 
+You can also hold ctrl while dragging down to force copy rather than fill. 
+I've used that with an offset and still don't fully understand it.  
+
+So you return the value in column A that matches when 0 is count of what?
+May I ask what you used the data for?
+
+I planned to do something similar with Riot's API
+I would almost be more tempted to write the code in Python or Ruby or something other than VBA and have it export as a CSV and then read that with Excel/VBA.
+I think the case for a macro could be made. If the layout isn't identical, if he has to delete thousands of lines, or if this is something he has to do a few times a year, it could be a place where a macro is needed. 
+You can still use format painter with the keyboard, but after you do the Alt+H+F+P, press Ctrl-G, and enter the cell address, then press enter.
+
+You can do this in an alternate way, also without the mouse.  Select the cell with the formatting to copy, Ctrl-C, move to the cell or cells you want to paint the format to, press Ctrl-Alt-V, choose formaTs, then ok.  Same functionality as Format Painter.
+I would be nowhere without the free videos of those two men
+Why not?
+"This feature isn’t available in Office on a Windows RT PC. Power View and Power Pivot are available in the Office Professional Plus and Office 365 Professional Plus editions, and in the standalone edition of Excel 2013"
+
+[PowerPivot](https://support.office.com/en-nz/article/What-s-new-in-Power-Pivot-in-Microsoft-Excel-2013-930be6c5-e839-4860-8c74-8a5e2cba1279?ui=en-US&rs=en-NZ&ad=NZ)
+Are you asking how to do VLOOKUP?
+[deleted]
+Yep. Amazing. I was so shocked to read this that I just had to go do it to see it myself. 
+How have I never noticed that!?!?
+That same box I talked about can go both ways. When you're done dragging down what needs to be, look at the bottom right of your selection for a box that pops up and click it and choose whatever you want
+To be honest, I'm not sure myself. That formula was google-fu. 
+Just personal stats tracking. Nothing extremely useful, I just like charts and stats. I the current sheet I have all 450 matches logged that I played since january 
+Yeah, maybe. But this thing is the reason I learned VBA. Before I only knew that VBA exists. 
+Go see for yourself! Open up a new file and press it. Just don't have any unsaved data in there. 
+
+:)
+Look into the CHOOSE function
+Or if you like to stay on the keyboard you can hit ctrl + up (gets you to top of column) then ctrl + shift + down (highlights column ) then ctrl + d. Will change column values from incremental to copies. Seems like more steps but is really fast once you get used to it. 
+all i get is the really annoying ctrl "helpful shortcut" box
+Could you tell me how did you extract the stats from Riot's API?
+I just lost 4 hours of work, and I blame you entirely.
+
+Just kidding. I'll take a look
+There's a confirm data loss warning, isn't it??
+Check out number 1 here:
+
+http://www.techrepublic.com/blog/five-apps/five-tips-for-working-efficiently-with-excels-fill-handle/
+
+Edit: actually that whole post is good
+sure, this is the request to api http://pastebin.com/Tu7TFu7u
+it is for the recent games that returns last 10 games post game stats. 
+you will get it as a string.
+
+after that i just did a bunch of replaces to get rid of quotes and brackets i didnt want, and several layers of splits to do full response => 10 separate games => array of stat:value for the current game i am processing => separating stat and value to write them into a table
+
+its not very elegant, but it works.
+First one is exactly what I needed -- thanks!
+Thank you! So basically you can only request the last 10 games right? Or is it possible to request the whole season's match history?
+from what i know, in bulk you can do only last 10 games, there is a match details request but you need to know the gameId for that one, and it only returns one game

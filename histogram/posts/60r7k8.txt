@@ -1,0 +1,17 @@
+How to use INDEX and MATCH to include a 3rd parameter?
+    {=INDEX($D$2:$D$51,MATCH(G3&H3&I3,$A$2:$A$51&$B$2:$B$51&$C$2:$C$51,0))}
+
+Hit Ctrl+Shift+Enter to get the {} around the formula to make it an array formula. 
+
+
+Something to the effect of =index(range you're returning values from, match(car type&criteria2&criteria3, car type range& criteria2 range& criteria 3 range,0))
+
+Ctrl + shift + enter
+Thank you very much!
+Solution Verified
+Ah yes, it was the car type&criteria2&criteria3 trick I was missing, thanks!!
+
+You have awarded one point to _MrRedditUser420_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+No worries. 

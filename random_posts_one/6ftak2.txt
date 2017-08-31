@@ -1,0 +1,218 @@
+6ftak2
+Problems with OutlookMail.To...
+Hi all, I have a question that I hope will be brief to answer, since I think that I'm pretty close to working code!
+
+I'm making a sheet for the company I work for to help manage change. This sheet, in a tab called "MOC" shows 18 toggle buttons (numbers 7-24) that each correspond to a specific area/discipline. Each area corresponds to a specific point of contact in the facility. The idea is that a person will come into the sheet, explain the change that they will be making, check all the potential affected areas, and then hit "Send." This send button will forward the sheet, using Outlook, to the points of contact assigned to the areas that were checked in the sheet. This is where I'm having issues. I've tried a few different things, some of which would "gather" a list of email recipients and send *one* email, while others will check each area individually, and send the email if the area is affected, and send nothing if it's not. It doesn't matter to me which way this is executed.
+
+I have all of the points of contact on a second tab called "POC". Column A is empty, column B has the areas starting in row 3, and column C has the email addresses also starting in row 3. Column D is titled "Included?" and I coded into the toggle buttons that if ToggleButtonX.Value = True Then an "X" will be placed in the cell in this column corresponding to the same area. Also I'm using column E (may not be needed) just to say =IF(D3="Yes",C3,""). One of my attempts (#1 below), attempted to look for all of the "Yes" instances, and send the email to those people.
+
+Attempt #1:
+    For r = 3 To 20
+        If Sheets("POC").Cells(r, 4).Value = "Yes" Then
+            EmailList = Cells(r, 3)
+            With OutlookMail
+            .To = EmailList
+            'Subject Line, Body, and Attachments
+            .Subject = "ACTION REQUIRED - Small Change Management Automated Email"
+            .Body = "A small change is awaiting your approval. Please see document attached."
+            .Attachments.Add Application.ActiveWorkbook.FullName
+                'Send the Email
+                If MsgBox("Are you sure you are ready to send this report?", vbOKCancel, "Report Mailer") = vbCancel Then
+                    Exit Sub
+                Else
+                End If
+            .Send
+            End With
+            'Reset
+            Set OutlookMail = Nothing
+            Set OutlookApp = Nothing
+        End If
+    Next r
+
+
+Attempt #2:
+    'If ToggleButton7.Value = True Then
+    '    Email1 = Sheets("POC").Range("C3").Value
+    'Else
+    '    Email1 = ""
+    'End If
+    '
+    'If ToggleButton8.Value = True Then
+    '    Email2 = Sheets("POC").Range("C4").Value
+    'Else
+    '    Email2 = ""
+    'End If
+    '
+    'With OutlookMail
+    '    .To = Email1
+    '    .To = Email2
+    '    .Subject = "ACTION REQUIRED - Small Change Management Automated Email"
+    '    .Body = "A small change is awaiting your approval. Please see document attached."
+    '    .Attachments.Add Application.ActiveWorkbook.FullName
+    'End With
+    '
+    'If MsgBox("Are you sure you are ready to send this report?", vbOKCancel, "Report Mailer") = vbCancel Then
+    '    Exit Sub
+    'Else
+    '    OutlookMail.Send
+    'End If
+
+Any help is appreciated. I'm open to changing up my process completely if there's a better way! 
+
+Edit:  I can't get the VBA to format pretty here :( Anyone want to help with that too if it's hard to read?
+Edit2:  Got them formatted in the comments!
+
+
+-------------
+To apply code formatting;
+
+    Use 4 spaces to start each line
+
+You can select code in your VBA window, press Tab, then copy and paste into your thread or comment.
+
+-------------
+I think attempt 1's issue is the setting ol objects to nothing.
+Attempt 2 you've got .To twice (second will just overwrite the first).
+
+Example of a sub I use to send emails. It is called for each recipient in a list. It is more complicated than you need, but you should be able to use it to work through your "X" marks.
+
+    Sub DistrEml( _
+                 sSubj As String, _
+                 sBody As String, _
+                 sTo As String, _
+                 sCC As String, _
+                 sBCC As String, _
+                 sFrom As String, _
+                 sRoot As String, _
+                 rAtchs As Range, _
+                 sReplacements() As String, _
+                 sImages() As String)
+                 
+        Dim rAtch As Range
+        Dim i As Integer
+        
+        Set oApuri = CreateObject("Outlook.Application")
+        Set oEmail = oApuri.CreateItem(olMailItem)
+        
+        With oEmail
+            .To = sTo
+            .CC = sCC
+            .BCC = sBCC
+            .Subject = sSubj
+            .SentOnBehalfOfName = sFrom
+            
+            'Images
+            For i = LBound(sImages) To UBound(sImages)
+                .Attachments.Add sImages(i), olByValue, 0
+            Next i
+            
+    '       Attachments
+            For Each rAtch In rAtchs
+                If rAtch.Value <> "" Then
+                    If Dir(sRoot & rAtch.Value) <> "" Then .Attachments.Add sRoot & rAtch.Value
+                End If
+            Next rAtch
+            sBody = Replacer(sBody, sReplacements)
+            .HTMLBody = sBody
+            Select Case UCase(Sheet6.Range("J5").Value)
+                Case Is = "SEND"
+                    .Send
+                Case Is = "DISPLAY"
+                    .Display
+                Case Else
+            End Select
+        End With
+    End Sub
+-------------
+    'Set Necessary Recipients
+        For r = 3 To 20
+            If Sheets("POC").Cells(r, 4).Value = "Yes" Then
+                EmailList = Cells(r, 3)
+                With OutlookMail
+                .To = EmailList
+                'Does anyone need to be CC'd? Jeremy? Kim?
+                .CC = ""
+                'Subject Line, Body, and Attachments
+                .Subject = "ACTION REQUIRED - Small Change Management Automated Email"
+                .Body = "A small change is awaiting your approval. Please see document attached."
+                .Attachments.Add Application.ActiveWorkbook.FullName
+                    'Send the Email
+                    If MsgBox("Are you sure you are ready to send this report?", vbOKCancel, "Report Mailer") = vbCancel Then
+                        Exit Sub
+                    Else
+                    End If
+                .Send
+                End With
+                'Reset
+                Set OutlookMail = Nothing
+                Set OutlookApp = Nothing
+            End If
+        Next r
+    End Sub
+
+-------------
+Thank you so much for the reply! I had noticed that the second .To over-wrote the first, but I was just looking for a way to send to numerous people. What would the syntax be for that? Because that's the way that makes the most sense to me. 
+
+Go through each togglebutton, and if the value is true, set email1 = the email address, and if it's false set it equal to nothing. Then at the end, .To should = Email1 & Email2 and .... so on. But that didn't work either. 
+-------------
+    'Attempt 2 with only two emails
+    'If this works, get rid of POC column D
+        If ToggleButton7.Value = True Then
+            Email1 = Sheets("POC").Range("C3").Value
+        Else
+            Email1 = ""
+        End If
+        
+        If ToggleButton8.Value = True Then
+            Email2 = Sheets("POC").Range("C4").Value
+        Else
+            Email2 = ""
+        End If
+        
+        With OutlookMail
+            .To = Email1
+            .To = Email2
+            .Subject = "ACTION REQUIRED - Small Change Management Automated Email"
+            .Body = "A small change is awaiting your approval. Please see document attached."
+            .Attachments.Add Application.ActiveWorkbook.FullName
+        End With
+        
+        If MsgBox("Are you sure you are ready to send this report?", vbOKCancel, "Report Mailer") = vbCancel Then
+            Exit Sub
+        Else
+            OutlookMail.Send
+        End If
+
+-------------
+No, edit your comment in your question above.
+-------------
+I'm on mobile so hopefully this makes sense and formats. 
+
+
+    For Each cell in addressRange
+        If cell.Offset(0, whatever).Value = "X" Then
+            .To = .To & "; " & cell.Value
+        End If
+    Next cell
+-------------
+    'Attempt 3, using in-sheet IFs
+    EmailList = Worksheets("POC").Range("E3:E20")
+    With OutlookMail
+        .To = EmailList
+        .Subject = "Test"
+        .Send
+    End With
+
+-------------
+I'll try this first thing tomorrow morning at work! I think that should work. Thanks for helping an intern make an impact lol
+
+Edit:  Worked like a charm! Thanks again
+-------------
+Solution verified!
+-------------
+Grats - welcome to email distribution. Now you'll have to learn HTML to make them look beautiful :)
+-------------
+
+You have awarded one point to _RedRedditor84_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,593 @@
+What Excel best practice do you personally recommend?
+Treat sheet as a database table... Not separate tabs for each day of the week/etc, or placing data around the page to visually separate things.  Make reports to handle that. 
+Name your variables and named ranges properly.
+
+A named range called "input" is useless, call it something like `"ShortPageName_TypeOfInput"`
+
+e.g. `Inv_UnitCost`
+
+That way, you can easily group the named ranges in the name manager by the type e.g. Invoice sheet named ranges.
+
+Also, in VBA, use clear variables!
+
+If you say if 
+
+    If c > 5 Then...
+
+What the hell is `c`?  Why `5`?
+
+Try and do this
+
+    MaxQty = 5
+    If ItemQty > MaxQty Then...
+
+Then it's clear what's going on!
+1. Create a template file that has your company's colors already defined with custom themes for data tables, pivot tables, slicers, timelines, etc...  This allows you easily and quickly reproduce good looking tables, charts and worksheets that adds a little professionalism and company branding.
+
+2. Formulas used in data tables should be replaced with values if they aren't going to need to be recalculated constantly, HOWEVER, make sure that you copy the part of the formula after the "=" and paste it on a tab that I like to call formulas and give it a brief description.
+
+3. When coding in VBA, make sure to use Option Explicit and for the love of everything holy, please always declare all your variables at the top of your sub or function.
+
+4. Create custom functions if you find yourself using a workaround function all the time.  For example, in SQL, there's a function called ISNULL() and it's basically IFBLANK using the same logic as IFERROR.  I use this frequently.
+If you can, set absolute ranges when you do not need the entirety of a column. I.e. A$1:A$10000 < A:A for computing power.
+Know when to use an actual database system.  
+I [wrote a good part of this document](http://www.icaew.com/-/media/corporate/files/technical/information-technology/excel-community/166-twenty-principles-for-good-spreadsheet-practice.ashx?la=en) explaining Excel best practice, so I suppose the list of twenty items in here.
+
+My personal pick of them, to paraphrase slightly: Don't add extra fluff.  While knowing impressive Excel wizardry is nice, stick to the basic functions and features as long as they do the job, and only add extras if necessary and only with proper documentation / explanation as necessary.
+Know your formats! If you have things like UPC codes or Part Numbers formatted as a numbers, that's a recipe for disaster. Neither of those are numbers - they're codes (format as Text).
+
+Similarly, use dates for dates. If you have "Jan", "Feb"... as text, that's wrong. Use `1/1/2017`, format as `mmm`. Now I can actually *use* that cell.
+
+If you want to do any pivoting or any real analysis, follow the rules of good tables:
+
+- Use one table for relevant data (like the 'no separate tabs' rule mentioend)  
+- Every row is one (and only one) record  
+- Each column is an attribute  
+- Flat, unpivoted data (a "Month" category, not a "Jan", "Feb"... in 12 columns)
+
+Make inputs visually separate than cells with formula in them already.
+
+No merged cells (*maybe* if you're doing a clustered column chart as you may have to) - use [Center across Selection](http://i.imgur.com/XDagfN7.png) instead.
+Key Tabs for sheets with complex interactions. Nothing worse than inheriting a workbook and having to spend days tracking down spaghetti logic.
+
+For reference, [something like this](http://imgur.com/a/3Ip3A).
+ctrl-shift arrows
+
+This is basic 101 stuff but so many people don't use hotkeys at all. Navigating large worksheets is so much easier!
+i had a previous job where everyone almost used it as a word processor.
+
+dont do that
+Know where you save your files. If you get a file by email don't open it directly from the email and if you do, save a copy in your desktop or in a folder before you start to work with the file. I'm tired of looking for missing excel files in outlook temporary folders.
+
+-Did you save your file?
+
+-Yes.
+
+-Where?
+
+-I don't know.
+
+-[Facepalm]
+Might need to sticky this thread.
+Name your modules - Module1, Module2, Module3 are not user friendly.  Just saying.
+* If you have to hardcode things, add a comment in the formula using N("comment") describing what is going on
+
+
+      =2564 + 432 + 377/2 +N("Income for '15 + adjustment for tax + half of amount owed")
+
+You could add it as a comment as well, but I like having it in one place. 
+
+
+* When using array formulas, NEVER refer to the whole column/row (sumproduct(B:B=A2)). 
+
+* If you have a corporate color scheme, use it in your spreadsheets. If you don't have it under "layouts", contact your marketing dept. for a style guide and set up a style template. It will make your spreadsheets look consistent and professional.
+
+* try to avoid building too much [volatility](http://www.decisionmodels.com/calcsecretsi.htm) into your spreadsheets 
+
+* If you are working with a lot of data in VBA, [load it into memory instead of going cell by cell](https://blogs.office.com/2008/10/03/what-is-the-fastest-way-to-scan-a-large-range-in-excel/). 
+
+
+Make **frequent** backups. I have lost countless hours of work because my last backup was a over a day old.
+have standard colour coding for input, calculation, output cells. cell styles is a good place to start for this.
+
+I have an additional custom style set up for default values (different from input - these are one-time inputs that are made when setting up the file; whereas the normal inputs are for things like status - which are regularly modified).
+Set your excel to create new files with only one sheet, instead of default three sheets.. 
+Format data as a table, It simplifies data lookup, it simplifies named ranges (name the table)
+Include a source column for any input data / assumptions so you can back it up a year later when someone reviews it.  Paste in the link or reference or note how you got that number. 
+1. When making a lot of changes to raw data for tables/pivoting/filtering, create a worksheet called "raw" and then hide it. It will be your original data before you did any manipulation. It allows for checking if you scrambled a table later on.
+
+2. Make a worksheet called "Key" that explains everything you did and how to recreate it. Make it hidden if having it visible causes issues.
+Save the spreadsheet with the cell you want highlighted. For instance, our customers get an excel report with a cover sheet, data sheet,... etc. We always make A1 the active cell on all of our sheets. We set the active sheet to the cover page. This way the customer has a cleaner starting view of the spreadsheet instead of seeing the middle or end when they open it, with a large range highlighted. Its more professional looking and easy to do. 
+
+On each sheet hit Ctrl + home. It will take you to cell A1. 
+Its that simple. 
+
+
+I use a macro where pressing ctl + n automatically pastes special values
+Setting up Autosave to have a shorter than default time period has been pretty vital for me. Mine saves every 30 seconds now and when dealing with large data sets this has saved me numerous times (no pun intended). 
+Learn to use VLOOKUP. Drives me crazy when people in our company don't understand how to use it. 
+* Always use Index/Match over vlookup
+
+* Always use sumifs over sumif (and countifs over countif)
+
+* Pivot tables are great for quick math -- sumifs should replace pivot tables for static reporting
+
+* REMOVE GRIDLINES (anybody know how to disable this by default?)
+
+* Assume you'll be asked to create the same document at least 3 more times, design it to make repeating the report easier
+
+* Name every sheet
+
+
+
+Not so much formatting or data entry but for usage: learn the hot keys. All of them. Consider mouse usage a personal failure. 
+Change the auto save to folder from temp to your desired destination. 
+
+Change the frequency of how often it automatically saves your documents based on your need. 
+
+
+another one often even expert colleagues overlook: when you search (ctrl+f) you can expand it to your whole workbook instead of just the present sheet, by simply selecting that option from the drop-down list - super easy!
+As soon as you might have to start scrolling - please freeze your top row(s), first column(s) or both. There might be situations where this is not a good thing, but in the majority of cases it makes life a lot easier! (Besides that: it's one of the most basic functions of Excel, yet many people skip this step)
+Use a nested Index/Match formula instead of vlookup. It's much more flexible and powerful, uses fewer resources, and adjusts to changes in column numbers.
+
+It takes slightly longer to learn to use but, once learned, makes vlookup obsolete.
+I personally hate long formulas. In workplace settings Excel spreadsheets are most likely not used by the people who made them. Long formulas are hard to reason about and make it hard for the next guy to maintain. Here's two bite sized tips:
+
+* When using excel to pull SQL data, make a view for the data you want and then reference that in excel instead of pasting the query into excel. This will allow you to modify the view when making changes which will then propagate to all distributed copies.
+
+* When using formulas that reference ranges, only select cell ranges that are relevent. The more unecessary cells selected in a range the more difficult it is for someone else to understand what the heck you're actually matching on. This also then kills the usefulness of reference tools.
+
+* Avoid vlookup and embrace index and match. Vlookup is rigid and dictates your sheet's structure.
+
+* Separate your display tables from your logic and data tables. 
+
+* For critical sheets, make any errors very loud and obvious to the user. Make use of conditonal formatting to highlight errors and use descriptive IFERROR logic to suggest a solution. A sheet containing cash flow without it might show totals without letting the user know that big client's invoice is not included because their typo ruined on of your matching formulas.
+
+*  If your formula is long, break it up into smaller pieces based on the purpose of each component. Each component should be named which will then make the other formulas that reference it actually readable. Formulas should not do more than one "thing". This will help you maintain complex formulas and help the user unstated more clearly what is going on, likely allowing them to spot any assumption errors.
+If you are ever planning to print your sheet/workbook, select all of the tabs (click the first one, then CTRL+Click the others to multi select), set the page layout, set printable range, and set headers/footers that are meaningful.  YES:  Sheet Name, Date Printed, Page x of y, filename.  SOMETIMES: full path (unless that's important where you work), NO: Username (who cares who printed it).  This sets the page layout exactly the same for all pages.  
+
+It's not the default, but if you have columns of things that are dates or numbers, right-align the headers, so that it looks nice when printing.  Left align text headers.  In other words, align the headers to how the data is formatted.   Don't Center numeric columnar data. 
+
+Use the "Accounting" style rather than currency style. It looks better.
+
+
+Change your quick actions. In particular, change the Save button to Save As. (The extra confirmation might prevent you from saving over an important template).
+Parameterize? Is that the word?
+
+Basically, don't hard code *anything*. If everything is truly negotiable (even taxes) then everything deserves to be a variable stored a sheet (usually hidden) so that when necessary, it can be adjusted. Something as simple as net revenue should be a variable rather than being represented in a formula as 'revenue - costs'. 
+
+This allows you to *very easily* update your model with some fundamental change in assumption - what if we implemented some change that boosted net revenue by 10%? Easy to model; Net Revenue now becomes 'Revenue - Cost' * 1.10, and that change flows through every place the net revenue variable is used (rather than having to go make 15 edits to different formulas). 
+
+This is probably low level stuff, but worth reminding everyone once and again.
+Save your code in a hidden tab if you had to write custom SQL so that anyone who you send it to can view and replicate your raw data set.
+I didn't go through more comments to see if I'm being repetitive, but here are a few of mine:
+1. use application.enableevents and application.screenupdate = false in the beginning of the code, and make them "true" in the end
+2.  use "OnError GoTo ErrHandler" and have a ErrHandler in the end with a Select Err to capture what went wrong (and ideally, use the "true" piece of the previous advice after this Select)... this is arguably better than having the code crash in the middle and you having to abort
+3. use cells.find("<text>", LookAt:=xlWhole).offset(x,y) for locating a cell rather than "hardcoding" a cell... it may seem like extra work now, but it seamlessly deals with any cell re-positioning that may happen later
+
+If I remember more, I'll comment again...
+[Revision] tab. When changes are made you note the date, who/owner, and short description of the changes. 
+
+[Parameters]  tab. I often deal with numerous pivot tables across multiple tabs, The parameters tab is for slicers linked to those pivot tables. Also any user entered variables (dates, yes/no options, etc). Basically set up all the user inputs on one tab. 
+
+Making use of the 'reallyhidden' flag in VB to hide critical formula and calculation tabs from people that know how to unhind tabs normally. 
+I bookmarked this thread.
+if you're handing over a file, copy and paste values of all values - particularly lookups, so that values/metrics don't change from unintended alterations to data.  
+
+for personal use, copy and paste values for a lookup formula from the 2nd line (of formulae) onwards.. this drastically reduces loading/updating time, especially with large data sets..  
+
+you mentioned hotkeys - here's a few favourites:  
+alt-d-f-f = filters on/off  
+alt-w-f-f = freeze frames   
+alt-e-s-v = paste values  
+
+not sure if these are best-practices in the purest sense, but they're definitely lazy/easy things to remember
+1. Formulas only refer up and to the left. So, cell B3's formula can reference A1, A2, A3, B1, and B2, but NEVER C8. This single-handedly prevents 95% of the Circular Reference errors (which now can only occur from variable name definitions - that should follow a similar rule when possible).
+
+1b. If you HAVE TO, you can make down-left references - but never up-right. B3 might need to refer to an average centered on row 3, but if so it can only refer to data to the left (only column A, in this case).
+
+2. Make names worksheet-specific whenever possible. I wish it was possible to make this the default behavior. Otherwise, a simple name like "CellAbove" ("=B2", when B3 is selected) becomes a nightmare to understand on another sheet ("=Sheet2!B2" when B3 on Sheet1 is selected... because you defined it while on Sheet2).
+
+Index/match, it's more efficient on larger lookups.
+I.e. vlookup(A1,B:Z,25,0) uses more resources than index(Z:Z,match(A1,B:B,0))
+
+
+Column letters can be replaced with numbers if you prefer.
+For constantly-changing datasets, define dynamic named ranges with the OFFSET function. This helps improve performance when your workbooks get large or complex.
+
+When creating Excel-based reports, use narrow columns (1 is my go-to width). This will help you place text exactly where you want it to go, without relying on text boxes.
+
+I find it easiest to consume large quantities of data in tables when highlighting is every *three* rows, not every *other* row. I've got a conditional format formula that I use regularly, if anyone's interested!
+Never store your data in a report. That's what external connection links are for. (Also never reference another workbook via formula for the love of god).
+When you have a timeline in multiple sheets, have the same period be in the same column on every sheet. Mostly applicable in modelling but it greatly reduces risk of mislinking/errors. 
+Carefully and clearly consider the implications of your sheet/table layout. 
+
+&nbsp;
+
+A lot of all of what we do with Excel should probably be in a proper relational database but we are stuck working with the devil we know until "we can afford the time and money to properly migrate..." You can save so much memory and inprove efficieny by simplifying your table layouts and kv encoding to be easily integrated in Index:Match, xLookup and IF functions from the beginning. 
+Use named ranges when coding for an extremely long range of data
+Comment ALL the code because someday when you come back to old code or re-use code you'll be able to understand what it does piece by piece and this will also help someone else if they read your code.
+Get in the habit of pasting what you want (values, formulas, etc...) instead of hitting CTRL+V.
+
+When your sheets are full of different formatting and formulas, this will save a lot of needless CTRL+Z.
+
+This is obvious to veterans, but is a big help for beginners.
+Save often
+When working with pivot tables and dynamic source data, set your data range for the pivot table to the entire columns of your source data, then hide blanks from a field you know will never have a blank. On that same field, right click and choose edit field settings, then choose to 'include new items in manual filter'. 
+
+Presto bing bang boom, you have a fully dynamic pivot table that doesn't need maintenance until you change column headers.
+Whenever reasonably possible make anything you will use again as a template that takes well formatted data in and gives you exactly what you need as output. Next time you need to do that thing again just dump the data in and move on with your life!
+Tables table report
+If you are working with **large datasets**, use MATCH() INDEX() instead of VLOOKUP or HLOOKUP. match and index use less memory than the lookup formula.
+TEST THOROUGHLY. Everything else is secondary.
+
+Use sorted lists and *LOOKUP and MATCH with binary search as often as possible.
+
+Avoid volatile functions whenever possible.
+
+Don't overuse IFERROR. You ___WANT___ #REF!, #NULL! and #NAME? errors to propagate.
+Use TRIM. Trim can save you years of looking through Data to find why a lookup of sumif function isn't working!
+If you need access to a password protected sheet in excel and you have access to a mac, you can open that file with Apple Numbers and voila! the sheet is yours. Used this to see my entire classes grades one time.... 
+Use slicers with pivot and understand the beauty of &.
+If you have a ton of sheets, make a table of contents that hyperlinks to each sheet. Then write a quick macro with a shortcut to bring you to the table of contents. Might seem like overkill, but it can save LOTS of time for LOTS of people. 
+vlookup! It is an enormous time-saver for merging tables with slightly different data.
+These are some of the rules that I have developed for myself, I will try and explain the reasoning behind each of them:
+
+* If you are creating a model, never have formulas that use the results of other formulas in order to calculate their value. Always work from base data.
+
+The reason for this is when it comes to finding an issue with the model or report you end up having to unpick multiple formulas in order to find the base issue ( a 'rabbit hole' problem as I call it). Also using a 'stacked' formula method means if a lower formula is wrong/broken that error cascades throughout the book.
+
+* A pivot table is fine to use, but do not rely on it.
+
+Pivot tables are a great way to be able to get analysis out of a sheet of data quickly. They can even be used as the backbone of charts. However, in my experience, they are cumbersome due to calculation time and people not turning off the 'Save background data' option balloons the file size.
+
+* Excel is not a replacement for a database.
+
+When working with large datasets Excel can get unstable and have a hard time calculating. People use Excel like a database sometimes (people in my company are known to call an Excel spreadsheet a database) with large data sets & lookups everywhere. While there are tools in Excel to create data models and queries, Excel is not a database. A database has been built to deal with large amounts of data and comes with the tools needed to sort, filter and retrieve that data in much more efficient manner.
+
+* When trying to fix someone else's model or report, know when to quit.
+
+A recurring problem I have come across in my career so far is supporting other people's work. Old dashboards that management want reanimating or complex financial models that were built when the business was very different are a major headache. Especially when many of the rules in the OP have not been followed. Rather than spending forever trying to pick apart this tangled web, stop and start from fresh. It will often be quicker.
+
+A few quick fire items.
+
+* Write your books like someone else is going to have to use them.
+* Avoid passwords if you can. People **will** forget them.
+* Shared workbooks are prone to problems.
+* There is nothing wrong with having a cheat sheet within arms reach
+
+EDIT: Formatting & sentence structure.
+That's something I forgot to mention and I do this everyday! I usually create dashboards in my line of work and I house each dataset in their own sheets and rename the sheet to the same name as the table
+It's called the Narrow format (or ID/Attribute/Value).
+https://en.wikipedia.org/wiki/Wide_and_narrow_data
+
+Wide, or unstacked data is presented with each different data variable in a separate column.
+
+Person	Age	Weight
+
+Bob	32	128
+
+Alice	24	86
+
+Steve	64	95
+
+Narrow, or stacked data is presented with one column containing all the values and another column listing the context of the value
+
+Person	Variable	Value
+
+Bob	Age	32
+
+Bob	Weight	128
+
+Alice	Age	24
+
+Alice	Weight	86
+
+Steve	Age	64
+
+Steve	Weight	95
+
+Damn this is done all too often in my work place. What these people could have done if only they knew how to work a pivot table. 20,000 tabs for each daily report? Hell yes. I had no idea this actually had a name. 
+
+On the same note, just don't try to make your data look pretty or in report out format. That's what a pivot table is for. 
+I had someone compliment my named ranges once. It really helps other people know what's going on if your named ranges are explanatory.
+If c > 5 then 'temp fix 11/2/06 don't forget to change back 
+Regarding number 1: If you have standard company format for number,  create macro and link it to button on your custom ribbon for this. Huge time saver.
+Why the bloody hell have i never thought of doing number 4?
+
+That's a job for Friday!
+Given this is r/excel ranges should defined and named
+You're saying that if you do an index match with an entire column like A:A it takes significant more computing power than specifying A1:A1000? 
+This is true specifically with people who use VLOOKUP a lot in their sheets over large datasets. I mean they should be using INDEX/MATCH anyway, but if I can at least get them to limit the range so my ancient work computer can open the sheet, I'll be happy.
+This so very much. My group is trying it's best to pivot away from using excel because of a collective hangover from old practices of using Excel as a database. 
+
+The problem now is we're trying to shift too far away and losing excel as a spreadsheet tool. :/
+Can you talk more about this? I've dabbled in Access, but I never really saw a smooth connection between querying the database within Access and importing the results neatly / automatically into Excel. 
+
+Instead I was opening everything and copy pasting between etc, seemed like I was missing something fundamental.
+Array formulas are great examples. Most can calculate the same if you use helper columns
+I've been preaching to my colleagues about trying their hardest to avoid merged cells but I've never been able to give them an alternative. You just gave me one!
+I have used excel for years and seriously never considered using the center across selection instead of merged cells.
+
+Be right back to fix my master excel file for work...
+How do you center across a vertical selection though.  It only seems to work across horizontal selections
+[deleted]
+Adding onto this, trace precedents and trace dependents are both useful Excel features that can visually show you which cells go in and out
+actually a great tip for those who don't know yet, navigating with keyboard is so much faster if you know these shortcuts.  
+- ctrl+home to get to A1  
+- ctrl+end to get to the last cell used in your table  
+- ctrl+a to select the entire current table  
+- ctrl+ page up/down to navigate between worksheets  
+- f2 to edit your current cell  
+
+and if there is anything you do frequently, like say highlighting, you can easily assign a keyboard shortcut from within options > ribbon.
+One of my favorite hotkeys is ctrl + [. If you have a lot of links in a workbook this is a huge timesaver. 
+How about the lack of the ability to scroll horizontally like every other fucking Office program can without having to find an add-in online? Damn that's frustrating.  
+[deleted]
+Ages ago I worked in a university computer lab.  I had a guy who's native language was not English grab me in a huff and complain about how the formatting in his paper was wrong.  I look over his shoulder, and I see that he is putting one word in a cell, tabbing over, then typing the next word.  
+
+Bonus points:  He didn't want to use a word processor, he was adamant that I get Excel to behave how he wanted.
+Oh damn. That sounds horrible. Why would they do that?
+I have my CV in Excel, great for adding removing relevant experiences :) then export to PDF.
+I do Save As and save everything as a new version (file names ending in v1, v2, v3, etc) every few minutes.  Hard drive space is cheap and plentiful, and that gives me plenty of options.  Every so often I will delete most of the older version of the file.
+
+When I am working on something really important I will also save to a different network or hard drive (or even a USB stick) every few versions as well.
+I think excel 2013 onwards defaults to 1 sheet, but your point is absolutely valid for legacy versions.. 
+This is my favorite.  The ease of reading formulas makes the people that I teach go wide eyed every time.  
+I like this. This is especially crucial for audit trails.
+When I have workbook with many sheets to send, I wrote macro to run through all sheets and move the cursor to A1.
+You can get a button for this (and many more) in the "quick access toolbar"
+or use: alt-e-s-s
+Does that get in the way of working with large datasets? I would assume that the Autosave requires a calculation cycle?
+You probably got downvoted by  a index match fan. it's really popular here. Check it of you don't know it. It circumvents the major limitations of the vlookup. It has its oxn limitation too, but it depends on how heavy your use of excel is. 
+
+Edit: alos I don't think either of these counts a best practices in this thread.
+My personal best practice is to use always use Index/Match instead of VLookup.  I use Excel daily, and haven't used VLookup in years.
+
+It takes a few tries to understand the logic of Index/Match, but it is far more logical and far easier on your computer once you get it.  It's also far more flexible, and using it helps you know when to use other handy combined functions like Index/Match/Match (used to find the value in a specific cell in a two-dimensional table, by using the Match functions to find the proper rows and columns) and If/IsError/Match (used to check to see if a cell's value is in a list of values).
+> Pivot tables are great for quick math -- sumifs should replace pivot tables for static reporting
+
+
+YES. I am currently having this argument with a coworker who recently discovered the wonder of pivot tables -- and let's be honest, they're pretty great -- but she is getting frustrated with the fact that you can only manipulate them so much, and the GETPIVOTDATA formula is a big pain...
+* Always use Index/Match over vlookup
+
+I agree that Index/Match is better than vlookup, the reason I don't use it all the time is that I have to share my files with a wide team with a range of skills in excel. Everyone understands how vlookup works but not everyone knows how index/match works and so it makes it harder for them to follow what is going on with the file.
+
+I know the ideal answer would be to train everyone up in using index/match, but unfortunately that isn't going to happen. 
+Is there a hotkey for Fill Down?  Like CTRL+D, but instead of just copying the source it iterates? So if I have 1 in A1 and I select A1-A6 I get 2,3,4,5,6?
+
+Edit: Found this: http://superuser.com/a/270272/169157 
+
+You can use keyboard short cuts to get to anything that's on the Ribbon. Press Alt and then you can see the keystrokes next to each section. To bring up the Fill Series dialog box press Alt and then H F I S.
+
+
+To add to this: I am sure that if you set those parameters but don't show them (as in the basic find box) they still count. If you cant find something check them first.
+quick shortcut: highlight cell A2, then hold Alt, press  w-f-f  
+select other cells and it will freeze from the top-left of that cell
+Whilst it is more powerful, index is a volatile function which will mean that it recalculates every time a cell is changed in the workbook. Not necessarily an issue but when you have a large workbook it can cause some very annoying lag with every change
+I hit F12 all the time.
+
+Ctrl + S to save 
+Cannot agree more. Also, it makes much easier for someone who is looking at your spreadsheet to understand it.
+On a related note... If you use BI tools or other software (QlikView, SAP, etc) to pull data for analysis in Excel, take a screenshot of your data pull from the software and put it in a separate tab.
+
+When you have to open or redo an analysis that you did 6 months ago, this will show you how you got the raw data.  Similarly, if you need to show or teach anyone how to pull the data, all you have to do is refer them to the screenshot.
+[deleted]
+Filters on/off can also be done using Ctrl + Shift + L
+
+To clear filters, use Alt + A + C
+
+Paste values [Menu Key](https://i.stack.imgur.com/kF3jU.png) + V
+For paste values:
+crtl+alt+v - v 
+Interesting 1st rule. I've apparently done this subconsciously since... well forever. I started twitching when I thought about breaking it. Huh.
+Those extra spaces at the end of cells can be quite annoying indeed! At the end of the day, that's more of a data quality issue which should be fixed at the source
+Most spreadsheets I build are built with thia in mind. Allows for easy slicing and dicing when using pivot tables.
+This just seems like a go-to. First sheet is a data displa / exec summary, with data sheets and work sheets color coded to the right.
+Formatted as table
+
+Wide, or unstacked data is presented with each different data variable in a separate column.
+
+Person | Age | Weight | 
+:--- | :--- | :--- | 
+Bob | 32 | 128 | 
+Alice | 24 | 86 | 
+Steve | 64 | 95 | 
+
+Narrow, or stacked data is presented with one column containing all the values and another column listing the context of the value
+
+Person | Variable | Value | 
+:--- | :--- | :--- | 
+Bob | Age | 32 | 
+Bob | Weight | 128 | 
+Alice | Age | 24 | 
+Alice | Weight | 86 | 
+Steve | Age | 64 | 
+Steve | Weight | 95 | 
+
+*I used this Reddit Excel Add-in http://goo.gl//spNMYi*
+its also REALLY handy when you have multiple pivots looking at the range and you have to alter the range
+TIL you can name a range. Life just changed.
+Preferably setup dynamic named range and you do not have to worry about it no more. 
+Yes. Much easier to search to row 1000 than also check down to row 1045628 (whatever the limit is).
+Sure...I'm a little short on time this morning, but didn't want you to think I forgot you.  I did a quick search and skim and I like how [this article](http://schoolofdata.org/2013/11/07/sql-databases-vs-excel/) sums it up:
+
+> Excel and databases are good for very different things. Neither is per se good or bad. A rule of thumb: you should strongly consider using a database for a project to the extent that the following are true:
+>
+>   * You have a lot of data.
+>   * Your data is messy or complex.
+>   * You want to power something else with your data.
+>   * Other people need to work with the same data.
+
+Glad to answer questions about those bullet points.  I find item number two is usually the hardest one for people to recognize.  
+Exactly - people often act like they have to pay extra for using more cells to get to a result for some reason.  All 2^34 of them on the sheet are free!
+Why should we avoid merging cells? 
+The only drawback is that if you hide/group columns the center across can get hid, whereas a merge and center will still show.
+You can't. Only horizontal unfortunately 
+You don't have a firm grasp on Excel date handling. `1/1/2017` is *exactly* the same as `2017-01-01`. There is literally no difference at all once you hit the Enter key. They are  both stored  as 42,736, and they both display exactly the same - if your cell is formatted as `mmm` it displays the first three letters of the month on whatever language you're set to. If formatting is set to `YYYY-MM-DD` it will display 2017-01-01. If you leave it as general, Excel defaults to whatever Locale setting you have.
+
+>If you are a guy who recommends using the wrong format, we cannot be sure if you can even use YYYY-MM-DD, or what it means.
+
+It was an example, and uses fewer keystrokes than `YYYY-MM-DD`. I'm well aware of ISO 8601. But I also know that if you rely on typing in YYYY-MM-DD, there's something wrong with your software and system. How a system stores a date should be transparent to you (which it is in Excel). I you want to sort by date, 5/1/2015 comes before 6/1/2017 no matter how you enter the data. You seem like you want YYYY-MM-DD as text (which is wrong) and then sort alphabetically (which is also wrong).
+Ctrl left right up down is pretty vital.
+use can also use F5 to get back to where you were 
+Those who can't... teach
+I know I'm late, but that's like complaining that screwdriver makes a poor hammer - in some cases you could feasibly use it for that, but it is nowhere near what it was designed for.
+middle age women in accounts payables...
+
+figure they needed huge descriptions with maybe a 1x3 table to show costs missing?
+
+i really dont know, and it was such a piss off.
+
+also, during RFP's/tenders, HUGE companies would send stuff to us for pricing...    same thing.  using excel as their program to send directions, and responses, etc.
+
+the only other thing i can think of, and its a pretty bad reason....., if sending it to someone, its 'only 1 file'
+
+alternatively go to the last worksheet then:  
+hold Ctrl, then hit home-pg up-home-pg up-home-pg up-home etc....   
+very quick and easy, no macro needed
+I know, but I don't want to have to use my mouse to paste these values.
+Agreed, but ctl + n is less keystrokes :)
+or alt+h+v+v
+You're 100% right, I should've also mentioned you should have an awesome computer too! 
+I'm also an INDEX/MATCH user, converted from VLOOKUP. For those who don't use it, it's a little bit of a longer formula, but much less resource intensive (important when I'm using my ancient work laptop), and a lot more flexible (criteria match no longer has to be in left most column). 
+The only reason I don't use vlookups is because files we create are shared with quite a wide range of people with varying levels of excel knowledge. Everyone does know how vlookups work but not everyone knows how Index/Match works and so when they want to try to work out what a file is doing, it's much easier to give them one with Vlookup so they can follow it.
+
+However, for files that only I use, I'll use Index/Match.
+Using Index/Match every time is not a good practice, since it is overengineering that often hinders readability. If the simpler solution works, you can stick with it. Obviously, index/match might be easily modified later if the file changes, but often it is simply not worth it.
+You can get rid of the GETPIVOTDATA when linking to a pivot table. There should be an option for it. I'm on iPad right now but you can google it 
+I've learned to love the =sum(if( array formulas. You can basically create just the pivot table output you want without the hassle of an entire table sitting there.
+Yes, that's what I meant by "(and ideally, use the "true" piece of the previous advice after this Select)".
+
+
+yeah i'm pretty sure my shortcuts are old versions but dff and wff are easy to remember next to each other... also works for google docs files (yes our company uses google docs now for sharing).   
+for clearing filters i just toggle off/on.. creature of habit  
+
+i like menu-v though, 
+Completely agree, but when you have a human element involved in a large enterprise organization, sometimes it can't be helped!
+
+On exports, you can add a column for trimmed values, so you don't have to nest the function. Either way, best practice that has saved me tons of time!
+Y tho
+
+I mean i get it from a database perspective, but this isn't a database. This is excel. This makes pivoting and other activities a bitch. I consider myself a pretty advanced excel user, and i make an effort to convert data to unstacked formats. 
+
+Can you teach me why i'm wrong?
+The "narrow" format is similar to a EAV. These are considered Wrong. Don't ever do this, in particular when designing a database. 
+Ah ! Great ! Thanks
+[deleted]
+Formulas too. And once you get the hang of that, a whole new world opens up.
+I think that a lot of people don't realize that the Name Manager can be used to handle formulas.
+
+I'll set up one name to return the last row in a column, then a second one that uses INDEX functions along with the first name to represent a variable range.
+I don't really see any advantage in merging cells and only encountered issues with it. 
+
+it has issues with c&p, sorts, fills, data selection, formatting. 
+
+It also often times does crazy stuff to my VBA that is much easier to resolve by outright avoiding them. Even makes cell references confusing at times. Although these last 2 reasons are probably just me but still, it is easier avoiding merged cells.
+Ah never mind this will not be applicable for me then. Thank you!
+[deleted]
+absolutely! years after learning about this by accident, i'm still playing around getting to the very bottom and right of excel just because it's so fast and easy :D
+Did it few times, then had slow day at work, macro took 10 min to write and assign to button...
+I'm glad I made the switch to INDEX/MATCH.  I really only use VLOOKUP for super quick scratch work analysis.
+And outrageously more robust (move columns without fear!) and flexible (multi-criteria, v/h lookups in one, index match match, key columns anywhere instead of first, etc.).
+I understand. Do you think it would be worth it to teach everyone the index match? I'm no excel wizard but it took me one tutorial to understand how to use index match.
+Yes, there is a setting for that. Although depending on what you're doing, getpivotdata can work well.
+Yeah I know, and that's fine. The issue still stands that linking to pivot tables is fraught with peril -- if you link to C3 in the pivot table, and then you expand a section, C3 is going to be something different than it was. And if you use GETPIVOTDATA but then collapse the table so it's not visible, you'll get an error. 
+
+So you can't just mess around with the pivot table and take advantage of its instant recalculations -- static reporting needs data that stays in place.  For analysis, though, a pivot table is great.
+Yeah i use the =sum(sumifs( often for that purpose. 
+If it's within budget, you should think about moving onto a dedicated server primarily targeted at sharing information. Check out SharePoint
+Technically, you'd want to use the unstacked dataset type for pivot tables.
+
+I think what /u/GuerillaWarefare really meant was not having a separate sheet for every month containing budget and sales information, when you can just aggregate them all into one big table.
+
+To answer your question, you're not wrong.
+I just formatted what the guy above me said :P
+This is news to me.  Can you give/link me a concrete example?  
+OK, cool. Thanks. I'm a bit of a noob and my excel files are super simple. I'll keep this mind if I ever develop jedi-like excel skills. :-) 
+Yeah, sorry, I think we just misunderstood each other, and I'll update my wording when I can. I'm not advocating m/d/yyyy, all I wanted to convey is to enter dates as dates, not text. That's why I didn't say use m/d/yyyy, I said use 1/1/2017 as an example (I should have said "Enter 1/1/2017 or whatever your local date format is". I don't care how it's displayed, and neither does Excel, that's a user choice. 
+I use VLOOKUP for a weekly report I run for work - it's really useful despite its limitations, but I will have to give INDEX/MATCH a try.
+Could you give me the pros / cons here? I have never used Index + Match before and never had issue with VLOOKUP being a resource hog.
+Unfortunately I would say the files our team develop get seen by hundreds of people of varying levels of seniority in the company. Teaching the analysts, managers and directors in the finance side would be OK, but trying to explain to a VP of marketing or acquisition that they need to learn a new excel function is unlikely.
+On the contrary we're actually one of the biggest organisations in Australia and this is the IT direction - rather than a budget concern. All email, shared docs, etc through google. I'd say it's on par with SharePoint since it seems a lot more user friendly and collaborative. 
+
+It's just that google sheets will never rival excel. At least we can still use excel, it's just 2007 version 
+could use narrow too, but i think the main takeaway would be to have each "variable" in a column, and a column for each value of a variable. 
+
+Most commonly seen with months - 12 columns of "january" "february" .... 
+
+is a pain in the ass to work with in a pivot. you'll want to un-pivot that into a "months" column. "months" is the variable, each month is a value that the variable can take. 
+
+age and weight would generally be two different variables. But even if you have them in one column like this (lets say "physical qualities" is the variable, and age and weight are two values it can take), then working with that in a pivot table is relatively straight-forward, as you can use calculated items to do a number of operations. 
+
+it's also really easy to go from a narrow'er format to a wider format - you stick it in a pivot. Going the other way (without having powerquery installed or are using 2016) is a pita. 
+I see, I see, thank you.
+Going off of this, is there a way to utilize Vlookups in a stacked format? I understand it's super easy unstacked because everything is horizontal with respect to the unique identifier.
+
+Is it only possible to pivot the data and pull data from there?
+
+edit: spelling
+Ignore that, your table is fine and a good example.
+A quick example.  It dynamically determines the range of values for a chart.
+
+    Days_Start:    =MAX(Var1,Var2)+Duration + 1
+    Days_Trading:  =MAX(0,MIN(COUNT(LRS!$F:$F),COUNT(LRS!$D:$D)))
+    Chart_Range:   =OFFSET(ColHdr,Days_Start-1,0,Days_Trading)
+I don't know their method but you can do 
+=offset(start_cell,0,0,counta(desired_range1),counta(desired_range2)) 
+Or something similar and then name that formula. Now anytime you need that range just call you named formula. (Be sure to lock the references!)
+
+Edit: Forgot 2nd component of the offset.
+Here's one...  clever use of the OFFSET and COUNT/COUNTA functions to create a dynamic range in Name Manager.  TIL.
+
+https://support.microsoft.com/en-us/help/830287/how-to-create-a-dynamic-defined-range-in-an-excel-worksheet
+[deleted]
+I may also use VLOOKUP for small data tables.   I definitely only use INDEX/MATCH for large data sets, which is usually the only type of data sets I'm working with.  Definitely give it a shot!  You'll then be able to pick up INDEX/MATCH/MATCH and other modifications.
+VLOOKUP also gets wonky and returns incorrect data when you don't have the lookup array sorted, or if there are unique/missing values between the two.   INDEX/MATCH avoids all that. 
+
+https://fiveminutelessons.com/learn-microsoft-excel/how-use-index-match-instead-vlookup
+
+How much data are you working with?  Some of the workbooks that I used on the daily have hundreds of thousands of rows and when I would use VLOOKUP, the entire workbook would often freeze and I'd have to completely restart Excel.  Replacing the VLOOKUP with INDEX/MATCH solved that problem.  That's just my experience, though.  
+
+One advantage INDEX/MATCH has over VLOOKUP is that it doesn't matter if your lookup column is to the right or left of your return column.  Also, with VLOOKUP, you can only work with data that is set vertically (yeah, I guess you could use HLOOKUP - I've actually never used an HLOOKUP in my life lol). 
+Index/match works right to left, top to bottom, bottom to top. It also doesn't easily break when deleting/add columns/rows. Vlookup just breaks when you delete/add columns because the column_index does not normally auto adjust.
+I've been using index match for so long that I've kinda forgotten vlookup, but one way I use it is as an array formula where I can return a value based on several criteria at once. 
+For example, in my table, I have dates across the top row and names down column A. I want to fill in weight data for each person from their daily weigh in, and the data is organized in the following columns: name, date, weight.  I can type {= index (weight column, match ("name"&"specific date", "reference name column"& "reference date column",0))}. Lock the appropriate rows and columns in the formula, then you can fill the formula down and over to return all of your values in about 10 second or less.
+Everything you just read is true (and great) and on top of that there's a whole wealth of advanced permutations that are kind of amazing too.
+Use a multi-criteria index match!
+
+Hard to type out on mobile but basically you can tell excel to return a value where N preceding (or subsequent, whatever) columns contain the relevant criteria. Use & to string criteria  and the stacking arrays together. 
+
+Lovely formulas for doing things like that.
+Two/Three ways:
+
+1. Pivot Table like you suggested
+
+2. Using the example tables above, concatenate Person and Variable together and use that as the unique identifier
+
+3. If you're trying to summarise data which includes values based on several variables, SUMIFS can do the job without the use of helper columns explained in point #2
+Awesome, thank you!
+Terrific, I'm excited to see how I can use this.  
+OK that's awesome, I can think of a bunch of places I could slot that in and save myself a ton of time checking ranges. 
+No worries - I think you and I agree on a lot of stuff, we're just talking about different things. You're talking about the format, I'm talking about the content (storing and entering), and they are wholly separate in well-designed systems (like Excel). So to rephrase my earlier part: If your system *requires* you to enter or display dates in a particular format, it's probably treating dates as text, which I think is not desirable.
+
+Like when I said there's no difference between 1/1/2017 and 2017-01-01, [I meant it](http://i.imgur.com/zzjsOm2.png) because I'm talking about entering and storing data. They are *stored* the same and happen to be displayed the same (two slashes, no dashes, etc.). So it doesn't matter how you *enter* the data. They are 100% indistinguishable and there is no visual difference.
+
+Not to belabor the point, but [here's an example](http://i.imgur.com/E6gnhUq.png). It doesn't matter how you enter the date, Excel will recognize most dates (A4-A13) and of course will do so if you explicitly define the format as date, as I did in B14 and B15, it all shows how you want. Then when we sort the data, Excel correctly sorts by date.
+
+To take it a bit further, to show Excel not only decouples entry from storage, but storage from display,[note Column G is properly sorted by date](http://i.imgur.com/sBPS9b8.png). G14 is stored as 42,736 (number of days since Jan 1, 1900) and so it's sorted above G15, which is [31 greater than the cell above it](http://i.imgur.com/b1AxKXg.png).
+
+An example of a bad system say you have a filesystem with no date parameter, but you want to record a date. And say the file format doesn't have a date parameter either. You're forced to do [hacks like this](http://i.imgur.com/Ib0WAgz.png). The problem is you can't really alpha sort, because you've turned date into text. You can't view Adam's test above Brian's, which you should, since A comes before B. A better idea is to treat text like text and dates like dates. So then [you can sort by name](http://i.imgur.com/6PquYqe.png) and you [sort by date](http://i.imgur.com/7X7xpre.png). Note the Date modified does *not* have to be YYYY-MM-DD format, [but you can](http://i.imgur.com/x1cZh4F.png). In this case, Microsoft lets the user pick their format, and wisely keeps the format independent of how they store it (similar to Excel, Windows uses epoch timing).
+Cheers for the link.
+~~doesn't index match use a hard-coded column index too though?~~
+Interesting, can I ask if they have a high resource cost? My experience with array formulas have shown them to be powerful but resource intensive.
+
+[deleted]
+Not sure which column index are you referring to in the standard index/match formula?
+>Dates displayed as 1/1/2017 are simply bad, because you dont know if this means M/D/YYYY or D/M/YYYY.
+
+If you don't want m/d/yyyy, then don't use it. That's the whole point! Use what you want, the file I give you don't care what I want or what *my* settings are. The display is separate from content, and the user chooses whatever format they want. It's the same as how you can theme subreddits, or have different PowerPoint themes without ever changing conent. I can save a date, display however *I* want, and when you open the file, it displays however *you* want. It's the same file, the same data (days since the start of 1900).
+
+Like [here's a date cell is seen as someone from Sweden](http://i.imgur.com/uxqERrH.png). And [here's how someone from Egypt would view it](http://i.imgur.com/iXt6NEt.png) but if they used the Arabic calendar, [it looks like this](http://i.imgur.com/azvWZaY.png). That's all the exact same file, with the exact same data, entered only once. I'm not telling Excel the date is "1/31/2017", I'm telling it it's 42,766 days since Jan 1st, 1900. Excel then reads regional settings, and your operating system's time and date settings, to display it. It's just a nice feature that if you're in the US, if you type in 1, slash, 3, 1, slash, 2017, then Excel treats as if you typed in 42766. If I typed in 2017, dash, 01, dash 31, then Excel would do the exact same thing: treat it as if I typed in 42766.
+My bad, it has been a while - I remembered incorrectly that you still used a column reference in the index/match
+[deleted]

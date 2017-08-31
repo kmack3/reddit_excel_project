@@ -1,0 +1,35 @@
+Is excel for Mac really different from excel 2016 for Windows?
+Short answer. Yes
+
+Longer answer. Definitely yes 
+
+The very latest Mac version has more to it but it depends on what you'll be using. 
+
+The analysis toolpak plugin does I think have a Mac equivalent from 2012 version (2nd most recent iirc). But if you are doing anything that needs distinct count then you need PowerPivot which isn't in even the latest version for Mac. I think the statistics package that is in the later versions is also function poor vs the Windows version. Don't think Solver or Scenario Manager are in there and there are some functions not available in anything but the latest Windows version. 
+
+There are also 3rd party plugins that aren't on the Mac version 
+
+Not *big* differences for day to day but if they're the bits you need they're critical. 
+
+Best bet is to run parallels VM install Windows and get Office 365. Depending on the package you buy they usually allow you to install on multiple machines and download the Mac and Windows versions. Pay attention though as if you do need PowerPivot it's only on certain Office 365 versions. I've got the E3 enterprise version for my needs but YMMV 
+
+
+
+The biggest difference for me is stability. Mac office suite seems to struggle pretty badly as the work file gets larger and tends to crash quite a bit. Been trying to have this fixed, but I ended up going the VM way. 
+Yes. Literally different program with different capabilities. I work in finance. My personal computer is a Mac. I have BootCamp to dual boot into Windows and have ms office for Windows because Excel for Mac sucks so hard. Pro tip: if dual-booting into Windows use an external Windows  keyboard so shortcuts work as intended. Otherwise ctrl becomes command and several other keys swap around. 
+Are you really going to be using a lot of excel in your class? Usually R is the language of choice. 
+Doing anything in VB on Mac is a nightmare.
+solution verified
+Also there are a bunch of undocumented VBA reference libraries (especially for excel-to-word) that either don't work at all, or work differently than their windows counterparts. So if you rely on macros, there's a chance it will simply fail to work.
+Thank you!
+There are plenty of programs you can use to change the function of your keys. Makes more sense to do that than to hook up a windows keyboard to a MacBook Pro.
+I'm guessing 101 level, and/or non-statistics major.
+
+You have awarded one point to _pjeedai_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I used Excel in graduate economics course. 
+> and/or non-statistics major.
+
+Although I would have expected more SAS usage than Excel usage.
+I used SAS in my first graduate-level econometrics class ... and Excel in the advanced class. Go figure. 

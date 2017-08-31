@@ -1,0 +1,68 @@
+6ih3cd
+Command Button to copy data to second sheet
+Looking for VBA code for Command Button to take values from "Data" sheet Column F5:F14 to "Pending" Sheet column E3:N3 via a button "Transfer Data". Once copied then delete values on "Data" sheet.
+
+http://imgur.com/a/26M8V
+
+Thanks for all your help
+
+
+-------------
+    Option Explicit
+    Private Sub CommandButton1_Click()
+    
+    Dim Rng1 As Range, Rng2 As Range
+    
+    Set Rng1 = Sheets("Data").Range("F5:F14")
+    Set Rng2 = Sheets("Pending").Range("E3:N3")
+    
+    Rng2.Value = Rng1.Value
+    Rng1.Value = vbNullString
+    
+    End Sub
+-------------
+This is great!  I'd like to add two more things if possible .. Click CommandButton1 it will add that new set of data to the next available row and also to copy B2 on Data to B3 on Pending.
+
+Thanks again I really appreciate this! 
+-------------
+I'm guessing you want B3 to find the next available row too? If not, change line 23 to Set Rng4 = .Range("B3")
+
+    Option Explicit
+    Private Sub CommandButton1_Click()
+    
+    Dim lRow As Long
+    Dim Rng1 As Range, Rng2 As Range
+    Dim Rng3 As Range, Rng4 As Range
+    Dim ws1 As Worksheet, ws2 As Worksheet
+    
+    Set ws1 = Worksheets("Data")
+    Set ws2 = Worksheets("Pending")
+    
+    lRow = ws2.Cells(ws2.Rows.Count, 5).End(xlUp).Row + 1 'find next available row in Pending column E
+    
+    'set ranges
+    
+        With ws1
+            Set Rng1 = .Range("F5:F14")
+            Set Rng3 = .Range("B2")
+        End With
+    
+        With ws2
+            Set Rng2 = .Range(.Cells(lRow, 5), .Cells(lRow, 14))
+            Set Rng4 = .Cells(lRow, 2)
+        End With
+    
+    'copy and delete
+    
+        Rng2.Value = Rng1.Value   'copies Data values to Pending
+        Rng4.Value = Rng3.Value   'copies B2 to B3
+        Rng1.Value = vbNullString 'clears Data range
+    
+    End Sub
+-------------
+SOLUTION VERIFIED!
+-------------
+
+You have awarded one point to _one_time_chad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

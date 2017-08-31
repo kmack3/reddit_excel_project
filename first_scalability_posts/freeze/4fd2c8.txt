@@ -1,0 +1,56 @@
+freeze
+4fd2c8
+How to freeze certain cells within a column without affecting cells directly above or below.
+
+Hi r/excel
+
+Let me explain as I believe the title might be confusing. 
+
+I have a large spreadsheet that runs from the column A to the column GZ, and is 719 cells deep. Let's say the few cells in the column "I" are in question. The column "I" is a formula based and refers to the values in other columns on the spreadsheet. Each cell in the column "I" has the same formula.
+
+Now the question: Let's say I want the value in the cells I210:215 to contain a different formula from what is in all other cells in the column "I". Sometimes, we refresh the formulas by running them down from the cell I1 just to make sure every cell in the column "I" has the same formula.
+
+Now, when I do that, I want the new formula in the range I210:215 to be immune to that and not change. I want to freeze them in a way, so when you "run" the formula in I1 all the way down to I719, this will go around the range I210:215.
+
+Is this possible? Let me know if I need to explain further.
+
+
+-------------
+How about something like:
+
+    If(Or(Row() >= 210,Row() <= 215), formula1, formula2)
+
+It won't "fill around" the cells as you say, but it will mean those cells will act differently to the ones above them.
+-------------
+Why don't you just move the alternative formulas to the top of the list?  Then just copy down the other formulas for the rest of the list.
+
+
+I don't think it's possible what you are asking, although you can manually drag a formula down by clicking and holding/dragging the little square in the bottom right of a cell.  You could drag the formulas down until you reach the others then stop.  Then do the same for the formulas below.
+
+
+-------------
+Do you want to be able to change the window of cells that's frozen? I.e. sometimes you want I210:I215, other times you want another range of rows to be frozen, or a different column. Or is it going to be static? Will you need to maintain this sheet and use it for an extended period of time or is this a quick-and-dirty "let's just get through this analysis this week" fix?
+
+Do you mind describing why you want to do this? I'm curious if there may be better solutions.
+-------------
+In addition to this, OP could insert a few blank rows at the top and enter the top and bottom row numbers they want frozen (so instead of hardcoding 210 and 215, those would be user input up at the top of the sheet).
+-------------
+Thanks, but I need something that would actually make the cells in the specified range immune to auto fill. Your solution will still be overwritten if I double click and send the formula down the column.
+-------------
+I cannot move alternative formulas up as the entire spreadsheet has to be sorted by the column which has dates in it, and it has to be sorted from old to new.
+
+Sure, I can do what you suggested, ie manually drag a formula down, then stop etc. But this worksheet is used by multiple people at the same time, and I am more than sure, that at some point someone will mess it up by double clicking on the first cell auto fill up. Thus I am here, trying to figure out if excel allows you to do something about it.
+-------------
+No, I only want to lock the formula in the I210:215 range. This sheet is going to be maintained and used for the extended period of time. In fact, this sheet is a back bone of one of the organization's central financial processes. 
+
+I want to do this because the formula in the column I is very long. I cannot add or remove anything to the formula, I cannot also rewrite it. What I want to do is to hard code the certain values in the I210;215 range only, leaving the original formula everywhere else in the column I. Therefore, next time someone else runs the formula down the column I by double clicking on the "auto fill" within cell A1, it will not change the hardcoded values in the range I210:215. 
+
+What I am trying to say is that there are certain exceptions to the values in the range I210:215 that do not apply to any other cell in that column.
+-------------
+Why specifically do you need them to be immune to autofill? This is just a work around that means autofill will do nothing (I don't see a difference)
+
+If you really need to disable autofill for certain cells then you'd need to rewrite how autofill works in VBA. Not sure if that's possible. Or make a custom button which autofills and a macro script to do the filling where it is needed.
+-------------
+I see.  Protecting the sheet with just those cells locked, would stop others overwriting the special formulas as you suggest.  But I can't think of a way to do what you are asking though without resorting to a macro, sorry.  Hope others help you get it sorted.
+-------------
+Sounds like a conundrum. If /u/Danny1878's idea to lock cells doesn't work I'm not sure how you'd go about it without VBA

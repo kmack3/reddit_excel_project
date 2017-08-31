@@ -1,0 +1,37 @@
+I have a dataset of around 150 columns which all have 1 value for each row. How can I get these easily into a single column please
+More intuitive: just delete empty cells (+ translation to the left)
+
+Select the event plage (D3:H27 in your exemple), press F5, click on cells, check empty cells (you now have selected empty cells), click right on the selection and then delete it, check the translation to the left. TADA
+
+It has the advantage to keep a second columns with data if there is an error (multiple event attended for exemple).
+Could you clean up your current and desired data layouts?  Or post screenshots with examples of both?
+Select blanks, delete, shift left?
+You should really be using powerquery for this, especially if you need to repeat the process.
+If using excel 2016 you can use the new textjoin function.  It is not an array formula.  You can just drag it down.
+=TEXTJOIN("",TRUE,D4:H4)
+solution verified
+Oh that's a very quick way of doing it as well - thanks very much! 
+
+Good point on if there is more than one event! 
+Oh thanks - I have added a screenshot to the original post.. 
+
+You have awarded one point to _WERE_CAT_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Ah sweet.  In C3 you can use this formula.  Note, it's an array formula, so you'll need to hit CTRL+SHIFT+ENTER after typing it in, not just enter.
+
+    =INDEX(D3:H3,MATCH(FALSE,ISBLANK(D3:H3),0))
+
+Once you have that entered as an array formula in C3, just drag it down for the remaining rows.  You can edit the column ranges as needed since you mentioned having 150 columns, not just 5 :)
+
+Edit - Once you've got column C filled with these formulas, assuming you don't need the remaining columns, I'd suggest copying and pasting as values and then you can delete the rest of the unnecessary columns
+Oh wow you are a genius! thanks.. I was playing around with index and match for about half an hour.. thanks again!!
+Solution Verified
+That's an awesome way to put a lot of data as a single column. I've always done so using VBA, but this is great, too.
+No problem.  Please consider replying to my post with `Solution Verified` to throw me a ClippyPoint and change the thread's flair to solved.  Thanks!
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Thanks! :)
+Personally, I would've done it with VBA too (was the first thing that came to mind), but figured this would get the job done :)

@@ -1,0 +1,32 @@
+Fix dates without a formula
+This is really nice.  As an old timer, I wonder how many other fixes exist now that I don't think to look for and just do it the same old way.
+[Also works in the same column](http://i.imgur.com/OrgOZQ1.gif), if you just want to overwrite it.  
+[deleted]
+I rarely run into this particular issue, but a good reminder of the power of text to columns. I definitely went HOLY SHIT when I watched the video :)
+Fuck, I was just trying to figure this out on Friday.
+I found that on accident one time, when I was trying to remove the time stamp at the end of a date string.  I just selected, and hit text to columns then finish  - had no idea why it worked though.  Thanks for showing more detail.
+I'm having a much different problem. But need a similar result. The value in A1 is 41885 A Bar & Kitchen. In B1 i have a formula: =left(A1,5) to extract the numbers i want in date format. Now B1 has a formula, but needs to be in date format. No matter what I do with the formatting of B1, I cannot get the number 41885 to change to 9/1/2014. Please help!
+
+[deleted]
+[Camtasia](http://www.techsmith.com/camtasia.html).  Pricey, but very good.  
+Text to columns is a god send. Got huge column of numbers stored (say SSNs?) that a client send over stored as text? Text to columns. Fixed.
+
+Want to separate full names into their components? Text to columns. Done! (Maybe do some quick error checking.)
+
+Have several columns of data you need to copy from a pdf but it is copying all into a single excel column...
+Left is a text formula, so you need to convert it to a number.  Try this:
+
+    =LEFT(A1,5)+0    
+
+Good luck.
+But in this case the actual original values were not true dates. If you wanted to use them in any formula it wouldn't work properly. 
+You should just put that in your user flair. ;) 
+> Got huge column of numbers stored (say SSNs?) that a client send over stored as text? Text to columns. Fixed.
+
+You could also multiply by 1, I tend to do that especially when I'm going VLOOKUPs
+
+Thanks!!
+
+MY BAD. Didn't look close enough at your source data. Took you for a newb :) My apologies for the snark!
+That is a great idea.
+Or =value(ref)...but text to columns does the entire column in 2 clicks. By far the most efficient way.

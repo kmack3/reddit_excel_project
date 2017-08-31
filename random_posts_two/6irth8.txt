@@ -1,0 +1,27 @@
+6irth8
+How to countif an array in another closed workbook
+I need to make a countif to ensure that the case number is unique, so if the formula returns >1 then we need to manually do some other stuff.
+
+=Countif('N:\Mycompany\[Importantlist.xlsx]Region2'!$D$1:$D$1200,P14)
+
+Cell P14 = 10-123      (case number)
+
+The formula only works when the workbook is open, else it returns an error.
+
+
+
+
+-------------
+Some formulas don't work with closed workbooks, such as SUMIF & COUNTIF. Duplicate the table with D1 `=N:\Mycompany[Importantlist.xlsx]Region2'!D1` filled everywhere and point a COUNTIF at that.
+-------------
+I guess it will work. However I'm afraid it's not the ideal solution I'm looking for, there more to it than that which I can't go into detail with.
+
+I'll look into it. :) Thanks for the respond.
+-------------
+If you're into array formulas you can try
+
+    =SUM(N('N:\Mycompany[Importantlist.xlsx]Region2'!$D$1:$D$1200=P14))
+
+[CSE](http://www.mrexcel.com/articles/CSE-array-formulas-excel.php).
+-------------
+Nice I'll look into that to. Sounds good. Thanks

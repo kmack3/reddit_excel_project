@@ -1,0 +1,25 @@
+6ft3wn
+Format a cell to include text with time (in 24 hour format) following?
+Goal is to get a cell to display a set text with the current time in 24 hour format following it. Is this possible?
+
+
+-------------
+You can use NOW() and set the format to a 24-hour clock. The issue is the formula is a time stamp from the time you enter it so you'll have to either re-enter it or set it up as part of some VBA code if you want it to automatically refresh.
+-------------
+I don't need it to refresh, I'm just creating a button that when pressed changes the color of a cell and adds the current 24 hour time in addition to the text already in the cell
+-------------
+If you want to append the existing text with the press of a button, you're talking about VBA which is not what /u/rnelsonee is talking about.
+
+Say your text is in Sheet1!A1, to append the time to it you'll need to add something like `Sheet1.Range("A1").Value = Sheet1.Range("A1").Value & Format(Now, " hh:mm")`
+-------------
+Add `&TEXT(NOW()," hh:mm")` to the existing text.
+-------------
+What he said actually was what I was looking for. I am having an issue however where I have two separate macros and buttons that are supposed to change to the current time only when clicked, but when I click one the other cell's time also updates to the current time when I want it to stay at the time it had when last clicked.
+-------------
+I'll try that, thanks! I was doing something similar, just not in that order 
+-------------
+What he suggested will update every time the sheet refreshes calculations which is why I said it's not what you want. 
+-------------
+Ahhh... makes sense. So only option is vba?
+-------------
+Seems like it, sorry. Unless you want to manually add the time in. 

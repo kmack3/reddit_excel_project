@@ -1,0 +1,211 @@
+Want a fun brain teaser? Try making a Tabula Recta!
+Sorry to segue from the discussion but is there a way to find other "challenges" in this sub? It seems like a great way to improve my excel abilities but when I try searching based on flair it also includes "solved" posts.
+=CHAR(MOD(COLUMN()+ROW()-2,26)+63)
+
+Most obvious solution, is it the shortest?  I don't know enough about excel to know if there are any better references than COLUMN() and ROW().
+
+Also using LibreOffice so it might be different :p
+Hi,  
+
+i found a way with formulas it works but can probably be optimised:  
+
+http://imgur.com/a/jgiM1  
+
+    =CHAR(IF(COLUMN(CR1)+ROW(A1)>122;COLUMN(CR1)+ROW(A1)-26;COLUMN(CR1)+ROW(A1)))
+My most clever idea is:
+
+Why does it have to be A-Z? Why not let the user choose with which Letter to start and to end? So, I made a code with 2 input boxes:
+
+    Sub TabulaRecta()
+    LetterStart = InputBox("With which letter do you like to start?")
+    LetterEnd = InputBox("With which letter do you like to end?")
+    ls = Asc(LetterStart)
+    le = Asc(LetterEnd)
+    For l = 1 To le - ls + 1
+    For s = 1 To le - Asc(LetterStart) + 1
+    Cells(l, s).Value = Chr(ls)
+    If ls = le Then ls = Asc(LetterStart) - 1
+    ls = ls + 1
+    Next s
+    ls = ls + 1
+    Next l
+    End Sub
+
+Not as clean as most of y'all's, but I was thinking it needed to have the entire alphabet in a single cell, not as one character per cell.
+
+    =CONCATENATE(RIGHT("ZABCDEFGHIJKLMNOPQRSTUVWXY",26-MOD(ROW(),26)),LEFT("ZABCDEFGHIJKLMNOPQRSTUVWXY",MOD(ROW(),26)))
+
+I added some MOD functions so you wouldn't get an error if you copied it past row 26.
+Here's my solution in vba
+
+Sub TableRecta()
+
+For i = 0 To 25
+
+    For j = 0 To 25
+
+    Cells(i + 1, j + 1).Value = "=Char(" & (i + j) Mod 26 + 65 & ")"
+
+    Next j 
+
+Next i 
+
+End Sub
+
+Is it cheating to have a "seed" row?  Put ABC...XYZ into A1, put:
+
+    =CONCATENATE(RIGHT(A1,1),LEFT(A1,LEN(A1)-1))
+
+Into A2 and drag down. 
+
+http://imgur.com/a/m91rF
+This works only if you start in A1:
+
+=CHAR(ROW()+63+COLUMN()-IF(ROW()+COLUMN()>27,26,0))
+
+I decided to long it out, but it works in Excel from A1 to Z26 (I didn't try it before)
+
+    =IF(CODE(CHAR(ROW()+65-1+COLUMN()-1))>90,CHAR(CODE((CHAR(ROW()+65-1+COLUMN()-1)))-90+64),CHAR(ROW()+65-1+COLUMN()-1))
+
+Edit: Tidier, but I feel like I'm cheating, version.
+
+    =CHAR(IF(COLUMN(BL1)+ROW(A1)>90,COLUMN(BL1)+ROW(A1)-26,COLUMN(BL1)+ROW(A1)))
+I initially got the same solution as /u/mmrnmhrm, so I thought I'd try being a bit more literal and found this solution:
+
+* In A1: the value "A" (no quotes needed)
+* In B1: =UNICHAR(UNICODE(A1)+1) ... copy across to Z1
+* In A2: =B1 ... copy down and across to Y26
+* In Z2: =A1 ... copy down to Z26
+
+Didn't know about the UNICHAR() and UNICODE() functions before, so I learned something. Bring on the further challenges!
+A1 = ABCDEFG...
+A2 = RIGHT(A1, 25) & LEFT(A1, 1)
+auto fill to A26
+ANSWER
+So far all the comments I've seen result in only one character per cell.  This formula works by populating the full answer in each cell.  This works from A1 -> A26
+    =RIGHT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",26-ROW()+1)&LEFT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",ROW()-1)
+
+I'm working on the *drag* *right* to cell Z26 version but I need to keep working on it.  So far I have this for the A1 -> Z26 soultion; it breaks at C26 for obvious reasons
+    =RIGHT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",26+(1-ROW())-(COLUMN()-1))&LEFT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",ROW()-1+(COLUMN()-1))
+
+
+    Public Sub TabulaRecta()
+    Dim i As Integer
+    Dim j As Integer
+    
+    For i = 1 To 26
+        For j = 1 To 26
+            If (i + j > 27) Then
+                Cells(i, j).Value = Chr(37 + i + j)
+            Else
+                Cells(i, j).Value = Chr(63 + i + j)
+            End If
+        
+        Next j
+    Next i
+    
+    End Sub
+
+http://imgur.com/a/NDLiE
+    =CHAR(65+MOD(MOD(COLUMN(A1)-1,26)+MOD(ROW(A1)-1,26),26))
+
+Edit: Bah now that I look through the answers I see mmrnmhrm's answer and realize my inner mod's are totally repetitive. :(
+=RIGHT(A1,25)&LEFT(A1,1)
+
+?
+I put this down below but thought I would post it as well. Here is my solution:
+
+    =IF(ROW(A94)<27,RIGHT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",MOD(ROW(A94),26)-1)&LEFT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",27-MOD(ROW(A94),26)),"")
+
+I would love to see more challenges like this.
+
+Edit: Really wanted to throw that IF statement in there. My life would be incomplete without IF statements.
+Hmm, that's strange. I'll look into it!
+Bizarre.  Quick-and-dirty fix:
+
+https://www.reddit.com/r/excel/search?q=flair%3AChallenge+-flair%3Asolved&restrict_sr=on&sort=new&t=all
+Just posted [another challenge](https://www.reddit.com/r/excel/comments/4x1tp8/liked_trying_to_print_a_tabula_recta_how_about_an/) by the way!
+I'm guessing your formula starts in `A3`?
+Clever solution!
+
+Which version of Excel are you running? Excel 2016 didn't like the `;` in the `IF` statement. 
+I did the same thing with a seed.
+
+=CONCATENATE(MID(A1,2,25),LEFT(A1,1))
+I had to blow it out to understand it, but nice thinking! I originally thought along the same lines. 
+
+Here's the blown out code for others trying to understand it:
+
+    =IF(
+      CODE(
+        CHAR(
+          ROW()+65-1+COLUMN()-1
+        )
+      ) > 90, 
+      CHAR(
+        CODE(
+          (
+            CHAR(
+              ROW()+65-1+COLUMN()-1
+            )
+          )
+        ) - 90 + 64),
+      CHAR(
+        ROW() + 65 - 1 + COLUMN()-1
+      )
+    )
+How about this?
+
+    =RIGHT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",MOD(27-ROW(A1),27))&LEFT("ABCDEFGHIJKLMNOPQRSTUVWXYZ",27-MOD(27-ROW(A1),27))
+
+That would get rid of the A1 cell by putting it into the formula. Could even put an if statement in there to prevent it from working past row 26.
+
+Edit: Formatting and realized that the characters were advancing in the wrong direction.
+Adding to this, B2 = MID($A1, COLUMN(A1), 1) 
+
+You can auto fill to column AA:26 if you want each letter in its own cell. 
+Very similar to [my solution](https://www.reddit.com/r/excel/comments/4vrzk7/want_a_fun_brain_teaser_try_making_a_tabula_recta/d611js3)..
+
+Glad I wasn't the only one trying to put the whole alphabet into a single cell. :)  I also forgot that "&" could concatenate strings!
+Yup, that'll work for now. Thanks mate.
+Nice! Thanks for the heads up.
+No.  It starts in A1
+
+I edited the post.  My original solution of =CHAR(MOD(COLUMN()+ROW(),26)+65) was getting ABCDEFGHIJKLMNOPQRSTUVWX?@, but it works now.....
+
+Also, COLUMN() + ROW() of A1 = 2 in my configuration ... (I am using LibreOffice)
+Oh I'm using 2013 but french version my bad you would have to replace the ; by , as argument separators
+How'd you make it go boom?
+Yeah, it's not the shortest but it definitely works and makes more sense to me. It was interesting to see that you had your string start at Z instead of A. 
+Still getting ?@...
+Ah, gotcha. [Here's what your original](http://i.imgur.com/cFGNbd8.png) looked like for me. If I just moved it down to A3, it worked like a charm. 
+
+Nice solution!
+Nice! Didn't know that!
+
+Do y'all use commas as decimal separators? 
+[Explosives.](http://giant.gfycat.com/HeartfeltJauntyAntipodesgreenparakeet.gif) 
+
+And Sublime Text Editor.
+
+But mostly explosives.
+Yeah, pretty much only to get rid of a "-1" in the equation and make things a little shorter.  It was just the first solution I thought of when I had my math a little off and my strings were starting with the letter B instead of A. :)
+
+In Excel, I think you just have to adjust the 63 to a 65 and it'll work.
+To get rid of the ?@, you have to make it so that COLUMN() + ROW() = 0 in column A1.  I adjust by subtracting 2 from COLUMN + ROW in the fixed version.
+Yes for us thousands separator is a space and decimals are separated with commas like that 10 000,25
+[Here's another way...](http://excelformulabeautifier.com/)
+I had to use this in excel: `=CHAR(MOD(COLUMN()+ROW()-2;26)+65)`
+
+The two differences are:
+
+- 65 at the end instead of 63
+- Semicolon instead of comma between 2 and 26
+That explains it! 
+yes but unfortunately I think we are very few in this situation, I should make a copy/paste to explain it in all my posts, it would avoid a lot of misscomprehension here! :)
+Tip for you:
+
+http://fr.excel-translator.de/translator/
+
+I'm struggling helping with formulas in this sub, too. This is a very good tool to make your own formulas in french and then translate them to english
+Thank you very much! My excel is in english so I do not have issues with  formula names but when I type a formula with ";" instead of "," I get questions and your link can convert it so no more questions :)  

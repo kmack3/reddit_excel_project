@@ -1,0 +1,204 @@
+The case for INDEX MATCH over VLOOKUP - don't lose your wife's job
+Use not only INDEX/MATCH but also ALWAYS use excel tables - because column names...
+Good story. I hope your wife is not made unemployed as a result. With virtually any kind of spreadsheet work, there is a chance for error, not only with VLOOKUP. It's a healthy habit to build checksums or review summaries against those from previous, similar work, to have COUNTIFs to look for invalid results (such as negatives where none are expected) or putting in a MAX or MIN to ensure all values in a long column make sense.
+You can also add a MATCH to find the correct column with vlookup.   
+I am lazy. Often I will do a similar setup with INDEX MATCH, and not match BOTH the rows and columns, but just point it to the column I want, and match the row. So I would've made the same mistake :P 
+
+That can be remedied by structured references though (i.e. tables), so you point your index to [loan deferrals], and it doesn't matter where it is in the table. 
+Definitely check results twice and input ranges maybe even more often.
+
+However, INDEX+MATCH is only more flexible than VLOOKUP, not necessarily safer. If the first column has lookup keys and the top row has distinct labels, there's no appreciable difference between
+
+    =VLOOKUP(x,rng,MATCH(y,INDEX(rng,1,0),0),0)
+
+and
+
+    =INDEX(rng,MATCH(x,INDEX(rng,0,1),MATCH(y,INDEX(rng,1,0),0))
+
+other than the VLOOKUP formula is shorter and more recalc-efficient.
+
+If you/your wife were using constant 3rd arguments to VLOOKUP, that was the problem, not VLOOKUP.
+
+Tangent: if only Excel had 1-2-3's @XINDEX.
+This is not about Excel, it is about experience and vigilance in the work you do and the data you use.
+
+But a nice story otherwise.
+
+
+
+
+I kind of wish whenever someone talks about index match in a post and how much it helped them, they would post a link to a site on HOW to do index match.
+
+so here is the GIST:
+
+    =INDEX ( Column I want a return value from , MATCH ( My Lookup Value , Column I want to Lookup against , Enter “0” ))
+
+and here is a site that explains it:
+
+http://www.randomwok.com/excel/how-to-use-index-match/
+>  Because VLOOKUP returns a static column based on the constant in the 3rd argument, it grabbed the Loan Payment amount in error.
+
+Are you saying that VLOOKUP returned the column that it was told and that you just didn't realize that the column order was different? 
+I've got to admit, I have sort of a soft spot for vlookup.  It's one of the first things I learned in excel where I really thought, this is giving me an advantage at work over people who don't know how to do this. 
+
+ I've slowly moved over to using index match, as I think it is superior, but I think vlookup gets an unneccisary bad rap sometimes.  It's like anything else in excel, it's going to output exactly what you tell it to.  I'd say nearly 100% of the time the error with vlookup is a result of the user, not the function.
+So in this instance, how is a INDEX MATCH formula written out? I'm trying to learn this method too.
+I love tables but when they get big they get REALLY clunky.
+There is one instance where I like Vlookup better. If in column A I have a value I want returned, in column B I have a minimum value and column C a maximum value. Imagine it as a teacher's grading scale an A equals 93 (column B) through 100 (column C) if my value is 95 Vlookup knows that's between 93 and 100 and will return A. I don't think you can do that with a basic index match.
+As someone who works on the other side of 401k administration, this isn't a huge deal as long as she lets the 401k company know quickly so they can undo it. The longer it sits, the more chance something else happens in the plan.  
+  
+Usually it'll be a small fee (hourly rate x an hour or 2) and the employer gets the money back (or the 401k provider will hold on to it and just offset the next match file that comes in). 
+INDEX MATCH is far superior to VLOOKUP (though there is a case for using MATCH for the third parameter of VLOOKUP too). I personally use INDEX MATCH almost exclusively. It's better about 999 times out of 1000.
+For something like this, I agree. It also sounds like something where you'd want to run it through PowerQuery when pulling it from the source, so automatically table. 
+What?
+What are reasons not to use tables? Can't merge cells? Any other downsides? 
+The problem I have with tables is when using index match with them, the reference portion in the match moves when you sort the table differently, it doesn't lock the row. Unless there is a work around I am not aware of
+Yes.  There are various double checks built in through out the series of spreadsheets, and in all honestly, this mistake should have jumped out.  It had her deferring far more than she actually was, and a couple people were over the statutory maximum.
+
+I'll have to sit down over the weekend to review the different spreadsheets and add in some more checks.
+> You can also add a MATCH to find the correct column with vlookup
+
+That's a great point.  MATCH is the real winner in this case.  I've used COLUMN() with modifiers in VLOOKUP sometimes, when I'm pulling data from one sheet to another and the layout is identical but offset.  I don't think I've used MATCH before though.
+Correct.  The VLOOKUPs were written   
+(<ID>,<range>,4,0)  
+(<ID>,<range>,5,0)  
+(<ID>,<range>,6,0)  
+(<ID>,<range>,7,0)
+
+And when the column order changed on the source report it returned the wrong value.
+> I'd say nearly 100% of the time the error with vlookup is a result of the user, not the function.
+
+Well, I think you can probably say that for *anything* related to formulas or computer algorithms.  In this case, the problem wasn't technically with VLOOKUP, it was with checking/sanitizing the input data.  However, INDEX MATCH, or using MATCH instead of a constant in VLOOKUP would be a way to sanitize the data.
+
+Perhaps the real lesson is simply not to use a constant as the 3rd argument of VLOOKUP.
+INDEX takes 3 arguments, an array/range, a row number, and a column number.  It returns the contents of the cell in that range at the intersection of the row and column numbers.  VLOOKUP does the same, except it is restricted to looking for a match only in the first column, and returning the corresponding value in another column.
+
+You can use MATCH to find which row/column you want to return.  In our case we could do something like:
+
+    =INDEX(<range>,MATCH(<ID #>,<first column of range>,0),MATCH("401k Deferral",<first row of range>,0))
+I've got one with 900k rows and you don't want to too many countifs in it...
+MATCH and VLOOKUP actually use the same search algorithm (specifically, a binary search when the approximate match (default, TRUE) is enabled, and an incremental when exact (FALSE) is enabled). Although MATCH has the option of doing a high->low search, too.
+
+Funny enough, VLOOKUP wouldn't work for your example because the lookup value (95) needs to be in the left-most column, so that means the value you want returned cannot be in Column A. Also, VLOOKUP needs low-> high sorting, unlike MATCH. But... INDEX and MATCH won't work, either, not for values above 93 in your example, as the high->low search requires a high value (100) to be present, just like how the normal MATCH mode and VLOOKUP need a 0.
+
+I still recommend VLOOKUP to new users, so I'm not bashing it, but its funny that it wouldn't work for your example for several reasons. 
+
+[INDEX MATCH vs VLOOKUP](http://i.imgur.com/1dWKVpA.png). INDEX and MATCH works in 5 of the 6, VLOOKUP in only one.
+> It's better about 999 times out of 1000.
+
+Opinion not fact.
+
+VLOOKUP is slightly faster (approximately 5 percent faster), simpler, and uses less memory than a combination of MATCH and INDEX [source](https://msdn.microsoft.com/en-us/library/office/ff726673%28v=office.14%29.aspx#xlLookups)
+
+It really depends on the lookup scenario. Most scenarios that I come across are first column lookups, or lookups right of the source lookup.
+Agreed. PQ should be what everybody is using. VBA just died.
+https://support.office.com/en-us/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c
+I hate that it takes entire control of my worksheet. Similar reason why I prefer countifs/sumifs over pivot tables. But that's just me. 
+Never merge cells!
+The only thing that irks me when using tables is you can't insert cut/copied rows. You have to first insert a row then cut/copy the row you want to paste. Or paste it at the bottom of the data and re-sort or filter.
+Can't share a workbook.
+What do you mean? You shouldn't be using a table if the same formula can't operate in ever row - that's what it does.
+Friend, it sounds like you're doing a job for your wife that she needs to learn how to do yourself.  Lack of experience is what led her down the path to destruction in this case.
+
+Moreover, unless you work at the same company and are authorized to access payroll data, or you're working dummy formulas she copies in herself, it sounds likely she is handing you access to protected personal information.  If that comes out while determining how to rectify the errors caused in this situation, she could be getting the boot for more than just not doing her job herself.
+
+Teach, don't do.
+Thanks!
+Thank you for the explanation. That sounds way more precise than a VLOOKUP, just like you were arguing in favor for in the post. I use a lot of VLOOKUP at my work, but there's been many instances of where INDEX MATCH would be helpful.
+
+So INDEX(<range>) would be the whole table? in this scenario?
+Yes ours can be a sumif nightmare
+I may have the columns switched around but it absolutely works. I use it for a scorecard I made at work. I'm not by my computer so I can't remember the columns. Maybe the A is in column C with the first two columns shifting left one.
+
+Edit: just saw your examples. I had my columns flipped I have mine setup like you do in your last example
+> VLOOKUP is slightly faster (approximately 5 percent faster), simpler, and uses less memory than a combination of MATCH and INDEX 
+
+Unless you are working with very large data sets, the benefits of INDEX MATCH far outweigh the computational costs.  Your source even says to use it instead of VLOOKUP.
+You're either using other people's tables that were designed around VLOOKUP or just making lazy tables. Most of the data I need to look at is dynamic. Meaning dates, people or other data points need to change on the fly. I usually combine data validation with different tables in order to make dynamic charts and graphs.
+I like it.  I am scared, but I like it.
+I just sent this to my work email to use on Monday. It's gonna be a lifesaver - I'm rebuilding some forecasting models and this is going to help a lot. 
+
+Thank you! Lurking in r/excel is paying off
+This is cool, I have to agree though, use index match, it's a daily part of my work, I have to have storage locations to individual orders and identify them by org name, without index match my colleagues were spending as much as 30-40 minutes identifying and labelling orders, yay excel automation 
+Takes over?
+
+Meh
+so much extra work...
+Unfortunately I have to work with people who do
+Let me explain because of you can help that would be awesome. Let's sayi have a table with columns A-G and in H I want to do index match and in the match formula reference column c to get data from another tab. So I do that and the data in column H is in there now. If I sort one of the columns, then the formula scrambles in the sense that they aren't looking in the same row. Does that make sense?
+Cannot upvote this enough. 
+Have you tried teaching Excel to your wife?  It's not fun.  ;) 
+
+That said, I'm very proud of how far she's come.  She can handle VLOOKUP and all other simple stuff on her own.  I haven't had to help her in over a year (before today).
+> So INDEX(<range>) would be the whole table? in this scenario?
+
+Correct.  It can even be larger than the data you expect to search, though I suppose this would impact performance.
+
+The key to remember is that the ranges passed to MATCH should generally be the same size as that dimension of the range passed to INDEX.
+The other dudes wrong, it should be Index(ReturnedDataColumn, Match(LookupValue,ColumnToLookForValue,MatchType))
+>Your source even says to use it instead of VLOOKUP.
+
+mmm.. looking cannot see ..
+
+Scenarios people, scenarios. 
+
+Each lookup method has its place.. INDEX MATCH for flexibility where required and performance on large datasets (though [double VLOOKUP](https://fastexcel.wordpress.com/2012/03/29/vlookup-tricks-why-2-vlookups-are-better-than-1-vlookup/) may compare, but yes requires sorted data (scenarios people)) , VLOOKUP for equally suited situations.
+> You're either using other people's tables that were designed around VLOOKUP or just making lazy tables.
+
+I am always bothered by these sort of statements, but really shouldn't be!
+
+edit: I did not downvote you!!
+
+
+
+
+We all were but then we learnt and now we're not.
+If you have anything to do with financial spreadsheets it's a life saver. I'm convincing our CFO to switch to tables so he don't have to scroll through 15 cells to see what's being added together...... I'm in HR
+I'm giving you your first word of advice:
+ when you refer from one table to another, directly, like this, say from Table1:
+
+    =Table2[value]
+ 
+You get the value on the same SHEET row, not the same TABLE row. If you plan to do such things, *make sure the top line of the tables starts on the same line...* Now I nearly always leave 10 blank lines above my tables because I like statistics, graphs, controls and slicers up there...
+Have you looked at PQ yet? More fun and games.
+Make them stop, it's idiotic.
+Start a new thread and post a small snippet of the sheet (even a screenshot would help). 
+
+Yes it does make sense - there's no referential integrity in a table.
+Paste values? Or am I misunderstanding the problem?
+That went well ;)
+Creating an actual table of the data and giving it a name makes the range dynamic. 
+> mmm.. looking cannot see ..
+
+It's directly after the part you quoted:
+
+> Try using the INDEX and MATCH functions instead of VLOOKUP.  VLOOKUP is slightly faster (approximately 5 percent faster), simpler, and uses less memory than a combination of MATCH and INDEX, or OFFSET.  **However, the additional flexibility that MATCH and INDEX offer often enables you to significantly save time.** For example, you can store the result of an exact MATCH in a cell and reuse it in several INDEX statements.
+
+  .
+
+> Each lookup method has its place..
+
+Sure, I don't disagree.  I use VLOOKUP a lot of the time if I'm doing a one-off search, or if my data is guaranteed not to change/move.  However, I've found that the vast majority of the time, INDEX MATCH is superior for one reason or another.
+It wasn't meant as an insult. I actually meant it more generally. The speed factor has never been an issue for me as I've never worked with enormous data sets. So I'd rather a more versatile experience.
+I can't see how anybody would purposefully choose to use AD7+X7 over [cost price]+[state tax]...it's a form of masochism. 
+I typically need to blend data from various sources into one large table. I'll use index match to do this. A lot of it is dynamic (the data) so I need to maintain index match formula. I the portion of match when I'm referencing the cell to look up against is always in the same row. So if you do alt+M+P you'll see it go across the row. But if I sort the table you'll see the reference move to a different row for some reason, not sure why
+>Try using the INDEX and MATCH functions instead of VLOOKUP.
+
+
+>...the additional flexibility that MATCH and INDEX offer often enables you to significantly save time
+
+Agreed, through the ability to lookup any indexed data... vertical, horizontal, left, right.. as required.. if required.
+
+> "Your source even says to use it instead of VLOOKUP."
+
+Though you see; you are twisting words.
+
+I shall say it again... Scenarios people.. scenarios.
+
+edited for clarity
+Not taken as an insult.
+
+More the dismissive nature of the comment on a method that works, and works well in those scenarios.
+
+ See my comment [here](https://www.reddit.com/r/excel/comments/5xcne4/the_case_for_index_match_over_vlookup_dont_lose/dehcc2j/)
+Lack of knowledge man

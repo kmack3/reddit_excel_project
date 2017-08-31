@@ -1,0 +1,283 @@
+Why does it seem like everyone hates table format?
+After I figured out it only took a Ctrl-T and that you get a crap ton of benefits from it, I've never looked back :)
+Most people just don't want to learn something new even if it's more advantageous than what they currently do.
+
+Also mark this as discussion!
+There's almost no reason not to use it.  The only (lame) reason I can think of not to is that you can't have identically named columns (which is also a problem for pivots).  This is not a good reason, just sometimes inconvenient if working with imported data.
+
+It's simply a matter of people not knowing about it.
+I use it a ton. It's how I rage against all those nice people who put blank rows in their data.
+Tables have quite a few advantages as you pointed out here.
+
+They can also create headaches in VBA, and if you have to distribute to multiple versions of excel. 
+
+They're kinda like most features of excel - underused by most, overused by a some, properly used and understood by a few.
+
+I'm probably in that first category. 
+I update the data every day, and tables can get wonky when doing so. its easier (for me) just to name a range in a pivot.
+I'm late to the table party as well, but once I started using them I could never go back.
+
+The most notable advantage for my applications is that each table is a ListObject that can easily be referred to in VBA.  One of my more ambitious projects has a module that handles all my tables as ListObjects, so that other modules can refer to any table in my workbook with a single subroutine call.  I don't have to mess around with Range.End shenanigans to figure out how much data I have, I can just tbl.ListRows.Count.  Referring to columns is much easier, and I can move data around without having to worry about breaking my code.
+I think it's because of the default color formatting. A lot of times myself and others use a small empty column to break up groups of columns which is harder with a table. 
+For me, it is like auto formatting in Word.  You have to constantly fight with it.
+
+I have yet to learn the benefits of using tables, but perhaps some day I will.   In the mean time, leave me alone tables.  Awful default formatting on tables too.   
+I don't like table because I don't have full control over it.
+It tend to fill everything by itself.
+A common issue that people have is locking a table column, as you can't put dollar signs in it. Most people don't know how to do this, but this is how:
+
+
+    =Table1[[Column1]:[Column1]]
+Does anyone know how to make tables work in a shared workbook? In my office, we have several shared workbooks. It drives me insane that I can't have tables in them.    
+I haven't been able to get conditional formatting to work when it is in this format. What am I doing wrong? 
+I don't understand it either. Formatting as a true table object is just good practice. Usually formatting it solves like 80% of the problems in admin roles in my company because they usually use "tables" to log data i.e. add entries to the bottom of the table and then fill down all the formulas every time, when in fact a true table object can do all of that in one go
+Questions:  
+1. How is it that vlookups are faster? Because it autofills the formula?  I guess that would be a few extra key strokes saved.  
+2. How is filtering and sorting quicker than just normal filters?  
+3. How are pivot tables and charts faster that a normal data range? Ctrl+A, pivot table button is what I do.  How is it quicker than that?
+
+Now I am interested in seeing if there are substantial benefits.
+Another incredible benefit is dynamically sized variable names. I can grab two columns for an X-Y plot by referring to the table/columns. If I ever add rows, the variables update and the chart responds. Hard coded variables don't do this and would require going through the name manager (or going into the chart and manually selecting the new range). 
+I love Tables and use them all the time. Readable formulas, auto expansion, what's not to like? I think some folks are protective of their Excel secret incantations and don't necessarily like stuff that makes things easier and possibly makes the old ways obsolete. 
+
+It's like these job listings that want an "Excel expert" who "must master VLOOKUP". Dude, first off, INDEX MATCH, and more importantly, I use Excel 2016 First Release, not Excel 2007. Ever heard of Power Query / M / Get & Transform?
+I don't use them because most of the time I am just trying to hack together an answer from some data. I value speed in this function. I know what I have to do to get the answer and I just go right for it. Introducing tables means something else to mess around with. If I don't know yet how I am going to get the answer and need to mess around then I prefer unformatted sheets for flexibility until I know the path I will take. Then I just go for it. Anything that is a deep dive or contains relational data that isn't just a quick hack I am going to move into a more robust tool and chuck the data into a table in a database and analyze it that way.
+
+I rarely present my data to anyone else and will rarely look back at my spreadsheet once I have the answer I am looking for. =Any time I do present data I strip out as much formatting and formulas as I can and just give the raw data. This avoids people messing up my sheets or getting confused. Others that can use excel, I believe, would prefer the raw data, unformatted, so they can format it the way they want without having to strip out someone else's formatting.
+I'll be explaining to the CFO and an analyst today why they should use tables in their financial model instead of the fuckery they have now
+I feel your pain.  Trust me.  I'm one of four in our sales agency, and I am the *only* one that bothers to use tables for formatting.  The only other time a colleague used it was when he screwed up and I had to tell him that you can't have blank columns after a table and hope that the *other* columns would still be part of the format. Grrr.
+I like tables and I think that they have a lot of benefits, but I can see why some people prefer not to use them. My guess is that it has to do with cell references. To lock a reference to a range normally you would type something like $a$1:$a$20, but to lock a table reference you have to type [[header1]:[header1]] and you don't get the benefit of using the F4 keyboard shortcut.
+I use tables all the time and I love it. The only downside that I have personally encountered is the computing power that it requires. It's awesome, but when I'm opening a workbook with 5 different sheets that all have tables, it takes forever. 
+I think most people do what I do, which is to just start kludging some sort of table together that does more or less what they want to do, including whatever formulas they can figure out. It ends up being this Frankenstein's monster of a table that would be a big hassle to tear apart and make neat and tidy.  To be honest, the first time I put together a serious workbook, I was more concerned with making it look cool than I should have been.
+
+Eventually you realize that the Excel table format is the heart of the machine, and that using it unlocks the maximum of Excel's potential in the most painless way. But that's an advanced epiphany, had by those who are working with Excel on the daily. Most users will put together the occasional thing in Excel, since their job is usually 2% using Excel and 98% something else. 
+
+So the advanced user is constantly bombarded with every noob's idea of what a pretty table should look like, and only occasionally will they deal with the work of their peers. When that happens, at last, they are greeted with the cool blue waters of home. Otherwise, it's a poopshow.
+Tables connected to XML (xls) data sources are incredible! Export the data, overwrite the data source file, open the working document, hit refresh, win! It saves me oodles of time.
+
+
+>I can do vlookups faster
+
+Can you expand on this? Thanks
+I too share your love of tables.  So much easier to work with large data sets.  I would expect because a good number of people really don't know what excel can do.  A lot of people treat it as a "data base" or a grocery list.
+Even for non-excel types, the formulas make more sense because they use field names.
+Keep using them. People will come around once they start messing with them and see the benefits.
+Self taught Excel novice. Was just introduced to tables by a co-worker and tbh it broke my brain. Mainly because I could no longer just fiddle with existing formulas till they do what I want. But reading this thread I realize two things: 1 I don't think my co-worker knows much about tables either (mostly naming and stuff) and 2 I should learn tables
+When I found out about table format I started using it everywhere, for about a week.
+
+Then a table using spreadsheet went berserk on me.  It had a couple of tables, mostly with around 10 rows but one with around 500 rows.  All of a sudden as I was adding a new formula column to the big table, excel went berserk.  Frantically I saved so as not to lose my work - and excel crashed, corrupting the file in the process.  The file bloated from  200kb to 200Mb I kid you not.
+
+No idea what happened, but after losing a year's worth of tracking data (why is it always the file you don't have backup copies of that crashes?) I haven't been back to using tables.
+
+May not have been the table that caused the problem, however the spreadsheet worked fine before I made the table conversion and continues to do so now I'm back tableless.  And I've never had a spreadsheet suddenly bloat by a factor of 1,000 and I've used excel a lot.
+
+So that's why I hate table format.  INDEX/MATCH give me the functionality and, if you want the style, conditional formats based on MOD(ROW(),2) work just as well.
+First, probably a very niche usage, but Tables don't allow array formulas that return multiple results. For instance, I work with XY coordinates and have single array functions that return both an X and a Y value into two cells. Can't do that with Tables; I love Tables and wish Microsoft would include multi-cell array capability.
+
+Second, it would be nice if Microsoft allowed a Table setting that automatically contracted a table when people clear cell contents (Or auto-delete any rows that have blank cells in Column X). Tables automatically expand when pasting below a table, and I think it would be useful for Tables to do the reverse.
+Couple of key points on this.
+
+UX Designer stance - PAD (People are Dumb)
+
+They don' tell you what they did, and they don't know what they did.
+
+So First up you make a nice table and everything is awesome and then you hand it out and it all goes to shit, so you set locking features and now they can't use it and complain.
+
+PAD - Tables: People will unformat them (ultimately Copy/Paste is the level they are working at).... They look at your functions and inevitably will try to change something, because, they want it to pull something similiar but slightly different. Then they fucked the entire table because the everything in a Table autoupdates, then they save - only to reopen and panic and then start asking you how to fix it. 
+
+When you ask them what they did they don't know. So time to spend god knows how long trouble shooting all the data.
+
+PAD 2 - Destructive Editing - Mid level users who don't format will undo your work (Again Copy paste into a new sheet) redo your work and forget to format, then Delete your old sheet and think they did a good job. 
+
+Oh sure the data (Appears) still intact, but, they become PAD Users, because, again, there is an error which is now harder to assess. 
+
+Only now your table looks the same as yours, but isn't yours because it's gone and replaced by some Mimmic with teeth and no formatting.
+
+PAD 3 - Locked out - PAD users will always come running back to you for the passcode just so they can fuck up your sheet and then come back to you to fix it. Even if they don't, if you overlooked just one cell criteria in the lock, I hope you remembered your passcode.
+
+PAD 4 - Hidden Helpers - What you can't see doesn't exist. Double so for everything a PAD User sees so hide anything critical, the unfortunate side is tables require one change to update everything which can cascade like a bitch 
+
+E.G.  E Relies on A+D & D relies on C+B & B relies on X then you better believe they will want to change at least B, D & X and now nothing works and to throw a nice addition somehow the formatting is now all wrong somehow dates are numbers and half of the sheet is General. 
+
+Hide that shit and lock it, stick a Black Dragon in front of it, build a wall and call it Mexico.
+
+Overall Tables are great to work with yourself and a pitfall they have great benefits but ultimately that much control in other peoples hands is an ask for disaster, if you are going to use them I suggest using them to assist your own reports.
+
+Handing them out is asking for time wasted.
+
+I've seen models where it's grossly overused.
+
+Context is everything.
+
+There's no foolproof rule for when to use tables, but I'd say for anything which has the only key field in the 1st column and no more than 5 other columns, tables tend to be overkill. OTOH, anything which spans more than one screen width in a readable font size in all columns at 100% zoom level, tables make more sense than simple ranges.
+I just wanted to come back here and tell OP thanks for bringing this to my attention.  I used to hate table format but this thread gave me so many helpful ideas I use it all the time now!  THANKS! 
+Named columns bloat the formulas, I hate reading that.
+Embarrassed to say I only just learnt this shortcut now (or I'd forgotten it) ... Thank you! 
+I can't I'm on mobile 👀
+I feel like this is the situation at my workplace. When I first started my current job, I assumed employees of accounting departments across the business world were Excel gurus. After only spending a couple of months learning Excel, I was surprised that the office's go to accounting "Excel" guy was baffled by the INDEX MATCH and array formulas I was using. Not to mention that one time I found some VBA that calculates distances between locations using the Google Maps API, minds were fucking blown.
+what advantages are there in using a table?
+When it's a pivot I just add a space to the end lol 
+Love tables, keeps things neater, easier to read formulas and formatting is quick and reusable.
+
+One small draw back is that there is no absolute references in tables. If you create a formula outside of the table that refers to said table then drag that along horizontally then the column refs change. 
+There is a workaround but you have to copy the formula rather than drag.
+
+"It's simply a matter of people not knowing about it."
+
+This. I don't think I know three users that know what it is, and I doubt any of them could say why they should use it. Poor marketing of an apparently awesome feature, MS! Since I'm not counted in the three WAG, I can only say "apparently" :) I have literally never heard anyone mention it before. Wonder what other coolness I'm missing?
+> blank rows in their data
+
+http://i.imgur.com/TyAgdpt.gif
+I recently started encountering this. The blank row spacing kills me. 
+Oh boy. Thanks for raising my blood pressure.
+dude for cryin out loud... we have a manager who insists on blank rows to separate things by whatever fields. JUST USE A THICK BOTTOM BORDER FFS. Not only are filtering and automation harder, but the tables look like complete bullshit. 
+ 
+it makes me grind my teeth.
+I'm seeing red right now.
+Who does this? Is it just a way to make it more readable, when you don't know how to alternate line colors?
+man, I love tables in VBA. 
+
+Navigating listobjects instead of wonkily defined ranges is so much smoother. 
+
+     set tbl = thisworkbook.sheets("Sales").listobjects("Sales")
+
+then you just do stuff like
+
+    for each cell in tbl.listcolumns("North-west").databodyrange
+        do stuff 
+    next cell
+
+if more rows are added to the table - no problem.  
+If more columns are added to the table - no problem. 
+
+Same with pivots based off of tables, and queries based off of them. 
+
+it also makes updating pivots (and everything else that is based off the table) programatically easier. 
+
+Like let's say you're importing a monthly dataset. You just delete the old table (this doesn't kill the references), add the new data as a table object, name it the same as the old table, and refresh all. 
+
+The main headeache I could imagine is sharing with 2003-workbooks. 
+
+That said, I see why people don't like them, they force behavior that can be annoying, it took me a long time to become a convert, and that was primarily by the time I started working with VBA more.
+I only use vba when I have to, but this is interesting to know! 
+What kind of updates are you doing? I use tables specifically when I do add data often
+This a hundred times. this.
+That's when I turn to banded columns.
+One great thing is you can name a table like "Standings" and then just refer to that table name in formula references elsewhere in the document. 
+Honestly it's so much easier than auto format in word. 
+I believe this is one major reason, but I've also seen some cases where having individual control over cells without any of the autocomplete done by tables may lead to errors or manual entries. With standard ranges people feel the need "to adjust" values as desired and those changes are very difficult to spot later on. When you get used to tables and normalized data, it is far more difficult to make or allow those mistakes.
+There is this add in too:
+
+https://www.excelcampus.com/tips/absolute-formula-references-excel-structured-table/
+Sadly, not possible. You can look at locking sheets and using range permissions for users - this will give still give a good degree of protection and control. Google 'allow users to edit ranges' to learn a bit more.
+You still have to treat and write the conditional formatting formulas as you would a normal cell range.
+
+The awesome thing about tables, though, is that they pick up on new records within the table and update column formatting (including conditional) to include them straight away.
+3  Have you ever added data to a normal excel range and then had to update a pivot table data range or a chart data range for the new data to show up?   Well many people don't want to do that manually and want it updated automatically. This was solved in the past ,excel 2007 or 2003, by creating a myriad of dynamic named ranges (eg `MyData=OFFSET($A$1,0,0,COUNTA($A:$A),COUNTA($1:$1))`) and feeding these named ranges into the charts and pivot.   Problem was they could be cumbersome to create, use and slowed down excel if used extensively (offset is a volatile function and recalculates with every change).  Tables give all the benefits of auto-updating ranges, are much easier to create & use and come without most of the performance hit. 
+Auto-filled formulas is one big advantage.
+
+Also the ease of selecting a column of data with a single mouse click (when you don't want to select the full height of the sheet) - that's probably one of the biggest benefits I get from it. That and the automatic extension of formulas (and to a lesser extent formatting) when you add new data to the table.
+
+It's also nice to have named ranges built into your worksheet without defining each one explicitly - I find it useful for VBA. I know it's easy to create a named range, but the table also automatically handles expansion (and shrinking) of named ranges, meaning the formulas, VBA code, and charts that reference a given column will adjust with that.
+
+There are very few cases I find myself preferring standard ranges over tables.
+
+    1. Auto fill, and if you vlookup another table you don't need to select a range. 
+    2. There's no need to select a range and add a filter because tables automatically do this. 
+    3. You just have to select one cell in your table and hit pivot table.
+
+
+It saves a lot of key strokes and mouse clicks. Doesn't seem like much in the abstract but it really saves a ton of time. 
+
+just that it autofills down rows and automatically gives you named ranges.  Do enough work in excel daily and those little things add up to a lot of time saved.  Plus the number of times I've had people tell me x file stops working after a certain row, just because the data isn't in a table and the formula is only copied down so far.  On stuff they got elsewhere I mean, my stuff is always in tables and/or pivot tables.
+Ugh I wish my work computer had 2016 for the waterfall charts 😭
+If you're never updating the data that you currently have, then there's no point to using tables. But, if it does need to update/refresh as part of a month-end duty, then tables can help automate a report without retyping formulas or updating any code.
+You have to go through so much effort even with hotkeys to get the same results with a normal range. I don't remember the last time I had to toggle F4 or turn a filter and sort function on. 
+You're too kind. PAIFS.
+No problem! Who knew that a vent session would be so influential 😂
+Fair enough. I like seeing what the formula is at a glance instead of spending time investigating what (b4/(c4-g5)) really is though. 
+Me too!
+If you use the browser instead of the app, and then choose desktop version, you have full control on a tiny little screen.
+OP cited the following:
+
+> Filtering and sorting is quick. I enter formulas faster, my formulas are easier to understand because columns are named, my subtotals, averages, and counts are calculated faster, I can do vlookups faster, pivot tables and charts are easier to create, and I swear my file sizes are much smaller. 
+
+
+Come on dudes, why down vote a question?
+Or number the column names. 
+
+Type 1, Type2
+Power query can easily fix this in case you want to know, 
+You haven't seen it?  Count yourself lucky.
+
+I think they're doing it because they think they are presenting the data and it needs to look readable.  So they break it up, like paragraphs or something.  They don't get that this destroys the ability to use any other analytical tools like sort/filter/pivot/etc.
+
+Imagine you had a company that issues cell phones to employees.  This excel jockey decides to, instead of having a column called "phone mfg" to break up the data by mfg.  So, R1C1 says "Apple" and the data starts at R1C2.  Then, 30 rows later there's a break and R31C1 says "Samsung"....  BAH!
+
+Haha, you nailed it. I have some very... Resilient customers on 2003. And they don't want to change. As for defining ranges, yeah I always have to find last used row and loop that way. I've written that into my library though, as its useful for importing/working with non-tabled data.Maybe I need to give them another look. 
+I couldn't agree more! Tables are downright superior for anything VBA. All of your data is organized nicely into a predictable, structured object.
+It is soooo easy to read and also to make sense of code after the fact.
+
+Also instead of deleting the whole table and renaming, I usually just do Worksheet.Listobjects("TableName").Databodyrange.delete Then paste data into table with Worksheet.Range("TableName").cells(1).pastespecial xlpastevalues
+
+Also referring to a specific row in a specific column in a table is also really easy with Worksheet.Range("Tablename[Columnname]").cells(row#)
+Just data loads. But it seems to get finicky with formatting, and I just dont like fighting it each time.
+And leave them empty? I hate those things when they actually contain data. 
+normal named ranges do this too though.
+I've found Tables only good for creating nice color and then I switch them to range right away :-D
+Fixing those errors becomes a breeze too ^
+That's interesting. But I can't use the F4 key in a normal formula window to do this, according to the link. It would have to happen in the add-in dialogue box.
+What I can't seem to figure out is how to make relative references to table cells.  You can get a cell from the same row as the formula, but if I want a cell from the previous row, I have to use a non-table reference.
+Thanks for the tip. Users simply need to be able to sort and filter and add their edits to certain columns. Implementing some controls on my end might help alleviate some of the headaches associated with a shared workbook so it's something to consider.
+INDEX functions can replicate the functionality of OFFSET functions without the inherent volatility.  They're still cumbersome to create, but it's worth noting.
+And tables are more intuitive for people who aren't Excel power users.
+I have never had performance issues with ththis offset...counta method. 
+I've seen VBA ranges defined to a hard-coded number of rows. I've also seen VBA with the awkward control down and up one to find the last row. With tables you just say range table name and as long as the table expands which is visually indicated the code keeps working. And your VBA doesn't have to Loop through a bunch of empty cells if you only have 5 rows of data.
+If you can't update Excel but can install other software, there's Power BI Desktop.
+Usually I am looking into system failures. If I am doing my job correctly once the problem is solved I will never need to look into it again.
+
+Occasionally I build reports but when I do it's a straight dump from SQL to excel as a reoccurring job, or I'll set up a datacube and interact with it through a pivot.
+Please feel free to do it more often!  I think I just didn't know enough! 
+Ok i just used the table and I'm not quite sure how to make the VLookup work with this new set up lol or for any other formula for that matter. It sounds like a really good tool. I remember using something similar in google sheet where every data field is identified by unique ID and can be used in any formula with the correct name used.  Right now it shows up as table 1. How do you tell which data column is in table 1? which is table 1 and how to indicate if there is multiple tables etc. 
+Sadly I'm in the app and I'm far too lazy to open my browser. Laziness, hence the table formatting. 
+Oh shit, I have seen that. Hell, that type of formatting is integrated into my company's software in some places, for no reason. It's ridiculous. 
+I've never had this issue ever! 
+No I just use color to break up the columns. Usually grey or blue. If it really gets in my way I just group some columns and hide them 
+Normal named ranges kinda slow everything down and make the file sizes huge on my experience though. 
+Correct, but it does work that way.  And so far i have found the only way that mimics the F4 functionality on formulas with tables. 
+You'd have to do something like this:
+
+
+
+    =INDEX(Table1[Column1],ROW(Table1[@Column1])-ROW(Table1[#Headers])-1)
+Exactly
+When you select any where in the table, Table Tools should appear in the top ribbon. Select table tools and on the far left, there will be a field that tells you the table name and you can also edit it there. Always name your tables.
+
+Inside formulas, data columns are referenced as tableName[Column].
+
+Hope this answers your questions!
+I dont even click when entering formulas anymore just start typing the column header name and it will appear in your formula. Just hit tab and move to the next part of the formula
+No worries. Done it for you.
+It's perfectly fine for reporting, and pivots do that by default, but tabular data should be normalized.  
+Hmm I'll have to try that
+I like dynamic named ranges using offset though. You add rows of data and bam they're included in your lookup or sumif or whatever. Although now when I think about it referencing a table column would do the same right?
+Yeah, that's what I was afraid of.  I guess that's what the Name Manager is for.
+That part I understand, but I mean like is there a way to know just by looking at the data and knowing which column/data field belongs to which table? or there isn't a way to see it.
+ya this is one convenience I can get used to =)
+Thanks Bruh! ✌🏻
+Correct. And because of table formatting it's easy to see if the data is inside the table or not. With complicated named ranges the only way of knowing is when your Downstream formula screws up. Plus I really like the automatic formatting of tables but that's just a side benefit.
+How do you visually know what columns belong to a table? Making any range a table automatically applies table-formatting, so right off the bat if it's a table it will have blue banded rows and filter buttons appear next to the header of every column. If the column is inside the table, it's named according to the header (which should pop up with the filter button). 
+
+What about for inputting names in a formula? Easy! If it's inside the same table, entering 
+
+    =[
+
+will automatically bring up a list of all the column names in the table, from which you can use arrow keys to highlight the one you want and then press tab to continue with the formula. 
+
+If it's not in the same table, you can start typing 
+
+    =Table1[
+
+and then the same list appears. 
+
+[ColumnA] will automatically refer to the whole column up to the end of the table, and [@ColumnA] will automatically refer to the entry in ColumnA in the same row as the cursor. 

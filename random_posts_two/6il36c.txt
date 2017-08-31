@@ -1,0 +1,63 @@
+6il36c
+Have Vertical information, Need horizontal results.
+Hey guys, I have a question that I do not know how to solve
+
+
+the thing is, I have columns and a simple sum in one spreadsheet, and I need to present it horizontally in another one
+
+
+so I Have
+='Received per source'!BE158   and one I drag it right, instead of going to BE159 it goes to BF. How do I change that? 
+
+I mean, I don't want to manually input 200 lines of changing a number, there must be a way!!
+
+
+
+Sorry if my english is not that great, and thank you, excel-fu fighters
+
+
+
+
+
+Thanks y'all, you are awesome ♥
+
+
+-------------
+Do you need to do it once? There's copy-paste with transposed option. Otherwise if you want something that updates automatically you'll have to do something more rafinate (trickier but not impossible)
+-------------
+Use `=INDIRECT("'Received per source'!B" & column(FB1))` to generate the range and drag across, adjust the column reference to start on the correct row.. i.e column FB is column 158.
+-------------
+Can you copy, and paste special with transpose?
+-------------
+    =INDEX('Received per source'!$BE$158:$BE$358,Column(A1))
+
+Is a non-volatile alternative to excelevator's solution.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+What is the love affair this sub has with indirect? Offset and index and so much nicer and more efficient to work with. Indirect should be a last-ditch method at all times.
+-------------
+Why do people always ask rhetorical questions instead of making a point?
+
+Why would you pop in to r/Excel to make such a comment considering your zero record of assisting in this sub?
+
+We are all learning here, and today I was reminded about INDEX from u/Passeri_ which is another option in solving OPs issue.
+
+
+-------------
+I see it used often but I think it's a bad practice. So I was pointing that out in case people has an explanation.  And I have helped in this sub, I just wasn't given points.
+-------------
+So make a proper reply, not a snipe on a reply.

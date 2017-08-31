@@ -1,0 +1,42 @@
+slow
+2249km
+[Unsolved]Find & Replace Super Slow
+
+Hi everyone--
+
+I'm having an issue with find/replace. I'm trying to find and replace about 20,000 cells, 20,000 cells on tab 1 and 20,000 on tab 2. These are both in the same workbook. 
+
+So when I find/replace on the first tab, it goes super quick and usually gets finished within about 10-15 seconds. When I do THE EXACT SAME THING on the 2nd tab immediately after I'm finished updating the first tab, it takes FOREVER. Sometimes it can take up to 20 minutes. 
+
+Has anyone else seen this issue?? Why would it go quick on the first tab and then become super slow/almost unresponsive on the 2nd one? Any help would be greatly appreciated!!
+
+
+-------------
+One idea may be to turn your calculations from Automatic to Manual.  If it's doing the changes and caculations at the same time you're going to bog down your computer.  Do the Find and Replace with the calc on manual then turn it back to Auto, or hit F9 to run the caculations.
+
+Although I don't know why it would be fine on one sheet, but not the next.
+-------------
+Pasting in richtext instead of plain can make Excel crawl.
+
+If you've not done that, try *Formulas > Calculation Options > Manual* then do the find & replace, then restore the setting to *automatic.*
+-------------
+are there misplaced cells filled out somewhere crazy on sheet 2? Like is there something in XFD104857 or something like that causing it to look through everything? Is it searching in the formulas and the formulas in sheet 2 are much larger than in sheet 1? Try find/replacing in sheet 1, then save, close the workbook, reopen, find replace on sheet 2, still slow?
+-------------
+So just an update. I've been tinkering around with some solutions to this problem. It seems that if I save my workbook, close it, and reopen it....I never have the super slow find/replace. That's with leaving the calculations to automatic. 
+
+Just an FYI if anyone has this random problem. Thanks for all the responses everyone!
+-------------
+I thought about doing that but it still is confusing me why it works like a charm for one and then terrible for the 2nd. I've never seen this before and it's super annoying ha
+-------------
+The formulas are pretty much identical in both sheets. There's no data that's way off at the outer limits. I've saved after sheet 1 find/replace, then tried sheet 2 but it still is always slow every other time. I haven't tried closing it entirely. I'll try that
+
+-------------
+yeah sorry, I don't really have any great ideas ass to why it's happening, not something I have run into before O_o
+-------------
+I honestly never had this issue until I upgraded to Excel 2010 a couple weeks ago. I never had this issue in 2007 so I'm wondering if it's just some faulty part of 2010. 
+-------------
+I tried googling it and got this : 
+
+http://stackoverflow.com/questions/3585445/excel-how-can-i-speed-up-a-find-replace-process-changing-32-000-links-per-wo
+
+The second answer has a simple little macro for find/replacing that might speed it up, you could try that too and see if ti makes a difference. 

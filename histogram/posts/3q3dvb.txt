@@ -1,0 +1,168 @@
+What can you do in Excel that you wished you knew out of college?
+- Pivot Tables
+- How to properly utilize tables
+- Visual Basic
+- INDEX MATCH
+- PowerQuery and PowerPivot
+
+Actually....if all you know how to do is the first one (Pivot Tables) you are already ahead of 90% of the people at my company. It is amazing how many people just cannot grasp the concept of them.
+
+Using tables and/or named ranges to make dynamic formulas for datasets of changing sizes.
+
+ How to really use pivot tables and pivot charts. I sat down and worked with them for a while, and now when showing data at meetings some people look at me like I'm a wizard, when it really isn't that hard. 
+
+Vba in general. I knew it existed and it's capabilities, but I wish there was a required class for my degree (chemical engineering). I've taught myself on the job and have saved myself and others hundreds of hours over the course of the last year. 
+I just learned goal seek a few weeks back. Shit is awesome, I use it every day now!
+[deleted]
+Monte Carlo Simulations 
+Index match match
+Everything.
+
+( didn't know/use Excel for years after getting a Comp. Sci. Degree. Started using it pretty heavily once the Power addins became available)
+I guess this is more of a question. I've recently started using excel a lot more at my new job and I'm trying to get better with it. The only thing I have kinda figured out is vlookup and pivot tables. Very basic knowledge of both. 
+
+My question is, how do I get better at excel? How do I get started? 
+What are some things you have used to expand your knowledge?
+What is a must have/learn for my tool belt?
+Thanks in advanced
+I am still in college so thank you all for the suggestions!
+so useful. 
+I wish I had known more about normalized data and just general "best practices" in working with data in general, as well as VBA / programming in general, just as much as the specifics to Excel. 
+
+Looking back at some of my earlier - incredibly intricate - worksheets, they were horribly inefficient or did things in a very roundabout way. It WORKED of course, and the end result was pretty, but all the steps to get there were a clusterfuck. One sheet sped a process up from 1 week to 2 days, but if I known how to do something as simple as a for-loop, it could've been cut down to half a day. 
+Write functions. 
+- Pivot tables
+- vlookup and hlookup
+- conditional formatting
+- hyperlink
+
+... and the list goes on. If I knew this back then it will be easier for me to perform reconciliations.
+My coworkwrs think I'm some kind of wizard because I understand pivot tables. I tell them it's easy but they keep talking about how great I am. I'm intermediate at best but you'd think I'm Excel Jesus by the way they act.
+INDEX/MATCH is such a lifesaver. People always seem to use VLOOKUP on data that isn't sorted, and never get the results that they are looking for. I use that and SUMPRODUCT more than anything else.
+If you know VLOOKUP you're ahead of 90% in my department. The lack of excel skills is mind blowing. 
+Any recommendations for someone trying to learn the basics of VBA? no experience with it at all.. just trying to choose the best route to get started.
+Thanks for mentioning this, never heard of it and I'm going to be using this daily now!
+What's goal seek? I'm a year out of college and have only used vba and Data Solver Pak before.
+I've seen people talk about ADO's before but I still have noclue as to what they are... Can you please please educate me on this topic? PLEASE
+There are far better tools than Excel for stochastic simulation. Especially if you need to work with correlated random variables, so need to use cupolas.
+I learned this one. I'm looking for more advanced features in Excel.
+if you think that is amazing tiptoe into R programming and you will be data Jesus at your company 
+
+Source: I am data Jesus at my company
+The shit you can do with sumproduct is amazing. Once you "get it", it just melts faces off of anything in your workbook.... so dynamic...
+Vlookup is lame, I just taught a training session on Friday about Index Match and index match match to my team... They had their faces melted off.
+VLOOKUP is still faster and has less overhead than an INDEX/MATCH and it the way to go when you have a large dataset.  Just got to make sure its sorted as you pointed out. as well as use a unique key.
+
+>People always seem to use VLOOKUP on data that isn't sorted
+
+I always use VLOOKUP when I'm doing a quick lookup and it's never failed to find the correct thing
+My learning was out of necessity. I had what essentially amount to data entry for part of my job. It basically require manipulating and formatting data in a predictable way. My learning so far has just been googling specific tasks and applying them to my scenario. Break down what you want to do into individual steps. For example, don't Google "how can i format a page while transferring data from a pdf."  Try to break it down into steps like "how do I delete rows of data that contain a value of 0" or "how can I transfer data between cells?" oh an always start your searches with "excel vba" over time over picked up more and more tricks. I'm sure there are better ways of doing some stuff I've learned to do, and I know my code is messy at times, but I've learned and improved over time. 
+
+I personally haven't used it before, but I've heard sites like Lynda . com Have really good tutorials for things like vba. I keep meaning to check it out.... 
+
+One advice I heard about programming in general is to not try to learn vba just to learn it,  but rather to learn by setting out to solve a specific problem you have. 
+You need a problem to solve first. Do you use excel now?
+STEP 1 of learning VBA: Record macro, review code.
+like /u/evonb said, it's basically a tool that allows you to tell excel what you want one variable to be, but to do so by changing another variable to a set value.
+
+Let's see if I can explain clearly enough to demonstrate its value!
+
+Let's take an example: it should make sense that the number of cars that can pass a point on the highway is a function of many many things. It is a function of the number of cars on the road, the average speed, the time of day, the day of the week, the weather conditions, whether or not there's an accident ahead, whether or not a football game is on at the time... etc etc.
+
+If I want the number of cars passing my point to be 250 cars/minute, I can change any bunch of these values and there are probably hundreds of different combinations I can come up with to get 250.
+
+Goal seek allows you to say: I want define the time of day, day of week, weather conditions, etc etc, and know what speed the cars need to be traveling to get 250. So I say: "set cell 'n_cars' equal to '250', by changing cell 'average_speed'" and boom, excel will tell you 'average_speed' must equal '30' miles per hour.
+
+This wasn't the greatest explanation, but hopefully it helps!
+
+edit: bonus: it's not even a VBA function, nor is it an add-on; it's a standard tool!
+> If you know the result you want from a formula, but you aren't sure which input value the formula needs to get that result, use the Goal Seek feature.
+
+From [this](https://support.office.com/en-us/article/Use-Goal-Seek-to-find-a-result-by-adjusting-an-input-value-ef3495fe-9ddc-4249-89b4-0e24406b7fcb) Office support page
+[deleted]
+for finance/business applications doe..its pretty boss. for scientific stuff..yea R or python all teh way
+I stand by it. You asked what I wish I knew out of college, and it's definitely that above all other (potentially more advanced) features.
+I've been starting to learn R, and I'm mostly just creating ggplots. Was wondering what kind of interesting things you've been doing on R with data that is impressing your company? particularly things that can't be done on Excel...
+Haha. I'm actually learning it in a data mining class, but noone where I work knows what it is. Maybe my next job.
+How do you get your boss to let you use R?
+Sounds interesting. What's an example use case for  SUMPRODUCT?
+False. VLOOKUP is a consumer -friendly INDEX-MATCH, whith more limitations and more memory usage. 
+If your data is sorted and you use the 1 or -1 arguments of match, the index will be pretty much just as fast. 
+Then your data was sorted.
+You don't need to store it in an array of variants.  If you have been doing that, I feel for you man.  You are going to name a kid after me.
+
+    dim rng as range
+    rng.CopyFromRecordSet  rec_set
+
+
+You definitely want to look at Power Query and Power Pivot, they offer similar functionality but bring down the skill entry bar a lot. 
+This sounds awesome.
+Tell me more tell me more!!! :)
+here are the mind blowers:
+package:dplyr,
+package:tidyr,
+package:sqldf,
+package:ggplot2
+package:rvest (with selector gadget)
+package:data.table
+
+here is a quick primer on why dplyr and tidyr will make you WAY more efficient if you get data from clients or customers in weird formats:
+
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
+some of this CAN be done in excel it's just that writing code is a little easier in R (imho) and you can get much better data visualizations
+
+if you have any questions on how to do something specific in R that you have been doing in excel I would be happy to help, and of course there is always /r/rstats 
+Its free, just start doing things in parallel then make the shift to solely R. I find that R is good for larger datasets, things less than 100K rows I'll stick to excel just for speed (for now) while I improve my R skills
+well I am the data scientist, so I told my boss that I would be using it. But to transition just make the case that you need a faster/better way to do things and that you can still write the results to an excel file, bonus you have a reproducible record of how you did the analysis, which you don't always get in excel. Second bonus you can automate tasks like web scraping and creating plots on data sets that are crazy big (kind of like macros but more flexible and easier to write in my opinion)
+It does the job of COUNTIF(S) and SUMIF(S). Before Excel 2007, COUNTIFS and SUMIFS didn't exist and SUMPRODUCT was the only way to perform calculations based on multiple criteria, but things have changed now. It's also important to know that SUMPRODUCT is slower than COUNTIF(S) / SUMIF(S) which can take a toll on the calculation speed of a workbook full of those. 
+
+Presently, the only case where SUMPRODUCT is better is when referring to ranges in closed workbooks. While SUMIF(S) and COUNTIF(S) give you #VALUE error when the source workbook is closed, SUMPRODUCT will pull in the values and just work.
+I use sumproduct a lot for finding weighted averages across mulitple criteria for investment portfolios. For example, you might have a list of securities with country, sector, duration and weight. To find the average duration of a single sector in a single country you can use sumproduct instead of a pivot table. Very convenient when you are working with exported data or large datasets where the pivot tables blow the worksheet up.
+You can use it in place of array formulas for things like creating a MaxIf with multiple criteria.
+I'm late but the points mentioned are all valid.
+
+ Another thing I really like about it is the ability to use horizontal and vertical ranges in the same formula.
+https://www.reddit.com/r/excel/comments/2537le/the_mechanics_of_index_match_a_tutorial_for/
+
+Look at the top comment.  VLOOKUP is faster.  
+
+2 function calls always slower than 1. NBD if you have a few hundred or fewer such formulas, but this become important when there are thousands of such calls.
+https://www.reddit.com/r/excel/comments/2537le/the_mechanics_of_index_match_a_tutorial_for/
+
+Look at the top comment.  VLOOKUP is faster.  
+I forgot to specific, on unsorted data. I pretty much never have sorted data when throwing together a quick lookup
+Can you please explain what the heck you two are talking about
+[deleted]
+thanks for the cheat sheet, bookmarked! 
+Add in [package:shiny](http://shiny.rstudio.com/) (from Rstudio who also make dplyr, tidyr and ggplot2) and you can create interactive plots in a web browser.   Seriously cool stuff.
+So just download R and not tell my boss - sounds like a terrible idea. What do you do for work lol
+Check out my comment below. Let me know if i messed something up in the test setup, but basically, running 40000 vlookups on 20000 cells each takes pretty much the same time as index match.
+I did some similar testing of VLOOKUPS vs INDEX MATCH vs INDEX-operator: 
+
+https://www.reddit.com/r/excel/comments/2wvo4g/calculation_performance_vlookup_indexmatch/
+
+Of course different setups, I just made 5 (I think) columns with numbers 1-20000 sorted in order, then made 20000 lookups based on a random number, and timed it. 
+
+VLOOKUP was slightly faster (by about 1/25th or so when best), but I wouldn't say noticeably so, and then difference diminished when not looking for exact value. 
+
+edit: 
+
+Just ran the VLVL0 and IMIM0 sheets again, on quadcore desktop, got 1.49something, 1.5000something, and 1.49something for IMIM0, and 1.47something, 1.49something, 1.49something for VLVL0. 
+
+In general I'd say that if there is a difference in the two when you scale up the number of calculations, then it seems to be very small. 
+Damn, I hadn't used it in so long I didn't remember there being an 'exact match' option. I guess it still works when you don't have sorted data, but there are still less limitations for the index/match function
+I agree they can really slow things down, but it opens up a world of opportunities for those without the skills to do it by hand. 
+But the power of ADO is limited to reading/writing data, when you want to perform some calculations on a large dataset (from a BI point of view), PowerPivot is what will help you. The use cases are vastly different, so you can't really replace the PowerBI tools with ADO.
+umm well... ask him then, I don't see how anyone would say no to free software??
+
+if your company prevents downloading just download it at home and check out this course. 
+
+https://www.coursera.org/specializations/jhudatascience?utm_medium=courseDescripTop
+I've used Charles Williams's FastExcel in the past to benchmark various formula idioms. There are very few instances where 2 function calls are faster than 1. INDEX-MATCH vs VLOOKUP isn't one of them.
+
+INDEX-MATCH is always more flexible than VLOOKUP because the former allows lookups on columns other than the first. Greater flexibility is its main benefit, not speed.
+Well, I was just let go from my temp job lol. Recruiter said everything was fine 3 days ago and now they let me go for not understanding core concepts. Funny thing is that I only handed in one assignment over a week ago and it was fine. I don't understand corporate life lol
+Agree, but at least what I saw is that index itself is an incredibly simple and fast function to execute, so despite using two functions, there is a very little - bordering on insignificant - gain in performance from using vlookup. Making the "use vlookup when you want speed" argument a little misleading.
+VLOOKUP has 2 other advantages: clarity and the ability to return multiple columns when its 3rd argument is an array. INDEX can't do that.
+True, being able to easily pull multiple columns for the row is really neat, a good trade-off for a little less flexibility. 

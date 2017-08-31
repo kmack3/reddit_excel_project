@@ -1,0 +1,23 @@
+I'm at wit's end. How to fit excel spreadsheet onto one page when saving as pdf?
+Instead of looking for errant cells, set the print area.
+Highlight cells you want to print > page layout > set print area > set width = 1pg (or whatever)
+Maybe try copy-pasting the cells with data to a blank worksheet to print? That can be easier than trying to track down what's
+ causing the problem.
+You can also do this in the printer dialog page setup
+If it is that big of a problem, then make a new page.  Copy what you want to it and then delete the original page.
+I know on older versions of excel some of the peripheral actions can get freaky when a file (especially a single sheet) gets super large, or super loaded with functions.  I think you are at the point where you are going to have to figure out how to start over and make an entirely new file.  
+It sounds like this is the dreaded "every cell prints as one page" issue.  Some possible solutions:
+
+- Update your default printer driver
+
+- Change your default printer setting to a different printer
+
+- Delete your temp files. If you're using Windows, these are typically found in C:\Users\ "your windows username" \AppData\Local
+
+I tried all your solutions and even when setting print area, it SHOWED one page, but it was still scrunched up. Yet my other excel sheets that were open were showing proper print areas. I decided to close ALL my excel sheets and reopen and that worked. Thanks everyone! 
+Do you maybe have a cell way down the sheet with custom formatting or a single character in it or something? Try copying all your data and then selecting every cell and hitting delete, or copy your data to a new sheet, or just select the whole sheet except what you want to keep and delete it.
+^This. Works every time
+Well when I press ctrl end. it takes me to end of worksheet, which is just like I25. 
+
+Also, when I press ctrl p, every page in my spreadsheet has that problem. pressing ctrl p shows like 225-900 pages. 
+

@@ -1,0 +1,50 @@
+6fuek5
+I want to auto generate file name and save it into the correct folder from one button.
+I have managed to get the file to auto generate the name from another post of this sub. My code looks like this
+
+Sub Button10_Click()
+
+ChDir "chosen directory"
+
+Application.GetSaveAsFilename Range("AC1")
+
+End Sub
+
+Which saves it with the correct name and prompts me to pick the right folder. I am wondering if there is a way to pick the folder from another cell in the excel file. We have job numbers so there is a job number on the sheet and a folder with the same name on our server. I am also struggling to get it to chose any place on the server to save to.
+
+This is what it looks like when I copy the file path of the folder where I want to to be saved but it keeps just prompting me to save it in my documents."\\servername\folder\subfolder\subfolder" What am I doing wrong?
+
+
+
+-------------
+network locations need a double backslash and you'll need one on the end of the string before your filename.
+
+    "\\servername\folder\subfolder\subfolder\"
+
+edit: you can use two cells to reference the full file path with a simple & concatenator.
+
+    "\\server\file\" & "filename.xlsx"
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+I did use a double backslash, not sure why it didn't show that on my post. Still could not get it to work. So could I use "\\server\file\" & "AC1"? Would that make it choose the right folder on the server?
+
+-------------
+Ah, backslash is an escape character. Mine shows because it's in a code block. Forgot about that sorry. 
+-------------
+If the above was in a cell and it resolves to the correct path, then yeah it should work. If it's in code though you'll need something more to let Excel know AC1 is a range.
+
+    "\\filepath\" & Range("AC1").Value

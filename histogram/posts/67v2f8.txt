@@ -1,0 +1,74 @@
+Basic? VBA Scraper for NFL Predictions
+I'm going to assume you are ignoring CFAman's suggestion that what you are doing is against the terms and conditions. We are all adults, and as long as this is for personal use, it's no worse than surfing to each link and copying and pasting. It's just a lot faster.
+
+There are 2 methods, one is slightly easier.
+
+The first method is via automating Internet Explorer. I've done this; you have to  add some references to the Microsoft Internet Controls.
+
+This is a good overview of the method.
+http://analystcave.com/web-scraping-tutorial/
+
+You will also need to understand basic DOM manipulation. You will need to grab the HTML element and then return either the InnerText or InnerHTML, depending on the code. You will also probably need to know a little about the debugging console in Explorer / Chrome / Firefox to grab the right elements.
+
+The second method is only for if this website does not render correctly in Internet Explorer / Edge or you are on a Mac. The most widely used scraper is called Selenium; you can install a version that works with VBA. I've not used it; I couldn't get the sample code to work as quickly as using the Internet Explorer objects.
+
+Good luck. It took me about 2 hours to build my first scraper. If you get stuck, I'd be willing to help you this weekend via Skype. PM me if that's something you are interested in.
+While this *is possible* to do, most websites specifically prohibit web scraping. FiveThirtyEight is owned by Disney, who has this in their T&C section
+
+>Additional Restrictions on Use of the Disney Services
+>
+>We do not allow uses of the Disney Services that are commercial or business-related, or that advertise or offer to sell products or services (whether or not for profit), or that solicit others (including solicitations for contributions or donations).  You agree not to knowingly or recklessly introduce a virus or other harmful component, or otherwise tamper with, impair or damage any Disney Service or connected network, or interfere with any person or entity’s use or enjoyment of any Disney Service.  You agree not to use any software or device that allows automated gameplay, expedited gameplay, or other manipulation of gameplay or game client and you agree not to cheat or otherwise modify a Disney Service or game experience to create an advantage for one user over another.  **Additionally, you agree not to access, monitor or copy, or permit another person or entity to access, monitor or copy, any element of the Disney Services using a robot, spider, scraper or other automated means or manual process without our express written permission.**
+
+That last sentence is the important one. Sorry to be a wet blanket. :(
+
+You could try contacting one of the guys on masthead of fivethrityeight, see if you can get basic permission. They do a lot of data analysis, so they might be sympathetic.
+If you look at the source code of that website, you will notice that line 12 seems to contain the information you want to pull off of it. You could download the site and parse it like a txt file. You could also try to parse the bundle.js.
+That table copies and pastes really easily into excel. It does require a manual action and isn't the VBA solution requested, but it also isn't a technical violation of the terms. 
+
+Once its pasted, a simple macro to clean up headers and you are good to go....
+
+Paste the text, not the formatting and it will go in better. 
+- Pull Data from link above (fairly easy, just a mess)
+- Create a Macro to manipulate So I have Home Team;Away Team;Home Team Win Probability;Away Team Win Probability;Home Team Predicted Spread;Away Team Predicted Spread
+
+I actually e-mailed them to ask for permission.... more so to see if they would send me their excel data lol. but thanks for the help, I will dig into this.
+Any browser would meet that definition...
+Not to be a wet blanket, wet blanket, but doesn't the CFA have rules that you are not able to use "CFA" in usernames? 
+oops haha, thanks.
+could you elaborate... I see a whole bounce of gibberish when I see line 12.
+Yes, I was able to copy and paste the table into my spread sheet. But I want to be able to click a button and have it extract each week of the season. Here is a step by step to what I believe will achieve what I'm trying to do. That way I can approach one thing at a time.
+
+I've put together a step by step to achieve what I'm trying to do so that maybe someone may see a step and know how I can approach it that way I can take things one step at a time as I'm a noob to coding(?).
+
+
+http://imgur.com/a/XcdQH
+Chick-fil-A actually likes the idea of me advertising for them. A couple of the local store owners thought it was pretty cool. Plus, their sandwiches are delicious! =D
+On the far right side it starts with the info. Alternatively you could parse this: https://projects.fivethirtyeight.com/2016-nfl-predictions/js/bundle.js?v=5be6a62f29d0e9e76edfcb888c07fb7a
+Gotcha, I have messed around with extracting data from sites using VBA. So Far i've had the most success pulling header info. 
+
+Not sure I will be a ton of help going further, but you might put this up on fiverr. It's something someone could do from Powershell or GIT in a matter of minutes... 
+touché
+What does parse mean, I'm assuming it is to make it into a text file that can then be imported? I'm fairly new to coding (if you wanna call it that).
+Does that cost money? 
+
+Wouldn't mind having someone do it, I could at least look through the code to see how they did it, but ultimately would like to at least have a hand in doing this. I enjoy this stuff and is definitely something, later on, that I'd like to fully learn.
+Ah parsing is like translating the text into data structure you can work with your code, to put it simply.
+
+Let's say you have a tab separated file which has the structure of:
+
+    $Var1 TAB $Var2 Tab etc until /n (/n indicating the end of the line)
+
+You can read in a string from a text file until you hit /n and then split the line up at every tab:
+
+    string= file.readline 'Denver    Wins    24 <--your string
+
+    array = Split(string, vbTab)
+
+
+array(0) would be "Denver", array(1) would be "Wins", array(2) would be "24"
+
+So you have to find a way to break the text up to get to the good parts you are interested in and filter out the fluff you don't care for. In your use case you would probably use a dictionary so that the tag is your key to which you assign the value, so that you could do something like dictionaryDenver("elo") to get the elo of Denver.
+This post was helpful to me getting my first sub working. 
+
+https://www.mrexcel.com/forum/excel-questions/700058-visual-basic-applications-code-extract-html-table-data-worksheet.html
+

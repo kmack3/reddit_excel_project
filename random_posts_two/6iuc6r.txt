@@ -1,0 +1,35 @@
+6iuc6r
+Consolidate and sum rows
+I have a spreadsheet of insurance claims. Each row represents one claim. A given policy (with a unique policy number) may have multiple claims on it, so it will have multiple rows with the same policy number. I need to create a report with a sum of the claims for each policy. I imagine this would involve the "consolidate" function but I can't seem to make that work. Any advice or a tutorial you can point me to?
+
+
+-------------
+LOL, you will love me after this.
+
+1. Create a pivot table
+2. Put whatever data you need in the pivot table (claim and total, likely)
+3. Put the policy in the filter
+4. Go to Pivot Table Options, click Show Report Filter Pages
+5. profit
+
+Or just put the policy in the pivot and dont parse it out
+-------------
+Your best bet may be to include a helper column that sums each row then you can use SUMIF with the policy number being the criteria and the total'd column being your sum range.
+
+Clippy: SUMIF
+-------------
+Why didn't I think of this?! This is exactly what I need to do. Thanks.
+
+Solution Verified
+-------------
+[SUMIF](https://support.office.com/en-us/article/SUMIF-function-169B8C99-C05C-4483-A712-1697A653039B)
+
+     Syntax: SUMIF(range, criteria, [sum_range])
+
+
+You use the SUMIF function to sum the values in a range that meet criteria that you specify.
+-------------
+
+You have awarded one point to _baineschile_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

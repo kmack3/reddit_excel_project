@@ -1,0 +1,53 @@
+big
+22hyju
+Graph of a big amount of data sorted in different rows
+
+Hi!
+
+I have a set of data represented like this: http://i.imgur.com/2bcHJeq.png
+On the columns I have time (15 mins intervals) from 00:15 to 24:00, while the lines are different dates. The values inside the cells are electrical powers.
+
+What I want to achieve is a continuous graph thats shows me the behaviour of the electrical power from the first day till the last, but if I use the "line with markers" plot I can only do it for one day. The results should be something like this: http://www.sandc.com/products/automation-control/intelliteam/images/intelliteam-vv-peak-load-season.png
+
+How can I do it? :/
+
+Thanks in advance! 
+
+edit: i'm running Excel Professional Plus 2010
+
+
+
+
+-------------
+actually this is pretty easy to do with a pivot table. 
+1. Drag the days to the row area of a pivot table
+2. drag each column heading (0:30, 1:00, etc.) to the Data area
+
+Now.. the magic step... the "Sum of values" field that appears in the Column (legend area)...drag that to the row area instead.
+I made you a screenshot with some sample data. Let me know if you don't follow.
+http://imgur.com/eKRQ18l
+-------------
+It looks like in your post  you did not specify which version of Excel you are running.
+
+Please be sure to edit your post to include this so that we are able to better help you with your specific problem.  If you have received this message in error, please disregard.
+
+
+*[I am a bot](/r/AutoModerator/comments/q11pu/what_is_automoderator/), and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose?to=%2Fr%2Fexcel) if you have any questions or concerns.*
+-------------
+No can do amigo, the data has to be going across all the way to get the chart in Excel to that format.
+
+In other words, Excel can't place data going down, into a going across format in a line graph.
+-------------
+Great, thanks! You have been of immense help, now it works just fine :D
+-------------
+Ouch.. do you know any other software that might do that?
+-------------
+Sorry buddy.
+
+You thought about getting a macro to do it for you?
+-------------
+Actually I thought of that, but i have never done a macro for excel in my life!  Do you happen to know a good tutorial on how to do them?
+-------------
+Do you want me to give it a try for you? It's a bit more complicated if you want to get it to work properly. Upload it to Google Docs and PM me the link if you want.
+
+I won't tell anyone you're using an "unactivated" copy of Excel ;)

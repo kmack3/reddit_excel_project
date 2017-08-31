@@ -1,0 +1,37 @@
+Protip: Another awesome feature: PowerBI in Excel
+This is a cool feature, but it crashes on me constantly. 
+I'm not sure how awesome it is, or is not, but that was an awful demonstration from a business intelligence POV.  It uses a geographical view (because ooh, shiny), addresses no issues and communicates no information.
+
+Fundamentally, Excel is not a BI platform - yes you can make graphs and such, but there are other properly designed applications which leave even fancy implementations in the dust.  Excel is good for financial modelling and crunching small to medium sets of numbers, and in that area it's hard to compete with.  But let's not fool ourselves into thinking it's going to replace different applications.
+I'm going to have to go ahead and disagree with you there. Excel, in addition to some first party plugins (that are going to be built-in when 2016 appears) turn Excel into a legit central point for Business Intelligence:
+-ETL with Power Query (connect to many, many sources)
+-Data Model with PowerPivot (If you know Excel formulas, you pretty much know how to use this. Can also handle into the many multi-millions of rows of data nicely)
+-User PowerView (Which I'm not a fan of) or the regular old charts and tables that hundreds of millions of users already know how to use.
+
+I think PowerView and PowerMap are a little stunted as of today, but I've seen previews that indicate that they're going to be getting pretty sweet.
+
+Here's an article from a really smart guy about how Excel is king(ish): http://www.powerpivotpro.com/2015/06/no-more-apologies-excel-is-the-worlds-best-data-tool-period/
+
+Hmm, this has the potential to be an interesting discussion.  
+
+We've all heard that "Excel is not a BI platform".   ...But, the post suggests that if you look at the more recent versions, which they call "modern Excel", then you have to include PowerPivot, PowerQuery for ETL (which is key for any BI system), and now PowerBI Designer.
+
+So, for the sake of the argument, if those all are now working and stable, then does that do the trick?
+You can disagree, but you'd be wrong, and I say that as someone who's been a 'go to' guy for Excel for over ten years.  If you submitted an RFP for BI in the field I work in and said you intended to use Excel as your BI platform, you'd stand no chance of winning.
+
+Properly implemented BI is so much more than what you've covered, it's automatic PDF production, email & sms alerts, spreadsheet production, online interfaces for complex reports and downloadable versions.  Back end & front end databases with forms for clients to handle data cleansing and set up business rules.  It's integration with proper programming languages like R for predictive analytics.  The whole interface should also be in the clients 'corporate style'.
+
+I use Excel a fair amount every day, and while I'm familiar with PowerPivot I'm not really impressed.  Fundamentally it's still thinking about things in the same underlying way, which works nicely if you want to do something simple like plot sales over time with user selectable groups, but the functionality available in more serious BI tools makes it look outdated.
+
+I read the link, and I'd agree with two things with a lot of BI implementations - the idea that a lot of the time they're not used (best dealt with by pushing the important messages to the users via email / SMS), and that 'download to Excel' is important.  The second becomes much less used when clients trust you to manipulate the data, but in the prototyping / early implementation days it's often used.
+
+As I said above, Excel is not a BI platform, it's one tool in your arsenal, and used correctly it's the right one for some tasks, but it's not the be all and end all.  ["If all you have is a hammer, everything looks like a nail"](https://en.wiktionary.org/wiki/if_all_you_have_is_a_hammer,_everything_looks_like_a_nail)
+I've replied separately to Heppert, but no, those don't even come close to closing the gap.
+Let me just say this. I work for a company very high up in the Fortune 500. While IT has spent years deciding what they want to do with our data, I have built dozens of working applications using the PowerBI platform. They still have no product. And I can respond to a request in hours rather than waiting for who knows how long for IT to, for example, create a new dimension or measure. I like to think that PowerBI is democratizing business intelligence, bringing it to the masses. Taking it out of IT and putting it in the hands of the analysts who really know what to do with it, with care that is.
+My clients are big too, but I don't work internally, but as an external contractor specialising in BI.  The problem you describe with people being very slow is a serious issue, and one that isn't an issue with the way we work.  We also field multiple ad hoc requests per day, and sometimes deliver them in Excel, sometimes PDF, sometimes completely different software that's more specialised.
+
+Excel, and the tools which work with it are tools to use in the right time and place, but they don't make a BI platform on their own.  People clearly fail to understand this not just here, but with some clients where I've found awful Excel messes which take weeks to unpick, are full of bugs, and can be done thousands of times faster with a properly built solution that uses the right tools for the job.
+
+As an external agent, I need to be able to deliver what companies & public bodies of wildly different sizes need, with huge variations in their employees' technical knowledge.  There is no one tool that can come close to doing all this.  The right database for our client with a couple of billion records, three major distinct data sources and a desire for OLAP is not what I'm going to use for procurement tracking for a council.
+
+Absolutely none of this changes the fact that the original video was abysmal.

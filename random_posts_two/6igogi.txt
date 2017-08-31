@@ -1,0 +1,43 @@
+6igogi
+Moving average for non-uniform dates
+Howdy, I am trying to do a moving average, which I have mostly figured out but a moving average assumes that your (dates, numbers, etc.) are uniform. My dates skip around a few months sometimes. My boss is looking for me to do this moving average every 3 months, 6 months, and 12 months. Any idea on the easiest way to do it? 
+http://imgur.com/gallery/3kxLa There is my spreadsheet. Please let me know if you have any questions about it!
+
+
+-------------
+A1:C16
+
+Date | Stuff | Ave | 
+:--- | :--- | :--- | 
+01/01/2017 | 1 | 1 | 
+03/01/2017 | 2 | 1.5 | 
+22/01/2017 | 3 | 2 | 
+19/02/2017 | 4 | 2.5 | 
+21/03/2017 | 5 | 3 | 
+27/03/2017 | 6 | 3.5 | 
+29/03/2017 | 7 | 4 | 
+03/04/2017 | 8 | 5 | 
+01/05/2017 | 9 | 6.5 | 
+10/05/2017 | 10 | 7 | 
+26/05/2017 | 11 | 8 | 
+22/06/2017 | 12 | 9 | 
+06/07/2017 | 13 | 11 | 
+25/07/2017 | 14 | 11.5 | 
+20/08/2017 | 15 | 13 | 
+
+With C2 `=AVERAGEIF($A$2:A2,">="&A2-90,$B$2:B2)` filled down.
+-------------
+Just assuming that works with my information how do I incorporate the 3months, 6months, and 12months into that?
+-------------
+SOLUTION VERIFIED!
+-------------
+-90 as in 3 months before the date in A. Use -180 & -360.
+-------------
+Did I do the Clippy Points thing correctly?
+-------------
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+That works!! And my boss is very pleased, don't worry I gave you credit ha. Thank you!

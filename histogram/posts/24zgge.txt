@@ -1,0 +1,33 @@
+VLOOKUP...to the left!
+That's a neat trick, but Index/Match easily accomplishes this:
+
+    =INDEX(C:C,MATCH(A1,Z:Z,0))
+
+This is quite ingenious actually. Though I'm going to have to stick with INDEX-MATCH for my non-left lookup columns. 
+I agree with the other comments that index/match is more practical and intuitive, but I always appreciate seeing creative thinking around new solutions. This one is clever, thank you!
+Thanks for sharing this tip! 
+Hows does it work? What does {1,2} actually do inside the CHOOSE function?
+Index/Matching is by far superior.
+Helper columns aren't bad. They help reduce calculation time in most cases. And improve readability of formulas.
+Wow. I'm assuming that this doesn't get destroyed by inserting columns either...?
+I actually looked up how to do this yesterday. Ended up using a helper column instead because it was quicker for calculation. 
+This depends on how much data you need to do a lookup on.  There are some situations where vlookup with a helper column is so much faster than index/match or vlookup/choose that it is worth the effort to make a helper column.  This occurs when the lookup is over 200,000 rows of data.
+
+I wrote a custom find/offset macro that returns data no matter where it is found in a range of columns.  It is many times over more flexible than any of the lookup combinations, but is also very time consuming to run.
+Google index match.
+Is there any reason people would do this besides using just LOOKUP ? I'm a student in a course where we had a project that involved vlookups to the left and the professor told us to use INDEX, but I was able to do it just using LOOKUP
+Isn't INDEX/MATCH some sort of evil voodoo? ;)
+Yeah, once I learned index match I use it like crazy, so happy I found it. 
+You're telling it which column you want to be first and which second.  Typically, these are together (next to each other), but using CHOOSE gives the freedom to have them anywhere on the sheet.
+
+As has been said several times in this thread, INDEX(MATCH) will accomplish the same thing, but this is just another way to go about it.
+Correct
+INDEX/MATCH acomplishes better what VLOOKUP does because it solves other limitations. Using it will prevent errors that may appear because of the data you are using.
+
+People use VLOOKUP mainly because it is easier to remember.
+Can you walk me through how this works?
+Nice. Always like to learn something new in Excel, especially if it was something I didn't think could be done!
+I'm not saying VLOOKUP though, just LOOKUP
+I'm going to write up a tutorial on this later today, I think. I'll post it to this subreddit.
+
+Here it is: http://www.reddit.com/r/excel/comments/2537le/the_mechanics_of_index_match_a_tutorial_for/.

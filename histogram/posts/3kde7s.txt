@@ -1,0 +1,87 @@
+A macro for copying and pasting multiple cells a different number of times each. (Will give gold to anyone who can solve this for me).
+This works beautifully for me.
+
+Load your file, press ALT+F11. This loads the VBA window.
+
+Click Insert > Module.
+
+Then, paste this into the white window that appears.
+
+    Sub CopySongs()
+    
+        Application.ScreenUpdating = False
+    
+        Dim s1 As Worksheet, s2 As Worksheet
+        Dim i As Long, lr1 As Long, lr2 As Long
+        
+        Set s1 = ThisWorkbook.Sheets("Sheet1")
+        Set s2 = ThisWorkbook.Sheets("Sheet2")
+    
+        With s1
+    
+            lr1 = .Cells(Rows.Count, 1).End(xlUp).Row
+            
+            'LOOPS FROM ROW 2 TO LAST ROW OF SHEET1
+            For i = 2 To lr1
+                
+                If .Cells(i, 5) > 0 Then
+                    
+                    Application.StatusBar = "Copying " & .Cells(i, 1)
+                    
+                    'FIND NEXT ROW ON SHEET 2
+                    lr2 = s2.Cells(Rows.Count, 1).End(xlUp).Row + 1
+                    
+                    .Rows(i).Copy Destination:=s2.Range(s2.Rows(lr2), s2.Rows(lr2 + .Cells(i, 5) - 1))
+                
+                End If
+            
+            Next
+                
+            
+        End With
+        
+        Application.ScreenUpdating = True
+        Application.StatusBar = False
+        
+        MsgBox "It is done.", vbInformation
+    
+    End Sub
+
+
+
+After that, close the VBA window. Press ALT+F8 when on the first sheet. Click on CopySongs then OK - look at the status bar and wait for the done prompt. You can use a COUNTIF formula on the first sheet to count how many entries appear on the second sheet for each record (I did that, took me 5 seconds and every entry matched).
+
+When you're done, copy the sheet out into it's own workbook (right click on the tab, select copy, change the drop down to new workbook) and then save as a CSV file.
+Here you go http://www.filedropper.com/music2  
+
+And don't give me gold, that's how not how this sub works. 
+
+Ps it's in Excel format, I forgot to save as a csv. You'll have to do that yourself. 
+[deleted]
+This is pretty easy. I'm about to head to work, but if this isn't solved by someone else by the time I get off work I'll take a stab at it. 
+This looks very promising! I have followed what you said and it looks perfect. 
+Thank you so much!
+
+Now I have the csv file, but when I open it, it just looks like a regular excel spreadsheet. Universal Scrobbler requires this sort of format into the bulk scrobbler:
+
+"Jeff Buckley", "Last Goodbye", "Grace", "Jeff Buckley", "275"
+
+Is there a way to apply those speech marks and to get the commas in as well?
+Solution Verified
+
+Thank you so much. I've spent the last hour pasting the csv in segments as I think there is a limit on how much universal scrobbler will accept.
+
+I think I gave you gold? I bought it but I'm not sure if it takes a while to show up. 
+
+Thanks again. You have made my week :)
+Don't open the CSV in Excel - open it in notepad. Just open notepad and drag and drop it in. It doesn't need the quotation marks either.
+
+Excel automatically strips away the commas and applies it's own formatting to look pretty.
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Thank you very much!
+I thought that might be the case. Will have a look now!
+
+Yeah, excel is the destroyer of CSV files.  Notepad++ is my go to for all things text editing.

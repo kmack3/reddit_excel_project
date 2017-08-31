@@ -1,0 +1,86 @@
+Excel Workbook that is linked to around 1300 cell from an another workbook, not starting.
+So if I'm understanding this correctly, you are trying to read certain cells from other workbooks in the same folder directory as the current workbook you are executing this macro from?
+Have a look at PowerQuery, I learned from Youtube and it is really awesome with getting and working with data from diffferent workbooks.
+Just by your description, this seems better suited to SQL or at the least Access.  Excel is awesome and you might even get this to work, but I am certain it will be very fragile.
+
+I understand we are all bound by what we can learn and what we can afford and this is the tool you have, but using a screwdriver as a chisel is generally not going to get you a good result.
+> #TO APPLY CODE FORMATTING
+> 
+>     Use 4 spaces to start each line
+> You can select code in your VBA window, press Tab, then copy and paste into your thread or comment.
+Is there any reason the data is spread across 15 workbooks and not 15 worksheets in a single workbook?
+
+Your solution is very fragile and seems a bit extreme. Suggest combining the data into a single workbook, and/or worksheet if the data is the same format.
+It should work better/faster if you open the source files first.
+Absolutely. Importing multiple data sources and then manipulating them is exactly what PowerQuery is for.  Then when you need to do it again just update the data source and refresh.
+Thx, ill look into powerQuery
+
+
+Heh, always the answer I get when asking these kinds of questions, unfortunately I don't have access to any other better suited tool at work, and even though Excel is limited, I still have to make do and do the best I can.
+Another vote here for Power Query. It exists for this purpose and it's free.
+>Heh, always the answer I get when asking these kinds of questions
+
+Because you're reinventing the wheel, making more work for yourself and others. Use the correct tools for the job. Use Access. 
+I understand, I really do.  
+
+But that doesn't change my opinion or the veracity of it.  It's not snobby or elitist it is the truth.  You are trying to do something that is beyond the reach of that tool.  It can handle it in a minor fashion.  But not very well, not for very long, and not for that great of scope.
+
+If you keep getting the same answer, maybe you should start listening to it.
+
+
+There's at least 6 people that I need to sign off on me getting Access.   Chances of that are next to zero.
+
+Just because there's a better option doesn't mean it's an available option.
+Physically can not. Work doesn't allow it.
+
+I have to work within the bounds of what work allows me.
+>maybe you should start listening to it.
+
+Except, I can't, the only thing I'm allowed to use at work is Excel. I'd use Access or SQL if I could.
+
+When these kinds of questions are asked, it's not always because someone is stubbornly sticking to software that isn't the best tool for the job, sometimes it's all they've got.
+Work is wrong.  Tell them they are wrong.  STAND your ground.
+
+Part of IT is protecting people from themselves.
+
+SQL and Access are not your only options.
+
+I know they are expensive.
+
+But there are literally hundreds.. maybe thousands of free tools.  Many of which are certified by Military, banking, and security establishments as safe and secure.
+
+So expense is not an issue.
+
+If your IT is the stumbling block, Open up dialog with them and keep doing it.  If you explain this to any decent IT person, they will see it is not the tool. Get your Boss involved.
+
+If your boss is the roadblock, spend some time building a case for one of the other products.  Bosses want to succeed, build a case that is their best interest and they will let you.
+
+Don't just complain, show them a solution.  Show them you are trying to make it better for the company.
+
+
+Heh, when work is the government and I'm not in IT, they don't really listen.
+
+Bureaucracy is fun!
+It's simply not an option. There are so many steps involved. My IT don't make the decision, they pass it on to head office to review the product, they do a cost/benefit analysis.
+
+Do they just install it on the few PCs that myself and my colleagues use, then install it on others every time we move? Or do they just install it on all 10,000 PCs in the business?
+
+It doesn't matter if some other government or some other military has agreed it's a secure product, we have to do our own thorough review.
+
+It's a massive months-long undertaking that needs the approval of a lot of people so that a couple people who want it can make use of it.
+
+It's not my boss, or IT, it's bureaucracy that kills it. It pushes the expense of even a free product too high. And the answer we have got back in the past is "Excel is doing the job so far, stick with it". It's the biggest business in the country. Change is very very difficult. Even if they approved my change, it would be so low priority that I would be waiting for years for it to happen because other more important changes are constantly being implemented.
+
+Continuing to push the issue just wastes time and tax payer dollars.
+
+I know you're thinking that perhaps I'm not trying hard enough or not saying the right things. But I know my business and I know what is or isn't possible. I constantly win and lose much smaller battles for change. And those take a very long time.
+
+When I go on the internet asking how to make Excel do things that it was never designed for, it's because it's all I've got and all I'll be able to use. And you know what? Every single time I've succeeded. I've built some pretty impressive things for the business that Excel has no business doing. 
+Sure, whatever you say.
+
+But I'm going to go ahead and stop trying to help you.
+
+Good luck with your problem and your life.
+Jeez man, I was just trying to help you understand why for some people, the solution of "get better software" isn't an option, I wasn't trying to be rude or anything. So I don't really understand your attitude here.
+
+But yeah, have a nice day.

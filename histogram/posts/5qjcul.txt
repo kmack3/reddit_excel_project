@@ -1,0 +1,323 @@
+Managing a 800'000 record dataset - no SQL allowed
+With all due respect, if somebody asks me to paint a wall without the right tools such as a brush, it is going to take a loooong time and the results won't be pretty.
+
+100 records and untrained users - word is fine.
+
+5000 records and untrained users - Excel is fine.
+
+800k records and untrained users and no tools - get a life, management.
+I'm sorry, but this is too large of a solution for Excel to handle reliably and securely for any extended amount of time. Excel is a spreadsheet. It's not a relational database, it's not a user-input solution and it's not an Enterprise reporting solution. It is not a stable enough platform to keep and manage this much data with direct user interaction.
+
+You need to make sure that you protect yourself and create redundant email trails to your management so that when, not if, something happens to the data, you at least have that to fall back on. The same management that is not allowing an upgraded environment for this data will be the same management that will throw you under the bus when it fails. Especially since this is one of several, as you've said. The management may be a hurdle, but it's imperative they know that this solution will cause undo issues with all of the users and, arguably more importantly, your customers.
+
+As [u/cronos2546](https://www.reddit.com/user/cronos2546) said, you can store the data in Access and pull it out into other reporting and charting apps like Excel if the Access reporting isn't robust or dynamic enough for your needs (which it very well can be for most situations). You can also look into Power BI which can be used without the Pro version in a small network environment.
+
+Looking at [u/xolieo's](https://www.reddit.com/user/xolieo) suggestion, you can put SQL Express, for free, on a tower with backup protocols to the network under someone's desk. It's not ideal, but better than what's currently going on. I'm sure that the current Excel solution doesn't adhere to any form of industry-standard life-cycle development process (As-Is-Assessment, Design Review, Dev-Stage-Pilot-Prod servers, UAT Vetting, Migration Process), but it should with that much information. You will at least get more stability, security, and recovery with this approach.
+
+[u/Terkala](https://www.reddit.com/user/Terkala) mentioned using the Excel as a Data Connection/Regurgitation tool that can tap into an Access repository. You can place the back-end Access file in an accessible network location and place the Excel concierge file also on the network or in a SharePoint library. Users can create a shortcut on their desktops to the Excel file. If they absolutely have to, they can save a local copy of the Excel reporting solution, but they shouldn't, because again, it destroys any attempt at a controlled development life-cycle. At this point in the volume of the data, NO STANDARD USER SHOULD BE ABLE TO DIRECTLY EFFECT IT!
+
+This entire situation is a classic example of my Jurassic Park Paradigm; Just because you can, doesn't mean you should.
+
+I'm going to go drink a bourbon. I apologize if this sounds like a rant. 
+Why don't you just keep the file in Access? 
+How many columns are there? 40mb is a big file, but it's not unmanageable. 
+
+* Put all the raw data into a table.
+* Add your calculated columns at the end
+* Use Index/Match instead of Vlookup, it's faster
+* Create pivot table / pivot charts from table
+
+If you need to update the raw data:
+
+* If the data is more lines, just copy and paste into the table. It will automatically resize and add the calculated columns for the new rows.
+* If data is fewer lines, delete lines in the existing table until it's fewer and then follow my previous step. 
+* Hit refresh all on the pivot and everything will update. 
+can you make charts using Tableau software? www.tableau.com 
+
+or does it HAVE to be stay in excel?
+You should try the free version of [Domo](https://domo.com). It accepts stupidly large excel files (800k rows shouldn't be a problem), their latest release has drill down from chart, and making the visualizations/dashboards is trivial. I don't think you have to pay unless you hit over 100Gb of data, or a certain level of users. 
+
+I'm not affiliated with Domo, for the record. You just sound like *exactly* their intended client. 
+> presentations and analysis.
+
+What are these? How many separate files are we talking about? Who gets them?
+
+
+
+> We receive the data in a pivotcache. * We expand the data * add 3 vlookups * add a new pivottable * delete the source data. * 
+
+This sounds like it can all be done with VBA. Is it?
+Given the low tech constraints, here is what I would try. Manage the source data in Access. The lookups are easily replicated there if you know what you're doing. Create tables or views of the data that correspond to the drill-down and charting requirements. Then, point Excel to the Access DB using data connections. 
+
+With careful planning, you can create a repeatable process that reliably lodges the source data into Access, creates the needed views, and sets up Excel as the data consumer, rather than the processing platform. 
+
+What this does not solve is the need to move a lot of data between Access and Excel. So you will still have that pain point.
+
+What this could solve is the concern about managing the data resource in Excel. I agree with others that 800k rows is too much to manage in Excel alone. However, a 40MB footprint in Excel suggests that the data storage needs are comfortably below the Access constraint of 2GB. 
+
+If possible, explore the opportunity to source from somewhere upstream. If you currently receive an Excel file as a pivot cache, then someone has already done a lot of work to create that. That work likely involved ingesting a pure(r) source. Perhaps that source came from something else again. The goal would be to swim upstream as far as you can until you find the source of record. 
+
+No matter what you do, take care to document the process and the concerns, and articulate the concerns to your management as you feel necessary. There's a lot of inefficiency and risk in the current state, but these are problems that are not difficult to solve if people are willing to think outside the current state box a little. 
+
+Good luck with it. 
+I do this every day.
+
+I have an SQL server but routinely use access to handle data too large for excel simply for ease of use.
+
+Store your data tables in MS Access. Do all your criteria filtering in Access queries. Your objective is to get as close to the finished data as needed before using Excel.
+
+Do all your grouping, averaging, monthly, quarterly and so on with access queries. You will trim your data down to the few thousand data groups you need for your presentation.
+
+Next run a MS query from Excel to query the Access query. You should be able to group enough to get below a quarter million records. Excel can handle that and you will have it in Excel were everyone knows what to do with it. That answers your problem according to your criteria.
+
+If, however, you need to import more than a quarter million records, this will require PowerPivot and sometimes you simply have to spend the money it takes to do business. Upgrade.
+
+When exceeding a quarter million records,  import it directly to your data model and not to a spreadsheet. 
+
+If you need to import more than half a million records, then you have not applied enough criteria groups in the Access queries.
+
+With data sets this large store it in the Excel Data Model, not in a spreadsheet table. The data Model stores it as a Columnar Database. I have a data source in one Data Model well over 600,000 records with no functionality issues.
+Here's how I've handled a similar scenario.  Short background: data came from proprietary software that some brilliant sales rep closed on.  Company data goes to MongoDB, a non-relational database and was mapped extremely poorly.  Before we could adapt the management was signing more business segments.  Just about every solution presented above would fail for one reason or the other (not throwing shade at power pivot, I obtained local admin rights and use whatever I want now and power pivot changes the game).  
+
+1. Paste .csv to one sheet.  
+2. Set up 2nd sheet with a table (Ctrl + T) and add at least 2 rows.
+3. copy and paste the column headers you absolutely must have to the table headers.
+4. VBA - Advanced filter to table and resize - the lifesaver for me here was our MongoDB gui had such an awful export interface, columns would spit out in random orders so advanced filter restructures the columns with a pretty small memory cost.
+5. VBA - With tbl. Add extra column, name column, add formula, convert to values - not copy paste special!, add next column.....etc. end with
+6. Refresh all
+
+Either in same module or separate
+
+Delete data from table, delete extra 3 columns, resize to x columns by 3 rows, delete .csv paste sheet's used range.
+
+Can't refresh from here on.  
+
+I can send you my code if you pm me, it's really concise.
+
+Extra tips:  uncheck the table auto expand option. Disable auto recovery.  Don't format anything in the source.  Format the output.  If vlookup is still slow (it's a champion in vba), look into if vlookup=1 trick or index match (not a big fan)  oh, and obviously....  Application.ScreenUpdating = 'FUCKING' FALSE
+if you have it set up as an access file, isn't it possible to make a pivot table based on a connection to that access file? 
+I'm a financial analyst, and I have to pull transaction level information from Oracle GL and sift through it in Excel data dumps.  Revenue and COS transactions for 2016 are roughly 220k rows, with maybe 40 columns.  That's 8.8m cells with information; the data by its self in an XLSX formatted file is nearly 45mb.  For 2017 I am managing everything out of Access because I can run pivot tables from Excel on the Access data so much more easily.  My bosses don't care as long as I do my job and report accurate data (I use Hyperion for report reporting, the transaction details are for play-by-play details).
+
+There is absolutely no excuse for importing the data into Access or another database program (MySQL, SQLExpress, etc...) to either house the data so you can run pivots/power pivots on it from Excel, or run queries to slice the data into more manageable chunks.  You can even configure Access to execute lookup-type operations if you need it to!  Excel gives you the option to reference external data sources (Access databases, other Excel files) straight from the pivot table menus!  If management really values your time, then they need to give you the proper tools and support to do things the right way (as others have already mentioned).
+
+I'm sorry if that sounded like a rant, I'm a bit anal about data management.
+I don't know if it's possible, but you could try random sampling into a 5000 rows dataset that you can work with. Just make sure to set it up in a reusable way, so you can take multiple experiments and check if results are somewhat the same.
+This is not what Excel is designed to do. There are open source/free SQL solutions out there.
+Hey so they want this in a cube.. not that hard. 
+
+I would use power pivot.. but it's out of the question here for some reason. May I ask why? It's free and integrated into excel after 2013. 2010 just requires the free add in.
+
+
+I use power pivot on excel 64 bit and have more than a few multi million row tables in models I used daily. Don't let this community shit on you. It's full of a bunch of know it alls that have been doing thing the same way since 2010. Most people don't even know what power pivot/power query is. 
+
+That or check out powerbi.
+Why is SQL out of the question? 
+create a workbook into which you can load the data into. (save and close workbook)
+
+create another workbook that is linked to that workbook to run the formulas. (save and close workbook)
+
+create a third workbook that will keep only the aggregates that is linked to the second workbook.
+
+depending on the frequency of new data received... you'll need to come up with a process for storing historical data.
+
+if you have the time to learn, then there is always power shell that can execute all of the above.
+
+EDIT: keeping multiple workbooks open will be CPU intensive. 
+
+Also, when calculating, lock the ranges to specifics. This will prevent excel from doing pointless calculation. Instead of using A:A use A1:A800000. When you do A:A, it will keep looking beyond the last record.
+Have you considered using Qlikview? They offer a free personal version and it is more than capable of consuming that data. You can then do all your calculations and aggregations in Qlikview and then export to Excel for your dashboard. It's very similar to SQL.
+Powershell and data table maybe?
+Can you use power query to summarize some of this data, and cut down the number of rows? With 800k rows, I would think that this is transactional data of some sort. Can you summarize by a field or two? Maybe lump together weeks months or quarters? 
+Access
+save the data in a workbook, then from another workbook use connections -> other data sources -> msquery (its the last option on the list) select your data file as the source and you can do sql level querying from there. 
+
+edit just read your converting to access , just query thae data from there? set up a workbook connection to your access db. 
+Why is PowerPivot out of the question? It's free
+load the data set to powerpivot
+800krecords without the tools and untrained users = typical day at the office.
+
+Sounds like you just need to make a dashboard that references the data dump
+:( and it isnt even the first project like this 
+Or use powerpivot. I wish it wasn't out of the question.. I wonder why it's out of the question.. I mean it's free.
+I'm giving you credit for your paradigm.  That's brilliant.
+
+EDIT:  Whatever OP ends up doing, he/she needs to make sure that at all times they are using software tools with the consent of IT/management.  Don't want IT going crazy because you put an open source database program on the company computer when there may be specific data security requirements.
+I'm sorry. I disagree. Powerpivot will handle this without issue.
+
+Too bad it's out of the question.
+Solution Verified
+i am adding it into access but they need charts...
+This is the solution!! I deal with this all the time.
+
+Use access with your source data as the table - create queries that summarize your data with only the necessary fields so that only minimal rows (or records) appear.  This creates a much smaller set to manage.  You can then either export that query to xlsx and create charts in excel or link to the access database query from excel.  
+thanks! I wanted to keep the copies refreshable so I will just move the calculated source file in either a CSV or access to speed updating the copies fast. Thank you!
+Solution Verified
+This.  Use a visualization tool with the excel being the datasource.
+> thanks but this is a corporate environment, introducing new tools is generally the toughest option if not outright forbidden. But thanks for the suggestion nevertheless! 
+
+Thanks but this is a corporate environment, introducing new tools is generally the toughest option if not outright forbidden. But thanks for the suggestion nevertheless! 
+thanks but this is a corporate environment, introducing new tools is generally the toughest option if not outright forbidden.  But thanks for the suggestion nevertheless! 
+* They make 1 file we send out to the supervised teams,
+* one with additional views and statistics we keep for ourselves 
+* and finally we prepare a presentation
+
+Yep, am doing it in VBA.
+
+After reading through the replies, this is what is most likely be the solution. Thank you very much for your  explanation and recommendation!
+
+We have tried to request the changes to be added by the controllers( the people preparing the file, actually this is a long and difficult question about whether our team is even necessary) so where were I? Yes I have proposed this to my manager and got shot down. Not gona fight for this too much, I have already give in my two months. 
+Solution Verified
+haha thanks!
+I don't know much about excel tables. Are they faster to compute? I normally 
+just take the column as a range, add the formula then subsequently flatten the file like this:
+rangeA.formular1c1="=vlookup()"
+Flattener(RangeA)
+
+>Delete data from table, delete extra 3 columns, resize to x columns by 3 rows, delete .csv paste sheet's used range.
+i am not sure about this. why can't ijust delete the tables all together? 
+ 
+i did compare the execution times  of vlookup and index(range,match(),Match()) and to my greatest surprise, most of that 30 or so test showed negligible advantage of INDEX (match match) and some utter failures in circa 10 runs. 
+
+I am working on adding everything to an Access database file stored on the department share drive then  using that as an external source for the pivottable. 
+I just don't know how viable is that.
+
+If I add the table in access, run a left join query to add the calculated columns there then use  that query in the excel file. Would that work, or would i be dealing with the original recordset being help in the access table the access query and in finally, in the pivottable?
+
+would the user have to launch access to refresh their numberS?
+
+I will have to test .  
+ 
+I wish i could  just add the three columns i  
+
+Thanks! 
+I love using powerpivots myself but the existing workflows that we are working in conjunction( the processes of other departments who use our data ) with don't use them so it would require us to teach some pretty senior people to have them installed. 
+setting upSQL servers require prod, and UAt environments, COBs... not gona get the approval for them. 
+if you're adamant on keeping one workbook, then try this: see if converting the excel file into ".csv" or ".xls binary" to reduce processing time. you would do this after loading your data and clicking "save as" and adjusting the file type. (fyi, i haven't tried this but would be curious to hear what your findings are.) 
+
+last thing, you'll always need to wipe the data from the first workbook. it would be just a load tool from which the second workbook would run the calculations. (i'm sure you knew that though.)
+Thanks! Yeah, it is bookings data. One of the team's task is capture and correct any incorrect bookings so they need to be able to see every record. 
+
+A proper solution would be giving them a dashboard and then queryies that gives them full details for the desired line/expense code/ time period but ... I am not sure I am technically adept enough to do that yet.  
+
+thanks!
+:) Have tried this, the column selector window just straight up hung.  But ihave similar issues with access. I am adding columns in batches to see which one is causing "the ODBC driver error" 
+
+Ms quer was my first choice originally but then I couldn't find a way to join two tables in it. (MAybe I was just inattentive?) so I have decided to use access insteadd.
+
+Is the MS query   faster or more reliable than pulling it straight from Access, can join two tables in query (for the calculated columns)? 
+
+> Powerpivot is out of the question
+
+OP clearly says that's not an option in the posting.
+This. Spread out calculations over multiple tabs and manually calculate whenever it starts to get too slow or crash. 
+okay, thanks. This is interesting. how would this look like in practice? Countifs, VBA ?
+Curious, how stable of a development environment is it for non powerpivot installations? Do I have to worry about developing things that will not work for a majority of my clients; or end up spending an exorbitant amount of time error handling for two working environments?
+I can't get any add-ons on my machine... It sucks. 
+Once we do our analysis,  data is then being handed over to a wide range of people, to challenge it. 
+
+we have tried to release reports running powerpivot but it was just a torrent of complaints.:( 
+
+I like powerpivot though. question bt therei s something i can't get my head around: if i dobleclick ona value in powerpivot, the resulting table is always all string. String string string. strings that cannot be SUMmed. how do you get around that, am I doing something wrong?
+
+This or even worse. Even admins get caught with non approved non-portable software. 
+Also agree, power pivot is amazing!    On the other hand, other guy, management will take your jurassic park paradigm and buy a license to 20 different vendors and not take the time to scope any of them........try to throw a couple more thousand dollars of tablau, good data, or power bi licenses at that.  Once you've got your rube-goldberg machine configured, one of your vendors pulls the plug for a lapsed expired contract.  Enjoy!
+
+
+
+You have awarded one point to _Scheckschy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You may be able to use access to accomplish some of the aggregation that your pivottable does if you have Access 2010 (see the pivot view). You could also accomplish it with appropriate subqueries. As far as Excel's advanced charting capabilities, you could consider saving the file as an .XLSB (excel binary) to cut down on size. 
+Solution Verified
+That's a good idea. Raw data in a CSV source file to be used as backups. Then the report file that you update with new data as it comes in. 
+
+You have awarded one point to _Knights123_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+there's an "online" version as well, but I guess if your co. doesn't allow new tools then that'll be out as well. sorry
+I would review your VBA code then, and time it to see what takes the longest and refactor those parts first. You're avoiding select and whatnot?
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Access is definitely the 'correct' tool for you in this case, but when I was under fire; I had the limitation of not knowing anything about it.  I spent a week or so trying to teach myself, and learned some great DB best practices.  It is also a great way to visually learn how queries work, especially joins!  Unfortunately, I wasn't able to produce any results in time and so I reverted to VBA in excel which I was becoming comfortable with.  The delete data source trick - that you already know - was one of those huge "Woaahhh" moments for me, but I've made my money with my VBA advanced filter method.  It suits the poor data source issue easily.
+
+Tables, tables, tables.  Once you make the switch, you'll hardly ever use a range again.  They are much faster at calculating, easier to keep formatting the same, have a total row you can add and reference elsewhere with a drop down for which function you want to summarize for, and on and on.  The two biggest advantages to me have been:  1.  References everywhere become orders of magnitude easier to read and you don't have to spend time 'untangling' your work.  In VBA, they are super easy to work with.  In formulas, you can look at a function once and know exactly what it's doing.  2.  It helped connect the dots about how excel handles pivot tables.  Once you realize that a paragraph sumifs() function is the long, overly complicated way of building a pivot table and adding a couple of slicers, then you will start to work more efficiently.  I very rarely write formulas in my day to day; I'm a data minimalist (obviously not a rant-minimalist).  My favorite formula is GETPIVOTDATA() because it's a dynamic, readable, sumifs that won't break when you delete the source data (because you are referencing the pivot table that has the source data cached).  Also, hopefully someday soon, when you get into the Power Pivot world, the syntax for DAX equations will be easier to pick up on.  
+
+Index match has plenty of advantages but the reason I don't use it doesn't have anything to do with its functionality.  At my job, career path has been pretty poorly defined so management has this notion that people that can write the "craziest" excel function are the "best" analysts or whatever.  So it turns into a competition to see who can nest the most if statements and the index match crowd are instantly condescending of the vlookup "idiots".  I don't even bother, I just throw on my headphones, crank some Death Grips and develop my own method.  I take the philosophy that the most elegant and concise solution is the best.  So, in my context, I can do more powerful work with sub 1mb files and 2 paragraphs of code than any of these fucks with their formula bar dragged down to the start button.  
+
+Sorry, was trying to avoid flaming the index match crowd but I got triggered.  I can help with the functions if you give me a little more information about what they are.  I'm confident they are lookup functions, but who knows?  You could have some crazy stuff going on.  
+
+Final note:  That disable auto sizing of tables option has some strange behavior with VBA and tables.  I'd try the first 100 rows to get it going but if it looks like excel will crash with the full dataset, disable that and it will free up a ton of memory.  Ohhhhh nuance.  
+Write an excel sheet that does nothing other than request datasets from access and present them. Have all the heavy lifting done in access by having the excel vba talk to the access database.
+That's not at all true. You could use a standalone, self-dependent sqlite3 file. It's just a file, and has no more environmental dependencies than an xlsx. Check out [SQLite Manager](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/) for Firefox. 
+
+Edit: That said, powerpivot seems like a fine choice for this one. I would seriously explore that option before trying to build it in vanilla excel. As a last resort, you could use a VBA or powershell script to add your calculated attributes to the data, and then just use excel for your presentation.
+sqlite?
+Or you can download SQL workbench for free and just do it without asking for permission because that's what you need to get your job done.
+Yea but he needs to give a reason why..
+I'd suggest checking out chandoo.org.  Great resource to learn excel, and they have a lot of examples of dashboards from previous user contests.  Download some of the past contest entries that look like they might suit what you want to do, see what they're doing, and use that info to make yours.
+Ideally, you'd store it on a server.  Microsoft was pushing SharePoint heavily for a while but I haven't tried to publish one in over a year.  I either present it live or push the results down into a custom-tailored view to hide the secrets.  You bring up a valid cost/benefit about it being worth it for the audience in the end, and scoping that before day 1 is a great best practice.  There is another cost that you have to consider as well, namely, your skill set.  I'm not a "you don't code in python so you're not a programmer" vs "oh yea?,  well I write everything in C++ and Java so I'm a real programmer" type of worker.  In my circumstances, I basically look at it like I'm getting paid to go to school and the more systems/tools/languages I can familiarize myself with, the better I'll end up wherever the road takes me.  That will very obviously not apply to everyone, but my main client has the type of money and ignorance to scatter millions of dollars across different systems and providers and quickly letting them deteriorate for the newest hot thing in IT when, all-the-while, they could have had the due diligence to fully map a project out and had a clean system at 1/10th the cost.
+
+TLDR: If you want to learn it and have the access/time, the customer's utilization plays second fiddle to the XP points you'll gain diversifying your skill set.  IMHO
+My suggestion:
+( I was in the same boat...but when I published I spent a huge amount of time sitting down with the
+Main contacts of the different groups using the data to answer questions.....even did two webinars to do a demo and answer qs)
+
+Use powerpivot to do your report.
+
+Have a pivot on a separate tab that's set up to act like a table with filters just to look at the raw data.
+
+Have a separate CSV file( or access db file or just about anything else...) with the raw data that people can reference.
+
+( actually, I think the time explaining stuff to your users is the main take away ) 
+
+Unfortunately you can't.  Pivot Tables compress a table object or range to a 'pivot cache' while Power Pivot Pivot Tables look back at the DAX engine, which, from my very limited understanding, is all in RAM.  You can extend the 'top 1000 rows' but you cant get source column names, or get any values from a DAX measure.  Also, can't use the "Show Report Filter Pages" feature which I've blown a couple of Sales Managers minds with.  Most of them hate pivot tables because they will throw a Rep or Territory in the filter and copy the table, paste to new sheet, name sheet the Rep or Territory, repeat... They always hate when I'm like, "You know there's a button for that, right?"   
+
+Edit: "Show Report Filter Pages", not Manual
+You've been on that ride before, it seems.
+thanks. I am already using xlsb, it saves on the disk size, but not on the memory size which is the hard limit here.
+
+what do you mean by pivotqueries?
+Solution Verified
+
+You have awarded one point to _FeedMeWine_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Furthermore, your last requirement would be solved easily.  With nothing but the pivot cache, you can add a couple of slicers to the pivot table.  Then, after you disable auto expand columns on pivot changes and switch to tabular layout and get rid of subtotals, your multiple users will forget all about needing to "drill into" anything.  "Oh, I can just click my name on the big blue button and it shows only my stuff?!?!?" 
+I second this--you already have access. You don't need anything fancier for 800K rows. You can work on an excel-access interface like the above user suggested and in meantime can do your summarizations and access then use the aggregates in excel? 
+i am sorry, how is that possible? wouldn't access still run on the user's machine?
+and where would it run? still on the client side. I have a semi legal SQL database tucked away on one of our UAT SQL servers that they forgot to recycle but I have left that department a year ago and  I just cannot use it for production, especially not in a work for a different department:)  
+
+doing it properly requires approvals and expenses:\
+Fuck that.  Do the job with the resources you have.  Can't do the job?  Tell your boss you lack the proper resources.
+Couldn't agree more.  I don't use Power Pivot as an end-all be all.  When I first started messing with it, I was the guy that saw you could magically make Excel handle more than 1,000,000 rows so I was like, "Great, I'll just load EVERYTHING".  Now, I use it for very specific, easily modulated end results that will enable the end user to do something better from a static file.  There are many use cases, but this is where I've had more buy in from different users.  My days of trying to recreate a client's entire DB in 12gb of RAM  "just because" are over.  
+
+Furthermore, I really like how humbling it is.  You start messing with it and that light starts to go off and you think you can solve anything; then, you get stuck and find your way to Marco Russo and Alberto Ferrari's material and realize you had no idea how powerful this is.  Those dudes are using DAX functions to access the system clock and memory logs and building pivots off of them to show, in real time, which actions are better and why a certain intuitive idea that you try to craft that worked easily in excel is a terrible idea in Power Pivot.  That imposter syndrome starts acting up really quick.
+hmmm so like a second powerpivot table ? this is one of the most orthodox solutions I have seen. hehe I will try it tomorrow!
+> Show Report Manual Pages
+Iamsorry this is completely new .. .what is this, where can I read more about this? thanks!
+
+Yea.  The crazy thing is these are some of the biggest names in IT and they have been trying to buy the "data car wash" solution for 20 years.  You can't sweep bad data under the rug.  Just started a new client though and they have the cleanest instance of SFDC of all time, from my understanding .  I got my credentials and went to their site and almost started crying from joy.  There's a reason SFDC's ticker is CRM. 
+Well I'm not sure, I mentioned the access pivot table view of a table and subqueries. You can access it in access by opening a table and right clicking on the table window icon that appears above the data sheet view. A pivot table is basically a bunch of distinct select statements and aggregate functions. You can accomplish this with sql and join the results together. 
+one thing no one's mentioned is your use of vlookups. I once had a massive sheet (not quite as huge as this) and had horrible memory performance. Turns out the vlookup is terrible at scale as each instance uses the entire array of cells required to span the lookup columns and parses it into memory. 800k rows and you've got a huge amount of data in memory! I'd recommend using INDEX / MATCH formulas instead. It only parses the specific columns you need.
+I think what OP means is that you can create a query in access that uses your table as the source - think of it like a pivot table.  In an access query you select the fields you want, and then you have the option of summarizing,averaging, etc any numerical fields so that the output (which can be exported to excel) will be a much smaller, more manageable excel file that you can use as a source for your charts.
+
+You have awarded one point to _cronos2546_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You can set up access as a "back end" that resides on the server somewhere and have excel (or whatever) provide a "front end" for the users. 
+
+In my own system the only thing on the users computer is a small vbscript that clones the front end found on the server (a bit of a further step).
+More like lacks the resourcefulness. 
+It's "Show Report Filter Pages", not Manual Pages as I incorrectly stated about.
+
+The easiest way to explain them is to just test it yourself.  Take any workbook that you have with a pivottable, open a new workbook (Ctrl +N).  Copy and paste the pivottable into the new workbook.  However the pivottable is currently laid out is fine, just take something with less than 20 options, for example, "Theatre", and drag it to the filter section of the pivottable.  Now click into the pivot table so the two pviottable sections are on the ribbon.  Click 'Analyze', then on the far left, clik the 'Options' dropdown then select the 'Show report fitler pages' (2nd option).  Alt JT + T + P for the whole shortcut.  It will open a dialog box with 'Show all report filter pages of: and then have any filters you have listed.  Click the one you want, "Theatre" if you are in the example.  Then clik ok and watch what happens!!
+
+Not a super impotant feature but there are times when it is extremely handy!  
+Index/match is what I fight coworkers on almost everyday.  I refuse vlookup!  
+Well, I never keep active formulas like that. after joining the two tables together, I hit the range with a flattener function that replaces the vlookups with constant values. 
+ in my tests on this dataset, index(match,match) and vlookup functions performed  similar.  
+thanks!
+This is a great answer. Use a very similar setup at work for large queries. 
+Resource you are not permitted to use = resource you do not have.

@@ -1,0 +1,37 @@
+Inventory spreadsheet using hyperlink for images
+This formula will give you the folder as long as there is no "[" in the excel file's path:
+
+
+=LEFT(CELL("Filename",A1),FIND("[",CELL("Filename",A1))-2)
+I think you're looking for something like this:
+
+    =HYPERLINK(".\whatever\somepic.png","somepic.png")
+
+It uses a relative path, a single dot means "the current folder".
+Curious about this myself...
+If you can save the "temp" folder on a shared drive then you can send your coworker an email containing a hyperlink to open the file. This way the file location won't change. 
+Ever considered doing so on google spreadsheet. It has a function image() that allow you to dispay the inage directly into the cell.
+Really useful for that kind of inventory file and having a folder in your google drive makes the link generation pretty simple.
+Would you want the pictures in the file?  You can input the pictures as a comment so when people scroll over the cell they see the picture instead of the comment.  I used this for a spreadsheet  I had to do so that people could see the examples I was describing so there was less room for error when identifying and item.
+
+To do this insert a comment. then right click on the edge of the box.  go to "Colors and Lines" tab on the color drop down go to "fill effects" then picture tab. From there you can insert any picture you would like.   
+
+This will of course make your file a lot bigger, but if you were planning on sending a whole folder of pictures I can't see that it would matter and would be easier as one file.
+Can you house the files on a shared drive? If so, then you can establish an image folder and the hyperlink roots can be consistent (//server/share/folder/file01.jog).
+This is what OP needs. For example, this is what a formulaic hyperlink would look like:
+
+>   =HYPERLINK(left(CELL("filename"),FIND("[",CELL("filename"))-1)&"nameofpicture.png","link to picture")
+
+Note, I used -1, which would include the \ in the file path.
+
+Also, what I usually do is write a simple batch file that I would put into the folder giving me a list of files in the folder.
+
+>  dir /b/on filename.txt
+
+Edit: changed my mid formula to left, to match what ^ included.
+Ya we currently have it on a shared drive, however once the file is complete it will be sent to someone who isn't on our shared network drive. 
+
+I've been reading if I use a hyperlink function and have my spreadsheet in the same folder as the images, it should work?
+I haven't considered this before! Thanks! 
+If that doesn't work for you, why don't you load the pictures to like a google photo album and set it to "share with anyone with link".  Then just direct the link in the workbook to that photo in the album?
+Ohhh thank you! This sounds like a good solution!

@@ -1,0 +1,66 @@
+large
+2phva2
+Splitting an excel file that is too large to open
+
+Is there a way to split an excel file that is too large to open? 
+I can't open it without excel crashing.
+I figured I might split it into a few files to lessen the load.
+File size: 5,080,817 KB
+
+
+-------------
+If possible, try importing the Excel file into Access
+
+How did you come to have such an absurdly large file, in the first place?
+-------------
+Have you tried to open it with Excel 64-bit?
+-------------
+You could connect the excel file to a PowerPivot model and extract the data.
+
+Edit: Also, someone just posted this article. Read this http://blogs.msdn.com/b/powerbi/archive/2014/12/16/announcing-new-excel-2013-bi-stability-and-usability-improvements.aspx
+-------------
+Change extension to  .zip and then unzip it, split up the xml into similar structured file packages for each worksheet, and then rezip and change back to .xlsx  
+
+
+I make no promises that this will work in the slightest 
+-------------
+I believe the maximum size of mdb or accdb file is 2GB.
+
+Try importing to SqlServer or other DB.
+-------------
+Not sure if I'm running the 64 or 32. How can I check?
+-------------
+It's a kind of funny coincidence. I posted that link 10 minutes before testhec10ck's question :)
+-------------
+> split up the xml into similar structured file packages for each worksheet
+
+How would I go about doing this?
+-------------
+I've never even gotten close to this, but it looks like you're right!
+-------------
+Check out this link: http://kb.jetreports.com/article/AA-00722/0/How-to-determine-whether-you-have-32-bit-or-64-bit-Excel.html
+-------------
+Yup, that's what I thought.  :D
+-------------
+Honestly, digging around and experimentation. I haven't unzipped an xlsx file for awhile and don't even remember what the structure looks like 
+-------------
+http://msdn.microsoft.com/en-us/library/office/hh180830(v=office.14).aspx#odc_Office14_ta_GenerateExcelWorkbookswithOpenXMLSDK20_Introduction. 
+
+
+Definitely not for the faint hearted :)
+-------------
+Maybe I inspired his/her question. Who knows ;)
+-------------
+First solution in my mind is to use other programming language (python with pandas or xlrd comes to mind) to read the xlsx.
+
+
+
+Then I read other suggestion to import the file to database server or using PowerPivot (both seems to be a better solution than try to do with programming language)
+
+
+
+But your suggestion sir is the most hardcore of them all :p .
+
+Renaming to zip file, extract all the worksheet in folder xl\worksheet, split all the xml and then parse or create xslt for the xml? 
+
+The satisfaction when you done it will be truly epic.

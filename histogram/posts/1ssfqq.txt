@@ -1,0 +1,509 @@
+What are some of your personal or creative uses of Excel?
+At my work, I am close enough to hear the janitor lady knock on the men's bathroom door and say "Excuse me" to check to see if there are any occupants before she would start cleaning up the restroom.  Needless to say, I want to avoid being in the bathroom when she comes around, so I have a sheet named Excuse Me that I use to track the date and time for every time she knocks.  
+
+I have learned that ~65% of her visits occur between 10:30 and noon, with occasional stops between 8:45-9:45am or 2:30-3:15pm.  There is no tendency I can see yet with regards to the day of the week.
+Personal balance sheet and cash flow forecast. 
+
+I've had one setup since 2006-2007 and I make a copy of the sheet at new years. I now have numbers on all my credit lines and monthly income/expenses. It's amazing to see that I actually set it up to decrease my spending, control my money outflows but instead my income and expenses both grew. I can see when my student loan was paid off, what was the monthly payment, what interest rate, etc. it's great.
+[deleted]
+In the essence of simplifying my life, I am going to start mapping my meal plans on excel for the week. Pick meals that i like and are heslthy and put them in a drop down. As time goes on I will grow the data validation. The meal plan will auto populate a shopping list for a weekly grocery shop so im only buying what i need.
+Some people think I'm weird because I always use excel as my calculator instead of keeping one on my desk.
+
+When I dieted last year I made a workbook to track the calories of each meal (which I calculated using wolfram), exercise, and weight over time.
+Designing my home's floor plan to conceptualize furniture layout.  I inserted (to scale) shapes of my furniture and tinkered around till I found what I liked.   I'm certain there's plenty of software that would've made it easier, but it worked nonetheless.  
+The best 2 things I've done with Excel (what I'm most proud of):
+
+1. Created a workbook using VBA that has inputs for category, title, description, price, photos paths, and a script that will loop through the workbook, automatically delete my old ads, and then post them again to online classifieds (including attaching photos) every 2 days between 5-5:30.
+
+2. Used Excel/VBA/Batch/PM SW to automate about 6 hours of weekly reporting and emailing at my previous job. This involved creating reports from our PM software using batch files (batch and wait via vba), parsing said reports, checking out documents from sharepoint, updating them using report data, checking them back in, along with emailing users on their status, and a few other things. I had never used VBA prior and this really helped me get in to it. Probably took about 50 hours of work, but saves 4-6 hours per week (and as far as I know, has still been running at the company for about 1,5 years).
+Chronicling seat arrangements in lecture halls and filling them out each day by occupancy. Interestingly enough, regardless of size of class, most people will avoid sitting in direct line of sight of professor. Front rows and most of the middle are generally empty. Also, sometimes I highlight seats where students ask the most questions and often they are in the upper middle rows of the lecture hall.
+My lectures are incredibly boring.
+Another creative use of excel is speedometer graphs. 
+
+Create two pie charts. One with red/amber/green sections based on what you call good/bad/OK. The other pie chart contains segment A, which is your current score, segment B which is always 1, and segment C which is (99-A).
+
+Overlay one pie chart onto the other, and set the graph background to transparent. Now whenever you change the value of segment A, the speedometer needle will move round the coloured bars.
+
+It's a bit of work, but it's prettier than a bar chart.
+Something fun I've been working on (not quite done yet, still in the middle stages):
+
+A recipe repository that can import and parse recipes of a somewhat standard format. From there, I want to pull up recipes containing specific items, calculate the fat/protein/carb/calorie contents (per recipe and serving). All of which is pretty much available in a handful of places now.
+
+But after that is set up, I want to create a function where I input some ingredients I wish to use, and it pulls a list of recipes. Also I want to add an "optimal search" function that can pull groups of recipes with common ingredients and builds a shopping list from it. If I add in costs, I could also pick the cheapest group for frugal meal plans!
+
+But that's a ways off still. And I'd ultimately only be using Excel as the pass-through, since it will become a database and needs to be treated as such.
+
+In the interest of my own self-development, I made the import function completely modular and configurable, it uses Regular Expression pattern matching contained inside column definitions inside an XML file. You just have to tell the script where the files to input are and where the XML file to use it. It then spits everything out into a table format. The best part of that is I set the script to recognise (from the XML definitions) if the file should be searched in whole, line-by-line, or in multi-line blocks. I need to clean it up a little, but it's all working as I had hoped!
+____
+When I tried out weight watchers, I felt the tracker was ridiculous, so I had my own calculator built in Excel, with dropdowns of previous meals so it filled in the data if previously recorded.
+____
+Just about everything else outside of work was recreating things that already exist elsewhere, so not really worth going into detail but:
+
+* an event calendar with categories, recurring/non-recurring, calendar or list display (Like Google Calendar, but not as awesome)  
+* A predictive bill-pay list that calculated how far in advance we could afford to pay bills. It let you allocate money for things outside of the list, or put weights on upcoming bills so they wouldn't sneak up on you. (Got a $5k bill coming up in 2 months, but with no allocation, everything looks good for 6 weeks? could land yourself in trouble if you don't plan properly).  
+* a giant Solver workbook that I could just drop a bunch of variables in real quick and tell it to run. I was helping a guy in a stats class that used solver, and setting up the solvers took so much time!
+I use Excel to make my resume.
+SO much easier to get formatting/bulletting/spacing down exactly how I want it compared to Word. When I want to distribute it, I just save ("print") it as a PDF file.
+The worlds most ultimate movie list (without covers).
+
+Mainly i use it to sort and check imdb links to see if i already own/seen a movie, but it auto scrapes info from the internet on actors / directors / plot / ratings / etc, as well as does a bunch of neat side that are most likely only useful to me and my setup but are fun to use none the less!
+
+As a side note if anyone here knows a way to put a Movie Name in one cell, a Movie Year in another cell, and have it auto find an imdb link for that movie, you would be my hero forever! (eg A1 = "The Green Mile", B1 = "1999" and the script would return "http://www.imdb.com/title/tt0120689/" to C1)
+I am routinely swamped with work requests, and there is no way to efficiently get them all done with other office resources like post-it notes or notepads.  
+  
+So I designed a ** task prioritizer/tracker**, with the following fields:  
+  
+* TaskID  
+* Task description  
+* Priority (manually assign the priority 1-5)  
+* Due Date  
+* Action Required  
+* Requestor Name  
+* Work Type Category  
+* Status (Pending, Hold, Complete)  
+* Hours worked on item (estimate until task complete)  
+
+Then I just have a button that instantly sorts it all by status (Pending 1st, Hold 2nd, Complete 3rd) and by priority (ascending), so that I always have a clean list of pending work tasks itemized by priority level.
+
+For the hours worked, I initially put an estimate, then when I finish the task, I put in the actual number of hours spent.  Then, based on all this data over time, I create graphs showing how much time I spend on each tasks type, by month or by any data point included in the spreadsheet.
+
+I have been using it for over a year now, at it seems to be working very well.  I can even show it to coworkers so they know where their request is in my prioritized list.  Then if they need to raise the priority, they can talk to the person(s) who have the higher priority items.
+I have a database that I use to keep track of everything; personal finances, studies, readings, etc. I use excel to update and manage this database.
+I have created... 
+
+an artificial life, the game, simulator
+
+defender game
+
+working craps game
+
+texas holdem
+
+NCAA CFB FBS rankings
+
+everything else in my life pretty much.
+
+all while I should have been working... I WAS LEARNING
+I have a spreadsheet that I share with my girlfriend (technically Google docs, not Excel) that we use to manage our monthly spending.
+
+Every time we make a purchase that's for both of us, we put the date, place we purchased it, optional description, amount, category (Bills, Groceries, the dog, apartment stuff, etc), and which one of us made the purchase.
+
+Another tab of the spreadsheet automatically buckets the first tab by month and tells us the amount that one needs to pay the other, including the cost of half the rent, in order to make sure we're each paying half of everything that's for both of us.
+
+Then in a third tab I have a pivot table and some line charts that lets us easily track any unusual variances in our spending habits in each of the categories I mentioned before, so we can determine if we're getting lazy with our spending, or if we made any unusual purchases, or bills fluctuated too much from month to month, etc.
+
+
+I know this is basically what Excel was built for, but I was pretty proud of how much of it I managed to automate behind the scenes (particularly the bucketing of each person's expenses by month).
+One guy made an RPG.
+
+Here's the [article on Ars Technica](http://arstechnica.com/gaming/2013/04/how-an-accountant-created-an-entire-rpg-inside-an-excel-spreadsheet/).
+Probably nowhere near as grand as other people's uses, but:
+
+On the personal side, back when I played DnD (3.5) I had a bunch of spreadsheets for magic item creation that would crunch the cost of creating/buying/crafting items with different types of enhancements. My brother created character sheet generators that could do pretty much all classes, feats etc. that automatically calculated saves, abilities, bonuses etc.
+
+On the work side, I have sets of sheets that I use to randomly generate data from specific metadata and weightings. It gets used to mass unit test statistical data. It's checked against formula-based transformative helper columns.
+I programmed Conway's Game of Life in VBA in Excel. Sadly it's on a work computer that's not connected to the Internet.
+I use it to predict my end-of-term scores from individual exam scores. Each score is weighted differently, but I have a handy graph that shows what my end-of-term score will be if I continue at the same quality, or if I drop down to my first quartile level of quality.
+I am diving in head first.
+
+I started with the family business a few years ago and they were doing everything on MS Word.  Payroll, retail/field sales, billing, accounts payable, 10K customer 'database,' etc.  Yes you read that right, MS Word.  I can't even imagine how it came to be that way.
+
+Anyway, I designed some very simple workbooks with zero knowledge and google.  A month ago I saw a video of an Excel workbook using VBA. 
+
+Needless to say I'm learning VBA and everything is changing.  Excel is friggin' incredible.  What *can't* you do with it?
+
+Personal stuff I use it for now include dumb stuff, serial number organization (for all the stuff we have in our home), personal finance which I'm always reinventing, baseball card org., photography work/equipment/billing.
+Not the most creative or advanced, but I love excel for personal expenses. I have a spreadsheet that calculates all of my and my partner's respective monthly expenses and then calculates the amount the other person owes for any shared expenses. A summary worksheet then reports the final number of how much one person owes the other at the end of a given month, as well as how much was spent on any given category (food, car insurance, mortgage, etc). And (of course) you have to have a nice pie chart to display that data as well!
+
+Basically all I have to do is enter in the receipts, double-check the formulas, and then I'm done.
+i use it to track my mortgage payments, how much goes towards pricipal, interest, extra payments, and to calculate when my mortgage payoff date will be.
+I use it all the time, but one of the things I just recently started using it for is to make some macros to automatically update certain files from my work laptop to replace copies on the network drive here at work (or vice versa - downloading copies of files and replacing the ones on my machine).    
+
+At the click of a button, I automatically update 10 files from around the network drive, rather than having to go find them all and copy/paste each one and "Yes, Windows, I'm sure I want to replace the file".
+Add a blank row between each line:
+
+Fill in incrementing numbers in a blank column down next to your data. Copy those number and then paste them directly underneath, so basically you'll end up numbers from 1-100 then a second set of numbers from 1-100. Then you sort by that column. 
+
+-----
+
+The other thing I enjoyed doing was an excel macro (VBA) to solve Sudoku puzzles. I stopped playing Sudoku after writing that. It was a neat exercise in recursive programming. 
+
+    Option Explicit
+    
+    '* **************************************************
+    '* Notes
+    '* **************************************************
+    '* Using arrays to store the used values in 3
+    '* different(one each for Column, Row and Box)
+    '* and use flags.
+    '*
+    '* Concept
+    '* Load data in 4 arrays.
+    '* - All Data
+    '* - One each for Row, Column and Box - this stores bit
+    '*   flags to see if the value was actually used.
+    Private Enum enValueCategory
+        vc_BoxIdx = 0
+        vc_RowIdx = 1
+        vc_ColIdx = 2
+        vc_Value = 3
+        vc_IsKnown = 4
+    End Enum
+    
+    Private Enum enUsedType
+        ut_BoxIdx = 0
+        ut_rowIdx = 1
+        ut_ColIdx = 2
+    End Enum
+    '
+    
+    Sub SodukuSolver()
+        Dim hr As Long
+        
+        Dim nUsed(0 To 8, 0 To 2) As Long
+        Dim nData(0 To 80, 0 To 4) As Long
+        
+        hr = ufnRetrieveValues(nUsed, nData)
+        If hr = 0 Then
+        Else
+            MsgBox "Error Retrieving Values"
+            Exit Sub
+        End If
+        
+        
+        hr = ufnSolve(nUsed, nData, 0)
+        If hr = 0 Then
+        Else
+            MsgBox "Error Solving"
+            Exit Sub
+        End If
+        
+        hr = ufnOutputValues(nData)
+        If hr = 0 Then
+        Else
+            MsgBox "Error Outputting Values"
+            Exit Sub
+        End If
+        
+    End Sub
+    
+    Private Function ufnSolve( _
+                            ByRef nUsed() As Long, _
+                            ByRef nData() As Long, _
+                            ByVal nCurDataPos As Long _
+                        ) As Long
+        On Error GoTo err_ufnSolve
+        Dim hr As Long
+        Dim nBox As Long
+        Dim nRow As Long
+        Dim nCol As Long
+        
+        Dim nValue As Long
+        Dim fUsed As Boolean
+        Dim fEnd As Boolean
+        
+        nBox = nData(nCurDataPos, enValueCategory.vc_BoxIdx)
+        nRow = nData(nCurDataPos, enValueCategory.vc_RowIdx)
+        nCol = nData(nCurDataPos, enValueCategory.vc_ColIdx)
+        
+        If nData(nCurDataPos, enValueCategory.vc_IsKnown) Then
+            '* Handling here is questionable.
+            If nCurDataPos >= 80 Then
+            Else
+                hr = ufnSolve(nUsed, nData, nCurDataPos + 1)
+                If hr = 0 Then
+                Else
+                    ufnSolve = -1
+                End If
+            End If
+        Else
+            nValue = 1
+            fEnd = False
+            Do Until fEnd = True
+                fUsed = False
+                If (nUsed(nBox, enUsedType.ut_BoxIdx) And (2 ^ nValue)) = (2 ^ nValue) _
+                    Or (nUsed(nRow, enUsedType.ut_rowIdx) And (2 ^ nValue)) = (2 ^ nValue) _
+                    Or (nUsed(nCol, enUsedType.ut_ColIdx) And (2 ^ nValue)) = (2 ^ nValue) _
+                    Then
+                    fUsed = True
+                Else
+                End If
+                
+                If fUsed = True Then
+                    If nValue >= 9 Then
+                        ufnSolve = -1
+                        fEnd = True
+                    Else
+                        nValue = nValue + 1
+                    End If
+                Else
+                    nUsed(nBox, enUsedType.ut_BoxIdx) = (nUsed(nBox, enUsedType.ut_BoxIdx) Or (2 ^ nValue))
+                    nUsed(nRow, enUsedType.ut_rowIdx) = (nUsed(nRow, enUsedType.ut_rowIdx) Or (2 ^ nValue))
+                    nUsed(nCol, enUsedType.ut_ColIdx) = (nUsed(nCol, enUsedType.ut_ColIdx) Or (2 ^ nValue))
+                    nData(nCurDataPos, enValueCategory.vc_Value) = nValue
+                    
+                    If nCurDataPos >= 80 Then
+                        fEnd = True
+                    Else
+                        hr = ufnSolve(nUsed, nData, nCurDataPos + 1)
+                        If hr = 0 Then
+                            fEnd = True
+                        Else
+                            nUsed(nBox, enUsedType.ut_BoxIdx) = (nUsed(nBox, enUsedType.ut_BoxIdx) And Not (2 ^ nValue))
+                            nUsed(nRow, enUsedType.ut_rowIdx) = (nUsed(nRow, enUsedType.ut_rowIdx) And Not (2 ^ nValue))
+                            nUsed(nCol, enUsedType.ut_ColIdx) = (nUsed(nCol, enUsedType.ut_ColIdx) And Not (2 ^ nValue))
+                            nData(nCurDataPos, enValueCategory.vc_Value) = 0
+                            If nValue >= 9 Then
+                                ufnSolve = -1
+                                fEnd = True
+                            Else
+                                nValue = nValue + 1
+                            End If
+                        End If
+                        
+                    End If
+                End If
+            Loop 'fEnd = True
+        End If
+        
+    exit_ufnSolve:
+        On Error Resume Next
+        Exit Function
+        
+    err_ufnSolve:
+        ufnSolve = Err.Number
+        
+        Resume exit_ufnSolve
+        Resume
+    End Function
+    
+    
+    Private Function ufnOutputValues(ByRef nData() As Long) As Long
+        Dim nCurYCube As Long
+        
+        Dim nCurCubePos As Long
+        Dim nCurRowPos As Long
+        Dim nCurColPos As Long
+        Dim nCurValuePos As Long
+        Dim nCurValue As Long
+        
+        nCurValuePos = 0
+        
+        For nCurRowPos = 0 To 8
+            For nCurColPos = 0 To 8
+                
+                If nData(nCurValuePos, enValueCategory.vc_IsKnown) Then
+                Else
+                    ActiveSheet.Cells(nCurRowPos + 1, nCurColPos + 1) = nData(nCurValuePos, enValueCategory.vc_Value)
+                End If
+    
+                nCurValuePos = nCurValuePos + 1
+            Next 'x
+        Next 'y
+    End Function
+    
+    Private Function ufnRetrieveValues( _
+                            ByRef nUsed() As Long, _
+                            ByRef nData() As Long _
+                        ) As Long
+                        
+        On Error GoTo err_ufnRetrieveValues
+                        
+        Dim nCurYCube As Long
+        
+        Dim nCurCubePos As Long
+        Dim nCurRowPos As Long
+        Dim nCurColPos As Long
+        Dim nCurValuePos As Long
+        Dim nCurValue As Long
+        
+        nCurValuePos = 0
+        
+        For nCurRowPos = 0 To 8
+            For nCurColPos = 0 To 8
+                
+                nCurValue = ActiveSheet.Cells(nCurRowPos + 1, nCurColPos + 1)
+                ActiveSheet.Cells(nCurRowPos + 1, nCurColPos + 1).Font.Bold = nCurValue > 0
+                
+                Select Case nCurRowPos
+                Case Is < 3
+                    nCurYCube = 0
+                Case Is < 6
+                    nCurYCube = 3
+                Case Else
+                    nCurYCube = 6
+                End Select
+                
+                Select Case nCurColPos
+                Case Is < 3
+                    nCurCubePos = nCurYCube + 0
+                Case Is < 6
+                    nCurCubePos = nCurYCube + 1
+                Case Else
+                    nCurCubePos = nCurYCube + 2
+                End Select
+                
+                '* Assign indexes for Future reference
+                nData(nCurValuePos, enValueCategory.vc_BoxIdx) = nCurCubePos
+                nData(nCurValuePos, enValueCategory.vc_ColIdx) = nCurColPos
+                nData(nCurValuePos, enValueCategory.vc_RowIdx) = nCurRowPos
+        
+                nData(nCurValuePos, enValueCategory.vc_Value) = nCurValue
+                            
+                If nCurValue = 0 Then
+                Else
+                    nData(nCurValuePos, enValueCategory.vc_IsKnown) = 1
+                    nUsed(nCurCubePos, enUsedType.ut_BoxIdx) = (nUsed(nCurCubePos, enUsedType.ut_BoxIdx) Or (2 ^ nCurValue))
+                    nUsed(nCurColPos, enUsedType.ut_ColIdx) = (nUsed(nCurColPos, enUsedType.ut_ColIdx) Or (2 ^ nCurValue))
+                    nUsed(nCurRowPos, enUsedType.ut_rowIdx) = (nUsed(nCurRowPos, enUsedType.ut_rowIdx) Or (2 ^ nCurValue))
+                End If
+                nCurValuePos = nCurValuePos + 1
+            Next 'x
+        Next 'y
+        
+    Exit_ufnRetrieveValues:
+        On Error Resume Next
+        Exit Function
+        
+    err_ufnRetrieveValues:
+        ufnRetrieveValues = Err.Number
+        Resume Exit_ufnRetrieveValues
+        Resume
+    End Function
+
+betting for hockey and a sudoku solver ^__^
+Baby care schedule/monitor.  Basically it is 2 parts, a db where we enter what we have done (changed 1/2, fed - how many ml, vitamins, bath, etc)  The console/dashboard portion says what is upcoming and it gets closer to red as it gets closer than a predetermined recommended time for things.  (3 hours between feedings etc).  Obviously if baby is hungry before, we just feed and mark it down, but it is nice to know, ok it has been 2.5 hours visually, and start to get the formula read, or not plan to get involved in anything if you are my wife and have to breastfeed.  
+
+The db portion was great when we went to the nutritionist, as she could see exactly how much food the little one was getting.  It is probably overkill, but our daughter was born 3 months early, so she is being monitored pretty closely.
+
+
+Edit:  I plan to make a workout/weekly/daily/monthly/repeatable tasks list in the same way.  Would also work great for chores once our daughter gets older, so she can see, oh I haven't dusted my room in 6 days, one more day until I have to do it again, etc... 
+I built an esthetic and fully functional Yahtzee game, with high scores list.
+NCAA Tourney gambling tracker
+Three statement personal financial model
+
+I made a black jack game with VBA. Pretty fun. 
+Beer tasting spreadsheets
+One of the bits I consistently use it for is tracking my hours.... Record the time I get in, whether I take a lunch (duration), when I leave...   as each week passes, I color code it to indicate whether it was submitted, accepted, sent to payroll or finally paid.   Makes time entry dirt simple, and I'll have a record of sorts if there's any shenanigans with my check.
+Simple mind maps with shapes to help understand problem or some hierarchy.
+I'm programming a Penalties Game!
+Flight Simulator!
+have you see art in Excel 
+
+http://www.spoon-tamago.com/2013/05/28/tatsuo-horiuchi-excel-spreadsheet-artist/
+I use excel for pretty much everything.
+
+I have a spreadsheet for my personal finances. I can budget my money so much easier this way. My now fiance got me into this and I have now been able to get out of debt and have a hefty savings account. I have a spreadsheet set up that calculates how much I can save each month and how much is owed in bills. I have tabs set up for January through December based on my pay dates. In my December tab I have my goal amount of money I want to save in the year. I calculate all the tabs and make a formula in my December tab that shows me my goal. Its by far the easiest form of budgeting and finance planning I have done.
+
+I use it daily for work also. I work in a distribution center and excel makes it run. We have a spreadsheet that has all the locations for every single unit of product in the building. We get a sheet every week showing us what needs to be shipped out to our retail stores and I insert this sheet into our location sheet and it finds us all the locations needed using macros we have set up.
+
+
+
+I used Excel to help create my website on the world's largest Ferris wheels: http://www.observationwheeldirectory.com
+
+Every row in my sheet was for one observation wheel, each column a piece of data. I run a macro that converts each row into a data table in HTML that I can then simply copy and paste into the website to update.
+Haha! I think you win most "creative" use of Excel in the thread... For now.
+As soon as I finish my running sheet, I'll build a cash flow sheet. Would you mind sharing a screenshot or tips on what worked for you?
+I use Excel for my job and write on the side, have never thought of using Excel to help organize my writing. This is a great idea, though. Thanks!
+As a dietitian in the making, I plan on building an elaborate spreadsheet for setting meal plans with specific calories and macronutrients ratios, with food info from the USDA database.
+I always use excel as a desktop calculator too. For multi-stage calculations it really comes into it's own, especially if once you've worked out whatever it is, someone asks you "but what if...?".
+Google (trimble?) Sketchup is great tool for that.  Free, and it doesn't take long to learn.
+As an architectural technologist who does floor plans every day in Autocad I cant even imagine trying to do it in excel. Mind posting some screenies of your file for the interested ones like me???
+Another good tool is the room builder built into many furniture store websites.  Mybobs.com is an example.  You can put exact dimensions of all of your rooms,  furnishings,  etc and lay it out to your liking.  Also, you can save it or collaborate with others. 
+Those are pretty smart ways to use Excel. By the way, what do you do that you post online classified so often?
+Nice! Like this one? http://www.instructables.com/id/Speedometer-Graph-in-Excel/
+Word can be a beautiful thing when you learn how to format documents correctly. It is indeed a steep learning curve though.
+You could always use a IE HTML object to open the site and search using the form, and then return the address
+
+    Dim IE As InternetExplorer
+    Set IE = New InternetExplorer
+    IE.Visible = true 'change to false to not see it
+    IE.Navigate "http://imdb.com/"
+
+    'Wait for initial page to load
+    Do While IE.ReadyState <> READYSTATE_COMPLETE Or IE.Busy: DoEvents: Loop
+    
+    'Get HTML Reference to Handle Forms
+    Dim doc As HTMLDocument: Set doc = IE.Document
+    
+    'Get ad posting form from page
+    Dim frm As HTMLFormElement: Set frm = doc.forms("navbar-form")
+
+    'Get search field of form
+    Dim searchField As HTMLTextElement: Set searchField = frm.elements("navbar-query")
+    searchField.Value = "The Green Mile" & " " & "1991"
+    frm.submit 'or if that doesnt work, find the button element
+
+    'Wait for new page to load
+    Do While IE.ReadyState <> READYSTATE_COMPLETE Or IE.Busy: DoEvents: Loop
+
+    msgbox IE.LocationURL
+    IE.quit
+
+This is completely untested, might be a slow way of doing it, but it would do it!
+    
+I would like to know that too.
+Nice! Must be really helpful in making coworkers understand -- in a clear way -- how much their requests is going to take.
+As someone that used to play Game of Life, that is impressive and probably fun too. Hopefully you can make a copy and share?
+How difficult would you say it is learning VBA? Do you have previous programming experience?
+Why not just use a batch file for this with windows task scheduler? You can use windows task scheduler to launch a batch file every x hours/days/minutes that can do that.
+Curious if you have ever tried doing it without VBA.  I got partially started on that road, and ended up with a Sudoku "helper"  I gave up part way through as I wanted to make it solve the way a human does, by looking for easier methods of finding numbers first.
+Nice job! I love dashboards. Would you mind sharing a picture of yours?
+Just a nudge in the right direction.  You could get rid of that color coding and use a drop down instead.  You could also use conditional formatting.
+In reference to your "running sheet", do you mean to track your running? If so, I've been doing this since 2006 and I LOVE it. I'm very analytical but have not always been very athletic, so tracking everything keeps me motivated (and accountable!). I have ways to look at my distances and times weekly, monthly, or annually, and I'm often motivated by the desire to beat last month, or beat the same month from last year, etc.
+
+My spreadsheet is a mess, though. Each run requires mutliple entries to get all of the tables to populate, and I really should clean it up. If you develop any cool ways to look at running data, let me know!
+I do a similar sheet myself. One of the big helps for me was online banking. I imported my bank statements, then had columns for expense type, date and amount. I sorted my data by expense type first, then by date, then by amount.
+
+For each block of expense-type, I then worked out the average cost. That way, rather than just using the most recent version of events, variable costs were represented by a true average.
+
+I suppose one day, when I improve the sheet, I'll add a column for variation of variable expenses. Then on the "total expense" cell at the bottom, I could have a +/- to guard myself against unusually expensive months.
+
+Edit:
+
+Another thing that's pretty handy is using excel to get all expenses into monthly equivalent.
+Col A is the amount. Col B is the frequency per year, so weekly = 52, monthly = 12, yearly = 1. Col C is A*B.
+
+Col D is then C/12. This way I get to do a monthly budget that takes into account less frequent expenses, like car insurance and birthday gifts.
+It depends on your needs and ER have all the same needs - how long does it take to pay off loan with given minimum payment, how long can I pay this off if I pay $min+x,  when does special intro rate end, how much to pay in order to pay off in 1/2/5 years, etc. make all these your columns and fill with formulas. Divide the rows with bills due between 1-15 and 15-30 of month and be organized.
+[deleted]
+Would you be interested in working on something together? Im no dietician but i can build a good spreadsheet. The shoppig list combo with nutrient information could be a user friendly combo. A choice of your weight class, gender, etc. And then even your budget per week could be an idea
+
+I immediately thought about Google Sketchup for this too. Seems a little hard to do it with Excel!
+This was ages ago, so I don't have my original, but just threw together a quick a dirty.  The goal was to see how my furniture could be arranged.  I formatted the cells to make it more like graph paper which made it easier to get the dimensions right (I believe my original had 1 square = 1 inch).  From there I just played around with the shapes that represented my furniture.  It's like Cad, only much shittier.  
+http://i.imgur.com/pBK1YGv.jpg
+Well I'm a student, so I always have random stuff laying around that I dont use (and I have a problem of buying stuff that I stop using a month later), and the easiest way to save space and make a couple bucks is by selling stuff on Kijiji. So I have games, old clothes, DE shaving supplies, etc.
+
+Usually the posts after a few days are a good 10+ pages from the front, so deleting and reposting is the best way to get people to see it.
+Pretty similar. When I did it, I didn't do all that sin/cos business, so my speedometer needle is slightly wedge-shaped compared to theirs, as it's just a pie-chart wedge as narrow as I can get it, with line style set to thick.
+
+Theirs is a bit prettier, but I guess it'd be harder to debug if something goes wrong with the trig. Swings and roundabouts.
+It's more of a [simulation](http://en.wikipedia.org/wiki/Conway's_Game_of_Life) than a game. Not sure that my work will let me take it home.
+No experience other than formatting a cell with a right click and labeling cells.
+
+Two weeks ago I started with HTML/CSS on codeacademy. Then JavaScrip, then Python. Now VBA. I would say VBA is easily the simplest syntax. 
+
+I would say the hardest part is learning the functions and committing the most common to memory (which I've yet to do).  The other part is knowing where to find the answers you're looking for. I would say programming is 20% programming knowledge and 80% your ability to use the internet effectively.
+Partly because I don't exactly know when I will be at work, or when these files will be updated by their normal users, or when I feel I will need updated versions.   Really, it's only two or three buttons moving less than 15 files total.  It's fine the way it is I think.
+Haha, not my best work.  Was basically a gut response to my wife being upset that the baby was "unexpectedly hungry" when I pointed out that I had thought it had been 3 hours since the last feeding, and some tension grew... I'll try to remember to send myself a copy to work for Monday and figure out this imgur thing to post it.
+Yeah, it's just a simple little sheet I whipped together, probably take more time fiddling with dropdowns and conditionals than it would just manually coloring it in.   Check my history in this sub, you'll see I'm a big proponent of automation. :D
+Yes! I'm very analytical too and sometimes I need an external motivator to exercise. Since I started keeping track of my weightlifting training I improved a lot, so I decided to do the same with running (which I've been doing for 6 weeks only).
+
+I set it up very simply, otherwise I find it too much of hassle to do daily. Just a date, distance, run time and average speed, along with my body weight.
+
+I found a pretty cool running spreadsheet here: http://www.reddit.com/r/excel/comments/14vnyc/i_want_to_start_tracking_my_daily_progress/c7h8f3g
+Please do!
+MS Visio has tools exactly for this purpose too.
+Nice. By what way does Excel connect to that website, delete the old ads, and post the new ones? I have some stuff I should get rid of...
+Oh, I thought it was something else hehe...
+I didn't mean any offense.  I work with people who spend all day in excel and we try to nudge each other to make things better, which is what I was doing here.
+Could I see your weightlifting sheet by any chance?
+Using InternetExplorer object, there is some example code I posted in a comment below.
+http://www.reddit.com/r/excel/comments/1ssfqq/what_are_some_of_your_personal_or_creative_uses/ce143se
+Oh, no offense taken, it's the time vs benefit tradeoff. :)   My last timecard sheet, I had it so I could hit a button and it would auto-generate the timecard (word docx) for me, and e-mail it for approval.     This is more so I know what weeks I've been paid for.   No idea how long this job will last... might be weeks, might be years. :D
+There's one over at /r/fitness, I believe 
+Even though I track my weightlifting training, I do not have a spreadsheet for it.
+
+At first I used a simple paper notebook to do it. I did that for about 3 years, then decided to use Fitocracy website and Android app for a while. I used it for some months, but it was slow and too much of a hassle to use daily.
+
+So now I'm using the Evernote software and Android app. For now, it is the best solution, but I plan on eventually "upgrading" to an Excel spreadsheet. But as it's much more complicated then a simple running spreadsheet and I'm still a newbie, it's gonna take a while before I can graph my lifting numbers.

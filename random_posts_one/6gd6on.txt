@@ -1,0 +1,29 @@
+6gd6on
+Creating a loan repayment forecast where interest rate and repayment amount are variable
+I have a UK student loan, the terms of which seem to have been explicitly designed to make it hard to model in excel :)
+
+I'm trying to weigh up multiple repayment options, but having searched through the sub, many of the solutions to similar problems aren't quite what I'm looking for as they seem to assume a static interest rate and repayment amount.
+
+UK student loans have their interest rate adjusted every September based on RPI (though weirdly, the value of RPI the previous March). The interest rate is on a sliding scale of (0-3% depending on salary) + RPI.
+
+The amount you repay each month is a minimum of 9% of your Salary over £21,000
+
+I'm trying to create a model that lets me weigh up making a lump sum payment in September and paying off every month after that, varying both the amount I pay off in the lump sum, and also the amount of the monthly payment.
+
+I'm not looking for anyone to solve this for me, but if you have suggestions for useful table structures and/or functions and formula I should look into using, that would be very much appreciated!
+
+Edit: Almost forgot the most important part! The loan is entirely written off after 30 years, regardless of how much is left unpaid. I want to see what the best strategy is for paying as little as possible, which I assume will be pay it off ASAP.
+
+
+-------------
+You might want to try a Monte Carlo simulation with RRI as the probabilistic input and salary as the deterministic input. This can be achieved with RAND or RANDBETWEEN combined with Excel data tables.
+
+Offhand, if the loan disappears in 30 years regardless of balance, one might assume the best strategy is to pay nothing :)
+-------------
+Is RPI an amount or a percentage?
+-------------
+Awesome - that strategy has opened my eyes to a lot more I can try!
+
+Unfortunately since we're taxed at source in the UK the minimum repayment leaves my paycheck before I ever get to touch it :(
+-------------
+It's a percentage, usually averaging around 2-4%

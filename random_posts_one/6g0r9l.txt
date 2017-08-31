@@ -1,0 +1,37 @@
+6g0r9l
+AVERAGEIF for visible rows only
+https://i.gyazo.com/2a47fd1b810edc43...cac4f2d256.png
+
+I want to set up a function which can average, for example, all the durations corresponding to zone "D1", but ignoring any hidden rows which include times for zone "D1".
+
+AVERAGEIF doesn't work because it includes hidden rows, and SUBTOTAL doesn't have an option for AVERAGEIF.
+
+Would appreciate some advice?
+
+Cheers
+
+
+-------------
+You can use SUBTOTAL in a helper column that will count the cell with the SUBTOTAL in it, and then AVERAGEIFS including the condition that the corresponding SUBTOTAL is 1.
+-------------
+    =SUMPRODUCT(SUBTOTAL(109,INDIRECT("b"&ROW(B2:B5000)))*(A2:A5000="d1"))/SUMPRODUCT(SUBTOTAL(102,INDIRECT("b"&ROW(B2:B5000)))*(A2:A5000="d1"))
+
+I made it arbitrarily cut off at row 5000 just for performance reasons, but you can expand or shorten as needed.
+
+Essentially: sumproduct a subtotal sum of all visible numbers where A:A = zone "D1", and divide that by sumproduct a subtotal count of all visible numbers were A:A = Zone "D1". Of course you can make "D1" a reference to another cell instead of the string.
+
+Edit: I realize that explanation was actually wrong. What I should've said is that the subtotal sum with the offset creates an array of a subtotal sum of *each* row, one by one. So a subtotal sum of cell B2, a subtotal sum of cell B3, a subtotal sum of B4, etc. So if it's a hidden row then the sum of that cell will be =0 no matter what the actual value in the cell is. And then I take that value and multiply it by 1 or 0, depending if A:A = "D1" or not and then add up the array [ie the sumproduct]. Then rinse and repeat for a subtotal counta.
+-------------
+Can you repost the screenshot? Use www.imgur.com, it's much better.
+-------------
+`AGGREGATE` has some tricks up its sleeves, like try the same `SUBTOTAL` formula but do `1/1/formula*(zone="C")` to generate errors when it's not equal to "C", and turn on the ignore errors flag.
+
+But I think a helper column might be the only way if that doesn't work.
+-------------
+This was spot on, thank you so much!
+-------------
+http://i.imgur.com/wwNwMZJ.png
+
+I just use gyazo for time-saving :-)
+-------------
+Glad to hear it helped! If you don't mind, could you reply to my original post with "Solution Verified"? Thanks!

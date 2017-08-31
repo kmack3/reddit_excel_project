@@ -1,0 +1,48 @@
+incrementing time when its written like this: 7:30 - 8:20
+Enter first times, enter formula and drag down..
+
+Start | End | 
+:--- | :--- | 
+7:30 | 8:20 | 
+=A2+TIME(0,55,0) | =B2+TIME(0,55,0) | 
+9:20 | 10:10 | 
+10:15 | 11:05 | 
+
+
+Though reading your post it is a tad ambiguous to me of required result... 
+Formatting is your friend.
+OK I figured it out.. it came to me while out walking thinking of something completely different.
+
+It works off the row number to add 55 minutes to each row increment.
+
+Starting at the second row,  and drag down
+
+Time |  | 
+:--- | :--- | 
+=TEXT(TIME(6,35+((ROW()-1)\*55),0),"h:mm")& " - "&TEXT(TIME(7,25+((ROW()-1)\*55),0),"h:mm") |  | 
+8:25 - 9:15 |  | 
+9:20 - 10:10 |  | 
+10:15 - 11:05 |  | 
+
+
+
+
+
+
+So i cant write 7:30 - 8:20  in one cell?
+assuming you have the start and end times in A1 and B1 respectively:
+
+    =TEXT(A1,"hh:mm:ss")&" - "&TEXT(B1,"hh:mm:ss")        
+It gets very messy.. someone may have the patience to work it out.. too late in the night for me. 
+
+It requires extracting individual values to put into TIME function to then add the 55 minutes with the same TIME function.
+
+ 
+You can write text in one cell, but you probably shouldn't.
+
+It's easier to divide this task into smaller chunks instead of doing everything in one big formula that is hard to read.
+
+If you do the calculations in "support" cells/columns and later on "glue" your support cells together using & to get a result, then the spreadsheet might be simply easier to maintain in the long run.
+Np and thank you for the help
+It's not hard, but it is cumbersome. You gave a delimiter (the dash), so you could write easily parse out the start and end times, but it'd be much easier to have two columns as suggested. If you wanted to display the times in one column, it'd be so much easier to concatenate the input cells together. 
+Yeah, you just have to do something to the effect of substring extraction. 

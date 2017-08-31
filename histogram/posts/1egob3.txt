@@ -1,0 +1,359 @@
+Post your best and most useful VBA routines. This is not a question, just a thread to post a useful routines.
+    Option Explicit
+For debugging code inside a loop, I use a fake variable to set a breakpoint at the iteration I want to walk through with F8.
+
+    If cell.Row = 98 Then
+      setbreakhere = True
+    End If
+Loved this part
+
+    If Not flag Then Sheets.Add(After:=Sheets(Sheets.Count)).Name = Sheet_Name
+
+The Sheets(Sheets.Count).Name is a great way to post after the last sheet.  I can't believe I didn't think of that before.
+
+That said, I would probably avoid the double negative and switch the way the flag works.  This would avoid the else completely and avoid the not false conditional.
+
+I am not sure there is a mose useful routine, but I relaly do like
+
+    ActiveSheet.UsedRange.Rows.Count
+
+There are some limitations, but it can show you the last entry and +1 get you to the next available row in many cases.
+This code allows you to retrieve a class object and call it from any module.  You don't have to initialize your object in the code that uses it, since that process is wrapped by this function.  It's really damn useful in larger applications.  Especially when you're debugging, since it guarantees that your class exists even if you have to end your code execution (which just so happens to kill any objects in memory).
+
+    Private myObject As myClass
+    
+    Public Function GetMyObject() As myClass
+        
+        If myObject Is Nothing Then
+            Set myObject = New myClass
+        End If
+        
+        Set GetMyObject = myObject
+    End Function
+
+
+So in your code, you use it as follows
+
+    Sub Example()
+        Call GetMyObject.Method
+    End Sub
+
+This is known as a functional global.
+If a single line of code has both assignments, methods, and decision logic - break it apart into multiple lines.
+
+    Cells(Rows.Count, Col_Num).End(xlUp).Offset((Cells(1, Col_Num).Value = "") + 1, 0).Select
+
+What the fuck is that supposed to do?  I know what it selects a cell either the first or second row of a series of data.  But it is very convoluted and it would fool most VBA programmers.  The (Cells(1, Col_Num).Value = "") bit as a logical statement that evaluates to 0 or 1 to use in a mathematical operation is confusing as shit.  Don't EVER do that.
+
+    Dim wsSelection as Worksheet
+    Dim rgSelection as Range
+    Dim iRow as Long, iCol as Long
+
+    Set wsSelection = ThisWorkbook.Sheets(SheetName)
+    Set rgSelection = wsSelection.Cells(iRow, iCol).End(xlUp)
+    if rgSelection.Value = "" then Set rgSelection = rgSelection.Offset(1, 0)
+    rgSelection.Select
+
+That code makes use of the VBA Object Model to create self describing code.  Anyone can read it.  You can step through it using F8 and actually see WTF is going on.  You can more easily alter it.
+I've got loads, literally tens of UDFs and Subs.  Lets start with VHLOOKUP.
+
+    'Combined VLOOKUP and HLOOKUP, to replace INDEX MATCH
+    'eg VHLOOKUP([enter table range here],[item to find in first column],[item to find in first row])
+
+    Function VHLOOKUP(Grid As Range, Row_Find, Column_Find)
+    
+        VHLOOKUP = WorksheetFunction.Index(Grid, WorksheetFunction.Match(Row_Find, Grid.Columns(1), 0), WorksheetFunction.Match(Column_Find, Grid.Rows(1), 0))
+
+    End Function
+This macro updates every pivot table in a work book. I find it extremely useful.
+
+    Sub RefreshAllPivots()
+     Dim w As Worksheet, p As PivotTable
+    For Each w In ThisWorkbook.Worksheets
+        For Each p In w.PivotTables
+            p.RefreshTable
+                p.Update
+        Next
+    Next
+    End Sub
+ 
+ 
+Pretty simple, but I find that these two end up in just about every project I write:
+
+    Function CalcLastColumn(ByVal WhichSheet As String, Optional ByVal WhichRow As Integer) As Integer
+
+    ' Determines the last filled column in a given row on a given sheet
+    ' If WhichRow is omitted width of row 1 is returned
+
+        CalcLastColumn = 0
+    
+        On Error Resume Next
+    
+        If WhichRow > 0 Then
+            CalcLastColumn = Sheets(WhichSheet).Cells(WhichRow, Columns.Count).End(xlToLeft).Column
+        Else
+            CalcLastColumn = Sheets(WhichSheet).Cells(1, Columns.Count).End(xlToLeft).Column
+        End If
+
+    End Function
+
+    Function CalcLastRow(ByVal WhichSheet As String, Optional ByVal WhichColumn As Integer) As Integer
+
+    ' Determines the last filled row in a given column on a given sheet
+    ' If WhichColumn is omitted depth of column 1 is returned
+
+        CalcLastRow = 0
+    
+        On Error Resume Next
+        
+        If WhichColumn > 0 Then
+            CalcLastRow = Sheets(WhichSheet).Cells(Rows.Count, WhichColumn).End(xlUp).Row
+        Else
+            CalcLastRow = Sheets(WhichSheet).Cells(Rows.Count, 1).End(xlUp).Row
+        End If
+
+    End Function
+
+This code has worked for me.  It will trim all cells in a worksheet
+
+    Sub Trim()
+    Dim cell As Range
+    For Each cell In ActiveSheet.UsedRange.SpecialCells(xlCellTypeConstants)
+    cell = WorksheetFunction.Trim(cell)
+    Next cell
+    End Sub
+
+*So* many times, using Excel, I double-click the fill down box, and don't realise that, 1,203 rows in, there's a break in the data in the previous column, so the formula doesn't copy all the way to the end of the data-set
+
+Then my figures are all screwy
+
+So wrote this, and bound it to SHIFT+CTRL+C:
+
+    Sub FillDownProperly()
+    Dim active_row As Double
+    Dim active_column As Double
+    Dim length As Double
+    Selection.Copy 'copies fomula from active cell
+    length = Range("A999999").End(xlUp).Row 'finds length of column a
+    active_row = ActiveCell.Row 'finds current row number
+    active_column = ActiveCell.Column
+    ActiveSheet.Range(Cells(active_row, active_column), Cells(length, active_column)).Select 'selects from active row to length of column a
+    ActiveSheet.Paste
+
+End Sub
+I use this routine to flag cells by color so the user can visually tell if there is a problem to address.  It is simple to call with Color_Set "BLUE" for example.  Note that I used "Selection" which indicates I will be passing control back to the user.
+
+    Public Function Color_Set(Color_Is As String) ' Red = 3, Blue = 41, Yellow = 6, Gold = 44, Green = 4
+        Selection.Interior.ColorIndex = xlNone
+        Select Case UCase(Color_Is)
+            Case "NONE"
+                Selection.Interior.ColorIndex = xlNone
+            Case "RED"
+                Selection.Interior.ColorIndex = 3
+            Case "BLUE"
+                Selection.Interior.ColorIndex = 41
+            Case "YELLOW"
+                Selection.Interior.ColorIndex = 6
+            Case "GOLD"
+                Selection.Interior.ColorIndex = 44
+            Case "GREEN"
+                Selection.Interior.ColorIndex = 4
+            Case "STAY"
+                'leave the color as is in this case
+            Case Else
+                'leave as is
+        End Select
+    End Function
+
+Function FilterOut(strInput, strFilter)
+'Filter Out Keywords Out From a String
+    Dim arrInput As Variant
+    Dim arrFilter
+    Dim i, j As Integer
+    Dim strOutput
+    
+    Dim strPrep: strPrep = "aboard about above across after against along amid among anti around as at before behind below beneath beside besides between beyond but by concerning considering despite down during except excepting excluding following for from in inside into like minus near of off on onto opposite outside over past per plus regarding round save since than through to toward towards under underneath unlike until up upon versus via with within without"
+    Dim strPronDemon: strPronDemon = "this that these those"
+    Dim strPronIndef: strPronIndef = "all, any, anybody, anyone, anything, both, each, either, everybody, everyone, everything, few, most, neither, no one, nobody, none, nothing, one, several, some, somebody, someone, something"
+    Dim strPronInterr: strPronInterr = "who whose whom which what"
+    Dim strPronObj: strPronObj = "me you him her it us you them"
+    Dim strPronPoss: strPronPoss = "my mine your yours his her hers its our ours your yours their theirs"
+    Dim strPronReflex: strPronReflex = "myself ourselves"
+    Dim strPronRelative: strPronRelative = "who whose that which"
+    Dim strPronSubj: strPronSubj = "i you he she it we you they"
+    Dim strPronAll: strPronAll = "all, any, anybody, anyone, anything, both, each, either, everybody, everyone, everything, few, he, her, hers, him, his, i, it, its, me, mine, most, my, myself, neither, no, nobody, none, nothing, no one, our, ours, ourselves, several, she, some, somebody, someone, something, that, their, theirs, them, these, they, this, those, us, we, what, which, who, whom, whose, you, your, yours"
+    
+    Select Case LCase(strFilter)
+        Case "prep" ' Prepositions
+            arrFilter = Split(strPrep, " ")
+        Case "prondemon" ' Demonstrative Pronouns
+            arrFilter = Split(strPronDemon, " ")
+        Case "pronindef" ' Indefinite Pronouns
+            arrFilter = Split(strPronIndef, ", ")
+        Case "proninterr" ' Interrogative Pronouns
+            arrFilter = Split(strPronInterr, " ")
+        Case "pronobj" ' Objective Pronouns
+            arrFilter = Split(strPronObj, " ")
+        Case "pronposs" ' Possessive Pronouns
+            arrFilter = Split(strPronPoss, " ")
+        Case "pronreflex" ' Reflexive Pronouns
+            arrFilter = Split(strPronReflex, " ")
+        Case "pronrelative" ' Relative Pronouns
+            arrFilter = Split(strPronRelative, " ")
+        Case "pronsubj" ' Subjective Pronouns
+            arrFilter = Split(strPronSubj, " ")
+        Case "pronall" ' All Pronouns
+            arrFilter = Split(strPronAll, ", ")
+        Case Else
+            arrFilter = Split(strFilter, " ")
+    End Select
+    
+    arrInput = Split(strInput, " ")
+    
+    For i = LBound(arrInput) To UBound(arrInput)
+        For j = LBound(arrFilter) To UBound(arrFilter)
+            If LCase(arrInput(i)) = LCase(arrFilter(j)) Then
+                arrInput(i) = ""
+            End If
+        Next j
+        If Not arrInput(i) = "" Then
+            strOutput = strOutput & " " & arrInput(i)
+        End If
+    Next i
+
+    FilterOut = LTrim(strOutput)
+    
+End Function
+Debug.Assert Not (cell.Row = 99)
+I'm a fan of UsedRange too.  For example, this will sort a sheet on column H.
+
+        ActiveSheet.UsedRange.Select
+        Selection.Sort Key1:=Range("H1"), Order1:=xlDescending, Header:=xlNo
+
+
+This is a custom routine to convert the entire sheet to first letter upper case for all words.  I haven't yet found a use for it, but it is interesting in the way it works, including the usage of UsedRange.
+
+    Public Sub UpCase()
+        For Each UsedCell In ActiveSheet.UsedRange.Cells
+            'UsedCell.Value = StrConv(UsedCell.Value, vbProperCase) ' this form works, but changes things like "TT1040 to Tt1040"
+            CVal = ""
+            If Len(Trim(UsedCell.Value)) > 0 Then
+                CVal = " " & Trim(UsedCell.Value)
+                For x = 1 To Len(CVal) - 1
+                    If Mid(CVal, x, 1) = " " And Mid(CVal, x + 1, 1) >= "a" And Mid(CVal, x + 1, 1) <= "z" Then CVal = Left(CVal, x) & UCase(Mid(CVal, x + 1, 1)) & Mid(CVal, x + 2)
+                Next x
+            End If
+            UsedCell.Value = Mid(CVal, 2)
+        Next UsedCell
+    End Sub
+
+
+This (or similar depending on your needs) is VERY useful for anyone writing multi-project applications.  There are some really nice hidden "features" with object instancing from another project (eg an addin library).
+
+
+I've read books that say never to use "not" because most programmers can't comprehend what it does.  I've read that using a logical value (Cells(1, Col_Num).Value = "") should never be done because most programmers can't comprehend what it does.  I made a point of learning to use these operators because they are often the fastest executing code that can be written.  Sometimes I really need those extra few microseconds.
+
+Did you perhaps make an error on this line?
+
+    if rgSelection.Value = "" then Set rgSelection = rgSelection.Offset(1, 0)
+
+    if rgSelection.Value <> "" then Set rgSelection = rgSelection.Offset(1, 0)
+
+I agree, code should be written to be as clear as possible and commented so that future users can easily determine the function.
+
+
+I hope that the example is from some sort of event driven code interfacing with the user.
+
+I can't imagine how someone gets to the point where they are evaluating booleans like this and still drives their execution with *select*...  
+
+.shudder 
+'Paste as Values on selection - assign this to a shortcut button.  Activate when selecting the range you want to convert to values.  It only works on the intersection of the selection and the used range so you can select the whole sheet if you want.
+
+    Sub ValueAsShown()
+    
+    selrange = Selection.Address
+    Set sels = ActiveWorkbook.Windows(1).SelectedSheets
+    
+    For Each sel In sels
+    
+    sel.Activate
+    Set SelUsed = sel.UsedRange
+    Application.Intersect(Range(selrange), SelUsed) = Application.Intersect(Range(selrange), SelUsed).Value
+  
+    Next
+
+    End Sub
+I see a *lot* of people define "Last Cell" with .end.   Probably because this is the most likely thing to see from a recorded macro.
+
+The problem with .end, is that it finds the last contiguous bit of data from where you start.  You've got 2 chances to break it.  A null value in your data, or if you start incorrectly and hit your headers.  In most cases, a .find that "looks up" is a much more robust way to catch your last cell.
+
+    lastRow = SheetX.Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+
+Obviously you can also tailor it to search a column instead of just cells, and get the last data in that column.
+
+My full function wouldn't make much sense here because it assumes a framework that won't be present for anyone else, but the idea of using the real LAST instead of last contiguous is important I think.
+If this uses Long instead of Integer it will avoid the 65K limit.  Would this be an improvement?
+
+    Function CalcLastRow(ByVal WhichSheet As String, Optional ByVal WhichColumn As Long) As Long 'note use of Long
+
+        ' Determines the last filled row in a given column on a given sheet
+        ' If WhichColumn is omitted or any invalid value is supplied then depth of column 1 is returned
+        ' Tests all sheets to ensure a valid sheetname is given
+        
+        Dim flag As Boolean
+        Dim sheetname As Worksheet
+        
+        CalcLastRow = 0
+        flag = "False"
+        If Not (WhichColumn > 0 And WhichColumn <= Columns.Count) Then WhichColumn = 1
+        
+        For Each sheetname In ActiveWorkbook.Sheets
+            If sheetname.Name = WhichSheet Then flag = "True"
+        Next sheetname
+        
+        If flag Then
+            CalcLastRow = Sheets(WhichSheet).Cells(Rows.Count, WhichColumn).End(xlUp).Row
+        End If
+ 
+    End Function
+
+    Function CalcLastColumn(ByVal WhichSheet As String, Optional ByVal WhichRow As Long) As Long
+    
+        ' Determines the last filled column in a given row on a given sheet
+        ' If WhichRow is omitted or any invalid value is supplied then depth of row 1 is returned
+        ' Tests all sheets to ensure a valid sheetname is given
+    
+        CalcLastColumn = 0
+        flag = "False"
+        If Not (WhichRow > 0 And WhichRow <= Columns.Count) Then WhichRow = 1
+    
+        For Each sheetname In ActiveWorkbook.Sheets
+            If sheetname.Name = WhichSheet Then flag = "True"
+        Next sheetname
+    
+        If flag Then
+            CalcLastColumn = Sheets(WhichSheet).Cells(WhichRow, Columns.Count).End(xlToLeft).Column
+        End If
+    
+    End Function
+
+I added a test to see if WhichSheet exists, it it does not, then CalcLastRow should return zero.  You might choose to add a test to see if it returns zero.  This method allows avoiding possible error conditions and therefore should not need an On Error statement.
+I am working on a sheet now that can use this.  I was debating earlier today whether or not to write the code.  Thanks!
+Wut
+Well I guess it depends on the scope.  I use sumproduct to include or exclude database results using true as a 1 in excel formulas, but you will often get questsions about it.  That said.  90% of my code is not read by anyone but me, but I think the ability to step through the code is the strongest argument.  Regarding nots, I don't think they have to be avoided, but when you start getting into double negatives etc, that is when you should at least consider the value they add.
+
+Regarding optimization, unless I am sure something is being reused, or looped many times... or there is a performance issue, I won't worry about performance vs readiability at all.  I would always attempt to go with more readable code, but that is a personal preference.  I wouldn't tell another person what they should be doing, unless we are working on something together, then we would need to come to some agreement.  
+
+All this said, I personally find some code to be less readible if you start adding too many variables rather than just dealing with the built in libraries in VBA.  Especially on smaller peices of code that could be 3 lines, there are many times were you wouldn't bother to create holding variables etc... but again, personal choice and very situational (although scope creep tends to ensure things will get more complex as you go more often than not...)
+Yes, I have to pass control back to the user at one point where this routine executes.
+This is one of the most popular ones among my colleagues.
+
+    'Opens the folder the currently active workbook is in
+
+    Sub OpenFolder()
+
+    On Error Resume Next
+    Call Shell("explorer.exe " & ActiveWorkbook.Path, vbNormalFocus)
+
+    End Sub
+Fanstastic!  How have I survived without this.  I just realized how often I could be using this.

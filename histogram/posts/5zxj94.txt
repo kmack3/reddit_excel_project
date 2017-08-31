@@ -1,0 +1,21 @@
+If cell A1 = Yes, then change the color of cell A2. How?
+Use conditional formatting. With cell A2 selected, go to the Home Tab on the Ribbon > Conditional Formatting > New Rule > Use a formula to determine which cells to format and enter the following formula:
+
+    =IF(A1="Yes",1,0)
+
+You can change the format to what you like using the format button. 
+Conditional formatting! Really easy to do and one of my favorite features.
+Even shorter...
+
+    =A1="yes"
+
+Was trying to figure out this same issue last week.
+solution verified
+Thank you very much!
+
+
+You have awarded one point to _jonokress_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+[deleted]
+Done, apologies for that

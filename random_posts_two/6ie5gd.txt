@@ -1,0 +1,24 @@
+6ie5gd
+Request for Undocumented 2016 to 2013 compatibility issues
+I am working on a decently complicated excel document in Office 2016. My coworker in Asia tells me that the document will immediately shut down if they try to scroll down after opening the document in Office 2013. They even tried this on a brand new computer.
+
+Some thoughts.
+
+* There are NO listed compatibility issues using the Compatibility Checker.
+* I removed all margins in the print preview (Potential bug?)
+* The custom headers and footers have pictures in them (Potential bug?)
+* There is a graph or two that is being hidden by a filter. (Bug?)
+
+
+I have split the document into several different documents to try and identify the bug; but I am hoping someone here might have an idea of what might be happening. I will be checking in throughout the day if there are any questions or ideas.
+
+
+
+
+
+-------------
+Just ideas, does it depend on another sheet, like a Personal.xlsb or whatever the extension is, to function? Have you tried changing trust settings from whatever they are now, to something else
+-------------
+No extensions or trust settings have been applied yet. After some testing, I have confirmed that it has something to do with Merged cells.
+-------------
+Disable all add-ins, turn off sheet recalculation then try again. 

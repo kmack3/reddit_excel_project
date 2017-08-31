@@ -1,0 +1,30 @@
+Multiple Conditional Formatting
+I hope Master Key isn't a sheet in the workbook, or that's one easy test ;) 
+So you need the conditional formatting to trigger when there are two conditions met? One being when they've answered the question and the other them checking that they've finished the exam? Could you maybe use the AND logical function to achieve this?
+I would just avoid conditional formatting altogether. Conditional formatting is for instantly changing the context of a cell. You can just have cell inputs conditional on a single cell that when the test is finished that cell informs the answers to appear.  
+  
+Setup would be like, IF(A1="finished",IF(if correct answer in cell,"correct","wrong"),"")  
+  
+Where A1 is the cell that indicates the test has been turned in and is looking for grading.  
+  
+ALSO, you could just set up a google form for this which does most of the work for you.
+Ah, just lock and rename it. Kiddies will have no clue.
+I hadn't thought of that. I'll give it a shot.
+Maybe i'm doing it wrong. But, when I try to use the AND logical function =AND(Exam!C2='Master-Key'!A2, G2=1) and even just =AND(Exam!C2='Master-Key'!A2, C3='Master-Key'!A3,) to check if that'd work. I just get back False even though both are true.
+What exactly is the trigger for indicating completion of the exam? Is it simply a "Yes" / "No" in one cell? Let's say that cell was G2...
+
+Something like the following, maybe?
+
+=AND(Exam!C2='Master-Key'!A2, G2="Yes")
+
+Unless I'm completely misunderstanding something.
+I'm going to be honest. Just copy pasted your code, and it came back true. Dunno why it didn't before.
+
+So, that'll make it work for a single cell that is correct. Now I just have to format the same thing for incorrect and somehow copy it over 90 cells. Sweet. That'll work.
+
+Thanks buddy.
+SOLUTION VERIFIED!
+
+You have awarded one point to _Axnegative_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

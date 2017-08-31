@@ -1,0 +1,52 @@
+Does Excel not have a simple way to just automatically pull data from tables as it's entered, to a combined/ master table of the data? (Excel 2010)
+Not basic Excel, but you can do it using the Power Query add-in.
+
+Read this article for 'how to' - http://www.excelguru.ca/blog/2014/11/19/combine-multiple-worksheets-using-power-query/
+Yeah, Power Query would work for this. You'd use the From Table button on the POWER QUERY tab to load in the tables. Then you'd do a SQL query-like merge of the all the tables into one master table however you choose using the editor and then load it to a sheet.
+
+If you don't want to go that route you can simply set up your master table using INDEX / MATCH formulas to pull the pieces of each individual table you need. It's not too difficult once you get used to those formulas.
+
+Edit: The latter approach works perfectly fine in many cases, but for instances where the size of the tables is variable it is rather lacking and needs an approach with more dynamic flexibility.
+I see you have a great answer but you could also Google.  Rdbmerge.   That's also a free addin that will do it what you want or separate workbooks; if that ever comes up.
+I've always been frustrated by this as well, and maybe there's an elegant way I haven't found. One annoying work out would be to reference large cell ranges onto one intermediate sheet, leaving lots of room between data sets (assuming these data sets are small enough to aggregate to one), and then pivoting from there. No time to test now but in the past I have found way to manipulate a query to edit the SQL and UNION from tabs within the same sheet. But sometimes this is trial and error. And I've definitely found it easier to do this if you write the aggregation query into a single tab that is in a different workbook from the source data. Good luck.
+If there were clear rules for which child table particular records would go into, the reserve -- master table populating child tables -- would only require formulas.
+
+It's harder but still possible to populate a master table from child tables using formulas. Doing so requires supporting calculations in additional cells, and it's simplest when pulling entire current child tables in sequence rather than trying to maintain original entry order.
+Gah. I came across this add-in, and also Power Pivot, in my Googling. Tried to install them. Alas, I'm on a virtual desktop and our system is locked down as far as installing anything. I'd have to put in a tech support ticket, and I'm not sure how happy my company would be to pay for that request . . . but I'm considering it. 
+
+Thank you for the suggestion and the link! I will learn out how to use Power Query, whether or not I get it installed in my virtual desktop.
+Solution verified
+Awesome, this seems like a tl;dr of the instructions! 
+
+I'm excited. More Excel tools.
+Solution verified
+Oooh! I didn't come across that one in my Googling. I'm going to see if they can add that when they add the others for me tonight.
+I tried the SQL and Union stuff, but it wasn't working for me even though I followed instructions from a few different websites. I was able to get it to pick up cell ranges, but it didn't recognize any of my tables, even though they were named and everything. I wondered if there is some funky thing about my workbook that I'm unaware of, which made the tables unrecognizable to create relationships. I'm hoping that Power Query will help me out, now that I've requested tech support to install it for me. 
+> I've always been frustrated by this
+
+Right? I mean, this seems like such a basic thing that Excel should just do. I reformatted my data into tables so that I could easily reference those to have a pivot table pick up all new data entered into each one, just assuming that Excel could pull together multiple tables into a fully usable pivot table. Thus began an hours-long journey of finding out just how much about Excel that I don't know! I can't believe it doesn't allow you to simply summarize multiple tables through one pivot table, or simply pull together several tables for a master list of data. 
+That add-in is free by the way, maybe you meant your company would have to pay for the tech support assistance.
+
+PowerQuery along with PowerPivot (both part of the PowerBI suite) are the best thing to happen in Excel in a long long time and going to be more and more integrated in the normal workflow of all power users in future.
+
+You have awarded one point to _xlViki_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _UnretiredGymnast_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Tangent: structured referencing is great for formulas ___within___ tables referring to other cells within the table, but problematic for formulas outside the table. Yes, it's nice to use Table[Field] instead of $X$5:$X$123, but it's be a whole lot nicer if the 3rd argument to VLOOKUP took field names in tables rather than requiring column index numbers.
+Just to chime in, there are (as you might imagine) good technical reasons Excel doesn't support this.
+
+You're trying to make Excel do what Access is built for.  The correct answer here is "You've reached the functional limitations of Excel.  It's time to expand your solution to include Access if you intend to work with tables in this way."
+
+People don't use Word tables in lieu of Excel because they don't have the same features.  The same is true of Excel workbooks and Access databases.  This is a textbook example of where Excel ends and Access begins.
+Yes, I meant that I was under the impression we had to pay for every support ticket requested, which I just found out is not the case! (Some genius in upper management misinformed the whole office long ago.) That being so, I submitted a ticket and hope to have these add-ins available to play with today. YES. 
+Yes, okay, you're right. If I could use Access for this I would, but I'm taking reports that are used by others in my office and trying to just be able to better analyze the data myself. I just thought it would be a simple thing for me to throw together and be able to take a look at when I wanted to, and it was frustrating to find that it wasn't so. 
+
+Definitely, I'd use Access if it was something I was building myself, rather than taking what's already in place and trying to make better use of it.
+I dunno, Word is a huge departure from Excel type functionality, whereas permitting pivots from multiple tables of identical structure wouldn't be a big stretch, would it? But yes maybe it's an intentional omission, leaving that to Access.
+Not to get pedantic, but Access *is* Microsoft's solution for the use case you just described.  There is no tool better suited to aggregating/analyzing data from disparate Excel workbooks.
+
+That isn't to say there's not a steep learning curve, but any time spent learning Access will be much more fruitful than spending that time learning PQ.  Just my two cents.

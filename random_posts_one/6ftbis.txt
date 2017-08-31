@@ -1,0 +1,47 @@
+6ftbis
+Vlookup the column header if a match is found
+So I have column A, containing a range of values.
+
+Column B resides the formula, which is the "Classification".
+
+J:S is a table array, of which contains values that can be found in column A. 
+
+I'm trying to make it so that column B will contain a formula that checks a value from column A, in one of the many cells of J:S. And if a value is found, I will pull the column header of the found value, and place it in column B.
+
+I had written a prototype of it earlier but it's not on this pc, it went something like 
+
+    =If(Not Error(Match(A1, J:S, 0 ) , Indirect(Adress(1, Match(A1, J:S, 0)))
+
+
+Obviously, this doesn't work and I need a little help on that. Can't remember how I wrote the formula exactly, but these are the key features.
+
+
+-------------
+Can you provide a sample table, and your desired outcome? It might be easier to help you if we could visualize what you're trying to do.
+-------------
+I have a feeling there is a simpler way of doing this, but try:
+
+    =INDEX($A$1:$S$1,SUMPRODUCT((A2=$J:$S)*COLUMN($J:$S)))
+-------------
+
+Numbers | formula | a | b | c
+---|-------|-|-|-
+122 | c | 222 | 33 | 122
+222 | a | 444 | 11 | 
+444 | a | 442 | 22 | 
+
+-------------
+
+
+Numbers | Formula | c | a
+-------|-------|-|-
+11 | c | 22 | 33
+22 | c | 11 | 99
+33 | a | 444 | 40
+
+-------------
+I tried this, and it works as expected, however, the performance is horrible! Additional note, when it fails to find a value in the table array, it selects the column header of Column B, which is not an intended outcome (I suppose I could fix it with an if else.)
+-------------
+Oh damn, posted it twice, hope you get the idea, this is what I imagine it would like like after the formula is punched in. Checks A for value in table array, then copies the header, or first row value of the found column, and writes it in column B
+-------------
+Do you need to use the entire column of J:S? That is probably slowing it down a ton. If your data is within J2:S500, use A2=$J$2:$S$500.

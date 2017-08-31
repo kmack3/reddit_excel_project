@@ -1,0 +1,23 @@
+6fw1r5
+anyone else here NEVER use VBA because it delete de UNDO history?! and can cause MAJOR problem instead of helping?!
+anyone else here NEVER use VBA because it delete de UNDO history?! and can cause MAJOR problem instead of helping?!
+
+
+-------------
+I don't use de VBA because de Mac, and de Perl and Postgres are de tools for de deep data analysis for me.
+-------------
+Isn't this fixed in O365?
+Edit. Just tried this. Undo is preserved after VBA in O365.
+-------------
+De upvote
+-------------
+wow are you sure? otherwise i will go buy o365 right now,!! plz confirm
+-------------
+No, my bad. You'll just have to use the old way and save the undo history first. You can get it here -
+Application.CommandBars("Standard").Controls("&Undo").List(1)
+
+You get the individual items from .Values(1) which is a string.
+-------------
+and that will keep the UNDO , not grey out?
+-------------
+No. You copy it into a string array in your VBA code so it's the first thing that executes when VBA runs, before any commands that change the Excel cell grid. Your undo history is available until any VBA command alters the screen in even the tiniest bit. At the end of the VBA you put the contents of the string array back into the undo list. You can make use of Application.OnUndo to do this but you can Google how to do that.

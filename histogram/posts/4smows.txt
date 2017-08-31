@@ -1,0 +1,64 @@
+Why would pasting a spreadsheet crash on one computer and work fine on another?
+I'm guessing it has something to do with the amount of ram and pagefile size. Some computers have badly configured pagefiles so when the processes runs out of ram it will iterate painfully showly by shoving things on and off the pagefile and crash.
+
+Not related to my theory A google search turned up this https://answers.microsoft.com/en-us/office/forum/office_2013_release-excel/excel-2013-will-crash-when-opening-new-workbook/1395fd79-3bc6-4653-9135-37e216061414?auth=1
+
+which sounds like your problem.
+> The crash only seems to happen when I copy the entire table
+
+So you're selecting everything and copying? Have you tried copying the sheet instead? (Right-click sheet tab on bottom > Move or Copy > check Create a copy) 
+I've had some luck with partially corrupted Excel files by doing the following steps:
+1. resave it into a different format  (I like "XML Spreadsheet"), 
+2. close Excel (to get everything out of the RAM), 
+3. re-open Excel, 
+4. open the new file and resave back to the original format.
+
+You'll have to test out the various file formats because some will work better than others for the content.  
+
+-----
+
+Another option is to try the built in "open and repair" feature. https://support.office.com/en-us/article/Repair-a-corrupted-workbook-153a45f4-6cab-44b1-93ca-801ddcd4ea53
+If you have different types of PCs and different Office versions, do you also have different Windows versions on different PCs?
+
+Do __ALL__ PCs running Office 2010 crash with this workbook? Do all PCs running Office 2007 handle it without problems? Are all Office 2010 PC up to date on patches and updates?
+
+Tangent: OART.DLL is OfficeArt. Maybe OfficeArt is used by Excel charts.
+is there a workaround for that, though? i posted a link to the spreadsheet in question in the OP
+Good tip, by the way! I checked the event log. It seems to be a problem with oart.dll, whatever that means
+Yes that also causes the crash. Duplicating the graph in any way seems to crash the computer. Even, apparently, saving (sometimes -- perhaps due to temp files?)
+ill definitely try that, thanks
+User|Excel|Windows|Crashes?
+|--|--|--|--|
+Front Desk|2010|7|No 
+**My Office|2010| 7|Yes**
+My Home|2007|8|No
+Co-Teacher|???|???|Yes
+Other Teacher|2007|7|No
+
+I will fill out this table in a few hours after I go to work
+When I tried to close the spreadsheet i got a warning about a large amount of data left on the clipboard, and an option to leave it on the clipboard or delete it.
+
+> oart.dll
+
+See if [this link](https://support.microsoft.com/en-us/kb/2883100) helps.
+
+Which graph? I see two bars listing Vocabulary through F/Score on the x axis and 0 - 120 on the Y. Nothing strange about them. But I deleted them and discovered two more graphs hidden underneath. One looks the same, but the other has broken references to the sheet '2016.September'. Still, that shouldn't be something that causes a crash...
+
+Without being able to replicate, my only suggestion is to delete all the graphs and recreate them. Good luck!
+You looked at the file I posted, and it said there was stuff on the clipboard... from me? How is that even possible? And how can that be resolved? 
+I'm not quite clear -- I should try installing that update and see if it works?
+Thanks! I also found that -- very suspicious. I'm on my home computer now and I also cannot recreate the bug.
+
+I have just two questions for you: which version of Excel do you use, and were the graphs centered on the page, or overflowing the blue boarders we made?
+
+I'm using 2007 at home and the graphs were overflowing. I'm going to try and format them at home and see if it is usable at work tomorrow, but I'm nervous all my formatting is going to go to waste when I move it to 2010 edition. I also found a neat little command that allows me to copy a worksheet x number of times so it should be pretty easy to make these new report cards for 100 kids, as long as they look good on paper.
+
+Oh and to answer your question, either graph causes the bug, I think. I might not have tested the right-hand graph, though -- mostly just left or both.
+Only thing I can really think of is to make sure your system is up to date. Sorry. 
+Yes
+Excel 2013. They stay within the blue borders, but the entire thing overflows the page: http://i.imgur.com/3SEgiiK.png
+
+BTW, you don't need separate shapes for borders. You can add those as part of the chart. See [this link](https://support.office.com/en-us/article/Change-the-shape-fill-outline-or-effects-of-chart-elements-edbc9ae5-12ef-46d0-b078-67f450a35cb9#bmcustomshapeoutline). 
+good to know -- thanks!
+
+i think the person who made this one is new here... gonna have to start making my own

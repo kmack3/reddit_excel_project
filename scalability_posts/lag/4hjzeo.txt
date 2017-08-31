@@ -1,0 +1,21 @@
+lag
+4hjzeo
+How many rows before excel 2016 for mac lags?
+
+Hi /r/excel,
+
+My title is fairly self-explanatory. I have an excel file (.xlsx) with ~10 tabs, with the largest tab having ~50,000 rows, and most other tabs having ~1,000 – 5,000 rows. The 50,000 row tab has a few columns where each row has the vlookup function (to one of the other tabs) as well as a few columns with sumifs. 
+
+This file lags pretty bad for me. Most actions take a couple of seconds, even simple ones like copying a column or dragging an entire column down. What’s the point of excel allowing 1,000,000 rows if it lags after 50,000 with only a few columns with some formulas? 
+
+Thanks!
+
+
+-------------
+It isn't how much data, as it is what you do with the data. The more computations and calculations, the quicker it will slow down. The more complex, the quicker it slows down.
+
+Excel isn't designed for what a lot of people use it for, but it's generally a lot less intimidating that a full DB.
+
+Efficient workbook creation and focusing on less-demanding formulas is a good place to start. I guarantee I've written the longest, worst, most-complicated formula on here with decent data sets - and Excel performs just fine. At least as long as you don't mind a little lag when opening/saving a file.
+-------------
+Try replacing your vlookups with index/match. Vlookups query the entire table for every row, whereas index/match only queries the two columns you're looking in. 

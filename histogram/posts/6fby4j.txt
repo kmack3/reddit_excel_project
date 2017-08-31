@@ -1,0 +1,13 @@
+Using a function or formula to change the font of certain text within a cell, without changing the format of the entire cell.
+http://imgur.com/a/biK58 heres a screenshot of the report, all four coloumns are filled with 5-10 species in each. At the present time I have to manually click each cell, highlight the 'sp' and unitalisize it
+You can change selected characters in a cell using this piece of code which takes the first four characters in A1 and italicizes them. It's pretty obvious which numbers you need to change to do what you want, using right, left and mid to get those numbers.
+
+        Range("A1").Characters(1, 4).Font.FontStyle = "Italic"
+       
+Your update comment should really have been edited into your main question
+
+Anyhow, [here are a couple of macros](https://www.reddit.com/r/excelevator/comments/5fm5io/vba_macro_format_characterword_in_a_cell/) designed to format text in cell.
+
+If you use either, have them search format `_sp` where _ is a space and not `sp` which will format `sp` within any text as well.
+Cheers man, that worked out just how I wanted
+

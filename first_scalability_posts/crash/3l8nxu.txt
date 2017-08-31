@@ -1,0 +1,139 @@
+crash
+3l8nxu
+Excel crashes after using vba Copy/Paste operations for large data set.
+
+Hello All,
+
+I am have issues with using vba to copy and paste a data set. So the data set consist of 5000 rows and about 15 columns. The rows are data that belong int he same groups where the first column is the ID of each row data. I sorted the rows so all the same ID are grouped together (e.g. rows 1-10, rows 11-50, rows 51-200 are the same ID). 
+
+ I wrote a script to add a row onto a transition in an ID number as I scan down the first column (ID values). Then I will copy the header row of the new ID row and paste it onto the newly added row.
+
+My problem is that if I use a data set of 200 rows it may do this 20-50 times and finish with no problem. However when I attempt to do this for my real data set of 500 rows it eventually crashes (greys out) and the windows screen appears.
+
+my vba code is below:
+
+
+Sub InsertM(i)
+
+Sheets(2).Cells(i, 1).EntireRow.Insert
+
+End Sub
+
+
+
+Sub Sort()
+
+Dim i, N, b As Integer, colsize As Integer
+
+
+N = 2 'sheet of interest
+b = 2 'inital start of data
+
+
+Sheets(N).Rows(2).EntireRow.Copy
+    InsertM (2)
+  Sheets(N).Rows(2).Select
+   Sheets(N).Paste
+   
+   Cells(b, 2) = " "
+   Cells(b, 3) = 0
+   Cells(b, 4) = " "
+   Cells(b, 5) = " "
+   
+   Cells(b, 10) = 0
+   Cells(b, 11) = 0
+   Cells(b, 12) = 0
+   Cells(b, 13) = 0
+   Cells(b, 14) = 0
+   Cells(b, 15) = 0
+   Cells(b, 16) = 0
+i = 3
+
+Do While IsEmpty(Cells(i, 1).Value) = False
+
+
+   If Sheets(N).Cells(i - 1, 1) <> Sheets(N).Cells(i, 1) Then
+   
+    InsertM (i)
+   
+   Sheets(N).Rows(i + 1).EntireRow.Copy Destination:=Sheets(N).Rows(i)
+   
+   Application.CutCopyMode = False
+   
+   Cells(i, 2) = " "
+   Cells(i, 3) = 0
+   Cells(i, 4) = " "
+   Cells(i, 5) = " "
+   
+   Cells(i, 10) = 0
+   Cells(i, 11) = 0
+   Cells(i, 12) = 0
+   Cells(i, 13) = 0
+   Cells(i, 14) = 0
+   Cells(i, 15) = 0
+   Cells(i, 16) = 0
+  
+   
+i = i + 2
+Else
+i = i + 1
+End If
+Loop
+
+End Sub
+
+
+
+-------------
+There is only ONE circumstance I've identified where I had to use copy/paste and you don't have it!  Never use Copy/Paste to move data around in Excel.  Each time Copy executes, it moves data into the clipboard.  Each time Paste executes, it moves the data from the clipboard to excel.  This means you are moving the data twice to achieve the desired result and in the process churning up all of the available scratch space on your computer.  You are filling up the scratchpad which causes Excel to CRASH!
+
+One thing that may help is to clear out your temp folder.  The Windows version you are using and how it is configured may affect where it is stored.  If you need help to figure out where, post in the PC forum and someone can show you how.  Figure out where it is located and then delete all the files you can, some won't delete if they are in use.  It is usually in Users.<YourUserName>.AppData.Local.Temp on Windows 7.  There is a similar location on other versions.
+
+The first method is to use a Range object for the move.  Yes, a Row is a Range object in the Excel Object Model.  Note in particular the use of the "Value" on the end, this is required.  If you play around with this, you will find ways to transfer cell formatting if needed.
+
+    Sheets(N).Rows(i) = Sheets(N).Rows(i+1).Value
+
+The second method is to use directed copy.
+
+    Sheets(N).Rows(i+1).copy Sheets(N).Rows(i)
+
+Another suggestion, don't set all those cells to " ".  I won't tell you how, but there is a much better way to put either a space or to clearcontents.
+
+If this resolves your problem, please reply with "solution.verified".
+
+
+
+-------------
+This sometimes happens when you're trying to copy a lot of cells and your computer doesn't have the available resources.  Instead of trying to copy and paste the entire rows, choose only the cells with data and copy those.  This should fix it for you.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 3 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 4 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+-------------
+Perhaps it's inserting rows, copying/pasting, too fast/too much for excel and it locks up? The code looks ok, I don't see why it would create an infinite loop. You could try adding an application.wait somewhere in the loop. As well as DoEvents somewhere in the loop. Can't hurt anything.

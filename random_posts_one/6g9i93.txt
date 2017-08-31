@@ -1,0 +1,74 @@
+6g9i93
+Was looking for advice on how to find and add, via macro, multiple values in one sheet, combine their values and past them into a single cell in another worksheet.
+I have the following below, but realized I might have multiple 'Cost Items' that I may need to add up and summarize into one total number and cell in another worksheet. I figured I might have to keep looping it to look for all the 'Cost Items' in that column, but I'm still new to this and not sure how to preserve each value found and then added together at the end to be copied over. Any advice would be much appreciated.
+       
+       dim found as Range
+
+       Worksheets("1").Activate
+        
+       Set Found = Range("C9", 
+       Range("C8").End(xlDown)).Find(what:="Cost Item", 
+       LookIn:=xlValues, lookat:=xlPart, MatchCase:=False)
+        
+        If Not Found Is Nothing Then
+        
+        Found.Offset(0, 13).Copy
+        Worksheets("Status").Activate
+            Range("I86").PasteSpecial xlPasteValues
+        
+        Else: End If
+
+
+-------------
+This should do the trick:
+
+
+    Sub addItems()
+    
+        Dim rng As Range
+        Dim lastRow As Long, j As Long
+        Dim i As Integer
+        
+        lastRow = Worksheets(1).Range("C" & Rows.Count).End(xlUp).Row
+        
+        j = 0
+        For i = 8 To lastRow
+            If Worksheets(1).Cells(i, 3).Value = "Cost Item" Then
+                j = j + Worksheets(1).Cells(i, 16).Value
+            End If
+        Next i
+        
+        Worksheets("Status").Range("I86").Value = j
+        
+    End Sub
+
+-------------
+If it's not viable, should I look to try and add those values into the new sheet, hidden somewhere and then just have them linked to the cell I need combined?
+-------------
+Thank you. I'm going to put this in at work when I get back. Just spent an hour getting torn apart by the array exercise on wise owl. So many damn loopcounters this and transpose these things. I'm so over my head trying to learn and then when it comes to doing my own simple stuff I'm just staring like an idiot.
+-------------
+SOLUTION VERIFIED!
+-------------
+I find that the easiest way to learn Excel and coding in general is to Google on a by needs-basis, very hard to utilize stuff you read online if you don't know the application.
+
+If the above code works, please reply to the comment with "Solution Verified" to close the thread and get me a clippy point, thanks.
+-------------
+
+You have awarded one point to _Erotic_Chopsticks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+It keeps looping from the if statement  to end if and then next i and repeats itself. 
+
+>     For i = 8 To lastRow
+>         If Worksheets(1).Cells(i, 3).Value = "Cost Item" Then
+>             j = j + Worksheets(1).Cells(i, 16).Value
+>         End If
+
+
+-------------
+Sorry, I don't follow, what's the error statement you're getting? If you're asking why it's looping, that's the point of the for loop.
+-------------
+Or you could make this very easy on yourself and just use the SUMIF function and not have to mess with macros.
+-------------
+OMG, I'm a moron, excuse me. I was just f8'ing through it and didn't realize it was stepping down each part. the word was way down the list. I'm going to throw in a table that has multiple values, run it and get you that clippy.

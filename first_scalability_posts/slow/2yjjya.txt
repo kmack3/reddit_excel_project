@@ -1,0 +1,19 @@
+slow
+2yjjya
+Spreadsheets with macros (.xlsm) load slow from Network.
+
+There are multiple facilities at the company I work for. At my facility if I try to open a .xlsm file from our network it opens in a matter of seconds, as expected. At another facility it opens a much slower, like 5 minutes. I'm pretty sure we use the same software, excel 2010, windows 7 64 bit, Kaspersky endpoint security 10, IE10. Are there any leads on what this could be due to? I understand it might be a network issue, but could there be anything on the excel end?
+
+
+-------------
+Anti-virus settings would be your first protocol. Is it just one file, or all XLSM files?
+-------------
+I'm not sure that it would have such an impact but try saving as '.xlsb'. This will still retain the macro ability but compresses the file size. 
+-------------
+Could you possibly copy it down from the network, open it locally on your machine, then upload any changes back when you're finished?
+-------------
+All .xlsm files are slowed. My initial thought was the Antivirus too, but since my facility has the same kind it makes me not so sure. Still worth a look though.
+-------------
+From what I understand it also takes around 5 minutes to save it to a local directory, so it doesn't help a lot.
+-------------
+Sometimes something like heuristic analysis is turned on or it set to really rip into XLSM files or the like. 

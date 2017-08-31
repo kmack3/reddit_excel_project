@@ -1,0 +1,180 @@
+6fw4pb
+Turn a formula into an array.
+Hello everyone. I have a formula that looks like this:
+
+    =IF(B:B="12345",(COUNTIF($G$2:$G2,$G2)=1)+0,0)
+
+It takes an ID number and checks column B for it (I used 12345 as a dummy ID number) and then counts the first instance of the values in column G which holds dates. 
+
+So if I copy this value down the length of my table in column J and then sum the column, I get the number of unique days that person appeared in the table.
+
+I am trying to turn this into an array that will sum the column and just input the value of that sum into a single cell so I do not take up a whole column.
+
+
+-------------
+You want a single formula which would count the distinct dates in column G for a given ID in column B? Try
+
+    =SUMPRODUCT((B$2:B$1048576="12345")/(COUNTIFS(G$2:G$1048576,G$2:G$1048576,B$2:B$1048576,"12345")+(B$2:B$1048576<>"12345")))
+
+This is an extremely inefficient formula in terms of recalculation. Using supporting formulas in additional cells, even in 1048575 additional cells, usually produces faster recalculation.
+
+This is one of the few instances where VBA user-defined functions can be more efficient (and compact) than formulas only calling built-in functions. Can you use VBA?
+-------------
+This works:
+
+    =--(MAX(SUMPRODUCT(($B$2:$B2="12345")*(COUNTIFS($G$2:$G2,$G2)=1)))>0)
+
+No array-entry needed
+-------------
+I tried it with this supporting formula in another cell 
+
+    =--AND(B2=Query!$C$3,Query!$B$1<=G2,Query!$B$2>=G2,COUNTIFS($B$2:B2,B2,$G$2:G2,G2)=1)
+
+The only issue is I need 17 IDs to use this and that means 17 additional columns all full of formulas and it was just running too slow.
+
+I have never used VBA. Do you know of a good tutorial for doing something like this in a VBA?
+-------------
+Thanks but my formula does a very similar thing.  I am hoping to get all of this to happen in a single cell rather then needing a whole new column that I need to sum up.
+-------------
+Not sure what you mean by 17 IDs. If you need separate distinct date counts for 17 different IDs, just fill the cell into 16 other cells and replace the text constant "12345" for each ID.
+
+If you mean you need a distinct count of dates for 17 different IDs combined, that needs more details. If you had, say, 3 IDs all with the same date, would that produce a count of 3 or a count of 1?
+-------------
+Sorry, I stopped reading too soon ):
+-------------
+Sorry 17 different IDs in 17 different columns. I have that set up and it just takes to long to do anything. Adding new data, even if it is only a couple lines, takes literally 10 minutes to load.
+-------------
+VBA probably best. Open the VBA Editor, insert a general module, run the menu command Tools > References..., and in the dialog which appears check the box to the left of __Microsoft Scripting Runtime__.  Then add the following code to the inserted general module.
+
+    '# assumes 1st arg and then every even arg are 1D ranges or arrays all of
+    '# the same size and 3rd and subsequent odd args are criteria
+    '# text =/<> comparisons use VBA Like operator, so could use [] char classes
+    '# ---- MINIMAL ERROR CHECKING ----
+    Function distinctcount(pv As Variant, ParamArray cr() As Variant) As Variant
+      Dim d As New Dictionary
+      Dim x As Variant, j As Long, cr2 As Variant, op As String, st As Boolean
+    
+      '# make pv into an array
+      If TypeOf pv Is Range Then
+        pv = pv.Value
+        On Error Resume Next
+        If LBound(pv, 2) <= UBound(pv, 2) Then
+          '# if 2D, make 1D
+          pv = Application.WorksheetFunction.Transpose(pv)
+        End If
+        On Error GoTo 0
+      End If
+      If Not IsArray(pv) Then pv = Array(pv)
+    
+      If UBound(cr) < LBound(cr) Then
+        '# no additional arguments, so no criteria
+        For Each x In pv
+          If Not d.Exists(x) Then d.Add Key:=x, Item:=""
+        Next x
+    
+      ElseIf (UBound(cr) - LBound(cr)) Mod 2 = 1 Then
+        '# even number of additional arguments, treat as value-criteria pairs
+        '# note: ParamArray is zero-based
+        ReDim cr2(0 To (UBound(cr) - LBound(cr)) \ 2, 1 To 2)
+    
+        On Error Resume Next
+    
+        For j = LBound(cr) To UBound(cr)
+          If j Mod 2 = 0 Then
+            '# value ranges for comparisons, ensure they're 1D arrays
+            If TypeOf cr(j) Is Range Then
+              cr(j) = cr(j).Value
+              If LBound(cr(j), 2) <= UBound(cr(j), 2) Then
+                '# if 2D, make 1D
+                cr(j) = Application.WorksheetFunction.Transpose(cr(j))
+              End If
+            End If
+    
+          Else
+            '# criteria for comparisons, parse operator and operand
+            '# operands: (nothing) or =, <>, <, <=, >, >=
+            op = Left$(cr(j), 2)
+            If op = "<>" Or op = "<=" Or op = ">=" Then  '# 2-char operators
+              cr2(j \ 2, 1) = op
+              If IsNumeric(Mid$(cr(j), 3)) Then
+                cr2(j \ 2, 2) = CDbl(Mid$(cr(j), 3))
+              Else
+                cr2(j \ 2, 2) = Mid$(cr(j), 3)
+                If op = "<>" Then cr2(j \ 2, 1) = "~~"
+              End If
+    
+            Else
+              op = Left$(cr(j), 1)
+              If op = "<" Or op = "=" Or op = ">" Then  '# 1-char operators
+                cr2(j \ 2, 1) = op
+                If IsNumeric(Mid$(cr(j), 2)) Then
+                  cr2(j \ 2, 2) = CDbl(Mid$(cr(j), 2))
+                Else
+                  cr2(j \ 2, 2) = Mid$(cr(j), 2)
+                  If op = "=" Then cr2(j \ 2, 1) = "~"
+                End If
+    
+              Else  '# no operator, defaults to =
+                If IsNumeric(cr(j)) Then
+                  cr2(j \ 2, 1) = "="
+                  cr2(j \ 2, 2) = CDbl(cr(j))
+                Else
+                  cr2(j \ 2, 1) = "~"
+                  cr2(j \ 2, 2) = cr(j)
+                End If
+    
+              End If
+    
+            End If
+    
+          End If
+        Next j
+    
+        On Error GoTo 0
+    
+        For x = LBound(pv) To UBound(pv)
+          For j = LBound(cr2, 1) To UBound(cr2, 1)
+            If cr2(j, 1) = "=" Then
+              st = (cr(2 * j)(x) = cr2(j, 2))
+            ElseIf cr2(j, 1) = "~" Then
+              st = (cr(2 * j)(x) Like cr2(j, 2))
+            ElseIf cr2(j, 1) = "<>" Then
+              st = (cr(2 * j)(x) <> cr2(j, 2))
+            ElseIf cr2(j, 1) = "~~" Then
+              st = (Not cr(2 * j)(x) Like cr2(j, 2))
+            ElseIf cr2(j, 1) = "<" Then
+              st = (cr(2 * j)(x) < cr2(j, 2))
+            ElseIf cr2(j, 1) = "<=" Then
+              st = (cr(2 * j)(x) <= cr2(j, 2))
+            ElseIf cr2(j, 1) = ">=" Then
+              st = (cr(2 * j)(x) >= cr2(j, 2))
+            ElseIf cr2(j, 1) = ">" Then
+              st = (cr(2 * j)(x) > cr2(j, 2))
+            Else
+              '# should be impossible
+              Err.Raise Number:=-1
+            End If
+    
+            If st And Not d.Exists(pv(x)) Then d.Add Key:=pv(x), Item:=""
+    
+          Next j
+        Next x
+    
+      Else
+        '# odd number of additional arguments, so ERROR
+        If TypeOf Application.Caller Is Range Then
+          With Application.Caller
+            Debug.Print .Address(0, 0, xlA1, 1); "ERROR: must have odd number of arguments"; .Formula
+          End With
+        End If
+        Set d = Nothing
+    
+      End If
+    
+      If Not d Is Nothing Then distinctcount = d.Count Else distinctcount = CVErr(xlErrNum)
+    
+    End Function
+
+Use this user-defined function in formulas like
+
+    =distinctcount(G$2:G$1048576,B$2:B$1048576,some_ID)

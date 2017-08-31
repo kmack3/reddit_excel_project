@@ -1,0 +1,26 @@
+IF (E2) = "Yes", multiply C2 by 3%; if (E2) = "No", multiply C2 by 2%.
+=C2*(IF(E2="Yes",0.03,0.02))
+
+No need for two IF statements. 
+    =IF(E2="Yes",C2*0.03,IF(E2="No",C2*0.02,""))
+For an unconventional solution that isn't robust...
+
+    =C2*(Len(E2)/100)
+Maybe something like this:
+
+    =C2*(2%+(1%*(E2="yes")))
+But what if E2 is blank or "Maybe"? Those would get the same treatment as a "No".
+Unless the cell contains something other than yes or no...
+This is much better
+Perfect, thank you so much!
+Points for creativity 
+=IF(E2="","",C2*(IF(E2="Yes",0.03,0.02)))
+
+Reply to his comment with "Solution Verified".
+*cough* /u/aulstinwithanl
+Solution verified
+"solution verified" 
+
+You have awarded one point to _SapperInTexas_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

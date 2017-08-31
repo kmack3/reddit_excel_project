@@ -1,0 +1,38 @@
+I took an Excel test for a job interview and have some questions.
+[deleted]
+Other common formulas would be to use match, index/match, vlookup, and sumproduct.
+Know how to manipulate text to extract information (LEN, LEFT, RIGHT, MID, SUBSTITUTE), how to use logical / math / statistical functions (IF, SUMIF(s), AVERAGEIF(s), COUNTIF(s), SUMPRODUCT), how to use date functions (NETWORKDAYS, DATE, EDATE, EOMONTH)  and obviously your lookup functions (VLOOKUP, INDEX/MATCH, OFFSET). Can confirm at a 40 hour a week job these functions constitute like 99% of what I do and the rare instance I have to come up with a crazy array someone else has already written it and a quick google search can fill in the missing pieces.
+Sumproduct can often be used instead of a pivot table for summarizing data. Basically, you need to use boolean calculations to match to your criteria multiplied by the result column. The booleans evaluate to 1 if true and 0 if false.
+
+To do this you use the modifier -- like this:
+
+=SUMPRODUCT(--(A:A="criteria1),--(B:B="criteria2),C:C)
+
+This would return the total sum of all rows in C where both criteria in A and B are met.
+Maybe a helper column that combines X,Y,Z and then countif.
+Auto filter probably would quickly help you count up the marched entries
+Learn all the if functions
+This... Also, if you get this job, learn Excel asap. If they took the time to test you on it, thats means you really should know this. Usually Excel tests are the minimum they expect from you just to be sure you aren't BSing your skills. Watch the Excelisfun videos on YouTube. They will really help. Good luck!
+That surely would work but I think avoiding helper columns might score the poster some more brownie points., by using sumifs/countifs/sumproduct type formulas.
+
+Below link might be helpful to understand how sumproduct can be used on arrays:
+https://www.ablebits.com/office-addins-blog/2016/08/24/excel-sumproduct-function-formula-examples/
+Excelisfun is an amazing resource. 
+More impressive would be stating -
+
+Hmmm, you don't want me to use Pivot Tables. I can nest these formulas, or I can write them in helper columns for ease of use and *slightly* faster calculations. Which would you prefer?
+
+Of course, and answer like that only helps if the person giving the test is smart enough to know a smart answer.
+I never knew fitting an entire formula into one column was a desirable goal, any more than nesting as much as possible into a single line in a procedural language would be. I often deliberately split my calculations into different columns for a few reasons.  
+
+* The column headings serve as documentation that helps me understand why things were done the way they were when I come back to a spreadsheet months or even years later. "Hey, remember that spreadsheet you made for us a long time ago? I added some stuff to it and now it doesn't work anymore. Can you fix it?" 
+* It makes it easier for others to understand.
+* It aids in debugging
+* It aids in analysis for reverse-engineering calculations.
+* Modularity makes it easier to change formulas when fickle management changes requirements.  
+
+Am I weird?
+Does breaking formulas up into helper columns make calculations run faster? I always built smaller formulas in individual columns and then combined them into massive formulas in single columns to make it look important. 
+Yeah it really depends on how much experience the job requires. You can cram and/or fake it, but at the end of the day it has to be a good fit.
+Probably!! But splitting things up that way is a good practice so I wouldn't worry about it :p
+They do, but mostly that comes from not repeating the same calculation twice. For example, if you nest a vlookup in an iserror as part of an if statement, putting it all in one cell means you'll compute the answer twice as follows     if(isrror(vlookup()),0,vlookup())If instead you put the vlookip() in a separate column, you could just reference that column twice. It's impact for calculations is minimal untill you're into tens/hundreds or thousands of rows (or array formulas around 1000 rows). It does make readability quite a bit easier though. 

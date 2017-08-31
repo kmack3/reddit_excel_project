@@ -1,0 +1,144 @@
+Hi there. I am trying to open a .xlsx file which is password protected. However I forgot the password, is there anything I can do?
+It's possible to unlock a password protected sheet using a VBA script (basically a for loop that tries a bunch of passwords). You can find the code easily with google.
+
+This may be portable to apply to opening a workbook.  Open a new workbook and write the VBA code to open the file from there. The .Open method should have a password variable you can modify inside a loop.
+We had to do this at work, when we lost an employee that used the password protected excel files. I downloaded Passware, costs $50.  It cracked the password on our xlsx files.
+
+If your password is simple, the demo version may work.  It only works for 1 minute, and if it does find the password, it gives you the first 3 letters.
+
+Regardless, depending on the amount of time you invested creating this workbook, $50 may be relatively cheap.  Good luck!  
+File-open password? Dictionary attacks then brute force (iteration) may be the only options. If you have an approximate recollection of the password, iterating off of that may be best.
+
+Good news is that Excel imposes no limits on the number of failed attempts to open password-protected workbooks.
+.xlsx files are basically .zip files.  Change the file extension to .zip and you will have access to all of the sheets/data.
+Can you open it in Android and upload it to Google sheets and then download it again ?
+Other answers (zip method, vba script) are correct only if the file is created (and saved) by a version of Excel 2007 or prior. In excel 2010 or above these methods will not work (the script crashes and the zip doesn't open). 
+
+Have you tried these methods with an older version of Excel? I think it doesn't work but I would give it a try. 
+Yes there is.  Install open office,  load it there,  and resale it without the password 
+Try this maybe https://www.youtube.com/watch?v=xW0YMtjiPxc
+Before following these steps, you may want to make a backup of your file before doing any of this.
+
+1. Rename the file extension to .zip.
+2. Open the zip file, and navigate to the following path: "Protected.zip\xl\worksheets"
+3. You should find a file called "sheet1.xml" (Or something similar, based on the worksheet name and number of worksheets in your document)
+4. Extract the target worksheet out of the zip file.
+5. Open the xml file in a text editor, and look for the following tag: "<sheetProtection>"
+6. Delete the entire sheetProtection tag from the xml file, and save it.
+7. Copy the XML file back into the zip file.
+8. Rename the file extension back to .xlsx.
+9. ???
+10. Profit
+
+Can you print to PDF using the windows shell? Alternatively, maybe convert to PDF and back using a web service like Zamzar?
+There is a glitch when using OpenOffice to open password protected xlsx files. Simply download open office, open the file, save as and rename. 
+Is the file password protected or the sheets inside? I have a script to open protected sheets that you forgot the password for but you need to be able to open the file first.
+One of the things that's worked for me in the past is to upload your excel workbook to Google sheets. Then open the workbook with Google sheets and save as another excel file, no more protection.
+I hate to be the one to tell you, but the answer is no.
+
+The only thing to do now is try to get an unprotected copy from the original source.
+Perhaps open another book and use VBA to copy everything over to the new one?
+
+I did this once with hidden sheets inside a book so might work for this.
+I got you. I use this all the time.
+
+Alt+F11
+
+Double Click the sheet to open a data entry field
+
+Drop in:
+
+    Sub PasswordBreaker()
+    'Breaks worksheet password protection.
+    Dim i As Integer, j As Integer, k As Integer
+    Dim l As Integer, m As Integer, n As Integer
+    Dim i1 As Integer, i2 As Integer, i3 As Integer
+    Dim i4 As Integer, i5 As Integer, i6 As Integer
+    On Error Resume Next
+    For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+    For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+    For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+    For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+        Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+    If ActiveSheet.ProtectContents = False Then
+        MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+            Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+            Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+         Exit Sub
+    End If
+    Next: Next: Next: Next: Next: Next
+    Next: Next: Next: Next: Next: Next
+    End Sub
+
+Hit F5
+*it works via brute forcing password attempts.  I think it took about ten minutes to get a 7 character password
+
+**edit** fair warning, that was an english word, 7 characters, no special characters.  I just tried it on my non-english word password with numbers in the middle, and after 30 minutes of guessing dictionary words, it moved on to adding symbols numbers and spaces.  It is guessing that it will take 2 days to crack it.  However, you can give it clues on how to guess your password to cut down on that time.
+> Good news is that Excel imposes no limits on the number of failed attempts to open password-protected workbooks.
+
+This kinda makes me chuckle, but also makes me scared inside...
+[deleted]
+I tried to do that but it won't work. Winrar gives me an error saying that the archive is not compatible.
+I have done the same thing with Libre Office. The worksheet was protected and also the VBA code. I could get the sheet unprotected and the VBA code, but I did not get the password for the VBA protection.
+I believe that only works if a sheet has edit protection. OP's entire workbook is password protected. 
+Tried it, unfortunately it did not work. Thank you for the suggestion.
+Really?  We're downvoting bad news now?
+How can I open up the book if I cannot open the file?
+I took this code and modified it slightly to do Workbooks.Open inside the loop.
+
+Not recommended, but might work if you're desperate.  It's been running for about 20 minutes or so, and I see a temp file being created on my desktop (where the protected file is saved) a couple times a second.  I think it's trying to open it repeatedly with the wrong password.  Not sure how long it will take.  I'll probably have to crash the program to get back to work.
+It should cause concern. Excel workbooks (Office documents generally) aren't secure. Given enough processors and/or time, even file-open passwords could be defeated with brute-force attacks.
+You'll need an xml editor to delete the password with this method. Rename to zip. Open the one that says workbook with an xml editor. Search for the tags with password and delete it. Save the file and Rename back to .xlsx. 
+Ah, password protected via the filesystem versus being internally protected?
+
+/u/TREEandMONKEY care to clarify the type of protection we're dealing with?
+
+If it's protected by the filesystem, you're stuck unless you're able to bruteforce the protection on that. There's really no other work around for that type of protection.
+I guess this is the new improved security with xlsx files.
+
+There are options if you are able to open the file, where only a sheet is locked.
+OP will figure it out soon enough. 
+You don't open the book. You open a new book and use VBA to copy stuff over. You don't need a book open to pull stuff from it.
+I don't think this works on xlsx files. This works for 2007 and earlier excel files by taking advantage of the weak hash Microsoft used on them. But after that the password security got much better. 
+It runs fine without modification. It doesn't create a protected copy as you are having it do. It sounds like OP just needs to open it and  start where the previous owner left off.
+Why?  How would Excel possibly enforce such a limit?  I can make thousands of copies of the file in seconds, and i can run as many copies of Excel as I want in virtual machines.  Any attempt to enforce limits on guesses by Excel would do nothing but promote a false sense of security, and that's ignoring the fact that there are open source programs that can open the very same file, for which enforcement of any limits could just be patched out.
+True, if you had enough processing power. Fortunately many people don't have enough to crack 16 character hashes! :D
+That's how I interpreted it. In which case, yeah /u/TREEandMONKEY, you might be screwed. But if it's just sheet editing protection, that's easy to get around. 
+
+It would still prompt you for the password, and if you cancel, it gives the #REF! error.
+I work for a Fortune 500 company. We just stopped using AS/400 a couple of years ago. Well we still have it but now we have this beautiful turd known as Oracle.
+
+New Microsoft products aren't top priority.
+I'll test it, but I think I've used it on .xlsx files in Office 2010.
+The code as posted will unprotected a sheet, not open a password protected file.
+Granted limits could be defeated by multiple copies of the workbook, but the multiple copies add time and storage overhead.
+I still have to use AS/400 at work. It's a thing of beauty.... if you want something that looks like it came straight out of War Games.
+Unless the password is a combination of A and B, this will never work.  This macro brute forces by taking advantage of collisions between the real password and sequences of A and B.
+Ahh yes, you're correct. It will remove the protection once inside the sheet. It doesn't break the password to get into the sheet.
+As an example, I decided to create a test file.  I downloaded all volumes of the [Mahabharata](https://en.wikipedia.org/wiki/Mahabharata), concatenated them into one file, imported them using Excel's text import wizard, then open and modify protected them with the same password. (mahabarat123456, I believe, whatever the maximum characters is.  A diligent reader will note that, in performing this test and writing the command, I misspelled the word "Mahabharata").  That gave me a "Size on disk" (which includes filesystem inefficiency) of 8,687,616 Bytes.  I have, currently mounted, 7,778,344,837,120 Bytes of storage space, or enough to hold 895,337 copies of my encrypted Mahabharata spreadsheet.  That excludes a 2.7 TB hard drive that I need to clean up and a 200 GB partition that I use for running another operating system.  Making copies of this file, even if I wanted to write a macro to recreate it from scratch, would be trivial.  Copying them with a script would be orders of magnitude faster.
+
+Man, but isn't it concerning that Excel doesn't limit the number of tries before stopping you from opening it?
+
+If you want to recreate your copy of the Mahabharata to test: (Cygwin recommended).
+
+     curl -k "http://bombay.indology.info/mahabharata/text/UR/MBh[00-18].txt" -o "MBh#1.txt"
+     ls -v1 MBh*.txt | xargs cat >> Mahabarat.txt
+
+Note, this script runs with SSL disabled, meaning this security exercise is, itself, insecure.
+right?  I worked for a company still using that in 2005.  Don't know if they've moved on yet.
+It works for passwords to protect sheets that are not only As or Bs. Not sure if the hashing function for workbook passwords is the same.
+Text lends itself to compression. Try selecting A:ZZ, type =RAND(), press [Ctrl]+[Enter] to enter the formula in all cells at once, then save. That should produce a file on disk many times larger.
+
+No doubt the time to try 1 million passwords would take a few orders of magnitude more time than copying large files as many times.
+Probably not. As ugly as it is, it does the job. 
+The hashing function for workbook passwords is not the same, which is why it will only work if the real password to your workbook is a combination of A and B.
+> No doubt the time to try 1 million passwords would take a few orders of magnitude more time than copying large files as many times.
+
+This was kind of my point.
+
+And yes, text compresses well, but your average spreadsheet is going to be far less random than =rand() in all cells, and likely much smaller than the Mahabharata.
+Your Mahabharata workbook was under 10MB, and a web search shows it has roughly 1.8 million words. At a generous average 10 characters per word, that's about 18 million characters.
+
+Most of the workbooks I see at work are well over 10MB. Filling A:ZZ (so Office 2007 and later) fills a bit over 736 million cells. Point here is that filling very large ranges with simple formulas can produce much larger test files than importing long texts, even the complete US criminal and tax laws.

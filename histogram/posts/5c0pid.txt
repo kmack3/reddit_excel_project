@@ -1,0 +1,92 @@
+Performance of Excel: Study Shows How to Speed up Excel by 81%
+Flair set to advertisement.
+>Screenshot of the test worksheet  
+  
+  
+Spectacular spamming skills...
+> 2 steps in 2 formulas vs. 2 steps in 1 formula
+
+> Is it better to spread a formula over two columns or to have a longer formula within 1 column?
+Is it better to have an additional column or to put two formulas into one Excel column?
+In order to answer this question we’ve set up a VLOOKUP within a VLOOKUP. So basically the result of the first VLOOUP is the search value for the second VLOOKUP. We compare two options:
+Each lookup formula in 1 column so that the first column with the first VLOOKUP is the input value for the second column. The formula is divided into two columns.
+Having a longer formula within 1 column.
+The direct comparison shows: Having a longer formula in 1 column is slightly faster. You can save app. 0,5% of calculation time.
+
+
+Please note this is *only* for two stage calculations. In a calculation where the same calculation is going to be used multiple times, Microsoft recommends splitting out each individual calculation. Something like
+
+    =IF(ISERROR(Vlookup(A2,Sheet1!A:E,5,false))=TRUE,"No Answer",Vlookup(A2,Sheet1!A:E,5,false))
+
+Is going to run faster with the Vlookup calculation split out.
+Issues with 64-bit is not simply related to older add0ins or data connections.  Issues can arise with 64-bit when using forms or controls as many of the common controls within 32-bit do not exist in 64-bit therefore the reliance of 3rd party add-ins is increased even though these are still not available anywhere near as much as 32-bit. If your workbook needs to be compatible in both 32/64 bit this dramatically reduces what controls you can currently use as most will not work on both plus there are certain compatibility requirements when writing certain VBA scripts particularity when using the Declare statement or the Long data type.
+TL;DR?
+As i understand the german setting is slower. Is this similar for french setting ? For older version of excel ? 
+
+(at work and waiting for calculations to finish).
+How about array formulas, cube functions, and sumproduct.
+Don't forget, Microsoft still recommends 32 bit to the vast majority of users
+But what about my magical SUMPRODUCT?!
+This site has some great comparisons between vlookup and index match http://analystcave.com/excel-vlookup-vs-index-match-vs-sql-performance/ 
+Did you test it with Chrome or Windows Explorer open?
+Everyone's work is sponsored somehow. This study was a pretty interesting read and the advertising was minimal. I hope the setting of this flair doesn't diminish the views, or curtail the conversation.
+Sorry, corrected it. I know, you would say spamming skills again - but on the website it looks much nicer also with the charts :)
+Yes, that's true.
+Yes, that's true. As an add-in developer I can tell (at least I'm making my add-ins compatible with the Declare statements). But I'd still say you could give it a try. It took me about 5-10 min switching from 32bit to 64bit (with a 365-subscription).
+The only variable they tested that had a large (more than 10%) impact was changing regional setting from English to German. And this had a gigantic impact of 4X to 5X faster! 
+
+Seems strange and would make excel odd to work with for those of us used to English numerical notation but if it really has that much impact, perhaps worth it. 
+Yes, just tested it. French seems similar to German. 
+If you switch from one of the following regions to "English (USA)" you reduce the calculation times:
+Hindi	-97%
+Punjabi	-97%
+Arabic	-97%
+Spanish	-85%
+French	-82%
+German	-81%
+Russian	-78%
+Portuguese	-76%
+Japanese	-2%
+China	0%
+
+Thanks, haven't tested but will add them to the list of further tests.
+Yes, that's true. But the vast majority of users also don't need to reduce the calculation time. 
+
+Sorry, I canceled the SUMPRODUCT test as after 15 min it only got around 15% done (100,000 formulas - VLOOKUP took app. 8 seconds).
+Are you referring to the software in the background? We had Chrome open. 
+No, we've let it stay.
+
+But it's more of a case of "this is external content". If you look at the user's post history - they have no comments in the sub to help other users directly, it's all advert type posts.
+
+As it's still helpful info, and not just brand awareness, we let it stay.
+We hope so too! We also hope that the subtle advertising doesn't turn people away from what should be an impartial sub.
+
+The need to keep a close watch on what is being advertised should be obvious. If you feel there is a room to grow on our policies, please send us your ideas via mod mail!
+It's a problem. I have Excel in Spanish and it may work the same way. 
+
+The problem is that if you need to share between people or stuff like that, it becomes a mess.
+
+
+Numerical notation is not the point. Foreign language installations actually have different function names...it's complete madness.
+
+I sometimes have to help someone with their Dutch language version and suddenly MATCH is VERGELIJK is IF is ALS...
+Any difference without it open?
+I understand everything and agree except 'no, we've let it stay' huh? Who said you took it down?
+
+Is there an interesting flair to add too? This was one of the more interesting things I've read here, and I'd hate for people to miss out on the study of core excel functionality.
+
+
+What do you mean by 'it becomes a mess'?
+
+Settings are local, "." and "," decimal separator can work with each other.
+Usually the conversion works fine. It works in the background and people don't even notice that it a file was edited or converted to another system. 
+Or did you experience any problems? 
+Sharing an Excel sheet isn't the issue, but generating CSV *is*.
+Sometimes I use this, hope it works for you: http://es.excel-translator.de/translator/
+My usual reply to them is "Send it to me"...and when I open it I get it in English.
+Haven't tried it. As the software in general had very few impact we didn't proceed further in this direction. But if you like you could download the test macro and try it yourself. 
+What kind of effect were you expecting and why?
+I did. Sometimes formulas break. And sharing in other formats is problematic, as /u/small_trunks mentioned.
+Nice
+Any kind because the browser is often the most used item that people have open.
+Where other formats are CSV and text...all of the "normal" excel files (xlsx, xlsb, xlsm) save correctly and can be shared.

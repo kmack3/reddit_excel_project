@@ -1,0 +1,49 @@
+Is there a way to use a single OR statement to compare a single cell with 7/8 different cells?
+How about this? :)
+
+    =IF(COUNTIF(B1:D1,A1),"A","B")
+Try sumproduct, it's honestly pretty incredible. I'm on mobile right now so I'll just link a site that explains it decently.
+
+https://exceljet.net/excel-functions/excel-sumproduct-function
+You could alternatively try...
+
+    =IF(isnumber(match(A1,B1:D1,FALSE)),"A","B")
+
+This should work as the 'isnumber' qualifier will return TRUE if a Match is found and FALSE if no match is found, as the Match function returns an array number reference when it finds an item in the form of a number. If no number is returned, then no match was found, hence, FALSE.
+What version of Excel are you using?
+if 2016 on an o365 subscription, you should be able to use the new SWITCH function
+
+    =SWITCH(A1,B1,"A",C1,"A",D1,"A","B")
+
+This tests the value A1. If its equal to A1,C1,D1 it assigns "A", else it assigns "B"
+how/why does this work?  I don't see the logical test I would expect "IF" to require.
+Cool, looks like it will work. will try it at office tomorrow. Thanks. 
+Solution Verified
+It's a play on the idea of 0 = False, 1 = True.
+
+Any number other than 0 is true, so if A1 matches anything in the range B1:D1, then the Countif statement isn't 0, which results in the If statement being true, and producing the result of "A".
+
+If A1 doesn't match anything in the range B1:D!, then the Countif statement is 0, which results in the if statement being false, and producing the result of "B".
+
+It's a very clever solution.  Kudos to /u/CFAman 
+
+Edit - To play around with the idea, you can use a formula like `=IF(A1,TRUE,FALSE)` where A1 is a number.  You'll see that for all numbers other than 0, this formula evaluates to TRUE.
+If the lack of a strict boolean result bothers you, make it 
+
+    COUNTIF(B1:D1,A1)>0
+
+That will return TRUE if A1 is found in cells B1:D1, and FALSE if it is not found.
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+> Any number other than 0 is true
+
+cool.  Thanks for breaking it down :)
+Be careful! The test
+    
+    =IF(0=FALSE,TRUE,FALSE)
+
+returns False! 0 does not equal false! They just resolve to the same value in a lot of situations.
+No problem!
+This is an interesting distinction -- thanks for clarifying 

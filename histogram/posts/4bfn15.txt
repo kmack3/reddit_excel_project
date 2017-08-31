@@ -1,0 +1,57 @@
+If column A contains specific text, than fill column C with data. More complex IF function?
+You can try this:
+
+    =if(A1="Sugar",.5,if(A1="Cracked Corn",.25,"")
+
+You could keep filling ifs in for the `false` part of the statement if you need to. 
+Depending on how many possible values you have/need, the simplistic answer would be to use nested if statement, e.g. in cell C1
+
+    =If($A1="Sugar", 0.5, If($A1="CrackedCorn", 0.25, ""))
+A VLOOKUP might do the trick as well. If you have quite a big list then you could simply put them into a value table with Column 1 being "Sugar", "Crack Corn", etc. and Column 2 being the values. 
+
+The formula would then look like:
+
+=VLOOKUP(A1,Value_Table,2,FALSE)
+SOLUTION VERIFIED !
+
+
+both contributors should receive a clippy point!
+i guess i dont get how this verifying thing works haha
+
+Solution verified !
+We will try right now. Thank you for the quick response! 
+This worked. thanks a bunch for helping me out! My problem has been solved! :)
+Going to try asap. Thank you!!
+Solution verified!
+
+thanks!
+Yeah it would be easier to deal with also. In the future you could add whatever you wanted without changing the formula. 
+
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _Tycv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Hello!
+
+**Posting a comment with 'solved!' does not mark the thread as solved.**
+
+Please read the sidebar on how to set the correct flair.
+
+Thank you for keeping the sub tidy - please take the time to familiarise yourself with the guidelines on the side bar and the submit page.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+And just to clarify, this should work with as many words as needed?  as of right now there are 5 different ingredients that would potentially be nested...
+
+You have awarded one point to _empire539_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You can just keep filling in more if statements where that last set of " " is. 
+It worked! thanks so much. Looks like my friend had tried something similar, but the formula syntax wasnt correct. idk! Thanks again for helping me solve this!
+

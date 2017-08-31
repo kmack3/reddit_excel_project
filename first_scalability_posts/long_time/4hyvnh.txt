@@ -1,0 +1,43 @@
+long time
+4hyvnh
+How can I change the value of cells expressing time as hh:mm:ss:ff in to mm:ss except if the time is long enough to be hh:mm:ss?
+
+I have a spreadsheet full of durations of footage in a column where all the durations are expressed in the format hours, minutes, seconds, frames (hh:mm:ss:ff). I have to add that to an existing spreadsheet where the original authors seem to be expressing the time values as minutes and seconds mm:ss except when the footage is over an hour long and it's just hh:mm:ss. Either way, the frames are always omitted.
+
+I have software that will created tab delimited text listing all the durations, and that's where all mine have come from, but it'll only do in in the longer format and I don't want to manually change them because it defeats the purpose of the software listing it all for me. I would like a way of changing the cell values to the format I described, which is adaptive in the case of clips lasting over an hour. If it's easier, I don't mind the frames simply being just omitted, without a formula that rounds up or down to the nearest second.
+
+
+-------------
+There's ways round it with Custom Formatting or forcing it to become text, but what do you need to do with the numbers once they're in a spreadsheet - do you then perform calculations with them?
+-------------
+If it wasn't for the frames, you could format the cells as time using the following number format to drop the hours and minutes if they're zero.  Perhaps there is a way to modify this to include frames? (anyone?)
+
+    [<0.000208][ss];[<0.0415][mm]":"ss;hh":"mm":"ss
+-------------
+I suspect the intention with the authors of the master spreadsheet  that I'm collaborating on is to do nothing with the data and simply to keep it for informational purposes and for checking against if they encounter problems with the media. By that token having it properly formatted in hh:mm:ss:ff would actually be better, but I can't really know precisely what their intentions are and I don't want to be the weak link in the chain with my contribution to it. I suspect they actually can't perform any calculations with them because I see some people seem to have have used a '.' rather than a ':' and since the number of digits changes if it's one hour or longer. I assume that alone means the data isn't consistent enough to even work for any analysis but as I said, I just want to make my contribution in line with everything done thus far.
+-------------
+Just to check, you have exported a list of durations of videos with the time in the format of hh:mm:ss:ff and you want to change this to be consistent with the existing document which has the format of mm:ss and hh:mm:ss if the length in greater than one hour?
+
+If that is what you want to do and all the times you exported are in the format hh:mm:ss:ff then you could use the following formula which will give you either hh:mm:ss if > 1 hour and mm:ss if its under an hour.
+
+    =IF(NUMBERVALUE(LEFT(A2,FIND(":",A2,1)-1))>0,LEFT(A2,8),MID(A2,4,5))
+
+If you want the times to be stored as an excel time (if the times are just going to be used for reference and not calculations then you probably don't need to do this) you can use the formula:
+
+    =TIME(LEFT(A2,2),MID(A2,4,2),MID(A2,7,2))
+
+Both of these assume that the first time is in the cell A2, you will have to change this to reflect your data.
+
+Let me know if this doesn't work or if this isn't what you wanted.
+-------------
+That's right. Can't wait to try that out. I'll let you know.
+-------------
+> NUMBERVALUE
+
+Note that this function is new for excel 2013
+-------------
+Good point, I think you could replace NUMBERVALUE with just VALUE in this case and that would work in Excel 2007 onwards. 
+
+Do you have any advice on which function is 'best practise' in cases like this where both would work?
+-------------
+yeah, I guess the value or time function should work. 

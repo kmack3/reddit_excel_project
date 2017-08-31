@@ -1,0 +1,89 @@
+Can someone explain vlookup?
+=VLOOKUP(W, X:X, Y, Z) 
+
+W is what you want to to find in a list. 
+
+X:X is the table of data you're looking in. The first column is there excel will look for W
+
+Y is the number of columns to the right of W you want it to return. 
+
+Z is either 'TRUE' or 'FALSE'. 'TRUE' means when looking for W in the first column of X:X, find the closest value in an ascending list. 'FALSE' means find the exact value W in that first column. 
+
+
+So if you have a list of names and you're looking for thier age (which exists in a table of name, net worth, and age) you'd say something like =VLOOKUP("John", X:X, 3, FALSE)  and excel will find 'John' in the first column and then look at the third column in that array (2 over from John) to return 47 or whatever his age is. 
+
+
+Hope that makes sense. I'm on mobile so I can really build an actual table to look at. 
+Vlookup is "I need to locate a value in a list, then retrieve a value from a later column in that same row"
+
+It is quick and easy but not as powerful as other methods like INDEX combined with MATCH
+http://i.imgur.com/o59ormI.png
+
+Basically it's "find *[lookup value]* in the first column of *[table]* and spit out whatever's in the *[column number]*'th column in that row".
+
+So in my example it's "find *[James]* in the first column of *[table of F6 to I21]* and spit out whatever's in the *[4]*th column in that row". So it comes back with James' height. 
+
+The *FALSE* at the end is used to choose between exact or approximate match - I have never used the approximate match, so I just always write FALSE there.
+[How to use the Excel VLOOKUP Function.](https://exceljet.net/excel-functions/excel-vlookup-function)
+Clippy: vlookup
+[Here's a great resource describing VLOOKUP.](https://www.techonthenet.com/excel/formulas/vlookup.php)
+Here's my most recent use (this is actually a lie, I used Index, Match)
+
+I built a price book for a customer... it has models, part numbers and a ton of other stuff for the customer...
+
+Different customers have different prices, but all products have a SKU and I can pull each individual customers price for each SKU.
+
+So I have a generic price book... it has static information and a PRICE column. I can change the pricing for the entire book by loading it into the back sheet, which matches the items SKU against the customers pricing list (it finds the same SKU, then looks one column over at the price)
+
+So the VLOOKUP would be =VLOOKUP(Product SKU, PriceBookSKU&Pricing Columns, 1, 0) I'd put that in each cell where I wanted to have an adjustable price... 
+
+You almost always have sheets/tables with related, but incomplete information. If your sheet/table you are using has all the information you need, stop. You don't need a vlookup.
+
+But lets say you have a table of orders, with item numbers, but the item price is in another table. Vlookup is the way you join these two tables to get the information you need. 
+
+The rest is just syntax, this is the idea.
+You have 2 lists of information
+List 1:Item and price
+List 2:Item and quantity
+
+
+and you want to make a list of: 
+
+Item, price, and quantity
+
+You can v(ertically)lookup price or quantity by matching the item and bring that additional item in the list 
+This is a good, but there is one small issue with the last part. The array (in your example "X:X") must be as wide as the column you are searching for (3). So it should be:
+=VLOOKUP("John", X:Z, 3,FALSE)
+or
+"Search in table X:Z and give me the value in the third column (Z) which corresponds to the first instance of 'John' in column X"
+
+Just wanted to clarify in case OP runs into errors.
+
+Also, the whole "first instance" of John part is important. If there are two Johns you will only get the value for the first John in the list. There is weird nuance with TRUE as well, but that's another story.
+What if there are two James in that column?
+
+I still don't understand what you would actually use "TRUE".
+
+Thanks, that image helped me a lot ;)
+[VLOOKUP](http://office.microsoft.com/en-us/excel-help/vlookup-HP005209335.aspx)
+
+     Syntax: VLOOKUP(lookup_value,table_array,col_index_num,range_lookup)
+
+
+Searches for a value in the first column of a table array and returns a value in the same row from another column in the table array.
+Yes, very good point.  When I wrote X:X I didn't really think of it in context of being one column but you're 100% correct.  
+
+To your second point, also very important.  If you have multiple 'John' values and it's a total you want, then a SUMIF is better suited.
+If there are multiple matches it will return the first one it finds working from the top down, so ideally you want the column you're searching to have unique values.
+
+You might use TRUE if you're looking up a numerical value where you just want the nearest value. I made an example here of cooking time of steaks:
+
+http://i.imgur.com/evAWceW.png
+
+As you can see several of the lookup times I used are nowhere on the reference table, but it doesn't give a #REF error (which it would if I used FALSE). It just returns the answer for the closest value below it. Obviously this is a silly example, but there might be actual uses for it in, say, engineering reference tables where the thing you're measuring can be any value but you just approximate it.
+
+Note that for an approximate search, the search column (i.e. the first column in the data table) *must* be in ascending order. With an exact search this isn't required.
+Thank you!
+
+Now I finally understood it, you guys have a great community
+No problem, happy to help :)

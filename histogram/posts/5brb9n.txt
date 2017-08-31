@@ -1,0 +1,53 @@
+From PDF table to Excel Sheet
+Not an Excel answer per say, but you may have to consider a third party utility.
+
+Hope it's not against rules to mention other products, but I've good experience so far with an online tool called DocParser. Does a good job when copy/paste doesn't work.
+I do this every day and use a bit of software called PDF2XL. It's not free, but my business would be impossible without it.
+Highlight want you want to copy and then Copy > Paste into Excel.  There's no other way to do it.
+
+If formatting is funny then right click in excel and try the different paste options to see if something works better.
+Also, if you have a newer version of acrobat (adobe) you can convert the PDF file to an excel file. It can get messy here if text is not completely clear though.
+If the pdf is of a scanned document or there is no selectable text, then you don't have any options that I know of. If the data was originally laid out in such a way that you can select the table in the pdf, you usually can just copy and paste it directly. Sometimes it will come across as a long column of text in excel. In that case, I use tools such as smallpdf.com to convert it.
+You can also try to take the pdf's screenshot or the PDF printed to a OneNote notebook and use its Image to Text conversion. I have used it and the Image to Text from OneNote is pretty good. 
+
+But, the column separator might come as an L (small) or a pipe symbol ( | ). 
+
+:)
+
+
+Well if the data is just numbers with no space, you could copy into MS Word first then convert into a table separated by spaces. Then copy into Excel
+I use Adobe Acrobat Pro DC, not free but worked so far.
+If the data is mostly single words/numbers then you can have good luck just copying and pasting to excel and then using text-to-columns with space as your delimiter.
+Www.smallpdf.com
+Nuance has a pretty strong suite. Student version is only $110 for a perpetual license.  
+Go to ilovepdf see there. 
+Which version of adobe are you using? 
+Able2extract. 
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+There's also [Datawatch Monarch](http://www.datawatch.com/resource-center/videos/how-to-quickly-convert-a-pdf-to-excel/). If you have say, a bunch of monthly reports, you'd first define what fields to extract - this is saved as a model. You'd then be able to apply that model to all your reports and export all the extracted data to Excel.
+I have used this at a previous job and it works great
+Thanks for this! Worked great!
+I often lose the table formatting when I try to paste it directly into Excel. Something that sometimes still work, is to paste it into Word, and copy it again before pasting it into Excel.
+Sometimes if you "print to pdf" before it works better too.  I have no idea why.
+You can also play around with text to column to get it cleaned up
+
+What has helped in the past is converting the pdf to word and then copying the table over into excel from the word doc
+> Www.smallpdf.com
+
+That's actually pretty good, or was on the test PDFs I just threw its way.  
+"only"
+Welcome.  The new version seems to crash occasionally, but it's still completely indispensable to me!
+Welcome.  The new version seems to crash occasionally, but it's still completely indispensable to me!

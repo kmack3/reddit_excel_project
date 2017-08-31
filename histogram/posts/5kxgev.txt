@@ -1,0 +1,25 @@
+Why does my formula not calculate, but just shows the formula text?
+[This may help](https://ion.icaew.com/itcounts/b/weblog/posts/exceltipoftheweek53causesofformulasnotcalculating)
+
+The cell is probably formatted as text.  Select the cell and hit CTRL+1 and make sure it's not text.
+
+
+One way to fix is to find and replace all = with =
+
+Seems daft as its replacing like for like but it works 
+Did you try hitting the ctrl+squigly button on the top left of the keyboard? Not sure of the key name, but there is a key that will toggle excel between formula and formulab results. 
+Side question: Do you usually create a "List" ? I just refer the columns in general that usually avoids many issues on my end
+CSV always looses formatting when it is saved with excel formulas, just convert the cell formatting
+
+
+I am able to respond in real time to you until it is solved!
+Text-to-columns also resolves this.
+SOLUTION VERIFIED!
+This is what I would have suggested, but in my experience I've also found that sometimes you have to edit the cell and press enter once you've done the above  (as though you're 'refreshing' the cell).
+It's called a tilde I believe.  ~
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I remember running into this when I first started exploring excel, keep expanding your knowledge. One day you will come back and laugh at this
+Pronounced til-duh 

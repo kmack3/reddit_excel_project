@@ -1,0 +1,75 @@
+Thrown into an Excel heavy job.
+Sounds doable, however we'll need more data before walking you through how to do it. 
+Buy an excel tutorial book from John Walkenbach.  He has several so find one that you think will fit your needs.
+
+This will teach you best practices and will be an excellent resource later.  You will probably realize your predecessor did everything wrong after reading one of his books.
+Sounds like you could potentially accomplish a lot of the manual filter and copying with a pivot table and vlookup. Is it querying from a database or just from spreadsheets? If from a database, excel may not be the reporting tool you need. I'd look into maybe a crystal report if you can amber that or even an Access report. If the data is all originating in spreadsheets, then Access may be your best bet if it's a complicated series of premises.
+Look up Excel Magic Trick #1 on YouTube,  and start watching.   They are 5 minute videos,  and I think the professor is up to #1400 right now.   Just start watching,  and there are optional exercises too. 
+nobody truly knows vba or excel until they are thrown into it.  just have curiosity, realize that the question you're asking is NOT new in it's entirety, and google the fuck out of it.  easy money
+I'd practice using vlookups, pivot tables, sumif (one condition), sumifs (multiple conditions), and if statements. Make a fake dataset so you're not afraid to break it, and just play with it. Watch YouTube videos. Those will enable you to a lot of basic stuff. It will be a great starting place. 
+A lot of Excel is covered by basic math functions like SUM and AVERAGE, and Index Match (replaces VLookups). Index Match should be easily googled, and I use it a LOT.
+Data Analysis using excel is a very demanding job.   
+There are plenty of video lessons, even maybe some free ones but the best way to learn technical skills is by hands-on practice.   
+The company I work with has developed a learning system that consists of test exercises, on the real excel application, along with video solutions of these exercises.   
+We even developed a massive course for data analysts.    
+[TEST4U data Analysis](https://www.test4u.eu/en/e-tests/ms-excel-data-analysis-en)   
+Try the free demo first, and I am sure you will understand its value.    
+All the video solutions for the exercises are also free to watch on our youtube channel [TEST4U youtube channel](https://www.youtube.com/user/test4ueu)
+Personally, if I were presented with a spreadsheet like the one you are describing, I would strongly consider throwing it into Access for all the data processing and then use Excel to present the final results.  I understand, however, that you may not have Access or may be uncomfortable with it but it is a really powerful tool.
+
+Regardless, I would highly recommend that you learn some simple VBA at a bare minimum.  It will help you tremendously especially if you are having to look through cells and are manually copy and pasting data.  If you learn the basics of VBA, you can take accurate processing time down from minutes to seconds.   
+Lyndia.com is your best friend
+Thanks for your reply!
+
+Okay so sheet 1 is a report that is sent off monthly, it contains all of the numbers of customers that can buy specific items. There is a minimum dataset needed for this which off the top of my head includes three columns that are autofilled by me and the others that I copy paste into: the item name, the quantity bought, the price, the total price and the seller. It also includes the date. However, on sheet 1 each customer has only 1 row per specific item they can buy. So if they buy more than one of the item in the month then more rows need to be inserted.
+
+Sheet 2 is an automatic download from our system which includes every item bought by every customer in the month, 99% of it is irrelevant to the report. It includes most of the minimum dataset (not including the autofillable ones in sheet) such as the prices, the dates, the totals, the unique numbers the item names etc. and a couple of extra which can easily be deleted. Note that this has multiple rows if the item is bought on different dates.
+
+It may be worth noting that the headings are not in the same order (but I may be able to change this)
+
+Thanks again!
+
+I have a feeling that this is the case anyway as I think she started in the same shoes to be honest!
+
+I will look into a book, thank you
+Yeah, I'm not entirely sure what I'm allowed to use, the person left abruptly after setting the whole thing up over a series of years. Crystal is used in the organisation but excel is what the people I report to require. The report I pull daily and monthly is just an organised file I open with excel but I don't see why it couldn't be opened elsewhere? I have access to access, maybe I'll look at its functionality and then present the data on excel. But access is an entirely different beast I imagine? I will try and open the reports in access and see what happens!
+
+I don't know what constitutes complicated either really, from a newbies eyes it looks like it's relatively simple but I absolutely know that isn't actually the case.
+
+Thanks again for this!
+Sorry, to answer your question, just spreadsheets, but I haven't tried plugging the files into a database.
+Ah thanks so much, this looks great!
+Yeah I'm taking it as a good chance to learn a new skill!
+That sounds good, I'll take a copy of the dataset and have a fiddle around with it.
+VBA looks interesting I didn't even know it existed until I found this sub so I will have a look at some tutorials, learning is my priority regardless and I do have quite a bit of free time to do that!
+Imo, it depends of the data size. For most people a simple excel table works just as well and it's more user friendly. 
+*lyndia.com* is a no-content placeholder website.
+Hard to completely understand what you need. If you are going to be doing a lot of this stuff I suggest you try to read up on Power Query and Power Pivot as they are the BI add ins for excel, and it seems that you are doing more of this kind of stuff than financial modelling.
+
+Off the top of my head I would think you could use Power Query to remove the irrelevant data from your automatic feed, merge it with sheet 1 and then recut into the format you want. Power Query would turn that into a query that would be repeatable each month without you having to anything but replace the source file.
+
+If you are on excel 2010 or 2013 it's a free download from MS, 2016 it's called Get and Transform under the Data tab. If you could share your sheet, perhaps with all the actual data copied over with dummy numbers, I could probably do it for you in ages mins.
+
+On your broader question, Excelisfun on YouTube is pretty good. F1F9 do a free 30 day course (it's like  mins a day) on financial modelling.
+After reading some of your other replies, i would first see if maybe you could get direct access to the system's database, and if yes, look into building a crystal report or sql query that you can make the calculations automatically and output it in a final, pleasing format, which can be either PDF or excel, if they require excel reports. If they won't allow you or someone who can build a crystal report to access the database directly (maybe it's a cloud software that doesn't offer database access, or you don't have the licensing that allows it or something) I would see if the data pull you are getting from your system can be modified to make at least some of the calculations for you. It really depends on the software as far as which of these options would be available to you. 
+
+If you truly cannot change how the source data comes to you, start playing with pivot tables in excel. They are pretty versatile and easy to manipulate for someone without a lot of excel knowledge. Change the pivot to classic view to allow you to collapse/remove sub totals as you add more fields. If your source data is from multiple sheets, you can use vlookup formulas to combine the source data sets into a single sheet and then use pivot tables to do the rest.
+
+After you've set up your pivots, it's only a matter of adding any new data received to your source sheet and refreshing the tables after to update your report. New reports will take no time at all.
+[deleted]
+The good thing about it is you can record most of the actions that you do, then you just need to modify it using If statements, Loops and relative references.  It is a really powerful tool.
+I do agree, but it is definitely something to keep in mind.  From my experience, I see a lot of people doing overly-complicated Excel workbooks for things that would be simple in Access.  Then again I've been doing this professionally for several years and I could totally understand how it Access could be overwhelming to some one that is new to it.
+The correct website is Lynda.com
+Are they two different add ins? I have Power Pivot installed, is Power Query included within that or is it an entirely different download? I have Excel 2010.
+No worries that's pretty much the problem, without understanding the process itself *I* don't know what I need! Thanks so much for your advice, I will definitely look into it! The familiarisation and learning is absolutely my priority anyway.
+It's odd, the download is manual from an archaic KEA! emulated terminal, the file is then opened with excel. I have no experience with any reporting software but in reality it's a super simple dataset that is output, so I'd assume that crystal would be able to handle the data easily. Unfortunately due to the nature of the job etc. Crystal is not accessable without training/confirmation and it doesn't look like that will be any time soon.
+
+Thanks for the advice, I am going to see if I can put the data through Access and maybe ask around about crystal; learning about it's functionality and scope.
+
+Also Pivots and VBA are the things I'm going to be looking at first!
+Thanks so much, I'll have a tinker tomorrow morning, it does look daunting but I'm sure I'll get the hang of it.
+Ah, I thought it must be something similar, but didn't want to bump into something pervy.
+Two different downloads for excel 2010. You'll want to foogle how to connect the two as it's simple but not as immediately clear how to do it in 2010.
+I am using excel 2010 but downloads may be a problem!
+I thought you were the It guy :p. It's an MS download. I work for a large company and I could download it. 
+Heh not the self professed IT guy, the "have you tried plugging it in" go to IT guy! ;P

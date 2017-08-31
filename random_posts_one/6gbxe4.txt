@@ -1,0 +1,36 @@
+6gbxe4
+Yahoo Finance doesn't work anymore. How can we get current stock and options data into excel?
+I see this question all over with no good answers!
+
+I want to have an excel workbook where I can put a stock ticker in one cell and it will retrieve option information from the web. Yahoo Finance has been the go-to for everyone who made these types of sheets. Apparently they made big changes in the last month, allegedly to stop freeloaders and to monetize the service (not unreasonable, just sucks for us). Every site/blog/board I go to says something different. Some say Yahoo and Google APIs work, some say they don't. Some comments tell me they are having no problems at all. I'm just learning this stuff and it is a lot harder to learn with bad information. What is the truth? What options are there for dynamically getting data into excel?
+
+
+**There are more votes than comments.  I've seen this question in other places. That means that there are a lot of people curious about this. Someone super smart and knowledgeable would be greatly appreciated....Like if Elon Musk and Bill Gates fucked and had a baby....and their baby met the baby of Warren Buffet and Charlie Munger...and somehow those two babies fucked and had another baby...hopefully someone like that final baby will answer.**
+
+/r/Options X-Post
+
+Thank you. I love you. 
+
+
+
+-------------
+Hmm? Yahoo Finance API works for me right now. I'm using Power Query to retrieve stock quotes.
+-------------
+From what I can tell they changed their API a bit and incorporated https as a requirement along with cookies/crumbs. I found a working file that handles this at the following site:
+http://www.excelhelpdesk.com/free-excel-spreadsheets-templates/yahoo-historical-price-download-spreadsheet/ I haven't yet converted all my legacy functions to the new method yet.
+-------------
+Can you use [Quandl](https://www.quandl.com/)? I've used it with Python and you can make (I think) 50 requests a day. If you need more, you can create a free account and get all the data you need. They have an excel [add-in](https://docs.quandl.com/) as well
+-------------
+They change it because you have to pay to get all the information now 
+-------------
+[This is what I used to set up Power Query](https://blog.kloud.com.au/2015/06/24/use-excel-powerquery-and-yahoo-finance-to-manage-your-portfolio/).  I had never used power query before, but this gave very detailed steps including all the code that you need to get it to work.  Took almost no time to follow the instructions and get it to work.
+
+Just tested it and it gave me refreshed quotes this morning without any problems.
+-------------
+Power Query
+-------------
+I must be missing something then. I am pretty new at the advanced features. Are you using it for current or historical data?
+-------------
+Thanks for the resource. From the chatter I was reading, it seemed like Yahoo deliberately made its data inaccessible because they wanted to monetize it somehow. 
+-------------
+Current data. I never bothered to figure out how to get historical data.

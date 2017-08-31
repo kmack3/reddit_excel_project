@@ -1,0 +1,128 @@
+Please help me shorten this 60-function array formula - Maybe with a proper alternative for Index-Match?
+Cant type it on mobile but this absolutely should be replaced by a vba recursive function.
+Oh that is just ridiculous.
+Why not use a helper column or SUMPRODUCT
+Are you using an .xlsb? helps if excel keeps crashing/lagging.
+Lol start from scratch with some VBA. This is absurd.
+Heya, I was looking at this thread and Im glad you got it sorted out a bit furhter, but I just gotta ask if there is any particular reason you're entering it as an array instead of just using relative ranges? 
+
+You say it calculates fast now so thats good, but every time you change an input in an array formula, the whole array recalculates (so your 4790*9(?) formulas recalculate when you change I54). 
+
+Based on your formulas it looks like it should be possible to just use relative references and have each formula refer to a single range. That way if you update I54, only the cells with I54 would update. 
+
+The last MATCH in the INDEX also seems to be missing something? 
+
+I think it'd be a lot easier to give you a suggestion for how to do it differently if you could provide a mock-up of the data you are looking up, and your table. Not real values of course, but just something made up that has the same structure as the problem you're dealing with, and on smaller scale (like a 4 by 3 table or something).
+
+Testing on a smaller scale also lets you use the formula evaluater (alt+m+v) and step through your formulas so you can interpret exactly what is going on. it really helps when "debugging" or trimming complex formulas like this.  
+Never heared of it, hope it's not that hard to learn 
+It is. Right now I only use the first 2nd line (just look up value, no deviding). It would be much more accurate though... 
+No just xlsx, this sounds useful though. Will look into it! 
+Hi! Thanks for the lookout and tips:
+
+    instead of just using relative ranges?
+
+I'm not sure what u mean. If you are talking about not using $ signs, I do (like in the match function), but only in a view cells, the rest needs to change with a drag to the right. It doesnt need to be dragged down, so more dollar symbols are not necessary.
+
+    the whole array recalculates [...] when you change I54).
+
+Yes, I can change the data setup with a dropdown list or change the input for costs and all the arrays will be recalculated. It's quite a miracle to me but it only takes about 10 seconds with the last formula.
+
+    (so your 4790*9(?)
+
+Just to reassure you are getting it right, the last formula is only for one column. So one array formula per column. First I had one array formula for 9 columns. So yes, 9 array formulas are recalculated when data changes. But no, the array formula does not do 9 columns at the same time, but 1 column at the same time.
+
+     I54). 
+
+I dont know what you mean with this, if I ctrl+F it doesnt find anything. The cell i54 or L54 refers is in the middle of the data, not in the formula.
+
+
+    The last MATCH in the INDEX also seems to be missing something?
+
+Ah yes, I see now, the last Match function is useless, there can just be a 1. That brings the formula down with another function. Solution verified! ;) I dragged all the arrays to single cells: it automatically changed A1:A1 to A1, so I overlooked this one. 
+
+    I think it'd be a lot easier [...] and on smaller scale (like a 4 by 3 table or something).
+
+Thanks for the reach out, but as the results I need are there and there is tons of more stuff to do, I don't really have the time to create a 'mini-model' of what I have. Posting and commenting on this thread is already time consuming enough (as you can see above I dont comment this long usually lol).
+
+    formula evaluater (alt+m+v)
+
+
+I knew about this function and indeed used it also for this workbook. I didnt use the shortcut yet though, thanks for the tip.
+
+
+
+It's a function that calls itself.  So instead of doing 40 functions, you do one function and it repeats, after doing something, until finished.
+I'd probably be able to create the VBA that replaces all that. Problem is, that formula is so long I have no idea what it does.
+It's very useful. If you are not sharing with people using versions older than 2003 then its even worth setting it as default.
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+yeah it takes a little time to set up a mock-up, but it's much easier for everyone else to understand what you're trying to do with complex formulas if they have a reference to your data layout. As you can see from the things you pointed out, even after reading all of your comments I still don't have a proper picture in my minds eye of what your sheet looks like and what exactly you're trying to do.
+
+with relative references I mean for example this one: 
+
+    INDEX(AG4797:AG4802;MATCH($F2:$F4791;$AB4797:$AB4802;0)
+
+If you put this in a cell, say  A2, like this: 
+
+    INDEX($AG$4797:$AG$4802;MATCH($F2;$AB$4797:$AB$4802;0)
+
+it will look up F2 in the target range, when you then drag it down/copy paste it a row it'll match up F3, then F4, and so on, but the target row(s) won't change. 
+
+The same goes again for $D2:$D4791 and I2:I4791
+
+
+
+
+In words: it calculates the cost of facade renovations. Opp stands for surface/m2. If the facade is (for example) under 50 m2, it is more expensive (fe) 100 euro/m2. When it is a large surface the price per m2 would be only 60 euro.
+
+I have this table with minimum, average and maximum costs, in euro's . In another table I have the surface limits: minimum is 50 m2, average is 90 m2 and maximum is 120 m2. So with those come costs: 100 euro/m2 (for 50m2), 75 and 60 euro/m2. 
+
+If a surface to renovate is 70 m2, it would be fair to interpolate (is that the right word for it?) the costs, as it would be in between 100 and 75 euro/m2. That is what the long part of the formula does (what I called 'deviding' above): it calculates the appropriate costs per m2, based on the cost and surface-limit-tables
+
+I know a little bit of VBA, but wouldn't have clue on how to write a function like that
+Yes, that kind of posts can be pretty annoying. I'll make some screenshots tomorrow. 
+I would be very interested to see data examples.
+
+My impression is that you are using database normalisation where it is not appropriate for your needs... do not be afraid to have more complete lookup data to reduce the complexity of the lookup function required.
+
+The denormalised data could be constructed to have dynamic values for surface size and values, getting those from 6 source cells... 
+
+anyhow, just something to consider
+I don't understand why interpolating requires an array function like that.  
+I dont understand what data normalization is, but it sounds like I could learn something very usefull knowing what it is. The whole workbook is more or less put together with arrays, for example the 6 source codes as well -  coming from another sheet and which are also index matched depending on some input cells. The workbook is very smooth if I only use the first three lines of this formula, so I guess it is just too many functions in one formula. I will try to make some screenshots today of the workbook if you want. 
+Because it is done for about 15 columns and 5000 thousand rows. 
+Normalisation is where data is seperated into distinct tables to minimise duplication of data across a record.. so instead of repeating a line of data over and over again, you have it once and instead have a reference to that line in the parent data... this is where your lookup is occuring.. finding child records via links..
+
+Denormalisation is where you re-combined that child data back into the main data row.
+Feel free to post a link to a copy for a play!
+Linear interpolation isn't accurate enough?
+Didnt try it yet. I got the formula down to a lower ammount of functions and arrays, but still noticing slow speed:
+
+Old formula (as above):
+
+	ARRAYS	98x
+	MATCH	36x	
+	INDEX	18x
+	IF		5x	
+	NOT		1x
+
+New formula, without Index/Match:
+
+	ARRAYS	53x
+	IF 	  	9X
+	MATCH 	1x
+	NOT   	1x
+
+
+I'm trying to find out now how many arrays/functions are needed for the forecasting formula. 
+
+
+If you're having to deal with a hellish array formula like this, your time would probably be better spent modelling the thing in VBA and/or finding an alternative method that doesn't involve calculation through 75,000 cells.  It's a facade, not particle physics.
+    It's a facade, not particle physics.
+
+What do you mean with this? In VBA the particles have to be calculated as well right? I agree the amount of arrays is ridiculous, but to be honoust I am having to much fun with it.
+
+And as I am typing this I got the great idea to filter out the arrays, and doing it just per column in stead of 20 columns one at the time. **AND NOW MY WORKBOOK IS SMOOTH AS CAN BE** 

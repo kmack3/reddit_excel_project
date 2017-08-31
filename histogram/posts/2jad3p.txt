@@ -1,0 +1,314 @@
+What was the last thing that blew your mind to find out was possible in Excel?
+Ctrl+shift+end. It will highlight everything from the current select cell, to the bottom right corner of a block of cells with stuff in them.
+When I discovered that you could use INDEX(MATCH) to match multiple criteria, I almost cried. It combines my two favorite things in Excel: INDEX(MATCH) and array formulas. [Here's a blog post](http://blog.contextures.com/archives/2012/07/12/check-multiple-criteria-with-excel-index-and-match/) about it, in case anyone wants to have their [mind blown.](http://i.imgur.com/APwiIYN.gif)
+
+You more or less try and find the 1 in the array that is the product of comparing the two comparisons. It looks kinda funky because you're matching 1 instead of some value, but the post does a great job at explaining it.
+SQL in VBA. You name a range and that's your 'database'. Do multiple ranges and find matches/differences. Mind blown.
+The whole Power BI suite is great!
+
+Power View,
+PowerPivot,
+PowerMap,
+PowerQuery
+
+Microsoft have made a big push for BI with their recent updates to Office 365. 
+
+If you go with Power BI, then check out Q&A!! 
+
+Edit: link for the lazy - http://youtu.be/qBXYNn4x0jA
+It's been a while since Excel's blown my mind, but, maybe [cube functions](http://office.microsoft.com/en-001/excel-help/cube-functions-reference-HA010342384.aspx)?
+
+Probably not terribly useful for a lot of people, but both my previous employer and my current employer use OLAP cubes and so these have been put to good use in the past year or so.
+
+Before cube functions, I'd probably say PowerPivot (+ Data Model, in Excel 2013).
+
+Basically, I like cubes.
+I'm constantly having my mind blown by Excel at the moment. At least once per week. I did an intermediate course a few months ago, and my work speed has probably increased ten fold, just from using formulas to check stuff instead of doing stuff manually anymore. From there it went to VBA codes to put the formulas in automatically, so i didn't even have to enter stuff manually anymore. At the moment, its probably the fact that I can use Excel to move files to and from different folders. We have a ton of random files in 'holding folders' that need to be all moved into specific individual folders. Manually, this would take weeks, but excel makes it take minutes!!
+Multi-part keys.  You can concatenate multiple columns to form a distinct row identifier in one column.  This allows for important matching, duplication identification, etc. functions that you may want to perform between one or more data sets.  
+
+A multi-part key (or concatenated key) is a very basic database concept, but it didn't crystalize for me that Excel can be a powerful relational database-like tool until I started working with actual databases.
+2 things. TRIM function for getting rid of stupid spaces and then copying dates in excel that don't group when filtering into notepad, then pasting then back into excel. Dates returned to normal and now grouped.
+Using +N() to put inline comments into a formula.
+The F4 key.
+
+I now refuse to buy a computer that alternates to the Fn F keys by default.
+
+
+Dynamically adjusted Named Ranges are pretty neat.
+
+    =OFFSET(A1, 0, 0, COUNTA(A1:A500), 1)
+
+    =A1:INDEX(A1:A500, MATCH(0, A1:A500, -1))
+
+Second one is a bit slicker
+Abusing excel as audio player with the sheet as track list
+Pivot tables and slicers.  Because before I knew about both I'd had to use multiple sheets and formulas to create poor approximations.
+Array formulas and more importantly using them to do MAXIFs
+Alt+H,V,A for paste values. Sames me so much. 
+What blew my mind was the ability to use data validation lists to create "dynamic" dashboards without the use of macros/VBA. Combine this with GETPIVOTDATA and it instantly becomes powerful.
+
+And then I discovered combo boxes! Similar to the drop down boxes except I can adjust the number of items viewable (8 for data validation) and all sorts of interesting stuff.
+
+An old colleague introduced me to array formulas. After 2 days of trying to wrap my head around it my brain imploded, my college linear algebra classes resurfaced from the depths of my memory, and I've been thinking in arrays ever since. Moving on to VBA, dimensionalizing, redimensionalizing, and filling arrays is even more of a go-to crutch for me at this point :( 
+It's been a loooong time, but....
+
+[When Ian Huitson demonstrated creating a Mandlebrot Set in Excel without VBA.](http://chandoo.org/wp/2010/05/06/data-tables-monte-carlo-simulations-in-excel-a-comprehensive-guide/)
+I was pretty stoked when I figured out how to use MOD to calculate shift differential hours for a work project. 
+Most recently? I'm gonna go with the ability to embed UI customizations (ribbons, backstage elements, etc.) directly in .xslx/m files, especially when you're working with a lot of VBA. Soooo much more reliable and professional looking than random ActiveX buttons dropped on the worksheet. 
+Me finding a job I actually enjoy! lol
+calculating the distance between two lat/longs.   Very useful for real estate based work.
+
+http://bluemm.blogspot.com/2007/01/excel-formula-to-calculate-distance.html
+cant think of anything recently, but am fond of pivot tables and some stats functions 
+When I learned how to do macros. That was awesome.  
+
+When I learned how to do Conditional Formatting, that was awesome.  
+
+When I learned how to do formulas more fancy than 'sum, that was awesome. 
+
+I don't know if I can pinpoint anything specific. 
+That you can watch a movie or play a mp3 in excel.
+Watching a movie
+Not the LAST thing but vlookup.      =vlookup(......
+
+Ctrl+Shift+Down will highlight everything between the currently selected cell and the bottom cell in that column with data in it. 
+This is so simple but so effective.
+How is this different than using vlookups and hlookups?
+Woah..
+
+Can this match with more than 3 criterias? Or is it only limited to two?
+
+EDIT: I currently use an array formula with a combination of INDEX MATCH and IF for multiple criterias.
+Thank you so much.  This completely solved [this request I made last month](http://www.reddit.com/r/excel/comments/2g190e/help_a_faster_method_for_comparing_columns_across/) by using functions instead of loop after loop.
+I'm interested in using more SQL. Do you have any articles or links that helped you learn this?
+Do you have an article where I can learn more about this?
+This is glorious. I'm learning SQL right now and there are multiple questions I see here (especially when people want multiple return values) that could simply be found with a basic query. Highly recommended for anybody looking to get into more database applications.
+Preach
+I agree with this. I've actually been playing around with CUBE functions last week and it's like GETPIVOTDATA on drugs. Love it
+POWERSHELL!!
+I am very interested in how to do this.. can you explain?
+This should be upvoted more.  Many people don't realize the power of this, especially in combination with INDEX.
+I frequently do search/replace/reformat kind of stuff by cutting and pasting into Vim, doing a search and replace with a regex command, and pasting back into Excel.  Really powerful and quick. 
+You just blew my mind. I'm going to use this!
+I just discovered this recently. I have no idea where my life was before this. So much time was spent trying to awkwardly type absolute ranges, but now I just use F4 and it is beyond glorious.
+Remind me! Tomorrow "look into this" 
+
+Can't remember the remindme format...
+My god yes. Tears came to my eyes when I first discovered this.
+What does this achieve?
+[deleted]
+While MAXIFs is probably the most common (at least for me), I love that the possibilities really are endless with array formulas. With them, you can do MINIFs, SMALLIFs, MEDIANIFs, all kinds of weird, beautiful stuff.
+Arrays still confuse me quite a bit. they do blow my mind. Any resources that helped you learn them? Or did you just play around with it enough?
+
+Adding shortcuts to the Quick Access Toolbar is a HUGE time saver!
+Why not ctrl+alt+v, v? Paste special, values
+Rick click a section/column, drag off, drag on, copy here as values only.
+
+The best way I`ve found to change formulas to values. 
+I created VBA macros and binded them to the side scroll buttons of my Logitech M705. 
+Bam! 
+Presto Paste as values / paste formatting.
+
+Saves me HEAPS of time.
+
+Here is the code:
+
+    Sub Macro1()
+    '
+    ' Macro1 Macro
+    ' Paste as values
+    '
+    ' Keyboard Shortcut: Ctrl+e
+    '
+        Selection.PasteSpecial Paste:=xlPasteValues
+            
+    End Sub
+    Sub Macro3()
+    '
+    ' Macro3 Macro
+    ' Paste formating
+    '
+    ' Keyboard Shortcut: Ctrl+Shift+A
+    '
+       
+        Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+            SkipBlanks:=False
+    End Sub
+    
+
+
+After that, you just bind the same shortcuts to the mouse buttons in logitech settings.
+ 
+The only thing that irks me about this is that for some reason the actions aren't undoable. So you have to be REALLY careful - once you paste, there ain't no coming back :)
+Menu key+s,v does the same. :)
+I've made some pretty slick dashboards using slicers too. They act as filters on Pivots, and you an select single or multiple items
+I hardly understood any part of that. Can you maybe say that again differently, please?
+THIS.
+
+Also, creating .xlsa add-ins containing custom elements can be great too.
+
+And if you are interested/don't already know about this; there is a custom UI editor for Office Applications that can be downloaded (may have to search). This gives you the ability to change the ribbon (add/remove buttons), turn off certain features (e.g. copy/paste), etc in a workbook by adding a custom xml file to the zip package.
+
+The best part? It travels with your workbook. 
+Wow, that IS awesome. But how is it possible for .xslx files? You mean I could add form controls to the ribbon of a single file (as opposed to every workbook of mine) without touching VBA?
+I've seen an MP3 played in Daniel Ferry's work, but never a film, that's pretty awesome! So what do you do, embed it within a cell or shape?
+
+EDIT: oh I've seen the post now, that's excellent!
+How?
+I've been preaching about vlookup and hlookup for years now, but only lately have I realized that index/match is also a really REALLY neat combo  :)
+Also, dropping the Shift in any of these shortcuts will simply move you around, rather than selecting everything in between.
+
+Also worth noting that Ctrl+* will select everything within the current "block". I'm not sure how to better describe this, but basically whichever local table or area you're working in on a sheet.
+Awesome! Do the other arrows work in the same way? I'll have to try that at work today.
+It allows for more versatility. You can match columns and rows instead of just columns, it takes less processing power, and you can match backwards (AKA, search for a value in column C and return the value in column B). 
+You have a column of Names, and a row of Dates.
+
+The data is a number (how many pies were eaten by name on date).
+
+Please tell me how many pies Billy ate on 13/10/2014 ?
+
+VLOOKUP cannot do this.
+
+INDEX(MATCH) (or SUMPRODUCT) is your man for the job.
+Another neat trick is concatenating columns in a MATCH.
+
+Ex ={MATCH(A1 & B1, C1:C5 & D1:D5, 0)}
+
+Similar applications :)
+Look into the sumproduct formula.  I use it all the time to match multiple criteria.
+
+http://www.xldynamic.com/source/xld.SUMPRODUCT.html
+The only limit is calculation time and number of chars in a formula. Each array of {0,1}'s will be multiplied, piece-wise, to yield a final array to MATCH from.
+
+Ex. MATCH(1, {0,1,1,1} x {1,1,0,1} x {1,1,0,1} , 0) = MATCH(1,  {0,1,0,0}, 0) = 2   
+Awesome! So glad I could help!
+[Article that explains the concept from Chandoo](http://chandoo.org/wp/2012/04/02/using-excel-as-your-database/)
+[Article that explains the concept from Chandoo](http://chandoo.org/wp/2012/04/02/using-excel-as-your-database/)
+I don't understand how index match is a higher voted comment, its neat but nothing on the whole Power BI suite!!! 
+Guess I should look into this more.  GETPIVOTDATA is great for building dashboards.
+I just learned this myself!
+
+http://youtu.be/zHJPliWS9FQ
+
+This is one of a great series of VBA videos
+Totally agree. The idea of primary key is incredibly useful for databases (hence why a lot of DBMS automatically make one for you) and does have a lot of applications in Excel, as well, even though a spreadsheet isn't technically a database.
+It's great at first... but pretty soon you realize that you don't what an extra 30 chars in every formula
+Wait until you discover the magic of repeatedly hitting F4 to cycle through the permutations of absolute values.
+I forget too, but I just saw this comment and that it was posted 15 hours ago (most likely yesterday), so this is me asking as the "Remind Me" bot, reminding you to look at this today!
+O boy. You sir, are about to have your mind blown.
+
+Have you ever wanted to add a data validation drop-down list so users can only select few items, but realized that the list of choices grows and shrinks dynamically depending on other factors?
+
+Have you ever made a chart where the number of x,y-value pairs to be plotted changes, and had to re-select the data each time?
+
+Have you ever had a data set you needed to INDEX/MATCH that was constantly being added to, such that you needed to manually adjust the ranges in your function?
+
+Well, those days are over! Basically, the range shrinks/grows with your data set. This allows for some extremely interesting applications/precise calculation. Combine these equations with Named Ranges, and your are golden. There in nary a workbook I deploy where one of these bad-boys isn't present. 
+
+add this to your code:
+
+    Declare Function mciSendString Lib "winmm" Alias "mciSendStringA" (ByVal _
+    lpstrCommand As String, ByVal lpstrReturnString As String, _
+    ByVal uReturnLength As Long, ByVal hwndCallback As Long) As Long
+
+Then anywhere do this, which starts to play:
+
+    CommandString = "open """ & FileName & """ type mpegvideo alias " & FileName
+    RetVal = mciSendString(CommandString, vbNullString, 0, 0)
+
+With other commands you can get the length and current position of the file and change volume.
+I can check, if I can find the sheet I used for this or I simply recreate it this afternoon, not too complicated.
+btw, if you supply a video file, it automatically opens a window to play the video, great for watching stuff at work with excel still being the active process
+Array formulas are pretty much 100% magic
+Check the sidebar of /r/excel or my superthread which is stickied.
+Play around and use the evaluate formula tool to visualise the data is the biggest help.
+If you highlight all of your text in the VBA editor and hit the TAB key, it'll indent everything by 4 spaces. Then copy and paste it here to make the code look better.
+I use the old school Alt + ESV + Enter
+I had to build a tool to calculate shift differential hours within an employee's shift. The hours for extra pay were 6 pm - 6 am. So if they work 5-7 it's 14 hours of work and 12 were Shift. It took me a couple of days but I figured it out using MOD. I was stoked. 
+Correct me if I'm wrong /u/GooDawg, but I think if you edit your Personal.xlsm file, you can include buttons and edit your ribbon with custom macros you wrote that can be used in any workbook you open, even if it's a .xlsx file. I don't have much experience writing user defined functions (UDFs) and the like, but I think this is possible.
+xslx/xslm files are just zip files full of xml files, one of which defines any custom ui (Google "ribbon xml", I'm on mobile or else I'd post links). In an xslm you can write vba callbacks to respond to ui events (user clicks button, expands dropdown, etc.) which is obviously more powerful, but even in xslx you can use built-in features and call add-ins.
+Oh boy, discovered INDEX/MATCH a few weeks ago. Both my lookup tables and overcomplicated vlookup formulae shrunk massively, and so many unnecessary additional columns have disappeared.
+
+Godsend.
+Ctrl + . (dot) takes you to the next corner of your selection in clockwise direction.
+CTRL+A does this as well, in 2007+
+Yup
+Excel is truly amazing. So many different ways of deriving the answer.
+This is how I do it, or you can use SUMPRODUCT to match multiple criteria.
+SUMPRODUCT is by far the most useful tool in Excel. It takes a little getting used to, figuring out how it actually works (double negative signs etc), but one you do, my goodness it's amazing
+My mind has officially been blown.
+Nearly every one of Power Query's capabilities were the last time Excel blew my mind
+No I wouldn't use it often, but there are some formulas that I come back to later and say "What the hell does any of this mean?" where it would be nice to include a little comment
+Don't forget that the F4 key by itself (when you're not in the F2 edit mode) repeats your last command.
+Yes! I discovered this by accident, but it's so convenient in every situation.
+Thanks, I did look into it. Basically pressing F4 after selecting a range will offer the option to make them absolute values. Will definitely come in handy.
+Trying to learn, and I'm going through older posts, but can you walk me through what "=A1:INDEX" is saying? I guess I haven't come across it yet.
+
+Also, would this formula make your life easier, by just including the whole array?
+
+=OFFSET($A$1,0,0,COUNTA($A:$A), COUNTA($1:$1))
+Especially to a person who has never used them before. It's best when people think they have a basic understanding of formulas and how they work, but then you hit CTRL + SHIFT + ENTER and they question everything they know about reality.
+This. I didn't really understand arrays and SUMPRODUCT until I started using the evaluate formula tool on small datasets so that I could see what was happening step by step. I still use the evaluate formula tool when I'm writing new array formulas because it allows me to figure out what I'm looking for quicker.
+Done, thanks :)
+Also Alt + ESE for transpose (I use this a lot). For those new to Excel, Alt  + E used to bring down the edit menu back when Office had a menu bar. S = shortcut for paste special.
+That sounds really interesting. Could you post a generic copy you would be comfortable sharing?
+Personal.xslb, but yeah I'm pretty sure you can use macros in it as ui callbacks. The drawback is that your workbook is no longer portable, of course.
+
+I also vaguely remember at one point calling code in the macro-enabled template that was used to create the file, but I may be thinking of Word. Not sure if excel allows that.
+Can you give me an example where SUMPRODUCT is more desirable over SUMIFS?
+Ctrl + Y
+
+Is more natural IMO
+I never really understood how to do this. Could you give a brief example of how this could be helpful?
+Not a problem.
+
+    =A1:INDEX
+
+Should, in most applications really be:
+
+    =A1:INDEX/MATCH
+
+Okay, so this would be best described using an example remembering that INDEX() evaluates to a range. So if the String "END" is located in A5:
+
+    =A1:INDEX(A:A, MATCH("END", A:A, 0)) 
+
+will evaluate to:
+
+    =$A$1:$A$5
+
+Giving you a dynamically sized range. The above is, in practice, very similar to using OFFSET to 'build' a range, but there are a couple key differences: 
+
+The first is that OFFSET is a volatile function (so it recalculates every time something has changed). Not usually a huge deal, but it does remove a degree of control over your calculation chain, and is obviously a bit less efficient as a result.
+
+The second difference is that the A1:INDEX/MATCH pattern can be a bit more flexible. Using OFFSET, you are limited to sizing your array with functions that return integers (COUNT, MATCH, COUNTA, etc). While you can usually replicate the result of the former using OFFSET, it can be quite a bit more difficult (messy) at times.
+
+Lastly, yes. You could include the whole array, but the examples I was giving were directly pertaining to data validation and plotting charts (both of which will only accept a one-dimensional array). 
+
+
+This is often overlooked but the Paste Special form also has an option for copying Column widths. So this is great when you want to set columns to the width of a starting column. Just copy a cell in the starting column and then do a special paste column width.
+Sure. I can do it this weekend. 
+I believe what /u/SiLeAy is talking about is not really anything to do with SUMMING at all, in the traditional sense of the word, even though it's called **SUM**PRODUCT.
+
+Take a look here:
+
+http://chandoo.org/wp/2009/11/10/excel-sumproduct-formula/
+
+Specifically: *Using SUMPRODUCT as an array formula*
+
+Oh man, I love this feature. It's a "repeat last action" button, almost no matter what your last action was; could be changing font to bold, could be deleting a row, could be changing the color of a series on a graph. Imagine it like a mini macro recorder that started and stopped with whatever you just did. Use it any time you're repeating a single action. Where you wouldn't want to use it is if you're altering 2 things for each object, such as font to bold and red, it would only capture whichever one you did last.
+Ooh - thanks. I've wanted to do this many times but never noticed this option. 
+sweet looking forward to it. if you don't want to broadcast it feel free to pm me. Thanks in advance.
+Using SUMPRODUCT and Tables is even cooler. You can end up with formulas that are super easy to understand such as:
+
+    =SUMPRODUCT((FYSales[Product]="Widgets")*(FYSales[Customer]="ABC Co")*(FYSales[SalesDollars]))
+
+Which means sum all sales of widgets to ABC Co.
+One action that F4 apparently doesn't do is to paste (ctrl+V or Enter) when you want to paste multiple times. A way around it is to paste using Paste Special All. Then F4 will repeat that paste action.   
+I'm sorry, but I utterly despise Tables.
+
+*shudder*
+Oh that's good to know, but I'm not sure what paste special all is? I'm guessing by the name that it pastes everything about a selection, an exact copy, even down to column widths?
+Why? Unless you have huge datasets, tables basically act as dynamically named ranges which makes a formula more human readable. The only caveat is that your tables name and tab name should match (or be close enough to decipher). 
+I am also curious as to why. I use tables and named ranges for EVERYTHING. It makes everything so clean and easy to understand.
+After you copy with Ctrl+C do Alt, e, s (this is the pre Excel 2007 sequence, which still works) to get a user form with the selection of all the things that you can do in the Paste Special.
+I literally never use tables or named ranges.  Of course nobody touches my spreadsheets 

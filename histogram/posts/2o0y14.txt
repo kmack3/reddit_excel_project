@@ -1,0 +1,96 @@
+Excel, lessons learned, tips to speed up VBA routines
+Speed you say?
+
+* .Find is MUCH better and faster than looping through a range.
+* Application.Screenupdating will stop your screen from 'flickering' and switching between screens/workbooks.
+* Set calculation to manual if you are doing changes that don't require calculation to occur.
+* DECLARE YOUR VARIABLES.
+* 'Reset' your variables and erase your arrays (crimes, that rhymes!)
+* "ON ERROR RESUME NEXT" can be fatal, use with caution
+* ^ Speaking of this, try and catch all your possible errors and deal with them accordingly.  Having a user see "1004 Application-defined" error is terrible.  Let them see "I'm sorry Dave, I'm afraid I can't do that... This is why: xyz"
+* Please avoid "Excel Data Tables"
+* Consider 'global' variables when using multiple modules/classes.
+* Replace VLOOKUP with SUMPRODUCT or INDEX(MATCH).  You'll thank me later.
+* ^ If you don't, then please don't do: =VLOOKUP(A1,Sheet2!B:B,2,0).  Do you really need to search through the entire B column?
+* Declare variables properly!  Dim x, y as integer -> Only y is an integer here.
+* Declare variables properly v2!  Dim o as object -> What type of object is it? 
+Limit the number of times you access values in the spreadsheet.  Moving between VBA and excel is a killer.
+
+If you're outputting a table of results, don't output them as they're generated.  Hold them all in an array within VBA and dump them out in one line at the end.
+
+Similarly you can read in an array and then pick out the parameters you want, but generally I find I'm outputting more than I'm reading in so cutting down out the output commands gives much more gain.
+Good points! These are some simple tweaks with huge performance impact.
+
+I always try to use this whenever possible:
+
+    Range("A1").Copy Destination:=Range("B1")
+, but it copies and pastes formats also. So, for copy-paste as values, I prefer: 
+    
+    Range("B1").Value = Range("A1").Value
+"Dim o as object" may be usefull sometimes.  
+I don't like to add references do my VBA project.  
+If I try to declare a object and the user doesn't have that reference, Excel will give an error.  
+So I always use late binding, like this:  
+
+    dim o as object
+    set o = CreateObject("PISDK.PISDK")
+
+This saved my life many times, preventing Excel from trying to create a object and giving many erros.  
+Doing this, I must always declare as object.
+> Set calculation to manual if you are doing changes that don't require calculation to occur.
+
+This one should be emphasized more.  If you move data, change cells, or add or delete rows or columns, it will trigger calculation to run. Calculation will run EACH TIME a change is made.  The cumulative effect can slow execution by orders of magnitude.  Turn calculation on only if and when it is required.  How do I know this?   Let me tell you about the fish I caught last summer.
+
+
+[deleted]
+Application.Screenupdating = False saves lives. 
+Can you copy formats like
+
+    Range("B1").formats = range("A1").value
+
+Edit: Formatting HA
+I just prefer to define the object correctly.  It makes it so much easier when coding:
+
+    o.xyz
+
+"xyz" auto popsup with the possibilitys, and also shows all the relevant properties in watch.
+
+I agree with the users not having references though, that's a pain!
+You leave fish out of this...
+Should have been "sumproduct OR index match".
+
+Lets take this:
+
+    =VLOOKUP(A1,Sheet2!A2:D100,4,0)
+
+Sumproduct would be:
+
+    =SUMPRODUCT((Sheet2!A2:A100=A1)*Sheet2!D2:D100)
+
+Index(Match) would be:
+    
+    =INDEX(Sheet2!D2:D100,MATCH(A1,Sheet2!A2:A100,0))
+
+
+You can copy certain things from the format (like colour):
+
+    range("a1").interior.colorindex = range("b1").interior.colorindex
+
+For the entire format, you would need to use PasteSpecial (paste:=xlPasteFormats)
+Unfortunately, Range.Formats is not a valid property; it would have been really useful though.
+I know, the "helper" really helps.
+When I am coding something big, it do something like this:
+
+    public const debugmode = true
+    #if debugmode then
+    dim o as objectType
+    set o as new objectType
+    #else
+    dim o as object
+    set o = createobject("objectType")
+    #end if
+
+I don't remember if it's exactly like this, I just wrote the code here, but it's more or less this code.
+This way I can have the best of both worlds! :D
+It's definitely preferable, but sometimes you want to avoid it if you don't have a reference loaded (and can't just load it). That's when I use Dim o As obj; set obj = ...
+But you have to type twice as much!

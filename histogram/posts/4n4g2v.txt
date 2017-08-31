@@ -1,0 +1,14 @@
+Change color of a excel cell based on a value of a cell
+You want [three rules](http://i.imgur.com/ypGiBS7.png). Use the [use a formula...](http://i.imgur.com/VCuhWPI.png) criteria. Highlight all the cells you want to change, starting with H2 (CF rules are based off whatever the active cell is) and use the following:
+
+    =H2>G2
+    =AND(H2>=0.5*G2,H2<=G2)
+    =H2<0.4*G2
+Thank you it worked. Is there an easy way to make it work for every row?
+It should already, which is why I mentioned highlighting all the cells you want to change :) But if you skipped that, go back to the CF menu and manage rules, and change that Applies To box and change to $J$2:$J$1000 or so.
+Solution Verified
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+CONGRATULATIONS

@@ -1,0 +1,53 @@
+6ivc0s
+Conditional Formatting for a cell being equal to another cell
+Column H contains quantity ordered, Column J contains quantity received. If they do not equal each other, I would like them to both highlighted. If that is not possible, than just having 1 column with highlighted values would work too. Is this possible? I'm new to conditional formatting I apologize if it's a simple answer.
+
+
+-------------
+If you go into conditional formatting, you can format via a formula, using the following formula
+
+    =if(not($h1=$j1),1,0)
+
+then highlighting the appropriate regions, or just putting in
+
+    =H:H,J:J 
+
+in the Applies to area, it should highlight based on the format you select when creating the rule!
+
+By selecting H:H,J:J it might highlight your headings as well, so maybe selecting using
+
+    =h2:h10000,j2:j10000
+
+it would work better!
+
+-------------
+I understand how to create a condition with a formula. I do not understand the "Applies to Area" part. Am I looking for somewhere to input that area of H:H and J:J, or is it part of the formula?
+
+PS: Is your username Runescape related?
+-------------
+Solution Verified
+-------------
+Right now the applies to area I've defined as H:H,J:J which means that it's going to look in columns H (that's what H:H means) and J (likewise for J:J) and apply this formula to those areas. I put $ in the formula so it doesn't shift over, and it'll evaluate the same formula regardless of the horizontal shift!
+
+
+
+I had one that a while ago, this one however isn't though
+-------------
+
+You have awarded one point to _Badoodled_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Ok I understand now. After inputting the formula you gave me though it just highlighted all of column H and J.
+-------------
+You might have to change my original formula, depending on if you want to highlight cells that are the same or are different!
+-------------
+I would like the cells that are not equal to each other to highlight.
+-------------
+then use the formula
+
+    =if($h1=$j1,0,1)
+
+This should work!
+-------------
+Going to have to apologize. I pasted my values from a table, and only column "I" didn't format to a number format. I converted it to number format and now your original formula works correctly, thank you!

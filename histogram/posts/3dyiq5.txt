@@ -1,0 +1,59 @@
+Formula to count how many "A"s are in a cell.
+~~=LEN(b2)-(LEN(SUBSTITUTE("a",b2,"")))~~
+
+EDIT: freehand formula entered incorrectly
+
+    =LEN(b2)-(LEN(SUBSTITUTE(b2,"a","")))
+VBA for anyone besides OP:  
+  
+    Function charcount(add As Range, char As String) As Integer
+    Dim i As Integer, tot As Integer
+    For i = 1 To Len(add)
+        If Mid(add, i, 1) = char Then
+            tot = tot + 1
+        End If
+    Next
+    charcount = tot
+    End Function
+
+     =LEN(SUBSTITUTE(A1,"A",""))
+
+
+Edit: sorry I forgot to add the first part. /u/fuzzius_navus has it
+That will count the length of the original string, then the length of the string without the letter "a" and return the difference.
+perfect, thank you!!
+
+Solution Verified 
+You're on a roll lately!
+Elegant solution! I'd add a little more to it to account for case, since SUBSTITUTE is case-sensitive (at least from my experience). 
+
+=LEN(UPPER(A1))-LEN(SUBSTITUTE(UPPER(A1),"A",""))
+
+This forces the string to all uppercase characters during the calculation so the capital "A" in "Apple" in the original post isn't missed and it'll force all the lower case "a" instances in banana to a capital "A" as well.
+
+It looks like you may have received an answer to your question.
+
+**Please keep the sub tidy by changing the flair to 'solved'.**
+
+You can do this by **awarding a [ClippyPoint^TM](https://www.reddit.com/r/excel/wiki/clippy)** to helpful users by replying
+to their post with the words: *Solution Verified*
+
+See the side-bar for more information.
+
+*I am a bot, please message the /r/excel mods if you have any questions*
+
+
+You have awarded one point to _fuzzius_navus_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Slow summer days... :)
+
+I'm picking off other projects as I go and searching for my own Excel help. Puts me in the right mindset.
+I'd offer the infinitesimally more elegant:
+
+    =LEN(A1)-LEN(SUBSTITUTE(UPPER(A1),"A",""))
+
+but the main kudos go to fuzzius
+haha, thank you for the team effort. The only credit I can take is  being first to submit.
+
+I will keep in mind the case limitations of SUBSTITUTE.

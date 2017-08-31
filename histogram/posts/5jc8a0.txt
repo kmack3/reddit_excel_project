@@ -1,0 +1,72 @@
+What is the easiest way to teach someone who's completely new to Excel VBA?
+See our [Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/) in the sidebar..
+
+[Also](https://www.google.com.au/search?q=learn+vba)
+
+http://www.excel-easy.com/vba.html
+
+http://www.excel-pratique.com/en/vba.php
+
+http://www.homeandlearn.co.uk/NET/excel_vba.html
+
+http://www.excel-vba.com/excel-vba-contents.htm
+
+The thing is, you really do have to have a desire to learn VBA, not just a passing interest 'cause someone asks.. it takes time and understanding to really get it.. and you have to practice.. often.
+I went through this tutorial over the course of a few weeks and I think I have a decent foundation to work off of, now that I understand the basic principles.
+
+First chapter: http://www.homeandlearn.org/add-the-developer-toolbar-to-excel.html
+
+They'll be able to breeze through the tutorial if they're naturally good logical thinkers
+
+I think it's also worth mentioning that they'll learn a lot quicker if they have a project on mind which they believe would be improved with the use of VBA. I had been thinking about learning VBA a lot the first couple of years but I had no reason to learn VBA at the time because it didn't benefit me. Now, I make use of VBA to build rating calculators for several underwriting teams (insurance industry) in my company.
+Self tought here too.
+
+When I had to teach a colleague I gave them the advice to do what I did.
+
+Record macros to get used to what it calls things and the terminology etc.
+
+Then progress to removing all the extra bumpf that recording adds in that you don't actually need.
+
+Then for new stuff, google is your friend.
+
+My colleague got very proficient (not expert) within a few months using this method.
+> How would you teach someone who has no knowledge about Excel VBA?
+
+I wouldn't.
+
+If they have no knowledge about Excel, you will get much more bang for your buck by teaching them about formulas, pivot tables, data validation, Goal Seek, conditional formatting, etc.
+
+Hell, if you can teach them VLOOKUP (or INDEX-MATCH), SUMIF, and Pivot Tables, you will solve 90% of their problems.
+Immediate Window (Ctrl + G in the code window, I believe) and Debug.Print has taught me way more than google ever did. The macro recorder is a good starting point but make sure to tell your coworkers that it will pick up mostly the noise from your cursor movements and screen scrolling.  
+Your method is how I learnt. It's quite a complex topic to learn so if the person teaching you is not an expert themselves then utters difficult to get across concepts.
+
+The best way to learn something is by doing it, it not working and then figuring out why. Especially for coding. 
+
+Give them some examples of how to automate some regular processes they do and point them to where to find the answers rather than giving them the answer when they get stuck.
+
+I've been in the same position as you and it just ended up with me getting better as i solved other people's problems and then not getting far at all. Then I left so they had no choice but to learn or start again. Some times you need to remove their safety net for them to take the risks to fix something.
+I've found that having a specific goal in mind while trying to learn a scripting/programming language gives you a path to follow in figuring things out. Sort of a working backwards approach where you have a goal in mind, that requires specific tools to complete. If you don't know how to make those tools, you'll need to learn how in order to do so. And if those tools require more tools to create, you'll need that knowledge too. Once you've acquired everything, you should be able to reach your goal, and have learned a lot along the way.
+
+Otherwise you're probably wandering about aimlessly, learning how to create simple tools without a real use for them. So you're left with a bunch of semi-working tools, and no real knowledge in how to use them.
+I think it's less about teaching someone and more about ensuring that they maintain the desire to learn. Some people simply don't have that desire to learn computer programming and that's ok - but foster the talents of those who do and let them know that you consistently make 100 problems a day and your goal is always to come in tomorrow and try to make one less.
+I find Sams and For Dummies books to be really helpful when trying to learn new subjects or get a high level overview before digging into the highly technical parts. 
+Figure out what you want to do and then google. The hardest part of this is knowing how to phrase what you want to search for. 
+My experience with teaching technology classes is:  
+
+1/3 of the class really gets it,   
+1/3 pay attention, let it go over their head, and make note of who got it,   
+and   
+1/3 check out quickly and surf CNN, ESPN, or TMZ.
+  
+Never try to teach a cow to bark:  it annoys the cow and it wastes your time.  
+
+"Coder" isn't just a skill, it's also an aptitude.  Hand someone a Rubic's cube.  If they actively struggle with it for more than a minute or two (even if they just Google a solver) they have the aptitude.  
+
+
+>Practice often 
+
+I'll program in VBA about once every 2 months and every time I do I forgot basically everything. Sucks having to relearn the syntax over and over again 
+I can't recommend John Walkenbach's "Excel VBA for Dummies" more. I rarely buy books and usually just go straight into web tutorials, but I feel like there's so much information out there on the web that it's easy to get overwhelmed. 
+I build a key for my excel reports because if I have to do maintenance 6 months later I'm not going to remember jack about name ranges, functions or dependent formula chains.
+John Walkenbach <3
+Same. And I color code cells that are meant for certain outcomes. It's always good to go through it then and there though and give yourself step-by-step instructions to update it again. 

@@ -1,0 +1,21 @@
+crash
+4kpmk0
+Excel Pivot Table Crash/Black Screen
+
+Hi Excel Reddit,
+
+I am having a weird issue: http://imgur.com/bol61Rd
+
+It seems to occur every time on that Pivot Table when I refresh the PT. The Excel document goes black; it is not an accidental black color fill.
+
+When this happens I have to Save As the file and then reopen it.
+
+Does anyone have an idea what could be the issue? I may possibly rebuild the entire file.
+
+Thanks in advance!
+
+
+-------------
+I believe I've had this issue when my computer "ran out of resources to display completely." Try closing other programs. Try moving the pivot table to a separate workbook and see if it will calculate properly. I believe separate instances of excel use less memory than a lot of files opened in a single instance? Maybe allocate more RAM? Possible.
+-------------
+Thanks. The pivot table calculates properly. It is in some instances the spreadsheet will go black. I did try allocating more RAM but it doesn't seem to remedy the issue.

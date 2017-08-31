@@ -1,0 +1,40 @@
+How to unlock protected sheets when you don't know the password
+PST files work the same way. They only store a hash, which is very short (in case of pst, it is sort of a CRC32 checksum). You need to find a password, whichs checksum adds up with the given sum to overflow and end up being 0 when added.
+There is a [PST Password recovery tool](http://www.nirsoft.net/utils/pst_password.html) that shows you 3 possible passwords for your PST almost instantly.
+
+Since only hashes are used, there are technically infinite passwords that match the hash. The problem (with PST) is described [here](http://www.nirsoft.net/articles/pst_password_bug.html) and is similar for excel
+I've always just loaded the spreadsheet into Open Office.  While in there, you can turn off the protection without a password.  Then just save it and open it back up in Excel.  
+I've actually used this code before and it's saved me a lot of headaches.  The protection on Word docs is even easier to crack, no code needed.   
+Edit:  Was the "one usable password" output useful for you?  I was unable to use it to unprotect the same workbook opened from an earlier saved version.  However, the macro did unprotect my worksheet.  
+
+
+That is an interesting hack!  Just me guessing, maybe it's finding a password with the same hash as your password.  If this is the case i guess the hash is 12 characters long.
+
+
+
+Somwhat related, There was also a workaround for unprotecting sheets using zip compression, which is discussed [here](http://blog.bitcollectors.com/adam/2011/10/how-to-unprotect-a-password-protected-xlsx-file/) among other places. 
+On the flipside of this, whenever I don't need a sheet to be especially secure, just user-proofed, I just lock it with no password.
+I have some vba at work specifically for this task. Basically it overwrites the current password with one I specify. As it's done in vba excel throws up no obstructions. 
+
+If you would like I can post when in the office Monday. 
+Oh really? That's fascinating. Hopefully people realize this when deciding what information to put in documents.
+That's what I was guessing, something to do with the way the password is hashed.
+
+That link showed a stupid easy way to do it, too. 
+So your password is just blank?
+Please do. I, for one, would like to see that.
+First save the doc as an .rtf.  Then open the document in Notepad.  Do a search for "password" and you'll find the password hash in parentheses.  Delete the string of characters, but leave the parentheses and save.  Open again in Word.  Go to the protection tab and click "Unprotect" and then save as a .docx or whatever it was to begin with.    
+From [this article.](http://www.spreadsheet1.com/sheet-protection.html)
+
+16-bit hash, and it doesn't even save your password as is, but as the hash itself.  It goes a little bit into the hash documentation, and also has the macro you listed.
+
+The important bit I saw, and the main reason I protect sheets:
+
+> Excel’s sheet protection seems geared towards preventing accidental editing and easier data entry than designed to protect sheet contents from malicious tampering.
+Often, yes.  Half the users that I work with don't even know that sheets can be locked or unlocked.  I just need to stop them from deleting or altering formulas on dashboards.
+That is incredibly simple.... It's quite the nice trick in case that day comes!
+>First save the doc as an .rtf. Then open the document in Notepad.
+
+I've only used that in order to change authors but didn't know the password was there as well, thanks for the info.
+That's a very good point and should be the main purpose to protecting sheets. If somebody really wanted to get in, they easily could.
+Good point. The level of "security" is highly dependent on your target audience. 

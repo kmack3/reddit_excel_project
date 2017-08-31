@@ -1,0 +1,23 @@
+What are the causes of Excel files corrupting?
+Sometimes Excel starts to think a huge range is used instead of the range of actual content. Press ctrl-end and see where you land.
+
+If that's you, delete the extra rows and/or columns, then press alt-F11, then ctrl-G, then type activesheet.usedrange and press enter. Close the dev window, save your file, and marvel at the magical size decrease!
+Large file sizes can be caused by applying cell formatting along entire rows or columns, versus only on cells being used.
+The abrupt appearance of named ranges and increase in file size is usually attributed to the file being linked to another file. To confirm, go to the Data ribbon, and see if Edit Links is not greyed out.
+
+Files can become linked by copying or moving worksheets, or cutting and pasting cells.
+Thank you all.  I'll mark this as solved because they're all very useful suggestions.  
+
+Bear with me while I mark this SOLUTION VERIFIED because I'm not sure if I have to do a single reply with just those words...
+That's super useful. Thank you!
+> The abrupt appearance of named ranges [...] is usually attributed to the file being linked to another file
+
+Small addition: Named ranges can also show up by copying data/worksheets from one book to another
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+SOLUTION VERIFIED

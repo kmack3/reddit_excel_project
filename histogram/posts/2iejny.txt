@@ -1,0 +1,38 @@
+Excel standards and 'best practice' discussion (less VBA, more about spreadsheet layout)
+Separate your data and presentation layers. 
+Every sheet you make should be optimized for eventual automation and expandability. This will help you in general create more robust and connectable data sets. 
+There are a bunch of standards / methods / approaches promoted in the financial modelling industry.
+
+The rules that seem to me to be the most universally agreed are:
+
+* Keep formulae consistent - e.g. if you have a column for each time period, then each row should only contain one formula and that formula should be copied across all the periodic columns.
+* Format clearly - generally it should be obvious whether a cell is an input, calculation or an output, but at the very least it should be clear which cells are inputs and which are not.
+* Label clearly - the meaning of each value in the workbook should be readily apparent.
+* Keep formulae short - anyone proficient in Excel should be able to quickly understand any given formula. You can usually break a single complex formula into multiple simpler steps.
+
+I'd encourage anyone who's interested in this sort of thing to join [/r/FinancialModelling](http://www.reddit.com/r/financialmodelling/), which I set up months ago and don't really know how to promote / grow.
+
+The published approaches that I am aware of are (in alphabetical order):
+
+* [Access Analytic](http://www.slideshare.net/jgrob3/financial-modelling-best-practices)
+* [BPM](http://www.bestpracticemodelling.com/resources?page=/resources/standards)
+* [FAST](http://www.fast-standard.org/the-standard/)
+* [IBM (ex PwC)](http://www.eusprig.org/smbp.pdf)
+* [ICAEW](http://www.icaew.com/~/media/Files/Technical/information-technology/excel-community/166-twenty-principles-for-good-spreadsheet-practice.pdf)
+* Operis has an approach which I think (from marketing material) is documented in the book “Practical Financial Modelling” by Jonathan Swan
+* [PwC](http://www.pwc.com.au/deals/assets/Appreciating-Value-13-Feb13.pdf) (pages 10 and 11)
+* [SCILS](http://numeritas.co.uk/wp-content/content/downloads/2011/11/Principles_SCILS_01.pdf)
+* SMART is normally available but doesn’t seem to be at the moment (Corality produced SMART and their website is being updated)
+I recently rewrote(?) a workbook used at work so that data was on one sheet, pivots on another, and dashboard on a third. No changes to functionality, just that, and some embiggened fonts.
+
+It's now much easier to read and interpret, and I am one step closer to being office god. 
+This is a great one - common sense but definitely needs to be spelled out.
+I actually posted this over at r/actuary as well ([link](http://www.reddit.com/r/actuary/comments/2ielef/excel_standards_and_best_practice_discussion_less/.compact)). It slipped my mind that the finance industry would be big on this as well.
+
+Thanks for sharing those links - will look through them in a bit.
+That sounds like a very cromulent usage of excel.
+This. It is SO beneficial for spreadsheets that are used by people other than yourself to separate data and presentation. There were several workbooks that a number of co-workers at my office were always messing up because they'd accidentally paste new data over a formula, or cut instead of copy from the sheet, etc. so I did this. Data goes on one worksheet, presentation of data is on another, fully locked down worksheet that nobody can change. Often I will also use a hidden "calculations" sheet on really complex workbooks where I can keep reference tables, dropdown lists, and complex calculations so that I can avoid making extremely long formulas. I can break things up into stages so it is easy to follow.
+Thanks for sharing, I'm interested in the actuarial take too. Some of the links I shared are pretty long and detailed, and I've already spent and inordinate amount of time amongst it - happy to share ideas / punnets to any particular areas of interest.
+I would always outline the borders of cells where data input was required. This made it easy for users to know where they needed to input data.
+
+If there was a lot of data input, I would make a separate data input sheet and again would have outlined borders around the cells where the actual data would be entered.

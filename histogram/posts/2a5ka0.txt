@@ -1,0 +1,168 @@
+I am hosting a "lunch and learn" for Excel at work, and I need your help!
+Definitely cover the big 3, VLookups, Pivot Tables and IF Functions (IF, SUMIF,COUNTIF,etc).  Macros are always good to know but can sometimes get confusing for people who aren't that familiar with excel.  Simple shortcuts are always great.  Go over CTRL+ shortcuts to start and maybe even get into ALT shortcuts.  
+I just want my coworkers to stop using colors to indicate status and inserting empty rows into data. I would buy everyone lunch personally if they would stop doing this.
+Some very basic examples that I have shown in the past in addition to what you are suggesting are:
+
+1) using Alt+Enter to show multiple separate lines within cells and formulas
+2) Using the format painter (and double clicking it to lock it) to copy formats between cells
+3) mouse tricks - show how to drag, how to click the sides of the cell to go to the farthest data point in that direction
+4) selecting and using multiple worksheets using CTRL or Shift. If you do this explain the dangers of overwriting data.
+
+These are things people can use every day that a lot of beginners don't know. If you're looking to fill more time, you could also add in a quick demo of basic conditional formatting.
+I'm going to be doing the same thing at my company next month.
+I'm shooting for a two hour time slot and lunch will be provided.
+I've chosen the topics to cover (below) because of past experiences with teaching Excel.  
+In a former life I taught Excel classes (and other software) to corporate and Government clients.  
+Excel was our most popular class.  We taught them in 4 hour increments levels 1, 2, and 3.  
+I most often found that the students that would be considered Excel veterans, were often self taught and missed out on the most basic time saving tricks.  
+They were not getting much out of the advanced classes, so I would reschedule them for the level one classes.  It was always nice to have those people in the level 1 classes because you'd often here exclamations of "Wow! How long has THAT feature been there?!"  and "This is going to save me hours!"  
+
+So just keep in mind that you will not have enough time to cover everything in one class.  If you can, provide hands-on training. (have them bring their laptops to class and provide practice files.)  
+
+The most experienced Excel user may benefit more from learning basic time saving features.  
+If you have prior knowledge of the types of documents your students will be using for their everyday tasks, then I recommend using those as your sample files. 
+
+My (not yet complete) list of topics I'll attempt to cover:
+
+The Excel Window : 
+
+•	About Excel  
+
+•	Changing Views  
+
+•	Zoom  
+
+•	Customizing the Quick Access tool Bar  
+
+•	Opening Files  
+
+•	Columns and Rows  
+
+•	Adding Data to Cells  
+
+•	Resizing Columns  
+
+•	Undo and Redo  
+
+•	Inserting Columns and Rows  
+
+•	Select Cell ranges with keyboard shortcuts  
+
+•	Sheet Tabs  
+
+Formulas Basics : 
+
+•	Understanding Cell References Look at Formulas  
+
+•	Creating Basic Formulas  
+
+•	Add multiple Cells  
+
+•	View Auto Calculate Results  
+
+•	Formula Rules  
+
+•	The Formula Bar  
+
+Learning Basic Functions:  
+
+•	Manual Formulas using Functions  
+
+•	Using Functions with a Cell Range  
+
+•	Using Auto-Sum  
+
+•	Cutting, Copying And Pasting  
+
+•	Moving Cells  
+
+•	Using the Fill Handle  
+
+Understanding Cell References:  
+
+•	Using Relative References  
+
+•	Using Absolute References  
+
+•	Using More Functions  
+
+•	The Tilde Key  to view formulas
+
+
+* Data Tables (and writing formulas against those field names instead of cell references)
+* Absolute/relative references
+* Grouping/Un-grouping
+
+I would also probably not do Macros, unless you are literally just showing them how to record and play.  
+>I plan on going over basic formatting, functions (sum, count/sumif,vlookup), useful shortcuts, filtering, subtotaling, pivot tables, and basic macros. 
+
+Presuming lunch is only an hour then I'd think that you have your hands full already.  Minor side note, I do highly recommend using examples from real-world problems so that they see the value in the lessons.
+I have an habit to select the whole sheet clicking at the corner between A and 1 and then Double clicking between column 1 and 2 to auto-adjust all the columns of the sheet at once. People at my office seems to like it.
+
+Also all the CTRL + Arrows shortcuts to move and Select ranges with the keyboard are easy to learn and very useful in the daily tasks.
+Using F4 to make cells absolute. I use this all the time. 
+You got the bases covered.  I'd suggest ctrl - ; and ctrl - : if your office date/time stamps things.
+
+Remove duplicates and text-to-columns are also very handy and do not take much time to demonstrate.
+I like to show some easy specialty functions so they learn how to think out of the box. Usually I do IFERROR, LEFT, RIGHT, TRIM. I think those are easy enough I grasp and help answer some of the "can excel do this?" The answer is usually yes, but you may need to google to find out how.
+... Your not based in Atlanta are you? 
+I d something like this a couple of times and I asked people to bring along certain problems they were having, work they thought could be done quicker.  A couple people had things and it started the discussion nicely, after introductions and some background on what we were trying to achieve.
+Two things I tend to share regularly that blows minds:
+
+Using text to columns; in general but specifically to correct date formats 
+
+Remove duplicates 
+
+I often bypass vlookup and go straight to index/match. The flexibility of it is spectacular and it lets people feel like they have one up on people who use vlookup 
+Ctrl+shift+arrow key! highlights everything in a given direction if you do over then down it will highlight all data until a break in the data! saves loads of time. Also show the double click on a cell after entering a formula to copy it all the way down
+Topic 1 should be How to get your data into excel in a way that is easy to use... This is the thing that most people I know are terrible at. They want it to look nice then complain that the merged cells are messing with their charts
+Something I've found is really helpful is to make the example data sets as relevant or conversational as possible. If you work at a car retailer, use car-related examples for how they could find out really interesting data that might help them in their day to day work. Try to show the benefit of pivot tables so that someone will say "I think these newfangled pivot desk things will help me solve X!". They might not remember what buttons to press, but if they know that they can make their job easier they will either figure it all out themselves or at least follow up with you for more help. I try to explain the "long-term lazy" approach, where someone can put in more time learning now so that they can spend more of their office day watching Hulu. Excel features are worthless unless you can make them understand how much better their lives will be by using it.
+I thought this was a very good beginner tutorial:  http://www.reddit.com/r/excel/comments/26ougx/excel_skills_and_tips_29_that_you_need_to_learn_a/  
+
+The video is 30 minutes long and covers a lot of the basic excel functionality.  I've in the past found it challenging to teach Excel as a lot of basic functionality that I take for granted is not known to the users, even things like CTRL+C, CTRL+V etc, so watching another example of a tutorial is a good learning experience.
+Index-match
+I would also get into =index(match()) functions. They're in my opinion far better then the vlookup. You might also want to explore arrays. 
+
+I would also compliment the curse with some visualization principles. Don't only keep it technical but show good examples of dashboards and graph ands graphs that packs to much information on 2axis and blurs the message.
+This. I wouldn't even touch macros in this setting unless you tell them to come to you if they want to know more. They're gonna be overwhelmed already with VLOOKUPS.
+And **naming cells**, that helps a lot to keep a spreadsheet clean
+I feel you!
+General spreadsheet hygiene, including DO NOT skip rows or columns when creating a spreadsheet!  Amazing how many people don't know this, in part because they don't know about Alt+Enter and can't figure out how to make the data look readable.
+Wow, I really appreciate your response! At first I thought I would barely be able to fill the hour time slot, but now it seems I'll struggle to stay within it. [Thanks again!](http://i.imgur.com/lXVJYnh.png)
+Try this:
+
+Ctrl + a
+
+Ctrl + a
+
+Alt, o, c, a (tap these, don't hold them)
+Nope!
+I have a list of attendees and I plan on creating a Google survey to get an idea what people want out of the class. 
+If you're going to teach naming cells, and I think you should, please make sure that you also teach how to change the cell/range that a name points to (formulas --> name manager). 
+TIL they say "I feel you!" in Ohio.
+This is a very important lesson - I teach this stuff for a living, and you need to realize that without slowing down, leaving time for questions, and letting the group try it hands-on, this will go over most people's heads.
+
+There will be quiet people in the room - more often, it's because they don't understand, rather than being bored. Hit a few biggies, leave room for the material to breathe, let people talk amongst themselves and find reasons to use these tools.
+
+I often teach three, 8-hour days of Excel, and never struggle to fill the time! It's better to give them four things they understand and can use than to hit ten things most people won't understand.
+
+Good luck!
+My pleasure.  I hope it helps.  
+Hopefully you'll start getting feedback from your students along the lines of "I'm trying to do...."  and " Is there a faster way too...?"  
+Write down the questions and when you have enough, then you are all set to build your next class!
+You're well organised, good idea.
+Can you elaborate on what you mean?
+
+
+You'd feel it, too if you'd ever had to go row by row down a huge spreadsheet because the creators didn't know how to do Alt+Enter in a cell to create a line break, so they just put the rest of the info in the cell below and left the rest of that row blank.
+Thank you for the sound advice.  I will keep this in mind when creating the lesson. Maybe I can turn this into a series rather then a one time event. 
+I agree. When I used to teach classes, we used to break everything up in chapters, and had practice lessons at the end of each. The Practice lessons would ask the student to complete a scenario using each of the tools that were just discussed in the lesson.  
+While many people might be nodding along with you during the lesson, they would often immediately forget the actual steps needed.  The practice lessons would give you the time to roam around and quietly answer questions as people worked their way through the steps.  It's really nice if you can develop that kind of thing, and have the time put it into practice.  
+Where I am working, that just isn't possible.
+Sure, I mean if you name range A1:A15 "items" and then later realize that you need to extend it to row 16, you can just change the range that "items" consists of. 
+
+I've seen a number of users where they end up creating new ranges like "items1" and "items2" because they didn't realize they could just change where that name points. 
+Oh hell no! Actions like that deserve a tech beatdown. It's now official:    
+    
+I feel you!
+I gently educated them and rebuilt the spreadsheet with autofilters and pivot table. They were amazed.

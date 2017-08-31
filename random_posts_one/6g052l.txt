@@ -1,0 +1,113 @@
+6g052l
+Runtime Error 1004 Occuring after Changing R1C1 formula in VBA
+I've written a bit of code to stop me needing to use INDIRECT to access data from the numerous backing sheets of a dashboard I'm working on.
+It loops through a column, changing the worksheet name in the formula to the name held within the cell of the same row of the 'SheetNameList' named range.
+It worked fantastically the first couple of times, I had changed the formula once or twice and it worked every time. But this time I made the formula a little bit more complicated and it keeps spitting out the Runtime Error 1004 Application-Defined or Object-Defined Error.
+
+Here's the code with a formula that it works fine with:
+
+    Sub CompileLatestData()
+    Application.ScreenUpdating = False
+    
+    'When modifying, change the Named Range for formulrange to the 1st column of data that needs to be changed
+        Dim wsname As String
+        Dim wsnamerange, formulrange As Range
+        Dim x, y As Integer
+        Set wsnamerange = Range("SheetNameList")
+        Set formulrange = Range("FirstSTPList")
+    
+     'This loops through the "formulrange" column, changing the sheet name to the variable "wsname", found in the same row as the current loop is on
+        For x = 1 To formulrange.Rows.Count
+            For y = 1 To formulrange.Columns.Count
+                        wsname = wsnamerange.Cells(x, y)
+                        'The easiest way to obtain the R1C1 formula in order to modify this code is to record a macro either writing or changing the desired formula in excel, after obtaining it paste it below
+                        'Where the sheet name is referenced, replace this with the following: " & wsname & " . Include the quotation marks!
+                        formulrange.Cells(x, y).FormulaR1C1 = "=INDEX('" & wsname & "'!R11C5:R243C76," & Chr(10) & "MATCH(R1C,Data_Orgs,0)," & Chr(10) & "MATCH(RC3,OFFSET(Data_Dates,RC36,),0))"
+            Next y
+        Next x
+        
+    Application.ScreenUpdating = True
+    End Sub
+
+And here's the code with the formula that breaks it:
+
+    Sub CompileSparklines()
+    
+    Application.ScreenUpdating = False
+    
+    'When modifying, change the Named Range for formulrange to the 1st column of data that needs to be changed
+        Dim wsname As String
+        Dim wsnamerange, formulrange As Range
+        Dim x, y As Integer
+        Set wsnamerange = Range("SheetNameList")
+        Set formulrange = Range("FinPeriodList")
+    
+     'This loops through the "formulrange" column, changing the sheet name to the variable "wsname", found in the same row as the current loop is on
+        For x = 1 To formulrange.Rows.Count
+            For y = 1 To formulrange.Columns.Count
+                        wsname = wsnamerange.Cells(x, y)
+                        
+                        'The easiest way to obtain the R1C1 formula in order to modify this code is to record a macro either writing or changing the desired formula in excel, after obtaining it paste it below
+                        'Where the sheet name is referenced, replace this with the following: " & wsname & " . Include the quotation marks!
+                        formulrange.Cells(x, y).FormulaR1C1 = "=IF(ISNUMBER(" & Chr(10) & "INDEX('" & wsname & "'!R11C5:R243C76," & Chr(10) & "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly"",INDEX('Ref Sheet'!R15C2:R15C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)-IF(RC16=""Monthly"",R2C,R3C)))," & Chr(10) & "INDEX('" & wsname & "'!R11C5:R243C76," & Chr(10) & "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly"",INDEX('Ref Sheet'!" & "5C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)-IF(RC16=""Monthly"",R2C,R3C))," & Chr(10) & "NA())"
+            Next y
+        Next x
+        
+    Application.ScreenUpdating = True
+    
+    End Sub
+
+Any help unpicking why this error is cropping up would be really useful, or if you have an alternative way of achieving this that would also be great!
+
+
+-------------
+You were missing an "R" from one of the cell references in formula. It just said "5C25" instead of "R5C25".
+
+    Sub CompileSparklines()
+    
+        Application.ScreenUpdating = False
+        
+        'When modifying, change the Named Range for formulrange to the 1st column of data that needs to be changed
+        Dim wsName As String
+        Dim wsNameRange As Range, formulRange As Range
+        Dim x As Long, y As Long
+        Dim myForm As String
+        
+        Set wsNameRange = Range("SheetNameList")
+        Set formulRange = Range("FinPeriodList")
+        
+    
+        'This loops through the "formulrange" column, changing the sheet name to the variable "wsname", found in the same row as the current loop is on
+        For x = 1 To formulRange.Rows.Count
+            For y = 1 To formulRange.Columns.Count
+                        wsName = wsNameRange.Cells(x, y)
+    
+                        'The easiest way to obtain the R1C1 formula in order to modify this code is to record a macro either writing or changing the desired formula in excel, after obtaining it paste it below
+                        'Where the sheet name is referenced, replace this with the following: " & wsname & " . Include the quotation marks!
+                        myForm = "=IF(ISNUMBER(" & Chr(10) & "INDEX('" & wsName & "'!R11C5:R243C76," _
+                        & Chr(10) & "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly""," & _
+                        "INDEX('Ref Sheet'!R15C2:R15C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)" & _
+                        "-IF(RC16=""Monthly"",R2C,R3C)))," & Chr(10) & "INDEX('" & wsName & "'!R11C5:R243C76," & Chr(10) & _
+                        "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly"",INDEX('Ref Sheet'!" & _
+                        "R5C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)-IF(RC16=""Monthly"",R2C,R3C))," & _
+                        Chr(10) & "NA())"
+                        
+                        formulRange.Cells(x, y).FormulaR1C1 = myForm
+            Next y
+        Next x
+    
+        Application.ScreenUpdating = True
+    
+    End Sub
+
+-------------
+> Sub CompileSparklines() Application.ScreenUpdating = False 'When modifying, change the Named Range for formulrange to the 1st column of data that needs to be changed Dim wsName As String Dim wsNameRange As Range, formulRange As Range Dim x As Long, y As Long Dim myForm As String Set wsNameRange = Range("SheetNameList") Set formulRange = Range("FinPeriodList") 'This loops through the "formulrange" column, changing the sheet name to the variable "wsname", found in the same row as the current loop is on For x = 1 To formulRange.Rows.Count For y = 1 To formulRange.Columns.Count wsName = wsNameRange.Cells(x, y) 'The easiest way to obtain the R1C1 formula in order to modify this code is to record a macro either writing or changing the desired formula in excel, after obtaining it paste it below 'Where the sheet name is referenced, replace this with the following: " & wsname & " . Include the quotation marks! myForm = "=IF(ISNUMBER(" & Chr(10) & "INDEX('" & wsName & "'!R11C5:R243C76," _ & Chr(10) & "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly""," & _ "INDEX('Ref Sheet'!R15C2:R15C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)" & _ "-IF(RC16=""Monthly"",R2C,R3C)))," & Chr(10) & "INDEX('" & wsName & "'!R11C5:R243C76," & Chr(10) & _ "MATCH(selected_STP,Data_Orgs,0)," & Chr(10) & "MATCH(IF(RC16=""Monthly"",INDEX('Ref Sheet'!" & _ "R5C25,,MATCH(RC5,'Ref Sheet'!R16C2:R16C25,0)),RC5),OFFSET(Data_Dates,RC18,),0)-IF(RC16=""Monthly"",R2C,R3C))," & _ Chr(10) & "NA())" formulRange.Cells(x, y).FormulaR1C1 = myForm Next y Next x Application.ScreenUpdating = True End Sub
+
+Solution Verified!
+-------------
+Thanks for this! It's confusing that this happened because I just copied and pasted the R1C1 formula that recording a macro produced. I'll watch out for this in future!
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

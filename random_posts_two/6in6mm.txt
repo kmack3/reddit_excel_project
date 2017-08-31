@@ -1,0 +1,21 @@
+6in6mm
+Macro to update pivot tables after data refreshes
+I have 2 pivot tables linked to 5 sheets of data which are all connected to a database. I have it set so when I update the date range in cell c6 the sheets pull new data. I have a macro connected to a button that will then refresh the pivot tables. I don't want to push the button, o want the tables to refresh when the data changes, either based on date range in cell c6, or after the other macro runs. But when I include my refresh pivot table in with update sheets it pulls in old data, If I manually hit the button it works every time. 
+
+
+-------------
+At the end of the "other macro" you just need to do a `Call UpdatePivots` or whatever the macro is called. If the "other macro" changes Application.CalculationMode to XlCalculationManual, it needs to be switched back to XlCalculationAutomatic before running UpdatePivots.
+-------------
+You could always call your Refresh Pivot Macro when the date range is changed in cell C6
+
+Open up the VBA editor and click on the sheet containing the date range then input the following code:
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+    If Target.Address = "$C$6" Then
+    Call RefreshPivotMacro 
+    End If
+    End Sub
+
+Now, whenever the date range changes, the macro should run.
+-------------
+I don't have any calculations on the sheets, just straight data pulls. I've tried inserting just the call refreshpivot and it pulls old data. It seems that the data doesn't update until the automatic macros fully finish running. 

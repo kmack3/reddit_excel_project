@@ -1,0 +1,183 @@
+I always set Application.ScreenUpdating to False, curious if anyone ever sets it to true, and if so, what circumstance?
+If you want to get serious about speeding things up:
+
+http://www.thespreadsheetguru.com/blog/2015/2/25/best-way-to-improve-vba-macro-performance-and-prevent-slow-code-execution
+
+I have these in my VBA Template because it's so damn useful.
+I'm going to blow your mind with this one.
+
+I store all of the application state variables in a class module.  The module has a few methods: get, restore, disableall, enableall.  Those methods all return self so you can chain them together as necessary.  It also has get/set properties for each individual application state.
+
+Why?  Because if some code errors out or otherwise you don't reach the end of your module (except for a Break), the object goes out of scope and automatically executes the destructor which calls the restore method.  
+
+So at the begining of a particularly grusome module, I've got this code*:  
+
+
+    Sub Module_That_Takes_A_Long_Time()
+        clsAppState AppState = New clsAppState.Get().DisableAll()
+        /* lots of code */
+    End Sub
+
+And that's it.
+
+*I don't have excel on this pc so that is vba-ish.
+It's true by default. I don't bother setting it to false on new projects until I have performance issues. 
+I have a macro that takes up to 4 minutes to run and is used by numerous people.  It takes a little longer to run with screenupdating enabled, on average about 5% longer.  I can't turn screenupdating off.  The people using it get antsy and many of them wind up killing excel and restarting because they think it froze up.  So I deliberately wrote the code to do a few screen changes as fast as possible and display those changes so the users will keep their hands off the task manager buttons.  Before someone states the obvious, I am using  Application.StatusBar to tell the user what the code is doing.  They don't look at the statusbar, all they see is that frozen screen and after a minute or two of sitting waiting, many of them slam ctrl-shift-esc and kill the task.
+I usually set it to true when I'm debugging, because it's a huge pita if you have it set to false (as well as application.visible set to false) and then it crashes.
+You need to set it true (for a short time) if you're freezing panes (at least in 2010). Also window size (usually force fullscreen) is important for the same reasons.
+depends, I don't usually bother with it, but I often don't do too much in the cells themselves. It's usually something I do as an after-thought, like when I clean up my script and make sure everything is aligned and dot my i's and cross my t's and such. 
+
+In a few cases leaving it on can work as a visual aid for people who don't "trust" macros. For some things (like batch web-scraping or other things where doing each opeartion on each item takes a while) I leave it on so you can see the partial progress (along with a do events in the loop). But I tend to prefer just using a progress bar. 
+
+edit: flair changed to discussion
+I have it set to true for my maze generator
+Only to true if it speeds up the process or if it reduces visual glitches like when it switches tabs.
+I once had it on true so I could show an ETA in the workbook. In that algorithm the computing power went into transforming a matrix and almost no data was written to and from the sheet. 
+I like to use a generic function:
+
+    Function goFast(go as Boolean)
+        Application.ScreenUpdating = Not go
+        Application.EnableEvents = Not go
+        Application.DisplayAlerts = Not go
+        Application.Calculation = IIf(go, xlCalculationManual, xlCalculationAutomatic)
+    End Function
+
+This way you can just drop it into projects and do:
+
+    goFast(True)
+    (*do stuff*)
+    goFast(False)
+
+>Why?  Because if some code errors out or otherwise you don't reach the end of your module (except for a Break), the object goes out of scope and automatically executes the destructor which calls the restore method.
+
+This is fing brilliant. I'm going to have to try this.
+Any chance you could ELI5 this?
+I made a status bar userform for this exact problem.  But I can't get it to both be modal and let other code execute in the background.  Stupid VBA.
+that's really smart, i hadn't even thought of that i'm going to incorporate that into my workbooks
+I'm kinda impressed your users are savvy enough to know they should raise task manager and kill a task, instead of just running screaming like they'd been set on fire towards the nearest technically knowledgeable person.
+
+Btw, you could throw in a DoEvents here or there after a few major changes - it does one "normal" cycle of Excel-ing, including a screen update.
+I cheat somewhat in this situation by having a hidden worksheet like [this](http://i.imgur.com/fVto5r8.png).
+
+With a named range defined like this:
+
+    ' MessageLocation = Processing!B19
+
+And a sub like this:
+
+    Sub ImProcessing(Optional ByVal Message As String)
+    
+    ' Displays the "Processing" screen, with an optional user message
+    ' If no message is passed any existing message will be cleared
+    
+        On Error Resume Next
+        
+            Sheets("Processing").Range("MessageLocation").Value = ""
+            
+            If Len(Message) > 0 Then
+                Sheets("Processing").Range("MessageLocation").Value = Message
+            End If
+            
+            Sheets("Processing").Visible = True
+            Sheets("Processing").Activate
+            
+        On Error GoTo 0
+    
+    End Sub
+
+With calls like this scattered throughout the code:
+
+    ImProcessing ("Loading activity data")
+
+That solution is a couple of years old, when I did dumb things like toggle screenupdating before/after calling ImProcessing - I like the goFast function above, and might just incorporate something like that in the future.
+True that sounds better than hitting F8
+>  (as well as application.visible set to false) 
+
+Does that have any impact on performance?
+I secretly love [those glitches](http://imgur.com/a/zTCdQ).
+I have something similar to this, but I have a lot of subs that can be run independently or in sequence. So I only want to turn them all back on again if it's the same sub that turned them off. My solution is to have a public variable which is set to true when I turn the booster on.
+
+To adapt your example it's something like this:
+
+    Public go as Boolean
+    
+    Function goFast()
+        go = not go
+        Application.ScreenUpdating = Not go
+        Application.EnableEvents = Not go
+        Application.DisplayAlerts = Not go
+        Application.Calculation = IIf(go, xlCalculationManual, xlCalculationAutomatic)
+    End Function
+
+Then in each procedure I want to speed up:
+
+    Sub whatever()
+        Dim imFirst as Boolean
+        If Not go Then imFirst = True: goFast
+        
+        (*do stuff*)
+        
+        If imFirst then goFast
+    End Sub
+
+
+Fucking genius. Hell yes. I am doing this from now on. Thank you.
+
+*Wait, what is "Not go"... shouldn't your function just be Application.ScreenUpdating = False, etc etc? Making them all False?
+Why a function? You're not returning anything.
+In computer terminology, objects are discrete things that you can interact with.  In many languages, such as VBA, you can create and destroy objects and the program will automatically execute a routine on that object.  Another factor is "scope" - or how long any given object will live during your program.  When the object leaves scope, it will automatically destruct.
+
+In my code, I took advantage of that behavior.
+
+I create an object (before a computationally intensive piece of code), let it exit scope, it then destructs, and the destruction code calls a specific procedure.
+
+In the case of this topic, I made the object save the state of the application (things like ScreenUpdate, Events, etc, that add userinterface overhead which slows down the execution of my code) and then disable those features.  Once that object leaves scope, it calls the Restore method and the application returns to a useable state.
+
+This is useful because sometimes errors occur. If you don't gracefully handle that error, then you might not reset the application state - execution jumps somewhere else in your code.  This approach is immune from that pitfall.
+
+The other benefit is that this code is a single line. You don't need to set then reset. Just copy/paste this line at the beginning of any code that is slow. 
+I made a "progress bar" form that also shows the status for this reason. I made mine not modal so it can sit on the screen while processing happens. I'll usually only use it on stuff that I know is going to take a while.
+
+Basically, every time I want to show an update, I call a function like:
+
+    ProgressUpdate(2, 10)
+
+If the form isn't visible, the function makes it visible. It then sets the progress bar to be at a 2/10 position.
+At another bit of code, I'll call it again with 3 and 10 so it shows 3/10 of a full bar, etc. I'm essentially manually updating the progress.
+
+If something like 10/10 is called, then that's the function's cue to hide the form. Also, all updates that I would throw at the status bar are also thrown at a caption on the form (at all times) with a Sub like:
+
+    Sub Status(ByVal strText As String)
+        Application.StatusBar = strText
+        ProgressForm.Status.Caption = strText
+    End Sub
+Don't know.  I did it because the code cycles through a few dozen to a few hundred workbooks and it's just better to not see anything.
+So, I guess I went a few steps further. I really can't paste the code here because of possible IP stuff, but what you want to do is three things in addition to turning on or off events and updating and calculation et al. To streamline this text, I'll just call them "events".
+
+First, always notice that your code is entered at specific points in the interface. The functions that the interface calls, I usually keep in a separate module called "External". This, then, houses all entry points into your code. This is important because, theoretically, these will be the only functions that will need events turned off and back on again. There's other reasons for this, too, as these will be the functions that the user can run independently from the macros list and they need to check for worksheet protection.
+
+Second, there's still the possibility that you'll call your events function more than once (you've solved this in a novel way). Because most of these properties are Boolean (events on or off, updating on or off, etc), when you call to have them turned off in one function, and then that function calls another to have them turned off, you'll eventually end up with the last function turning them back on again before the first function is done. This can lead to unexpected interface conflicts. Because of this, you can count how many times they've been called to be turned off and then count down as each requesting function closes so that the initiating function does the honor of enabling events again. I've encapsulated this process in it's own module so that all I need to put in any procedure is:
+
+    SuppressEvents()
+    'Code here
+    EnableEvents()
+
+Counting up or down also save a little bit of memory, too, and encapsulating the process is conducive to the next part...
+
+Lastly, you never really know the state of these properties as your events function is called. Maybe the user wants manual calculation rather than automatic? So, before you turn off events, you have to save the old states. Then, when you're done doing whatever, reinstate those old states back to the user's preference.
+not turns the TRUE into FALSE. 
+
+goFast(True), as in, "I want things to go fast", should make screenupdating into "False". 
+
+vice versa. 
+You're right, and there's a few reasons:
+
+1. It meant I didn't have to type Call to run it (but I've just realised I don't have to Call subs to run them either and don't remember where I got the impression that I did). 
+
+2. I like to use Subs to contain Big Stuff - sets of processes and function calls and so on, and functions for Small Stuff, brief sets of commands, checks, and loopable ETL stuff. This both helps me organise my code (rather lazily) and prevents people who are trying to run macros from the main GUI asking me which sub they should be running in a set of subs to start a process (and yes, I know about Private as well). Each module just contains the sub required to start it. 
+
+3. Because™.
+sounds cool. are you able to share the code in the class module?
+Ohhh right and "go" is the boolean variable here. Correct? 
+Not judging, just curious =)
+yup

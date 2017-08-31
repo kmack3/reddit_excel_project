@@ -1,0 +1,55 @@
+Excel is changing all the values of the numbers I type in
+Sounds like you have this set to a European language or locale. Over there periods mean 1000's. 
+
+Make sure you set Excel to be US based and with US metrics. Otherwise, periods denote thousands elsewhere. 
+What do you mean by 'registers'
+
+Does it change the value? 
+
+Is it part of a formula?
+
+Check Options> Advanced > Automatically insert a decimal point
+[deleted]
+Thanks everyone , I got it. Options -> Advanced -> Check "Use system separators" 
+
+it had "." set for thousands separator. 
+Would this be under language because everything is set to US english. 
+there are no forumals.
+
+By register I mean this
+
+I type 
+
+"3.994" in the cell and then excel is basically multiplying it by 1000, so in the forumla bar, it is showing up as 3994. Then when I go to make my graphs, all the data points are multiplied by 1000. 
+
+So, If I want a point with coordinates of (3.994, 3.714E-03) I am getting (3994, 3.174E-3)
+This did not do anything. 
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+SOLUTION VERIFIED!
+What happens if you use a comma instead of a period?
+
+Relevant settings to change this are (this is Excel 2010, might be somewhere else in different versions)
+
+File -> Options -> Advanced -> Use System Separators
+
+You can uncheck it to manually set the decimal separator and Thousands separator if necessary.
+See link. Specifically for dates but likely same for numbers. 
+
+http://excel.tips.net/T011574_Setting_a_Default_Date_Format.html
+It would be nice of you to verify Nateorade's comment, seeing as he's the one who pointed this out.
+Well, he lead me to finding this but didn't actually give it. He said my region may be off. It wasn't. 
+
+Then later I found this myself. 
+
+LynchpinPuzzler is actually the one who gave the same solution that I found. 
+It's rare to see someone downvoted in /r/excel but you still haven't gone back and given solution verified to /u/LynchpinPuzzler
+I've never seen anyone verify their own issue either
+That's because I figured it out on my own before he replied, or at least before I read it. Hence I haven't given it to him. If it's that big of a deal, fine. 
+OP posted their solution a couple of minutes before my post.
+Fair enough but he could still give you the point!

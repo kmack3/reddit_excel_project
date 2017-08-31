@@ -1,0 +1,13 @@
+Excel 365 just blew my mind away. Cool "new" (?) feature!
+It's called [Flash Fill](http://office.microsoft.com/en-gb/excel-help/use-autofill-and-flash-fill-RZ103988276.aspx).
+I saw the Flash Fill on reddit last week or so. And started using it - it was working great.
+
+Now with the same data source, it won't work.
+
+Does anyone have any suggestions on how to get it to work again? I've even tried the manual, menu button and it gives the warning to try a few more. Last week, the first 3 were enough, this week, 5 samples isn't enough....
+
+Weird - says Excel 2013 - but I've never seen it triggered 
+It may depend on how complicated the logic is. I've found that 3-5 is what is needed.
+It triggered for me last week for the first time.  I had Column A full of company names in all caps, and I wanted them to look normal (first letter caps, rest of letters lower).  I typed in the first company name in Col. B, hit enter, and started the second name, and it filled all of them.  It was a huge time saver.  The one issue it was having was with companies where they may have LLC or something at the end, it just recognizes this as a word and returns Llc.  Oh well.  Great feature in my opinion.
+you can also use the proper() formula to get the same thing, fyi.
+Yes, but flash fill is nice for when you have something that requires complicated nested text formulas to convert. I find it beneficial for splitting information apart.

@@ -1,0 +1,39 @@
+6g12a1
+Using an if/then statement in a spreadsheet linked to word
+Hey guys. I'm an intern at an engineering firm currently and I've been tasked with making a template for our proposals. I haven't done anything like this before so I'm pretty lost and have a couple of questions:
+
+The template is supposed to be universal, so in my spreadsheet linked to word I have all of the possible headers for our proposals even if they will not all show up in each proposal. For example, some projects/proposals will only involve 3 disciplines of engineering but I have included all of the possible disciplines in the spreadsheet. Is there a way to code this such that the person working on a certain proposal needs to enter a certain value into a cell in order for that header to show up in the proposal word document? Sorry if this makes no sense as a question. Thanks for any help! 
+
+
+-------------
+Yes and no. You can achieve such things but to honest, you probably don't want to go down that route. Making truly flexible reports is error prone and inflexible. 
+
+- You really need to think this through as to what you are really trying to present to whom at the end. Does this make the proposal writer's life easier or not.
+
+- splitting the data entry/capture from the data representation is highly recommended - it allows you to have helper columns and textual prompts which you don't subsequently need to hide or delete.
+- so you *should* consider having a single type of data entry template - and then having 3 (4, 7 or more) representations of *that* data which could then either be pasted into word documents 
+- pre-setup word documents, can also be created which reference a specific sheet's data.
+- is it sufficient to summarise the information as a pivot table, for example?
+
+So
+
+- I recommend you work toward generating fairly statically formatted data representations and then pasting those into word documents as required.
+- Work with the idea of making specific formats for specific proposal types 
+- use a separately formatted excel sheet (tab) for each flavour of proposal.
+- reference the raw data from the data-entry sheet from your formatted template sheets - using pivot tables as required.
+
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

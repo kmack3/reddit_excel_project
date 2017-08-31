@@ -1,0 +1,79 @@
+big
+2lwl28
+Working on my first big excel project, it's hard for me to put what I want to do in words, please hear me out.
+
+I want to count the number of "A1 cells" that have a value of 1 in sheets #1 to #100 that also have a cell B1 with a value of 1. How do I do that?
+
+Here's what I have for two sheets: =COUNTIFS('1'!A1,'1'!B1=1)+COUNTIFS('2'!A1,'2'!B1=1)
+
+
+-------------
+> With a lot of manual labor renaming worksheets, or a little bit of VBA code.
+
+    Sub LoopThroughWorksheets()
+    Dim WS As Worksheet
+    count = 0
+    For Each WS In ThisWorkbook.Worksheets
+        If (INSERT FORMULA HERE):
+            count = count + 1
+    Next WS
+    End Sub    
+
+Where INSERT FORMULA HERE stands for VBA code you'll have to write to evaluate if A1=1 and B1=1
+-------------
+Can't do a full edit since I'm on my phone so...
+
+    If Cells(1,1) = 1 AND Cells(1,2) = 1 Then
+    count = count + 1
+    End If
+    Next WS
+    Msgbox Count
+
+-------------
+Well, I guess I'm in deep. I have no idea what any of that means. 
+-------------
+Open up your file, hit ALT+F11. This will open up the VBA window. Right click "VBAProject (Your workbook name here)" and Insert->Module.
+
+In this new window that pops up, copy and paste this
+
+    Sub LoopThroughWorksheets()
+    
+    Dim Count As Integer
+    
+    Count = 0
+        
+        For i = 1 To Worksheets.Count
+            
+            If Worksheets(i).Range("A1") = 1 And Worksheets(i).Range("B1") = 1 Then
+                
+                Count = Count + 1
+        
+            End If
+        
+        Next i
+    
+    MsgBox Count
+    
+    End Sub
+
+then hit F5 while you cursor is inside (selected) inside the code.
+-------------
+It means you have inherited or constructed a very inconvenient data structure.  The above posts are encouraging you to use VBA to essentially write a small program to do your calculation for you. It is not terribly difficult to get into, but for a first time thing it would definitely take a bit.  Google something similar to "getting started with VBA macros excel" or something.
+
+/u/Aristite above has a better answer, as VBA is a better way to do it.  A less fun way is to use a bunch of indirects.  Indirect lets you "Construct" a cell reference based on other cells, and this way you can fairly easily make a helper column for your sheet names.  Here I have used a table, but you could do the same without a table, and just use some columns.
+
+[**This**](https://i.imgur.com/d1i0z0p.png) shows a sample of what a summary with 3 sheets might look at, table on top, and a sample with just one sheet below.  [**Here**](https://i.imgur.com/z4PPcno.png) are the formulas. 
+
+
+
+
+
+
+-------------
+Oh wow, I've been making some really basic mistakes. I'm trying to rework that code into a function right now (so that LTW(A1,B1) gives me in how many sheets the two cells have the value of 1). I'm getting a #VALUE! error. What could be causing this?
+
+I know I'm jumping the gun here and probably appear as obnoxious, but I was told to do a survey analysis in Excel and now I'm realising that my professor may not understand exactly how much time it'd take me to learn.
+-------------
+This is not a UDF (User defined function). That is an entirely different beast in itself. You have to run this directly through the code window or through the macro window. You can adjust it so that it's easier done but I think you're doing this entirely wrong.
+
+If your professor told you to do a survey analysis, then I think you've been going about this the wrong way. Instead of putting all of your data into separate worksheets, condense it all into one sheet with different sections for each dataset. 

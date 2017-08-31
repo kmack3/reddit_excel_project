@@ -1,0 +1,88 @@
+I want to see the VBA code for the AVERAGEIFS function, so that I can modify it and make a STDEVIFS function
+Answering your first question - it's not possible, Excel is a closed source software. But the built-in functions were not written in VBA.  
+
+There are [open source](https://en.wikipedia.org/wiki/Open-source_model) alternatives like [LibreOffice Calc](https://en.wikipedia.org/wiki/LibreOffice_Calc) and in theory you could check their code, but it's not in VBA either.
+You can use IF() as an array formula and turn any function into an [...]IF() function.
+
+    =STDEV.S(IF(criteria_range=criteria, stdev_range))
+
+Then hit Ctrl+Shift+Enter to make it an array formula. Some [notes on using multiple criteria here](https://support.microsoft.com/en-us/help/275165/when-to-use-a-sum-if-array-formula).
+
+There's also a way to [use SUMPRODUCT as an array formula](http://chandoo.org/wp/2009/11/10/excel-sumproduct-formula/), something like 
+
+    =STDEV.S(SUMPRODUCT(--(criteria_range = criteria), stdev_range))
+
+but I don't remember exactly (it's not that way, but it's similar). [Here's another tutorial on it](https://www.ablebits.com/office-addins-blog/2016/08/24/excel-sumproduct-function-formula-examples/). I believe the SUMPRODUCT option is more powerful (allows you to use formulas within the conditional statement?).
+[Here is a UDF for STDEVIFS](https://www.reddit.com/r/excelevator/comments/659iwl/udf_stdevifs_stdev_range_criteria_range1/) .. not tested fully yet... let me know any issues.
+you can just use sumproduct to do it in formula. something like: 
+(apologies if the maths is wrong its been a while since i did stats! ) 
+
+    sqrt(sumproduct((range=condition)*((sxx^2)-avgifs()^2)))/(counitfs()-1))
+Oh, ok, thanks! 
+I tried inputting what I have in my AVERAGEIFS in this way:
+=STDEV(IF(VK!$A$2:$A$3691=I5&"*";IF(VK!$A$2:$A$3691="*"&"FF"&"*";IF(R5=4;VK!$C$2:$C$3691;IF('Specs and calc Scost'!R5=5;VK!$D$2:$D$3691;VK!$E$2:$E$3691));VK!$B$2:$B$3691)))
+But that doesn't work. basically, the two first IFs for specific search hits, then starting from the third one it's a nested IF, where depending on how many characters the first search term is, it will use a different column to check if something is TRUE or FALSE. Then the last part is the value range.
+
+edit: reddit interprets some stars * as where to start writing in itallics.
+wow, that's awesome! Thanks! I think it works, only is it quite slow, ~~and there seems to be some problem with filling the formula down the column.~~ Scrap that, it works now, it just took a long time before every cell was calculated and in the mean time it displayed wrong values. I'm going to check a few things out, see if I find any problems, but it already looks promessing :)
+edit: I see no, problems, this was exactly what I was looking for! Couldn't have written it myself.
+SOLUTION VERIFIED
+What is sxx? Also, for each number that fits the criteria, the mean should be subtracted, and the result squared. Then, all those results should be summed and divided by the number of counts. So I don't think SUMPRODUCT is what i'm looking for? Thanks anyways!
+How many values and cells are you using it in?
+
+Was it a silly amount of time?
+
+Just considering if to tidy it up a bit... the constant redim I think is causing slowness...
+sxx = the geometric weighted mean (iirc) - n*sum(X-xbar)^2 
+
+dont think it needs squaring on second thoughts - it was a while ago i did stats.  
+
+such that the stdev is sqrt ([sxx - nxbar^2 ] / (n-1) ] 
+
+essentially were using sumproduct to downselect the array on which to perform the STD dev. 
+
+edit: scratch all of that you can just do 
+
+    sumproduct(stdeva((range=cond)*(range)))
+Each column is 3690 rows. I have three criteria, the last of which is a nested IF, to check a different column depending on the length of the search string. So it complex, but compared to AVERAGEIFS, which solves all 3690 values almost instantly, the STDEVIFS took probably a minute or longer (I haven't checked, at first I thought he was done calculating already and giving wrong values, but actually the values were just those from the cell I pulled down. Forgot to mention that the pull down was for two columns, so twice 3690 cells. But i'm not complaining, very glad it works! If you can tidy it further, that would be even more awesome :)
+Nooo, don't repeatedly ReDim arrays T_T
+ok, I used your function for the same number of cells, slightly different criteria (one is false instead of true), and it took around 3 minutes!
+Ok so I tried a simple version of what I need, with only one condition, but it returns a DIV/0! error. THis is what I wrote:
+    =SUMPRODUCT(STDEVA(VK!F2:F3695=TRUE*VK!B2:B3695))
+So i have a column with TRUE or FALSE, and if TRUE, it should use the corresponding value to use in the STDEVA.
+give it another try.. have removed a stumbling block... copy the code... let me know how it goes.. 
+Hahaha! Yeh I knew it wasn't right, but just hacked it together to get it working.. sorted now... 
+works here:
+
+edit: youve missed some brackets, put your condition in brackets: 
+
+=SUMPRODUCT(STDEVA((VK!F2:F3695=TRUE)*(VK!B2:B3695))
+
+http://imgur.com/a/Vg7jS
+Ah, hadn't seen this message when I tried the second part of my excel sheet. So the 3 minutes was for the previous code. i'll try it with the new code :)
+Strange, I still get the DIV/0! error :(
+
+edit: in the calculation steps, all the values that have been multiplied by FALSE return as 0. Is that what the problem is?
+
+edit²: I tried for a small range, and it worked. maybe the range is too big?
+
+edit³: ok, there apparently is one value in my list that has DIV/0! as a value.. I'll get back to you if i get everything up and running!
+Ok, now I get a value, but as you  can [see](http://imgur.com/mEVyPhB), it is different when using SUMPRODUCT(STDEVA (condition=TRUE)...) which gives the value 260.7738, than when I manually select the TRUE values as input for STDEVA (this is the 385.6023 value).
+
+EDIT: I think it still counts the 0 values, so it divides by the number of cells instead of only the number of TRUE cells
+I do not think a UDF will ever be super quick with the amount of values you are using, not being native compiled code.. but if it does the trick then all good.
+It would still count the 0 values.
+Yeah, no problem if it takes a bit longer. I'm trying your new version of the code, but it doesn't seem to work correctly this time?
+
+
+EDIT: it does work, but it seems slower. most things I do, whether related to the STDEVIFS or not, seem to sort of hang, until i click somewhere else on the sheet, which makes excel snap out of his calculations or something.
+Any way to prevent that? 
+Curious.. I have an idea to re-write it for a quicker process, but will take me some time to get my head around how to accomplish it.. I had written it for a few numbers,  not in the thousands.. when I get time I shall re-code it and let you know... :) no guarantees though eh!
+could you send me your spreadsheet to have a looksee, to have a better understanding of the issue? no worries if not.
+Try this, entered as an ARRAY FORMULA (press ctrl-shift-enter):
+
+    =STDEVA(IF(VK!F2:F3695=TRUE,VK!B2:B3695,""))
+
+[I've included a screenshot using your simple example.](http://imgur.com/050be7R) Note how the other formula is using a list of numbers replacing the "False" ones with 0s. The formula above uses a null string, which acts as a blank instead.
+hmm, sorry, but I better not. I don't think the information is very sensitive, but it contains some pricepoints for different products the company I work at sells. So I suppose to be safe I shouldn't share the whole thing. Maybe there's a scrambler somewhere on the internet that changes every letter to another one, and same for numbers? then you could use the encrypted version, and it would still work :P
+ah yes, via an array. Thanks, but I haven't had any success converting the conditions in my AVERAGEIFS to an array entered STDEVA(IF...)) function unfortunately (I think the conditions are too complex, since if I'm not mistaken arrays don't work well with booleans and such).

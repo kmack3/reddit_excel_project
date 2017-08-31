@@ -1,0 +1,77 @@
+Is there any way to create a "button" within a function that will copy the contents of a cell?
+So, to clarify, the data you need is in column B, and when you push the button, you want it copied to column A?
+
+Edit:
+
+You'll need to create an ActiveX button named CopyButton.  Once created size it to your cell.  Right click on it, and choose View Code, and paste the following in.  Then go back to excel and turn off design mode and you should be all set.
+
+    Private Sub CopyButton_Click()
+        ActiveCell.Value = ActiveCell.Offset(0, 1).Value
+        ActiveCell.Offset(1, 0).Select
+    End Sub
+    
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        With CopyButton
+            .Top = Target.Top
+            .Left = Target.Left
+        End With
+    End Sub
+
+How do you decide which cells to copy? There might be a way to automate choosing them instead of manually selecting them.
+I have to wonder if just making a worksheet sub would make the most sense. If you have thousands of buttons on a sheet (one next to each value), I think awful things are going to happen. 
+
+You could set a worksheet macro to copy the contents of the currently activated cell whenever your selection changes (there's a few other worksheet events that you could work with as well that might yield similar results. Maybe you could set up an IF clause so that it'll only happen if you have a value present in a particular cell, or even if you have another worksheet with a particular name open, just something so that you could reliably stop the behavior when it's not helpful.
+
+Something like this might help (thank you internet for the copy function):
+
+    Sub CopyText(Text As String)
+        'VBA Macro using late binding to copy text to clipboard.
+        'By Justin Kay, 8/15/2014
+        'Thanks to http://akihitoyamashiro.com/en/VBA/LateBindingDataObject.htm
+        Set MSForms_DataObject = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+        MSForms_DataObject.SetText Text
+        MSForms_DataObject.PutInClipboard
+        Set MSForms_DataObject = Nothing
+    End Sub
+    
+    
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    
+        If Target.Cells.Count = 1 And (Range("d10").Value = "start") Then
+        
+            CopyText Selection.Text
+    
+        End If
+    
+    End Sub
+[deleted]
+No; i just want it copied to the clipboard
+what i mostly do currently is look through the raw data and manually select the target cell and use Ctrl-C to copy that value to the clipboard. Not horrible; but still end up doing it several thousand times a day (and i'm not the only one having to go through this annoying repetitive task)
+
+the input data is raw and mixed with a lot of other output that doesn't follow a regular pattern where i can predict which cell will contain the data needed.
+
+the relevant values are being copied manually over to another program and entered there by pasting into a 3270 terminal emulator.
+
+it is a tedious manual process currently and every hour we get a new output file typically containing ~10,000 lines of output (of which there are usually around ~100-150 values that we need to extract.
+
+i can (and have) setup a few scripts to strip lines from the input file that are not needed which does help but ultimately i need to paste the data one value at a time into an ancient crude app via a 3270 session and there is no interface to bulk load so cleaning up the data helps but still leaves me manually copying and pasting each value one at a time. it's ugly but it is what it is and i'm trying to find any options for making it less painful.
+that worked here - i will try it tomorrow on a larger scale but it looks promising so far.
+SOLUTION VERIFIED
+Hello!
+
+You need to verify **an actual solution** - which means **replying** to the post that solved your problem - not leave a new comment!
+
+Please kindly try again.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Try this copybutton code instead of what I edited above.:
+
+    Private Sub CopyButton_Click()
+        ActiveCell.Offset(0, 1).Copy
+    End Sub
+Sounds like your whole job could be replaced by some smart VBA code and an auto clicker. You should definitely look in to it.
+
+You have awarded one point to _SaladProblems_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+we're all going to be replaced by robots eventually :)) This one should be fast tracked; i really have no clue why they haven't improved this process in decades other than the rather stupid "it's always been that way" excuse. There's never any budget for IT projects but they waste far more money on manhours doing repetitive data entry that could easily be automated. typical government mentality.

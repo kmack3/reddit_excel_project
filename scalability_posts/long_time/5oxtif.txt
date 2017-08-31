@@ -1,0 +1,47 @@
+long time
+5oxtif
+Convert Text to Numbers - takes an extremely long time.
+
+I have a massive data extract file that I am working with that is all text, I'm working in the 100,000's rows of data.  For a particular column I need to convert it to number format, and when I highlight the column and click on the little exclamation point that appears in the upper left hand corner to convert the text to numbers, it takes an extremely long time, like over 15 minutes.  What adds to my confusion is that sometimes when I do this it converts at a reasonable speed (less than 30 seconds).  And I can't figure out why.   
+
+Here is a more detailed explanation of what i am doing.
+
+1)  I download data from dynamics CRM that includes a date.  This date also includes minutes and hours so it appears like this:    1/9/2017 15:30
+
+2)  I then copy paste the data into another tab and the date comes out like this:  42744.64583
+
+3) I need to remove the last part of ".64583", this column of data will be used as part of my identifier in a "sumif" by date.  So in other words:  I will need to summarize all the data by day.  So I do a "left" formula for 5  characters to produce:  42744
+
+4)  I then copy paste the column to remove the formula, and I am left with 42744 stored as text.
+
+5) I then covert this to number format.  My end result is to show the date of 1/9/17 (removing the hours and minutes of "15:30")
+
+6)  I sit here and wait.  And write this reddit post.
+
+I am pretty confident in my abilities of Excel in the front end, I don't have much experience using VBA and writing Marco's.  I am sure there is probably an easier way that what I am doing.   
+
+If you have any input on how to speed up the text to numbers conversion, or a better suggestion overall for what I am doing, I would appreciate that input!  Thanks for your help.
+
+
+-------------
+I'm not sure if I could speak to the variance in processing time, but if I understand you correctly, you're trying to just truncate out the time part of the timestamp, correct?
+
+If you're downloading CRM data via query, you could change its field type to date instead of datetime.
+
+If you're downloading CRM data without query, you could truncate all the decimals by INT() or DATEVALUE() functions.
+-------------
+Couldn't you just do Text to columns once?
+
+Text to columns, Delimited> Other . > 1st column pick date, 2nd column pick do not import?
+
+
+-------------
+Turn calculations to manual before you do it. It takes a long time because after each cell is updated it recalculates everything again. If you have vlookups etc this can takes a while.
+
+Formulas tab > calculation > manual.
+-------------
+Wow the INT() works.  What an easy solution that I did not even think of.  Thanks for that. 
+
+Solution Verified
+-------------
+I know you already verified this solution, but you can also multiply the column by 1! This also does it incredibly quickly, and since multiply a number by 1 returns that number, nothing will change other than the format!

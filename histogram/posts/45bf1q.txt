@@ -1,0 +1,31 @@
+I wrote up some Excel Challenges today, if you'd like to sharpen your skills and or provide feedback. Post in the comments if you need help!
+If you finished these and need another challenge, [here's another](http://1drv.ms/1mw6buA) I made a couple years ago. Not for the faint of heart.
+Ok, this might be a stupid question: what is "Major String Value?" I known how to do a vlookup, but I don't know how to use it to find a Major String Value. Is this some hidden gem of excel or am I missing something obvious because it is so far past the time normal people sleep?
+>Don't worry too much about the range_lookup (the fourth, last, and optional argument) for this kind of VLOOKUP.
+
+Umm, what? Definitely worry about the last argument, as it defaults to TRUE. Otherwise you'll have things like "POST" returning "Performance" as the major name (i.e. approximate match instead of exact match)
+Dr. Kelso would approve.
+Thanks! Are the solutions somewhere handy?
+Follow-up challlenge: 
+
+Solve it without using any helper columns 
+That was fun. Here is what I came up with. I used 3 helper columns. I wouldn't call this elegant, but it works. I'm going to go check out your solution now.
+
+https://dl.dropboxusercontent.com/u/3535032/Advanced%20Excel%20Test_NLP%20Solution.xlsx
+
+Sorry, no, that is Berklee talk. The "Major String Value" is just like "Performance" instead of "PERF". If you look in the second tab of 'Sample Data.xlsx', I listed them for you.
+Thanks, fixed.
+"You think my name is Turk Turkelton?"
+
+"And MRS. TURKELTON!"
+Yeah, but you have to make them yourself 
+A bit like mine, the solution *data* is provided (in /u/dipique's challenge it's in the second tab; in mine there's a sample at the bottom of the README) but the solutions code is not provided.
+I'm working from my phone, but I think this version has the (a) solution. 
+
+https://onedrive.live.com/redir?resid=D386D1FD19CC3204!93794&authkey=!AC9hNKcgrXrcBLo&ithint=file%2cxlsx
+Very nice! :)
+I hadn't even noticed the second tab. Thanks for the clarification. I guess the root problem was me trying to do these at 3:30 AM.
+
+Edit: Just finished it. Nice to practice with excel since I need the skills if I want a job. Thanks for the challenge!
+Great job!
+Question on your other challenge: are the lists internally nonrepeating? Like, is column 2 made of nonrepeating numbers within itself?

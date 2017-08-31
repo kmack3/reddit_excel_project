@@ -1,0 +1,55 @@
+What are some good resources to learn VBA for a beginner?
+All of the learning links are in a sticky on the sidebar. 
+
+Please let me know if this information is not clear. 
+1. Use the Excel Macro recorder. 
+2. Do the stuff you're trying to do.
+3. Read and try to understand the code it generates.
+4. Tweak different parts of the code, rerun the macro, see if it works.
+
+Buy an Excel VBA book to learn more. There might be online courses for free (and definitely paid), but they weren't around when I was learning.
+I learned by having something I wanted to do and trying to do it. Then googling , slack overflow, and repeat. Macro recorder definitely but it has some "bad" ideas. 
+I believe I found this link elsewhere on Reddit but I've found www.homeandlearn.org quite useful so far. It lays out the basics and is pretty beginner-friendly. 
+[Chip Pearson's site](http://www.cpearson.com/Excel/topic.aspx) has a ton of great examples for both vba and general excel stuff. Not so much a step by step tutorial but good reference with detailed examples. I don't usually browse the site or go there directly but whenever I'm searching for something it seems like his site shows up.
+
+You could also check out udacity and Coursera. Not sure exactly what their current free offerings are but I think they've had vba stuff in the past.
+[WiseOwlTutorials](https://www.youtube.com/playlist?list=PLNIs-AWhQzckOzn3l2_VWUicXZvywNSI4)
+Learn basic programming stuff. It doesn't really matter what language.
+
+Figure out what objects, classes, arrays, functions, etc are, and where and why you'd use them. Try to dig into a little bit of compsci and understand what's going on under the hood. Learn the difference between different styles of programming and try identifying and employing them.
+
+Do this and you'll end up 10x better off than the average "hey it works" VBA jockey, and with skills and an understanding that can be transferred and built upon in most modern languages. Heck, once you figre out how to make sense of the Object Browser and MSDN you should pretty much never need the macro recorder (well..maybe in a really tight pinch).
+I liked The newboston's tutorials on Youtube.   
+The people over at Mr. Excel will blow your damn mind. And they're quite helpful.
+I've been slowly going through each section here. I think it's a good starting point and has a lot of good examples/explanations
+
+http://www.homeandlearn.org/index.html
+Thanks everyone!
+This. Except I wouldn't buy a book at all. Google is your friend. Pretty much anything you might want to know how to do can be found on Google with a search of 'Excel vba what-i-need' 
+i'm an absolute beginner myself but i can tell that \#2 is very important. it helps immensely if you have a real life problem, your problem to solve. 
+
+one thing i'd like to add to this list is to learn about variables and utilize that knowledge in addition to what you see in the generated code. 
+I have recently started learning VBA and i also used recorder and then when i wanted to loop or something i googled. 
+This way is easy rather than writing codes you learnt from books. 
+I have recently started learning VBA and i also used recorder and then when i wanted to loop or something i googled. 
+This way is easy rather than writing codes you learnt from books. 
+I think number one issue with macro recorder is that it records every action as a separate line when most can be done on one line, also it doesn't address loops, arrays, etc. Which are necessary for most macros. Also copy then paste is bad when you can set range.value to another range.value
+I learnt it from there only. I will always recommend this to a beginner.
+this. it's a really great source.
+I use excel a fair bit at work. Most of the excel work is downloading reports and then formatting them. You think in the instance I would be better off learning VBA first or something like Python?
+Thanks! I started with this and am working my way through it. It is making sense, but I still feel like I'm way in over my head! 
+Although I agree that Google is your best friend, I respectfully disagree about the buying of a book. I bought Walkenbach's Excel VBA for Dummies and went through about 3/4 of it. I'm still intent on finishing it, since that was earlier this year. It helped me immensely and had a structure that would have been lost for me if I had only stuck with Google. 
+That's where the VBA book comes in. It'll teach you about loops and variables and conditionals and whatnot.
+I guess it really depends where you want to end up, but yeah, Python is a very flexible and useful language, and has an *enormous* community supporting it, with tonnes of free courses and tutorials and a module for just about everything. It's pretty highly rated for many kinds of analysis and probably fairly decent for automation, too.  That said, you probably won't be coming across many full applications written in Python, but it doesn't sound like that's the kind of thing you're going to be worried about.
+
+That said, VBA is probably going to be the most immediately useful for you, but it's also probably going to imbue you with some weird ideas and habits that might not be conducive to learning other languages if/when you decide to step up to that, which is why I'm a bit reluctant to just say "yeah learn VBA".
+
+Also, there are several addins for Excel that allow you to use Python to script it in a VBA-like fashion, if you're allowed to install such things at your work. Could help strike a balance.
+It's totally worth it to go through each section and not skip. Wait until you get to the Loops & UserForms as I found learning them be the most interesting and practical!
+Same. I only got half way through the book, but I feel like it's really helpful in understanding the bigger picture, especially if you have no previous coding experience. 
+
+
+I don't know...I started learning vba like 1y ago by reading some guide/tutorial on internet where I could see variables, loops, etc.
+6months ago I finished my first "project" where I automated a process within excel where you build a txt file with excel input, launch an .exe software, read the output file and do post processing. Everything in a specified directory.
+This isn't so complex, gooogle helped me a lot, but I didn't read any book. 
+Anyway I finished a SoloLearn course about python and I found, for example, the useful regular expressions method that I've just used in vba for another smaller project.

@@ -1,0 +1,120 @@
+Any recommendations for teaching VBA?
+So, I'm a complete idiot when it comes to using VBA, however I have found the following resource for self teaching extremely useful. I'm not saying plagiarize the entire site but... plagiarize the entire site. 
+
+http://www.homeandlearn.org/index.html
+Teach them how slow cell operations are.
+
+Before I left my last position, I was asked to do much the same, so I scribbled up this sub.
+
+    Sub Cell_Operations_are_slow()
+    
+        Sheets.Add After:=Sheets(Sheets.Count)
+        
+        Debug.Print Now()
+    
+        Application.ScreenUpdating = False
+        For j = 1 To 2
+            Columns("A").ClearContents
+            If j = 2 Then
+                Application.ScreenUpdating = True
+            End If
+            StrtTime = Timer
+            Range("A2").Activate
+            For i = 1 To 100000
+                ActiveCell.Value = i
+                ActiveCell.Offset(1, 0).Activate
+            Next
+            Select Case j
+                Case 1: Debug.Print "Screen Updating OFF : Cell activation duration: " & Round(Timer - StrtTime, 3) & "s"
+                Case 2: Debug.Print "Screen Updating ON : Cell activation duration: " & Round(Timer - StrtTime, 3) & "s"
+            End Select
+        Next
+    
+        Application.ScreenUpdating = False
+        For j = 1 To 2
+            Columns("A").ClearContents
+            If j = 2 Then
+                Application.ScreenUpdating = True
+            End If
+            StrtTime = Timer
+            Range("A2").Activate
+            For i = 1 To 100000
+                ActiveCell.Offset(i, 0).Value = i
+            Next
+            Select Case j
+                Case 1: Debug.Print "Screen Updating OFF : Cell Offset duration: " & Round(Timer - StrtTime, 3) & "s"
+                Case 2: Debug.Print "Screen Updating ON : Cell Offset duration: " & Round(Timer - StrtTime, 3) & "s"
+            End Select
+        Next
+    
+        Columns("A").ClearContents
+        MsgBox "Nothing up my sleeves...."
+        StrtTime = Timer
+        Dim Arry(1 To 100000, 1 To 1)  ' When applying Ranges, even 1 column is a 2D array.
+        For i = LBound(Arry) To UBound(Arry)
+            Arry(i, 1) = i
+        Next
+        Range("A2").Resize(UBound(Arry), 1) = Arry
+        Debug.Print "Screen Updating ON: Array+Resize duration: " & Round(Timer - StrtTime, 3) & "s"
+    
+    End Sub
+    
+Depending on your computer, it will take a minute or two to run completely, and that time can be used to give a brief rundown of what it's actually doing.
+
+> First it ensures the screen updates are off, then puts the values 1 - 10000 in cells, ACTIVATING each cell.   Turns screen updates on, does the same.   Then instead of activating each cell, it goes through the exact same process, but uses "Offset" instead of activating each cell.    Lastly, it creates, populates an array with numbers, then puts that array onto the sheet.   Same exact process, six potential ways to do it, VAST speed difference.
+
+Here's the numbers I got on my system (I7-4770k)
+
+>Screen Updating OFF : Cell activation duration: 3.344s
+
+>Screen Updating ON : Cell activation duration: 34.555s
+
+>Screen Updating OFF : Cell Offset duration: 1.281s
+
+>Screen Updating ON : Cell Offset duration: 1.289s
+
+>Screen Updating ON: Array+Resize duration: 0.039s
+
+Just make sure your immediate window is visible. :)
+Short and sweet examples are definitely the best route to go.  
+
+
+First thing I would teach is how to read information from a cell.  Also how to output information to a cell.  
+
+Show how to declare variables.  Explain what subroutines are and why they are used, what public vs. private means.
+
+Depending on whether or not they've had programming experience, teach how to use if statements and for loops.  
+
+Show how to find the last row or last column of a dataset - this is used in almost every VBA program I've ever made.
+
+Show how you can experiment a little bit with VBA objects by typing a period after the object and scrolling through a list of methods and traits.
+
+
+I would definitely point them to the MSDN object reference ([2010](http://msdn.microsoft.com/en-us/library/cc313152(v=office.12\).aspx), [2013](http://msdn.microsoft.com/en-us/library/jj162978(v=office.15\).aspx))  and how to use it. 90% of learning how to do anything is knowing where to look.
+
+I would have them build the following control statements from scratch: `if/else/then, case, do while, for each, for, goto`  
+also have them build a function from scratch.
+
+I would teach them about error handling.
+
+I would teach them about handling arrays.
+
+The idea being: they can probably get to a good deal of the functionality provided by the built-in Excel classes just by recording macros and using the object model reference, but in order to truly edit or create new code, they'd have to get a good feeling on how the language works.
+
+I also wouldn't try to focus on making them memorize how any of this works, because I wouldn't expect them to leave the sessions writing perfect code. But what it should do is remove some of the uncertainty barrier to making large edits or new code, and with the tools in their belt they should have a way forward.
+
+So that would probably mean a fair number of handouts or printed sections of the Object Model Reference maybe?
+See if you can leverage this video:
+http://www.datamules.com/courses/vba/
+I would emphasize the macro recorder as a *way to learn* how to do things, and be sure to emphasize that code generated via the macro recorder is not a finished product. 
+I had already plagiarized (with a footnote so it doesn't count!) some of the MSDN content. This looks like it's much easier to follow (and I love the screenshots!) Thanks!
+thanks for this link.. Didn't know this, great site!!
+As I was reading this I wondered if you were going to get to writing to an array, and you did.  Makes me happy.  Most people overlook this.
+Excellent. This is especially useful to show 
+1) there are multiple ways of doing the same task, and
+2) since we deal with a lot of "large" data sets, this example really shows what "efficient" code is all about.
+
+Thank you so much for the generous routine!
+Excellent suggestions. I didn't even think of the last row/last column idea.....  I use this in 99% of my VBA projects! Definitely worth demonstrating. 
+I was looking for a good way to demo the object model , and yes unfortunately it seems the best way is going to be printouts! 
+That, and I will also show them where to find it online and tell them that this is an excellent tool.

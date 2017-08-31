@@ -1,0 +1,63 @@
+freeze
+3lhgsv
+Simple freeze panes question: can I have the entire first row (1:1) and the leftmost seven columns (A:G) frozen?
+
+I want the data in the leftmost columns to stay put while I scroll through a large number of rows that start with column H. I'd also like the top row to stay put. I though I could do that in older versions of Excel, ending up with a 'T' split/freeze that ran horizontally between rows one and two, and vertically between columns G and H. But can't figure out how to do that in Office 365. Am I missing something that obvious or is there a trick to this?
+
+
+-------------
+Sure.  Click in H2 and freeze panes.
+-------------
+It's on the View ribbon, in the 'Window' group.
+-------------
+https://support.office.com/en-ca/article/Freeze-or-lock-rows-and-columns-3439cfe6-010c-4d2d-a3c9-d0e8ba62d724
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 3 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 4 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+-------------
+Contrary to what others have said here, I don't think you can do this with just "freeze." In my experience, you need to click "split," which should be a separate button on the same ribbon. That will give you your "T" split.
+
+I'm not at a computer so I can't test the other suggestions. 
+
+**edit:**  I'm also using Excel 2010 and 2013.  I don't know about Office 365.
+-------------
+Freeze panes is Alt, W, F. 
+
+Do the same for unfreeze. 
+-------------
+There are 3 freeze options
+
+Freeze Pane - Freezes all visible rows/columns prior to your selected cell.  This is what he wants.
+
+Freeze First Row
+
+Freeze First Column
+-------------
+Yep, you're right.  I was mistaken.  Thanks for showing me that.

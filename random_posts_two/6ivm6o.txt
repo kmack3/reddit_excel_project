@@ -1,0 +1,45 @@
+6ivm6o
+Csv help
+I need to delete the top two rows of multiple csv files and then add a column with the name of of the file for every row please help.
+
+VBA or power shell is fine 
+
+
+-------------
+    Option Explicit
+    
+    Sub FileManip()
+    
+    Dim sPath As String, sFile As String
+    Dim lf1 As Long, lf2 As Long
+    Dim sLine As String
+    
+    sPath = "c:\path\here\"
+    sFile = "myfile.csv"
+    
+    lf1 = FreeFile
+    Open sPath & sFile For Input As #lf1
+    lf2 = FreeFile
+    Open sPath & "Temp_" & sFile For Output As #lf2
+    
+    Line Input #lf1, sLine
+    Line Input #lf1, sLine
+    Do While Not EOF(1)
+        Line Input #lf1, sLine
+        sLine = sFile & "," & sLine
+        Print #lf2, sLine
+    Loop
+    Close #lf1
+    Close #lf2
+    If Dir(sPath & "Temp_" & sFile) <> "" Then
+        Kill sPath & sFile
+        Name sPath & "Temp_" & sFile As sPath & sFile
+    End If
+    
+    
+    End Sub
+  
+
+Be sure to amend the path and file variables as appropriate
+-------------
+Thank you I'll let you know if it works 

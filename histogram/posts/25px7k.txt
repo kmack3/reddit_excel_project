@@ -1,0 +1,170 @@
+What's your most useful macro so far?
+I have a very advanced macro that looks at all past lottery numbers, analyzes them, finds a trend, and then spits out (what it predicts) the next drawing. Very useful, it's won me a grand total of $23 
+^it^may^or^may^not^be^a^random^number^generator
+I had the task of taking as many as 100 screenshots for 50+ loans on a monthly bases  as part of my job. Created a macro to run through this process which is now used hy several departments. I got a nice bonus as a result and browse reddit with the spare time I have now.
+I have three:
+
+* Store current cell's value in x, scroll down until it finds a different value.
+* Scroll down until it finds a #N/A
+* Delete all #N/As in selection.
+
+I have a nasty one that I put together for work...it takes a ton of user entries to create about 60 different PDFs...formatting the text for standardization and more.  Being able to slice and dice all this information and making great looking PDFs, creating 60 for an hour of processing instead of a manual process that would take much much much longer.  All the PDFs get saved to a folder automatically.
+
+It's been a huge pain in the ass to make but it works real slick and I learned a lot in the process...plus it saves my team at work so much time.  
+Global find '™' & replace with '\&trade;' followed by find 'Ⓡ' replace with '\&reg;'
+Cross reference and remove rows where customer entries are duplicated on another sheet:
+
+    Sub DL()
+    Dim LR As Long, i As Long
+    With Sheets("Sheet1")
+    LR = .Range("A" & Rows.Count).End(xlUp).Row
+    For i = LR To 1 Step -1
+        If IsNumeric(Application.Match(.Range("A" & i).Value, Sheets("Sheet2").Columns("A"), 0)) Then .Rows(i).Delete
+    Next i
+    End With
+    End Sub
+Historical data retrieved from finance.yahoo.com for any ticker of my selection, any date of my selection with any periodicity of my selection. It refreshes its own worksheet if I select different options. It's for a risk regression spreadsheet. 
+I run a lot of linked reports that refresh data and then are posted to an FTP- not a fancy pants Macro but it dose save me a lot of time every morning using the task scheduler to just open the file so it can refresh from our DB - proper case everything then close and save.
+
+    Sub Auto_Close()
+    '
+    ' Auto_Close Macro
+    '
+
+    '
+       ' Loop to cycle through each cell in the specified range.
+     For Each x In Range("A1:J1165")
+         ' There is not a Proper function in Visual Basic for Applications.
+      ' So, you must use the worksheet function in the following form:
+      x.Value = Application.Proper(x.Value)
+      Next x
+      
+    ActiveWorkbook.Save
+    End Sub
+I wrote an Excel antivirus a long time ago. I forgot the name of the virus but it was Excel based, it copied it self to the xlstart folder and attached itself to every excel file a user opened.
+
+Excel 2003 was the first version that made the vba object model open for programmatic access. Wrote code that deleted the file from xlstart and also deleted the module.
+I had one that, given any movies IMDB link in a cell, it would go to a webpage, gather the info and post it all perfectly in each cell automagically, creating the most flawless movie list of all time. However the initial site i used to scrape the IMDB data has since gone offline and I am not smart enough to update it on my own to a new/better website. Gotta get around to at least trying to fix that one of these days!
+I have one that copies and then pastes special values, and then replaces all #n/a to be blank cells. Very useful after a vlookup, which I do all the time.
+I have a framework I built that creates Power Points on the fly from scratch. Includes a way to pick the slides. Custom slides and so on. I've used it for multiple clients.
+
+I also have an import export XML solution. 
+
+That's some money making material right there
+This.  It creates dynamic named ranges for every column in a table with the sheet name and the column header as the name.  It's the tits.
+
+    Option Explicit
+    
+    Sub CreateNames()
+    'http://www.contextures.com/xlNames03.html
+    
+    ' written by Roger Govier, Technology4U
+        Dim wb As Workbook, ws As Worksheet
+        Dim Lrow As Long, lcol As Long, i As Long
+        Dim myName As String, Start As String
+        Dim shtname As String
+        
+        ' set the row number where headings are held as a constant
+        ' change this to the row number required if not row 1
+        Const Rowno = 1
+    
+        ' set the Offset as the number of rows below Rowno, where the
+        ' data begins
+        Const Offset = 1
+    
+        ' set the starting column for the data, in this case 1
+        ' change if the data does not start in column A
+        Const Colno = 1
+    
+    
+        On Error GoTo CreateNames_Error
+    
+        Set wb = ActiveWorkbook
+        Set ws = ActiveSheet
+        shtname = Replace(ws.Name, " ", "_")
+        
+        ' count the number of columns used in the row designated to
+        ' have the header names
+    
+        lcol = ws.Cells(Rowno, 1).End(xlToRight).Column
+        Lrow = ws.Cells(Rows.Count, Colno).End(xlUp).Row
+        Start = Cells(Rowno, Colno).Address
+        
+        wb.Names.Add Name:=shtname & "lcol", _
+                     RefersTo:="=COUNTA($" & Rowno & ":$" & Rowno & ")"
+        wb.Names.Add Name:=shtname & "lrow", _
+                     RefersToR1C1:="=COUNTA(C" & Colno & ")"
+        wb.Names.Add Name:=shtname & "myData", RefersTo:= _
+                      "=" & Start & ":INDEX($1:$65536," & shtname & "lrow," & shtname & "Lcol)"
+    
+        For i = Colno To lcol
+            ' if a column header contains spaces,
+                ' replace the space with an underscore
+                ' spaces are not allowed in range names.
+            myName = Replace(Cells(Rowno, i).Value, " ", "_")
+            If myName = "" Then
+                ' if column header is blank, warn the user and
+                ' stop the macro at that point
+                ' names will only be created for those cells with text in them.
+                MsgBox "Missing Name in column " & i & vbCrLf _
+                       & "Please Enter a Name and run macro again"
+                Exit Sub
+            End If
+            wb.Names.Add Name:=shtname & myName, RefersToR1C1:= _
+                 "=R" & Rowno + Offset & "C" & i & ":INDEX(C" & i & "," & shtname & "lrow)"
+    nexti:
+        Next i
+    
+        On Error GoTo 0
+        MsgBox "All dynamic Named ranges have been created"
+        Exit Sub
+    
+    CreateNames_Error:
+    
+        MsgBox "Error " & Err.Number & " (" & Err.Description & _
+        ") in procedure CreateNames of Module Technology4U"
+    
+    End Sub
+
+
+
+
+
+If using Excel - [StringConcat](http://www.cpearson.com/Excel/stringconcatenation.aspx), something that's native to the other spreadsheets.
+I have one that is essentially an array autofilter which then annotates the selected data. Very handy when working with ledgers and what not 
+Without a doubt, it would have to be the Excel Add-In that I came up with that on Workbook_Open adds a right click menu to run the macros I most commonly use.  That way all of my spreadsheets have access to the added functionality.
+
+The macro on that menu that I use the most is what I fondly refer to as my "Deluxe Find/Replace" macro.  It removes any periods, parentheses, hyphens, spaces, and even that stupid invisible ASCII character that looks like a space but isn't one.  I work with a lot of telephone numbers that will come to me in all sorts of formats and I need to sanitize the data.  
+
+Another large part of my job requires creating text or .csv files that are used as input files for other macros that make the actual changes/queries in our system.  So another part of that right click is a categorized menu with 20 or so of our most common order types.  They validate the data based on a set of criteria (correct length, is a number, starts with valid values, etc.) and create the input files if everything checks out.
+
+It is SO much quicker than the templates we were previously using.  Highlight the data, right click, choose the order type, it does the logic check, and it's done.
+
+Another thing it does is checks if it is a .txt or .csv file on open.  If so, it autofits the columns so the data looks better.
+I will split the powerball with you if you post that macro and it wins me money
+I'm going to need proof.  :-)
+Check out Screaming Frog web scraper or Outwit Hub
+=iferror(vlookup(a1,$A$B,2,false),"")
+I have the same macro but stop short of the n/a to blank. It is very convenient, I do not like to sort cells that have formulas in them due to risks so I just paste values after the formulas are done for safety and to stop the formulas from recalculating
+I know it's been a long time, but could you possibly post the code for the Power Point Creator? Thanks! 
+I have to create a Power Point every Monday morning, it's a very repetitive task and this could save me loads of time.
+Dude... ctrl & t then ctrl & shift & f3...
+Can I ask how you did this? I'm a novice and wanted to do something similar. Is there a good way to make an array from a range and then filter by it?
+There you go. 
+
+https://drive.google.com/file/d/0B03SxT05EktjbDNBdGhDY2h6eUU/edit?usp=sharing
+
+Use 504 days and always use the S&P500. I put the other ones there just for fun but always use the SP
+
+EDIT:All credit to professor Aswath Damoradan and my CS professor. 
+
+The basis xls can be obtained here: http://pages.stern.nyu.edu/~adamodar/
+
+EDIT 2: thank you for your feedback 
+I prefer to not have my data as a table because I think it is much more difficult to read with all of the colors and what not.
+Through vba. I have the coding at work, I'll try remember to post a sample/skydrive on Monday 
+Very nice work.
+You can create a custom table format with no formatting at all and make that the default 
+Thank you, I would very much appreciate it.
+Apologies - haven't forgotten - just been flat out!!!
+No worries, I figured it out.

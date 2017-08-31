@@ -1,0 +1,36 @@
+Time to share! Post your favorite Excel file/template/model, etc
+This timesheet for an /r/Excel collaborative effort: http://itsnotaboutthecell.com/reddit-excel-timesheet/
+
+I mean going back now I'd fix a lot of stuff but long mehhhh....
+Check out my Excel wizard: http://www.apress.com/us/blog/all-blog-posts/creating-a-spreadsheet-based-wizard/12017664
+I have no use for this but I like this.
+Just so you/y'all know, initializing the userform appears to require the Microsoft Outlook object library, and not having that reference enabled throws an error.
+Who is this man?! Ironically this is actually the chapter I'm on in your book right now Jordan.
+I agree - would much rather play ExceNFL - http://itsnotaboutthecell.com/excenfl/
+I'm curious why the Outlook reference is even in there (Access as well). I went ahead and removed them just now and it ran fine. This project was kind of one of those "Someone build something, then someone else build something on top of it" the template I grabbed must of had some crazy stuff going on.
+I show up from time to time. I used to have a lot more gold. :(
+Well, it seems to need *some* kind of library that has the ability to grab your Windows username... it failed for me on the following line until I realized my Outlook object library was marked MISSING:
+
+    Private Sub UserForm_Initialize()
+    
+    'Code Written By u/EddieMurphysGhost - ItsNotAboutTheCell.com
+    
+    Application.ScreenUpdating = False
+    
+    LastRow = Sheet2.Range("A1").End(xlDown).Row
+    
+    On Error Resume Next
+    'Extract Text Value From Windows UserName
+        UserDir = UserBox
+        UserBox = Environ("UserName") & "'s Timesheet"  <==============
+    On Error GoTo 0
+
+    'Populate Starting and Ending Times
+
+Actually, I just noticed the Resume Next right before, so now I'm even more confused.
+ 
+edit: OK as soon as I post I see why. It's a compile error, doesn't happen during runtime. So the resume next doesn't even have a chance to do anything.
+Environ is always strange from machine to machine - try Environ$("UserName") - that dang money sign.
+
+http://stackoverflow.com/questions/21098260/vba-excel-2010-environusername-not-working-in-saveas-filepath
+Ah, thanks. I don't even need to use the sheet - just reporting a bug in case the authors wanted to know/fix.

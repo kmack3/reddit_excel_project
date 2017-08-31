@@ -1,0 +1,51 @@
+Cool! How did a spreadsheet look like 30 years ago? The answer is in this article dated back to Nov. 1984.
+[deleted]
+I started with [ViewSheet](http://en.wikipedia.org/wiki/ViewSheet) - on an Acorn Electron.  
+  
+[Pack Shot.](http://i.imgur.com/HKts9Jb.jpg)  
+  
+  
+EDIT - just been on a mini nostalgia trip - [here's the use manual](http://imgur.com/a/O2n1U).
+Nice article! Creation of electronic spreadsheets was indeed akin to renaissance in data processing. 
+Love this!
+Oh man. I remember that. Had to hit the / key to open the menu bar. Memories. 
+My work with a spreadsheet started in 1981 and pre-dates my work with windows.  I have an accounting degree.  I now work with SQL databases and various programming languages, none of which were readily available or even non-existent when I graduated.
+
+So for the young folks out there wondering what job to go for in 15 or 20 years - that job doesn't exist yet.
+anybody remember R1C1 ?
+Think about how many jobs spreadsheets stole from the dispensable human computers adding up columns like these: 
+
+http://www.loc.gov/exhibits/bobhope/images/vc10p1.jpg
+
+Here is an example of some schoolteachers using an ad-hoc spreadsheet to track the contributions for their Saturday cake-club:
+
+http://www.grandts.dk/images/Skolefotos/OeS-klasser/GO-klasser/basselisten.jpg
+On my Win95 I used to have both MS Works and Lotus 1-2-3 ;)
+love these articles. its amazing to think that our modern capitalistic system was built on spreadsheet software
+>  all it takes to get into the game is a $3,000 personal computer and a $500 copy of 1–2–3, or even a copy of VisiCalc or the Micro-Soft Company’s Multiplan, both of which cost less than $200. 
+
+XD
+I remember logging my baseball cards with a program like this on a Commodore.
+It's really strange to think that people 30 years from now will look back at our current technology and find it just as old.
+This is so cool!! 
+9.75% sales tax?! Ouch.
+I am blown away by how true his points still are today.  And there are still people in the world, in the business world even, who are not sophisticated enough to use a formula in a spreadsheet.
+I owned visicalc for my Apple.  By the time I got out of college (89) Lotus had taken over.
+Excel still supports the notation actually.. you can toggle it in the options menu.
+Lotus 1-2-3, with Always to format the report, is what I remember.
+The computer you want costs $5000. A largely true statement until prices really started to break circa 1994.
+IIRC you have to use that notation for cell reference in VBA.
+It's not mandatory, but sometimes it can be useful
+While you don't *have* to use it, macros recording will show the formulas in R1C1, and it's actually used "behind the scenes" in worksheet calculation.  The A1 notation you input is translated into R1C1 before it's executed.
+
+You can use Range.FormulaR1C1 to access.
+
+
+Depends...   Some functions do "require" it.. (Pivot Tables comes to mind), but most can go either way... like..
+
+       Range("A1").FormulaR1C1 = "=R[1]C[2]+2"
+       Range("A1").Formula = "=B1+2"
+
+Should have the same results...
+
+only time I bother with R1C1 syntax is when I have to say something like "Add the cell two rows up, and one column left"

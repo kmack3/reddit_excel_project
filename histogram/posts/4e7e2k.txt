@@ -1,0 +1,160 @@
+Can I interest you in my Excel plugin?
+I'm sorry, but I don't watch videos  for instructions. Do you have a written description and instructions?
+Youd have better luck if you gave us 4-6 lines about what it can do.
+> Gosh, you actually opened this post, I can hardly believe it! And the title is so bad, this marketing thing is easy-peasy.
+
+I stopped reading immediately after this sentence.
+Ok, I'll bite.
+
+I downloaded the add-in and played around with it a bit, looks interesting - I don't really know yet what I will be doing with it but I find it a very interesting enhancement for my Excel toolchest.
+
+A couple of points - please take them at face value, I have no intention to be a smart-ass:
+
+* As others have said, the videos aren't the ideal medium to make people familiar with what your add-in can do. If this were my baby, I would produce a general outline/description, a FAQ (which goes into more detail than the present one - this is not only a FAQ but also a marketing tool, your present FAQ starts with things TQ can't do, write about what it can do, in bite-sized portions, generate an appetite), documentation (what functions are there, how to use them, ...), a few examples in the form of a made-up problem description, the steps you take, liberally sprinkled with screenshots of the stages you go through and the results.
+
+
+* Having videos in addition to these is ok - but please talk slower, avoid the "ehrm" and rework them - typos, zoom in so that one can read what you're doing ...
+
+
+* Pricing - my gut feeling is that you are too expensive. While there are a number of add-ins that cost "real" money, these are somewhat established and have rather specific target groups. What I want to convey here is that either you should go for a specific group of customers (controllers?) or market this as a Swiss Army/Leatherman type of tool for the myriad of people who use Excel for inventory, documentation etc.
+
+* Maybe also offer a perpetual license, look into different ways of payment - Paypal isn't the payment option of choice for a lot of companies.
+
+* Last but not least - come up with a better name. Before you start bigger marketing efforts ;)
+
+
+If you can find a free license for me, I'd appreciate it.
+
+Very impressive, Antonio. My SQL skills are unfortunately non-existent but I have a work colleague who is good with Excel and SQL. I'll ask him to take a peek at your site.
+Soooooo..... If I don't watch the videos do I still get a free license? Maybe after I read the transcript?
+This is very interesting and priced reasonably.  I've used the built-in database connection, but it seems difficult and limited.  A "select" command that can filter multiple columns would be especially helpful.  I will try ThingieQuery this week.
+Two days ago, I spent hours bodging SQL stuff in VBA for a large workbook. I wish I knew about this then. Definitely taking this for a spin tomorrow!
+This is great!
+
+I previously built an interface using Excel DNA (https://github.com/Excel-DNA) as I constantly use SQL within Excel, but this just makes it so much easier. 
+
+I will have to get used to a few different syntax's that you don't have, but so far I've managed to work around what you have. 
+
+My only suggestion would be to allow the user to change the table formatting, I use the same formats 99% of the time, so changing it every time is a bit of a pain; but otherwise well done!!!
+Very well done.  I've always wanted these types of features in Excel and this addon seems like it's really well done and easy to figure out.  Thanks.
+So, I've watched the video you linked - I thought it was good, nice and easy to follow with a simple example problem. Looks like a cool product and I think the way you demoed it was great; from a professional point of view I might suggest rerecording the VO to eliminate some of the 'umms' and 'errs' - they're not a big problem but I think a smoother vocal description would just come across a little better.
+
+I also agree with other posters ITT about also providing the demo / description in text, people can use that as a side-by-side guide a lot easier than a video IMO.
+
+I had a look at the website too, one thing I couldn't see any information about was how long the trial license was for - I'd suggest stating that somewhere in the download process before the DL starts.
+
+I gave the trial a spin and it looks good, I think it'll be useful for the stuff I do. Could you hit me up with a license?
+I'm moving into a business intelligence role where we have to be a little more scrappy (is that the right word?) with our tools. Apparently, they do a lot of stuff of reporting in Excel still. I'd be interested in trying this personally to see if it would integrate well with my new role and maybe you could grab some commercial customers. :) 
+This looks very useful for prototyping and quick&dirty data analysis! How can I go about obtaining a (free) license ?
+I'm impressed mate!
+After quickly trying this out, it seems very useful and relatively intuitive. I am only just learning about SQL in school and I think this would be a useful tool!  Are you really giving away free licenses? If so I would be very interested
+[deleted]
+Looks cool although Im not sure how I personally could use it. What does it offer that power query doesn't offer?
+i only clicked because it's your cake day!
+That's actually an interesting comment though. I wonder how many people prefer text to video tutorials.
+Darn it, and I worked so hard on the videos!:) I have some, but they're a bit out of date. Take a look here: http://thingiequery.com/Home/Guide
+
+Fair enough, I think you're right. I've updated my post with info about the plugin. I couldn't stop at 4-6 lines though.
+I can see how that might put you off, but wasn't trying to be a jerk, just horsin' around.
+You've got a well deserved license in your inbox! Really like the points you're making. 
+
+Just to be clear, when you say "market it as a Swiss Army/Leatherman type of tool" do you mean make it affordable and go for mass adoption? 
+
+Any thoughts on monthly subscription pricing, something like 10-15$/mo per machine? 
+
+Agree about the name, but I'm coming up with very little trying to think of something that I personally like, that sounds good, and has an available domain. Any ideas there per chance?:) 
+
+I'm curious about PayPal though, I've heard the same thing said already but I don't understand why. Is it for practical reasons, or do you think using it just gives off an non-professuional vibe for some reason?
+
+Thanks a lot, and please do!
+Well if you don't watch a single video, how do you know you want one?
+Thanks. You mean the built-in database connection of Excel or ThingieQuery? Do give it a try, I'd be interested to know what you think.
+Cool, and let me know what you think 
+Hey thanks, that's great to hear! 
+
+Could you elaborate a bit on the syntax differences, maybe I can include something I haven't though of. 
+
+About the table formatting, did you mean the default table formatting for new tables? I can definitely add that, it's easy to implement and actually makes perfect sense. Added it to the todo list for next version, thanks!
+Thanks, glad you like it! 
+
+Yeah, most of the features are where you'd expect them to be, although some are not very discoverable. Like the preprocessor... you can write code like this for example:
+    select * from people where id = {Sheet1!A1} 
+
+Who'd figure that one out... 
+Considered VO but I thought I'd rather go for a relaxed type of video that realistically shows me working with the plugin. But yea, text = way to go, feedback is pretty unanimous which is useful for me. I'm getting better at video making though so happy about that, I think I'll keep them to accompany the text in the future. In any case, thanks for the feedback, your license is in your inbox!
+I like the sound of that! Give it a whirl with the trial, I'll send you a license if you like it.
+Yeah, cleaning data and q&d data analysis are definitely a use case. You can give it a try right now, free trial lasts 30 days, and I'll send you a license if you like it. Feel free to ping me whenever for this.
+Thanks mate:) Take it for a spin, the trial is free and fully functional, if you like it ping me and I'll send you a license if you want
+Sent, enjoy!
+Thanks for the detailed feedback! True, even though Excel isn't a database, there's no reason not to have sql operations available in it since it deals with tabular data. And yeah, depending on what you're doing sometimes a proper database is actually unnecessary overhead. 
+
+
+Should be fine with large resultsets, although if they're extra large (e.g. 2M rows x 50 cols) you might need x64 version of office to not run into process memory issues. 
+
+
+There's a function intuitively called vba which you can use to call VBA functions from SQL. 
+
+
+ThingieQuery's VBA API I haven't properly documented but it is there and fully functional. I'll be updating the docs and hope to have them up to date in a week so check the website next week. 
+
+
+License incoming.
+Thanks, well they're very different beasts. Their purposes do overlap a bit, both can be used for transforming and cleaning data, but they go about it in completely different ways. Also Powerquery can fetch data from all over the place and works with a model, while ThingieQuery works with excel tables and can push them to databases, and automate stuff. Mainly ThingieQuery offers SQL, but they're just different plugins. 
+Actually I answered your question too hastily. So a broad category of problems you could use this for is batch processing of tabular data. 
+
+Very broad I know, but I'll give you a concrete example that I covered this is [this video](https://www.youtube.com/watch?v=ByAK9Xd62eQ&list=PLoZnFFcbkMap7P5FeVGyDPXRiEe_BJMYv&index=2&nohtml5=False) - finding typos in a table. 
+
+This piece of sql will go through a table in Excel and find all pairs of peope that have suspiciously similar but different names (differ in 1 or 2 chars):
+
+    SELECT
+        a.__address, a.__address,
+        a.FirstName || a.LastName, b.FirstName || b.LastName,
+        LevDist(a.FirstName || a.LastName, b.FirstName || b.LastName) diff
+    FROM
+        Person a inner join Person b on a.__row < b.__row and  diff BETWEEN 1 and 2
+
+The LevDist function is basically an implementation of the [Damerau–Levenshtein](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance) algorithm that returns the number of character changes needed to turn one string into another. Basically, measures the number of character differences in two strings.
+
+The example is perhaps esoteric, but it just serves to illustrate the kind of problems you can solve with this.
+
+Thank you it means a lot
+Text is easier because we can quickly flick through it and decide if it's worth finding out more.
+Just to chime in: text can be preferable for a variety of reasons. Most notably, different sections of your audience are going to get stuck on different things. A video forces all of them to go through it at the exact same pace, while skimming through text is quicker (and more productive) than fast-forwarding/back-tracking/looping through a video. Also, I'm constrained to the speed at which you can talk, rather than the speed at which I can read (usually, the written word can be digested at least twice as quickly as spoken). Plus, I can print/email a text file to make it available at all times, whereas I'd look rude sticking my headphones in at work to watch a video on YouTube (even though it is work related). And although this isn't directed at your videos personally, you make the audience entirely dependent on their ability to understand your accent, and so on. Text may not portray the same cheery vibe, but it removes all these other obstacles that might get in the way between you and a potential customer.
+
+But all that said: awesome job on the videos anyway. It's great that you've put so much care and attention into it, and you should be really proud of it. It *is* well-produced in-spite of your brother :-). So often a dev just drops the code without any explanation at all; this is a pleasant change.
+Thanks. It's late now but I'll have a look tomorrow.
+Good stuff, but you should also provide the name not just the URL. You need to get people familiar with the name. Cardinal rule of marketing.
+Thank you for the license. Will save it for the new notebook :)
+
+Whether you want to go for mass market or specific, vertical group of people remains your decision. I just want to nudge you into the direction to think about the different target groups that you may entice to shell out money. If you look at the app market for Android/IOS, there are people who have earned a lot of money off 1.99 apps. I find the barrier of 149 USD a bit steep. 9.99 USD? Give me two or three. And if my company doesn't pay for it, I will - that is also a mindset you might want to include in your deliberations.
+
+Next point isn't easy to answer sensibly for me. As soon as you know what your target group is, it is easier to come up with a pricing/subscription scheme. My experience - companies and individuals hate subscription schemes.
+
+I will think about a name. In exchange for a few more licenses ;) Or distributor status for Europe ;))
+
+Ad paypal. Many of the companies that I deal with won't touch paypal for purchasing. No offense intended to purchasing managers and staff, but procurement offices/departments and their rules are often a bit behind the times.
+
+I think that TQ is a really cool toy/tool/... and believe that it is possible to monetize it.
+
+
+Hmm, that's a fair question. But I did read your edit, and querying an Excel table with SQL is a thing a tried to figure out how to do one time and I'd be interested to see how it works. :-D 
+I've used Excel's built-in database connection and it seems (in 2010) to be somewhat limited.  I'm going to try ThingieQuery.
+sorry that came off rude. I meant it to be cheacky but upon re-reading it. Wasn't. My bad. It's great to see people give back and seek open feedback. 
+That's fair. I've written up a guide a while ago, I haven't updated it in ages but I've done a lot of development since, so currently the videos are much more relevant but yeah, I see your point. The text instructions are here http://thingiequery.com/Home/Guide
+(dated)
+Thanks, nice comment. I do prefer text too when I know what I'm reading about but when I'm just digging into something new, for me, a video illustrates what it's like to work with it a bit better than text. Thanks for the kind words, and my brother actually isn't such a jerk as I made him out to be, he just said it's too lengthy and perhaps slow paced for people to watch and he's probably right:) 
+Cool, late here as well so I'll likely be going to sleep, but the thoughts-for-a-license deal stands. You can try the plugin out as well, it has a trial period, and is digitally signed so if you decide it's unsafe you can check the digital signature and see where I live:)
+That would presuppose that the name is good though...
+Point taken about the price, I'll think about it and do some testing. On the one hand it's not exactly a niche market so maybe a more affordable price and aiming for wider customer base does make sense. On the other hand the price is part of the product and I don't want it to say "cheap product" I'd like it to say "serious product that means business" which is what I'm aiming for. Depending on the company the learning curve might be a bigger investment than the price of the licenses. But yea, I'll have to do some testing and try to figure who my typical and potential customers actually are.
+> I will think about a name. In exchange for a few more licenses ;) Or distributor status for Europe ;))
+
+A few licenses is a small price for a name, I'd take that deal any day! Distributor status for Europe might be a wee bit much though on the other hand:)
+Give it a try with the trial, and ping me if if you like it. No need to wait for the trial to expire, I'll send you the license right await if you like it.
+You are going to like ThingieQuery:)
+Hey, nah I wasn't offended, it's all in good fun, gave me an opportunity to practice my sarcasm:) Thanks for coming back and saying that though! I started my post pretty cheeky as well it could easily have been seen as rude... ah it's a delicate balance between funny and rude especially with text.
+
+Edit: I just now realized your comment was a response to the first sentence of my post.... d'oh. Don't I feel silly now.
+If you're shy about the name it's probably a sign you need to rename.
+
+EDIT: Don't mean to be hugely critical, just want to give feedback about your marketing attempt. I would love to try this out, I've been meaning to learn more about SQL, I'm not even aware of the deficiencies in the native functionality.
+No, I agree, I didn't take it as harsh criticism at all. Can you try it with the trial? If you like it, ping me and I'll send you a private license. Some of my customers are actually using it to teach/learn sql, it's quite convenient for that, you can immediately see the effects of your queries.

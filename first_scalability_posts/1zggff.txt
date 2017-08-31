@@ -1,0 +1,20 @@
+big
+1zggff
+I have a big column of numbers 1-100 that i need to normalize into groups and convert into text strings 1-5,6-10,11-15, etc. What's the best way to go about this?
+
+-
+
+
+-------------
+Why not sort A-Z and then group using cut and paste?
+-------------
+You could try [something like this](http://i.imgur.com/o33Bpzp.gif), maybe.  Basically just building out a table to normalize and then lookup.  Not too much work and you can sort, build PIVOT tables, etc.  [Spreadsheet](https://dl.dropboxusercontent.com/u/28254/Normalize.xlsx), if it helps.  Good luck.  
+
+-------------
+Sounds like you want to make a histogram type chart. 
+-------------
+That's more or less what I'm doing now. I was just wondering if there was a way to do an auto-replace that would take care of most of the labor for me. Thanks though!
+-------------
+Auto-replace? What do you mean? 
+
+Can you send a print screen of a before and after? I don't know what you mean by grouping and text strings in this case.

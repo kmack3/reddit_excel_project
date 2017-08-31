@@ -1,0 +1,27 @@
+6g37ii
+Correct Sumifs statement with lots of criteria
+I have about 50 cost centers I am trying to sum in different columns when I use =SUMIFS(O37:AN37,O34:AN34,Sheet1!A2:A18) to sum my first group and =SUMIFS(O37:AN37,O34:AN34,Sheet1!C2:C37) for my second the same values are returned to me. What am I doing wrong?
+
+
+-------------
+Needs to be an array. SUM(SUMIFS()) and then CTRL+SHIFT+ENTER instead of just pressing enter - 
+
+
+    =SUM(SUMIFS($O$37:$AN$37,$O$37:$AN$37,Sheet1!$A$2:$A$18))
+
+Article I wrote on SUM(SUMIFS()) though I don't go into the array portion, only hard coding. http://itsnotaboutthecell.com/2016/02/16/sum-count-average-functions/
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

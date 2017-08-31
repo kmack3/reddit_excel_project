@@ -1,0 +1,23 @@
+[Discussion] TIL the feature of workspace in excel!!
+Wow, I didn't even know this feature existed! 
+
+This sounds like a nice way to organize files that are always used together. However, you may want to ask yourself "Why?" a couple more times. Why is the data spread across so many files? How much time do they depend searching for information within these sheets? Perhaps there is a better way of organizing the data?
+
+Good job finding a unique solution and thanks for showing me something I did not know!
+Unfortunately this feature has been removed from Excel 2013. [Save a Workspace is gone](https://support.office.com/en-in/article/Discontinued-features-and-changed-functionality-in-Excel-2013-c417e377-26c6-4f43-be6d-16718dd75ffa#__toc342560926)
+Thanks man. 
+
+The question you asked are exactly the questions which i am asking here.  Why so many? 
+
+To give a brief background for ex. The sales department will have certain payments pending for clearance, production has some data related to payments etc. So the account dept will get data from other departments and stuff.  I am planning to reduce them. Still didnt get so far. This was more like an immediate solution and decided to share here. 
+
+On the other hand, you wont believe the way the ppl work on excel here. I had to study this 1 person who told me he is  good at excel in his department. So I was like ok. Sat with him to understand how he makes a particular report.  He had like 20 rows and 2 column of numbers of previous day sales. He told me he has to add the 2 columns, copy the values and mail it to his superior. I said ok, please proceed. He clicks on cell c1 = a1 + b1. Enter. C2= a2+b2. Enter. C3=a3+b3. Enter. He does this for all 20 rows!!! I then showed him sum formula, then showed him the double click cell corner to fill formula down. Then I showed him my personal favourite - select a1:c20. Click alt+=.  He bought me a beer for reducing his workload :)
+Thanks for the tip.  Will surely keep in mind for 2013.
+You could write some VBA and have a shell workbook. Make the open method open the required workbooks, the save method save all the workbooks, and the close method close them all.
+Awesome! I love those moments. I didn't know about ALT+= or your original TIL. Thanks dude! The part about the co-worker buying you a beer made me laugh out loud... Good job!
+I've sat there and seen someone type in the numbers from analytics manually (from screen, no idea csv export then import was an option) then add up the numbers WITH A CALCULATOR to then type the sum results into the spreadsheet and then add all those numbers up for a total, again manually with a calculator. Across 3 or 4 reports in Analytics (by Channel and product). Took them 2 days a week to do the reports and the monthly/annual reports were the daily reports manually added up... 
+
+This had been a job for someone for 18 months... 
+
+Showed them Google API export, named ranges of imported data and pivots, all setup to batch update. Minds blown. They saved half a salary of a mid level exec by using the big calculator in their PC rather than using Excel as a neat way to keep rows and columns listed neater than Word 
+Usually there's a reason a feature is removed.  The only valid use of it I can think of its when you're trying to use indirect across workbooks.

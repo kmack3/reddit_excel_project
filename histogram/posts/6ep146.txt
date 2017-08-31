@@ -1,0 +1,28 @@
+VBA: Appending/populating table when new sheet is created
+[deleted]
+Thanks for getting back to me.
+
+
+This looks spot-on. Since the rows have to be dynamic (@ end of table), would this be an appropriate way to define the range?
+
+	Dim LastRow as Long
+
+
+	LastRow = Range("B" & Rows.Count).End(xlUp).Row
+	Range("B8:B" & LastRow).Formula = "=B1+2"
+	Range("C8:C" & LastRow).Formula = "=C1+2"
+
+
+Edit: Forgot to mention - really appreciate the help. 
+[deleted]
+You certainly saved me some grief; I only intend to apply the formula to the LastRow. 
+
+
+Thanks again; very much appreciated. Looks much better than the jumbled mess that I would have turned out!
+    Solution verified
+[deleted]
+
+You have awarded one point to _ThePhoenixJ_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Always do; learned that one in high school. Thanks!

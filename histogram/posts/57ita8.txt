@@ -1,0 +1,27 @@
+Is it possible to post a fully functional Excel spreadsheet online?
+Google sheets can do a lot but doesn't have all the features that Excel does. Fron what you describe, it sounds adequate.
+Depends what you mean by fully functional.
+Basic functions and formatting sure - with Sharepoint Excel Webapp or Google sheets.
+
+Macros & other add in - nope. 
+https://office.live.com/start/Excel.aspx
+
+Requires a Microsoft account. You can sign up for one right there. It has all the office apps online for free. 
+I know it's not completely the same, but if your situation allows it, use Dropbox. My company does and it's nice, still online but have full power of excel. 
+I would just be using basic functions like the ones mentioned above but if I wanted a cell to change color as a particular number was reached (ex: A6> 20 cell turns blue) would that be possible? Thanks for the reply btw
+Can use One Drive (made by Microsoft). Should have more stuff than google sheets, since its made by Microsoft, but I think you lose some things that you have in Excel, like array formulas and some formatting.
+Google sheets can definitely do conditional formatting, i.e. change the cell color based on its value. I just created a google sheets to share finances between my girlfriend and I and the formulas and conditional formatting were very intuitive and similar to Excel. 
+The Excel web app has fewer spreadsheet/calculation features than Google Sheets but more formatting features. For example, Excel web app will calculate array formulas, but it won't let one edit them or add new ones because it doesn't provide for array formula entry. Google Sheets includes a function named ARRAYFORMULA.
+
+If you want to treat the Excel web app as an Excel runtime which will recalculate formulas when users change constant entries, then it's adequate. It's generally inadequate for adding or changing formulas.
+Would I be able to post a google spreadsheet directly onto a website where users could change numbers and the cells would change or would they have to follow a link to get to the spreadsheet?  Basically my idea is having a functional budget sheet (with a little flavor so its different from what there is). Any advice would be great.  Also, I appreciate your answer
+Ok. I knew I couldn't add array formulas, I assumed it couldn't run them at all. Thanks.
+I actually just tried this out and it is pretty cool and definitely possible.
+
+Place html like this on your webpage.
+<iframe src="INSERT SHAREABLE LINK TO GOOGLE SHEET HERE" width="1000" height="2000" frameborder="0"></iframe>
+
+Example here:
+<iframe src="https://docs.google.com/spreadsheets/d/16_HXCms6Eue0Q1jYBiyeoNaUpIQclxILlf002MFy6o8/edit?usp=sharing" width="1000" height="2000" frameborder="0"></iframe>
+
+Can experiment on a test site like this: http://htmledit.squarefree.com/

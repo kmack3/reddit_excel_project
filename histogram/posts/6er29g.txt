@@ -1,0 +1,4 @@
+Need help matching transactions with different periods
+It's probably more complicated, and I'm not understanding the extent of your issue, particularly because the purchases and sales on the testfile are not in date order. But if you put into H3 `=SUMIFS(B2:B52,F2:F52,">="&H2,F2:F52,"<="&I2)` and into J3 `=MIN(H3,SUMIFS(C2:C52,F2:F52,">="&H2,F2:F52,"<="&I2))`, would that not do it?
+=SUMIFS(C2:C4,D2:D4,">=6/1/2000",D2:D4,"<=6/30/2000")-SUMIF(D2:D4,"<1/1/2000",B2:B4)
+I will test that solution. To your question I should propably prefice, that the Transactions I have posted are already prematched through a fifo Calculator therefore the 'correct' Sale and Purchase have already been asigned to each other.

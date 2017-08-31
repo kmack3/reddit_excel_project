@@ -1,0 +1,15 @@
+6ilxxb
+Change location of chart using VBA
+I am trying to change the location of the graph that I generate with my vba. For now, it is just taking data from a column that may or may not change size. I understand I do not have 'Chart1' identified ion my code but I can not figure out where to declare it where it doesn't create another sheet for the chart as well.
+
+
+    reportsheet.Select
+    ActiveSheet.Range("a4", ActiveSheet.Range("a4").End(xlDown)).Select
+    ActiveSheet.Shapes.AddChart.Select
+
+    With ActiveSheet.Shapes("Chart1")
+       .Left = Range("A40").Left
+       .Top = Range("A40").Top
+    End With
+
+

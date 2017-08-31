@@ -1,0 +1,30 @@
+6fqwj9
+Text to Columns on list of addresses outputs only part of the addresses
+I'm trying to use the Convert Text to Columns Wizard on a list of ~2,600 addresses.  Each address is in a single cell (all addresses take up 2,600 rows).  The addresses (typically) have a street number, street name, city, state, and zip code. The only delimiters within any of the addresses are commas and spaces (I have those delimiters selected properly).  
+
+The problem I'm running into is the wizard keeps cutting off the addresses in the data preview window and outputs the data that way.  It seems to be arbitrarily cutting off the addresses after the street name. Is there some sort of text limit for the text to column function? What could I be missing?
+
+
+-------------
+Is there a new line character in the addresses? You can see by wrapping the text.
+-------------
+The text was unwrapped to begin with.  To make sure there weren't any issues with additional lines, I expanded the formula bar so I could see how the addresses were oriented (e.g. in one continuous line vs different elements of the address in each different lines).
+-------------
+Do you have samples to look at?
+
+Send me pm with sheet if you want to.
+-------------
+There is a new line character or line feed character in the text, not sure which, very odd,, anyhow, 
+
+1. create a help column with `=CLEAN(A1)` at B1 and drag down.
+2. Copy Paste Special Values on the new column of data 
+3. delete Column A
+4. text to columns in the new data.
+-------------
+That is great! Thank you so much! I obviously missed the new line character.  Do you have any advice on how I don't miss something like that in the future?
+-------------
+This was not a Windows new line character `code(10)` but an Apple Mac new line `code(13)` so it did not appear when wrapped in Excel.
+
+It appeared when I copied the text to notepad, dropping the new line. I think Excel did not know how to handle it in Text to columns and the rest of the line was dumped.
+
+All you can do is keep it in mind for next time and use similar solution, or change how the source data is being produced.

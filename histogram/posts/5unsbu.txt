@@ -1,0 +1,27 @@
+PSA: How to alternate row color based on "group" in Excel.
+Wow.   It's like you knew exactly the question I was coming here with this afternoon.   This worked perfect for what I needed and is A LOT cleaner than any of the code I found when I was searching around this morning.  Thank you!   
+I'll be saving this for future reference! 
+
+>I added this to the conditional formatting for cell **A2** and then dragged the formatting down to the end of my data and the formatting worked instantly! 
+
+Can you expand on the dragging down bit? Not sure what you mean.
+=IF(B2=B1,A1,IF(A1=1,0,1))
+
+Put that in column A, assuming your group names are in row B.   That will put an 1 or 0 by each group with no counting or slow sumproducts.  You can also put it in conditional formatting I believe.
+=IF(B2=B1,A1,IF(A1=1,0,1))
+
+Put that in column A, assuming your group names are in row B.   That will put an 1 or 0 by each group with no counting or slow sumproducts.  Your solution will drag badly in large datasets.
+Although /u/excellentnewbie is quite correct, it is better to just change the applied range of the conditional format (Conditional Format>Manage rules) as you risk bringing other formats, formulas, or values you may not want.
+When you are hovering over a cell and a small + sign comes up and you drag that formula down so that the formula and formatting match all of your rows. Or double click to auto fill until a gap. 
+
+
+Something similar to your suggested solution is shown on the webpage that OP linked:
+
+    =IF(A2=A1,D1,D1+1)
+
+Although, I think your version is simpler and more elegant as their version requires additional formulas in conditional formatting. However, OP said his solution was for when you *can't* use a helper column.
+
+Either way, have an upvote for contributing! ;-)
+Op did say couldn't use a helper for this, though I agree their solution may be slow for large data. Really, in most large sets you want to avoid any formatting because that should be limited to reports/summaries/subsets. Power Query FTW
+Yes. I would agree. 
+u/excellentnewbie is correct!

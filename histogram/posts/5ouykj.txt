@@ -1,0 +1,59 @@
+I've been working 14 hour days all week trying to fix my model
+ELI5?
+Similar story: when I was interning I spent a full day at work trying to get a balance sheet to balance...it was off by 8 cents every period.
+
+It turns out I amortized a loan discount slightly differently in one period vs all the others. Incredible how that tiny oversight led to ~14 hours of lost productivity.
+L
+Congrats! I know your pain when it comes to the construction of complex financial models.
+Where did you learn to create models?
+I have 0 idea what you just said and I am an accountant
+Good on you for finding the problem! The combination of relief and "Oh, come on, really?" must have been strong.
+Wow. I can scarce imagine Your pain.
+My worst experience like that was  string that would not match each other  because one had a space at the end.
+I feel your pain... I'm struggling with a TWR at the moment
+I've never had much luck with models :/
+Why would the  internal rate of return of the project be equal to your cost of capital?
+Congratulations, 
+I modeled something that forecasts the cash flows from owning an asset. I told the model what the income and interest would be, but the project's returns weren't matching by 0.4%. 
+
+XIRR calculates the internal rate of return from cash flows on a specific date. I had the last day of the month as my dates (Jan 31, Feb 28, etc). When I modeled the returns, I split them evenly over the 12 months, but each month isn't exactly 1/12 of the days in the year.
+
+IRR calculates the internal rate of return from a series of cash flows with no dates (assumed to be spaced evenly). By using this function, my even 1/12 matched the assumed even timing of cash flows. 
+
+And I assumed the problem with the returns was elsewhere in my massive model, instead of in the return calculation itself. 
+
+
+8 cents every period? flush that shit to equity.
+That's would be helpful
+Got familiar with financial statements in school. Modeling them just requires some math, but I learned best practices for structuring them by looking at others' work. 
+Hah. It was poorly worded, but basically excel has two functions, IRR and XIRR to calculate the return of a series of cash flows. XIRR requires dates, which I provided as the last day of each month. But I'd modeled 12 equal cash flows in each year. But they weren't spaced evenly (31 days, 28 days, 31 days...), so the return using XIRR slightly varied from what I intended. 
+Hah, excel can make you feel like you've gone insane sometimes. 
+It's probably a fixed income security to match cash flow with liability.
+It's an electric utility asset that earns an authorized cost of capital. The model is complicated by regulatory treatment of things like deferred taxes and capitalized interest. 
+A fellow intern tried that kind of thing once, got yelled at until he cried and was relegated to slide deck formatting for the rest of the summer. Needless to say the rest of us understood that wasn't something we should risk lol
+Clearly he's in accounting and not finance.
+Do you have some examples of some that you took inspiration from?  This is something I would love to do in my career, but don't really know where to start.
+Got it, thanks for the explanation
+Could also be a pricing tool for a different sort of asset like commercial property etc...
+Electric utility investment that receives revenue to cover authorized returns on capital, expenses, depreciation, and taxes. 
+It's not even that, some accounting managers don't care about small variances (just write it off to the BIDC account - Because I Don't Care), while others are anal about pennies (on balances of hundreds of thousands or even millions of dollars).
+
+Materiality people!  Come on!
+
+Nope, it was a hedge fund. I had good reason to believe that this sort of solution would be frowned upon, so I decided against it.
+
+Though I resort to this kind of thing all the time for classes/competitions lol
+
+See my response to three comment for why I wouldn't try that kind of thing.
+Ya, I would love to learn how the write something like this. I also learned how to write macro and formula by looking at someone else's work. It is truly the best way to learn. 
+Step one is learning how financial statements work, and how they're interrelated. The output of my models is always financial statements, using the cash flow statement to do valuation calculations. 
+
+Step two is learning some basic excel functions that allow you to build dynamic models (e.g., vlookup, index, match, sumif).
+
+Step three is learning good modeling techniques. Off the top of my head these include: centralizing your assumptions in one tab, color coding cells based on whether they're calculations or plugs or links to other tabs, and most importantly keeping the equations simple. This last one is crucial. I used to put elaborate algebra in cells that would do several steps. But this makes it hard for others to understand what you've done. It's always better to show each expression calculated as separate cells, given you have plenty of space and makes finding errors easier. 
+
+I'd be more than happy to help you and answer any questions you have. I'll look to see if I have some generic models to send, cuz I can't really share material from work. I majored in finance at a state school and got hired as a financial analyst after graduation. Taking the CFA exam is also a good way to study and boost your resume. 
+When balance sheets don't balance, it makes people doubt everything else you've done. Unfortunately. 
+It's easier than it might sound, and really only requires knowledge of financial statements, some basic excel functions, and learning some best practices. I'll see if I can dig up some old models to share that don't have work related info. Also, I work for a regulated utility, so the models are a bit different than usual because of regulatory finance. 
+Thanks for the rundown, that was great.  So I use excel pretty frequently for my job now, so I have step two, and to a small extent step three covered.  I just need to improve my understanding of financial statements.  I would greatly appreciate generic models, that would be amazing.
+That would be awesome! Thanks in advance =)

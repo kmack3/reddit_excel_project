@@ -1,0 +1,73 @@
+interview for a Financial analyst next week, will have a Excel test, what to expect/practice?
+It's unlikely they'll test you specifically on formulas (e.g. "How do you write a VLOOKUP formula?".  When I've encountered these tests, they're much more open ended. "Here's a spreadsheet full of raw data. Manipulate it into a report that summarizes the following information..."
+
+Some of the bullet points will probably require a vlookup or index/match. Some will require a sumif. Some might require a pivot table. There are plenty of examples of these sorts of tests online with accompanying video guided solutions. 
+
+What I look for when I've administered these tests:
+
+* No Hardcoded numbers: this means don't do some crazy complicated and inefficient math to the side of the data and then type it into a cell as an answer. Don't be clicking back and forth through tabs typing in your answers. With limited exceptions, all answers should be solved using a formula.
+
+* Basic Formatting: Obviously you can't spend too much time on formatting, but knowing how to format numbers as accounting or percentages or dates is important.
+
+Most of these tests are put together so that they're not expecting everybody to be able to everything. There will be a few really advanced curveballs thrown in to identify those who are very proficient in Excel. But you will not be "downgraded" for not knowing (so don't feel discouraged). Ultimately, these tests have little weight if you can take the test in a way that suggests that this isn't your first time using Excel. 
+you don't know how to do a vlookup and you want to impress them with VBA?
+
+If you're that inexperienced with excel, it's probably not a good fit for you.
+
+That said, they probably want to see you do vlookups and a pivot table.  Either that or it will be one of those dumb automated tests where you're asked to do random functions and a single wrong click fails the question.
+
+EDIT: and chandoo.org is the site you're looking for
+Speaking as a financial analyst, you'll probably also want to be comfortable with OFFSET, INDIRECT, SUMIF/SUMIFS, and SUMPRODUCT. Also array formulas in general.
+
+For resources, check out this thread:
+
+https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+I can teach anyone a specific formula. I won't hire you because you know a formula. I'll hire you because you have the right mindset as well as the ability and eagerness to learn.
+
+Since that is pretty nebulous, some practical advice:
+
+* Simple is better. Do not make a crazy index match that you'll only use once and is only used a handful of times. Remember: other people need to understand your formulas too.
+
+* Understanding constraints. Sure, it'd be great if you could VBA this entire process but if I need something analyzed in a short time frame don't you dare spend a huge amount of time making it repeatable for the sake of future time save. Automate it after, automate it before, whatever, just not in the midst of analysis time.
+
+* [This](http://9gag.com/gag/a9dAMpD/a-simple-example-on-how-to-make-your-graphs-less-terrible)
+
+* Anticipate the needs of your audience. If you're in segment support, their needs will be different than plan, than corporate reporting, than etc..
+
+* Absolute / Relative references. Sticky money is good. $ makes formulas stick.
+
+* For VBA, you can learn to do simple loops relatively easily. *For each cell in range* is useful.
+pivot tables. They MAY not use them, but if they do that's a huge chunk of what they do. I personally don't think you actually know what excel is unless you know pivot tables
+Look for ExcelIsFun at Youtube. He has a ton of videos on almost all Excel topics and formula, and has accompanying materials as well.
+Care to be a little more specific about the position? In most cases, they're looking to see how you think about certain things that you'd be doing, and excel is a conduit to applying that thinking - knowledge of formulas is necessary, but understanding how to apply what you'll be doing in whatever area of finance you're going into would be even more necessary.
+
+If you give me a better idea of what you're interviewing for, I'd be happy to help you a little more.
+Depends greatly on the internal culture and role for expectations.
+
+Things I have always found useful: 
+Pivot Tables, Calculated fields in Pivot Tables.
+
+Named Variables, Data Validation.
+Transpose.
+Vlookup, left, right, mid, sumif, countif.  Dsum, Dcount.  Replace. Contains.
+
+It's not enough to know these, you'll need to problem solve with a combination of them.
+
+ navigation and shortcut proficiency... Menu navigation.  If you know VLOOKUP but don't know how to efficiently format or  navigate, I'm going to look at you cross eyed. If you can alt-tab, use menus efficiently, I know you'll be a proficient worker.  That and problem solving, good manners, sense of humor, someone I want to work with.  Hired.
+Probably should think about your fitness for the role...
+a**n** Excel test - for starters
+I don't really know what an analyst is, but I think it's what I do now.
+could you direct me toward a online excel "test" that you think would be good for me?!
+
+also thank you!! you answer rly helped me!!
+
+If you don't know vlookups, you need to hold off and practice more with Excel, because that's one of the first intermediate formulas you should learn. My test was vlookups, sumifs, and averageifs, and then interpreting the data and writing about it. Nothing crazy but it weeds out people that don't know how to use Excel past the basics. 
+Sumifs, sumproduct, offset, indirect, match, named ranges. All you need boiz!
+
+If they can do that or show me they could understand why those would be useful and convince me they could learn them, I would test someone on building good looking charts, and quickly making alterations. A lot of my job is making the same chart 30x across different spreadsheets for a power point presentation that I want to go to a vice president of finance for review in 20 minutes.
+This is exactly right. Excel is a great tool, but you should be able to make recommendations based on the data. What is the position you are applying to?
+speaking of calculated fields in pivot tables, does any office for mac actually HAVE that feature? My last few positions have been in mac only offices and that seems to be one of the major things missing
+[deleted]
+Exactly.  At my workplace even people who need a reference guide to remember how to copy/paste can do vlookups.  It's the first thing you have to learn.  Once you're good with excel you'll probably never do them again, but it is what it is.
+Plz use Capitol lttrs to strt sentences. 
+Big internet threat there, tough guy.

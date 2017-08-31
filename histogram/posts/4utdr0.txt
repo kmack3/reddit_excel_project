@@ -1,0 +1,31 @@
+Contract in excel
+You could also use a MS Word mail merge
+That is very easy using &. How I would do it:
+
+1. Create an input sheet which has the parts of the text that change. One cell for each input. [You can name the ranges like CLIENTCOMPANYNAME etc to make the formula easier to read]
+
+2. Create a fixed tab which has the standard contract - each time you have a member that needs to change stop the text and start the next section in a new cell. This is important. 
+
+3. Using the & function you can simply use cells references between the tabs to build the full sentence which is dynamic based on the inputs on your input sheet. i.e. =Fixed!A1&Input!A1&Fixed!B2&Input!B2
+
+
+If you are using named ranges then if could look like =StandardOpening&CompanyName&....
+
+Fiddle around with the & operator and you'll see how easy it is.
+
+Your only issue would then be formatting the text, it might just be easier to keep in word and use the Replace Function (ctrl+H)...
+
+This ^
+Thank you. Will try it out. If I can properly format it as well it could be answer to my problem. I was looking at the Mail Merge as well. It is just the fact that when I calculate a price I have all of the variables so it would be really convenient if all the info would automatically fill in the contract.
+It works great but I'm having problem formatting the text. Is there any way you can do it as well as in Word?
+Will try that. Thanks!
+Not as good as in Word. In Formulas for example, you can't format letters differently.
+SOLUTION VERIFIED!
+You have to reply "Solution Verified" to the original comment, not your own for the bot to catch it, I think.
+mark the thread as solved
+"Solution Verified" 
+Hi
+
+You should reply to the actual solution to verify it, not your own comment. 
+
+Thanks! 

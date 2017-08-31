@@ -1,0 +1,13 @@
+Adding a single column for % in the pivot table
+Make a calculated field. Under one of the pivot table options on the ribbon. That should help. It takes formulas. Sorry for the broken English, mobile. 
+in the Pivot Table Field List, drag "Volume" into the "Value" field again > click on the drop down > Value Field Settings > Show Values As > % of Grand Total
+Where is your data being housed?  Can you just add the column in the data and run an overdue/total column?  Then just add the column in the PT field settings in front of the column you want it in front of?
+As i've stated above, if i make a calculated field it also adds column to each overdue types. I only need to add 1 column. 
+That won't do since it will still add % columns for Due today, Due tomorrow, etc. Also, it will divide the count to the actual grand total below which is 34,362 instead of 37 for its specific team/department. 
+Just another sheet beside this pivot table sheet. Problem is that there are many types to consider. Like type of worktype, team and department then you need to count it depending on that factors and find the OVERDUE items and divide it by its total.. I actually thought of that but can't think of an exact way to do it. 
+I'm going to stick with a calculated field for 500 Alex. Under the ribbon, fields items etc, there's an option to add a calculated field, not as % of anything else. There you can do your division by writing a formula using applicable fields. I think this is your best bet. 
+can you send an example of what you mean?  How do the factors affect your overdue list?
+Uhh what is 500 Alex?
+I have a table like this but have like 40k rows: https://ibb.co/md3bBF
+It was a Jeopardy joke. 
+Sorry not from the US.

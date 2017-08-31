@@ -1,0 +1,12 @@
+Advanced Inventory Management System
+This is probably a better project for access tbh 
+Are you familiar with an MRP?  This is pretty much exactly what you are asking for.    You should look into that, there may even be some good implementations of that in excel already floating out there.
+QuickBooks. It's really the best solution to integrate your inventory, purchasing, sales and returns all in one setup, plus it makes tax time and business analysis so much more succinct than a spread sheet.
+There are software programs out there to help with this.  I use one specifically for ebay, amazon, and shopify.  It has kitting features like this.  You can have it count your raw materials and then take those raw materials and kit them into finished products and push that kitted inventory to different marketplaces..  You can also create picklists that will have you take raw materials and place them into an assembly area to create the kits.  The software I use is Skuvault.  There are 3 to 4 other software thst offer similar features with a focus on Ecomm channels.
+Seconded on Access.  There's a reason most any inventory management system uses a referential database when dealing with this kind/amount of data.
+
+You can always build data connections between Access and Excel if you need it, but the master data for you inventory items should be handled in Access.  The integrity of your database will be that much greater than if you handle it in Excel.
+I'll look into Access, but I'm on a Mac (I know there are apps around that) and I don't really have any experience with Access. I'll definitely look into this option though. Thanks for chiming in! 
+Hey @Hellkyte I had not heard of MRP, but this looks very similar to what I'm looking for. This was a huge help! Thank you very much!
+I know a paid-for system would be the best option, but this is a new business and I'm strapped for cash at the moment. Plus I'd like to put my skills to the test. 
+It's part of Microsoft office has a mac version 

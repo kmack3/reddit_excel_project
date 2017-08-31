@@ -1,0 +1,56 @@
+6gcufl
+How to stop calculating if a certain condition is met?
+How do I make it so that if a certain condition is met, it will stop calculating and leave blank cells?
+
+I came up with this:
+
+> =IF(*condition*,"",*formula*)
+
+An example with actual numbers:
+
+> =IF(1:1=0,"",1:1-1)
+
+This means "if row 1 is 0, then leave the cell blank; otherwise, subtract 1".
+
+But the problem is, if I leave the cell blank, then the cells after that gives the #VALUE! error. So then I came up with something like this:
+
+> =IF(1:1="","",IF(1:1=0,"",1:1-1))
+
+This means "if row 1 is blank, then leave the cell blank; if row 1 is 0, then leave the cell blank; otherwise, subtract 1".
+
+So when the value hits 0, it will leave a blank cell, which will leave another blank cell, and so on.
+
+But the problem here is that when I leave blank cells like that, then those cells doesn't have any values in them (like I want), but the formula is still visible in the *fx* bar at the top ... and I don't want that.
+
+I want to make it so that if a certain condition is met in the previous cell, then the following cells will be completely blank without any formulas remaining, as if the cell was deleted.
+
+Thanks.
+
+^(Sorry for my crummy explanation.)
+
+
+-------------
+You want a formula to only appear when a value condition is met?
+
+That would require VBA to update cells as required based on cell values changes and dynamic population of a formula when those conditions are met.
+-------------
+u/excelevator hinted at this; I will spell it out: In Excel, a cell can contain a value, a formula, or nothing. Hereinafter I shall refer to a cell's content as the 'state' of a cell. 
+
+An axiom in Excel is: No cell's state can affect the state of another cell.
+
+Therefore what you're asking for is not possible within Excel's formula context. 
+
+However, you can use VBA to modify the state of cells. 
+-------------
+Basically, I have a recursive formula, let's say 1:1/2. From a certain initial value, let's say 64, it eventually reaches a certain final value, let's say 1. I want it so that when it reaches 1, the cells after that will have nothing in it - no value, no formula. Just a completely blank cell, as if I hit the delete key.
+
+Now, sorry but I have no clue what you said ... could you try to explain it with easier terms?
+-------------
+Solution Verified
+-------------
+What he's saying is that the cells can't delete their own formulas (or the formulas of other cells). To do something like clear out cells automatically, you'd have to use a VBA script. 
+-------------
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

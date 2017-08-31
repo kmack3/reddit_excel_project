@@ -1,0 +1,51 @@
+large
+3ab5uh
+Large files filter slowly even with manual calculation
+
+A lot of files I work with end up hanging for a minute or so whenever I try to filter, even with calculations turned off. What's going on?
+
+Sample file: 
+
+* 53 seconds of "not responding" when trying to filter on a text field.
+* 4.57MB
+* largest tab has 7200 rows
+* largest tab two SUMIFS( and a COUNTIFS( referring to whole columns, plus a bunch of vlookups
+* headers have wrap text turned on
+* no comments
+* no shapes or embedded images
+* no VBA
+* manual calculation
+
+Edited to add: Excel 2013 32-bit (via Office 365) running on Windows 8.1 64-bit.
+
+
+-------------
+Press ALT+F10, a window will pop up on the left.
+
+Do you see objects in that window?
+-------------
+The whole column SUMIFS/COUNTIFS are a memory hog. Use only the range which is populated, maybe 1000 rows extra, or even better, use dynamic ranges where you can.
+-------------
+I once had a problem like that and it had to do with having the maximum number of styles in the workbook (~4,000). Not sure how to go about fixing that without add-ins though.
+
+What you can try is pasting your data into a new workbook, and see if it still gets hung up. Try tab by tab, potentially closing the initial workbook each time. At least this way, you'll be able to see which sheet is causing the problem, if it is indeed a single sheet's fault.
+-------------
+Do you mean Alt-F11? Alt F10 just gives me a "selection" pane on the right with "show all" and "hide all" and nothing else. Alt-F11 pops up the VBA window which shows 8 sheets and no objects.
+-------------
+I will be removing these wherever possible, or adjusting the range now that I've learned the formula to tell me the last row number with data.... but wouldn't that only affect calculations of the file, not filtering?
+-------------
+Hm, I've run into the styles problem before. I'll see if running the XLStylesTool app will fix it.
+-------------
+Nope, XLStyles said there were just 6 styles in the book. I guess I just need to paste text/formulas into a new file and start over.
+-------------
+Alt + F10 shows you objects. Sometimes objects slow down your file. Since you don't have any then thats solved
+-------------
+Well, calculations slow down all operations because they hog memory.
+-------------
+It's not just the number of styles but how much of the workbook has been styled.  Many people will select a row or column or the whole page and apply a single style to it because it's easier than selecting 10000 cells.  This will also cause massive slowdowns depending on the type of style and how many cells have been styled.
+-------------
+I know, that's why I specified that my delay occurred even when calculations were turned off. What I was trying to figure out in my previous comment is if memory intensive formulas have any effect when they're not trying to calculate.
+-------------
+Is that still a problem if your sheets are the same size as your data? (That is, if I hit Ctrl-End I'm taken to the last cell of data rather than to cell WZ600000 or something.)
+-------------
+It's really only a problem based on whether the size of the area you're applying styles to is large enough to impact performance and how willing you are to sit and wait for a spreadsheet to open or finish updating.  Some styles can be more intensive than others such as tables.

@@ -1,0 +1,12 @@
+6gg429
+Predicting a Normal Distribution
+Hello all, 
+What I would like to do is predict a normal distribution at specific points. I will supply a total number and the number of points needed. For example, if I say 12 and 6 points, I should get 1, 2, 3, 3, 2, 1. I'm not really sure how to go about this.
+
+
+-------------
+Use NORM.S.DIST with false as the second argument.
+
+Your z score might simply be 0±(n/2) where n is the number of points needed. So for n=6, you might have z= -3, -2, -1, 1, 2, and 3.
+
+You can compress or expand this set of numbers by either dividing or multiplying it with an arbitrary number that's greater than 1.

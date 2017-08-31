@@ -1,0 +1,33 @@
+6gghgy
+Trying to return a specified amount if 3 cells were to equal 3 different criteria
+I work for a trucking company and I do 1099 Sub Contractor payroll.  I wanted to know if it was possible if there were 3 criteria in a string of cells if in the last cell it can produce an amount.  I'm assuming that I would need to create a table in a different location in order to reference that table to input the amount.  In the comments I've included a picture of the Excel sheet template.  It would cut a lot of time out of my day and also make mistakes less often.  If you know how to do it, please help me out.  Thank you so much!
+
+
+-------------
+http://imgur.com/a/mYjvV
+-------------
+Perhaps if you could explain what you want the amount to be a little better I could be of more help.  
+But my first recommendation is to try using an If (And (<requirements>),true, false)) statement if your are trying to get a small amount of results. As you could do a chain of if statements. Otherwise, if you want to refer to a second list you would be using vlookup or hlookup, referring to other tables. I could help more with more info. But hopefully this gives you some ideas. 
+-------------
+Like if certain cells contain the exact criteria referencing maybe a second table put the amount/price in the cell all the way to the right. There will be quite a few groups of criteria to match. 
+-------------
+If the first cell contains 'X' and the next cell contains 'Y' and the next cell contains 'Z' then it's $75. On the other hand if cell 1 contains 'X', cell 2 contains 'Z', and cell 3 contains 'Y' put $100. I'm trying to basically match exact jobs with amount paid. 
+-------------
+Create a table somewhere with 3 columns, list all your combinations of X, Y, and Z and then in a fourth column, put an IF(AND( formula like shown in the picture and auto fill down the entire table. Then in your output box, just SUM the 4th column.
+
+In the example below, the formula in column D is 
+
+    =IF(AND($H$1=A1,$H$2=B1,$H$3=C1),75,0)
+
+and the formula in H4 is 
+
+    =SUM(D:D)
+
+[Example](http://imgur.com/yVhMxvG)
+-------------
+So would X always be say $20 Or would the $ of X change dependant on what y and z are?  
+Such as XYZ would be 20, 30, 40 respectively, would XWZ be 20, 55, 40 or would it be completely different?
+-------------
+OK I will try this and get back to you as soon as possible. Thanks for helping!
+-------------
+Okay.... I'm in the trucking industry. I'm doing payroll for 1099 workers. They do specific "moves". There's a starting point (X), a customer (Y), and an ending point (Z). X, Y, & Z will be completely different every different move. Each move pays differently. Some moves pay $100, some moves pay $300, and so on. What I'm essentially trying to do is when I write the move up on their sheet the pay automatically updates instead of manually entering the pay. So if the row contains those exact criteria the pay cell will update with the corresponding paid amount. Does that make better sense? Sorry I'm sure this is confusing. 

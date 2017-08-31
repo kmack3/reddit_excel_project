@@ -1,0 +1,34 @@
+How to pull historical stock prices to use in excel
+You can pull daily historic data from Yahoo Finance. You can set it up to have a refreshable data link. I can explain it better when I get home if you need a better description!
+What is your data source? If you have a Bloomberg terminal, you can use the API to pull historical data very easily. Please note that there are bid/ask prices and you can set which ones you want to pull. Also, pay attention to the currency of the stock and your base currency. 
+Google sheets handles this extremely easily. Just use the googlefinance function. 
+If you would like free data, there is google finance, yahoo finance, the wsj, and Quandl. Quandl is my favourite of the bunch as it includes both google and yahoo finance as well as economic data etc from many sources and it's got an excel plugin so it integrates beautifully. Check it out :)
+[deleted]
+I have an Excel app for doing just this. Send me a PM with your email and I'll send you a free sample. The unlocked version is $25. It will accept an unlimited number of tickers and any date range and will return the daily ending prices. 
+I'd be interested in this. I'm currently using a link like it to pull current data from Yahoo, but haven't figured out how to pull historical from it.
+
+      =NUMBERVALUE(WEBSERVICE("http://finance.yahoo.com/d/quotes.csv?s="&$A$1&"&f=l1"))
+[deleted]
+None of these are for historical data it appears.
+I know this is r/excel, but you could try out Google Sheets which has a native function that pulls data from the Google Finance databanks. See https://support.google.com/docs/answer/3093281
+Yes. What do you mean you don't have the IT resources to set it up for you?
+A ton easier. Thank you!
+Solution Verified
+[deleted]
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+So long and thanks for all the memes!
+On Excel, go to the Bloomberg tab on the ribbon - look for the Real-Time/Historical Wizard button. It should walk you through the steps.  
+  
+Or just press the Help button twice and chat with the Bloomberg guys. They'll guide you through the whole process and/or give you a formula you can just paste into Excel.
+/u/pedges needs to make sure he's installed the Bloomberg add-in to his Excel ...  might need administrator privileges to do that.
+
+I was going to say put the stock ticker in column A, dates in column B, and the formula in column C:  
+
+*=BDP(A1,PX_BID,B1)*
+
+But the Wizard is also nice. 
+
+Bloomberg has a nice API tutorial in Excel itself. Also, pressing the Help button twice will bring up live chat with the help desk. It's been a while since I've done it, but it's pretty straight forward.

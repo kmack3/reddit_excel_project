@@ -1,0 +1,42 @@
+Trying to replicate a vlookup formula from an old workbook for a new workbook. I don't understand why it won't work or if I need a new formula.
+The ISERROR function tests the argument (in this case the VLOOKUP) and returns TRUE if the argument produces an error (in this case if the VLOOKUP does not find any matches it returns an error of the type 'N/A').
+
+When used with and IF function the ISERROR can test if the VLOOKUP finds a value, if it does not (ISERROR returns TRUE because it is an error) then write "BLANK", if it finds a value (ISERROR returns FALSE because it is not an error) then do the VLOOKUP again (that is why it is written twice: one for testing the result the other for displaying the result).
+
+Was the explanation clear?
+
+TL;DR: IF(ISERROR(FORMULA TO BE TESTED), RESULT IF ERROR, FORMULA AGAIN TO DISPLAY THE RESULT)
+
+On versions after Office 2007 (included) you can use the IFERROR function instead, with this function you do not need to repeat the formula that you want to test:
+
+IFERROR(FORMULA TO TEST, VALUE IF ERROR) - it tests the formula just like ISERROR and if is not an error it returns its value, if it is an error returns the value that you chose...
+
+
+Further reading:
+
+http://www.techonthenet.com/excel/formulas/iserror.php
+
+https://support.office.com/en-us/article/IFERROR-function-c526fd07-caeb-47b8-8bb6-63f3e417f611
+I would also suggest using the Index-match combo instead of VLOOKUP-function. 
+It's definitely more versatile and robust and for me it's also easier to understand. 
+I would suggest you to Google it, but the most simple version is in pseudocode;
+=INDEX(column with return values,MATCH(lookupID,column with IDs,0))
+
+Basically excel is getting the cell in one column being on the same row as the ser ID exists in a ID column. And don't forget the 0 in the end (for exact match)
+I would suggest that you use the Index-match combo instead. More versatile and robust as well as easier to understand. 
+Google it for a guide! 
+
+I mostly use the most basic argument:
+INDEX(column with return values, MATCH(searchID, column with IDs,0))
+You can make this a lot more concise and readable by using IFERROR instead of the IF, ISERROR combo. That way you don't have to repeat the vlookup formula. 
+
+    =IFERROR(VLOOKUP(....),"") 
+
+will do the same thing. 
+It is quite simple. the formula is testing whether a value exists, and displays it if it does. ISERROR is true when there is an error. 
+
+I assume you have names in column a, and names and surnames in column a &b of another sheet. you want surnames in your current sheet. but if that name is not contained in the name-surname list, it will show #n/a. So the command you are using is asking whether the vlookup is returning a value (means name-surname exists in other sheet) or an error. if it returns error, the formula will show BLANK. If there is indeed a value returned, then that VLOOKUP value will be displayed.
+Text to data on the data tab
+Thank you that really helped! 
+Thank you. I'm familiar with index match formula so I'll try it that way. 
+I think the person who created the workbook was using an older version of excel. I'll try it with IFERROR. Thank you! 

@@ -1,0 +1,73 @@
+Trying to understand the love of Pivot Tables
+One word: Slicers.
+For me, it is usability for other people.
+
+I work in retail, where all data is structured in a database form:
+City-Shop-SaleID-ItemID-ItemName-Price-Quantity...
+
+It is super for me to create a report using a pivot table, and then teach my colleagues to add/remove columns or rows as they see fit. As long as they only need sums or %, everything is fine, and it is infinitely better than creating a separate report for every "view" of the data.
+
+For anything more advanced, like getting rid of empty spaces, linking several data sources together etc., you might want to have a look at the beauty that is:
+
+[PowerPivot](https://support.office.com/en-us/article/Power-Pivot-Powerful-data-analysis-and-data-modeling-in-Excel-d7b119ed-1b3b-4f23-b634-445ab141b59b)
+Data Extraction based on different Subtotals. 
+
+
+Double click a subtotal within the pivot table, and boom. You have all the 
+rows of data that make up the subtotal. No more going back and forth filtering and checking and unchecking little boxes. 
+
+That in addition to the easy drag-in, drag-out menu allows for very quick insights in your data. Want the totals of all assets per project per location? Easy. Want the totals for that project *regardless* of location? Just drag out the location field. Quick, easy, convenient insights. The more things you do with one pivot table, you realize how much longer it would be use sumifs, countifs, averageifs for all of those tasks. 
+
+
+Edit: Wrong field name
+You can drill into the detail behind the number by double-clicking that cell in the values field.  No need to flip back and forth.
+I actually don't like pivot tables, but they're good at summarising data and easy to adapt to show what you want.
+
+That said, they absolutely kill your resources and if you have a decent sized set of data it's really going to struggle.
+
+Equally far too many people try and use pivot tables for things that they're not best adapted to. 
+Depending on what you're actually needing to report- has anyone at your company considered Power BI? Great visualisations, and will potentially get around the Excel 2007 lack of functionality issue. 
+There's a couple of things.
+
+File size bloat isn't necessarily as bad as file calculation bloat. Adding helper columns increases the file size, but typically won't change calculation much, particularly not if you're doing reasonable helper columns that only target a couple of cells each, and if those cells don't change, there's no recalculation going on. If you have helper columns where each cell is referencing a whole other column, you'll start to see startup bloat and file-size bloat a lot more.
+
+If you have normalized data, you can cut it in a lot of ways using pivot tables, even more with power pivot, or you can extract subsets with power-query, all in a fairly user-friendly way, have graphs that update automatically, it's super neat. If you don't have normalized data, it's largely useless. So I guess on the bright side, the lack of flexibility forces discipline in your data structure. 
+
+One problem you get with pivots, and that you mentioned as well, is if you have a lot possible ways to cut the data, business lines, countries, seasons, years, months, whether it was a rainy day, whatever, people have a tendency to cram it all in there **somewhere**, which gives you a big and bulky pivot table which hardly gives you an overview of anything specific.
+
+This is more a design issue though, and you run the same risk with a "manual" dropdown/sumif setup, it's just more work so you're less liable to go crazy. Generally speaking, multiple smaller pivot tables will serve you better than a single huge one. 
+
+From a processing point of view, pivot tables will usually run faster than formula setups, you can also have them connect to the data "externally",  so your reporting and your data (and helper columns) aren't in the same sheet at all, which then again reduces the risk of people bumbling around in the core data, while avoiding mr. butterfingers fucking up your 3 line long multiple condition unique count array formula. 
+
+I don't know if you should "convert" to pivot tables, but if you have data that pivot tables like, they are a great tool, that can allow you to quickly and easily get an overview of the data. The ability to double click on a value and drill down into the data that makes up that value, is a neat tool too. 
+
+With that said - no - pivot tables are not as flexible as a formula setup, sometimes you'll want a report that pulls some specific information out of a sheet, or you'll want a specific operation done to the data, and pivots will suck for the purpose, but they aren't all bad :) 
+
+As a disclaimer, this is all written without knowing the specific issues you face, just my general experience with pivots. I used to hate them precisely because they were inflexible, often my data wasn't normalized, I tried to do things with pivots and it never worked, with a formula I could bang out a solution in no time, but after working with them for a while, there are just a lot of situations in which a pivot table makes everything easier, faster, and better, recognizing when to use it and when not to, is the main challenge :D
+
+
+Also, if you have lots of blank space at the end of data values try using the TRIM() function. Or LEFT() if you know the actual value is a set length 
+use excel 2010 and you'll see why. pivot tables r pretty gay in the old versions of excel
+You need BIRT's interactive web viewer.  
+I can see value if all I ever want is to sum and if I had newer versions, percentages.  Those are always needed, but I feel like 90% of the time, more is called on, or will be.  I work in finance, I kinda assume everyone can work with an iffs statement, and if you're doing analytic, you better known sumproduct.  These often get applied outside the pivot.  
+
+I'm not saying these are useless tools, but they seem so insanely limited and weak next to the ease of understanding and simplicity that a sumifs provides.  
+The functions I mentioned, imo are far more resource intensive.  That is actually a huge plus for a pivot.  The negative, I don't know what fields are in half of them!  
+Thanks for the response?  
+
+"normalized" is such an interesting term.  With my last job, no, it was a huge 100 column denormalized table, intentionally, that we basically threw case statements into sql to extract "excel" and "idiot accountant" (I'm being nice) friendly ways.  I then had I dunno, 5000 or 10000 formulas written to produce full accounting reports and menus allowed us to drive into which one of our clients it was for.  About a half second lag to switch between clients on my old laptop.  This also worked with VB code and so yeah it was the right way to make it.  I used similar setups to drive analytic from the data.  
+
+Step forward to the new job.  We have badly written queries (I'm suspecting) coming out of business objects and/or SAS.  They are then thrown into what becomes more "helper columns" than the whole original raw data.  These helper columns then drive 12 plus sheets of pivot tables, which then respond to 12 corresponding "formula" sheets which just copy the pivot tables so they can be formatted nicer I guess and then passed out without the pivot.  It's a joke.....seriously a joke.  
+
+I can't run THAT many functions off this data.  There are at least 10 columns of vlookups in the "helper" columns, to "automate" things.  It's a mess.  So where I'm at is the data I'd need for a function table "setup" is way way too dynamic plus I do need to assume a fairly entry level replacement down the road (say a guy/gal with a masters in finance/account or MBA and 6 months to 2 years experience.  I'm not explaining arrays in my notes, lol.  So the issue two fold. First, I am not comfortable with pivot tables.  Everytime I use one, I get annoyed and just write functions.  I like because if I do it right I can reuse and scale (add more details).  I like it because resources pending, I'd rather have instant updates.  I generally work with (and here no exception) many to many relationships.  So I'm starting these things with concatenations just to create one to many or one to one relationships.  I think a part of me just finds that annoying since it's a breeze in access to do this.  Second, they aren't making this easier.  They're creating a glut of work and creating "tables" so large it's hard to even keep up with what column headers mean.  
+
+I'm sure I need to use pivot tables, and need to learn to like them.  I don't have power pivot which I actually respect a lot and had some fun with before the limitations of one to many or one to one but never many to many drove me to access for those types of problems.  But I"m trying to figure out when it's a CLEAR winnner, when it's OK, and when I'm just wasting my time.  I'm not sure I'll ever find myself loving it...but I'm open to it.  
+You can use a trim to the field headers in a pivot to make typing the field name into a calculated value (in the table, not a helper)?  
+Wow man, I'm feeling for ya, sounds like a right clusterfuck, from the very start with shitty queries followed by vlookups in helper columns followed to pivots and then copying the data back out of the pivots. 
+
+It sounds like they took every worst practice and combined it lol, but then I could be wrong and there is some legitimate technical/business reason for why they're doing what they're doing the whole way through, but it seems unlikely.
+
+The fact you're on 2007 doesn't help either, in 2013 you'd be able to use the data model feature or power pivot to set up relationships between different tables, which would probably remove the need for all of those vlookups (unless they're targeting the table itself, in which case :S)
+
+
+I'm sorry :(

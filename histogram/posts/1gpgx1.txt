@@ -1,0 +1,45 @@
+A thank you.
+IF(C2="Professional Upgrade","Woo!","")
+
+> Woo!
+This is awesome - There aren't that many subs which have such a positive impact on one's livelihood. :) You all rock!
+FTFY
+
+
+    Sub Life_Upgrade()
+
+    Dim NewPayRate As Integer
+    Dim PreviousPayRate As Integer
+    Dim MoreHours As Integer
+    Dim MoreMoney As Integer
+    Dim YourName As String
+
+    YourName = Environ("USERNAME")
+    
+    If NewPayRate = PreviousPayRate Then
+    GoTo BossSaidNo
+
+    Else
+
+    MoreMoney = NewPayRate * MoreHours
+
+    MsgBox ("Congratulations " & YourName & " on your raise of " & MoreMoney &"!")
+
+    BossSaidNo:
+
+    Set wordapp = CreateObject("word.Application")
+    wordapp.documents.Open "C:\Users\"&YourName&"\Documents\"&YourName&"_Resume.doc"
+    wordapp.Visible = True
+
+    Application.Quit
+
+    Else
+
+    End If
+    End If
+
+    End Sub
+
+BossSaidNo is, unfortunately where I'm at right now... :(
+
+I'm fixing up my resume now.

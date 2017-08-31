@@ -1,0 +1,62 @@
+Using Excel to solve a variable on the right hand side of the equation from multiple cells
+What's the overall general formula for this type of calculation, as we're not all rocket scientists =P
+Starting with the 2nd formula,
+
+(A*/A)/1.728 = M / (1 + 0.2 M^2 )^3
+
+call the LHS b.
+
+(1 + 0.6 M^2 + 0.12 M^4 + 0.008 M^6 ) = M/b
+
+0.008 M^6 + 0.12 M^4 + 0.6 M^2 - M/b + 1 = 0  [edited]
+
+That should be easy enough to solve using Newton or Secant methods.  
+You can use VBA to call solver / goal seek in each row if you know how to use them. That's how I usually do this kind of problem.
+Excel crunches data easily, but doesn't do mathematical equations like this. 
+
+What I would do is put the equation into Wolfram Alpha with as many of the constants as you can, and then reproduce the solution for M into Excel. 
+In Aerodynamics, this is called the Area-Mach number equation. There are plenty of [tabulated values](http://www.cchem.berkeley.edu/cbe150a/isentropic_flow.pdf) that you can use to find the Mach number when given the ratio of areas, no need to do calculations when someone already has!
+So what variables in the equation are unknown?  
+This is more of an algebra question than an excel question. Solve for M algebraically so that all of the Ms are on one side of the equal sign alone, and everything else is on the other side. Then, whatever M equals, that's what you'll enter into the cell as your formula
+
+So, if M = 2a / 3c
+
+Plug into your M columns =2A / 3C
+
+Obviously very simplified. But that's how this is done.
+Forgot the link, apologies!
+Yes, this.  Came in here to post about newton's method.  I do lots of excel voodoo using numerical methods.  I solve equations with no closed form solutions all the time with newton's method and look like a damned wizard.  All you need to know is derivative equation.
+Indeed. This is the way to go. 
+http://imgur.com/zGmxJuR
+Put two more columns, one for the "calculated A*/A" (col F) and another one for the "error" (col G). The use the "Goal Seek" tool to calculate the Mach (on column E for me) that sets the error to 0. Goal seek for every row with the code bellow:
+
+      Sub Macro1()
+          Dim N As Long
+          For N = 2 To 12
+            Range("G1")(N, 1).GoalSeek Goal:=0, ChangingCell:=Range("E1")(N, 1)
+         Next N
+      End Sub
+
+Yeah, or a dedicated computer algebra system like Maxima. 
+
+Is this secretly really an optimisation rather than tables of numbers problem?
+I've included the simplified equation if it makes it any more straightforward for excel? And we know the left hand side of the equation.
+
+I'll look into that thanks
+That is very helpful actually thank you, but unfortunately I have to show the working for this report!
+Just M.
+ A*/A, on the left hand side of the equation, is calculated in the excel spreadsheet at 11 different points in 11 cells.
+The best re-arrangement I can do though is (M^3 ) * (1+0.2M^2 ) on the left hand side. I can't get a singular M
+Picky: in most cases Secant method for the first few iterations followed by binary search can be as fast and doesn't require derivatives.
+https://www.symbolab.com/solver/solve-for-equation-calculator/solve%20for%20x%2C%20.21836478%3DX%5Cleft(%5Cfrac%7B1.2%7D%7B1%2B0.2X%5E%7B2%7D%7D%5Cright)%5E%7B3%7D
+
+This might help
+What is this homework?  
+If youre trying to work backwards- finding the Mach number from the area ratio- you need to use employ a numerical analysis like Newton-Raphson method. 
+
+[Here's what I found on Google,](https://www.grc.nasa.gov/www/winddocs/utilities/b4wind_guide/mach.html) you can try working it out from this. 
+So....you're asking someone to solve the equation for M then?
+I'm learning stuff.  Never used the secant method...will look into this.  I suppose we should also preface that you need to write custom vba functions to pull this off.  I have seen this done in excel only, but it's very ugly.
+
+Thx for the tip!
+Yeah, for each point. Sorry if I've confused anything.

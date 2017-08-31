@@ -1,0 +1,32 @@
+big
+3vng1a
+Big performance problem in CW Algorithm Implementation
+
+Hello guys,
+
+I have a big performance problem with the implementation of the CW Savings Algorithm in Excel VBA. It is an heuristic approach to the Routing problem with added capacity. It works fine and all with around 10-20 clients but if I go for a list of like 60 clients it takes ages (30min and still nothing done).
+
+Here is a zip file containing the spreadsheet and the access db where it gets its client data from. The distance matrix, which gets build through google maps api is already done, so to run it use the "Build Routes" button.
+
+https://dl.dropboxusercontent.com/u/2912865/cw_algo.zip
+
+
+
+
+
+-------------
+Try adding this to the subs that take a while:
+
+    Application.Calculation = xlCalculationManual
+    Application.ScreenUpdating = False
+
+And be sure to add them back when you're done:
+
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+
+Turning off calculations and screen updating will free up time to run the VBA code. If you do need the sheet calculate use this:
+
+    Application.Calculate
+
+This way you control when it does happen

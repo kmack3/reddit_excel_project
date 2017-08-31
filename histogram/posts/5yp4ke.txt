@@ -1,0 +1,45 @@
+How can I get Excel to do my timesheet automatically?
+Alright, let's automate. Below are the instructions; formatting is left until the end.
+
+1. In cell J3, type in 1/8/17. 
+
+2. In cell J4, enter below formula and drag down. To drag down (ie. copy / paste formula) click bottom right corner of the cell and pull that to the end of the desired range.
+
+    =J3+1
+
+3. In cell I3, enter below formula and drag down.
+
+    =TEXT(WEEKDAY(J3),"dddd")
+
+ 3.5. If columns K and L are not formatted as time, do so by selecting the cells, clicking the 'home' ribbon at the top, clicking 'format' in the middle of the page, and formatting as time. 
+
+4. In cell M3, enter below formula and drag down.
+
+    =MIN((L3-K3)*24,6.5)
+
+5. In cell N3, enter below formula and drag down.
+
+    =MAX((L3-K3)*2,6.5)-6.5
+
+6. In cell M10, enter below formula and drag *over* to cell N10
+
+   =SUM(M3:M9)
+
+-----
+
+For the max functions you need to multiply by 24 because excel stores time such that 1 is 1 day. Subtracting two dates will give you the difference *in days*. To show in hours, you have to convert to hours, which is multiplying by 24.  
+off topic:  where are you that over 6.5 hours is OT?
+Don't you thing that using something like https://www.actitime.com/ will be much easier?
+In your regular column for Sunday put = the click the first column in the end column put a - then click the time in cell for Sunday. You can copy that formula down the cells. This will solve for hours worked. Then you can add put a =sum(highlight all hours) formula at the bottom of the table.
+
+For OT hours make a new cell that says OT hours. You will need to do an if formula. =If(click hour value in a cell>6.5,click hour value again - 6.5, click hour value). 
+I think you meant MIN where you put MAX in step 4.
+I work 10 hour days for 2 weeks straight. After 8 hours is overtime and weekends are overtime. They instead give overtime after 6.5 hours which equals to be the same. In Canada, btw.
+Revised. Might work better now. Might work worse. Not sure. Drunk. Will see tomorrow.
+That is a strange way to do it, but works out better for you.  If you work only three eight hour days, do you still get 4.5 hours OT?
+
+(Also, I forgot to leave a tip about Excel in my last response, since you are new and someone already answered.  See that fancy "F" up there?  That is the Function prompt.  You can click on that and read up on all of the things Excel does.)
+still says MIN :P
+Man, this threw me through a loop last night. Would have been nice if I had realized I was looking at step 5, not step 4.
+
+u/semicolonsemicolon was correct, step 4 should have been MIN and I've edited to reflect.

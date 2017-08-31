@@ -1,0 +1,235 @@
+What are some of the worst design features that you can incorporate into an excel sheet?
+Trying to store your multi-dimensional data in two dimensions instead of recording it in database format. I see stuff like this all the time at work. E.g., boss wants a report showing the OT Hours and OT $ spent in each region. So the table is created (and maintained) as follows:
+
+| |        Overtime   |          |          | OT Pay   |          |          |          |          |
+|----------|----------|----------|----------|----------|----------|----------|----------|----------|
+| Region   | 1/1/2016 | 2/1/2016 | 3/1/2016 | 4/1/2016 | 1/1/2016 | 2/1/2016 | 3/1/2016 | 4/1/2016 |
+| East     | 5        | 5        | 2        | 1        | 50       | 55       | 20       | 12       |
+| North    | 1        | 5        | 2        | 1        | 10       | 55       | 23       | 10       |
+| West     | 1        | 3        | 4        | 5        | 12       | 34       | 54       | 62       |
+| South    | 3        | 3        | 1        | 1        | 30       | 35       | 12       | 11       |
+
+As you can see, we have three different dimensions of data. OT Hours, OT $ and Region, but we only have two dimensions to output this data. As such, the OT Hours and OT $ are both displayed in the same dimension. While this might be OK if I only ever want to display this information in this exact format, what if I want to analyze it? I can't very easily. 
+
+*"What's the average OT Wage in the East Region?"*
+
+You might be thinking, "Ha! That's easy to calculate. And it kind of is. You could do SUM(F3:I3)/SUM(B3:E3) and get the correct answer.
+
+Now, what happens next month when you add more columns? Your formula now is SUM(G3:J3)/SUM(B3:E3). Not a big deal. But now what if you want to find the average OT wages in the North and West for just April? It's still simple, but as you can see it's extremely tedious. 
+
+If instead you stored the information in "database format," it'd be much easier to do all of that. You could even create a simple dashboard that takes an input and spits an output, as it will always be referencing the same rows and columns. 
+
+Take the below column, for example:
+
+| Region | Month    | Overtime | OT $ |
+|--------|----------|----------|------|
+| East   | 1/1/2016 | 5        | 50   |
+| East   | 2/1/2016 | 5        | 55   |
+| East   | 3/1/2016 | 2        | 20   |
+| East   | 4/1/2016 | 1        | 12   |
+| North  | 1/1/2016 | 1        | 10   |
+| …      | etc      |          |      |
+
+Going back to the example, "What's the average OT Wage in the East Region?"
+
+Well, it's      
+
+      SUMIFS(C:C,A:A,$[Cell That Says East])/SUMIFS(D:D,A:A,$[Cells that says East]) 
+
+If I want to find another region, I just change my cell that says East to say North. I can even dynamically change my search range by adding a SUMIFS criteria to the date being <= and >= my outer limits. 
+
+This is a lot more than I anticipated writing, but a large part of my job is working with data from a million sources, so half of my job is really just figuring out the easiest way to store a piece of information to be scalable.
+Sheet 1, Sheet 2, Sheet 3...
+Conditional formatting for each cell. Learn how to apply across all the cells.
+Hiding sheets with password protection, thinking that provides data security.
+Merged cells  - they only make things more difficult. Format the text to center across selection instead.
+Rows/columns where formats/data types are inconsistent, preventing usage of the same formula across those rows/columns. 
+
+Hard coding dynamic data (monthly financial statements, p&l, daily reports/stats, etc.).
+
+Vlookups on separate worksheets with more than a few columns. I'm looking at you, Mr. 5 yr budget/forecast model with reference to random columns in your lookups. It's just not intuitive when needing to troubleshoot. 
+
+Complex Vlookups with match/if/offset logic ebedded when index/match or sumproduct work better. Though the argument could be made about volatile formulas....though there are rare of occasions when Vlookups are useful...
+
+Any table/report structure requiring the manual cutting/pasting of data across multiple cells and worksheets. 
+
+
+You've got most of the data in a couple of hundred rows and columns. Then you stick some other data a couple of thousand rows and/or columns out and color the font white so nobody can easily see it.  WTF, I hate you. 
+Not using headlines for your data. Using sheet white-space for uncommented calculations. Not putting comments in large macros. Not using uniform color-coding.
+
+Came across this a year ago.  A team sent me a simple spreadsheet with 4 rows and 3 columns of data with a couple more columns of calculations.
+
+The numbers made sense so I started to use them.  Then I decided to cross-check the calculations.  There were references to cells way to the right (like column AA).  The data in those cells were in WHITE TEXT so you couldn't see them.  The hidden numbers in white text basically were "magic numbers" that presupposed the results they wanted and the spreadsheet was just a sham to make it look like they calculated the results from raw data.
+Col A left intentionally blank. Row 1 left intentionally blank.
+A huge complicated macro involving file generation, worksheets, workbooks, using hardcoded ranges.
+ 
+That will try to run on the *active workbook*.
+ 
+With a shortcut key assigned of *ctrl+s*.
+ 
+This exists as a standard document where i work.
+Using number and text formatting incorrectly. 
+
+For instance, applying Number formatting to product codes because most of them are numeric. The product code **999.100** will become **999.1** .
+Some people then go out of their way to *mask* this by adding Custom formatting to force the dropped zeroes. 
+
+Rule of thumb: Are you or could you make a *mathematical* calculation on that value? If not, it should **not** be formatted as a Number.
+3D pie chart, bar of pie chart, exploded pie in 3d chart.  
+all those charts in 3d and maybe all those 'stacked' chart.
+For me: Precision as Displayed.  Want to have all your financial amounts constrained to two decimal places?  PAD sounds tempting - all numbers are only stored as 2dp so you don't need to write any of those pesky rounding formulas.  But then someone comes along and drops a decimal on a column for whatever reason, and oops the tax rate was in that column and has now been unreversibly rounded off to 0% for the entire model and you didn't even get a warning dialogue box.
+
+Bleh.
+Late to the party, but I absolutely hate when someone has chosen to not show Column letters or Row numbers. Yes you can reset it without too much hassle, but dude you are just asking for trouble for novices.
+Color codes with no description of what each color means.  You're better off with a column to indicate what the color would represent anyway. Then you can sort, filter, and write formulas against it.
+
+ Putting blank/headers in between data sets, which prevents goid use of data filtering.  
+
+Those are two of my biggest frustration points with other peoples spreadsheets.
+I have used Excel for a long time. I am not a programmer. I would not even call myself a programming analyst.
+
+* Generally speaking, listening to people that have no imagination or idea of what can be done with math and logic. This has nothing to do with Excel, of course.
+
+In retail...
+
+* Using a vlookup to return one color of a style, when all colors were necessary for other departments to work with. The data source was actually deprecated after some system updates. I wound up writing a UDF to return all colors of a style that were in inventory in one cell. I offered to extend the UDF to also include inventory counts for each color since the teams that used this needed it. This was declined by people I reported under.
+
+* Wrong formulas for projections, averages, sales, and inventory, contrary to established industry standards. Yes, I was told to do this. And yes, they did over commit on orders leading to inventory sitting there that was not selling.
+
+* Spent a day following specific instructions to a one-time use project on a set of Excel files that I helped manage. The features of this project was on my to-do list of enhancements, as a permanent feature to these files. I spent 30 mins doing it my way to add the feature the following week.
+
+Working in other roles:
+
+* Building a database of financial figures for public companies. This used very early versions of web queries in Excel. The amount of time I spent was longer than buying that data from data vendors.
+
+My own faults:
+
+* Not rewriting inherited code from people that have no business working with VBA... and formulas from people that do not know how to structure conditional statements.
+Using ALL bold and different colours to format the font cells across the worksheet. Eye pain.
+Slightly off-topic, but I once had an account director make me show a pie chart with two data points compared to a pie chart with one data point.
+
+For the longest time I tried to convince him to use a stacked bar so he could include all three data in the same chart, but he wasn't having any of that. Eventually, I just changed to that design and later asked him if he liked the new feature we had in Excel. He loved it.
+Merged cells.
+
+"plugs" e.g. in some random formula like =SUM(A1:A20) someone added a nice plug that changes the formula to: =SUM(A1:A20)+23,55
+
+Then next month they forget about the plug...
+
+(multidimensional data stored poorly was mentioned by other user)
+Randomly inserting hard coded numbers into huge sheets with thousands of calculated cells. 
+
+I've been telling them for awhile that this is going to end up biting them in the ass when the calculations are all wrong, but so far I've been ignored. 
+Offset and indirect but my pet hate that I see a lot is indirect("a"&match(b2,a:a,0))  why introduce volatility for no good reason!
+This is probally (imo) the number one important thing to consider, never taught me in college (uk) about data storage. 
+
+You can also pinion a flat data table! You cannot in a matrix format!
+I'll generalize by restating this as, 'learn to separate your data from your *presentation* of the data'. I've seen many needlessly complicated formulas because the author is using the data source as a means to display the data, whereas a better solution would be to create a datasource and then pivot from it.
+This just blew my mind. I have personally always went with a database layout, but didn't realize the impact. 
+This so much.  Half the people in my department don't understand this, and the other half are so tired of having their work butchered this way and made unscaleable.
+
+Analysis shouldn't require rework. 
+And this is why god invented Powerquery and *unpivot other columns*...
+I still don't like it when you can just turn it into a pivot table.
+Agreed 2nd is better, but 1st could be read (relatively) easily with a SUMPRODUCT.
+I hate how conditional formats are copied automatically when you copy a cell over. In no time, there are multiple versions of the same conditional format applied over varying ranges. That's just annoying.
+YES!!!!  I seriously spent an hour removing individual formatting in a gigantic old workbook yesterday. Thought I was going to rip my hair out. 
+Well, considering the level of Excel literacy I've come across many offices, it does to some extent. :)
+Uhhh, what's the easy way around password protected sheets then?
+XlVeryHidden
+
+No need for even passwords. 99% don't even realize there is a sheet there
+I don't see what's so terrible about a sheet that you design to be printed and it is fitted to be 1 page to have the first row merged for a nice title. I only ever use merged cells in such a way that sorting the sheet in its entirety is not something that you want to do or impede any type of sorting otherwise. If the sheet is designed well, I really don't see what the problem is with this.
+Sure, let me just select A1:A3 and center across selection...
+
+Oh wait, something is wrong.
+
+If there were a vertical center across selection, I'd agree that we should avoid merged cells in most cases. But there isn't.
+My excel knowledge is pretty basic, but my primary function is building fillable forms and worksheets in Excel and I merge cells all day long. I've never seen a workable alternative when needing to take inputted information in an aesthetically pleasing way. 
+Im guilty of complex vlookups. I can do just fine with index-match, but somehow keep going back to lookups. I do code dynamic row and column number references though, so at least editing and implementing changes is easier for end user. 
+I'm guilty of hard-coding semi-static numbers. Mostly because other users can't open two files at once to make multi-sheet pulls work >_>
+They're used less and less in modern excel...tables are the way forward.
+Agreed.  Any spreadsheet I make that is ever touched by someone else always gets fucked up formatting because they only know the default way to cut paste.
+This. I was recreating a sheet with 30,000 rows of references to other sheets. I deleted all but the first row, and recreated the formulas, then started re-pasting.
+
+By the time I got to the end the workbook had slowed to a crawl and it took me a couple of days to figure out why. The Conditional Formatting that was previously for each column was now repeated 30,000 times.
+
+Once I deleted all of those and redid them for the columns the slowdown was fixed immediately.
+This man, I mostly hide sheets to not confuse users. Has nothing to do with data security.
+`=HiddenSheet!A1`
+[This is how](https://www.reddit.com/r/excel/comments/4lv3je/hi_there_i_am_trying_to_open_a_xlsx_file_which_is/d3qdoot/)
+
+As long as the document isn't encrypted, bypassing password protected data is extremely simple.
+I have a macro (taken from the internet) that will crack any excel password in a matter of minutes.
+Merged cells should be reserved for data output, not the actual storage of data. If it needs to look pretty or be printed, merge all the cells as needed.
+Center across selection, single accounting underline. Do not ever merge and center you pleb 
+ 
+EDIT: I was joking. But these actions look great and don't mess with formulas.
+
+Respect. 
+
+At the end of the day it's all about preference. My teammate has great analytical chops, solid modeling, and always uses vlookups. My brain just isn't use to it when digging into his models. >_<
+I feel that pain. I feel that pain. I'm glad my current team is pretty savvy, though their mindset has not yet expanded to "workflow" mode to centralize daily/monthly processes. I should know better by now, but I'm still shocked by how craptacular data integration and flow can be for organizations with asset sizes in the billions. 
+
+Sometimes you gotta swallow your pride and sanity, and just accept the fact that people don't mind spending 10-30 minutes, or more, on a repetitive tasks...
+If the conditional formatting is not currently active, it's not unreasonable for them to do anything other than the default method for pasting.
+I do it to protect users from screwing themselves. If they could see or edit that stuff, they'd mess it up and the workbook would be unusable. 
+Psh, if they use veryhidden, you'll never figure out the name! Oops I accidentally dropped pens on the alt and F11 keys...
+Better still, use a table - it gives no hint of the existence of a sheet.
+Your output is someone else's input. If you didn't want them to use it for something, send it as a pdf. If you send it as an excel doc, send it as a usable excel doc IMO.
+Yeah this is how I set up my sheets. The only sheets that have merged cells are the end reports not the data or working sheets. 
+Even then, so often I get asked to take the output of the workbook we did two months ago and do something to it, that I now build my output sheets with this use in mind. I use colour blocking and selective borders to make the output readable. In cases where I might once have merged three or four cells vertically, I now place the same info in each cell, but set the text colour to the background colour in most of them, so that they're amenable to array formulae, SUMIFS() and so forth.
+typical example: coworker has a process she used to do with literally dozens of speradsheets that were just static data, with single columns for a description where she'd type in all the activity done to date.  When a notice was issued, when we got a response, when a check was reissued, when it was cashed, etc.  I dumped all that mess into a single file with columns like date cashed, so you just key in the dates of relevant events when they happen in the proper place.  No having to read each line, conditional formatting identifies what's done and what isn't.  Except when she keeps adding new lines by copy/pasting from another workbook with her own manually-applied formatting, then bitches at me that my spreadsheet isn't working when the color doesn't change.
+I leave it unhidden and keep a second copy on my account; then if they dick about with it and break something I can make them feel foolish, fix the problem, and they won't do it again. 
+
+For the majority of people, leaving the sheets visible helps them understand how we are processing the data
+Good thing the VBE project is locked with a password, too, then.. right? ;)
+More of a question of the user and their needs/abilities, in my opinion. If I know someone is excel savvy I've no problem sending the xls. Otherwise pdf. 
+Thanks for actually saying this. I always read how you should absolutely never use merged cells and it makes me feel like I'm doing something wrong when I've never ever had an issue with them.
+The majority of the people I work with don't understand it anyway, so there's no point. And yeah there's always a fresh unadulterated copy on the server.
+Helps them understand how much they don't know...
+Oops, I opened it in OpenOffice and all the passwords fell off.
+[Yes, totally](http://home.ayra.ch/unlock/)
+And the others don't care about understanding
+But it gives the added aura of how magic you are when you fix that. Sometimes I will hit F2 on a formula cell and pretend to "analyze" it for no reason just to bombard them with the rainbow of color explosion from the complicated formula I created.
+Good work! Now explain to IT how you managed to download and run an unauthorised application on your work computer, or otherwise how you exfiltrated internal files to an insecure external box, all to gain access to information you didn't have the authority for, then collect your things on the way out :)
+So, people are actually stupid enough to upload their Excel files to a strange website and trust that the person on the other side won't do anything they wouldn't want them to do?
+
+Oh, who am I kidding. Of course people are that stupid.
+Sure seems so:
+
+Notice: Use of undefined constant err - assumed 'err' in C:\inetpub\wwwroot\unlock\index.php on line 91
+
+Interesting choice to host your site on a Windows box, btw :p
+
+Does it attempt to employ a similar technique to the xml unzip/edit for sheet passwords?
+
+Either way, I would say that's getting out of interoffice fiddler territory to the point of maliciousness.  Obviously Excel files are not actually secure, but you can account for people poking around where they shouldn't, and anything human typeable can eventually be broken if the cracker is willing to sit through a bruteforce.
+eh, true. Sad but true. Excel is great!
+Ha, yes, I am magical and no mere mortal understands my ways: formulas and macros.
+Ok smart guy. Turn it into a zip file and just open it. Then pull the password from the vba file directly because it is stored in plaintext on pre excel 2013 files.
+
+Plus, getting open office authorized at any big company should not be a problem. It does a lot of excel file repair better than excel can.
+We have an internal site that unlocks Excels and pdfs along with some other various tricks. It's pretty easy to replicate the useful part. 
+> Oh, who am I kidding. Of course people are that stupid.
+
+if you need to unlock the VBA password it is usually because you were not the one to lock it in the first place, so you probably also don't care about the sheet content.
+> Notice: Use of undefined constant err - assumed 'err' in C:\inetpub\wwwroot\unlock\index.php on line 91
+
+I don't do PHP very often and I am not used to prefix every damn variable with `$` (after all, it works without doing so just fine). For some reason however, error reporting in that file has been set to `E_ALL`. Normally notices are not printed. Maybe I left it there for debugging.
+
+> Interesting choice to host your site on a Windows box, btw :p
+
+I am a Windows person and own about 15 public IP addresses, so yeah, they are all Windows. I am more used to ASP.NET anyways. Setting up PHP on windows is by no means harder than doing so on Linux and most of the scripts you find online work just fine. They usually break when the programmer hardcoded linux specific paths instead of using the correct PHP functions for it.
+
+> Does it attempt to employ a similar technique to the xml unzip/edit for sheet passwords?
+
+Yes. This will only unlock the VBA password however. Interestingly, the procedure is almost the same for any file. If it is of the new zipped file, you have to unzip the `vbaProject.bin` from the file and then perform the unlock steps on that instead of the whole file. I added a download link for the script at the bottom of it now if you are interested in how it has been set up.
+
+
+
+
+We're on 2013 here so no worries for me, and no OO available. A lot of companies don't trust FOSS (paradoxically)..
+
+Anyway, as I said in another subthread, we're reaching the point of maliciousness and this stuff is only really meant for obfuscation - if people are going to these lengths, either someone in your company is doing the wrong thing or your security has failed elsewhere allowing someone to access a file they shouldn't be able to.
+You ever work for a big company?  Good luck getting OO installed.
+[Who needs to install?](http://portableapps.com/apps/office/openoffice_portable)
+I've had OO approved by corporate security at two different fortune 500 companies. It took a little bit of jumping through hoops, but not really a huge problem if you just open a ticket with the security group and explain rationally why you need it.

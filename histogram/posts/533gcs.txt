@@ -1,0 +1,37 @@
+Create a check-box that will send an automatic email? is this possible?
+Hello,  
+
+You can create a macro in VBA attached to a check box or a button that will send an email of your choosing when run.  
+
+    Sub Send_Email()
+        Dim OutApp As Object
+        Dim OutMail As Object
+
+        Set OutApp = CreateObject("Outlook.Application")
+        Set OutMail = OutApp.CreateItem(0)
+        With OutMail
+            .SentOnBehalfOfName = ""
+            .To = ""  
+            .CC = ""
+            .BCC = ""
+            .Subject = ""
+            .Body = ""
+            .Attachments.Add ActiveWorkbook.FullName
+            'or
+            '.Attachments.Add ("C:\test.txt")
+            .Send
+            '.Display can be used if you wish to open outlook before sending the mail.
+        End With
+        Set OutMail = Nothing
+        Set OutApp = Nothing
+    End Sub
+
+Just simply enter your desired text and addresses inside of the quotation marks. You can also remove the .SentOnBehalfOfName field if you are not required to send from a standardized mailbox, and wish to use your default Outlook address instead. You can also change .Body to .HTMLBody if you wish to enter hyperlinks in your message.  
+
+Hopefully this helps!
+thank you works well!
+solution verified
+
+You have awarded one point to _Ludakrix_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

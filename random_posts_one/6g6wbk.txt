@@ -1,0 +1,33 @@
+6g6wbk
+non-duplicate and find them out
+Currently i have a list about 10k of digit numbers, how do i find the non-duplicate list from column A using the data from column B ?
+
+example , in column B i have around 4k row of numbers, and i wanted to remove all the 4k numbers at column A means (10k-4k=6k) it will be have 6k rows of digit on column A only
+
+
+-------------
+On column C:
+
+    =MATCH(B1,A$1:A$10000,0)
+
+Then just filter rows with numbers in column C and delete them all.
+
+Edit:
+To prevent blank cells issues.
+
+    =IF(NOT(ISBLANK(B1)),MATCH(B1,A$1:A$10000,0),NA())
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

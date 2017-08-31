@@ -1,0 +1,23 @@
+When using VLOOKUP Function can I stop excel from putting #N/A in the empty spaces?
+Yes, use IFERROR
+
+=IFERROR(***VLOOKUP goes here*** , ***value you want instead of #N/A here***)
+
+EDIT: If you want to be more specific, you can use =IFNA, which does the same thing, but for #N/A only. i.e. It won't hide "**#DIV/0!**"
+I'm pretty sure you can use an if statement and ISNA to have it fill in blank instead. Something like. 
+=if(isna(your-vlookup),"",your-vlookup)
+As others have stated, you can use IFERROR, sometimes though you want to allow errors to see if you forgot to put a number in some of your fields. In that case you could use this (I assume your product-name is in column A):
+
+    =IF(A2="";"";VLOOKUP)
+Solution Verified
+[deleted]
+You are the best, thank you! 
+This.
+This is hands down my most frequently used formula at work. I always find myself putting in "double check cell" or similar so I can go back and verify what happened later on if needed. Has saved me on several occasions. 
+If the OP is using Excel 2003 or earlier, the IFERROR function is unavailable, and this is their only option.  (Though personally, I'd use ISERROR instead of ISNA.)
+
+^(Edit:  Corrected typo.)
+You have awarded one point to Supertrinko
+Yep. Every single one at work goes this way so I can paste values immediately afterwards.
+Good to know. Thanks. 
+Also, that can double the required vlookups. Slows down on large data sets

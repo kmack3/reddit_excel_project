@@ -1,0 +1,97 @@
+I've read the sidebar but don't know where to begin.
+You need to start with a purpose then use google fu to make it happen. For instance create a personal finance sheet or a vacation planner etc.
+You say you're starting summer vacation so I'll assume you're not working full time yet. 
+
+Here's the thing, Excel is useless to learn if you don't have a reason to use it. Working in an office environment, I learned Excel very quickly. Every time I learned a new skill in Excel, it was very easy to apply it to my daily routine. 
+
+Is there a reason you want to learn Excel? Are you building a fantasy sports team? Tracking your finances? Buying stock?
+
+If you just want to learn Excel to have more tools in your resume, that's great! However, please find a project to work on so you can actually apply what you learn. Until you apply Excel to a real problem, your skill set will be theory only.
+
+If you really want to expand your tool belt, I suggest you learn programming, I.e. Python. The more complicated areas of Excel (VBA macros, logic, conditional formatting) will come much easier if you learn to program. Also, programming will make you far more versatile to employers than a traditional Excel user. If you get hung up on something, the answer is usually a Google search away.
+ExcelIsFun is great. Start by looking at his playlists and find a beginner one or something you're interested in, such as finance or statistics.
+
+I use fangraphs and baseballreference.com to copy/paste data as well as try to come to this forum often and learn. Keep a healthy interest and ask questions.
+Youtube is a great place to get started. What sort of data are you interested in manipulating?
+I started on youtube. Then I did this awesome excel sheet that calculates my average grades and weighted averages and averages by subject. adjusted in way that copypasting the transcript only calculates everything. It contained lots of problem solving n visual design which was pretty fun. Getting real and intresting data is difficult but playing around with your own school grades is pretty cool. And the output is also interesting to yourself
+
+EDIT: ok ''just by copypasting'' is bit of an overstatement. I still have to do certain cleanup before it works but it is a work in progress and a couple of my friends have already asked to give it to them:D
+I'm really interested in seeing the replies to this post as I'm stuck between learning excel online for what I need for work or paying £400 for an accredited course that I can carry with me to any job. 
+
+Either way I need to learn more wonders of excel to make my job run much more efficient.....I just don't know where to start. 
+Also, remember that the most important thing about Excel is not necessarily the toolkit but problem solving abilities. 
+Would you like an assignment?
+
+Hi. This is a great question. I just launched a comprehensive Excel formula course that offers over 16 hours of Excel training. The course focuses on transforming students into Excel Wizards by solving 100s of real world examples together. The course can offer you some structured and If you commit to it you can become really awesome at Excel in a month. If you're interested here's a link for 20% off. Best of Luck! https://www.udemy.com/xlessentials-eap-m2/?couponCode=xlessentialsreddit
+I agree with this, personally mine was a diet tracker and it grew from there to the point I was using VBA and other impressive (to friends) looking things.
+Agree 100% - have a purpose for it. If there's some type of data that you want to learn about or something you're personally invested in, it's so much easier to learn the processes in putting it together and manipulating it to your desire.
+>Are you building a fantasy sports team? 
+
+Is there any good reading on this?  I'd be curious to see what others have come up with and used excel for.  I've been wanting to learn more excel for a while now, and this would actually be a good outlet for me, but I always felt that my lack of statistics expertise was holding me back more than my excel experience (although I'm sure they often go hand-in-hand).
+I haven't gotten to the point where I'd work that out. Just felt like starting learning excel and was looking up on where to begin. Anyway, I'd check out excelisfun on youtube then. 
+Much easier to learn for work. I find that it's hard to learn when you don't know even what you want to do. If you know what you want to do for work just start googling how to do things you want to do. Watch some supporting videos on YouTube and you will be set. 
+
+I taught myself how to write macros in the last year for work and it has gotten me untold amounts of visibility. 
+You start with the data and how to lay it out to get the results you want.
+
+Knowing the results you want helps you know how to lay out the data.
+
+Then sit and read ALL the formula help files.. twice, three times, practicing with each one, so you know what you can achieve with the inbuilt formulas. 
+
+Then you will start to understand how to use Excel.
+I'd also suggest downloading some sort of financial model and just play around with them until you understand how they work. A lot of these incorporate many of the common excel functions and being able to reverse engineer what they did would be a great jump start, whether or not you are interested in the finance industry. The link below is a commercial real estate focused blog where the author has published models and excel tips. It's worth looking at. I've found that when it comes to excel I learn by necessity.
+
+http://www.adventuresincre.com/
+Yeah, macros and source codes are what I will need eventually but before I even get there I need a better understanding of excel. 
+
+It's knowing what, and what order to learn to get to that point. Thanks for the tips. 
+The problem I have is wanting to run before I've walked. ( I have a basic level 1 and everything else I've learnt on the job )
+
+I've taken over from someone else's role and the spreadsheet used is just colours and mixed up data. It's really not functioning for the job in hand let alone what I actually want it to do. 
+The problem is my lack of knowledge is holding back what I actually want to achieve. 
+
+Basically I have a list of every employee and there certificates. SOME of which are date sensitive ( run out at different times and are valid for different time spans )
+I want to set something up so the qualifications that do run out will send an email reminder when they are due for renewal. At the moment it's just a mass of different data next to everyone's name. 
+
+I know this is possible, but I don't know enough to even begin sorting through it. 
+
+Thanks for the tips. Going to be a long summer ( but hopefully with a good pay off )
+
+Learning database and data format is a large part of getting good results from data in Excel - Excel loves a table of data. 
+
+For a simple indicator table like you describe, I would do it thus. (see below)
+
+Each row of data is a record of a persons certificate, with an expiry date. If they do not expire we leave that cell blank.
+
+This layout allows you to sort by Status to see the soonest expiring certificates , and reverse sort for expired certificates.
+
+It allows you to filter by Name, or certificate, or Expire Date or Status to determine groups of data independently.
+
+It allows you to generate a Pivot Table from the data to see counts of certificates and various other data information.
+
+It allows you to graph the data easily for counts of certificates.
+
+It allows you to easily add additional columns for more data analysis if required, like a status flag to add for a pivot table for active and non active certificates..ditto graphing...
+
+etc etc
+
+
+Name | Certificate | Expire Date | Status | 
+:--- | :--- | :--- | :--- | 
+Anne | cert5 | 27/12/2016 | =IF(ISBLANK(C2),"ok",IF(C2<TODAY(),"Renew "&C2-TODAY(),C2-TODAY()&" days remaining")) | 
+Bill  | cert1 | 6/06/2017 | 375 days remaining | 
+Joe | cert3 |  | ok | 
+Joe | cert1 | 1/12/2015 | Renew -178 | 
+Joe | cert2 | 16/12/2016 | 203 days remaining | 
+Ben | cert4 | 29/05/2016 | 2 days remaining | 
+Joe | cert4 | 26/05/2016 | Renew -1 | 
+
+This is so helpful and I will easily be able to accommodate this formula into the data I have. 
+
+It will be a long sorting process but it will function perfectly once set up. 
+
+Thank you so much. 
+
+Here's to a summer of excel!
+
+

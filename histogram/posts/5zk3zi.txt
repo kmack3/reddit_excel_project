@@ -1,0 +1,18 @@
+Enron spreadsheets on GitHub
+hmmm, in excel pre-excel '07, there was no distinction between xlsx and xlsm files, you just had the xls file, which could contain macros. 
+
+All of these are saved as xlsx files. 
+
+Do you know if something has gone lost in the process? 
+Very good point! I got the sheets [here on figshare](https://figshare.com/articles/Enron_Spreadsheets_and_Emails/1221767). They're in a tricky zip format, so I thought I'd republish to make them more accessible, since I was doing some testing with them anyway. I believe they were published on figshare by [Felienne](http://www.felienne.com/archives/3634), so I'm guessing she processed them and rewrote them as .xlsx
+yeah, kinda interesting though, I just tried making a .xls file, and saved it as .xlsx just by renaming it, but on opening I get an error message saying invalid file extension. 
+
+The other way around works fine (xlsx->xls). So each file seems to have been processed somehow by opening up and saving in a new format, essentially disabling any potential code.  Seems a bit odd, but I am not too keen to download a 9gb file to look into it lol! 
+
+Btw felienne is the one who made that talk on excel as pure functional programming that was posted last year! Pretty entertaining :P
+
+
+https://www.youtube.com/watch?v=0yKf8TrLUOw
+Totally agree with Felienne on "spreadsheets are code". IMHO a sheet that's just tabulated data isn't code - it's just data. But add just a single formula, and then it's code. Code developed in a functional grid based visual programming environment.
+That was a super interesting talk. I'm a programmer by training and used excel alot for my internship, it never occurred to me that excel was essentially fuctional programming (when you aren't using vba).
+Geekiest conversation I've ever seen

@@ -1,0 +1,56 @@
+Automating Formula Changes in Excel
+Should I assume you meant to type `SUM(E5:E6)` that second time? If I would make B1 a time format, formatted as `mmmm`, so 5 would display a May, and 6 as June, etc. So then the formula would be 
+
+    =SUM(INDIRECT("E"&B1-1&":E"&B1))
+
+INDIRECT builds a string of text with &'s, so E, then 4, then :E then 5. Note INDIRECT is about as 'weird' as you're likely going to get. And I already regret mentioning it as it can slow down large worksheets. This would work as well:
+
+    =SUM(INDEX(E1:E12,B1-1):INDEX(E1:E12,B1))
+
+The trick with that is knowing that INDEX returns a *reference* even though it looks like it returns a value. I would imagine <5% of Excel users know this, but it allows for cool tricks like this.
+
+Of course I've been using the assumption "May" equals 5. If May is just "May" stored as text,  which you shouldn't do, *ever*, as it will soon be obvious (formulas become harder), you can do some thing like `MATCH(B1,{"Jan","Feb","Mar","Apr","May","Jun"...},0)` to convert text to a number. So then this would work
+
+    =SUM(INDEX(E1:E12,MATCH(B1,{"Jan","Feb","Mar","Apr","May","Jun"},0)-1):INDEX(E1:E12,MATCH(B1,{"Jan","Feb","Mar","Apr","May","Jun"},0)))
+
+There's a lot going on with your question, and there's usually dozens of ways to do things. I think INDEX and MATCH is important, array formulas are important, I'm a huge fan of SUMPRODUCT so look that up... like this would work as well ("May" = 5). And note SUMPRODUCT is just SUM without hitting Ctrl+Shift+Enter (required for array formulas).
+
+    =SUMPRODUCT(((E1:E12=B1)+(E1:E12=(B1-1)))*E1:E12)
+
+Also get familiar with Pivot Tables. They will change how you examine data.
+I think you just want a simple IF function.
+
+    =IF(E16="May",SUM(E4:35),IF(E16="June",SUM(E4:E6),""))
+
+
+Can't say for sure without seeing your data, but I bet what you really want is SUMIF / SUMIFS. 
+Please use SUM(OFFSET($E$4,0,0,1,x)) where x is the value that defines the number of columns you want to sum across. This long form of OFFSET is a way to define a range, which is why you have to wrap the function with another function such as SUM that uses the range. In this instance, if x is equal to 2, then you're defining arrange that starts at E4 and does not move from there (that's why there is the 0,0 for the row and column offset parameters), has a height of 1 row (that's the 1) and a width of two columns (that's the x=2). You can widen the range that you're  summing simply by changing the x, per your example of a changing month end. 
+
+If you change the 1, then you're changing the number of rows that is in the SUM range. You can vary both the row height and the column width to make this a very powerful and flexible function for defining a range of any size. Changing the 0,0 at the beginning means you can also change the position of this range relative to the starting E4. 
+
+Making the starting base cell such as the E4 be another point on another worksheet (e.g., Sheet2!H12) means that you can be in one worksheet, and work with data in a range on another worksheet.
+> In cell E16, when the month displays May in cell B1, I want the formula in E16 to be **SUM(E4:E5)**. When the month is cell B1 displays June, I want the formula in E16 to be **SUM(E4:E5)**.
+
+In both cases, the formula in E16 seems to be the same...
+[deleted]
+Thank you so much for all this great information. I did make a typo originally, which I know was confusing, my apologies. 
+
+I am going to mess around with all of the options provided above next week. Hopefully expand my knowledge by working with all of them. 
+
+I will also look into getting more educated on how to properly use Pivot Tables as well 
+> solution verified
+
+
+Yeah, that might work for this specific example, but I'll need something more flexible for some other application. Thank you for the tip though, it's good for me to add all this to my tool belt.
+I'm so sorry guys, got pulled away and made a typo . I really apologize for the confusion. I meant for the second formula to end in E6
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

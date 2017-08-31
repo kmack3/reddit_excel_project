@@ -1,0 +1,18 @@
+Slowly learning Excel. If, Then statements with multiple choices.
+> perhaps even an easier way
+
+Use VLOOKUP. See [this](https://support.office.com/en-us/article/VLOOKUP-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1?ui=en-US&rs=en-US&ad=US). 
+One solution:
+
+    =CHOOSE(MATCH(E2,{"Bronze","Bronze Rare","Silver","Silver Rare","Gold","Gold Rare","Special"},0),0.3,0.75,1.5,3.5,4,8,100)
+
+The other is to make a lookup table, [like so](http://i.imgur.com/OUho9Ss.png). It can be on another sheet or hidden - it just makes it easier to adjust if the multipliers are ever changed.
+Thanks I'll have to look into VLOOKUP as it may help in the future when I have multiple sheets.
+I would do the list option. Very easy to see or change values in the future. 
+Solution Verified 
+And if you're still learning, if you aren't using Conditional Formatting, do so - it can automatically color those cells for you.
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Yeah I am using Conditional Formatting for 'Profit', will start trying to use it for these values as well as I can just run multiple conditions on each column for the colours to display in 'Position', 'Category' and 'Rating' columns. I also have formulae in the 'After Tax' 'Profit' and 'Discard' columns to make calculations automatic. 

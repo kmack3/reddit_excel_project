@@ -1,0 +1,50 @@
+6g92hv
+Trying to come up with a formula to find a cell with same text or value in another sheet and enter the value in the cell to the left.
+I'm creating a bid sheet, and I have created data-validated dependent lists for the make and model of various parts. So, for a sink, you'd select the make and model via drop downs. Next to this is a pricing table, where I'd like the item amount to auto populate its price, depending on which model was chosen.
+
+The data (models, and pricing) is all on a second sheet. The sink model and pricing setup looks like this:
+
+
+| Sink1List  | Sink1Price    | Sink2List     | Sink2Price      |
+|:-----------:|:------------:|:------------:|:------------:|
+| Model A1| $25.00 | Model B1| $65.00 |         
+| Model A2| $35.00 | Model B2| $80.00 |  
+
+
+Obviously different items have more makes and models to choose from, so not everything aligns evenly. Therefore, I was wondering if there's a formula to search, for example, Model A1 on sheet 2, and then select 1 column to the right to get the pricing? And apply this to the whole worksheet? Maybe I could utilize RC1 or something like that?
+
+I appreciate the help and will answer any questions. Thanks.
+
+EDIT: Model numbers to B1, B2
+
+
+-------------
+You're looking for [VLOOKUP](https://exceljet.net/excel-functions/excel-vlookup-function) or INDEX/MATCH.
+
+However, you'll (ideally) need to arrange all the model numbers into a single column. You won't be able to (easily) search for Model A1 across the entire sheet.
+
+If Model names are repeated but Makes are not, it may be helpful to create a helper column that combines the Make and Model into a single cell.
+-------------
+Don't be afraid of the VLOOKUP! Learn it and it will open up so many doors. 
+
+Take it from someone who did everything to avoid it...
+-------------
+You don't need to rearrange, you can use the offset function! I'm on mobile and not super awesome so can't write it out at the moment, but basically you would put the lookup to find the model in as the "reference", and the offset would be 0 rows and 1column from that reference. 
+
+
+http://www.excelfunctions.net/Offset-Function.html
+-------------
+Ahh that's what I was afraid of, haha. I'll most likely go with the rearranging vertically, like you said, instead of horizontally.
+
+Is there a way to then search for the proper price in the column to the right using vlookup?
+-------------
+Good advice but I'll note that people who typically make large workbooks with multiple lookups should learn index/match instead. Vlookup is volatile and can seriously slow down a file if you have a decent amount of them.
+-------------
+I think this is what you're asking for:
+`=VLOOKUP(CellWithModelName,Sheet2!A:B;2,0)` 
+
+This looks for your model name in Col A of sheet 2, and returns whatever is next to the model name in Col B.
+-------------
+Probably so. I learned VLOOKUP first and have sense learned of Index Match without learning to use it. 
+
+Mostly don't want to go back through 3 years of work and make all the changes. But I probably should.

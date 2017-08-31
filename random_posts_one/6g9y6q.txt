@@ -1,0 +1,64 @@
+6g9y6q
+How to change "b" and "m" to zeroes
+Hey!
+
+I need to figure out how to change a b or an m to "000000000" and "000000" respectively. For example:
+
+I started with $1.2b+ and $60m+
+
+I used a text formula to get rid of the plus signs leaving me with $1.2b and $60m, but i'm trying to get to 12000000000 and 60000000. Is there anyway to do this?
+
+Edit: Missed a zero 
+
+
+-------------
+Would ctrl+H "b" to "000000000" work, or you want it done more specifically for those cells?
+-------------
+If you're wanting a number when you're done  
+
+    =IF(ISNUMBER(SEARCH("B",A1)),LEFT(A1,LEN(A1)-1)*1000000000,IF(ISNUMBER(SEARCH("M",A1)),LEFT(A1,LEN(A1)-1)*1000000000,A1))  
+
+
+-------------
+Keeping it simple:
+
+    =VALUE(SUBSTITUTE(SUBSTITUTE(A2, "b","000000000"), "m", "000000"))
+-------------
+This solution is very clunky, but it'll work:
+
+    =IF(RIGHT(A1,1)="b",LEFT(A1,LEN(A1)-1)*1000000000,IF(RIGHT(A1,1)="m",LEFT(A1,LEN(A1)-1)*1000000,0))
+-------------
+I'm not sure exactly what ctrl+h does, but I need it done for 1000 cells, so a manual solution won't really work
+-------------
+> =IF(ISNUMBER(SEARCH("B",A1)),LEFT(A1,LEN(A1)-1)*1000000000,IF(ISNUMBER(SEARCH("M",A1)),LEFT(A1,LEN(A1)-1)*1000000000,A1))  
+
+Perfect! Thanks so much!
+
+
+-------------
+> Solution Verified
+
+-------------
+That worked for the millions but not the billions
+-------------
+ctrl+h is "replace." You can select "replace all"
+-------------
+welcome :)
+-------------
+
+You have awarded one point to _12V_man_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Can you elaborate what didn't work? The formula did nothing, created an error, did something unexpected,..?
+
+For /u/man-teiv 's idea, you can do a Replace All, which does all the changes in one shot. So, whether it's 2 cells or 2 million cells, would only take 2 Find & Replace actions.
+-------------
+I also need the period in 1.2 deleted as well
+
+-------------
+> =IF(ISNUMBER(SEARCH("B",A1)),LEFT(A1,LEN(A1)-1)*1000000000,IF(ISNUMBER(SEARCH("M",A1)),LEFT(A1,LEN(A1)-1)*1000000000,A1))
+
+Sorry for the lack of clarification.
+
+It provided the right value for everything ending in "m", but all the "b" values were left as 1.2, 6.7, etc. except without the b

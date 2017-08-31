@@ -1,0 +1,39 @@
+If A is True, or B is True, or C is True, or D is True, then E is False, but if A-D is False then E is True
+if the cells contain a boolean and not text, you should use 
+
+    =NOT(OR(AD569,AE569,AF569,AG569))
+
+it will take the value TRUE iff all the values in the four cells are FALSE
+
+if the values are actually text, you can use the formula you have, surrounding it with a NOT()
+Excel has booleans (`TRUE` and `FALSE`), which are not strings. So "TRUE" is different than TRUE, so that might be one issue. You can tell because unless it's otherwise formatted manually, booleans are center aligned, text is left aligned.
+
+But anyway, you just need to invert your formula. So you want `=NOT(OR(AD569,AE569,AF569,AG569))`, or `=NOT(OR(AD569="TRUE",AE569="TRUE",AF569="TRUE",AG569="TRUE"))`, depending on if you have booleans or text.
+also a fun trick for booleans is that you can add them for OR or multiple them for AND.  So this works too:   
+    =NOT(AD569+AE569+AF569+AG569)
+=sum(a, b, c, d) =0 
+
+If they're booleans, you can treat them as ones and zeroes. 
+SOLUTION VERIFIED
+
+I did this but it returns me everything as "TRUE"
+
+    =NOT(OR(AD569="TRUE",AE569="TRUE",AF569="TRUE",AG569="TRUE"))
+
+Edit: I didn't realize about the strings, boolean difference in Excel, your first solution worked.
+
+SOLUTION VERIFIED
+Thank you for such a detailed answer! I was having a similar issue as OP today and your explanation was really helpful.
+
+You have awarded one point to _magemax_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+are the values in AD569  text or Boolean ? 
+
+Try the other formula I gave you :
+
+    =NOT(OR(AD569,AE569,AF569,AG569))
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

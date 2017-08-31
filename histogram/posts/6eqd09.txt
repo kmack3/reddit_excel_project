@@ -1,0 +1,18 @@
+Can I make a macro that takes a CSV, saves it with a different title (with current date) and to XLS?
+     [workbook].saveas [filePath] & format(date, "yyymmdd") & ".xls", fileformat:=xlnormal
+
+Where you should replace `[workbook]` with the actual name of the object or file you're working with, and `[filePath` with the directory where you want to save
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

@@ -1,0 +1,51 @@
+I have a "filtered" column with over 100 zip codes. In another spreadsheet i have a list of 20 zip codes. How do i select the 20 zip codes from the filtered list without going one by one?
+[deleted]
+Two thoughts:
+
+1. Use a helper column where you lookup item from original list in smaller list and filter on that (1 = found, 0 = not found)
+2. Use conditional formatting and highlight duplicates*, then sort on color.
+
+\* assumes you don't have duplicates in your original list.
+Are you asking how to filter the filtered list using the list in the other sheet? If that's the case, you can use an advanced filter. To do this, however, I believe the list needs to be in the same sheet as data you want to filter, and they need to have the same column header.
+I'm on mobile so I apologize for any formatting issues, but the following is precisely what you need and I believe can be done on a separate sheet within the workbook.
+
+http://www.excel-easy.com/examples/advanced-filter.html
+Wow so it looks like there are a lot of ways to do this. Is there any pros and cons to the different methods? 
+Conditional formatting custom formulae (having selected all filtered list):
+
+=Countif(range of values to match,first cell of selected cells)>0
+
+Set a colour for a positive result, then filter the column by that colour.
+1. Insert a new column into the larger list and call it something like "Found?"
+2. In that column use the formula (assuming you are entering it in cell B2 and dragging it down) =countif([Range with the 20 values],A2)
+3. Records that match a ZIP in your range of 20 will return a value greater than 0.
+4. Filter your list of 100 based on this new column.
+I tried this and in the new column it's outputting the zip code that's in the range no matter what is in the data column. https://imgur.com/a/0rSv0
+I have many duplicates 
+It can be in a different sheet, you do want the same column header though.
+It really depends on what your needs are. If you want one particular value returned corresponding to a zipcode, then vlookup is fine. If you want to see several values on the rows corresponding to the filtered list, then advanced filter is the better solution.
+When I do this I get an error saying the name that I entered is not valid. 
+It looks like you have mixed some of the parameters up. Is column X the one with the 100 zip codes that you want? What you want to do is have your first parameter refer to the cell X1 and not an absolute value. The vlookup should then be looking in the list of twenty Zip codes that you want to find. That's the second part of the vlookup formula. Let's say that list of twenty zip codes is in cells AA1:AA20. Your vlookup formula will look like this: 
+
+=VLOOKUP(X1, $AA$1:$AA$20, 1, 0)
+
+The reason I put dollar signs in the formula is to lock or anchor the range so that it doesn't shift when you drag the formula. You will then drag the formula down the column Y. Now what will occur is that if a zip code is one of the 20, it will show up and if it is not in the list of 20 it will say #N/A. You can then filter out anything in column Y that does does not have a #N/A. You can also make the formula a bit more complicated by doing something like this:
+
+=IF(ISNA(VLOOKUP(X1, $AA$1:$AA$20, 1, 0)), "NOT IN LIST", "IN LIST")
+
+This formula returns the value NOT IN LIST if the zip code in X1 can't be found and IN LIST if it is found.
+Ah you're right. I thought there was some restriction on advanced filtering being in the same worksheet or workbook as its criteria. It looks like there isn't. I might have been confusing it with conditional formatting, which does have these restrictions I think.
+Can you send me a screen shot of what you have?  That should have worked.
+
+Or send it to me and I will do it...it would take me about 30 seconds.
+I'm confused by your terminology. Column x is the zip codes I'm trying to narrow down. The column of zip codes I'm searching for is now a1 to a96 on sheet 2. I'm trying to display the formula in column y which as you said should display either the zip code or #n/a. What should my formula be with the above info? I appreciate all your help!! 
+I got it! Awesome thank you. Second question is the column I'm trying to duplicate the formula down is huge. How do I replicate the formula down without having the drag it down for 20 minutes?
+Solution verified 
+Enter the formula in the first cell of the column. Then place your mouse cursor on the bottom right corner and double click. It should autofill all the way down the column. Please note that if you have a lot of rows (like 100k), one of the drawbacks of vlookup is that it may take a second or two to calculate
+
+You have awarded one point to _tom_fuckin_bombadil_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+When doing this I got an error. There was 62000 rows. I had to select the cell with the formula (let's say it's B2). Press F5 to open the GoTo dialog. In the Reference textbox, type the last cell you want the formula to go to, e.g. B21005. Now's the important part: Hold down the SHIFT key and then click OK. This will select all cells from B5:B21005
+ 
+Then hit ctrl D to fill all the way down

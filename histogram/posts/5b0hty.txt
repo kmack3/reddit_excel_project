@@ -1,0 +1,112 @@
+A chemical engineer's 22 most used Excel shortcuts
+Thanks for sharing. Flair changed to advertisement as thread requires following external link to own content.  
+
+We don't have any hard rules against this on the sub, but please mind reddit's [self-promotion guidelines](https://www.reddit.com/wiki/selfpromotion)
+
+
+ALT + =
+
+AutoSum is love. AutoSum is life.
+Quoted below:
+
+**Navigation**
+
+Ctrl + ←↑→↓	Used to move between sections on sheet			
+Ctrl + Tab	Switch between workbooks			
+Ctrl + Page Up	Move one sheet to left			
+Ctrl + Page Down	Move one sheet to right			
+Alt + F11	Open Visual Basic editor			
+F5	Open Go To dialog box	
+		
+**Formula Editing**		
+F2	Edit selected cell			
+F4	Cycle through fixed references (ie C4, $C$4, C$4, C$4)			
+F9	Can be used to calculate sub sections of formulas (very useful and very dangerous!)			
+Ctrl + Shift + ←↑→↓	Used to drag multiple cell selections to end of section			
+
+**Sheet Building**			
+Ctrl + Shift + + + C	Insert column			
+Ctrl + Shift + + + R	Insert row			
+Ctrl + F3	Opens name manager sheet			
+Ctrl + F	Open Find dialog box			
+
+**Formatting**
+
+Ctrl + 1	Opens 'Format Cells' dialog box			
+Ctrl + Shift + 1	Formats cell as number with two decimal places			
+Ctrl + Shift + 5	Formats number as percentage with no decimal places			
+Ctrl + I	Italics			
+Ctrl + B	Bold			
+ALT + HA + L	Align left			
+ALT + HA + C	Align center			
+ALT + HA + R	Align center
+
+visit [adgefficiency's site](http://adgefficiency.com/a-chemical-engineers-22-most-used-excel-shortcuts/) for the original list
+> F9 
+
+> Can be used to calculate sub sections of formulas (very useful and very dangerous!)
+
+Out of curiosity, what's dangerous about F9?
+I hate when people only mention a couple of the ctrl+shift+# shortcuts. There's a pattern when you see them all together that helps you remember. If you memorize them as 1-off shortcuts, it's much harder.
+
+Hit ctrl+shift and ` to clear formatting (general).
+
+1) (!) Number with 2 decimals.
+
+2) (@) Time.
+
+3) (#) Date.
+
+4) ($) Dollar.
+
+5) (%) Percentage.
+
+6) (^) Scientific Notation.
+
+7) (&) Not formatting, but useful: Draw a box around the selection.
+surprised "shift + spacebar" isnt on there.
+
+sure it just selects/highlights whatever row you're in, but when showing something to someone, it brings their eyes right to that line
+
+
+I feel silly. I knew F4 would throw in the $s, but never realized it cycled.
+Shift+F9 calculates just the active sheet, that can be very handy in a massive workbook.
+I'll add a tip for chemical formula.  The super/subscript shortcut is non-existent w/o macros, so I make a table of chemical formula in Word using the keyboard shortcuts and copy/paste into Excel, retaining the text formatting.
+
+I found this useful working tableau method problems in Excel to solve for chemical equilibrium.
+I misread this and for a second I thought I could use some one else's excel sheets.
+Select table - >Alt - >A->M. 
+
+Removes duplicate. 
+[deleted]
+as an undergraduate in Chemical Engineering, not what I expected lol
+If you select a cell, highlight a bit of the formula and hit f9, excel will calculate it, and replace that part of the formula with the result.
+
+eg in A1 put 1, in A2 put 2, in A3 put =A1+A2.  Hightlight "A1+A2" in the formula and hit f9 - the formula becomes =3
+
+If you then hit enter, the formula in the cell will change.  If you hit escape, the formula will revert.
+
+It's just dangerous because you may have wanted the original formula and can lose it if you're not paying attention, and then suddenly output values aren't changing when you change the inputs.
+
+The danger is that once you use F9 to evaluate a section of the formula, it changes that part of the formula into a number! So you need to make sure you press Escape to revert the formula back to the original.
+> 7) (&) Not formatting, but useful: Draw a box around the selection.
+
+WHAT how did I not know this?
+Good one, I got curious and just found ctrl + spacebar does the same for columns
+This one drives me crazy actually. I can't tell you how many times I'm writing a formula and my sloppy typing leads me to keep holding shift after I close a parentheses or ampersand and hit space, and next thing I know my formula is suddenly like
+
+    ="Quarterly Total: " &352:352
+
+and then I'm like, whoa hold on there and I reflexively hit Esc and have to start writing my whole formula over again.
+
+I know I should be more careful and it's my own fault. But I wish it weren't so easy to do. 
+I will be messaging you on [**2016-11-05 16:28:05 UTC**](http://www.wolframalpha.com/input/?i=2016-11-05 16:28:05 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/5b0hty/a_chemical_engineers_22_most_used_excel_shortcuts/d9lnwcx)
+
+[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/5b0hty/a_chemical_engineers_22_most_used_excel_shortcuts/d9lnwcx]%0A%0ARemindMe!  1 day) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! d9lnx03)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|

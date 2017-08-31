@@ -1,0 +1,49 @@
+6ftbdt
+Clash analysis
+Hello,
+
+I work in a school and I'm trying to find which students have a clash of subjects in order to build a clash-free exam timetable. I can export the data from our database to Excel but I've hit a wall as I can't seem to achieve what I want with a pivot table.
+
+Column A contains the students unique ID and column B contains the subject name. Each student has a separate row for as many subjects as they take. I want to see which subjects "share" students and which are mutually exclusive. I could compare class lists with vlookup but this would be quite tedious.
+
+Hopefully someone can help.
+
+EDIT: This demonstrates the problem visually http://imgur.com/a/FpyUM
+
+
+-------------
+If i understand you in the right way, you may have to drag down the unique student ID in values, and the subjects into rows?
+-------------
+A few questions:
+
+* Does each student have the same number of total classes?
+* Is there a blank row between students?
+* Are you comfortable using macros/VBA?
+
+It would really help to have a better idea of the layout of your worksheet.
+
+-------------
+Could we get a screen capture of the layout?
+
+What factors are already determined and on the spreadsheet?
+
+* Student Schedule
+* Exam Start time
+* Exam End time
+* Passing time(time between classes)
+
+To have an easy visualization, I would use conditional formatting for this. I can't give you a formula without knowing that other info though.
+-------------
+I don't understand why you can't pivot? 
+-------------
+I already have the unique ID in each row if that's what you mean? So each row has a student ID and class name, with student IDs having as many rows as the student has corresponding classes.
+-------------
+Here's a demo. Not great with macros/VBA but could give it a go.
+
+http://imgur.com/a/FpyUM
+-------------
+http://imgur.com/a/FpyUM
+-------------
+Here's a demo of what i mean. Thanks 
+
+http://imgur.com/a/FpyUM

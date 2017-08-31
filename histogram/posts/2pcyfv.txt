@@ -1,0 +1,140 @@
+Auditing Excel Spreadsheets
+*Incorrect business decisions* are the auditor's true enemy, and most are due to simple mistakes made by human users. *Fraud* is just one of many reasons workbook-based business decisions can be flawed. Indeed, I figure that in most workbook audits, *fraud* isn't even on the list of top 100 worries.
+
+A well-prepared audit consultant might dummy up a sample audit report to present to stakeholders for feedback or help filling in. Thinking "report down" can help get the juices flowing about what to audit and how to do it.
+
+Workbooks have life cycles, and each phase has audit implications. Here are some fairly random off-the-top-of-my-head notes that may inspire you.
+
+**Audit goals**
+
+* What business decisions are we checking? 
+
+* What measures and metrics should the auditor present in their findings? 
+
+**Requirements and documentation**
+
+* What is the workbook for? 
+
+* What business decisions are being made?
+
+* Who is using it?
+
+* What is the "source of truth" for the values in various lookup tables? 
+
+* What are the requirements for the downstream system(s) that use the results of workbook calculations?
+
+**Development**
+
+* Documentation of developers, required tools, existence of change logs, controls, etc.
+
+**Security**
+
+* Local and network access and permissions
+
+* VBA-specific stuff (e.g., "dangerous" DB connection strings in VBA code?)
+
+* Internal workbook protections
+
+* Identification of protected/confidential information
+
+**Testing**
+
+* Alignment of test plan(s) with Requirements and overall QA adequacy
+
+* Documentation of testing execution by QA team
+
+* Bug-ticket life cycles and closure
+
+**Deployment**
+
+* Process and controls for new version deployment
+
+* Process for retiring old versions from production
+
+* End-user deployment communications
+
+**End user activity**
+
+* How to double check what end users entered into the workbook?
+
+* Sampling cases for auditors to "re-do".
+
+* Watch end users actually use the workbook to get more ideas about what to audit.
+
+* Metrics for common errors and their repercussions.
+
+**End user activity review/approval/execution**
+
+* How many people are required to review the business decision?
+
+* Review process reporting (e.g., how many cases not approved on first look?)
+
+* Who releases results downstream? How do you check that process? Is it logged?
+
+* Do the downstream systems reflect the Excel-calculated data you just audited?
+
+**Archival/destruction**
+
+* Compliance with statutory requirements for workbook retention/destruction.
+
+* Compliance with business requirements for retention/destruction.
+
+* Archive metrics, growth projections
+
+* Destroyed metrics
+* Something interesting I saw the other day was using custom numbering formats in strange ways. If you type in a number as your custom format, it will display that number regardless of the underlying true number. Never heard of that one before.
+
+* A lot of auditing can be helped greatly with the GoTo Special dialog.
+
+* It'd certainly be worth someones time to go into the VBE and look for worksheets that are "VeryHidden", or any other macros that might be working in the background.
+
+* Also, you could use Data Validation in a backwards way, coming up with a rule for a set of cells that are already filled in and then circling all those that don't follow the rule
+
+* There's also linked pictures that could be showing you something that is not actually the way it appears. Similar to the number formats, you could have a linked picture of a cell containing a value you want a column to "SUM" to, when in fact the column would normally sum to something else, and they're betting you won't bother to double check their math/formulas. Could be helped with GoTo special: Formulas, when that cell doesn't light up
+Okay before we go down this rabbit hole, to what extent are we auditing these spreadsheets? One of the things I do is validate spreadsheets in compliance with FDA regs which requires an un-godly amount of work (read formula testing, workbook characterization, tracing dependencies/precedents for nearly everything, user requirements, the whole nine yards). Do you plan on introducing the INQUIRE add-in or diving into the "MySpreadsheetName.ZIP" <xml> world? 
+
+I guess I am asking, for your purposes, what does it mean to "audit" a spreadsheet?
+I'd check with /r/Accounting as well.
+Although no auditor and it's been a long time since I've had to master a spreadsheet, two things come to mind that always baffle me. 
+
+One of them is that there is no inverse testing for QA purposes, where, e.g., if something is divided by way of some if-then formula, do the numbers still add up to the original total. There could be errors with the function logic, there could be typos, there could be errors in function math, etc. there could be various reasons for an error to sneak in and there really should be some reverse testing to make sure there aren't some tiny little errors that go on for decades, leading people to believe bullshit and make nonsense decorations decisions based on it.
+
+The second is similar but preventative for future circumstances. The idea is using various means, e.g., conditional formatting to at least highlight and notify about unexpected, unlikely changes. The recent issue with a e-retailer software glitch comes to mind. If there had been gates in place to prevent or at least highlight extreme deltas, the retailers in that example wouldn't have had their whole inventory sold off for nothing. 
+
+Edit: Auto-incorrect
+Don't know if it's in-scope of your course, but you should definitely look at the Inquire add-on that ship with Excel 2013. That offers some incredible tools to track linked sheet dependencies, check formula consistency, and compare versions.
+Thank you very much for this detail.  These fairly random off-the-top-of-your-head notes are very detailed and structured..  You have given me loads of inspiration here.  I could nearly re-write the course now.  The course was more focused on MS tools to audit spreadsheets, such as the use of GOTO Special, Spreadsheet inquire and the discovery and risk assessment server.  Please feel free to have a look at the course as it currently stands.  Thank you very much for your input
+Curious, but what do you mean by "dangerous DB connection strings"?  I do a lot of DB connections in my line of work. 
+Thank you for this.  yes I have seen negative numbers formatted to show as positive number, and I have also seen custom formatting applied to remove some of the digits.  This is know as presentation fraud.  I have also covered the GOTO special in some detail in this course, but I have not looked at data validation in a backwards way and I really like this idea, thanks for sharing!
+the new spreadsheet inquire function will show any Very Hidden sheets, which were difficult to locate in the past.
+> custom numbering formats in strange ways. If you type in a number as your custom format, it will display that number regardless of the underlying true number. Never heard of that one before.
+
+Almost.  0's are interpreted as the digit placeholder, while the other characters are treated as literals.
+
+To give an example, suppose you set the value of a cell to `98765` and the format to `0110110110`.  The ones are treated as literal characters but the zeroes are still placeholders, so the result will be `98117116115`.  
+
+You can see the same thing with text: if the format is `0 a 0 k 0 z 0 w` then the output will be `98 a 7 k 6 z 5 w`
+> There's also linked pictures that could be showing you something that is not actually the way it appears. Similar to the number formats, you could have a linked picture of a cell containing a value you want a column to "SUM" to, when in fact the column would normally sum to something else, and they're betting you won't bother to double check their math/formulas. Could be helped with GoTo special: Formulas, when that cell doesn't light up
+
+That is so evil I'm impressed.
+When I say Audit, that will depend on the scope of the Audit.  So over all I am talking the un-godly amount of work.  I have introduced spread sheet inquire and spread sheet compare to the course, but not MySpreadsheetName.zip, which I am not aware off?  Is this a 3rd part plug in?
+thank you, I will do ;-)
+"Nonsense decorations"
+It is around Christmas time after all.
+I have covered this tool.  I too think it is incredible!
+Any connections from workbooks should have bare minimum privileges, not a developer's SQL login, for example. 
+Identical to data validation in a backwards way would be conditionally formatting your cells to light up for a specific rule and checking all those that do. 
+
+So to get to your course I would just go to Udemy and search for "Auditing Excel Spreadsheets"?
+Haha, yea that would be fun to catch someone using ridiculously shady practices like this and just see the look on their face when you reveal what you've discovered.
+
+Or hey I've got another one! A UDF titled something like "SUM_" that no matter what happens all changes spit out the same preffered answer but make it appear to be to be using the basic SUM function (or whatever is appropriate) and giving an answer you wouldn't arrive at by calculator. The person would have to know to check the VBE for funny business, or else have to spot a random underscore in a function they take for granted.
+If you rename "MyWB.xlsx" to "MyWB.zip" you can extract all of the files that comprise an Excel book. It's basically just a collection of .xml files, but an adept user does have the ability to manipulate the workbook (then revert back to .xlsx). Other things like protection passwords, UDFs, etc are also located in the .zip directory.
+
+If you haven't, take a look at the "Custom UI Editor For Microsoft Office." This small application gives you the power to add your own .xml files to an Excel book (I usually use this to disable things like cut/copy/paste among other things).
+My course is still under review so you will not find it yet on Udmey market place.  
+
+if you use this link you will get full free access
+https://www.udemy.com/auditing-excel-spreadsheets/?couponCode=decfree
+I am going to look into this, it is not something I am familiar with, but I'm excited with curiosity now.  thank you for this 
+

@@ -1,0 +1,243 @@
+What macros do you have saved for your quick access/add in toolbar?
+Standardised reformatting of reports from various datasources - selectedfont and fontsize, alignment, custom borders, format titles to taste, freeze pane, turn gridlines off. Saves me having to do it every time. I find it much easier to work with an aesthetically pleasing dataset. There are others, but that's my starter.
+I have one to select every nth row.  After executing you are prompted to input how many rows you want to skip between selections  Very beneficial in my line of work.
+Most of my "stash" are functions, not subs. The most useful sub I have on hand is one that creates a dump of all the tables/schemas in a given database. 
+How do you save a macro to your quick bar? 
+I have a few that make my life easier.
+
+1. EOMONTH - put last day of the month in each of the cells in the selected range. Select 12 cells and get the last day of the month for a full year, which is quick and easy for chart creation.
+
+2. IFERROR - probably the most used of all my custom macros. Wraps any function in the selected cells inside an IFERROR.
+
+3. Remove Links - some copy/pastes from our financial system come with links, this nukes them.
+replace references to table header in formula with current cell's column table header.
+
+I often deal with super annoying setups like having months in the column headers (mngment wants that specific view with formulas to source data), copy a cell and paste the formula retains the table references, but doesn't update header references. could just make it into a non-table, but the structured references are still easier to read.
+
+then i "unpivot" it all into a normalized table and then re-pivot it for reporting purposes *rolleyes*
+Remove all connections from the file and then save as with the current date/time added to the file name.
+A few that of my favourites. Some are accessed through shortcuts/right click menu
+
+* Insert template - inserts a frequently used template after the active sheet
+
+* Remove styles - removes non-default styles for if workbooks start to get overloaded
+
+* Select A1 - selects A1 on visible worksheets so they're all scrolled to the top
+
+* Trim selected - Trims cells in current selection
+
+*  IFERROR wrapper - adds an IFERROR(,"") around selected formulas, or toggles between IFERROR(,"") and IFERROR(,0) if there's already a wrapper
+Here's my bag of tricks that I've used for years in an accounting job:
+
+* Select A1 in each sheet in active workbook (or intersection of frozen panes), and adjust zoom to 100% (good for presenting a standardized workbook to clients)
+* With selected cells, if a cell has zero in it, hide entire row (useful for financial statements or schedules where an account with a zero balance does not need to be displayed)
+* Same as above, but with columns
+* Same as above rows/columns, but instead of hiding, deleting the rows/columns with zero
+* Same as above, but delete any rows/columns with blanks
+* Unhide rows/columns in selected cells (I don't use this much)
+* With selected cells, if a cell is equal to the cell above it, delete that row (kill duplicate rows, this works only in an A-Z sort, and if you have at most two duplicates, yes I realize that there is now a remove duplicates function, this was before that was implemented)
+* Automate the formula auditing tool, trace dependents and precedents
+* With selected cells, apply accounting format
+* With selected cells, if formula, frame with a ROUND function, I have one for nearest dollar (0) and nearest penny (2)
+* Same as above, but with IFERROR
+* Apply official company color to background of selected cells
+* In selected cells, paste values or formats in clipboard (I stopped using this because it wipes your undo stack, I used it too often and it overcame the convenience factor)
+* Hide all visible comments in active sheet
+* With selected cells, if text, reverse the order of the string (e.g. cat becomes tac, this is for prank purposes)
+
+
+Anyone care to share their macros with the sub?
+use R1 C1 references - just a quick macro that swaps the referencing fromat, makes it easier to write macros or back to A1 to make it easier for formulas. 
+1) adds a Std header and footer with our company name  client job. Who prepared work and date 
+2) date format.  It cycles through diff displays for date
+3) number format. It cycles through diff displays of number. $ and c
+4) exports data to a csv for import to industry acctg file 
+
+Very easy macro to format selected sells to number format and center
+
+    Sub zerodpcenter()
+
+    Selection.NumberFormat = "#,###0"
+    Selection.HorizontalAlignment = xlCenter
+
+    End Sub
+
+I have it hot-keyed as Ctrl+Shift+N
+Show All Hidden Worksheets, Password Code Breaker and a Consolidation script for Raw Data files not found within a server.
+You know when you get your data from an external source and the dates are actually text?
+
+I got this macro that insert a column, convert the text into actual dates, copy and paste values over the text and then get rid of the auxiliary column. I call this macro with CTRL + D. I use it every day.
+
+    Sub ConvertDates()
+    '
+    ' This macro convert TEXT dates into actual DATES
+    ' By Pedro F. Pardo
+
+        If IsDate(ActiveCell.Value) And (ActiveCell.NumberFormatLocal = "dd/mm/yyyy") Then
+            MsgBox ("Current Value is actually a date")
+        Else
+            current_row = ActiveCell.Row
+            current_col = ActiveCell.Column
+            last_row = ActiveSheet.Cells(Rows.Count, current_col).End(xlUp).Offset(1, 0).Row
+            ActiveCell.Offset(0, 1).EntireColumn.Select
+            Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+            Cells(2, ActiveCell.Column).Select
+            ActiveCell.FormulaR1C1 = "=IF(RC[-1]="""","""",DATEVALUE(RC[-1]))"
+            Selection.AutoFill Destination:=Range(Cells(2, current_col + 1), Cells(last_row, current_col + 1))
+            Range(Cells(2, current_col + 1), Cells(last_row, current_col + 1)).Select
+            Selection.Copy
+            Cells(2, ActiveCell.Column - 1).Select
+            Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+            Application.CutCopyMode = False
+            Selection.NumberFormat = "m/d/yyyy"
+            ActiveCell.Offset(0, 1).EntireColumn.Select
+            Selection.Delete Shift:=xlToLeft
+            Cells(current_row, current_col).Select
+        End If
+
+    End Sub
+Insert row every time the values in a column change from row to row. Great for creating white space around items in groups or categories. It traverses down a column starting at the highlighted cell. 
+Report formatting. I have a report we run once a day that refreshes with new GL items. The macro copies our annotations and conditional formatting from a folder dialogue box.
+FileOpenDialog
+[removed]
+I like that. I probably wouldn't use it TOO much but I think I have a lots of coworkers who could enjoy that.  Can you share your code? 
+[Link](http://www.excel-easy.com/vba/examples/add-a-macro-to-the-toolbar.html)
+I can't take credit for this but for those that want to use the IFERROR macro, I have it here:
+
+    Sub Add_IFERROR_Activesheet()
+    Dim myCell As Range
+    Cells.SpecialCells(xlCellTypeFormulas, 23).Select
+    For Each myCell In Selection.Cells
+        If myCell.HasFormula And Not myCell.HasArray Then
+            myCell.Formula = "=IFERROR(" & Right(myCell.Formula, Len(myCell.Formula) - 1) & ",0)"
+        End If
+    Next
+    End Sub
+
+What's wrong with having months in the column headers?
+Do you find yourself using the remove styles a lot? I've not come across many people that even use styles
+Do you mind sharing the IFERROR wrapper?  the toggling is very interesting to me.  
+I'd be really interested in the first one, could you please share? :) 
+Yeah I like the idea of this thread but now I want to add some macros 
+You know there's a button next to 'Record Macro' that says 'Use Relative References'?
+
+Pretty sure it's been there since 2007
+I get this kind of reports too, and the text to columns works fine (skip the steps and just click finish). 
+This link contains malware. (and pretty awful one too... i couldnt even use task manager effectively to close chrome without spamming the 'end task' button)
+Sure thing.  I left the office for the day but I'll post it tommorrow.   I don't use it very often but when I do its Dos Equis.
+
+Edit*
+
+Sub EveryOtherRow()
+
+Dim rng As Range
+
+Dim InputRng As Range
+
+Dim OutRng As Range
+
+Dim xInterval As Integer
+
+xTitleId = "EveryNthRow"
+
+Set InputRng = Application.Selection
+
+Set InputRng = Application.InputBox("Range :", xTitleId, InputRng.Address, Type:=8)
+
+xInterval = Application.InputBox("Enter row interval", xTitleId, Type:=1)
+
+For i = 1 To InputRng.Rows.Count Step xInterval + 1
+
+    Set rng = InputRng.Cells(i, 1)
+
+    If OutRng Is Nothing Then
+
+        Set OutRng = rng
+
+    Else
+
+        Set OutRng = Application.Union(OutRng, rng)
+
+    End If
+
+Next
+
+OutRng.EntireRow.Select
+
+End Sub
+You can't pivot the data, and doing sumifs and such to summarize the data gets more complicated. 
+
+Generally speaking it's a nice intuitive way to present summarized data (and it's the format a pivot table might produce), but it's not a very good format for storing or using data for other purposes. 
+It denormalizes your dataset....?
+Not very frequently, only really if I ever insert a lot of sheets from someone else's workbook that's overloaded with styles and I have to clear them out. When I do have to use it it's a lifesaver, and I've shared a spreadsheet version of the tool with some coworkers too. 
+Oh yeah. A lot of SAP BEx users who send straight from that format. It removes about 20+ unneeded styles. 
+It's on my work computer, which I don't have access to at the moment as I'm on leave, and I probably can't share it anyway.
+
+From memory, it would be something like this in a loop for each selected cell. Might have to mess around with how to arrange the quotes in VBA so the end result is "")
+   
+    'See if there already is an =IFERROR statement. 
+    If Left(Cell.Formula , 8) = "=IFERROR" Then
+
+        'If the end of the statement is quotes, change it to a 0.
+        If Right(Cell.Formula, 3) = """)" Then
+            Cell.Formula = Left(Cell.Formula, Len(Cell.Formula) - 3) & "0)"
+        Else
+            Cell.Formula = Left(Cell.Formula, Len(Cell.Formula) - 2) & """)"
+        End if
+
+    Else
+        'Code to add =IFERROR statement
+    End if
+yeah, i use this switch so when im writing my macro and i want to output to columns F:J i can easily see what column number F is, then i can
+
+ for i=6:10 
+
+cells(1,i)="blob" 
+
+- just saves me counting letters on my fingers. - i very rarely use the record macro button. 
+lol I think your browser contains malware if anything. :p
+
+Chap that owns the page is a genuine person and provides Excel consultancy here in UK. It's offensive for you to make such statement. This page has not changed since 2013: http://imgur.com/3rmtmt7
+thanks!
+Good to know, thanks! 
+You can switch the letters of columns to numbers so you don't have to count on your fingers
+he very well could be (and probably is), doesnt mean his site didnt get hijacked and in turn disable my browser man.  I didn't say anything about your friend's character or his work, just that link.
+
+
+
+(My browser turned into: "malware detected!", blanking all other tabs, and disabling the close button.  Interestingly, just from a software perspective, it was forcefully clicking the browser constantly so you could not 'right click' anywhere which is why I had to "spam" click the end task button)
+thats what my stored macro does... 
+
+    Sub useR1()
+    '
+    ' useR1 Macro
+    '
+    ' Keyboard Shortcut: Ctrl+q
+    '
+    
+    With Application
+    If (.ReferenceStyle = xlA1) Then
+    .ReferenceStyle = xlR1C1
+    End
+    Else:
+    .ReferenceStyle = xlA1
+    End If
+    End With
+    
+    End Sub
+
+Appreciate it and didn't mean to dis what you were saying. Since, I have had a quick look via the edge browser, clicked through the link few times, used my phone 3g connection and the RIF app and all seem to be trouble -less. 
+
+This does make me genuinely worried for your system /u/pankswork as google malware warnings would not block you from closing the browser windows (false postive or not). I would have your system checked out for anything residual. Obviously do not take any links from me as I could be your average white cloaked hacker (I'm not). :)
+
+I'd start with your average malwarebytes and spybot.
+
+
+Again, appreciate your comments and the site owner is not my buddy either, he's just a good, genuine dude.
+I meant it doesn't require a macro
+
+[link to MS page](https://support.microsoft.com/en-ca/kb/269866)
+yup, but that takes like 20 seconds to do, pressing the button is instant, and it toggles between. hence the whole point of having it on the quick access....  its exacty the same result as ticking that box. 
+Ah I understand! 
+
+

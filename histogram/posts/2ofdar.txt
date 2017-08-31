@@ -1,0 +1,29 @@
+Why are merged cells bad?
+As the other guy said, it can mess with your ability to arrange columns and rows. It can also mess with data in general, break macros, formulas, etc.
+
+If your spreadsheet is purely visual, then merged cells are fine, however, avoid them at all costs when working with data.
+
+If you need to have the appearance of a merged cell for titles, headers, etc, consider [center across selection](https://exceljet.net/lessons/how-to-use-center-across-selection-in-excel) instead.
+
+When it comes to vertically merged cells in data, just don't. Ever. Instead, repeat the data label for each row it applies to.
+For me it's because it messes with your ability to arrange columns and rows.
+
+"This requires all cells be the same size..."
+
+I have an excel strategy where I have a display tab, a data tab and a formula tab. Display tab had merged cells but the other two are no merged zones.
+I use merged cells for one particular application because it is a visual display with no data manipulation.  I hate with a fervent passion having to deal with someone's sheet that is full of merged cells that can't be copied and pasted into.
+My rule of thumb is that my data should always be in a format that resembles a SQL table. Headers in the top row of every column, and data in the other rows. It should always be pivotable. The only place I would ever merge cells is formatting a summary table designed for an end user that will not be manipulating the data. I.e. Something I would be pasting into the body of an email or a docx file. 
+Kills the ability to use the keyboard shortcut ctrl+space to select the column. 
+Everyone rise here is spot on. Many go on to say is fine within your own sheets and if it's purely for display. 
+
+I argue that using them at all encourages their further (mis)use, which is another reason not to use them! 
+i have to say merged cells are a nightmare - reduces keyboard ability and the copy and paste error message of same size drives me mad. 
+
+the alternative to merge cells is to use *center across  selection*  - Format Cells, alignment, Horizontal drop down,  *center across  selection* 
+I used merged cells with all sorts of clmplex formulas.  If you need to copy and paste, just put it into the formula tab directly instead of trying to paste into the cell.
+Thanks, this makes sense. I'm getting comfortable with things like VBA, pivot tables, etc but I think I really need some remedial training on the layout and design of worksheets.
+I've run into that message more than a few times!
+Didn't know this one. Thank you. Is there a shortcut to select an entire row too?
+Shift space
+
+Shift space bar 

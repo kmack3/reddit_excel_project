@@ -1,0 +1,77 @@
+How to change default date entry? If I type "4/28" then I want the default to be "4/28/2017" not "Apr-28"
+Good Morning, cigarkid,
+If you anticipate entering dates for a specific range, you could set the format to "Short Date" by clicking the combo box button that by default reads "General." When you make the selection, the combo box will then read, "Date."
+Maybe I'm misunderstanding but this is really easy. Just set format to "m/dd/yyyy".  
+I don't think this is possible. Either you type in "/17" after every date, or change the date formatting with a couple of clicks (click Drop-down arrow under Number tab, and select "Short Date")
+Hello,
+
+This may or may not help: play around the region settings of your computer. Excel, and a few other spreadsheet applications by default follow the global settings of the PC, and not what format you want it in initially. At least, his is what i have observed.
+
+Best of luck.
+You can use a macro triggered on cell value change.. this will change the format from `d-mmm` to `m/d/yyyy` on data entry
+
+Add into the worksheet module (alt+F11); change the trigger range as required
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        On Error GoTo CleanExit
+        Dim targetRng As Range
+        Set targetRng = Range("A1:aA00") '<==trigger when change made to a cell value in this range
+        If Not Application.Intersect(targetRng, Range(Target.Address)) Is Nothing Then
+            Application.EnableEvents = False
+            If Target.NumberFormat = "d-mmm" Then
+                Target.NumberFormat = "m/d/yyyy;@"
+            End If
+        End If
+    CleanExit:
+    Application.EnableEvents = True
+    End Sub
+
+
+
+With no any obvious fixes, maybe you can just save a blank excel document with certain cells formatted to m/dd/yyyy on your desktop or taskbar or something, and just open that file and save as whenever you need to make a new file?
+
+Kinda a brute way and might not save too much time, and given you think changing the format is a bit too much hassle anyway i assume you are looking for more of an automatic change, so disregard my post if that's the case.
+iirc in your computer you can change the default settings
+
+You can change the logic punctuation (e.g. , to ; - to () )
+
+Try to look there or use a macro so you just have to click 1 button
+
+
+Also we shall get ove this data problem, I don't care which one but we have to set an international data and use only one. It gets super annoying when there's 2/6/2017 because I'll read 2nd June and you won't
+Use ddmmyy or ddmmyyyy or yyyymmdd. That's it. anything else is dumb and inefficient. Be the change.
+To answer your comment: International people who are sick and tired of those US centric people wanting to see an american date with a month in front and dont want to use 170428 or variations there of.
+
+April-28 is at least still readable for me whereas 4/28 always reads as "the fourth of ... what? oh that crap again". 
+
+for the rest: choose your pref. format, learn that ctrl-1 is your friend and if you really need it this often,record a makro and set it to the quick bar. 
+Thanks, but I want it on all the time. To give some context, I feel like everyday I'm writing some unique really short excel doc for a client. For example they ask me the SPY value we used for three dates so I will put it in an Excel doc and I want it to always default to "4/28/2017" format. 
+
+The time it takes me to do it in advance is the same (probably worse) than to fix it afterward.
+I know how to change it to "4/28/17" once it is already written, but I want it to automatically write that when I type 
+
+> 4/28
+
+
+> Maybe I'm misunderstanding 
+
+Yup, as has everyone that up voted your comment, though the question is very clear.
+
+This is not how business works. You work to requirements, requirements do not work to your assumptions of how things should be.
+:(
+Good guess, I did not think of this. Sadly it only lets me change short date and long date, doesn't let me change "Apr-28", whatever the hell that's called lol (MMM-dd maybe?)
+I've had to do this also, for both date and negative number formats. For some reason, regional settings for Canada default to dd/mm (super annoying) and -123 versus the preferred (123). 
+ISO 8601 suggests dashes in there. Otherwise I'm with you. 
+I do in file names but not in Excel docs that are sent to clients.
+Type 28/4 instead
+don't be sad, [see my solution](https://www.reddit.com/r/excel/comments/689bmu/how_to_change_default_date_entry_if_i_type_428/dgx3kx0/) :)
+Sure I'd be flexible with that.
+Sigh I see your point. I'd consider charging extra for non-iso formats.
+Lmao I don't think that would fly....
+
+> CigarKid Fees:
+>
+> 5 hours @ $550/hr
+>
+> Non-iso formats @ $2/hr
+Really? Charge for your time, and if clients realize the cost and they'll adapt. Give discounts instead for iso formats.

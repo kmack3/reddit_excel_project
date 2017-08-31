@@ -1,0 +1,36 @@
+6iakv2
+How to stop rows & columns from resizing when copying values into new cells through VBA.
+Hi All,
+
+I use a macro to copy data from one sheet to another in my workbook. When the original cell value is quite large, excel automatically formats the new cell to fit everything which ruins the look of the worksheet (as everything is already formatted and set out the way I want to. 
+
+
+Is there a way to stop cells from formatting/changing size when using VBA to copy data between worksheets? 
+
+
+Thanks in advance!  
+
+
+-------------
+How are you copying the values across? copy paste?
+
+Try just assigning the values .
+
+e.g
+
+`range(pasterange).value = range(copyrange).value`
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

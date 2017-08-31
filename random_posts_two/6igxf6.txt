@@ -1,0 +1,45 @@
+6igxf6
+Looking up a min value in a table without ifs statement.
+I swear I've seen an nice clean way to do this using the table, but I can't remember / find it.  It's not a big deal in this situation, but it is driving me nuts and will come up when I have more than 4 criteria.
+
+All I want to do is look up an employees years of service and return the weeks of vacation they are allowed (table below).  So, if they have worked 5 years, they get 2 weeks, if they've worked 10 years they get 3 weeks, etc.
+
+
+
+Years | Week
+---|---
+1 | 1
+3 | 2
+7 | 3
+15 | 4
+
+
+
+
+-------------
+`=VLOOKUP(YearsOfService,A1:B8,2)`
+
+Where A1:B8 is your years-to-weeks table
+-------------
+That's going to return #N/A for the in between years of service like 2, 4,5,6,8,9... 
+-------------
+Solution verified
+-------------
+Did you try it? Or are you just assuming :)
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Ha!  I did try it but out of habit, I put "True" at the end.  Why does leaving true / false off make this work?
+-------------
+The default value is "TRUE," so if left out, it assumes to TRUE. "TRUE" performs an approximate match -- the function finds the first value that's higher than the lookup value, then returns the previous row. It's perfect for tables like this (as long as they're sorted)-- and grades, tax brackets, commissions, etc
+-------------
+I guess I never wanted approximate matches.
+
+Thanks.
+
+And I think we both switched around or true and false.  False returns the exact match.
+-------------
+Oops, good call, will edit my comment for the lurkers

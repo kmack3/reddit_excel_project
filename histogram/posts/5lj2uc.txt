@@ -1,0 +1,28 @@
+VBA to prevent cut/paste (but allow copy/paste) and VBA to prevent insert/delete of rows & columns
+    Private Sub Worksheet_Activate()
+        Select Case Application.CutCopyMode
+            Case Is = xlCut
+                Application.CutCopyMode = False
+        End Select
+    End Sub
+    
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        Select Case Application.CutCopyMode
+            Case Is = xlCut
+                Application.CutCopyMode = False
+        End Select
+    End Sub
+
+Put in each worksheet's code which you want to disable it in.
+Solution Verified!
+Awesome, that works perfectly for preventing the cut/paste option. Do you have anything that will stop users being able to insert or delete new rows/columns?
+
+You have awarded one point to __LiveAndLetLive__.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Review > Protect Sheet > Do not allow users to Insert/Delete Columns or Rows
+Solution Verified!
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

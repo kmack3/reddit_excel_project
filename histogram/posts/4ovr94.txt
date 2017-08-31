@@ -1,0 +1,196 @@
+My users are morons and I need to prevent people from being able to paste into specific cells
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        'Does the validation range still have validation?
+        If HasValidation(Range("DataValidationRange")) Then
+            Exit Sub
+        Else
+            Application.Undo
+            MsgBox "Error: You cannot paste data into these cells." & _
+            "Please use the drop-down to enter data instead.", vbCritical
+        End If
+    End Sub
+    
+    Private Function HasValidation(r) As Boolean
+        'Returns True if every cell in Range r uses Data Validation
+        On Error Resume Next
+        x = r.Validation.Type
+        If Err.Number = 0 Then HasValidation = True Else HasValidation = False
+    End Function
+
+
+http://superuser.com/questions/870926/restrict-paste-into-dropdown-cells-in-excel
+
+Just make the named range to include all cells that have validation in them and copy that to your sheet.
+You can use data validation in cells to enforce your standards. You can create a list of the only items allowed.
+Not exactly what you're looking for but sometimes helpful in this kind of situation:
+
+You can have other "check" cells that test whether the data validation rule is met, and report an error if not. You can then pick up the results of all such tests in a master check area, and report the master result (e.g. "All tests passed" or "5 tests failed") in a prominent location - perhaps within the freeze pane of each sheet.
+
+Example test:
+
+    =IF(OR(LEFT(C24,2)="DC",LEFT(C24,6)="DOCWTN"),"Ok","Invalid value")
+Pasting over a cell replaces it, thus rendering data validation useless. My recommendation is to lock and hide (or just lock depending on your level of desired idiot-proofness) all cells. Then go to review>protect worksheet to enable the lock / hidden option. This way a user can only make the changes to cells you allow. Pasting/modifying the overall structure of the spreadsheet becomes impossible. Hope that solves your problem! 
+[deleted]
+Can you use VBA as a backup to your validation? In the Worksheet_Change event have code that checks the value and deletes it if it doesn't belong. Another alternative might be using a combo box form control.
+Will they not be very frustrated and come back with complains if you disable the paste function for those cells?
+
+I would suggest using the Find/Replace  in-built function. When it comes to things like naming convention errors, i personally have found this very useful.  
+
+For example: Serial number = R0452, but should be RO452.  Or 5, 8, 3 should be S.  These errors happen with most text recognition.
+Rather than do some fancy VBA to create a pop-up every time they enter a value what I've done in some situations is to create a validation sheet.  Basically the sheet will list pretty much all of the steps someone needs to take to fill out the other spreadsheets and it would have some kind of status next to each like VALID, INVALID, or INCOMPLETE.  Then they would have to check the validation sheet periodically or before submitting at least to see that their data was entered properly (woe to you if this is a multi-user spreadsheet).  Hopefully your supervisor (and theirs) has your back in that they need to show *some* kind of intelligence when using the workbook.
+Why not just lock your document from editing? Only allow certain cells to be entered? Completely cut out users from deleting the validation cells.
+I'm trying this but it does nothing.
+Sorry, I actually meant I already had data validation in place. Pasting into it circumvents the validation.
+
+Updated OP.
+I wouldn't know how tbh, but that would work.
+As it stands with the solution provided by /u/unnapping, you can paste things that meet the correct standards without issue. But if you paste anything else, or type an invalid value it will undo the action and display an error.
+
+This actually works better than I had originally intended, and gives me some ideas on how to simply my sheets.
+
+This is really just a way to idiot proof this for one user who consistently fucks everything up by providing invalid information. I thought I had it pretty well set up, but they keep finding new and inventive ways to fuck it up.
+~~I'll upload my example for you.~~
+
+Actually it only works when copying cells into the data validation cell, not text on clipboard.
+How is that happening? I just checked pasting into a data validated cell and I get a message box which doesn't let me enter anything which isn't on the list of allowed items.
+Actually fairly straightforward. You're just basically using the same formula in VBA terms
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Intersect(Target, Range("C24")) Is Nothing Then Exit Sub
+        If Target.Value = "" Then Exit Sub
+        
+        If Left(Target, 2) <> "DC" And Left(Target, 4) <> "DOCWNT" Then
+            MsgBox "Invalid Entry", vbOKOnly, "Invalid Entry"
+            Target.ClearContents
+        End If
+    End Sub
+
+Edit: Fixed for blank value. 
+Edit 2: changed to And operator
+sounds good.  I think another viable option could be conditional formatting.  Make the cell fill red if contains certain strings.  On my version of excel i have seen this to work for cells that are occupied via pasting 
+Thanks, is there anything I need to do to get it to start working or should it just work?
+
+I've named the range but it's still letting me paste.
+This one turns off paste in the workbook if this works for you?
+
+http://www.vbaexpress.com/kb/getarticle.php?kb_id=373
+
+So combining the two might work.
+You can't enter text in that doesn't match, but pasting into that cell doesn't trigger the validation rule.
+
+**edit: tring this: http://spreadsheetpage.com/index.php/tip/ensuring_that_data_validation_is_not_deleted/**
+Still does nothing sorry, lets me paste and destroys the validation.
+
+**Edit: Update does nothing either**
+
+**Edit2: Fuck, I think it's because I ladready have a Worksheet_Change sub....fuck. Hold on....**
+You over estimate how little of a shit they give. That ain't going to stop them.
+I have used this before but I want to be able to allow users to paste into SOME cells just not all.
+
+I might have to bite the bullet and disable it, the name and shame the person who fucked it up for everyone.
+What's your validation rule?
+What are they pasting from?
+
+ how about this:
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Intersect(Target, Range("C24")) Is Nothing Then Exit Sub
+        If Target.Value = "" Then Exit Sub
+        
+        If Left(Target, 2) <> "DC" And Left(Target, 4) <> "DOCWNT" Then
+            Application.Undo
+            MsgBox "Invalid Entry", vbOKOnly, "Invalid Entry"
+        End If
+    End Sub
+
+Also note: changed from Or to And. (Oops)
+If they're that bad, fire them, or tell someone to fire them
+You might want to check this one out
+
+At the bottom the guy gives code to restrict pasting in certain ranges.
+
+http://www.mrexcel.com/forum/excel-questions/696084-restrict-copy-paste-only-certain-cells-worksheet.html
+Found [here](http://stackoverflow.com/questions/12525942/how-to-detect-paste-event-in-excel). Caveat - I have not tested it.
+
+    Private Sub Workbook_SheetChange(ByVal Sh As Object, ByVal Target As Range)
+      Dim lastAction As String
+
+      ' Get the last action performed by user
+      lastAction = Application.CommandBars("Standard").Controls("&Undo").List(1)
+
+      ' Check if the last action was a paste
+      If Left(lastAction, 5) = "Paste" Then
+
+        ' /u/Jeester's code here
+
+      End If
+    End Sub
+=OR(LEFT(C24,2)="DC",LEFT(C24,6)="DOCWTN")
+
+Prevents anything not beginning with DC or DOCWTN at the start.
+I want to stop any and all pasting, I'm not sure where it's coming from but they're fucking idiots and this needs to be restricted so they literally can't fuck it up anymore.
+Solution verified
+That did it dude! Thanks
+tried this several times - does nothing to stop me from pasting into those cells.
+Just to be sure, you are entering that here - Data tab, then Data Validation/Data Validation then select Custom in the Allow box on the Settings tab and then enter the formula there.
+Why not just have a cleaned column that adds this when it is not added to the start? Then they can be sloppy and you can be happy. 
+
+Also, im bigger on conditional formatting green/red. People don't like seeing mistakes. You could also use some vba to prompt if they make am error amd only close the form if they enter it correctly. 
+I know it's frustrating. Unfortunately idiocy isn't preventable.
+
+You have awarded one point to _unnapping_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I think I have it.
+
+    
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        'Does the validation range still have validation?
+         If (Left(Range("ValidationRange"), 2) <> "DC" Or Left(Range("ValidationRange"), 3) <> "DOC") Then
+            Application.Undo
+            Exit Sub
+        End If
+        
+        If HasValidation(Range("ValidationRange")) Then
+            Exit Sub
+        Else
+           Application.Undo
+           MsgBox "Your last operation was canceled." & _
+           "It would have deleted data validation rules.", vbCritical
+       End If
+        
+    End Sub
+    
+    
+    
+    Private Function HasValidation(r) As Boolean
+    '   Returns True if every cell in Range r uses Data Validation
+        On Error Resume Next
+        x = r.Validation.Type
+        If Err.Number = 0 Then HasValidation = True Else HasValidation = False
+    End Function
+
+
+
+Correct. If I go to type anything that does not meet those cirteria the validation rules trigger and the error message disaplys.
+
+if I paste invalid data into it, it deletes the validation rules.
+I COULD just remove all cpoy.paste abilities but that would annoy those who aren't thumb-sucking retarded.
+[deleted]
+From Microsoft.
+
+Lock specific cells in Excel
+1. Select all cells in the worksheet, right-click, and then click Format Cells.
+2. Uncheck Locked  and click OK . ﻿
+3. Select the cells you want locked, right-click, and then click Format Cells﻿.
+4. Check Locked.
+5. Right-click the worksheet tab, and click Protect Sheet.
+6. Enter a password, and click OK.
+
+Check out my example I made for you:
+
+https://drive.google.com/file/d/0B2rXe2OGR64AZ0w4TW1rRjJEZ2M/view?usp=sharing
+
+You can still paste but it has to contain DC or DOC at the start.
+Users still need to be able to enter data into these cells - locking will not help.

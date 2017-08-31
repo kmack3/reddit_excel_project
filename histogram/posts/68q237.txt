@@ -1,0 +1,92 @@
+How would you sell a VBA upskill to a manager who doesn't really understand excel?
+My method of learning vba was on the job making my life easier. 
+If there's any reports that consist mainly of copying large amounts of data from one place to another, work out without being made human readable, that can be automated. There's a real, quantifiable saving there in man hours. A report in actually running right now I click go and come back an hour later and it's done. By hand this used to take a good 8-9 hours every night.
+
+Same with anything that might trigger an email in specific circumstances.
+
+Basically anything that you can show all save time/money. 
+I was in a similar boat around 1 - 2 years ago. Now, I know VBA fairly well. You can automate repetitive processes and speed up your work. Do you know how to record macros? If not, I would learn how to do so, and study the code. With VBA, you can extend recorded macros by making them able to respond to dynamic situations. This is done by adding things like conditional execution, variables, error handling, etc.
+
+Learning VBA was hard. I read a comprehensive book (Power Programming with VBA 2013) and it took me a long time of reading (and rereading) the topics in the book until things finally started making sense. Now, I use VBA all the time at work, including today. If you're looking to get serious about it, it's a good introduction to programming. 
+
+But to be honest, there are better things to learn to extend your Excel skills. I would recommend focusing on PowerQuery / Get & Transform & PowerPivot. I think you'll find that those skills will be more valuable in your career, especially in the future. I'm learning PowerPivot now and it's kind of crazy the things you can do with it. 
+
+And if you want to learn programming, there are other languages that are more versatile (e.g. Python, C#, etc.) VB6 (VBA's parent language) isn't actively supported by Microsoft anymore. And Microsoft has explicitly refused to begin supporting it again. They want developers to move onto their modern .NET languages like VB.Net and C#. While VBA is still actively supported, the upgrades to VBA have been pretty weak imo. For example, they added to the VBA object model for PowerQuery, but you can't delete queries with it, formulas are a read only property, etc. 
+
+Perhaps most relevent, I haven't particularly found VBA to be a very marketable skillset. Although it would be valuable to many employers, most don't know about it. And so it's not a skillset they look for in particular. FWIW, I tend to see more jobs with VBA for Access. But YMMV. 
+
+I'm not trying to explicitly dissuade you from learning VBA. I'm just letting you know that doing so might not have the benefits you'd expect.
+Have a read of our [Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/) in the sidebar and the **New to Excel VBA** threads.
+
+There are plenty of free online courses for VBA that will give you a very quick insight into your potential aptitude for VBA and whether you want to pursue it.. 
+
+If you still feel a paid course would help then you will have some experience and an idea of how VBA can improve your productivity to sell to your Manager.
+Break down your workweek/work month. 
+
+What are your tasks, how many hours do you spend on them, what is the risk and cost of human error, how long would it take to train someone new to do the job. 
+
+For each task, what are the steps, how many of those steps are consistent and repetitive in terms of data and processing (for example: extract standard data from X -> transform doing Y -> peform calculations -> display)
+
+If you were able to do these tasks automatically, how much time would you be able to save. 
+
+How often do human errors have an impact on your work in terms of corrections or misunderstandings? Would an automatic "programmatic" solution reduce these? If so, what would the benefit be. 
+
+If you were to get hit by a bus tomorrow - what knowledge of processes and data would be lost, and how much time/money would it take to replace it? How would an automated process reduce the loss associated with your sudden departure? 
+
+This last argument is slightly risky I suppose, but depending on your relationship with your employer it also a strong signal of your interest in creating value for the firm. 
+
+You may want to consider things like "are there things we would like to report on, but don't, because it would be more time-sensitive or we do not have the capacity to work the data?" In that case you may be able to make an argument for an added benefit, and not just a cost savings. 
+
+Lastly you should make an argument of "What would I do for the company, if doing what I do currently, took a lot less time", bring that to your manager as part of your personal motivation. 
+
+you have a desire to move up in the company, you want to make the processes more efficient, and with that in mind you want to improve your competencies and skills, and the company's investment in you is worthwhile in excess of the real business benefits re. the data on savings and benefits above. 
+
+
+In addition to the above very general approach, /u/beyphy makes some very good points regarding whether VBA is the best place to put your effort in terms of effort/payoff, that I definitely think you should take into consideration when you do sit down ad go through your processes and how they could be improved. 
+If you don't know how it'd be useful for you, at least not enough to explain it, how do you know it will be?
+
+Just asking because unless the company has money burning a hole in their pocket, you should have examples- ideas/plans for what you want to use VBA for that don't require programming syntax to come up with. For example what would you automate?
+
+If you have none, the course probably won't be as useful. If you DO know how you'd use VBA, you might be able to take it home and teach yourself. 
+
+Excel courses just are not nearly as effective as need and desperation on the job.
+
+They're probably keen enough to know investing in an employee taking technical classes just to increase their marketable skills will probably be a negative ROI. Your skills will demand more money and/or you'll jump to another company to put them to use if there's no clear way to use them there.
+Processing time i.e. productivity increase.  Also improve accuracy by reducing errors.  Better product in less time.
+VBA = Productivity
+To be honest I'd skip a VBA course and try to learn some Python (particularly the Pandas library). I started trying to automate my workflow using VBA, and was able to come up with some scripts that saved me and my team a bunch of time, but since then, I've moved everything over to Python and it's faster, more flexible, easier to share, and had a better online knowledge base. 
+Here is a great online course to get you started for free.
+
+https://openeducation.blackboard.com/mooc-catalog/courseDetails/view?course_id=_219_1
+
+
+When you do sell it ask for a mentor to check your code, or at least buddy up and work with someone else. 
+Selling points:
+
+Saves time, and can free up time to do more meaningful work. An example: a 4 hour task has been reduced to 10 minutes. Leaving 3 hours and 50 minutes for the staff to do value added work.
+
+Reduces human error and input from work. (Providing the code is error free to start with!)
+
+Can remove the need for admin staff and result in an overhead saving.
+
+Allows you to produce complex reports quickly, speeding up decision making processes
+Everyone here is going to tell you the same thing: paid training in VBA is either non-existant or overpriced.
+
+The best way to learn VBA is to teach yourself. Books are OK for this, but it's scattershot; they will teach you everything when you probably only need to know the next thing.
+
+Anything you are doing manually is probably an opportunity to automate via Excel. Especially anything with a lot of data, or that takes a lot of time.
+This is mine too
+Not to forget accuracy and/or consistency.  Weeding human error is notoriously inefficient. 
+> And if you want to learn programming, there are other languages that are more versatile (e.g. Python, C#, etc.)
+
+This is the issue I'm running into. My office is extremely Excel heavy and so macros and VBA are invaluable (especially since I'm the only one who currently knows them). But, I know that I need to expand my skill set if I want to be more marketable. My current list of skills to learn includes SQL and Python and I've thought about trying to learn PHP or Java so that I can have more network friendly abilities (e.g. webpage forms).
+I replied, then read this. Essentially a much more comprehensive version of what I said. Good job.
+Honestly, if you're looking into learning serious, object-oriented programming, I'd look into C#. It's such a powerful and well designed language. Most people I've seen talk about it say it's like a well designed Java. But Java is much higher in demand than C# though. You can read a good description of C# and Java differences here: https://www.linkedin.com/pulse/my-experience-c-java-guy-david-khanaferov
+I have actually taken a course in C and C++ but I found that for my job (data analytics) it's just not as helpful. Most of what I do revolves around database manipulation. Especially in regards to internet applications.
+Then learn SQL, or focus on Power Pivot and Power Query. 
+>Then learn SQL, or focus on Power Pivot and Power Query.
+
+That was what I said:
+
+>My current list of skills to learn includes SQL 
+Aaaand I'm a moron. Still drinking the coffee. 

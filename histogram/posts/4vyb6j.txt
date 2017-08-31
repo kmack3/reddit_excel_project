@@ -1,0 +1,36 @@
+Let's say I use the $ symbol to lock on a cell and copy data into 1600 lines. How do I remove the $ symbol from all the cells after that so I can copy the table into another tab?
+Highlight the cells. Ctrl-H. Find `$` and replace with `<nothing>`
+Also, highlighting the cells and then placing you cursor on $A$1 in the equation =$A$1+B1
+
+And then press F4
+
+it will toggle through all the absolute choices
+
+Hey look one button solution
+Replace all--> replace = with # --> copy paste --> replace # with =
+
+Works for many other things as well
+A lot of times what I'll do, especially for much larger tables, is create a copy of the current tab, then cut the copy's contents into the original tab and that preserves linkages.
+Paste as values in the new table
+I probably missed understood the question
+
+But copy then Alt, e,s,v (paste special values)?
+Thank you, it works!!
+
+Let's say I did this, I have a collum of info and it is written as 
+
+=$A$1+B1 (this one grows as in B2,B3..., while A1 stays, A1,A1...)
+
+I then get rid of the $ on all of my 1600 lines. Now I have
+
+=A1+B1
+
+Is there a way of putting the $ back in the A1? I suppose I could do the same as with getting rid of it and doing find: A1, replace: $A$1?
+Change it in the first cell then drag it to the bottom
+Find replace A with $A$
+Or this way, didn't think of it :D
+Select the cell range within the formula (A1:C47, or A1, B2, B3, etc) and hit F4.  Hit multiple times to cycle through.
+
+Find/Replace "A" is not a great solution.  There are lots of values in cells that could have an "A" in it that is not referencing the column
+Solution Verified?
+Yes.

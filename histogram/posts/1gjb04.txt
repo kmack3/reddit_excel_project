@@ -1,0 +1,96 @@
+What is the Comic Sans of Excel spreadsheets?
+A couple of things come to mind that you should not do:
+
+* Merge cells.  Instead expend the "alignment" section on the "Home" tab and center across selection.  Merged cells fuck up formulas and vba code.
+
+* Fancy graphs.  **No 3D.  No shadows.  No cones instead of bars.  No backgrounds. Etc.**  Fuck all that noise - it makes the infromation harder to see and you look like a 12 year old discovering word art.  I also hate all pie charts, but that's just me.
+
+Also, I have no idea what Glow is.  But I bet it's not something you need.
+
+Things that are really really useful:
+
+* Pivot tables.  
+
+* Pivot tables.
+
+* More pivot tables.
+
+* A graph made from a pivot table.
+The key to Excel is to make your sheets as simple, streamlined, and easy to interpret as possible.  Minimal formatting on any main pages to be read.  You can get more fancy with other sheets that are meant to be flashy.  (For a font, I suggest Calibri, that's my personal favorite font to work with)  Less is more.  
+  
+  
+PS - don't use pie graphs.
+[deleted]
+I'd advise separating your raw data from the analysis.
+
+Meaning, you should put your raw data all in one sheet. Then _from_ that, build pivot tables, or make tables from VLkookups, and SumIfs, etc in other tabs to show features of your data.
+
+This abstraction will secure your original data from being messed up. Also, it makes it much easier to change things around a bit. (Especially with Pivot tables). If you do it well, your source data tab can be completely hidden and never even touched.
+Great question, I think most people in the field of DataVis hate pie charts and 3D charts.  But, I tend to think of structure as the bigger problem.  Creating charts and the look is straightforward, but dealing with bad data is what I really deplore and I think is a huge time sink for millions of Excel users.  When it comes out of a system bad, then I get it, but a lot of times users try to pretty something up and they screw up the data. For instance they will insert rows or extra columns to manually add subtotals.  Makes it a much bigger pain to work with.  So for me, it is when I see someone screw up a useful data table by adding extra columns, subtotals and 27 different colors of shading. There are many, many more, though :o)
+You don't need dollar signs all the way down a column.  The first and last row should be enough.  You can also usually round to the nearest dollar. 
+
+The general rule of thumb is the less busy it looks, the easier it will be to read. 
+The comic sans of Excel? Shitty numerical formatting. Make columns/rows out to two decimal points when working with financial data. Usually looks much cleaner. 
+
+Edit: Oh, the nitpicking. I don't really care that you don't use decimal places when you do your accounting.
+My major pet peeve is when people don't hide the grid lines...
+Judicious use of formatting, callouts, sparklines and graph information. Simple is better. Don't highlight everything (e.g. a traffic light report with every cell having red,yellow or green). Just highlight/indicate the outliers.  
+  
+Think this: In 60 seconds, can my audience see the trend and any problems in it?
+I don't know how much of your job is just reporting and getting the number your told to get and how much is you looking at the numbers and picking the most relevant for your boss.  If it's the latter, your boss will see a lot of fancy formatting and assume you spent most of your time dicking around choosing the colors instead of analyzing data for the most relevant pieces.  IE don't spend 1 week formatting a spreadsheet that is essentially saying "sales are down 5% this month" in 20 different ways instead of showing why sales are down 5%. 
+i just wanted to thank everyone for their suggestions and help. i learned things i was not aware of (I AM GUILTY OF USING MERGED CELLS... but i just went and updated all of my templates, unmerged everything, and used "center across selection instead. FIX'D!) and i think i've got a better handle on what i should be focusing on in the future. 
+
+you folks are wonderful and are directly helping my career. i'm very grateful. this is a very worthwhile and useful subreddit, and you folks are doing a wonderful thing for those of us who could use some perspective and advice. 
+Some nice hints on this can be found [here!](http://exceluser.com/blog/category/ideas/bad-charts)
+Highlighting. Unless its conditional formatting, highlighting to emphasize a cell value is distracting. A simple bolded, bordered cell for your bottom line will suffice.
+If you have Office 2013/365 sharepoint - use powerpivot and powerview. So powerful, and they enable the user to get the detail and information that they want. Have a look [here](http://www.youtube.com/watch?v=Txfpc6Ii0Pw)
+Kindly explain the connection between this post and [this Metafilter question](http://ask.metafilter.com/243054/What-is-the-Comic-Sans-of-Excel-spreadsheets)?
+As long as Merged Cells is at the top of the hate list, all is well.
+Yes. Fuck Merge Cells.
+
+
+Wow... there is so much to love about this post. I would like to +1 to every single point made.
+
+(+2 to no pie charts ever)
+[deleted]
+Pivot charts with slicers can often be very effective in situations like this where you want to give another user some interactive function whilst keeping it intuitive and aesthetic.
+I find pie charts useful for people too stupid to understand Pareto charts.
+I think that pie graphs can be appropriate if the number of categories is low (five or less), otherwise they become cluttered. I've rarely seen one executed well.
+I agree 100% with this comment. Especially about Calibri: it seems to be the most readable font when working with spreadsheets. Usually the first thing I do with a file I receive from someone else is make sure it's all Calibri.
+
+Although, I have used pie charts, but only in conjunction with other charts and when I had a very small number of categories. I've seen people use them with tens of categories. Blech.
+I totally agree.  
+Except, especially as a marketing person, marketing/advertising people *hate* Comic Sans. It's an ugly font and anyone that uses it will be made fun of to no end. 
+I'm glad I read all the comments before giving my advice. This is the most important suggestion here.
+I agree less busy is better. I often end up showing multiple columns including currency and regular numbers. I find keeping the dollar signs all the way down those columns helps to differentiate.
+Or if you work in a larger organisation chuck this in the custom formatting:  
+  
+    #,##0.0,,;(#,##0.0,,);
+Actually, in most industry, financial formatting without decimals is preferred.  That way it's 2 less sets of numbers :P
+Cents ceased to have any meaning back in the 70s. What can you buy with 5 cents?
+
+Worse: when people apply white borders instead of hiding the gird lines.
+OCD much?
+
+Old school eh? Flat colours eg Windows 8 look, can work well when used sparingly.
+
+Fucking yellow, pink, and blue highlighting is the worst. It's like Pokemon threw up in a spreadsheet then blinded me.
+
+Also no color fonts where it can be avoided.
+The problem here is that you wind up with accountants doing graphic design...  
+  
+It isn't that you should never use colour...
+i asked multiple communities. seems obvious, no? it's even the same username. 
+Oh no! OP asked two different sites on the internet for feedback!  
+Somebody call /r/karmaconspiracy
+Merged cells, ironically, are part of the Microsoft Office Specialist exam.
+I perform analysis on a pretty large data set (10,000+ lines) every week. In reviews with management, I am often asked to display data in different ways on the fly (show it by week, now by type of cost, now by organization, only show labor cost, etc). I find Pivot tables to be the ideal tool for this sort of thing.
+Pivot tables for execs are very useful, i.e. if you have spreadsheet with call metrics being able to drill down and sift through the data quickly is much more useful than just giving them the data with a few graphs.  
+Agreed, but if you're asking for the basic faux pas in Excel, then, as a rule of thumb, I'dt think it best to just advise you to avoid it.
+I don't have a computer in front of me, going to have to look this one up tomorrow
+Pretty close to my standard number format:
+
+    #,##0.00;[Red](#,##0.00)
+A penny.
+Ugh... people do that?
+You wouldn't believe some of the things I've seen, and even by people who were lauded as "Excel experts".

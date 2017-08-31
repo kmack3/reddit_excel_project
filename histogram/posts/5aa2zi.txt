@@ -1,0 +1,45 @@
+Starting a new job next week that will heavily involve excel. What do you all feel are the most important parts of this glorious program I should brush up on?
+I don't know what level of familiarity you're at with Excel but if you're going to be using it a lot, master the shortcuts first then figure out the fancier stuff later. The formulas others have mentioned are great.  
+ Shortcuts like:  
+  
+* Shift + space to highlight an entire row  
+* ctrl + space to highlight an entire column  
+* ctrl + arrow key to move to the end of a table  
+* ctrl + shift + arrow to highlight cells to the end of a table  
+* double click format painter to lock it and apply to multiple cells consecutively. Esc to exit the tool  
+* F2 to edit a formula/entry in a cell. Look at the bottom left of Excel - it will say Edit or Enter as you press F2 repeatedly. Enter means arrow keys select cell references left or right of the formula cell, Edit means arrow keys move your cursor around the formula in the cell so you can edit parts of the formula  
+* Use macro recorder to auto-create macro code  
+* F4 to lock rows, columns or both for a cell reference - $A$1: the first dollar symbol locks column A, the second one locks row 1. So if you copy and paste the formula to other cells those cell formulas will always refer to $A$1. Press F4 repeatedly to cycle through each option of locking  
+* someone said to enable Solver. Big Yes. Also Data Analysis. You never know when you'll need to optimise or run iterations to find an optimal number (Goal Seek)  
+* if I would recommend one more formula - it would be SUBTOTAL. You can use this to sum up values. Why not SUM? Because subtotal ignores other SUBTOTALs in the range it's summing up. So if your data table has many subtotals and one grand total at the bottom, you can use subtotal to select the entire range rather than using sum and having to select multiple ranges excluding their subtotals.  
+  
+Okay I'm out of tips, that's about it. Good luck! And don't be nervous.  
+  
+Edit: typos and grammar
+CountIf, SumIf, Vlookup, averageif. It depends on your job really...
+Best thing is to review a[ list of commands and descriptions](https://www.techonthenet.com/excel/formulas/).  Then when you're working on something and trying to strategize on how to approach it, you're brain will tell you "Hey, wasn't there a command that does *blank**" and then you can google from there.
+Start with keyboard shortcuts early.
+I'd repeat the same as others - Pivot Tables, Data Tables, etc.
+
+Maybe check the add-ins "solver" and "statistical tool pack". 
+
+I found this course on edx invaluable:  https://www.edx.org/course/analyzing-visualizing-data-excel-microsoft-dat206x-3
+This table really helped me with starting to memorize the keyboard shortcuts for Excel.  http://www.datapigtechnologies.com/downloads/Periodic_Table_Of_Excel_Keyboard_Shortcuts.pdf
+Index/match with named ranges. It's like a whole new world of comfort..
+Im currently a tool developer for a supply chain. If you understand programming ( or dedicate a good amount of time to learn), I would learn VBA for Excel. If you can learn that, you can automate like 95% of your job. 
+Agreed with what everyone else said but I would also add Data Tables and Pivot Tables
+=if
+I haven't had that job, but I've supported a lot of people who have. Vlookups and gant charts seem to be what really gets their motors going. 
+I did not know about subtotal.  That is very useful.
+Agreed.  Plus Index/match.  For a lot of things it works much better than Vlookup.
+
+Also, take a second to look at VBA.  At least look at the macro record function.  It can do some amazing things with 0 programming required.
+Thanks for the reply. If you couldn't tell I'm really nervous for this job. I'm going to be dealing with a lot of client info with customer service and account management. Also some logistical stuff like inventory planning and tracking.
+i didn't know about this either... but not sure if i'm understanding how it's better. even if you subtotal, you still have to sum all the other subtotals? 
+
+edit: i now understand it after trying it out on Excel - that's really a good feature. damn good stuff!
+Subtotal also disregards rows that are hidden with a filter. That's useful.
+Yea I only recently discovered it, I think from someone else on this sub actually. It's a great addition to my regular toolkit of formulas!
+I wouldn't worry too much. One thing I pre noticed is that more senior members of the world do not realise the power of Google when working in excel....you're working in excel and want to create something but don't know how? Literally just explain to google what it is you're looking to do and add "excel" on the end of the search! Good luck in the new job 
+If your job will require cleaning up/aggregating data I suggest also becoming familiar with the basics of Power Query. You can avoid a lot of repetitive VLOOKUP work with it by using the merge query function. 
+Don't be nervous man. If you got any Excel related questions, just post them on this sub and we will help you out 99% of the time. You can always shoot a pm to me if you need help too (although I am not nearly as experienced as the collective excel hive here).

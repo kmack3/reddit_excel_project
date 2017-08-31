@@ -1,0 +1,28 @@
+6ftopd
+Referencing a tab name
+Hi guys, I'm working on an excel workbook that contains several tabs. My first tab is a summary tab. So i have formulas that refer to certain tabs. Here's one example: =INDEX('Billing Report'!C:C,MATCH("Taxes",'Billing Report'!C:C,0)+1,1)
+
+What happens is that every month the application we use for finances creates a report and we export an excel of that report. Then, we open that file and move that excel tab to our bigger file. So I would like to find a way that my formula can automatically look for the specific tab name in my formula, so that once i move the new tab to replace the old one(which both have the same name) the reference still works. Thanks for your help.
+
+
+-------------
+In your first tab, you could put the worksheet name with the reference in a cell. For example, A1 would contain the text ~'Billing Report'!C:C~ without the ~'s. Your formula could then be:
+
+    =INDEX(indirect(A1),MATCH("Taxes",indirect(A1),0)+1,1)
+
+I'm pretty sure that would work. However, that's a pretty volatile function. What if you just brought in your new tab, then on the summary tab, do a find and replace for the old tab name and replace it with the new tab name (if it's the same, it probably comes in as "Billing Report (1)"). Then, move out the old tab and rename the new tab. It sounds tedious but it's probably only adding the find and replace from what you currently do. I'm guessing that entire process could be automated as well; if you want that to be the case, let us know!
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

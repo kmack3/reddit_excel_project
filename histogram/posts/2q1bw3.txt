@@ -1,0 +1,85 @@
+Where can I practice Excel?
+Why not right here?
+
+Have a look through the SOLVED posts
+
+While many of the questions may not have any real connection to economics, (and some are quite easy for experienced Excel users), there are some real challenges on here.
+
+While not many of the questions are directly related to my field, either, the questions people ask are sometimes quite challenging/
+
+See if you can solve them, as well - you might be able to come up with a more efficient solution than was originally posted - and, if you can't solve the question, you can see the post which *did* solve it, and see if you can work out why/how it works.
+
+There are sometimes questions on here which I see and think to myself "I have no idea how to do this", or even "there's no way to do that", and later see the question marked as SOLVED, so I re-read the thread to see if I can learn something new
+The [excelisfun](https://www.youtube.com/user/excelisfun) youtube channel provides spreadsheets you can play with as you follow along their videos.
+Google for ModelOff, you can practice your skills on previous years' exercises. I do them at work sometimes when I need a little tune up.
+Let's look at it from another angle. What are you going to be doing with Excel? 
+
+My experience is that it's all about the Data Process. You have to clean it up. Check the minimum values, maximum values, date ranges, see that different fields are what you want. Half your SSNs are text and half are numbers? How do you deal with that? 
+
+Do you have all the information needed for the statistical analysis you want to do? 
+
+Your client claims this list of people have been paid out this much. Here's a list of actual benefit payments from their bank trust. Compare them and explain the differences. 
+
+For added fun, the bank trust gave you benefit payment information as pdf files. Turn them into excel and find some way to connect them to each participant. 
+
+May be worthwhile to simply research the data process and build from there. Much of the actual learning comes from working with others and paying attention to the tricks and hotkeys they're using. Every single candidate puts 'proficient in Excel' on their resume. Telling a story about something done with it is usually better.
+
+Hell. Research Beersheets for fantasy football, rip it apart and see how it ticks. Apply lessons learned to another sport. 
+
+Burning through this there are certain things you run into often.
+
+VLOOKUPS. COUNTIF. Filters. DATE. TEXT. MATCH. Grouping. VALUE. General practices such as color-code inputs. Center Across Area rather than Merge Cells. 
+
+alt+e+s in sequence to bring up special paste options. (alt+e+s+v for paste values and alt+e+s+t for paste formats are super common. paste transpose exists.)
+
+There's got to be some online site to offer services for  pay. I'd be shocked if there's not someplace to offer data cleanup. 
+
+Really want to go to the next level? Dive into VBA. The go to is [Excel 2010 Power Programming with VBA](http://www.amazon.com/Excel-2010-Power-Programming-VBA/dp/0470475358). Read through a section, do all the examples, come back then try to do them all again without guidance. This gives insight into a lot of what goes on behind the scenes in Excel, teaches many hotkeys you wouldn't otherwise pick up on. The moment I discovered how to access the Immediate window (ctrl+G) then learned to throw a Print command or two into my coding to test values in the VBA editor was the key moment I connected my programming in VBA to what I had done in R, Matlab, C, or Python. 
+
+ In college is an excellent time, because you have time. It doesn't seem like it now, but time is hard to find afterward as well. 
+
+ 
+I think since you already know STATA, the biggest benefit from using Excel would be its ability to visualize and analyze datasets. The main tool you need is the pivot table, which can quickly filter and slice and dice a dataset to make sense of it all. 
+
+You'll need a training dataset to work on, maybe the Northwind database, and some assignments to work at.
+Great suggestions offered already.  Two more ideas:
+
+1.  Look in the index of your textbooks to see where excel is mentioned.  There may be some end-of-chapter exercises that deal with excel.  
+
+If you can't find anything helpful in a textbook you have already, look for some used ones with an included CD or software key on Amazon or something. You can probably find plenty of opportunities to hone your skills for cheap with the benefit of having the correct answers provided in the text/CD.
+
+2.  Check out subreddits that analyze data.  Often they will include the raw data source(s).  See if you can replicate the same sorts of graphs they can (two challenges in one).
+
+Edit:  In my experience, you should make it a must-do to learn VLOOKUP.  
+Please also let me know if you find interactive tutorials for intermediate and advanced levels. 
+[deleted]
+Honestly, you could read all the Mr Excel books on how to use excel, how to write programs in VBA, or how to build nice dashboards and you could read all the problems on here but you probably wouldn't learn or retain much of anything.
+
+What you need are problems to solve. Finding you a curriculum of problems to solve is tough, i'm running into the same issues with VBA. I need problems as well.
+
+I would recommend getting your hands on a huge set of data and messing around with it. Talk to one of your economics or statistics profs. Ask them where you can find a few million points of dirty data. Then use this forum to learn the best ways to clean that data, turn that data into usable information, then present that data in a readable way.
+
+Get your hands on some data so that you can solve all sorts of problems which will teach you how to excel efficiently. 
+There are sites [such as this one](http://www.mockaroo.com) that will generate a bunch of random data in an Excel file for you. You can then mess around with it. You can try basic formatting, sorting, text to columns, etc. but you can also try more complex things like vlookups, if statements or pivot tables. 
+Total aside, but is LaTeX  still used a lot? I remember  using it in school and being told all technical publications would use it... then never used it again. 
+IF you're in school just go to your professor or ask your dean for exercises? You pay for school why ask reddit?    
+This is a great idea. I'll definitely start there.
+[ModelOff](http://www.modeloff.com) is the best. Loved the Purple City and Chutes and Ladders problems this year.
+
+ModelOff inspired me to build [RateMyExcel](http://www.ratemyexcel.com) as a year-round home for Excel challenges. One day I hope to add bigger challenges with prizes to the site.
+How do you approach solving their problems? Do you look at the solutions and then attempt the problem after? 
+These are the exact kind of ideas I had, as far as manipulating the data to get an end result that I wanted. Thank you for the ideas!
+This is how I learned HTML and CSS, actually.
+This is perfect. Thank you!
+I'm not quite sure yet. I'm an undergrad so we stick to Word and PDFs, but LaTeX is apparently used in math graduate level classes. As for professional level, I'm even less sure. If I go into an Economics oriented field I'd like to use LaTeX to display data and findings, but I don't know how common that is.
+My minor is accounting. I haven't touched Excel for school except to organize data for STATA.
+Try to solve first, then review solutions. If there's something you can't answer, then it's a good problem set.
+I don't see any harm in asking Reddit. Thanks for asking, OP, because I am not a student anymore. 
+Just ask your school? I don't get your post.  
+ 
+It's not about harm, it's illogical. 
+
+Practice Excel? That has to be vastest question that could be asked. At least if he just asks professor they can tell him about field, and what people will actually be using it for.   That's what schools is for... His interest could also lead to opportunities in that respect. 
+
+I don't understand students that pay for college and won't use their college resources.   
+I agree. His professor might know people in his field who have actual excel needs which be a great networking opportunity. 

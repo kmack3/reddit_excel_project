@@ -1,0 +1,157 @@
+Just for fun - how would you intentionally obfuscate a spreadsheet?
+Depending on your audience, simply convert a complex worksheet to R1C1 reference style. 
+Inconsistent formulas is pretty low hanging fruit. Indexmatch and vlookup. sum and +. Sometimes nest 4 ifs, sometimes 1 at a time and have the cells reference each other. Whatever you're doing do it with 0 consistency at all.
+
+Edit: Another thing, you can make blank cells display images of non-blank cells that look like they might make sense. You can also chose the image to display randomly. 
+Assign a delete macro to Ctrl-C. Assign a save macro to Ctrl-Z.
+
+Code everything in INDIRECT(). Referencing random cells with letters and other with numbers in them.
+Wrap all of your functions that return numbers in the [BAHTTEXT](https://support.office.com/en-us/article/BAHTTEXT-function-5ba4d0b4-abd3-4325-8d22-7a92d59aab9c) function.  Copy and paste entire sheet as values. 
+Cross reference a bunch of random sheets with names like "lllIIIllII" have trails of these that lead nowhere. 
+Array functions are damn near fucking impossible to decypher even when you KNOW what they're doing...
+     SendKeys: ctrl+alt+down
+Write a function which does some simple arithmetic but name it something very close to a normal function. 
+
+For example, AVERAG(), which finds the product of the contents. 
+Abuse custom formats. On each cell you have a different custom format to show a different number. Create a full spreadsheet that works off of the custom numbers... with a second, real sheet under
+The most obvious and most evil one that I have ever come across is workbook filled with nicely formatted values that appeared to be variables in the model.  For example, there might be a cell brightly labeled "Tax Rate" with a green background in bold text. The formulas in that workbook never referenced that cell however, and instead the rate was hard coded into thousands of cells. Hundreds of people used the workbook before noticing the problem.
+
+If you are really interested in comprehensive lists of the ways that people can make absolutely evil errors in spreadsheets, just try searching for *spreadsheet auditing*.  There have been a number of good studies cataloging the most common and insidious errors.
+For Data Storage:
+
+1. File IO to external locations, bypassing the need to store anything at all within the spreadsheet. FilePaths would definitely be generated based on the environment, so nothing is hard coded.
+
+2. Store information in the document properties. Hardly anyone ever looks in there, and it's useful for storing binary data to compress storage space requirements.
+
+3. Storing data in the cloud, where you can remotely access data no matter where the document is located.
+
+4. A combination of all of the above depending on the user's environment, where online storage is the first priority, followed by File IO, then document property storage. Or even a hybrid of all of the above where small/heavily used data is cached locally before upload to the cloud, and vice versa when downloading data.
+
+---
+
+For Data Integrity:
+
+1. Encrypt everything.
+
+2. Checksum all encrypted data.
+
+3. Zero hard coded strings to maximize obfuscation.
+
+4. Self-checking analysis, where modifications to certain aspects of the spreadsheet triggers fail safes within the document.
+
+I like to math it the fuck up. Multiply by one prime then divide by another only you know the primes though so..... To why the right answer reverse it if you get a remainder you don't know the prime blue cheese or fuck your mother.
+Plenty of left() right() and len() functions in if statements with no cell references, only hard coded values
+references to veryhidden sheets. 
+
+Create excel 4.0 macro sheets and excel 5.0 userform sheets to do stuff - then in VBA, set sheet.visible to xlVeryHidden. 
+
+The sheets won't show up on the vba excel object list, and you won't be able to unhide them by right-clicking on the sheets. 
+
+The only way to find out what is there is to loop through the sheets collection with VBA and set status to visible. 
+
+Now introduce a mistake in your userform, or make your excel 4.0 macro do something ridiculous.
+
+This kind of support for old '95-era shit is a massive headache when you encounter it in the wild for the first time. 
+
+The reference help file for excel 4.0 macros can be downloaded here: 
+
+https://support.microsoft.com/en-us/help/128185/macrofun.exe-file-available-on-online-services
+
+and you might need to download the winhlp32.exe file from microsoft for your specific operating system (google it) to open the file. 
+
+If you are on windows10, there is nothing official available to access old help files, but you can follow the instructions in the reply by Alan Cobb at the bottom of this page https://answers.microsoft.com/en-us/insider/forum/insider_wintp-insider_install/winhlp32-do-we-have-to-go-through-this-again/ddcc2f40-e4f3-407b-9672-ee8a2b08a71e
+
+unfortunately, since geocities got taken down and most angelfire websites are dead, the primary ressources for excel 4.0 macro support are gone :D :D
+
+
+
+The second an array formula is entered using multiple cells, people start their head scratching.
+
+but if you really want to mess people up.
+
+Go to a cell with a value in it, click on formatting, select custom and type.
+
+    ;;;
+
+It will make the value vanish
+VBA to automatically move anything entered to a random cell among the 300 worksheets, at least 50000 rows and 50 columns away from a1, and turn the text to white.
+Indirect all your cell links so none of the correct cells are highlighted by the GUI.  
+Basically anything with text(a1,"#") is over most people's head. Or worse, nest if() within iferror(), within if(), and maybe has an and() / or() somewhere in the mix. 
+
+If I really wanted to fuck with my office, I just use  right(a2,len(a2)-find(" ", a2)), which I use to pull the portion of a cell that is after the space on the cell. 
+
+People look at my production formula that calculates a production number from forecast,normsinv, averageifs... and they give up.
+
+
+Use offset and indirect 
+I feel like half the files I've been asked to work on used this thread as a style guide. 
+Indirect all the things
+Change text color to the background color on a few strategic intermediate formula cells.
+Someone at my work sends out a spreadsheet with composite returns - the cells with returns are custom-formatted with #.00"%". Meaning the user sees the return as 1.41%, while the actual cell value is 1.41, which can get so incredibly annoying. You could be doing 1+return, expecting to get 1.014, but getting 2.41 in return and it drives me nuts. 
+Naming cells and using that everywhere. 
+
+Heck - naming cells as B23 when it's actually from C4
+Are you my coworkers?
+That is incredibly mean. I like it!
+This is the ultimate april fool's
+I'm doing this to my monthly tracker. Right now.
+Why does this even exist?
+This. And while doing this, hide some or all the sheets using the vba 'very hidden' sheet property. And use indirect and offset functions, within named ranges, to reference ranges on the very hidden sheets. 
+Array function using name space, indirect, and user created functions. All to produce a sumifs formula that looks like it might launch a nuclear missile upon execution.
+I agree. They're definitely not intuitive to read, and can be slower than other methods when you have a large amount of data.
+I disagree, you've just got to 'git gud' mate...
+
+
+Pure cruelty. 
+We used to do this to our colleagues that always left their desk for a moment without locking the pc.  Lots of laughs!
+Oh man, the fun you could have with this. Concate() and have it do some funky math so numbers look similar to referenced cells. 
+Easily dealt with by Clearing All Formatting (ALT, H, E, F)
+Would using a find and replace macro using that value and replacing with a cell reference fix that kind of problem? It sounds right in my head but I've never had to do that. I think it might end up replacing the whole cell instead of the part you want unless you use a right() or left() and Len() to find the value in a cell then delete and add in the same spot
+Nice!
+
+
+
+Could use formulas referring to/from other tabs, coming and going many times
+
+Change text color to white so the cell appear blank.
+
+Cell formatting give lots of options! (this seems a nice one: http://imgur.com/dtUfK5x )
+
+All should be done in the middle of "normal data". So the user needs to verify each an every cell to find the "fake" one
+
+Tons of indirect and offsets...
+
+Put a code on vba to get a print screen, cut, save and load the piece of image (simulating cells) in the exact place of the spreadsheet.
+
+
+
+There could be a challenge like this one here... : P
+number 1 can actually be a valid strategy in some of the things i do, recently set up a sheet to do some complex laminated composite calcs which was fine for the test case but some of the others had 2.5 million lines to process, ended up jut writing the output to text and summarising with powerpivot, works really nicely in the end. 
+Ah, wonderful Excel4Macros, they're a wonderful and mysterious spectre in Excel VBA.
+Naming ranges removes obfuscation if you do it correctly, abstraction is a key part of programming...  
+  
+Ctrl + F3 gets you to the name manager where you can easily audit formula
+Oh god I am so sorry for you.
+https://en.wikipedia.org/wiki/Thai_baht
+We've moved on from array functions. Old school. Excel tables and power query is where we're going. 
+I don't want to test what this does, mind explaining it?
+Sure, but if you know that hotkey, you know more than most people who use excel, and that doubt many things would stump you
+A variation on Data Storage #1 would be to create an artificial RAID1 where data is split between multiple drives or files. With preference for multiple drives for disk I/O. To get your data back, you'd have to combine both files and decrypt everything.
+tbh I have never made one or used one (except for get.cell and datedif calls in named ranges), but remember spending hours trying to figure out where the hell a userform CAME FROM in a sheet. Turns out it was a 5.0 form that was veryhidden ._.
+I know what the Baht is, but I still don't see the point in the formula.
+Why would you need to see any currency written out in a spreadsheet ever?
+I didn't say to use Array formulae for anything, just that they're not hard to wrap your head around...  
+  
+I agree table nomenclature & power query are awesome
+
+Ctrl+Alt+[direction] rotates the user's monitor to the input direction. So Ctrl+Alt+Down flips the screen upside down. Feel free to try it yourself. Ctrl+Alt+Up to undo. 
+Never underestimate the abilities of the end user when it comes to data protection.
+That's the way they traditionally write numerals.  It's not the equivalent of spelling out the words, e.g. one hundred dollars. 
+You mean you don't use Excel to print your home made cheques?
+Does it only work on certain operating systems or monitors? It doesn't work on mine but I've heard of that trick before and it worked on my last laptop.
+Oh yeah, I'm able to break most of the protection we have. But in terms of sheer confusion that's easy to revert, I think custom formatting is the way to go
+I just tried the formula. It must be tedious to write out numbers; even simple numbers like "1" are ~9 characters long.
+Actually bahttext returns the numbers written out; the Thais have their own numeral system which is different. This is just using Thai letters to spell out the numbers
+In Soviet where-I-live check cashes You!
+Certain video adapters, yeah. (I think Intel ones?) They're common, but there are certainly others too,
+And that's why the West, mostly dominated by judo-christian stuff, uses Arabic numerals--they are extremely efficient. And why the world is following after. There might be a theoretical notation system out there that's better. But no body 1500 years ago had thought of it yet. 

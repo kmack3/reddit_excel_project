@@ -1,0 +1,85 @@
+Issue reg. export of several worksheets into pdfs
+What you are going to want to do is a For Each Loop on the Worksheets...
+
+Something along the lines of
+
+    Option Explicit
+    
+    Sub WorksheetWorker()
+        
+        Dim ws As Worksheet
+        
+        For Each ws In ActiveWorkbook.Worksheets
+            'Do Stuff here...
+        Next ws    
+    End Sub
+
+
+This basically says, for each Worksheet... do whatever you want, go to the next worksheet, and do the same thing... 
+That makes sense and seems like a great way to account for multiple sheets! Thanks a lot!  But I unfortunately still have the issue of naming and saving the pdfs correctly. Do you have any ideas for that?
+
+Of course, give this a go:
+
+    Option Explicit
+    
+    Sub WorksheetWorker()
+        
+        Dim ws As Worksheet
+        Dim strFolder As String, strFileName As String
+        
+        With Application.FileDialog(msoFileDialogFolderPicker)
+                .AllowMultiSelect = False
+                .Show
+            On Error Resume Next
+                strFolder = .SelectedItems(1)
+            Err.Clear
+            On Error GoTo 0
+        End With
+        
+        For Each ws In ActiveWorkbook.Worksheets
+            strFileName = ActiveWorkbook.Name
+         ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=strFolder & "\" & ActiveWorkbook.Name & " - " & ActiveSheet.Name _
+         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+        Next ws
+
+    End Sub
+
+Long story short, going to open a "folder picker" that will allow you to pick where you want the file saved.
+
+Then it wall save the file in that location with the Workbook Name + the ActiveSheet, since you are looping through the entire workbook... should be a quick add... 
+Thanks once again.. I tried running the macro but ran into two issues:
+
+1. The selection of where to save will prove a huge hassle in the long run as there is over 300 excel docs. Do you know the formula for just saving it in the same folder as the excel file?
+
+
+2. It only saves the 1st first and does not continue with the next couple of sheets.
+> It only saves the 1st first and does not continue with the next couple of sheets.
+
+Doh!  Fixed and done... 
+
+    Option Explicit
+    
+    Sub WorksheetWorker()
+    
+        Dim ws As Worksheet
+        Dim strFolder As String, strFileName As String
+    
+    
+        For Each ws In ActiveWorkbook.Worksheets
+            ws.Select
+            ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=Application.ActiveWorkbook.FullName & " - " & ActiveSheet.Name _
+            , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, OpenAfterPublish:=False
+        Next ws
+    
+    End Sub
+    
+
+This is perfect!!!!!!! 
+Thank you very very much, you have been an awesome help!
+
+SOLUTION VERIFIED!
+Great, glad it worked out, let me know if you run into any other problem..
+
+You have awarded one point to _fearnotthewrath_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

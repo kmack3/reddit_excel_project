@@ -1,0 +1,19 @@
+Why does .xlsm file keep opening in Read Only?
+Are you saving it locally or on a network drive?  This happens to me from time to time on my company network.  My IT guy can fix it but when he's not around, I just save as a different file name, delete the original and rename the new one.
+You can save a file as read-only. If you go to the file -> right click -> properties -> last row in the properties window should list a box with read only and hidden.
+
+This is my guess, could be something completely different.
+Maybe try Excel Options>Trust Center? There are a few options for macros there
+Are you referring to your personal macros? The ones saved inside a macro named personal?
+
+Locate the PERSONAL.xlsm file which has your homemade macros you added to excel, right-click it, settings, check the box for read only. The file is inside your XLSTART folder. To locate, in a folder type %appdata% in the folder path field at the top, hit enter, navigate to the Excel folder, then XLSTART. 
+
+I'm saving it locally, everything is on my laptop 
+Ah! This won't work. 
+
+I have macros that I want to run on open and close. I should technically be able to run the close ones but not the open one right? 
+Another possibility could be your Excel file is used in some data connection. If it's used in mail merge and Word is open then Excel is read only, for example.
+This is my guess.  It's how I make my important spreadsheets read only.
+- Multiple times open (in different excel instances)
+- Opening multiple different spreadsheets that reference the same macros.
+Ctrl+O, then hold down shift when you're pressing Open 

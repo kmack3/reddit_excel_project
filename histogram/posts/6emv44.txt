@@ -1,0 +1,50 @@
+I need some help creating an Ultimate Frisbee Tournament Seeding Formula
+I would imagine the easiest way to do this would be to create a table where Column A contains the calculated Pools and Row 1 contains the calculated Ranks. Then you can do an INDEX/MATCH/MATCH to fill your bracket. Assuming that the 1st Seed will go on Sheet2 and the table will go on Sheet1:
+
+    =INDEX(Sheet1!$A:$I,MATCH("1st",Sheet1:$A$1:$I$1,0),MATCH("Pool A",Sheet1!$A:$A,0))
+
+Or you can make it dynamic by listing "1st" and "Pool A" in separate cells and simply referencing those cells instead.
+I'm probably missing something, but your example doesn't show what happens if the team rank doesn't correspond to the seed, right? Like the 2nd rank and 7th rank both happen to be in Pool C, so it all works out in the example.
+
+If you have 8 teams, then I would think the best way is to just match them up as usual (1v8, 2v7, 3v6, 4v5). If there are four pools and the first game must contain matchups between pools, then there's also not choice: A plays A, B plays B, etc.
+
+For the first scenario, an INDEX MATCH works as usual. For the second, as AmphibiousWarFrogs mentions, either an INDEX MATCH MATCH, or an INDEX MATCH with multiple criteria (`MATCH(Pool&Rank,PoolCol&RankCol,0)` with Ctrl+shift+enter, e.g.) should work.
+Thanks for your input! I just need the initial seeding for the first game. 
+.
+Thinking about it I most probably over complicated a step, it would be simpler to populate the Team Name by Rank only.
+
+I have 8 Rows (A3:A10) (one for each team), I have a column with their Rank (W3:W10) (Rank is based off of their Win/Loss record, which I change for each scenario).
+
+I need to populate the Team Name by Rank into a blank cell.
+Example: Seed 1 should be whichever team has a rank of “1st”
+Thanks for your input! I just need the initial seeding for the first game. We're trying to see who we will potentially play if we win or lose our next 3 games. 
+
+Thinking about it I definitely over complicated a step, it would be simpler to populate the Team Name by Rank only. 
+
+I have 8 Rows (A3:A10) (one for each team), I have a column with their Rank (W3:W10) (Rank is based off of their Win/Loss record, which I change for each scenario). 
+
+I need to populate the Team Name by Rank  into a blank cell. 
+
+Example: Seed 1 should be whichever team has a rank of “1st” 
+
+Hopefully you are using `RANK` and getting 1-8 instead of the text "1st".."8th".
+
+If you have the seed column match the rank column (`1` and `1` or `1st` and `1st`, for example) then do this
+
+    =INDEX(A$3:A$10,MATCH(<seed cell>,W$3:W$10,0))
+
+[Imgur](http://i.imgur.com/cql1wfB.png)
+
+If you have "1st" or such nonsense - don't do that, but this will work but you must hit Ctrl+Shift+Enter when entering it.
+
+    =INDEX(A$3:A$10,MATCH(<seed cell>,VALUE(LEFT(W$3:W$10,1)),0))
+
+[Imgur](http://i.imgur.com/LPPUzq5.png)
+
+If you don't want a column for Seed number, just replace with `ROW(A1)` in either formula.
+
+[Imgur](http://i.imgur.com/qoKRuti.png)
+Yep! I was being an idiot. Index Match worked perfect! 
+You guys rock!
+
+I changed it from 1-8 to 1st-8th by using a formula. I liked the visual. 

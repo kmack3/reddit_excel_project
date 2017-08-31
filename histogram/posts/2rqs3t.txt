@@ -1,0 +1,44 @@
+Sudden inability to alter company's excel file, what could be the cause?
+Ah. Yeah. So I guess we should probably go ahead and have a little talk. Hmm?  We regret to inform you that your position here at the company is no longer needed.
+I'm guessing that you have to click the "Enable Editing" button.
+Is it possible you have an unlicensed copy of excel?
+"Just delete him from the system and it'll work itself out"
+Is the sheet protected?
+
+In the Review tab, check to see that it's not
+
+Secondly, does the problem persist in only this workbook or every workbook? Could you just copy/paste the data out into another workbook and move on down the road?
+Sometimes you may have a spreadsheet that is read only. You could try to "Save As", give it a different name, and then edit that spreadsheet.
+Did you experience something like this? http://superuser.com/questions/830189/why-does-excel-2013-ignore-my-keystrokes
+Maybe try running it through Excel Online and see if it works there or some other known good version of Excel?
+I can think of two possibilities.  
+
+1)  Did you by chance have two tabs/sheets selected at the same time.  I have had this happen before and not much works.
+
+2)  Is there any chance that you or someone else protected the sheet?  Oops, Baron Von Wasteland already mentioned that one.  Best reddit id today if I do say so myself.
+Check the name of the file at the top of excel and see whether [Group] is mentioned after the filename?
+I've had this at work with Excel and it thought my ctrl key was stuck. I wasn't touching the ctrl key. I share my desk with someone on the other shift that eats over their keyboard a lot. The space key sticks, too. They must have spilled some crap in the keyboard that dried sticky. IT department was out of keyboards, so they sprayed it out and we're supposed to have a new keyboard next week. Turning the keyboard over and beating it on the desk lightly dumped out a lot of crumbs and seems to temporarily solve the issue whenever it pops back up. If this is your issue, you should see some things highlight when you touch certain keys. Though maybe that's just my version, which is much newer than yours. Never had this on older versions. I don't eat over my freaking keyboard like it is some sort of crumb catcher trough, though. 
+It is possible, is this behaviour indicative of how excel reacts if it is detected that it is unlicensed?
+Great, so uh /u/Wuek has been let go?
+I will check back tomorrow if it is protected, but i highly doubt it is. It's a problem that extends to the 'file' options as well, not just contents within the workbook.
+
+As mentioned, even reopening new files in excel result in the same problem, and i can't copy-paste the data because it just does not seem to acknowledge any keyboard inputs besides 'enter' and 'tab'
+
+I can't 'Save-as', as mentioned above, the only 'File' tab options i can execute are 'Open', 'Close', 'Print'.
+wonder how that was solved?! http://xkcd.com/979/
+Not exactly, i didn't even have the options to select within 'File'. I could not 'Save' or alter the workbook in any way.
+I thought it was keyboard problem as well, but no.. it's definitely excel-isolated
+
+Depending on version, yes. You can see if you are unlicensed in the File -> Help menu. It's usually pretty obvious about it, red warnings and the like in your user interface.
+No guys, i haven't been let go... As far as i know.. Yet.. 
+Have you tried changing the file extension? Make sure you have an original copy and then change the extension to ".xls" from ".xlsx" or vice versa.
+
+Hopefully this works.
+Sorry. I tried.
+I'm on Excel 2007, and i can't click anything beyond File -> Excel Options -> Resources.. I don't see the Help menu as illustrated
+it's from Office Space. the next line goes "well hold on now, I didn't say that. we just fixed the glitch." 
+If you don't readily notice anything on the screen (like red in the title bar or alerts when you start MS office) you probably have a legitimate office installation. [Here is a link with some picture for finding the about dialog in an office 2007 program](http://www.howtogeek.com/howto/microsoft-office/how-to-see-the-about-dialog-and-version-information-in-office-2007/), I hope it helps verify you are licensed.
+I did as you recommended, it mentions that the product is licensed to a user: Dell. 
+
+I guess that means either we have a legit license, or we are using someone else's license? But what would cause this problem of unreadable keyboard inputs though?
+Sounds like you have a valid OEM license. I would try editing a different spreadsheet and if I could, I would assume somehow the lock settings had been set on that single file I could not edit. If I could not edit even a new spreadsheet I would assume something was wrong with my copy of excel and probably use google docs on the allegedly locked file.

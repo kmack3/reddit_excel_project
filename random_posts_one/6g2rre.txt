@@ -1,0 +1,46 @@
+6g2rre
+Excel Formula Combination HELP!
+Hey everyone,
+
+So I have 3 columns of interest. Month (April or May) the report was ran in, Customer ID (email) and Industry code (4 digit number). I have to find the total amount of unique customer IDs and Industry Codes in each month. I have the formula that finds Total Reports Ran in April and May they are as follow: =COUNTIF(Conversion!A1:A3000),4 for April and =COUNTIF(Conversion!A1:A3000),5 for May where Conversion! is the title of my sheet it is referring to. I also have the formulas that find the Total Number of Customer IDs and Industry Codes for April and May combined and they are as follows:
+=SUMPRODUCT((Conversion!D1:D3000<>""/COUNTIF(Conversion!D1:D3000, Conversion!D1:D3000&"") where D is the column the customer IDs are found in and =SUMPRODUCT((Conversion!C1:C3000<>""/COUNTIF(Conversion!C1:C3000, Conversion!C1:C3000&"") where C is the column where the Industry codes are found in. What I am trying to figure out is how to make a formula that counts the amount of unique customer IDs that had reports ran in each April and May and then the amount of unique Industry codes that had reports ran in each April and May. I feel like you should just be able to combine the formulas I already have to do this, but have yet to find it. Any input on how to find this is appreciated!
+
+
+-------------
+Ok. Easy.
+
+in the 4th row, do a concatenation of the first 3. You'll get a unique string. After that, you can do a distinct count based on that column, using  
+
+    =SUMPRODUCT(1/COUNTIF(E:E,E:E))
+
+That will give you a unique count of ids/month/code
+-------------
+You'll need a different type of formula for what you're looking for. Suppose a1:a3000 are months and d1:d3000 are customer id's. You want the unique customer id's for the month of april (month code=4). Use this formula: 
+
+    =SUM(--(FREQUENCY(IF(D1:D3000<>"",IF(A1:A3000=4,MATCH(D1:D3000,D1:D3000,0))),ROW(D1:D3000)-ROW(D1)+1)>0))
+
+as an array, so after you paste in the formula, press contrl+shift+enter. 
+
+
+if you want to do the month of june, change the =4 to =5 as such: 
+
+    =SUM(--(FREQUENCY(IF(D1:D3000<>"",IF(A1:A3000=5,MATCH(D1:D3000,D1:D3000,0))),ROW(D1:D3000)-ROW(D1)+1)>0))
+
+this assumes column A contains month numbers instead of actual month names. To get unique based upon industry code (c1:c3000), change the D1:D3000 to C1:C3000 as such: 
+
+    =SUM(--(FREQUENCY(IF(c1:c3000<>"",IF(A1:A3000=4,MATCH(c1:c3000,c1:c3000,0))),ROW(c1:c3000)-ROW(c1)+1)>0))
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

@@ -1,0 +1,34 @@
+Cell contains two values separated by a comma. Is there a way to split these two values between the exisiting and new columns?
+Why not text to columns with the coma denoting where to split? 
+You would want to create 2 new columns to hold the two pieces (leaving the original unchanged).
+
+Right of comma:
+
+    =TRIM(RIGHT(A1,LEN(A1)-FIND(",",A1)))
+
+Left of Comma:
+
+    =TRIM(LEFT(A1,FIND(",",A1)-1))
+
+[deleted]
+Can you explain what this means, please?
+Yep text to columns with the comma as the delimiter is way simpler than using a formula!!
+SOLUTION VERIFIED! Many thanks, Madball73!
+
+I didn't think about using a formula to do it as I update it. I always get all the data then do text to columns as a last step. I like yours though 
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+In the Data tab on the ribbon there is a built in function that is present called "Text to Columns" select the cell or cells and then click the text to columns button. once done a pop up menu will appear. You can either split up the text to columns using certain characters as the break points in this case you would want to use the commas. or you can used fixed spacing which will be auto generated but in the preview you can drag the spacing around. 
+No problem.  FYI, /u/Introverted_Learner gave an even easier method!  What is preferable may depend on whether this is one-time or a repeating activity.
+
+You have awarded one point to _Madball73_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I apologize Introverted; I hadn't understood your solution until your explanation from two hours ago.  Text to column is incredibly quick and easy!
+I've used this before, it's just been a loooong time and totally didn't pick up on it from his post. Thanks for the clarification! 
+No worries :) the formula is something you could pre load in columns so as you added data it autopopulates vs my way which means it has to be the last step! Two different ways to get your result! 

@@ -1,0 +1,46 @@
+Satisfaction level ---- top of the world!
+Yeah, the day where you suddenly realize you've become "that person" that used to blow you away.  That is an amazing day :)
+I have one answer, Pivot Tables ! 
+I feel like a hacker! 
+Well done.
+whenever I get a excel sheet from somebody that uses vlookup, I call them up and call them an amateur excel user.
+The thing is that I create a lot of spreadsheets that other people need to use as well.
+
+People who are not as proficient as I am. People for whom VLOOKUP is their workhorse function. They know how it works and can edit or modify it when the need arises.
+
+Part of having good excel designing skills is taking the end user into account.
+I consider myself a reasonably seasoned excel user and I use a lot of vlookup and haven't used a pivot table before. Am I missing out on something? 
+What do you use? Index/match or vba? If vba, how?
+"Part of having good excel designing skills is taking the end user into account."
+
+This is true, it amazes me how many people build things, not just excel, without ever taking the end user into account.
+
+
+It generally comes down to preference, but VLOOKUP is less practical than INDEX/MATCH, and pivot tables add a world of flexibility and speed to producing quick analyses.
+used conjunction with =GETPIVOTDATA, amazing!
+I had issues seeing the use of pivot tables at first.    Just remember this:
+
+*Whenever you want to* **AGGREGATE** *data, Pivot is the answer.*
+
+Had a co-worker want to get a count of items (~200) that were marked "Low/Middle/High".   Selected the data, Inserted a Pivot, added L/M/H to the Rows, Dragged L/M/H to Values and ensured it was Count.   They were ecstatic... then they grabbed a calculator, and started figuring percentages.  Grabbed the mouse again, dragged L/M/H to Values again as a count, changed the display to %, and boom.  Another column with the overall percentage.
+
+Time elapsed?  About two minutes, standing up, never touching the keyboard (they were sitting)
+
+Pivots are also damn handy where you can do things like "I want the Sum of 'Total Sales' for 'Golden Arches' from '3Q'" using GETPIVOTDATA (just hit = in the cell, and click on the value in the pivot you want).  If your data shifts any, you don't need to worry about the formulas pointing to the proper value.  It'll still pull the value you want.  You can also do things like tweak the GPD formula so instead of a string, it references another cell, then you can have formulas that pull data out of the Pivot based on data on your particular Row.
+
+They're stupidly powerful little things, once you get past the "WTF will I use this for?"
+You are definitely missing out if you don't use pivot tables!  They are SO flexible and powerful if you frequently need to cut up excel data in different ways.
+Index/Match is much more flexible than Vlookup.  Once you get the hang of it is very nice.
+
+Not sure why I am being down voted for my other comment.  It was a joke.
+will look into it again.  I tried once a few months ago and lost interest.  I will use index/match occasionally but for whatever reason vlookup is my trusty formula
+I do manage large amounts of data and do cut it up in various ways but I guess I've just never seen a pivot table in action or seen one created enough to actually know how its useful in my application
+This sounds intriguing, how does it work?
+I didn't downvote you. You just mentioned that vlookup was inferior and not what you used instead. I'm on the index/match train and just thought you may have had insight into something even better.
+Give it a go.  Pivot Tables and Index/Match functions combined with names ranges have become my best friends for managing large amounts of data.
+It's a matter of comfort. I had to force myself to get comfortable, because I knew it was silly to use INDEX/MATCH and VLOOKUP inconsistently.
+
+It will save you time, when you don't have to worry about what column order you've got your data in.
+I wasn't accussing you, just being general.
+
+Sorry.

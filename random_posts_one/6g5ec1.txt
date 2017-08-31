@@ -1,0 +1,83 @@
+6g5ec1
+Trying to generate dynamic part numbers
+Hi I'm hoping to generate part numbers for files I use and the kicker is that I need them to have a counter based on the file type. I think I'm pretty close with the current code I have but I don't exactly know how to set a count command for numbers with an irregular structure. For example, I want a counter that uses 6 digits starting from 000000, and then another counter that would start at 00#00 (the # denotes a class the part fits into)
+
+Currently what I have is a series of input text boxes so the user can place the relevant information to create the other aspects of the part number, but then I need the number to be dependent on the input value for file type. I think the simplest way for me to do this will be to create a different sheet for every group, model, and file type combination and then have the code paste the number into that sheet so that the code will know the number is no longer available.
+
+
+Well now that I've explained the problem here's what I currently have coded. Please let me know if I need to clarify anything else.
+
+Lastly, the parts where there is only one ' means I plan on using that in the finished product, and if there's two ' then that means it's just a comment.
+
+
+    Sub My_code()
+    
+    Dim Calendar As String
+    Dim Group As String
+    Dim Model As String
+    Dim File_Type As String
+    Dim Description As String
+    Dim User As String
+    Dim Number As String
+    
+    Calendar = InputBox("Please enter today's date", "Calendar")
+    Group = InputBox("Please enter Group Name", "Group")
+    Model = InputBox("Please enter the Model Name", "Model")
+    File_Type = InputBox("Please enter the File Type", "File Type")
+    Description = InputBox("Please enter the part description", "Description")
+    User = InputBox("Please enter your name", "User")
+    
+    Range("A1000").End(xlUp).Offset(1, 0).Value = Calendar
+    Range("B1000").End(xlUp).Offset(1, 0).Value = Group
+    Range("C1000").End(xlUp).Offset(1, 0).Value = Model
+    Range("D1000").End(xlUp).Offset(1, 0).Value = File_Type
+    Range("F1000").End(xlUp).Offset(1, 0).Value = Description
+    Range("G1000").End(xlUp).Offset(1, 0).Value = User
+    
+    'If Group = V And Model = MM0 And File_Type = iG Then
+    ''Need to figure out a way to generate the next number in the sequence dependant on file type
+    ''Using next line to generate number text
+    'Range("E1000").End(xlUp).Offset(1, 0).Value = Number
+    'End If
+    
+    'If Group = V And Model = MM0 And File_Type = SG Then
+    ''Need to figure out a way to generate the next number in the sequence dependant on file type
+    ''Using next line to generate number text
+    'Range("E1000").End(xlUp).Offset(1, 0).Value = Number
+    'End If
+    
+    'If Group = V And Model = MM0 And File_Type = iM Then
+    ''Need to figure out a way to generate the next number in the sequence dependant on file type
+    ''Using next line to generate number text
+    'Range("E1000").End(xlUp).Offset(1, 0).Value = Number
+    'End If
+    
+    'If Group = V And Model = MM0 And File_Type = SM Then
+    ''Need to figure out a way to generate the next number in the sequence dependant on file type
+    ''Using next line to generate number text
+    'Range("E1000").End(xlUp).Offset(1, 0).Value = Number
+    'End If
+    
+    'If Group = L Then
+    ''Need to generate files starting from 000000 and counting by 1 upward (ie 000001)
+    
+    End Sub
+
+
+
+-------------
+To apply code formatting
+
+    Use 4 spaces to start each line
+
+You can select code in your VBA window, press Tab, then copy and paste into your thread or comment.
+
+Please edit your post.
+-------------
+Thanks that was pretty useful, I didn't realize it would generate a nice section like that!
+-------------
+You could use COUNTIF to get the next countid, using a wildcard to get the type in the current list,, if I have understood your question properly.
+
+`=COUNTIF( range , "*identifier*" )`
+-------------
+I'll put some research into that. I'm not well versed enough in code to know for sure if this would help me in my problem but at least I'll learn a new function if it doesn't work.

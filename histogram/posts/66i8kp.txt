@@ -1,0 +1,30 @@
+When I copy paste dates, it subtracts 4 years?
+Your boss is using the 1904 date system since Macs used to not support dates prior to 1904. Windows always uses the 1900 system. So you'll have to add four years (`=EDATE(A1,12*4)`) or change your workbook's system. [More details here](https://support.microsoft.com/en-us/help/214330/differences-between-the-1900-and-the-1904-date-system-in-excel).
+
+The colors is probably just due to the theme. Like if you have a Theme where blue is Accent 1, Excel doesn't copy "blue", it copies "Accent 1", so if your destination workbook has blue as Accent 1, it's all good. But if you have say, yellow as your theme's accent 1 color, it will look different. So just find the theme your boss was using and use that.
+Your boss is using the 1904 date system because he is using a Mac. You can use it too if you like (File>Options>Advanced).
+[deleted]
+That's it! thank you!
+
+SOLUTION VERIFIED!
+I hang around this sub just to confirm that I don't know Excel. 
+What an obscure thing to know! Bravo.
+Both spreadsheets are set to US. It is also not copying colors right, the blue cells are becoming red and yellow when I copy over =/
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+If you want obscure - I'm pretty sure the reason for the difference is that developers find it's beneficial to start your "zero date" in a leap year (on older computers, where algorithms need to be fast, you can shift bits to the right twice to test if a year is a leap year, since it's the same as dividing by 4, just like how dropping two zeroes in decimal is the same as dividing by 100). So 1904 worked since 1900 wasn't a leap year, and there was enough space in the 32-bit counter to last until 2^32 / (60\*60\*24) days + 1/1/1904 = some time in 2040, so it worked out.
+
+But that fact that 1900 wasn't a leap year was either lost - or not cared about - by the developers for Lotus 1-2-3, the first big spreadsheet program for IBM PC's. They chose 1900 but had it set as a leap year and made Feb 29 1900 a valid date. 
+
+So Excel comes out, and they want all the Lotus 1-2-3 users to be able to use Excel, so they kept all the formats and formulas the same (just like Google Sheets does now) and therefore they intentionally kept the bug in.
+
+What's fun is Google wants *their* spreadsheets to work with Excel, so March 1st 1900 is also valued at 61. But Google chose to *not* have 2/29/1900 exist, so they worked around it [by making 1/1/1900 as day 2](http://i.imgur.com/kw9ENon.png) instead of day 1
+Not sure on the date part, can you post a screenshot?
+
+Also, color formatting usually wont copy over to a new sheet.
+That's oddly fascinating.
+Here is a link to some examples
+
+http://imgur.com/a/3CFLL

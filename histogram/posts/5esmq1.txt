@@ -1,0 +1,57 @@
+How complex would something like this be to code in VBA?
+not too difficult, you maybe able to use the macro recorder to start you off, use insert picture from file to get the img
+I would say yes it is possible. I have written macros before which look for xxxxxxx.jpg and insert them to a sheet. 
+You could also look at using a macro to generate the barcode instead of importing it, you can find the code for some online. Just a suggestion. 
+
+Overall it is possible, but if you are new to vba then it will be a very steep learning curve. 
+
+
+
+
+Shouldn't you or your IT division or the vendor modify your ERP program?  
+While it can be done in Excel doesn't mean its best to do it in Excel.  
+
+I believe the difficulties aren't in programming the VBA but in maintaining the master data and user behaviour.   
+eg: :  
+1. Maintaining the products' master data.  
+2. Making sure that each of your customer are using the latest update of the excel file.  
+3. Formatting so the image will still in the same layout as you intended when opened by your customers and they do something unexpected like resizing columns, inserting/deleting rows, etc  
+4. How if you create the forms in excel 2016 but your customer open in excel 2007 or in Mac or Android or...Open Office?  
+
+Excel is too flexible for something like this.
+Hi /u/DDiran, have you done any vba coding before? Just to get an idea of where you're at? This is possible, not too difficult (if you've coded in vba before, it will take you a few hours). As others have suggested, use the recorder to do one step at a time to see the syntax that excel uses. Once you see the methodical way that it works, you just have to think how you would do this manually and then code it (obviously, there are some programming tricks to make it better/faster). 
+
+Let us know where you get up to, always willing to lend a hand. 
+Shouldn't be too hard.
+
+Only thing I'd be aware of is that if there are a lot of pictures to import in the sheet, it might bog down the whole sheet pretty fast.
+I have an idea, but I haven't read the whole description...
+
+... have you considered creating the bar code with excel columns with variable width?
+If you have the code number, it shouldn't be too difficult to implement.
+Thanks, I'll give this a go, however I'm concerned that this will need to be coded for general use on different orders. Macro recorder surely can't help with this?
+I'm not sure I completely understand why it's going into Excel. Excel as a document creation engine is quite interesting.
+
+A lot of ERP systems have connectors that you let generate invoices etc without sucking it into Excel and doing it there.
+Unfortunately editing our ERP is not an option
+It's a long way to get to your result. There are add-ons, including free ones, for Excel that will take the number and do the encoding for you.
+no obviously you'll have to generic-ise the result from the recorder but it can be useful if your not overly confident with vba to give you the building blocks to modify. 
+
+so for example when you do it over the acro recorder you'll get something like
+
+    ActiveSheet.Pictures.Insert( _
+        "C:\Users\snorge\Pictures\Screenshots\Screenshot (1).png").Select
+    Range("J37").Select 
+
+and you'll want to edit to be something like 
+
+    i = 1
+    ProductCode = Cells(i, 1)
+    Dim image_path_string As String
+    image_path_string = "C:\users\snorge\screenshots\" & product_code & ".jpg"
+
+     ActiveSheet.Pictures.Insert( _
+        image_path_string).Select
+    Range("J37").Select
+Instead of giving it specific order numbers, product IDs, create variables that store those values and place this into a loop so it can process all the orders at a press of a button (as suggested by Snorge). 
+If you don't mind answering, what erp are you using? 

@@ -1,0 +1,67 @@
+Girlfriend's Spreadsheet Crashed, Asking to Debug or Close. It Is Now Completely Changed, And There Is No Recent Save Despite Her Saving Multiple Times All Morning.
+[deleted]
+You can try the autorecover file location. It's basically where Excel auto-saves the file occasionally while you're working. If you go to File-->Options-->Save, There should be a path that shows the Autorecover file location, see if it's there.
+Download agent ransack and search for all files created today. This is what I do for my girlfriend and it works 99% of the time. She's always opening excel files in e-mail attachments, clicking save (not knowing where it's being saved to) and then closing. Then she goes to open the file (which she obviously did some work on) from the e-mail she originally received and "hey presto whaddayouknow" it's obviously back to it's original form. So you usually just need to use a search tool to find where Windows threw that saved temp file, and I do this by searching for all files created today. You can quickly scroll down till you find the xls file (or just put "*xls*" in the search prompt to make it faster. 
+It probably won't help now but in the future setup automatic backups, http://excelribbon.tips.net/T003884_Controlling_Automatic_Backups.html
+If she opened the file from an internet browser / outlook, and she only used the "save" as opposed to "save as" she may have saved it to a temp folder. 
+Windows Temp files?
+If you right click on the file in the folder, try clicking restore previous versions. This is Shadow Copy built into Win 7 and (assuming it is enabled) takes a snapshot a couple of times a day depending on configuration.
+The IT backup would be a day or two old, and would be a big setback.   She has patients all afternoon, so I hoped I could surprise her with a solution by time to go home. 
+Okay a bunch of this made sense. The spreadsheet is 12 megabytes of pure text and macros, and she was about 50 entries from being completely complete when she hit her macro button for a new entry and the crashed. 
+
+She figure out it basically deleted a couple important lines when it closed and made all the references incorrect. 
+
+What do you mean that the macro saved her spreadsheet? 
+Okay I stayed up until like 3AM reading about VBA and taking a really quick crash course.
+
+Her spreadsheet IS using some VBA, but only a couple macros that she wrote using the "record macro" function,  so there is no save built into it.  She had been using the same macro for months before the crash occurred and hadn't made any changes.  The macro's function was to basically add 3 blank lines at the top of the spreadsheet (for a new patient entry) and put a couple reference formulas in certain cells to calculate certain things for the study.
+
+Each of her 15 worksheets in the workbook used one macro each,  but some used the same one, so there were a total of 6 macros in use, all made using "record macro" and that was the extent of the VBA used. 
+
+She was using one macro that she had used for months when the crash occurred. 
+
+So.... Does it sound like it was just due to the massive size of the file that caused the crash, because there is no other VBA happening besides simple ones...?
+
+And I now know how to send you the code, but can't until Monday (if she'll even let me do that). 
+
+I'm glad I don't now feel like a TOTAL idiot when trying to explain the problem, and I'm actually intrigued enough to keep learning about excel, so that at least came from this! 
+I'll have her try that,  thanks! 
+
+Is this the same as file>info>old save? 
+Awesome, thanks. I'll have her try that tomorrow.... But one quick question:
+
+Can she just use the windows 7 search to the same effect? She's not sure if they'll let her download ransack on a work computer that has all that patient data on it. 
+It isn't there. Every temp file is empty, and it is set to autosave every 10 minutes. So weird. 
+[deleted]
+It may be, but I'm not 100% sure. I just know that I've had success with that in the past, that's generally my first stop, I've never actually looked at file>info>oldsave to compare.
+&nbsp;
+Good luck!
+Thanks again for your help so far. 
+
+We aren't quite as technically savvy as you (understatement) and aren't sure how to find out if a save function  was the culprit or how to get you the code.  She also isn't exactly familiar with Access (although she plans to learn soon) so she was thinking of a work around for right now. 
+
+Her file contains 15 workbooks that don't need to reference eachother. Would it be okay if she fixed the lines of the messed up workbooks so they referenced properly and then she separated them into 15 different files and used her existing macros and formulas? 
+
+We aren't sure what a corrupted file exactly means and she's worried if she copies and pastes stuff into 15 different files and then fixes the formulas and references then it might happen again because she "copied and pasted" from an already corrupted file. 
+
+Or if she needs to just completely start fresh and retype stuff into new workbooks. 
+
+You have no idea how much we appreciate your help, you're either saving time already spent or time spent in the future, or both! 
+Yeah it wasn't there. Doh! Hopefully there is another route. 
+[deleted]
+Open Run and type: %localappdata%\Microsoft\Office\UnsavedFiles. You can also right click on the file and look for Previous Versions 
+I just don't think there is anybody in her office that has any capability to write any "VBA code". It is just straight up Excel 2010 that crashed that way... And the file wasn't in a folder that backs up on the network, so the IT guy (that is basically a networking guy) doesn't have a backup. 
+
+It is a small research division of a company on which she does the doctoral exams, and they have one on site IT guy that seems to not know much in this realm to help.
+
+It looks like she is going to try to just make each workbook separate and fix the formulas and see what happens. 
+
+I'll tell her to ask the IT guy about VBA code, but I am almost certain he won't know what we are talking about. 
+
+Thanks again for your help. 
+Solution Verified
+Are you comfortable saying which vendor? Just curious
+
+You have awarded one point to _synonymous_with_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

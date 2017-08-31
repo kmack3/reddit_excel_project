@@ -1,0 +1,29 @@
+6fwzo3
+Unsure of how to get an array of values from a comment
+So, at my job, I'm analyzing comments that customers leave us about our products/service/etc. I've created a list of 'buzz words' and numbered them so when I've parsed out the comment field into a text-to-column situation, I can see which number (from my VLOOKUP) matches which buzzword so I can track it. That said, given there's 180 columns (some of the comments are incredibly long), I was curious if there's an easier way for me to do this. Ideally, I'll be able to type in a formula immediately next to the single comment column and be able to know which buzz words are in each of those comments as then I'll be able to more easily analyze them and convert them to more quantifiable information. 
+
+Is this possible? I imagine I could use an index, but being I have a separate worksheet that contains my buzz words (and their corresponding, unique id), I'm not entirely sure if using an index is the way to go.
+
+Thanks! :)
+
+
+-------------
+Assuming Excel 2016.
+
+If you have every buzzword in a range, say 20 buzzwords in X3:X22, then
+
+    =COUNTIF(B3,"*"&$X$3:$X$22&"*")
+
+would return an array with 1s corresponding to buzzwords found in cell B3, and
+
+    =TEXTJOIN(", ",1,LEFT($X$3:$X$22,255*COUNTIF(B3,"*"&$X$3:$X$22&"*")))
+
+returns a comma-separated list of all the buzzwords found in cell B3.
+
+That said, it you need to perform text parsing, there are much better tools than Excel. Google Sheets is much better than Excel because it provides regular expression formulas.
+-------------
+Not an answer but how do you separate  'I'm happy with your service' and 'I'm not happy with your service'?
+-------------
+Ah, awesome. I'll do that tomorrow at work. Thanks! :)
+-------------
+One of the buzz words that I have is 'not,' so the way I have it, it'll recognize the difference between those two. Because I initially parsed it out, it separates every single word in a string with its own individual column, which makes the process loads easier (despite the fact that Excel-in a few instances-created almost 200 additional columns).

@@ -1,0 +1,276 @@
+What are absolute MUST-knows if you wish to start a career that utilizes Excel heavily?
+Here's a comment I originally made in this thread about half a year or so ago: http://www.reddit.com/r/excel/comments/20v0i0/boss_thinks_im_smart/ It's a bit long but it covers some aspects
+
+"Most of these are reiterations of what other people have said, but these are my 2 cents. (and remember, a big formulas is just a bunch of small formulas stuck together, sit down and break it apart and it is no big deal) 
+
+More or less in order of importance:
+
+**PIVOT TABLES** - you're in a business setting, they will be useful and you will run into them, in newer versions of excel they have "Slicers" which makes everything easy for excel-challenged managers. Prepare to see pivot tables applied to _everything_ if you work with a certain demographic in the business sphere, even things where they probably shouldn't be. 
+
+**SUMIFS, COUNTIFS, AVERAGEIFS** - These are amazing and you can do some real magic with them depending on your data, sum/count/average numbers in a list if all of your conditions are true. 
+
+**INDEX/MATCH** - Versatile and straightforward reference functions that I have used in pretty much every project I have ever done. 
+
+**LOGIC** - IF() functions, Nested IF() functions, OR(), AND(), NOT(), are some of the ones I use the most. Having a solid understanding of boolean logic will help you with creating complex (or surprisingly simple!) formulas, and it is transferable to writing macros or doing array calculations. 
+
+**TEXT FORMULAS** - LEN(), MID(), RIGHT(), LEFT(), FIND(), SEARCH(), SUBSTITUTE(), TRIM(), TEXT(), & (this character concatenates text). Clean data is the exception rather than the rule, and these fellas are what you want, to get what you need out, of what you have. They are also useful when helping that cute chick from marketing. 
+
+**DATA VISUALIZATION** - or charts, or graphical representation of information, if you're doing business reports, guys are gonna wanna see charts. They're also going to remember a good chart that they can use to convince other people with, so familiarize yourself with the different options. Read a few blogs on how to create and present different kinds of business'y charts (waterfall charts, bullet charts, etc.) One of the better resources for this is the Peltiertech website: http://peltiertech.com/Excel/Charts/ChartIndex.html (check out chart types and chart types - custom) the walkthroughs and examples are straightforward, and he often makes deliberations on the different chart types and their appropriateness as well. Of course there are many other sources (and opinions), just google. 
+
+**OFFSET** - This is a gem, especially if you're dealing with weird data layouts or subsections of data based on the position of a cell or something like that. Combine it with INDEX(MATCH()) and COUNT formulas for more versatility. Also great for making dynamic named ranges. 
+
+**INDIRECT/ADDRESS** - Indirect will let you use a string as a reference. This may sound a little tame, but when you have data in 32 different-but-consistently-named worksheets and you have to pull something from each of them into a table, you will be blessing the gods for INDIRECT(). ADDRESS() returns to you the address (e.g. "B4) of a cell depending on a row number and a column number you give it. Again this sounds a bit bland, but it can increase the versatility of your INDIRECTs.  
+
+**ARRAY FORMULAS** - are the hammer with which I hit most problems, I am ashamed to say. Most formulas can be used as array formulas by hitting ctrl+shift+enter. Computationally they are often not the best for large spreadsheets, but I like the logic of them and once you have that down it helps break down the process into smaller steps. I don't advise you use them extensively, but I think it's important to know about them, as they can be lifesavers. Look up SUMPRODUCT and FREQUENCY, frequency especially can be beautiful.
+
+**VBA / MACROS** - If you find yourself doing the same thing over and over again every day or every week; copy pasting a report into another report removing the first two rows then sorting and and changing the formatting before making it into a chart (or whatever) - it's time to record a macro. Recorded macros are never pretty, and they often aren't great, but they're baby's first steps into automating things with VBA, something that will make you seem like a grand wizard AND make your life a lot easier until it makes it a lot harder. 
+
+**GROUPING** - one of my least favorite features of Excel but business guys love it, they can click it and it expands/hides parts of their reports. Know about it and apply it if you deem fit. 
+
+I am probably leaving something out, but as the last thing, but not the least important: 
+
+**SHAMELESSLY USE THE MICROSOFT EXCEL TEMPLATES AVAILABLE ONLINE**
+
+Some dude at microsoft is paid to sit there and make these templates available. They generally work all right, and you can get great ideas of how to get nifty functionality out of spreadsheets with it. (like this sweet [project-timeline-in-a-graph template](http://office.microsoft.com/en-us/templates/results.aspx?qu=project&queryid=d3b3ab4d-9b08-44c2-be39-551ce231d770&avg=zxl#ai:TC102930043|))
+
+Edits: 
+Holy run-on sentences, Batman! Also minor edits, deletion of commas."
+
+A few things I forgot to add originally: 
+
+**NAMED RANGES** - especially for building dynamic named ranges, but can also be used for making iffy calculations look a lot prettier and make the core of the formulas easier to read 
+
+**CONDITIONAL FORMATTING** - prettify stuff and perform visual error discovery, nifty if you use the FORMULA setting but can get a bit heavy. I usually keep it away from non-essential tasks but some people swear by scanning their spreadsheet for yellow cells 
+
+**DATA VALIDATION** - Make dropdown lists force people to not put in the wrong goddamn value 
+
+**SOLVER** - Solver can be used for lots of cool shit, but mostly it's "what does the interest rate need to be for this to be X", or something similar. The applications can also be pretty case-specific, and in many jobs you won't ever need to use it, the book Datasmart goes through how to solve a lot of data analytical problems using Excel and Solver, but I rarely see it used generally. 
+
+edit: words and formatting
+I don't know if these are absolutely necessary since the others mention the need-to-know skills, but some others to know about:
+
+* Using and creating **array** formulas (In reality, I don't know how often you'll need to use them, but at least now how to create them.)
+* Advanced filtering
+* Text to columns
+* Troubleshoot formulas using Formula evaluation
+* Conditional formatting
+* Making sure ALL information is displayed (unhide sheets/rows/columns); make sure fonts ARE NOT formatted as white in a cell with white background (people use this to hide stuff)
+* Dumb things too; I teach Excel and find that most of my students don't know order of operation
+* Charting (although powerful, it's not the best charting tool but people still have problems if there's any complexity)
+* How to open a corrupted .xlsx file by changing the extension to zip
+
+While most of the core functions that you should know are being covered in other comments, I'd like to add a few things that I think are important. Understanding the high-level issues with data quality, table structure, and intuitive thinking.
+
+Be extremely critical of any large data set that you are given, especially if that data has been entered at any point by a human. People make mistakes. People make mistakes constantly. Look at the min/max of a number set, does it make sense and seem reasonable? For text, check for leading/trailing/double spacing.
+
+Be aware of best practices when creating a table. Especially once you get to extremely large record sets, it becomes critical to minimize waste and redundancy. If you've never used Access or other database software, get an entry level book and learn about common mistakes. They will be useful in Excel. It is easy to impress a less technical audience with a sloppy Excel workbook but you should always try to work cleanly. Every single book I create is named consistently "20140819_BookName_MyInitials". Form good habits now.
+
+Lastly, have an open mind and try to think about what Excel should be able to do. A lot of the formulas listed in these comments seem obscure at first glance. You need to see situations where they are useful before you will really understand why we would include them in a "must know" list. Majority of my Excel knowledge came from solving business problems as they came up. I would see a problem, know that there has to be a logical way to solve it in Excel, and set out to find the solution. Sometimes it is quick, sometimes it takes much longer than I would like to admit, but now those are solutions I have in my wheelhouse for the future.
+You're gonna need to know all of the functions that everyone here has brought up, but I cannot overstate the importance of learning keyboard shortcuts. When I'm doing shit in Excel, I pretty much never touch the mouse unless I'm messing with pivot tables. Stealing new colleagues' mice is a classic office prank.
+Database connections to pull data into a pivot table, 
+
+microsoft query and power pivot to do table joins, 
+
+text functions to cleanup shitty data dumps, 
+
+being able to reverse engineer someone else's work to look for errors, 
+
+sharpen your Google-fu skills when you are trying to find a solution to a problem,
+
+sharepoints
+That's pretty much it. Maybe pick up VBA and write some macros.
+
+Edit: countif is pretty good.. Maybe pick up access?
+Depending on what kind of analysis gig you're looking for, you may quickly be leaving the realms of Excel and be on a fast track towards R or SQL or something of the like. Excel is great for many business purposes, but it's not a very good piece of software for heavy duty analysis.
+
+With that being said, I would get very comfortable with the uses of each of those features you mentioned. Diving into VBA wouldn't be a bad idea, either. Play around with the recording of macros so you can get a hang of how things go down.
+
+The thing that really separates the men from the boys in Excel is the creative combination of formulas. Yes, some problems require a simple SUMIF or a VLOOKUP, but when people are able to combine an IF, SUMPRODUCT, and a VLOOKUP function all in the same cell, that's really what's impressive. There's also something to be said about simplicity, but even the basic combos of IF statements within other IF statements are incredibly useful for a variety of applications.
+2 Excel questions I've had before:
+
+* I have rows of data and columns of data, I want to know which value is in a cell based on a particular row and column, what do I use?
+
+    INDEX(MATCH())
+
+* How do I input an array formula?
+
+    CTRL+SHIFT+ENTER
+
+Learn the power of SUMPRODUCT.  The rest is covered nicely by /u/rgmw.
+    =pearson()
+
+Will make you look bare clever.
+
+Also, get a mensa puzzle book and smash through it to the stopwatch. Get another one and do it in less time. What really makes for good formulas is thinking, "(a+b)c" is the same as "ac+bc". Eg...
+
+    =if(a+b>d,"Solution"&A,"Solution"&B) is the same as...
+    ="Solution"&if(a+b>d,A,B)
+tjen gives an excellent list of must-learn things.
+
+My 2c
+
+**INDEX/MATCH** - this is critical when working across multiple sheets or workbooks
+
+**VBA** - this covers anything iterative and can increase your productivity tremendously.  If, While, For, and Application.ScreenUpdating = False/True are good places to start.  Also learning how to call functions, opening other files, and activating different workbooks is important.
+
+**Serial-time extraction and manipulation** - there will be many times where reported hours, or dates are in the Date format, and in order to extract hours minutes or seconds, understanding how INT(A1*24), MINUTE(date), SECOND(date) is a huge bonus.  Learning how to use time-stamps with index matching based on certain hours or half-hours of the day is really useful if you have to work with live-production data.
+
+**LEFT/RIGHT/MID/SEARCH** - Left, right, mid, and search can eliminate the issue of having certain pieces of data un-Index/Match-able. 
+Concatenate is not top level, but definitely an underrated command
+Pivot tables
+In order to use pivot tables well you need to understand database queries. 
+Understanding relational database design helps to understand queries. 
+
+Advanced formulas
+Larger formulas get tiresome so understanding VBA can help there.
+In order to understand VBA you need a basic understanding of programming:
+
+If then statements, 
+
+variables,
+
+arrays
+
+loops,
+
+containers
+
+function concepts in general.
+
+Events
+Know how to use google, sometimes you have to know how to articulate what kind of formula and it's not always that easy.  
+The formulas that everyone has mentioned, one user mentioned keyboard shortcuts (an easy way to blow everyones mind as the screen flashes and they have no idea what you just did) and power pivot if you want to do analysis on a large amount of data and dont want to have to write Access queries to pull the data. 
+I'm surprised no one has mentioned any time or date functions yet. Also formatting 
+Vlookup is god's gift to man.
+I use Excel a lot and have for years, but most jobs have not required me to be expert at it, and most jobs have benefited greatly because my skill level is way above that required to get the job in the first place. 
+
+What everyone else has listed I totally agree with, but consider using these formulas to set up templates and basic calculators.  
+
+For example, in my current job I have to work out Gross/Net pricing based on %markup.  Mark up and Margin aren't the same thing by the way - another handy thing to know.  But, I have a basic calculator so that I enter the Net price in one cell, the % markup in another, and it calculates the Gross, tax and tax-inclusive amounts for me.  Everyone else in my office uses a 'normal' calculator - it takes longer and is more prone to errors.
+
+Tracking data in Excel is also great.  Filtering your columns, and learning to create pivot tables is a great way to create reports which simply don't compare in quality, time, variations of, and presentation options of a manual alternative.
+
+Use the auto-features to make tables, etc, look pretty, but be aware of your audience.  I, for example, love to colour-code my data.  I use conditional formatting a lot for this reason.  It draws my eyes straight to 'critical' information.  
+
+But, my boss, who I have to send some of this data to each day can't stand it.  He likes the black and white version.  So, instead, I lay it out with plenty of 'space' around the data to make it easy on the eye.
+
+Finally, learn your keyboard shortcuts.  Once you get really good at Excel, you tend to want to pounce on the good ideas you have on how to use it and you don't want time to stop you and your wizardry.... learn to be efficient.   And, remember, Excel is far more amazing than people who do the same thing day in day out on it know.  If you want to do something, just google what you want to do.  Someone will have a formula out there to use and teach yourself new tricks with.  
+
+Good luck, it's addictive.  Spreadsheets = data control, forecasting, estimating, etc... it's a great way to keep your life on track.
+VBA. Seriously.
+Thanks all for the amazing responses. When I say I "know" pivot tables, vlookup, index/match, etc. I know the basics and can easily handle the tutorials on YouTube (specifically ExeclExposure). That said, my current job uses so little Excel that I can't accurately tell what my real world skill level is at but I'm assuming I'd be in way over my head especially compared with some of you.
+
+A few more questions...what types of roles can I look for that will need a basic understanding that I currently have but will allow for growth? 
+
+Also how interesting do you guys find working in Excel day in and day out and how are the job prospects? I know a guy fairly well-versed but not a wizard making 6 figures basically making spreadsheets all day.
+
+Thanks as always. Very helpful all of you!
+Badass nested IF functions
+Thank you all for the amazing answers.
+
+As a follow up question how can I convince a hiring manager to give me a shot without the professional experience. I mean I can only do so many tutorials and such right?
+
+My current job utilizes it virtually not at all.
+Pivot Table, vLookups, Sum/CountIfs, SumProduct (love this one) and any variation of If/Then.
+Powerpivot.
+Excellent detail there.
+
+> GROUPING - one of my least favorite features of Excel but business guys love it..
+
+Ugh, I despise grouping.  Grouping, Merged Cells and Tables are (imo) the worst Excel tools available.
+Great write up, thanks for taking the time to write this originally and again for pasting it in here :-)
+This is really great. I consider myself an excel ninja, but you definitely detailed some things I clearly need to brush up on.
+
+Minor nit-picky thing: My understanding is that Array Formulas are actually much more computationally efficient on large data sets. They certainly reduce file-size. In general practice you're essentially utilizing one calculation that would typically require hundreds of individual formulas. I see array formulas as a straight-jacket for calculations. 
+
+That said, you can certainly ask the mysterious ctrl-shit-enter formula to do some really crazy mad scientist stuff that would make your processor cry.
+PivotTables, and not just picking an item for each axis and summing one set of figures.
+Don't forget 
+
+-VLOOKUP
+
+-VBA
+
+Can you expand on the corrupted file part? I've never heard of this. What would corrupt a file? And how does your zip process work?
+> Dumb things too; I teach Excel and find that most of my students don't know order of operation 
+
+ A lot of people in general don't know that, makes for some face-palming Facebook fodder.
+
+Great post /u/diearzte2!
+> when people are able to combine an IF, SUMPRODUCT, and a VLOOKUP function all in the same cell, that's really what's impressive.
+
+
+I disagree fundamentally with this. A good spreadsheet should be designed to be as simple as it's possible to be.
+
+ It's all very well having some slick, fancy formula that does everythnig in one go. But you'll come to kick yourself when, 6 months later, you're confronted with a wall of #REF!'s  and you have to spend hours unpicking the code to diagnose the problem. 
+
+I try to build things so that I (or whoever else is looking at my work) can tell at a glance what the formula in a cell is doing. I take simplicity and robustness over coding pyrotechnics every time.
+Oh snap of course. Index match is way more useful than vlookup/hlookup
+/u/Fishrage_, Based on how you asked the question, I'd say you're on your way. It's true that this is a good forum, but at this point, you can google the question and learn a hell of a lot more.
+
+There are several good Excel sites - check out dailydoseofexcel.com for some of those with a broad swath and depth of experience in Excel as well as Chip Pearson, JWalk (good for spreadsheet humor as well), ozgrid, mrexcel, to name only a few sites.
+For VBA practice, Project Euler is good.
+
+https://projecteuler.net/
+Is concatenate any different than putting "&" in between the terms? 
+For example I understand 
+
+    =Concatenate(A5," Fish")
+
+to be the same as 
+
+    =A5 & " Fish"
+
+which I find easier to use (although to be honest that's mostly because my spelling is atrocious when words get bigger than two syllables).
+Strongly agree with this - I would also add all of the string functions:
+
+Len()
+Left()
+Right()
+Mid()
+Find()
+Etc.
+
+I find I use these in combo with Concatenate() extremely often - for quick and dirty parsing/cleaning/organizing data tasks.
+SUMPRODUCT and INDEX(MATCH) are MUCH more powerful than VLOOKUP.  VLOOKUP has many flaws and is typically very resource intensive/slow.
+yeah I know, they are a great way to make a workbook completely impossible to navigate. Tables have recently grown on me for being useful when making private workbooks with some sort of data entry aspect to them (billy's pokemon trades, the tiny petshop cookie sales tracker, McGruffs workout schedule, whatever) because they auto-extend formulas and make dynamic ranges real easy, but I never had a use for them doing work projects. 
+yeah, it's mostly directed at situations where you are doing operations on your arrays in your array formula, before then using those results. Like if you have a column of dates and you want to use the months only in your array formula, then doing MONTH(A2:A20), instead of making an extra column of MONTh(A2). When you're dealing with large arrays, doing those operations outside of your array formula will make the spreadsheet larger, but it can make your calculations faster (e.g. when updating a single piece of data), as excel will not recalculate the MONTH value for every entry in your array, but only that one entry.  
+
+Sometimes it's worth working around and sometimes it's not, but it's always fun! 
+A .xlsx file is a compressed file and when you change the extension to .ZIP you can open it in an archive tool (windows tool, 7zip, winzip etc) - Try it yourself!  
+
+> What would corrupt a file?
+
+Lots of things.  Typically users playing God.  See: [Kruger Effect](http://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect)
+I definitely put simplicity before complexity. Nobody wants to read a formula that has 12 different (often unnecessary) formulas nested inside of it. It's really counterproductive.
+
+But, sometimes situations call for a nasty looking formula that requires a really creative solution. That's mainly what I was referencing.
+VLOOKUP cannot solve that question.
+
+SUMPRODUCT can though.
+? I'm very confused.  Which question? I don't need help with Excel, but thank you for your concern! 
+
+The questions I posted are example interview questions which someone asked me.  The answer are posted under the questions.
+
+
+wow, that's a great link, I always think "oh, I should get better at VBA!" but then I'm so comfortable with using formulas etc. to solve actual excel problems that I never get around to slaving through a VBA solution. I know it is just me being lazy, lol, but it's cool with a link that just has a bunch of problems that I can go straight to working through with VBA. 
+* CONCATENATE used to have a limited number of arguments in earlier versions (can't remember the figure).
+
+* CONCATENATE is slower to compute than an ampersand (although you won't notice a difference).
+
+* An ampersand is easier to type.
+
+* The ampersand is universally used throught many other programs.
+Not really - although i'm not sure if & can be used more than once or allows formula insertion
+I can see the benefit of tables, I just hate using them! 
+
+Example I had the other day... =vlookup(A1,'sheet2'!a1:b100,2,false) suddenly becomes =vlookup([NAMES],[ALL#][NAMES]:[STUFF],2,false).... I have no idea what cell reference NAMES and STUFF are.
+
+
+Agreed, I recently had to convert a model we use to using a reference Table instead of locked ranges, and it makes the formulas a lot easier to understand and trace.
+Thanks /u/Fishrage_; I don't believe I heard about the Kruger Effect. (I just looked at your reference.)
+Agree.  Ampersand is almost universally better.
+Sure it does. Its just a little less organized. 
+You can actually go in to excel settings and make it so it will always show the cell reference and none of that "name" bullshit. I forget where exactly since its been so long since I did it, but you can do it!
+It's my new favourite mental thing.
+[This?](http://i.imgur.com/awSku6T.png)

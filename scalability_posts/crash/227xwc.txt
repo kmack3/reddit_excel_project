@@ -1,0 +1,54 @@
+crash
+227xwc
+Online Excel crash course?
+
+I may have a chance at a job that requires "intermediate to advanced" excel skills, and they want to test me on it. I'm a very computer literate, mathematically oriented guy and I've built a handful of fairly simple spreadsheets and worked with more complicated ones built for inventory tracking and the like. But I am not an excel professional. This job is with a charitable organization, working with online giving campaigns. 
+
+Can anyone direct me towards an online tutorial, or hell, even a book or piece of software that might help me demonstrate my competency in as short as a week? I know there's some links on the sidebar, and lots of results with Google, but some direct advice on what might be my best option would be much appreciated. 
+
+
+-------------
+Go through all the YouTube videos on the channel called "excel is fun". Just start doing the excersices along with the video and next thing you know you will be pretty good at excel just from that
+-------------
+All depends on what the job entails. Are you doing simple bookkeeping? Accounting work? Financial analysis? Data entry? Depends.
+-------------
+I'll check it out. Thanks for the tip!
+-------------
+From what I can gather from the job description I need to be able to read and interpret data more than anything. Here's the potentially relevant parts:
+
+>* Set up Workplace's prerequisite requirements, upload campaign data and test campaign site before it goes live. Set up live demos of Online Giving system at Workplaces
+* Ensure all donor information within Online Giving donation tool is kept up-to-date and suitable for extraction and importing into the system
+* Responsible to do data mining, analyze data and suggest recommendation to improve campaign operation
+* Provide timely and accurate reports to internal staff and external customers
+* Monitor and communicate processing and system errors for corrective action, regular maintenance and efficient system performance in timely fashion and on an ongoing basis
+* Train assigned temporary staff on Online Giving system functionality and reporting
+* Test Online Giving application when enhancements are implemented.
+* Assist in reconciliation, ending campaigns and reporting by company and campaign level in a timely manner
+* Lead importing all received data from other donation tools to Andar
+* Off campaign support in Donor Choice, National Campaigns, Tax Receipting and Cashiering as needed
+
+They suggest an accounting background would be an asset, but it doesn't exactly sound like I'm doing accounting work, per se. 
+-------------
+From that description, I would definitely look into Pivot Tables and charts. Then you would possibly go into Goal Seek/Solver. 
+
+Most of it looks to be work with whatever this Online Giving system, which I'm not familiar with so I can't help you there. 
+
+Pick up an Accounting for Dummies (or equivalent) just so you know the basics if you already don't. Based on this "Assist in reconciliation, ending campaigns and reporting by company and campaign level in a timely manner"
+-------------
+Edit: I just realized my post doesn't answer your question at all, that's what you get for posting under the influence
+
+It sounds like it's going to be relatively straight forward. Pivot tables as mentioned, basic user acceptance testing of the website and quality assurance of the data produced, if you sit down and think through [where is the data coming from] ---[why]---> [where is it going to] 
+
+Building reports for internal staff and external customers means pivot tables or basic filter extractions from larger tables, formatted neatly. 
+
+I don't know what their online giving system is, but once you get access to it, sit down and map out every field in it, how each field related to other fields, and what the fields represent from a business point of view, this will help you with testing and building good databases, even if it is a bit tedious. 
+
+Reconciliation and end-of-campaign reporting should be fairly straight forward, but depends on the systems they use, this is one of the main "accounting" related areas, but really only tangentially so, talk to the business-side people there and understand what it is they are reporting and reconciling, and it will be pretty straight forward. 
+
+Importing other received data to Andar (whatever that is) will put your acquired thorough understanding of their donation system to use, if you know what goes where and why, you'll be able to create correct "mapping" spreadsheets from other databases to your own database without too much trouble. 
+
+The more ad-hoc off-campaign support sounds like it would be a great opportunity to have fun with your database to build models for who to contact and how to best target donors, so just knock yourself out with that, check out libgen.org for something like donor theory or something.  
+-------------
+Thanks!
+-------------
+Thanks for the thoughtful response!

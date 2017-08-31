@@ -1,0 +1,31 @@
+6g8kxz
+Need to be able to show the transaction below the one that's already shown.
+Hi guys, I have a column full of transactions numbers. Sometimes, the transactions appears twice and even four times. What i need is to be able to show the transaction below the one that's already shown. I have my first column Vlookup that shows the first transaction but I need to be able to show the second one in another column if there is a second transaction with the same number. I can sort the lookup table in a way to make the number in order, if that can help. Here's my current vlookup for my first column =IFERROR(VLOOKUP(G2,'GL Entries'!$O$5:$S$2017,4,0),"")
+Thanks guys
+
+
+-------------
+As far as i can understand your question, i do not think it is possible to do it through vlookup. I suggest you pull the required columns into a pivot and group it by transaction numbers. 
+-------------
+There's a few solutions, but the VLOOKUP one would be messy and kludgy - I'd replace VLOOKUP with INDEX MATCH and then do  +1 or +2 (really +COLUMN(A1)) to the MATCH. This requires sorted data since you said that's possible.
+
+    =IF(COUNTIF('GL Entries'!$O$5:$O$2017,$G2)>=COLUMN(A1),INDEX('GL Entries'!$R$5:$R$2017,(MATCH($G2,'GL Entries'!$O$5:$O$2017,0))+COLUMN(A1)-1),"")
+
+[Imgur](http://i.imgur.com/CLk8z0M.png)
+-------------
+You might be able to get a solution faster if you post a dummy spreadsheet showing how your transactions look like, and what you want to do.
+-------------
+Thanks for the reply, but it didn't seem to work. Here's my new formula =INDEX('GL Entries'!$Q$5:$Q$2018,(MATCH($G2,'GL Entries'!$O$5:$O$2017,0))). Here's an example of the table. The first column is the transaction number. In my cell that has my formula, as of now it shows the GST Purchases. But now in my second column i want it to show the QST Purchases. I hope that helps you with my problem.
+
+105104294	21971	GST Purchases
+105104294	21981	QST Purchases
+
+-------------
+The formula I posted works - the one you're using doesn't because it's not even close to my formula. You got rid of the the entire `IF`, `COUNTIF`, and the `COLUMN(A1)+1` which is the key to incrementing down to the next result. Now if you tried my formula and got 0's, note I was assuming the data you want is in R, since you used VLOOKUP with a `,4` so that meant 4 columns from O (including O). So if your data was in R the whole time, just adjust the references as needed.
+
+So select my formula, copy, go to Excel, paste to where you want the first result. Drag over however many times you want. Like in this example, I posted to H2, dragged over to I2. But now it looks like you want data from Q, not R, so
+
+    =IF(COUNTIF('GL Entries'!$O$5:$O$2017,$G2)>=COLUMN(A1),INDEX('GL Entries'!$Q$5:$Q$2017,(MATCH($G2,'GL Entries'!$O$5:$O$2017,0))+COLUMN(A1)-1),"")
+
+[Imgur](http://i.imgur.com/GI6Saxt.png)
+

@@ -1,0 +1,52 @@
+forever
+4oktpp
+I have a macro that suddenly takes forever after I added unrelated stuff to the workbook
+
+so I've got this macro that basically just loops down some columns and averages some number of cells at a time, then outputs the average into a new column. it fills this new column with those averages, then starts again doing the same thing, only sourcing from new column and outputting to a third column. it was basically instant before, but then I added another sheet in the workbook that was just a table of values, and now that macro maxes my CPU and seems like it might take upwards of 10 or 15 minutes to complete... or it might just lock up... I'm not sure. excel becomes unresponsive after a moment when I start it. 
+
+
+-------------
+No formulas at all in the new worksheet? Any formulas in other worksheets using 3D references like Jan:Dec!A1:Z1000 which might be including the new worksheet? How many formulas with INDIRECT and/or OFFSET calls?
+
+Finally, hard to say without seeing your macro, but you could always put
+
+    Application.Calculation = xlCalculationManual
+
+at the top of your macro and
+
+    Application.Calculation = xlCalculationAutomatic
+
+at the end.
+-------------
+Can you show your code?
+
+
+-------------
+I think the sheet that is being added to the workbook has excel formulas filling a column.. i think there are like, 36,000 cells in that column, and I think they all use OFFSET() and TRUNC() and MOD()... you think that's the problem? that sheet isn't  interacting with my other macro'd sheet as far as I can tell, but it's clearly causing the problem somehow. my version of the old workbook before that sheet is added works fine. after the sheet is added, everything is slow as hell. 
+
+
+EDIT: I tried switching to manual calc from formula tab, and then running the macro. worked fast as before. so that solves the problem.. I guess that new sheet is updating the whole column every time my macro loops? I can see how that would be a huge problem... I didn't realize it tried to auto-calc every time anythign happened anywhere in the workbook... I just assumed it only did that if the reference values were updated. didn't think it would apply cross-sheets.
+
+thanks. I suppose I could try to get things to populate with VBA instead of whatever the godawful excel function is that my coworker wrote into that other tab... but that's a problem for another day. Or I guess I could just do what you've suggested with the macro handling the calculation toggle.
+-------------
+Solution Verified
+-------------
+this is the excel function that is in the cells in the new sheet that somebody else made that I have added to my workbook. 
+
+    =OFFSET(DataTable,TRUNC((ROW()-ROW(ColumnDataR))/COLUMNS(DataTable),0),MOD(ROW()-ROW(ColumnDataR),COLUMNS(DataTable)),1,1)
+
+
+as far as my macro, the code is quite long... but it's basically just a loop that has a counter to bump down a row and repeat a summing operation. it's not efficient, but it is simple and gets the job done just fine until now.
+
+other comment in here makes it sound like =OFFSET() in the new sheet might be causing the problem. 
+-------------
+INDIRECT and OFFSET when overused are the biggest efficiency drags in Excel. They're both volatile functions, which means formulas which call them are recalculated EVERY TIME ANYTHING triggers recalculation.
+
+The formula  =F3  would only recalculate when the value in F3 changes. However, the formulas  =INDIRECT("F3")  and  =OFFSET(E2,1,1)  would recalculate whenever anything triggers recalculation even if F3 doesn't change, even if F3 itself contained a constant value.
+-------------
+
+You have awarded one point to _hrlngrv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+this is good to know. explains why this thing basically just rolled over and died when I added the other guy's sheet. I'll be making lots of use of the VBA command to turn calc to manual and back from now on I guess... 

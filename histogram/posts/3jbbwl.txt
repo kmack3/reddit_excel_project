@@ -1,0 +1,23 @@
+I'm almost there...
+Congratulations! Now you can join the club of people going "ugh, VLOOKUP, as if!" :D
+
+If you want to play around with it, try something like this:
+
+A | B | C | 
+:--- | :--- | :--- | 
+1 | 4 | 7 | 
+2 | 5 | 8 | 
+3 | 6 | 9 | 
+
+
+and then do: 
+
+    =SUM(INDEX(A1:C3,0,1))
+
+change the column number between 1-3. Then set column number to 0, and change the rows between 1 and 3. 
+
+ 
+One of the best feelings. I usually fist pump shortly after.
+Flair changed to discussion.
+Thanks.
+

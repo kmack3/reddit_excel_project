@@ -1,0 +1,32 @@
+New promotion requires Excel, and I don't really know it... help?
+[Ah, the Peter principle, still hard at work](https://en.wikipedia.org/wiki/Peter_Principle)
+https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+Ignore the satirists; you'll be fine. Excel is a **tool**, it's built (A) to work, (B) to be learnable, and (C) to be -- if not intuitive -- at least not completely unintuitive.
+
+What I mean by "intuitive" is that you can sort of "riff" in Excel. A user who knows a little and who can Google knows a lot. 
+
+An example. I know how to use a formula "=sumif", where you add values based on a criterion (like summing the collective salaries of everyone who works in Marketing might be =sumif(C:C,"Marketing",D:D), or something like that. I did not know how to use "=sumifs", which adds values based on multiple criteria (like summing the salaries of the Marketing employees with last names beginning with "Q"). Eventually, I needed to learn, but it was easy, because of how Excel (or Google Sheets in this case) is built. It prompts you for what it wants, I'll attach a screenshot below -- and similar formulas often work in similar ways, so a little knowledge goes a long way.
+
+Ah crap, I don't have Excel installed on this, but here's a screenshot of what I mean in Google Sheets, which is what I was actually using anyway and works similarly:
+
+http://i.imgur.com/iLTog3F.png
+
+Pretty helpful, right? This just popped up when I started writing the name of the formula. Excel, too, prompts you for what it wants. Sure, you have to have some idea of what "sum range" might mean, but that's what Google is for.
+
+Online courses might be helpful, but you will really cut your teeth when you first begin facing problems that you need Excel to solve. The first time you use an Excel formula to do something that you are aware -- painfully aware -- you would have been spending five, ten, fifty hours to do manually -- that is an Excel formula that you will never forget how to use.
+I'm going to attempt to stop hating you (only a little) so I can pay forward some wisdom and keep a fellow redditor on top of his game. 
+Go out and buy yourself a "For Dummies" book or something similar. I personally keep 2 copies, one at home and one at work as my "cheat sheet". Show it some love and mark it up, dog-ear it, highlight, underline and create a "partner" notebook with all your notes. The more you engage with the book, the more your brain will have fun learning :). 
+
+You can take a couple classes. Groupon usually has great deals for excel certification or MS Office certification. The key to these functions and formulas is repetition and nothing helps with that better than homework. These courses will give you a great platform to helping you understand why certain functions are used to solve problems, as well as challenege you with problems you can solve on your own. 
+Create tasks for yourself at work. Every morning update a "personal tracker". You can make this anything you want... food, office supplies, attendance, workouts, outfits, whatever. When you start, have it as a data entry table. As you go, you will start to identify places in your tracker where excel can do the work for you. Say its your outfit. You could create a list of your outfits on one sheet, while using an if statement to plan your weekly attire on your main tracker sheet.
+
+Most importantly, find a way to make it fun. When it comes to work, you're going to feel the pressure to learn this as quickly as possible. Remember its ok to be on a learning curve, take your time and try to have some fun with yourself while you do. You'll remember things much more if you're enjoying the learning process!
+"Solution Verified"
+Awesome! but i don't see a post on Charting? That might be my most needed topic =/
+[This should be helpful](http://www.excel-easy.com/data-analysis/charts.html).
+
+However, like myself and a lot of folks in /r/excel, we are just self-taught and practically mastered Excel from constantly using it. If there's a roadblock or something that we couldn't figure out, I usually consult google or this sub or other Excel forums online. Experience is still the best teacher.
+The built-in Wizard for making charts is decent learning tool, if you give it a few tries.  
+
+You may also try clicking on a cell you want to be included in the chart, then hitting CTRL+SHIFT+8 and then ALT+F1 on the keyboard; it might well give you exactly the chart you want. 
+This. 

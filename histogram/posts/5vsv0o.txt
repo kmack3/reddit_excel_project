@@ -1,0 +1,124 @@
+Employee was fired and has worksheets protected in excel 2013. It was only worksheets - not the whole workbook so I can run a VBA. What VBA code should I run and how long will it take?
+DISCLAIMER: Please note that breaking password protection MAY violate laws or regulations in your jurisdiction. In the United States (currently) it is certainly OK to break password protection on sheets that you developed for your personal use, or for which you have permission from the author or owner. It's probably OK if you own the workbook, even if it was written by someone else. But I am not an intellectual property lawyer in ANY jurisdiction, so, if in doubt, ask the original author, and if you can't ask - don't use it!
+
+    Sub PasswordBreaker()
+    'Breaks worksheet password protection.
+    Dim i As Integer, j As Integer, k As Integer
+    Dim l As Integer, m As Integer, n As Integer
+    Dim i1 As Integer, i2 As Integer, i3 As Integer
+    Dim i4 As Integer, i5 As Integer, i6 As Integer
+    On Error Resume Next
+    For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+    For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+    For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+    For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+        Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+    If ActiveSheet.ProtectContents = False Then
+        MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+            Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+            Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+         Exit Sub
+    End If
+    Next: Next: Next: Next: Next: Next
+    Next: Next: Next: Next: Next: Next
+    End Sub
+I've noticed that if you put a protected excel doc in Google Drive, and open it as a Google Sheet, it wipes the protection.
+If her mailbox still exists,  talk with HR and the sysadmins. She may have stored it there. Also, of there was severence, talk with hr. They can probably withhold severence until she surrenders the password
+Lmao sweet revenge
+Check out Passware Kit Basic if the VBA code doesn't work.  That may do what you need.  Costs $ tho
+If the VBE IDE is not protected from view, you should be able to edit the protection property of the sheet object.
+have you tried to copy all the worksheets to a new workbook?
+Can anyone explain how this actually works? Have used it successfully before, why do the numbers start at 65?
+Done this before. Works well. If it doesn't work here's another option. It's a bit more complicated. http://www.amarindaz.com/unprotect-excel-sheet-without-password/
+I thought this didn't work for excel 2013, or does it just take longer?
+So, this did not work after running it for about 15 minutes. I did resolve my issue, but I'm curious as to why this did not work.
+This doesn't always work I have found out.
+This isnt as elegant, but could work if you cant crack it.
+Excel's worksheet protection is *very* weak; when a user tries to unlock a locked sheet, rather than checking against the *actual* password used, Excel checks against a hash of the password (A value *derived from* the password), which means that more than one password will be valid for unlocking the sheet. So if you want to unlock the worksheet without the password, you don't need the actual password, you just need a password that returns the same hash.
+
+And that's what this routine does; it tries a series of passwords that will eventually hit every possible hash value, until one works, and then it returns that to the user. The amount of possible hashes are so small that it's very easy to brute-force the protection like this.
+
+This is why you *don't* use this type of protection for genuine security purposes - it's trivial to break - but only to hide things that the user doesn't *need* to see in order to work with the sheet. If this is all the ex-employee could think of to do out of spite, she's nowhere near as clever as she thinks she is.
+Sorry I'm on mobile - this has to do with ASCII codes. Chr(65) corresponds to A, 66 to B, and so on.
+It works.
+Could be a few things; excel version likely, this was for an older version, but the ASCII did not change.
+
+How did you get it to work?
+Doesn't need to be out of spite. Usually locking sheets once they are completed is done so that nothing can accidentally be changed afterwards.
+> This is why you don't use this type of protection for genuine security purposes
+
+I ran the macro that /u/baineschile posted above just to see if it worked with my version of Excel (2016) and it worked perfectly. 
+
+I've sent out financial models before that were password protected without realizing they were so easy to crack. If I wanted to genuinely secure a file from being opened or modified, what alternative methods would you recommend?
+
+So how long can one expect this to take?
+1. Changed the file extension to .zip
+
+2. Opened the zip file
+
+3. Navigated into the xl folder
+
+4. Navigated into the worksheets folder
+
+5. Opened each .xml file for each sheet
+
+6. Found "sheetProtection"
+
+7. Deleted everything involving sheet protection inbetween the "<" and ">" sets
+
+I will probably update the original post to with this information.
+Pretty sure I've used the same method before...  How to:  https://www.youtube.com/watch?v=wZEmMpEk0DU
+You're right, but that's how it read to me.
+
+I've also seen this sort of thing genuinely done out of spite, as someone walked out of their job... we certainly didn't lose anyone of value the day *that* guy quit.
+I simply lock such worksheets with a simple enter - locked enough to not accidentally delete something, easily enough to unlock in case something has to be changed (by me or others). Totally just a convenience stuff.   
+
+(On the other hand, if I would get fired I'd just write down/tell people that they can unlock it with enter) 
+Windows has encryption options built in. 
+
+https://support.microsoft.com/en-us/instantanswers/c5e573c5-78f0-48dd-a998-181580274cdf/how-to-encrypt-a-file
+
+It's far more robust than Excel's encryption and should be fine for your needs. 
+Excel is a no go for encryption. Publish to PDF if its just a look. Tableau if interactive, and turn of data and sheet viewing.
+Minutes, at most. Likely seconds. But it depends on the machine you run this on.
+
+Of course... after the first worksheet, you've got a password. It's very possible she used the same password for every sheet...
+What a laugh. Saving this
+I always link back to [this post](https://www.reddit.com/r/excel/comments/4lv3je/hi_there_i_am_trying_to_open_a_xlsx_file_which_is/d3qdoot/) when this problem arises.
+
+Glad you managed to unlock everything though!
+He *quit* and did that?
+Thanks. Unfortunately, my work laptop is extremely restricted and I don't have the ability to toggle on built-in encryption. 
+
+By following the instructions in that link, does that only encrypt the file for transfers or does it also prevent the end-user from making changes to the file? (e.g. if I wanted to send out a locked Excel file so that the end-user could view the formulas but not make any edits, are the instructions in that link still the ones to follow?)
+It ran on my computer and did not give me an answer. 16gb ram, i5 6700k. It said not responding, but the code ***was*** running - so I think the file was processing. I ran it for probably 15 minutes.
+I mean, all a *sheet* is is xml. Unlocking a *workbook* is quite a bit harder.
+In some places, it is very hard to get fired.  I've personally worked somewhere that you basically just had to get sick of it and leave if you wanted out.  Some people would just mentally clock out and browse the internet all day, with others picking up their slack.
+Yep. Locked his sheets, walked out, never came back.
+
+When we realised what had happened, and the systems guy and myself had stopped laughing, we had everything fixed in well under an hour; we checked the files with IT's backup as well, and locking them was literally all he had done.
+
+We were more annoyed at how little he credited our intelligence than about having to unlock the files.
+That only encrypts the file. If you want to lock cells etc you would still need to do that the usual way with protection from within Excel before encrypting per the instructions.
+
+If you can't use Windows encryption then you could use one of the third-party encryption software options like TrueCrypt (although IIRC TrueCrypt is no longer maintained, so probably not that one). But if your work's IT policy restricts things like Windows encryption it will probably prevent you installing software as well. And the client would usually also need the same software to decrypt the file, which obviously isn't ideal. 
+
+I suggest you speak to your IT department and explain the situation. If you frame it as an info sec issue they will probably get on board. 
+It should essentially be instantaneous, ~~I don't think it'll work for 2013/2016 though~~. I just checked and it works in 2013
+
+Something to check is to ensure you've selected the sheet you want unlocked before running it
+For sure this should be near instantaneous or seconds at worst on a modern computer.  It's a lot of loops but the outer 11 loops are only A and B with a final inner loop of 94 characters for a total of 192512 iterations.  That's only if it has to search the whole space too.
+To give him a little credit he was probably trying to walk a fine line between annoyance and out and out criminality / lawsuit.
+Yeah you're right about software restriction - Spotify and a couple of other programs were somehow allowed but for everything else I need admin privileges. 
+
+Thanks for your advice on speaking to IT, I'll give it a go and see how it works out. 
+> Spotify and a couple of other programs were somehow allowed but for everything else I need admin privileges.
+
+Here are other encryption techniques:
+
+- Encrypt the entire excel document. Click on "File", then select "Info" (if not by default) and then "Protect workbook". Choose "Encrypt with Password". **This will actually encrypt the file**
+- Get 7-Zip. (https://7-zip.org). You can put files into 7-zip archives and chose to encrypt them with a password
+Do you have WinRAR or 7zip on your laptop?
+I think you should read the whole comment chain. Your first solution relies on Excel's built in encryption, which OP wants to move away from. The second relies on him installing 7Zip, which his work IT policy will not permit. 

@@ -1,0 +1,143 @@
+Is knowing SQL or VBA more of a valuable skill to employers?
+Both are great but there is no hard and fast rule. However, in my personal experience:
+
+- For developing businesses, you need VBA. You can create systems and streamline processes and do really cool fancy things. You can make some good money in smaller businesses who can't afford to pay large sums of money for massive data warehouses.
+
+- SQL is then used for established, growing businesses who have tackled the problems of data and processing and are now looking to leverage their data for analysis. Their data processing is done using other coding languages and not in Excel - by using proper databases.
+
+SQL is often required for higher up positions because it's scope is vast - so many different applications use it for many different things, where as VBA is limited to Excel only.
+
+So, short answer is SQL - but know your VBA =D
+More experience related info:
+
+VBA > You are signing on with MS products, you can make the jump to visual basic, but in the end, it's more of a frame work.  You still need to get that data, and the question is how.  Either from a spreadsheet cell, or more often then not, a SQL database/web api.
+
+SQL > You are getting the data, you can fairly easily transition between RDBMS (MySQL, MSSQL, Access, Postgre etc.)  You can feed that data into a excel pivot table, or you could use the same sql scripts to get data for a web app.
+
+SQL is your back end language, VBA is how you organize and display it.  If you start with SQL, you can also decide to use PHP,  Javascript, or any HTML Application really.
+
+I started building workbooks with VBA, and by necessity had to write SQL scripts for the data retrieval.  I'm still using SQL scripts, but not VBA these days.
+
+So once again SQL; you have to be able to get the right data, and you get a lot more versatility.
+If I have to choose, then SQL. I use both SQL and VBA for my job, but I think really knowing what you're doing in SQL will bring in more money.  My company's ERP system is SQL-driven.  ERP development is what I do.  It's a mix of programming, system analysis, and administration.  That job pays much higher than anything I could do writing VBA alone.  That said, VBA is also important.  We use Excel for all analytics and of course VBA is a real workhorse on some of those sheets, which are borderline breaking Excel every day.   Knowing both is good because they go together like peas and carrots.   It just depends on what line of work you want to get into.
+
+Our method is 1) Use SQL to get data.  2) Let VBA crank on that shit. 
+The one that has a company that needs that particular skillset.
+
+I put VBA on my resume as a joke, basically...  that joke landed me a position paying more than I was making, and I wasn't even looking for a job.
+
+My current job I actually got because of my programming experience, AND my Database Experience....
+
+They're complimentary skills, if you're in a Microsoft house.
+
+I'd go for the Trifecta....  
+
+Excel - VBA - SQL.     
+
+* If you have to do it once, and only once.. just do it in Excel.
+* If you have to do it multiple times, implement the process in VBA
+* If you have more than a few related "sheets", or more than a million records, then put that shit into a SQL Database, NOT Excel.   Use Excel as a Front-end if needed.
+VBA will allow you to "shine" more in front of your non techy boss. You can create some really stunning automating solutions. Some people think that they are really good with Excel because they can use VLOOKUP and run a simple pivot table. When they see you automate entire business processes through the click of a button, they might be extremely impressed.
+
+But that's the kind of things that you can only do in small companies or in project of very small scope in larger companies.
+
+SQL on the other hand, well you have less chances of showing off your skills. Chances are, if you work in a place that has a database in place, you will not get access to it (and you probably shouldn't!).
+
+Now you certainly can make a lot of money being a DBA, but learning SQL vs being a DBA is a bit like applying a band-aid vs being a neuro-surgeon (or at least that's my impression of it, I'm no DBA).
+
+That being said, what gets real interesting is when you use ADODB in VBA where you can use SQL queries and command through VBA code.
+What's the best way to learn SQL?
+They're very different things.  Do you want to be a programmer? Learn SQL.  Do you want to be a very efficient office worker? Learn VBA.
+
+As for money, they're different career paths. DBAs make plenty of money in the right place.  On the other hand, being some kind of analyst that uses VBA could be a good amount of money too.  The amount of education you need before you ask yourself this is pretty significant.  See my first statement.
+While I don't have experience using SQL, I do with VBA.  That said, I see a LOT of open positions looking for people with SQL knowledge.  I don't see employers looking for VBA knowledge all that often.
+I used to work in consulting, and VBA was awesome. I could do way more stuff way faster than moth people.
+
+Now I've moved on to industry. If I need something actually coded, I can have an IT guy do it. But I'm playing with Access pretty regularly.
+You can't just learn SQL - you have to learn that database system in-depth to be valuable.  
+    
+VBA is a toy for users; SQL is a developer language.
+VBA can be used--and often to greater effect--in Access as well.
+
+But I would say SQL is more critical for a place to start--that's the data aspect and that will be immediately useful.
+Just to give another perspective, I have run across a client that had used a nice SQL database, and modified/mangled parts of it to output some data they needed in a nice presentation. They also wanted to further mangle the data to fit another presentation, that was monthly. Because they loved the SQL so much they tried, and failed, to mangle the data properly and wanted someone to do the same with VBA. The quantity of data that SQL can output makes using regular office products cumbersome, so VBA can come to the rescue. 
+  
+Efficient? most likely not, but with both tools, you can get several things done, and often the boss is only looking for an "automated" way to generate a regularlly occurring report, he couldn't care less if it was VBA all the way or using twenty two different dBase III platforms and a chipmunk. 
+  
+Bottom, learn to use one when it's obviously stronger than the other, for that particular case. Tomorrow, you're boss will come up with something even stranger, guaranteed...
+
+VBA is not restricted to Excel, last I checked it was available in all Microsoft Office apps including Outlook, which does make it easier to interact with Office apps and Windows.
+
+In my opinion go for SQL, master the generics of it before the advanced parts of particular databases.
+VBA is great to get ahead while you're in the job, but jobs which depend on the skill are few to come by in the UK.
+Many small businesses use Access for their database needs, vs. a large DBMS. It's quick to develop for, and works fine for small projects. VBA is just as important as SQL in these cases. In fact, some SQL can only be used through VBA. Most DBMSs rely on a high level language on top of the DDL/DML that SQL provides. In Access, that's where VBA comes into play. 
+
+If you end up as a developer for a company that uses a robust DBMS, it would be likely that they'll also have a  preferred high level language, too. 
+I agree with the above.  Along slightly different lines...
+
+In my experience, SQL is a requirement for certain jobs.  You are rarely going to impress someone with your SQL work.  They expected you to know SQL and you knew it, YAY!
+
+VBA is rarely a requirement for a job, but it can enable you to do sneaky impressive things.  My general rule of thumb is to avoid VBA if at all possible, but sometimes you need it and sometimes it can really cut down your workload.
+
+TLDR;  SQL opens up real job opportunities and provides some more job security, and VBA is flashier and more versatile, but gets you nothing much in terms of real credentials.
+Do you know anything comparable to Codecademy for basic VBA syntax tutorials? I always feel way more proficient in Python, but only have VBA available at work.
+Lots of resources, but for an extreme beginner I found W3schools online turorial very good to get you off the ground. Then just google the hell out of whatever your questions are. If you have a Database Admin where you work or a very good data warehouse analyst, become friends with them and ask them questions to learn more. SQL is like math, there are always like 10 different ways to accomplish the same thing, but some are more efficient, this is where talking to the seasoned pros come in.
+Like many things, the best way is to learn by doing. That said, I agree the W3schools is a very good beginning resource.
+
+After building professional experience with SQL, I returned to W3 and it was basically second nature...whereas 2-3 years ago it looked so daunting.
+
+Break it down into the core concepts (Selecting and manipulating the Data, functions, Joining tables CORRECTLY, and knowing how to create proper thresholds/where clauses) and then keep a journal of more challenging or confusing concepts. Keep track and tackle these as you can. Then you can dive more into the specifics of various data types, casting and converting, creating multi-layered queries, and maximizing efficiency. Take it slow, as there is a lot to digest and you want to master the fundamentals first. 
+How much SQL to get a job with it?
+If you're in a Microsoft ecosystem, VBA extends the already powerful suite of tools even further.  Heck, just the other day I programmed an event hook into Outlook to watch for an e-mail that meets specific criteria, validate the format, and if it matches, dump the contents into a file for another job to pick up.
+
+
+Unless you're specializing in a particular RDBMS (which could be career suicide), then taking the time to learn all the intricacies of a particular SQL implementation just isn't worth the time.   Know your Joins, Indexed columns, and date manipulation quirks of your RDBMS and you should be good.   If you need help with something, most companies have a DBA available, and there's always Google.  For what it's worth, on a daily basis I'm using DB2, Oracle AND MS SQL...
+
+
+Unless you're working at a tech company, dismissing VBA as a toy says to me that you're focusing too much on the data/technology side and are detached from the business side of things.  In an ideal world, all our data would be stored in a nice clean database that could generate ad hoc reports with quick turnaround, but that's not the case in the real world -- nor is it always necessary.
+
+VBA can do powerful things relatively quickly and effectively.
+I didn't realize that I was in r/Excel, my response was going to be that SQL is indefinitely more useful and permeates every sector of programming. Everyone needs a good DBA.
+
+But all the places I've worked involved programming, so VBA wasn't really used, that I know of.
+Whilst there are things out there ive never come across anything that suited me. I just practised. 
+
+Firstly, i implemented projects that were easy like displaying data using the record macro tool. Then i moved onto for loops and generated really basic but effective programs. 
+
+Its one of the simplest languages to learn whilst also being the most available and having a very wide range of features. I recommend:
+
+1) Learn about your worksheet commands. Things like assigning values or formulas to cells. Colouring cells or ranges or formatting them. All this can be done with the cells() and range() commands. 
+
+2) Learn about the worksheet functions. Using vlookup, index, ifs, min, round etc in VBA and then using these functions to display data in your sheet. 
+
+3) if statements. If x = y then - ive found these extremely beneficial for writing functional programs as it automates lots of clicks and allows your program to identify data.
+
+4) for loops and do while loops. Again giving you tools to look through data quickly and do something with it. 
+
+5) Data Sources and Recordsets. Where is your information coming from? How does your program find it. 
+
+6) Go back through and organise your modules taking out irrelevant lines by using with commands, functions and other modules. Its incredibly effective and allows you to alter programs quickly and without causing bugs. Eg. Ive just restructured my whole code in a 25000 line vba program as someone wanted something adding, ive now defined my columns as numbers so that i can quickly change where columns are placed on the worksheet.
+I'm looking for something similar, something to get me started with VBA.
+I didn't find specific tutorials for VBA, just the same stuff that you found. I feel like most of my progress came from seeing a few good examples in the excel forums combined with occasionally recording a macro to see what objects/methods to look up in the MSDN documentation. Recording macros always feels dirty, though.
+
+There are a couple threads in here about best practices for VBA that go beyond "don't use the Select method," but you don't see talk about styles being more "VBA-ian" like you often see about code being more/less pythonic.
+Don't forget about Powershell, which you should have access to at work also.  In my opinion it's nearly as good as python, has the ISE, and can interact with .net and office.
+I don't unfortunately, at least not Codecademy style =/
+
+I learned most at work as well, a lot of tinkering, googling, and recording macros and learning what they do.  And if you know python, you probably have a good grasp at the logic, so I'm assuming learning more about the built-in variables and methods in VBA will go a long way.
+
+Lynda.com does have some VBA/Excel courses that I recommend to coworkers. However, I haven't looked too close at the VBA aspects of them.
+
+Yeah, VBA is programming lite. More like scripting with libraries than actual development.  But it can definitely be used to do some cool things.
+
+OP just learn both.  They're best when used in tandem anyway.
+It's a shame because it's far easier for novices to get that kind of help with other languages, but with VBA i always end up wading through mountains of dog shit in the form of awful excel/IT forums and broken english VBA tutorials
+I agree, there's not going to be an either-or scenario, and it'll take you a couple months to master the basics anyway.
+> wading through mountains of dog shit in the form of awful excel/IT forums and broken english VBA tutorials
+
+That's the best articulation I've seen of the VBA online learning resources, nice job
+If it helps, I'm slowly working my way through the below course(s). You need to sign up & click enroll. 
+
+https://openeducation.blackboard.com/mooc-catalog/courseDetails/view?course_id=_219_1&tab_tab_group_id=_10_1
+Given how much I use DoCmd.RunSQL() I think both go hand in hand.
+I did this course and didn't find it all that helpful. There are some really good ones on Lynda.com if you have access.

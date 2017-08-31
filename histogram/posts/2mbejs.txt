@@ -1,0 +1,151 @@
+We did UDF's, now share your favorite useful worksheet formula
+Here's one of mine, a formula to return the name of the worksheet.  
+
+    =MID(CELL("filename",AZ1),FIND("]",CELL("filename",AZ1))+1,256)
+
+I use this all the time to capture the name of the current worksheet.  I put in cell AZ1 in each worksheet, and I link a Table of Contents (TOC) sheet to each sheet's cell AZ1.  
+
+ I use a macro to hide and show different sheets for different reports, and it can be a pain if the user RENAMES a sheet that's critical  to a specific report. 
+
+This way, if the sheet is renamed, the TOC page captures the new name, and the hide/show macro only needs to loop through the names on the TOC page.
+
+
+=vlookup(A1*1,.....
+
+For when my company can't be consistent that IDs are strings and not numbers. 
+this one's probably easy for the old pros but it threw me for a while.  Julian Date:  (or the numerical day within the year from 1 to 365.)  Essentially subtracts the current date from 12/31 of the prior year.
+
+    =TODAY()-DATE(YEAR(TODAY())-1,12,31)
+Looking through some old books, I found this one...
+
+    =IF((ROW(Z100)*COLUMN(Z100)<> 2600),"Altered","OK")
+
+Placed in cell A1, this will display "altered" if rows or columns have been inserted into range(A1:Z100).   It does this by comparing the area in rows and columns to a "checksum" that corresponds to "100 rows by 26 columns."  Since the cell reference isn't locked, an insert will change the address referenced in ROW() or COLUMN() and the checksum will no longer match. 
+
+We had to use this because end users were altering our templates (which we used as input to a SSIS package.)  We could troubleshoot and fix changes, so we did allow them to alter the template, but we wanted a way to see instantly whether we had to review the sheet or not, and one of my co-workers came up with this.
+I don't know how obscure it is, it isn't at all really, but it's all I could think of that I often see people doing differently.   
+
+ I use the fact that INDEX returns a reference constantly for returning areas or making non-volatile dynamic ranges where I often see OFFSET used. That is, you can say INDEX:REF, or REF:INDEX, or INDEX:INDEX, to define an area. So if you've got a table like this: 
+
+h1 | h2 | h3 | h4 | 
+:--- | :--- | :--- | :--- | 
+1 | 2 | 3 | 4 | 
+5 | 6 | 7 | 8 | 
+9 | 10 | 25 | 3 | 
+
+
+And you wanted to calculate the cumulative value of all the numbers in all the rows between a specified column and the last column, you could do: 
+
+    =SUM(INDEX(A2:D2,MATCH(specified,A1:D1,0)):D4)
+
+To return e.g. B2:D4. If you wanted to sum from the first to a specified you would just reverse it so you would have: 
+
+    =SUM(A4:INDEX(A2:D2,MATCH(specified,A1:D1,0)))
+
+or 
+
+    =SUM(A2:INDEX(A4:D4,MATCH(specified,A1:D1,0)))
+
+Or if you wanted to specify the interval you could use INDEX:INDEX : 
+
+    =SUM(INDEX(A2:D2,MATCH(start,A1:D1,0):INDEX(A4:D4,MATCH(end,A1:D1,0)))
+
+These are all pretty straightforward index functions, but the versatility in calculating the row and column indices is just neat! (using COUNTA to get a dynamic range, using SMALL to get the n'th occurrence of an item or to get the all the n matching items, using MAX to get the last item in a range, MOD and INT to flatten tables, etc.) 
+
+
+    =LOOKUP(2,1/($B$2:$B$13=D2),$A$2:$A$13)
+
+http://www.mrexcel.com/forum/excel-questions/99621-lookup-value-unsorted-data.html#post492425
+
+
+or, found a work-around.
+
+Oh, I also use this one quite often: 
+
+    =MID(A2,1,ROW(1:INDEX(A:A,len(A2)))) 
+
+Which splits a text string into an array of its individual characters. "TOAST" becomes {"T","O","A","S","T"}. 
+
+It is useful for finding, say, the position of the nth instance of a character or space in your string (for sticking into a find or a mid or whatever),   
+or you want to count how many words you have in a text (the number of spaces +2)   
+How many Sentences (the number of periods),   
+where/when two large blocks of near-identical blocks of text start being different (one = the_other, find the first "FALSE" value),  
+extracting a number from a text string (using ISNUMBER (1*array) MATCH, and SUM to get the values for a MID),   
+and just whatever else you can come up with really, it makes you wish really hard for a native JOIN function though. 
+
+The formulas can end up looking a bit wonky, but it's solid. 
+Oh, also it's pretty neat to use MMULT along with INDEX to extract unique values (Or no index if you just want to sum the values of unique entries) 
+
+header | value | 
+:--- | :--- | 
+cake | 1 | 
+hats | 2 | 
+biscuits | 3 | 
+hats | 4 | 
+jellyfish | 5 | 
+
+
+Say you got this, then you would use MMULT like this: 
+
+    =MMULT(--(A2:A6=TRANSPOSE(A2:A6)),--(A2:A6=A2:A6)) 
+
+The first part of the MMULT creates an array that looks like this: 
+
+ | cake | hats | biscuits | hats | jellyfish | 
+:--- | :--- | :--- | :--- | :--- | :--- | 
+cake | 1 | 0 | 0 | 0 | 0 | 
+hats | 0 | 1 | 0 | 1 | 0 | 
+biscuits | 0 | 0 | 1 | 0 | 0 | 
+hats | 0 | 1 | 0 | 1 | 0 | 
+jellyfish | 0 | 0 | 0 | 0 | 1 | 
+
+The second part would just be a row of 5 1's (A2:A6=A2:A6 will always be true). 
+
+So you have an NxN array and an Nx1 array that MMULT then turns into an Nx1 array that looks like this: 
+
+MMULT Result | Corresponding row header | 
+:--- | :--- | 
+1 | cake | 
+2 | hats | 
+1 | biscuits | 
+2 | hats | 
+1 | jellyfish | 
+
+Any value that is unique will return 1, any other value will be higher than that. 
+
+In the above case, finding the sum of the value for all unique numbers, we would then make a conditional with this array and multiply it with the value range, like this: 
+
+    =SUM((MMULT(--(A2:A6=TRANSPOSE(A2:A6)),--(A2:A6=A2:A6))=1)*B2:B6)
+
+Or if you wanted to extract the corresponding header based on just your MMULT unique results (you'd be better off using remove duplicates but whatever): 
+
+    =INDEX(A2:A6,SMALL(IF(MMULT(--(A2:A6=TRANSPOSE(A2:A6)),--(A2:A6=A2:A6))=1,ROW(A2:A6)-(ROW($A$2)-1)),ROW(1:1))
+
+and then drag it down until you get errors. 
+in array formula using boolean logic to downselect your array, 
+{=max(index(<rnage>,,match(1,(cond=range)*(cond=range),0)))} 
+=(LEN(A1)-LEN(SUBSTITUTE(A1;"someword";"")))/LEN("someword")
+
+it counts how many times "someword" appears in a text, in this case in cell A1.
+I might have to save this thread to pick up some new tricks!
+.....mind blown.
+My number one issue....  Thanks
+just.... just... mind blown.
+This sounds useful but I'm unfamiliar with this. If copy/paste the first table into A1:B6, where would i then put the first formula? =MMULT(--(A2:A6=TRANSPOSE(A2:A6),--TRANSPOSE(A2:A6=A2:A6)) 
+Generally speaking you wouldn't need to put it anywhere, that formula just creates an array that you can operate with in whatever way you want using array formulas. 
+
+If you wanted to put it somewhere you could select C2:C6, then enter the formula in C2 (with all 5 cells selected still) and then press ctrl+shift+enter. 
+I tried that before but it just says the formula contains an error.
+
+As an aside, I always use something like =SUM(IF(FREQUENCY(A:A,A:A)>0,1)) 
+to count the unique numbers in my columns
+Hold up, I think I goofed up when I wrote out the formulas, I usually work with these in columns instead of rows, the second MMULT is Nx1 without a transpose and a transpose turns it into a 1xN, which makes the MMULT break. I deleted the second transpose, give it a go now and see if it doesn't work. 
+Still doesn't seem to work... I'm highlighting C2:C6 and clicking in the formula bar which says C2 is being typed into and CSE'ing the array formula?
+All right, let this be a lesson to me in writing out formulas online without running them through excel to check for brackets :P 
+
+There was a bracket missing after the first argument for the MMULT, to close it off entirely, I changed that throughout and it should be working now. 
+
+Thanks for taking the time to try the crap I wrote and finding all sorts of problems with it! 
+Oh dear, I should have noticed that myself. Sorry about that.
+
+But yes, that works fine now thanks!!

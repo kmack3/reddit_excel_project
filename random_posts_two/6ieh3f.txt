@@ -1,0 +1,34 @@
+6ieh3f
+Can you compare two sets of data and note and differences?
+I have 2 sets of data I need to compare. One is from this year and one is from last year. Each set of data has two columns, and number, and a name associated with it.
+
+
+My goal is to compare this years data and last years data to make sure that the number and names match up from last year to this year.
+
+The two sets of data I have are sorted from smallest number to largest number, but there is extra data in the new set from new things being added throughout the year. For example, I can see row 9 in the first set of data is actually in the 7th row in the new data set. Is there anyway to mark which data has errors or has been added or deleted without having to go through all 1500 rows manually?
+
+
+-------------
+You've got a few options: Power Query, Vlookup, or a Pivot Table or maybe even the remove duplicates function, depending on what you need. There might even be more and some of these may or may not work depending on your situation.
+
+ - You can use a vlookup and filter the dataset so that only "N/A" errors show up, highlight the dataset and select only visable (Hit ALT and ; at the same time) and then copy and paste at the end of the other dataset. Just don't forget to set an array with absolute values. https://support.office.com/en-us/article/VLOOKUP-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1
+
+
+ - If you add a column to each table with the appropriate year in that column and copy/paste them into one large dataset, you might have some success with a pivot table. https://support.office.com/en-us/article/Create-a-PivotTable-to-analyze-worksheet-data-a9a84538-bfe9-40a9-a8e9-f99134456576
+
+ - Power Query could let you merge two sets of data and look at the differences, or it can go through and only show you unmatched items.
+https://www.microsoft.com/en-us/download/details.aspx?id=39379
+
+ - You could also copy and paste the two tables into one big table and use the 'Remove Duplicates" on the Data tab.
+-------------
+Take the columns youre comparing from each data set and copy paste into a new sheet next to each other sorted the same way. Insert a column in between and type =a1=c1. This will create a true false statement. Fill the formula down to the last row. Any time there is a false is where that data doesnt match. You could then select and move the data from where the false is and move down to where the next match is and redo the formula for the rest of the data until all instances are found, buts a bit annoying.
+
+Or combine all values into a single column and do a countif over both data sets to see which values dont repeat.
+-------------
+I'm not sure if a vlookup will work because the amount of rows in each table is different and I also can't download any add ons on my computer at work. 
+-------------
+Another option would be to concatenate the fields, and then combine them into a list and conditional format for unique values. Any of the unique values would be either errors or new records...
+-------------
+This is what I ended up doing. Got about half of my work done. The other half looks like it has to be done manually since both sheets I have came from two different departments who have different names for the companies I have to look for. Excel isn't able to match things that aren't identical
+-------------
+I have a table like this and I just create a key and then have a third column on each table that provides the Consolidated Customer. It's a bit of work up front, but once it's done you've solved the problem and only have to adjust new customers. 

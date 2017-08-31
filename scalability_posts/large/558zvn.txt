@@ -1,0 +1,128 @@
+large
+558zvn
+Easier Solution Needed than Large SUMIF
+
+In Cell B9 any number 4-12 can be entered. One cell below, in B10, I need a formula that looks at the number in B9, and from there looks at a table spanning G14:O25 (Month 3 in column G, Month 12 in column O. 
+
+I only want the formula to add up the sum of OT Hrs for the months entered in B9 (so an >= would apply"greater than or equal to B9)) 
+
+The table is set up with columns for each month with numbers of OT hours included in the rows. I'm not including the headers (month x in the range I provided. The range G14:O25 includes only the numbers that I need to sum up for the months needed. Also, please note column G starts at month 3 because the first three months of the fiscal year have already happened, which is why B9 only needs 3-12 entered.
+
+To make it easier, row 10 already sums up the rows of OT hrs for each column. (Ex: =SUM(G14:G127) I think the formula should just pull from this.
+
+So in conclusion, in cell B10, if cell B9 has "4" entered, I would want to sum up months 4-12 only by summing G10:O10. (Remember the cells in this range already include a sum function that sums up rows below it for total OT hrs). If I entered "5" in cell B9, I would want the sum of months 5-12 which would want to sum only H10:O10.
+
+There has to be a better way than a huge SUMIF function that asks if this number is greater than or equal to.....on and on.
+
+
+-------------
+A question, if G is month 3, then isn't O month 11?
+
+
+This formula should essentially do it for you:
+
+    =SUM(OFFSET(G10,0,B9-3,1,9-(B9-3)))
+
+A quick explanation.
+
+Offset returns a RANGE/ARRAY, starting at G10, offsets by 0 rows, and B9-3 columns. It is 1 row tall and 9 - (B9 - 3) columns wide.
+
+We need to subtract 3 to knock off the missing months. OFFSET uses a 0 base index
+
+| INDEX | Cell Address | Month |
+|---|---|---|
+| 0 | G10 | 3 |
+| 1 | H10 | 4 |
+| 2 | I10 | 5 |
+| 3 | J10 | 6 |
+| 4 | K10 | 7 |
+
+So starting in month 5 is index 2. 3 must be subtracted to get the correct starting cell.
+
+We also do not want the size to be static, otherwise if there are numbers after column O they will be included in the formula.
+
+    9 - (B9 - 3) = 9 - (5 - 3) = 9 - 2 = 7 columns wide
+    SUM(I10:O10)
+
+If this should extend to column P, then change 9 to 10 instead.
+-------------
+My mistake! I meant column G is month 4.
+
+This ALMOST works exactly. Only problem is it is not adding up the month that I want to include. For example, when I input "4" it's adding up months 5-12. It should add up 4-12.
+
+Probably my fault in explaining.
+-------------
+Think I fixed it.
+    =SUM(OFFSET(G10,0,B9-4,1,9-(B9-4)))
+
+Please explain how this works. I sort of get "OFFSET", but don't. Why is it taking -4 from B9. I don't see how that gets us what we're looking for in this instance.
+     
+-------------
+I provided an update, and didn't tag the edit.
+
+Here's the working version:
+
+    =SUM(OFFSET(G10,0,B9-4,1,9-(B9-4)))
+-------------
+Please see my edit. I've broken it all down.
+-------------
+Oh! Reading your edit!
+
+I think I may understand so I'm going to keep reading. Hope you see this before wasting time explaining more!
+
+Thanks SOOO Much! 
+
+Solution Verified!
+-------------
+Picky: you could avoid the volatile OFFSET call.
+
+    =SUM(INDEX(G10:O10,B9-3):O10)
+-------------
+You are awesome. Thanks again this is wonderful and I've spent hrs in the office trying to get this to work.
+-------------
+I'm apparently a little out of practice at this. I'm normally a little more thorough when I post. :)
+-------------
+Of course, even better. I couldn't remember the correct syntax for this.
+
+Nice variation. /u/HereForExcel
+-------------
+Can you explain the "B9-3" part? I don't get what it's doing?
+
+
+-------------
+Believe me, many hours have been wasted to get the limited knowledge I have. 
+
+Glad to help!
+-------------
+People like you are godsends to us at the office. I'm trying to improve.
+
+Currently on a contract and may know by next week or two if they will make me permanent. Trying to learn much more!
+-------------
+Thanks. I'm working with it now. I'm trying to see how this works, but the B9-3 part confuses me. When I change the number from 3 to 2 Excel returns one less cell (moves one cell to the right in it's summation calculation)
+
+-------------
+Similar to the OFFSET version's B9-4. B9 contains the month to begin the sum, 4 to 12. 4 corresponds to the first cell in G10:O10. INDEX requires 1-based indexes. When B9 = 4, B9-3 = 1, so INDEX gives G10, so the sum is from G10 to O10. When B9 = 7, say, B9-3 = 4, so INDEX gives J10, so the sum is from J10 to O10. When B9 = 12, B9-3 = 9, so INDEX gives O10, so the sum is from O10 to O10, so just O10.
+-------------
+Do yourself a favour and sketch out a table of outcomes.
+
+| Cell | INDEX | Month | OFFSET | OFFSET Column Width |
+|---|---|---|---|---|
+| G10 | 1 | 4 | 0 | 9 - (4 - 4) = 9 |
+| H10 | 2 | 5 | 1 | 9 - (5 - 4) = 8 |
+| I10 | 3 | 6 | 2 | 9 - (6 - 4) = 7 |
+| J10 | 4 | 7 | 3 | 9 - (7 - 4) = 6 |
+
+If you map it out, the subtraction makes sense and helps make the formula building easier.
+
+    Cell - The cell Address containing the values you are after
+    Month - this is the value your users are going to type into B9, and the value the Cell represents
+    INDEX - This is the index number of this cell in the Array (1 based indexing)
+    OFFSET - Think of it as the number of cells you need to shift from the Reference cell to get the starting value you need. 0 is the starting position so you haven't traveled anywhere.
+
+
+
+
+-------------
+Thank you so much! I understand it now.
+-------------
+Thank you very much fuzzius_navus!!!

@@ -1,0 +1,20 @@
+Best way to download multiple separate excel documents into one workbook?
+If you have Excel for Windows 2010 or later, you can do this with Power Query, renamed in Excel 2016 as Get & Transform.
+
+You can set up a dedicated folder and drop all 10 CSVs in it. Then use Get & Transform (Excel 2016) to import the data by pointing a query to the folder. It will import all files, and if you add new files later, you'd just have to refresh your query.
+
+
+Here's an example of how to do it: https://www.youtube.com/watch?v=zjnFKS9iXPs
+ASAP Utilities had a tool for this. 
+Thanks for replying so quickly! I'm using 2013, by the way.
+
+So, I found the option to get the data imported: on the data ribbon, 'from other sources', 'from Microsoft query'--but I'm having trouble figuring out how to connect my folder correctly, as I get the error 'this data source contains no visible tables'. What did I do wrong?
+
+
+Power Query has it's own separate ribbon, and a set of options within for data import options. It sounds like you have not yet downloaded and installed Power Query ([link](https://www.microsoft.com/en-us/download/details.aspx?id=39379)).
+
+FuschiaDevil is correct about Power Query being the best option for your request. Especially if you can download them as CSV.
+Here's a quick video. I'm in a loud cafe otherwise I would have narrated instead of using the brief notes. I hope this helps. Let me know. 
+
+https://onedrive.live.com/redir?resid=3EA4EC285E89D8B!3919&authkey=!AImSVwkK68YE7v0&ithint=video%2cmp4
+Thanks, and you're right, turns out I have no Power Query. This effort is on a work computer, and I was supposed to have had all the add-ones installed already, but it looks like they missed this one. I'll put in a ticket tomorrow. Now just to figure out how to deal with all that data...

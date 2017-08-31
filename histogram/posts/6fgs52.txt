@@ -1,0 +1,6 @@
+Saving a file with a value from the excel worksheet
+Does H17 end with .xlsm? If not, change it to 
+
+    NewBook.SaveAs Filename:="N:\J\B\dP\" & Range("H17").Value & ".xlsm"
+
+Right before the Save, `debug.print Range("H17").Value`. Does it look like a valid filename (no slashes, asterisks, question marks, etc.)?

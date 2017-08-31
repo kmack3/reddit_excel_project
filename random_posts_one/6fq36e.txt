@@ -1,0 +1,29 @@
+6fq36e
+Is there a way to unlock a cell if another cell.value = "Other"?
+I want to be able to lock all cells in a column so that they are not editable unless the cell to the left has "Other".
+
+I know how to do this with Workbook_Change event. But I would like to be able to do this without saving 50+ macro enabled workbooks.
+
+Any suggestions?
+
+
+-------------
+Try this
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+    If Range("A1") = "Other" Then
+        Range("B1:B4").Locked = False
+    ElseIf Range("A1") <> "Other" Then
+        Range("B1:B4").Locked = True
+    End If
+End Sub
+-------------
+Thanks for the reply. I know about this approach. I am hoping that I can solve my problem without saving as a macro enabled workbook.
+-------------
+Have you tried Data Validation? You can set it up by formula so that it accepts any value when a certain cell says "Other" - e.g. validation on B1 would look like:
+
+    =OR(UPPER(A1)="OTHER",B1="")
+-------------
+Thanks a lot for the help. Just so I am understanding correctly, I would put this into column B?
+-------------
+Yep, exactly. 

@@ -1,0 +1,309 @@
+What is your favorite Excel formula? Why?
+iferror.  Before that existed everything had to be a set of nested if statements and they were ugly.
+Match/Index - it's beautiful. 
+
+
+Runner Up: =if(a1="","",......)
+subtotal, "but I don't want to sum the other sums in this column"
+SUMPRODUCT. Also, DGET is awesome. 
+countifs() 
+sumifs()
+
+Just so dang handy. I am using them daily. Pulling out pivots, match up datasets, collegues updating various files with new data, and then to interpret the results on the fly, they are just great ;)
+
+
+`KURT`, which returns the [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) of a number set.
+
+Why?  I had to teach Excel to my colleagues once.  I was the only IT person in our smallish company, and had better things to do than teach project managers/analysts the skills they were *supposed* to bring with them coming into the job.  In short, I wanted to teach people how to use help to look stuff up.  The Internet was new-ish at the time, and the stuff we take for granted today on stackoverflow and other Excel guru websites wasn't as prevalent.  So I told them Excel had extensive information on some dude named Kurt. I made up some story about how he was one of the founders of Excel (because that's a thing...) so they included an easter egg in the help file about him.
+
+I've still never used kurtosis in any practical application, nor do I think I ever will.  But `KURT` is still one of the best teaching tools I've used. 
+
+
+Vlookup makes my life so much easier at work. I'm in supply chain management.
+Index (Double Match) is magic. But favorite is probably the IF - when I learned If statements, my world changed.
+    =MOD(ROW(),2)=1
+
+when used as the selection criteria for conditional formatting with a light grey color it bands every other row regardless of how you move around the data.
+
+very useful :)
+I discovered a simple favorite today: =Proper(A1).
+
+Replicates Text With Each First Letter Capitalized.  A quick fix for cells that an asshole typed in all caps.
+Anything used as an Array
+My favorites are the "magic one's" : offset and indirect. It took a while to really understand them. But they do incredible things !
+
+The long form of OFFSET with the arguments =OFFSET(BaseCell, row offset, column offset, height in rows, width in columns). 
+
+This returns a range that you can specify dynamically by linking all five arguments to input cells. The function defines a range, so it has to be wrapped in any other function that uses a range, e.g., SUM(OFFSET, Sheet2!D12,2,4,3,10), which is the equivalent of SUM(Sheet2!H14:J23). 
+
+This function allows you to do a calculation anywhere in the workbook from another location in the workbook. 
+=A1=B1
+
+Put it in cell C1. Put a value in A1. If the value in B1 matches A1, C1 becomes True, Else it is false.
+Not the ones I use the most often but 2 favorites are:
+
+COUNTIF: only count the number of cells that match certain criteria
+TRIM: remove white space 
+Want to check if something exists in another list? This will give you a TRUE if it does. '=NOT(ISNA(MATCH(cell, other_list,0)))'...
+
+Another favourite is using curly brackets { } to hard-code range values into a single cell. Want to choose from a list of values =INDEX({"output_A"."output_B"},MATCH(cell,{"list_item_A","list_item_B"},0))
+
+This leads to really compact formulas without having to store lists anywhere for vlookups or index/match
+Want to create a list of months? Type the date of the first month (i.e. 7/1/2015), then use EDATE to get the next month.
+
+    =EDATE(A2,1)
+
+I also use the TEXT function to do a lot of conversions. For instance, to extract the weekday from a date, I would use =TEXT(A1,"ddd"). 
+    =IFERROR
+
+
+Makes your spreadsheets nice and clean while awaiting inputs from the user. 
+In google docs, query. I still don't know how to do any fancy stuff with it, but I use just the basic "repeat everything in that row over here" all the time since it doesn't get screwed up by new entries from Google forms. 
+
+I also recently learned I could replace concatenate with &. That was awesome. 
+Offset. So many useful formulas you can use in conjunction with offset. 
+INDIRECT and GETPIVOT are my favorite.  Just set up a pivot table with filters and you can do anything. 
+
+However, it's really the ability to combine all the formulas in creative ways to do what you want that will really impress other.  Arrays are pretty sweet too.
+Since OFFSET/MATCH and INDIRECT have been mentioned, here is a very useful formula to get the name of the worksheet you are working on, You can then use this for further INDIRECT formulas.
+
+    =MID(CELL("filename",A2),FIND("]",CELL("filename",A2))+1,256)
+
+I create sheets for every month 01, 02 etc... this the allows for very complex dynamic formulas, particularly around graphs
+INDIRECT. I'm surprised it's not more popular. It's pretty versatile but I like it for  finding data in different worksheets.
+CHOOSE, because it can return ranges and arrays. For example,
+
+    =ROWS(CHOOSE(n,Sheet1!$A$1:$Z$100,Sheet2!$A$1:$Z$200,Sheet3!$A$1:$Z$300,Sheet4!$A$1:$Z$400))
+
+Also, at least from Excel 2002 on, defining names using XLM functions, especially the GET.* functions. In Excel 2000 and prior, if you had formulas referring to such defined names in cells in one worksheet, you copied some of those cells and tried pasting them into other worksheets, you'd crash Excel with complete data loss since last save.
+COUNTIF: is probs a favourite.
+  
+I am but a simple man
+I'm a big fan of =mid(find,("@")+1,100) to strip out email domains from users email addresses.
+
+It's been an excellent function in our email ramp up process when we've had delivery delays caused by Gmail and Hotmail, so I can strip them out and compare against the remainder open rates.
+
+I don't know why, I just find it sleek and sexy - very basic, but has done me well.
+
++1 on the =if(X,Y,Z) on the top comment.
+averageif used in conjunction with the wild card * characters is pretty great.
+Concatenate, but I am an excel noob.
+Datevalue() because so many exports treat dates as text for some reason (looking at you quickbooks online)
+**OFFSET/MATCH**!!
+
+It's a way better version of Index/Match - you can move in any direction from the axis along which you're matching, and you can select a data range instead of a single value - so you can OFFSET/MATCH to select a column of the table, which you can then put into a COUNTIFS or a MMULT or a SUMPRODUCT or whatever you want. It also makes it a lot more friendly to write one formula and then copy it to other cells because you aren't actually specifying a table to be looking stuff up within anywhere. And while it can sometimes be a bit difficult to visualize exactly what it is that you're doing, it allows a lot more flexibility with how you set up your data because you don't need to specify a table anywhere.
+
+It has a really similar syntax to INDEX/MATCH so it's easy to switch from one to the other, and once you're using OFFSET/MATCH, you can do anything!
+Index/Match because, well, it's my name.
+I was actually asked this in a job interview! I said Match/Index  :).
+sum(). it's pretty fun to use.
+Any DAX expression
+I love using iferror just to change vlookup output to true/false with an IF statement.
+I have two macros set up to change my formulas to:
+
+>IFERROR({function},0)
+
+Or
+>IFERROR({function}, "")
+
+They are set to toggle, and operate on ranges.  It's magical.
+IF(ISERROR(),X,Y)
+
+This is how I did it before IFERROR
+Sorta new to Excel, but how does this help? Don't you still have to use nested statements using iferror? I use nested if statements sometimes, how would this help me? Thanks 
+... There was a before iferror? 
+
+Wow. 
+I love match index, it's basically like a ghetto database at that point. It's how I learned databases.
+
+
+Could you give me a quick breakdown of why Match/Index is so useful? Compared to vlookup or something comparable? 
+
+edit: For example, when I want to compare multiple fields, I make a column with a unique string (e.g. A2&F2&T2...), which I vlookup with another unique string from the data I am comparing. I've heard the match/index function helps avoid that, but I haven't quite figured it out.
+what's the ........ do in the runner up? or do you just mean that as a wildcard for whatever other function might go there?
+Subtotal does so much more too.  It'll give you a count, a min, a max and more.
+
+Also, it will ignore hidden values, so you can use it as a total for just the items that you have when you filter things out.
+
+I also use it to create banded rows in custom designed tables.  =MOD(Subtotal(3, $A$1:$A2),2) and then copied and pasted everywhere will do that for you.
+
+It's amazing.
+Sumproduct for me too. It has a lot of capabilities to re-produce similar results to pivot tables using multiple criteria to find and calculate results. 
+I have never heard of DGET. It does look pretty awesome.
+Agree on SUMPRODUCT. I discovered it while trying to solve a multiple criteria lookup problem several years ago and it has become a goto formula for me. Not familiar with DGET. I'll have to look into it.
+My head just exploded. I'm gonna use DGET for so many things starting tomorrow! Thank you kind person.
+Indeed! It is like the power of a pivot table, but you can give it a predetermined structure that easily changes.
+You should learn index match. It's vlookup on steroids
+Brother, index match will change your world.
+that's the field I want to go into after college!
+I am pretty sure my ability to use vlookup is what got me hired full time from my internship after I graduated
+    =ISEVEN(ROW()) 
+I have one spreadsheet I used this on. (The spreadsheet has now been inherited by someone else)  Then I realized I have to filter this spreadsheet often.  I got it working, but I hope I never have to explain it, because it's a mind fuck.
+Ha, I love this one for formatting like a table.  I have it as a standard formatting piece. 
+And when you want to be that asshole, you can use UPPER or LOWER to convert to all upper or lower case text.
+I'm having such a hard time learning arrays.  Any tips?
+Control+Shift+Enter Baby!
+I love INDIRECT for creating dropdown lists to populate the items in the next dropdown list
+
+Indirect confuses the hell out of me. It uses arrays, right? I think that is the source of my problems 
+These are the two I still need to utilize.  The whole thread seems to like them.
+Indirect is positively amazing- you gotta be careful with it though cause it's very volatile and someone who doesn't understand it can jack a spreadsheet up by simply inserting a column/row.
+As someone who does financial modelling, thank Gods for Index Match Sum Offset. Depreciation calculation in a single formula.
+When importing data from websites, trim is invaluable.
+Ooh! Lol, just stole that. Was just using IFERROR(VLOOKUP()="missing") instead. I hadn't seen the NOT function. 
+
+Thanks! 
+
+EOMONTH might be better as it gives end of month dates. Most financial-related reports label their period columns with the end of period dates, even if they're formatted as mms-yy only. 
+Nothing worse than setting someones #value
+INDIRECT is volatile, which means cell formulas calling it are always recalculated whenever anything triggers recalculation. Too many INDIRECT calls can slow down recalculation substantially.
+
+It also doesn't work against closed workbooks. FWLIW, Lotus 1-2-3's @@ did retrieve values from closed workbooks, and LibreOffice's Calc's INDIRECT function also works against closed workbooks. The cause is syntactic: Excel's INDIRECT only returns *Range* objects, and those can only exist in open workbooks, so INDIRECT can't return anything from closed workbooks.
+How long have you been working in excel on the job?
+Offset is volatile, for me that kills it. You can also get a dynamic array with Index():Index()
+Can you PLEASE give a detailed example?
+but you can do this with index match? just dont pass an arg in to the row/col selection, ts stored as an array.
+
+eg using match to get col# . =max(index(<array>,,Col#)
+What did they think of your response?
+It sounds like ISNUMBER (MATCH (
+
+might be a better solution for what you're doing if you're just checking to see if something is somewhere. 
+Wouldn't that be simpler as NOT(ISERROR(MATCH(shit,array,0))?
+Yep, and it could get ugly when using index/match.
+It's just a shorter method compared to how we used to do it in Excel 2003 and prior. Before we had to nest IF with ISERROR to evaluate for error formulas. For instance:
+
+    =IF(ISERROR(VLOOKUP(A2,A50:F500,6,0),0,VLOOKUP(A2,A50:F500,6,0))
+
+Would now just be
+
+    =IFERROR(VLOOKUP(A2,A50:F500,6,0),0)
+There was also a time before and/or.  Nested if statements galore and fucking hard to audit.
+I've done full on relational databases in spreadsheets for no good reason.  I'm all about Index Match, but my personal favorite is if(iserror(match(
+You can also use match and index to search for two parameters and then return a value.  For example I want 1st shift on a certain date... 
+Index/Match has two advantages. One, it's not uni-directional (so if you want the result from a column to the left, you don't need a duplicate helper column to the right of the lookup range). Two, it's faster. I can't cite the findings now as can't remember where I found them but the Index/Match method is faster. Not noticeable over one or two rows, but in 5000+ rows and multiple columns, you **will** notice the difference in speed!
+I don't use it often enough but I think the three main pros of index match against lookup aside from looking to the left is that match index ignores adding or removing of columns. With lookup you set the column number and have to change it if you move the column. And secondly in a big spreadsheet with lots of lookups excel uses a lot more resources. And lastly with index match you can more easily drag the formula for example to the right, looking up a couple of consecutive columns at the same time without changing the formula for each by removing the $ from the returning column.
+One cool thing you can do is return the value from x columns over from the match.  So instead of just returning 'Greg exists in H', you can return 'Greg's  phone number is _____'.
+Yes, whatever formula is needed. 
+
+It's easier to drag down when there are row gaps in data like on P&Ls and stuff. 
+Yeah, but 
+
+    =ISODD(ROW())
+
+is way more efficient.  By a whole keystroke.
+the down side to that approach is it can break in smaller segments and do weird things if your titles aren't in an odd row.
+Yup, great for tables that work right :)
+My advice would be to learn the foundation of how arrays work before trying to create them.  I've seen many times where somewhere will find an array formula online (like the INDEX MATCH with multiple criteria) and then try to tweak it to work for their spreadsheet.  Yet, once its done they have no idea how the formula is working.  This doesn't allow them to fix any issues they have or even tweak the formula further and make it even more useful.  
+  
+  
+I wrote a comment a while back detailing how an array works [here](https://www.reddit.com/r/excel/comments/301l3p/sorting_school_name_with_multiple_attendees/cpofcd6).  Hopefully this will atleast give you a start.
+F9 is your friend! You can select a portion of the array, press F9, and see what you get. Really helps with troubleshooting. 
+I've used this link as a reference.
+
+https://support.office.com/en-za/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7
+Indirect converts a text string into a reference so for example sum(indirect("a1:a5") is the same as sum(a1:a5).  
+I have a daily report that I format  with macros and examine with another sheet using a lot of conditional formatting and lookups/matches.
+
+In order to prevent having to run macros for the analysis over and over, I just use an INDIRECT reference to point to the filename and I just change the cell  to the previous day's date and it picks up that file.  Extremely handy.
+Hmmm. Is it a MACRS calc or UOP? I'm having trouble thinking of why depreciation would have to use index match offset vs just a normal formula. 
+I've worked in finance, and found that it was about half and half. Just depends on the user. 
+For a few years.  Mainly just filling in preexisting forms.  I enjoy finding new ways to make shortcuts to these forms, but I only know a fraction of what excel can do.  From what I see on this sub, I think I need to figure out what arrays are.
+[Here's](https://www.reddit.com/r/excel/comments/39047q/grab_data_from_large_table_with_dropdown_menu/crza0l8) a solution I wrote here a while ago that uses OFFSET/MATCH
+Ah tbh I didn't know about skipping arguments in INDEX/MATCH. But what about variable table sizes or negative directions?
+You want, say, the maximim value from the 4th column of C5:Z200?
+
+    =MAX(INDEX(C5:Z200,0,4))
+
+Anything which can be returned from OFFSET can also be returned from INDEX():INDEX().
+
+    OFFSET(a,b,c,d,e)  ==  INDEX(x,MIN(ROW(a))+b,MIN(COLUMN(a))+c):INDEX(x,MIN(ROW(a))+b+d,MIN(COLUMN(a))+c+e)
+
+where x is the entire worksheet range containing a. If a were SheetX!C5:Z200, x would be SheetX!1:1048576.
+There was two people there, one smiled at my answer and seemed to approve, the other still used Vlookup, but I think they were impressed as well. 
+IF(ISNUMBER(SEARCH(text/phrase,cell)),if true, if false)
+
+Great for checking if a cell has something in it, then turning that into a true/false statement for your IF statement.
+Oh, gotcha, thanks
+Aw yes the quick countif()> 0
+you can also nest index matches in your index match to perform lookups of ancillary data to match your primary index on. 
+
+I use lookups pretty commonly in situations where I need to pull in, for example, the items from columns 3, 4, 5, etc.  What I do to get around the need to include a column number is use COLUMN() instead of the column number (e.g. VLOOKUP($A1,Sheet1!$A:$H,COLUMN(C:C),FALSE) to get the results from the third column).  Then when you drag the formula to the right, the COLUMN piece automatically updates as required.
+Ah that makes sense. Seems to require more nested formulae to work, but I can definitely see the advantages. Thanks!
+You don't have to change the column number if you move the column formula. I always set up my spreadsheet with first row as just having the number corresponding to the column. So cell A1 = 1, B1 = 2. So when I do =VLOOKUP(A2,$B:$D,B1,FALSE) you can click and drag and the return column will just reference the numbered column. 
+
+My favorite besides index(match is SUMIFS! I can't set case statements unless I do VBA and it gets slow with too many nested pages but you can have up to I believe 216 IF statements. So if it is greater than six, blue, in Georgia, with a "D" product code, in account 600, posted by Matt then sum. Whoa. 
+
+Murphy Oil still uses my book I made monthly for their report to MGT. It's pretty cool. 
+Would that be similar to =vlookup(cell, reference, output, 0), with output being the column offset from what you are comparing? 
+
+e.g. =vlookup(A1, sheet2!A1:F50, 4,0) would return what is in D1 on sheet2. syntax is probably off, but the general idea is there. 
+That's when you add an IF
+
+    =IF(OR(ROW()<=2,Column()>=10),FALSE,ISEVEN(ROW()))
+This is excellent.  Learning how they actually work has been what I've had trouble grasping which means that I really can't develop anything.  From what I've read they appear incredibly useful.
+Arrays have always been an issue for me. Thanks for the reference and the advice! 
+Thanks
+wow. I can see how that would be really useful. Thanks!
+Ah, that sounds really convenient. I ended up learning a ton of VBA and pretty much make macros of everything. That file pull with an Indirect might save me some coding time, haha. Thanks!
+Different asset classes, depreciation rates, useful lives, etc.
+variable table sizes can be solved by either defining the whole sheet (or at least as much as the maximum possible table size) as an the index array (little clunky) or more easily using named ranges. negative directions are fine 
+
+eg  you want the max data piece from col 3 but your matchable data is in col 5 you just append -2 (or dynamically define) after the match function as the arg to col# in index.  
+SEARCH() or FIND()?
+Or =if(iserror(match(a2,Sheet2!$a$2:$a$2000)),"","Yes") and fill down to mark if something is in another list
+could you provide an example?
+Wait what?
+I do this too. I use vlookup daily and don't understand the hype over index/match. It's like street cred or something in here. It has its uses but vlookup isn't as useless as people try to make it seem.
+Nifty workaround, thanks!
+But then if you delete column B you'd get a #REF! error?
+Maybe I use it wrong but vlookup seems to only work if what you're matching is in the far left of the range. If say you want to look up based on something in the middle, you can't pull from a column to the left. 
+
+IE you couldn't do "here is a phone number, who does it belong to?" With vlookup. But you could with match. 
+
+Also if you add or move columns around a match/index code adjust accordingly. You have to go back into every vlookuo and change which column you are pulling from. 
+Yes, you can do that same thing with vlookup, but Match/Index is more straightforward once you know how to use it and can be used in a lot more situations than vlookup.
+Ah ok, yes, similar to that.  Apparently column offset and other parameters in Index/Match is dynamic, though, so if you add a column it won't screw it up. 
+Right, but now the formula is creeping..
+Once you learn them, they will definitely open up a whole new world to creating advanced formulas. 
+Start simple.  An array formula I use often is:
+
+>{SUM(ABS(Range))}
+
+Where Range is a set of differences (A-B=Range, where A should equal B, so Range should be all zeroes). This lets me make sure all items in two columns match, without worrying about one being +1 and another being -1.
+
+What happens is, each element of range is passed to the ABS function, which then passes the resulting array to SUM.  SUM always operates as an array function, so after that, it's just normal operation.
+be careful if you use it a lot as its volatile!
+It's really useful for building a formula that references across multiple (ideally identical) tabs. Big weakness is that it doesn't work well to reference external files - in that case you need both files open or else it immediately returns an error. 
+I have about 45 almost identical pages (with some aspects changed for the lookups and conditional formatting.  Each page has about 810 VLOOKUPs running in it.
+
+=IFNA(VLOOKUP($A$2&" "&J$6&" "&$I8,INDIRECT('Automatic Comparison'!$B$5,TRUE),2,FALSE),"")
+
+That's the formula I use.  A2, J6 and I8 refer to various names and products that are the source of the VLookup, and the Indirect is the page of the Vlookup.
+
+Below that cell with the page name I have 
+
+=CONCATENATE("'[",B4,".xlsm]Sheet1'!$A:$G") 
+
+to turn my file name into an actual file destination and range.  For some reason it wouldn't work if I wrote the file extension in the cell above.
+Both work. One is for just numbers I think. 
+https://docs.google.com/spreadsheets/d/1y5hNSaQj7K9tB_UfsJ8t3exedLIAFNzAdTqUvD4wmxE/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1y5hNSaQj7K9tB_UfsJ8t3exedLIAFNzAdTqUvD4wmxE/edit?usp=sharing
+Since we're on reddit, index/match is a vlookup for hipsters.
+Well, no I didn't type it out but A1 = 1, B1 = A1 + 1
+You are correct. Only can have the lookup column on the far left, which definitely is a hassle. Match/Index does sounds a lot more appealing. Thanks!
+Gotcha! I think I'm going to need to get more comfortable with Match/Index.
+Ahh that does sound very useful. I will look into it more. 
+>Ah ok, yes, similar to that. Apparently column offset and other parameters in Index/Match is dynamic, though, so if you add a column it won't screw it up. 
+
+That is also true of vlookup.
+Thanks, that is helpful.
+Is there a difference  between concatenate and just ="'["&B4&".xlsm]Sheet1'!$A:$G")
+they are identical, not sure why both exist tbh 
+INDEX/MATCH only deals with the the two ranges, the LOOKUPS need the entire table.  It isn't noticeable in small sheets, but when you start to have thousands of rows and many lookups, the performance boost is noticeable.
+
+Also, INDEX/MATCH can "look" to the left OR right, while the lookups can only look to the right.   
+Oh, what is also really awesome is if your values are all right next to each other, you can just drag the match index formula (locking the match part) without having to keep rewriting the code!
+[Use OFFSET/MATCH instead!](https://www.reddit.com/r/excel/comments/3dikxd/what_is_your_favorite_excel_formula_why/ct5qydk)
+Shouldn't be. I don't know why I used concatenate. It usually annoys me when people use it instead of &
+dont do this, offset is volatile and will slow your sheets down. 

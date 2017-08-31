@@ -1,0 +1,206 @@
+The Mechanics of INDEX & MATCH: A Tutorial For Abandoning VLOOKUP
+Psst
+
+=VLOOKUP("Afganistan", MyRefernceRangeBasedOnAOffset, MATCH("NameOfColumnIWant",1:1,0),0)
+
+But before you say Index/Match is better than Vlookup, you never cover cpu overhead once, so, I did and as i Thought, Index/Match combination has a 50% higher CPU load than a single vlookup does.
+
+Searching through 180000 records for a record locatred 10% of the way down took vlookup 4.3ms and it took Index/Match 6.3ms and required typing more text.
+
+So Vlookup is more efficient on CPU cycles and faster to type in than your Index/Match.
+
+I even test Vlookup/Match which I offered.  that took 5.7 ms so its still faster than your index/match.
+
+
+Conclusion.
+Vlookup is fastest
+
+Vlookup/Match is slower
+
+Index/Match is slowest.
+
+code to test
+
+    Sub Test1()
+        Dim cc As CCounter, rng1 As Range
+        Set cc = New CCounter
+    
+        cc.StartCounter
+        Debug.Print Application.WorksheetFunction.VLookup("T0CF01C", [ZipCodeMasterDB], 2, 0)
+        Debug.Print cc.TimeElapsed
+        Set cc = Nothing
+    End Sub
+
+    Sub Test2()
+        Dim cc As CCounter, rng1 As Range
+        Set cc = New CCounter
+    
+        cc.StartCounter
+        Debug.Print Application.WorksheetFunction.Index([ZipCodeMasterDB].Columns(2), Application.WorksheetFunction.Match("T0CF01C", [ZipCodeMasterDB].Columns(1), 0))
+        Debug.Print cc.TimeElapsed
+        Set cc = Nothing
+    
+    End Sub
+
+    Sub Test3()
+        Dim cc As CCounter, rng1 As Range
+        Set cc = New CCounter
+    
+        cc.StartCounter
+        Debug.Print Application.WorksheetFunction.VLookup("T0CF01C", [ZipCodeMasterDB],     Application.WorksheetFunction.Match("City", [ZipCodeMasterDB].Rows(1), 0))
+        Debug.Print cc.TimeElapsed
+        Set cc = Nothing
+    End Sub
+
+
+
+Ccounter Class
+
+    Option Explicit
+
+    Private Type LARGE_INTEGER
+        lowpart As Long
+        highpart As Long
+    End Type
+
+    Private Declare Function QueryPerformanceCounter Lib "kernel32" (lpPerformanceCount As LARGE_INTEGER) As Long
+    Private Declare Function QueryPerformanceFrequency Lib "kernel32" (lpFrequency As LARGE_INTEGER) As Long
+
+    Private m_CounterStart As LARGE_INTEGER
+    Private m_CounterEnd As LARGE_INTEGER
+    Private m_crFrequency As Double
+
+    Private Const TWO_32 = 4294967296# ' = 256# * 256# * 256# * 256#
+
+    Private Function LI2Double(LI As LARGE_INTEGER) As Double
+    Dim Low As Double
+    Low = LI.lowpart
+    If Low < 0 Then
+        Low = Low + TWO_32
+    End If
+        LI2Double = LI.highpart * TWO_32 + Low
+    End Function
+    
+    Private Sub Class_Initialize()
+    Dim PerfFrequency As LARGE_INTEGER
+        QueryPerformanceFrequency PerfFrequency
+        m_crFrequency = LI2Double(PerfFrequency)
+    End Sub
+    
+    Public Sub StartCounter()
+        QueryPerformanceCounter m_CounterStart
+    End Sub
+
+    Property Get TimeElapsed() As Double
+    Dim crStart As Double
+    Dim crStop As Double
+        QueryPerformanceCounter m_CounterEnd
+        crStart = LI2Double(m_CounterStart)
+        crStop = LI2Double(m_CounterEnd)
+        TimeElapsed = 1000# * (crStop - crStart) / m_crFrequency
+    End Property
+
+
+Obviously adjust the code for your database you are testing on.
+
+Neat and useful tutorial.  As an Excel junkie, I very much appreciate all of the attention that INDEX/MATCH has been getting recently.  It can really do some very neat stuff in special cases.
+
+Only thing is, that for *standard* purposes, I don't know why VLookup() gets so much hate.  It's perfectly good in probably about 90-95% of typical cases.
+
+
+I doubt anyone sees this comment, but I feel it is important to bring up a key strength of INDEX/MATCH over VLOOKUP. For me, the ability to insert columns without worrying about if I have a hardcoded value in a VLOOKUP function somewhere is AWESOME. Yes, you can make your col_lookup value dynamic within a VLOOKUP, but now you're using two formulas (at least) which seems to be a major gripe from the non-INDEX/MATCH crowd. 
+=offset(...,match(...)...) 
+this is awesome!  please keep doing these tutorials.  
+Excellent info thanks.
+
+One little thing that might help in understanding (it confused me a bit at first and I knew what you were trying to say) is to maybe put your labels on the right side so your labeled columns line up with Excel's columns.
+
+Having the beginning of your array that you labeled as column A begin in Excel's column B is a little confusing.
+I need to start using Index & Match as I do spend too much of my time working how many columns I have to look across with Vlookup.
+
+One question, (and I'm assuming it does), does Index/Match play nicely with Indirect? For example, I have a workbook that has a separate sheet for each country and currently I use vlookup/indirect formulas for looking up each individual countries tab, and I assume I could do the same with Index/Match?
+Index/Match is a powerful alternative to nested IF statements as well. 
+
+     =INDEX({"dog","cat","horse"},MATCH(B1,{"house","barn","yard"},0))
+
+It's a little awkward at first, but it stays far more manageable than a nested series of IF statements. In  this example, if B2 = "barn," it will return "cat." 
+
+Not for everybody, but sometimes you just really don't want to wedge an extra table into your document.
+I can't get index match to work across worksheets/workbooks.  Maybe I am dumb though.  What is this offset function for vlookuo? 
+Agreed on performance.  [I found similar performance results when trying to look look up "letter grades" based on 0-100 scores.](http://www.reddit.com/r/excel/comments/248fot/why_use_vlookup/ch4qlvf)
+
+I still much prefer index match though.
+I've been migrating away from Excel for handling large datasets, but the performance issue is critical - thanks for bringing it up. The VLOOKUP, OFFSET, & MATCH combination is interesting, but seems unnecessarily complicated.
+
+Further benefits of using INDEX & MATCH is the ease of using two (or more) lookup criteria versus one, which I doubt VLOOKUP can accomplish.
+This is good info.  I have some questions though.
+
+Could you by chance show this on a screenshot with "real" data?  I've not seen a Vlookup/Match combo before and I'm having a little trouble wrapping my head around it.  From what I understand, you are using the OFFSET function in the array to get around the problem of VLOOKUP needing the leftmost column.  Is that correct?
+
+I'm still a little fuzzy on what you would put for the NameofColumnIWant variable in the Match formula in a real-world example.
+
+Thanks.
+As someone who has gone from vlookup to index/match as my go-to and come back to vlookup again, I also disagree with abandoning vlookup as a primary lookup function.
+
+For me, while the efficiency is important, it's more about usability. 90% of the users of my spreadsheets can "read" and manipulate vlookups without much effort.  That drops to probably 30% with match/index. 
+
+Does it have it's place?  Absolutely.  Even more complex lookups will have their place when they are called for. I've done some serious black magic with named ranges and indirect, or nested variable lookups, or inner array formulas. But if you can keep the outward complexity down (assuming you are creating spreadsheets that others will use), it's usually worth it in my opinion.
+I am very tempted to test this with values in different places in the list, and with the lists sorted vs randomized, as well as run several calcs across all of those criteria.
+
+But alas, too busy :(
+Thank you for this, I always wondered which method was faster. Generally, I used vlookup for everday use, and only used index&match when I was working with forms that needed certain fields to be calculated without moving other fields (like having to do a right-to-left match). Looks like I should continue doing that.
+
+Plus, vlookup was easy to teach my co-workers who were very nontechnical and needed to do simple document matching.
+
+"Ok, here is how you do it. First, what do you want to find. Second, where do you want to find it. Third, what column do you want to bring back once you find it. Fourth, always put false (don't ask why)."
+Are you some sort of VBA wizard?
+I recognize that Timer class - I use it to test my own code too.
+If you have multiple return columns, factoring out the MATCH and using index should perform better than VLOOKUP, yes?
+If you're know the column of your lookup table are never going to change you could write something like this. I use this a lot when I have to join data in a single table from multiple sources
+
+Let's assume we're using the value in column A to look up in a named range. I can just extend the below formula to the number of columns in my lookup table and it would automatically look to the correct column because COLUMN(B2) would return 2, and increment as I extend it.
+
+    =VLOOKUP($A2, LOOKUPTABLE, COLUMN(B2), FALSE)
+I find the inability to look left is a bit crippling. I normally start with what I know in column A, then work gradually to the right extracting meaning from the data. Eventually in a right hand column, I get to some interesting variable, that I want to refer to, to find out which column A item created it.
+
+For me a fairly rigid workflow of going left-to-right, with the more interesting data on the right means that VLOOKUP is almost never useful to me. Dunno if anyone else here is thus limited by it?
+I'm unsure why it's disliked. I find that for many questions/posts on this subreddit along with my analysis demands, VLOOKUP isn't viable or worthwhile.
+Agreed. The alternatives to INDEX & MATCH offered so far are, while faster, more cumbersome.
+Same diff, except I think Offset is super inefficient, and Index requires you to specify your table bounds. So, pro/con
+No problem. I've updated the image and formulas per your feedback.
+It does!
+Can you share what you are trying to accomplish?
+Composite identifiers are the best way to match multiple criteria in my experience.  If you need data that's Date & Location for example, make a column that concatenates the datae & location fields.    On any sizeable data set, the performance hit you'll take from doing complex multi-criteria lookups will make pre-calculating composite identifiers worth it.
+what are you using in place of excel, access?
+cool  I've been trying to solve [this problem](http://www.reddit.com/r/excel/comments/2535r2/having_trouble_with_this_i_want_to_count_some/) for some time now.
+
+I've been trying to make [this microsoft](http://office.microsoft.com/en-us/excel-help/count-unique-values-among-duplicates-HP010342343.aspx) tutorial work, but I'm not entirely sure it's robust enough.
+No it can't, that's why I wrote a Udf which uses  the search method and allows for multi criteria though a parameter array.  Like this
+
+Xllookup(tablename,result column,column1,filter1,column2,filter2,...)
+
+
+The offsets is just to name ranges so it easier to refer to them code.  Who wants to dim a range var, and set it when if you simply define an offset based reference name to the range you can simple do [ranegname] and it's treated like a range so you can .value, .address, .row, .column etc.
+
+I don't typically even write this anymore.  I just type in createdb "name",worksheet and it defines all the offsets n what not for me because I so this's shit 40 hours a week.
+Power pivot makes v lookup redundant
+I suspect the MATCH component gets the index or number of columns Excel moves to the right of (the "1:1" is a bit confusing). If you look at my example under C, you'll see that I use MATCH similarly.
+I use offset to define names ranges.  Offset(a1,0,0,counta(a:a),count(1:1)) so that I have dynamically sized named ranges for lists or data tables, that way I  an simple do [rangename] and not type in worksheets.range etc.  I also can get around the need info to use column 1 throug that, but I actually have a udf for that purpose which allows me to do multi criteria lookups and return any column.  Slower then vlookup but u got multiple criteria.
+
+I musing the match to locate the name of the column rather then typing in the value.  I was showing how the index portion of this formula is the slowest part.
+
+> Fourth, always put false (don't ask why)."
+
+Yep. Every time.
+
+
+Sith Lord.
+I didn't know Index() is more inefficient than offset(). Good to know!
+
+I love the flexibility of not having to set table bounds, but I guess there might be some applications where index is preferable.
+I have three workbooks that I paste onto 3 different worksheet, each worksheet has 1 thing in common to do vlookup on,  I just insert that column to left.  Basically I need to link managers to employees but also to indicate if the employee exists on a third sheet.  I had an mr. excel thread,  maybe I'll copy that.  The managers has the employees listed in columns so I need the first worksheet that manager names repeated wirh employees names in rows.  I can't get index match to work across the worksheets,  maybe I'm doing something wrong.  Unfortunately I also needed to grab a score that the manager rated that employee so I also made a 4th worksheet where i put the 8 coulmns into 2 columns. 
+Great advice.
+You can use arrays in INDEX/MATCH for multiple criteria as well.  But it's a significant performance hit on a large data set.
+R.
+Using what works best and makes most sense to you is key.
+Haha, no, vice versa

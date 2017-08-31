@@ -1,0 +1,181 @@
+New intern at a financial firm, zero prior excel/coding experience and I need to create a Macro for something that I would assume is pretty simple. Advice?
+Definitely possible.
+
+You'll need to first understand the process that you want to automate: WHAT information is required to be copied over, HOW is this information identified, and WHERE will it go.
+
+From here, you need to understand how to access the developer tab and like /u/funkybum said, learn how to record a basic macro. Recording your own macro usually uses absolute cell references and cannot adapt to changing data (this would be fine if the exports from the new company NEVER change--you should make sure).
+
+If you do it this way, the code is ugly, but if everything is the same, it could work. 
+
+
+tldr?
+1. Enable developer tab
+
+2. Open Master File
+
+3. Open new company file
+
+4. Press Record Macro on developer tab
+
+5. Copy information from New Company to Master Company
+
+6. Press Stop recording
+
+7. Open macro menu and save macro
+
+8. Test again to make sure it works
+
+
+I agree with what everyone has said already - record a macro.  
+
+However, I would add that you should practice doing what you'll be recording a few times first.  Try and get your own process streamlined/efficient before you record the macro.
+
+I had to do something similar and the solution I used had two parts.
+
+Part 1: create a mapping table
+
+1. Create a list of the columns your company uses and assign the list a name.
+2. Use a small macro that opens the import file and just fetches the column header list, paste into a range and assign it a name.
+3. Create a mapping table where each column header in your company's sheet can be mapped to the other company's manually. In the mapping table, use data validation referring to the imported list. Then you can go through each item and use the drop down to select the appropriate column.
+
+Part 2: import the data
+
+The import macro will then loop through each item in the first list, get the corresponding import column number, grab the data and paste it in the correct destination column.
+
+The reason for doing it this way is that you won't need to touch the code if the columns change on either the import or the destination files. You'd just go to the mapping table, run the first macro to re-fetch the headers and then map the columns again.
+Records feature at first to try and learn how to do it. It will take you lots of trial and error to get things down right. He understands he is giving you a project for the next 2 months. 
+Also interested in this question, good luck!
+I learned many tricks from the Mr. Excel website
+[deleted]
+I would recommend learning to write a Python script to do this, rather than VBA. Python is a far more flexible and valuable skill, and I'd say it is easier to learn (though a little tricky to install). There is a Python module that allows you to modify Excel spreadsheets and it's easy enough to use.
+Ping me if you still have further issues. I'm a big4 data developer/Valuations subfunction team member who specializes in dimensional data modelling using tools in Excel like Power Pivot (among many others).
+
+Most of the advice here is just okay/wrong - there are better alternatives.
+Well said, thank you. I think I got the hang of recording, and I see what you mean by it using absolute cell references. 
+Now I'm not entirely sure it will be the exact layout next month since we are meeting with them Monday to discuss specifics, but lets assume that every month it's the same layout with the same columns all in order. Lets say I need 40 of the 55 columns to add to our master file template, which already has all 99 column labels across Row 1. So the easiest way I can do this is to go back and forth copying cell 2+below (excluding the new company's column title, just leaving the selected data) into the master file, correct? My only concern is making a mistake since I'm going back and forth 40 times and it's recording my every action. The new company also has 19,000 contracts/rows in making it a bit harder to keep track as I go. But if this method is easier than writing code, then by all means I'll stick to it haha.
+
+Gotcha, I appreciate the advice. 
+Sorry, what exactly is the "record feature"? And ideally I was going to try and figure this out within the next 4 hours... not sure if that's possible haha. 
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Any more information on this? I've been trying to learn Python and really just haven't had the time lately.
+
+Thanks!
+WHILE YOU TEST-BE SURE TO TEST ON COPIES.
+
+Try not to think of this method as an easier way to write code, but a stepping stone to learning how to write code. Recording macros will add a bunch of unnecessary steps that you can delete and will show you what syntax is used for different commands. If you have the formatting (without any sensitive information), i could try to help you build this out. If you do it monthly, we have plenty of time.
+
+Most of the macros i wrote for work have all been just a ton of re-formatting to make an import work.
+
+Let me know if you can send me or post anything else and i'll be glad to help.
+
+
+A good way to move all this data without crazy, precise copy/pasting is to first rearrange the column order of this source data to match yours - put empty columns where your extra data lies and rearrange the existing ones until you can pretty much just select row 2 and on and copy that over in one copy/paste action instead of 40.
+
+Tip: copy both row headings into a blank doc then rearrange the columns to match so you have an easy reference for how you can modify the source data order when you're recording the macro
+Normally, record is under Developer - Code - Record Macro.
+
+If you don't see the developer ribbon, may need to turn it on. Right-click on the Ribbon, 'Customise the Ribbon'. In right-side list, check the box for 'Developer', Ok out.
+are you looking to delete extra column that you don't need from your spreadsheet to match the format of your current one? if so simple macro here to help you get started. Easy start under Developer tab click insert and create an active button and then double click on it. This will allow you to write the code. I just provide you with an example of column deletion. Now all you got to do is figure out which column needs to be deleted. And remember once you delete a Column the next column will take its place so be mindful of your positioning before you delete. Example: If you need to delete column B and D. you would want to delete Column B and Column C. Because once you delete column B, Column C will now become column B and D will be come C and so forth. Hope this help and good luck
+
+Private Sub CommandButton1_Click()
+
+Columns("A:C").Delete
+
+Columns("B:C").Delete
+
+Columns("C:E").Delete
+
+Columns("D:O").Delete
+
+End Sub
+
+Absolutely! Just a second
+OK so here's where I'd start.
+
+1. Download Python 3, and maybe a good text editor like Brackets or Sublimetext for editing your Python scripts (I use PyCharm, which is an IDE). I'll let you Google this bit for yourself. If you get bored and just want to start writing and running Python code, you can do so [here](repl.it/languages/python3), but the whole point is to create and modify files (like spreadsheet files) that are on your computer, and naturally a web site won't really be able to do that.
+
+2. Take a look at this code and figure out what it's going to do. Perhaps you'll find that you heard right; Python can really be very easy to read and write, it's a lot like just pseudo-code that happens to execute.
+
+		def main(verses):
+		    lines = []
+		    for verse in range(0,verses):
+		        line = []
+		        beerz = str(verses-verse)
+		        line.append(str(verse))
+		        line.append(beerz + ' bottles of beer on the wall, ' + beerz + ' bottles of beer!')
+		        lines.append(line)
+		    print('Verse #','Verse',sep='\t')
+		    for line in lines:
+		        print(line[0],line[1],sep='\t')
+		
+		main(100)
+
+3. Save that file as writer.py (or paste it into repl.it) and use Python to execute it, and find out what it does.
+
+4. Fix every problem that you can think of with this code. Here are a few to get you started: It only lets you start at 100 bottles and doesn't let you choose. It doesn't sing the whole song, just the first part of each verse. It sometimes says "1 bottles" which isn't grammatical. 
+
+5. Make the file use the CSV module of Python to get it to print the rows to a CSV, instead of printing them to the terminal. Hint: you'll need to add "import csv" to a new row at the top of the file,  and you might want to Google a sample csv-writing script to get a sense of how to do this.
+Ahh I see. Ok I will stick to the recording method then until I have a firm understanding of the syntax, but I really do appreciate your offer to help build it out- very kind of you. But if the director asks specifically to write the Macro as code instead of recording it down (not sure why she would, but I guess ya never know), I will definitely hit you up. Thanks again for all your help. 
+Yes. Always on copies. Just yesterday someone I work with accidentally deleted 8 hours of work by running his script which he had just 'improved' on our master copy. Sadly  he had broken it and it overwrote substantial amounts of data.
+Cool thanks. VBA has been my go-to since I use excel every day at work. It made sense to learn as my first language with no background in programming. My buddy also said python is much easier to learn.
+
+Thanks! 
+This is awesome. Seeing code work live is always an excellent way to learn syntax step by step.
+
+I appreciate this!
+Cool! I added this to the code to add the second line. Took me many tries just looking at syntax in the code you provided:
+
+	def main(max):
+	    lines = []
+	    for beerz in range(0,max):
+	        line = []
+	        beerz_string= str(max-beerz)
+	        next_beer= str(max-beerz-1)
+	        line.append(str(beerz))
+	        line.append(beerz_string+' bottles of beer on the wall, '+beerz_string+' bottles of beer!')
+	        line.append('Take one down, pass it around, '+next_beer+' of bottles of beer on the wall!')
+	        lines.append(line)
+	    print('Verse #\tVerse')
+	
+	    for line in lines:
+	        print(line[0],'\t',line[1], '\n', '\t', line[2])
+	       
+	        
+	
+	main(10)
+
+Also changed the bottles to just 10 cause it was processing pretty slow =p
+
+Any particular reason why you append strings to the lines list/array to print instead of printing each line as you go?
+I bet she won't know the difference. But writing it will benefit you the most as you can really set it up the way you need it.
+
+If each format ends up being the same it'll be simple.
+
+Let me know!
+I'll echo what /u/inspireAspiration said, to work on a test version when you are still working out your code. 
+
+
+The actions performed by vba probably won't be recorded by excel to be able to undo them.
+That is unspeakably frustrating!
+Yikes, well good thing I can't even access our master file without the password, I can only use the read-only. Additionally I'm sent a duplicate copy of the new company's data so I think I'm in the clear. 
+> Any particular reason why you append strings to the lines list/array to print instead of printing each line as you go?
+
+Yep -- because ultimately we're not really trying to print it to the console, we're trying to turn it into a row of CSV data, so Python wants a list for that. (Each list item becomes a value for a new column in the row). That's using the writerow method.
+
+There is also a writerows method that takes a list of lists as an argument, I think, which is what the variable "lines" contains in my sample code. So you could be really lazy
+
+[documentation](https://docs.python.org/3/library/csv.html#examples).
+A good next step is to fix the "1 bottles" bug (should be "1 bottle"... and yet "0 bottles")... and then get it to use the number words rather than digits (e.g. "One hundred bottles... Ninety-nine bottles..." etc)
+I found this out the hard way.... hah!
+I love challenges!
+
+Thanks again.
+Yep! We've all been there I think.
+
+Nothing like hoping you haven't pressed save during the last hour to get the data back to a point to where you haven't totally screwed it up.

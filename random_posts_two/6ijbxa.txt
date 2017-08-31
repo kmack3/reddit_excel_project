@@ -1,0 +1,30 @@
+6ijbxa
+How to look up a random value in an array that meets certain criteria
+Basically I have an array of numbers. I want to select a random one that is greater than 0. How could I do this?
+
+
+-------------
+So I'd have a column that's just assigning a random number to a row of data if it meets the criteria and displays nothing if it doesn't:
+
+=if(value_cell>0,rand(),"")
+ 
+Then we're going to search for a random value in  these random values we've just generated with a vlookup which isn't looking for exact matches so we'll always get something returned.
+
+=vlookup(rand(),column_mentioned_above,value_cell,1)
+
+ 
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

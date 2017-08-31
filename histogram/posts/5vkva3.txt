@@ -1,0 +1,35 @@
+My Excel sheet for randomly generating almost everything a DM needs to run a town (NPCs, shop names, store inventories, prices, etc.) (x-post DnDBehindTheScreen)
+Some cool stuff. I see a few places where you could maybe optimize the formulas. One tiny error/issue. The way the items are pulled, the last item on list has a VERY small chance of appearing, because the random number generator basically rounds down. So, with jeweler, it picks a number from 1 -18000, but if randbetween gives 17999, you get the 17900 item. Might be worth adding a dummy item at end, or we could change this...
+One issue I see with this file is that all the formulas will calc/give new values anytime you open it. So, let's say you've got your list of people/places/etc for a town and you stop gaming for the night. Next week you open the file when resuming the game and all the formulas auto-update -- all your names, places, items will change.
+
+If you convert the file to a macro-enable workbook you have the ability to turn off auto-calculation for just that one file on-open in the VBA editor.
+
+    Private Sub Workbook_Open()
+        Application.Calculation = xlCalculationManual
+    End Sub
+
+Also remember to add this to re-enable auto-calculation when you close the file.
+
+    Private Sub Workbook_BeforeClose(Cancel As Boolean)
+        Application.Calculation = xlCalculationAutomatic
+    End Sub
+
+The obvious pitfall of this is that any other Excel file you open at the same time as this one will also have auto-calc disabled, since it's an application function. 
+I want to be very clear this is not my OC. This was created by /u/Laetha [+3] and posted [here](https://www.reddit.com/r/DnDBehindTheScreen/comments/5vjwe9/my_excel_sheet_for_randomly_generating_almost/). I thought some /r/Excel users might enjoy the project, and others might be able to offer suggestions for improvement for individual users who might want to tweak the output.
+For the better item calculation, here's what you could change Enchanter formula to (others use similar structure)
+
+=LOOKUP(RANDBETWEEN(1,MAX(Enchanter!$A:$A)+LOOKUP(9E+99,Enchanter!$B:$B)),Enchanter!$A:$A)
+
+The MAX and LOOKUP functions should run a little faster. It now quickly grabs the biggest number and last number from col B (the rarity) to determine which numbers to calculate.
+> I want to be very clear this is not my OC. 
+
+Then why did you title it "my Excel sheet"?
+Great contribution, exactly what I a was looking for. Thanks! Going to try awarding you a clippy point even though this is flared "Discussion"...
+[deleted]
+He just copied the exact title from the other thread. Post looks to be a carbon copy for the most part, 
+That is normal x-post etiquette. The ambiguity of the title is why I posted a disclaimer both in the comments and at the very top of the post as well, to ensure its not missed.
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+That explains it. The title is so long, I stopped reading before I got to the x-post part. 

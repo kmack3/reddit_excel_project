@@ -1,0 +1,68 @@
+6g2rg3
+Keeping formatting across an entire Worksheet
+So I *almost* have this working. If I can figure out how to select the entire sheet or a range bigger than a cell, I am *set*. 
+
+I need to convert symbols to Latex format in an Excel spreadsheet. If I have a symbol like H2O in Column A, then I have to have H_{2}O in Column B to represent the Latex form of specifying subscripts. For superscripts, I would have to have x^{2}.
+
+Now I can do those substitutions in Word, but I also have other substitutions that I am doing in Excel using VBA. I have to convert # to \# and _ to \_. So CK# would become CK\# and BC_n would become BC\_n. I want to be able to make these substitutions in VBA without changing the original subscript/superscript format of the original symbols. That way I can take the formatted symbols into Word and make the final subscript/superscript formats there. 
+
+Here is my VBA code. It does exactly what I need it to do for one cell. Now I just need it to do that for an entire worksheet, or at least one entire column at a time. 
+
+Thank you so much for your help.
+
+     Sub CopyKeepFormat()
+
+     Dim rSrc As Range, rDest As Range, rng As Range
+     Dim j As Long
+
+
+     Set rSrc = Worksheets("Trial1").Range("A41") 'source cell
+     Set rDest = Worksheets("Sheet2").Range("A41") ' destination 
+     cell
+    
+      ' first copy source cell to destination cell, this keeps the 
+        formats
+    
+      rSrc.Copy Destination:=rDest
+    
+      ' replace "_" with "\_" and "#" with "\#" keeping the formats
+
+       For j = Len(rDest.Value) To 1 Step -1
+
+          Select Case Mid(rDest.Value, j, 1)
+        
+              Case "_":
+                  rDest.Characters(j + 1, 0).Insert ("\_")
+                  rDest.Characters(j, 1).Delete
+                
+              Case "#":
+                  rDest.Characters(j + 1, 0).Insert ("\#")
+                  rDest.Characters(j, 1).Delete
+                
+              Case Else:
+            
+          End Select
+
+      Next j
+
+      End Sub
+
+
+
+-------------
+[deleted]
+-------------
+Yeah, that works. 
+
+Now I'm trying to figure out how to include the Greek alphabet and degree symbol in my switch statement. 
+
+So if my symbol includes the Greek alpha, I have to replace that with \alpha wherever that letter is located. How do I do that?
+
+I tried just using ChrW(unicode number), but it didn't work for the switch statement. 
+
+Thanks.
+
+-------------
+Sorry my phone wasn't showing your post correctly.
+
+I'm can't get to my computer right now, but I'll check it out when I can and get back to you.

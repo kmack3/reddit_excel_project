@@ -1,0 +1,56 @@
+All About Gantt Charts
+Asana is not the best. It's one of the better task management tools but lacks decent resource scheduling, multiple project oversight and its export options are a little limited.
+
+In my experience Wrike is a better tool vs Asana. Asana gets recommended because it is easier to get your head around but like Base Camp limits you when you are juggling multiple projects. Trello + Slack are actually a good combo if you use the calendar integration. Process and setup beats tool-choice in my experience 
+
+I use Liquid Planner but that's a more committed project management tool, choice between gantt/priority scheduling, resource balancing, kanban card view or basic time sheets. Central version of the truth and data but multiple presentation/roll-up views. Killer features for me are the analytics and cost mechanisms. API and Export options are extensive. 
+
+For similar reasons (multiple views, good IO options, input forms, and Google sheets/docs integration) Smartsheet is pretty good. 
+
+I use Smartsheet linked to an excel gantt I've built myself for roll up reports for clients but have the data and the global control of all clients projects, resources and costs in Liquid Planner. 
+
+The baked in gantt in Excel 2016 is ok, Chandoo.org have a couple of really good templates for gantt and explains that these can be achieved in a few ways depending on your version/preference/need
+I come from a manufacturing environment, so my example below will relate to that.
+
+A Gantt chart is a visual representation of lead time and task precedence.  In our world, when we are launching a new product to our floor, there are many things that have to happen in order down many parallel paths.
+
+A project leader has to start by generating the routings and bill of materials.  Those routings (operational steps in a manufacturing process, like "Laser cut" or "Bend") each have a leadtime associated with them.
+
+After the project leader has the information into the system:
+ - Purchasing needs to look at what we need to buy to make the parts, and each of those will have a separate lead time
+ - Tooling needs to design and build dies or fixturing for new parts that are created, each tool will have a lead time
+ - Capital Expendiature group needs to analyze if this new project will put us over capacity in any of the machines it needs to go through, and if so order another one
+
+Many more things need to happen, and many of the tasks in one area are dependent on (cannot start) until a task in another area is done.  Example:  In our tooling group, before a weld fixture is "ready to go" it needs to be checked with a set of sample parts, which cannot be gotten until the components of the weldment are complete on the shop floor.
+
+We use Microsoft Project to manage this.  It lets you generate a list of tasks and indicate which tasks need to be done before a particular task is available to work on.  Once your task precedence tree is set up and your lead times for each task are entered, it lets you look at it two ways:
+ 1.) If I started this today and everything goes to schedule, when will I have this done?
+ 2.) If I have to have this done on (such-and-such-a-date), what am I already behind on?
+
+Number 1 is used more for internal projects, number 2 more for projects where our customers have specified a deadline.
+
+So, all I've talked about so far is helpful in large projects with multiple parallel but interconnected paths, but the visual representation that is the gantt chart - why is that useful?
+
+When something goes wrong, or you start late, or your customer wants to know why a new project takes 4 months instead of 2 weeks, a gantt chart can show you what takes the longest, what is the critical path, what do I need to push through quicker than normal to stay on time.  Yes a computer could take some rules and spit that info out at you, but a person seeing a good visual representation will (for now) be better at it.
+Gantt charts are useful because: human beings.
+
+Yeah, it's possible to store/represent information in a bunch of ways, but at the end of the day, virtually every project worth its salt has visibility across a broad range of stakeholders, not all of whom understand data intuitively (or care). Particularly upper management, who just want to know "why does this take 6 months instead of 3?"
+
+A Gantt chart is still the absolute best tool I've seen to date - without exception - that can be given to virtually *anyone* at *any* level, and impart a clear, fact-based understanding. *And*, when used properly (i.e.: resource scheduling etc), it also has the data behind it to truly back it up.
+
+Moreover, Gantt charts can be used to overlay multiple projects at a time, so you see them in parallel. That's invaluable in many places.
+For anyone interested in an excel version, /u/HypotheticalGenius uploaded a template last year as well that might be fun to have a look at.
+
+https://www.reddit.com/r/excel/comments/2io9we/gantt_charts_want_one_need_one_have_one_im/
+
+
+You can try out PlusX Excel Add-In from www.plusx.me , it's free
+If you have the time, I'd really appreciate it if you could describe your trello+slack workflow. I just started doing project management at a light fabrication shop, and I got promoted to the position from the shop floor with zero training, so it's been a struggle. It's a small company, and a smaller department, and we don't use any planning software at all. I use trello for everything in my personal life, but I've had a hard time integrating it into my job, and I've never heard of slack. 
+
+Any chance you could give me some tips?
+Wrike [is very expensive though.](www.Wrike.com/price) if you want Gantt chart functionality.
+Just saw this, sorry. Will see if I can give some ideas or link to some PM resources. It's basically about defining the steps you need to take and in what order, who signs them off, where handover happens. 
+
+Another poster went into some great detail about how PM and critical path works in MS project. 
+
+I've used a lot of the tools out there and its about defining your own process offline correctly that makes the difference. A simple cardboard t-card board works well in a workshop, part of the challenge is getting buy-in and compliance. The best PM tool in the world is useless if people don't fully grasp how it works or report accurately. A simple tool used well is better than the best tool used poorly 

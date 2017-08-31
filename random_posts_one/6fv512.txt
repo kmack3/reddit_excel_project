@@ -1,0 +1,31 @@
+6fv512
+Run a line graph over top of a bar graph?
+http://imgur.com/a/cMNH0
+
+Each pair of bars, if divided, can be represented a %. I have these percentages already in a data set with each date that is represented.  
+
+Is there a way I can have a line graph within this same graph that would represent the accuracy on that given day?
+
+
+-------------
+I'm not sure what you mean by divided? Two routes I see
+
+1. Run the line at midpoint between each pair of bars. The value is calculated as the average of each pair, and then you just add the new series and change it to a line.
+
+2. Score your accuracy on a secondary y-axis, with range going from 0-100%. Then you can use your current values, and just plot teh new series on the secondary axis and lock min/min values of that axis.
+-------------
+Yes. Click the graph and choose select data. In the series values area select the data set you want to add as a line. Click ok. Then right click the new data series. Select format data series and select secondary axis. The right click the new series again and choose change chart type. Then change the series to line. 
+-------------
+Option 2 is what I was going for thank you. solution verified !
+-------------
+Thanks! Solution Verified
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _Knowakennedy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

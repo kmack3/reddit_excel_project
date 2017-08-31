@@ -1,0 +1,40 @@
+6fpwgt
+Change date for each consecutive page?
+Hi.  I'm making a daily planner sheet on excel.  I was wondering if theres a way i can print x pages with x different consecutive dates on them.  I would like to include the day of the week which would also change per sheet.
+
+For example, i want to print it out for the dates between Monday, August 8, 2015 and Tuesday, June 26, 2018, one day a page, and every page have its entirely unique Day and Date.
+
+Stretch goal:  Any way i can tell it to put Saturday and Sunday dates on a separate sheets that would both print on the same page?
+
+
+Also... i don't know how to do clippy points and or flair.   I've been on reddit this long and i still don't know how to do those things...
+
+Edit:  figured out flair!
+
+
+-------------
+I tried looking for a "print scenarios" tool or something, but the best option is probably to roll your own in VBA. This is untested, and will depend on your sheet layout, but the core would be a simple loop like:
+
+    Option Explicit
+    
+    Sub PrintDateRange()
+    
+        Dim lStart As Long
+        Dim lEnd As Long
+        Dim lDay As Long
+        
+        lStart = DateValue("8 August 2015")
+        lEnd = DateValue("26 June 2018")
+        
+        For lDay = lStart To lEnd
+            ActiveSheet.Range("A1") = lDay
+            ActiveSheet.PrintOut
+        Next lDay
+    
+    End Sub
+
+I would strongly suggest you try a smaller date range first, and perhaps even print to PDF first, so you don't get a thousand pages of junk!
+
+It also doesn't combine Saturdays and Sundays. You might consider a special sheet which combines those days, and print your weekends separately.
+-------------
+I'm going to try this at work. I've never done VBA stuff before.  I hope this works!  Thank you!

@@ -1,0 +1,56 @@
+Excel Test prep for a job
+I'm confused.  You say [here](http://www.reddit.com/r/AskReddit/comments/2x8hhb/what_is_it_like_to_have_your_job/coy4a1h) that you're a Financial Analyst for a F500 company, pointing out that it's an Excel grind.   
+
+Why do you need excel job interview pointers for a job title you already have and use excel in??
+
+You also [posted the same question in this very subreddit a week ago](http://www.reddit.com/r/excel/comments/2x0rqa/excel_tests_before_employment/).
+
+In that thread, you mention [the position you're interviewing for is a senior level position that specifically says you need to know index/match](http://www.reddit.com/r/excel/comments/2x0rqa/excel_tests_before_employment/cow4la8)
+
+Now, I'm not pointing all this out to bust your balls.  I'm just trying to ascertain exactly what you're looking for help with.   You say on several threads you don't have a job, others you do have a job...
+
+There are a load of excel tuts and guides on this sub, going through them would qualify you for nearly any entry level job (and if a job only requires vlookups and is an 'analyst' position, it's entry level).  I'm a financial analyst for a large bank.  If someone were interviewing for my position I'd see if they could code a fizz buzz in VBA or at least pseudo code, link and query external data sources, look at some calculations and tell me what they do, view a sample portfolio and tell me what caused percentages to go up/down.  The list could go on and on, but without some guidance from you on what you *really* are trying to find out and some clarity as to what you do know and what you do not, it'll be really hard for anyone here to guide you.
+
+
+
+Flair changed to discussion.
+
+Have you run a search for other job test posts? We get a lot of these.
+I've seen a rise in use of PivotTables in tests - I would definitely look into this.
+
+If I were an interviewer, I would make sure the candidate is at least confident in the use of VLOOKUP, IF and PivotTables.
+Index, Match...
+Array Formulas..
+Charts...
+Slicer / Dicers
+I work with financial analysts. You should know how to create a calculated field in a pivot table, use formulas to take data from different tabs and combine it into a calculation in another tab (sumifs, average ifs, lookups, freeze cells in formulas), use conditional formatting and debugging techniques to fix a broken formula. Mainly, know how to take lots of data from one place and summarize it accurately in another place using calculations. 
+It depends on what they are having you do as a financial analyst. Are you using excel to find financial condition, revenue/expenditure forecasting,  net present and future values, then knowing financial formulas and forecasting models will be beneficial. If you are analyzing stored data such as COGS, Sales, number of scans, say by product, department, category or, store location then knowing data formulas and being able to turn long data into fat data using vlookup, pivots, sumifs, countifs, index/match, and charts. I have seen many people loose opportunities cause they say they know pivot tables and vlookups but they don't. A good hiring manager will have tricks in the test to see if you actually know what it is you say on your resume. 
+
+Honestly, if you know excel you should be fine. 
+I guess I'll start with things I do know. Vlookup (index/match is OK, just starting using that more recently), IF, SUMIF, IFERROR, and I can create pivots. Nothing too advanced but I can work my way around it a bit. Conditional formatting. Text functions (AND, CONCATENATE, LEFT, RIGHT, MID).
+I'm just nervous I guess. It's different when you have to take a test and I'm not sure how sensitive the program is. Like, do you have to do things a specific way or else you get it wrong?
+Thanks. Yes, I have. But I wanted to see if things were different in my particular field...
+WTF is a dicer?
+
+Are they usually multiple choice or do they give me a workbook and I get to work?
+It seems is if you're qualified for an entry level data analyst position.  I'd limit your search to that, after sending me the posting I think you're probably shooting a little high with this position.  They're looking for someone who knows excel at an advanced level.
+That's pretty basic stuff man, financial analyst is a pretty broad term though, how senior is the position and how strong are you in other aspects like Accounting and DCF etc?
+That's very dependent on the company and the job listing.  Some firms have a standardized level of knowledge with excel they require before they'll hire you.  Those are tested usually.  Others want to see whether or not you can figure things out, those will ask you lots of theoretical questions (what would you do to figure out how to do XYZ?).
+
+If you want to PM me the listing, I'll tell you what I think it might be.  
+Hey man, a while ago a guy had a take home excel test for an entry level role. I did it for him: [xls](https://dl.dropboxusercontent.com/u/100748450/130502%20-%20I%20came%2C%20I%20saw%2C%20I%20did%20your%20homework.xlsx)  
+  
+I'd assume it'd be harder than that
+We have a had a lot of requests from financial analysts too...
+lol... my bad... its actually slicer..
+It converts a cell into a pair of die when you press it. Not very integral to a business dashboard but fun nevertheless.
+These tests would rarely be multiple choice.  They hand you some dummy data, tell you what they need and you are supposed to be able to do it in an accurate and efficient way.
+The only Excel (not vba) focused test I took asked to do specific things in Excel, such as math, adding lists, etc. The test was in flash, and required you to click on a representation of Excel. The bad news is that the test expected some very specific steps to do what it wanted, instead of the many other ways of accomplishing the same goal.
+Yeah true. I've seen so many financial analyst job postings, not a single one is the same. This specific one was asking for 2+ years experience. 
+It was actually pretty similar... I had to generate a Pivot exactly how they wanted, and did a few logical formulas like SUMIF, COUNTIF's and NPV. It wasn't anything too crazy. I was so worked up on the excel portion, I don't think I did too hot on the interview. :(
+Oh so like a random number generator. I use those for all of the bonus metrics.
+Did you remember that the NPV formula discounts the first value? So if you've got a t0 value it has to be NPV() + t0  
+  
+EDIT: Mind if I ask which company? (If it wasn't Valve or Blizzard then who cares :p)
+I don't even do that, I just ask management what numbers they want. I trust them and it's much easier than connecting to a database and all of that difficult stuff!
+I've been doing it all wrong. Thanks for the tip! That will certainly cut down on my time spent reworking the figures for their presentations.

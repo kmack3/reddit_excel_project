@@ -1,0 +1,93 @@
+Got hired as an Intern, need help with Macros
+Probably the easiest way to learn is to use the record macro function.  Record yourself manually doing a transfer of data, and then open up the macro and see what got recorded.
+
+For the most part, Excel VBA (the language Excel uses) is pretty good at not using cryptic function names, so it should be fairly readable.  On the other hand, recorded macros tend to have a lot of extra stuff that the macro doesn't particularly need in order to function, such as scrolling up and down, so the recorded macro will tend to be a lot more verbose than is strictly necessary.
+
+But when you're doing this, remember that a few different things will cause a macro to fail when used by someone else.  For example, if you have both spreadsheets open when you record, but the end user only has their spreadsheet open, then the macro will crash when it tries to select the destination sheet because it's not open.
+
+Similarly, try to select the data to be copied without directly selecting it.  So, for example, instead of clicking on the first cell and then shift-clicking to the last cell to select the whole range, use ctrl-shift down and ctrl-shift right.  If you manually select the data, your recorded macro will only grab that specific range of data, regardless of how much is actually there.  But by using those keyboard shortcuts to select "until the end of the data" then the recorded macro will select all the data.  But, again with the quirks, if there's only one row of data and you're in the first cell and use ctrl-down arrow, you'll actually go to the end of the spreadsheet, rather than the end of the data, and probably give you macro error because you're trying to paste more data than is possible (i.e. you're trying to paste maxrows-3 starting in row 10 -- there's just not enough room)
+
+Now, regarding the whole "data in a different order" problem.  Is it that everyone doesn't have to deal with every piece of data, and so they all have a subset of the master data set?  Will you be able to make their data entry spreadsheets?
+
+If you can make theirs, or can at least modify them, there's a really, really easy way to solve that problem -- re-arrange the data!  Even if their entry has to be in the wrong order, just mirror it in the order you want it on a hidden sheet within their file.  They'll never see the difference and the macro can read data off of hidden sheets no problem.  It's a lot easier than re-arranging it at copy time and barely increases the size of the spreadsheets.
+I'm always a little puzzled when someone says to me, "I want you to build a macro to do X". 
+
+If I told you, "I want you to stick a carrot in this keyhole so I can open the door" you would look at me like I'm crazy. You are smart enough to know a carrot is not the right tool to open a door. 
+
+How does the other guy know a macro is the right tool to combine data from multiple documents where the layouts don't match (I presume that's what you meant by "in a different order") and there's potential duplication across documents ("repetition of previous data")?
+
+Now, maybe the other guy is in fact a macro expert, I don't know. But IME, 100% of the time when people who are not developers say "make a macro...", they have no idea what they're talking about, and they think macros are some kind of magic wand that can make problems disappear.
+
+No matter how you approach this challenge--macro or otherwise--I would advise you to be wary of these things. All kinds of craziness can go on when 100 users make up their own rules in separate spreadsheets. Expect and plan for the worst, and expect the unexpected.
+
+* You mentioned different entities (customer details, savings, loans, etc.). These are probably (I hope) in different tables with different layouts. When you compare like entity tables across documents, make certain they are at the same level of detail before you combine them, or have a good reason not to care.
+* Columns in different order, or added/missing columns compared to the rest of the lot.
+* Column names that are different but are actually the same thing. 
+* Values that are different that mean the same thing (loan type is "car" in one table, "auto" in another). Besides the inconsistency, this can break attempts to avoid duplication.
+* Column names that are the same but actually mean different things (I dunno... maybe "address" means home address in one table, work address in another). This is an insidious problem.
+* Values that are the same in columns with the same name--but mean different things. Even more insidious.
+* Values stored as text in one table and numeric in another. ZIP codes are a notorious example. 
+* In all the "same/different" scenarios, watch out for subtle 'differences' that are purely typographical, like trailing spaces, dots, commas, spacing, etc.
+* Embedded carriage return/linefeed/tab characters that can wreak havoc on scripts that use these to delimit cell boundaries. Notes fields are notorious example.
+* Suggest you import the source sheet name as part of the process, so you can trace problems back and do some reconciliations.
+
+Good luck!
+What's all the data for? Maybe a better way to go would be to import it all into an Access database. 
+
+VBA is probably going to be the way to go, but without being more specific, I don't know exactly what you need. 
+If the data is structured or even normalized, try Power Query for importing everything into one file. It enables you to quickly sort data, choose columns and rows and even shape some to make it more accessible. You can also rerun the import with just one click if the source file changes.
+I'm a senior engineering student who has developed Macros in two previous internships for use in organizing and compiling data and creating forms and documents alike. 
+
+
+What you've described sounds like something of a search which finds and copy pastes data, sorts it, and deletes old data in the process. 
+
+
+At this point with no previous experience you're going to have to look up the functions necessary to complete this one by one. As long as you're aware of basic programming capabilities you should be able to mix all of those functions together to get a working Macro.
+
+
+For example, one of the first obstacles you may have to overcome is using a search type function, there is a really useful search function in VBA but its not spelled out anywhere that is easily accessible. At this point its all google, just looking up "VBA search function" shows something like [this](http://www.ozgrid.com/VBA/find-method.htm) that not only has the search function spelled out, but also contains an example that you can use to get the formatting correct. Examples are a huge part of learning VBA as the format and flow of your code is something that can't really just be learned by trial and error. 
+
+
+At this point once you have a function and an example, go ahead and try to modify it for your own use. This is where making multiple VBA modules comes into play as you can create a module just to test out the various functions. When you're in the VBA module script menu there are a couple of other useful tools that helps beginners learn how to make their code work. The first helpful tool is that when you begin typing out a function, VBA will show a pop up menu that outlines what each part of the function does, go ahead type in "Activesheet.cells(1,1).find( " and see what pops up. The other useful tool is the built in de-bugger, any time you hit F5 and try to run a module and there is an error, always hit "Debug" as it will take you to the exact line that Excel is having an issue with. You can even step through each step of the code using F8 in order to see the order of events leading up to the error. 
+
+
+I hope that information is helpful in getting you started with VBA at your internship. As for myself, VBA wasn't required as part of my work but I found it so incredibly useful in getting my work done that I took the extra time to learn it myself, mostly through other people's examples online. If you can find other ways beyond what your boss tells you to use VBA, go ahead and do it as most people don't understand just how useful it can be, and it could really improve your chances at a career. 
+Learn basics of coding. Best way to learn macros is to google "excel vba xyz" where xyz is what you want to do. Copy and paste the snippets and then make minor edits. 
+Google and testing. I learned a lot by googling what I wanted to do and then finding some code that I could test out and see how it worked. Then I would adapt that to suit my needs. A couple good things to know starting off is to use the F8 key to step through a macro and see what the bit of code it's running is actually doing. Also recording macros is a good way to see how some actions are performed in VBA. 
+
+I would say google + "Excel vba sort data copy" or something along that line. Record a macro sorting the data how you want and see what it does.  If you get two things working, but can't get them working together, then you can ask here. 
+Very informative, thanks a lot! I've not started working yet so I don't really know what kind of data they have and in what order.
+
+Thanks for alt+shift tip, i watched few videos on youtube regarding relative and absolute data and i'm starting to understand the concept of loops and when to use what syntax.
+
+I don't think i'll be able to modify data in other sheets because data is coming from different branches and I don't think my manager is going to feel safe doing it unless someone from BA department says so. But i'll try to raise this issue
+^^^^^^^^^^^^^^^^0.9413meh19460
+If someone tells you "Make a macro that does x," and the first thing you do is start making a macro, you're the idiot, not them.  Part of being skilled with a given tool is knowing when not to use it, even if you're told to use it.
+
+If you come back with "Actually, we didn't need to use a macro at all." nobody is going to complain that you didn't complete the task.
+Client details.
+
+One sheet is for customer details, second sheet for saving account details, third for loans, fourth for investments, etc. and all of them have a primary ID in common
+
+I haven't seen the data yet but this is what hiring manager told me
+This info is indeed very helpful, Thanks a lot! Hiring manager didn't mention VBA when he was talking about macros so i think VBA isn't that important for this task. I've previous coding experience with Java so i think i can grasp VBA concepts easily.
+I'd say read through the snippets, try to understand what they are doing and why, and apply that knowledge to your problem.
+I did Java in three of my semesters but coding was never my strong point t_t
+
+You're right. I'll see what the data actually looks like when i start working and will ask BAs if i can use different methods to sort/move the data.
+
+Thanks a lot for your help!
+To add to Astromancer's advice, one nifty trick I've found is to have the VBA window open in one window while you're recording the macro on another window. You can actually see the code it's recording in real time. 
+dude up tops right.  Record and see what happens.  Make sure you ask questions and get clear definitions of the goals for the project.  Depending on the end user of this data it might be easier to store it all under a SQL database.
+Ctrl+shift will basically just go to what Excel thinks is the last value.  This is NOT reliable, you'll want to convert this to a for...each or while loop.
+If it were me, I would transfer the info to Access and build a UI to manage it with VBA, but that's just me. 
+
+I recommend you do some reading about how VBA interacts with worksheets, cells, and ranges.  
+
+If these are different categories of information, what is the advantage of putting then all on one worksheet? 
+
+**edit** I misread, they're going to one single file. How many worksheets are we talking about?  You might just be able to do it manually faster than automating it. 
+Yeah def. and start to write out step by step what you want the program to do. My first big macro project at work ended up being 5,000 lines of Code to totally automate something that used to take me the first 20 minutes of my day each day. 
+Yep, managing such things in Access or any other DB is very convenient. Hiring manager said this is just the initial stage of data migration, first they're going to make one master sheet and then transfer all the data to a centralized server (i don't know which DB they're going to use). 
+
+Thanks for your help :)

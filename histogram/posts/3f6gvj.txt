@@ -1,0 +1,89 @@
+I protected a sheet on excel and I think I must have entered the password wrong (twice) as I cannot unlock it. How do I go about removing this password?
+I don't believe excel locks you out for an incorrect password on a protected sheet. I'm guessing you somehow are not putting in the correct password? 
+
+Anyway, follow these steps to get around it: 
+
+Press Alt + f11
+
+In the top left, double click on one of the modules (if you don't see Project VBA window in the top left, click ctrl + r . if you don't see a module, go to insert -> module). 
+
+Paste this code
+
+    Sub PasswordBreaker()
+        'Breaks worksheet password protection.
+        Dim i As Integer, j As Integer, k As Integer
+        Dim l As Integer, m As Integer, n As Integer
+        Dim i1 As Integer, i2 As Integer, i3 As Integer
+        Dim i4 As Integer, i5 As Integer, i6 As Integer
+        On Error Resume Next
+        For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+        For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+        For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+        For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+        ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+            Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+            Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+        If ActiveSheet.ProtectContents = False Then
+            MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+                Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+                Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+             Exit Sub
+        End If
+        Next: Next: Next: Next: Next: Next
+        Next: Next: Next: Next: Next: Next
+    End Sub
+
+Click somewhere in the code and press f5
+
+This should unlock the sheet. 
+Upload it to Google drive, open it, copy/paste into new fresh excel document
+Aaaand... corporate espionage assist. High fives all around. 
+I know this is solved but did you try hitting caps lock and then the password? It's unlikely a simple typo happened twice at the same place but you may have had caps lock on. 
+This does not work for Excel 2013 btw
+
+Source:
+http://www.spreadsheet1.com/sheet-protection-2013.html
+
+ya sorry that's what I meant. I set up a password but must have been with a typo as it's not working now. 
+
+Thanks for this I'll try it later
+
+EDIT: it worked. thanks
+Why are you just using A and B for most of the characters in the password?
+
+I think that's what's going on with the i=65 to 66 .... Chr(i) stuff anyway
+I'm just learning the very basic of VBA now and I didn't expect this kind of utility. I'm baffled. Mind telling me whether you figured it out or is there some kind of "useful VBA coding database"?
+
+I guess the real question is that I lack any intuition about how VBA can or cannot do.
+
+Ty!
+What serendipity! I couldn't get into a worksheet's protected cells (Excel 2010) today at work.  I needed to retool one of the formulas to meet new criteria.   I had created the sheet originally, but it was so long ago that I couldn't remember the password.  D'oh!  
+
+Thank you thank you for saving me from a huge headache!!!
+This is a really neat bit of code. I enjoyed deconstructing it.
+Also pretty sure saving as a really old excel file will work. 98 I think? 
+This is literally the first answer in google with the phrase "how to unprotect excel sheet without password 2010" :
+
+https://uknowit.uwgb.edu/page.php?id=28850
+That's good news!
+is there a way to remove a password from an Excel 2013 sheet?
+
+For some reason the above code worked on my laptop at home but doesn't work when connected to the server at work. Both are 2013 so I'm unsure how it worked at home for me
+
+my version could be outdated so I don't want to switch it with the version on the server at work
+Didn't know that thanks. My office switched to 2013 a few months ago and I haven't yet needed to use it on a doc protected in 2013. 
+Don't forget to comment "Solution Verified" under the top comment to resolve the post :)
+It doesn't brute force the password, it brute forces something that returns the same result as the password when put through Excel's hashing algorithm.
+
+Excel's really, really shitty hashing algorithm.
+it's relying on a hash collision. Basically it compares the hash of the typed password to the hash of the stored password.
+Hey it's certainly not something I thought of. I'm fairly amateur in VBA, but by knowing a few basics and how to google for what's needed, you can get quite a lot of functionality out of it. There's a lot of material online for learning to program in VBA: "excel VBA is fun" on YouTube is a good one.
+Glad to be of service!
+Save it as 2003 (.xls), crack password as above, save as 2013.
+
+You will lose any features in the workbook not supported in the older version.
+done, and thanks
+I am trying this on a 2003 excel document. I get 'AAAAAAAAAAA' but it doesnt open the file. Any ideas?
+This question still shows up as unsolved.   
+Has your question yet been resolved?
+I'm not sure what you mean by open the file? This code will unprotect a worksheet only. You don't need to actually enter the "AAAA..." password.

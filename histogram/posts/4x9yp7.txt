@@ -1,0 +1,250 @@
+People that use VBA at work at least a few times a month, what is your job?
+I was a data analyst AND in the finance industry.
+
+Today, VBA is useful for me to make complex tools for other people to use, when they only know Excel.
+
+So I would say VBA is important only if you are going to do complex stuff in Excel, which should basically happen only if you don't have any other technology available (e.g. when you work in a big company where using python is not an option because you don't control environment, or when delivering tool to Excel-only people)
+Forecast analyst. A lot of excel, but more and more access. I use VBA to automate reports, pass data between databases, that sort of thing. 
+
+Recently just figured out how to create my own functions as formulas. Turned a formula that we had to type over and over (involved ifs, lefts, and rights) into one single command. Changed my life. 
+
+Also brought to light how many things were doing over and over. Reformat the same report every day? VBA. Find/replace this value every time it appears on that report? VBA. 
+
+Still learning it, 90 percent Google trained, and love it.
+I am in FP&A. Use Excel for almost everything. Knowing VBA has saved me from countless hours of overtime. I am able to do things in Excel with the click of a button that would take someone who doesn't know it hours. If you work with a company where no one knows it, you look like a genius.
+Data Analytics and Reporting for a giant bank. Mostly Excel, but at least 20% Access.
+
+If we have reports that get run at least once a month, the goal is to get them down to setting a few variables and clicking a button. That's a big part of what I use VBA for. I've already converted about 20 of them. Currently, I'm working on a report that takes the better part of a day to produce. It involves manually changing field names and modifying long queries (in Access... smh), has at 8 data sources, lots of data scrubbing, a ton of manual manipulation, and lots and lots of vlookups. 
+
+It took two days of walking me through how to run the report just so I could understand how to do it.
+
+Anyway, when I'm done it's going to take about 15 minutes to run every month. But just as important as the time saving, automating it means it will be far less prone to error and we don't have some poor sap stuck doing it all day.
+Data analysis manager. I mostly use VBA to automate complex processes and to clean or manipulate raw client data. I don't actually do that much analysing. 
+Accountant, I automate everything with VBA. Literally, 90% of my own work is automated, so now I get special projects that involve VBA all the time. I've fully automated Journal entries in our accounting system, reports, updating internet applications with hundreds of pages of data to reconcile (using sql queries to a database), journal voucher forms, the list goes on.. Since my company is so massive, and my stuff can scale nationwide so literally thousands of people can use the same macro to automate their work, I'm getting a big reputation. It's gotten me promotions and some large bonuses. Learn VBA and think big. 
+Previously in production engineering and now in product engineering, both at the same international company. I use it for nifty little applications that require manual input like FIFO-queues, order lists, KPI-calcs, editing raw data etc. Usually the VBA is for buttons that automates a thing that people have a hard time doing or usually screw up.
+
+Most of what I do in excel should be done in Access or with PowerPivot, but most people shy away from these.
+I work in annuities now, but was in mortgage before doing analytics and various things.  
+I've written hundreds of thousands of lines in VBA over the years.  Little things like automating formatting on an output report to much more complex things like building an e-mail based reporting system or even a full on workflow management system from lead to close for a mortgage loan.   
+Depending on the company you work for, your access to tools may vary greatly.  Excel is usually one of those though, and VBA may be the only language you have easy access to.  It might not be the first thing I'd recommend people learn, but it is something you should keep in mind for if you ever need to do repetitive tasks in Excel.
+I am a Financial Analyst at a defense contractor. 
+My role is pretty much 50/50 between data and financial analytics.
+I use VBA a couple of times a week, only when I really have to do something that I can't do in Excel.. or if I'm feeling lazy and want to automate something. I'd recommend learning it, especially if you'll be working between Excel, Access, SQL, etc.
+student assistant working with project management. So far ive used it for automating reporting, and facilitating more thorough reporting and better data collection (easier to provide data, easier to see reports, more complete reports, higher degree of data transparency, clear sources etc.) 
+
+Also played around with a bunch of smaller ad-hoc things, issue logs, post-processing of finance reports, unicode csv / text files, chinese character matching partial matching, work hours reports automation, VBA SQL queries, web scraping etc.
+
+Basically it's just a tool to solve a lot of problems and make tedious things a little less tedious, or not have to inflict them on other people too much. Being able to do that also gives you a better ability to do things the way you want to do them, and sell other people on doing it the same way (because it's easier and better than the old way). 
+I do Data Analytics for a Patent Law Firm. 
+
+I have a series of workbooks that generate uniform reports for clients which are controlled by a VBA Macro that directs a PowerQuery to a specific workbook of standardized data for each client, pulls the relevant data, dynamically inserts a ton of formulas depending on how much data was pulled, updates a bunch of graphs, opens a Powerpoint linked with those graphs, updates, and then prints the powerpoint to a PDF. 
+
+There's about 12 of those workbooks and corresponding PowerPoints, and we access them through a VB.net windows form application that lets you select the company and type of report from a drop down menu. 
+
+We use SQL too to manage a huge database that this whole system draws from, but learning VBA sped up our report generation (previously about a day per report, now about 30 seconds per report) and introduced me to VB.net, so I'd say it's worth it. Plus every once in a while I'll churn out an office macro that will help the other parts of the firm in their day to day work, which makes me look good. 
+Actuary
+Another marketing analyst here. One of our standard reports required a process like this : manipulate a pivot table, copy - paste, conditionally format the cells, start over again. 
+
+Building a macro to automate this saved about fifteen annoying minutes of work per report. 
+I'm only adding this because I don't see anyone else with this position. I work in Healthcare Quality. We use VBA to improve the quality of our reporting and simplify daily tasks. I am a nurse with some computer experience. I found VBA to be relatively easy to learn.
+Technical Business analyst in banking, I use Excel for many hours per day.
+
+- Have built many large excels over the last 18months for performing the complete data migration between an old "core" banking/lending/commercial financing system and the new one. 
+- Includes SQL execution, XML API marshalling and parsing, extensive data transformations, data validation, list management, client static data loading, multiple environment management, financial data extracts , reconciliation, reporting, uncle Tom Cobley and all...
+
+Is VBA worth it? 
+
+- I could not have done *all* the above without it, but I spent the previous 2 years (also in a bank, in master data management) not requiring it at all so it depends on the subject domain. 
+- I'd say go learn about listobjects, pivot tables, power pivot etc first. 
+
+
+ 
+I'm an engineer at a heavy lift and transport company. I use it for calculations all the time. I built a program that tells me how a barge will float with heavy loads on it and rolling up and down it, then how much ballast water we'll need to add and how stable it is. 
+Business Intelligence Analyst. I spend more time automating in VBA and constructing report generators/interactive forms etc than anything else, though.
+I have recently been building tools in excel to clean and process large amounts of data to use for analyzing a building's energy use behavior and create estimates about performance with solar and new control logic that we create. 
+
+It does some utility rate analysis/computation as well to generate distributions of potential savings figures under different rate structures. 
+
+I've been working on making it a 1-button click per tab type operation that anybody can figure out with the most minimal experience in excel. It's not easy... I realized I just assumed people knew a lot of what I consider to be super basic stuff, like how to navigate around the page and how to use special paste options instead of just ctrl+v. 
+
+It's awesome to know VBA because you can basically do anything in excel. It's a shit programming language on the face, but it rests on the entirety of Excel, so you have all that additional functionality and interface right there too. 
+Civil Engineer
+Previously a financial analyst in healthcare, now a reporting analyst for purchasing. I use a lot of Excel, Access, and SQL.  Most of my VBA is used in Access, but for monthly reporting I have some standard macros in Excel.
+Another Financial Analyst here. We use SAP and export bunch of data into excel. VBA is a timesaver for formatting (sort, remove empty lines, etc.). 
+Manufacturing business owner. We make very customized one-off products with various components and parts which can vary as the customer requested sizes and configurations change. To boot, we have to produce estimates for said products in as little as a couple of hours. There is almost no feasible way to train estimators on every small detail. I learned VBA and have designed estimator workbooks which can be used by almost any employee with minimal product knowledge. 
+Pension analyst.  I use it daily for functions ranging from data verification to data manipulation.
+Assistant lab manager/quality control at a production site.  24 hour operation so there is a ton of data to sort.
+Finance in a call center environment. Excel used to simply help me keep track of numbers that would fly around in conversations. Now I create calculation tools, ad hoc analysis, reporting systems, and different degrees of automation. 
+
+Between my own attention span and the multi-tasking nature of my job, I essentially try to create ways of replicating my own routine behaviors and those of others.
+
+VBA isn't the most elegant programming language out there but I wouldn't discount it's practical applications in a business environment.
+
+The prevalence of the medium to which a language can apply is important. If you learn VBA (to even a bolt-on copy & paste degree) you might be surprised by how you can impress your coworkers who use MS Office as a staple.
+My current role is Supply Chain and Business Analyst. I use VBA for automating Excel reports that I put together and to give myself time back into my day. My previous role dealt with warehouse and inventory optimization, and I used VBA for automating reports there as well, but I also built custom tools and interfaces with Access and VBA for expanding the functionality of our warehouse management systems across our distribution network. SQL was also a big help there. 
+
+Regardless of what your job focuses on, learning VBA is definitely worth the time and effort for a number of reasons. First, its an additional tool in your toolbox, which can help with getting away from the "everything is a nail if all you have is a hammer" mentality. The more tools you learn, the options you have. Also, getting to the point to where you're using VBA to do things for you or other people means that you're going to have to have that much of a better understanding of the data you use and encounter on a daily basis. The more you understand, the more valuable you are. Finally, it can make things more fun because it can remove tedium and give you options for approaching things you deal with every day. And like I said about my stuff, it can give you time back in your day, too, if you're willing to put in that up front time investment. 
+IT Project Manager/Metrics and reporting guy for IT. Vba is great because it's FREE. If your org doesn't want to pay for an application that will automate or standardize a process you can probably do it in vba. Example: I developed something in vba in Access to pull 60 MS project files off of SharePoint weekly, then developed some vba code in Project to export all the files to Excel, then more vba to import into Access and voila! We now had a portfolio management tool. In fact, it showed my boss how valuable a portfolio tool is so now we are actually going to purchase a real one! I get teased about my "Rube Goldberg" toys that I create but my boss loves it. Vba allows you to integrate apps like Excel, Access, SharePoint and Outlook so easily. 
+Sales Engineer, funny you should ask this now as I just finished code to run from Word - select a folder, grab all the pictures, sort them, then dump them into a Word table for a report. Beats doing it manually (I just spent 20 hours to save me 10 probably). Probably not what you are looking for.
+
+But you should check into it, you can pull your data in Excel using SQLOpen function, and then have VBA code read it, perform calculations on it (I was doing quartiles, span, etc. on tons of process data), and then dump it into a new formatted report all in one shot.
+
+"record macro" is your friend.
+Pricing Analyst for major tech company and I use VBA to automate as many repeatable tasks as possible. And as another person said, when you can do this kind of thing and others in your job can't, everyone thinks you are a genius.
+Business Analyst. Today I used VBA to strip the raw data from 48 different files because they had errors in the calculations. With the raw data, I re-did what I needed correctly. 
+Operations Consultant for major telecom. I am starting to implement more and more VBA into our reports. We don't have access to the SQL servers so Excel is all we got. I currently use it to automate processes to speed up our morning reporting. Looking to add functionality to reports and make more "tools"  for leadership with them since it's all we got. Definitely worth it if you don't have other means. Even if you do the knowledge is still worth it. I am sure you will have to use it at some point I  your career 
+Digital Advertising Operations.  Use VBA for automating ad reports for my team. 
+
+VBA was gateway to learning python for me. Now shifting to using python instead of vba as it is much more maintainable of i was to move on to another role. 
+Dang, so many replies, thank you all. Will read em all and see how it relates to where I see my career going 
+I might be an oddball here. I am a container ship planner and terminal resource manager. I use VBA in my every day tasks to help me analyze cargo trends and manning requirements as well as automate some reporting and tracking model processes. I've automated quite a lot over my decade of experience. In this industry very few people even know what VBA is let alone how to do anything with it, so it has helped me carve out a niche for myself.
+I do QA for a pretty big tech company. Part of my job is automating the tests in Java with the Selenium library. We got a new head who decided we should be automating the automation. This means we wrote a script that scrapes web pages for their elements and stores them in an excel file where a user can enter values, copy and paste the file and create different scenarios without knowing any code. In order to make the excel files more user friendly, I've also implemented some macros that call forms and automate some of the special commands. ">CLICK&lt;" is how a user tells the excel file that it should click an element, which they can enter simply by double clicking a cell. 
+
+I'm the only person in QA who fluently knows VBA, so my knowledge has come in handy in making the automation automation more user friendly. 
+
+But all in all, I wouldn't have gotten the job if I didn't also know HTML, Regex, SQL, JSON, XML, and Java. 
+
+Knowing VBA just kinda boosts my rep. 
+
+I'm also a contractor for my previous boss who's developing an access database for his employees and accounts. 
+Mechanical engineer. Structural calculations for components of Hydro turbines. Vba isn't Mandatory but in same cases it could help some calculation steps. It's a "plus". Anyway Im still learning but it doesn't take more than few hours to know the minimum level to write some simple macros.
+Video game producer. We don't have a tremendous amount of data- 'just' the daily work snapshots but the software devs use for logging is totally unintuitive to creating long term meaningful forecasts and analysis so we've found it helpful.
+
+Plus as a producer that's looking at keeping the option to move over to product I think it's a useful skill to have.
+Performance Analyst here. Use VBA to automate more complex and granular results from CSV files I pull from the main database. I basically just give my bosses discrete organised data and charts from big messy tables
+
+:edit: and I'm the only one in the department who can use VBA so obviously I get roped into building training matrixes and all other kinds of dashboards :(
+Resource Planning Analyst for a large telecomms company. I compile data on several thousand staff, millions of calls, fault rate, response rate, fix rate, etc to produce forecasts 3 month out to calculate how many people we need to answer the phones and get out and fix any physical faults.
+
+While a lot of this data is stored on SQL servers I need to pull that data, use ERLANG to calculate call queues and volumes, and generate trends. I also need to produce reports that can sell these forecasts to drive the correct staffing and performance. The majority of my workbooks need to run repetitive tasks on a daily, weekly and monthly basis - and here's where VBA is invaluable for automation.
+
+If I had to manually alter my queries, pull the data, extract and trend that data, format it, save it to various drives and sharepoint sites and email the reports then I'd need a small team who would spend a lot of time sitting around waiting for tasks to complete. With VBA it's literally 1 click to do all that on one PC while I carry on developing on another.
+I use it often, but 99% of the time its for complex formatting. Data coming in is ~always a mess. Once its a clean set, i get away with basic excel. 
+
+I'm a finacial controller, risk manager and investment analyst all at once. 
+Staff accountant for a kitchen & bath remodeling firm.
+I work as a maintenance planner at a coal mine.
+
+I'm pretty much the only person at my site who knows VBA, and I dont know much at all. What i do know is from google and reddit.
+
+People will come into my office and see me run a macro and be like, "wait, stop, how TF did you do that??!!"
+
+So yeah, learn VBA, and also throw in some AHK (autohotkey). These two combined can save you bulk time in excel/SAP/(insert your program here)
+
+for example, i have a mouse with left and right scroll tilt as well as forward and back buttons. Using AHK, when an excel window is active, *back* is cut (Ctrl-x). left and right tilt are copy and paste respectively (in any program)
+
+Again, in excel vba i have a highlight macro written to bold and color the selected cells, mapped to ctrl shift something, which then is mapped via autohotkey to the forward button on the mouse, again, only if the excel window is active.
+I use VBA to access an API that converts PDF tables into Excel. Great for researching, especially balance sheets and end-of-year reports. 
+[This is their API tutorial](https://pdftables.com/pdf-to-excel-vba)
+I work in Invoice Payments. We get a 100-1000 page PDF, use VBA/Excel to extract all the necessary data in to a nice sheet that can be loaded straight in our payment system.
+Quality engineering.  I have to make reports every month for statistical data.  Using vba I have cut it from a two and a half hour workload, to a 20 minute process.
+This is a fascinating thread. Thanks for all the responses!
+Medical Billing Admin Assistant - So many reports. 4 days of the week was reporting when I started. Now it's half a day. Automating repetitive tasks has saved so much labor I should be getting paid 3 salaries.  
+Here's a weird question- How much does everybody in these other positions get paid? 
+I have been in various BI teams over the last 18 years and every single one of them I have had to do lots of VBA coding for access and excel mainly for automation purposes but I have also made some pretty cool ad-hoc interfaces for people.  I have used VBA to improve very labor intensive processes that others have built to cut down processing time that used to take hours into a  minutes or even seconds.  
+
+I have been working for the same company for the last 12 years in several different departments including supply chain, finance and marketing and from the beginning they say they are moving away from Office products but it never happens because people don't want to give up their Excel spreadsheets.  The great thing about knowing VBA is that it has made me look like a suoer-hero on many occasions.
+Geoscience technologist
+Financial modeling consultant, which is a type of financial analyst. Use VBA all the time. Most uses are automating repetitive tasks, building reports, and very simple macros in financial models to do things that are awkward in native Excel.
+Supply chain. I do a lot of tool creation. Eventually when the tool works well enough I'll automate it to VBA. I also use it to just speed up my daily tasks. 
+I'm a reliability engineer and have no occupational reason whatsoever to have my hands in VBA.
+
+That said, I was able to transform a standard report spreadsheet we were using (along side a few other reporting applications), into a 9000+ line VBA-driven reporting application that replaced the others. Writing a report took a half hour before. Now it takes a few seconds.
+
+Truth be told, I'm trying to get our IP guys to let me release the code (the company wants to stick with their 3rd party applications). Nearly every question I see on here could be answered with some portion of the code I wrote. It would be a fantastic example application.
+So fortune 75 company. I've never heard of anyone using anything outside of excel except for tableau which in my opinion is very far away from actually coming to fruition at our company. 
+
+What type of tool can you use VBA for for excel only people, can you provide an example?
+Any tips on how to start? I audited a VBA class so I have a very basic knowledge, not sure where to go from here.
+I'm starting in FP&A next year, what are the common things you do in VBA? Also, what would you recommend I can do in VBA before I start? 
+Holy fuck, that gave me ptsd just thinking about it.
+
+One wrong lookup or inadvertent column change. Ow. Owowowowow 
+Kind of glad to see so many other people with '(x) analyst' job titles who spend almost no time doing actual analyses. :)
+I have to second this. I also work in financial services and have automated an accounting firm to the point where they have stopped recruiting new people. I offer it as a consultancy service to other professional service firms to automate their businesses. It truly is the way of the future. 
+
+VBA is shunned by "serious" software engineers because of its flaws, and history. They have a point. 
+
+But if you look at where the bulk of the money is in B2B industries, it's in automating repetivie tasks of which 75%+ have some part of their life in excel. 
+
+
+You can make some very serious money knowing how businesses can automated their data orientated operations.
+What *is* the first thing you recommend people learn? 
+Did you learn all of your VBA on the job or have a decent base before starting?
+Only response with no elaboration and of course it's an actuary.
+Why Excel? Seems like that kind of stuff needs something a little more than Excel can handle?
+[deleted]  
+ ^^^^^^^^^^^^^^^^0.8845 
+ > [What is this?](https://pastebin.com/64GuVi2F/06519)
+I'm a data analyst at a fortune 100 company in the billing department. 4 of my 5 day work week is spent creating macros/vba to assist and even completely automate large repetitive tasks. My other day I actually have to bill two of our largest clients. To give you a real world example, one of our clients, that's split over a dozen or so billing team members, requires their invoices to be PDF documents. Before I came along each biller would open each of their 100 invoices or so a week and save as PDF. I wrote a macro to do this and added it to the company's add-in that's installed on everyone's PC. One click and it can process a whole folder of Excel files and save them as PDF and even send them if you wish. 
+
+
+Examples in my current and previous job :
+
+- in my old job at a bank, we were doing a lot of backtesting, and always gathering the same data to communicate (i.e. average IRR, quantiles of IRR), I had a macro where I just selected the series of Data and it outputed a table already formatted
+
+- Today, people in my teams are implementing my automatic processes. some of them actually use python, but they are more comfortable using Excel macros. One of them just goes through a list of customers to send a lot of emails. Another one transforms a file we receive from our suppliers to fit the format they want to upload on the website.
+
+Most of my VBA today is besides my data scientist job and more to assist operational teams, just because I'm the only one who knows VBA in the company (it's a 80 people startup, but it's Brazil)
+Use the macro record button to get started or google what it is you want to do and you will be amazed how quickly you pickup how to do things. 
+Lynda.com has a lot of good stuff on it. 
+If you don't have any formal training or experience programming, take a couple classes from edx or coursera. They don't have VBA but that doesn't matter, you're learning concepts, data structures, algorithms... stuff like that.
+
+I would suggest either Java because there are so many free resources out there for it. Others would say Python, but my experience with that is incredibly limited.
+Right now I use VBA mostly in conjunction with Hyperion and the Smart View add-in. I've created a set of templates for employees to use for submitting their budgets. I use VBA for refreshing a number of Smart View grids as well as submitting data to the cubes. I've also designed an AFE database in Access which I use VBA for auto creating forecast templates. In the past, I've used VBA for sanitizing data. I had to prepare a weekly cost analysis for projects and the raw data I got would reveal salary information. I wrote a macro that removed this and auto create a pivot table. I spoke to someone who still worked there and apparently they are still using it 6 years after I left the company!
+
+To start in VBA, I recommend recording some macros and analyzing the code to get the basics of the syntax. It's a pretty easy language to learn especially if you are already familiar with OO programming. Then learn control structures (IF statements and Loops). There's a ton of resources on the net. Just start googling.
+
+Good luck!
+Pretty much.
+
+1) Open the file
+
+2) Figure out where the columns are this month
+
+3) ETL the data into Access
+VBA also gets a bad rep because there is an incredible amount of horrible, shitty, buggy VBA code out there. And for some reason "real" programmers blame the language for that. 
+
+They also don't seem to understand just how much you can do with it. As long as you have an API or an ODBC connection, you can do pretty much whatever you want. 
+
+I don't know what the future holds, MS has said they want to improve things for us. I feel pretty confident that Excel isn't going anywhere and as long as there's Excel, there is going to be a way to automate it.
+In an Excel context, vlookup and pivot tables.  They take care of 90% of the day-to-day asks that the common user would use (in my industries).  
+
+If they're already an advanced user, then I'd maybe start into Index/Match, Array Functions and/or Recording Macros.  
+
+Taking on a programming language for most people is a significant investment, so I don't usually start with that when people ask about things to learn in Excel.
+All on the job for VBA, but I had experience in SQL and Python so it's easy to pick up another "language" (using that word loosely) once you've learned one.
+Flexibility, primarily and speed of development. Excel can handle it - but I did get a 64bit environment.
+
+- MS Access isn't allowed here and the .NET development team and release process would have taken years to get it right.
+- It's handy to be able to display details of proposed changes in spreadsheets which can be distributed to everyone for approval in advance, also.
+Okay, but where did you start for VBA?
+
+I've only dabbled in it with userforms, but I don't know how to "learn" the language to do things so automatically, like I can't even figure out in my head how to do these types of things automatically.
+
+Can excel use VBA to communicate to other programs outside of excel?
+
+Is the first step making sure your data is relatively uniform like the  same data type is always in the same column, and so on?
+
+What's the next step to learning? Is wiseowl a good source?
+Where did you start to learn VBA?
+
+I've only dabbled in a userform, but I don't fully understand it and I feel like I have to have my hand held the whole time.
+
+Is wiseowl tutorials a good start?
+This. I started by just recording macros and then looking at the code. 
+Exactly how I started... and how I still do it... Google is great for when I can't make it do exactly what I want. Like adding a formula to every cell in a range that changes from one day to the next.
+thanks! ill give that a go
+Yeah, I might do that to refresh. I learned Java a long time ago but haven't used it. Thanks for the suggestion.
+These are the things they don't teach us at Uni... 
+
+Thanks so much, I really appreciate it! 
+
+>already familiar with OO programming
+
+I'm not haha but I'm gonna learn now, I have 6 months! It's better to get advice then start, because I feel like, when we (people who just start) google, there's this information overload, now I at least know where to start. 
+I find if you can get a handle on vlookup, it's an easy jump to index/match. If someone is already on the page of asking to learn more about VBA, I'd jump them straight to index/match. 
+So if learning both SQL and VBA, would there be any benefit to learning one over the other first?
+[Excel 2013 Power Programming with VBA](https://www.amazon.com/Excel-2013-Power-Programming-VBA/dp/1118490398/ref=sr_1_1?ie=UTF8&qid=1471235295&sr=8-1&keywords=power+programming+with+vba) is pretty great and it's the one I see most recommended.
+I really like the Power Programming book /u/beyphy links to below. The best way to learn however, is just to do it. I got my start as a production specialist where I utilized someone else's access databases and excel workbooks to track production rates, downtime reasons, etc. for a large forging company. Every day I saw things that could be improved or new features that would make my job easier so I saved a local copy and played around with it. Trial and error is the foundation of most programmers and once I saw how fun programming was, I went back to school and got my BS in CS (I already had my general AS). As much as I love VBA, python and R are my newest "toys". The great thing about programming in general is there's always something new to learn and to be honest the more I learn, the more I get paid. It's a win-win!
+SQL isn't really a language like that, it's more of a syntax to describe operations on tabular (columns & rows) data.  Regardless what language the program is written in, the parts that re-arrange or alter tabular data will be written in SQL.

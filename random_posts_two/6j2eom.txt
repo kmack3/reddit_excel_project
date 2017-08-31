@@ -1,0 +1,355 @@
+6j2eom
+VBA Peer Review
+Hi,
+
+Relatively new to writing VBA code and since I've had a good amount of bandwidth at work I've been trying to automate some of my reporting functions and learn legit VBA coding (vs simple formatting done via recorder, etc.).
+
+Up to this point mostly I've just edited previous written codes and created some small stuff. This is one of the first that I wrote from the ground up - albeit most was the product of research and recording various procedures and taking what I wanted.
+
+Just figured I would post this and see what all I did right and what needs improvement since I'm pretty much just self learning it all. The macro basically imports the raw data files (that are formatted and saved with a different macro) and then will update some of the tracking sheets with information that populates on the main Summary sheet that is mostly GetPivotData functions. The manual process would take roughly 20-30min.
+
+        Option Explicit
+        Dim lastrow As Long
+        Dim OpenARFile As String
+        Dim UnbilledFile As String
+        Dim TEHoldsFile As String
+        Dim DataDate As String
+        Dim Template As String
+        Dim fPath As String
+        Dim RawSheet As String
+        Dim RawWB As String
+        
+        
+        
+        
+        Sub ClearandImportData()
+        
+        fPath = "xxxpath\"
+        DataDate = Format(Date, "YYYYMMDD")
+        Template = ActiveWorkbook.Name
+        OpenARFile = fPath & "Open AR " & DataDate & ".xlsx"
+        UnbilledFile = fPath & "Unbilled " & DataDate & ".xlsx"
+        TEHoldsFile = fPath & "TE Holds " & DataDate & ".xlsx"
+        
+            
+        'Open AR Info
+        
+            'Clear Open AR sheet
+            Sheets("Raw - Open AR").Activate
+            
+                RawSheet = ActiveSheet.Name
+                lastrow = Sheets(RawSheet).Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:P" & lastrow).ClearContents
+            
+            
+            'Import new data
+            On Error GoTo errHandler
+            Application.DisplayAlerts = False
+            Workbooks.Open Filename:=OpenARFile
+            Application.DisplayAlerts = True
+            
+                RawWB = ActiveWorkbook.Name
+                lastrow = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:P" & lastrow).Copy
+            Windows(Template).Activate
+            Worksheets(RawSheet).Range("a3").PasteSpecial xlPasteValuesAndNumberFormats
+            Application.CutCopyMode = False
+            On Error Resume Next
+            Range(RawSheet & "[Unit]").SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+            Workbooks(RawWB).Close
+            
+            
+            
+        'Unbilled info
+            
+            'Clear Unbilled sheet
+            Sheets("Raw - Unbilled").Activate
+            
+                RawSheet = ActiveSheet.Name
+                lastrow = Sheets(RawSheet).Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:AG" & lastrow).ClearContents
+            
+            
+            'Import new data
+    
+            On Error GoTo errHandler
+            Application.DisplayAlerts = False
+            Workbooks.Open Filename:=UnbilledFile
+            Application.DisplayAlerts = True
+            
+                RawWB = ActiveWorkbook.Name
+                lastrow = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:AG" & lastrow).Copy
+            Windows(Template).Activate
+            Worksheets(RawSheet).Range("a3").PasteSpecial xlPasteValuesAndNumberFormats
+            Application.CutCopyMode = False
+            On Error Resume Next
+            Range(RawSheet & "[Unit]").SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+            Workbooks(RawWB).Close
+            
+            
+        'TE Holds info
+        
+            'Clear TE Holds sheet
+            Sheets("Raw - TE Holds").Activate
+            
+                RawSheet = ActiveSheet.Name
+                lastrow = Sheets(RawSheet).Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:AI" & lastrow).ClearContents
+            
+            
+            'Import new data
+            On Error GoTo errHandler
+            Application.DisplayAlerts = False
+            Workbooks.Open Filename:=TEHoldsFile
+            Application.DisplayAlerts = True
+            
+                RawWB = ActiveWorkbook.Name
+                lastrow = ActiveSheet.Range("A" & Rows.Count).End(xlUp).Row
+            
+            Range("A3:AI" & lastrow).Copy
+            Windows(Template).Activate
+            Worksheets(RawSheet).Range("a3").PasteSpecial xlPasteValuesAndNumberFormats
+            Application.CutCopyMode = False
+            On Error Resume Next
+            Range(RawSheet & "[Unit]").SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+            Workbooks(RawWB).Close
+            
+            
+        'Refresh All and update report date
+            Worksheets("Premier Partner Summary").Range("D4").Value = Date
+            ActiveWorkbook.RefreshAll
+            
+        'Check if macro should proceed to update data
+        Dim answer As Variant
+        
+        answer = MsgBox("Proceed to update Summary Tracking?", vbYesNo, "Update?")
+        
+        Select Case answer
+            Case vbYes
+                UpdateSummaryTracking
+                
+            Case vbNo
+                GoTo Quit
+        End Select
+        
+            
+        Exit Sub
+            
+            
+    '''''''''''''''''Error Handling'''''''''''''''''''
+            
+    errHandler:
+    
+            If Err.Number = 1004 Then
+                MsgBox "File not found for " & RawSheet & " " & DataDate
+            Exit Sub
+            
+            Else: MsgBox Err.Description, , Err.Number
+            
+            End If
+            
+    Quit:
+        
+        End Sub
+        
+    Sub UpdateSummaryTracking()
+    '
+    '
+    '
+    
+        Dim DataDate As Date
+        
+        DataDate = Date
+    
+        'Create new columns
+        If Sheets("Summary Tracking").Range("OpenARSummary[[#Headers],[Age Bucket]]").End(xlToRight).Value <> DataDate Then
+        
+        With Sheets("Summary Tracking")
+            .Range("OpenARSummary[[#Headers],[Age Bucket]]").End(xlToRight).Offset(, 1).Value = DataDate
+            .Range("OpenARDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(, 1).Value = DataDate
+            .Range("UnbilledSummary[[#Headers],[Age Bucket]]").End(xlToRight).Offset(, 1).Value = DataDate
+            .Range("UnbilledDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(, 1).Value = DataDate
+            .Range("TEHoldSummary[[#Headers],[Metric]]").End(xlToRight).Offset(, 1).Value = DataDate
+            .Range("TEHoldDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(, 1).Value = DataDate
+        End With
+            
+        Else:
+        
+        End If
+    
+        Dim OverDays As Range
+        Dim PercentChange As Range
+        
+        Application.CutCopyMode = False
+        
+        
+        'AR Summary Tracking data update
+        Set OverDays = Sheets("Summary Tracking").Range("A11")
+        Set PercentChange = Sheets("Summary Tracking").Range("A12")
+        
+        Range("ARSummary1[[#Totals],[CURRENT]:[Total AR]]").Copy
+        Sheets("Summary Tracking").Range("OpenARSummary[[#Headers],[Age Bucket]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues, Transpose:=True
+        
+        Sheets("Premier Partner Summary").Range("D10").Copy
+        OverDays.End(xlToRight).Offset(, 1).PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+        
+        PercentChange.End(xlToRight).AutoFill Destination:=Sheets("Summary Tracking").Range(PercentChange.End(xlToRight), PercentChange.End(xlToRight).Offset(, 1)), Type:=xlFillDefault
+        
+        Range("ARSummary1[Over 60 %]").Copy
+        Sheets("Summary Tracking").Range("OpenARDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues
+        
+        
+        'Unbilled Summary Tracking Update
+        Set OverDays = Sheets("Summary Tracking").Range("A34")
+        Set PercentChange = Sheets("Summary Tracking").Range("A35")
+        
+        
+        Range("UnbilledSummary1[[#All],[Week1]]").Copy
+        Sheets("Summary Tracking").Range("UnbilledSummary[[#Headers],[Age Bucket]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues
+        
+        Sheets("Premier Partner Summary").Range("D30").Copy
+        OverDays.End(xlToRight).Offset(, 1).PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+        
+        PercentChange.End(xlToRight).AutoFill Destination:=Sheets("Summary Tracking").Range(PercentChange.End(xlToRight),     PercentChange.End(xlToRight).Offset(, 1)), Type:=xlFillDefault
+        
+        Range("UnbilledSummary2[Over 30 %]").Copy
+        Sheets("Summary Tracking").Range("UnbilledDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues
+        
+        
+        'TE Holds Summary Tracking Update
+        
+        Sheets("Premier Partner Summary").Range("D51:D52").Copy
+        Sheets("Summary Tracking").Range("TEHoldSummary[[#Headers],[Metric]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues
+        
+        Sheets("Premier Partner Summary").Range("TEHoldsSummary1[Total]").Copy
+        Sheets("Summary Tracking").Range("TEHoldDetailSummary[[#Headers],[Client Name]]").End(xlToRight).Offset(1).PasteSpecial Paste:=xlPasteValues
+        
+        
+    End Sub
+
+
+Thanks in advance to anyone that takes any time to look!
+
+
+-------------
+I think it looks pretty good! The only things I saw were:
+
+    Select Case answer
+        Case vbYes
+            UpdateSummaryTracking
+
+        Case vbNo
+            GoTo Quit
+    End Select
+
+    Quit:
+
+    End Sub
+
+I would just change the `GoTo` to `End Sub`.
+
+    'Create new columns
+    If Sheets("Summary Tracking").Range("OpenARSummary[[#Headers],[Age Bucket]]").End(xlToRight).Value <> DataDate Then
+
+    End With
+
+    Else:
+
+    End If
+
+If you have a blank Else, just remove it entirely.
+
+You have a mix of Pascal Case and Camel Case, I would pick one and stick with it.
+-------------
+Wew lots of odd formatting quirks throughout, but decently clean code.
+
+Some small critiques:
+
+All of this stuff here
+
+    Dim answer As Variant
+
+    answer = MsgBox("Proceed to update Summary Tracking?", vbYesNo, "Update?")
+
+    Select Case answer
+        Case vbYes
+            UpdateSummaryTracking
+
+        Case vbNo
+            GoTo Quit
+    End Select
+
+
+    Exit Sub
+
+Can be replaced with this:
+
+    If MsgBox("Proceed to update Summary Tracking?", vbYesNo, "Update?") = vbYes Then Call UpdateSummaryTracking
+    Exit Sub
+
+They both do the exact same thing, except one is much more concise. As is the case with this snippet of code and the rest of your code, you have things extremely spaced out and oddly indented. I would recommend keeping subroutines and functions at not being indented, and all encapsulated code being indented.
+
+Since you are managing multiple workbooks and worksheets throughout this code, I would highly recommend becoming familiar with Workbook and Worksheet references. This would allow you to simplify code as shown:
+
+You can replace this:
+
+    Sheets("Raw - Unbilled").Activate
+    RawSheet = ActiveSheet.Name
+    lastrow = Sheets(RawSheet).Range("A" & Rows.Count).End(xlUp).Row
+    Range("A3:AG" & lastrow).ClearContents
+
+With this instead:
+
+    Dim Unbilled As Worksheet: Set Unbilled = Sheets("Raw - Unbilled")
+    Unbilled.Range("A3:AG" & Unbilled.Range("A" & Rows.Count).End(xlUp).Row).ClearContents
+    Set Unbilled = Nothing
+
+The bottom code doesn't require the activation of anything to be able to interact with the contents of the worksheet. This means your code is sped up as it no longer needs to wait for Excel to draw the activation on screen. You can further speed up your code by using the following subroutine:
+
+    Public Sub LudicrousMode(ByVal Toggle As Boolean)
+        Application.ScreenUpdating = Not Toggle
+        Application.EnableEvents = Not Toggle
+        Application.DisplayAlerts = Not Toggle
+        Application.Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+    End Sub
+
+You would enable/disable it in your code via the following lines:
+
+    Call LudicrousMode(True) 'Allows for faster VBA processing
+    Call LudicrousMode(False) 'Returns Excel to normal operation
+
+-------------
+Thanks for taking a look and giving feedback! Just made the updates you suggested.
+-------------
+Thanks for taking the time to look through it! Pretty much my first true attempt at VBA so it sounds like it wasn't too bad.
+
+Ya I do have it spaced out a good amount - it was just easier for me to read the separate things since I'm not that great at easily identifying what everything does.
+
+Looking at updating what all you suggested now. For the last part, is that something that you utilize on all your scripts? And should that be turned off in the beginning and back on at the end?
+-------------
+I use it in code that either does a lot of screen moving (flipping between different worksheets or workbooks) or reading/writing of cell contents. Both of those contribute to slowing code down if you don't tell Excel to not draw screen updates, or to stop trying to calculate cell formulas when new data is written to a cell.
+
+And yes, you'd turn that subroutine on at the beginning of your code, and off at the end. Though under certain circumstances you'd want to wait before turning it on such as if you ask for user input like selecting cells before running more code. (Having the user select cells while this mode is enabled wouldn't allow them to see what they are selecting since screen updating would be off)
+
+You would also want to make sure that if anything errors out, you would want this subroutine to be turned off so Excel returns to normal behavior again.
+-------------
+Can that be done with On Error at the beginning? Or does that only apply to the next line of code.
+-------------
+    Option Explicit
+    
+    Private Sub Example()
+        On Error GoTo ErrorHandler
+        Call LudicrousMode(True)
+        'Do things here
+        Call LudicrousMode(False)
+        Exit Sub
+    ErrorHandler:
+        Call LudicrousMode(False)
+    End Sub
+

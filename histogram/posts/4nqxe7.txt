@@ -1,0 +1,14 @@
+Using countifs with multiple criteria
+I would probably just add in a dummy column in column E with the formula 
+
+    = IF ( C4 = D4 , TRUE, IF ( AND ( OR ( C4 = "Mobile", C4 = "Sales"), OR ( D4 = "Mobile", D4 = "Sales")), TRUE , FALSE ))
+
+Then do a countif for the trues in F5:
+
+    = COUNTIF ( E:E , TRUE)
+Thanks for your reply.  That sounds like the most simplistic way.
+
+Cool!
+
+Anytime! If it worked, please respond with "Solution verified"
+Solution Verified

@@ -1,0 +1,18 @@
+How to rank items against themselves?
+You need a number that says how much you like it - showing A1:B6
+
+How much U like it | Rank | 
+:--- | :--- | 
+1 | 3 | 
+3 | 1 | 
+2.3333338 | 2 | 
+0.0000125 | 4 | 
+-4 | 5 | 
+
+With B2 `=RANK(A2,A:A)` filled down. Just add numbers to the first column and fill the formula further down.
+that's what I figured I had to do. thanks for the help
+SOLUTION VERIFIED
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

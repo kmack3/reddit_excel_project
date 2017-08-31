@@ -1,0 +1,115 @@
+Is it possible to crack into a password encrypted excel file?
+    Sub PasswordBreaker()
+        'Breaks worksheet password protection.
+        Dim i As Integer, j As Integer, k As Integer
+        Dim l As Integer, m As Integer, n As Integer
+        Dim i1 As Integer, i2 As Integer, i3 As Integer
+        Dim i4 As Integer, i5 As Integer, i6 As Integer
+        On Error Resume Next
+        For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+        For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+        For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+        For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+        ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+            Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+            Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+        If ActiveSheet.ProtectContents = False Then
+            MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+                Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+                Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+             Exit Sub
+        End If
+        Next: Next: Next: Next: Next: Next
+        Next: Next: Next: Next: Next: Next
+    End Sub
+    
+    
+    
+
+There is also a method where you rename the .xlsx as a zip file.  Then you open the zip file and inside it there are .XML files.  There should be one associated with each worksheet and one for the entire workbook.  Inside the XML there will be a password tag that you can remove.  Then just save it and update the zip file and the password should be removed.
+Passwords on the document are actually encrypted, so you're probably not going to open it. As demonstrated above, sheet protection is really weak, so that's super easy to crack. People at work think I'm a wizard when I crack sheet protection.
+Ok, so what if the vba project is also password protected?
+Wow, very impressive! Whoever was writing what I read probably was referencing encryption created in the previous versions. Thanks much for the clarifying info!
+The older .xls files that were used prior to Excel 2007 are possible to crack, although extremely difficult and successful attacks may only be able to recover a few bits here and there.  If you have these older encrypted .xls files, I would recommend saving them as .xlsx using Excel 2007 or later.
+
+The modern .xlsx files are encrypted using AES-128, so it is very safe.  I would be very intrigued if anybody managed to crack it.
+Worksheets are fairly easy to open if they're password protected.  
+
+Workbook passwords tend to require outside programs to help.
+In short:
+
+* Encrypted .xls: Crackable
+* Encrypted .xlsx: Not crackable (AES, same algorithm as US military, banks, etc.).
+* Protected workbook: Crackable ('Protection' is different from 'encryption').
+
+/r/LearnExcel has a link to a good overview of Excel's 'protection' feature: https://www.reddit.com/r/learnexcel/comments/36ykmq/how_to_prevent_users_from_making_changes_to_a/
+LOL! You're a fucking genius. I'm suddenly curious if this would ever work...
+Here's a version that gives you status updates in the status bar and makes you feel like a spy. :)
+
+    Sub PasswordBreaker()
+    'Breaks worksheet password protection.
+    Dim i As Integer, j As Integer, k As Integer
+    Dim l As Integer, m As Integer, n As Integer
+    Dim i1 As Integer, i2 As Integer, i3 As Integer
+    Dim i4 As Integer, i5 As Integer, i6 As Integer
+    Dim Iterations as long, IterationCount as long
+    Iterations = 192512 'Combinations of hashes possible using the loops below
+    IterationCount = 0
+    On Error Resume Next
+
+    For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+    For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+    For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+    For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+        Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+    If ActiveSheet.ProtectContents = False Then
+        MsgBox "One usable password is " & Chr(i) & Chr(j) & _
+            Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+            Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+         Exit Sub
+    End If
+    IterationCount = iterationcount + 1
+    Application.statusbar = "Breaking password... " & format(iterationcount/iterations, "Percent") & " of possible passwords tried.
+    Next: Next: Next: Next: Next: Next
+    Next: Next: Next: Next: Next: Next
+    End Sub
+I'm an Excel guy but not a huge comp sci guy, can someone explain why this works? I gather that the passwords are converted to some kind of hash, and any password that converts into the same hash would work? Why 11 spaces of A's and B's and then 1 space of any ASCII character?
+That's for the workbook, not the file. 
+I've used this method before and it worked great.
+
+It struck me as strange just how easy it is.  You aren't cracking a key or anything, and you never learn what password they were using.  You're just drilling out the lock so the door opens.
+Cheers :)
+Save the workbook as xls 2003, open it with a hex editor, search for the string DBP and replace the P with x or some other character. Save the workbook. Open with excel and click through all the errors that get thrown. Then Alt-F11 to bring up the VBA editor. The project code will be visible. Enter a new password to protect the book and save and close it. Open it again, enter your password, remove protection. Done!
+If its just a password protected sheet, then yes. This is quite a common piece of code found if you just Google it.
+Its like lock picking. You have a lock/safe/door and then you have the correct tool to open the lock (the key) VS having the lock, but having to make your own key, the home made key does not have to be perfect match of the key, just close enough to  pop lock open. 
+
+Cryptography, Modern cryptography is heavily based on mathematical theory and computer science practice; cryptographic algorithms are designed around computational hardness assumptions, making such algorithms hard to break in practice by any adversary.
+This method only works for password protected workbooks, not those that are actually encrypted. If you follow that method and end up seeing nonsensical characters in the text file, you know it's encrypted and will require a brute force attack from what I've seen, or some people claim there's some VBA that will crack the hash.  I'm not at all familiar with the encrypted side, but have used this method a handful of times to simply remove the protected password, or just to find out what it is.
+I assume the goal is to run until you get a hash collision, not the actual password?
+So this begs another question: How do I share my spreadsheets I've made without people unlocking and jacking my code/formulas?
+Good point.  I interpreted OP's question as "password protected" instead of "password encrypted" due to my apparently bad reading comprehension.  If it's actually encrypted, then they are screwed unless they can figure out the encryption algorithm or have years to brute force the passcode.
+.
+Yes, it'll yield a working password,  not the same one used to protect the sheet. 
+Sort of. Takes seconds. Doesn't find the actual password just the equivalent. 
+VBA code is harder to break into. You need a hex editor and a brain to do it. 
+
+Formulas are quite easy to break I'm afraid. 
+
+
+In short, if someone really really wants your code, they can get it. 
+Well I don't know if it's safe to go that far, because it was just recently I read the encryption algorithm is actually kind of pathetic in the big scheme of things. I wouldn't put it past Microsoft to completely suck it up in that category tbh.
+Am I wrong in thinking it relies on a hash collision?
+Anyone that might gain from breaking into VBA code can probably figure out how to crack it.  It's really not that difficult.
+
+To really protect your code, you need to use *not VBA*, and compile a library.
+Microsoft implemented AES in Excel 2007. That's the same algorithm used by the US military, banks, etc.
+
+Prior to Office 2007, Excel used RC4, which is not nearly as secure as AES.
+
+Here's a Wikipedia article about it: http://en.wikipedia.org/wiki/Microsoft_Office_password_protection
+
+>Currently, the 40-bit key RC4 protection used in Office 97–2003 can typically be bypassed with password hacking software. The 128-bit key AES protection employed in newer Office 2007–2010 remains secure. In fact, the distributed.net RC5 project has been trying to brute force an RC5 72-bit key since 2002, and have not successfully done so yet.[1] Furthermore, even utilizing all known breaks (that speed up brute force attacks by about a factor of 4) it would take a typical computer millions of years or longer to break a 128-bit AES key of sufficient length and complexity.
+That's exactly it, yes. 
+Possibly, I don't know how Excel protects it sheets, but I won't rule it out.

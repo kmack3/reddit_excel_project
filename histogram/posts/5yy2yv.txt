@@ -1,0 +1,14 @@
+How can I have the numbers of hours left in a Cell ( more than 24) ?
+You can treat date-time with normal sums as Excel uses a decimal data-time datatype.
+
+To get the total hours, simply minus one date from the other , format the cell with custom format `[hh]:mm` . The square brackets force total hours shown without converting the hours to days.
+Thanks it Worked beautifully i'll mark it solved 
+Thanks man ! solution verified
+[deleted]
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+> solution verified
+
+Thanks i'll do it.

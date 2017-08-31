@@ -1,0 +1,7 @@
+Macro to show/hide rows works on my PC, but will not work on a Mac.
+What errors are you getting?
+Run-time error '445':
+Object doesn't support this action
+
+I believe the problem is coming from this line...
+    Select Case DDown.ControlFormat.List(DDown.ControlFormat.ListIndex)

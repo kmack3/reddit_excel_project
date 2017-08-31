@@ -1,0 +1,117 @@
+slow
+2d9c52
+Countif - copy & pasting as value very slow
+
+I have a large excel with 70,000 rows. Most of column G2:G70000 is empty, but certain rows will have a pre-calculated static value {A1, A2, A3, A4, A5, B1, B2, B3, B4, B5, C1, C2, C3, C4, C5, D1, D2, D3, D4, D5, M1, M2, M3, M4, M5, S}.
+
+On column **H** I have a simple formula. The idea is to create a unique identifying record. This later allows me to sort the people very elegantly. 
+
+    =IF(G2="","",CONCATENATE(G2,"-",COUNTIF($G$1:G1,G2)+1))
+
+Extending this formula to 70,000 rows and pressing calculate are fairly quick (<5s) but when pressing copy and pasting as value, nothing happens even after 10-20 minutes or so at 100% i7 2.3Ghz 4850HQ.
+
+Any and all help is most welcomed. Thanks
+
+
+
+-------------
+Looks like a RAM problem not processor. Anyway, try to do it in parts starting from bottom row.
+
+The result should be the same.
+-------------
+[deleted]
+-------------
+Looks like your formula is heading towards astronomical levels. Every row is performing countif on all rows above it. 
+It might be that you can see a few cells at a time as they are 'lazy' evaluated but trying to force calculation of all of them is just too much.
+-------------
+I've tired on a 4 and 16Gb machine (macOS and Win7).
+
+Any particular reason to start from the bottom? I'll get it on vBA see what happens
+-------------
+Automatic calculation is off.
+
+    Application.Calculation = xlCalculationManual
+-------------
+Is this variant more lightweight?
+http://www.mrexcel.com/forum/excel-questions/689879-cumulative-countif-sumif-help.html
+-------------
+Technically it's not looking at all the countifs above it. It's looking at the G column  (static no formula) while the formula is on the H column.
+
+-------------
+Actually no, I though your formula would mess up if started from the top but now I double checked it and it won't.
+
+Since you know how to use VBA, here is a sample code for you to do it:
+
+    Sub ReplaceFormula()
+        For i = 1 To ActiveSheet.UsedRange.Rows.Count
+            Cells(i, 7).Value = Cells(i, 7).Value
+        Next
+    End Sub
+
+-------------
+That mostly seems to work, I'm looping it in 1000 rows but when it gets to row 31,000 it overflows error 6 :/
+
+It overflows on line 15 of the loop. According to the debug ProcessFrm = "H31002:H32005"
+
+    Dim RowInit As Integer
+        RowInit = 2
+    Dim RowRm As Integer
+        RowRm = 3
+    Dim ProcessRows As String
+        ProcessRows = Range("varProcessRows").Value
+    
+    'Global variable declaration
+        
+        Dim ProcessRowsCP As String
+        Dim ProcessRowsRM As String
+        Dim ProcessCol1 As String
+        Dim ProcessCol2 As String    'this allows for ranges
+        Dim ProcessFrm As String
+        Dim ProcessFrmRM As String
+
+[...]
+
+    Dim Parts As Integer
+        Parts = 1000
+    Dim I As Integer
+        I = ProcessRows / Parts
+    Dim n As Integer
+        n = 1
+    Dim RR As Integer
+
+    ProcessCol1 = "H"
+    ProcessCol2 = "H"
+    
+    Do While n < I
+    
+        ProcessRowsCP = ProcessCol1 & RowInit + ((n - 1) * Parts) & ":" &  ProcessCol2 & RowInit + ((n - 1) * Parts)
+        ProcessFrm = ProcessCol1 & RowInit + ((n - 1) * Parts) & ":" & ProcessCol2 & (n * Parts) + 5
+        ProcessFrmRM = ProcessCol1 & RowRm + ((n - 1) * Parts) & ":" & ProcessCol2 & (n * Parts)
+        
+                           
+                 Sheets("Process").Select
+                    Range(ProcessRowsCP).Select
+                    Selection.AutoFill Destination:=Range(ProcessFrm), Type:=xlFillDefault
+                    
+                   'Foces calculation, otherwise it would all be blank
+                   Calculate
+                    
+                 For RR = RowRm + ((n - 1) * Parts) To (n * Parts) - 1
+                     Cells(RR, 8).Value = Cells(RR, 8).Value
+                 Next
+        n = n + 1
+     Loop
+
+Note: n = 32; I = 80; RowInit = 2; RowRm = 3
+-------------
+Solution Verified
+-------------
+Edit:  I changed all the Integer data types to Long, and now it's working,
+
+I have an inkling it was RR that needed to be Long as the other integers shouldn't get over 31,000 and above the 16 bit integer limit. I'll test and report back
+-------------
+Confirmed - 1 point awarded to Bechara
+-------------
+Nice! Congratulations you figured it out!
+
+If you ever need anything I'll be glad to help.

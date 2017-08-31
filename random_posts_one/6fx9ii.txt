@@ -1,0 +1,32 @@
+6fx9ii
+Click/Time Chart
+So, I have a data set of website visits. Basically, it's just a list of date/times, where each entry on the list is the date/time someone clicked a link. I want to make a line graph where the x axis is time (say, every 20 minutes is a line) and the y axis is the number of hits in that 20 minute block. Any idea if there's an easy way to do this? I'll have to make this chart every week or so.
+
+Example of the first 23 lines of the dataset:
+http://i.imgur.com/M7RdUGJ.png
+
+EDIT: Something like this. (At some point I'll need to overlay a second list of clicks over the first, like in this pic)
+http://i.imgur.com/ReEYsp5.png
+
+
+-------------
+Not totally sure I understand what the two data series are, but I think the main hurdle you're asking about is how to recast (or maybe group) the data into 20-minute chunks? 
+
+Try this formula, pointing it at the source time stamps. Then make a pivot table based on the result:
+
+    =INT(A2/TIMEVALUE("0:20:0"))*TIMEVALUE("0:20:0")
+-------------
+I don't think excel is the best tool to do this in!   
+
+For website traffic data I would use either MS PowerBI (plenty of online connectors including google analytics) or just use Google Data Studio. You'll be able to make much better dashboards. 
+-------------
+The two data series are date/time someone visited the site, and date/time someone submitted data in a comment field. But yes, the 20 minute chunk is the main hurdle I guess, so I'll give it a try and see what comes up. Appreciate it.
+-------------
+Solution Verified
+-------------
+Yup, that worked pretty well for what I needed, thanks.
+-------------
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,28 @@
+Way to get values from diferent spreadsheets in one spreadsheet.
+I'd go at this with SSIS as it can set up a file iterator and then read from each excel file with a native connector,  then append to a file or another sheet.
+
+And it is mainly GUI instead of code. If the code based approaches don't gel with you, you might get on with boxes and lines better and there are plenty of examples around.
+
+http://www.encorebusiness.com/blog/import-data-from-multiple-excel-files-sql-ssis/
+We have had a couple of threads about this this week:
+
+https://www.reddit.com/r/excel/comments/5xtivu/video_combining_worksheets_from_all_workbooks_in/
+
+https://www.reddit.com/r/excel/comments/5x9z6i/im_looking_to_merge_data_from_multiple_files_with/
+
+Have a look at those if you are in similar situation
+You can use the formula INDIRECT for this. 
+
+Lets assume for this example, you want to pull data from JohnSmith.xls, tab1, cell A3
+cell A1 = "C:/Desktop/JohnSmith.xls"
+Cell A2 = "Sheet1"
+Cell A3 = "$A$3"
+
+Then type in this formula
+       
+    =INDIRECT("'[" & A1 & "]" & A2 & "'!" & A3) 
+If they are CSV's, you can use CMD to do this. 
+
+http://analystcave.com/merge-csv-files-or-txt-files-in-a-folder/
+To be clear, there is a lot of files files in one directory, or files are spread across vast directory tree? Second case is a little bit trickier but can be solved too
+Thank you I'll check it. 

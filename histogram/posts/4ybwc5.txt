@@ -1,0 +1,65 @@
+trying to see if part of a string in one cell is not found within another
+I'm not on my computer right now but would the VBA function inStr not do what you need?
+Where is this list of domains stored? Aside from that, here's how to check to see if an email's domain is listed in your array of domains.
+
+    Option Explicit
+    
+    Public DomainList() As String
+    
+    Private Sub Example()
+        Dim TempDomains As String
+        
+        TempDomains = "gmail.com;hotmail.com;live.com;yahoo.com;ymail.com;aol.com;"
+        
+        Call ExtractDomains(TempDomains, DomainList)
+        MsgBox IsListed("Psyladine@gmail.com", DomainList)
+    End Sub
+    
+    Private Sub ExtractDomains(ByVal RawString As String, ByRef arr() As String)
+        DomainList = Split(RawString, ";")
+    End Sub
+    
+    Private Function IsListed(ByVal EmailString As String, ByRef arr() As String) As Boolean
+        Dim Counter As Long
+        Dim Domain As String
+        
+        Domain = Right(EmailString, Len(EmailString) - InStr(1, EmailString, "@"))
+        
+        For Counter = 0 To UBound(arr)
+            If InStr(1, arr(Counter), Domain) <> 0 Then
+                IsListed = True
+                Exit Function
+            End If
+        Next Counter
+    End Function
+
+Executing the `Example` sub will run the example code to verify that it does indeed work.
+[deleted]
+Also not near a computer, but if you loop through the list and use if ! inStr and add those values to an array it should work. 
+Maybe, but it seems like that would just duplicate the function of ISNUMBER(SEARCH, seeing if the website was in the list.  Unless I could define within the array of mtokens to use instr against website...
+the list of domains are stored in the contact's related entity organisation, under Website. Logic interprets them within the CRM system, but for the purposes of the report they just appear in a column after the organisation.
+
+Your code would work if every organisation had the same group of domains, but it's dynamic, and there are 38,000 contacts in 1300 orgs each with its own unique array, some of which that are not valid domains (i.e. no contact uses them).
+
+I'd thought this would be a straightforward process but it's looking very difficult to do a simple thing...
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+My code will work with whatever string of delimited domains is passed to it, which was why I was asking.
+
+    ExtractDomains(ByVal RawString As String, ByRef arr() As String)
+
+Will delimit and store all the domains passed to it within the array that is also passed to it. I just wasn't sure where your delimited string was located, so I defined the parameter identical to your existing code. The `Public DomainList() As String` array is referenced because it will always be available for you to store a specific array of domains as determined by what is passed to `ExtractDomains`
+
+    IsListed(ByVal EmailString As String, ByRef arr() As String) As Boolean
+
+Will always simply check to see if a given contact email's domain is stored within the passed array. As long as you extract that contact's list of domains immediately prior to checking to see if the email's domain is listed, then you will receive accurate information.
+Solution Verified
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

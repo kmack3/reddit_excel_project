@@ -1,0 +1,102 @@
+Where do you go when Excel can't handle your requirements anymore?
+Access Databases & SQL Server are the two steps our company took when the data became too abundant and complex to rely on excel only.
+I increasingly use R for data analysis, aggregation and manipulation. You need some programming ability, but once you get the hang of it you will see a lot of benefits in speed and versatility. Plus, it's completely free and open source. Chances are if you are looking for a function, an intrepid R user has built some code to solve your problem.
+
+There is definitely a learning curve, but it's worth it to make the jump.
+https://cran.r-project.org/ is the download site. Make sure to download both R and RStudio if you choose to pursue.
+I spent 5 years reporting and analysing call data and various KPI's for a large telecoms company (7M customers and 10K staff), and you need to move to collating your data via SQL.
+
+If it's call reporting you're focusing on then your call system probably already collates all its data in either an SQL or Oracle database. You may well find it does all the aggregation and stats you need as well. You just need to learn how to access this, pull and work with the data you need and then use Excel for presentation (web based reporting via SSRS still has a lot of presentation issues for large data).
+
+Before doing anything I'd recommend talking to your IT department (specifically the people who look after your servers and or datacenters) to find out what they currently have available and/or licenses for; what they can provide and at what cost; and whether they already collate the data you need and how they do it. It's possible that the data you are already using is sourced from SQL servers, and they currently export it via CSV due to prior requirements.
+if your at 100k per month, just go right into SQL Server.  Forget Access.  Access has size limitations and no where near the performance of SQL Server.
+
+You can also use Excel w/ SQL Server in tandem.  You can define queries from Excel into the Database and have pivot tables/pivot charts connected to data real time that you can filter and pivot on.  Very powerful upgrade. 
+I do this. Professionally. With Access, and SQL Server. If your process is under 2GB, use Access. If it's under 10GB, use SQL Server Developer Edition (it's free). If it's more, pay for SQL Server.
+
+PM me with questions, I can give you my email and I can point you in the right direction if you get stuck.
+64 bit excel using the data model instead of loading the sheet. Get your boss to buy you another stick of RAM.
+Depending on what you are doing, store in Access if the data isn't too large. At my old job, I would move store the data in Access and then load into PowerPivot and do my calculations in PowerPivot.
+
+Also, as others have mentioned, if you aren't already on 64-bit Office, you should upgrade to 64-bit Office.
+We use Alteryx to combine and summarize data.  It can directly connect to pretty much any data source, ODBC, Excel files, etc.  So much faster matching and summarizing datasets than Excel.
+I use SAS for all the data manipulation (working with hundreds of millions of rows and hundreds of columns) and then use excel to make fancy graphs for the presentations. 
+Matlab might be an easy-to-learn choice. Works great with data arrays. It is well-documented and offers a good amount of customizable graphing, calculations, etc. I have been meaning to play around with it since I haven't used it since university but excel more than meets my needs for work.
+Did you upgrade to excel 64-bit? Works like a charm 
+Sounds like it's time to look into data warehousing on SQL Server with [SSAS](https://msdn.microsoft.com/en-us/library/bb522607.aspx), [SSIS](https://msdn.microsoft.com/en-us/library/ms141026.aspx), and [SSRS](https://msdn.microsoft.com/en-us/library/ms159106.aspx).  You can still query the data (learn SQL) into Excel if necessary.
+You mention reporting, but what software is used in the rest of your org? Is there any reporting module that can be activated in your existing systems? If your reporting is bogged down, how is the rest of the company doing? Is billing ok? Cs/crm? Ar? You can try patching the problems you see, but you might need bigger changes than that. I also work in fairly large telecoms and I couldn't imagine doing the majority of my work in office. We're running SAP as our core system.
+Tableau for the reporting side. It can build reports/visualizations off a wide variety of data connections including excel, SQL and many more. 
+
+If you subscribe to tableau server, you can even publish your reports to a website where your clients can access them via web browser. 
+
+Tableau has also begun integrating some R functionality into its data aggregation and calculated fields. 
+That's when you hire me to set up your processes for you!
+
+But seriously like people said, start with Access, it'll take the load off. Build working systems with Access and excel links, automating your loads and links. Work out your requirements and then decide whether to move to SQL server, and whether you need a dashboarding or web entry based front end or whether to keep it in excel. Alternatively you could even use Access forms.
+MS Access and Powerpivot for Excel are good for next steps.  I used Access to reconcile 3 Million lines of data monthly.  Powerpivot is also very useful for large amounts of data.  
+For a walk until my computer comes back to life ;)
+Trifacta is good for data wrangling / clean up. I've used it to prep data before importing into SAS VA for the fancy interactive visuals. 
+depends on what you are doing. 
+
+if you are using excel for maintaining a database, its time to move onto SQL Server, or another database option. 
+
+if you are using it for generating reports from databases, move onto SAS or Access. 
+
+if you are using it for Logical evaluations and such, you may want to consider moving to a lightweight home brewed application of your own design. 
+100K+ is easily handled by 64bit Excel and PowerPivot.
+Where would be a good place to start looking into this?
++1
+/r/Rlanguage/
+Hmm, its not really great as a replacement database though. In any case it doesnt solve the problem of Excel being used as the primary database.
+I would not recommend R for a business. I have used it in my personal life, but it requires too much additional learning and many workers already know access and sql. No reason to force all the coworkers to learn a new system to save a few dollars for the company. Actually the company will probably spend more training everyone.
+This works really really well, until you have to send your work to big companies with shit it who then cant open the files....
+There is another Alteryx user! Unless you're my one colleague that also uses it. Simon?
+Wow, it's expensive AF. Is there any cheaper alternative, user-friendly?
+
+It seems like a tool to play with data and get the server do the calculations, I am right? Can It be installed on VPS with Linux?
+
+Sorry for the storm of questions, It seems interesting :D
+Is there somewhere where I could start researching more information on this?
+Second this
+I'm only a reporting Associate. Not actually an analyst. We use csv files from our different data sources because I don't have any other access. I'm hoping I can put it into a data base of some sort. It's a reasonable large telecoms company 
+If you are a beginner then I can highly recommend the Dummies series. They got me up to speed with Access and query writing in SQL.
+
+TBH though if you have the option to use SQL go there straight away since Access has some issues due to its nature. It works, don't get me wrong. But if you have the option of SQL go for it.
+/r/MSAccess is great. I've been trying to build a database for my work as well, and coming from no previous experience, I can say I've learned a lot (though still VERY far from being anywhere close to proficient with it)
+These are great, and cheap books on database design, which is what you will need to know about to make performant tables and queries.
+https://www.amazon.com/Inside-Relational-Databases-Examples-Access/dp/1846283949/ref=sr_1_3?s=books&ie=UTF8&qid=1477539365&sr=1-3&keywords=relational+database+access
+
+https://www.amazon.com/Beginning-Database-Design-Novice-Professional/dp/1590597699/ref=sr_1_7?s=books&ie=UTF8&qid=1477539365&sr=1-7&keywords=relational+database+access
+https://www.reddit.com/r/rstats/
+True, but it handles database connections just as well, if not better than Excel. If I'm reading OP's question correctly, The issues he was having were more around reporting and data manipulation than data storage. For this, R is a good solution. 
+That's why I send my reports as PDF's
+No, not Simon.  And there are a few users out there.  I went to Inspire this year and saw a bunch IRL.
+There might be alternatives, but none are more user-friendly and time
+-saving than Alteryx.  I've never worked with anything that could handle as much as Alteryx.
+Sas.com is a great place to start. They offer a free version of the software (and a few intro courses) if you want to try it out, but it lacks the computing power and tools needed for my analysis. In terms of learning the language, I have no programming background and was able to pick it up in a week or two with the help of the little sas book and google. I also learned sql at the same time which is great since you can run sql commands in sas. I'm not sure what it will cost to get a license, but I do know it is not cheap and my company has been slowly moving toward free software such as R. 
+Do you already have access to powerpivot and/or MS Access which have been suggested here? Already on your computer or available via normal company process? Assuming normal corporate bureaucracy I'd say your best bet to improve things is to work within the current it infrastructure and existing licenses. So if you have msaccess already, go ahead with that and start learning rather than chase approvers for a sql solution.
+I think this playlist would be great for what you're asking. 
+
+https://youtu.be/kogGwRIHH6o
+
+that sub looks more active, thanks for the link
+
+I don't disagree, but the real problem is Excel being used as the database.
+If I'm sending something to an external user, I always send it as a PDF. Eliminates potential problems, not to mention you know it's going to look exactly how you want. Their version of office or whatever won't be able to mess with my formatting. 
+I got my license on the last day of Inspire so I missed it unfortunately. Perhaps next year. Are you going to Tableau Conference?
+Also this to get a basic understanding of access and table relationships etc... Microsoft Access 2016 Tutorials: http://www.youtube.com/playlist?list=PLXX7zytTr-DPRTSGYKWdILJ5dJ70Otc5X
+You can use MySQL or MariaDB. Those are two relational databases, and "free" as in free beer, compared to Microsoft SQL Server.
+
+But using Databases is really another different deal. Yo will need tu learn SQL, are the so many different frontends and options you have to work with data.
+
+I use Excel with MySQL through PowerQuery and MySQL for Excel (both plugins), but I don't use very large datasets, and my data is always in similar formats, so I'm in a particular position (I use it to do BI to my forums and blogs).
+
+I'm not an expert on this, but on large datasets what you want is to tell the server what to do, and get the result. Not download the data, make the calculations and show a result, which is exactly what Excel does with this plugins.
+
+fine for reports and i'd do the same, sadly less useful when its aircraft stress data that they need to check!
+No Tableau this year, hoping to go to Adobe Analytics conference.  Worked with Adobe for 5 years and have never been.
+Power Bi models (.pbix) have some pretty amazing compression. 
+2,500,000 plus rows with over 20 columns only like.. 7MB.
+
+I've found saving excel as binary is fine too (.xlsb)
+Ah, bummer.

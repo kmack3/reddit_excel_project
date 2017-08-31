@@ -1,0 +1,233 @@
+VBA to search through all worksheets
+I've got this to loop through all used cells in each worksheet and it will locate email addresses. It should be useful for you as all of the workbooks look different but the relative location of address, name and TOIL value is the same.
+
+    Dim ws As Worksheet
+    
+    For Each ws In ThisWorkbook.Worksheets
+        For Each Cell In ws.UsedRange
+            If Cell.Value Like "*@*.*" Then
+                MsgBox (Cell.Value)
+            End If
+        Next Cell
+    Next ws
+
+I completely understand your logic, I'm just struggling to apply it to the code.  Is this what you mean?
+
+    
+    Dim ws As Worksheet
+    Dim Email_Subject, Email_Send_From, Email_Send_To, Email_Body As String
+    Dim Mail_Object, Mail_Single As Variant
+    
+    For Each ws In ThisWorkbook.Worksheets
+    For Each cell In ws.UsedRange
+    If cell.Value Like "*@*.*" Then
+    MsgBox (cell.Value)
+    End If
+    
+    
+    
+    Email_Subject = "Weekly TOIL report"
+    Email_Send_From = "TOILreports@mydomain.com"
+    Email_Send_To = range("cell.value")
+    Email_Body = "Dear " & range("cell.value - 1") & ", you have " & range("cell.value + 1") & " hours left of TOIL."
+    
+    On Error GoTo debugs
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .Subject = Email_Subject
+        .To = Email_Send_To
+        .Body = Email_Body
+        .Send
+    End With
+    
+    Next cell
+    Next ws
+    
+debugs:
+    If Err.Description <> "" Then MsgBox Err.Description
+    End Sub
+ 
+
+apologies in advance, VB is not my strong point!
+You'll need to use the Offset function. The syntax is Offset(row,column).
+So if the email address is in between the name and TOIL value of your users, you'd use it like this:
+Sub test_email()
+        Dim ws As Worksheet
+    
+        For Each ws In ThisWorkbook.Worksheets
+            For Each Cell In ws.UsedRange
+                If Cell.Value Like "*@*.*" Then
+    
+                        Dim addy As String
+                        addy = Cell.Value
+    
+                        Dim addressee As String
+                        addressee = Cell.Offset(-1, 0).Value
+    
+                        Dim TOIL_Value As String
+                        TOIL_Value = Cell.Offset(1, 0).Value
+    
+                    Exit For
+                End If
+            Next Cell
+        Next ws
+    
+    Dim Email_Subject, Email_Send_From, Email_Send_To, Email_Body As String
+    Dim Mail_Object, Mail_Single As Variant
+    
+    Email_Subject = "Weekly TOIL report"
+    Email_Send_From = "TOILreports@mydomain.com"
+    Email_Send_To = addy
+    Email_Body = "Dear " & addressee & ", you have " & TOIL_Value & " hours left of TOIL."
+    
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .subject = Email_Subject
+        .To = Email_Send_To
+        .body = Email_Body
+    End With
+    
+    End Sub
+
+I haven't yet managed to get it working - it's not doing anything when I assign this to a button, but I'll plug away at it.  Thanks so much for your help!
+Do you want to check the emails before you send them? If not, just add
+
+    .Send
+
+Like this:
+
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .subject = Email_Subject
+        .To = Email_Send_To
+        .body = Email_Body
+        .Send
+    End With
+Almost working - it's sending emails as intended, but the strange thing is, it's only doing this for the very last two worksheets - it's ignoring all the earlier sheets :|
+
+This is the latest I'm using
+
+    Sub test_email()
+    
+    Dim ws As Worksheet
+    
+    For Each ws In ThisWorkbook.Worksheets
+            For Each Cell In ws.UsedRange
+                If Cell.Value Like "*@*.*" Then
+    
+                        Dim addy As String
+                        addy = Cell.Value
+    
+                        Dim addressee As String
+                        addressee = Cell.Offset(-1, 0).Value
+    
+                        Dim TOIL_Value As String
+                        TOIL_Value = Cell.Offset(1, 0).Value
+    
+    
+    Email_Subject = "Weekly TOIL report"
+    Email_Send_From = "TOILreports@mydomain.com"
+    Email_Send_To = addy
+    Email_Body = "Dear " & addressee & ", you have " & TOIL_Value & " hours left of TOIL."
+    
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .Subject = Email_Subject
+        .To = Email_Send_To
+        .body = Email_Body
+        .Send
+    End With
+                    Exit For
+                End If
+            Next Cell
+        Next ws
+    
+    
+    
+    Email_Subject = "Weekly TOIL report"
+    Email_Send_From = "TOILreports@mydomain.com"
+    Email_Send_To = addy
+    Email_Body = "Dear " & addressee & ", you have " & TOIL_Value & " hours left of TOIL."
+    
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .Subject = Email_Subject
+        .To = Email_Send_To
+        .body = Email_Body
+        .Send
+    End With
+    
+    End Sub
+
+In fact, I'm wrong, it's only doing the top name on each worksheet!  Apologies, wasn't reading my mail properly - I'll plug away at it for now :)
+Got it - used the following
+
+    
+    Sub test_email()
+    
+    Dim ws As Worksheet
+    
+    For Each ws In ThisWorkbook.Worksheets
+            For Each Cell In ws.UsedRange
+                If Cell.Value Like "*@*.*" Then
+    
+                        Dim addy As String
+                        addy = Cell.Value
+    
+                        Dim addressee As String
+                        addressee = Cell.Offset(-1, 0).Value
+    
+                        Dim TOIL_Value As String
+                        TOIL_Value = Cell.Offset(1, 0).Value
+    
+                            
+                            Email_Subject = "Weekly TOIL report"
+                            Email_Send_From = "TOILreports@mydomain.com"
+                            Email_Send_To = addy
+                            Email_Body = "Dear " & addressee & ", you have " & TOIL_Value & " hours left of TOIL."
+    
+                        Set Mail_Object = CreateObject("Outlook.Application")
+                        Set Mail_Single = Mail_Object.CreateItem(0)
+                        With Mail_Single
+                            .Subject = Email_Subject
+                            .To = Email_Send_To
+                            .body = Email_Body
+                            .Send
+                        End With
+                   
+                End If
+            Next Cell
+        Next ws
+    
+    
+    
+    Email_Subject = "Weekly TOIL report"
+    Email_Send_From = "TOILreports@mydomain.com"
+    Email_Send_To = addy
+    Email_Body = "Dear " & addressee & ", you have " & TOIL_Value & " hours left of TOIL."
+    
+    Set Mail_Object = CreateObject("Outlook.Application")
+    Set Mail_Single = Mail_Object.CreateItem(0)
+    With Mail_Single
+        .Subject = Email_Subject
+        .To = Email_Send_To
+        .body = Email_Body
+        .Send
+    End With
+    
+    End Sub
+
+
+Thanks again for your help!
+
+Remember to respond "Solution Verified" to close the thread.
+
+Glad the code worked for you and cheers for the gold!
+Solution Verified
+
+And no need to thank me for the gold, you earned it!

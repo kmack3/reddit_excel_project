@@ -1,0 +1,71 @@
+Can I do this with VBA ? How complicated is the solution ?
+You should be able to do this with plain old formulas. Each cell in the delivery row could take previous planned stock value, subtract the consumption for the day, then compare the result with safety stock.  If it is below safety level then the result should be your desired order quantity, otherwise it would be zero.  You said you do it on Monday, so you could even have a check that the date of the column is a Monday. Let me know if you want further help.
+
+Edit: Fixed run-on sentence.
+To answer your question, yes you can do this with VBA and you can probably learn/write VBA in a couple weeks to achieve your goal. 
+
+Since you want to learn VBA, I would recommend the site below, because it will provide a good introduction to the basics. 
+
+http://www.homeandlearn.org/index.html
+
+
+Is this the exact formatting you get from the SAP output?
+A script to automatically  plan a delivery? what is your order process like?
+First of all, thank you
+
+I have two questions:
+
+1- The material number is always 6 digits number. Is there such check in VBA ? Like if the cell is a 6 digit number, then select the cell etc.
+
+2- How complicated is such a project ? I am ok with Excel but absolutely clueless with VBA. I am not unfamiliar with programming though. I learned Java in college and studied some Python afterwards so I am familar with basic algorithm. Do you think for a month of study and work someone can handle this ? 
+
+I really want to create an automated solution, I can pay and outsource it to a freelance but I want to do this myself. There are other folks in the company that do the similar work daily so it would be really cool if I can figure this out on my own. 
+No :)
+I can't share the exact thing online, not allowed.
+But the one I shared has all the relevant parameters. 
+Thanks for the reply.
+
+Not sure if I got your question  right.
+
+This tool is for planning the shipments and deliveries to the customer. I basically make shipments that would keep their stock above Safety stock but below maximum. 
+u/KG86 is saying you don't need VBA to run these calculations - you can run it with just vanilla Excel formulas like IF/Max/Min etc. No extra learning required.
+I'm not really sure what you mean by "automated solution" here then. How automated?  A set of formulas will give you the delivery dates and quantities that you would enter manually.  If you are wanting to use this as an exercise to learn VBA, then of course it is possible in VBA.  How long it would take to learn would depend on how quick a study you are.  Since you have programming experience I suspect it wouldn't take very long. I think most VBA users got started by recording macros and then looking at the code that was generated. That and then the [Excel Object Model Reference](https://msdn.microsoft.com/en-us/library/office/ff194068.aspx) that Microsoft publishes.
+For 1, yes. Assuming you don't care about letters:
+
+    if len(*cell*)=6 then *cell*.select
+
+If you need each one to be specifically a letter.
+
+    if len(*cell*)=6 then
+        for i = 1 to 6
+            if not(isnumber(--mid(*cell*,i,1))) then exit sub
+        next i
+        *cell*.select
+    end if
+I realize it's not the original file - but my question is if the SAP output is organized the same way, because I was trying to think about how to clean up the data first before trying anything else. 
+It looks like the formulas are there to tell you that on 1/30/17 you need a 10k order of product A and B and only because it hit 25% of max stock. What is the manual part taking the longest time that you want to put into vba? If you put in simple formulas to suggest when there should be a new shipment to keep stock at a certain level, do you want to automate the part where it takes in how much you are trying to order and process that order from excel numbers on certain dates? 
+I guess I failed explaining my problem properly.
+
+The excel file I need to process is an SAP output from our customer. It's updated twice a week and I need to process and send it back. 
+
+It also consists of around 400 materials and like  2000 rows so this is manual and time consuming. 
+
+So my plan was to write a VBA code to do follows:
+
+- Go to first material (item number with 6 digits), check which date on hand inventory goes below safety stock. 
+- Calculate a delivery quantity that will put on hand inventory above safety stock but below maximum number.
+- Schedule/write down the quantity on the nearest Monday. 
+- Do this for next 6 weeks. 
+- Then go down to the next material number, repeat.
+- Repeat until last material number
+
+I don't really understand how you can do this simply with Excel formulas. I probably misexplained or people misunderstood :)
+
+Thanks 
+SOLUTION VERIFIED!
+Yes, the output is organized the same way 
+Yes, a more detailed explanation of the process would have helped.  Yes, you can automate that with VBA with a few different approaches based on the shape of the data.  If the sections for each material are the same dimensions then you can use a loop with the step clause, no need to identify the material number.  If some sections are a different size then you can loop through each cell in the material id column and test its value, if it matches the pattern then continue with the logic to determine delivery data.  If you would like a code sample to get started, let me know.
+
+You have awarded one point to _windowtothesoul_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

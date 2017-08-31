@@ -1,0 +1,138 @@
+What are some 'must knows' to be considered advanced at Excel?
+I'll let someone else jump in with vlookups, index/match, and VBA.
+
+One "hidden" excel feature is 3DSum.  It isn't a defined function so many people don't know it exists, but rather a subtle change in usage of SUM.
+
+Let's say you have 12 tabs, one for each month, which each contain the same formatted table with updated totals by row.  If you want the total for the year (all 12 tabs), you can try to go back to the data source and extract the information for the year or you can quickly do a 3DSum (a sum of the same cell over multiple tabs).
+
+If you want to sum the total of cell B2 for the year, you'd enter.
+
+=SUM(Jan:Dec!B2), where each worksheet corresponds to a month, are consecutive worksheets in the workbook, and the consecutive worksheet range begins with Jan and ends with Dec.
+
+You can also enter the formula by typing =SUM( then clicking on the left-most worksheet in the continuous range and clicking SHIFT+the right-most worksheet in the continuous range, then keying in the cell/range you'd like to sum.
+
+[More](http://excel3dreferencing.blogspot.com/)
+Know where to find answers.
+
+Tek-Tips, Chandoo, /r/excel, ozgrid, mrexcel, MSDN library, **the help file**, all great resources.
+INDIRECT()
+Excel solver. I've saved companies millions and millions of dollars, maybe even billions over everything with that little gem. You would be surprised how inefficient the world is.
+Dynamic linking to external data, web queries, getpivot(), pivot charts/slicer, dynamic charts/graphs, formatting to make everything look presentable and/or usable, user forms, being able to do anything you do in Excel efficiently along with everything lushaq mentioned including his first sentence. 
+
+The following checklist doesn't seem *that* advanced, but in regards to a standardized test it may be relevant. 
+
+**Warning PDF** http://www.cccsolutions.com/courseoutlines/Excel_Advanced_Skills_Checklist.pdf
+
+I would say being able to do a considerable amount of work without using the mouse
+R1C1 references. Don't know about standardized tests, but I'd expect any intern that claims to know Excel beyond "uh, I can get around"  to handle R1C1 sheets.
+Array formulas.
+Wow, I considered myself advanced in Excel... and... did not know this.
+Thank yoo for your reply. I added 3DSum to the list. I doubt it would be on the test, but I can see the use in my personal life. 
+Yeah I didn't know this. And it kinda makes some of my ridiculously long formulas look a bit stupid now. I know what I'm trying when I get back into work! Thanks very much!
+Cool. Does this work for subtotal? I will try that tomorrow.
+People who use vlookups should be killed with fire - no offence.
+thank you. I wrote these down. 
+Honest question, does the help file actually help?  I have never considered Excel's help file given that every other help file in the history of modern computing has sucked donkey dongs.
+I checked it and I still don't really see when you would use it over a direct link =sheet1!A1
+
+Could you elaborate?
+Not familiar with that but I added it to the list. It seems like something that would be very helpful. 
+Goal Seek. Very useful at times.
+Decent list... I'd make one change though.
+
+>"Enhance" worksheets with text boxes, AutoShapes, WordArt, and graphics 
+The checklist is exactly what I was looking for along with the list both you and lushaq mentioned. Thank you for your help. I am jotting down notes from this thread and putting the information into practice. 
+Can you do all of the work without the mouse? Like editing formulas? I can do the basics without using the mouse. 
+I will admit I forgot about R1C1 references. My previous job wasn't very excel heavy :)
+Are you saying you prefer Index/Match? Are you paranoid about processing power and calc times?  Is it just a fear of the unknown?
+
+Or, are you a comedian fighting to get hlookup its due?
+
+
+
+It does, it really does. Search for a function, it gives you the syntax and worksheet style examples of how it works, as well as caveats and warnings. It will then also list related topics and articles at the bottom.
+Search for a topic, such as "importing text files" and it walks you through the steps.
+
+Example: obviously I don't have to turn on the developer ribbon on very often, so when I had to, I fumbled around for 10 seconds looking for it, I  then found out how in less than 5 seconds by typing "Developer Ribbon" in the help file.
+
+
+Let's say you want to use the reference that is in cell A1 as your reference.  
+
+Let's say you have the following data.  A1="B1", B1=6, B2=7.  Then in C1 you type =INDIRECT(A1).  This will return the answer 6.  If you change A1 to B2, this will return the answer 7.  
+
+This simple example doesn't sound too useful, but INDIRECT gets very useful when you need to drag a formula across multiple columns AND rows without having it change.  For example, you might end up with something like =INDIRECT("B"&ROW()) or even more complex.
+
+Here's one formula I used recently; I can send you the whole spreadsheet if you want to see how it fits in.  =LARGE(INDIRECT("$I$2:$I$"&$O$2),ROW()-1).  As I drag this formula down from cell J2, it finds the first largest number in column I, up to the maximum row number that is calculated in cell O2.  Then in J3 it finds the second largest number in column I, etc.
+Indirect is sort of like C4.... in the right hands, stupidly powerful... used wrongly?  BOOM.
+
+Say you have a bunch of data that you needed to link to another sheet.... but the sheet you need to link to changed each month.    You could put the sheet name in the cell, and then used Indirect to change it to an actual refererence.. like.
+
+Sheet2:A1 = "Hello!"
+
+Sheet3:A1 = "Goodbye!"
+
+Sheet1
+
+A1 =  Sheet2
+
+A2 =  "A1"  (no quotes)
+
+A3 = =Indirect(Concatenate(A1,"!",A2))
+
+then you can change A1 to Sheet3 and A3 should update accordingly.
+
+Now, the danger with Indirect is because it's not a "real" reference, it won't update itself if you insert/delete data, so it is very easy to FUBAR a sheet.
+
+please IGNORE the first point...or at least avoid it as much as possible.
+
+merged cells are a NIGHTMARE when it comes to VBA...and worksheet referencing in general.
+Not all but a good amount. I made a lot of shortcuts on the top of the menu bar area and the alt key assigns quick values to them. That plus moving through the SS allows you to do a lot
+F2 edits formulas :)
+using the arrow keys, home, and end in conjunction with shift and control, you can navigate easily (more easily than using the mouse oftentimes).
+
+Something else: let's say you have a button you click often on the ribbon. Hit the alt key, and keep hitting the keys that drill down to that button. Make a mental note of the keys you pressed. You'll be surprised at how quickly it becomes second nature.
+There is no advantage using VLOOKUPS, as in not one.
+
+* INDEX/MATCH is more flexible 
+* INDEX/MATCH is usually many times faster
+* INDEX/MATCH/MATCH cannot be achieved with V/HLOOPUP
+* VLOOKUP requires your data to be sorted alphabetically
+* VLOOKUP only indexes left to right
+* VLOOKUP with FALSE will revert the closest match - Whatever than means, especially with people who uses NOW() instead of TODAY()
+* INDEX/MATCH reverts an address, which you can combine with anything like OFFSET, ROW, etc... Even getting the named range behind the internal hyperlink .... In short anything you'll ever need.
+
+
+There is no upside to using H/VLOOKUPS, not a single one. The only reason people use it is because they don't know anything else, and it usually causes them a metric shit ton of problems.
+Wow that is helpful. I seen what you was hinting at in the simple example but the complex scenario you gave just sold me on INDIRECT()
+Thanks man, upvoted.
+More and more I have the sneaking suspicion that we work at the same place.
+Vlookups are much faster to teach than index/match.  So, there's one advantage.
+
+Otherwise: 
+
+Data need not be sorted alphabetically for vlookups.  Don't know where you got that info, but it's patently not true.
+
+Vlookup with true reverts the closest match, but that's not a feature most people use, so it's sort of irrelevant to point that out when vlookup with false returns the exact match.
+
+Also don't get where you get the "metric shit ton of problems" from.  They are usually slower, but the processing time in the quantities most people require  is negligible.  
+
+Anyway, not really worth arguing the merits of vlookups in a post 4 months old.
+>Anyway, not really worth arguing the merits of vlookups in a post 4 months old.
+
+
+Especially when you're wrong.
+
+
+Anyone who can understand VLOOKUP can understand INDEX/MATCH, it is just that they are usually not taught. Mostly because people like you fail to see the advantage of teaching a method that is vastly superior and will allow users to find other uses.
+
+
+You're the limiting factor with that kind of thinking, not users.
+I'm wrong about knowing my users can't understand how to nest formulas, but somehow magically can understand how to nest index/match?  
+
+By my estimation, most workplace users who would derive seriously value from the advanced uses of index/match arent the users who need to be taught how to use index/match over vlookup...they've already figured it out.
+
+You're talking about a seriously small sample of people who already use excel everyday, want/need to become advanced users, and don't know vlookup or index/match. 
+The concepts behind vlookup and index/match are strictly identical, except index is actually easier to read because it is just an row/column number within an area.
+
+
+If your users can't understand basic nested formulas, then you are not doing your job right. Half of the people I work with are above 50 year old and started without computers. Drop the jargon, break it down in simple pieces, and there's nothing they wouldn't understand. And don't start by telling them that it is a complex/advanced formula, just go about how it works and they'll get it.

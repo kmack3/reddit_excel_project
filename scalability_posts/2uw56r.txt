@@ -1,0 +1,50 @@
+big
+2uw56r
+Creating sub-tables from a big table
+
+Hi all. I have a "big" table whose columns are A,B,Category. There exist N different Categories. 
+Is there a way to create N different smaller tables where the i-th table contains rows related only to the i-th category type? 
+For instance: 
+Starting from big table 
+
+A | B | Category
+---------|----------|----------
+1 | 1 | Apples
+1 | 3 | Oranges
+4 | 5 | Apples
+5 | 6 | Oranges
+6 | 6 | Chestnuts
+
+coming up with
+
+Small table 1
+
+A | B | Category
+---------|----------|----------
+1 | 1 | Apples
+4 | 5 | Apples
+
+Small table 2
+
+A | B | Category
+---------|----------|----------
+1 | 3 | Oranges
+5 | 6 | Oranges
+
+Small table 3
+
+A | B | Category
+---------|----------|----------
+6 | 6 | Chestnuts
+
+Thanks a lot! 
+
+
+-------------
+Looks like your data didn't format correctly. Could you take a look at reformatting it? More information on how to do so can be found on our Wiki.
+-------------
+I've just found this solution: http://www.reddit.com/r/excel/comments/1ywa7n/protip_vba_to_split_a_table_into_separate/
+
+Is there a way to do it without using VBA?
+-------------
+Now it should be ok. Tnx

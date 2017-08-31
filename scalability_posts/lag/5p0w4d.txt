@@ -1,0 +1,84 @@
+lag
+5p0w4d
+Active X scrollbar and textbox lag
+
+Good afternoon,
+
+I have a spreadsheet with a large time series. I want to allow the user to specify the start time of the data that's displayed on a chart. The chart is in an ActiveX textbox. This is linked to an ActiveX scrollbar. Both the textbox and the scrollbar refer to the same cell (a named range called 'datum').
+
+I am using three VBA subs that make things work.
+
+The first one updates the time axis of the chart by referring to the datum:
+
+    Sub ReScaleChartAxis()
+    
+      Dim chtMin, chtMax AsLong
+      Dim grphSht, dtSht As Worksheet
+      Dim minDepthCell As Range
+    
+      Set grphSht = Sheets("PlotSheet")
+      Set dtSht = Sheets("Data")
+    
+      Set minDepthCell = dtSht.Range("datum")
+    
+    'Determine Max/Min of time used in chart
+      chtMin = Val(minDepthCell.Value)
+      chtMax = chtMin +500
+    
+    'Update chart
+      With grphSht.ChartObjects("Plot").Chart.Axes(xlCategory)
+        .MaximumScale = chtMax
+        .MinimumScale = chtMin
+      EndWith
+    
+    EndSub
+            
+The second modifies the datum value by letting a user enter a value into a box:
+
+    Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger,ByVal Shift AsInteger)
+    
+      Dim datMin, datMax AsDouble
+      If KeyCode = vbKeyReturn Then
+        datMin = Sheets("Data").Range("dat_min").Value
+        datMax = Sheets("Data").Range("dat_max").Value
+    
+        IfNot IsNumeric(TextBox1.Value)Then
+          TextBox1.Value = Sheets("Data").Range("datum")
+        ElseIf Val(TextBox1.Value)<= datMin Then
+          Sheets("Data").Range("datum")= datMin
+          TextBox1.Value = datMin
+        ElseIf Val(TextBox1.Value)>=(datMax -450)Then
+          Sheets("Data").Range("datum")= datMax -500
+          TextBox1.Value = datMax -500
+        Else
+          Sheets("Data").Range("datum")= Val(TextBox1.Value)
+        EndIf 
+      EndIf
+    
+    EndSub
+
+The third calls the axis rescaling when the scrollbar changes:
+
+    Private Sub ScrollBar1_Change()
+    
+    Call ReScaleChartAxis
+    TextBox1.Value = Sheets("Data").Range("datum")
+    TextBox1.Select
+    
+    EndSub
+
+**My question:**
+
+When I click the arrows on the scrollbar, the chart lags a few seconds before updating. If I enter a new value into the box (which uses the same VBA as the scrollbar arrow click and MORE), the chart update is instantaneous (when it should take the same amount of time or more).
+
+Any ideas why this is the case or how I can fix it? Please let me know if I can provide any additional details!
+
+Thank you in advance!
+
+[Screenshot of Sheet1](https://dl.dropboxusercontent.com/u/105506752/DataSheet.jpg)
+
+[Screenshot of Sheet2](https://dl.dropboxusercontent.com/u/105506752/PlotSheet.jpg)
+
+[Download Worksheet from Dropbox](https://dl.dropboxusercontent.com/u/105506752/SlowScroll.xlsm)
+
+

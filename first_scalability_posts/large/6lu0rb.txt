@@ -1,0 +1,218 @@
+large
+6lu0rb
+If statement calculator. Large statement and getting confused. Do I need a nested If?
+
+So I'm working on an "If" statement for a calculator for our HR department at work to say how much the firm will pay and how much the employee owes.
+
+Here are the stipulations:
+
+* First $50.00 monthly expense - firm will pay 100%
+
+* Monthly expenses from $50.01 to $200.00 - the firm will pay 30%
+
+* Monthly expenses from $200.01 to $500.00 - the firm will pay 50%
+
+* Expenses in excess of $500 will not be covered
+
+The caveat to all this is that it will be tiered.  So if the person has a $300 parking expense it will be as follows:
+
+$300 - ($50 paid for firm) = $250
+
+The $250 will then fall into two categories: $150 of it will be at the 30% firm pay and $100 will be at the 50% firm pay.
+
+So I'm trying to enter the parking amount into cell B5 and get the amount he firm will be paying.
+
+=IF(AND($B5<=50),50,IF(AND($B5>50,$B5<=200),((($B5-50)-50)*0.3)+50,IF(AND($B5>200,$B5<=500),(($B5-200)*0.5)+50,IF(AND($B5>500),0))))
+
+I can't figure out how to make a balance split into two percentage ranges.  I'm still working and trying to write out the logic on paper, so I'll post up if I find anything, but if there's a better way to do this, I'm all ears.
+
+Thanks!
+
+
+-------------
+You can do this like so:
+
+    =IF(B8<50,B8,IF(B8<200,50+(B8-50)*30%,IF(B8<500,95+(B8-250)*50%,245)))
+
+Because the amounts for each level once filled are fixed, you can just use the direct amounts.
+-------------
+`=MIN(B5,50)+IF(B5>50,MIN(B5-50,150)*0.3)+IF(B5>200,MIN(B5-200,300)*0.5)`
+-------------
+So I used VBA to solve this since you can make your own functions there and I find the logic easier to work with Case statements. I made two Identical functions where one would output for the employee expense and one for the firm expense. Just copy and paste these into a visual basic module and you should be set.
+
+Employee (in the spreadsheet you would just type =EmployeeParkingExpense(B5) and it would give you the calculation.  
+
+    Function EmployeeParkingExpense(fSheetCell As Double)
+    
+    Dim fEmployeeEx As Double
+    Dim fFirmEx As Double
+    
+    Select Case fSheetCell
+    
+        Case Is <= 50#
+            fFirmEx = fSheetCell
+            fEmployeeEx = 0
+            
+        Case Is <= 200#
+            fFirmEx = (fSheetCell - 50) * 0.3 + 50
+            fEmployeeEx = fSheetCell - fFirmEx
+        
+        Case Is <= 500#
+            fFirmEx = 50 + 45 + ((fSheetCell - 200) * 0.5)
+            
+            fEmployeeEx = fSheetCell - fFirmEx
+            
+        Case Is > 500#
+            
+    End Select
+            
+    EmployeeParkingExpense = fEmployeeEx
+    
+    End Function  
+
+
+Firm, same thing, but =FirmParkingExpense(B5)  
+
+    Function FirmParkingExpense(fSheetCell As Double)
+    
+    Dim fEmployeeEx As Double
+    Dim fFirmEx As Double
+    
+    Select Case fSheetCell
+    
+        Case Is <= 50#
+            fFirmEx = fSheetCell
+            fEmployeeEx = 0
+            
+        Case Is <= 200#
+            fFirmEx = (fSheetCell - 50) * 0.3 + 50
+            fEmployeeEx = fSheetCell - fFirmEx
+        
+        Case Is <= 500#
+            fFirmEx = 50 + 45 + ((fSheetCell - 200) * 0.5)
+            
+            fEmployeeEx = fSheetCell - fFirmEx
+            
+        Case Is > 500#
+            
+    End Select
+            
+    FirmParkingExpense = fFirmEx
+    
+    End Function  
+ 
+
+This requires a macro enabled workbook, so save it as one.
+-------------
+should be `IF(B8<500,95+(B8-200)*50%,245)`
+-------------
+Ok, that got me pointed in the right direction. I didn't think of the amount being fixed like that.
+
+I'm having to tweak it a little,but that probably had more to do with my explanation of the policy.
+
+I'll post up my results shortly.  Thanks!
+
+
+-------------
+This is what I'm currently working with.
+
+=IF(B5<50,B5,IF((B5-50)<200,50+(((B5-50)-50)*0.3),IF((B5-50)<500,95+(B5-250)*50%,245)))
+
+I'm stuck on the 3rd leg.
+
+Arguments are as follows:
+
+1.  If B5<50, B5
+2.  If (B5-50)<200, 50+((B5-50)-50)*30%
+
+I think step 2 is where the logic gets a little hairy. 
+
+Let me try to make more sense....
+
+Parking Cost: 165
+
+Firm pay: 50
+
+115 Balance
+
+Of that balance, firm will pay 30% of the amount that falls between 50 and 150.
+
+So of that, 65 falls in that range.  So 65*30% = $19.50.
+
+So firm will pay Original $50+19.50 = 69.50
+
+I've got the first 2 if statements working with what I've added above, but am stuck on the 3rd.  I've just been at this so long I'm having a hard time thinking outside of the box...
+-------------
+Solution Verified
+-------------
+This gives the correct answer if the amount is $300, which is $145.
+
+If I enter a parking amount of $165 into this, the answer should be 69.50, but I'm getting 84.50.
+
+Edit:  Hold that thought.....
+
+Edit Edit:  I think this is it.  Need to do some testing.
+
+-------------
+Solution Verified
+-------------
+You are correct, with that amendment the function should work.
+-------------
+This policy explanation is different to before, but sounds a bit... off to me.  You are subtracting the $50 threshold twice - once to get the amount of $115, and again after that.  That doesn't sound right to me - I'd expect it to be that you are splitting the $165 into $50 into the 100% bucket, $100 in the 30% bucket, and $15 in the 50% bucket.  But the system you describe is a bit weird and I'm not sure I know what the third step is even supposed to be doing.
+-------------
+
+You have awarded one point to _SaviaWanderer_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+$50 + ($165-$50)*30% = $84.50 
+
+84.50 is the correct answer based on the tiered logic you've described. First 50 covered at 100%, remainder is covered at 30%. 
+
+It may help you out if you set up a table rather than try to do this all in a single formula.
+
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Spot-on.  This worked.
+
+
+
+-------------
+I agree - it sounds a bit off to me as well.  I think that's why I'm struggling so hard.
+
+I'm headed to HR to get some clarification...because this is a little ridiculous IMO.   Thanks for sticking with me!
+-------------
+Starting in A1
+
+Fine:|165|Covered:|84.5||
+:--|:--|--:|--:|--:|
+|||||
+Tier Start|Tier End|Coverage|Amount in Tier|Amount Covered|
+0.00|50.00|100%|50.00|50|
+50.00|200.00|30%|115.00|34.5|
+200.00|500.00|50%|0.00|0|
+500.00||0%|0.00|0|
+
+
+
+Formulas:
+
+Fine:|165|Covered:|=SUM(E4:E7)||
+:--|:--|:--|:--|:--|
+|||||
+Tier Start|Tier End|Coverage|Amount in Tier|Amount Covered|
+0|50|1|=IF($B$1&gt;A4,MIN($B$1-A4,B4-A4),0)|=D4*C4|
+50|200|0.3|=IF($B$1&gt;A5,MIN($B$1-A5,B5-A5),0)|=D5*C5|
+200|500|0.5|=IF($B$1&gt;A6,MIN($B$1-A6,B6-A6),0)|=D6*C6|
+500||0|=IF($B$1&gt;A7,MIN($B$1-A7,B7-A7),0)|=D7*C7|
+
+-------------
+You're right.  This works.  I visited with HR and got some clarification.  This is perfect.
+
+
+-------------
+Ace! Reply to the comment with Solution Verified to close the thread :)

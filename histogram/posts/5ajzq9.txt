@@ -1,0 +1,54 @@
+Any go-to tips on optimizing a workbook?
+It may be worth ensuring there are no empty cells that excel thinks are in use...
+
+You will need to do this for each sheet...
+
+* Find the last row of data
+* Highlight the row below the last row of data
+* Press CTRL + SHIFT + DownArrow
+* Press CTRL + Hyphen
+* Find the last column of data
+* Highlight the column after the last column of data
+* Press CTRL + SHIFT + RightArrow
+* Press CTRL + Hyphen
+
+Once you have done the above for each sheet then saved the workbook, it may reduce the size.
+
+In some circumstances, it can reduce the size of the workbook dramatically.
+
+Hope this helps...
+On top of /u/priceyferz tip try save as an .xlsb file. You'll be saving as a binary excel file which has pretty much the same capabilities as an .xlsx file. 
+Make sure you're using 64-bit Excel. I've dealt with a few workbooks that were just unusable in 32-bit.
+
+Try to do less chaining of formulas (i.e. formula 4 refers to formula 3 refers to formula 2 and so on).  Excel can perform calculations in parallel as long as one formula isn't waiting on another to finish.
+My go-to list when optimizing huge spreadsheets is as follows (in increasing order of pain):
+
+* Clear extra columns and rows of empty formulas and formatting
+* Save the file back and forth to an xlsb (binary) file, which often forces excel to optimize the calculation tree
+* Swap out volatile functions (e.g., offset and indirect) for non-volatile functions.  Google "volatile functions excel" and you should get a great Mr. EXCEL page that eli5's the differences and identities
+50 mb down to 532 kb.. Incredible. 
+Solution Verified
+In a similar vein, I like to use CTRL+END. This takes you to the cell representing the junction of the last column and last row. Using this you can quickly review lots of sheets for empty rows and columns that excel considers in use. 
+What does control + hyphen do? 
+Holy shit you just blew my mind.
+Huh, that makes a lot of sense. It's possible I've drug formulas to the end of the sheet. 
+
+Thanks a ton. Even if that's. It the issue here it'll help in the future. 
+This is a macro enabled workbook, but I'll keep that in mind for some of my larger straight data ones. Appreciate it. 
+Be weary of 64-bit when using forms or controls as many of the common controls within 32-bit do not exist in 64-bit therefore the reliance of 3rd party add-ins is increased even though these are still not available anywhere near as much as 32-bit.  If your workbook needs to be compatible in both 32/64 bit this dramatically reduces what controls you can currently use as most will not work on both plus there are certain compatibility requirements when writing certain VBA scripts.
+
+In terms of formulas, where possible use non-volatile or semi-volatile alternatives to the more well known formulas, e.g. index/match instead of vlookup/hlookup/indirect/offset is a classic example.  Also, if the formulas do not have to be live calculations, i.e. the data data they are driven does not change then these should be changed to static values.
+Thank you so much for gold... I'm glad I could help!
+
+You have awarded one point to _priceyferz_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Brings up the "delete cell" prompt.
+You'd be surprised at the difference it can make. Even in a workbook containing 2 - 3 pages, it can be the difference between 126KB and 5MB.
+Also happens if you apply formatting to entire sheets. It's very tiresome!
+Xlsb is macro enabled too. I use xlsb and macros all the time. 
+Conversely, the CTRL & + brings up the insert cell prompt. 
+Ooh, I always think of it as Control Minus (CTRL -) as opposed to Control Plus (CTRL +)...
+Yeah after you mentioned that I remember discovering the same thing only a few days ago. 
+
+It just didn't click to check for that in my other workbooks for whatever reason. 

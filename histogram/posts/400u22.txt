@@ -1,0 +1,81 @@
+VBA: Using Wildcards To Open File
+So you have a different piece of code in which you're using wildcards for file names and it works fine?
+
+Also, I think you might want to replace this:
+
+    Filepath = Fileroute & Fileroute
+
+With this:
+
+    Filepath = Fileroute & Filename
+
+
+And btw., VBA doesn't support the use of wildcards for file names, unfortunately. You will have to use the exact name of the file, but you can use FileSystem (make sure to enable Microsoft Scripting Runtime in References):
+
+    Dim FSO As FileSystemObject
+    Dim SourceFolder As Folder, SubFolder As Folder
+    Dim FileItem As File
+
+    Set FSO = New FileSystemObject
+    Set SourceFolder = FSO.GetFolder(Fileroute)
+
+    For Each FileItem In SourceFolder.Files
+        If Instr(1, FileItem.Name, "SUB_RED_L2987_20151127_10112711_20151130_11210", vbTextCompare) Then
+        Workbooks.Open FileItem.Path#
+        Exit For
+    Next
+
+    
+Yeah, I have the following code (in a different workbook) that works as expected
+
+    MASCode = "061B"
+    Fileroute= "Z:\Daily Downloads\" & MASCode & "_AZ6152_*"
+    Workbooks.Open Fileroute
+Yeah, I noticed the Fileroute / Filename error, that was just a mistake when copying it here, so please ignore that.
+Solution Verified
+See my updated answer with vba code for looping through files in a given folder.
+
+Also, wildcards work if there's only ONE file with a similar name, if there're two or more, it's going to return an error.
+
+You have awarded one point to _daneelr_olivaw_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+The code you sent works great, so thank you for that.
+
+On checking the file, there is only one file with that name (or similar), so that isn't the reason for the code not working unfortunately.
+I think that your code should have been altered to:
+
+    UserName = Environ$("Username")
+    Filename = "SUB_RED_L2987_20151127_10112711_20151130_11210*"
+    Fileroute = "C:\Users\" & UserName & "\Dropbox\B23\"
+    Filepath = Fileroute & Filename
+    Workbooks.Open Filepath
+
+As per your other example (I removed the .csv, asterisk must be the last character in the string for wildcard to work) :)
+Removing the .csv comes back with the same error.
+
+Defaults the file to be a xlsx file.
+
+Either way, I won't waste any more of your time. Thanks for the help!
+What if you tried :
+
+    Filepath = Fileroute & Filename & ".csv" ?
+
+Yeah, tried that. Same issue. 
+Does the other piece of code relate to a .csv file or .xls/.xlsx ?
+Try This, with your
+
+    UserName = Environ$("Username")
+    Filename = "SUB_RED_L2987_20151127_10112711_20151130_11210*"
+    Fileroute = "C:\Users\" & UserName & "\Dropbox\B23\"
+    Filepath = Dir(Fileroute & Filename)
+    If Filepath <> "" Then
+        Workbooks.Open Filepath
+    End If
+
+This code is producing a strange error.
+
+As is saying
+Run-time error '1004' once again, however, it says "Sorry we couldn't find SUB_RED_L...20151130_112100.csv"
+So it is recognizing the correct file, just not opening it?
+I have double checked and it isn't open elsewhere, renamed or deleted.

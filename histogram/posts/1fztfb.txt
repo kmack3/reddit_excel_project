@@ -1,0 +1,18 @@
+51 New Excel 2013 Functions
+Web functions - amazing. Time to throw out all of my poorly written web scraping scripts. 
+XOR,  am I missing something? Shouldn't it only return true if only one of the parameters is true?
+I so could have used that DAYS function a couple projects ago. Oh well.
+they should add a new vlookup, which works both ways (YES I KNOW WE CAN USE INDEX for that)
+when the hell are they going to add a principle components or cluster analysis-type function? 
+I use [Web Content Extractor](http://www.newprosoft.com/web-content-extractor.htm) right now for some stuff. It's awesome and incredibly easy to use. It parses pages into a spreadsheet, and exports as txt, csv, Access, xml, and a number of other formats. Makes scraping/excel-ing an easy two step process.
+it's not too bad - [http://www.youtube.com/watch?v=cyst4A18gis](http://www.youtube.com/watch?v=cyst4A18gis)
+you're right. i need to update that. thanks! (JUST UPDATED)
+That seemed funny to me as well.
+=ROUND((End Date-Start Date),0)
+
+As long as the start and end dates are referenced cells on your spreadsheet.
+Because excel stores dates as numbers, this formula will give you the difference aka the number of days in between.
+
+The rounding function, can give you an integer (when zero is plugged into the formula, as above), or you can round further using a negative number (eg -1) to give a more general estimate.
+you can use the magic formula called "-" (minus ;-) )
+I think it's safe to say never, unless you want to trust a newer data analysis toolkit. (You don't.) But, hey, that's why they let us have flairs.

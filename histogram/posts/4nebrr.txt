@@ -1,0 +1,33 @@
+What is the difference between Visual Basic and VBA? What can you do in Visual Basic that you can't do in VBA?
+VB can be used to create stand-alone applications. VBA can only be used within its parent application (insert a MS Office app name here). 
+vba is a macro language for applications, vb is a language and development environment that includes a forms designer and other capabilities.
+
+in vb you could create a standalone application consisting of one or more excel com objects and automating them among other com or vb objects.
+Wha about VBScripts? It run independently.
+However with vba you can automate other things - for example you can write vba code in excel which will open internet explorer to retrieve some information, open a different excel file to chart the information, then open powerpoint and write it out into a report.
+
+Also vba has a form designer (at least in excel it does)
+
+Seems the only difference there is the capability to create a standalone application.  however In my experience, if you create a form linked to workbook_open and hide the workbook you can create something which has the same look as a standalone program, albeit you do still need excel to be installed
+Also VB implements many "modern" programming concepts, inheritance, abstract classes, interfaces, and so forth.
+
+VBA is extremely limited. You can kludge through some of the more advanced stuff if you really need to, but if you need to, you're probably using the wrong tool for the job.
+So you could tie Excel to other external applications? Do a lot of applications support VB integration?
+It does run independently and if you're skilled with VB it's pretty good. But, for the same purposes C# is easier. 
+What would you suggest is better for using with excel?
+sure, for example the excel com object is useful for creating complicated charts from on the fly datasets. many applications expose a com object for automation and vb can easily manipulate them.
+VBA in almost all cases.  The extra complexity of using VB in Excel isn't going to be worth it unless you're making full blown applications.  Best to just use the built-in tools if you're making home-brew solutions for limited use cases and audiences.
+
+If you're making enterprise or commercial applications, then you're probably not using Excel.
+
+I have seen a few commercial Excel plug ins where VBA isn't sufficient or appropriate for security reasons, that would be your use case for VB in Excel.
+
+Thank you! I'm trying to convince my boss we should download a VB editor so I can automate more of our processes. I need to make sure she understands the many benefits of this approach.
+What processes are you talking about? There might be closer, or better solutions. VB is passé.
+Our IT system offers an SDK for Visual Basic. I'm looking to automate our Accounting Workflows.
+Just out of curiousity what is your IT system?
+Applied Systems Epic
+
+Vertafore ImageRight
+
+Both are Insurance Agency management software.

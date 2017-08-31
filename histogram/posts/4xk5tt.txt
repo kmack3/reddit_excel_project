@@ -1,0 +1,27 @@
+[VBA] An example of why you should always ask for help - I wrote a convoluted script that could have been avoided if I had just researched a bit more
+hey! I bet you also learned something  / got some practice from doing the first solution too! That's what I like about doing stuff in VBA, even if I do it in a long way, and then find out a better way, I still learned something through the process of figuring out how to do it then long way - and I'm that much more likely to remember the short one, lol. 
+
+
+When I'm messing around with a new thing and I'm like "There should be a way of doing this!" I usually start off by looking up the object on MSDN: 
+
+https://msdn.microsoft.com/en-us/library/office/ff820762.aspx
+
+here for pivotfields for example. And then skim the different methods and properties available. 
+
+
+
+When it comes to complicated or brand new tasks, never ever feel ashamed of googling! 
+
+Did you read the ask Reddit about doctors googling their patience symptoms? If they do it for life and death situations after years and years of school and interning, you can Google "excel 2010 vba how do I select the last cell with a value in the column".  Again. For like the tenth time, because for some reason that knowledge won't sink in. 
+
+Not that I'm speaking from experience or anything.
+I had a similar experience with a macro for exporting a vector graphics image of a chart. I wrote a script to save a temp version of the spreadsheet, open it as a zip file (2003? and later uses a zip wrapper for XML files) and find the image to save elsewhere.
+
+Then I googled it. Someone else wrote a *much* simpler script that copied the chart and extracted the vector image from the clipboard.
+
+Both ways worked though and I learned a lot so no ragrets...
+[deleted]
+Me_irl
+I started with so many helper columns, and then my solutions got more elegant. 
+
+Thing is, those helper columns worked and I got the job done and learnt a little bit more. 

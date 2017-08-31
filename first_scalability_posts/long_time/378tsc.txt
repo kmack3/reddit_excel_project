@@ -1,0 +1,156 @@
+long time
+378tsc
+Files are taking a very long time to open. Please help.
+
+I have some pretty big spreadsheets, but I dont think they should take 3 minutes to open.
+
+-I am running Office 2013 (64bit), with a 365 subscription.
+
+- File size - 350 - 400MB
+
+- ~350,000 rows
+
+- No macros
+
+- Calculation set to manual
+
+-Time to open 2:30-3:00+
+
+Computer specs:
+
+- Windows 8 (64bit)
+
+- Intel i7-3930K Overclocked to 4.0Ghz
+
+- 16GB Ram
+
+- Samsung 840 SSD's in RAID1
+
+I know the files are large, but they arent THAT big, should it be taking this long to open the files?
+
+If not, any idea what is wrong?
+
+THANKS!
+
+
+
+
+
+
+
+
+
+-------------
+Saving the file as a .xlsb should reduce the file size to 100-200MB and speed up opening quite a bit too
+-------------
+Can you do a Ctrl+End to see where your data ends? If it doesn't end where it should end (say, your data only goes up to Row 350,000 but when you Ctrl+End it, it goes to 400,000). Once you determine this, you can delete the extra rows that might be taking up space.
+
+Another way is to try and delete unwanted formatting.
+-------------
+One hidden driver of large Excel files is unnecessary formatting. Let us assume your last occupied (number or formula) cell is Z1000. If you have accidentally formatted cells beyond Z1000 then the file size will grow quite large. Please back up your file(s) before trying my suggestions below. Without access to your file, my suggestions might cause issues that are not easily fixed. In addition, saving a second version will provide a before and after view.
+
+So how do you determine the "last cell" and fix the issue? Repeat the steps below for each tab in your worksheet.
+
+Hit F5 > Special > Last cell OR CTRL & END. If the "last cell" is way beyond the last occupied cell then removing some of the formatting might help. In this example, if the "last cell" is way beyond Z1000 then you might have find your bloat issue.
+
+***How to manually resolve the issue...***
+First, find your last occupied cell then move one cell to the right then CTRL & Space-bar to select the whole column then hold down shift and press END then press Rt Arrow. This should select all of the cells to to the right of the last occupied cell. Now go to the Home tab > Editing tab > Use drop down under clear and select Clear All.
+
+Next, find your last occupied cell then move one cell down. Click Shift Space-bar to select the whole row then hold down shift and press END then press Down Arrow. This should select all of the cells below the last occupied cell. Now go to the Home tab > Editing tab > Use drop down under clear and select Clear All.
+
+***How to use VBA to resolve the issue...***
+If you are comfortable with VBA and Add-Ins, I highly recommend using a Format Cleaner Add-in. [Here is one example from Microsoft.](http://www.microsoft.com/en-us/download/details.aspx?id=21649) If you have many tabs and are very interested in the topic, Google the following, ["excel vba for each sheet in workbook"](https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1AFAB_enUS461US461&ion=1&espv=2&ie=UTF-8#q=excel+vba+for+each+sheet+in+workbook) and read some of the results. I have found some useful VBA code that helps me narrow the issue down to one or two tabs that cause file size bloat.
+
+I echo what /u/herpaderp1995 recommended about saving the file as a binary type. I usually see a 40% reduction in file size using binary.
+
+How can you prevent the above issue in future spreadsheets? Avoid formatting entire rows or columns with the same formatting. For example, avoid selecting column B and formatting the entire column and Bold and Currency.
+
+I hope this helps.
+-------------
+are you kidding - 400MB? I don't know much about computers beyond excel but the largest file I've ever opened was about 90MB and that one took about a minute, so yeah seems par for the course. 
+
+
+workaround A: does all of that information need to be in one workbook?
+
+
+workaround B: assuming it's essentially a workbook of data tables (like a database), you could use ADO and SQL to insert/get information without having to open that workbook.
+
+-------------
+Is this loaded over a network or local? At that size the network could be bottle necking
+-------------
+Do you have a lot of conditional formatting?
+-------------
+Just an Idea:
+
+Are the files linked to some other external file with Vlookups or something like that?
+
+If so, open the source before trying to opening the file.
+
+Even better. If the source data is static and you don't need the link, break the link to reduce the size of the file and to speed up the opening.
+
+You can see if there is any external connection in the menu [Data: "Edit links" ](http://ww2.cfo.com/content/uploads/2011/10/MrExcel-1110-26-Fig3.gif)
+-------------
+Open the xlsx file in 7zip - it will let you explore the xml objects and shows the compressed size of each - you may find some large drawings or the like. 
+
+
+You should be able to delete elements and save the file (after making a copy of course) then when you reopen Excel will usually succeed at repairing the 'corrupted' document..... I've fixed many large slow files for clients with this trick! 
+-------------
+I think I may have figured it out.
+
+&nbsp;
+
+
+-Saving as Binary helped ALOT. Thank you /u/herpaderp1995
+
+&nbsp;
+
+It was still pretty slow on small files though, so I dug a little deeper.
+
+-Ran CCleaner and cleaned up the registry
+
+-Then followed these instructions and cleaned up the registry even more/deleted old recovered files:
+
+&nbsp;
+
+  *"-resiliency/document recovery: Using Sysinternal's Process Monitor, I found that Excel 2013 went through thousands of old entries which the Autorecovery function had left in the registry whenever Excel had crashed in previous months. The crashes had probably been caused by a number of commercial add-ins. The Excel start-up remained slow even after deactivating all add-ins and in safe mode. CCleaner had not removed those registry relicts. After deleting them manually, Excel launches within 2 seconds. Delete the registry key Document Recovery to get rid of those relicts: HKEY_CURRENT_USER\Software\Microsoft\Office\1x.x\Common\Resiliency"*
+
+&nbsp;
+
+
+I have the load time down to about 1 minute now on the giant file, and on regular size files it is blazing fast like it used to be.
+
+&nbsp;
+
+Thank you all so much for the help!
+
+
+
+
+-------------
+Solution Verified
+-------------
+I will try this in the interim before I get a database set-up.
+
+EDIT: This helped alot. Reduced file size by 100MB and load time went from 3 min to ~1:30
+
+Thanks for the help!
+-------------
+[deleted]
+-------------
+The sheet ends where it is supposed to, no extra cells. 
+
+Thank you for the idea though.
+-------------
+haha ok maybe 400 is just too much for excel, my next step is definitely putting it in a database like SQL.
+
+Thanks for the help!
+
+-------------
+No worries, happy to hear it helped 
+-------------
+You have awarded one point to herpaderp1995
+-------------
+SQL is a language, not a database. Try moving to Access, it is easier to learn coming from Excel than other databases and is likely better suited for whatever you're trying to accomplish. 
+-------------
+Haha, shows how much I know. I have used Access before, I will look into moving some data into it and see how it goes.
+

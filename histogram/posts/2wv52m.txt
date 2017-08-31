@@ -1,0 +1,162 @@
+I've built an Excel plugin for using SQL in Excel
+A bit of a risky download. Brand new user asking people to download EXE
+This sounds very cool! You may want to cross post to /r/webdev
+This looks wonderful.  
+  
+I can't think of a time when I'd need it yet - but I love it!
+Love this already- the interface takes a little getting used to, but that's largely just because I'm used to other things.  Syntax seems to be working well so far.  Only issue thus far is that there was a fair lag on the first start after install- a wee warning about that in the setup process might be useful.  Other than that- loving it.
+Congrats on the APP! Looking forward to that tutorial :-)
+
+Word of caution to new users - DATA NEEDS TO BE IN TABLE! "ctrl-T".... silly me took awhile to figure that out.
+Hey, just stumbled across this and am getting ready to try it. At the moment I'm using SQuirrel to test queries on my company's database and then creating data connections in Excel to import them. Excel makes it a real pain to get connections set up, and with our server residing in another state, creating and debugging tools is... tedious, to say the least. I think your plugin is just what I need to streamline the entire process before setting up the final connections. Fingers crossed!
+Ok so, I really like where this is going.
+
+If I understand correctly, the basic operation is as follows:
+If I connect to a workbook or worksheet, I need to have my data in Tables (not just tabular Format, but the `Insert->Table` variety.) From there, it will create a SQLITE database to perform queries upon.
+
+If I connect to an external DB, I can do all of my querying right there and return results to excel, with the added benefit of an SQL interface to build queries. That's a far sight better than the internal SQL interface in Excel, and there are pros and cons vs working in the RDBMS's SQL IDE and pasting the query into the Excel connection info.
+
+Or, I could also choose to include an Excel table as a temporary table in the remote DB. That's pretty spiffy.
+
+Here's some issues/things I see missing from what I would expect of such a product:  
+
+1. Can't reload my temp table without disconnecting and reconnecting. If there was a way to do a refresh of specific table or all tables, that would be stellar.
+2. The first table I tried to load had a TRUE/FALSE (boolean) field in it, and the temp table creation failed. I suspect because the syntax expected a boolean datatype and SQL Server (the RDBMS software I connected to) does not support BOOLEAN, but BIT (1/0). I suspect you might find other issues of that nature. Obviously in this instance it's going to be difficult since you would have to convert the data on table creation. Interesting problem I think?
+3. The editor window does not recognize table aliases. I can see that the autocomplete popup is filtering current objects based on the contents of the text before the cursor, so I understand *why* it's doing it, but since I can't do `Select * from #Table1 t where t.` and have it populate the popup with  #Table1's columns, it's much less useful for me.
+4. I'm very used to `Ctrl+Space` popping up the autocomplete. Having it drop down the window controls of the query editor seems odd to me? Maybe it's a SQLLite thing?
+5. There would obviously be issues if you tried loading excel content as a temporary table and the user didn't have access to create temp tables. Maybe you should include a connection test feature which not only tests the connection, but also attempts to build a test temporary table and drops it, so you know if the user has the access to create new temp tables?
+6. The icons need polishing.
+Do you plan to release a Mac version too?
+
+Thanks
+This looks rather fun. Will save this post and give it a go when I get to work tomorrow (as don't have excel at home any more)
+Will all of the standard SQLite syntax work in this?  Things like .mode or .open etc.
+Just installed, but it seems that I don't have permission to connect to the database.  I'll have to talk to my DBA when I get to work tomorrow about that.  Looks like it's going to be extremely useful though.  I'll provide some feedback once I get up and running.  Thanks man!
+This looks totally awesome will give this a go tomorrow at work!
+Is it possible you can create a video introducing ThingieQuery and showcase what it has to offer?
+This looks great Antonio.  Certainly a terrific idea.
+
+Downloading now... then bed.  Hopefully I can play with it tomorrow.
+.
+[deleted]
+I can understand the concern... That's why I bought a certificate from Comodo and after a long verification period (I'm not from the US) I finally got it. The installer is now digitally signed, and you can see my details on the certificate when UAC shows up. You can also look me up on codeproject and stackoverflow (my name is on the ThingieQuery website so it wont be difficult:))
+I feel similarly. But my virus protection didn't balk, so I'm giving it a shot.
+Thanks! I would love to, I'm just not sure how to do it:) I haven't been an active reddit user so far, so I'm a reddit newb... What's a good way to do it, copy paste the entire post or just post a link to this thread or something else?
+Thanks for sayin so! And thanks for the clippy points although I'm not sure what they mean (reddit n00b here I'm affraid:))
+I'm glad you're enjoying it! Did the lag occur when starting Excel or when trying to use ThingieQuery? 
+
+Thanks for the kind words! I also learned something, didn't know about Ctrl+T, I always used the ribbon:) I'll post again it in the /r/excel when the tutorial is done. 
+Hi! Cool, that's nice to hear:) Let me know how it goes, and feel free to make suggestions or ask me questions if something isn't clear. 
+First of all, thanks a bunch, I really like your comment.
+
+Your understanding is mostly correct:
+The basic operation does create an in-memory SQLite database, but with a twist: It doesn't copy the data into it, it actually lets the SQLite engine use Excel tables as the data storage (I implemented something SQLite calls a virtual table - an adapter to let it work with custom data sources). This means you can run update/delete/insert statements directly on excel tables. It also means that in this mode there is no need to refresh data, it's always live data. 
+
+
+Now for the other issues:
+
+
+1. I agree, when connected to an external server there is a need to refresh the data and it's not obvious in the GUI. I think I'll be adding a visual hint that the data in the temp table might be stale as well as an option to refresh it.
+
+2. ~~Could it be that the column was formatted as a string and it couldn't put a string into a bit column? Is there any way you could send me an example workbook with this problem?~~ I've reproduced it, thanks for the catch! 
+
+3. This is very true. The code completion is not advanced. I plan to make it smarter, but parsers that can handle malformed input (which is basically what autocomplete needs to do) are tricky to implement. I'm looking into doing it with Antlr, but I have SQL dialects to consider, and I don't think I'll be able to do it any time soon (hopefully in a few months if all goes well)
+
+4. I can relate. Unfortunately Excel uses Ctrl+Space for it's own purposes and I can't override it. I use Ctrl+. by default for opening auto complete. I think I'll be able to do something about this by hooking into the windows API. If so, this should not be a problem for long.
+
+5. Didn't think of that, point well taken.
+
+6. Yupp, didn't get around to fancying it up yet:)
+
+
+As I said, I really like your comment, and I hope you will stay tuned and will be using my plugin in the future. I'm sending you a licence key via message shortly (just activate it when the trial expires). 
+
+
+
+
+
+Fixed point 2. I never use booleans in Excel so i missed it. Nice catch!
+Currently not likely, the technologies are completely different. If the windows version turns out to be a stellar success, I would definitely consider it:)
+Thanks! Please do, and post what you think about it as well.
+These are the SQLite "dot commands", they aren't executed by the engine, but by the SQLite command line program, so they won't work here. I do however have plans to integrate a scripting environment into ThingieQuery so the user can do fun stuff with the data (for instance dump it to a file, or save to xml to name a few options). I'm looking into hosting Powershell and IronPython for this purpose.
+Thanks. You don't need an external db at all to query Excel tables. Just click connect to workbook. Make sure that your data is marked as a table. Tutorial is coming soon, but I can answer any questions here as well.
+Thanks, please do, and please post your thoughts 
+Yes, I'll be doing a tutorial very soon. Some features are quite hard to find but I really like them, so I'll definitely be showing them off in a tutorial in the next few days. 
+Yay I'm not malware:D Thanks for posting this!
+Replying is a good sign :) thanks and got luck
+
+The installer froze on my machine. Will try again later
+Thanks for your trust, I know it's a lot to expect on the net. I'll be checking this thread every hour or so, so I can answer any questions on how to use it. There's no tutorial yet, but check out the pictures on the webpage for hints on how to use it (click the picture near the top to start the slideshow). Just a basic tip: ThingieQuery works with tables, so a region must be explicitly marked as a table for ThingieQuery to work on it.
+Just post the same thing again :) sometimes people write something like "Crosspost /r/excel" in addition to their title in the header, but it's not really necessary. 
+Ha, those are on his flair, it's the points he's been awarded for solving other people's questions (and they subsequently awarded points for).
+Both.  2 minute lag when running Excel the first time, then probably 30 seconds on clicking in Excel before it prompted for the license code.  No problems since.
+Cheers, thanks!
+Thanks for the license! I will definitely be poking around with this. I've been waiting for the Office team to improve the SQL interface for some time. I don't think that time will ever come, so this is long-anticipated by me.
+Thanks :)
+So far not been able to get it working :(
+
+Can install it, but it keeps showing as a disabled add-in, even if I manually change it in Excel Options. I have tried it as me and also as administrator with no joy. (Excel 2007)
+Man, got blocked by our FrontRunner
+
+http://imgur.com/Zgz8vXB
+[deleted]
+Thanks
+Thanks:) 
+Is the installer saying "Initializing..."? If so, can you start it as administrator? I'm not sure why this happens, but I noticed it happen once or twice before and it would work if I started it as admin. I'm using Wix to build the installer but I'm not really too experienced with it so I might have missed something.
+Ah, ok I already submitted a link and set the url to this page, seemed like the way to go. 
+Aha, that makes sense, I thought I won or was awarded some points or something:D
+You are most welcome, yours is the first feedback I've gotten so you've helped me more than I helped you! Your licence is even unique in that it's a commercial licence that never expires (had to manually poke arround in my licensing service for that:)). 
+
+
+Ah, I know about this. There's a hotfix for Office2007 to let it run VSTO addins... Can you give this a try: http://support.microsoft.com/kb/976811
+That's too bad:( I'll see if I can do something about it. I'll try to make an option for activating a licence via email for such cases. Probably during the next week or two. I'll post here when it's done.
+Excellent tips! My current priority tho is getting feedback so some things in the plugin and on the website aren't polished yet (e.g. the social media buttons on the webpage aren't even aligned:)). 
+
+OK, so:
+
+1. MD5 hash: will do soon
+
+2. Previous versions + change log: important but postponed it for now since there's no use in having a change log if no one reads it:)
+
+3. FAQ: I like it, will do
+
+4. SSL: yeah, a bit of an overkill for now:)
+
+5. Featurelist: did not plan on doing it, but will consider it
+
+6. Tutorials: I'm not sure if it would be better to use YouTube or screenshots+text. I'm thinking a textual tutorial would probably be better at least until I earn some money and hire a professional to make proper YouTube tutorial videos:)
+
+Out of all this tutorials would probably have to be top priority. There is little chance the user will figure out some of the features  on their own. For instance a user can write:
+
+    @table tableName="results" defaultAddress="Sheet1!$A1" 
+in the editor before a query and it will redirect the output to the specified location in the workbook. Would not expect anyone to figure that one out:)
+
+
+Anyway, thanks for the feedback, and you will be receiving an activation key shortly:)
+
+Dude! That's a really nice thank you!
+
+Uh, Thank you!
+Can only find a hotfix for x86 and I am on 64bit W7 (tried downloading the x86 anyway in case it was meaning Office installation - but would not run so obviously means CPU architecture)
+Almost 2 weeks! :P
+I can see some people really benefit from this at my work.
+Any updates on this?
+[deleted]
+Hm, I'll be able to try the installation on an office2007 later today so let me get back to you with this. 
+You are indeed correct!:) I did say a week or two and I didn't get around to it. I'm sorry, and now I feel bad... Not too bad tho, because I do love to hear that people are using ThingieQuery and benefiting from it!
+
+
+Ok, to solve this, I'm going to expose the WCF configuration in a file so that you can adjust the network settings without me having to recompile the entire thing. Then we can try different settings to get through your proxy (this should work). If this does not work, I'll add a page on the ThingieQuery website, which will serve as an alternative communication channel between the client application (ThingieQuery) and the licensing server. With this option you would have to copy/paste the licensing information manually but it should not be too much of a hassle. Gonna try the first option tomorrow, I'll send you a message when it's ready so you can give it a try.
+You're most welcome:) Yeah, I like text tutorials more as well, and it's an easier option so text it will be, at least for now. The feature list might be kind of the same as the tutorials tho... The licensing schema is pretty simple so far, but I'm buying you a beer (at least via PayPal) if ThingieQuery grows so fast that it will require a more complex licensing schema soon:)
+No worries. Will keep trying this end too and see what I can come up with
+Have just looked in Windows Update and noticed I have about 30 for Office, so will try running through those and see if that helps (sure I set this machine to auto-update when I first got it!)
+Sounds good! Looking forward to it.
+[deleted]
+Cool, let me know if it helps
+Ok, the new installer is up. Can you give it a try? If you use default credentials for your proxy it should work now. Also, the wcf settings are now in a config file, so we can try to fiddle with those if it doesn't work right off the bat (e.g. in case custom credentials are needed for your proxy or something). 
+Oh boy... still getting the hang of this reddit thing. I know about the private messages, but I thought your message was in my inbox so I just hit reply.
+Not made any difference :(
+Yup just got past the proxy and trial is now activated. Thanks!
+Ok, I sorted out the installer, now it doesn't even need admin rights, and it should work on Office 2007. Can you please download the new version and try? It should work, but with a glitch: some icons that exist in newer versions of office don't exist in office2007 so it will complain (just click "Ok to all" when Excel starts complaining). I'll sort this out later on. 
+Ok, found the problem, it's not your office it's the installer. I think I'll be able to fix it by tomorow, stay tuned...
+Yay! You are most welcome.

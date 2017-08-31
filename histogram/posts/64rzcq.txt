@@ -1,0 +1,103 @@
+I want to nest about 10 different IF functions in one cell (if that is possible)
+    =IFERROR(((C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(SUM(B2:G2)*5),0)
+So you actually don't need any if statements for this! You can just use the sumproduct formula and a helper row at the top to get this done (you can hide the helper row if you need this to be a nice looking document).
+
+
+To do this, insert a Row at the very top and in C1, put in the value for strongly disagree (i.e., 1). In D1, put the value for somewhat disagree (2). Repeat this through Strongly Agree. 
+
+
+Then, in the formula at the end of your first real row of data, put this in:
+
+
+=sumproduct(C#:G#,$C$1:$G$1) / (sum(C#:G#)*5)
+
+Just replace the # signs in this with whatever row you're in. Copy past for all rows you want this for. That's it! 
+
+This formula multiplies whatever is in C# by whatever is in C1, then does the same for D# and D1, all the way through G. At the end, it adds them all up. Then you just count up all of the answers with a sum formula and multiply by the maximum value (5 in your case). 
+
+Note: if you want to future proof this a bit, you can change the part of the formula at the end that says "*5)" to be "*max($C$1:$G$1)) "
+
+If the $ signs are confusing you, it is just using Excel's cell locking capabilities, a quick Google can explain that better than I would be able to.
+
+Let me know if that works! 
+Maybe this in H2
+
+    =((B2*0)+(C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(I2*5)
+
+or
+
+    =((B2*0)+(C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(SUM(B2:G2)*5)
+Personally, I like finding ways I can copy/paste without having a substantial volume of data.
+
+What I would do is as follows:
+
+- Insert a row above your headers, and put your weights above the values.
+
+- Enter your # PPL as:
+
+    =SUM(B3:G3)*MAX(1:1)
+
+(The reason I'd do this, is if you're working on different scales, it's going to take the maximum regardless)
+
+- Then I'd calculate your Cumulative as:
+
+    =IFERROR(SUMPRODUCT(B3:G3,$B$1:$G$1)/I3,"")
+
+Sumproduct takes two arrays, and multiplies the corresponding values together and sums them. So in this case, it takes B3\*B1 + C3\*C1 + D3\*D1 + ... G3\*G1.
+
+This is another solution that works without having to always troubleshoot larg(er) IF statements.
+
+Also, as personal preference, I like IFERROR(Formula, "") which leaves a blank string in the cell, so you can have a bit cleaner result, because in this case a 0% is not the right answer to zero surveys, it's NULL.
+Does this work
+
+    =SUM(B2,C2*1,D2*2,E2*3,F2*4,G2*5)/I2*5
+> =IFERROR(((C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(SUM(B2:G2)*5),0)
+
+This worked! I only had to change the B2:G2 range to C2:G2 since the IDK responded don't count as points.
+
+Would you mind explaining how you got to this? If it's too complicated to explain, don't worry about it!
+
+Thank you :)
+What is the difference between your formulas? They both seem to work.
+Solution Verified
+Sorry on phone so cannot test functionality.
+Certainly! All you're doing is multiplying each cell value by its corresponding point value. You then are adding that all together to produce this:
+
+    (C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5)
+
+Now that we have this, we need to get the total number of people you're applying the point system to, so we sum the number of answers together like this:
+
+    SUM(B2:G2)
+
+Then, since you wanted to get the maximum number of points possible, we multiply the number of people by 5, the highest point value you specified:
+
+    (SUM(B2:G2)*5)
+
+Then, to get the percentage of the total possible points scored, we divide the actual number of points, by the number of possible points like so:
+
+    ((C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(SUM(B2:G2)*5)
+
+But, in the event that there is no data populating that row, we don't want a division error, so we specify a default value if there happens to be a divide by zero error like so:
+
+    IFERROR(Formula to test for an error , value to output if there is an error)
+    Which turns into...
+    =IFERROR(((C2*1)+(D2*2)+(E2*3)+(F2*4)+(G2*5))/(SUM(B2:G2)*5),0)
+Not OP but the difference is where you do the sum calculation. The first formula allows the sum calculated in cell I2 to be trusted, and the second formula resums the row within the formula. 
+In this case, 55, which is the value in I2, is the same as the sum of B2:G2, so i wasnt sure if that was hard coded in.
+
+FYI - This wont work if there is a 0 value, so you can wrap it in an IFERROR like the other solution.
+
+You have awarded one point to _baineschile_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Wow thank you, as I try to get more proficient with excel explanations like yours really help me!
+Solution Verified
+Oh okay, so this is where /u/ViperSRT3g accounted for the whole "trusting" thing when he used IFERROR?
+[deleted]
+
+You have awarded one point to _ViperSRT3g_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Not quite. The error check is in the event you don't have data in the row yet. You won't get nasty divide by zero errors in your spreadsheet. You can have the sum be a reference to cell I2 if you know it will always have the correct number of people counted (it technically should) the error check is just a safety feature.
+Thanks for letting me know, totally did now.
+Awesome, thank you :)

@@ -1,0 +1,80 @@
+large
+3edeig
+Help reducing large =If function
+
+Hi, as the title says, can't link tonight will throw some pics up in the morning.
+
+I have a box e.g. A1, and rows of categories, eg. A3:V4 
+Each category is an upper or lower tolerance limit,eg:
+0 3  6  10  15.....
+3 6 10 15 22.....
+
+I am currently using an embedded if, with 20 embeds along the lines of:
+=if(and(a1>=a3,a1<a4),1,if(and(a1>=b3,a1<b4),2,=if(and(a1>=c3,a3<c4),1.........,"err"))))
+
+I get I could have used and(a1>=a3,a1<b3) but I've done it now, plus same ends, different means..
+
+Anyway, is there a simpler way??
+I thought of doing a look up, but A1 could be a decimal and didn't want a massive table.
+
+Any ideas? 
+
+Thanks
+
+
+
+
+-------------
+You could replace your and statements with MEDIAN(A1,A3,A4)=A1, which will evaluate TRUE if A1 is bound by A3 and A4.
+
+I'm not sure what the output of your IF statements represents, the 1, 2, 3 etc but perhaps it could be simplified even more.  
+-------------
+If it isn't broken, why fix it?
+-------------
+You could try
+
+    =IF(COUNTIFS(A3:Z3,"<="&A1,A4:Z4,">"&A1),MATCH(1,INDEX((A3:Z3<=A1)*(A4:Z4>A1),0),0),"err")
+-------------
+Pictures/links will help because it's not easy to determine what you're doing.
+
+However, if it's just upper/lower limits, I think MATCH() will do what you need pretty easily. 
+-------------
+More data would be useful. I cannot see what you are trying to achieve overall. 
+-------------
+Yeah, Looks similar length though. I was kind of hoping for a 'between' function with a large array, but couldn't find anything on Google.
+
+The output, 1,2,3 etc reflect a vlookup column reference for the data table below cells a3:v4
+
+Thanks
+-------------
+Striving for perfection! And if I distribute I'd like people to understand. 
+-------------
+Match() sounds interesting, I'll give that a look. Thanks 
+-------------
+I just looked at this online, and I think it will remove the need for the if function at all as I can embed into the vlookup. Thanks! I'll try it and verify at work 
+-------------
+Imgur blocked at work.... any ideas how to share? :S
+-------------
+Solution Verified
+-------------
+I am just filling up your inbox now, but thanks, match works perfectly and gets rid of the whole IF function. 
+
+so now I will inbed the Match in the Vlookup formula to avoid hidden/locked cells
+
+thanks again
+-------------
+Well, that's what MEDIAN does, returns the value in the middle. :-)
+
+Can you throw up a screen shot?  I'm having a hard time understanding what the output from the IFs represents. 
+-------------
+Maybe so,  but the computer can't tell the difference and the output works. 
+
+Your back end can look like a cyborg vomited a tentacle monster,  as long as your front end looks like a pagent model it doesn't matter, beauty is literally skin deep in software, as long as it all works. 
+-------------
+
+You have awarded one point to _SaveOurServer_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Sure thing, but it will have to be tomorrow. I'll upload some grabs when I get so work. 
+Thanks for your help

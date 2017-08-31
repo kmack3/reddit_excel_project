@@ -1,0 +1,244 @@
+I have 22 tabs at the bottom of my sheet. Is it possible to have them listed vertically on the side so they are all in view all of the time?
+A solution I use when faced with many worksheets is create a hyperlink index on the first worksheet, then it is always easy to jump to the first worksheet and then use that index... 
+* Ctrl+Page Up to move to the tab to the left. 
+* Ctrl+Page Down to move to the tab to the right. 
+
+That's how I usually move from worksheet to worksheet. It's about as quick as you can get IMO. Switching tabs 8-9 times an hour isn't even that much. You can hold them down as well.
+Have you considered using VBA?
+
+One way you could do this is by making an ActiveX button on your Worksheet, and give it the following code:
+
+    Private Sub CommandButton1_Click()
+        UserForm1.ListBox1.Clear ' Clear it out in case the button is clicked again
+        For Each ws In VBAProject.ThisWorkbook.Worksheets
+            UserForm1.ListBox1.AddItem ws.Name
+        Next ws
+    
+        ' Make the Form window pop up but allow the user to still click on the worksheet
+        UserForm1.Show vbModeless
+    End Sub
+
+Then make a form called UserForm1 (default name in empty project), and add a ListBox to it with the name ListBox1 (default name). This ListBox will have all worksheet names from the code above.
+
+Add the following event handler to your form for ListBox1:
+
+    Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
+        If Not IsNull(ListBox1.Value) Then VBAProject.ThisWorkbook.Worksheets(ListBox1.Value).Activate
+    End Sub
+
+Double clicking a worksheet name in the listbox will then automatically pull up the worksheet.
+
+You can play around with this to make it suit your needs. For instance, you could also make the form pop up as soon as you open the workbook through the workbook event handlers. Or you could change the ListBox1.AddItem part to only add specific worksheet names you want to have available for easy access.
+I was going to say: No, of course you can't. And then I saw 23 comments. and all these Ideas. I love this subredit.
+Not visible of all time but you can right click on the arrow and show all of the sheet
+I have written myself a macro for just this purpose! :)
+
+You may use it to replace 'open' and 'new' icon in your QAT (if you have it). Just add it to our 'Personal' or create an Addin and add the icon to QAT.
+
+[The effect looks like this.](http://i.imgur.com/7qacBCl.png)
+
+The code:
+
+    Private Sub QuickSwitchMenu()
+
+    Dim MenuItem As Object
+    Dim SubMenuItem As CommandBarButton
+    Dim wb, AllWorksheets As Integer
+    Dim ChosenSheet As String
+       
+    '   Deleting list so that the double menu doesn't show
+    Call DeleteList
+    
+    With Application.CommandBars.Add("ExceList", msoBarPopup, False, True)
+        
+        'New worksheet button
+        Set MenuItem = .Controls.Add(Type:=msoControlButton)
+        MenuItem.caption = "Insert Worksheet (ALT+SHIFT+F1)"
+        MenuItem.FaceId = 2591
+        MenuItem.OnAction = ThisWorkbook.Name & "!CreateNewWorksheet"
+        
+        'New workbook button
+        Set MenuItem = .Controls.Add(Type:=msoControlButton)
+        MenuItem.caption = "Create a new Workbook (CTRL+N)"
+        MenuItem.FaceId = 18
+        MenuItem.OnAction = ThisWorkbook.Name & "!CreateNewWorkbook"
+        
+        'Open workbook button
+        Set MenuItem = .Controls.Add(Type:=msoControlButton)
+        MenuItem.caption = "Open a file (CTRL+O)"
+        MenuItem.FaceId = 23
+        MenuItem.OnAction = ThisWorkbook.Name & "!OpenWorksheet"
+        
+        'Showing all open files
+        For wb = 1 To Workbooks.Count
+
+            Set MenuItem = .Controls.Add(Type:=msoControlPopup)
+                MenuItem.caption = Workbooks(wb).Name
+                    If wb = 1 Then
+                        MenuItem.BeginGroup = True
+                    Else
+                    End If
+                    
+                'Showing all worksheets for all open files
+                For AllWorksheets = 1 To Workbooks(wb).Sheets.Count
+                    If Workbooks(wb).Worksheets(AllWorksheets).Visible = True Then
+                    
+                        Set SubMenuItem = MenuItem.Controls.Add(Type:=msoControlButton)
+                        SubMenuItem.caption = Workbooks(wb).Worksheets(AllWorksheets).Name
+                        SubMenuItem.Parameter = MenuItem.caption & "," & SubMenuItem.caption
+                        SubMenuItem.OnAction = "'Activate """ & SubMenuItem.Parameter & """'"
+                        
+                    Else: End If
+                Next AllWorksheets
+        Next wb
+        
+    End With
+    End Sub
+    'This macro is supposed to be added to QAT. That's why it is not private
+    Sub ShowExceList()
+    On Error Resume Next
+    Call QuickSwitchMenu
+    Application.CommandBars("ExceList").ShowPopup
+    On Error GoTo 0
+    End Sub
+
+    'Deleting the list
+    Private Sub DeleteList()
+    On Error Resume Next
+    Application.CommandBars("ExceList").Delete
+    On Error GoTo 0
+    End Sub
+
+    'Activating chosen sheet
+    Sub Activate(ChosenSheet As String)
+
+    Dim wb, AllSheets As String
+
+    wb = Mid(ChosenSheet, 1, InStr(1, ChosenSheet, ",") - 1)
+    AllSheets = Mid(ChosenSheet, InStr(1, ChosenSheet, ",") + 1, Len(ChosenSheet) - InStr(1, ChosenSheet, ","))
+
+    Workbooks(wb).Worksheets(AllSheets).Activate
+
+    End Sub
+
+    'Adding a new workbook
+    Private Sub CreateNewWorkbook()
+    Workbooks.Add
+    End Sub
+
+    'Adding a new worksheet
+    Private Sub CreateNewWorksheet()
+    If Application.Workbooks.Count > 0 Then
+    ActiveWorkbook.Worksheets.Add
+    End If
+    End Sub
+
+    'Showing an 'open' prompt
+    Private Sub OpenWorksheet()
+    Dim ChosenFile As Workbook
+    Dim FilePath As String
+
+    FilePath = Application.GetOpenFilename()
+    
+    If FilePath = "False" Then
+    Exit Sub
+    Else
+    Set ChosenFile = Workbooks.Open(FilePath)
+    ChosenFile.Activate
+    End If
+    
+    End Sub
+
+It also lists all the files, because that was my issue - I had 20 files open with 5-10 sheets at the same time. Of course, clicking the name gets you straight to the file/sheet.
+Ctrl and clicking the right arrow will jump you to the last tab, and the ctrl clicking the left arrow will make you go all the way to the left.
+
+I think you can hover over the arrows to see the options
+22 sheets!! Moving to a small database may make your work easier.
+I found a bunch of posts with workarounds. /u/excelevator has a good option, but if you want a code option:
+
+    Sub ChooseSheet()
+    Dim ws As Worksheet
+     
+    Application.CommandBars("Workbook Tabs").ShowPopup
+    Set ws = ActiveSheet
+    End Sub
+
+Assign that to a button, or a hotkey, or a ribbon...
+I don't think you can move them.  You could possibly create a userform that has links to all of the pages though, or I suppose you could set up one of your ribbons up top to be filled with sheet links (presuming you don't need to be on another ribbon section like Data all the time).
+
+There's also this macro that you could assign to a shortcut and it'll pop up the list of sheets, but it looks like it can only handle 15 at a time...:
+
+    Sub ChooseSheet()
+        Dim ws As Worksheet     
+        Application.CommandBars("Workbook Tabs").ShowPopup
+        Set ws = ActiveSheet
+    End Sub
+[removed]
+Wait. Do you have particular sheets that you work with when doing something specific or do you need them all?
+This with a script set to a keyboard shortcuts to that index page. Awesome.
+That could be a workaround, but not exactly what I am looking for.  Thank you for the suggestion. 
+Don't accidentally hold ~~ctrl~~ shift when you do this or it'll link all the tabs you cycle through, that's a bad day. 
+This is my favorite answer. 
+I was thinking "Pfft, they won't even let you change the light-grey-on-light-grey color scheme, of course you can't change where the tabs are", then had the same realization as you. 
+
+Thank you, I know those tricks, but I was hoping to have something a little more efficient. 
+I'm not familiar with this; what does it do?
+Hi /u/isntAnything 
+
+It looks like you've been shadow-.banned and your post has been automatically removed. This doesn't have anything to do with the /r/excel mods and we can't do anything about it. Please see the sticky thread on /r/shadowban to find out how to appeal your ban with the Admins. 
+
+Once your situation is resolved we look forward to your continued contribution :) 
+
+Best regards, 
+
+/u/tjen 
+Holy crap your comment just blew my mind, I made a navigation pane like this at work and always thought it was lame to have to press Main Menu... my god...
+If you go that route, this will quickly make you an list of tabs with hyperlinks (excluding Sheet1).
+
+    Sub MakeIndex()
+    
+    Dim ws As Worksheet
+    Dim i As Integer
+    
+    i = 2
+    
+    For Each ws In Worksheets
+        If ws.Name <> "Sheet1" Then
+            Range("A" & i).Value = ws.Name
+            ActiveSheet.Hyperlinks.Add Range("A" & i), "", ws.Name & "!A1"
+            i = i + 1
+        End If
+    Next ws
+    
+    End Sub
+Adding to this, you could put the hyperlink list in the first column of each tab and freeze that column. Then it will always be on the far left no matter what tab you are in.
+Adding on to the above trick with hyper linking to tabs, you can then view your workbook in a new window and keep a skinny window to the left with the column with all your links and work in the right. Come to think of it no you can't, it'll just navigate you to whatever you click on in the skinny link window...hmmm
+Yes, especially when you don't notice, make a change in one cell, and then save the file and quit (making a change on grouped sheets applies the cell change to all the grouped sheets).
+
+Thank goodness for Dropbox previous versions...
+It's Ctrl+Shift+Page Up/Page Down that links/groups worksheets. You can hold Ctrl and use Page Up/Page Down to navigate to your heart's content without worry.
+yea, if we could have tabs on the side, that'd be amazing ._.
+It makes a shortcut menu of all of the workbook tabs at the current pointer location. 
+Thanks! Your comment made me laugh. Are you going to try it? I think I may!
+Or just press the Goto End navigation button for worksheets.   `|<`
+I'm trying out this code today and it works but only if sheet names don't include spaces? Sweet code by the way very handy!
+Yea I meant to type shift. I really shouldn't post at 2 AM.
+    Sub MakeIndex()
+    
+    Dim ws As Worksheet
+    Dim i As Integer
+    
+    i = 2
+    
+    For Each ws In Worksheets
+        If ws.Name <> "Sheet1" Then
+            Range("A" & i).Value = ws.Name
+            ActiveSheet.Hyperlinks.Add Range("A" & i), "", "'" & ws.Name & "'!A1"
+            i = i + 1
+        End If
+    Next ws
+    
+    End Sub
+    
+Edited to work with sheet names containing spaces. Sorry about that.
+Ahh, I was trying to do this same thing but was putting the ' in the wrong place. Thanks!

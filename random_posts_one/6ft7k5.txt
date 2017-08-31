@@ -1,0 +1,50 @@
+6ft7k5
+Using formula to search for all S&P 500 company names on spreadsheet containing all of Donald Trump's tweets. Need formula for partial match.
+Hi,
+
+I've been playing around with a spreadsheet posted by another reddit user containing all of Trump's tweets , seeing if I can isolate the tweets that mention company names. So far I've put together a formula that works only for an exact match, when I'd like it to work for a partial match. Is there any way of doing this?
+
+The formula for an exact match is:
+
+=IF(COUNT(SEARCH('S&P 500 '!B2:B506,Sheet5!C1607)),"match","no match")
+
+where B2:B506 is the column of S&P500 companies and C1607 is the cell containing the tweet text.
+
+Thanks
+
+R
+
+
+
+
+
+-------------
+What are example values, what are expected results?
+
+Which part is partial matching?
+
+Is [this](https://www.reddit.com/r/excel/comments/6fbchi/can_i_highlight_q_single_cell_w_a_partial_text/digyzmp/?context=3) the sort of thing you mean?
+-------------
+http://www.npr.org/2017/04/14/523890750/twitter-bot-botus-will-buy-and-sell-stock-based-on-trumps-tweets
+
+If you're trying anything like that, best of luck! Like they said, it'll take a lot more than Excel to distinguish between an apple you eat and Apple the company.
+
+But, for what you want to do, I'm guessing this site's formula will work - it worked for me with a test case:
+
+https://exceljet.net/formula/cell-contains-one-of-many-things
+
+The formula is:
+
+    =SUMPRODUCT(--ISNUMBER(SEARCH('S&P 500'!$B$2:$B$506,C1607)))>0
+-------------
+Thanks for that. Would you use ctrl+shift+enter because its an array? and also, would this just match whole words?
+
+
+-------------
+I re-read your question and realized you wanted partial matches. This will only match whole words. My best guess would be to add on to your S&P 500 list an additional list of potential partials. Otherwise, I'm not sure how you would do that.
+
+But no, you do not need to enter this as an array.
+-------------
+Working a bit better now but I've realised that it is returning true if a company name in the array fits within another word in the cell. Eg: At from AT & T is included in "what". Any way to fix this or make it case sensitive?
+-------------
+Are you using the formula I provided? Or a different one?

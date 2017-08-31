@@ -1,0 +1,33 @@
+6im712
+Pivot Table - any way to have a column show a percentage of another column?
+I have a pivot table summarizing call data.  
+
+My data rows are the various staff members that take the calls.  I am trying to capture the following in my pivot table:
+
+* total # of calls (I'm counting the date column - working)
+* # of callers that book an appointment (I have a column w/ Yes in my table for any calls that book - working)
+* % of callers that book (I want this column to show the percentage of bookings relative to total calls for that staff member - not able to get this working).
+
+I understand how to format the field in the pivot table to show the values as a percentage of the column, etc., but am stumped at how to reference this percentage as it relates to the total number of calls.  I see options for Base Field and Base Item when determining the "% Of", but I'm returning #N/A for every variation I've tried.  Is it because my source table has Yes in the column I'm trying to count?  Do I need to add another column in my source table that uses a 1 for any records with a Yes?
+
+Any help or suggestions are much appreciated.
+
+
+-------------
+Absolutely this is possible. You need to use a calculated field. In the ribbon select Analyze>Fields, Items, & Sets. Then choose calculated field. Name the field what you want and in the formula selection you can use the fields as listed to do you calculation. In this case =bookings/callers
+-------------
+Thank you for the reply.  I wasn't able to get it working with the way my original data was formatted, but once I converted my Yes/No data to 1/0, I was able to get the calculations working.
+
+One follow-up...  When creating a calculated field in a pivot table, is there a way to specify a sum of the fields used rather than a count?  It seems to default to count which throws things off if I use a 0 for No/False values.  If I delete the 0, it works correctly.
+-------------
+Solution Verified
+-------------
+Right click one of the values in the field. Select summarize values by. Then choose sum. 
+
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _Knowakennedy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

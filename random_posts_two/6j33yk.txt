@@ -1,0 +1,55 @@
+6j33yk
+SQL % Wildcard Replacement
+I'm replacing some SQL code using Excel formulas; there is a part of the SQL code:
+
+    Parameter LIKE '%STREAM%'
+
+I want to replicate this; so I want a wildcard that can recognize any string of 0+ characters.  I tried the * like this:
+
+    Parameter="*Stream*"
+
+But this didn't return results that started with "Stream" - am I doing something wrong with the wildcard characters?
+
+EDIT: for further context:
+
+It's an if statement...there is more to it than this, but the basic function is:
+
+    IF(A1="*Stream*","Stream","Other")
+
+If A1 starts with "Stream" (for example "Streamline") it won't recognize that and return the "String" value; it will return the "Other" value.
+
+EDIT2:
+
+I've found that the * wildcard isn't even working in this instance?  With the IF statement above, even if the cell contains "stream" it will always return other.  I think it's taking the literal for * instead of the wildcard character?
+
+
+-------------
+In what context?
+-------------
+Try    
+
+    =IF(ISERROR(SEARCH("Stream",A1)),"Other","Stream")
+-------------
+This work for you?
+
+    =IFERROR(IF(FIND("Stream",A1)>0,"Stream"),"Other")
+-------------
+I added more context in the main message.  Sorry that wasn't there first!
+-------------
+> =IF(ISERROR(SEARCH("Stream",A1)),"Other","Stream")
+
+Thank you, this works.  I wish I didn't have to string 2 functions together just to replace that wildcard character but I suppose that's how Excel works.
+-------------
+Solution Verified!
+-------------
+Solution Verified!
+-------------
+
+You have awarded one point to _Erotic_Chopsticks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _OutofStep_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,101 @@
+6ilwv6
+Conditional Formatting, Partial Matching Against a List of Multiple Values
+Hello! I'm not very advanced in Excel, but I am trying to streamline a process for a company I work at. Only problem is I cannot figure out which formula to use to make that happen. Column A contains various text and numbers. Column H has a list of *just* numbers. I want Column A's cells to be highlighted if there is a match from the list in Column H. When I try conditional formatting of:
+
+> =COUNTIF($H:$H,$A1)
+
+It results in no cells being highlighted. I tried making a separate column with only the numbers and that formula *did* highlight the matches found, so it appears the additional words in Column A might be the issue. I've tried searching for hours with no luck. Any ideas?
+
+I'll try to describe this better. Column A has cells that contain things like: "98279 Extraordinary Expenses," and Column H contains only the number. There are various numbers in column A and column H. I want the matches to be highlighted in Column A. 
+
+Hopefully I'm making sense! 
+
+
+-------------
+This should do the trick for you:
+
+    =COUNTIF($H:$H,LEFT($A1,SEARCH(" ",$A1)-1))
+-------------
+I would use a helper column with a simple If function 
+=IF(numbers of Column A=Column H, "YES","NO") 
+then use that result to trigger the conditional formatting of column A. 
+=Helper Column cell="YES"
+-------------
+Yeah, COUNTIF looks for exact matches. `98279 Expenses` is not the same as `98277`.
+
+This will work if you limit your H range to only include the numbers:
+
+    =NOT(ISERROR(MATCH(TRUE,FIND(H$1:H$10,A1)>0)))
+
+[Imgur](http://i.imgur.com/lkLeLUS.png)
+-------------
+[deleted]
+-------------
+That has gotten me further than anything else I've tried so far, but it seems to be highlighting additional numbers that aren't in Column H. Any ideas why? I want the numbers in Column H to perfectly match the numbers in Column A. 
+
+* Column A has "8765 Expenses"
+* Column H has 8765 
+* I don't want it to highlight 876 in Column A or 87 in Column A, I want the exact number
+
+Column A and H both have several numbers that I want matched, but Column A has additional text in each cell. (Just additional clarification if it helps at all)
+
+All of the Column H numbers are matched and highlighted in Column A! So thanks for that. But additional unneeded ones are highlighted too. 
+-------------
+Hello!
+
+**Posting a comment with 'solved' does not mark the thread as solved.**
+
+Please read the sidebar on how to set the correct flair.
+
+Thank you for keeping the sub tidy - please take the time to familiarise yourself with the guidelines on the side bar and the submit page.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+Hmm as per your example, the formula I gave should work as expected. It shouldn't do the partial match.
+
+However the formula will get mixed up if you have extra spaces in column A. Can you confirm that your numbers are always a single long number with no spaces? Eg "8765 Expenses" vs "87 65 Expenses"? Also make sure that there are no other conditional formatting rules you might've added when testing out other formulas.
+
+Can you give some example values of Column A that has the partial match? 
+
+And can you confirm that with the current formula that if you type test values that you can't replicate the partial match problem? Eg you type into column H a test value of 99999999. If you type into column A "99999 Test" or "9 test", it shouldn't be highlighted [assuming column H doens't have 99999 or 9 already].
+
+    
+-------------
+There are spaces and special characters before the number. I definitely should have mentioned that! Maybe that's the issue? For example, the full cell says: "*   2043  Robern Canada" etc. It's usually an asterisk or two and there might be a good two or three spaces separating the asterisk/character from the number. 
+
+Edit: I think I'm doing something wrong. I created two test columns and although it highlighted one cell [it didn't highlight others it should've.](https://imgur.com/gallery/RLEX3)
+-------------
+Ah yes, special characters would indeed mess it up. Here's the massive revised one to account for other characters and a whole lot more:
+
+    =IFERROR(TRIM(IF(ISERROR(VALUE(LEFT(A1,SEARCH(" ",A1)))),MID(TRIM(MID(A1,SEARCH(" ",A1),LEN(A1))),1,SEARCH(" ",TRIM(MID(A1,SEARCH(" ",A1),LEN(A1))))),LEFT(A1,SEARCH(" ",A1)))),A1)
+
+It'll work with anything like:
+
+    * 5436 Test
+    *   5436 Test Inc
+    ** 5436 Test
+    **   5436 Test
+    blargityblarg 5436 Test
+    5436
+-------------
+Thanks! I'll try this out later and let you know how it works. You've been a great help. It seems like you're on the right track. :D
+-------------
+Quick question, is that also referencing my list in Column H? I only see the formula dealing with Column A. Sorry if that's a dumb question. :P
+-------------
+Nooooooooot a dumb question. I blanked and copied my helper cell instead of the actual conditional format formula. The only difference being adding a countif that actually references H:H haha:
+
+    
+  
+  =COUNTIF( H:H,IFERROR(TRIM(IF(ISERROR(VALUE(LEFT(A1,SEARCH(" ",A1)))),MID(TRIM(MID(A1,SEARCH(" ",A1),LEN(A1))),1,SEARCH(" ",TRIM(MID(A1,SEARCH(" ",A1),LEN(A1))))),LEFT(A1,SEARCH(" ",A1)))),A1))
+-------------
+I copied your formula exactly and [this is what I end up with.](https://imgur.com/a/roO6g)
+-------------
+If you look carefully, you can actually see that the green highlighting always happens one row *after* the correct row. Eg  A3 is supposed to be green highlighted but it ends up A4 being green.
+
+I'm guessing that you applied the conditional format to range A2:A1000 (or whenever it ends) instead of A:A. You can either change your format rule to apply to A:A or you can change all  references in my custom formula from A1 to A2. If you do the latter then you wont have to change the conditional format range. Your choice!
+
+I hope that solves it all!
+-------------
+Perfect! You've been wonderful. Thank you so much. 
+-------------
+Solution verified

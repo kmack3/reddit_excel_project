@@ -1,0 +1,69 @@
+large
+60zxf4
+Need help transforming large amounts of data
+
+This is almost a case of transposition, but first I need to duplicate each element enough times to transpose it.
+
+
+[Here's a snapshot of the sheet](http://imgur.com/a/LX7um)
+
+Countries in Column A, each year is also a column, then info (here it's the # of new businesses in that country for the year).
+
+
+What I want to do is have Year be a column, which requires multiple entries of the countries.
+
+Example: Aruba would take 11 cells in the Country Column, and the adjacent column would have years 2004-2014, and the next adjacent column would have # of new businesses.
+
+The latter is transposition, but I'm not sure how to get Excel to drag down Aruba the necessary amount of times (and do that for every country, for the number of years).
+
+
+Thanks for reading.
+
+
+-------------
+There are a couple of ways to do this but here is one using OFFSET that I think is most clear. The worksheet that your snapshot is of will be called 'data', on another tab set up your output table [like this.](http://i.imgur.com/jPrESBH.png) In A2 use the formula:
+
+    =OFFSET(data!$A$1,INT(ROW(A11)/11),0)
+
+which will basically count upwards from one, by one every 11 rows. This will duplicate the country name.
+
+
+In B2 use the formula:
+
+    =OFFSET(data!$AV$1,0,MOD(ROW(A11),11)+1)
+
+Which will count 1 -> 11 then repeat every row over and over again. This will cycle through the year labels.
+
+In C2 use:
+
+    =OFFSET(data!$AV$1,INT(ROW(A11)/11),MOD(ROW(A11),11)+1)
+
+
+Which combines the two formulas above to slowly increment the row while cycling through the columns to find the value.
+
+Some people don't like using OFFSET and will say to use INDEX. They're probably right. 
+-------------
+Hi there! If you are open to Power Query (Get & Transform if you're using Excel 2016), the Unpivot feature is almost exactly what you are looking for. What you are asking for is relatively common (at least in my field of work), and to my knowledge (which is obviously not infinite), there isn't a clean way to do this with Excel's built in functionality. 
+
+Unless there is a stash of VBA written somewhere that handles this, I would look into Power Query.
+-------------
+Thank you for responding!  I'll give this a shot as well, if Power Query can't keep the nulls.
+-------------
+Did not know this was an option for transposing data. +1 for this!
+-------------
+Thanks for informing me of Power Query!  I'm almost there, my issue now is that if a year column has no value for a country, that year is not transposed for that country.  Is there a setting I can toggle to keep nulls?
+
+
+Edit: It also deletes countries that have no values for any of the dates.
+
+
+I might be able to make it work without 'em for now, but may need them around later.
+-------------
+Consider replacing nulls with 0 for the transformation steps. It seems (from what I can tell) that in your context, null is saying that same thing as zero, that there are no values for new businesses for that country and time period.
+-------------
+Yeah, I'll need to consider this more carefully since of course it's not that no new businesses were started that year, but a lack of data.  For now, Power Query has done enough.  Solution Verified.
+-------------
+
+You have awarded one point to _alexisprince_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

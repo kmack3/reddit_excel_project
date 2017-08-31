@@ -1,0 +1,9 @@
+How do I create a conditional formatting formula where if A1 has data and B1 is blank, B1 turns red
+Select B1, then go to Conditional Formatting > New Rule > Use a formula to decide which cells to format. Then type AND($A$1<>"",$B$1="") into the formula box and select your red formatting option. That should work.
+What does <> represent in Excel? 
+solution verified
+Does not equal. 
+
+You have awarded one point to _StickTank_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

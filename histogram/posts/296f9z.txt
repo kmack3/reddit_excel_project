@@ -1,0 +1,60 @@
+To all you excel gurus out there...
+Then you'll love this....
+
+    =IF(L47<M38,"NOT MET",IF(L47<N38,"MET W/COMMENT","MET"))
+
+You're being a bit redundant in your formula.    If you're checking for < then you don't need to check if it's >=, the fact that it's not < means it has to be >=. :)   
+
+Second formula is about as simple as you can get using IFs, but if you switched that to a VLOOKUP, you could make it a single command. :) 
+Try to keep things simple so you and others can understand what your logic was 6 months from now.
+
+Redundant implied logic can be deleted:
+
+`=IF(L47<M38,"NOT MET",IF(L47<N38,"MET W/COMMENT","MET")))`
+
+Nested ifs are ugly and I try to avoid more than 2 levels.  You can create an array within a formula that would be easier to add more cases to. {} define an array, commas are column separators, semicolons indicate a new row.
+
+`=VLOOKUP(D38,{0,"N/A";"G",1;"A",0.6;"R",0;"N/O","N/A";"N/A","N/A"},2,FALSE)`
+
+
+Suggested extra reading if reading about VLOOKUP is choose/match. 
+
+     =IFERROR(CHOOSE(MATCH(D38,{"G","A","R"},0),1,0.6,0),"N/A")
+
+As it puts the searching arrays and the lookup arrays next to each other, some find it easier to debug.
+Hit F2 and use alt-enter to insert line breaks in your nested if statements. This helps to make it visually see what's going on with your function. 
+Wow, I must be catching the savant bug.  I'm sitting without excel and I understand it.  Thanks!  Will try that tomorrow. 
+In my opinion, for people who don't use excel often, 
+>=IF(L47<M38,"NOT MET",IF(L47<N38,"MET W/COMMENT","MET")))
+
+is a lot easier to understand and audit than 
+
+>=VLOOKUP(D38,{0,"N/A";"G",1;"A",0.6;"R",0;"N/O","N/A";"N/A","N/A"},2,FALSE)
+
+It's important to remember that just because it's easier for you to update, it may not be easier to explain to someone else--like your boss. Just a thought.
+Upon rereading your reply, I wonder if we are talking apples and oranges.  In that formula, I have a cell (D38) that has a drop down menu which starts as a blank, you can choose G for green(go), A for amber (go with comment), and R for red (Nogo) along with N/A and N/O (not observed).  All from one cell.  The first three are weighted for grade. 1, .6, and 0.  
+
+Now not being a learned man myself, In reading your reply, seems that vlookup would be checking other cells I might have named Alphabetically.  Right?  If not, I will paste it tomorrow and give it a try.  Mine is working but I'm all for learning and cleaner is better. 
+Have not tried vlookup yet.  I will try it out.  After I teach myself macros so I can overcome a problem. Thanks.
+Thanks for the suggestion, but im worried that i am overreaching myself.  I dont have the basics of Excel.  I had a idea, and went forward to research those areas that impacted it, but passed by a lot of stuff that didnt fit within the particular project i was working on.  Like learning shakespear but not knowing how to read hardy boys. 
+Not if he shows us HOW that is more simple, and in simple terms. Maybe that isn't possible but that's what this sub is about ain't it?
+The net result would be the same, think of the pain if they decided to add "(C)hartruese:  God only knows what the status is"    How much grief would it be to expand the if-pile.
+
+and FALSE on a vlookup means it doesn't have to be sorted, it'll look for an exact match. :)
+The way his vlookup is written makes it look WAY more intimidating than it actually is.  He basically used an array to build a reference table so that when the value you are looking at matches the first one in the array, it returns the second value in the array.
+
+For beginners, it would be easier to put those values in cells on your spreadsheet somewhere out of the way.  It serves the same purpose.  My example will put the lookup data on sheet2 in columns A and B.
+
+=VLOOKUP(D38,Sheet2!A:B,2,FALSE)
+
+This formula takes the value in D38 and looks for it in column A on sheet2.  When it finds it, it returns the value in column B on that sheet.  Just note that it stops looking once there is a match.  If you have the same value in A more than once, it will never even look at the second listing.
+Vlookup first.  Then macros.  :-)
+I'm not saying for US to understand necessarily, was more saying for sharing work with coworkers / bosses who are excel noobies. Often times for me, an index/match or sumproduct(--( or array type formula works really well, but harder to explain to coworkers and bosses who only use sum formulas. Adding an array on top of it adds to the appearance of complexity as well as adds complexity for copying and pasting. That could be hard for people to review and use. But if it's for work that you just need to get done, I agree, a more dynamic formula is worth learning!
+Ok. Maybe it's the hidden geek in me, but I'm looking forward to trying it, thanks. 
+Working on it now.  Thanks
+There's not a day that goes by that I'm not in Excel for SOME Reason....  with a fast enough computer, it's almost as quick to open Excel as it is to launch Calculator, so why the hell not? :)
+
+You're already a good bit of the way to mastery... You've realized you can stack functions together, and the output from Function A, can be an input to Function B.   THAT'S when the insanity begins. :D
+Vlookup, then index/match, then index/match/match, then vlookup/match, then sumproduct
+
+Then macros

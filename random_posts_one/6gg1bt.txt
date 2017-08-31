@@ -1,0 +1,62 @@
+6gg1bt
+Using Countif with 3 Criteria. Can't get the syntax for one of them that is a DATE.
+I'm tracking my sales at work (work at a bank). So i have a list that includes date, type of sale, etc.
+
+I'm using an COUNTIF to get some better data. Currently i have THIS
+
+* =COUNTIFS('Solutions Tracking'!$H$2:$H$198,"Credit Application",'Solutions Tracking'!$I$2:$I$198,"YES")
+
+So If an entry is for a "Credit Application", and it was approved "YES", then it counts it. I started tracking Jan 1 2017, so this gives me the total credit applications thus far for the whole year. What i want is it to be sorted by MONTH. I have dates on the entries (2017/01/01 format). I know dates have values for them. So for January, i want to add the criteria that the date is between 42736 and 42766. which function do i use? 
+
+Cheers!
+
+
+-------------
+I would recommend pointing them to cells so that you can always adjust the time frame instead of hard coding but something like below should get you to where you need to be.
+
+    Range,">="&startDate,Range,"<="&endDate
+-------------
+My advice would be to use a ToMonth or ToYear in adjacent cells rather than using the actual numbers for picking january or whatever. Other than that, what its not about the cell said is exactly right
+-------------
+In addition to what I see here, you could use a pivot table. The date column can be automagically grouped by year and month.
+-------------
+The sheet i have has filters so i can rearrange the list. would this cause errors if i sort by date and change it to sort by type or something else? 
+-------------
+I don't see a ToMonth or ToYear function. Maybe i'm not understanding the explanation. 
+
+I did find a helpsite that says to use TEXT(A1,"mmm") in an adjacent cell to show the month. then use the countifs to search for "Jan". I am still however getting a #value! error. I tried the countifs for the month by itself and it returned the number of times JAN showed up. then i put them all together, and i again get the #value! error. 
+
+* =COUNTIFS('Solutions Tracking'!$I$2:$I$26,"Credit Application",'Solutions Tracking'!$J$2:$J$26,"YES",'Solutions Tracking'!B2:B200,"Jan")
+
+The other issue i am finding is that empty rows show up as JAN, so when it's counting the JAN's it's including the empty rows. 
+
+
+-------------
+It shouldn't have any effect - only the AGGREGATE function is effected by filtering data as far as I recall.
+-------------
+sorry, it may just be Month and Year, not tomonth or toyear. text wont work because its not changing the value, its just changing what it looks like.
+
+and for empty cells what you can do is =if(isblank(A2),"whatever",month(A2)) that will give a 1 for january
+
+    =COUNTIFS('Solutions Tracking'!$I$2:$I$26,"Credit Application",'Solutions Tracking'!$J$2:$J$26,"YES",'Solutions Tracking'!B2:B200,1)        
+-------------
+Thanks!
+-------------
+When i use month(A1), it comes up as 1900/1/1. Not sure how this can help since the original format is 2017/01/01 already
+
+-------------
+No problem at all - I wrote a cool lesson on using nested functions along with "The Big Three" as I call them SUM, AVERAGE, COUNT and all the IF(S) - may be able to lend you a hand in the future - http://itsnotaboutthecell.com/2016/02/16/sum-count-average-functions/
+-------------
+thats because its formatting it as a date, change the format from shortdate to number or general
+-------------
+Hey I'm having a little difficulty with the solution you posted. is RANGE an excel function? 
+
+Is there something i can put into the countif that checks for the date? 
+
+Countif(type, Yes, between Jan1-Jan31)
+
+
+-------------
+range is your range, so it would be 
+
+    =COUNTIFS('Solutions Tracking'!$H$2:$H$198,"Credit Application",'Solutions Tracking'!$I$2:$I$198,"YES",#solutions tracking k-k, ">="& startdate, solutions tracking k-k, "<=" & end date

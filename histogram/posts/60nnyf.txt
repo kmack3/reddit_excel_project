@@ -1,0 +1,106 @@
+Every time I have to run reports on a spreadsheet I didn't create
+I had to run a bunch of reports for the city council last second (~30 minutes lead time) using the WORST data.
+
+RFP-123
+
+RFP - 123
+
+Request for P, 123
+
+123 (RFP)
+
+RFP-123-A
+
+Not only did it not get done accurately but I quit that job. I feel for you.
+I regularly get reports from our office in India, and it's amazing the new and interesting ways they provide totally obfuscated reports.  I had a vlookup that came back with errors, no matter how many ways I cleaned it up, the two cells came back as FALSE when doing a direct =A=B comparison.  Turns out the spaces in between the characters was some random unicode/ascii blank character, and not a true "space".  That was fun.
+That's why you get paid the big bucks!
+Why don't people automate this stuff?
+Can you explain what this formula does?
+I had to create a fully locked down sheet with a data validation list for dates as i used to get variations in completely unusable formats. On one sheet, I've seen things like:
+
+21-Mar-2017 (text, not formatted)
+
+21.03.2017 (decimal)
+
+21st March 2017 (text)
+
+21/3/17
+
+ 21 3  17 (multiple spaces)
+
+21_march_2017
+
+It's ludicrous.
+I think you mistook r/Excel for r/FML 
+
+or be the first to post on r/WhyCantPeople
+
+
+My client's ERP only punches out reports on .txt, and it's divided by some fucking header footers per location and customer. I almost quit.
+whats your job?!  would love a job to work with excel and data, but i dont know what career to pursue!!
+I would just create a custom function that uses regex to parse out the numbers, if that was your goal. A good challenge is worth asking for more money. 
+Non breaking spaces drove me crazy at first, now I just have a macro to remove them on my toolbar. Of course this company finds new things to mess me up after that.
+Oh God, I had a problem with that once. That's half a day I'll never get back! 
+Usually because:
+
+1. They don't know it's possible, and
+
+2. They don't know how.
+strips out trailing and leading spaces, apostrophes, soft line breaks. It also returns a 7-digit number (preceded by a C) regardless of if the number is in the beginning or the end of the cell.
+Not trying to Monday morning quarterback but isn't there a calendar widget in forms?
+Well, parts of them are correct data formats and should just need to be format reapplied? 21.03.17 and 21/3/17 are fully valid dates in regards to excel. 
+
+Things that help: return to sender if done so poorly, mandantory training sessions for idiots and alike. 
+Make them feel the pain, otherwise they'll never learn.
+People say "oh you should be nice to people" but honestly there is a reason public embarrasement works ... 
+
+And if you are good, they will use your system against you. I for example implemented "you are only allowed to enter data in green fields". one time I forgot it on the most important data point (forecast of revenue for the year) and in the meeting with high level people the person presented left it blank and said "it was not green.<pause>" 
+he had a backup of course, but it was great fun.
+
+
+ah but no, that is where the fun starts. get yourself aquainted with a scripting language (i worked for years with awk, but pearl etc will do).
+
+you throw in the bad file with the ugly stuff and make a pretty text file ready for excel out of it. I also used it to create 50+ separate sub files, 10 leadership files and after that had macros run through the .csv to make mega reports.
+
+the key was to get the stupid stuff out before you work in excel - and scripting languages where made for this ;) 
+
+if the lines are 'simpler' you can also use a command line tool like grep which has an option to "grep everything from a file but ..."
+so if the lines are always the same f.e.
+------- BERLIN 
+xxx
+xxx
+---- NEW YORK 
+
+but can be matched by regular expression, you can just string it along and parse it. 
+
+grep -v "\-* BERLIN" | grep -v "\-* NEW YORK" >output.csv
+
+Find somebody who know grep and pearl, show them the files, promise them cake and get home with skripts and way less headaches. ;)
+Financial Analyst, Data Analyst, Accountant, Data architect, business analyst, business integration
+I'm a Data Analyst and the majority of my day is spent making Access databases and reports on Excel, it's a pretty good job if you like that kind of thing! 
+I work in IT; I just happen to be the office excel guru.
+There were maybe a dozen columns ALL this disorganized. The data was also just generally organized in a way that made 0 sense. I did my best but the report I gave was for sure wrong. I endorsed it as, "this is correct based on the data set I was given." Spent months cleaning it up, eventually quit for other reasons.
+Yeah but i was a fail-safe for auditing between workers and payroll. Wasn't my sheet initially as the finance guys had strict rules on formatting and content. Hence the reason for me locking down rather than being able to reinvent the wheel
+I used to be a fan of "reply to all" with idiotic mistakes like that, but got told off for being too passive aggressive 
+With a 50 Billion A/R listing, I'd give them a blowjob if they can make it make sense.
+i am an acocuntnat, but i mostly do additions in excel... what i wnat is to use VBA, or create huge spreadsheet to automate work for people around me (mostly for admin folks)
+the only thing is that i am not really good with probability, statistic... is is prob/statistic heavy as a job?!
+what do you do in IT?!
+Do you, I guess. 
+I can do this. Pm me some details and I'll do it for beer money.
+not sure what a/r listings are and not everybody wants bjs, but if you have that amount, you should def. look into that. 
+
+I cannot imagine it will be different than anything I have seen coming out of the SAP system - I worked for years my way through departments as the excel queen since I made accounts receivable reports (which where export of the print information, with page numbers and other cruft) into pretty excel files. because nobody was freaking capable to find the table in sap and dl it from there.
+
+find the pattern, find if you can apply regexp (regular expressions) you nearly always can. separate the data from the other stuff. do not just throw it away, set up routines like cinderella: good stuff here, bad stuff here. check bad stuff for mismatches. ;)
+
+then use a script language which can pick the elements you need and write a pretty new file you want  - and can import directly beautifully into excel.
+ 
+once you have the patterns, you can even hire somebody to script for you - and then you do the touchups yourself. 
+Probably more of a role for a data analyst. 
+I second this. Excel + VBA is pretty easy and people treat you like you're Office Jesus. The most difficult part of the job is understanding a big SQL query you didn't write. 
+Not particularly, it definitely helps to to have some kind of a background in mathematics/statistics but it's not a necessity! If you're confident in excel including VBA then there's no reason you can't look into pursuing a career in Data Analysis!
+Accounts Receivable. Basically what people owe you. 
+
+Nah, my SAP clients are much cleaner. I just meed to text to column and concatenate. This one used software which looked like it was run on DOS. No GUI, click 1 to acess a certain menu/command
+I've only started learning VBA in the past 6 months or so and already have managed to cut out ours of tedious labour. The appreciation I get is next level now and I have so much to learn still.

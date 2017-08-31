@@ -1,0 +1,32 @@
+6gi7jx
+VBA to copy and paste new data by column header?
+Hello, 
+
+I need to create a VBA macro that would open up a file picker window and allow the user to select the correct data file. Then copy the range of the selected file to the main excel file. The problem is sometimes the new data file has columns out of order which would mess up formulas in the master file if I do a straight copy and paste. How do I make sure copy the columns my column header?
+
+
+-------------
+The range object has a Find function which will return another range object that contains the text that you're searching for. If you want to find the column that contains the given header text, you could do something like this:
+
+    Activesheet.Rows(1).Find("ColumnHeader").Column
+
+There are other parameters in there too if you want other restrictions (e.g. making the search case sensitive). [Check out the Microsoft documentation on the function for more details.](https://msdn.microsoft.com/en-us/library/office/ff839746.aspx)
+-------------
+If the column headers are always the same name you can do variables in your vba for them. Make a FOR loop with a counter. Use that counter to incrementally move across the columns looking for the names of the columns. IF statement catches the name and you assign whichever number the column counter is on assign that to the variable name associated with the column.
+
+
+That probably doesn't make a ton of sense...I'll try to edit later when not on mobile.
+
+Edit:
+
+    For iCol = 1 To Sheets("Main").UsedRange.Columns.Count
+        If Sheets("Main").Cells(1, iCol).Value = "First_Name" Then FName_col = iCol
+        If Sheets("Main").Cells(1, iCol).Value = "Last_Name" Then LName_col = iCol
+        If Sheets("Main").Cells(1, iCol).Value = "Address" Then Address_col = iCol
+        If Sheets("Main").Cells(1, iCol).Value = "City" Then City_col = iCol
+        If Sheets("Main").Cells(1, iCol).Value = "State" Then State_col = iCol
+    Next iCol 'Move to the next column until all columns are read
+
+I rename the sheet to "Main" elsewhere but you can make it "Sheet1" or Activesheet. Then you can just use your column variable names everywhere you used to use the hard-coded column number. I'm not sure it's the greatest solution as I'm still pretty new at this but it works for me for doing almost exactly what you're describing. Good luck.
+
+

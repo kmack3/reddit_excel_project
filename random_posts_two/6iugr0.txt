@@ -1,0 +1,26 @@
+6iugr0
+What is the name of the method I would use.. Marco?
+Forgive my newbness.
+I have a spreadsheet 3000 rows, about 8 columns.  The data is generated from a report.  I run the report weekly. 
+
+I want to be able to run a few formulas in succession to clean up the sheet to be ready for further processing..
+
+I will be adding new data to the existing spreadsheet in an effort to capture new rows, and changes to certain values.
+
+things like
+1.compare new data against existing data, and bring over complete new line for unique entries.  also bring over 1 column from every other line.
+2.Delete entire row if it has certain key words in it.
+3.add 2 columns, and populate them with sums and percentages.
+4. color code a cell if a value has gone up or down.
+
+what would be the best way to accomplish (most of) these tasks easily?
+thanks!
+
+
+
+-------------
+Macros (so, VBA code) were made to do that. Excel has been moving a lot towards data processing with Get & Transform (Power Query prior to 2016) which I believe can also can do this. There's a nice graphical front end, then a whole language ("M", so not VBA) behind it that you can edit.
+
+I would probably do VBA myself, but I've done VBA before and there's a huge library of support (100 other people have done exactly what you're trying to do, at least any one particular step) via Google.
+
+*edit*: Meh, M doesn't seem to have loops... so yeah, VBA.

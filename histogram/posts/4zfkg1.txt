@@ -1,0 +1,95 @@
+Remember that LPT that said you should write down all the due dates in your college syllabus'? Well I took that a bit to heart...
+Bonus pro tip: make sure to update it if the prof hands out an updated syllabus. A couple friends got burned because they neglected to do that
+Consider creating a Gantt Chart showing the days required to complete the assignment (or prepare for the exam). That way you don't just see items on the due date, but rather leading up to the due date.
+This would have helped me stay organized in school. I was never one for planning and the habits I never developed are haunting me now. I'm doing my best to change that, hah!
+
+Keep it up!
+Can you send me the file? I am interested in how you did this exactly. I mostly use vlookups for work and hoping to expand my knowledge
+Please share that template with us when you're satisfied with what you've got - fellow disorganized student.
+Can we please get a template of this? My classes are starting soon and I'd really love to use this.
+I'd like to try to recreate this as well. Would be great to see a copy. 
+You can add a column for grade received..
+Love. Wow.  Going to make this right now.
+
+Not one class in my 7 years of college listed assignments on the syllabus.
+Hello,
+
+I was wondering if you had a link on how to do this? (i wish to do this for my 3rd year of university. Time management is not my strong suit)
+[deleted]  
+ ^^^^^^^^^^^^^^^^0.7329 
+ > [What is this?](https://pastebin.com/64GuVi2F/00699)
+Thank you for the file, great work
+
+Download isn't working for me. Anyone have a mirror?
+Drop down list of dates for the search bar would help.
+These are just some suggestions that i would think make your calender more helpful
+edit: hiding columns on the right side as well would help others too
+edit2: http://www.fontstuff.com/excel/exltut03.htm (calander funciton) would be cool
+It's calendar
+Bonus bonus pro tip: customize and sell to classmates == Profit!!
+Been there done that. Missed a final because of it. Thought I would have to retake the class but was able to convince the professor to forgive my stupid mistake and take it a day late. 
+I'll never forget it either. Ran into a classmate at a bar and he asked how I did on the final. The oh shit moment I had right there...
+Sweeeet sounds good! Thanks for letting me know.
+Ooo. I haven't heard of that type of chart before. Just looked it up and yeah, it looks extremely useful for project management.
+Sure! I'm not home atm but I can send it over once I am 
+Hey here's the file!
+http://www.filedropper.com/fallhomeworkcalendar
+Yeah for sure. I'll send I over once I get home 
+Yo I just uploaded the file. You can view it here
+
+http://www.filedropper.com/fallhomeworkcalendar
+Here's the file!
+http://www.filedropper.com/fallhomeworkcalendar
+I just added the file download to the main post.
+
+To sum up the formula without out getting into to much detail, it's essentially an array formula that looks at the date in Column B then compares it with every date in the table due date column. 
+
+Doing this will get you a result similar to ={FALSE;FALSE;FALSE;FALSE;**TRUE**;FALSE;FALSE}
+
+So then to weed out the "False"  values, you use just an =IF() statement. To index the "True" values, you use the =ROW() function which will return the row value of each of the "Trues".
+
+Once you know what row the correct date is in, all you need is the =INDEX() function to bring in the correct data.
+Not sure of how many college students would be willing to actually pay for this lol.
+I managed to do that using the old fashioned method, ie writing it in on the wrong day in my diary. Thankfully they let me make it up...
+Oh yes, it is *the* chart for project management.  You can also identify dependencies among tasks, etc.  
+
+I think newer version of Excel may have gantt Chart as an option, but if not look into how to use a horizontal stacked bar chart to simulate a Gantt chart...a great way to learn even more about Excel.
+One fun way to model this is to do a Auto-Color if certain cells are activated. You can control which bars are highlighted using this. I'll actually create it down to the day and then compact all the cells with equal widths together to zoom it out. Makes it very accurate and easy to update. 
+
+The way I activate cells is just simple 1's and 0's that appear if the qualifications are met, such as the sum of the line is less than the length in days of the assignment. 
+I would love it if you could send me a copy of this as well.  
+I would like to see it too. Maybe you can create a dropbox link? That way everyone can see.
+I also would love to see it.
+Could I have the file too? Thanks!
+Same for me, I'd be pretty interested in figuring out how that works since that formula went way over my head.
+thank you so much!
+Thanks so much!
+you sir are a legend. I can not give gold but i sure as hell can stalk your past posts and up-vote you!
+Would you mind going into more detail? I'm looking at the formula and I'm trying to figure out the purpose of the SMALL function in regards to the rest of the formula. I'm not too familiar with arrays, but could this have been done with SUMPRODUCT()?
+If you added some vba components and prettied it up, I guarantee you could sell to classmates. Slap a little macro together that emails and texts you reminders, have an easy to use interface that makes adding/removing tasks simple, and add a couple nifty charts to show progress vs. plan. After graduation show that to prospective employers and you'll be in like flint.
+Absolutely none!... There goes my plan...
+
+Edit: now to think of it, i wouldn't have bought it either.... =/
+If it costs more than a sharpie and a desktop sized calendar...
+Outside of Excel there's also Project Libre (as in Free version of Microsoft Project) and a slew of other free Gantt/project management tools. I only checked out a couple but I like Project Libre
+Hey! Here's the file download for the calendar.
+http://www.filedropper.com/fallhomeworkcalendar
+The SMALL function's purpose is to order the values in a list without blanks.
+
+It's a bit difficult to explain but this video is comparable to what I did:
+
+https://www.youtube.com/watch?v=5BWKJ5VuMfU
+
+If your interested in array formulas, I'd definitely look through the rest of this guy's videos. There a bit advanced but everything I've learned about array formulas has resulted form watching through this guys series.
+That sounds like an awesome idea! I actually do know VBA (to some extent) so adding in the code I don't think would be to difficult for me. The dashboard could definitely improve in terms of look though, even if I do improve the layout I probably still wouldn't sell it. (I'd probably just give it away for free tbh.)
+
+Showing it to possible employers is a cool idea too. Luckily, I already work in a position that allows me to use Excel pretty extensively; so if I did end up getting a new job, I'd probably have cooler things to show them. 
+Yeah, just search the app stores for student planners. There's a good market there.
+what's the vba code to send reminders to email?
+Drat!
+Cheers!
+Check out Ron de Bruin's email code if you're not already familiar. Using that as a base seems to work more often than not. Texting is as simple as sending an email to phonenumber@carrier.extension. For example, if you have AT&T it would be 1234567890@txt.att.net. Just google 'text via email' and you can find all carriers. 
+
+What line of work are you in? Being organized is a sought after quality regardless of the position, and a proven system definitely checks that box. From experience I've seen that an ability to create functional templates with solid code in the background that have intuitive UI leads to quick promotions. For reference, I've interviewed around 50 financial analysts in the last year. The few who have come in prepared with samples and are able to articulate the purpose and architecture of their models all received an offer within days. 
+Wanna try to collaborate on something like this? My GF just started her masters program and I'm sure this could help her out. ;D
+OP could have made millions if it wasn't for those pesky kids.

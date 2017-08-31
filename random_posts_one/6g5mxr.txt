@@ -1,0 +1,25 @@
+6g5mxr
+need to search entire row for text string and, if found, copy that particular cell into a new cell
+Hi,
+
+I need to search an entire row (hundreds of columns) for a particular string. If the string is found, I need to copy the entire contents of *that cell* (whichever cell it was found in) into a separate cell.
+
+The string I'm searching for is 'branch id:'. That string is always followed by the ID number I need; e.g., 'branch id:17'. As I said, that string could be found in any one of about 300 columns.
+
+Thanks,
+
+
+-------------
+=index(A:A,match("*branch id:*",A:A,0))
+
+"Since this is a formula problem, might be easier if you upload your sheet to Google sheets and use the add-ons feature and add Formula Helper. I'm using it myself. It looks for complicated formulas and helps you to solve it."
+-------------
+I think OP would need to change your formula to   
+
+    =index(1:1,0,match("branch id:*",1:1,0))    
+in order to search the row rather than the column.  
+Also need the * wildcard so that it will match the partial string.
+-------------
+Thanks guys :)
+
+/u/unkmunk is absolutely correct about the row and wildcard

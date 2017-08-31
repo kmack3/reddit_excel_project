@@ -1,0 +1,29 @@
+6iel2a
+Creating Macro that automatically Refreshes All Data
+I want to create a macro that will refresh all the data that is being "Pulled from web" across all spreadsheets.
+
+
+-------------
+Use the recorder
+-------------
+Yeah I could, but that gets messy, like it shows (albeit microspeed) switching between sheets and cell movements
+-------------
+That's easy enough to fix. After recording it just wrap the code in this:
+
+at the beginning
+
+     Application.screenupdating = false
+
+Then at the very end
+
+     Application.screenupdating = true
+
+-------------
+great thanks!
+solution verified
+
+-------------
+
+You have awarded one point to _Knowakennedy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

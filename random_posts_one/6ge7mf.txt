@@ -1,0 +1,23 @@
+6ge7mf
+Wondering about a formula in a spreadsheet that was given. Number > comma > rows
+=SUBTOTAL(9,V2:V3054)
+
+Trying to figure out what the '9,' is for. Something isn't adding up, but if I try to remove the 9, it doesn't accept. 
+
+Thanks for the quick answer everyone!
+
+
+-------------
+[Does this help?](http://i.imgur.com/Qxo2XJn.png)
+-------------
+Its a function number for SUMing the range
+
+`SUBTOTAL` does a lot of different totals. [see help file here](https://support.office.com/en-us/article/SUBTOTAL-function-7b027003-f060-4ade-9040-e478765b9939)
+-------------
+>Method: The type of subtotal to create.
+
+There's a list on the site I linked below. That first number is essentially a code that determines which *type* of subtotal you want (average, count, max, min, product, etc.).
+
+https://www.techonthenet.com/excel/formulas/subtotal.php
+-------------
+"SUBTOTAL", "something isn't adding up". Unintentional joke?

@@ -1,0 +1,25 @@
+Excel freezing multiple times a day, becoming either a static screen or all menus etc. disappearing
+Intel graphics? - disable hardware acceleration from the advanced portion of the excel menu. also rotating your screen (ctrl + alt +left ) or force reffreshing the display driver will fix it.
+Could be related to this
+
+https://www.reddit.com/r/excel/comments/5bjjld/anyone_ever_have_excel_program_partially_freeze/
+\* Apologies, error in the title. The menus don't disappear - it's everything *but* the menus disappearing (as per the screenshot)
+I have the same issue periodically, and it is not a resource issue. I'll try to grab a screenshot of my task manager next time it happens. I'd be curious to see if your issue is resolved by watching out for other resource heavy software.
+
+ I'm working on Excel 2016 32 bit on Windows 10. 
+Is it ONLY Excel? How about the other programs?
+
+Because the first thing I'm suspecting is you got hit by malware.
+I was having the same problem as well, and rotating the screen has solved the problem! Thank you so much!
+VERY interesting thought there. Yes, Intel Graphics (XPS 13 laptop) and when I just clicked to disable hardware acceleration it had the error for a split second and then stopped. I'll report back to see if it happens again. Thanks so much. 
+It's greyed out but ticked for me. What does this mean?
+Graphic issue has somehow caused lots of excel problem in my work place (but first place goes to 15MB+ excel file). Usually disable acceleration fixes it but I have a case that I have to disable intel's driver complete and use windows' VGA driver instead.
+Just to follow up - this was the solution!! I'm incredibly grateful for you taking the time to answer. This has already saved me (and my colleagues) a huge amount of frustration. 
+
+Thank you, thank you, thank you! 
+This sounds exactly like the problem I'm facing! That makes sense that it's Chrome eating up all the resources and causing Excel to break (and actually sounds obvious now that I think about it!)
+
+Thanks so much! 
+Yes, it's just Excel. According to the thread linked above, it might just be Chrome being a resource hog and causing Excel to break. Thank you for the suggestion though. 
+I would guess its.set for you by group policy speak to your it admins
+Happy to help, we had the same problem but happened to get a display driver has stopped responding message when also using our webex client which led us down the right path luckily

@@ -1,0 +1,70 @@
+crash
+6f14y3
+Excel crashes when opening macro-enabled files.
+
+Does anyone have a good solution for Excel crashing when opening macro enabled (XLSM) files only? This issue started 2 days ago (6/1). It started completely out-of-the-blue, and I have not made any changes to my system recently. There was a Windows update that installed on 5/31, but the problem persists even after I uninstall that update.
+
+
+The top solutions through a Google search have not resolved the issue. I’m posting here to see if anyone has previously encountered this and has a solution.
+
+
+Here’s what I know:
+
+-	System: Windows 10, up-to-date (KB3150513 on 5/31); Excel 2016 through 365 subscription, up-to-date.
+
+-	Issue began on 6/1.
+
+-	Most xlsm files will crash (Message: Microsoft Excel has stopped working). Most times, it will crash right after attempting to load the file. Occasionally, it will open the file but will crash.
+
+-	Some very basic xlsm files will work. Not 100% confident on this, but it seems like only files with Worksheet events or more than 1 module will crash.
+
+-	I’ve tested impacted files on my work computer and they work fine. Same version of Excel, but uses Windows 10 Enterprise Edition. This means that it's an issue with my Excel/Windows 10 settings, but I haven't changed any settings in months.
+
+-	The above points indicate that my files are not corrupted.
+
+-	My VBA is solid and only includes the default libraries.
+
+-	I have not made any significant changes to my system recently (I use it mostly for Excel). I haven’t accessed any dodgy websites or made any program downloads or installs. Virus and malware scans check out.
+Here’s what I’ve attempted so far:
+
+-	Guidance provided by Microsoft did not resolve the issue. Deactivated and uninstalled all add-ins, did a repair, changed default printer, and even did a manual uninstall/install.
+https://support.office.com/en-us/article/I-get-a-stopped-working-error-when-I-start-Office-2016-or-2013-applications-on-my-PC-52bd7985-4e99-4a35-84c8-2d9b8301a2fa
+
+-	Various non-Microsoft solutions did not resolve the issue, including deactivating VBA on demand compile, changing document trust settings, temporarily saving as xlsx, etc.
+
+-	Uninstalled all programs that interact with Excel (Visual Studio 2015, Visual Studio Tools for Office)
+
+-	Confirmed that add-in junk was removed from registry.
+
+-	Uninstalled the 5/31 Windows Update.
+
+Here are my current work-arounds.
+
+-	As of yesterday, I could open impacted files with a 50% success rate if I opened it through excel while a xlsx file was open. This no longer works today.
+
+-	As of today, I can open impacted files (3 attempts, all successful) if I opened it through Excel with a very basic xlsm file running (permits macros to be activated when the basic file is opened).
+
+
+These work-arounds are not ideal and do not seem to be stable, so any advice on long-term fixes would be welcome. May try a full system restore later today. Will post updated if I figure out a fix on my own.
+
+
+
+-------------
+If you're still grasping for straws, try getting rid of all ActiveX (if any) components in one of your files.  I think they are evil... deleting them has brought some of my dead files back to life. 
+
+Also, have you tried deleting *.exd from your system?
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

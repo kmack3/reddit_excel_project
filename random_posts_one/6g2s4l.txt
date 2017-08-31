@@ -1,0 +1,35 @@
+6g2s4l
+Is there a way to merge rows of data so that if any cells in on row contain data, but the cells in the same column of a different row are empty, the merge will retain the data? (Example included)
+I have combined two tables of data, all contact information. I plan to remove duplicates from the list based on email address. 
+
+But I want to retain any other data associated with that email address. 
+
+Here is an example: http://imgur.com/a/jSXD1
+
+Doing it one by one, though, would take far too long since it is over a thousand rows of data. Are there any tools out there can facilitate? 
+
+
+
+-------------
+Power query - "fill down"
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+Remove email duplicate, then index match
+
+    =INDEX($B4:$B5,MATCH($A11,$A4:$A5,0))
+
+Drag across and down

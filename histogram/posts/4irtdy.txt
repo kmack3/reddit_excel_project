@@ -1,0 +1,17 @@
+How to hide SQL server credentials from user?
+Admin can setup additional DB accounts with limited access to data (usually a database view). You can then use those accounts and share them with users.
+
+Another option is to run a non user accessible workbook that generates another workbook that has a snapshot of the data that users can see (basically a database view, the hard way). User spreadsheets will in turn reference that sheet for all their queries.
+Use trusted connectivity.  Instead of passing a username and password, have them create or reuse Active Directory groups for people who have access, and map SQL accounts to those users.  The connection string for that setup doesn't expose any credentials.  Plus, this way, access is automatically given to someone who is added to the group and denied to someone who is removed.
+Do you have a SharePoint site? You can set up an odc connection and point Excel towards it.
+
+https://technet.microsoft.com/en-us/library/jj900485.aspx
+This sounds perfect! Do you have any recommend learning resources?
+Nooooooooo! Fuck everything about SharePoint 
+http://stackoverflow.com/questions/5029014/how-to-add-active-directory-user-group-as-login-in-sql-server
+
+You may need to make sure the server is part of the domain for it to work.
+
+You can use Groups instead of usernames. +limit what the users of that group can see/execute.
+I like this attitude.   
+Also, on topic, Database view and an account with login restriction will do.  This require no extra administration or interface handling and will do the trick. 

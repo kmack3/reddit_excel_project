@@ -1,0 +1,71 @@
+Is it possible to enable Macros to be used in every excel file?
+Add the macro to a Personal.xlsb worskbook. This workbook will automatically open every time you open excel - just make sure to hide it or else it gets annoying. 
+
+Hard format on mobile so here's a link:
+https://support.office.com/en-nz/article/Copy-your-macros-to-a-Personal-Macro-Workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566
+Enable them in the trust center.
+
+https://support.office.com/en-nz/article/Enable-or-disable-macros-in-Office-documents-7b4fdd2e-174f-47e2-9611-9efe4f860b12#bm2
+https://support.office.com/en-nz/article/Copy-your-macros-to-a-Personal-Macro-Workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566
+
+This is what I do. Thoughts?
+A few things...
+I use my own add-ins to do what you're asking. I name them in a way so that I know what they are, e.g., sub zz_readable_name. I then add the macros to a custom ribbon. I actually save the add-in on the network share, and share them with co-workers.
+
+That said, you don't need to use an addin, as you can use personal.xlsb as well. MS's site has some good instructions for beginners, and intermediate users: [assigning a macro to a button](https://support.office.com/en-US/article/Assign-a-macro-to-a-button-728C83EC-61D0-40BD-B6BA-927F84EB5D2C)
+
+If you want to go with the add-in route:
+
+* Save the file with the macros as an Excel add-in file ( .xlam). The file type is towards the bottom of the list of file types in the save\save-as window. You can now close the file.
+* Go to File - Options - Add-ins
+* At the bottom of the Add-ins window, you'll see the label Manage, and the drop-down  box should default to Excel add-ins (if not switch to it). Press the GO button.
+* Press the browse button, and navigate to the Excel add-in file you just saved.
+
+Or go here to read about it on MS's site - minor variations by version of Excel. You will need to save your macro file as an Excel add-in file first.
+
+Excel 2010 | [add-in](https://support.office.com/en-sg/article/Add-or-remove-add-ins-0af570c4-5cf3-4fa9-9b88-403625a0b460#bmexceladdin)
+
+Excel 2013 | [add-in](https://support.office.com/en-gb/article/Add-or-remove-add-ins-64d3d147-98fb-4b82-8833-709d54e3ace1#bmexceladdin) 
+
+Excel 2016 | [add-in](https://support.office.com/en-nz/article/Add-or-remove-add-ins-64d3d147-98fb-4b82-8833-709d54e3ace1?ui=en-US&rs=en-NZ&ad=NZ#bmexceladdin)
+
+Some quick and slightly dirty macros I have in my add-in that I have in a custom ribbon...
+
+* Convert formulas to values (using range.value = range.value, not copy paste)
+* Convert formulas to append =iferror(,0) and =iferror(,"")
+* Change formula view from A1 to R1C1
+* Save without calculating
+* Change settings back to normal; screenupdating = true, displayalerts = true, statusbar = false, etc.
+* several buttons to quickly change pivot table value formats
+* some extremely task specific macros that changes views (hides columns, does not actually use saved views), applies filters, etc.
+I would recommend making your macro work book into an Excel Add-In as opposed to trusting every macro. 
+Thank you.
+> Solution Verified
+
+
+I have enabled all macros and check 'tursted access to the VBA project object model' and I still can not access the macros
+> Solution Verified
+
+
+could you please explain how to do this?
+
+You have awarded one point to _skleegro_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Ah right, I think I misunderstood.
+
+Add the macro to your personal workbook and then it'll be available in any Excel file you ever open.
+
+http://www.rondebruin.nl/win/personal.htm
+
+You have awarded one point to _Valtyr8_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Thank you for your help.
+> Solution Verified
+
+
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

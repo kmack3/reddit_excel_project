@@ -1,0 +1,139 @@
+6fwkeo
+It is quite easy to unprotect without a password a password protected worksheet. Is it possible to prevent this?
+I bought Excel 2016. It was said that we can protect our worksheets with Excel. However, as explained on youtube, when I rename an excel file as .zip and within the .zip file if I rename the relevant worksheet as .txt and edit it and delete the part related to protection and then rename it as .xml and then rename .zip file as .xlsx then reopen this file, then within seconds the file is as if it was never protected with password. I am quite disappointed with this.
+
+ 
+
+Is there any way to really protect a worksheet?
+
+
+Regards,
+
+(Edit: I want to make the file usable in terms of calculations, but restrict the access to and sharing of the contents of some models/formulas in some worksheets. So I need to share the file password but keep contents of some worksheets inaccessible to users.)
+
+
+-------------
+Yes. You encrypt all data in all cells with VBA.
+
+But encryption is a tricky businesss...
+
+Why do you want to protect the data? For data transfer?
+-------------
+AFAIK that method only works if the workbook or worksheet is password protected, but not encrypted. Excel 2016 allows you to encrypt the contents of your entire workbook, and you can't hack your way through that.
+-------------
+No, not really. If someone is determined enough they will be able to unprotect the worksheet through methods such as the one you describe. 
+
+Protection is really there to protect against accidental/ignorant interference, not malicious interference. If you can't trust the people who will be using your worksheet not to try to break the protection, you probably shouldn't give them access to it at all.
+-------------
+No.
+
+FWIW, it's easy to crack worksheet protection and other internal passwords. See https://www.extendoffice.com/documents/excel/1430-excel-recover-password.html and http://www.mcgimpsey.com/excel/removepwords.html.
+
+The ___ONLY___ strong passwords Excel provides are Workbook Open passwords. ___ALL___ internal passwords are weak.
+
+Like it or not, if you need to protect sensitive/proprietary data and/or calculations, you shouldn't put your IP into Excel workbooks. If a user can OPEN an Excel workbook, they can access EVERYTHING in that workbook without much difficulty.
+-------------
+I think he means protection as in protection from editing (review -> protect worksheet), rather than encryption.
+-------------
+> Yes. You encrypt all data in all cells with VBA.
+> But encryption is a tricky businesss...
+
+Is there any place where it is explained how I can do that encryption?
+
+>Why do you want to protect the data? For data transfer?
+
+
+I want to share some Excel files where I want to hide some models/formulations in some worksheets. I need to share file password, but keep some worksheets and their content inaccessible.
+-------------
+>AFAIK that method only works if the workbook or worksheet is password protected, but not encrypted. Excel 2016 allows you to encrypt the contents of your entire workbook, and you can't hack your way through that.
+
+
+You mean file password protection? But I need to share file password.
+
+If you mean another kind of encryption is there any website where I can find some examples?
+-------------
+>Protection is really there to protect against accidental/ignorant interference, not malicious interference. If you can't trust the people who will be using your worksheet not to try to break the protection, you probably shouldn't give them access to it at all.
+
+I know, even file passwords can be overcome. But a reasonable protection that would not be overcome very easily as I described would be great.
+-------------
+> The ONLY strong passwords Excel provides are Workbook Open passwords.
+
+I have to make people use the file, so I need to give file password. So this password is useless for my purpose. But if there was a way to prevent saving the file without file password then this might be also useful.
+
+>Like it or not, if you need to protect sensitive/proprietary data and/or calculations, you shouldn't put your IP into Excel workbooks. If a user can OPEN an Excel workbook, they can access EVERYTHING in that workbook without much difficulty.
+
+I wonder why microsoft did not develop a real worksheet protection. 
+-------------
+Oh lol, you're likely correct.
+
+Could also do that with VBA... (And a password protected vb project)
+-------------
+
+>I think he means protection as in protection from editing (review -> protect worksheet), rather than encryption.
+
+I want to share some Excel files where I want to hide some models/formulations in some worksheets. I need to share file password, but keep some worksheets and their content inaccessible.
+
+-------------
+That really depends how well versed you are with low level programming languages. MSDN is the best place:
+
+https://msdn.microsoft.com/en-us/library/windows/desktop/aa380252(v=vs.85).aspx
+
+However the code here is often extremely low level (unlike VBA). So you need to know how to convert C++ code into VBA code a lot of the time.
+
+If your calculations use formulas you will not ever be able to hide them entirely. Formulas are designed to be visible to the user, which is pretty obvious given that they are shown within the worksheet itself.
+
+To hide calculations completely you have to use VBA or other programming languages. VBA is somewhat a bad choice because many users know where VBA is and know ways around it's password protection. So your better options would be to make COM Addins in VB.NET or C#.NET. It still won't be completely secure, but will be a lot more secure than using formula / VBA will ever be.
+
+To attempt to hide formulae, you can make a worksheet 'very hidden'. Doing such a thing would require the user to have VBA Knowledge to see the formulations, but is still entirely possible. It would also be suspicious when the formulas in the sheet would appear to be referencing a sheet that appears to not exist. It may peak someone's interest and bring more attention to it.
+-------------
+> I wonder why microsoft did not develop a real worksheet protection.
+
+Many have asked that for decades. MSFT would probably claim inadequate demand. Less cynical, spreadsheets really aren't good formats for software and IP distribution.
+-------------
+There is no unbreakable way to do this. I recommend saving a client copy and removing sensitive information before you send it. 
+-------------
+Thanks.
+-------------
+I agree. But if so easily crackable, I think microsoft would not say that the worksheet is protected or that one needs to record the password in a safe place. It is just protecting from changing things accidentally. Anybody can easily view the contents within seconds. And there is almost no need to record the password somewhere safe. Hence, the presentation of the protection even gives me an impression of dishonesty. And even people who are not aware of the easiness to overcome the protection may incur unnecessary harm.
+-------------
+I think MSFT, pretty much agrees, that if you want to protect your Businesses IP, you should be learning how to use the most recent technologies to do so.  E.G.   VSTO
+
+It's outside the averages users expertise, but that's also what makes it the safest option.
+-------------
+Thanks. But if I remove what I want to hide, the file cannot be used at all, though I want them to be able to use it.
+-------------
+A little more than protecting against accidental changes. It's possible to protect worksheets without passwords, and that's protection just against inadvertent changes. Worksheet passwords are protection against possibly innocent curiosity. There's no protection against determined cracking.
+
+There's a group policy setting for minimum Excel worksheet password length, and it's pure BS. Yes, MSFT is being dishonest about this, but FWIW they've been dishonest about this for decades.
+-------------
+Picky: one could embed arbitrary binary files in .XLS[XBM] files, including encrypted files and executables, then save those files as separate temporary disk files and use the executable(s) to read portions of the encrypted file ad hoc via VBA calls. Clunky, but wouldn't require Visual Studio and VSTO.
+-------------
+OK, then I'm afraid there is no way to do that in Excel that cannot be broken. Even some sort of VBA script to automatically reapply worksheet protection would be breakable if they are really that determined to get into the hidden data. 
+-------------
+Thank you. Then I think what microsoft can do is warn that "protection" is only to protect the worksheet from unwillingly corrupting it. And I think the warning on the worksheet password entry box that one should record the password and it is not recoverable is very misleading, and can cause unnecessary harm for those who believe the warning and think that there is at least some reasonable protection.
+-------------
+In the end, every format is crackable. You can write your data in a book of Egyptian hieroglyphs. Few people will be able to read it. Only those who have a lot of time on their hands will be able to, and will do so.
+
+The similar is true for any file format, and even for applications on your computer. You might not have the key to unlock the padlock, but with enough time you can get something that almost looks like the key...
+
+The same is true for applications (.EXE files). Even though you don't have the source code (in understandable English) any application can be decompiled to assembly code. It is impossible to 100% protect something digitally.
+
+That's not to say that protection is useless though. By protecting your workbooks and data you are mainly stopping users 'accidentally' accessing sensitive information.
+
+If you want the most protection over any files you want to send, you are best creating an executable which wraps the Excel document in an encrypted shell. Where some hashed password unlocks the document for that instance of Excel. Alternatively just use a password protected encrypted compressed .rar file. To further increase the data protection you can split the .rar into multiple sub-files.
+-------------
+Thank you.
+
+I am just trying to find out if there is a reasonable protection. Even file passwords can be discovered using some software. But to be able to unprotect just within seconds without sophisticated tools is very problematic. Because this means that too many people can access the models that I develop in a long time. If I reduce the number of people that may access it, that is something desirable for me.
+
+According to my search as of now, I think making the worksheet very hidden and protecting the structure of the workbook and locking the VBA object with password will be useful for my purpose. Or do you think this is also very easily crackable? If so do you have any further suggestion for further protection (I understand full protection may be impossible)?
+
+
+-------------
+You can for sure lock the VBA project with a password, but bare in mind this doesn't lock people out of using VBA. People will still be able to use VBA to inspect your workbook, find your hidden sheets and crack the password protection on the worksheet with relative ease (if they know what they are doing).
+
+VBA project passwords are slightly harder to crack (you need to modify the project in a hexeditor), but again if you know what you're doing you can do it very easily. Hell I'm sure people have made applications to do it within a few clicks!
+
+However if you continue using formulas that is really the best you can do. With that in mind even the encryption wouldn't help, if it were build in VBA.
+
+Bare in mind this does rely on people knowing what they are doing and are semi-fluent and explorative when it comes to VBA. I would say that's about less than 10% of people using excel. You get people on here who are real power users of excel who still know very little about VBA, so you would be pretty safe..

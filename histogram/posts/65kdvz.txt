@@ -1,0 +1,38 @@
+Web data mining with VBA
+I have an open source EXCEL add-in that might help:
+
+http://ogres-crypt.com/SMF
+
+It's basically a collection of user-defined functions that pull data from web pages and data files into a range or cell of EXCEL.
+
+There's currently a problem with Yahoo defined extractions, because they just changed their web pages and I don't have EXCEL available for a few weeks.
+Use VBA to make a GET request and then process the data like Selenium.
+
+    Set objHTTP = CreateObject("MSXML2.ServerXMLHTTP")
+    URL = "http://www.somedomain.com"
+    objHTTP.Open "POST", URL, False
+    objHTTP.setRequestHeader "User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)"
+    objHTTP.send("")
+
+You can also get regex involved if you are really inclined.
+You can use Power Query to get data from the web. Alternatively, you can look here: https://github.com/VBA-tools/VBA-Web
+Someone out there made a Selenium add-in that allows you to use webdriver to call Firefox and Chrome instances. I tried it once but wasn't worth the effort to learn because I haven't run into the shitty IE problems that you are. Look up Selenium wrapper for VBA and see if it alleviates your problem. 
+Depending on what is needed from the incorrectly loaded pages, if the data is still there (just not displayed properly) you could probably use Regex to extract it.
+Sorry for the ignorance, but what methods can I use to get elemtns/data from the web page? Can I use JS/Selenium methods? 
+
+Thanks for the help!
+I've been curious how this sort of thing works for ages, what terms would I research to find out more about pulling data?
+Thanks! I'll take a look at it.
+
+As for my task I ended up using IE with some workarounds to get the data I need (not scalable coding, but it worked)
+I know about Selenium, and I've used it, but it's no longer working
+Nope, the data is not there because it's a JS that loads more data into the page, and for some reason it doesn't work on IE. Anyways, I found a workaround, thanks!
+Ultimately, you're looking to 'interact with the DOM' with your particular tech stack. For VBA, I'm guessing XPath is what you'd research. 
+It's always a bit hard to find exactly what you want, but usually stackoverflow can lead you in the right direction
+
+Usually keywords like "methods" and looking for the kind of objects you are manipulating will give some documentation on what you want
+
+Usually something like "VBA Web Scrape" will get you there. 
+What workaround have you found to solve this issue? It will help to leave the solution in this thread so people searching in the future can find an answer.
+Thanks! I'll be trying this for my next project
+It's too context specific. I just used a different way to get the data - it costed me more hours of programming, but I used the same basic methods. I basically had to explore many different pages to get the same data I would in one page.

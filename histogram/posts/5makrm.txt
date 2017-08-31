@@ -1,0 +1,142 @@
+Why/When should VLOOKUP used versus INDEX+MATCH?
+Never, INDEX/MATCH is superior in every situation. 
+i use VLOOKUP sometimes just because it's quicker to type, assuming that the data is set up in the right way. otherwise i go with INDEX MATCH.
+Oh, dear. There has been much debate on this topic. I'll give you my take:
+
+**Basics:**
+
+INDEX/MATCH is necessary in two use cases:
+
+* the quantity sought is situated to the left of the key
+* the key sought does not exist in a single column
+
+When the quantity sought is placed to the right of the key (or is the key itself), and when the key is in a single column in the lookup table, either INDEX/MATCH or VLOOKUP is sufficient. 
+
+**Performance:**
+
+Assuming each method is equally qualified in a use case, we can talk about relative performance. Performance studies have been done. [Here is mine](https://www.reddit.com/r/excel/comments/4jea6j/vlookup_vs_indexmatch_showdown/). 
+
+My test was not exhaustive, although it was exhausting. I exhausted my personal interest to drill any further. 
+
+The result? From a performance standpoint, pick one, it doesn't matter. Benefits on either side are marginal, if they actually exist. I do not ascribe to the antithetical point of view that INDEX/MATCH is inherently superior when either method will work. 80% of the time VLOOKUP works, so that's what I use. 
+Forgive me father, for I have sinned. I used VLOOKUP today because I was just going to paste values anyway, and it was faster to type.
+One benefit to INDEX/MATCH over VLOOKUP that people don't often mention is that VLOOKUP completely breaks Trace Dependents. Let's say you have a formula: =VLOOKUP(A1,B1:D5,3,0)
+
+If you do a trace dependents on any cell in C1:C5, it will show up as being depended upon by that VLOOKUP, even though it doesn't need any value in column C. Game. Set. MATCH. ;)
+While not scientifically sound, I do use VLOOKUP in very small and simple lookup tables. Because why not? :)
+I can type out the formula for VLOOKUP in 2-3 seconds without thinking about it and troubleshoot it immediately if there is a problem. INDEX/MATCH is alright, but it's brought up so often that I think I'm in r/ExcelCirclejerk
+Vlookup for temporary analysis and Index-Match for ongoing reports. 
+I usually use index-match for the reasons previously mentioned except for when I need to do a two-dimensional lookup (i.e. Looking up a value by dynamically matching the row AND column), for which I haven't yet found a method using index-match (which matches a variable row against a static column). If there is a way to do 2-D lookups with index-match, I'd love to learn it. 
+Most of the time I use VLOOKUP because most of the time I have named ranges and tables of only 2 columns to look up so it is a lot easier to remember/type. 
+
+I only use INDEX MATCH if I can not use VLOOKUP
+
+I do use the the occassional INDEX MATCH MATCH. 
+
+
+> INDEX/MATCH is superior in every situation
+
+How do you qualify this? Why is it superior? 
+I frequently hear of people (at work) explaining how to solve issues with VLOOKUP, which I then nearly immediately attempt to teach INDEX/MATCH to those same people.
+
+I'm uncertain why VLOOKUP is taught so often, other than perhaps because it is a single function, as opposed to two.
+
+Thoughts?
+I'd disagree. Vlookup is better when other people will eventually take over the sheet
+Awesome answer, thank you!
+
+I primarily asked out of both curiosity, however, when I have workbooks with hundreds of thousands of INDEX/MATCH's in them, I sometimes wonder if there is a better way to do things (besides creating a real database ;))
+With INDEX+MATCH you can use an "&" and have multiple lookup criteria. Can you use multiple criteria with VLOOKUP? Also, INDEX+MATCH can do what HLOOKUP does too.
+I'm new to r/Excel and figured since I happened upon a group that may know the answer, I'd ask. =)
+
+Personally, I've always used INDEX/MATCH so, to me, it's simpler than VLOOKUP due to my familiarity with INDEX/MATCH.
+Unless I am misunderstanding what you want to do, INDEX(2D_lookup_range, MATCH(...), MATCH(...))  ought to work. The second match will find the column position. 
+Unless I am misunderstanding what you want, INDEX(2D_lookup_range, MATCH(...), MATCH(...)) ought to work. The second MATCH will find the column position. 
+1. It works in both directions
+
+2. It's easier to copy across cells
+
+3. Taylor Swift told me so 
+If I use a spreadsheet more than once, or if I have a lot of columns, Index/Match is much easier for me to update and debug.  Saves time when I have more than a few columns or need to insert a new column in the data (and thus bork any Vlookup functions).
+[deleted]
+I read somewhere that index match is supposed to be more memory efficient for large lookups.
+Vlookup is quicker to type and easier to understand the concept of. 
+Yeah, it's generally easier to remember, and is just one function (I used to had a hard time remembering the order of things personally). There's also just inertia - VLOOKUP has been around since Lotus 1-2-3 (before Excel) and LOOKUP was around before that in VisiCalc, so that's like nearly 40 years ago (LOOKUP, by the way, works as VLOOKUP or HLOOKUP, depending on the height/width ratio of the table, so they introduced the V and H versions to allow you to specify the direction).
+
+But yeah, MATCH uses all the same search logic as VLOOKUP (a binary search starting in the middle [which is why this returns C](http://i.imgur.com/g559QJQ.png) and [this returns 3](http://i.imgur.com/yxWQxtO.png)) so I don't think it's any faster or slower.
+Agree, while Index+Match may be the superior option in many cases Vlookup is way easier to understand, type and repair for muggles.
+If you encounter performance issues with either, then that's nature telling you to go RDBMS.
+> the key sought does not exist in a single column
+
+he covered your point for index/match in his post
+Beautiful! And somewhat more intuitive than the vlookup route, although a little more to type. Thanks for the tip! 
+I'm upvoting because Taylor Swift!
+
+But seriously (and I actually did upvote), I agree there are certain advantages you mentioned... but how often do those advantages actually matter? My contention is that INDEX/MATCH is necessary for those reasons about 20% of the time (and I'm being generous there).
+Also, it moves with the columns. If you insert a new column in your source data, you don't have to go back and increment the column index. 
+That's a good example of when VLOOKUP and INDEX/MATCH are not equally qualified. In this case, I agree, INDEX/MATCH is superior. 
+
+
+I disagree there is no advantage. I covered my reasoning elsewhere in this discussion. 
+
+I already covered left vs. right placement of the key, but I agree you have a couple good use cases for INDEX/MATCH here:
+
+* more reliable addressing 
+* the number of data columns makes it unintuitive which one is being selected with VLOOKUP (you could combine VLOOKUP and MATCH for that, but even I do not go there)
+
+In fact, now that you bring it up, I recall I *did* use INDEX/MATCH for the reasons above, at least for a short while. But then E2007 was released, bringing us tables with addressable columns. Most of the cases where I might have used INDEX/MATCH for the reasons above were supplanted by SUMIFS and COUNTIFS. I realize this does not work for text, but I rarely have to worry about that.
+Citation needed. 
+
+If someone has a repeatable test that supports this claim (and why it matters), I have yet to see it. 
+
+Don't believe the hype. Test it yourself. 
+You spilled and spelled out a great case for VLOOKUP!
+
+Not only is this true:
+
+> Vlookup is quicker to type and easier to understand the concept of
+
+Additionally, it's easier to learn for newer users, who are trying to grasp the *concept* of a lookup function in the first place.
+
+VLOOKUP requires remembering four things. INDEX/MATCH *in toto* requires remembering more. Moreover, nesting functions elevates the learning difficulty to a new level because of the logical abstraction. 
+
+When VLOOKUP and INDEX/MATCH are equally qualified in a use case, there is no material performance benefit using one vs. the other. 
+
+Assuming VLOOKUP and INDEX/MATCH are equally qualified in 80% of use cases (and I'm being generous), why not choose the simpler solution?
+Wouldn't
+
+    =MATCH(5,A1:A5,0)
+
+Be 1?
+
+I almost always qualify my MATCH statements so that I get the first occurrence. Perhaps it doesn't actually work this way though. I reserve the right to be wrong ;)
+We are all muggles at Excel once upon a time and it's not like INDEX MATCH is such wizardry that lesser mortals cannot learn it. Probably all the more reason to not use VLOOKUP if the workbook will be shared with others for them to update.
+And when nature calls you for that, you'd better walk, not run!
+True, my mistake. 
+But there's no reason to ever use vlookup over index/match, so why use two different formulas at different times?
+TBF you can do this with VLOOKUP if your clever about how you specify the column number.
+http://www.exceluser.com/blog/727/excels-fastest-lookup-methods-the-tested-results.html
+
+It's a bit dated though
+With a `,0` it's 1, yeah. In the default mode (with no 3rd argumet, or TRUE), MATCH and VLOOKUP assume the data is sorted, so it divides the range in half and looks at that middle value and decides to go up or down based on that. It makes the search much faster (if the data is sorted) vs checking line by line in order. In my example 3 is halfway between 1 and 5, so it find row 3, sees it's 5, and since they return the last result that is higher than or equal to the value, it goes up to halfway between 3 and 5 to see if it's a 5 or higher. It's a 4, so it stops, and returns the last result >=5, which was 3.
+I do not agree 'formula X is redundant because of formula Y, therefore formula X should not be used' is a reasonable argument. There might be reasons why 'formula X' is preferable: E.g., accessibility (for newer users), simplicity, and no material benefit for choosing formula 'Y'. 
+
+Ed: I am assuming here that 'formula X' is sufficient, and I am asserting that is the case 80% of the time (and I'm being generous).
+Thanks for linking this! To summarize the results of that reference, which was written by Charley Kyd:
+
+* It's about timing, not memory use, which is fine.
+* In a challenge using unsorted data and an exact match (to me, the most likely and practical scenario), INDEX/MATCH wins with a calculation time that is 3% quicker than VLOOKUP. Sounds reasonable to me, but I can't discern from the article how many trials the result is based on.
+* Using sorted data and an exact match, INDEX/MATCH wins again, 12% faster. What I don't like about this test is the unnatural way Charley created the exact match formulas by throwing in an IF and an extra lookup. Moreover, the timings were sub-second for 5000 formulas (but we still do not know the number of trials), so the difference is small in absolute terms. 
+
+In the end, Charley's results are in favor of INDEX/MATCH, but do not align with my tests very well, especially in the most likely/most useful case, which is unsorted data and exact match.
+
+There are differences between our tests:
+
+* My test did not have overhead from volatile formulas whereas Charley's did
+* My trials consisted of 10,000 lookups vs. Charley's 5,000
+* My test results reflected 40 iterations whereas we do not know how many iterations Charley did (if I missed something there, please let me know)
+
+My test is linked elsewhere in this discussion.
+I'd say I use index match 95% of the time. I would agree with you though. Vlookup simpler to learn and read. And when you're sharing books with other people, that trumps nearly all the positives of Index Match.
+The biggest best difference for me is the fact that index/match can find things to the left of the column where the formula resides. That restriction in VLOOKUP is arbitrary and outdated IMO. 
+This is why I use vlookup. It was easier for me to learn at first, and anything more will confuse all my coworkers. They basically distrust formula usage in Excel...

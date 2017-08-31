@@ -1,0 +1,7 @@
+I have dates in format 2017/dayofyear/HH:MM:SS, how do I extract the day of the year?
+If string in A1 `=MID(A1,6,LEN(A1)-14)`
+If the data is an actual date and not a string you can use =DAY(data).
+Thanks I'll try this. 
+It's not an actual date. Thanks though. 
+Please change the question flair to Solved if you have your answer.
+I will, I haven't had the chance to try it yet.  

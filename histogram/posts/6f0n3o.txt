@@ -1,0 +1,36 @@
+Using variables from called procedures
+You could replace all three of them with this function:
+
+    Public Function SearchCol(SearchStr As String) As Long
+    Dim c As Long
+        For c = 1 To 26 'search cols A-Z
+            On Error GoTo Err
+            If UCase(Cells(1, c).Value) = UCase(SearchStr) Then
+                SearchCol = c 'if match is found then exit the function
+                Exit Function
+            End If
+        Next c
+    Err:
+    SearchCol = 0
+    End Function
+
+You would still need the three variables to hold the column number but you can use it like this:
+
+    FoundColumnQ = SearchCol("Quoted?")
+    FoundColumnM = SearchCol("Month")
+    FoundColumnAc = SearchCol("Account")
+Hi u/one_time_chad (lol),
+SOLUTION VERIFIED!
+
+Thanks for this solution that solves the issue and reduces clutter even more
+
+For purposes of learning , if I wanted a solution as per my specs. How would that be implemented? Would you know?
+If you called another sub to get a variable, once it hits End anywhere in the subroutine it will clear all the variables it was storing. Generally speaking if you needed a value from somewhere else then you'd call a function as this can pass that value back to where you need it.
+
+You have awarded one point to _one_time_chad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Ah , so thats why u gave me that solution.
+
+Makes sense and thanks for the tuition. :)
+No problem

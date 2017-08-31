@@ -1,0 +1,27 @@
+How binary helped me.
+To expand on this, if you have more than 2 options per category, you can go to a larger base than 2. Or if you just want to make it more human readable. Base 10 for example. Instead of encoding yes excel, no word, yes access as 1\*2^0 + 0\*2^1 + 1\*2^2 = 5, you can use 1\*10^0 + 0\*10^1 + 1\*10^2 = 101. (Which is, of course, the binary representation of 5.)
+
+If you work with VBA, you might have noticed that it uses this approach with its built-in constants. If you do a message box, the *buttons* input controls a bunch of different options. You can write
+
+    =msgbox("Hi!",vbYesNo+vbQuestion)
+
+to get yes/no buttons and a question mark icon. If you look, vbYesNo has a value of 3, and vbQuestion has a value of 32. (You can use those constants anywhere in a macro, although I'm not sure why you'd want to.) The options are in base 16, so VBA can break 35 into 3\*16^0 + 2\*16^1, and say, aha, I need choice 3 for my buttons, and choice 2 for my icon (and choice 0 for all the other msgbox options). See [here](https://msdn.microsoft.com/en-us/library/aa445082%28v=vs.60%29.aspx) for a full list of those options.
+This is neat but for someone with a math background who's done truth tables, proofs, math logic etc, using And() and Or() just seem much more natural to me.  But to each there own.
+Just going to mention that sumproduct also works nicely for countifs of these types.  You can also leave the values in "yes" or whatever format you like, and just make comparisons within the sumproduct, as false gets counted as 0)
+
+Always neat to see multiple ways of solving problems though.  Glad to see this worked for you.
+[deleted]
+Nice to know, thank you for adding this :)
+http://www.digitalinternals.com/software/bitwise-operations-excel-not-and-or-xor/281/
+
+For even more bitwise fun. Using boolean functions will allow you to match your sums to a mask of your choice, returning those where all match (AND) or any match (OR).
+Indeed, and since this example is quite small, the calculation speed does not matter that much.  
+When i used this on my data however, the following formula took much longer to calculate than my example;  
+=COUNTIFS(excel_col;"Yes";word_col;"Yes";access_col;"Yes")  
+Actually in some use cases this is a VERY valid approach, as it scales to large datasets much more easily, and is more dynamic than fixed formulae.
+[deleted]
+Please re-read, my comment was that the binary approach is more dynamic, not that  sumproduct approach is not dynamic.
+
+'Additional steps' are not unnecessary if they have a purpose.
+
+My point was about how multiple AND(), OR() etc. in a formula can be replaced by using single bitwise functions, where operands are binary.

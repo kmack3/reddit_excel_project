@@ -1,0 +1,44 @@
+Macro to auto copy from a web browser
+There is a VBA Selenium plugin.
+I've done this, and it's super easy with Internet Explorer.
+
+You need to Google these things:
+This is the Internet Explorer Object in VBA. You will need to add a reference.
+ > SHDocVw.InternetExplorer
+
+http://stackoverflow.com/questions/12965032/excel-vba-controlling-ie-local-intranet
+
+These are the ways in which you interact with a webpage once you've loaded it in VBA using the above object.
+To scrape fields from a website.
+ > VBA getelementbyID value
+
+ > VBA getelementbyID innerText
+
+ > VBA getElementsByTagName
+
+To click a button on a website.
+ > VBA getelementbyID click
+
+Here's a good start. Ask me any questions as you get stuck.
+
+https://www.google.ca/search?num=20&safe=active&q=site%3Astackoverflow.com+VBA+value+OR+innertext+getElementsByTagName+OR+getelementbyID+internetexplorer+&oq=site%3Astackoverflow.com+VBA+value+OR+innertext+getElementsByTagName+OR+getelementbyID+internetexplorer+&gs_l=serp.3...6344.20223.0.20271.22.19.0.0.0.0.241.1731.0j8j2.10.0....0...1c.1.64.serp..12.0.0.ykai9hRdlZw
+
+
+I use webharvey
+
+https://www.webharvy.com
+
+Not free but works well.
+Depending on what you're doing, there a few options. You can make a web query through the Data tab, use Power Query or yes, even do it all in VBA. It really depends on whether the URLs change every time and what you mean by "changing screens". If you want a program to do something on a website, you have to be able to define the rules that govern that action, i.e. which link to click, or whatever.
+Power query should be able to do it.
+
+Have a read of this
+https://support.office.com/en-gb/article/Connect-to-a-web-page-Power-Query-b2725d67-c9e8-43e6-a590-c0a175bd64d8?ui=en-US&rs=en-GB&ad=GB
+How has no one mentioned data from Web? Use that function (on the Data tab) and parse out the text you need from the import. Built in functionality. 
+If you're the only one it needs to work for, I created something similar super easily with autohotkey.
+I'll second this.  There's a significant learning curve when it comes to manipulating IE in VBA, and you'll need a strong foundation in VBA to handle more complicated tasks, but it is quite impressive to watch the browser window do things seemingly of its own volition as entire engine parts lists are downloaded and reformatted programmatically.
+Feel like i dont need it to be too complex. I just need to grab 3 values from 3 specific spots on 3 specific screens for the policy that i am working on. I just need a macro that will grab those values and will change the screen to the next one with the next value I need to grab.
+Its not so much a website as a web app. Its a backend DOS system that holds all the accounting information that is related to the policy. In order to "change screens" I have to type in command words.
+Tried that, asked my friends about it. The site Im using is an emulator that is running the backend system which is a DOS like system. The Web Data wont interface with it properly. Unless you know of a way to explain to me how to parse the text in a way that it would work.
+How does that work?
+

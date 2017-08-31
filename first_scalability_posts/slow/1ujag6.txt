@@ -1,0 +1,11 @@
+slow
+1ujag6
+Excel 2007 slow to open hyperlinks to other programs
+
+I have a spreadsheet that links a list of files to AutoCAD drawings. If AutoCAD is already open, the files open relatively quickly (~2-5 seconds). However, if AutoCAD is not open, it can take up to 45 seconds. Is there a solution?
+
+
+-------------
+Not really. Sounds like the AutoCAD files need AutoCAD open in order to load quicker i.e. it probably loads DLLs that the files need to open which it has to manually grab each time whenever AutoCAD is closed.
+-------------
+Hm ok, thanks!

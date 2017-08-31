@@ -1,0 +1,45 @@
+There must be a solution to this. I know reddit has the answer.
+Just subtract 1
+=if(mod(A1+1,10)=0,A1-1,A1)
+
+Drunk.tired and no excel so ill be amazed if that works
+Excel Challenge 2014: Achieve objective using only irrelevant formulas.
+Ok just for fun, here's how you can do it without any math.
+
+[Numbers](http://puu.sh/9zFZr.png) and [formulas](http://puu.sh/9zG2a.png). Let me know if you have any questions.
+
+Cheers!
+I, and the 7 other people working on this for the last two hours, are retarded. At least I won the bet. Face palm
+
+I know!   **GIANT** VLookup table.   
+Hmm, I actually don't check to make sure that the number actually ends in a 9, so this'll throw an annoying error (multiply existing price by 10 and add 8) if you have any prices that don't end in 9. But that's pretty easy to fix by just having the column called Text say
+
+=IF(RIGHT(J5,1)="9",J5,O5&8)
+=VALUE(MID(A1,1,(LEN(A1)-1))&SUBSTITUTE(RIGHT(A1,1),CHAR(57),CHAR(56)))
+
+No offense, but that is pretty convoluted.  If you don't want to use math, just take the left() value as the length minus one and tack on the 8.
+
+Something like =left(a:1,len(a:1)-1) & "8"
+[laughing]   They should pay out extra!   Answered within 0.8% of the allotted time, AND made you feel silly!
+
+
+I've gotten similar.... 
+
+"Are you an Excel Expert?"
+
+"...I know my way around it, what do you need to know?"
+
+"How do we find out what 230% of 5 is?"   
+
+".........  5*2.3?"
+Are we getting Punk'd right now?
+
+Edit: subtracted an e
+You also have a -1 --- Challenge is to do it with no math :P
+Yeah but -1 is math! Can't do that :P
+I've seen people write down a few rows of numbers then get out a calculator and type the answer underneath!
+Alas, would that it were so. Sigh.
+You could scrap the MID thing and just do LEFT(A1,3) instead, but I wanted to account for a number with more than, or less than, 4 digits.
+
+
+Dammit. Can't argue with you there.  You win this round()!

@@ -1,0 +1,23 @@
+Quick Charting Tip
+i love your gifs
+I have always found this trick useful, but I don't like how Excel can't figure out that the data is repeated for grouping.  But if you are just grouping it to create the visual, then I feel it is a useful trick. From a data structure perspective, this is not a good approach.  I will often use this and then go in and color each group a distinct color, but you have to do that manually for each series.
+The go to blanks will be extremely useful thanks
+I didn't know you could "group" an axis like it was originally. It looks a lot better like that, IMO.
+
+I also didn't know you could select blanks using GoTo Special.
+
+Great post!
+This would be useful for subtotals.
+
+Also for those wondering, hit [CTRL + Enter] when inputing =b2...
+
+Figured it was alt ctrl enter, but no alt required.  Neat trick, i've never used that before.
+Great gif to put full screen while browsing reddit too.
+Thank you.  
+I am confused about what you are showing here. Why would you want to remove the nice grouping on your chart to replace it with the repetition of the main categories? Ok I didn't know about the goto blanks, that is a possibly useful tip. However, to be honest, the only reason I would have the data structure like that in the first place would be to create the graph as it is before you change it.
+Yeah. Go to blanks is tight, bro. 
+Yeah, I actually use this a lot to fix poorly formatted data.  Definitely an aha moment for me when I figured that out, I have forgotten how useful it is.  
+Well, that was kind of my point.  Critically, it makes better sense if you are using the data to build out formulas and other reporting to have all of the labels in the row. It is simply better data structure. But if you want the chart to look good, you would need to have the data without the labels.  It isn't intuitive to me to remove the main group data labels from the first row. So yes, if I was building the chart, I wouldn't add in the individual labels, but I would be bastardizing my data table to build the chart. Suppose my data was more complex and I had a dashboard with a chart as shown in the cleaner way. If I wanted to use the same data to drive other visuals or calculations, it would make it more difficult. I think Excel would be smarter if it treated both views the same way for charts, but it doesn't.  Anyway, these are just random Excel thoughts that I thought might help people think critically about their reports and visuals. But you are correct, in that I wouldn't go in this direction, usually the opposite. 
+Yeah, I thought you were saying that. I liked your animation but I wasn't sure whether the focus was showing you how to fill in blank rows in a table, how to group an axis in a chart or how to fill in blank rows in order to remove grouping. 
+
+I know the problems though, I produce nearly all my work in graph format without giving people the data tables at all so I have just got used to cutting and pasting the table into whatever format Excel will be happy with. Forget trying to work with graphs attached to pivot tables for instance, its so fussy about what you are and are not allowed to change. I just have to copy paste values to make new tables all the time.

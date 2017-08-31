@@ -1,0 +1,35 @@
+I made a stock market trading simulation game in excel! I figured you would appreciate it!
+Also, it's open source for our VBA aficionados here! :)
+[deleted]
+Very cool, and thank you for keeping it open source!
+
+Just a quick question after glancing at the code. I thought that declaring variables this way actually declares all but the last variable as a Variant?
+
+"Public Cash, PortfolioValue, PortfolioLongShares, PortfolioShortShares As Double"
+I just tried to open it to take a quick look as I don't have much free time today; however it did give me some errors saying something about not working on Windows 7 x64
+
+'Compile Error: The code in this project must be updated for use on 64-bit systems. Please review and update Declare statements and then mark them with the PtrSafe attribute.'
+I think the one that you are alluding to is how the game ends for everyone :)
+I didn't think that was true... however I just tested it with a:
+
+    MsgBox (VBA.VarType(Cash))
+
+Before the variable is initialized and received a VarType of 0. I then ran it again after being initialized and received a VarType of 2. Thanks for pointing this out! I now need to check all of my excel projects to make sure I didn't make the same mistake!
+Thanks for the error report. I've changed the declarations in a new version. Please redownload let me know if it works for you.
+
+Old:
+
+    Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+New:
+
+    #If VBA7 And Win64 Then
+        Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As LongLong)
+    #Else
+        Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+    #End If
+Just use a 32 bit install. It probably uses a 32 bit library, which won't work on a 64bit install. Very few people use 64 bit, so it seems fair to pander to the majority
+Thanks, it works now... although i have *no* idea what i am doing :o)
+Almost everybody uses 64bit systems these days because almost everything is compiled for windows and windows 32bit is limited to 4gb of physical memory.
+Push buttons and pray to the random number generator gods! :)
+They definitely don't. I don't have a single client using 64 bit. It causes too many compatibility issues when using additional libraries in VBA

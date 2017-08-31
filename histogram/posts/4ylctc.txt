@@ -1,0 +1,32 @@
+When I paste content in from an outside source, Excel auto formats it to a date
+Quick thought: Either, can you paste raw values and, possibly force the formats of the worksheet before pasting. Or, use VBA to parse all data as text strings? 
+Are you pasting into a table?  I've had this happen a few times.  Sometimes alt+H+V and posting as values worked.  Sometimes I just created a separate working table that fed off the raw data pasted.  It's ugly and I hope someone has a better solution.
+Have you tried applying the text format to the cells before pasting? Right click > format cells > text
+It sounds like it could have something to do with the default text format in a specific sheet? Try changing it. 
+> force the formats of the worksheet before pasting
+
+This. Format the column in question as text before pasting
+Follow up, asking just out of curiosity, why do you want the slash? Wouldn't it better, in most applications, to separate the numbers to columns? 
+I'm pasting from a Google Spreadsheet into Excel. I think that might work.
+
+Edit: Didn't work
+eh....it doesn't really work.
+>This. Format the column in question as date *before* pasting.
+
+*As text. As per OP. 
+
+
+But I don't want it to be a date. See, it thinks 3/5 is 5-Mar, and changes it to the second. I want it to stay as the first.
+It's a bit of a story, but the short version is I am using VBA to separate the numbers and then find what number is the biggest. It's for inventory and using separate columns will ruin what is already there.
+Sorry.  My next suggestion would be to just record a quick macro to format it for you.  I'm not as advanced as most people on this sub.
+Sorry--that was my typo for a quick minute. 
+Sorry--that was my typo for a quick minute. 
+Sounds like you should programmatically convert ALL the existing data into separate columns. Cleanse dat data set fo life yo. 
+I'm jut going to make them decimals. Seems to work and being decimals is allowed in my number sorting marco.
+I'm doing something similar in VBA. The problem is that when I copy the data I want from my Google spreadsheet and then paste it into my Excel, some of that data gets turned into a date, which will mess up my VBA code
+
+Parse that data to text as well! 
+
+Edit: maybe post your vba mate
+the big problem is that when i convert the date to text (which it thinks is 5-Mar) it turns it into a really....ugly number like 45360 or something like that.
+It's still converting to a date. That just the excel serialized version, or how many days have passed since 1/1/1900.

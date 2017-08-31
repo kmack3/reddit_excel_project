@@ -1,0 +1,23 @@
+How to sum depending on date
+If the date in question is in A1 and your monthly budget is in B1, this formula: 
+
+    =(B1/DAY(EOMONTH(A1,0)))*DAY(A1)
+
+Should be what you're looking for. If the cell gives a date as an answer (e.g. 1/5/1900), make sure the cell is formatted as a number. 
+So i've done: 
+
+=(B31/31)*DAY(TODAY())
+
+B31 is the cell that says £160 in. Does that look reasonable?
+Hi,
+
+Try
+
+=DAY(TODAY())*5
+Winner, thanks! Came up with a different result that what I posted but it looks more accurate! Cheers
+
+Solution Verified
+
+You have awarded one point to _wiredwalking_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

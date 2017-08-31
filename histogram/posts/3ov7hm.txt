@@ -1,0 +1,52 @@
+I dont know how to describe what I want to do so I will try my best
+Check out the RND() function in excel VBA.  You can basically use a RND() function to generate a number from 1-30, and then use that number as a cell number.  For example, if you generate 25 randomly, then A25 is the cell you use.  Do the same for 31-34 and 46-100.
+First select the cell you want to have the random number. In that cell (ex A1) put
+
+    =randbetween(1,100)
+
+In the cell to the right of it (ex B1) put this formula:
+
+    =if(A1<=30,"item1",if(A1<=34,"item2","item3"))
+
+Now to the macro.
+
+Go to Developer tab, record macro, save a macro name, hit f9, stop macro.
+
+For the button, go to Developer tab, then Insert, then Button.  Click on the sheet where you want the button located.  Say OK. Right-click button, click Assign macro, choose the macro you just created.
+
+
+Why?
+Ok I will look into that, do you know of any walk through or tutorial on trying to do what I am doing. Or what I could type into google to try and search for it?
+If all of your 100 items are in Column A on Sheet 1, this code will put the results into C1, C2, and C3:
+
+    Sub Random()
+
+    Dim x As Integer
+    Dim y As Integer
+    Dim z As Integer
+
+    x = Int((30 - 1 + 1) * Rnd + 1)
+    y = Int((34 - 31 + 1) * Rnd + 31)
+    z = Int((100 - 46 + 1) * Rnd + 46)
+
+    Worksheets("Sheet1").Range("C1").Value = Worksheets("Sheet1").Range("A" & x).Value
+    Worksheets("Sheet1").Range("C2").Value = Worksheets("Sheet1").Range("A" & y).Value
+    Worksheets("Sheet1").Range("C3").Value = Worksheets("Sheet1").Range("A" & z).Value
+
+    End Sub
+
+Wow ok thank you I will look into how you made all this work and try to edit it around what I need.
+
+
+Thanks!
+what if I have 26 options what can be used to add onto XYZ? 
++1 Point
+26 options for what? Here's how that works: x represents the 1st random value, y the 2nd, and z the 3rd.  It will be easiest explain using y:  The upper and lower bounds are represented by 34 and 31, meaning you are generating a random number between 31 and 34.  So X is a rand. # between 1 and 30, y between 31 and 34, and z between 46 and 100.  
+
+the formula is 
+
+    = Int((upperbound - lowerbound + 1)*Rnd + lowerbound)
+
+You have awarded one point to _Beers_For_Fears_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

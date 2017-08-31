@@ -1,0 +1,29 @@
+Using Indirect in reference to another sheet
+Use a text merge within your indirect to keep CalulationSheet! in there after it resolves:
+
+=INDIRECT("CalculationSheet!"&CalculationSheet!B3)
+
+
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+This is correct -- alternatively, change the string in CalculationSheet from "N2" to "CalculationSheet!N2" .
+
+When Indirect receives the N2 reference, it's assuming you mean the current sheet unless you tell it otherwise.
+Solution Verified
+Thanks!
+
+You have awarded one point to _Naule_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

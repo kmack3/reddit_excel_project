@@ -1,0 +1,43 @@
+slow
+32pped
+Why does Excel slow down when I have too much formulas?
+
+I have a sheet with a udf that gets information from a local server, so it take a while to load. This function only uses one argument, a data (mm/dd/yy), placed in cell F4.
+
+So my udf looks like: =myUDF(F4). This way, every time I change the value in F4, my sheet recalculates and it takes a while to get all data from the server. That's ok.
+
+But why when I change any unrelated cell, Excel kinda recalculate things? As I fill more cells with my UDF, Excel gets slower when I change values in other cells. Why is that? Is there a way to solve this?
+
+
+-------------
+Does your UDF have
+
+    Application.Volatile
+
+written into it? That would cause it to re-calc on every change.
+-------------
+What is your calculation Option set to? Automatic?
+
+FORMULAS > Calculation Options > Manual
+
+This is optimal for larger sheets where getting a 30s spinning wheel whenever you change literally anything happens.
+
+As to why... I can only speculate that your program is taxed by the UDF (maybe because the connection to the local server isn't amazing) and any additional inputs onto your sheet is just yet another thing it has to calculate every time you add something. It adds up man!
+-------------
+Is cell F4 a formula? For example if it is 
+   =Now()
+Then it will recalculate every time you update something forcing the rest to recalculate. If F4 is just text then something in your UDF is probably calling a Volatile function. 
+-------------
+No, it doesn't. How does that work exactly?
+-------------
+It's automatic, because it's much better to work that way. I didn't wan't to change it to manual, but I'm starting to think that this will be the only way.
+
+When I change the cell with the data, I'm ok with the time the sheet takes to load. But I don't know why it keeps recalculating this cells even when I change unrelated cells.
+
+I added a stop point to my macro and it really run my udf sometimes even if I change a cell that is not related with the parameter of my udf.
+-------------
+No, F4 is a value entered manualy.
+
+My udf calls some third part functions (PI SDK from Osisoft). Maybe this is my problem.
+-------------
+Volatile means that the cell value may change whenever ANY OTHER cell also changes. So it will constantly re-calc itself irrespective of which cell is actually change. If you don't have `Application.Volatile` then it means, it will only update when the cells it is referencing update.

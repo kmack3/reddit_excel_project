@@ -1,0 +1,286 @@
+Levels of Excel proficiency
+/u/epicmindwarp is **the** guy to talk to about this
+
+EDIT: Here's my idea of the level of proficiency for Financial Analysts:
+
+**Beginner tier**
+
+* Knows how to navigate around Excel
+* Math & Logical functions like SUM, IF, COUNT, COUNTIF etc
+* Lookup functions
+
+**Intermediate tier**
+
+* Pivot Tables and Pivot Charts (including the use of `=GETPIVOTDATA` for dynamic analysis)
+* Multiple criteria Lookups
+* Nested logical/IF formulas
+* Basic knowledge of Array formulas and how it works
+* Good working knowledge of the industry
+* Data cleansing
+
+**Advanced tier**
+
+* Knowing how to merge more than one dataset together/data consolidation
+* VBA
+* 2+ years experience in the industry
+* PowerPivot Data Models (depends if the company has access to this feature)
+
+**God tier**
+
+* Can do all the above with only a keyboard
+
+EDIT2: This [thread](https://www.reddit.com/r/vba/comments/5rnjos/what_do_you_consider_to_be_the_limit_of_what_vba/?st=iyudztzm&sh=296c128b) of people's opinions on the limitations of VBA may also be an interesting read. Once you reach what you think is a limitation of VBA, knowing other softwares/languages to aid you in your work is what separates the good versus the exceptional analysts
+I saw a job posting last night that said "must know advanced Excel functions such as VLOOKUP, MATCH, TRANSPOSE, etc" so yeah...I agree it's a subjective level in job postings. 
+What about the,"I've never had to use that but I could probably figure it out if needed," tier?
+I usually consider pivottables, complex formulas including lookups, and simple macros etc., to be intermediate and things at the level of GUI/macro programming to be advanced
+What people think are intermediate / advanced listed on a position I find to be extremely basic. I would consider intermediate skills to be that of using array formulas and basic VBA concepts. Advanced would be a continuation of VBA and use of the new BI tools - Power Query, PowerPivot, etc.
+[One particular attempt at nailing this problem down](http://www.icaew.com/en/technical/information-technology/excel/spreadsheet-competency-framework)
+
+Disclaimer: I wrote a lot of this, as it's my job.  It's free though so I don't have any vested interest in whether you use this or not; just trying to be helpful.
+I would change the flair of this post to discussion
+https://superexcel.ca/what-truly-are-the-different-levels-of-excel-skills/
+I do a lot of financial modelling and what constitutes good modelling isn't being proficient in some Excel function that not many others are but instead how to set up your spreadsheets in a functional way. 
+Maybe little help, but _advanced_ should imply intermediate knowledge and ability in all aspects of Excel and much deeper knowledge and ability in some areas. For example, knowing the built-in chart types but no more about charting, knowing how to record simple macros and make them relative with respect to cell locations but no more about VBA or Excel's object model but comprehensive knowledge of formulas and pivot tables.
+
+Consider advanced analogous to an MD completing residency. Any MD can set a broken bone or remove an appendix in an emergency, but it takes a specialist to perform open heart surgery.
+Yeah, we hire financial analysts regularly. I always get annoyed that we put intermediate to advanced when all they are doing is really beginner stuff. Also, It's really hard to claim you are advanced in excel. It can do a lot of different things, and almost everyone who is "advanced" is good at a small subset of those things, myself included.
+Advanced to Medium Complexity
+
+Array Formulas
+
+Macros
+
+Data Importing
+
+Pivot Tables
+
+Index Match, Sumif
+
+Lots of good insight in this thread; very few true answers in regards to your actual question about financial analysts. "Advanced" Excel/modeling proficiency for most buyside jobs (PE or hedge) generally consists of how well you can build an LBO/three statement model. Creating one usually requires all types of logic, lookup/index, and array functions plus more practical skills like formatting and whatnot. There's very little VBA because not many of your tasks are repetitive. You also usually don't work with large data sets by this subreddit's standards. All of your Excel add-ons are extremely expensive industry software (BBG, CIQ, FactSet, etc.) so knowing those custom functions is a plus.
+I'll just add there are different skills that serve different needs.  I feel I am rather near god-tier, I do excel consulting for numerous fortune 500 companies.  I do alot of very heavy VBA...but I don't mess with pivot tables.  Never learned it, don't care.  When I have a need like that, I write VB code to perform that function.  Not trying to brag, but the point is, I manage to earn a nice living at it not using pivot tables.
+Beginner:
+
+Knows sums from maths + - / * ()
+
+Recognises row /column.
+
+Uses general formatting for everything
+
+
+
+Intermediate.
+
+Learned the Home tab inside out 
+
+Heard of pivot, uses pivot, doesn't understand inxex / match yet and uses Vloolup to ref ranges... 
+
+Can't understand why data isn't transfering because they dont get how to reference a table verses a range, and have added extra data to a table without setting criteria.
+
+Uses Insert tab for Three options for everything else there Home or right click
+
+Can do nested Functions doesn't call them that, prefers the term "Complex Functions"
+
+Once recorded a macro and has dev mode doesn't use it.
+
+Advanced
+
+VB - Making Buttons, Automation, Task Streamlining.
+
+Pivot / Power Pivot - report generation data consolitation
+
+Conditional Formatting - Data interpretation/ Representation
+
+Nested Functions - Ifs, Index + Match, Basic Logic 
+
+Database - Helper Columns / reference tables 
+
+Knows most of the tabs
+
+
+Expert
+
+Actually formats data types
+
+Uses pen and paper to plan data structure 
+
+Plans input output models
+
+Uses multiple hidden worksheets to ensure smooth data flow
+
+Has started using MS Access.
+I back this.
+
+However, I would say that VBA deserves it's own tier, because I know beginners who know VBA to the extent of writing very basic code, but they can't use simple Excel functions.
+God tier:
+
+* Ability to pull down and integrate Backend data sources such as SSAS, JSON and OData Web Services, SQL Server, Microsoft Access, Flat Files, and others, and maybe ability to use Microsoft's Cloud PowerApps like Flow.
+
+* Ability to cleanse data (hurray for OpenRefine)
+
+* Streaming Real Time Data and autoupdating Excel (although this has become a real cakewalk in Power BI)
+
+* Creation of Measures and KPIs in PowerPivot
+
+* Proficiency with Power View (which has pretty much been superseded by Power BI)
+
+* Publishing Excel reports to Power BI/SQL Server Reporting Services/Sharepoint, and automating data refreshes.
+
+* DAX (and perhaps MDX) proficiency for PowerPivot.  Ability to relate tables via Power Query/Power Pivot etc.
+
+* Mastery of PowerQuery data transformation.
+
+* Use of Add-ins, Solver, Curve fitting, and R for advanced analytics and forecasting, and maybe things like Monte Carlo simulations.  Integrate with R server for fast AI analysis and automatic categorizations and trends.
+
+* Optimizing your spreadsheet for performance when you have to deal with hundreds of thousands or millions of rows.  At some point you'll probably just want to preprocess it in either a PowerPivot/SSAS Tabular model or OLAP cubes, but most Excel-heads are wary of new and different.
+
+* VBA VBA VBA (and now Javascript)
+
+* Extreme text manipulation (maybe even using the Microsoft Regular Expressions library)
+I think this needs a "Data" entry tier or something before beginner.  I've been trying to delegate some of my really simple excel tasks and I swear even SUM functions scare many people, but they are still able to navigate pretty well and copy-paste and enter data pretty well.
+God tier is realizing excel is too limited and rolling your own.
+This is pretty good but I might move array to the advanced.  Many really good users haven't even really heard of array functions.
+Yep - I am clearly an Intermediate Tier, admittedly able to do all with keyboard alone.
+
+No VBA. Not sure what data consolidation is in the context of Advanced Tier, and never have done Powerpivot Data Models.
+I feel there ought to be 1 or 2 more tiers between your Advanced and God tier.
+
+Or, well if the God tier was simply meant as a joke, there's definitely some things that should qualify for "Expert", such as advanced array formula use, understanding the subtle nuances of some functions so that you understand the shortcomings or use the intricacies to your advantage, knowing how to solve the same problem 10 different ways, knowing how Excel handles data (and data types) on import/export, knowing how to set up workbooks for easier maintenance down the road...
+> Knowing how to merge more than one dataset together/data consolidation
+
+Where do i learn more about this?
+I agree to some degree. I don't think it's always this linear though. 
+
+I feel I'm all over the place on this. I almost did it all backwards. I recently abandoned VBA in favor of python. I know it's not the same, but my motivation was more than just excel.
+
+Lastly, I just want to say that I favor "/" instead of Alt for keyboard shortcuts. /hdr, /hdc, /how, /hhn, etc. is just easier for me. Maybe it's from PC gaming habits. Anyone else use it that way?
+I don't agree much with the God Tier tbh.
+
+I use a mix of keyboard shortcuts and mouse (ofc) and some movements, with my mouse can't be beaten from a shortcut, in fact some I'm very speedy using the combo with mouse click+shortcut. 
+But ofc a ctrl+c ctr+v ctrl v (values only) is a must.
+Anyway, sicne I'm a mech engineer I use excel while using like other 2 software in the same time so usign just the kb would lead to a time loss (I don't like at all dragging my hand between kb and mouse).
+
+Oh also pivot data...idk I would set them between intermediate and advance. but it depends by work also. I know how to create, modify, creating items in pivots tables but I learned vba first lol.
+
+The god tier should also include the indipendent knowledge of vba..I mean I don't remember all the functions, sometimes I need to do a google search :\
+> GUI/macro programming to be advanced
+
+I think the best part about Excel is that my programming knowledge from 1998 never goes out of style.  Remember when dynamic web meant CGI scripts?  Tcl/Tk and LessTIF.  So many fly by night Java frameworks.  Smalltalk LOL.  Silverlight pft! Python 2 and 3, and never shall the two meet.  Ruby is slowly declining.  Glad I never bothered learning WPF and whatever the hell they were trying to do with Windows 8.  But Excel VBA?  Still going strong.
+This (ICAEW's spreadsheet competency framework) was shared a few months back. It was well received and you might be interested to read /r/Excel's comments:
+
+https://www.reddit.com/r/excel/comments/4rpjk8/spreadsheet_competency_framework_from_the_icaew/
+I did, thanks!
+Great link
+That might be how they weed out the people who don't have any excel skill at all.  A few years ago I had my first accounting internship and in the interview they asked me to rate my skill in excel 1 to 10.  I said 7.  Come to find oit I was reassuring round a 4.  It's often a case of not know what you don't know.
+All the people who work with me claim a high level of excel proficiency, which is partly true since they spend most of their day using excel, but can't tell you what a named range is. 
+
+There's just so much to excel, you can do all sorts of stuff and unless you ask about those specific areas then you'll never really know. 
+That's the thing with Excel, always many different ways to achieve something. PowerPivot is beast though.
+I have to agree with keeping VBA as a separate tool/skillset.
+Yeah, I always think of VBA as a separate thing.  To be honest, I usually just steal something from online and tweak it.  It's usually more efficient and includes error checks that I didn't think about.  I'm a pretty sloppy programmer.
+I ran across a guy who was in the process of writing some VBA to do what a vlookup does... I showed him vlookup.  So, yea.
+Agreed. I worked with an analyst that added a button to calculate something in VBA (since he was more familiar with code) that could be solved with algebra and some basic modeling. He effectively removed the ability for us to quickly check his work by using VBA, which was just a pain in the ass and quickly replaced. 
+You've listed things I'm currently learning! I'm aiming to become fairly confident with most of what you've listed, by the end of this year.
+
+The only thing that's holding me back is getting IT to install the Power BI tools for me. I only have access to Power Pivot but having my own SharePoint server to upload Power Pivot dashboards would help me tremendously
+> OpenRefine
+
+Please expand on this a bit.  I know I can Google it (and have) but I would like your description and/or use cases for what OpenRefine is and does.
+This is all the stuff I look at and go "Oh, I wish I was better at this / had a usecase at work / actually just something later than excel 2010"
+
+Only VBA is an option for me really, so I've ended up becoming the office scripting monkey, learned lots, but word is spreading and now I am too busy :[ Still some fun projects though some of them. 
+Sadly I've come to realize what's holding me back from God tier these days is the fact that my employer (major i-bank) won't let us upgrade beyond office '07. 
+
+Ugh
+Agreed on the "Data Entry" tier.  There are sooooo many people who can put data into a spreadsheet you give them but manipulating it any meaningful way is out of their realm of expertise.
+IMO, it's mostly because they've lost their usefulness. I used to use them all the time pre-Excel 2007 as a way to perform sumifs() and countifs(). Now that these are incorporated formulas, my use of array formulas is non-existent.
+Do you really know the syntax of so many languages? I dont write VBA code much, and when I try, I generally know exactly what I want to do / can prepare the pseudocode easily, but the problem is the syntax.
+VBA tiers are:
+
+"What is VBA?"  
+Hack VBA  
+Write VBA  
+"What is VBA?"  
+
+The last one is more 'Why are we using excel for this'
+> steal something from online and tweak 
+
+That's basically how most VBA code is done, why write something from scratch when it already exists out there.
+
+However, I've gotten to a point where I can write everything from scratch, without even executing it once until the very end. It's like looking at the matrix, I can almost see what's happening just from the code.
+
+There's some preventative error handling that you should learn, and then there's normal error handling, which is normally the last thing I always add to a module.
+Pretty much same here. Why try reinvent the wheel if something already works? A lot of my VBA macros are tweaks of already working codes
+There was once guy who didn't realise that you could use text and numbers to represent columns. 
+
+He proceeded to make 26 variables, one for each column, and make them equal to the column number, then used the variable in formulas. 
+
+It didn't cross him why he never saw modules online that showed the same thing. 
+vlookup tends to be really slow for large search ranges because it doesn't do a load-sort-binary search.
+That's my main problem with VBA, a lot of people use it and over engineer their file. So many times you better use Excel it is a lot faster and easier to educate other people on how to use it.
+You need to be pretty proficient in either python or R to do serious statistical data analysis without a lot of effort, and integration with R is a lot more "Microsofty".  I started off trying to do it using the Solver libraries in C# that's terribly documented and barely anyone uses, made some aborted efforts in F#, then figured out you can do things in R for like 1/20th the code.
+Have you ever used the merge functionality in Google contacts?  OpenRefine is the underlying engine that allows you to do that.  It helps you clean up things like mangled address and state names, zip codes, variations of customer names (Dick = Rick = Richard = Rich), phone numbers, social security numbers, and things like that in your data, and can also do things like give you lat/long coordinates for your place names.  It also does things like give you histograms and scatterplots of your numerical data so you can easily spot fubarred outliers, remove duplicates, group data, and lets your transform data using regular expressions.  In a way, it's almost like a nice front-end for Perl with some precanned libraries for common use cases.  In a nutshell, it helps you identify, transform, and clean messy data very quickly by identifying missing records and what different algorithms believe are referring to the same entity.
+
+In a recent use case, I had to create a new sales region based on zip codes and city names (with fun data items like Houston, TX, Argentina) and zip codes frequently entered into the wrong fields (like Address2).  OpenRefine lets me fix it up pretty quick-like.  On top of that, I can use the lat/long transformation along with revenue sales to do something like a Lat/Long Plot with sales indicated by by a segmented pie chart overlaying a Bing map using Power View/PowerBi pretty quick, with views by City, By State, By Sales Region, By Country, or even By Zip Code if that's what you really want.
+
+Here's some simple tutorials:
+
+https://www.propublica.org/nerds/item/using-google-refine-for-data-cleaning
+
+http://programminghistorian.org/lessons/cleaning-data-with-openrefine
+
+http://enipedia.tudelft.nl/wiki/OpenRefine_Tutorial
+
+http://www.padjo.org/tutorials/open-refine/introduction-to-open-refine/
+
+https://schoolofdata.org/handbook/recipes/cleaning-data-with-refine/
+I would try to get your org to spring for an Office 365 subscription.  Excel 2016 is ridiculously better to use than Excel 2010, and it comes with all the Microsoft Cloud goodies too.
+Office 365 Business which includes Excel 2016 is $8.25/month, SQL Server Developer is free, as are Power BI Desktop and R Server Developer, and we've got r/datasets.  If you want to self teach, the cost barrier of entry is pretty low.
+I've always been a sloppy programmer.  I'm old and date back to Basic, COBOL, PASCAL.  I've always been able to make it work to pass the class, but it was never great code.
+
+Before cool forums like this I just used the recorder and tried to clean it up some.
+>That's basically how most ~~VBA~~ code is done
+
+FTFY
+I'm just imagining you with a vision of binary 1's & 0's scrolling down your peripheral vision like in the Matrix or something lol.
+
+I'd love to get to the position of where you are with VBA. I've only just started getting more confident in writing fairly basic loops from the top of my head
+Is preventative error handling the same as defensive coding?
+I am by no means an expert in vba. Beginner level, but intermediate in my knowledge of what it can do.
+
+I will write out code from scratch, maybe use a bit of pre written code, and then get someone else to execute the code (press the button). They take much joy of it encounters an error, if it doesn't I take the glory.
+I haven't had to deal with large quantities of "messy" data for a while, but i messed about with this back when it was google refine - the interface is tremendous, really intuitive and easy to work with, and it makes it so much easier to clean up even very large datasets. 
+Thanks man I have an interview for a data role soon and I will check this out before.
+On behalf of the other lurkers, this is awesome. Thanks!
+There is an IT project looking into implementing 365 across the organization, but it'll probably be another year or so before roll-out, at least. I keep pestering them about getting it done, but I work for a large pharma company so regulation and security and documentation and stuff is all super tight, and stuff moves slowly. 
+Teaching self is fine. However given my schedule is 7a-9p 5-7 days/wk. I'm usually limited with "play time" at home for these kinds of things. I'm happy waiting until they bother to care. I'm already proficient in R, python, and we use sybase for our back end. It's just they realllllly limit the scope of what they want non-devs able to do. 
+I try to Unix my way through things.  Just one step at a time, get that one function to do its one thing perfectly, then move on.  Often, I will do this in reverse, though.  This leaves you with lots of reusable code.
+I wonder if I should screen record myself writing VBA.
+
+The newbies would be impressed, but the pros would be like "WTF IS THIS GUY DOING?!"
+
+I do alot of going back and forth, just doing stuff as and when it comes to me, while I write the code.
+I would guess so. 
+
+It's where you don't just set a variable to a workbook for example, but you check the workbook exists first and then set it. 
+
+You make no assumptions and everything is checked before using it. 
+> and then get someone else to execute the code
+
+Why? I sit there and try and break it myself, I even have a list of things to always check.
+Please do it!
+
+Also would like to see how you manage modules and whether you use the Personal workbook. 
+Also "we're doing a loop until a condition is met... but just in case we are going to make a second condition of first 2000 lines"
+Someone else in my office knows how to use vba, it's just something we enjoy doing. 
+My personal workbook is like a man drawer. Cos no-ones gonna see it but me, it's not really clean... 
+Oh that's alright then, I did that with my colleague.
+
+He thought he was good, until he ran in to me.
+Pretty please? Even other pros like learning tricks.
+Opposite here. The chap who I do this with showed me the way!
+
+As repayment I showed another chap in the office to do some vba and he is now pretty proficient.
+[Here's a little suttin.](https://www.reddit.com/r/excel/comments/2xokz1/what_are_some_of_the_best_macros_you_have_saved/?st=iyuhm9d9&sh=a50c1abf)
+I taught two guys in the office, one of whom writes very clean code now, so I'm proud. 
+
+I once broke one of his macros immediately by trying in -1 into the input box and he spent the next day figuring out other bags, such as text in number fields etc. 

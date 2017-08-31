@@ -1,0 +1,102 @@
+What are your favourite pranks to play on other Excel users?
+Every ~1000th time anyone at 14 locations worldwide runs a macro in a workbook they all use, instead of printing their documentation it prints the "hang in there" photo with the kitten hanging from the tree branch.  I don't think it's happened twice anywhere, so I can only assume everyone probably thinks they accidentally did it themselves.
+I've just added a button that says "DO NOT PRESS" underneath a button that they regularly press. When the user presses it, it will randomly open a number of excel and word docs and add one character to the docs so the user has to manually say no to saving each doc when they close them.
+This is best played on someone who doesn't really know much about vba.
+
+Create a module and name it something generic which looks half important such as "IndexDB_Main" or something and input the following code:
+   
+    Sub RandomTime()
+        Dim z As String
+        z = "00:" & Round(Rnd(Now * Rnd(Rnd(Now))) * 15, 0) & ":" & Round(Rnd(Now + Round(Now, 5)) * 60, 0)
+        Application.OnTime Now + TimeValue(z), "SpeakNow"
+    End Sub
+
+
+    Sub SpeakNow()
+        TalkSpeak = GetSpeach()
+        Application.Speech.Speak TalkSpeak
+        Call RandomTime
+    End Sub
+    
+
+    Function GetSpeach()
+    x = Round(Rnd(Now * Rnd(Rnd(Now))) * 2, 0) + 1
+    MsgBox x
+    y = ""
+    Select Case x
+        Case 1
+            y = "i'm sorry dave i'm afraid i can't let you do that"
+        Case 2
+            y = "I'm watching you"
+        Case 3
+            y = "swoswoswoswoswoswo"
+        End Select
+    GetSpeach = y
+    End Function
+
+
+
+Now on your chosen worksheet or on workbook open call RandomTime. Sit back and laugh as they freak out.
+You can add many more lines to the case block(and change the multiplication in the x value to add new outputs.
+
+Bonus points for using If Environ("Username") = "Victims Username".
+Modify someone's personal workbook to have formula calculation set to manual, save it. Now every workbook they open will default to Manual.
+
+I wrote a macro that generated a random number between 1 and 100. If the number was less than 60 it would open my coworkers CD tray. He asked me to figure out what was wrong and fix it so I reduced the probability >:)
+https://www.reddit.com/r/excel/comments/2oqugd/excel_pranks_tricks/?sort=confidence
+ctrl+~
+if you can run macros on users computers without the warning message, add this to their ThisWorkbook object:
+
+    Private work As Boolean
+    
+    Private Sub Workbook_SheetChange(ByVal Sh As Object, ByVal Target As Range)
+        
+        If work = False And Target.Cells.Count = 1 Then
+            If IsNumeric(Target.Value) And Rnd > 0.95 Then
+                work = True
+                Target.Value = Target.Value + 1
+            End If
+        End If
+        work = False
+    End Sub
+
+
+If a cell is changed and its value is is numeric, it will sometimes add one to the number. It only happens when 1 cell is changes, so editing multiple cells at once will not trigger the function, which makes detecting this less likely
+
+it can be made less likely by moving 0.95 closer towards 1. 0.999 is almost never
+this is the geekiest post i've ever seen on reddit. i love it. 
+Ctrl + ~
+
+If you want to be a real dick, you can set a counter in VBA (counting mouse clicks or time or whatever) that executes this command upon reaching your limit.  
+Sounds like a great way to get fired!
+Application.Username combined with Application.Speech
+Do you really need all the stuff in the Rnd brackets?  I thought with VBA, calling Rnd() or Rnd(PositiveNumber) both just gave the next number in the sequence.  So Rnd(Now*Rnd(Rnd(Now))) is the same as doing Rnd()?
+
+Also the number returned will be in the range 0-1, so Rnd()*2 will be in the range 0-2.  Rounding this will indeed give either 0, 1 or 2 (and therefore 1, 2 or 3 for your case statement).  However it will give a 0 if the number is 0-0.5, a 1 if it's 0.5-1.5, and a 2 if it's 1.5-2.  Therefore the case 2 statement will appear 50% of the time, and the case 1 and case 3 statements only 25% of the time each.
+
+You should use Int or RoundDown instead, which turn the range of 0-2 into either 0 or 1 (since the range is actually 0.0000 to 1.9999) with the same chance of each.  To get three options, do Int(Rnd()*3).  (You don't need the +1, just change your case statements to 0, 1 or 2)
+
+Of course, if you want the probabilities to be 25% / 50% / 25% then the code works fine (although I would recommend coding it so that those percentages are clear)
+You're a monster.  Unless I'm working on a big ugly file, then thanks.
+I pulled the opposite of this on my entire reporting team. Crashed 2 computer's due to excessively large workbooks auto calculating!
+I'd love to do this. Do you know how to do it on Windows 8.1?
+Best thread eu
+There are enough idiot users that do that prank to themselves.  No need to do it for them.
+Sort by all posts from all time by Top and you'll see an even geekier one.
+The spreadsheet is only used by one other person and we prank each other all the time. Plus I'm leaving the company in 2 weeks.
+Your workplace sounds like a fun place.
+Unfortunatly in my work usernames are a mixture of first and second and names. David Smith would be DSmith02 etc hmm maybe a caseblock for usernames.... * *evil laughter* *
+The part initially at the top was supposed to look complex so the victim wouldn't bother reading further down(I think when I actually used this it was embeded among loads of other actual working code. Not that I actually used it with in legitimate working code in my office to annoy people...nope not at all.
+
+You're correct with the rounding tbh I just quickly threw this down it wasn't ment to be perfect code with every but thought out but that's a good obeservation which I never thought about. I'll have to keep that in mind in future.
+It'd be more credible if you used another account to rep your own thread :p
+That is how I discovered it.
+Lol alrighty then. No harm.
+Randomly stopping the user from getting actual work done or worse, screwing up a random Word document? Yeah however fun that may seem, I doubt the user or CEO thinks so.
+Me too.  Trying to hit Ctrl-1 (shortcut to format cells).
+> screwing up a random Word document
+
+He didn't say anything about screwing up existing documents.
+
+I doubt the CEO is tearing his hair out about this.
+Did you really come to a thread on pranks to be serious?  

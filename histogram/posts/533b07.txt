@@ -1,0 +1,91 @@
+Is there a way to minify VBA code? or do you know a way to make the code not understandable?
+You can password protect your VBA project. You can break it with a workaround but it needs some extra motivation.
+
+To answer your direct question. You can't 'minify' VBA, the methoda and properties have definite names and you can't change those. You can, however, try to to make the code less intelligible by creating a lot of objects, declaring two objects while simply passing one to to the other, declaring some fake objects which are not used anywhere, etc.
+You are being unreasonable.  
+
+It is just code.  Writing it is what we are paid to do.  Like children, we sent our code off into the real world and we hope to be proud of it in the coming years.  Don't screw it up.  Let it go.
+Why not make it known to the hire-ups and others that you created this great macro so this other person can't steal credit, even if you do get fired? 
+
+Another possible technical solution is to move the macro to another file that is password protected (the whole file in addition to the VBProject). I tested this in Excel 2013 and couldn't get into the XLSM as a ZIP - without a workbook password, I was able to open it as a ZIP. I don't know whether there are external utilities that can crack it. 
+cheapo solution :P
+
+send a mass mail with something like this:
+
+> hey everybody if you currently use any of the following macros, please reply to this mail. i created these and have been fine tuning these over time. think it's time to roll out version-2s of these macros.
+
+make some small enhancements in these macros and circulate. now everybody knows who made 'em and hopefully you get some appreciation for improvements as well.
+Put a password on the vba code and have another VBA code to respond with selfdestruction to cracking attempts? Seems possible enough to me ;)
+Look up obfuscation. There are free programs that will take your macros and rename everything with random nonsense and mess up the formatting to make it really hard for anyone to understand. 
+
+There's also a program you can pay for that makes modules unviewable, which is supposedly strong enough that you could share your workbook outside the company without fear that a competitor will reverse engineer your work. A big asterisk is I don't know how it prevents you from accessing the VBA, so I have no idea how secure it really is. I don't want to seem like a shill so PM if you want and I'll send you a link. 
+If you want the credit, e-mail a copy of your code to your manager and your department's HR representative, and let them know it's your work product.
+You asking this question proves your the petty asshole in my opinion.
+I mean, if you wanted to make it hard to read you could make all your variables random names. Like instead of "strName" you'd use "LSlKslkgj".
+
+Or put your initals in some of the, so if your initals are "abc," you can add them in the other variable like this "LSAbClkgj".
+
+This won't do much if they know how to open it without initiating code, but you could add something like this, 
+
+    Private Sub Workbook_Open()
+    
+    Application.DisplayAlerts = False
+    If Environ("UserName") <> "WhateverYourLanIdIs" Then Application.Quit
+    
+    End Sub
+
+Is it a file only you use? Could you put the macro in your personal file and run it from there in any active workbook you have open?
+I just say that he at least has finish what he started. Education is free in my country, he just have to get one more year to finish high school; but that takes effort so he sabotages everything his immediate boss does until his bosses quit, then they hire a new boss, and the same happens. This person is trying to tire the owner of the company to make him the new boss.
+just take a copy for your future reference. but not alot you can do normally. in most jobs like this you won't own IP so you could be in breach of contract by passwording protecting the companies files
+I'm not that good of a programmer yet, I thougt on putting a flag in a very hidden page and if it is changed by the program after a date, the program will not work. Is there a way to change the code with code?
+I've got a macro that unprotects a VBA password for all workbooks in a second
+Make your code run with a long wait time unless a proper "password" is passed at execution? 
+
+Guess it wouldn't really work with people who know the ins and outs of vba though...
+I normally would. This mother fucker that wants to steal my job is a dude that's being working here for 5 years, and he wants to be the manager, he never ended high school and has climbed steps by sabotaging people in a position over him, to climb places. He suck... if he manages to kick me out, I want him to build this place on his own. In a civilized world we fight for success not steal it.
+Theoretically, you can make thousands of copies of the same file and collectively try millions of password combinations.
+If one disables VBA, how would a VBA self-destruct module be able to run?
+
+It's VERY SIMPLE to disable VBA in Excel or other Office programs. OTOH, it's EXTREMELY DIFFICULT to try to reenable it within an Office program session.
+Sounds really good. but I don't feel safe installing macros made by others. I don't know, data mining? Ransomware?
+Already done that, but the boss has zero knowledge on computers. The thing is this kid must not get success by stealing jobs. That's not cool.
+Ok
+This one can be a layer of protection, thanks! just find and replace every variable until there is no legible ones. 
+No it's just a file that controls the process. It's a master connected to slave programs.
+Yes, to do that you have to go to the VBE, then under Tools click on References and give a reference to 'VBA Extensibility X.X'.
+
+You can probably put a check at Workbook_open event for the current date and run a "delete all" code if it is beyond a certain date. Use the following snippet to delete all code in an Activeworkbook.
+
+    Sub DeleteAllCode()
+    On Error Resume Next
+    With ActiveWorkbook.VBProject
+        For i = .VBComponents.Count To 1 Step -1
+            .VBComponents.Remove .VBComponents(x)
+        Next i
+        For i = .VBComponents.Count To 1 Step -1
+            .VBComponents(x).CodeModule.DeleteLines _
+            1, .VBComponents(x).CodeModule.CountOfLines
+        Next i
+    End With
+    ActiveWorkbook.Save    
+    On Error GoTo 0
+    End Sub
+
+Do you have a code that works in 2013 excel and later by any chance?
+
+I you sure you're talking about VBA project password and not sheet password? I'm asking because the only crack for vba passwords that I've seen involves changing a part of the hex code.
+I've been in this position before. Get a new job, this guy is not worth the trouble. 
+
+What happens when a future employer asks why you left your current position? "Hostile work environment" is the reason now, or later it's "I got fired because" and they stopped listening to the rest because they heard enough. 
+
+Do you include a friendly coworker for a reference? Does that coworker still have nice things to say after they find out your code is self-sabotaging? 
+
+In the long run, you're stacking the deck against yourself. Wash your hands of this place. Good luck to you! 
+What does their education level have to do with this?
+
+I'm more impressed that the person who never graduated high school is able to do the same job as the university graduate.
+Found the co worker
+I'd live a copy of that code as well... I'm sort of the Excel Guru at work and every now and then someone digs up some old file at work with a password we need to break. 
+Changing bytes in files can be automated. Removing VBA passwords could, in theory, be done with GNUWIN gunzip, od, patch and gzip commands.
+Any undergraduate can get anything by stealing. Now he is pretty impressive I must say, by stealing in the noses of everyone and still getting that underdog praise. But stealing is not cool, so he has to find another way wile I'm in charge.
+Just google, you will find it quick

@@ -1,0 +1,18 @@
+How do I make a change the way a pivot table sums data together?
+I'm not sure which version of excel you're using, but within your 'PivotTable Tools' (up in the ribbon), you should be able to select Formulas-> Calculated Field in the Tools subsection.  From there, you should be able to add a column which calculates the difference between your debits and credits
+I'm using the newest version.  I may be setting my data table up wrong, since this is my first time trying to pivot tables.  I'm going to upload the file. The two worksheets that im working with are General Journal and Pivot Table. 
+
+I looked where you said, but I only saw options for: sum, count, average, var.... etc
+
+Would you mind taking a look?
+https://drive.google.com/file/d/0B2m-r-QaM78gZ18wSGhNZXd4Z2M/view?usp=sharing
+Grand Totals can't be screwed around with, and Calculated Fields can't be categorized (you can't put in Rows or Columns boxes, basically). So you're  going to want to add a proper positive/negative amount, either in your source data, or you can click 'Add to Data Model' when making the PT, go to Power Pivot and [add the formula there](http://i.imgur.com/0wL0jKq.png). 
+
+[Result](http://i.imgur.com/CwQf6R1.png). Oh, and don't have any blank data in your source data, so copy those dates down. Otherwise none of the date functions will work.
+Solution verified!
+
+Awesome thanks!
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

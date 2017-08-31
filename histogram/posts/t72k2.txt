@@ -1,0 +1,42 @@
+Excel ProTip - The benefits of helper columns
+Great info for those that don't use helper columns.  They are a foundation for much of what I do at my job in reporting analysis. 
+Since you mentioned Conditional Formatting, it should also be noted that you can do custom conditional formatting using a formula (rather than the preset conditional formats with a helper column in some instances).  I love me some helper columns, but just offering an alternative depending on what people need to use it for.
+
+[I just posted an Excel Video Lesson an hour ago which shows how.](http://excelexposure.com/2012/05/04/excel-video-lesson-conditional-formatting/)  The custom formula piece starts at around 5:12 for those interested.
+Need to insert a blank row between every row? 
+
+1. Populate a helper column with 1 and 2 in the first two rows. 
+
+2. Select these two cells and fill down. It should have filled 1, 2, 3... N and all cells from 1-N should be selected.
+
+3. Copy, ctrl-down, down (you're now at the cell right below your last row of data), paste. you now have 1-N in a helper column beside your data, then N more blank rows with 1-N in the helper column.
+
+4. ctrl-a. All you data and the blank rows are copied. Sort smallest to largest. You now have a blank row.
+
+Want two blank rows? Paste 1-N twice. 
+My bread and butter at work is to create a dynamic reference column. I often have a situation where I have certain metrics - revenues, expenses etc. - in one column, repeated for multiple countries that are listed in the next column. How to find only Germany expenses, or only Germany revenues? By starting my data grid in column B, I can use column A as a helper. Assuming column B is a KPI and column C lists the countries:
+
+=B2&C2 in cell A2
+
+would give me, e.g. "ExpensesGermany" as a unique lookup reference (and dynamic! In case I add something to each country  later) .
+I'm going to start linking most posts on this subreddit to this thread.  It's getting ridiculous with all these "OMG I only have 2 hours to finish this project and i need an unbelievably complicated formula, can someone write it for me?!" posts that could *easily* be solved with intermediate calculations.
+Love using helper columns along with =even to help highlight every other row
+I use a combination of helper columns and conditional formatting to create banded rows that alternate colors every time a value in a certain column changes.
+
+If you had a table of different customer orders with CUSTOMER_ID in col A and it was sorted on CUSTOMER_ID, for example, you'd create a helper column (lets say column H) with the first value (H2) as TRUE. the second value (H3) would be =IF(A3=A2, H2, NOT(H2)). fill that down.
+
+If the ID changes, then the helper value switches to false. If it changes again, it switches back to true. You can then use conditional formatting to highlight the entire row if the value is false. (I didn't watch the above video, but it looks like it explains that part around 7:30)
+
+tl;dr: Excel is fun!
+Just watched that video, I thought I was good at Excel, but my hat off to you Sir. :) Thanks for teaching me some neat tricks. :D
+What are the benefits of blank rows?  If you are looking for white space, can't you simply adjust the row height?
+Yes, definitely.  I'm a big fan of helper cells (sometimes I call them flag cells).  I was saying that I would just put the formula in as a custom conditional formatting criteria.  So you could throw in '=A3=A2' as a formula in conditional formatting, and it would highlight when true if that was the case (the conditional format is relative to the first cell in the range, hard to explain here but the video does).
+
+Helper cells can also be very helpful if you get caught writing a really long formula, and can pluck out a repetitive chunk to move to another cell for easy following/reference.
+
+EDIT: Re-reading it now we may be talking about slightly different things, and your way may be the simplest to have it switch formatting by chunks of the same text changing.
+Glad you enjoyed it :)
+
+There are a bunch of other videos on the site if you're interested.
+
+Keep pushing it to the limit!

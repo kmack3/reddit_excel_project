@@ -1,0 +1,6 @@
+VBA Help with fixing code
+The only way I could get these formulas to work was by declaring the range beforehand. I don't know why I couldn't get it to work using RC. Even with my settings changed it still wasn't having it.
+
+    Set rng = Cells(ActiveCell.Row, ActiveCell.Column - 1)
+    Range(Final).Formula = "=VLOOKUP(" & rng.Address & "," & vFileName1 & "Data!$B:$H,3,0)"
+

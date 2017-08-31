@@ -1,0 +1,17 @@
+crash
+3w8hbh
+Been editing and updating the same spreadsheet every day for over a year. Now suddenly any time I delete cells (with delete button, not key) or select and drag a group of cells, Excel crashes. Even copying data to new file causes crashes. Is there a way to track down the problem?
+
+Basically for about the last year and a half, I take the previous day's spreadsheet, add data to the bottom, reference the old data, then delete that old data and work on today's data. I have a ton of conditional formatting in a few columns and there are multiple sheets in the worksheet.
+
+This week, whenever I try to delete a blank row, or delete yesterday's data, or select a few cells and drag them to a new place, or try to subtotal some stuff, *or do any of these things in a brand new sheet I've copied the data into*, Excel crashes. 
+
+I've learned to save constantly and just use the delete key to remove data (leaving blank holes), but that's no way to live.
+
+Is there any way to track down what's causing the crashes?
+
+
+-------------
+I am guessing the constant insert/delete on the file has fragmented the conditional formatting rules. These tend to really tax Excel and since you have a ton of them, there's where I would start. Check your rules and see how many there are. Chances are the same rule has been broken up into duplicates that point to different ranges. If you see a lot of duplicated rules, create a test copy of the file and delete all conditional formatting and see if the crashes stop.  
+If so, fix the conditional formatting in your file. remove the duplicates and correct the ranges of the remaining 'master' rule. 
+See if that helps.

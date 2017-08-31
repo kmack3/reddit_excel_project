@@ -1,0 +1,32 @@
+6gan3n
+No more csv save warning when my workbook has formulas or multiple tabs?
+I saw that excel changed the warning when you save as a csv to a little ribbon that pops up on the top. You can easily disable this forever by clicking "Don't Show Again". For me, it is actually important that this warning cannot be so easily disabled.
+
+I manage about 10 different laptops and several people use each one. So somebody could easily click "Don't Show Again" without me knowing and then there will never be any warnings on those computers anymore when I save as a csv. 
+
+For me, this is dangerous to not have the warning. Here's why: I've opened a csv (forgetting that it was a csv, not an xlsx) and put a formula in one of the cells. I hit Ctrl+S and excel just saves it as a csv without my knowledge. I close it, reopen it, and all my formulas are gone.
+
+Does anyone know of a solution to my problem, such as a way to force excel to always give this warning?
+
+
+-------------
+Which version Excel?
+
+
+-------------
+You can intercept the workbook save event and put in your own code. Or you can remove the Save and Save as buttons from the ribbon and replace them with a button to a custom macro which points to your own custom save routine. This is the most satisfactory method because you can put all kinds of checks in there to ensure whatever you want happens. I did this just to get rid of the backstage view with every Save as.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

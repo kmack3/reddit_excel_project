@@ -1,0 +1,18 @@
+Application.Run Macro executes twice
+You don't need to use the () and more than likely you should just do:
+
+    Call SelectFolder
+Change line 3
+
+    Application.Run "selectfolder()"
+
+To this:
+
+    selectfolder
+
+
+SOLUTION VERIFIED
+
+You have awarded one point to _itsnotaboutthecell_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,12 @@
+Budget - Automatically utilizing any extra cash towards a prioritized list of balances
+As it is, you have part of C3's formula referencing C12, and part of C12's formula referencing C3. Thus creating the circular dependency error. Did you mean for C3 to reference B12? I'm not exactly sure what the difference between C12 and B12 is supposed to be.
+This isn't exactly what you're looking for, but this is a different approach that you can play around with. If this is operational (you are updating the balances monthly), then you'd have to make that update and then change the first month (the next 11 are formulas). If you are deleting loans as you go just be mindful of how the cash flow links together (the first one refers to the "funds" line).
+
+Sounds like you can figure it out, but if you have any questions feel free to ask.
+
+https://docs.google.com/spreadsheets/d/1C7KM7okiiKqh8yKOqFz9mQcyLBFCfZNXQQloRjTY5SE/pub?output=xlsx
+B12 is your paycheck before anything is paid out.  C12 is what remains after the sum of C3:C11.  
+
+I guess I need to sort out the circular error before moving forward.  How would you display the same information without getting the error?  
+
+Edit: Also looking into an INDEX/MATCH to replace my VLOOKUP error...

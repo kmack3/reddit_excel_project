@@ -1,0 +1,138 @@
+[Discussion/Opinion] If you had to place Excel skill into 4 tiers of competency, "Beginner," "Functional," "Advanced," and "S-Tier/Master," what would go into each?
+[deleted]
+I'd actually divide those tiers by how much you can manipulate the raw data:
+
+Tier 1: Data entry (enter text and numbers and format their size or color, then deal with page setup and print, or data validation, conditional formatting and similar features that a user would see in default Excel menu)
+
+Tier 2: Mathematical calculations (knowing the existence of complex statistic functions does not make a person an advanced Excel user, necessarily)
+
+Tier 3: Conditionals (from simple if() to use of array or even VBA such as building your own UDF to achieve customized results)
+
+Tier 4: Data manipulation and automation (from simple text to column, to using VBA to parse data etc; the key is you can process whatever data, in whatever format I feed you and turn them into entirely different structure, in a more automated style; for example, I give you a report template and huge amount of raw data and you need to calculate then export as individual reports everyday)
+Something a lot of other people are overlooking is less technical but just as important: readability via visuals and consistency. 
+
+Ideally, any important spreadsheet should be able to stand on its own, with nobody needed to walk a new user through it.  Things named appropriately, consistent formatting, human friendly colors, proper alignment, etc.  Everyone has that one co worker that you never want to see his/her spreadsheets because they are a terrifying clusterfuck of randomly formatted shrapnel.
+
+Maybe this is just a pet peeve of mine.  For instance, do not highlight rows with random colors to flag them.  Use a column for notes or categorizing.  Colors are not intuitive if they are only defined in the users head.  Plus they cannot be pivoted on, sorted, or filtered as easily.
+There was a thread a little while back where someone posted a very comprehensive list of excel skills and what user tier should require them.  
+
+I disagreed on some of the particulars, but overall, it's a great document.
+
+Edit, link:
+https://www.reddit.com/r/excel/comments/4rpjk8/spreadsheet_competency_framework_from_the_icaew/
+Beginner is simple: doesn't qualify for a higher level.
+
+Functional: knows how and when to use simpler formulas, pivot tables, autofilters, conditional formatting.
+
+Advanced: knows how/when to use array formulas, advanced filters, has some experience with Excel's weaknesses, some knowledge of VBA. My definition here would correspond roughly to expert proficiency.
+
+Expert: knows the ins and out of Excel, usually also learned the ins and outs of another spreadsheet. Knows SQL, and prefers writing web queries in SQL than using graphical query builders. Has developed his/her own library of utility macros and user-defined functions. Has automated Excel using 2 languages other than VBA and VBScript.
+As the hiring manager I would specifically walk up the skill tree you described and ask those questions.  I think you have a good list except my last two questions were 4. Can you do macros. 5. Can you do VBa?
+
+A lot of people can fudge the macro recorder and make buttons but they don't understand the VBA behind it.
+
+The middle functional tier is a crap shoot which is why I think it's important to ask specifically about which function the job required.
+At the start of the year I was very much a beginner who could navigate Excel and know which tab did what. There's a few things that I'd like to study more on which I consider to be advanced & could probs be grouped in tiers.  
+
+Beginner - Able to navigate excel and create basic formulas, graphs & tables.  
+Functional - A broader knowledge of formulas, nested formulas & able to identify the best formula to use for any given task.  
+Advanced -  Enough confidence to teach people how formulas work, design spreadsheets. Pivot tables, Array formulas and create basic macros.  
+God - Master of all of the above, and I'll include SQL, Power Query, Add-Ins. I dont know of anything else. I'm somewhere between Beginner and Advanced.     
+
+
+
+
+For years I have argued in favor of these four tiers:
+
+1) Excel Nothing
+
+2) Excel Basic: This person can handle most normal tasks thrown at them. They know all basic functions, vlookup, pivot tables, how to record macros, and even how to do basic editing of existing macros. 
+
+3) Excel Master:  This person can do anything that you can imagine. They know or can easily handle all functions and functionality. They can write Visual Basic code. 
+
+4) Excel Guru:  This person has moved beyond solving your problem and is only interested in solving your problem efficiently. 
+I recommend getting the book data smart. It will introduce you to the advanced excel concepts a great deal I think.
+>but I'm not sure what people ask for when they say "expert-level Excel proficiency required," 
+
+"Expert in Excel" is literally meaningless on a job description. Sometimes it means "knows how to do VLOOKUP/Pivot Tables," sometimes it means "knows how to build complicated macros in Visual Basic." Apply anyway, and when they talk about your Excel skills, just be honest. 
+There's probably another tier like highly functional, for people that know how to do more complex formulas like if statement and stuff.
+Add pivots to "advanced" or "functional" depending on industry. 
+a bit "gross" bit I agree with this list! I think we cn add some sub-lvls for each "rank", like:
+
+Beginner 1,2,3,...
+Functional 1,2,3...
+and so on.
+
+I think, since this reddit gives a lot in terms of info/guides/etc, that it could give also THIS information: A general classification based on type of job made by whole community and major experts/worker/etc.
+
+So for mods, what do you think about this?
+Splicers?  ;)
+5 DEITY. https://youtu.be/ax2UBISNv2A
+Pivot tables need to be on the list.
+This is a very good way to categorize the skill levels. Ultimately in Excel, how good you are is a matter of what you can do with data. Of course you have to know functions–and knowing VBA helps sometimes—but if you can't use these to distill information from data, then you're still not advanced in any way. The more dimensions of information you can get out of raw data (such as stuff you can do with Power Pivot, Power BI, data visualization, etc.), the more advanced you are. 
+This is far better.
+
+Tiers 1 and 2 do not require any knowledge of how Excel works, just learning how to apply skills you may already have from other sources (mathematics, statistics, presentation/design, etc.);
+
+Tier 3 requires understanding the logic of how data and formulae are related and how this can be controlled;
+
+Tier 4 requires understanding how Excel treats data (from the numeric form of date-times up to the MS Office Application/Document structure and accessing external data sources) and the logic flow of a properly written VBA macro.
+As to your last point, I soft of disagree.  Stoplight scheme is pretty intuitive to most people, as is green/black/red text for positive/ neutral/negative (or simple just red for negative). 
+
+I guess these aren't just random colors, they're pretty standard but yeah the highlighting the full of  rows/color change of text in row  can be a bit obnoxious depending on how it's used.  
+
+One are I will disagree with you is that color rows does not make it hard to filter/sort, but actually quite easy as you can simply click "filter by color" at the top of the filter column.  
+
+I know it's a bit redundant, but I have a VP of sales that likes stop light coloring (where I set up the logic that colors the row/use the built in conditional formatting) on some account updates he gets that he likes displayed a a fairly granular level. It's easier for him to just click filter>filter by color to get all red rows so he can address the "problem" accounts during regular meetings. 
+
+
+It's really basic and I could do more with the data but he basically wants the full record displayed so he gets all the account info, and then just isn't super excel proficient but sorting by color is intuitive for him
+
+
+Definitely not the best set up, but just want to go to bat for excels filter by color option because it is simple, and very basic excel users can use it much easier than the other filter options and it visually informs him of things at a glance just by color.  Sometimes it's better to do something you "know" you could make better, but just keep it simple and consistent.  Especially important he prints out sheets or didn't have time to review them prior to a meeting and is just quickly glancing.  Printed out sheets = no drill down so he needs the whole record displayed, and can't filter of printed out so the color allows the eye to autofiltwr.  
+
+Trust me, I wish I could fix these things, but the work for what he needs so whatever.  And there are many audiences in the workplace with similar preferences/behavior.  It's not like he's incompetent at his job, he can use that basic spreadsheet to great business effect, he just can't use eve that well and color is super simple.  
+
+Easy way for him to get at problem accounts where granular detail may show it doing well but he knows it was a onetime spot buy (though I may not, depending on customer as we have a firewall between some accounts due to nature of business). 
+
+
+>A lot of people can fudge the macro recorder and make buttons but they don't understand the VBA behind it.
+
+Which is odd, as I can Google-Fu the VBA and make it work for me, but I have ZERO idea how to Macro. 
+>2) Excel Basic: This person can handle most normal tasks thrown at them. They know all basic functions, vlookup, pivot tables, how to record macros, and even how to do basic editing of existing macros.
+
+While I'm not an expert or a master. I find there is a large group here, too large. A basic can enter data in a form, or follow instructions on how to take a form from a Guru and use it the way it was designed. Such as writing a schedule that was generated based on basic input on a web site that then designed a sheet for you to "Color Code" using right clicks. 
+
+But I know many people that can do basic stuff on Excel but not do anything they weren't directly told. Someone that can gather manipulate  from that data, (Functions, vlookup, if statements) to discover something is more advanced then basic. Perhaps like a Business Annalist I role. 
+
+For instance I can do Vlookup, Pivot, Basic, VBA with Google-Fi, Complex and nexted if and sums. Which makes me the "excel Guru" at work while I'm not expert, but anyone that someone goes to for help is above basic. 
+[deleted]
+You can draw a line in the sand anywhere you want. But I think the intent of this post was to make your own list, rather than strictly comment on someone else's.
+Pivots are "functional" imho. There are advanced things you can do with them, but it's pretty basic concept and less "programmer-y" than IF statements and formulas. Pivots, to me, are the demarcation line between people who 'used excel a few times in school' and people who have the basic, entry-level proficiency that Job Ads like OP's are looking for.
+I am not against colors, especially with an intuitive use like stoplight colors.  More like completely random and unnecessary highlighting from some temporary investigation on a row that should have been removed.
+
+You can't pivot on colored rows.  I know you can filter and sort on one color  but not multiple.  It's not a good habit to be filtering on formattinf, instead you should be filtering on data.
+If she can do index/match, there's absolutely no reason for her to learn h or v lookup
+For whatever reason lookups have always been a little confusing to me whereas index match is much cleaner to manipulate for me. Given that combined with their more dynamic application for negligible processing cost, and I've never looked back. 
+I've never been able to get vlookup or hlookup to do what I need to do. I've literally worked with other people when I was at university, copying their exact same sheet, on multiple different computers, and I never got the right answers with any of the lookups.
+
+Index Match works better (ie, it works properly), but i've never been able to use the other ways.
+I mean, SUMPRODUCT can be a more elegant way to do SUMIF across two axes. So if they've been using SUMPRODUCT for that, there's no reason to learn SUMIF.
+...And this is coming from the person who also didn't make their own list, but if you pay attention you'd see that I'm implying that I agree with the list and adding thoughts to their list, rather than just strictly shitposting.
+Fair call.
+Right, and I completely agree with that. But it's just a fact that some end users won't take the time to learn to do that.  They don't want to set the criteria to filter on, they won't take the time to learn and would rather me, the analyst, set the criteria for identifying the red/yelllow/green, apply the conditional format, then have the data set up with filters and then them just click on the drop down and select green/yellow/red.  
+
+
+Some of the sheets the whole row is colored, some just the field in a certain column so they can choose "green on margin, red on forecast accuracy".  
+
+I'm not recommending it as a best practice, just that in reality you may have an audience that wants their data like this.  
+
+I would much rather do it another way, and I did try in the past, but it's just how he likes it.   I don't know, sometimes as much as we want to show people a better way of displaying or visualizing the data, there comes a point where you don't fight your audience and just give them what they want.  As long as it's not incorrect and can't he can't arrive at "artificial" conclusions because it's not set up in a fool proof way to prevent him from misconstruing the data, it's fine. 
+
+
+I always will try and show people my suggestions and the benefits my version would have compared to their's (and the "costs" -  the cost of learning somethings is low but surprisingly prohibitive to some who are entrenched) when they ask for a report but if they give feedback that they appreciate it but want it that specific way - well, I'll give it to him because it's not "wrong".  
+Eh sometimes its quicker if you just want some quick info. Even if you dont use it you should still know it.
+Frankly I think 4 buckets is a bit limiting.
+I hear ya.  Can't always get everyone to use spreadsheets the right way and that's a definite reality.
+
+Though the OP was more of a hypothetical roadmap of skills, so I was writing more from that side, for someone trying to learn.  So I wanted to add that visuals, formatting, intuitive design, erc are as important to learn as anything else if one is studying excel.

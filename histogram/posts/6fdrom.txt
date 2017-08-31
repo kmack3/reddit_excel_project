@@ -1,0 +1,49 @@
+[Help] Cashflowing a number until it runs out
+Reminder to users to **not** put [Help] in their titles.
+
+Please read the sidebar and the submission guidelines on the submission page.
+C5 formula:
+
+    =IF($D$17-Sheet2!$F$6<=0,0,$D$17-Sheet2!$F$6)
+
+C6 Formula:
+
+    =IF($C$5<=0,$D$17-Sheet2!$F$6,0)
+
+This is based on the Total Cost being in Sheet 2 Cell F6. Just change Sheet2!$F$6 to wherever the Total Cost actually is.
+I think you've misunderstood the question. 
+
+I'm happy with how cells C5 & C6 are - these are inputs to change so currently 40% and 60% however I would change these to 30/70 maybe. 
+
+The formula i'm after will go into cells D21 and D24 and pull across to BC21 and BC24. (The cells highlighted in blue and orange)
+The link is broken
+Sorry, I have uploaded to google instead so the link shouldnt die:
+
+https://docs.google.com/spreadsheets/d/15Udr5uDVgq_8cAgDS50IemdJXpxitio1Cq-dL_xT_hw/edit?usp=sharing
+Is this what you're after?
+
+Cell D21 (dragged across)
+
+    =IFERROR(IF($D$5-D18<=0,0,$D$5-D18), 0)
+
+Cell D24 (dragged across)
+
+    =IFERROR(IF(D21<=0, $D$5-D18, 0), 0)
+I think this is getting closer to where I need to be! The Equity part seems to calculate correctly (Cell D21 across) however ideally I'd like to show the diminished amount per  month, rather than the total equity remaining per month. 
+
+The debt row (Cell D24 onwards) I don't think works. It needs to be essentially the same formula as Cell D21 but diminishing from a different number (Cell D6) starting to cashflow from when Cell D24 runs out.
+
+Does this make sense?
+
+Thank you for your help so far!
+You'll have to go easy on the financial terms, mate! What do you mean by diminished amount per month? Explain it like I'm 5!
+
+I did start with the Debt row calculating from D6 but it didn't seem right, but then again, I have no idea what any of this means! Change the the $D$5 in the debt row to $D$6 an drag that across.
+
+Haha sorry! So your formala for cell D21 dragged across outputs 59,775,926 in Cell G21. Instead here i'd like to show 1,951,048, which is the total in D5, less the 1,951,048 in Cell G17. 
+
+I know this sounds really stupid as the simple formlua in cell G21 would be D5-G17, however then I lose the functionality of the cashflow generating automatically if I change the time period. It also doesn't allow for the second pot of money, the debt in cell D6 to start being spent when the equity pot (cell D5) has run out.
+
+Hopefully that make sense :/
+OK, very quickly, what values are you expecting to see in G21, H21 & I21?
+exactly the same as the values in G17, H17 and I17. BUT when we reach Column AP 21 we have run out of equity (Cell D5) and need to drop into the line below and start spending debt (Cell D6). So in AP21 There will be 3,073,441 and in AP24 there should be 2,812,204 (the difference between cell AP17 and AP21)

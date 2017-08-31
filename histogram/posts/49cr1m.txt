@@ -1,0 +1,83 @@
+Can I make Excel Auto-Suggest a word or list of words?
+Alt Key + Down Arrow gives you a drop-down in the cell of anything else that's been rooted in the same column.
+
+You could use a data validation list:
+http://www.online-tech-tips.com/ms-office-tips/how-to-use-data-validation-in-microsoft-excel-to-create-dropdown-lists/
+I've used autocomplete boxes in many of my dashboards, in combination with dynamic named ranges. I use the following link's directions and edit to suit my needs. 
+
+http://www.contextures.com/xlDataVal10.html
+It will try to autocomplete words if they appear before in the column. I'm not sure of a better way than just copying your range above the column to allow easier data entry.
+
+For names you can press F3 to bring up a list of names.
+You could have a userform that pops up with a hotkey. This userform would only contain a dropdown box with a typeable text field. Load up all the words you'd like it to be able to suggest to you and it will autocomplete based on what you've loaded into it. Pressing enter would make the form save the completed word in the active cell for you.
+Nice tip, didnt know about that, its cool but does not solve my problem :( 
+
+btw, is it possible to get this but in a dynamic way? like If I type Jhon, It will show me Mark Jhon, Jhon Smith, Kelly Jhonny etc ? 
+Thanks MAN! This really is very good, but having to double tap everytime is not very user-friendly but It does the job very well! 
+Solution Verified
+I noticed, by F3 do you mean the Ctrl+F3 key? mmm so the best way is to just copy the range to be above where I want the auto complete? no other way? :\
+Thats clever! How do I do it? I have a way to do it using validation but involves a lot of formulas like vlookup, Is Ifs etc. and I have to type the word, then press down the arrow, I wish to do this in a simpler way but have no knowledge for that yet.
+Does a userform dropdown box always allow for autocomplete?  I know a data validated cell does not but a userform dropdown is different?
+
+Just asking for...a friend...
+Only works in Google Sheets, it's a shame
+
+You have awarded one point to _belltiara_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+F3 on its own when pressed when entering data into the cell will bring up the list of names available.
+
+You can use also use dynamic drop downs to mimic the autocomplete but it's a bit more complex, will send you a detailed answer later. 
+All of this would require the use of VBA to implement. But in all honesty it's not too complicated of a design.
+It can by default when you have added items into it. You can also configure it to not have a typable text field so you can *only* select items from the dropdown. This would be the only situation where it would not autocomplete.
+Strange, F3 does not work for me but the answer above Alt+down does show me the list of names I have written, just not in an auto complete form but a drop down list.
+wow really that easy? how do I do it? like for a range of A1:A1000
+I see.  I had a question that went unanswered last week and this pertains to it.
+
+https://www.reddit.com/r/excel/comments/48cu0h/dynamiclly_created_userform_dropdown_box/
+
+I think your code above gave me an idea on how to solve my problem.
+Make a userform with a combobox. Resize userform to the combobox so it's compact.
+
+Copy the following code into your userform module:  
+
+    Option Explicit
+    
+    Private Sub UserForm_Initialize()
+        Dim Counter As Long
+        
+        For Counter = 1 To 1000
+            ComboBox1.AddItem Application.Worksheets(1).Cells(Counter, 1).Value
+        Next Counter
+    End Sub
+    
+    Private Sub ComboBox1_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+        If KeyCode = vbkeyenter Then
+            ActiveCell.Value = ComboBox1.Value
+        End If
+    End Sub
+
+It's set to default object names, so everything should work without renaming anything. If you understand all that, then you can either google how to assign a macro a hotkey in Excel, or I can see if I can explain it to you here.
+I'm on it!
+Thank you, I will try that soon. Will confirm if it works :)
+Ah, also forgot to insert the form close code into there.
+
+Underneath the ActiveCell.Value = ComboBox1.Value line, insert 
+
+    Unload Me
+
+This will close the form after it's set the value of the active cell for you.
+It says vbkeyenter variable not defined.
+
+Just to test, I created a new sheet called sheet1 which is the 7th sheet of my workbook.  I added some item into range A1:A1000 (random names) then I just tap on any cell other than A column, activate the userform and type in there? it shows error variable not defined :/
+Okay sorry for the delay, at work again now. You can replace "vbkeyenter " with "vbKeyReturn" (I was typing up code on the fly yesterday)
+
+Now the reason the sheet number didn't quite work is because it was formatted to only work with the first sheet.
+
+"ComboBox1.AddItem Application.Worksheets(**1**).Cells(Counter, 1).Value"
+
+The 1 highlighted in bold is what tells your userform what sheet it will load the first column of information from. Everything should work as normal now, and I apologize for the typos.
+Not sure If Im doing something wrong but doesnt look like its working for me, Sure it has no errors now but nothing changes apart from the word being inserted into the active cell. lol 
+
+here are the pics http://imgur.com/a/NtMAu
+

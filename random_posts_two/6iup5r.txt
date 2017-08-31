@@ -1,0 +1,29 @@
+6iup5r
+Using solver to schedule workers - optimization help
+Hi, I am trying to use solver to optimize a schedule given various constraints. That is the easy part. I am maximizing points given the points assigned to each staff. A nested IF works. I searched on this subreddit and found some nested IF solutions but none that apply. 
+
+
+The problem is there will be 100+ staff. So a nested IF will be too long. Solver will assign who works which days with at least two people per day. The points total would be the maximized goal. How do I make the points total per day though? If the day is selected by "1" then how do I make this one cell lookup that persons point value? 
+
+
+The solution doesn't have to total the value at the bottom per day either. It could total the entire "grid" aka month, if that is easier.
+
+
+Thanks in advance
+
+
+Link to image of workbook: http://imgur.com/a/MSNyU
+
+
+-------------
+>How do I make the points total per day though?
+
+Assuming "points total per day" is the sum of points that correspond to the  people working that day, `=SUMPRODUCT(C5:C9*$A5:$A9)`.
+
+[Imgur](http://i.imgur.com/1srb4n1.png)
+
+>It could total the entire "grid" aka month, if that is easier.
+
+That's easy as well. `=SUMPRODUCT(<whole-month-range>*$A5:$A9)`.
+
+[Imgur](http://i.imgur.com/wd5oXBZ.png), so [the solver would look like this](http://i.imgur.com/lr0ZsJj.png), but I'd imagine you have more constraints.

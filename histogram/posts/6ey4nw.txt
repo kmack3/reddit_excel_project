@@ -1,0 +1,15 @@
+How to classify the data like this?
+Not really - I would say you could use Consolidate but the "From" is garbage where it's located. You could certainly attempt something crazy from within Get & Tranform (PowerQuery) but that may not be worth the effort as well. VBA could be a likely solution though I'm always hesitant to recommend that and would say - can you go to the source of your data and ask them to format it in database format (Fields and Records).
+bit complicated. Assume your first table is from A1 to D9. H1 is "from" and I1 is "USA" while H2 is name and I2 is age. 
+
+have this formula at H3
+
+    =IFERROR(IF(H$2<>"",INDEX(INDEX($A$2:$C$10,,MATCH(H$2,$A$1:$C$1,0)),SMALL(INDEX((INDEX(E$1:$Z$1,MATCH("name",E$2:$Z$2,0)+1)=$D$2:$D$10)*(MATCH(ROW($A$2:$A$10),ROW($A$2:$A$10)))+(INDEX(E$1:$Z$1,MATCH("name",E$2:$Z$2,0)+1)<>$D$2:$D$10)*1048577,0,0),ROW(A1))),""),"")
+
+drag across, then drag down. 
+Not sure what you're tyring to do with the data - the tables to the right are grouped by "from". If you're trying to do the same thing but automatically, pivottables would work. One of the options for a pivot table is to filter. 
+> Consolidate 
+
+Thanks for your help, the the formula was unable to show the name.
+
+btw, it there have any easier solution? 

@@ -1,0 +1,240 @@
+What is the best way to keep VBA code clean?
+Put repetitive code into it's own module and call it. 
+
+I have a module that I use to check if a sheet exists, and if it does it deletes and then re-adds it. I make it passthrough module, so I can call it from all over the place and use it to generate any sheet with my given name. 
+
+i.e. 
+
+    Call MakeSheet("TestSheet1")
+
+Then the module it calls checks if it exists, deletes it and then re-adds it. This also helps in the future if you have to make a change to this code, you can change it in one place and it affects everything.
+
+_____
+
+Keep all the declarations at the very top of the sub. Dim all of the same type of variables together
+
+    Dim i as Long, j as Long, k as Long
+    Dim str1 as String, str2 as String
+    
+Btw - the following doesn't work
+
+    Dim i, j, k as Long
+    Dim str1, str2 as String
+
+Only k is a long and str2 is a string - the rest are variants.
+
+**Also**, give your variables proper names. e.g. `names as String` not `str1 as String`
+
+____
+
+If you have lots of sub modules, and you are declaring the same variables over and over again, then make one sub called `Declarations`, call that, and declare everything else as Global Declarations so you only need to call it once e.g.
+
+    Option Explicit
+
+    Public sheet1 as Worksheet, Sheet2 as Worksheet
+    Public testbook as Workbook, tw as Workbook
+    Public Const ac = 5
+    
+    Sub Declarations()
+    
+        Set sheet1 = ThisWorkbook.Sheets("Master")
+        Set sheet2 = ThisWorkbook.Sheets("Sheet2")
+        Set testbook = Workbooks("Test Workbook")
+        Set tw = ThisWorkbook
+        
+    End Sub
+    
+    Sub TestModule
+    
+        Call Declarations
+        
+        ' NOW ALL THE MODULES ARE DECLARED AND SET!
+        
+    End Sub
+
+____
+
+Group your sub modules into their purpose and give the module it's own name e.g. Data Collection, Data Entry, Processing, Formatting, Old/Unused. It'll make them easier to find later on.
+
+____
+
+Force yourself to use Option Explicit (VBA Window -> Tools -> Options -> Require Variable Declaration), so you are always declaring your variables, therefore you're constantly using the right variable types.
+
+____
+
+Don't use 'naked' cell references e.g.
+
+    mySheet.Activate
+    Cells(1,2).Copy
+    mySecondSheet.Activate
+    Cells(1,4).Activate
+    ActiveSheet.Paste
+
+Do this
+
+        mySheet.Cells(1,1).Copy Destination:=mySecondSheet.Cells(1,4)
+
+If you use `With`, you can keep referring to the same reference over and over again without typing it out
+
+    With mySheet 'THIS MUST ALREADY BE DECLARED AND SET SOMEWHERE EARLIER!
+          .Activate
+          .Cells(1,2).Copy
+         'DO A BUNCH MORE STUFF
+    End With
+
+The with allows you to refer to the "mySheet" using just a `.`, saving you tonnes of time when typing out references.
+One of the tools I couldn't live without is the automatic VBA indenter.
+
+http://www.oaltd.co.uk/indenter/indentpage.asp
+
+If some part of your code could be reused (given the right variables) make it it's own Sub and call it as needed. Naturally, if a calculation could be reused, make it its own Function.
+
+On larger projects, I tend to have a Module named "Functions" that holds all of my functions.
+
+As often as possible, work WITH objects.
+
+Dim every variable on its own line and for the love of all that is holy, make "Option Explicit" mandatory.
+
+Never refer to network drives by their letters. Always use the UNC address.
+
+Table all datasets and learn how to manipulate tables like a pro.
+
+http://www.jkp-ads.com/articles/Excel2007TablesVBA.asp
+
+Read every single post from this guy:
+
+http://stackoverflow.com/users/1140579/siddharth-rout
+COMMENTS!!
+
+Definitely the most important thing for understandability of code.
+
+Also if you have something that you do repeatedly then put it into its own sub and call it.
+There is one and only one place that "Goto" should be used in normal programming and that is to call an error handler.  If you are using Goto for any other purpose, it will eventually cause problems with your code.  "On Error Goto" is your friend, any other use is a curse.  Corollary to this, if you are not including an error handler in your code, users will break things just because they can.  What you do for yourself in your own time is your own business, but if it is shared, use an error handler.
+http://strugglingtoexcel.com/2014/04/15/display-error-messages-excel-vba/
+
+Accumulate ready to call routines that do general tasks such as opening files, switching sheets, etc.  Write specific code for the task at hand.  Eventually you will have a library of routines that simplify most of the work down to the specific tasks to be performed.
+
+Re keeping things in one routine, in time you will see that this is bad coding practice.  Write a master routine that is as short and efficient as possible and has at least one defined termination point.  Write subroutines to do all the brute force work.  The master routine should call the subs.  The advantage of this code method is that it more closely approximates the way human minds work therefore is much easier to maintain long term.
+
+Make a point to only use Copy/Paste in VBA when absolutely necessary.  Copy has this nasty habit of pushing data onto the clipboard.  Eventually the clipboard fills up which causes your VBA code to crash and burn.  Simply take "Copy/Paste" out of your lexicon for most VBA.  This particular problem is one of the most difficult to troubleshoot that I have encountered with VBA!  I wasted hundreds of hours trying to figure out why a data harvester kept crashing after a few dozen cycles.  When I got rid of the Copy/Paste, it ran like intended.
+Depending on how much I care about keeping it clean I break down the code into different chunks that seem to make sense and then call them all in one macro. 
+
+Be sure to comment significantly because you never remember what you think you're going to remember. Also be sure to have a comment at the beginning that explains the overall intent of the sub.
+
+Make sure to tab things appropriately and don't be afraid to double-space in between different chunks.
+Definitely try break things into smaller subprocedures.  It's not easy at first because you're focused on the task you need it to complete, but try to generalize things as much as possible.  
+
+Subs that can be used by different modules is a great way to work smart and not hard.  
+It's generally good practice to avoid globals , instead it's better to pass then between modules / sub routines
+All incredibly helpful points. Variable declaration is one area that I absolutely need to improve on. This will be a big help to refer to.
+
+
+Better named variables would be good. Str1 says nothing. Pname means you remember it is a persons name.
+
+And if course comments
+> Never refer to network drives by their letters. Always use the UNC address.
+
+This. What's the best way to determine this?
+Saving this comment. Lots of great stuff here! I do need to get better about declaring variables at the start of my sub. 
+
+With "Option Explicit", is that something you have to declare in each sub, or can you have that be global? I'm ashamed to say that I have not being doing this up to now.
+Yes! It is a very weird feeling to know that I wrote the code, but somehow can't understand how it works anymore. Must be what it feels like to get Alzheimer's.
+    Application.CutCopyMode = FALSE
+    Application.CutCopyMode = xlCopy
+
+Cleans out the clipboard and puts Excel back into copy mode.
+Very good point on commenting at the beginning of the sub. Especially if I start splitting into multiple subs, having some kind of description will be really helpful. 
+
+Right now I'm using appropriate tabbing just to keep track of the massive if and for statements that connect everything together so I don't think that should be a problem on a smaller scale.
+When you have 8 variables to pass through, I tend to stick to Globals. 
+
+You could always have a start declaration and end declaration to set them equal to nothing at the end. 
+I personally despise global variables.
+Middle ground for me.  I use some global variables where they are used repeatedly in multiple subroutines.  Anything that can be used and tossed afterward is kept to the specific routine where it is needed.
+Open VBA window. Tools -> Options -> Require Variable Declaration.
+
+You have no choice but to do it now. Bwahahahahahaha.
+These were just examples. But I'll add that in as a note. 
+From the command line, type "Net use"
+
+This will list mapped drives and their UNC addresses.
+
+EDIT:
+
+Microsoft also offers this VBA example:
+
+    
+       ' 32-bit Function version.
+       ' Enter this declaration on a single line.
+       Declare Function WNetGetConnection32 Lib "MPR.DLL" Alias _
+          "WNetGetConnectionA" (ByVal lpszLocalName As String, ByVal _
+          lpszRemoteName As String, lSize As Long) As Long
+    
+       ' 32-bit declarations:
+       Dim lpszRemoteName As String
+       Dim lSize As Long
+    
+       ' Use for the return value of WNetGetConnection() API.
+       Const NO_ERROR As Long = 0
+    
+       ' The size used for the string buffer. Adjust this if you
+       ' need a larger buffer.
+       Const lBUFFER_SIZE As Long = 255
+    
+       Sub GetNetPath()
+    
+          ' Prompt the user to type the mapped drive letter.
+          DriveLetter = UCase(InputBox("Enter Drive Letter of Your Network" & _
+             "Connection." & Chr(10) & "i.e. F (do not enter a colon)"))
+    
+          ' Add a colon to the drive letter entered.
+          DriveLetter = DriveLetter & ":"
+    
+          ' Specifies the size in characters of the buffer.
+          cbRemoteName = lBUFFER_SIZE
+    
+          ' Prepare a string variable by padding spaces.
+          lpszRemoteName = lpszRemoteName & Space(lBUFFER_SIZE)
+    
+          ' Return the UNC path (\\Server\Share).
+          lStatus& = WNetGetConnection32(DriveLetter, lpszRemoteName, _
+             cbRemoteName)
+    
+          ' Verify that the WNetGetConnection() succeeded. WNetGetConnection()
+          ' returns 0 (NO_ERROR) if it successfully retrieves the UNC path.
+          If lStatus& = NO_ERROR Then
+    
+             ' Display the UNC path.
+              MsgBox lpszRemoteName, vbInformation
+    
+          Else
+             ' Unable to obtain the UNC path.
+             MsgBox "Unable to obtain the UNC path.", vbInformation
+          End If
+    
+       End Sub
+    
+
+> With "Option Explicit"
+
+It can be a "Set it and forget it" setting.
+
+In the Visual Basic Editor, go to Tools|Options and check "Require Variable Declaration."
+Transferring data from a sheet to the clipboard and then from the clipboard to the sheet requires 2 steps and takes considerably more time than using directed copy.  Even if clearing the clipboard is easily done, using directed copy or range equal methods are best practice.  There are plenty of times when you have to use the clipboard such as transferring data to a different application, but within Excel, it is rarely needed.
+
+    Range("L2:IV2").Copy Sheets(SName).Range("L" & Format(Str(X)) & ":IV" & Format(Str(X)))
+
+    Cells(1,1).value = Cells(2,2).value
+
+
+
+Done and done! I need to start forcing myself into these good habits now.
+What if at work you don't have access to cmd...
+I will be doing that right now!
+You mentioned clipboard filling up with data and causing Excel to crash without explaining how to remedy it.   I was offering the solution to that other than don't copy/paste.  Copy/Paste has its place.  Moving data isn't one of them though.
+I edited my original comment to you with a VBA way to get it.
+
+Also, you don't have access to CMD? That's harsh!
+I did not give details of any of my suggestions and perhaps should have.  So now the OP has reasons why copy/paste is bad practice.  :)
+I do have unrestricted access to reddit, so I got that going for me, which is nice.
+How ironic. I have full Admin control at work, and only Reddit on my phone with WiFi disabled there.

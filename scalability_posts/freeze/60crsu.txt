@@ -1,0 +1,24 @@
+freeze
+60crsu
+Screen freezes until Enter is pressed
+
+So I will be working with 5 or 6 different spreadsheets. Some do and some don't have any relationships to each other. But all of a sudden I will be typing and this whole Excel workbook will freeze. And then everything freezes that is Excel related. I will press enter and it will bring up a random background spreadsheet. 
+
+
+I have always assumed this is just a glitch in with excel but I'm hoping somebody will be able to enlighten me that I might be able to change a setting somewhere and fix this issue 
+
+
+-------------
+Look in the lower left hand corner. Does it say calculate? It sounds like Excel could be doing recalculating and if any of those 6 spreadsheets have large amount or complex/array formulas, it could take a bit. If this is the case, set calculation to manual.  
+-------------
+Unfortunately I know that it is not calculating. Are usually have this turned off or switch to manual
+-------------
+Do you have any macros in your workbooks? It could be a macro that process every time the worksheet changes.
+-------------
+Is the spreadsheet that opens a spreadsheet that was already open in the background or one that was closed? 
+This happens to me when I try to open a new spreadsheet without finishing entering a formula/data in a cell. 
+Maybe your computer is trying to open up an excel file without you meaning to?
+-------------
+No. no macro's.  
+-------------
+Apologies for the lack of response. It is one that is already opened in the background. 

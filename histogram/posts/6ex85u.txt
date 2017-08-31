@@ -1,0 +1,30 @@
+Changing strange postal code formatting to correct convention
+Those were maybe codes like `M4K 1E5` and `R3R 1E3`? I don't know if those make valid postal codes, but they follow the correct format. Unfortunately, Excel thought they were numbers in scientific notation, and unhelpfully converted the text values to numbers. 
+
+If you can, preformat the column as text, then paste the external data in. Don't open the data file directly in Excel. 
+CSV is text. Opening in Excel thinks those long values are numbers, that are then too long for Excel to handle.
+
+If you go through the Date > Get external data > From Text, you can define the datatype of that field and import it as text.
+
+I created an import Macro also to automate this  > [VBA Macro - Import CSV and specify column data types](https://www.reddit.com/r/excelevator/comments/5ncbz1/vba_macro_import_csv_and_specify_column_data_types/)
+
+
+It's Excel formatting your partial postal code as scientific notation.
+
+For example, go in Excel and type in the following values into different cells:
+
+    1E5
+    1E3
+    2E0
+
+You should see that Excel immediately formats the cell into the values you see in your screenshot.
+
+If you didn't save the CSV in Excel yet, then you can open the .csv file in a basic text editor like Notepad to see the original value. Otherwise you can work it out in that it's the general format of:
+
+[First Digit] E [Last Digit]
+
+..as seen from my previous example.
+
+Hope that helps!
+
+Edit: additionally! You can preserve the formatting if you still have the original CSV with the correct values by opening a new workbook in Excel -> Data -> Get Exernal Data [From Text]. Then find your CSV file and import it. On the last page of import, it'll ask what data format you want the Column Data Format to be. Change it from the default "General" to "Text" and it'll import correctly.

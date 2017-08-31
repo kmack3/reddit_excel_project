@@ -1,0 +1,32 @@
+ELI5: Net Present Value, not sure what I'm doing wrong
+Couple things. You are considering 6 years instead of the 5 years in the question. And as someone pointed out you are multiplying by (1.11)^n when you should be dividing. Money in the future is worth less than money right now, so your present values for 1-4 should be lower than the actual cash flow.
+
+Next is the NPV function in excel doesn't have a year 0. So your year 0 should be outside the NPV Function. So your formula for the generator would look like this:
+
+=NPV(C9,D20:G20)+C20
+
+I got the correct answer of -1,551,758.16
+
+Hope this helps
+Ok, I don't know much about this but if I'm not wrong the present value of future expenses should be less than the expenditure on that day. You are not discounting but rather adding the value of the discounting factor. Upload the excel sheet and I'll look at it tomorrow.
+The present value of a future payment at time t here is (cash flow)/1,11^n, since the time value of money means a dollar today is worth more than a dollar tomorrow.
+
+E: to the t:th power obviously, not the n:th. Getting my stuff mixed up here but you get the point
+Generator: =PV(11%, 5, 310000, 0, 1) - 280000 --> -1,551,758
+
+Electric Company: =PV(11%, 5, 400000, 0, 1) --> -1,640,978
+The timing of the cash flows is incorrect. I suggest re-reading the problem and assigning fake dates to each cash flow. Then you can use the XNPV formula to get your answer of -1.5. 
+
+You can also do it your way but you need to fix how you capture the beginning of the year payments in your PV formula.
+Thank you very much. 
+
+I corrected my spreadsheet. I got the right answer, but also would like verification that my formulas are on the right track too. 
+
+https://drive.google.com/open?id=0B_y1x3h4COeuSTZRZS1ad3lhS1U
+Financial analyst here.  You are correct.  Discount rate, sometimes synonymous with hurdle rate or WACC, is used to discount future dollars.  
+Awesome, thanks. I've made an edit to the original post with the link to the excel file on my google drive. 
+Your NPV formula for Status quo is wrong. You are referencing the generators cash flow. Should be =NPV(C9,D15:G15)+C15 = -$1,640,978.28
+
+Should get the same answer as if you added up years 0-4 on your PV line.
+
+Other than that looks good.

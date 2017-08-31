@@ -1,0 +1,27 @@
+Copied code from one spreadsheet to another but can't get results to duplicate.
+Do you have dates in X1:EZ1 and then the numbers "1", "2", and "3" in X2:EZ2?  
+
+The formula you have is searching the row X2:EZ2 for the first cell that contains with a "1", "2", or "3" and returns whatever is above that cell in Row 1.
+
+It's also looking for 1, 2, and 3 as strings, not as integers. You should remove the quotation marks around the 1, 2, and 3 if they're just in there are numbers (they presumably are), i.e. `match(1,$X2:$EZ2, 0)`
+I don't have 1, 2, or 3 in every cell, only the ones where it is relevant, but I don't think that would be an issue, correct? 
+
+Actually looking more closely, x1:EZ1 show up as dates but the cells themselves have the following code: 
+
+=if(weekday(ET$1, 2)<5, ET$1+1, ET$1+3)
+
+That is the code for cell EU1. 
+Correct, formula is just looking for the first time it sees a 1, 2, 3. Will ignore any other value. Having formulas in row 1 is not an issue. I think removing the quotation marks will solve your problem.
+Just tried that - If I keep the ones around 1, 2, 3 and remove only the ones at the end I still get a blank box. When I removed them from only around 1, 2, 3, and from all parts, I ended up with "42772" in the cell? No idea where that's coming from. 
+You can keep the "" at the end, I'm saying just remove the "" around 1, 2, and 3.   
+
+`=iferror(index($X$1:$EZ$1, 1, min(iferror(match(1,$X2:$EZ2, 0),300), iferror(match(2,$X2:$EZ2, 0), 300), iferror(match(3,$X2:$EZ2, 0),300))),"")`
+
+42772 is a date. Just right click the cell and change the number format to "Date"
+Solution Verified
+
+Thank you so much!!! This is going to make my life so much easier!!
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

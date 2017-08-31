@@ -1,0 +1,156 @@
+The One Microsoft Excel Trick That Rules Them All: How To Use Index/Match, The One Microsoft Excel Trick That Separates The Gurus From The Interns
+If lots of employers thought this made me a "guru" I would have found a job months ago.
+Index/match is just one trick a person should know.  A far better thing to know is how to write functional vba code quickly and efficiently.
+I'd hardly consider myself a guru but I'm glad to see that Business Insider thinks I am. 
+It's probably worth noting that if you are going to take the time learning index(match, it's probably better if you learn the bigger brother offset(match . Let me know if you guys want me to write about it.
+In my head the heirarchy is this:
+
+SUM = Apprentice
+
+INDEX/MATCH = Journeyman
+
+SUMPRODUCT = Master
+That website is absolutely disgusting. It took me a good 20 seconds or so to get rid of all the pop ups and ads to pick out the actual content.
+I always found the Index/Match combo a bit long winded.
+
+I like to think in simpler terms so I created this function 
+
+    Function VHLOOKUP(Grid As Range, Row_Find, Column_Find)
+    
+    VHLOOKUP = WorksheetFunction.Index(Grid,     WorksheetFunction.Match(Row_Find, Grid.Columns(1), 0),     WorksheetFunction.Match(Column_Find, Grid.Rows(1), 0))
+
+    End Function
+
+This looks up items in the first row and column of a range and returns the item at the intersection.
+Index/Match is pretty cool, but they could have used a better example though.
+
+Amen to that. One of the guys sharing my office was excited yesterday because he discovered he could improve his productivity by just typing "&" instead of "=CONCATENATE()".
+Indeed. Guru, this does not make you. Write your own custom suite of lookup functions to replace vlookup and you're closer.
+Why functional in particular? VB doesn't even support tail recursion... 
+The ability to write functioning VBA is a lot more useful than being tied to the Excel's predetermined functionality, yes.  In my experience it is, anyway.
+I'm gonna use this on my resume.
+Basically, offset/match is similar to index/match but I feel that it is more versatile as it allows you to have arrays going down as well as across. 
+
+**Offset Function**
+To understand how it works, you must first understand how offset function works, and it works like the following: =offset(reference, y, x) - where y goes down first and x goes across. 
+
+So if I want to bring the value back in cell B11, the formula would be =OFFSET($A$1, 10, 1)  remember to lock the reference cell for when you want to create a dynamic table later on when combing everything. 
+
+**Match Function**
+Now, by adding match onto this, we can create some magic. 
+
+The match function simply returns the numeric value of a searched term in an array. 
+
+For example if you have Jan, Feb, Mar… etc running down column A and your formula is =MATCH("Feb",$A$1:$A$12,FALSE), you will get the numeric value of 2 back. 
+
+Similarly, if you have Jan, Feb, Mar.. Etc running across row 1, and your formula is =MATCH("Feb",$A$1:$L$1,FALSE) - you will also get the numeric value of 2 back. 
+
+**Combining the two**
+Firstly, I exclusively use offset/match function and never use vlookup, and in most cases- my offset/match functions with conjunction of other formulas can replace pivot tables. Anything I can do in vlookup, I can definitely do in this. 
+
+When I combine both together, it gives me great versatile to go across as well as go down, so a typical formula could be =offset($A$1, match("Company A", $A$1:$A$12, False), match("2013/2014", $A$1:$L$1, false))
+
+What the above formula will do, will look down column A for "Company A", and then when it finds that it will go across the rows until it matches the cell where row 1 contains "2013/2014". 
+
+Moreover to be even more smart, if you have further breakdowns in various columns, you could simply add it on to your formula. For example if your data is broken down by Company A, Company B, Company C in column A and column B you have Dept x, Dept y, Dept z - you can even do =OFFSET($A$1, MATCH("Company A", $A$1:$A$13, FALSE)+MATCH("Dept y", $B$2:$B$4), MATCH("2013/2014", $B$1:$D$1, FALSE))
+
+Hope this helps, if I get some time tonight - I will upload some screenshots. 
+Go shead
+totally agree
+Strangely enough, I pretty much skipped the INDEX/MATCH stage. I'm wondering if I missed out but I'm a big fan of using SUMPRODUCT as a kind of superpowered SUMIF. 
+What rank does using array formulae earn me?
+VLOOKUP = Anybody who wants to call himself/herself a "guru"
+I consider the more interesting aspects of Index to be far more advanced than sumproduct if I'm honest. Especially once you let it return arrays...
+[Deslided for you.](http://deslide.clusterfake.net/?o=html_table&u=http%3A%2F%2Fwww.businessinsider.com%2Fexcel-index-match-2013-7%3Fnr_email_referer%3D1%26utm_source%3DTriggermail%26utm_medium%3Demail%26utm_content%3Demailshare%23you-type-in-vlookup-then-you-type-in-the-value-you-want-to-search-for-in-quotes-if-its-text-3)
+
+ Edit, there is also a button on the page you can click to view as one page.
+Probably worth noting that this will be noticeably slower than the equivalent Index/Match combo if used a lot in a large workbook.
+
+Definitely good to have around as an alternative the rest of the time though.
+Not to mention job ads that describe a position requiring "advanced" or "expert" level of excel knowledge, including vlookup and pivot tables. 
+
+What.
+Do you work with [NowWeAreAllTom](http://www.reddit.com/r/excel/comments/1i5weg/is_it_possible_for_a_cell_reference_to_be_a_cell/cb1a1g5)?
+If you're constantly needing lookup functionality that goes beyond V/HLOOKUP() or Index(Match()), either your data is terribly structured or you need a database.
+I don't even know what that means. 
+I think they meant functioning, not functional as opposed to imperative.
+
+My first book on VBA was *Writing Excel Macros*, an O'Reilly book.  I really liked the book until I started going through the appendix on other languages and found this, *There are other languages that seem not to be readable under any circumstances.  For instance, LISP...*  Unfortunately it was too late to take it back.
+The long form of OFFSET(reference,x,y,height in rows, width in columns) is super powerful. It's a way to define a range from anywhere in the workbook. Wrap that range in a function (index/match, offset, sumproduct, etc.) and you are in total control of what to pick out from where. 
+Don't you need to have -1 after the match results? Because your match function gives you 1,2,3... but you need to offset 0,1,2...
+I use something similar in order to avoid problems when columns are added and deleted, to look up column headers. In your first example, I would use something like this:
+
+=OFFSET($A$1,MATCH("Company A",OFFSET($A$1,MATCH("Company name",$A$1:$L$1,FALSE),1,COUNTA(B:B),1),FALSE)+1,MATCH("2013/2014",$A$1:$L$1,FALSE)-1)
+
+Of course, you will run unto problems with the COUNTA function if you have empty cells, but there are ways around that.
+In its simplest form, INDEX/MATCH allows you to VLOOKUP without having to have your lookup field in the leftmost column.
+They're apples and oranges really, but you should certainly give INDEX/MATCH a crack - it's lovely.
+I'm still not entirely sure what sumproduct even does. Arrays are the way to go
+Oh, Array formulae are up there with SUMPRODUCT. The syntax of SUMPRODUCT is harder, but it's more robust in that edits won't make you have to reactivate the array. But of course there are things array formulas can do that SUMPRODUCT can't, so they're both essential in the toolkit.
+I'm strongly of the opinion that anything that needs array formulae should be implemented in VBA. Normally, this will make it easier for future users to understand and alter as needed.
+
+Surely there are exceptions, but spreadsheet side arrays definitely aren't on my best practices list.
+I generally try to use VBA instead of arrays because I find other users tend to screw it up.
+
+I think a better definition of an Excel guru is someone who can write a formula with null commas, e.g. {=INDEX(A1:E9,,2)}
+In CV Speak advanced = amature, intermediate = advanced.
+Hmm, the timing is right. Or maybe he just read my comment.
+terribly structured data.  But it's not mine.
+
+I've *got* a database ;)
+I think a lack of readability can be easily forgiven after the stain on our professions sanity that was COBOL. Lisp is great fun though!
+I use a combination of sumproduct and offset to sum up the ascii values of all the characters in individual cells, as part of a check to see if they have been changed.
+
+I use it instead of sumif for multiple criteria.
+Basically it can do a subset of functions that array formulas do, but you don't have to worry about edits screwing up the function. Array formulas are absolutely necessary for some things, but where the functionalities overlap, SUMPRODUCT is more robust. All of this IME, your mileage may vary.
+matrix multiplication, essentially.  How the hell does one *advertise* their expertise level in excel?
+[deleted]
+I'm definitely always afraid that other users will screw up array functions. I generally only put them on protected sheets.
+> {=INDEX(A1:E9,,2)}
+
+I was referring to the same thing, I meant returning an array to another formula eg
+
+    =COUNTA(INDEX(A1:E9,,1))
+
+Which let's you avoid VB / array formulas all together. Arguably I would only do this when answering a question for myself as they can give other people headaches if they aren't used to the idea. They get particularly interesting once you start nesting them...
+but only when *they're* talking to you!  When you say it, advanced = amateur, intermediate = amateur, and shitting all over other people = advanced.
+I've been meaning to try and find some way to interface Excel and Scheme.  I think many Excel users might find it quite easy to transition from this:
+
+    =IF(x > 1, TRUE, FALSE)
+
+to this:
+
+    (if (> x 1) #t #f)
+Sumifs?
+Most people start using it as a method to have multiple criteria sumifs or countifs [because IF(A1>0),A1 returns the same value as the product (A1>0)*A1], but it can do way more when combined with INDEX and/or OFFSET. I'll give you an example of a formula I wrote to calculate the sum of all the digits in a number in cell A1:
+
+=SUMPRODUCT(CODE(MID(A1,ROW(OFFSET($A$1,,,LEN(A1))),1))-48)
+
+Ah, I see. I tend not to have contiguous data, so using arrays as arguments in a formula doesn't come up often. I'd need a UDF to make the array, so while I'm in VBA I might as well just do the whole thing there.
+Clearly you have not had the pleasure of interviewing for a role that requires very strong Excel skills.
+Sumif(range, criteria, sum_range) so sumif(a1:a24, "Dec", c1:c24) will count everything in column where column a is "Dec" . if you want multiple criteria, use sumproduct 
+It's invariably a better option to use VB or sort out your source data than resorting to these kinds of things. It's just that sometimes when you want to bash out a quick one off answer it's a lot easier. I use array formulas far more for things like checking the max length of strings in a column:
+
+    =MAX(LEN(A1:A11))
+
+where you just want a quick answer rather than spending the time for anything heavyweight.
+nope, I'm just a cynical guy.  Any tips would be appreciated!
+IMHO any interview that doesn't have a practical component... they are playing with fire... I would say that use of help and the immediate window will make you more valuable than any knowledge of one function or feature...  Getting your own help, and knowing where to look.  As sad as it is, Googlefu really should be on my resume, as it comes in handy all the time with coworkers... 
+You misunderstand me. 
+
+SUMIFS(sum_range, criteria_range1, criteria1, [criteria_range2,
+         criteria2], …)
+
+so sumifs(a1:a24, b1:b24, "Reddit", c1:c24, "Excel", D1:D24, "Forumulas") will add everything in column a where column b is "Reddit", column c is "Excel" and column d is "Formulas". I find them cleaner and easier than sumproduct, internet tells me they're four times faster. Only drawback is they can't be used across different files.
+Agreed, I was referrign to cutting down to a shortlist.
+Ahhh yes, similar to weeknum, it's worth mentioning that this will not work on Excel 2003. 
+
+So if you've created an automated dashboard for your client that utilises sumifs... They will come crying back with errors.
+
+And yes.. Some people still use Excel 2003!
+
+Edit... Yes sumproduct is slow and "picky"
+This is true! The company I work for (400 person call center, large national UK company with around 8 million members) just switched to 2007 year before last. Madness!
+Ditto, large UK company with over 20,000 employees and everyone is on 2003 as standard. 
+
+Writing unelegent weeknum work arounds is no fun as Analysis Toolpak is not enabled by default.

@@ -1,0 +1,28 @@
+VBA Online
+What do you mean by not having enough processing power? VBA is single thread and totally without any kind of modern optimisation. If something's going to take a while it's going to take a while..
+You can add application.screenupdating = False on top and then application.screenupdating = True at the end. That should speed it up  a lot.
+Thank you. I'm new to this. I've added a new function and its been well over an hour and it hasn't stopped running. Initially it took 27 seconds. I assumed if I had more processing power it should be quicker. 
+Will this only be necessary if I'm using the workbook? Currently I'm using arrays. 
+27 seconds to an hour?  Might be a stupid question,  are you stuck in a loop?
+Hold the control button and hit break and see what's going on.
+Its only really necessary on large programs, or large loops.
+
+Basically if you had to run a loop 1,000, excel will recalculate each value 1,000 times, which may be slow.  By turning off screenupdating, excel will not recalculate values until you turn it back on (towards the end of the program)
+
+Another tip is to hit F8 in VBA to step through your code.  I've also created a loop and didn't increment it, and hitting F8 will show that it is getting stuck.
+If you're using arrays you're already well ahead of things like this. ScreenUpdating=False will speed your macro up if you write to the sheet a lot, but if you're pulling an array, doing all your operations and then writing back it'll make almost no difference.
+Put it into your code and see what happens. You are turning it back on at the end either way. See if it helps.
+Found the problem. Forgot to increment a do while loop. 
+Hit Control and break? Can you explain a little more? This may be huge for me. 
+It will still recalculate each time you change the sheet, it just won't update so you can see it (rendering in software is an expensive operation). If you want to prevent it recalculating each sheet change you'll need Application.Calculation = xlCalculationManual.
+I've been guilty of this in the past. 
+Hello /u/Dr_Watcher, please set this post Flair to Solved if it no longer a problem.
+I am laughing to myself... alone in my office... at 6PM... 
+
+I think we're all guilty of this...
+
+"Why isn't it working!?"
+
+"Why is it working!?"
+it will go into break mode; i.e., stop the code but will highlight exactly what line of code it is on and will stay engaged so that you can step through line by line to see what your code is doing.  You can check the values of variables, etc. and see if it is in an endless loop by going line by line.
+ 

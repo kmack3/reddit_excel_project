@@ -1,0 +1,32 @@
+How do I get my Daily Calorie Intake from MyFitnessPal.com to show up in a cell?
+Data Tab -> Data From Web Button
+I tried that but there's no [yellow arrow](http://imgur.com/KkMeLNH) over any of the data like it says there should be, and I only want a single cell not the entire table to show up in excel. 
+Can you try the website import.io?
+I'm sorry, I don't know what that means. I'm a complete noob.
+Go to the website www.import.io and type your website into there and see if it can detect your table
+The data didn't show up. I sort of found a work around though - Freemydiary.com was able to list the information that import.io wasn't able to in a .csv file. I'd still like to have my excel sheet extract the data somehow and display it, but if I have to use freemydiary.com and manually input the data from the .csv file then that's fine. 
+You can easily get every date with that csv extract.  Then just copy paste-- not exactly what i'd call 'manual input'.
+Like I said, it's not a problem. Just not quite what I was looking for. 
+Alright, since I can eventually make use of this myself, I cobbled together a udf.
+
+    Function GetData(url As String)
+        Dim oHtm As Object: Set oHtm = CreateObject("HTMLFile")
+        Dim req As Object: Set req = CreateObject("msxml2.xmlhttp")
+        req.Open "GET", url, False
+        req.send
+        With oHtm
+            .body.innerhtml = req.responsetext
+            GetData = .getelementsbytagname("tr")(23).getelementsbytagname("td")(1).innerhtml
+        End With
+    End Function
+
+Call it with a worksheet formula like so:  
+
+     =GetData("http://www.myfitnesspal.com/food/diary/wheytnuete?date=2015-02-28")
+
+Edit:  this isn't going to work on every date--like when meals were skipped.  It's a PITA to mess with, that's why I was shocked you were basically dissatisfied with getting ALL THE DATA.  For crying out loud...
+
+But anyway, this demonstrates the basic concepts and objects one would need to work with...
+>  That's why I was shocked you were basically dissatisfied with getting ALL THE DATA. For crying out loud...
+
+Haha, yeah, the other way seems much more practical for my purposes. I just wanted to know if it could be done. Thank you for the answer! :)

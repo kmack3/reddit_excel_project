@@ -1,0 +1,34 @@
+I accidentally pressed Ctrl+F11 instead of Alt+F11, and it created a sheet called "Macro1". What's going on here?
+I'm guessing somehow your Ctrl+F11 created a macro sheet.  I'm not an expert on it, but they are not like regular worksheets, which is probably why formulas don't drag down.
+
+Microsoft's definitions is here.
+
+https://msdn.microsoft.com/en-us/library/dd948109(v=office.12).aspx#gt_410f5dd1-4217-4d31-ab16-48271bd25491
+
+I think it's this.
+
+macro sheet: A single, logical container that is used to store and run Excel 4.0 macro formulas.
+Don't have a clue but Shift-F11 adds a new worksheet. Yes! A new useful keyboard shortcut to commit to memory!
+Excel 4.0!? That's from 1992. I imagine this is relatively useless then. 
+Solution Verified
+When I started using excel 2.0 in 1988, macros were written on a spreadsheet and looked very much like a batch file.  You just referenced the first cell in the vertical list of cells and the macro would do your calculation. I think the syntax was something like "+Macro($C$6)" and you would write the first step of your calculation in cell C6.  It was useful for doing more complex calculations involving multiple steps but you could also use it for if statement loops and keystroke macros.
+
+I'm pretty sure you had to sit the macro on the same worksheet you were working from.  I don't think there were multiple worksheets in a workbook back then.  It was Windows based and came with a run-time version of Windows 1.0 as Windows wasn't really a thing back then.  You launched excel  from DOS but there was a win.com file in the excel folder that would launch a very basic Windows  It was very bare bones, Program Manager, Clock and not much else.
+
+That concludes this very vague history lesson.  TIL I'm old.
+Considering the total lack of information I could find on macro sheets on the internet.  I'm guessing no one uses them.
+
+Again, I'm just guessing, but I think I'm right.
+Microsoft is known to provide years of compatibility. If you think about it, `XCOPY` is still shipped with every windows installation and still has the `/W`switch:
+
+> Prompts you to press a key before copying.
+
+This seems useless at first but it was from the time where you did not had hard drives, so you would load xcopy from a floppy disk into memory and then had to change that floppy to the one you want to copy from/to.
+
+You have awarded one point to _CleanLaxer_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+It's probably something hanging over from Lotus compatibility or pre-VBA macro.
+
+I know Lotus would write macros as a series of instructions on a separate tab, rather than in a separate editor / file structure like VBA does these days.
+Not helpful, but I once ran into a workbook that had macro sheet when I was in the AirForce. It was hidden and locked. The workbook was for tracking bench stock inventory for the whole base I think. I can't remember if I ever looked into what was on it.

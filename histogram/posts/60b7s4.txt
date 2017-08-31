@@ -1,0 +1,49 @@
+Something weird happening with some decimals in a formula. Is this a bug or am I blind for not seeing where the error is?
+Welcome to the world of weird floating point bugs.  Basically, certain combinations of values will cause unexpected results due to the limitations of how computers work.  It's doing all the math correctly, it's that it can't return a number with exactly the right precision.   You won't bump into this often, but every now and then...
+
+The easiest fix would probably just be to force the formatting on the cells to two decimal places.  If, for some reason, that isn't working (or you need to use the numbers elsewhere for lookups, etc.), you could use a ROUND formula to truncate the result to two decimal places and get the same result.  
+
+
+My favorite floating point error that I've found in Excel so far is 1.015 - 1. It somehow doesn't equal 0.015.
+Oh, thanks! I thought it was a mistake I made when adding the numbers.
+
+I will try those fixes. Thanks a lot!
+I get this question when I teach Java classes. The long and the short of it is it is actually storing these numbers like fractions internally. 
+
+http://stackoverflow.com/questions/21895756/why-are-floating-point-numbers-inaccurate
+
+When coding in languages like Java or python, they have classes for "scientific numbers" or "big decimals". Basically, these methods are more accurate, but also significantly slower to use on computations. 
+Solution Verified
+Does for me in excel 2016 pc and excel 2011 mac
+It does that cause you can't actually store .015 as a binary value in integers. You store a value very close, but ultimately, slightly less than it.
+Easiest fix is to probably wrap your formula in ROUND(xxx,2)
+
+That will make sure the results are rounded to 2 decimal points.
+
+You have awarded one point to _SpongeBad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Here's what I get in Excel 2010.
+
+http://imgur.com/NnAYFmo
+Why is it that other calculations resulting in 0.015 work then? For example, 0.03 / 2 comes out to exactly 0.015.
+Thanks! That's exactly what I did. I used ROUND in just one formula and the error disappeared.
+That's what I have to do.
+...um. There's something funky with your setup then, that shouldn't be a floating point error.
+
+How do you trust anything you put in there?
+Depends how much data your speed to display. Can only 3 digit past the radix? Round up and display .015. Given infinite digits, it would show the true number (.0149999...). That's why it is important to set your floating point correctly.
+I get the same thing on a different computer using Excel 2013. Floating point errors exist in all kinds of software. Most of them, like this one, don't affect anything, because the error is so many decimal places out. The way I found this one was because I was rounding down to 3 decimals and ended up with 0.014.
+
+Edit: Here's another fun floating point error - go google 599,999,999,999,999 - 599,999,999,999,998
+You just need to show a LOT of decimal places to see this one...  
+  
+
+I'll be damned. at about 17+ decimal places I get .014999999999999ish. Guess I was wrong. Upvotes for everyone.
+I'm a bot, *bleep*, *bloop*. Someone has linked to this thread from another place on reddit:
+
+- [/r/isloneechoalive] [\/u\/YouTee will be damned. at about 17+ decimal places they get .014999999999999ish. \/u\/YouTee was wrong. \*\*REVEAL IMMINENT\*\*](https://np.reddit.com/r/IsLoneEchoAlive/comments/60h0au/uyoutee_will_be_damned_at_about_17_decimal_places/)
+
+[](#footer)*^(If you follow any of the above links, please respect the rules of reddit and don't vote in the other threads.) ^\([Info](/r/TotesMessenger) ^/ ^[Contact](/message/compose?to=/r/TotesMessenger))*
+
+[](#bot)

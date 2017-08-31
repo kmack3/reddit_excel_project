@@ -1,0 +1,296 @@
+Just Made my first Excel formula at work. Not sure if I should tell my boss.
+How much of your job have you programed yourself out of? 
+I would catch up on your filing, and then tell your boss. It's hard to object to you spending time learning excel when you're already caught up on your normal work.
+
+Most good bosses will be happy that you are making process improvements, but it's hard to say without knowing your company and your boss' personality.
+
+Then go ahead and show off - strong excel skills are more rare than you'd think, and it might get you put on special projects. Or at least your boss will know he can trust you to make good excel workbooks.
+You will need to edit and reformat your post a bit so the formula is legible. Reddit thinks asterisks mean *you want to type italics* and not multiplication. Try putting your formula on a new line with four spaces at the left.
+
+    then you get monospaced text like this
+
+The folks here might even have a better idea to improve the formula.
+
+Anyway, if as you say you've just saved 2.5 hours a month for 6 hours of effort, you are what we older-than-teenagers call a productive worker and a person with lots of initiative and we usually want you to keep doing that and we give raises not stern lectures. Well, most of us do that.
+Good job! Seconding everyone else's comment about catching up on your filling before doing anything else, if you only get the cell data once a month or so, you could go to your boss a few weeks before, to let him/her look at it / decide if they want to test it, before you get the actual data. For the first batch, if she is hesitant, you could suggest running the formula AND doing the work manually, to make sure there aren't any discrepancies.
+
+Anyway, you pretty much have the nested if version down, so here's a different way of doing it. 
+
+Consider that you have a lot of nested if functions, but if you write down your decision in a tree, there's only two levels: what does it say in d10? If it says fgp231, what does it then say in G1? 
+
+    D10 - No split
+        - pnorth
+        - psouth
+        - fgp231 - 281GST or 284GST
+                 - 281 or 284
+                 - 20, 255, 285, or 231
+
+One way you could use this to rewrite your function would be to use a CHOOSE formula along with a MATCH instead, CHOOSE in a way works like IF, and it's a pretty useful formula in a lot of situations. 
+
+    =CHOOSE(MATCH(D10,{"no split","pnorth","psouth","fgp231"},0),IF(C10=G1,E10,""),VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10,VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10,FGPCHOOSE())
+
+That'd be your first "level", with the FGPCHOOSE being a placeholder for your nested second level. 
+
+written with the arguments commented out: 
+
+    =CHOOSE(MATCH(D10,{"no split","pnorth","psouth","fgp231"},0) +N("this matches the value in D10 and returns 1, 2, 3 or 4, as an argument for your choose function"),
+    IF(C10=G1,E10,"") +N("This checks that the C10=G1 condition is fulfilled for nosplit and returns the corresponding values"),
+    VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10 + N("Lookup for pnorth"),
+    VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10 + N("Lookup for psouth"),
+    FGPCHOOSE() + N("placeholder for nested choose function"))
+
+So onto defining FGPCHOOSE, here you can use Boolean logic to do it slightly different. TRUE is 1, FALSE is 0, a value multiplied by 0 is 0, only one of your conditions are ever true: 
+
+    =CHOOSE(OR(G1="281GST",G1="284GST")*1+OR(G1=281,G1=284)*2+OR(G1=20,G1=255,G1=285,G1=231)*3,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*F10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10-H10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10)
+
+Commented out again: 
+
+
+    =CHOOSE(OR(G1="281GST",G1="284GST")*1+OR(G1=281,G1=284)*2+OR(G1=20,G1=255,G1=285,G1=231)*3+N("This returns the value 1, 2, or 3, depending on which of your conditions are true, only one can be true, so risk of value greater than 3"),
+    VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*F10+N("lookup for condition 1"),
+    VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10-H10+N("lookup for condition2"),
+    VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10+N("lookup for condition 3"))
+
+Then the last step is nesting the two: 
+
+    =CHOOSE(MATCH(D10,{"no split","pnorth","psouth","fgp231"},0),IF(C10=G1,E10,""),VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10,VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10,CHOOSE(OR(G1="281GST",G1="284GST")*1+OR(G1=281,G1=284)*2+OR(G1=20,G1=255,G1=285,G1=231)*3,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*F10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10-H10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10))
+
+and maybe adding an IFERROR: 
+
+    =IFERROR(CHOOSE(MATCH(D10,{"no split","pnorth","psouth","fgp231"},0),IF(C10=G1,E10,""),VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10,VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10,CHOOSE(OR(G1="281GST",G1="284GST")*1+OR(G1=281,G1=284)*2+OR(G1=20,G1=255,G1=285,G1=231)*3,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*F10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10-H10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10)),"")
+
+This isn't necessarily better,, but I figured since you already spent this long on it, it'd be fun to think of a different way of approaching/solving the problem. 
+
+**edit:** as a last example, you can turn the FGPCHOOSE completely Boolean, but I don't really think it aids in understanding what's going on, you'd use + as an OR operator: 
+
+    =IFERROR(CHOOSE(MATCH(D10,{"no split","pnorth","psouth","fgp231"},0),IF(C10=G1,E10,""),VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10,VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10,CHOOSE(((G1="281GST")+(G1="284GST"))*1+((G1=281)+(G1=284))*2+((G1=20)+(G1=255)+(G1=285)+(G1=231))*3,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*F10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10-H10,VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)*E10)),"")
+
+the changed bit: 
+
+    CHOOSE(((G1="281GST")+(G1="284GST"))*1+((G1=281)+(G1=284))*2+((G1=20)+(G1=255)+(G1=285)+(G1=231))*3
+
+Two things:
+
+1. What you're doing is smart. While you don't want to neglect your work for six hours at a time, and it's generally better to learn during off-the-clock hours unless you already have approval, leveraging tools is wise, and your actions demonstrate aptitude and ambition. When you're running things someday, you'll use that mindset to outwit the competition and get more work done more quickly.
+
+2. Whether or not you want to go out of your way to bring your innovation to the attention of your manager depends entirely on the circumstances of your specific situation. In particular, it hinges on whether or not your manager is smart enough to recognize a valuable employee when he sees one. He may only see a threat, or an opportunity to reduce wage expense.
+
+It's your call. The best news is that you're learning at the age of eighteen something that many people go their entire careers without ever realizing.
+I always heard a good rule of thumb is to not recommend change to much of anything for the first 90 days or so, until your  quite familiar with the business and its operations.  If it were me, I usually keep some sort of log for the different things I want to recommend, then present them after your first 90 days.
+>Here is the explanation I wrote:
+•	If there is no split
+•	Then put the cost to the one building it is for
+•	If the split is pnorth
+•	For a building in pnorth:
+•	Find the split percentage and multiple it by the bill amount
+•	For a building not in pnorth:
+•	Leave the cell blank
+•	If the split is psouth
+•	For a building in psouth:
+•	Find the split percentage and multiple it by the bill amount
+•	For a building not in psouth:
+•	Leave the cell blank
+•	If the split is fgp231
+•	For 281GST or 284GST
+•	Find the split percentage for the building then multiple it by the GST charged
+•	For 281 or 284
+•	Find the split percentage for the building, multiple it by bill amount, subtract GST
+•	For 20, 255,285, or 231
+•	Find the split percentage and multiple it by the bill amount
+•	If none of the above are true
+•	Leave the cell blank
+
+What you have written here is a functional spec for a process to be automated programmatically. Not only have you defined the requirement (i.e. what the process should do, technically) but you created code to implement it. This is a highly marketable and in-demand skill in the fields of software development and technology. 
+
+You seem genuinely interested in and proud of this sort of work. You said you are 18 and this is your first job -- have you given any thought to your long-term career goals? Do you plan to continue your education? If so, I suggest you look into a career in software development, financial analysis, or business analysis. If you could learn a few programming languages, especially in a university setting, you'll be setting yourself up for a very successful career. You can pm me for more info if you want. Also check out /r/learnprogramming
+Only thing you could do to slightly improve readability is pull out the iferrors to the top function, otherwise it looks very good.  You might also be able to optimize out the three `VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0)`  but it may not be worth the effort:
+
+	=IFERROR(
+		IF(
+			AND($D10 = "no split", $C10 = G$1),
+			$E10,
+			IF(
+				$D10 = "pnorth",
+				VLOOKUP(G$1, Splits!$I$4:$K$16, 3, 0) * $E10,
+				IF(
+					$D10 = "psouth",
+					VLOOKUP(G$1, Splits!$E$4:$G$10, 3, 0) * $E10,
+					IF(
+						$D10 = "fgp231",
+						IF(
+							OR(G$1 = "281GST", G$1 = "284GST"),
+							VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0) * $F10,
+							IF(
+								OR(G$1 = 81, G$1 = 84),
+								VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0) * $E10 - H10,
+								IF(
+									OR(G$1 = 155, G$1 = 255, G$1 = 285, G$1 = 231),
+									VLOOKUP(G$1, Splits!$A$4:$C$11, 3, 0) * $E10,
+									""
+								)
+							)
+						),
+						""
+					)
+				)
+			)
+		),
+		""
+	)
+Good for you. I'm the same way with excel and have learned quite a bit over the years by taking the initiative and using google to learn. I wish there were other people like you on my team.  I say just find a way to bring it up in conversation, "oh by the way" kind of thing. You dont want to sound like youre bragging. Just make sure your works up to date
+I do your job but for single family homes.
+
+I have written multiple excel spreadsheets using VBA to split costs into accounts (interior, exterior, HVAC), to calculate prorated costs for move ins, to generate move out letters, using index(match) to determine if a property is securitized or not for manual upload spreadsheets and have an auto fill button, and to take an invoice we get monthly and put in into the manual excel upload format we use.
+
+I have taken what took 6+ hours and made it where it can taken about 1 hour to do.
+
+TELL YOUR BOSS.
+
+I have now been asked to be part of a project where my company is trying to create a purchase order system where all is needed is to check if the vendor, property, and cost matches in Yardi (our property management software). Then it will be a one click payment and we won't have to manually enter things anymore.
+I work in IT consulting and I would advise you just keep this on the down low. It's definitely great that you're working smart like this but it can make Co workers and managers nervous for a lot of reasons. Just appreciate that you don't have to mindlessly enter all that data and find more stuff to automate
+I love seeing formulas like this
+You could always tell your boss that you think you could put something together to save time and see his reaction
+I think your situation is different than mine. Even if I want to tell my boss, he won't care a bit. The company is very much result-oriented so nobody cares if I die as long as my work is ready before deadline.
+
+But a fun story was I once revamped some progress report by putting lots of formula and vba so that unless the core project items change no manual interference will ever be needed. And then the staff who was responsible for it just didn't have much work left to do. Eventually she got transferred to another unit.
+
+Since then I don't help anyone unless they explicitly ask for my help.
+I don't know I get cell bills once a month and usually takes about 2-3 hours to enter them. If this thing works iw will probably take like 15 minutes. Still plenty of work to do.
+Yeah, I'm kind of worried because I don't really know how he might react. This thing really made me want to learn Excel though and I am already exploring some of the links on this sub. Thanks for your help.
+Solution verified
+>folks here might even have a better idea to improve the formula
+
+When I see a formula as dense as that one I think two things:
+
+Maybe it can be replaced with a much smaller, simpler formula.
+
+And if not, I'm not touching the damn thing unless I can use VBA.  Putting a complex function into one line gives me a headache.
+I couldn't get that to wrote so I uploaded a screenshot to imgur. And yes that is what I'm worried about that not all are like that. I mean I had plenty of teachers that would give me heck for doing something like this if it was related to a high school class and not work. The thing is if teacher's give me heck it doesn't mean I lose my job and can't pay rent. I live completly by myself and really don't want to have ask my parents for money.  Solution verified
+Yeah, I know I shouldn't have done that during work time. I honestly felt kind of guilty doing it but once I decided I wanted to do it I just didn't want to stop until I finally figured out. At first I thought it would take like 30 minutes max. I didn't realize how complicated this was going to be.
+
+And I don't know if I'll ever be running things. I am considering a career as an accounant but wanted to actually try it out a bit before I go to university. Not really sure what I want to take.
+
+As for your second point, I really don't know. He is a very kind person in general but he seems kind of old school and strict. I don't think I've worked with him long enough to know.
+Personally I've always used work time to develop tools to improve mine and others' efficiency.
+
+Take OP for example, he takes 3 hours on this task on a monthly basis, now he should only take (his estimate) 15 minutes, within two months he'll have saved the bulk of the time he spent developing this tool.
+
+I focus on things that are done daily then weekly and so on as the efficiency gains tend to be greater, but OP saw something in Excel and that it was manual and inefficient and addressed it. That mindset will go a long way in most careers.
+
+I would say that having the mentality that things like this should be done outside of work is actually quite negative. Many major companies build in time for their employees to work on side projects or play around and relax, because creative outlets and downtime are essential in getting the best out of people.
+OP. Listen to this person.
+
+I started the exact same way 3 years ago :  a couple of nested IF statements to make a spreadsheet better. I was inside sales in a manufacturing company.
+
+3 years later at the same small company, my salary nearly doubled, I successfully implemented an ERP system almost single handedly, I've written very complex excel spreadsheet that integrate with our databases. I've automated so many processes that we literally cut our production lead time from 6 weeks to 4 weeks (essentially down to our main supplier's lead time plus a days for final assembly).
+
+I'm assuming you're in Canada because your formula references the GST, which means you have access to somewhat affordable education.
+
+You should really, really look into doing some double field studies : computer science and Business.
+
+You don't need to become a CPA, but a good understanding of the basics of business (accounting, financial management, operation management and makreting) coupled with the ability to find data and automate processes will make you invaluable.
+Thank you. I'll make that change. Solution verified
+/r/rubegoldbergexcel
+Then it's probably safe to tell him(you don't want to replace your job with a spreadsheet),  just make sure your aren't behind when you do. 
+Honestly, I wouldn't tell him the specifics I would just let him know that the job is done & take that extra time to get other things done/ take on more responsibility. =IF you keep doing this in a few months you'll find yourself taking care of a lot of different things & able to bring a solid case for a raise to $$/hr based on the fact that you handle x,y,z, and p,d,q; 
+
+Eventually he may want to know how your getting all this done and then explain to him what your doing & give him some solutions on how you could do the same thing in other areas.
+Don't tell your boss. 
+
+Use the excel formulas to make your job easier. 
+
+Then either do something else with the time to improve the company (looks good when you seem very, very productive), or do something to improve your skills (learn other scripting, VBA). 
+
+No need to let the cat out of the bag just yet.
+
+You have awarded one point to _Aleriya_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+When **I** see a formula that dense, I have this irresistible urge to line everything up nice and straight:
+
+    =IF (
+	    AND
+		   (
+		   $D10="no split",
+		   $C10=G$1
+		   )
+	   ,$E10
+	   ,IF(
+		  $D10="pnorth",
+		  IFERROR (
+				   VLOOKUP (
+
+I won't subject you to all 84 lines of it. I only do it for my edification.
+Or a VLOOKUP to look up some if the info that's not changing instead of nested IFs.
+Wow, just googled VBA. That looks very hard.
+I find beauty in a complex function in a single line.
+
+Then again I don't really like creating macros, so I've spent plenty of time coming up with formulae based solutions that would have been simpler in VBA.
+
+I did notice (OK it was the first thing I saw) that OP used multiple IFERRORs when one encompassing IFERROR would have done the trick, that would shorten the formula a bit.
+
+BTW OP you should definitely highlight your successes (few others will do it for you), as others have said if you pick your moment wisely you'll get the most from it.
+I'm similar. It's fair enough from a noob though.
+
+I like to break a huge formula into multiple helper cells/columns/rows (whatever is appropriate). Far easier to read and debug :)
+Do you have a competitive personality? I don't and had a hard time during accounting school getting along with people.
+
+You have awarded one point to _TripKnot_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+BTW,  good job on this.   Your six hours spent will pay the company back  in spades with future efficiency and accuracy.
+I was really, really disappointed that wasn't a real sub.
+Agreed. Spin it so that you can show how you recognized the inefficiency, troubleshot it while still keeping up with your other work, and now have more time for other projects. 
+
+Innovation and problem solving show a lot of initiative, and can allow you to demonstrate your desire to help the team/company ahead of yourself (while still helping yourself by not doing the shit work for 3 hours). 
+Haha maybe if I replace my current job with a spreadsheet I get promoted? Solution verified.
+Why do it yourself?
+
+http://excelformulabeautifier.com/
+Or a INDEX and MATCH.
+My life changed when I discovered vlookup. I was teaching myself statistics through excel and using vlookup saved me probably around 100 hours by this point, no joke.
+It looks quite overwhelming in the beginning. But its not as difficult as it might seem. From the look of your formular you are doing quite well! And VBA is a mighty instrument for excel. 
+
+For the beginning I recommend that you record some easy makros and take a look at it what the macro has done. Just hit ALT + F11 and the VBA-window will open. There you can look at the code which was generated by the macro you had recorded. There are also very good tutorial videos on youtube. 
+
+Also look at this awesome offer from a fellow redditor /u/JohnnyMarcone :
+
+https://www.reddit.com/r/excel/comments/3b453a/100_off_excel_macros_course_on_udemy/
+
+It's an excel course free to use for redditors. Just check the comments for part 1 of the course. I highly recommend this for you! It will give you a good start!
+It's basically a programming language that plays nicely with Microsoft applications (it's particularly useful with excel and Microsoft access).  It's not really any more difficult than learning any other programming language.
+Of you want to start looking into VBA just do what I used to do.There is a "record macro" button in excel, press it and do something simple, like really simple, for example just select cell D20. Then stop recording the macro and jump into the code via the developer tab. You'll see the structure and syntax of the language and can just start tweaking it to your hearts content and see what happens 😊 
+> I find beauty in a complex function in a single line.
+
+Then you'll adore regular expressions - or cry.
+Hi, just wanted to let you know that it looks like you've been shadowbanned, I can't see why or how, and can't do anything about it, but I encourage you to contact the admins and figure out your situation. 
+
+Please see this post for more details: 
+
+https://np.reddit.com/r/self/comments/3ey0fv/on_shadowbans/
+you don't look shadowboxed to me?
+I kind of do in the sense that I have always challanaged myself but I don't think I appear or act like that from an outside perspective. I don't really care if I get along with people though other than the professor.
+You could make it!
+That sounbds good. I think I'll wait a week or two though since I am kind of behind on filing. I'll now be motivated to file really fast so I can show him. Solution verified
+
+You have awarded one point to _phcullen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Sort of.. what'll happen is you'll be given more to do, with the unspoken expectation that you'll "take care of this too".... 
+
+Eventually your job will be nothing but maintaining your existing automation, while you strive not to be bored during the day.
+
+Man.. that job was great. :)
+INDEX MATCH makes my life so much simpler, it's such a great alternative to VLOOKUP.
+
+No more helper columns to ensure that my lookup was to the left of the data I wanted, no more having to pre sort my data a-z to prevent errors. Using MATCH for both row and column is a game changer too.
+Comment removed.
+As said, your life will change again after Index(Match)
+I find RegEx syntax slightly odd, it doesn't seem as logical to me as an Excel formula.
+A healthy disregard for the opinions of others and a strong determination to achieve and overcome will take you far in life.
+I'm sure you'll be fine. It's a very diverse career path. I started out in government and now I'm on the consulting side. I have, to this day, never filed a tax return lol. If it's the math part you enjoy the most about accounting, you may consider looking into engineering. 
+Just beware that this may be your full time job from now on. If you are in to that, then cool.
+vlookup is considerably faster than index/match, so continue to use it where it is sufficient in heavy documents.
+That is not true at all.
+
+http://www.exceluser.com/formulas/why-index-match-is-better-than-vlookup.htm

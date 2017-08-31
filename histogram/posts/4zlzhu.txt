@@ -1,0 +1,58 @@
+I created a Mandelbrot set in an Excel spreadsheet
+    Application.ScreenUpdating = False
+
+at the begninning, and
+
+    Application.ScreenUpdating = True
+
+at the end should significantly speed up the rendering. You can also show a counter by giving a value/string to Application.StatusBar, for example at the start of each new row. Set it to FALSE at the end of the sub to clear it.   
+
+Edit: my comp is slow but I just did a test with 5 iterations, 500x500. With screenupdating on it took 1:25. With updating off it took 0:08.
+FANTASTIC!!!  Without opening your file...how did you do it?  Did you make pixel-sized cells and apply color based on the algorithm?  I personally made something very similar...and I have added to it here and there as I get time....mine now has color gradients and zooming at this point... but it's still excruciatingly slow to render a big image.. I have been trying to learn how to directly draw a bitmap, but I have not dedicated much time to it.  I also recently did a test using a plot to map out a vector field of points, but a big image also updates slowly...and I am running into limits with too many series.  But you are combining my passions for Excel and fractals, so I think we are kindred spirits.  Well done.  Can't wait to open yours up tomorrow.   EDIT...I just read your imgur  comments, yeah, we made the same program.  I think I did mine like 3 or 4 yrs ago, but I prob referenced the same source material as you did
+Very nice!! Would you consider sharing your workbook?
+
+When implementing color, did you run into Excel's limit for styles? I've tried doing graphics tests in this vein (using cells as pixels) and came up against an internal limit to the number of colors that can be displayed.
+
+Specifically, my test randomly colored a random cell every iteration in an infinite loop.
+damn, and i was impressed with myself when i made a Sierpinski triangle in excel.
+Thank you for this! I have seen Mandelbrot sets over the years and always been in awe of them, but never really understood how they worked. You motivated me to learn more and do this myself. [Here is my day's 1 progress, from scratch.](http://imgur.com/a/2pcDB)
+
+300x200 grid. I may bump it up to into the thousands but I don't want my computer to explode.
+
+EDIT: Damn... maybe I DO have an issue with obsession and compulsion! Riveted to my desk, [this is what I have now](http://imgur.com/a/wXk2m). It is so great that this is not such a mystery to me anymore! Hooray Excel!
+
+900 x 600 x 1 pixel grid, 40 permutations. This is how I implemented the grayscale:
+
+    If Diverge = False Then
+        Selection.Interior.Color = RGB(0, 0, 0)
+        Else
+        grayS = 255 - (6 * Perm)
+        Selection.Interior.Color = RGB(grayS, grayS, grayS)
+    End If
+
+
+That's so fast! I'll definitely try this tomorrow. Thanks for letting me know!  EDIT: I got around to timing the application. Without your code: 5 min 6 seconds. With your code: 1 min 9 seconds. What a difference! Thank you so much, /u/gfunk55
+Wow, yours has zooming? That's really cool! I'm thinking about implementing that as well, although I too am worried about rendering time. And yes, you're exactly correct about the pixel-sized cells and fill-colors. I made an array of colors to choose from that's essentially a gradient based on 5 different colors. I really wanted the image to be pretty :) 
+I love fractals. I'm new to Excel but it seems pretty awesome so far! Its nice to meet a kindred spirit and thanks for checking my work out!
+Thanks! And no problem! The code's pretty short so I pasted it into Pastebin here: http://pastebin.com/raMhzEnc
+Small warning: I wrote it up relatively quickly and VBA's not my primary programming language, so I apologize if it lacks proper VBA code styling or if it's inefficient. 
+No, I haven't run into that problem, but probably because this program only requires 40 unique colors. The number of colors displayed is whatever I set my max (maximum number of iterations) variable to. Code's here: http://pastebin.com/raMhzEnc.  I have yet to test it with more than 40 colors. (I've tested it it with 1000 grey-scale colors, however, and that worked fine). So if Excel does have a limit for styles, I haven't encountered that limit yet, sorry! Good luck, though! 
+Edit: Initially wrote 30 instead of 40
+Wow!!! It would have probably taken me longer than a day to plot this without help from reference code. I think that the fact that you came up with this from scratch all on your own is pretty impressive. Thanks for showing this to me! I can't wait to show a couple of my friends that I motivated an internet stranger to plot their own! I'm excited to see more updates! :D 
+1 min is still too long...there are web apps using java that update in seconds...there has to be a few more shortcuts.
+
+The problem with application.screenupdating is you can't tell if Excel has crashed if it takes a while.   Still, it is a huge improvement
+4000 styles is the max in 2003
+Thank you! If only I could motivate myself to learn a "real" programming language so I could plot some crazy colored Mandelbrot zooms. I just love excel  too much.
+
+
+>The problem with application.screenupdating is you can't tell if Excel has crashed if it takes a while.   
+
+That's why I suggest using Application.StatusBar. Example: at each new Row iteration:
+
+    Application.StatusBar = "Row " & Row & " of " & Height
+
+Sometimes it geeks out and stops updating after awhile, so you can force the update by adding 
+
+    DoEvents
+

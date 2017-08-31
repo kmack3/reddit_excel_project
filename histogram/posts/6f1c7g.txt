@@ -1,0 +1,38 @@
+Excel concatenating a " quotation in string
+Single quotes are put in by just typing in two quotes (`""`), but then that can mean three or four quotes in total.
+
+    =""""&A1&""" """&B1&""""
+
+that is
+
+  =" "" "  &  A1  &  " "" "" " & B1  &  " "" "
+
+or
+
+    =CONCATENATE("""",A1,""" """,B1,"""")
+i found one solution is to use `char(34)` https://exceljet.net/formula/double-quotes-inside-a-formula. Are there other solutions to this?
+
+EDIT: also `""""` works too
+When producing a " I prefer using the ASCII symbol by using the function CHAR(34)... It makes the formula more readable and less prone to errors:
+
+
+=CHAR(34) & "a" & CHAR(34) & " " & CHAR(34) & "b" & CHAR(34)
+ah okay I see
+
+http://i.imgur.com/Ra4KTjU.gif
+
+`= """ hello """` 
+
+produces 
+
+`"hello"`
+
+**EDIT** the only problem with this method is it doesn't work with variables, only text
+Solution Verified
+Those are the two main solutions, unless you want to put a quote mark into a cell, then reference that cell in your concatenation
+Yup, exactly. And I just edited in the CONCATENATE solution.
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+thanks for the help :)

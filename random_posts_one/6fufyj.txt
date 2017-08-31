@@ -1,0 +1,21 @@
+6fufyj
+Issue with chart templates, new graphs dont actually copy the template.
+I'm making a template for my graphs to minimize time spent formatting them to be the same. It's a super basic XY chart, but for some reason my template doesn't actually build new charts to look like my original. Screenshots here of what I am going for and the data, and what happens when I try to make a new one.
+
+Ive tried both selecting the entire data section, as well as only the series data, and the chart still comes out wrong. Am I doing something wrong here? I have to imagine there is a way for my template to actually make the graph I want somehow... 
+
+http://imgur.com/a/7K7eM
+
+
+-------------
+Follow up details - 
+
+It appears that there are 3 things that are not applying to my newly made charts:
+
+1) Not recognizing my first column as the y-axis data
+
+2) Not keeping my axis titles
+
+3) Not keeping the original chart size
+
+Is there something that I can do to ensure these things are also applied to my new charts?

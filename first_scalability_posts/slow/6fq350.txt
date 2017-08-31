@@ -1,0 +1,34 @@
+slow
+6fq350
+Rule of thumb for when calculations will become slow to update
+
+I'm working on a spreadsheet for a friend, and am trying to brute force some things for them so they don't have to rely on macros (they use a mac) or update things themselves.  
+
+Is there a rule of thumb for when things start to really slow down in excel? I searched and found some tips of how to prevent this in general, and one user said things start acting funny after about 25k rows, but I'm not sure if that's data, or formula/calculations.  Any other rules of thumb?
+
+
+-------------
+I work with 200k-300k row files daily. The size of the data will impact performance when doing things like sorting, that's why I refrain from sorting the dataset itself. The less formulas the better. Wherever possible, I run a formula and Copy-->Paste values to keep the number of active formulas in my workbooks as low as possible. I'm not sure how much of a difference this actually makes but it's become a habit and I'm sure it can't hurt.
+-------------
+It is *strongly* dependent on what's going on.
+
+Even a million rows with very simple formulas is quite workable...formulas that only look at information from that row. The calculation time increases *linearly* (in compsci this is called O(n)) for the number of rows. It's rarely a problem.
+
+But then you might have a formula in each row that looks at *every other row* (e.g. a sumif). Even a few thousand rows will cause a problem, because *each* row references *every* row. This is O(n^(2)), or geometric. A thousand rows referencing a thousand rows each means Excel is already doing *one million* calculations, so it's already as expensive as a simple linear formula on a million rows. Ten thousand rows means *one hundred million* calculations. It grows out of hand very quickly. 50K rows with an O(n^(2)) efficiency will just absolutely flatten Excel.
+
+So the answer is, there is no exact answer. It depends strongly on the formulas involved.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

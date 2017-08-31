@@ -1,0 +1,100 @@
+What are "good habits" I can use to make my spreadsheets easy to understand?
+* Never use merged cells.
+* Always create helper cells.
+* Create a copy of your worksheet before making any large changes to it.
+* Learn when to use Copy->Paste Special -> Values.
+* F5 -> Special Cells -> Blank -> =[cell above] will auto fill your blanks with the cell value above it.
+* If you have a complex nested formula, write out each part in seperate cells, then combine them at the end.
+* & is the same (pretty much) as CONCATENATE.
+* =MID will solve *most* string manipulation issues
+* Learn SUMPRODUCT.  NOW!
+* Set Calculated cells to a colour (I use Yellow) so I can easily see which columns/rows are calculated values.
+* Freeze Panes can be cumbersome, but make your spreadsheet look pretty.
+
+My number one tip - and it's so obvious but so many people distribute their work without it - is create a sheet called intro or key....and in that sheet keep a table of contents of all the sheets in your workbook - and categorise which are hidden/source data, which need to be refreshed and which are to be manipulated by a user - also list your conventions here and hyperlink it all - finally liberally use comments on column headers for your tables - let the user know how a column was derived just by hovering on the header...
+Separate your data and your presentation layers.
+I like to stick in a notes page like [this](http://i.imgur.com/8M9eIJs.jpg)
+Don't grab only the data that you think you'll need.  Grab it all.  Every last number, word, name, and value.  You can always ignore it later.  You can't get easily recapture it later.
+Freeze panes, and use auto filters on your tables. 
+I like to always start my data on line 10 with the headers in row 9. That way, it's easy to know where my arrays start and there's plenty of note space above for checking and well, some notes :)
+
+Additionally, any sheet that is data directly from a client gets a red tab color and a read-only protection. that way if I mess up, I know the original data is right there and untouched.
+
+I store my formulas in a row above the actual data and copy/paste value the results below. Saves tons of processing space.
+Standard formatting approaches:
+
+* Blue for harcoded inputs
+* Black for formulas
+* Green for data pulled from another sheet
+* Sometimes, you'll see red being used for data you want to call attention to
+
+I also like to ensure that if you're pulling data from another sheet, that you match cells on a 1:1 basis, i.e. don't make any formulae that use two different cells from another sheet, even if they're from the same sheet.
+
+Put any and all assumptions on a single sheet (or group of sheets).
+
+If you have multiple sheets which have a bunch of different years' worth of data in 'em (as is common in financial models) then make sure all of the years align - a given FY is always in a given column, and it's the same across all relevant sheets.
+
+Always indicate units, whether it's within each cell, or table, or in a column that indicates units for an entire row.
+First of all, always format tables using Home > Format as Table > and give it a name in Table Tools tab that appears on the Top.
+
+When using single cells in formulas I also recommend that you name the cell using the box left of the formula bar.
+
+This way it will be much easier to understand and modify your formulas.
+
+Now regarding design, take a look at Dark Horse Analytics blog, they have plenty of tips that I find very convenient when sowing data to other people:
+
+http://darkhorseanalytics.com/blog/
+Obvious Auto Filters and words of encouragement on how to use them.
+
+I love throwing Totals and Subtotals (=subtotal(9...) at the TOP of the sheet, so you can see immediate results when filtering.
+
+And I'm big on separation.  Any sales numbers should be segregated with color and/or gridlines compared to margin or inventory or any other category.  Make the difference in data stand out as you scroll to the right or left. 
+I used to work with a team that used a lot of spreadsheets and these are a few things we did:
+
+* Color-coded worksheets (e.g. orange for data sources, grey for intermediate calculations, blue for instructions, etc.)
+* Disabled automatic calculations, sometimes via macro (this is a godsend if you deal with thousands of calculations in a single workbook)
+* Made templates and instructions (e.g. paste data to Sheet2, fill down formulas, calculate, hide Sheet2, and so on)
+* Utilized named ranges for very complicated formulas
+* Put all/most parameters on one sheet (e.g. date, monthly target, prev. month earnings, etc.)
+* Use shapes (e.g. arrows) to make instructions more clear or point out (no pun intended) issues
+* Used macros for repetitive tasks
+
+A few things we did that we shouldn't have:
+
+* Utilized linked sources (creates tons of issues over a network)
+* Over-utilized pivot tables (these are awesome when used sparingly but a pain if they're all over the place)
+* Organized data horizontally (there are more rows than columns in Excel, plan to organize your data vertically)
+* Used macros when formulas will do (macro'd formulas should be a last resort, it forces the calculation to be single-threaded)
+If I have a lot of number crunching to do, what I tend to do is create a new hidden sheet, which handles all the number processing.
+
+
+This means, instead of shoving a large formula in 1 column, I can use this sheet and separate the formula, making it easy to see, and debug. 
+
+
+So I tend to end up with a **Dashboard** and **Calculations** sheet. Values are pulled from the dashboard to the calculations sheet, calculations completed, and then the dashboard sheet pulls the completed values back. 
+Not necessarily for easy to understand... but I like to unlock cells that don't have formulas or dependent data, then lock the spreadsheet when I'm not manipulating the formulas. Keeps me from making fat finger mistakes.
+best advice here, dont know why tables was voted to the top...
+
+* also when copying stuff from webpages, F5, go to special objects then delete away
+
+ps whats the difference between & and CONCATENATE?
+May want to elaborate on the filling blank cells.
+Like a good neighbor the page notes are there!
+Also, if you do this and you need to trim the unnecessary data **SORT** before you delete rows from a filtered column.
+I see a lot of people talking about standard formatting approaches.
+
+But what does that mean? Cell color? Tab color?
+
+Is there any kind of walkthrough on this magical best practice, including the separation of inputs, outputs, hardcoded, calculations, etc?
+Concatenate was limited to 30 arguments, as it's a function.  It's changed to 255 in later Excel versions so there's literally no difference now.
+
+Concatenate is, arguably, easier to debug/read but I'm lazy and & is so much easier to type ;-)
+Hmmmmm. The formatting I listed above (text colour scheme) has become de rigueur standard within the finance industry.
+
+There is no standardisation for cell and tab colours, as far as I am aware - just don't go overboard with the colouring, because that will make it pretty hard to read your sheets.
+
+Not sure where you could find a full, detailed walkthrough, short of attending one of those courses targeted at Wall Street types. 
+Thanks for the feedback.
+Can you give an example of what this looks like?  I work in finance, but have not seen this convention used.  (US, but I work with files from US, Canada, Luxembourg, and Australia most frequently)
+Try searching for some documents from Training The Street? I'm not really too sure - it's been a while. Which field of finance are you in? When I was still in training it was taught to me as being best practice.
+Mutual Fund ops, so basically bottom of the totem pole.  I'll take a look, thanks.

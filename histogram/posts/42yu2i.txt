@@ -1,0 +1,434 @@
+My cousin made a Visual Basic code in Excel for me to fetch and fill the Geocode(fetch City, lat, long, state, country, postcode and district using address!) and Elevation(Sea level) data(using Latitude/Longitude data). I'm sharing it with you!
+[deleted]
+Very nice, just curious why you needed it. 
+Do you mind posting the macro code directly?
+Thank you so much for this. This is amazing. I took this and modified a bit to measure distance between locations and dropped some of the info I didn't need, and it works beautifully.
+Thanks for the gold stranger!
+yup, it goes like...
+
+2,500 free requests per day
+
+512 locations per request
+
+10 requests per second 
+ 
+But I don't need more than what they have given!  ;)
+for my office work! I work for a carrier company where I go on about location scouting for the feasible locations for installing the tower! My company gives me the Lat/Long and I need to calculate the Elevation! :)
+Have it...!
+
+Geocode Module
+
+     Sub GeocodeTemplate()
+
+    Dim time1 As Double
+
+     Dim time2 As Double
+
+     Dim time3 As String
+
+     Dim ieApp As Object
+
+    Dim address1 As String
+
+     Dim PctDone As Single
+
+    
+    time1 = Timer
+
+    Application.ScreenUpdating = False
+
+  
+    'Clear previous output
+
+     Range("C11:G100000").ClearContents
+  
+      
+    Dim Request             As New XMLHTTP30
+    
+    Dim Results             As New DOMDocument30
+    
+    Dim StatusNode          As IXMLDOMNode
+    
+    Dim LatitudeNode        As IXMLDOMNode
+   
+     Dim LongitudeNode       As IXMLDOMNode
+
+     Dim CityNode            As IXMLDOMNode
+
+    Dim myAddress           As IXMLDOMNodeList
+
+     Dim xNode               As IXMLDOMNode
+
+    Dim myChildNode         As IXMLDOMNode
+
+    ActiveSheet.Range("B10").End(xlDown).Select
+
+    totalrecord = ActiveCell.Row - 10
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Loop to copy address into Google API and copy the results back
+  
+     i = 1
+
+    For i = 1 To totalrecord
+    
+     'Google allows 10 queries per second. This is to ensure we don't exceed the allowed quota
+   
+     If i Mod 10 = 0 Then
+    
+     Application.Wait (Now + TimeValue("00:00:02"))
+    
+    End If
+      
+    address1 = ActiveSheet.Cells(i + 10, 2)
+
+    'go to the website of interest
+ 
+    Request.Open "GET", "http://maps.googleapis.com/maps/api/geocode/xml?&address=" & address1 & "&sensor=false", False
+              
+    Request.send
+ 
+    Results.LoadXML Request.responseText
+   
+
+    Set StatusNode = Results.SelectSingleNode("//status")
+    
+    'Different results of query
+    
+    Select Case UCase(StatusNode.Text)
+   
+    Case "OK"
+        
+        Set LatitudeNode = Results.SelectSingleNode("//result/geometry/location/lat")
+
+        Set LongitudeNode = Results.SelectSingleNode("//result/geometry/location/lng")
+        
+        Latitude = LatitudeNode.Text
+
+        Longitude = LongitudeNode.Text
+        
+        Set myAddress = Results.SelectNodes("//result/address_component/type")
+        
+        For Each xNode In myAddress
+            
+            s = xNode.Text
+            
+            If s = "locality" Then
+                
+                City = xNode.ParentNode.FirstChild.Text
+            
+            ElseIf s = "administrative_area_level_1" Then
+                
+                State = xNode.ParentNode.FirstChild.Text
+            
+                  
+            ElseIf s = "country" Then
+                
+                Country = xNode.ParentNode.FirstChild.Text
+             
+            ElseIf s = "postal_code" Then
+                
+                Postcode = xNode.ParentNode.FirstChild.Text
+                
+            ElseIf s = "administrative_area_level_2" Then
+                
+                District = xNode.ParentNode.FirstChild.Text
+                
+            End If
+    
+      Next xNode
+    
+        'Copy results to excel
+        
+        ActiveSheet.Cells(i + 10, 3).Value = City
+
+        ActiveSheet.Cells(i + 10, 4).Value = Latitude
+
+        ActiveSheet.Cells(i + 10, 5).Value = Longitude
+
+        ActiveSheet.Cells(i + 10, 6).Value = State
+
+        ActiveSheet.Cells(i + 10, 7).Value = Country
+
+        ActiveSheet.Cells(i + 10, 8).Value = Postcode
+
+        ActiveSheet.Cells(i + 10, 9).Value = District
+    
+    Case "ZERO_RESULTS"
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "No match found. Try trimming the address and add country"
+           
+    Case "OVER_QUERY_LIMIT"
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "You have exceeded your quota."
+           
+    Case "REQUEST_DENIED"
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "Request was denied. Try again later."
+           
+    Case "INVALID_REQUEST"
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "Invalid Request"
+       
+    Case "UNKNOWN_ERROR"
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "Server Error. Try again later"
+       
+    Case Else
+        
+        ActiveSheet.Cells(i + 10, 3).Value = "Error"
+
+    End Select
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    PctDone = i / totalrecord
+    
+    With UserForm1
+
+            .FrameProgress.Caption = Format(PctDone, "0%")
+
+            .LabelProgress.Width = PctDone * (.FrameProgress.Width - 10)
+
+    End With
+    
+    DoEvents
+    
+    Request.abort
+
+    Next
+    
+    Unload UserForm1
+
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Final messages setup
+  
+    time2 = Timer
+
+    If (time2 - time1) > 60 Then
+
+    time3 = Format((time2 - time1) / 60, "#.00") & " mins"
+
+    Else
+
+    time3 = Format(time2 - time1, "#.00") & " secs"
+
+    End If
+
+    Application.ScreenUpdating = True
+
+    Excel.ActiveSheet.Activate
+
+    MsgBox ("Congratulations!! Geocoding completed successfully!" & vbNewLine & vbNewLine & "Time taken: " & time3)
+
+    1
+    End Sub
+
+    Sub CodeRun()
+
+    'Warning Message
+  
+    Message1 = MsgBox("Once this macro starts running, you will not be able to use this instance of Excel. You can open another instance 
+
+    of Excel if  you want to use Excel for some other work. Press 'Esc' if the progress bar is unresponsive for significant amount of time." &  
+ 
+    vbNewLine 
+
+    & vbNewLine & "Would you like to continue?", vbYesNo, "Warning")
+
+     If Message1 = 7 Then GoTo 1
+  
+    UserForm1.LabelProgress.Width = 0
+
+    UserForm1.Show
+
+    1
+
+    End Sub
+Elevation Module
+
+    Sub EleTemplate()
+    Dim time1 As Double
+    Dim time2 As Double
+    Dim time3 As String
+
+    Dim ieApp As Object
+
+    Dim address1 As String
+
+    Dim PctDone As Single
+
+    
+    time1 = Timer
+
+    Application.ScreenUpdating = False
+
+  
+    'Clear previous output
+
+    Sheet3.Range("D11:D100000").ClearContents
+  
+
+    Dim Request             As New XMLHTTP30
+    Dim Results             As New DOMDocument30
+    Dim StatusNode          As IXMLDOMNode
+    Dim LatitudeNode        As IXMLDOMNode
+    Dim LongitudeNode       As IXMLDOMNode
+    Dim CityNode            As IXMLDOMNode
+    Dim myAddress           As IXMLDOMNodeList
+    Dim xNode               As IXMLDOMNode
+    Dim myChildNode         As IXMLDOMNode
+
+    Sheet3.Range("B10").End(xlDown).Select
+
+    totalrecord = ActiveCell.Row - 10
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Loop to copy address into Google API and copy the results back
+  
+    i = 1
+    For i = 1 To totalrecord
+    
+    'Google allows 10 queries per second. This is to ensure we don't exceed the allowed quota
+    If i Mod 10 = 0 Then
+    
+        Application.Wait (Now + TimeValue("00:00:02"))
+    End If
+      
+    Latitude = Sheet3.Cells(i + 10, 2)
+    Longitude = Sheet3.Cells(i + 10, 3)
+    
+    'go to the website of interest
+    
+    Request.Open "GET", "http://maps.googleapis.com/maps/api/elevation/xml?" _
+    & "&locations=" & Latitude & "," & Longitude & "&sensor=false", False
+              
+    Request.send
+
+    Results.LoadXML Request.responseText
+   
+   
+    Set StatusNode = Results.SelectSingleNode("//status")
+    
+    'Based on the status node result, proceed accordingly.
+
+    Select Case StatusNode.Text
+            
+        Case "OK"   'The API request was successful.
+
+            'Get the elevation node value.
+
+            Set ElevationNode = Results.SelectSingleNode("//result/elevation")
+
+            Elevation = CDbl(ElevationNode.Text)
+    
+        Case "INVALID_REQUEST"  'The API request was malformed.
+
+            Elevation = "Request was malformed"
+        
+        Case "OVER_QUERY_LIMIT" 'The requester has exceeded limit.
+
+            Elevation = "Requester has exceeded limit"
+            
+        Case "REQUEST_DENIED"   'The API did not complete the request, likely because
+
+                                'the requester failed to include a valid sensor parameter.
+
+            Elevation = "Invalid sensor parameter"
+        
+        Case "UNKNOWN_ERROR"    'An unknown error occurred.
+
+            Elevation = "Unknown error"
+        
+        Case Else   'Just in case...
+            Elevation = "Error"
+        
+    End Select
+ 
+    'In case of error, release the objects.
+
+    errorHandler:
+
+    Set StatusNode = Nothing
+
+    Set ElevationNode = Nothing
+
+    Set Results = Nothing
+
+    Set Request = Nothing
+         
+        Sheet3.Cells(i + 10, 4).Value = Elevation
+        
+    
+    
+    PctDone = i / totalrecord
+    
+    With UserForm1
+
+            .FrameProgress.Caption = Format(PctDone, "0%")
+
+            .LabelProgress.Width = PctDone * (.FrameProgress.Width - 10)
+    End With
+    
+    DoEvents
+    
+    Request.abort
+
+    Next
+    
+    Unload UserForm1
+
+
+    '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    'Final messages setup
+  
+    time2 = Timer
+
+    If (time2 - time1) > 60 Then
+
+    time3 = Format((time2 - time1) / 60, "#.00") & " mins"
+
+    Else
+
+    time3 = Format(time2 - time1, "#.00") & " secs"
+
+    End If
+
+    Application.ScreenUpdating = True
+
+    Excel.ActiveSheet.Activate
+
+    MsgBox ("Congratulations!! Geocoding completed successfully!" & vbNewLine & vbNewLine & "Time taken: " & time3)
+
+    1
+    End Sub
+
+    Sub ELERun()
+
+    'Warning Message
+  
+    Message1 = MsgBox("Once this macro starts running, you will not be able to use this instance of Excel. You can open another instance of Excel if you want to use Excel for some other work. Press 'Esc' if the 
+
+    progress bar is unresponsive for significant amount of time." & vbNewLine & vbNewLine & "Would you like to continue?", vbYesNo, "Warning")
+    
+    If Message1 = 7 Then GoTo 1
+  
+    UserForm1.LabelProgress.Width = 0
+    UserForm1.Show
+
+    1
+    End Sub
+you can get it by opening the visual basic(Developer tab) :) very easy!
+
+But, do you still want me to post it?
+Cool. Are you feeding this info into a GIS for mapping antennae patterns or confirming measurements from GIS models?
+He's probably at work and can't download random files. Or on mobile.

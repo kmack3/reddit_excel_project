@@ -1,0 +1,53 @@
+How to go from beginner in excel to proficient/strongly proficient in a short time?
+mmm... you could possibly start by going through the [Where to Learn Excel & Advice Megathread](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/) listed in our side bar.
+[deleted]
+Excelisfun, on YouTube.
+Unplug your mouse and spend the time to learn keyboard shortcuts!
+Invent projects, find projects, try to replicate what other people have done. My best learning has been not through a course or textbooks, but through trying to figure out how to solve a specific problem and using code and formulas I didn't know. 
+As others have noted: Excelisfun on YouTube and learning through a project. I have a budgeting tool I'm working on that I use to learn Excel. Everytime I watch a video on YouTube or an article on Chandoo I try think how I can use it on my budget. Sometimes the implementation actually gets in the way of the simplicity of the budgeting tool but nevertheless I at least learn a solution to a problem that may be useful later on. The flip side is I have an idea of what I want to get out of the budget so everything I try implementing part of it I try solving it myself and if I run into problems I either ask here or hit up google or Excelisfun. By doing this I am actively trying to solve a myriad of problems constantly while improving my own tool. 
+
+Good luck!
+Unplug your mouse. Get a real 100 key keyboard. This is how investment bankers get good at shortcut keys. You should be able to navigate Excel 95% without the mouse. The only thing I can't do is the fill handle.
+
+Every time you have to do something manually multiple times... record yourself with the Macro Recorder and change the code so it's maintainable and extensible. Remove Select, use variables for sheet names, avoid ActiveSheet and ActiveWorkbook, etc.
+
+Read Chandoo. Excel blogs in general. Fast Excel is pretty amazing. This too.
+https://msdn.microsoft.com/en-us/library/office/ff726673(v=office.14).aspx
+
+Google everything you want to do before you do it. 
+
+Excelisfun is the best youtube videos. You will learn something every 5 minutes. He also has books if that's how you learn.
+
+Pivot tables are the answer to 50% of your data summarization problems.
+
+Avoid array formulas unless you absolutely need them. They are a performance and maintenance nightmare.
+
+WiseOwl has a great VBA tutorial.
+
+PM me.
+awesome! yea i have to learn lots of VBA/sumifs/sumif/countifs/countif/sumprod/if,and,or,pivot tables, vlookup/hlookup, etc. 
+
+Looks like this will be a great tool
+solution verified
+I genuinely enjoy using excel, and have since I first started using it in high school. People keep saying I'm better off learning Python, or another language vs VBA which is outdated. 
+
+While it may be true that Python can be more powerful, is it true that vba isn't worth learning now? I can't get myself to sit through too much Python because it bores me and I don't really know what I'm looking at. Though I can get myself through vba tutorials because of how much I like excel, and how familiar I am with it. Should I continue learning vba, or is it really that far behind Python or any other alternative? I'd say I'm definitely past the intermediate level with excel.  
+This is what worked for me. Go through his YouTube page and look for playlist names such as "Highline Class" and follow from start to finish. An episode a night got me up and running as an intermediate Excel user in a matter of a week or two!
+So much this.  Then, when certain hotkeys and repetitive tasks start to annoy you, start writing simple macros. Pretty soon, you'll be flying.
+Agreed.Learning about it is not enough. You have to practice, practice, practice.
+wow just checked out chandoo. very cool!!! so much to learn, so little time ;,D
+Wait I thought array formulas were faster than normal formulas. Don't quote me but it seems like it also creates a smaller file size than formulas in tables (10s-100s of thousands of rows). And you are 100% percent correct they are hard to maintain.
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+[deleted]
+> Wait I thought array formulas were faster than normal formulas. Don't quote me but it seems like it also creates a smaller file size than formulas in tables (10s-100s of thousands of rows). And you are 100% percent correct they are hard to maintain.
+
+~ */u/cisnotation*
+Thanks.
+
+Smaller file size when a HD GB is a dollar is a bad tradeoff.
+
+Array formulas are faster than normal formulas if and only if your range doesn't include, for example, an entire column of 10^6 entries. This will bog down pretty much any machine, and is unnecessary, especially when pivot tables get you where you want to go 90% of the time.
+Thank you so much. This is really helps. I'm going for it

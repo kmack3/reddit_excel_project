@@ -1,0 +1,132 @@
+What is an aspect of excel that you feel is under utilized?
+Pivot Tables.
+I would say the CTRL and SHIFT buttons, and not only in Excel but all of Windows in general. You might know, when moving a file CTRL or SHIFT depending copy paste locations being in the same disk or different logical disks, behaviour changes from copy to move or vice versa. And you can create a copy of the file you are working on regardless of it is open or not by CTRL + dragging it in the same folder.
+In Excel Ctrl + Arrows moves the active cell to the next end of the data block, and if you add Shift it's a selection. While editing text CTRL +Arrows makes the cursor move word by word. And while dragging CTRL changes behaviour. E.g if you are dragging down 1, if the default behaviour is copying down, pressing CTRL makes it 1, 2, 3... While moving anything if you add CTRL it creates a copy, While moving columns, if you add Shift, it puts the column in between two other columns. 
+It's relatively new but power query has changed how I use excel. It's removed a lot of repetitive stuff I used to do.
+Looking at the usage of Excel within the company I work for, I would say the following features are severely under utilized:
+
+1. Data Validation
+2. What-If Analysis
+3. Styles
+4. Sparklines
+5. Slicers and Filters
+
+I've tried to incorporate as much of these as possible as I really feel these features can make your life much easier within Excel. Now if I only could get the rest of the people I work for to use it as well....
+match index instead of vlookup
+* camera button (edit: for dashboard & presentation)
+* power pivot/query (also dax and friends)
+* create olap cube from external query (while having a little disadvantages, this is soooooo faster than normal pivot table)
+Styles (mainly cell styles, also table styles, pivottable styles, and themes). When used well, styles are a took that can quick, easily and flexibly format a workbook.
+Sparklines.  
+
+I build dashboards for a sales team and it's tough to get them to not get caught up in the small variances of past numbers. There's variation in all processes and (the newest) sparklines can help highlight where there truly were changes without getting caught up in the small, natural changes. 
+The Excel Templates database. 
+
+There's a lot to be said for building your own sheet from the bottom up, you learn something and know for sure how everything works.   
+However, for a lot of the smaller "DIY" projects that people do, and which can sometimes become exceedingly difficult, there are templates on the Excel template database that pops up when you press new.   
+Even if the templates don't give you exactly what you want, they can often serve as a foundation or as inspiration to how you want your own, AND look really pretty.   
+In some cases you may even pick up some new tricks, by picking the template apart.
+VBA or Pivot Tables.
+Since a lot of the good features of excel are already covered I will mention that excel has its limits. A powerful tool for excel users to know is when they have reached that limit and it is time to use another tool such as access.
+
+Excel is great for flat data and for files with around 500,000 to 1,000,000 cells. Anything larger or more relational is much better off in access.
+Power pivot in combination with pivot tables. Power pivot is an excel plugin it allows you to manage huge data sets in excel without having massive tabs of source data. It also removes any limitations of pivot tables. Its final benefit is that it allows you to create calculated fields that respond to row and filter reference as you manipulate the table. As a professional using excel when combined with some basic knowledge is SQL it has changed the way that i work significantly. 
+
+Here is a great tutorial:
+https://www.youtube.com/watch?v=yjASjwJCIxA
+[Intellicell](http://i.imgur.com/nck8RCb.jpg?1). I'm pretty sure not many people use Intellicell in Excel. 
+Yes, it has to be Pivot tables and i will add that formulas in Pivot tables are even more underutilized.
+One of many good things in Pivot Tables is, when preparing recurring reports, if your source is a table, you can after updating your source data, press refresh on the pivot table. Also you don't have to keep the source data for pivot table to work. Which means smaller file size.
+Definitely pivot tables. I would hardly consider myself an excel power user, but my friend who has years of experience with excel had no idea how to use them or what they were for. 
+Yes, nice one.
+
+For anyone wanting to Google this to learn more, Ctrl, Shift and Alt are often collectively referred to as the "modifier keys".
+I showed a coworker this a week ago.  Ctrl, shift, home, end, and combinations of all.
+
+Blew her mind.
+Alt + PgUp or PgDn will scroll left/right.
+Power Query and PowerPivot are game changers. They turn Excel into a legit BI tool (for free!).
+I often see people around here recommending VBA for stuff that Power Query can do much more elegantly.
+All of us who are forced to use older versions of Excel are sad now :/
+
+I had to live with 2007 for so long: it did not have the option to "display all labels" of a pivot table, that is so useful. Now I can only read about power query..
+Styles is right there on the Home tab...so you're always looking at it...and I've always thought, what the fuck is that and why's it taking up so much prime real estate?   (to be clear, I use the conditional formatting and the format as table all the time...it's the coloring to the right I'm talking about.  (Format as table is almost an obvious default at this point.  Conditional formatting is a gold mine...especially if you dig up ones based on formulas. ))
+I build a lot of things for other people; data validation is my friend. Especially when my users have very limited experience with Excel. 
+Oooh, I'd never heard of that, just read about it.  That sounds quite helpful for the stuff I do.
+
+Here's the article I read: http://www.randomwok.com/excel/how-to-use-index-match/
+Have any solid sources for Olap query tutorials?
+
+I'm a cube newb
+I can second the suggestion for camera. It's a useful feature for dashboards.
+I use the camera function quite a bit for quick dashboards.  second that 
+Styles are underutilized in any of the Office programs.  
+They also reduce the file size for large documents.
+I'm building a tool for call center agents with Excel and VBA. I'm using Styles (for the first time) to let them switch between eight color schemes. Changing a style through VBA is really easy and it's *awesome* that it changes the look throughout the Workbook.
+OMG Mind = Blown.  Thank you!
+This.  I hope they make Sparklines easier to use with PivotTables in the future.   Sparklines of Table data is nice since the sparkline will grow as the table data grows.   I have to futz around doing the same with Pivot Tables. 
+This is actually how I taught myself a lot about Excel.  I'd download a template,  figure out how it worked and try to rebuild it from scratch.  Then I would try to build a better version or just my own version. 
+> much better off in access.
+
+Or even in a real database ;-]
+No longer.   
+
+With PowerPivot/Query and Office 2013 64x I'm combining multiple files...one of which has over 1.2million lines.  When you save, Excel does an excellent job of compressing the data. (I pull in about one Gb of data and the XLS file ends up being about 40Mb.  
+
+The beauty here is that, 64x is needed to create the data model (and the Pivots/filters/etc)...but the users can just open it up in Excel 32bit just fine.
+Sigh, you made me look :/
+Dammit.
+Can you explain further? I'm still learning in Excel and i think this would be a great addition to my skills. 
+Yes. Calculated fields. So powerful. Save soooooo much time.
+Exactly. I think it more people understood that, they would use them. I've built many reports out of them using the master data that gets refreshed/updated.
+Years of exp doing things the long way. So sad.
+I also noticed Ctrl + Enter submits a post in Reddit, I don't know if this is worth revivng the thread though.
+Thanks, I was looking for the word "modifier keys"
+Yeah, they are mind blown, but they never get to use the shortcuts.
+I didn't know this, but I use Ctrl + PgUp or PgDn all the time to move quickly between tabs.
+Animals! :)  
+
+I just push out a report and got agreement that it would require Office 2013. ( 2013 is available in the company via an internal software portal but laptops are still being pre-loaded with 2010 so it's an (relatively big) extra step for people. )
+
+I just read that 2016 will have PowerQuery built in.   What's nice (for 2013) is that people without PowerQuery installed can still open up workbooks built with PowerQuery (they just can't do any refreshing).
+
+Anyways...I sad for you too. :)
+you mean dax ? or howto create olap cube from standard excel?
+
+
+If DAX :
+
+
+* http://www.daxpatterns.com or http://www.sqlbi.com/
+* https://support.office.com/en-us/article/QuickStart-Learn-DAX-Basics-in-30-Minutes-51744643-c2a5-436a-bdf6-c895762bec1a
+
+
+If you mean creating olap cube from standard excel, just choose Create an olap cube from this query instead of Return Data to Microsoft Excel.
+
+After that just follow the step by step instruction.
+
+
+note: I believe create olap cube option can only be chosed if you're using external data (ie: from ms access/other odbc sources)
+So true!
+Have you used pivottables in the new 2013? They have some pretty nice pivot chart visualizations.
+Fair enough.
+Yes, its simple lets say you want your Pivot table has two coloums A and B and you want a coloum C where C= A+B, usually people will just do a long work around, but you can use calculated field where you can create a new Coloum C and make a formula As C= A+ B .  On the Analyze tab look for Calculation and under that in field called "Fields , items and sets" . Pardon my clumsy explanation please find the link :  http://www.contextures.com/excel-pivot-table-calculated-field.html#Calculated
+https://www.youtube.com/watch?v=Vx-Fuw46VbY
+Can confirm.
+Source: power user, just learned pivot tables.  Mind = blown.
+that's great.  Thank you!  Just haven't messed with them before.  Going to dig in tonight
+
+yessssss......hmmmm...not sure what you're referring to though.  can you provide a pointer? that'd be great.
+is this available in Excel 2007?
+Are you using 2013? Because they did get better from 2010 to 2013...
+On the insert menu, in the middle--PivotCharts. Next to regular chart stuff, only these are Pivot Charts.
+should be yes. 
+yes
+Yes this should be, but cant confirm as i have excel 2010 on my system.
+At the moment the company I'm at uses only 2010.  I look forward to trying out 2013!
+Excel has some nice additions in 2013. It has "recommended pivot tables" which can be helpful for training new users. It also has a new "Flash Fill" tool. The days of having to make a formula to take the name "John Smith" in cell A1 and split it into "John" in B1 and "Smith" in C1 are gone. GONE I tell ya.
+
+I took an online course "What's new in Office 2013" last summer. Can you tell?
+That is awesome... Is that course still available?
+Yep: go here and scroll down to see the "What's New in Microsoft Office 2013." $95 was what it cost last year. http://www.ed2go.com/computer-applications-online-courses
+Great thanks!

@@ -1,0 +1,270 @@
+You ever lose the password on a worksheet? This little code is a lifesaver.
+But how!?  Why does this work?  Why is a password composed of mostly A's and B's able to unlock a sheet even if the password is not even remotely similar?
+
+Edit - [So this article talks about it.] (http://www.thespreadsheetguru.com/blog/2014/8/20/understanding-excels-password-security-methodology)  If anyone's at a computer with Excel 2013 or 2016 right now I'd be curious to know if it still works for you!
+I've been using this for years. I saved it as an Add-In and added a keyboard shortcut. People at my office think I'm a sick hacker because I can unprotect any worksheet by typing three keys.
+Can't you just unzip it, remove the settings file and then save? You could then redo the password protection, no? 
+It should be put as disclaimer that this is not legal, unless used on a worksheet made by you.
+I've had problems getting this to work in the past. Anyone know if this will always find one? I think I waited about 30 minutes once and no password came. 
+I found one that will unprotect everything in a workbook as long as you can open it and get a vba window open alt+f11
+
+This is awesome.
+
+    Public Sub AllInternalPasswords()
+        ' Breaks worksheet and workbook structure passwords. Bob McCormick
+        '  probably originator of base code algorithm modified for coverage
+        '  of workbook structure / windows passwords and for multiple passwords
+        '
+        ' Norman Harker and JE McGimpsey 27-Dec-2002 (Version 1.1)
+        ' Modified 2003-Apr-04 by JEM: All msgs to constants, and
+        '   eliminate one Exit Sub (Version 1.1.1)
+        ' Reveals hashed passwords NOT original passwords
+        Const DBLSPACE As String = vbNewLine & vbNewLine
+        Const AUTHORS As String = DBLSPACE & vbNewLine & _
+                "Adapted from Bob McCormick base code by" & _
+                "Norman Harker and JE McGimpsey"
+        Const HEADER As String = "AllInternalPasswords User Message"
+        Const VERSION As String = DBLSPACE & "Version 1.1.1 2003-Apr-04"
+        Const REPBACK As String = DBLSPACE & "Please report failure " & _
+                "to the microsoft.public.excel.programming newsgroup."
+        Const ALLCLEAR As String = DBLSPACE & "The workbook should " & _
+                "now be free of all password protection, so make sure you:" & _
+                DBLSPACE & "SAVE IT NOW!" & DBLSPACE & "and also" & _
+                DBLSPACE & "BACKUP!, BACKUP!!, BACKUP!!!" & _
+                DBLSPACE & "Also, remember that the password was " & _
+                "put there for a reason. Don't stuff up crucial formulas " & _
+                "or data." & DBLSPACE & "Access and use of some data " & _
+                "may be an offense. If in doubt, don't."
+        Const MSGNOPWORDS1 As String = "There were no passwords on " & _
+                "sheets, or workbook structure or windows." & AUTHORS & VERSION
+        Const MSGNOPWORDS2 As String = "There was no protection to " & _
+                "workbook structure or windows." & DBLSPACE & _
+                "Proceeding to unprotect sheets." & AUTHORS & VERSION
+        Const MSGTAKETIME As String = "After pressing OK button this " & _
+                "will take some time." & DBLSPACE & "Amount of time " & _
+                "depends on how many different passwords, the " & _
+                "passwords, and your computer's specification." & DBLSPACE & _
+                "Just be patient! Make me a coffee!" & AUTHORS & VERSION
+        Const MSGPWORDFOUND1 As String = "You had a Worksheet " & _
+                "Structure or Windows Password set." & DBLSPACE & _
+                "The password found was: " & DBLSPACE & "$$" & DBLSPACE & _
+                "Note it down for potential future use in other workbooks by " & _
+                "the same person who set this password." & DBLSPACE & _
+                "Now to check and clear other passwords." & AUTHORS & VERSION
+        Const MSGPWORDFOUND2 As String = "You had a Worksheet " & _
+                "password set." & DBLSPACE & "The password found was: " & _
+                DBLSPACE & "$$" & DBLSPACE & "Note it down for potential " & _
+                "future use in other workbooks by same person who " & _
+                "set this password." & DBLSPACE & "Now to check and clear " & _
+                "other passwords." & AUTHORS & VERSION
+        Const MSGONLYONE As String = "Only structure / windows " & _
+                 "protected with the password that was just found." & _
+                 ALLCLEAR & AUTHORS & VERSION & REPBACK
+        Dim w1 As Worksheet, w2 As Worksheet
+        Dim i As Integer, j As Integer, k As Integer, l As Integer
+        Dim m As Integer, n As Integer, i1 As Integer, i2 As Integer
+        Dim i3 As Integer, i4 As Integer, i5 As Integer, i6 As Integer
+        Dim PWord1 As String
+        Dim ShTag As Boolean, WinTag As Boolean
+
+        Application.ScreenUpdating = False
+        With ActiveWorkbook
+            WinTag = .ProtectStructure Or .ProtectWindows
+        End With
+        ShTag = False
+        For Each w1 In Worksheets
+                ShTag = ShTag Or w1.ProtectContents
+        Next w1
+        If Not ShTag And Not WinTag Then
+            MsgBox MSGNOPWORDS1, vbInformation, HEADER
+            Exit Sub
+        End If
+        MsgBox MSGTAKETIME, vbInformation, HEADER
+        If Not WinTag Then
+            MsgBox MSGNOPWORDS2, vbInformation, HEADER
+        Else
+          On Error Resume Next
+          Do      'dummy do loop
+            For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+            For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+            For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+            For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+            With ActiveWorkbook
+              .Unprotect Chr(i) & Chr(j) & Chr(k) & _
+                 Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+                 Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+              If .ProtectStructure = False And _
+              .ProtectWindows = False Then
+                  PWord1 = Chr(i) & Chr(j) & Chr(k) & Chr(l) & _
+                    Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                    Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                  MsgBox Application.Substitute(MSGPWORDFOUND1, _
+                        "$$", PWord1), vbInformation, HEADER
+                  Exit Do  'Bypass all for...nexts
+              End If
+            End With
+            Next: Next: Next: Next: Next: Next
+            Next: Next: Next: Next: Next: Next
+          Loop Until True
+          On Error GoTo 0
+        End If
+        If WinTag And Not ShTag Then
+          MsgBox MSGONLYONE, vbInformation, HEADER
+          Exit Sub
+        End If
+        On Error Resume Next
+        For Each w1 In Worksheets
+          'Attempt clearance with PWord1
+          w1.Unprotect PWord1
+        Next w1
+        On Error GoTo 0
+        ShTag = False
+        For Each w1 In Worksheets
+          'Checks for all clear ShTag triggered to 1 if not.
+          ShTag = ShTag Or w1.ProtectContents
+        Next w1
+        If ShTag Then
+            For Each w1 In Worksheets
+              With w1
+                If .ProtectContents Then
+                  On Error Resume Next
+                  Do      'Dummy do loop
+                    For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+                    For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+                    For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+                    For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+                    .Unprotect Chr(i) & Chr(j) & Chr(k) & _
+                      Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                      Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                    If Not .ProtectContents Then
+                      PWord1 = Chr(i) & Chr(j) & Chr(k) & Chr(l) & _
+                        Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                      MsgBox Application.Substitute(MSGPWORDFOUND2, _
+                            "$$", PWord1), vbInformation, HEADER
+                      'leverage finding Pword by trying on other sheets
+                      For Each w2 In Worksheets
+                        w2.Unprotect PWord1
+                      Next w2
+                      Exit Do  'Bypass all for...nexts
+                    End If
+                    Next: Next: Next: Next: Next: Next
+                    Next: Next: Next: Next: Next: Next
+                  Loop Until True
+                  On Error GoTo 0
+                End If
+              End With
+            Next w1
+        End If
+        MsgBox ALLCLEAR & AUTHORS & VERSION & REPBACK, vbInformation, HEADER
+    End Sub
+
+    
+.
+Or just download free version of Straxx.
+You can also crack a password with a hex editor, or uploading the file to Google Sheets.
+
+Only comment about the code: All those FOR/NEXTs without indentation drives my obsessive formatting brain crazy.
+
+Actually, I didn't know you could do FOR: FOR: FOR:, how is that different than
+
+    For...
+        For...
+            For....
+
+Aside from layout?
+I have Excel 2000 and trying to play with this.
+
+I saved a file as read only, opened it up as read only ,opened up vba and ran the above script. It gave a prompt of "One Usable Password is AAAAAAAAAAAAA". I tried entering the password but it would not work. 
+
+Can this be used for a workbook that is password protected just to open it? I can't figure out how to run the script to get it to work on a workbook that needs a password to open.
+This works because Excel uses a shit hash.  No matter what password you type in, Excel hashes it into a 12 letter password and it only varies by a couple letters.  Basically you have AAAAAAAAAAAA to BBBBBBBBBBBz
+
+(2^10) * 94 combinations which can be looped through in an eyeblink.
+
+All passwords work like this.  When you make an account somewhere the actual password you type in is never recorded.  A lot of people don't realize this.    You type in blackdog1, and then aSakEks912Jashdi9)83jdA903h57dAhjsdkA7dh  is what gets sent to the server as your password and what is checked against to see if you pass auth.
+
+It gets more complicated that this when you consider salting the hash to make it more difficult to crasck, but whats happens when you are cracking a password database, you are running through a dictionary of words and numbers trying to find some password hash that matches the hash in the file you have.  Now, 2 passwords can have the same hash which is why this works.  Salting the hash reduces this overlap.  (i know its more complicated than this, just trying to keep it simple)
+Doesn't work from 2013 mate
+People think I'm a hacker because I keep a terminal session open and that is just like that one matrix movie.  The movie with that guy who played the hero in that other movie with Sandra Bullock about that bus that couldn't go below 50mph or it would blow up.  I think it was called "The bus that couldn't slow down"
+If you save the password used to unlock the file, and lock it again with the same password, you will still be able to use the original password. try it. you just have to change the macro to show you what password unlocked the file.
+That worked in the initial version of 2007 that introduced the open document format, but not in later versions.  Not sure if it was fixed in a service pack or not. 
+If you mess that up, your file is corrupt. Nothing can really go wrong with the method above.
+If it's used in your organization with the permission of the file owner, it's completely legal.  I've used it to unlock sheets when an angry worker left and locked important data the CEO needed, so there are a few cases where it's completely fine.
+This doesn't work for newer versions of excel since they changed how they hash the passwords. Not sure which version it started in, but it definitely doesn't work in 2013+
+I think I added this on a standalone module and it froze up my computer for a while. Then I realized I needed to add the code in the Excel Object *worksheet* that needs to be opened.
+It hasn't worked for many years unless you're using the old versions of Excel. I see this macro posted many times a year and sigh every time.
+that's cool, what versions have you tested this on?
+No that doesn't work. The code can be stored in another workbook or an add in, but run on the active workbook. 
+It could be that this post wasn't meant for someone with your capabilities.
+Technically it's anything from `"AAAAAAAAAAA "` to `"BBBBBBBBBBB~"` assuming OP's chr values are to be trusted, and that's 2^11 \*95, but your point stands... that's a very small number of possible combinations for a computer to loop through (and if you comment out the `Exit Sub` line you'll see there's actually a *ton* of possible passwords).
+Why do they call it "salting the hash"? It makes it sound so tasty.
+But you can still crack 2013 by opening it in OpenOffice. Because it doesn't actually encrypt the contents. It just puts the equivalent of a "please do not open" sticker on the file.
+
+2016 has actual security, and takes a bit more work to crack.
+Ah, thanks for sharing.  Useful for some of us at work, but it seems its life is running out
+Does it work in a .xls (as opposed to .xlsx) file made in 2013?
+> I think it was called "The bus that couldn't slow down"
+
+
+Yeah, but you can always make a copy. 
+[deleted]
+And the vba password protection is easily hacked too in older versions of excel.
+.
+But my post was meant for someone with you social capabilities: Fuck Off Cock Sucker. 
+Hadn't had my coffee yet, trying to do it off of memory with the ascii.    2^11 * 95, you are correct.
+
+I realize there are a ton of matching passwords in Excel, that's just the shitty hash.  They could make this loop useless by doing the same crap that Apple did by making the math so complex that it takes a few milliseconds to hash the pass and then 2^11 is going to take a fuck load of time to deal with even with a shitty hash.
+You are "sprinkling" unexpected, irregular components through an otherwise normal hash. 
+Speed?
+What if a novice user doesn't make a copy?
+
+The posted method is basically fool proof. If something goes wrong, nothing gets broken.
+What do you mean? The spreadsheet was probably created on company time with company resources. The company had full rights to it. Fuck all who initially created it if those first 2 conditions are met. 
+It would only end up in court if used for malicious purposes realistically intent is very much the key thing here.
+
+You can break into a locked shed with a pair of bolt cutters, that doesn't mean they don't have legitimate uses.
+I am not aware of one other than upgrading excel as other people have said. 
+Yes, on a password protected drive with encryption. The only way to make something secure.
+
+Passwords in VBA or Excel files can be easily circumvented using code, or a hex editor, or even just saving to Google Drive and opening it there.
+
+
+[deleted]
+Wow. Now I'm even hungrier. Thanks dude!
+It's a Simpson's reference, but yes. 
+
+Homer: I saw this in a movie about a bus that had to SPEED around a city, keeping its SPEED over fifty, and if its SPEED dropped, it would explode. I think it was called, "The Bus That Couldn't Slow Down."
+A novice user can run that macro, but can't save a file?
+If someone doesn't have enough Excel experience to make a copy before trying to crack a password, I doubt they'd be cracking a password in the first place, or know how to use a macro.
+Sorry, can't argue right now. Busy fucking your wife, beeeep.
+The best encryption system is obviously a root beer float. You can deliver it to a table in two unappealing packages that no one would understand why you'd order. But when you have them both securely, you can combine them into a delicious mix that everyone is jealous of. Same with a well-salted [corned beef] hash. 
+That's pretty funny. Good reference.
+copy pasta - click play button
+
+vs
+
+unzip - remove settings file - make sure I don't mess things up
+
+I know how to do the first, don't have a clue how to do the second (though I'd imagine it would be a very simple thing to Google)
+Ever worked in tech support? Used to get this type of incompetence often.
+
+/r/talesfromtechsupport
+[deleted]
+You're saying you can mess up because you can forget to back up the file. I am saying if you can run a macro, you know how to save a file.
+Nope, thankfully.
+I currently have a director who closes and reopens Excel to get back to the top of the worksheet after he has scrolled down. Terrifying when he has saved it in that position. Cursor up-up-up-up...to get to the top again. Then Save!
+
+That being said, he has brilliant save habits. Keeps multiple versions and saves after just about every change.
+Sorry can't hear you over your grandmother yelling for my dick in her ass.
+> I am saying if you can run a macro, you know how to save a file.
+
+I know what you're trying to say, but unfortunately this has not been my experience! 
+[deleted]
+Hahahah! 
+
+Yeah, we have that guy at my office, too. I really don't think he knows macros, though.
+
+Looking at you, Andy. &#3232;_&#3232;
+Sorry, they can't hear you over the sound of me fucking your cat.
+[deleted]

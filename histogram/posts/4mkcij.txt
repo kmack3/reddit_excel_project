@@ -1,0 +1,51 @@
+Excel Formula Help?
+Wrap it in an if statement that does the check for an empty cell first. If it's empty, then the formula returns blank. If not, it continues on to your formula.
+
+    =IF(HZ2="","",NETWORKDAYS(HZ2,TODAY()))
+Trap and handle errors.
+
+The value you specify for error conditions.
+
+=IFERROR (value, value_if_error)
+
+value - The value, reference, or formula to check for an error. ...
+
+Use the IFERROR function to trap and handle errors produced by other 
+formulas or functions. ...
+
+Excel ISERROR Function.
+
+
+https://exceljet.net/excel-functions/excel-iferror-function
+Not to make this more complicated, but, if your start dates include time stamps and you want those incorporated, you can use the NOW and MOD functions as well...  Something like this:
+
+=IF(HZ2="","",NETWORKDAYS(HZ2,NOW())-1-MOD(HZ2,1))
+I like IFERROR for things like this :-  
+  
+  
+    =IFERROR(  
+    NETWORKDAYS(HZ2,TODAY())  
+    "")  
+  
+  
+  
+(yes - you can leave the carriage returns in place)
+The simplest solution is to wrap it in an IFERROR (
+Iferror is easier to use than the proposed solution but both give the same result
+Hello, please review our sidebar for [submission guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) ,specifically generic 'Help' titles.  
+Thanks this worked as needed! 
+'Solution Verified'
+SInce Im on the subject can you explain the practical use of this formula setup vs the other? What exactly does MOD tell the formula to do??
+
+Thanks
+IFERROR won't work because NETWORKDAYS is going to interpret a blank cell as "0" so it's not going to give an error.
+Be sure to comment with 'Solution Verified' to mark the thread as solved. 
+
+You have awarded one point to _Jos_Metadi_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+NETWORKDAYS counts the total number of workdays (Mon-Fri with the option of manually including Holidays) *including* the start and end date.  So, if your dates have time stamps, a start date of 5/31/2016 20:00:00 (8pm) and an end date of 6/2/2016 12:00:00 (noon) would give a result of 3 (5/31 + 6/1 + 6/2 = 3).  The formula using the MOD function would incorporate the time stamps and give you a result of 1.67 (full day of 6/1 + 4 hours from 5/31 + 12 hours from 6/2).  Note that the actual formula for this example would be different because you have a defined end date of 6/2/2016 12:00:00 rather than using the NOW function which creates a date and time stamp at the time it is run.  The actual MOD function takes the number in the cell it's calling from (in this case that cell is a date but it converts it to the corresponding number automatically), divides that number by the number entered after the comma, and then outputs the remainder of that calculation.  Dates are converted to numbers in Excel based on how many days have passed from 1/1/1900 to the date represented.  For example, today is 42,525 because that's how many days have passed between 1/1/1900 and 6/4/2016.  Today's date with a time stamp of noon would yield a result of 42,525.5.  So that's how it accounts for the date stamp...  =MOD(42525.5,1) would give an output of 0.5.  If you want an example of using the MOD function with a "pre-determined" end date (instead of using the TODAY or NOW functions), let me know.
+OP suggested that they were getting a `#VALUE!` error...
+
+
+Hmm...yeah, maybe I'm missing something, not sure why they would get an error if the cell is blank.  Maybe the "blank" cells actually hold spaces, I'm not sure how NETWORKDAYS would treat that.

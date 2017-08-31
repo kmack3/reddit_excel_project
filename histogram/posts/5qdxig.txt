@@ -1,0 +1,179 @@
+What's your fave nifty trick of the trade?
+Index/Match never fails to impress people at my work.  But then again, the bar is low. 
+I think the best general advice is to learn small things frequently, and then consistently use them.
+
+Keyboard shortcuts are great, but don't listen to someone that says "using the mouse is a personal failure".  You need both a keyboard and mouse.
+
+Avoid merging cells if you can.  They terribly destroy cell formatting and navigating spreadsheets, and you can get the same effect without all of the punishment by using "Center Across Selection".
+
+Get comfortable with Excel, and then if you still want to get better, learn VBA (programming within Microsoft Office that can automate something that would normally take 5-10 minutes or longer into only taking a few seconds).
+
+If you ever want to do something in Excel but don't know how, if you can phrase it right, you should be able to find many forum posts where someone asked / answered your exact question.  GOOGLE IS EVERYTHING <3
+
+You can watch videos of various stuff which is great.  ExcelIsFun is an absolutely incredible YouTube channel for Excel tutorials.  From basics to the most advanced, he has the best videos that I've seen.  [For someone that's new to Excel, this video will benefit you probably more than any other.](https://www.youtube.com/watch?v=e-yuYNgsHAk&list=PLDF4390866B480CD2)  Although, I speed his videos up to 1.5x
+Copious keyboard usage. With often used shortcuts and cursor control (including judicious use of the shift and ctrl keys and PgUp and PgDn). I've been using Excel pretty much daily for probably 20 years now and to this day people tell me what a master I appear to be when I do things as quickly as I do. It's become second nature to me and I take it for granted I guess that I hardly ever touch the mouse.
+I make spreadsheets for other people to use a lot. My tip is to make sure that if ANYONE else will be using the spreadsheet, lock important cells! Trust no-one.
+
+Jx
+CTRL+SHIFT+L to turn on auto-filter on a highlighted data range, I use that all the time.  
+  
+I like to try to think outside the box as much as possible. I often find coworkers or clients struggling to make something work, getting bogged down into a tricky formula or something. There's often an easier faster way to get what you need by using less elegant but ultimately simpler tricks like:
+
+1. Mask the data. Good for needing two different presentations on the same data, or merging disparate data sets for analytics
+
+2. Break up a nested IF function into a couple columns. There's probably a way to make it straight in one long IF(AND(OR(IF(AND(IF))))), but why bother? If you just need the answer just throw some more columns in - and it's easier for higher ups to follow your work that way anyway
+
+3. Break the problem down. If I get asked how to do X, and it's not immediately clear to me I always ask why they need to do X. Inverse correlation between people's proficiency in Excel and likelihood that X is the optimal approach.
+
+As has been said, I Googled a lot and still do when I hit a snag on something.
+
+Sub-VBA Excel Expertise continues to propel me forward in my career and differentiates me from peers in consulting.
+CTRL + T
+
+That's it. Welcome to Excel.
+You'd be surprised how many people don't know simple sumifs or sumproduct. 
+Sumproduct and index match blows people's mind where I work.
+
+Pivot charts are a nice way to impress as well
+Ok shortcuts are great and all - you will learn those in time. But can I just say, for normal business use, formatting (however you do it - whether keyboard or mouse) is severely underrated. Seriously, there is a new guy in my office - he's slow with excel, whatever. But what drives me nuts is his tables are ugly. They're hard to read and just really look like a college kid made them (he's 4-5 years post college).
+
+Look at nice looking tables and emulate their style, then make subtle tweaks to make it your own (unless your company has standardized formatting). Make use of different types of boarders, shade rows or columns you want to emphasize, make use of small white space, take out the grid lines, etc. Doing all this made me both fast at excel and my sheets look nice. You don't have to have defined borders around every cell! I don't do anything amazing - but I pay attention to the way the spreadsheet looks aesthetically. 
+
+For example we used to print only in black and white - so I utilized black shaded cells with white font for column headers and a light shade of gray to highlight something I wanted to showcase. I also set apart certain rows by inserting a row above and below it but make them really small just so that row is set apart. It's all very simple but it makes it easier to read. 
+
+Then the moderate user move -- create macros for all your normal formatting. My Ctrl + J does the column headers (described above), Ctrl + Q does the light gray shading, Ctrl + N (yes I click if I want a new workbook) formats numbers how I like them (accounting, commas, no $ sign, no decimals).
+
+It's simple things that go a long way.
+Ctrl+Alt+V brings up the paste special menu.
+A simple one that I use is Ctrl+W to close individual files, while keeping other sheets open. Sometimes I find myself having 20 files open. Just quickly closing down the ones that are not in use clears up the picture a lot.
+
+Also F12 to save as.
+Currently, I would say using nested OFFSETS with COUNT in named ranges so I can have charts and pivot tables that grow on their own to include new rows/columns of data as I add them.
+Format a cell with the custom code of ;;;
+
+Each semi colon tells excel NOT to display three different data forms (text, positive numbers, negative numbers?). It's like coloring your text white, but on steroids. 
+=2+2+1
+
+select 2+2 and press F9, it will calculate that portion and it will become =4+1, so this is a good way to check portions of your formulae, just make sure to press esc to prevent the data from being overwritten
+Go To Special - a very quietly hidden menu with a lot going on.
+I use the shit out of named ranges.  Surprising how few ppl know about this.  I also put a macro in my personal macro workbook (which always is available) that I link to a custom icon in my customized quick access toolbar, that toggles b/w display in R1C1 & A1 modes.   Very handy.  I tied another one to launch goalseek also.
+
+Also, a really handy piece of code for macros to identify if you are selected within a range of interest: if not intersect (selection, range_name) is nothing then...
+
+Very tidy
+Hit up YouTube and watch videos while following along with excel. Bonus points for doing this with multiple monitors. Back when I was starting out I used the Lynda courses that had videos with premade workbooks to go with them. I believe it was $30 per month for access but they have a free trial. I just studied non-stop with it for a week prior to starting my first job out of college. It was fantastic for learning most of the advanced techniques and formulas, but has a ton of basic content too. 
+Vlookup&index/match, goal seek, and pivottables were all game changers for me
+Using concatenate to create unique strings, and then using the same concatenation in a vlookup.
+
+Like: (date / animal / customer)
+Vlookup(concatenate(date cell, animal cell, customer cell)
+What a like:VBA
+What i hate: pasted values. 
+I use it sometimes when I REALLY want to hide something. I know there are a lot of ways to hide cells/content. I use this as part of the arsenal 
+=IFERROR(1/(1/FORMULA),"")
+Hell just knowing common hot keys to select things impresses half of my office. Ctrl + shift + arrow or shift + arrow to increase by one row or column. Ctrl + shift + L I use every day multiple times to turn filters on/off and everyone is surprised it's a thing. 
+I'm glad to find this isn't just in South Africa. I once caught a colleague adding up an excel column with a desk calculator. That blew my mind. 
+
+Even some of my friends who use it all the time can't manage a vlookup. And sadly I only came across index-match recently, having learned my basics years back and having run into literally no one who could have told me about it.
+What is Index/Match used for? How is it done?
+The bar so often is!
+lolol.  index/match/match got be a job offer...
+You might like AHK, I use it for hotstrings
+
+For example, if I type into a cell (it's a vertical bar, not an L, i use it at the start of all of my hotstrings, just personal choice)
+
+|ife
+
+It immediately gets replaced with
+
+=iferror(index(,match(,,0)),"")
+
+with the cursor blinking in the first argument of the match formula
+
+I find it really useful for printing longer formulas that I'm often using.
+
+Hope you find it interesting, cheers
+
+Thanks! Yep that's what I'm trying to get in the ropes of. Wow 20 years! Well, in that time, did you notice substantial difference (even just in comfort and ease) with the equipment that you used or not that much? The Thinkpad has a great keyboard especially for a laptop but I was thinking of getting something else for when I am plugged into the monitor for dual screens as I feel that I can do a lot better than what I have now to use for that. 
+Create a table, for those of us who never use tables. 
+Also alt+n+v 
+Lmao. This one amazes people at work all the time. "Wait wait, how did you do this so quickly???"
+Sumproduct is surprisingly powerful 
+Along the same lines, SUBTOTAL has made many a person happy in my office. "Wait, the numbers update based on my filter criteria?!?"
+And make all your fonts Rockwell Extra Bold.
+
+Seriously though, adopting a personalized formatting touch is very good advice.
+Changed my life when I discovered this! However now I mostly use a table, as I frequently have formulas to fill down in my data source anyways.
+Can you explain this one? I don't quite understand. 
+Go To Special - Blanks > then control D. Money combination!
+Thanks so much for reminding me about Lynda.com. I was a subscriber before it got bought out by LinkedIn - back when it was actually Lynda running most of the tutorials. Used it to get myself into HTML out of boredom (Year 7/8 kid). A decade later, and I had completely forgotten about it. It is really good and glad to see the site has expanded so dramatically across other disciplines yet seems to have retained its quality and integrity. 
+
+Not applicable to most but if any rookie coming across this later: check with your university or if you know someone close enough at university. My school offers all students access to the premium subscription (costs like $400 a year or something) as does my brother's uni (both Australian but seems like a lot of schools have negotiated an agreement for students. 
+I just found Ctrl + Shift + _ the other day removes borders, broadly not super useful but I have used it a lot more than I thought I might. Ctrl + Shift + = is a game changer though. #autosum4lyfe
+The same as vlookup. Just much much faster.
+Same logic as vlookup but omnidirectional. So you can reference on the left and lookup on the right and vice versa, reference below and lookup above and vice versa. It's vlookup and hlookup in one.  
+As for why it's faster it's because it's non-volatile which is much more efficient for large spreadsheets of data. 
+My absolute favorite scrip on ahk is stupid simple, I set the buttons on the side of my mouse to copy for the back and paste for the front button. In Windows I believe they are really only used as back page and forward page on browsers which I never used. However copy/paste is a 100+ times per day. 
+The equipment? Desktop keyboards haven't changed much in 20 years and I much prefer those to laptop keyboards. The numeric keypad is pretty useful when typing lists of numbers. Dual monitors are a requirement for a desktop setup but annoyingly, you can only have 2 spreadsheets open at once if you open a second instance of Excel. I have a Mac at home and using Excel on that (when I'm so used to Windows versions) is quite frustrating 'cause the common shortcuts are pretty much all different! F2 edits a cell formula on a PC but on a mac is Ctrl-U. What is that about? Meanwhile F2 is not used for anything.
+Definitely get a mechanical keyboard for your workstation. Also don't forget to swap the function and ctrl key on your ThinkPad, drives me crazy. 
+The amount of time people spend manually coloring alternative rows. #NoJustNo
+You can set how a cell is formatted based on certain rules. Some of the accounting formats allow you to display negative numbers either as red or in parentheses while positive is black. Other options allow you to format phones a certain way as long as the number of characters is correct. 
+
+Setting a custom format of ;;; literally tells Excel NOT to display nothing. The only way to see the value is to click on the cell and look at the formula bar.
+I think alt+= also autosums 
+Also you don't have to go from left to right with index match 
+I would qualify the "much faster" by saying only true when you're doing a long list of vlookups
+Not just faster, but much more flexible.
+> it's non-volatile
+
+what does this mean?
+I like that! I'm trying to write a multiple copy / paste right now. I have a hundred or so entries (rows) in excel with a fair few columns of different details. I have to copy each cell into an online form, which involves copying a cell, change to browser, paste, change to excel, copy next cell, change to browser, etc
+
+I'd like to copy the row entirely, hit my hotkey for paste and it pastes each cell intermittently with sending Tab to move to the next box.
+
+Great idea! Do you mind sharing the script?
+It looks like multiple instances of Excel was fixed in Office 2016, although I don't know about with Macs.
+Irritating AF as Excel is one of the only things I learned, and have used more, on Windows than on OSX. However you can, through keyboard preferences, add and change keyboard shortcuts for any function available through a menu. Most (but not all) of my muscle-memory kb shortcuts I now have set the same on OSX
+Yep I'm in the same boat. My role is scheduled out to be 2 months then a month break because I've still got a final semester back at uni and then back at the firm thereafter. Because of this, I've been feeling like "wtf do I do with this Mac" and whilst I still love it and prefer it for general use, I'm super keen to jump back onto Excel and its just irritating especially for someone who is already confused. Actually, I'm in the very process and waiting game for my Mac to boot up Windows at this very moment. Never was even remotely interested in that function that osx has until now. I guess I decided that taking this one annoying step is worth it because of all system incompatibilities out there, Excel on the Mac must be one of, if not the, worst. Bit like watching Batman without his superpowers. 
+Mechanical keyboards are for twenty-thirtysomethings doomed to repeat the inadvertent mistakes (because it's all they used to have) of their parents but this time even more dumbly, by actual choice. It's the same ridiculous current gauge of laptop keyboard "quality" in terms of an immovable baseboard. They're an ergonomic disaster but they tick the current geek boxes. 
+
+Stick to a laptop style desktop keyboard - and don't hammer. 
+Got it. What do you use it for though? I'm not sure if I see where I could personally take advantage of this formatting. 
+You are totally right, my auto sum adidas a column or row, also a game changer, but alt = is what I was thinking of 
+Volatile functions are functions that recalculate whenever another cell changes/Excel recalculates, regardless of whether the changed cell actually affects it. Under light usage, you don't notice this but when you have hundreds of VLOOKUPS in a massive spreadsheet and you change one cell you might notice the slowdown. OFFSET is another volatile function.  
+  
+*extra:* For people in finance (not sure if you are, but good for everyone to know anyway), you will most likely notice these effects when building spreadsheets using large amounts of Bloomberg data through its Excel API, where the formulas include references which are affected by volatile cells. A seemingly never ending cycle of #N/A Requesting Data everywhere. 
+Not OP but I assume it's this.
+
+Copy    
+
+    XButton1::
+    WinGetTitle, Title, A
+    IfInString, Title, Microsoft Excel 
+ 	{
+    send ^c
+    } Else {
+    Send {XButton1}
+	}
+	Return    
+
+Paste
+
+    XButton2::
+    WinGetTitle, Title, A
+    IfInString, Title, Microsoft Excel 
+ 	{
+    send ^v
+    } Else {
+    Send {XButton2}
+	}
+	Return    
+
+Might have to double check the if in string line, this was adapted from a different script I use and I'm not sure how it handles spaces.
+Nevermind found it!
+
+    XButton2::Send ^v
+    XButton1::Send ^c
+Lol what are you rambling about? How are they an ergnomic disaster?  What is a mistake about them? 
+Thanks! I am in Finance and use excel a fair bit. Just never had heard the term "volatile functions".
+You got it! 

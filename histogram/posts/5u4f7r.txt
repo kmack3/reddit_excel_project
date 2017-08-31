@@ -1,0 +1,100 @@
+What are the best 'advanced' skills to know for an Excel test job interview?
+These posts always make me question my own skills.  I have been thrust into the position of Excel Guru by my data-obsessed and data-extremely-knowledgeable boss.  I do prototype reports for a BI tool we sell.  After reading these comments, I never know if I should feel incompetent, or feel that everyone here needs to finally move their pet project to SQL. 
+
+
+I'd try to find out what's on the test, but it probably won't even be that advanced. To me, invaluable intermediate skills are array formulas, Pivot Tables, having a solid understanding of how time and dates work, and knowing how to set up data properly (columns for fields, each row has a data record).
+
+But what I see people doing at work is stuff that's a bit more common and a bit less advanced. So I would make sure I could do all the following:
+
+- Import data from a .csv file  
+- Fliter and sort (multi column)  
+- Master both VLOOKUP and INDEX MATCH (in case they force you to use VLOOKUP)  
+- If they throw a capital-T Table at you, know how to handle it  
+- SUMIF/S and COUNTIF/S  
+- Subtotals (don't need the much anymore, but who knows)  
+- Make a column chart, and a scatter plot
+
+I'd check out ExcelIsFun's [Beginner to Advanced playlist](https://www.youtube.com/playlist?list=PLrRPvpgDmw0nh4BBxqjcsnbB4ME4JjzfJ), in order, and just stop when you run out of time.
+Can we just make this question a sidebar by now?
+Over the years, I find just being competent at pivot tables and vlookups would be great.  From both interviews and the job itself. I had a n issue with IF formulas the other day. I just came here on Reddit for help! 
+Boolean SUMPRODUCT, AVERAGEIFS, SUMIFS, COUNTIFS, INDEX/MATCH, V/HLOOKUP, Charting, removing duplicates, conditional formatting, sorting, filtering, array functions, pivoting, absolute referencing, INDIRECT, DataTables (What-if analysis), simulating/iteration/solver.
+
+If finance/accounting NPV, PMT, IRR, XIRR, DAYS, DAYS360, EDATE, MMULT, RANK, CORREL, STDEV, VAR, NORMINV, 
+You will be fine. Learn maybe how to use the macro recorder and you will be better at excel than most candidates.
+Make sure your values are always the same such as it's 1 or and not one.  I have had to go through and fix coworkers entries, so make sure it's standard 
+I had an interview recently and the question asked me to create a formula that would count the number of times a cost was over $100,000 and then a second formula just to sum those.
+
+Basically needed to know count if and sum if formulas.
+I think the term advanced is relative. At my old job, my coworkers called me the "excel god" because I knew index match, sumifs, conditional formatting, and how to use basic recorded macros.
+
+I personally don't even consider that advanced because I know how much more there is that I can still learn and apply.
+
+I work in tax so this is just my two cents. But some analysts and finance peeps can do really high level work that is way above my league.
+
+ 
+Hear that. I'm a supply chain manager but started out as an analyst for a few years and still do most of my own analytics. 
+
+If you can combine excel skills with some SQL programming, data transformation like powerpivot and sprinkle in a little DAX/VBA you're leagues ahead of most people in the office except for maybe your specialist data analysts. 
+I'm a lead analysist at my co I've been moving everything to SQL why the hell do we stay on 6k row spreadsheets
+Thank you!  This really helps.
+[deleted]
+Just curious, why do you add MMULT in there? What would the application be?
+Thanks!
+Use Azure SQL Databases. They are in the cloud and require no maintenance. It's cheap and low latency
+What's analysist. 
+Ok. For arguments sake of "advanced" terminology.
+
+
+• Multiple Condition Lookup - CSE Index/Match or Boolean Logic SUMPRODUCT
+
+• Cascading Dropdowns Using Named Ranges - Combination of INDIRECT and data indexing
+
+• PowerPivot - DAX language
+
+• PowerQuery - M Language
+
+• ODBC (Office Database Connections) - data connections, refresh events and connection behaviors via SQL
+
+• SQL - Microsoft Query
+
+• Data Visualization - in conjunction with PivotTable connection link slicers and general form or activeX objects
+
+• Conditional formatting based upon relative formula locations
+
+The very basic's of a basic for a solid 4/10 Excel user - http://itsnotaboutthecell.com/about/
+I added that mainly for Accounting Or Finance type roles, where you would need array-wise matrix multiplication for portfolio theory within a risk weighting scenario or sector weighting scenario
+A bad misspelling of analyst
+..../s?
+Can't use excels built in functionality properly for data construction and extraction, so turns to esoteric solutions that over-complicate what should be a simple process of extracting useful information from a data-set, then tells normal users that they can't use excel.
+I take it all back - Learn VLOOKUP and we'll consider you the grand master!
+Data table construction, date-coding system, Index(match), Sumifs, countifs, pivot tables and dashboards.
+
+These are the bread and butter things that most analysts/managers need.
+
+Anything beyond that and your getting into data management and that is a specialist field where access or SQL tables are better suited.
+
+
+Thank you!
+They asked for "advanced" skills. I guess if I was going to re-read this post it would have been better to state "What are the best skills to know for an Excel test job interview" - I would certainly see where your argument comes into play.
+
+
+If you showed up to a job interview and the team was already deep into the M-Language or heavily involved with VBA (or even Python for that matter) and considered your "advanced" skills to be that of knowing a VLOOKUP as a hiring manager that would be visible very quickly that you are not the right candidate for the position.
+...and I wouldn't want to work for a company that needs people to work with VB in excel because they should be using a database application at that juncture.
+
+Like, who uses Excel as a core database software? It has a data-cap for a start and calculation issues later down the line.
+
+It recalculates everything that links to conditional formatting, it recalculates anything linked to a volatile functions like =today(). It is not appropriate as a platform if you are storing bulk data and want to run a proper analysis beyond trending a single year in terms of macro finance.
+
+Sure, excel is great if you want to store your data in a query via access and import the query results into a pivot table, that's certainly more sensible as a business use for Excel, but storing bulk data?
+
+Take my banking transactions for a three year period as an example.
+
+I have 1200 rows and 17 columns of data to get the splits I want, which is fine for just me and my needs but if I was collecting data for a company with that methodology, that would need to be 3 columns per table and related tables in a proper SQL database or if not that large, and access database with a proper model, because 20400 cells for three years for one person would mean that I would hit the Excel cell limit after 100 people. 
+
+That's not suitable for a business to be working with.
+
+If you are using Excel as a transformative piece, like transforming one document format (An invoice) into another document (A shipping bill), then I guess it could be useful to know VBA or esoteric things like that, because you can strip data out in a very tailored way, but formulas can do similar tasks without overwriting data, for one and for two... The source data should always be preferred over an output. As in, use the same data entries that pulled from the database to generate an invoice, to generate the other documents. That way your not creating a huge problem tracing back to the source and engineering possible transliteration bugs into your system..
+
+
+Either way, if you are at the stage when Excel is becoming Visual Studio, it might be wiser to use Visual Studio.
+Who said anything about the way people store their data? I love the enthusiasm but I'm missing the context.

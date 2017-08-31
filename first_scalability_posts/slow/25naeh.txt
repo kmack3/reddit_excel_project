@@ -1,0 +1,51 @@
+slow
+25naeh
+Excel 2013: Why is it so slow? Alternatively: Why am I so slow?
+
+Hi Everyone,
+
+The office updated to Excel 2013 the other day and I find it so slow, like sit and twiddle my thumbs while it calculates a vlookup slow.  If I use an array formula forget about it, I might as well leave for 20 minutes.  I am running Windows 7 and I believe my computer is newish (corporate computer) upgraded within the last year or two.
+
+I have disabled hardware graphics in my quest for speed.  As I was typing this I had ran an array formula accross 80,000 rows of data.  The next column over I tried the same thing with a vlookup and excel crashed.  Please help.
+
+Signed,
+
+Losing my mind this work should take me 10 minutes not all afternoon.
+
+
+-------------
+It sounds like you have either a unstable installation of Excel 2013 or your hardware is pants.
+
+I've been using 2013 fine with ~100k lines of data and the wait time is in the seconds.
+-------------
+maybe the computer is old. i switched computers and my macro went for 10+ minutes to less than 2. both had i5 processors
+-------------
+[deleted]
+-------------
+Specs are really good! No reason what-so-ever for the hold up based on hardware.
+
+Regardless of what you're doing, it shouldn't take 10 minutes to run. Sounds like a corrupt installation problem. Can you try on another machine?
+-------------
+Agree, these are good specs.  I run XL2013 in a VM on Linux, and have no problems.  Install's probably whacked.  Have you checked to see if you have any add-ins installed that may be hindering performance?
+-------------
+[deleted]
+-------------
+[deleted]
+-------------
+Hmmmm, well in that case the alternative is to switch to VBA!
+
+I think the formula is re-calculating each time it calculates one row, so it might be re-calculating once for each row you have the formula in.
+-------------
+yeah, about arrays formulas with a data set like that.  Good luck with that.  Arrays are good, but when used like that can cripple Excel (as you're finding out).  Excel's great, but it too has it's limitations.
+
+Any way you can convert to non-array formulas?  Or use VBA?
+
+I'm guessing the workbook started off small, then grew overtime? 
+-------------
+[deleted]
+-------------
+Ahh, I missed the part about going from 10 to 13.  Honestly haven't spent much time in 13 yet, because we're still using 10 in production.
+
+Could you use add a couple of non-array formula lookup columns to your dataset, then have another column pull from those lookups?
+
+

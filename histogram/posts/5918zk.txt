@@ -1,0 +1,201 @@
+Trying to automate my grocery list each month, last piece of the puzzle.
+[deleted]
+So you made a Database. Not a Data warehouse.
+
+Excel relies on infomation inputted to be repeated and usually it's extracted in report style. There are always exceptions to this rule for example Excel generating reports to Powerpoint, however, even these exceptions stem from a Datawarehouse.
+
+###DataBase 
+
+This is basically a set of Normalised tables linked to/via Key IDs (Normalised means no repeating data ever!). 
+
+But, they allow you to create a whole new data warehouse based on UI (user interface) input. As you select options it populates a table based on the secetion, creates a record and stores the combined data in a warehouse. which can be Exported to Excel to make a Pivot report.
+
+These new rows can have repeating data because they are mapped to an single Key ID.
+
+*E.G. of an ID table with no normalisation*
+Food table will have eggs mapped as lets say ID 1. If you input eggs again at ID 264 there will be a conflict. 
+As now in the drop down when you search for eggs there will be two seperate results (mapped to two ID's).
+Using the golden rule of PAD (People Are Dumb - Aka they won't tell you about a problem until it's too late)
+By the time you see the two conflicting ID's there will be hundreds if not thousands of inputs to both ID's and therefore no way to optimse without compromising data - (deleting records)
+
+
+###Excel Database
+
+Excel doesn't have Database functionality as default so we have to MAKE database functionality from the ground up. This can be beneficial as there are no set rules you can patch over Non-Normalised data without compromise. However, searching can be F---ING NIGHTMARE if you don't plan it properly.
+
+Pad and Paper at the ready you have to come up with how you want your data handled.
+Do you want it based on food, day, stock, best before??
+
+And let me tell you this for free "leftovers" are an **anomalous term** aka don't mean anything in terms of use. When you say left overs you mean anything you slung together in a pan that you could see. Only issue is the database can't predict that information even if you were to say, Idunno make a leftover table and setup the following population criteria:
+
+     if(Stock=1,Leftover,"")
+
+There are that many options how is the database supposed to know you ate the last carrot and not the last onion?
+So anomalous terms are out unless you can ID them!
+
+###TL:DR
+
+As you use lets say 6 eggs the database has a seperate table for eggs in stock called Stock_Eggs and can count how many times an egg is bought in this one table.
+
+In the UI 100s of users could pick egg, but, as there are only 6 eggs, only six users will be able to buy one each and as databases are FIFO based (First in First out) on purchase 7 there WILL be an error or Preferably it won't show in the drop down list but you aren't using a database. 
+
+As this is Excel you need to create that error yourself or you are going to have a bad time, because, a data warehouse only stores info, it doesn't utilise said info.
+
+So make a command via an if function to "buy" more eggs at egg 5, it would also help to have an error on use if =-1 
+
+Welcome to Excel Database Headache 001 *little ID joke :D*.
+
+
+###STL:DR How does this help you.
+
+
+Well Excel as mentioned is a Data Warehouse however with the use of tabs & formula you can simulate a database in one workbook.
+
+###The Layout
+
+Each table should correspond to a food this will be your "ID" for that food
+
+Now create a table/tab and add titles for Purchase date, best before, total uses etc. Even a helper column which detects the latest stock which would be a formula to check previous best before and if in date add to current.
+
+Instead of writing a formula for you I will put descriptive bits in ' other wise it will be too abstract. 
+
+     =If(or(today()<Eggs!'best before', 'Use-CountIf' < 'totalstock'-1),"in stock", "need to buy")
+
+[This may help when adding uses to your interface](http://www.contextures.com/excel-data-validation-add-tables.html)
+
+In any case I would look at this as what it is "A Database" and start from the ground up with that in mind other wise you will have a mess on your hands before macros!
+Here's what I would do.
+
+Ingedient structure:
+
+Recipe, Ingredient, Quantity (keep all qty consistent)
+
+Use your random number generator to get a list (VLOOKUP/INDEXMATCH to pull up the recipe from the number).
+
+Macro to filter ingredient list by the recipe you will be eating.
+
+Macro copies and pastes filtered ingredients to new page and remove duplicates.
+
+Macro uses SUMIFS (or SUMPRODUCT) with the recipe and ingredients to sum up Qty.  That way each ingredient only appears in your grocery list once.
+Try using index match I had a similar problem (different amount of results for the same thing) and it solved sadly it is more than a year back so I don't have the exact code
+So, I have mocked a file for you and I think I have a solution. Might not be the prettiest one but it works.
+
+I can't upload right now (at work) but will try to at home.
+
+Maybe you can recreate based on my description.
+
+**Sheet 1 - Menu**
+
+* Generate recipe for each day
+
+**Sheet 2 - Ingredients**
+
+Use the following columns:
+
+* Recipe - the title of a recipe
+
+* In use - a match on your menu-sheet to see if this recipe is in play this week. A match should yield you a result like "Yes", otherwise blank
+
+* Ingredient - self explanatory
+
+* Amount - self explanatory
+
+* Unit - what unit this ingredient will be in. Need to the same for all recipes using this ingredient
+
+**Sheet 3 - Shopping list**
+
+Keep full list of all ingredients mentioned in your recipes, no duplicates.
+
+Use columns:
+
+* Ingredient - all ingredients
+
+* Purchase - a sumifs to summarize all occurences of an ingredient with a "Yes" in the in use column
+
+* Unit - vlookup on your ingredients list to get the correct ingredient.
+
+Then just filter out all zeroes.
+
+Edit: [Uploaded screens](http://imgur.com/a/q1M5m)
+Can you share your spreadsheet? Or at least a sample so we can see how its formatted 
+Pivot tables might work. One for each meal, perhaps. It depends on how your data is structured.
+You'll definitely have to share this once you're done. I've had thoughts about putting diverging like this together. But in terms of finding the end of the list, the End(xlDown) function in a macro might be what you're looking for. Here's a link explaining it
+http://www.excel-easy.com/vba/examples/from-active-cell-to-last-entry.html
+I think based on your screenshot this could actually be very easy.
+
+- First, you need to split the recipe quantity into a number and a unit in 2 columns and they should always be consistent (e.g. water should always be measured in cups). To do this effectively, create a new tab with a complete list of ingredients in ColA and units in ColB and use vlookups and dropdowns on the recipes tab.
+- Then,next to each recipe, add a new column called "Selected" or something. This will use a lookup of the ID number to the list of selected recipes for the week and if that recipe is chosen. Basically, do a MATCH for the ID number and if ISNA()=TRUE (not found) then selected = 0, else selected = count of matches (so if recipe is selected more than once, you can get the correct quantities).
+- Now on the shopping list, you have a list of ALL the ingredients possible and next to it you have an "Amount to Buy" column. The formula =SUMPRODUCT(--(ingredientonrecipetab=ingredientinlist),--(selectedcolumn=1),recipequantity).
+
+This will give the total quantity needed for all recipes selected for that week.
+
+Edit: I made a quick mockup to demonstrate.  
+[Screenshot](http://i.imgur.com/rdMUvQv.png) (formulas in grey, manual entry in blue)  
+[Workbook](http://s000.tinyupload.com/?file_id=05859178775385845139)
+
+To make it simpler, I combined the *All Ingredients* list and *Shopping List* into a single list. If this was on a different tab, you could then use a filter to just show ingredients that have quantity >0. I also used named ranges for the ingredients and lookups to make it easier to follow the formulas.
+Can you let me know what solution you end up using? I want something simple for dinner planning and may be interested to see your workbook. Thanks
+Well again right now it picking meals for me is just a random number generator. If someone let's me know an easier way than hand programming a Macro to do this, then you'll see it. If I have to just go build one, then I definitely will!
+
+The way I plan on structuring it, if I have to build a Macro is with a "start" and "end" ingredient in each list. So when it's pulling the ingredients for "Crock Pot Gluten Free Lasagna (girlfriend has Celiac's)" It'll go to the "start" section of the list then go to each ingredient until it gets to "end". From there it'll look up the next meal, go to "start" look up the ingredients till it gets to "end" and so forth. 
+
+
+I am also interested in seeing/getting this grocery list when it is finished!
+This is quite the read. Thanks for the thoroughness.  I'll dive into this solution this evening. 
+Never heard of Sumproduct before, but I guess that is just a google search away to learn to use it. Let me try this. Thank you!
+I've been trying to upload some fancy screenshots. Imgur log in is giving me some trouble. I'll reply to this again once I have them up. 
+So here is a snapshot of my Breakfast Database, it goes down a bit further than what you see: 
+
+http://i.imgur.com/M1lE2cE.png
+
+On the far left you'll see a plain number. It's the "ID" assigned to each Meal. I separated everything into a unique column to help me pull information more easily. I separated ingridents, which will need to be purchased for each individual meal, and seasoning, which I won't need to buy every time I want to make a meal, to make it easier to pull a true ingredient list. 
+
+
+This is the structure of the meals being generated
+http://i.imgur.com/WY6dLH0.png
+
+On the far left you'll notice the day of the week, followed in the next column with which meal of the day, followed by the name of the meal. The name of the meal is being picked by the random number generator in the next column. It searches for that random number based on which meal of the day it is. 
+
+I have a tab for "Ingredient list", but have gotten nowhere productive with it. 
+About to post screen shots of the structure to the comment above yours. Internet is just being a dick to me. 
+
+When you look at it, if you could answer this question. I'm not sure how to use Pivot tables to automate the process, though I like the idea. Would I have to manually tell the pivot table which meals to showcase, based on the list, or would I be able to have the pivot table auto update based on the results of my "random meal generator." 
+Looking over this solution as well. Thank you. I'll update you on it. 
+Yeah man, this is kind of a multi evening project for me so if I you haven't heard from me in a bit just remind me. 
+I wonder if Access would be better suited to doing this? 
+Python. Import the Excel spreadsheet, pick however many meals, grab the ingredients for them all, format it nicely, convert to PDF as a shopping list and save to your desktop.
+In column B you could probably add "End" or something similar to signify the end of the recipe in the last row.
+
+Then using MATCH(ID,B:B,0) you can get the first row of the recipe and use that first row to find the first instance of "End" and know the exact amount of rows to copy paste the recipe in front of you.
+
+Just playing with an idea out loud, I'm testing the concept now
+I just looked at your screenshots. Pivot tables won't work on data in that structure. 
+Any chance you've sorted this out? I'd love to see it, but totally understand if you don't want to share. Thanks!
+ That's what I thought
+But I see now that this still leaves the difficult solution of parsing the data into a list with other recipes. Maybe it can still open previously closed doors for other solutions though.
+But your recipes look yummy!
+Damn... If I restructured the list of ingredients horizontally instead of vertically it would work, wouldn't it? 
+Haha thank you! 
+No, your problem is that you split up the recipes into unique areas, rather than have one table that lists all ingredients.  if you want to work with that, just make the first column the name of the recipe, or the id and repeat the entry for every line of ingredients that belongs to this recipe.
+
+This project would definitely be simplest with macros,  but if you do the big list,it should be possible to do it.  you'd want to find the first line that hits the name of the item and get that row. Then find the first row after that where the item is not called the same and take that row -1. You can then use this combined row information to make cell reference using indirect and address.  Personally I'd use concat for that since it would allow you to output one line with all the ingredients needed. 
+
+Vba would be better if you want to elegantly add up the overall amounts you need to shop for each item. Not saying that's impossible with formulas,  but it would be messy.  
+
+If I were to address this in vba, I'd aim for:
+- input of random meals to create, potentially broken down by category.  
+- Output of list of meals with hyperlink to full recipe for convenience 
+- Output of shopping list per item, background or foreground 
+- Combined output of shopping list,  categorised by items.  Potentially sub category for type of item 
+- possibility to adjust amount of people per meal either on setup or on output
+If within your ingredients tab, you structured everything in a single table, you could use a pivot table. How you would get the pivot table to show data based on a list is another question.   
+
+Sample structure:
+
+Frittata | Eggs
+---|---
+Frittata | Spinach
+
+The columns would need to be labeled..."recipe, ingredient, quantity...etc." 
+The reason I didn't label the columns was because I didn't want the labels to get in the way of me pulling cell information. I guess that may not have been relevant
+ 

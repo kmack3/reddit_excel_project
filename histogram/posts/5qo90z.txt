@@ -1,0 +1,88 @@
+Gantt chart with specific requirements
+So some questions: Are you open 5 days a week or 7 (or rather do we count weekends/holidays?). Based on your 2-10 example, don't count weekends.
+
+Is one sheet per student okay, or you do prefer a big old database of tables where you can filter out a student? 
+
+Do you want the schedule predictions to change based on the student's pace? If they complete courses in half the time, do you want to assume future courses will be done in half the time as well?
+
+*edit*: so I think /u/Svarpho beat me to it, as I made all the same assumptions :) To give some variety, I added a quick bit, so if the student has half a day left or more, it's assumed they start the next class that day. It still can be off by half  day, tough. My example sheet, [which looks like this in Excel](http://i.imgur.com/z7nmVg0.png) is available here on Google Sheets (download as Excel): `https://goo.gl/GoGhEk`.
+
+
+
+Super quick mock-up can be found here:
+http://www.filedropper.com/ganttcharttest_1
+
+did some assumptions:
+* 5 days a week
+* only one student, so no table in the background it feeds data from, but this can of course be added with some lookup formulas
+* the next start day is the day *after* the finishing day of the last course, so it currently only counts whole school days of 3 hours
+* when you add an actual end date the chart will adjust accordingly
+
+Just to give you an idea of a solution, this would then of course need to be refined etc. but it is a starting point :) 
+Ok... you have a number of different things going on here. You might be better off using a project management program that's more tailor made to suit things like this. 
+
+However...
+
+>  if students come to class 15 hours a week like I said, and a student starts a 30 hours class on 2017-01-30, I want the chart to show that it should be done by 2017-02-10
+
+You'll want something like the start/end dates of all the classes in a separate table first, and for the gantt chart all the dates in a row along row 1. On row 2 you'll have the first class. In each cell along row 2, you'll need compare the date of the corresponding date in row 1 with the class dates. IF the cell date is greater than the start date (It'll use the excel date serial) AND less than the end date, THEN make it an X, if not, make it "" (Excel sees quotation marks as text, so two quotation marks will give you a blank cell. Repeat that for all cells along that row and hopefully the dates that fall outside of the start/finish times should stay blank, and you'll have a lovely row of X's that'll lengthen or shorten if you alter the end date of the class. 
+
+> And I want the chart to go on for all the 26 classes they need to take.
+
+Repeat for each row ad infinitum and change the reference dates to class 2,3,4,etc and you should achieve the same effect for each corresponding row.
+
+> I need to be able to say ''actually this class has now been finished in 15 hours instead of 30'' and for all the following classes' end dates to readjust accordingly.
+
+If you want all the dates to shift then you'll want to add a row/column to your table for the number of days that equate to 30hrs work. Then each subsequent class will need to relate to the class before. So if the first class is 30hrs over 4 days, then you'll need to have the end date be the start date plus 4. 
+Then the second class start date will be the end date of class 1 plus 1 day (assuming they'll start the next day). The end date of that is the same as before, the class 2 start date, plus however many days class 2 takes. 
+
+This is a bit rough, and I'm sure it could be improved. Normally I'd include some formulas for you but its home time. Good luck! Hope this helps
+
+Edit: if you want to make it colourful, change each X to a 1,2,3,etc and conditional format the table so that if the cell equals that number, then format it as red,blue,green, etc.
+
+
+If you want a proper Gantt chart you could use a project tracking program. Microsoft Project would be the Windows solution, but ProjectLibre is a pretty good free version.
+
+How will students and other teachers access the planner? Excel is handy if they each need to open it individually. Also, if you don't need too much more functionality (resource planning, etc) that Gantt software provides then Excel will do the trick with what the other folks have posted
+[deleted]
+Thank you ! Your sheet was great; I actually started working with it at first but I'm a big poop at Excel so I encountered a couple of problems trying to change things and I kept fucking it up :( So I went with /u/Svarpho's because it was a bit more simple. But your sheet is awesome and if I was better at Excel'ing, I'm pretty sure the student thing would've helped a bunch. Maybe my colleague can remake it in Svarpho's sheet. We'll join all of our powers <3
+Thank you so much ! Wow, I wasn't expecting someone to basically do all the work for me haha. This is basically 90% of what I needed. I have a few things I need to switch around but my colleague's better than me at Excel so she'll probably know how to change them.
+
+This was so helpful; I'd like to thank you. You literally saved me hours of work. Instead of wasting money on Gold, I'd like to make a $20 donation in your name to the charity of your choice, if that's cool with you. I know it's not a lot but I'm a bit short on cash :( Just let me know which charity you'd like !
+
+Again, thank you so much !! I'm so happy !
+Solution Verified !
+Thank you for your very detailed answer ! I appreciate all the pointers ! I went with /u/Svarpho's sheet since he basically made it for me (thank you!) but I'm happy to learn how I can do it myself in the future. I'm sure I'll have other projects in Excel and this will definitely be helpful. I'm a big poop when it comes to Excel :(
+Microsoft Project would have pretty much solved all of our problems, but we'd have to buy it for all of our students which is just not feasible financially (they all have their own computer, not school computers). I went with /u/Svarpho's sheet and it's working great ! :)
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+No worries - it does use structured tables, which are a pain in the ass to deal with, I should have kept it simpler :) I only used them in case you requested a database type solution (all students in one big table).
+You are most welcome! Just for fun I played around with it a bit more and here is a bit more fancied up version, you add the student data on the "Data" sheet, then to get the unique names of each student there is a pivot table there, so if you add students you would need to right click on it and press "Refresh", but that can also be done via a macro automatically as well. 
+
+One thing to keep in mind is the date timeline on the chart, of some reason it will start earlier in the year so you will have a lot of unused space in it, so I have changed it manually. To do it via an macro is really easy, I can send you over the code if you wish.
+
+Here is the revised version: http://www.filedropper.com/ganttcharttest_2
+
+Thank you for your kind offer on the donation! However I helped you out mainly because it seemed like a little short fun project to do (I have never done a Gantt chart in Excel before!) and also I just generally like to help people :) 
+
+But also I do believe that education is super important in making this world better! So if I have helped you guys spend more time on teaching/improving for the students and less time on administrative things then I'm more than happy with that as a reward :) And also I learned something new, which is always a great reward in itself :) 
+
+If you encounter any issues with the file, don't hesitate sending a message! 
+
+All the best!
+
+You have awarded one point to _Svarpho_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Glad someone got you a solution! Project is definitely more than you need, and Excel is nice for its ubiquity. If you do want some Project-type functionality without buying it (maybe not for distribution to students but at least for your own work) then I recommend ProjectLibre.
+Wow, this is amazing ! Thank you so much ! I'm out today so I'll play around with it a bit more this evening and I'll report back (:
+
+You're the best !
+
+Edit : I had more time to play around with it and it's absolutely amazing ! This is pretty much everything we need. I might ask my colleague if she'd rather use Access and link our students' data since it takes a bit too much space in Excel. I'm sure she can do that. She's much better than me haha. Anyway, this is really awesome, I don't think we'd have ever gotten even close to doing this ! Thank you sooooo much ! :)
+You are most welcome! Glad to hear that it will come to use :)

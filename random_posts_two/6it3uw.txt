@@ -1,0 +1,49 @@
+6it3uw
+How to assign a value to text for the use in drop-downs
+I want to create a drop-down, but instead of the actual values displaying I want to display text that represent numbers.
+
+For example, I have created a drop-down for Apple, Orange and Pear. When clicking on the drop-down you see the names, but they represent 1, 2 and 3 which can be used in formulas. I tried VLOOKUP, and IF function but that didn't work.
+
+
+-------------
+I would think nested a IF formula and a helper column would work, but I would need more information.
+
+ =IF(Cell="Apple",1,IF(Cell="Orange",2,IF(Cell="Pear",3,"")))
+-------------
+This is one option.
+
+Depending on how many values you have, you could just have a text dropdown, then a vlookup from that text to a value. You would have to build the reference table first (unless you have one). You could return this value to a hidden cell, or formulate off of it.
+-------------
+I have tried this method, but it only displays the value. I prefer to display the text, but behind the text it "represents" a value. 
+-------------
+I don't know how to do this. Care to explain? 
+-------------
+Understood, but that is where a helper column comes into play.  Assign the value to a helper column to use in formulas.  You can hide the helper column(s) or put it on another worksheet.
+
+-------------
+Create a dropdown in cell A1
+[Create a dropdown](http://www.techrepublic.com/blog/microsoft-office/how-to-add-a-drop-down-list-to-an-excel-cell/)
+
+In another sheet, list your text in one column, and values in another
+
+    Apple     1
+    Orange    2
+    Pear      3
+    etc....
+
+On your first sheet, go to cell B1, and type the formula
+
+    =VLOOKUP(A1,Sheet2!A:B,2,FALSE)
+
+You now have the number in cell B1 that is referenced based on the dropdown
+
+FYI - Sheet2! is whatever you name that second sheet
+-------------
+Thanks, it worked!
+
+    Solution verified
+-------------
+
+You have awarded one point to _baineschile_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

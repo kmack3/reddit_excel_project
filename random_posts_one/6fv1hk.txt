@@ -1,0 +1,54 @@
+6fv1hk
+How can I link a shapes color in one sheet to the state of a checkbox in another?
+I converted a chevron smart art into shapes and I would like to change the color to green when a checkbox is clicked. How do I go about doing this? I tried to adjust code that would change a cells color but could not get it to work. Once I get one working I plan to duplicate it and make numerous of these chart 'trackers' to track the status (complete vs not) of multiple projects as steps of each are completed. When something is completed, the box will be checked, and in another sheet this will be shown via changing the color of the chevron (similar to dominoes pizza tracker).
+
+
+-------------
+You'll need something like the below for each checkbox. This will fill the area around the shape green. 
+     
+     Private Sub CheckBox1_Click()
+     ActiveSheet.Shapes.Range(Array("Diagram 1")).Fill.ForeColor.RGB = vbGreen
+     End Sub
+
+-------------
+If the shape is in the next sheet how do I go about adjusting the code accordingly.  I did get it to work when in the same sheet 
+-------------
+Add this line before the activesheet line
+
+     Sheets("your sheet name here in the quotes").Activate
+
+-------------
+Great! Thank you so much. I hate to ask one more clarification but if I'd like to make an if statement for whether the box is ticked or not so that when it is unticked it changes the color back to a white filler, how do I adjust what ive tried to make it work.
+
+    Private Sub CheckBox2_Click ()
+    If ActiveSheet.CheckBox2.Value = True Then
+    Sheets("Sheet2").Activate
+     ActiveSheet.Shapes.Range(Array("Freeform 4")).Fill.ForeColor.RGB = vbGreen
+     Else: ActiveSheet.Shapes.Range(Array("Freeform 4")).Fill.ForeColor.RGB = vbRed
+     End If
+     End Sub
+
+Really appreciate the help.
+
+Edit: In the code I put red but ideally it would revert back to being white, just wasnt sure what the code would be.
+-------------
+Change sheet names/object names as needed in the below. cleaned up the activate steps a little in this one. Should be a little more efficient. 
+
+    Private Sub CheckBox1_Click()
+    If Sheets("Sheet1").CheckBox1.Value = True Then
+
+     Sheets("Sheet2").Shapes.Range(Array("Diagram 1")).Fill.ForeColor.RGB = vbGreen
+ 
+     Else:
+     Sheets("Sheet2").Shapes.Range(Array("Diagram 1")).Fill.ForeColor.RGB = vbRed
+ 
+     End If
+     End Sub
+
+-------------
+Solution Verified!
+-------------
+
+You have awarded one point to _Knowakennedy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

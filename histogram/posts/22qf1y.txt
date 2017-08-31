@@ -1,0 +1,21 @@
+A function that uses Google Maps' API to find driving distance and time between 2 addresses
+Awesome, thank you for this. 
+Anyone looking for a pretty front end can download this: [Dropbox Link](https://www.dropbox.com/s/v26dn3jz6np80zk/Distance%20between%20two%20places%20%28Maps%29.xlsm?dl=0) (17kb)
+
+Make sure macros are enabled obviously
+
+Cool!
+This is cool. I believe there's a limit of ~10,000 Google Maps API calls/day.
+
+I use a plugin called CDXZipstream that also requires MS MapPoint. It costs $ but it's a bit better if you have larger projects. 
+this is so neato-burrito! 
+This is really fucking cool. Thanks! +100 for avoiding tolls...
+I can't get it to show miles. I changed it the word on line 25 above from "metric" to "imperial", but that doesn't seem to help. What am I missing?
+Have you tried running this code? It's not working for me. I'm a bit of an amateur with VBA - I inserted a module, pasted the code, and compiled. It said the 'surl=' paragraph was a syntax error. 
+to limit API calls for some geocoding stuff I started keeping a history and looking stuff up in the history first, then requesting a geocode only if necessary... I also used a named range to keep a tally of total api calls just out of curiosity.
+
+Keeping a cache of previous results on hand is also a huge speed boost for repeated calls - though since this takes traffic and new roads into account, you may always want live results - or datestamp your cache and auto-purge old entries....
+Ya it works perfectly for me, did you try my version in the link? What I did was copy and paste the code, then in a sheet I called the function, I'm on my phone so can't check it's name but I think it's =dis_and_time_2(cell1,cell2). Put the two addresses in cell1 and cell2. 
+
+Make sure your Internet is enabled and Google servers aren't blocked (like at work or whatever) Also save the worksheet as Macro enabled (xlsm). Other than that I'm not sure why it wouldn't work. Did you try change the "avoid tolls" or from metric to imperial? That's the only thing I could think would break that URL. 
+

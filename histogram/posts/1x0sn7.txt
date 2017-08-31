@@ -1,0 +1,201 @@
+VBA Macro code best practices?
+Avoid reinventing the wheel...rip off other peoples' code.
+Avoid using select command - if two lines can be truncated together, do so. 
+
+E.g. 
+
+    Range("A1").Select
+    Selection.Copy
+
+would become 
+
+    Range("A1").Copy
+
+Because it starts and ends with basically the same function, they can be conjoined. 
+
+Also, you can enable and disable screen flickering using 
+
+    Application.ScreenUpdating=False
+    'code here
+    Application.ScreenUpdating=True
+
+This speeds it up because you don't have to view the actions it takes. 
+
+Also, error codes are great when there is a chance it can go wrong. 
+
+
+    Sub Test() 
+    
+    On Error Goto Error
+    'code here
+    Exit Sub
+    
+    Error:
+    Msg (''Error occurred, try again'') 
+    
+    End sub
+
+
+It helps makes things neater. 
+
+Sorry if all this is formatted wrong, I'm writing from my phone. 
+
+And finally, if you don't know how to code it, record it if possible, and amend as necessary. You'll both learn the code and know that it'll at least get the job done. 
+Option Explict
+
+Use worksheet code names, not tab names or numbers
+
+Active{sheet, cell, workbook} are bad words.  Don't use them.
+
+Select is a bad word.  Don't use it.
+
+Turning off calculation will speed most VBA code up by a huge amount, but make certain your code exits safely and turns it back on under all circumstances.  Use On Error if you turn it off for a block of code to write to a sheet.
+
+Write smaller functions that perform discrete tasks rather than hundreds of lines of scripting.
+
+Explicitly type objects.  Dim MyObj as Object is rarely the best way to do things. The Variant type has a few legitimate uses where a loosley typed variable is useful, but objects can almost always be declared corretcly up front. 
+
+
+Probably something painfully simple and obvious but the first thing I teach anyone I work with is "comment, comment, comment". Especially when you're starting out. You'll forget what things are doing a lot more easily than you might think.
+
+My personal approach is to plan out the function/subroutine with a few comment lines first, for example:
+
+    Sub GetSalesData()
+    ' build data file path
+    ' open data file and parse
+    ' close data file and clean up
+    ' process data
+    End Sub
+
+...I then write the code between/around the comments, adding/removing where necessary.
+
+Even if I'm ripping off someone else's code, I do this.
+
+((EDIT for format))
+If you're working with a lot of data, consider using arrays for in-memory processing. It's much more efficient than doing something on a worksheet.
+
+In the same vein -- and also related to the tip from /u/instapunish -- read whole ranges into arrays at once rather than looping and write a whole array to a range at once rather than looping. 
+Not sure about resources to learn them other than practice and googling things but a few that I follow are:
+
+Make sure your subroutines and functions are placed into correctly labeled Modules.
+
+Every time you create a first macro for a workbook, the first things you should type into the new Module is Option Explicit.
+
+Also, learn good error handling techniques to really get the best out of your macros, as users can and will repeatedly break your stuff. Make it so they can't, or at least have your code report something useful to them and not some completely obscure developer error that you think looks cool. Give a code and a real description, with possible causes, as this will save you time picking up the phone if they have no idea what runtime error 1004 means. If they can find out what went wrong, they might solve it themselves by changing an input cell for example.
+
+Finally, if you think you'll be reusing your code again for something similar, build your code so it can be moved across workbooks, for example if you build something cool to show progress when a macro is running. Have it take inputs and need nothing else to run when you call it. This is the essence of good modular coding.
+
+Oh, and good luck!
+This might seem like a small thing, but follow the indenting conventions when you write your code.
+Most programming is educated copy and paste, wouldn't you say?
+
+And re-use your own code.  Modular FTW.
+To expand on this, .Copy should be avoided:
+
+    Range("A1").Copy
+    Range("B1").Paste
+
+Becomes
+
+    Range("A1").Copy Range("B1")
+
+And even better:
+
+    Range("B1") = Range("A1")
+
+Or if you want values only:
+
+    Range("B1").Value = Range("A1").Value
+
+You can also use .Cells instead of "B1" etc.  This is great for looping or dealing with columns in terms of integers instead of letters etcl.
+
+    Range("A1:A100")
+    Range(Cells(1, 1), Cells(100, 1))
+
+Then you have sheet references (using the activesheet is a bad idea usually).
+    
+    Set oSht = Worksheets("sheetname")
+    Set oSht = Worksheets.Sheet1
+    Set oSht = Worksheets.Sheets(1)
+
+Using this, you'd be able to target hidden sheets etc.
+
+    oSht.Cells(1,1).Value = oSht.Cells(1, 2).Value
+Thank you for the tips!
+Any opinions about using "ThisWorkbook"?
+That's great advice. I only have a half dozen macro applications and templates and I've noticed I'll sometimes forget exactly how/why I did something. 
+How do you read a whole range into an array at once? 
+For those just learning, this is great advice.
+This is absurdly faster than doing a for loop over a range.  Also an interesting snippet:
+
+    With Range("A1:A1000")
+      .formula = "=FORMULAHERE(B1)"
+      .value = .value
+    End With
+
+I find this pattern very handy when I need to do a lot of calculation on raw data that only needs to be calculated once.
+
+I agree that looping through ranges is best to avoid if possible.  I still do it depending on circumstances if the overhead isn't too high and it simplifies what I'm doing over working in memory though.
+Thank you sir!
+You can change a setting so all modules start with "Option Explicit" as default. http://easyexcelvba.com/chapter_2.html
+Are there indentation conventions unique to VB/VBA? Python has set me in the habit of indenting code the Python way.
+Oh, indeed!
+Please provide more information on what you mean by modular.
+
+Many thanks!
+Seconded on the setting the ranges equal to one another.  This saves a lot of time and keeps your clipboard clean.  I don't want to know how many imgur links I have accidentally copied into a spreadsheet during my career!
+Use it all time, typically when the code modules (or classes) reside in the calling workbook:
+
+     Dim wb as workbook
+     Set wb = ThisWorkbook
+
+I always assume users have multiple workbooks open.  
+    Dim arrSomeRange as Variant
+
+    arrSomeRange = Range("A1:Z1000")
+
+arrSomeRange is now defined as a 2-dimensional array with dimensions 1 to 1000, and 1 to 26
+Python *enforces* indentation of course, but I'd say it's more or less the standard that's used for VBA.   Any branching or looping block should be indented.  If, While, For, and With should trigger an indent for example.
+VBA is not indentation sensitive like Python (took me forever to adjust to Python because of this, thank god for decent IDEs).
+
+You can download VBE add-ons that can auto-format your code to suit your taste: [Smart Indenter](http://www.oaltd.co.uk/indenter/indentpage.asp)
+The general rule is to indent the code between keywords. Those keywords would be like Sub (name)...End Sub; If...End If: If...Else...End If; For...Next; With...End With, etc.  
+
+So the main code between the Sub and the End Sub should be indented. And you just keep indenting the code that appears between any keyword groups that you want to use in that code. 
+
+The only inconsistency in this rule that I've seen is in the Dim statement, which does not have and ending keyword (there is no End Dim). I like to use it flush against the left margin, based on some code i followed early in my coding life, although this seems to violate the rule of indenting under the Sub row. I've seen other people have an indent for Dim. 
+Here you go:
+
+* [Wiki](http://en.wikipedia.org/wiki/Modular_programming)
+
+* [Stack Overflow](http://stackoverflow.com/questions/1444221/how-to-make-code-modular) References Java, but still useful
+
+* [Technopedia](http://www.techopedia.com/definition/25972/modular-programming)
+
+* [Wiki - DRY](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+
+This should give you a good start.  Look into Stack Overflow as well - a plethora of information (both good, and bad, but community driven moderation to help separate the wheat from the chaff)
+I agree that ThisWorkbook is supremely useful.
+
+I don't know why you's rename ThisWorkbook though, it doesn't make the code any easier to read. It's no longer clear what's being operated upon.  If you have reused code that needs 'wb', it should probably be set up as a procedure that takes a workbook as a parameter.
+Exactly. But I think that it would be 0-indexed by default (so 0 to 999 and 0 to 25 when accessing its values), though I'm not at a computer to test it. 
+I've seen with statements where the contents weren't indented and I hoped that wasn't convention. Indenting just makes it easier to understand. 
+Thank you for the resources! DRY is great advice in any language. 
+Honestly, because I'm lazy.  I don't feel like typing "ThisWorkbook" all the time.  Using the "wb" convention is pretty standard in all my code, so I know what I'm looking at, any other coders can figure out through my notes, and how I structure the initialization of a procedure or class.
+
+If VBE had as robust as of an autocomplete feature as PyCharm (or one of the other hundreds of IDEs that have the feature), I'd be more inclined to use it.
+
+You would think so (I keep Option Base 0 by default), but when you set an unallocated array (in this instance arrSomeRange() ) to a range the lower bound is always 1, regardless of Option Base.
+
+
+Id assume you know about Ctrl + Space to trigger autocomplete.  What does that not do that other IDE's do?  The VBE isn't a great enviornment, I agree, but the autocomplete never bugged me much. 
+
+
+The more I use other languages, the more painful it is to come back it.  I miss such things as:
+
+* auto-indentation/code formatting (fixed by add-ins, but still not auto)
+* auto complete for code, variables, etc.
+* Code folding (honestly, this so helpful when reviewing code)
+* Sending code revisions to GitHub
+* refactoring

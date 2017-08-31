@@ -1,0 +1,33 @@
+6gi38b
+New to VBA, how would I translate this relatively simple pseudocode into VBA properly?
+Hi all, I was hoping I could get some help translating this into VBA language. I've never coded anything a day in my life but really want to learn for Excel.
+
+I have a worksheet of transactions. Each day has a few columns that look like [this](https://puu.sh/wgvhe/7c4761082f.png). What I want to do is search the 13 rows underneath 'Revenues' and 'Expenses' for predefined categories (i.e. 'discretionary', 'school', 'transportation', etc.). Once found, I want to store that category title in a String object and the adjacent value AND account affiliated with it.
+
+So for example, if I have an expense for school, it would look like [this](https://puu.sh/wgvpS/ef07951b33.png).
+
+Here is the pseudocode I've come up with:
+
+
+    Search(I1555:L1567)
+        	If(IsText(Current_Cell_Ax))
+	          	Store(Current_Cell_Ax)
+		      Store(Current_Cell_Bx)
+    AtEnd(generate worksheet listing each category, matching any and all columnB_x entries used)
+    End
+
+
+
+I've tried a pivot table but it wouldn't work due to me having blank rows some days. I'm also aware my pseudocode may suck. Don't fret about telling me this if I'm approaching this terribly lol, I'd really like to learn so I can improve.
+
+Thanks so much. :D
+
+**Edit**: [What I ultimately want it to report when I hit the macro.](https://puu.sh/wgvSU/12de273c13.png) I'll definitely touch it up some, but generally speaking I just want the rev/exp listed like that from what it finds in the columns.
+
+
+-------------
+Do you have any power to change the formatting of the source data? If you do you could arrange so it facilitates a pivot table.
+-------------
+Well, I have thousands of these columns. Otherwise I would totally give that a shot. :'(
+
+

@@ -1,0 +1,42 @@
+6im971
+How can I highlight cells of a column that start or have an asterisk in it?
+Pretty much the title. 
+I want to highlight any cell of a big column that has inside (or starts) an asterisk. Is there any formatting? 
+
+Thank you in advance fellow redditors! :)
+
+EDIT: Well, I'm going to give more info about what I want. I have a worksheet with information about customers. Those customers when they are not in the firm anymore older workers put an asterisk in them (some are in the middle of the cell and others start or end with it). So what I want is to be able to highlight them like I would do with a left-click with my mouse and delete them all with just one click. Maybe it isnt possible to do that?
+
+EDIT2: SOLVED! Thank you all for wasting ur time, i really appreaciate it!
+
+
+-------------
+Conditional formatting > highlight cells that contain > ~*
+-------------
+Highlight your entire worksheet (or the columns you want highlighted), then Home > conditional formatting > new rule > use a formula and type
+
+    =LEFT(A1)="*"
+
+then set a color you like.
+-------------
+Because errors are counted as 'do not highlight', and `FIND` doesn't work with wildcard characters, `=FIND("*",A1)` works. The more proper way is `=NOT(ISERROR(FIND("*",A1)))`.
+
+[Imgur](http://i.imgur.com/U944z20.png)
+-------------
+Saw your edit. Add a filter to the column. In the search bar of the of the filter menu type "~*" without the quotes. and click ok. Now your sheet will only contain entries with an asterisk. Highlight the column and delete. 
+-------------
+First, thank you for taking your time. I really appreciate it.
+
+When I use your formula It does not show the cells that have the asterisk in between words or in the end. How can I do that?
+
+And I wanna give more insight about what I want. Let me edit the post. 
+-------------
+Thank you for taking your time. I'm gonna edit the post because it is not what i have in mind, but thank you anyways!
+-------------
+That's what I wanted, Thank you!
+-------------
+I think /u/rnelsonee answer is what you're looking for. Just follow my instructions and set
+
+    =NOT(ISERROR(FIND("*",A1)))
+
+in the criteria box

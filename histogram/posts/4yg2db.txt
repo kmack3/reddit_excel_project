@@ -1,0 +1,11 @@
+Carry Around My Excel Settings?
+I haven't tested this, but to to Excel Options, Quick Access Toolbar, Import/Export and save as a Excel Customizations.exportedUI. Then get that into your C:\Users\username\AppData\Local\Microsoft\Office folder (manually or with a syncing program) on the other computers. AppData is hidden, so turn on hidden folders or just type that in directly. That might work.
+
+Other settings are saved as Book1.xltx in the folder specified in Excel Options -> Advanced -> "At startup, open all files in..."'s folder. And of course other preferences are stored in the registry, so you'd need a tool to export those as .reg files.
+Get everything how you like it and save as an Excel template - xlst or xlsm in the XLStart folder on your different machines - 
+
+https://support.office.com/en-us/article/Automatically-open-a-specific-workbook-or-template-when-you-start-Excel-BE9CDDC1-A148-4CBF-8F3B-779DF08957A3
+What version Excel?
+
+What operating system?
+Excel 2016. My laptop is Win 10 and the others are I believe 7.

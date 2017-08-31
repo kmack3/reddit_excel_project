@@ -1,0 +1,97 @@
+Best way to work in 20+ spreadsheets at the same time
+Create hyperlinks to other tabs from a master sheet.
+
+http://www.tech-recipes.com/rx/49296/microsoft-excel-create-a-hyperlink-to-another-worksheet-or-excel-sheet/
+
+Create a macro with a custom button to navigate.
+
+http://www.techrepublic.com/blog/microsoft-office/add-a-macro-that-displays-the-excel-worksheet-navigation-list/
+
+Navigator Utilities Plugin:
+
+http://www.navigatorutilities.com/Features.htm#Sheets
+
+Tab Hound Plugin
+
+https://www.excelcampus.com/tab-hound/
+
+Dude - you need to get all this shit out of Excel and into a database with structured reporting.
+Don't know if it will work for you but when I'm working with multiple documents I copy the tabs into a master sheet and rename them so I won't forget their contents. It doesn't harm the source file and for me at least it's easier to organize.
+Are your reporting packs for each entity consistent month on month and across entities? If so, I would recommend using excel's PowerQuery to gather the information into one data table (master sheet). It'll be so much easier to use and you should be able to automate much of the process. 
+If you don't already, use a vertical taskbar instead of horizontal. There's less collapsing and generally you can see more of each file name.
+
+Also, hopefully you have multiple monitors. 
+
+Get a program like DisplayFusion. It allows each monitor to display the programs open on THAT screen. That means if you could cut the number of task items on your taskbar in half because you have multiple taskbars. It's also easier to locate the files you want.
+
+Those tips can help, but may not ease all the frustration. 
+Will repeat what /u/jonokress stated:
+
+- pull all the disparate data into a single sheet using Power query
+- run pivot tables off the consolidated information
+- slicers to filter and summarise.
+How many monitors are you using?
+Does the data originally live in Excel files or is it being pulled from another system?
+[I move my startbar](http://imgur.com/yTMwZrh) to the right side of my screen so each tab is visible.
+Yeah you should really be using one master spreadsheet to pull all the data in.  Make an "import" sheet that imports all the raw data using VBA into specified sheets in the master workbook, and have calculation tabs to do any transformations and then have your output sheets that contain the end resulting reports that will be sent out / put into decks.  And any other sheets for mapping tables, reference, etc.  If your source sheets have large amounts of data which will balloon your master sheet, then reference it via a pivot that you can simply change data source to the new source when ready to roll it to the next period; and make sure to disable saving of underlying pivot data so it doesn't copy all of it into your master sheet.  The only space it will take up is what is displayed in the pivot.
+I think the best has already been suggested. 
+
+That is, you can tile each Excel window across your desktop (hold down the windows key and either the left or right arrow key). 
+This helps if you have multiple monitors to work with. 
+In reality, the long-term sustainable and scalable solution is to create a simple database to which the excel files can feed into. Will take time and effort to set this all up. After that, you should be doing reporting queries on top of that db, and life will be sweet. 
+Not a solution you can use but if you manually have to work with so many spreadsheets at once then there is something really wrong with the way your workplace operates. My guess is that you are somehow trying to consolidate data from many sources and if that's the case then these sources should deliver data in a way that you can pull the data without having to open and look into the spreadsheets.
+I developed a tool about 9 years ago called Worksheet Explorer. It basically gives you a nice interface with list of opened Workbooks and Worksheets that you can use to navigate. I just put the code on [github](https://github.com/minhaz/worksheetexplorer).
+
+Let me know if you need any help setting it up. I can put up an addin also. I used to bind the method to a keyboard shortcut.
+
+Edit: To use it, open the *WorksheetExplorer.xls* file, enable macro content, hit Alt+F8, run the "ShowForm" function. Make sure you already have a few files opened.
+If you aren't using them yet, I can't recommend enough multiple monitors.  There are also ultra wide monitors that would help tremendously.  Dealing with that many files is really a pain.  One thing you can try is increasing the size of your menu bar to double height, that will help you to see the different sheets easier.
+I'm an analytics developer at a hospital and I'm having trouble understanding how you have 20+ spreadsheets where, as you mentioned in another comment, the data only lives in Excel and is not pulled from another system. 
+
+Is it just pulled from other systems prior to it getting to you?
+
+This needs to be automated in some sort of data solution more sophisticated than Excel. You have better things to do with your time and a process like this is surely error prone.
+FormulaDesk (a free add-in) has navigation tools that might make this significantly easier.
+Use "classic windows" taskbar. Disable grouping in taskbar (so that each excel window has its own button on the taskbar). Then make the taskbar two or three rows high.
+How would one go about doing this? What's the process like? Which database should I use?
+This is what I would recommend -- also much easier to make references/formulas across tabs than across entire spreadsheets.
+This might be a challenge as each Excel document can have many cross referenced tabs. And each tab can have MASSIVE amounts of data. A master document is an interesting idea, but I'm not sure it would work due to the complexity of the spreadsheets. Thank you so much for the thought, though!
+i also color code my tabs.
+This is the answer.
+
+I did this with timesheets for the whole department (25 people x weekly timesheets) - standardised the timesheet template, pulls it all into one. Pivot tables and slicers and we're done - they've never HAD so much control over the billing.
+if you have windows 10 you can use the multiple virtual desktops to do this natively. 
+Sadly, just one. I have a small desk.
+Only in Excel
+> I'm an analytics developer at a hospital and I'm having trouble understanding how you have 20+ spreadsheets where, as you mentioned in another comment, the data only lives in Excel and is not pulled from another system.
+
+Are you new in your field? Because this is dreadfully common.
+It really depends on the data and the functionality you need, but Access would probably get the job done.
+I do something similar to what you described (daily) and will second the recommendations already given.  I build one master file with the data that needs to be manipulated which comes from 14 different reports.  When it is all said and done I usually have around 250k lines of data that is being sorted, manipulated, calculated and redistributed out to 4 regional reports for review.  
+
+It may be seem like a large order but this community is one one of the most creative and helpful groups I have been apart of.  Provide a bit more detail into what you are most concerned about and I bet we can find you a solution that will ease the headaches!
+
+Good luck!
+Consider switching to Access for storing the data, as that seems to be the main problem.
+
+EDIT. Ideally I'd advise SQL Server or SAS, but if it's only 20 spreadsheets, Access should do the trick and there's no additional cost, just a semi-steep learning curve.
+I have Power Query and know nothing about it. Really need to change that!
+Hate to say it, but that is your problem.  I can guarantee your need for screen space is greater than your need for other things space.  You need a second monitor.
+I don't have much to add beyond what has already been said and possibly asking for more monitors. 
+
+But I would suggest that it would be more effective to migrate all these reports to a proper database and set up access controls.   this would be a large undertaking but eventually worth it. 
+6 years. I'm not shocked at the overuse of Excel. I know that's common. I spend my whole life getting rid of those things. But the data has to originate from somewhere else.
+
+If people are manually creating 20+ spreadsheets worth of information by just typing data into cells, there is a huge technology deficiency at that hospital.
+
+I've seen the spreadsheet mess, but it's almost always people taking data dump reports they get and doing things that could be automated if they knew/asked.
+Thanks
+I see excel going more and more this way. It's also the basis for Power BI.
+And a third
+Yeah I suspect their timesheet process is creating the individual files. The whole process could be wrapped into access (or excel =\) with some VBA in a matter of hours. Technical deficiency is a good term. The struggle is real. 
+Used to work in a trading room at a bank. 8 screens...
+I had three screens once on a temp job and it was the best thing ever; going back to two might as well have my eyes shut
+Yeah, I have 4 and it still can be completely full when you have two different softwares going at once and then you have a bunch of files open.
+Omfg
+They went back to 6 when 24inch monitors came available. They also had these fantastic desks where you could get it into a standing position (so you could stand and work) at the push of a button.
+Wore suntan lotion...

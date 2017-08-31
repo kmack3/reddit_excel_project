@@ -1,0 +1,77 @@
+6fuuee
+Hide row based on blank cell
+Is there a way to hide a row based on whether a cell is blank automatically?
+
+
+-------------
+To enter this event-triggered Macro, right click on the sheet tab.
+Select "View Code" from the right-click drop-down menu.
+Then paste the code below into the window that opens. 
+
+Option Explicit
+Private Sub Worksheet_Activate()
+    Dim r As Range, c As Range
+Set r = Range("a1:a299")
+Application.ScreenUpdating = False
+For Each c In r
+    If Len(c.text) = 0 Then
+        c.EntireRow.Hidden = True
+    Else
+        c.EntireRow.Hidden = False
+    End If
+Next c
+Application.ScreenUpdating = True
+End Sub
+End Sub
+-------------
+Is there a specific column you are looking for blank cells in or is it any column in the row?
+-------------
+How would I repeat this process of multiple ranges?
+-------------
+Multiple columns and multiple rows so like if a1 b1 c1 and d1 are blank then hide row 1
+-------------
+I'm sure there's a more concise way to do this, but here's a macro that will accomplish what you want as long as you know how many columns your data has.
+
+    Sub hiderow()
+    '
+    Dim lastrow As Long
+    Dim s As String
+    Dim x As Integer
+
+    'This will count how many rows are in your data set even if the first column is blank, much better than the traditional .End(xlUp).Row
+    With Sheets("Sheet1")
+        If Application.WorksheetFunction.CountA(.Cells) <> 0 Then
+            lastrow = .Cells.Find(What:="*", _
+                      After:=.Range("A1"), _
+                      LookAt:=xlPart, _
+                      LookIn:=xlFormulas, _
+                      SearchOrder:=xlByRows, _
+                      SearchDirection:=xlPrevious, _
+                      MatchCase:=False).Row
+        Else
+           lastrow = 1
+        End If
+    End With
+
+
+     Application.ScreenUpdating = False
+ 
+     'change x < _ where _ is 1+ the number of columns you'd like to search
+  
+     x = 1
+ 
+    Do While x < 6
+    'This is the actual row hiding method
+     For i = 1 To Range("A1:E" & lastrow).Count
+         s = i & ":" & i
+         If IsEmpty(Cells(i, x).Value) Then
+             Rows(s).Select
+             Selection.EntireRow.Hidden = True
+        End If
+     Next
+     x = x + 1
+     Loop
+ 
+     Application.ScreenUpdating = True
+ 
+    End Sub

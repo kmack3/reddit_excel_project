@@ -1,0 +1,48 @@
+Allow user interaction with your spreadsheet mid macro – by tricking your VBA code into pausing
+This might be exactly what I've been looking for! I have a VBA script that runs through a bunch of sheets, plotting data and asking the user to guess the intersection of two lines in a MsgBox for each sheet. The problem is that the plot doesn't display before asking the user for input, so all they see is a blank rectangle instead of a plot of two lines. However, the plot DOES display in debug mode. I'm on mobile now so I can't check, but I think I can adapt this to work for my needs. Thanks! 
+It's a good idea to add a timer to the Do loop to auto-exit the macro gracefully after 10-15 seconds or less. This way the user doesn't have to remember that the macro is running if they step away from their desk.
+
+One cool thing you can do with this is create custom selection boxes independent of cells. You can select objects, individual points on a scatter plot, cells, or anything else with (x,y) coordinates. All you need to do is hijack Excel's Insert Shape function (no userform hack required!):
+
+    #If VBA7 And Win64 Then
+        '64-bit Office
+        Public Declare PtrSafe Function GetTickCount Lib "kernel32" () As LongLong
+    #Else
+        '32-bit Office
+        Public Declare Function GetTickCount Lib "kernel32" () As Long
+    #End If
+
+    Public Sub GetUserSelection()
+        ...
+        Application.CommandBars.ExecuteMso "ShapeRectangle"
+        
+        On Error GoTo ErrHandler
+        Application.EnableCancelKey = xlErrorHandler
+        lStartTick = GetTickCount
+        lEndTick = GetTickCount + (lNumberOfSeconds * 1000)
+        Do
+            DoEvents
+            
+            lCurrTick = GetTickCount
+            
+            If TypeOf Selection Is Rectangle Then
+                bShapeCreated = True
+            End If
+        Loop Until lCurrTick >= lEndTick Or bShapeCreated = True
+        ...
+    End Sub
+You need to show the form modelessly, or the user can't touch the sheet behind it:
+
+    f_wait.Show vbModeless
+Hi!
+
+No problem, let me know if you have any problems!
+
+FormatCells.com
+Hi, 
+
+Thanks for your message! 
+
+Instead of adding modeless to the code, I change a userform setting. 
+
+See Step 2.

@@ -1,0 +1,30 @@
+6ikrya
+Conditional Formatting: If another cell does not contain 'TBD'
+I have two columns:
+
+Column A has usernames and displays TBD if there is no username. 
+
+Column B has urls to the users profile using the following formula: "=HYPERLINK("http://test.test/user/"&A1&".aspx" , A1)"
+
+I want the B column to display as orange if the user is TBD and blue if the user has any other name.
+
+Any assistance would be greatly appreciated. :)
+
+
+-------------
+Use conditional formatting.
+Highlight column B, Home > conditional formatting > new rule > use formula and write in the box
+
+    =A1="TBD"
+
+You can then format as you wish. Same for those that are not TBD:
+
+    =A1<>"TBD"
+-------------
+The second formula seems to work fine, however the first does not. Unsure if I'm doing something wrong. When the cell displays anything other than 'TBD' it works as expected however cells which contain 'TBD' aren't highlighting.
+-------------
+This is odd... can you post a screenshot of your conditional formatting menu and rule?
+-------------
+Ah wait, got it working, I did something wrong.
+
+Thanks for your help, much appreciated :)

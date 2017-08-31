@@ -1,0 +1,121 @@
+How do I make a macro that emails people on their birthday?
+EDIT: updated snippets of code, back on my work computer which has outlook, and since today is slow as all get out, I went ahead and threw it all together. There are three sections - to run the VBA you said you wanted, to check in outlook if an unsubscribe email comes in, and the code to run if an unsubscribe email comes in.
+
+on my mac, and don't have outlook setup, so chances are there is an error or two in here, but, assuming you have a workbook, and the first sheet contains a list of names in column A, their emails in column B, their birthdays in column C, and the last time you sent them a birthday email in column D...
+
+
+    Public Sub sendEmail()
+    Dim olApp As Object
+    Dim myEmail As Object
+    Dim i As Integer
+
+    'create an outlook application
+    Set olApp = CreateObject("Outlook.Application")
+
+    Sheets(1).Activate
+
+    'loop until column A is blank
+    Do While IsEmpty(Cells(i + 2, 1)) = False
+
+        'check if month/day is today, check if you have already sent an email this year
+        If Month(CDate(Cells(i + 2, 3).Value)) = Month(Now) _
+            And Day(CDate(Cells(i + 2, 3).Value)) = Day(Now) _
+            And CDate(Cells(i + 2, 4).Value) < Year(Now) Then
+
+            'create an email item and fill it with a subject, address and body, and then send it
+            Set myEmail = olApp.CreateItem(0)
+            myEmail.To = CStr(Cells(i + 2, 2).Value)
+            myEmail.Subject = "Happy Birthday!"
+        
+            'html FTW
+            myEmail.htmlbody = "<html><p align=""center"">" & _
+                "<img src=""http://www.conversationsforabetterworld.com/wp-content/uploads/2015/06/Birthday-homepage.jpg"">" & _
+                "</p><br/><a href=""mailto:yourEmail@gmail.com?subject=Unsubscribe Me Please""><p align=""center"">Unsubscribe</p></a></html>"
+        
+            'change to .send when you want to execute
+            myEmail.display
+        
+            'update last sent
+            Cells(i + 2, 4).Value = Year(Now)
+        
+            Set myEmail = Nothing
+        End If
+    i = i + 1
+    Loop
+
+    End Sub
+
+
+Section 2: place in your ThisOutlookSession module
+
+    Private WithEvents Items As Outlook.Items
+    Private Sub Application_Startup()
+
+      'remember to restart Outlook after copying code into ThisOutlookSession
+     Dim olApp As Outlook.Application
+     Dim objNS As Outlook.NameSpace
+     Set olApp = Outlook.Application
+     Set objNS = olApp.GetNamespace("MAPI")
+     'default local Inbox
+     Set Items = objNS.GetDefaultFolder(olFolderInbox).Items
+ 
+    End Sub
+
+    Private Sub Items_ItemAdd(ByVal item As Object)
+
+      On Error GoTo ErrorHandler
+      Dim Msg As Outlook.MailItem
+      If TypeName(item) = "MailItem" Then
+        Set Msg = item
+            If Msg.Subject = "Unsubscribe Me Please" Then
+                Msg.Delete
+                Call unsubscribeUser
+            End If
+      End If
+      'ProgramExit:
+      Exit Sub
+    ErrorHandler:
+      MsgBox Err.Number & " - " & Err.Description
+      Resume ProgramExit
+    End Sub
+
+
+section 3: getting too lazy to write this. this is just a sub called unsubscribeUser that opens the workbook and deletes the row where the email address is found.
+At a high level though... you'd need a list of the pertinent information, and then on a daily basis loop through the list of birthdays, see if there's anyone there, check to see if they've unsubscribed from your mailings to avoid annoying them, and then fire off an e-mail...
+
+That said, [don't re-invent the wheel amigo.](https://blog.mailchimp.com/using-autoresponders-for-birthday-messages/)
+
+VBA really isn't the best tool for this. First of all, you need a way to run this program once a day. Secondly, you need to keep track of emails that got sent out to make sure you don't accidentally send out multiple emails to the same customer (say by accident you ran the program twice). Lastly you need a feedback system that handles bounces (could be done manually, I guess).  
+This is much easier using a scripting language like Python that reads your Excel workbook and maintain its own logs and sending out emails via SMTP than VBA. Afterwards you can set the OS to schedule your script everyday at a certain time. 
+
+I used to send out invoices using excel VBA and built-in email service through Gmail.  The only drawback is, Excel has to be open when you plan on running the macro.  You can use the windows task scheduler to open the workbook each morning (or night) and set the on time event in the macro to run after the open time.  Here's a link to what I sent before to a similar request:
+
+https://www.reddit.com/r/excel/comments/1pgwv4/i_need_help_using_excel_as_an_email_database/cd26sm0
+I haven't tried this, but approve of the logic.
+Don't forget to include the Microsoft Office libraries in reference. Also I vaguely remembering somethings about a security dialog that pops open when you send mail via Excel. Does this still happen?
+> don't re-invent the wheel amigo.
+
+I mean, there is if you have to subscribe to a service to do what you could do for free...
+What is the fun in not re-inventing the wheel :D
+Is it mail ka-himp?
+How do I get python to interface with Excel? 
+Yup, it's the whole infrastructure to deal with though.   Personally, those "Hey, you're older!" e-mails annoy me...  so then OP needs to have a way for the people to unsubscribe, keep the records up to date, decide whether to delete the record entirely, or flag it in some manner....
+
+I can just see this being a net loss of customer goodwill if OP tries to roll and manage it themselves.
+
+This is, of course, assuming that the customers even bother with an unsubscribe link, and don't just flag it as spam, making it harder for OP to e-mail in the first place.
+
+Let's also keep in mind the cost of OPs time to create, run and maintain a bespoke system, versus paying for a fully functional system and just having to load the data.
+Save excel as a .csv and have python access that file.
+This is actually a great tutorial: https://automatetheboringstuff.com/chapter12/ using openpyxl.
+
+Honestly, it is very unlikely that any boss is going to approve anything that costs money that does what's in your job description, unless you're wildly understaffed and the cost is nominal.
+
+but just for shits and giggles, the cheapest MailChimp professional plan is $25 a month (the most expensive is $225/month). the latest inflation print (CPI ex energy and food) was 2%. the present value of this over 3 years is a hair over $873.
+
+it would not be too difficult to modify the code below to send an unsubscribe link in the body of the email which, when clicked, sends a specified an email to OP's account to unsubscribe. then, write a short sub (to be placed in OPs outlook module) which searches each incoming email, and when an unsubscribe email is received, modifies the existing workbook by deleting the row the email is found on. hell, I'd do it for ~~$200~~ fake internet points if OP made a series of posts that got them through the process i.e. "how do I include an unsubscribe link in an email?" or "how do I get outlook to search the titles of incoming emails and execute a sub when an email with a specific title is received?"
+
+
+OP can learn to do it themselves with the help of others in this community, saving the entire $873 and learning some intermediate VBA in the process.
+
+

@@ -1,0 +1,35 @@
+Automatically Convert Mouse Clicks and Movements to VBA Macro
+This is neat but if you plan to use it, please  double check the source code.
+This is cool as hell, might give it a try
+Flair changed to Pro-Tip.
+
+Please keep the sub tidy.
+Could this be used to replace data connections? To be able to pull file data in and then format it?
+
+What did you have in mind when you made this? 
+What happens if I record a macro on display 1, but then play it on display 2 with different resolution/dimension settings? 
+Hi - What do you mean, nschider_001?
+Thanks! Let me know how you like it
+Whoops - thanks, epicmindwarp!
+It certainly can. The possibilities are endless, but I made it to navigate external windows that don't have good VBA control. For example, I recorded a script to automate filling in my timesheet at work. I've also used it to set high scores in online games;)
+In that instance, the add-in will record the actual position based on display 1. If you need to play it on a screen with a different resolution (i.e., your clicks will occur in different spots), then you can ratio the resolutions of the two monitors and adjust the locations of the cursor positions.
+He's saying (I think) that no one should ever use a macro/script they haven't tried to dissect and understand themselves unless the source is verifiably trusted. That way they can make sure, for example, that you're not sending their mouse movements to yourself to use against them/steal information/etc. I wouldn't take it personally, it's just that it's a big bad world out there and you can't be too careful. 
+
+Myself, I think this is a revolutionary idea and am excited to use it... as soon as I check the code. Does it happen to work on both 32 & 64 bit?
+
+Edit: Just realized you're free version/selling this. I'm guessing the code is hidden then, yes?
+Thanks I will definitely keep this in mind.  Great utility. 
+
+My first thought is to use it to log into my brokerage to automatically download the statement at that time.  
+
+Do you think there would be any security risks with that?
+If you use it for a pool game - will it break the pyramid of balls the same way?
+Ahh, I understand. That's a legitimate concern in this day and age. There's nothing to fear here, however. I've worked with some pretty big names in the Excel/VBA world (Chris Matthews, Brad Edgar, Petros Chatzipantazis, etc. ), so I'd only be hurting myself, my business, and my reputation if I was trying to do something criminal.  
+
+Thank you for all for the kind words! I'm really glad you're excited about the program. It does work on 32 and 64 bit - I'd love to hear some of your ideas for using the program.
+The primary risk is that you'll need to store your account username and password in essentially plain text within the macro. Other than that, there's no risk in running the macro to automatically log in. I'm glad you found a use for it!
+It certainly should - You can go into settings and lower the "Scan Interval" before recording to guarantee smoother, more consistent playback
+Good to hear and good to know. 
+
+My ideas? You've created the mouse equivalent of SendKeys, the missing piece of the puzzle for genuine human-computer-use automation. Skies the limit in terms of turning some process that only I can do into something I can automate
+I put a form at the beginning of the macro prompting for user and password. A bit annoying but it's good practice

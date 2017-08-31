@@ -1,0 +1,31 @@
+I want to divide one cell by another, but it always comes out as zero. What am I doing wrong?
+Try this
+
+    =VALUE(H2)/VALUE(J2)
+
+And also make sure your calculations are turned on (press F9 to see if that helps first).
+Just to check that the components a working correctly, if you take out the IFERROR in J2, does that formula to calculate correctly?
+For future reference, the way to solve these types of issues on your own is to use Evaluate Formula.
+
+Go to Formulas ribbon --> Formula Auditing section --> Evaluate Formula button.
+
+The helper that comes up will step through the cell's calculations chronologically, allowing you to see exactly where errors appear on the way to the final answer.
+Try breaking each element of the statment into it's own cell
+
+that way you can see which bits are causing erros/miss values 
+It worked, sort of. It's giving me a number, but not the right number. It should be 93,816.80. It's showing 100,518.00. This is just weird.
+Still zero.
+Check the actual numbers that are feeding through. Sounds like a value error.
+Ok, if you simplify the AVERAGEIFS to show the results based on only the first criteria, does it show 0? If you show the results based on only the second criteria, does it show 0? 
+H2 shows '469,084.00'. J2 shows '5'.
+J2 almost certainly equals 4.6667, but it's just showing 5 because the format is set to show no decimal places (so it rounds). If you click on J2 and click that "Increase Decimal" button on the home tab (number group, under the format type) you should see it change to 4.67.
+
+
+You are absolutely right. It was so simple, I can't believe I overlooked it. Thank you!
+> POST SOLVED?
+> PLEASE SET THE FLAIR TO SOLVED!
+> 
+> OPs should consider giving helpful users a ClippyPoint by replying to their comment with
+> Solution Verified
+
+

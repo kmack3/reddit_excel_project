@@ -1,0 +1,60 @@
+What 'excel-can-look-sexy' secret data viz tricks are you ninjas holding out on?
+I try to make my graphs look interesting by making the colors fit. In case of products, you would try to chose a color that matches it as best as possible.
+
+While [this image](http://i.imgur.com/UgPM90s.png) is a joke, it explains what I mean. If anyone wants that excel sheet, just tell me.
+[deleted]
+It's been a while since their most recent post, but this blog provides some beautiful clones of graphs from The Economist:
+
+http://www.apptrac.net/en/blog/all-post.html
+Power Query map makes some beautiful things across maps with data
+You may want to take a look at Excel Hero's blog
+
+http://www.excelhero.com/blog/
+Take a few hours to learn PowerMaps...they're useful and failry intuitive once you get used to the interface.  Limited in use to geographically relevant data, but can wow the less advanced excel users (management) with the fancy graphics and integrated data.
+A simple one: changing cell fill to white from blank. Makes it look much more elegant and professional.
+I don't know if this counts, but I made this so I could see all needed when when making Cold Calls for my startup.
+Everything is dynamic and based on the inputs of the light blue boxes. 
+
+http://i.imgur.com/m0Jl6VP.jpg
+
+This dashboard consisted of 4 different data sources. two data sources were obtained by creating two webscrapers for two different websites. Two data sources were purchased.  
+
+I would use the data sources from the scraping to help making my calculations and to see if a parcel could be a possible client or not and I used the two purchased data sources to reference owner information against each other. After making this, my rate at which i was able to make calls and do research became much much faster. If a parcel wasn't a potential client opportunity, the face would turn into a red box with a frowny face. 
+With regard to actually building various graphs and representations, peltiertech is a pretty great blog/site. 
+
+There's also a lot of inspiration to be had from the templates that office provides online.
+
+Pivot charts / slicers also offer intuitive and pretty interfaces for data visualization, and allows for more "layers" but is also more restrictive.
+You can make excel look like anything with a little effort and inspiration tbf, hell I was doing a timesheet thing for work recently and did most of it with a material design vibe just because.. Before they went with the duller corporate version.. 
+
+I tend to just image search 'charts dribbble' and 95% of it is possible in Excel. 
+I always research who my audience is and who is the highest ranking exec, then I find out what is their alma mater.  USC Trojans get maroon and gold.  Blue and orange for the 'Cuse.
+In the same type of area, make sure you change your font colours, line colours in tables to subtle versions of the main colour of the sheet. It works very nicely and fonts and lines are often overlooked in my opinion.
+Screenshot?
+Wait what??? 
+Show example....
+Huh?
+Or you can select one to be secondary axis.  Align your axis so they r the same. Adjust your gap distance.  One skinny. One fatty.  I prefer black for inner. Yellow half transparent for fatty.   
+Never thought to try 3.  Nicely played 
+Oh thank you so much for this!
+Not exactly the most interesting blog...one post a year and it's usually selling a course.
+Just tell Excel to not show the gridlines (Page Layout -> 'Gridlines', uncheck 'View').
+
+I do this 90% of the time, and then just add borders to the sheet if the data gets hard to read. Some people hate it, though.
+That would slow down excel depending on the size of the sheet though.
+That's pretty sweet, sounds sophisticated too. I built this tracker for our digital media planners to use, similar dynamic setup.
+
+http://i.imgur.com/gIfkeHF.png
+
+-- same deal, lseveral different data sources aggregating, and ultimately linked up into a nice little performance dashboard. Their job is "paste data here, hit data refresh, success." Definitely a workflow improvement.
+I agree. I read this all. I don't know what it means.
+I agree is not the most active blog around the web... but I wouldn't value the quantity over quality in this case... dig a little bit in his older posts... perhaps you already knew this method, but he "animates" charts with named ranges and a few not-to-hard-to-follow formulas...
+
+http://www.excelhero.com/blog/2010/05/animated-business-chart.html
+
+Of course there could be a lot of tools and applications that could do that now, but this post is from 2010 and gives you insights on some cool tricks... 
+Huh. TIL. Thanks.
+Thanks. I don't think it's too sophisticated. It has a few sheets that it pulls numbers from. I did some calculations then took the cells that contained calculated amounts and then copy-paste(special-number). From there it's mostly just index(match(match)) or Vlookups() and a few IF() and IFNA(). 
+
+I like yours... it's pretty. so sad i just said that. 
+Certainly some good stuff. I'll dig a little deeper when I have some time.

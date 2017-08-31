@@ -1,0 +1,37 @@
+big
+16r79n
+Silly but big problem with "Recent Colors" showing up on my formatting palette.
+
+Excel 2007.
+
+A command that I enter hundreds of times a day is ALT + HFC + Up x2 + LEFT x2. This turns the cell font color blue. The perfect blue.
+
+In this particular spreadsheet, I had to create some charts that had a purple theme to them. It was one time. ONE TIME. Now every time I try to change the color of something, [this stupid row of Recent Colors shows up on my formatting palette](http://i.imgur.com/BMcxI.png). I refuse to change my habits to conform to this single file. How do I get rid of these bastards?
+
+I went into the Windows button - Excel Options - Save - Colors - Reset, but that doesn't seem to work. Help!
+
+
+-------------
+Hm. What if you made a personal macro that change the color for you? So instead of that big ole process, you just hit CTRL + R or something...
+-------------
+Probably a registry setting somewhere.
+
+That would be like combating an anthill with a flamethrower. I approve!
+-------------
+That was gonna be my next suggestion. You should totally do this, OP.
+-------------
+Ah, interesting. Sorry I don't have much experience with creating macros. What would my steps be? Would I be able to set it to an ALT shortcut? 
+-------------
+Ok a few steps.  If you're in 2007/10, you may need to Show Developer Tab in the Ribbon, which can be found in Excel Options under the Popular tab.
+
+You can either Record a Macro or if that doesn't work, there's a lot of stuff you can do with writing your own.  You can probably do this with just the recording feature.
+
+Ok so click anywhere and go to the Developer Tab and click "Record a macro."   This will ask you for a name, you can put in a Shortcut key (CTRL + a letter) or (CTRL + SHIFT + a letter.)  Clearly, don't try to use a letter that's already a shortcut, i.e. CTRL + Z.  A few good ones are E, J, M, T.  I would store this in your Personal Macro Workbook, which means it's available anytime you're on your computer and using Excel. If you save it in the workbook, then you need to save it under a different file format, etc... just gets more complicated.
+
+Ok, so you clicked record, gave it a name ("ColorMeBlue" or something) , picked a shortcut key, click ok.  Now, very carefully, go to the format tab and select the right color.  Do not click on any cells.  Now go back and click "Stop Recording."  Because you didn't do anything other than change the color, it should work for whatever cell is currently selected.   Now click on a different cell and test your macro!
+
+
+-------------
+Great, got it to work. Thanks! Excellent directions.
+
+So does no one know how to get rid of the recent colors though? There's gotta be a way.

@@ -1,0 +1,32 @@
+6g127v
+Conditional formatting using a rule, how do I lock the cell for the columns, but not for the rows?
+This may be a very simple question, but I haven't been able to google it correctly. I'm trying to make a conditional formatting so that the complete row is painted in red when the H cell reads "CANCELED". 
+
+The problem is that I can't do it unless I lock the cell in the formula, and if I lock the cell, I can't drag it down because the next row's formatting depends on the first one's "CANCELED" status.
+[These are the images.](http://imgur.com/a/rD3G9)
+
+Thanks for the help!
+
+
+
+
+
+-------------
+Add formula rule at the first row first cell , example add at A2
+
+`=$H2="cancelled"` select format when TRUE
+
+Then `Apply to` the rest of the range to colour. e.g A2:H5000
+-------------
+To add to what /u/excelevator said, the dollar signs in a cell reference lock the column/row independently. So, you can have A1, $A1, A$1, and $A$1 as example of different relative/absolute combinations.
+-------------
+Thank you!
+-------------
+Wow, haha I had no idea about that. That's what I needed! Thank you so much!
+
+Solution Verified
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

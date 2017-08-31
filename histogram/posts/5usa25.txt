@@ -1,0 +1,287 @@
+What's your favourite function?
+INDEX(MATCH()) arrays are fun. They let you do lookups with multiple conditions from different columns. 
+I always get a kick out of extracting text from strings using mid,find,left,right,len etc
+
+But IF and Index Match are my two favourites.
+My new old favourite is MMULT which can shrink arrays within a formula. For example, with 2 in A1, in A2
+
+    =A1+MATCH(ROW(A1),MMULT(SIGN(MOD(A1+ROW($1:$99),TRANSPOSE(A$1:A1))),(A$1:A1)^0),0)
+
+CSE, filled down.
+I was delighted when I read about WEBSERVICE because I was able to use it immediately to query live data instead of having a copy of the data locally.
+Can't believe no one has mentioned the IF formula. It's to Excel what spices are to cooking. Or porn is to internet. 
+SUM(SUMIFS()) is tight - allows me to hardcode arrays without the crazy computing power required to CSE.
+While it has its disadvantages, INDIRECT is a very clever function.
+It's a split between SUMIFS and IFERROR
+RANDBETWEEN(). I use it to test IF formulas and verify that I've accounted for all situations.
+I am an actuary and actually ask this very question during all of my interviews (interviewing intern candidates).
+
+It's a fun question that they likely have never heard before while also providing good insight into their excel knowledge-base.
+
+My personal favorite though? Probably INDEX(MATCH()). The biggest problem I have with this is that most people don't know it so it actually creates issues when coworkers need to use my sheets.
+
+SUMPRODUCT(), SUMIFS(), & IFERROR() are all used very regularly. I'm also a bit partial to INDIRECT()
+The only formula you need is GETPIVOTDATA() and a properly built pivot table that has a table object as the data source.  I haven't had to write a sumifs or index match in years.  Why waste time using a formula to do what a pivot table does for you?  Oh yea, people think that paragraph length formulas are somehow an indicator of "chops" with excel.  
+
+Obviously wrap it in IFERROR(), the condom function.  Once it's set up, delete the source data and send the still functioning Pivottables in a sub 1mb email.  You could write the 1's and 0's on a paper airplane and throw it to your boss!
+Camera. Great for dashboards, etc.
+
+I always ask this question when I meet people that are good at excel and Camera was the first answer I have heard ever that actually blew me away.
+Goalseek. It minimizes trial-and-error manipulation of numbers.
+Always been a fan of [CONVERT.](https://support.office.com/en-us/article/CONVERT-function-d785bef1-808e-4aac-bdcd-666c810f9af2)
+=CONCATENATE ('VAR1,VAR2,...) INSTEAD OF DICKING WITH INDEX-MATCH MULARKY! If you concat a few variables together ( like a name and a date) you can VLOOKUP on multiple columns. Especially if you are using vb to put it in the cell cuz of arrays...
+I'm a fan of the following recently: 
+
+INDEX(Match(),match())
+
+SUMPRODUCT with multiple criteria 
+
+
+Probably the one I use most often is TODAY(). My top favourite has to be IF() functions though. I use them for so many things. 
+IFERROR, SUMIFS, COUNTIFS 
+Index match and datedif
+Combination of if, index and match. Sumifs, sumproduct are also pretty sick. 
+
+=sum(1/countif($a$1:$a$101,$a$1:$a$101))} ctrl+shift+enter For an array. This gives you how many unique records there are between a1 and a101 as an array. Don't need no pivot nor advanced filter for unique records with this.
+
+Still a big fan of pivots and slicers. In love with interactive dashboards; dropdown menus, comboboxes. Sometimes even data validation. 
+
+Iferror sometimes?
+
+Looking for a specific character with search, getting the location of that specific character and extracting the rest of it either right or left.
+
+Data cleansing with clean, trim, proper and data to columns before working into index;match. 
+
+Big fan of arrays but never use them that often. Mostly I'm afraid of them. 
+
+Not a big fan of macros, personally don't need them most of the time. Wish I could have that skill tho.
+
+Love nested ifs for multiple cells like that. It makes me feel smart a little bit lol.
+I enjoy being able to come up with my own functions. 💚 UDFs
+[deleted]
+Offset embedded into index(match) sumifs, etc
+I'm officially loving CUBEVALUE.
+It lets me set up PowerPivots, but to all the people who are using it in the end, it just looks like normal Excel formulae.
+
+And I hate VLOOKUP. 
+There are too many people who think that knowing VLOOKUP makes them Excel gods... as they wait 5 minutes for their files to open.
+I asked this question in job interviews, it definitely caught people off guard ☺️
+PROPER as I like making dashboards look pretty!
+i like to use CONCATENATE so i can make naughty words
+Areas? How often in real world spreadsheets are range unions used? The only function in which they're unambiguously useful is FREQUENCY. For an actuary, I would have thought FREQUENCY would be at the top of the list.
+
+In terms of instances in most spreadsheets I've dealt with, IF is often the most used but seemingly most unloved.
+Since the good ones are taken I will use the &" "& function not sure what it's called but it's easier for me to remember than concatenate for some odd reason. I love including it in an index match or.if formula. Works great when first name is in one cell and last in another. Or making a two criteria if.
+Transpose comes in handy.
+These are good, but I find myself using VLOOKUP in almost every sheet.
+I like to use OFFSET(). At work we have software that spits out numbers in excel that we have to put into a our own report for our customers. When bringing the raw data into our report template we link to cells that we pasted the raw data to. This way if we have multiple of the same type of output we can paste the data in and quickly see it in our desired format.  The software that outputs the raw data puts in blank cells between numbers to make data easier to look at and sometimes has extra data above or below that is not needed for the report. Our report template typically does not have spaces between numbers. If there is a pattern to the spacing between numbers and the order from the output matches the order in the report template, then i will just use the OFFSET() function. First i go off to column past the printed area that the customer will see and i put the number 0 in the first row. Lets imagine Column A is where our report numbers go and that the first cell outside the print area is B1 where we put the number 0. In B2 i would put "=B1+1". I copy this formula down until the report ends. Our raw data is pasted below the print area in the same column as the numbers in the report. In this case lets say our raw data starts at A10. Every 4 rows after A10 the next number i need is available. 
+So for the first cell of my report (A1) i do "=OFFSET($A$10,4*B1,0)"
+
+The first input into the function is the reference cell which i set to the A10, the first line of where my raw data is at. I use dollar signs to keep the reference the same because we dont want it to change when we copy down. The second input is the amount of rows to offset which is 4x the number in the corresponding B column. The third is the amount of columns i want to offset. 
+I copy and paste this down and all of my cells populate with the values all lined up. 
+
+See the example of what the data would look like. 
+
+     A  B  C
+1   X  0
+2   Y  1
+3   Z  2
+4       3
+5
+6
+7
+8
+9
+10 X
+11
+12
+13
+14 Y
+15
+16
+17
+18 Z 
+If(isnumber(search()),true,false)
+I saw one spreadsheet with a column at the end of a dataset which was referencing column B (=B1 etc...) just so later on a vlookup would work. Index match baby!
+I would have to agree with you here.  The combination of index and match allows for some really cool things to be done.
+what are arrays?!  i already know index match
+Index match is my baby 
+How does mid work in that scenario?
+This is some glorious Hall of Fame shit right here.
+Can you explain what exactly this does? What is MMULT? 
+Tell me more about this webservice.....
+I'd argue IF is to Excel as measuring cups/spoons are to cooking. In some cases you can get by without them, but usually only for dishes your cavemen ancestors could have cooked.
+Like the toilet in your home - it is vital. But is it you favourite room?
+Agreed. It's the basis for SUMIF and COUNTIF.
+Completely agree. I use it constantly for tests, like =IF([whatever1=whatever2],1,0). The more you use it, the more you realize how much you can do with it.
+Oh that's slick, I hadn't seen that before.
+
+On a side note, I've seen some nifty uses of SUMPRODUCT(...) to get around limitations in SUMIFS(...) - you can put formulas in your condition. Also, learning to use IF(...) as an array formula was an exciting day. Mostly it lets me do STDEV on a subset of data, which has been a nice companion to AVERAGEIF().
+Why not just use two (or more) SUMIFS? What am I missing?
+Just fucks you over when trying to trace, however our work sheets are littered with them due to their usefulness.
+Clever perhaps, but when overused they're the most frequent source of SLOW recalc. IMO, they're like amputation in medicine. Better to use it sparingly rather than with the frequency of 19th century battlefield surgery.
+Iferror is a must have!
+Iferror(dividebyzero, 0) is the best. 
+Love this one!  I will threaten sales managers with it.  It will be like week 10 of the quarter and they still haven't set the quotas for their reps so I just pop a randbetween 100k and 1M and sit there laughing while all of their pacing charts go full poltregeist.  
+INDIRECT and OFFSET are problematic at best.
+
+Never any reason to use OFFSET since OFFSET(a,b,c,d,e) can be replaced by
+
+    =INDEX($1:$1048576,MIN(ROW(a))+b,MIN(COLUMN(a))+c):INDEX($1:$1048576,MIN(ROW(a))+b+d-1,MIN(COLUMN(a))+c+e-1)
+
+Granted OFFSET is more compact, but it's also volatile, so, e.g., if all the arguments to OFFSET were in Sheet1 or constants, Excel would nevertheless recalculate the formula calling it whenever anything in another worksheet changed.
+
+INDIRECT is the only option in a few situations, such as SUMIF-like calls across multiple worksheets. However, for results from single worksheets, there are almost always better nonvolatile alternatives.
+Pivot tables not much use in discounted cashflow analysis, FWIW.
+
+If one can do everything with GETPIVOTDATA, one should be using a databse rather than a spreadsheet. No chops for using a suboptimal tool.
+I hate that you can't automatically drag the formula. It locks the cell on me for whatever reason
+Camera is a function?  What does it do?  Can you provide a sample formula?
+Not what I asked but I'm glad you answered. That's fantastic! 
+That isn't really a function though, it is a menu option correct?
+Or just use &...
+I've heard that Excel 2016 allows =CONCATENATE(A1:A10) instead of having to put a comma between each one, which I thought was a nice (and surprisingly absent) addition
+You can do all of it with index(sumproduct(range=cond x row(
+First, why use CONCATENATE rather than the __&__ operator?
+
+Second, if you have a table with 1st and 2nd columns
+
+A | B
+---|---
+a | bcd
+ab | cd
+abc | d
+
+how would you ever match the 2nd or 3rd rows? Situation is much worse when the lookup columns contain numbers.
+
+Third is recalc performance. Concatenating the 1st argument to MATCH may be NBD, but concatenating many columns with hundreds or thousands of rows each is extremely wasteful.
+
+Most robust AND fastest to use
+
+    MATCH(TRUE,IF(val1=COL1,IF(val2=COL2,val3=COL3)),0)
+
+Given the way Excel's IF function works, if the 1st comparison is false, Excel doesn't bother evaluating the other comparisons in that row. Similarly, if the 2nd comparison is false, Excel doesn't bother evaluating the third.
+--(range=thing) 
+1/countif is boss but takes a long time to calculate in my datasets.  Waiting for MS to pull DISTINCTCOUNT() down from power pivot heaven.
+You're doing two vlookups there though. Wouldn't iferror be quicker? 
+OFFSET and INDIRECT, the two most disastrously overused functions. Many (> 10,000) formulas calling either can really bog down recalc. I've seen too many large models making that mistake.
+Sumproduct is a similar culprit, I'm a huge fanboy though
+Picky: file opens quicker than that. It's the recalc on open which takes time.
+bruh
+
+
+Can you explain what this does please?
+We used to copy entire columns to the left just to make VLOOKUPs work -- this was at work, in a team of 12 people. Apparently no-one knew how to use INDEX/MATCH in the whole group. Since I had not used Excel before in previous jobs, I learned this (and many more things) from my coworkers and kept happily copying stuff to the left as needed until I learned about INDEX/MATCH, thinking there was no other way around it. Haha.
+In a lookup where you are looking for a result based on multiple criteria, you can use an "&amp;" to join the criteria in a single lookup. For example, INDEX(C1:C10,MATCH(A1&amp;B1,D1:D10&amp;E1:E10)) would return the value from C1:C10 where the values in columns D and E match the values in A1 and B1 (my syntax might be a little off, I'm not in front of a computer, but that's the general idea).  Since this is an array you have to run the formula using ctrl-shift-enter. I'm not the person to explain how arrays really work, but that's how this function works. 
+
+Edit: [Here](https://www.ablebits.com/office-addins-blog/2015/02/25/array-formulas-functions-excel/) is a good tutorial on arrays. 
+MMULT performs [matrix multiplication](http://www.mathsisfun.com/algebra/matrix-multiplying.html), perhaps you got it in school? Multiplication by a 1d array of 1's causes the figures to be added up, row by row. As to where the prime numbers come from...that can be left as an exercise for the student, eh? But don't forget *Evaluate Formula*.
+https://blogs.office.com/2013/03/21/use-webservice-functions-to-automatically-update-excel-2013-spreadsheets-with-online-data/
+
+
+I use it with the following formula `=WEBSERVICE("http://api.macvendors.com/"&A1)` to return the hardware manufacturer name when cell A1 contains a MAC (media access control) address.
+Wrote a pretty fun article on it if you wanted to learn more - http://itsnotaboutthecell.com/2016/02/16/sum-count-average-functions/
+
+I'm starting to get into SUMPRODUCT a lot more lately - the use of Double Unary or Boolean Logic for multiple condition lookups to kind of avoid doing multiple condition CSE INDEX/MATCH arrays. Fun time to be involved in Excel with all the crazy stuff people are up to now.
+I learned the IF(STDEV()) array formula a few months ago. What other sorts of arrays do you do with IF() arrays?
+Saving keystrokes!  aka shorter, more readable formulas...
+From my blog post: http://itsnotaboutthecell.com/2016/02/16/sum-count-average-functions/
+
+WRAP IT UP!
+You turned the original formula:
+
+=SUMIFS(tblData[Sales],tblData[State],”IL”,tblData[Item],”Soap”)+SUMIFS(tblData[Sales],tblData[State],”MO”,tblData[Item],”Soap”)+SUMIFS(tblData[Sales],tblData[State],”IA”,tblData[Item],”Soap”)
+
+Into this formula:
+
+=SUM(SUMIFS(tblData[Sales],tblData[State],{“IL”,”MO”,”IA”},tblData[Item],”Soap”))
+
+Just to be 100% clear, there is absolutely NO DIFFERENCE in the final result. But, there is a difference between a 192-character formula and an 81-character formula. You’ve essentially eliminated =ROUND(0.578125,4) of the original formula with no loss of integrity to your results.
+It also drastically slows down computation. INDIRECT and OFFSET are both volatile functions, so Excel can't only calculate the cells that reference any changes that are made. Once you've got an INDIRECT, it has to recalculate the entire sheet every time a change is made (or every time you hit F9, if you're set to manual).
+Could you explain me how it can be used (possibly in Accounting or Finance if you have experience with it)? I am an Excel noob. 
+Or honestly, IFERROR(XX,"") or IFERROR(XX,"some text telling the user they fucked up") 
+>INDIRECT and OFFSET are problematic at best.
+
+I agree. They are very powerful, but you definitely have to know what you're getting yourself into with each one.
+
+When using Offset I always pair it with match() so that it's finding the correct column/row each time instead of relying on hard coded numbers.
+
+You could also say that VLOOKUP() is problematic since most people hardcode the number of columns variable. 
+
+I typically use INDIRECT() for things where I want the formula to reference a different tab depending on a cell value.
+Assuming FWIW is "for where I work", I'd disagree with you on pivot tables being "sub-optimal"; maybe in your situation, but they are boss for me.
+If you are using actual tables (Ctrl + T), you can replace the reference section of the formula with the table column reference and it will copy down.  Something like GETPIVOTDATA(pivottablereference,"Sales Rep","Bob")  Change "Bob" to the [@[Rep]] column that you would normally have an A2 in or whatever.  
+I have it added to my Quick Access Toolbar, but you can add it wherever you want. You have to find it in "all commands" or "commands not in ribbon" when customizing your ribbons.
+
+If you select a cell or cells then click snapshot it will create a little window with that cell in it. You can resize that window and it will show whatever is in that snapshot area.
+
+It is useful if you are working on formulas across sheets and you want to see what something is doing on another sheet or in dashboard, you can create a bunch of camera windows of all the things you want to display without them being interactive.
+
+Because it is an "image" you can do some cool picture effects with it, if that is your fancy.
+
+Do a search for 'camera function excel' and you will see some examples, etc. but I suggest playing around with it.
+I wasn't going to call them out on it but...
+and "VAR1" 
+Textjoin() but same principle
+Office 365 has TEXTJOIN
+[Not working for me](http://imgur.com/a/THmDg) :(
+The problem with IFERROR is that it traps ALL errors, so not just #N/A. If the referenced cell contained an error value, e.g., #NUM!, IFERROR would mask it too. Problematic for #NUM!, #VALUE!, #DIV/0! which could only come from the referenced cell. Bad for #REF!, #NAME? and #NULL! which could be propagating addressing errors and destructive model changes. There's never any good reason to trap #REF!, #NAME? or #NULL! errors, but IFERROR will.
+
+Safest to use 2 cells: one with a MATCH call, the other to check whether the MATCH call returned a number -> use it in INDEX, #N/A -> return alternative no-match result, anything else -> serious model error!
+
+Don't want to use 2 cells? Add a row at the top of the table with alternative no-match values from col 2 right.
+
+    =INDEX(table,IFERROR(MATCH(value_sought,INDEX(table,0,1),0),IF(AND(COUNT(ERROR.TYPE(value_sought))=0,COLUMNS(table)*ROWS(table)),1,-1)),column_index)
+
+This only calls MATCH once, and when MATCH returns a positive integer, it directly returns the desired value from __table__. If MATCH returns an error value, then if __value\_sought__ is not an error value and __table__ is either a range or an array (in which case COLUMNS()*ROWS() would be a positive integer), the IFERROR call would return row 1, so INDEX would return the alternative no-match value in the top row in the augmented table. Otherwise, the formula would return an error value, but in this case, the error value is either what's in the cell referenced by INDEX or due to __value\_sought__ being any error value or __table__ not being a single-area range or an array.
+sure. We work with a lot of campaign data and many times the naming convention doesn't help flash fill in getting it right (it's also important to be able to do it by formula) and you want to assign the right channel name to a campaign.                 
+Say, you have two columns:
+Column 1 = Campaign names:                              
+YT_Campaign1           
+Campaign1_FB      
+Column 2 = Channel:         
+IF(ISNUMBER(FIND("YT",[Campaign name])),"YouTube",IF(ISNUMBER(FIND("FB",[Campaign name])),"Facebook","Other")))              
+Find is a better one than search as it's case sensitive.          
+What the function does is find "FB" in the campaign name column, if YES, it gives the position of where FB is located in the previous column....when you wrap it around ISNUMBER(), it becomes a TRUE/FALSE...and that TRUE/FALSE becomes the basis for if condition...so if campaign contains FB, Then it's true, if it's true, label column 2 as "Facebook"...Otherwise, check if it contains "YT",,,if yes, label it as "YouTube"...and then, if nothing meets the criteria, label as "Other"...after running the function ..can sort by Other and see if you've missed anything.       
+             
+
+Haha, that's the first one that came up in my google search. Nicely written!
+
+The boolean logic seems to me an almost necessary feature for any sort of array math. I came to Excel from MATLAB, so the idea of what MATLAB calls "logical indexing" was drilled into my head as the best (i.e. computationally cheapest) route to heavy array math. It's a little painful to not have the same functionality when I want to compute over large swaths of data, so the SUMPRODUCT(--(...)...) syntax *feels* good even if it's not the only way to do it and even if I'm not typically doing huge arrays in Excel.
+Anything where you need to narrow down to a portion of a range, you can do =*YourFormulaOfChoice*( IF(group=condition,group) ) then CSE.
+
+You could do it for any arithmetic that doesn't have a native "IF" version (e.g. AVERAGE has AVERAGEIF but MAX doesn't have MAXIF). Honestly I use it almost exclusively as STDEV(IF(... so I haven't applied to many other situations.
+
+Though, I have used it for a formula that finds the first value for each row within a data set - my oldest data is to the right and newest is to the left in any given row, and I want to know the start date so it's something like "MAX(COLUMN(IF(*NOT(ISBLANK(row range))*, row range)))" to get the column number (which I use in an INDEX/MATCH to return the value). I put that one together about 2 years ago but I definitely pieced it together from a couple different tutorials, I didn't figure it out myself.
+IFERROR has two parameters: the value you are analyzing, and the value you want to return in case of error. 
+
+So, if you have a function that returns an error in the form of #N/A, for example, and you want it to return a blank value every time the error occurs, then you would basically say 
+
+=IFERROR([Insert original formula without equal sign]; "")  and it's literally just saying that if that formula returns an error then instead of the result being an error, you want it to be blank. Very useful when using Index/Match combinations, in my experience. I might drag a formula down 100 rows and not want to deal with a bunch of error results, so i prefer blanks that way later on it's easier to copy and paste values. 
+
+If you don't understand any particular formula, try typing it in and looking at what parameters it is asking for. Those are the inputs and the result in the cell is the output. Then, realize that you can take the result of another formula and use it as the parameter for another. That's when you get into nesting formulas. I am not very good at explaining this kind of stuff, but if you need help with any particular formula, there is probably tons of information on reddit or any other forum. Probably even entire blogs explaining INDEX/MATCH example since it's quite popular. 
+Re VLOOKUP, how many production spreadsheets would have tables used with VLOOKUP for which the column layout would be changeable? Hardcoded 3rd arguments usually are NBD as long as the table is moderately compact. OTOH, tables with dozens to hundreds of columns maybe shouldn't be referenced using VLOOKUP.
+
+One model I maintained for a while had tables from col D to col IH. VLOOKUP($B$59+whatever,$D$10:$IV$643,129) was so much fun to trace. Especially silly since col D was sorted ascending. Took me a while, but I finally convinced the overlords that
+
+    LOOKUP($B$59+whatever,$D$10:$D$643,EB$10:EB$643)
+
+made more sense.
+
+As for 3D referencing across worksheets, I've seldom needed more flexibility than CHOOSE provides. Use XLM functions to produce tables of all worksheet names, then use text-valued formulas to build up formulas until you have something like
+
+    CHOOSE(MATCH(wsname,WSLIST,0),WS1!$A$1:$X$200,WS2!$A$1:$X$200,WS3!$A$1:$X$200,WS4!$A$1:$X$200,WS5!$A$1:$X$200,WS6!$A$1:$X$200,WS7!$A$1:$X$200,WS8!$A$1:$X$200,WS9!$A$1:$X$200,WS10!$A$1:$X$200,WS11!$A$1:$X$200,WS12!$A$1:$X$200)
+
+The only use INDIRECT serves with no other single-cell alternative is
+
+    =SUMPRODUCT(SUMIFS(INDIRECT("'"&WSNameArray&"'!"&ValueRangeAddress),INDIRECT("'"&WSNameArray&"'!"&Criteria1RangeAddress),criteria1))
+You misunderstand. If pivot tables are all you believe you need, you don't need a spreadsheet. It's the spreadsheet which is suboptimal. Spreadsheets are best for those who need to do things most of which pivot tables can't handle. And, yes, there are many things pivot tables can't handle.
+Interesting, I'm so hooked on Power Query right now that I can't help myself. But I will.give this a shot
+I went to help to read up on it.  Command is the proper term, not function.  A function, by definition, is used in a formula such as "=vlookup(A1,range,column)".  vlookup is the function.
+Yep.  A function, by definition, is used in a formula.  Goal seek is cool as hell though.
+See /u/Snorge_202's comment - looks like it's [TEXTJOIN(...)](https://support.office.com/en-us/article/TEXTJOIN-function-357b449a-ec91-49d0-80c3-0e8fc845691c), not CONCAT
+First time I understand this nested ISNUMBER, thank you for the explanation!
+Fair enough. When I read the question I read it more as 'what is your favorite "any tip" you use in Excel?'
+
+Most people don't use the terms correctly.
+np. ISNUMBER and IFERROR are nice functions to wrap your data. 

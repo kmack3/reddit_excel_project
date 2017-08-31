@@ -1,0 +1,311 @@
+Excel pride- Post those macros/solutions that made you proud at work
+I was working part time whilst at Uni at one of the UKs biggest banks.
+
+Team managers were having to key data manually in to spreadsheets for reporting purposes. I create a procedure to automate what took an hour for each manager, and this procedure finished in minutes.
+
+Worked out at £20k per year savings / efficiency.
+
+The company had an awards scheme and I was nominated and won an all expenses trip to Dubai with £2000 cash too.
+
+For a young me, this was one of my proudest moments. I'd made a lot of other (what I considered great) contributions, but this was the one that got me the nomination and award.
+
+I'd obviously do it completely differently now, but for my experience at the time I was pleased with it.
+1. Mine is a worksheet that we developed at work where users can type in a client ID and it will pull their past sales, current sales, stocking information, and projected earnings.  
+
+2. I saw we had 23 Sales Reps entering IDs, then exporting to pdf so that they could email out to each client (called Dealers or Dlrs).  This took ~1min per dealer x 350 dealers.  Some of our older reps took much longer than that
+
+3. I wrote a macro to cycle through the Client ID list and export to pdf with accurate file names. 
+
+
+
+
+        Sub PDF_Save ()
+
+            ActiveCell.Select
+        'Second WS called DlrList has the list of the dealers for the region with their client IDS and Names
+            Sheets("DlrList").Select
+            Sheets("DlrList").Range("A1").Select
+
+        'Define which cell value will be changing (the client ID)
+            Dim DlrCodeEntry As Range
+
+            Set DlrCodeEntry = Sheets("Master").Range("B8")
+
+            Dim DlrCode As Range
+        'Cycle through the Dealer list
+            Dim I As Long
+                For I = 1 To 350
+        
+                    DlrCodeEntry = Sheets("DlrList").Range("A1").Offset(I, 0).Value
+                       
+                    Sheets("Master").ExportAsFixedFormat Type:=xlTypePDF, Filename:= _
+                        "FileLocation\" & Sheets("DlrList").Range("A1").Offset(I, 0).Value & _
+                        "-" & Sheets("DlrList").Range("A1").Offset(I, 1).Value & "- March Sales Worksheet.pdf", Quality:= _
+                        xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas:=False, _
+                        OpenAfterPublish:=False
+                Next I
+            End Sub 
+
+Edit for formatting and to add explanations
+My code is on my computer at work so I can't share the code, but I'm pretty proud of it, since I've only been coding about 4 months. 
+ 
+Basically if you want, you can mailmerge an Excel workbook with a Word template. Then you call a macro in the template to have it loop through each individual document the mailmerge can create for you, with instructions to save each document as a separate PDF file with a unique name based on data in the document, and all in a specific folder.
+ 
+Then Word calls a second macro back in your Excel workbook which will start matching names in the Workbook to names in the folder you saved your PDFs in, find an email address associated with that name, and call Outlook to have it prep an email, attach the appropriate PDF, and send the email. And it'll loop through each record and do that.
+ 
+Then once it's done, I have it delete the PDFs since I don't need them anymore and they exist in my Outlook sent folder. The only real hitch is that my job's Outlook security settings don't let me send emails without running an add-in first, so I had to include code to disable all add-ins in Outlook while the macro runs, and the command to send the emails has to be a SendKeys command (%s).
+ 
+The reason I'm proud of it is because my job has been using a third-party add-in that they payed a bunch of money for it to do this for them, and only works on computers that have Acrobat installed. This project should be able to work on any computer with access to our network. Pretty cool for me.
+[deleted]
+We used to pull prices using the Bloomberg Excel Add-in all the time until we were told to stop, at which point we moved to Bloomberg Per Security - which is basically a txt file instead of a live feed. 
+
+The analysts wanted to keep the functionality of being able to just type in a source and be provided with a price - however the price source needed to be the data license.
+
+Therefore, I scheduled a Bloomberg file with approx 1000 ISINs and MID/BID prices, and when it comes down the analysts could easily mine through the file by simply typing in the ISIN in the ISIN column and a source into the sources column and it geneates a price direclty from the per security txt file - without it actually being a live feed!
+
+*reserved space for the code*
+Oh man, you guys would cringe at my beastly, inefficient macros.  After reading some of these responses mine seem like they were created by Chimpanzees huffing paint under a freeway pass.  Mine are long, arduous, monstrosities that I've been cobbling together for years while trying to "teach myself" VBA in down time at work or home.  
+Flair changed to discussion.
+The code's too long to post here, and (sadly) not very impressive from a programming perspective. But still...
+
+I juggle a lot of product data for our website. I needed an easy way to "clean up" product descriptions supplied by vendors: standardizing some elements and converting extended ASCII characters and HTML entities into predictable forms.
+
+e.g.
+
+* smart quotes (`“ ”`) to "regular quotes"; `×` (multiplication symbol) to a lowercase `x`  
+* symbols or accented characters `(©, — , ¾, é)` to HTML entities `(&copy; , &mdash; , &frac34; , &eacute;)`  
+* dec or hex HTML entities `(&#0224, &#x0E9)` to human-readable named entities `(&agrave; , &eacute;)`  
+* unnecessary entities `(&dollar , &#95; , &#x3C;)` to regular characters `($ , _ , < )`, where they fall within the ASCII printable character range (32-127)
+
+I even investigated fixing errors introduced by UTF-8 encoding (e.g. `™` turning up as `â„¢`) but that added way too many complications. I also wanted an option to convert entities both ways.
+
+
+Solution: Didn't require programming genius. Basically just a huge list of Replace functions; e.g. `c.Value = Replace(c.Value, "¾", "&frac34;")`. But it did require a *lot* of time compiling complete lists of ASCII and HTML entity codes, figuring out character standardization, what required encoding/decoding, etc. In the end I had a much better understanding of ASCII codes, HTML entities and encoding problems, so it was worth it.
+
+Drawbacks/limitations:
+
+* VBA can't handle certain characters due to its own encoding. Mostly characters that are uncommon in product descriptions, fortunately, such as Greek letters, mathematical operators, extended symbols, etc. `(Δ ⅞ ≅ ⇐)`.
+* VBA has a limit on the size of compiled code -- as I found out while putting this together! So I had to break things up into multiple procedures. (Which, in fact, worked out fine because...)
+* It's pretty slow, since it's processing dozens of Replace functions per cell in the selected range. Particularly for the extended encoding/decoding procedures I added, although I rarely use these anyway.
+The workbook I'm most proud of was the first one I worked for.
+
+It was the workfile of my team, that then was borrowed by our sister team, macros and solutions served multiple purposes:
+
+* there were macros that opened other files with archived data necessary for processing a given case (they contained vlookup function that would return all the necessary info, macro would just insert the case number in a given file, and copy the line to the main workfile, it saved a ton of time and reduced errors by 90%) (200-300 minutes saved, 0.5 FTE);
+
+* it supported 16 word letter templates that used the data retrieved by the macro above, that were previously completed manually, on top of that it navigated our intranet to obtain and format customer details (name, title, address), navigation and formatting alone usually took 1 minute, overally, it saved 300 - 500 minutes daily (1 FTE);
+
+* macros that opened various other excel files and filled them with necessary info, saved up to 300 minutes daily
+
+* macros navigating the intranet and semi-automating the workload (IE automation), up to 0.5 FTE department wide;
+
+
+
+The most complex macro automated the use of IBM Personal Communication, calls to Windows API (taking control of mouse pointer, finding a proper window handle and sending file paths for file saving etc.), calling MSSQ Server to perform some CRUD operations, with a custom front end, some shell scripts (dir, copy, del), I also automated MS Paint (to save screenshots at a given location on a network drive).
+
+Basically it needed to complete a series of actions using IBM Personal Communication based on criteria, take a screenshot of the last screen and save it in Location A (folder/month/day/string), then find all files within a given folder on a given network drive a certain string (Different each time, I would use shell dir command to dump a folder tree to save time) and copy them to Location A. Afterwards, some actions were performed in IE Window, branch number would be captured, two letters printed to PDF to Location A (Windows API calls to take control of the mouse for a windows pop up window that would need to be clicked), and at the end, a custom email was sent through Outlook to branch management.
+
+After all cases were processed, two other automations would perform a 100% quality check to ensure that the main macro did not ommit any cases.
+
+
+
+I also had a couple of other macros, mostly IE/Excel automation, that should have been handled by C#/MSSQL, but my company was too cheap and at the time I made them, I didn't know any better and they worked well enough.
+
+I'm glad I got into VBA, it's a gateway language to programming (albeit professional programmer loathe VBA for various obvious reasons).
+Mine isn't work related, its game related. The reason it exists is League of Legends lack of statistics tracking. And its the reason i learned anything beyond vlookup.
+
+It sends a request to LoLs json api, kind of parses the json and sorts all the stats into a table, and then shows some almost usefull charts and stats with the use of pivots.
+Perversity: 10 years ago my business unit was just transitioning from Lotus 1-2-3 to Excel. We had lots of old 1-2-3 workbooks in .123 file format we still needed to use, but of course Excel couldn't open .123 files. I wrote VBA macros which used 1-2-3's object model/Automation to extract data from the .123 files.
+I made a lot, a lot of sheets at work. People call me MacroMan because they came to me to ask for help in Excel.
+
+But there is one I made that a really large number of people uses. It's used to consolidate data from many reports. For example, you have a report for every day of the month and you want a list of all values in cell G4.
+
+I made a workbook with a sheet where you list the name of the sheet in a column and the cell name you want do know it's values - for exemplo: Sheet1 | G5. You can do this for multiple cells at the same time. Then you click a button, select all files you want do "consolidate" and Excel will do the rest of the work. It will generate a report with the filename and the value of the cell you want.
+
+Since we work with a lot of daily reports, this helps a lot.
+I am working at my current job as an analyst and myself and another coworker help manage tasks of our team. Sometimes we help and complete tasks that they don't have time to complete. Sometimes in a day we can complete over 100+ of these tasks.
+
+So I built a macro that creates emails for each individual person and the tasks that we completed for them.
+
+All you do is post the two different excel files into the work book and click run. It loops through the lists, and filters based on the teammates name. Then references a table and adds the teammates email, and then posts the relevant information about which tasks we complete. Plus the macro was smart enough to know what tasks was complete. So it would either say that I have completed task a and task b. Or just Task a or b. Sadly I can't post the full code here. I believe I posted it in here before but it was heavily edited. Still one of my favorite macros
+
+A team I was doing consultancy work for had weekly meetings where they would use post it notes to write down issues, and post them in certain parts of the wall, depending on whether these issues were a priority etc etc.
+
+I made a "post-it note simulator" in OO VBA.  Basically, you have a spreadsheet with all your issues on, and you click a button.  An 'post-it note' is instantiated for each issue on your sheet, and placed onto a mock 'wall' with each area.  You can click and drag these post-it notes to wherever you want on this board and it will remember where you left them.  Depending on it's final location, the program would determine what 'priority' it was based on the X/Y coords of the 'post-it'.  Double clicking on a vritual post-it note would open up a userform where you can enter/view more information.
+
+The whole thing would resize/scale based on monitor resoultion, and would even work with multiple monitors.  God I was bored that week!
+
+
+Not really a single solution, but the thing I'm most proud of is just being the go-to guy for excel problems..
+
+People would tell me their problems and I'd think for a few seconds before kicking them over and writing out a formula while they looked on in amazement with the final enter or paste being like a mic drop before walking away.
+We had raw data of sets of ca. 40 nozzles, indicating in which direction the nozzles sprayed. Think bulls eye or a rough clock around it, indicating the direction.
+
+What was needed was a graphical representation of this to look for production issues. I converted the data to show up in 3x3 matrix for each nozzle, either bullseye (position 5) or the direction of the deviation as one of the remaining positions.
+
+***
+
+&#9642; border  
+&#9676; nozzle positions  
+&#9679; spray direction
+
+| &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; | &#9642; |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| &#9642; |   | &#9679; |   |   |   | &#9679; |   |   |   |   |   |   |   |   |   |   |   |   |
+| &#9642; |   |&#9676; |   |   |&#9676; |   |   |&#9679; |   |   |&#9676; |   |   |&#9676; |   |   |&#9679; |   | &#9679; |&#9676; |   | &#9679; |   |   |
+| &#9642;  |   |   |   |   |   |   |   |   |   |   | &#9679; |   | &#9679; |   |   |   |   |   |
+
+***
+
+So, like this, but with more bells and whistles. Think different characters for irregular spray and more.
+
+The solution was a formula which took the raw values and made the respective bullet appear in the right cell if the conditions were met. Normalizing the coordinates, followed by nested IF statements.
+
+Everything in a table, no graphics involved. Similar to my reddit table here. That was done in Excel 3.0 or 4.0, ca. 1992.
+Code is all propriety but I've made a few fun M&S efforts in the past couple of years.
+
+* Simulation of a cyber attack on specific military systems and what their impact would be
+
+* Availability and time until usable heat maps for a subset of military airplanes
+
+* Shipbuilding industrial base model with adaptive scheduling.  Included some fancy add/delete stuff to keep charts and results functioning for different build plans and a demand profile creation tool.
+
+* A macro to read a couple thousand pictures that were all colored arrows and translate them to text instead of hand jamming them all.  I did this by using copy/paste commands and looking at the colors of specific pixels.  PITA but faced a bunch of monotonous work.
+
+* A coworker wrote an awesome simulation of the navy's ISR workflow that we used to evaluate different architectures and efficiency-improving tools.
+At my current job we have employees that were checking multiple screens and counting things to add to a basic end of shift report.  I was able to put together a few SQL queries with a refresh button that pull all of the information from db2 tables.  It then gives them all of the info on separate tabs with a main tab giving the roll up containing counts of each item and age ranges.  Isn't anything fantastic but it was the first thing I put together and am pretty proud of it.  
+Nice work, that's pretty cool to be awarded something like that early on in your career. 
+
+At one of my first employers, I figured out a way for our monthly exec reporting package to be semi-automated and saved the department essentially a full day or two of working on that mind-numbing thing. However, since I was only an intern I couldn't really be awarded much more than some nice company recognition (landed a FT offer, but chose to go elsewhere). 
+
+
+that's awesome.  well done.  its amazing how many of those little processes add up to big expenses!  
+That sounds incredible..  Nice job
+Great! I'd love to see the code.  I have dabbled in auto emailing but keep getting caught on our own security protocols
+Nice! I might have to give this a try
+That's clever. I'm assuming the users only ever need to view the reports, then? (I.e. no editing on users' parts)
+Do you still have the workbook or code?
+Not really sure what per-security is - I've been building some stuff at work lately using the bbg addin, recently discovered the magic of =BDS( ) functions. 
+
+Off topic - buy side or sellside? Started at a primarily F.I. fund a few months ago and loving it so far... Still have a ton to learn though. 
+Why did they ask you to stop?
+Be proud of your effort. My boss previously did my job before I was hired, and she wrote about a dozen macros in that time. She made work easier for a lot of people in our office, but her macros were ugly and unwieldy.
+
+When I first saw the master macro workbook, I was kinda proud of her. I mean, she took zero prior knowledge of programming and automated an enormous variety of tasks. That didn't stop me from obliterating all her work and rewriting everything to be legible and efficient, but I'm still impressed at what she managed to do.
+Have you tried feeding everything into an array, performing all the replaces within the array, then spitting the array back into a sheet? I have seen huge performance increases on a couple of my macros with this process. 
+This will remove the need for hundreds of REPLACE lines:
+
+(INFO: Have all of your "from" values in a sheet, under column A, and all your "TO" values next to the relevant "FROM", in column B.  Change Sheet2 to the sheet where all your data is).
+
+    Option Explicit
+
+    Private Sub lp_mass_find_replace()
+        Dim lr_from             As Range, _
+            lr_cell_values      As Range, _
+            lr_from_cell_vals   As Range
+            
+        Dim lv_instr_num As Integer
+        
+        Application.ScreenUpdating = False
+        
+        Set lr_from = Sheet1.Range("A2:A" & Sheet1.Range("A" & Rows.Count).End(xlUp).Row)
+        
+        For Each lr_cell_values In Sheet2.UsedRange
+            For Each lr_from_cell_vals In lr_from
+                lv_instr_num = InStr(1, lr_cell_values.Value, lr_from_cell_vals.Value)
+            
+                If Not lv_instr_num = 0 Then
+                
+                    lr_cell_values.Value = Replace( _
+                        lr_cell_values.Value, _
+                        lr_from_cell_vals.Value, _
+                        lr_from_cell_vals.Offset(0, 1))
+                        
+                End If
+            
+            Next lr_from_cell_vals
+        Next lr_cell_values
+        
+        Application.ScreenUpdating = True
+        
+    End Sub
+Could you post up a link to  sample workbook?  I'm trying to get some auto-emailing macros going and am having difficulty pulling from the reference lists. 
+Were these form controls that would pop up?  Or were they Shape Objects?
+Were those spray directions static?  Or did they update frequently?
+I love making tables with old school chart functions.  I liked the old bar charts that had 
+
+      sales ||||||||
+      Goal ||||||||||||||
+ 
+Like I discovered, if the security is caused by an add-in, you can get Outlook to disable the add-in during run-time. I found [this](http://www.mrexcel.com/forum/excel-questions/451239-disabling-com-add.html) thread which was enormously helpful in that process.
+ 
+Basically you have to 1. get a list of add-ins running in Outlook, 2. determine if they're regular add-ins or COM add-ins, 3. give a command to disable them in your macro using the list you found. The actual command is slightly different if it's a COM add-in instead of a regular one like Solver.
+Buy side I think. I do back office so I do both. 
+
+Taking data off the BB Terminal to use on another machine is a breach of contract btw. Bloomberg can and will fine you  X thousands of dollars. 
+
+PerSecuriy is where you send a request file to Bloomberg via FTP or Upload and they reply with a txt file with the data you requested. Slower than the BDP/BDH/BDS but Bloomberg won't fine you for misuse as the data can be used on any machine. You can also schedule it so you don't need to be at a Bloomberg terminal to use the data. The magic I've done with this, you won't believe! 
+Because we're not supposed to do it that way. 
+I haven't... but mainly because that's beyond my ability/understanding right now!
+
+Honestly, I'm a pretty strong worksheet user but have no real experience with VBA -- or with any other programming language for that matter. This was my first real foray into achieving something practical with VBA, by piecing together a couple of Googled code snippets as basic inspiration, then adapting them (with some educated guesses and further Googling for syntax) to achieve what I needed.
+
+I've hacked other people's code around before -- whether Excel macros, Windows batch scripts, OSX shell scripts, even some JavaScript-based Photoshop scripts -- with just a little application of logic + Google-fu. But while it's kind of fun to learn snippets on the fly and achieve a specific goal, it's no real replacement for learning a language properly. Case in point: I wouldn't even know to consider arrays for this macro, or where to start!
+
+That said, I'm currently trying to remedy that via [this course](http://www.reddit.com/r/excel/comments/2yuigh/reminder_free_10week_introduction_to_excel_vba/), so I can actually learn my way around VBA properly. I definitely want to revisit this macro once I'm a little more capable, even if only to test/push myself, so I'll keep the array idea in mind for when I do. Anything that could speed it up would be a boon; it really is painfully slow on larger range selections. Thanks for the suggestion!
+Oh wow, this sounds much more sensible (and flexible) than having everything hardcoded into 4000 lines. I'll give it a test run when I have a decent break between meetings today, thank you for posting it up! I'm also going to pick it apart to make sure I understand what each piece is doing -- I think I follow most of it but there are a couple of things I'm unfamiliar with at the moment.
+    For Y = 2 To 29
+
+        If UCase(TTE) = UCase(Sheets("Reference Table").Range("A" & Y).Value) Then
+
+
+        ManagerEmail = Sheets("Reference Table").Range("D" & Y).Value
+        TTEEMail = Sheets("Reference Table").Range("B" & Y).Value
+        GoTo EndLoop
+
+        Else
+
+        GoTo LoopAgain
+
+        End If
+
+        LoopAgain:
+
+    Next
+
+    EndLoop:
+ 
+
+    With objOutlookMsg
+    .To = TTEEMail
+    .CC = ManagerEmail
+    .Subject = Subject & " ~ " & Date
+
+
+    .Body = stg2
+
+
+    .Display
+    End With
+
+
+So this is the part you are asking for. Pretty simple. Just having a basic loop. The way I have this working is I take the tech from the other tabs and add that to a variable and then loop through the table to find that tech and then grab that techs email and managers email. I have UCASE to make sure and account for the different systems I pull from, because everywhere has different formats within the same company. 
+Sure ill see what I can do. 
+Everything was form based. The post-its were mini frames, with text boxes on and the double click was another form. The virtual "wall" was a huge userform.
+They were supposed to be static - some were irregular, though. I could detect this by averaging. The old school stuff was surprisingly versatile. Different sized bullets, different characters.
+
+The advantage is that you don't have unnecessary fluff which obfuscates what you want to see. Newer excel versions now have Tufte's sparklines to achieve similar effects.
+
+And CPU-effective. This shit had to run on 386 processors. The department server was a 486. Good times...
+No problem, happy to answer any questions
+
+Thank you!  I'll give that a shot tonight
+I like my sparklines... but I can't get anyone else in the office to see the benefit.  Every time I come up with a dashboard that includes them, I get the comment that they don't understand what they are. 
+Of course, just make sure your reference table has the same spelling of names that the system your pulling from. Other than that, you should be fine. 
+
+Ive come to find that big problems are pain but you can solve. Yet the little problem cause the most rage and can take forever to solve because you never thing of them (missed spelled name, etc)  
+I feel with you. I made excellent dashboards with muted pastel colors which don't distract. I got requests to change to bright primary colors instead.
+
+Maybe tell these people: If you don't understand them, just ignore them.
+ughhhh bright red and yellow.  With thick box borders.  
+You must know the same people. Thick borders like you wouldn't believe.

@@ -1,0 +1,72 @@
+How to change the color of a cell if its value is changed?
+You will need to copy this into the `Sheet1(Sheet1)` VBA Module in your VBE (The module name may change depending on what you named your worksheet) for whichever sheet you want this feature to work on.
+
+    Option Explicit
+    
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        Target.Interior.Color = RGB(254, 254, 254)
+    End Sub
+
+Now, you can insert this portion of code in a new VBA module, so that you can access it from anywhere else.
+
+    Public Sub ShowChanges()
+        Dim TargetCell As Range
+        For Each TargetCell In ActiveSheet.UsedRange
+            If TargetCell.Interior.Color = RGB(254, 254, 254) Then TargetCell.Interior.Color = RGB(254, 254, 0)
+        Next TargetCell
+        Set TargetCell = Nothing
+    End Sub
+    
+    Public Sub RemoveHighlights()
+        Dim TargetCell As Range
+        For Each TargetCell In ActiveSheet.UsedRange
+            If TargetCell.Interior.Color = RGB(254, 254, 0) Then TargetCell.Interior.ColorIndex = 0
+        Next TargetCell
+        Set TargetCell = Nothing
+    End Sub
+
+`Worksheet_Change` triggers when a cell is edited. What it does is marks the cell's color as RGB(254,254,254) which is nearly completely white. This assumes that the default cell color is white. This makes things less intrusive, and allows the user to edit the page with minimal distractions.
+
+`ShowChanges` makes the changed cells easily visible so that you can view what was changed.
+
+`RemoveHighlights` removes the highlights and returns the cells to the default formatting of not having any background color.
+
+---
+
+Note: This macro overrides any pre-existing cell color formatting.
+Duplicate the sheet, paste values, use conditional formatting if the matching cells are unequal. 
+
+*edit:
+
+OK, I tried this myself and it works. Use this formula on your main sheet: =NOT(EXACT(Sheet2!A1,A1)) and have it apply to all of the cells where you wish to show a change. The only downside to this approach is you'll need to mirror your main sheet on a separate worksheet (Sheet2) whenever you send your stuff out, but it avoids any VBA and should be pretty compatible with various versions of Excel. 
+Why not use "track changes"? 
+Sorry for the third post, but there's also an entire share workbook feature set that handles this type of use case. 
+Thanks. Will try and let you know how it goes.. on Monday ;)
+Bravo!
+How? And what is it?
+Tell me more.
+If you're impressed by that, you'll be interested in [this](https://drive.google.com/open?id=0Bx6qbYbtBah6dkU0R21VaUlEdk0).
+http://www.gcflearnfree.org/excel2016/track-changes-and-comments/1/
+On mobile - I'll try to summarize later when I'm home if you still need help :) 
+https://support.office.com/en-us/article/Use-a-shared-workbook-to-collaborate-49b833c0-873b-48d8-8bf2-c1c59a628534
+For even less intrusiveness than changing the cell's colour (which could be a problem in a number of workbooks), change the cell's vertical alignment:
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        Target.VerticalAlignment = xlDistributed
+    End Sub
+
+    Public Sub ShowChanges()
+        Dim TargetCell As Range
+        For Each TargetCell In ActiveSheet.UsedRange
+            If TargetCell.VerticalAlignment = xlDistributed Then
+              TargetCell.Interior.Color = RGB(254, 254, 0)
+              TargetCell.VerticalAlignment = xlBottom
+            End If
+        Next TargetCell
+        Set TargetCell = Nothing
+    End Sub
+
+Sub RemoveHighlights() as you have, above.
+
+I'll check out the linked file in a couple of hours.
+Thanks. I will try this and see how it goes.

@@ -1,0 +1,40 @@
+I have a string of alphanumeric data. I need to extract specific numbers from it. How can I accomplish this?
+Hi,  
+
+While looking for an asnwer I found here http://www.mrexcel.com/forum/excel-questions/443983-extract-only-numbers-text-string.html the following formula:  
+
+    =SUMPRODUCT(MID(0&A2,LARGE(INDEX(ISNUMBER(--MID(A2,ROW($1:$25),1))*ROW($1:$25),0),ROW($1:$25))+1,1)*10^ROW($1:$25)/10)  
+
+I tested it and it works to return all the numbers so in column B you could do left(this formula,6). In column C I am not sure of what is your objective sometimes it returns the same content as B sometimes an error (C1 eventhough A1 as numbers)   
+
+Cheers,  
+
+EDIT: Do not ask me to explain the formula I just copy/pasted it and tested it but I did not look much into it, you can find explanation on the linked forum.
+I took what /u/Starwax posted and made a small change then created something for column C.  I tried avoiding VBA and keeping this as a formula. It's kind of long so I'm open to ways of shortening it.  In cell B1 put this formula:
+
+     =LEFT(SUMPRODUCT(MID(0&A1,LARGE(INDEX(ISNUMBER(--MID(A1,ROW($1:$24),1))*ROW($1:$24),0),ROW($1:$24))+1,1)*10^ROW($1:$24)/10),6)
+
+Then in cell C1 put this formula:
+
+    =IF(MAX(LEN(TRIM(MID(SUBSTITUTE(" "&A1," ",REPT(" ",LEN(A1))),ROW(INDEX(A:A,1):INDEX(A:A,LEN(A1)))*LEN(A1),LEN(A1)))))=6,MID(A1,LEN(A1)+1-MATCH(MAX(FIND(" ",(RIGHT(A1,ROW(INDIRECT("1:"&LEN(A1))))&" "))),FIND(" ",(RIGHT(A1,ROW(INDIRECT("1:"&LEN(A1))))&" ")),0),MAX(FIND(" ",(RIGHT(A1,ROW(INDIRECT("1:"&LEN(A1))))&" ")))-1),"Error")
+
+The second formula is an array formula so be sure to press **Ctrl+Shift+Enter** when entering the formula.
+This might be sounding like a stone age man. 
+
+Bur for Column B have you tried replacing the letters and spaces with nothing so that they would be gone and then reading the first 6 characters?
+
+I know I sound like a brute...but maybe this is one of the solutions. :D
+For column B, I would imagine you should be able to type the first set of numbers in manually and flash fill for the remainder
+Thanks, I'll test it out in a moment 
+
+>In column C I am not sure of what is your objective sometimes it returns the same content as B sometimes an error (C1 eventhough A1 as numbers)
+
+What do you mean by this? Column C should return the largest number from A. So A1 containts "123 E 537 CE 2415 80". In B, it would get the first 6 digits (123537) and in C I want the largest number present in the cell A1 (2415).
+Sorry to hijack but this is magical. Saved this for future study :)
+When you say replacing the letters and spaces with nothing, do you mean manually do it each time, or is there a formula that would do that? I need to process about 500 entries a day.
+After reading it another time I understood your point about C, I did not understand this mornong.
+
+
+
+Highlight the column, ctrl+f " " replace with "" will remove all the spaces from the column
+If this is done regularly you could also do it with formulas or a macro.

@@ -1,0 +1,18 @@
+Should I be using a database?
+It's quick, does the job, and does it okay. It would probably be more efficient when stored in an actual DB, but for something quick and editable, it does the job. They probably don't want to have to deal with creating the DB, tables, and code to manipulate their data when they can directly edit it in Excel.
+[deleted]
+Excel is fine, but using Power Query would make the consolidation a lot simpler. 
+Store in Access, query with Excel. 
+mods how do I change the post to solved?
+ok cool thanks just wanted to make sure that this wouldn't become a huge disaster for them later on.
+
+You hit the nail on the head. It's built the way it is for convenience. The DB may be a struggle because they dont know excel very well. 
+they like to "see" things separated out as they type it if that makes sense.
+
+The input tabs have a bunch of nested tables so they know all of the Department 1 items are together and there are different tables are based on different regions. So all of region 1 department 1 in one table, all of region 2 department 2 in one table. 
+
+The scale of data is pretty small - around 2000 rows.
+nvm got it!
+Storing everything in a DB would only become a concern if the amount of data they are working with grows significantly.
+You mean if the dB solution isn't built with that assumption?
+If the current excel solution isn't built with scaling in mind, converting to a DB solution would become a concern.

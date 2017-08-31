@@ -1,0 +1,90 @@
+How can we automate timesheet compilation company wide?
+This should be done in a proper database.  Not a spreadsheet.
+Sounds like something best handled by a web form instead of merging individual excel files from each employee. Maybe try a Google Form for prototyping.
+As /u/ZebZ said you'd probably want to store the submissions in a database.
+It can be done using Power Query or by VBA. I have done something similar in putting together metrics gathering code that consolidates into one spreadsheet. I don't know if it is against the rules for me to offer, but I could work with you one on one for a consulting fee. If your interested, let me know.
+I'm going to disagree with everyone here calling for a relational database. Timesheet information is flat and has no need for a relational database.  If you all run on google apps, have them submit their time sheets in a google form and allow the form to create the aggregate ledger for you. If you want to get fancy, i recommend using one of the free online timesheet programs. I've had a good experience with WeWorked(dot)com in the past. 
+you could do this using VBA - a programming language built-in to Excel.  someone could code a collating spreadsheet to scrape the data out of all timesheets in a folder.  the process could be coded into a button that's right on the spreadsheet itself.
+[deleted]
+This really should be a SQL/Access database with some sort of form for everyone to fill out like others have said, but I have actually coded something similar that may help.
+
+        Sub January()
+        
+        Dim j As Long
+        Dim i As Long
+        Dim customerid As String
+        Dim diskgb As Long
+        Dim currentyear As String
+        currentyear = Left(Right(ThisWorkbook.Name, 8), 4)
+        j = 1
+        
+        Dim wbk As Workbook
+        Application.ScreenUpdating = False
+        Application.DisplayAlerts = False
+        Set wbk = Workbooks.Open("C:\billing\" & currentyear & "\test\" & currentyear & "-January.xls")
+        
+        
+        
+        Do While ThisWorkbook.Sheets("Q1").Cells(j, 4) <> 0
+        If InStr(1, ThisWorkbook.Sheets("Q1").Cells(j, 4), "Overage") Then
+        
+        
+        customerid = Application.WorksheetFunction.VLookup(ThisWorkbook.Sheets("Q1").Cells(j, 2), ThisWorkbook.Sheets("Lists").Range("A1:C50"), 3, False)
+        
+        For i = 1 To 150
+        
+        If (wbk.Sheets(currentyear & "-January Account Disk Usage").Cells(i, 1) = "Sub-totals for " & customerid & ":") Then
+        ThisWorkbook.Sheets("Q1").Cells(j, 8) = wbk.Sheets(currentyear & "-January Account Disk Usage").Cells(i, 4)
+        
+        End If
+        Next i
+        
+        End If
+        j = j + 1
+        Loop
+        Call wbk.Close(True)
+        Application.ScreenUpdating = True
+        Application.DisplayAlerts = True
+        
+        
+        
+        End Sub
+
+
+This code is tied to a button on a sheet but could be easily reworked to do what you need. I can't provide anything more specific without a look at how the data is laid out exactly. You'd need to do pretty much all of this code in a loop for each other spreadsheet. That's going to be dependent on how they are all named or where they're located. 
+
+Then the middle part of the code would need to be changed so that it's getting your specific data from the correct cells in the sheets and putting them in the correct spot in your master sheet.
+Like many others have said - Access or VBA - to save every input into the master spreadsheet :)
+Just to reiterate, yes, you could certainly do this through excel and a VBA macro.  A database is certainly a more sophisticated approach, but sometimes I think excel works just fine, especially to prototype a solution and get your requirements straight.
+
+
+If you are able to upload a version of the individual form, and the master form, with some dummy data, you might get some more help on the nitty gritty of setting this up.
+Time clock software has come a long way. Check out pricing. 
+If the values entered by your staff are prone to human error, then those spreadsheets don't have the proper data validation. 
+Second this... and probably OP needs to buy a software platform that utilizes this.  There are a lot of emerging ERP's for SMBs that can do exactly this plus a lot more.
+thanks for your response - could you expand on it at all?
+To go off of this, Power Pivot or Power Query may be your best bet. If you all have the same exact excel sheet that you use, you can put them all in the same folder and it could input the line items that you specify into your columns into one master excel sheet. However, it may be better if you just use a real database that is meant for user input instead of just an excel doc.
+To u/ampersand38 also
+
+Google forms hadn't crossed my mind - thanks for the suggestion, I'll have a look into it.
+
+One question, if we set up a form which essentially mirrors our time sheet template, will we be able to save these form submissions as individual files? Currently we save everyone's individual time sheet for audit purposes (which I don't think I was clear about in my post, apologies) and also run the master spreadsheet for analysis.
+
+Agree with this. I've used On the Clock and it's both decent and fairly cheap. 
+i agree. are these related to separate government projects, and all need to be billed appropriately? 
+
+there is a whole world of government accounting and hour tracking; tons of crappy software that is at least audit-able. excel sheets are not great at achieving that. 
+if you guys use Office, you probably also have MS Access licenses. Use that, get a beginners Access book. I did something very similar. Access queried the users PC logon id, shoved that into a field and then the user put in their hours. Users could only see their own records. The basics are pretty simple, most of my code was validity checking.
+You need a basic website to get people to submit their timesheets and the inputs are stored in a database (or buy a software package that does this, there are hundreds).  
+Then Excel can query the database (or you can use the built in reporting features of the software you bought).  
+I agree. This could be a 1 hour setup to get accomplished with Access and a form.
+Logging the submitter for each entry should be pretty basic functionality for whatever system you use. Then you can filter and export entries by individual submitters. Would that be sufficient?
+
+Not government projects, but projects nonetheless. The individual time sheets are saved by themselves, and their data input to the master sheet that allows us to manipulate/analyse/view the data as we need.
+
+I'll look into both your suggestions, thank you
+Maybe even less. I'd be amazed if there weren't already an access template for this.
+Possibly, I shall have a good go at seeing how this system works out for me in work tomorrow/Friday and report back.
+
+Thanks for your help so far :)
+Or, just use one of the free time clock software out there that exports their db to Excel. Many ways to skin this kitty.

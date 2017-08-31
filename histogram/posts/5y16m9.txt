@@ -1,0 +1,188 @@
+PSA : Don't ever accept to develop a solution for Excel on MAC
+This sounds like an absolute nightmare, and I feel sorry for you for having to deal with it. I don't touch anything that requires a solution for iOS. Not even with a 10-foot pole.
+i am running into excel compatibility issues with my mac as well. everyone else at my office is running excel on windows.
+
+my gripes are largely related to limited functionality on mac excel 2016 compared to windows counterpart. 
+
+* no XML import support
+* can't edit/create relations
+* i can count the number of times flash-fill worked correctly on one hand
+
+why Microsoft, why?
+
+You have my sympathies. 
+
+My company is also primarily Mac-based and, up until recently, most people have been on Excel 2008. That thing's a fucking disaster. It's like MS Paint for spreadsheets. It doesn't even support VBA... which turned out fine for me as it gave me a legitimate excuse to use "proper" Excel in a Windows VM instead.
+
+We were just recently "upgraded" to Excel 2011 for OSX but I'm not even going to attempt to adapt my various macros to use it. Excel 2010 (Win) was *substantially* faster than Excel 2008 (OSX), despite 2010 running inside a RAM- and CPU-limited VM **on the same Mac**... and I have a feeling 2011 is still pretty poorly optimized so it's not worth the hassle. (Much like Outlook 2011 is basically a slightly updated version of MS Entourage from the same Office 2008 package, rather than a fully-fledged match to MS Outlook.)
+
+Rumor has it that Office 365 / 2016 brings OSX more up to par with Windows versions, but I'm not going to hold my breath.
+I feel your pain so hard. I live my life in Excel/VBA/Windows at work.  At home I use most Apple products, which is my personal, off-the-clock preference.  
+
+Until I went back to school and endured the horror of graduate level finance on Excel for Mac.  I'm a pretty mild-mannered person, but I go from zero to straight murder every time I have to use Excel for Mac. It's the actual worst. 
+Right tool, right job. Looks like a job for "FileMaker."
+OMG..  I just dealt with this in my job.
+
+Mac and Excel/VBA is a fucking nightmare.
+
+I had a perfect Excel/VBA/SQLServer solution.  Client wanted it to work with Mac rather than Windows.  Our company ate something like 130 hrs of development after the contract ended trying to make it work until I simply told the director to cut our losses, this is never going to happen.
+
+
+I got a Macbook Pro because it was really good bang-for-buck at the time in South Africa. The retina screen was particularly appealing at this price point. 
+
+I had some struggles developing a custom database (it only has two tables and was an interim solution, so excel was a good solution) for some clinics at our public hospitals on Excel 2011. The biggest struggles were just the colours on my custom forms. Then I upgraded to the latest version of Excel for mac. Get this people...
+
+Forms. Are. Not. Supported. 
+
+I can literally no longer edit my forms at all. I can still run them. The code still works. But I can no longer open my forms in design mode to alter them. It's pretty shocking, in my view. It's not a total deal-breaker for me, because most of the work was already done. 
+
+But yeah. If your job is working with Excel, I can't recommend using a Mac.
+Sounds like yr "friend" took rather nasty advantage of you:  Cashed you out up front with no royalties, *and* managed to put you on the hook for support.  
+
+> So in order to recoup some of the money he was paying he, he figured he could sell the spreadsheet to other friends / competitors in the industry.
+
+That is such a sad, *sad* line.  "Oh, woe is me!  I'm so poor that I have to profit from yr labor without giving you at least 50% of the profits that you deserve!"
+
+This is a royal screw job, make no mistake, and you are suffering still for it.
+I didn't see where you mentioned the version(s) of Excel.  I know Office 2011 was worthless.  After pushing the few macs we have to Office365 many of the compatibility issues went away.  Don't get me wrong, iOS still sucks but going to 2016 made them behave a bit more.
+The only thing that comes to my mind is asking if you develop on mac?
+A. Excel for Mac is terrible. They'd be better off running it in a VM. 
+
+B. You are getting fucked and your friend is fuckingn you over. 
+Are you getting paid for this?
+And this is just one of the reasons I've stopped using my macbook. 
+Ohhh I know this struggle... I feel your pain! Everyone uses mac laptops in my company so I need to first test all my vba on a shitty old Macbook before sending them to my colleagues. Thankfully it's usually simple macros but what a source of frustration and a time waster. 
+You do realize that all of your complaints could be seen as issues with the PC version, if what you are used to is the Mac version, don't you?
+I use Excel for Mac and while I'll never use a Windoze box so long as I can help it, Micro$soft has failed to make good on their promise of parity.
+
+VBA lacks intellisense -- it was there in v. 2011!
+VBA lacks the "watcher" or whatever it was called.
+VBA editor still does not support UTF8 (not sure about the windoze version).
+
+I highly recommend that OP check out the research of Ron de Bruin [here](https://www.rondebruin.nl/).
+
+Cross platform compatibility of vba code remains an issue.
+It is. And it's a friend, so I can't just tell the guy to beat it.
+
+It started as help modifying a spreasheet.
+
+This spreadsheet than turned into an inventory management system, with lots and expiration date ( i.e. 1 item for multiple lots, with dates, with reservations at the item level and orders at the lot level).
+
+It got more expensive than he had planned for and I know that my friend isn't rich. This is not a huge business, it's a passion business that keeps him employed.
+
+So in order to recoup some of the money he was paying he, he figured he could sell the spreadsheet to other friends / competitors in the industry. They all deal with the same Monopoly vendor, so it applies to all of them. 
+
+He paid me well and he paid me in cash, so it was hard for me to say no at this point.
+
+But turns out all his friends / competitors in the industry are all a bunch of Mac loving hipsters. So now I have these 4 small companies, with multiple non tech savy users dealing with the spreadsheet making manipulation mistakes, on top of the Mac compatibility issues.
+
+And since my friend was running out a budget, the focus was on delivering the functionality. Not on extensive testing, mistake-proofing and error catching. So it’s quite easy to mess it all up.
+
+I want to cry.
+
+It's not microsoft's fault you're using a ~~shitty~~ subpar OS.  
+
+*edited for sensitive people.
+This is the kind of solution I would have liked to implement. But I didn't know beforehand that they needed multi user access (file is in a Dropbox folder synced on a folder on everyone's computer.) 
+
+But this is essentially how the solution is built nonetheless. I use 5 sheets as "tables", there's hardly any formulas anywhere, everything is handled through VBA (which is kind of a pain, I'd love to call a simple update function rather than loop through or use match to find the row number). 
+I see where you're coming from but it's far from this.
+
+He's a real friend. We go **way** back.  He actually offered a 50% royalty, but I turned it down, not wanting any money to be dependent on a sales effort I had no control in nor any intention to take part in.
+
+At most, he would have recouped almost what he paid me upfront if all the 8 companies (think 1-3 employees companies including owner) bought it . But in the end,  he doesn't even recoup a third of what he paid me. And for the 3 companies that did take it, there was a decent startup fee that went to me.
+
+It's really all the imcompatibility issues that have made the process so unpleasant.
+
+If everyone was on PC, I wouldn't mind providing the occasional support since the thing is still fairly well made, if you use it correctly. It's just that I have to get over the first 2 weeks to say that they've used it and it works correctly and then paid support would kick in.
+
+One of the other companies that bought in has now asked me to tie it up with their excel based invoicing "system" (I'm using those terms lightly, from what I saw they just type everything manually in an excel template to print and send and another workbook as ledger for these invoices). It's going to be a piece of cake and I'll be able to get still more money out of that.
+
+I'm not getting screwed in this whole thing far from it. 
+I can confirm on 2011 being horrible. Just trying to create a Pivot Table saw my application crash more than 20 times. I eventually gave up, created it on Google Sheets then brought it over to just readjust the columns it referred to.
+Excel for Mac 2011 was actually better in certain ways as far as VBA goes. It had intellisense, for instance.
+iOS is mobile. OS X is desktop.
+?
+Well that's the thing.
+
+I was paid quite well for the development, and in cash. Maybe not every single hour, but when reaching the end; my friend told me how much he had and I agreed to complete the project for that price (my mistake here).
+
+So my hourly certainly dropped since I started giving all that free support, but I did make over $3,000 with this side project, so I don't mind throwing in a few minutes here and there.
+
+It's just the simultaneous implementation in the 3 other companies that has proven tough.
+
+Like as soon as a week goes by without anyone having issues, with all the right data where it's supposed to be, the implementation phase will be closed and we'll move on to support plan.
+
+But I also feel for those 3 companies. They purchased this "software" for $500 and it hasn't worked properly since. I can tell them it's a compatibility issue all I want, it doesn't make it work.
+
+I've resolved the biggest hurdles I think, but I just have this anxiety shoot up every time I see an email about a problem.
+
+If I had a week to fix the bug, it'd be different. But it's a business critical spreadsheet, I need to fix it as fast as possible (Or they'll keep using it, with the corrupted data, and it'll take me 3 times as long to reinitialize everything, forget figuring out what might have happened).
+I haven't seen Good old regular excel do any of the following : 
+
+- Delete random subs because a filter on a pivot table made it crash
+
+- Randomly name in the worksheet parameters (accessible vrom the VBA editor)
+
+- Randomly resize the font size of Userform frame labels. Both extremely small and extremely large.
+
+- Change regular accent characters into weird unknown characters.
+Call it a day.
+
+Your job was to help with the initial spreadsheet. They changed the circumstances, so you can too.
+
+Or get their company to pay you. Set a reasonable amount of time and price (50-75% of market as "mates rates") and invoice them.
+
+Or they can pay for someone else to do it.
+Bootcamp? 
+It's not the OS. It's Microsoft's port of Excel. The Mac version is just awful compared to the Windows version, and Microsoft seems determined to keep it that way. 
+He's talking about macOS, not Windows.
+Watch the tone please. 
+
+edit: thank you :)
+You are correct...though I would argue neither is worth a damn.
+I just ask if your work computer a Mac, or a PC? I assume it is a Mac, but wanted to confirm.
+
+Probably developing files/macros on a Windows computer and then sending finished files to Mac users could cause problems.
+It sounds like the job has moved beyond your original agreement, and your friend/friend's employer should search for paid professional help from someone who is a specialist for Excel in an Apple environment. 
+I agree with u/orbitalfreak
+
+Regardless of your personal situation with your friend, this is a business engagement and the scope creep seems large here. If you've spent more than 60-100 hours on this, I'd renegotiate.
+When opening an Excel spreadsheet made on a PC similar kinds of madness happens, especially with VBA.
+
+Excel is a great program. It is unfortunate that there are problems crossing over between platforms. Perhaps Microsoft has not made ensuring compatibility a priority. It is not the fault of whatever OS one happens to favor.
+Right. And I've already had lengthy exchanges with him and some of his competitors as well on the topic.
+
+I told everyone that I'll have to invoice compatibility issues support going on. Well every type of support really, but there was a "start up fee" for the other companies that went to me, so some data import, minimal training and debugging was expected.
+
+I just hate that the Mac/PC compatibility issues are putting me in this position. My rant is about those unexpected issues.
+
+I don't mind supporting my code. It's robust, but if I made a mistake or didn't account for a particular exception; I'll gladly take the 15 minutes it takes me to fix it.
+Oh you mean like run a Windows OS on their machine?
+
+That might be the best idea. At first, I told a few of them that it'd be much cheaper to buy a used PC laptop for $250 (providing links to a decent used computer store here in Montreal); just to use this spreadsheet and send their purchase order.
+
+But understandably, they're not thrilled at the idea of lugging two laptops on the road. 
+
+That's probably the road I'll suggest them to take.
+Like a low-key version of me dealing with a shitty Snapchat app because the developer hates Android. 
+Unless you're a web developer, in which case it's the exact opposite. 
+I use a Windows. And I send the files to Mac Users.
+Is there even such a thing?
+
+I mean despite the Application.PathSeparator function I didn't know about, it's more about application bugs. I don't know what an expert can do about Pivot tables crashing and deleting random unrelated subroutines.
+Tell them to stop being hipsters and use a PC like a real business.
+Google sheets?  Vm in the cloud? 
+
+ I'd recommend a contract going forward and even right now to articulate the extent of your support services   
+I'd have them buy a windows machine for the office, and all of them could login via their PC to [Windows Remote Desktop](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) to do this sheet. Way easier than setting up Bootcamp for everybody.
+You could have them install parallel on their mac's. It allows you to run windows on a mac simultaneously. I use a mac fly work but also require some pc only software. It works great for me. 
+Maybe consider buying a cheap Mac laptop and trying to develop on a Mac? In the long turn it is obviously not a great solution, but at least you would develop on the same system as your customers. So that you can test the stuff on same architecture (and customers are not beta testers).
+I tried. Didn't go over so well. 
+
+"On Windows there's always problems. On Mac, it just *works* ". 
+How else are people supposed to know you're a market leader when it comes to technology?
+I'll offer them this solution. 
+
+In the end, I'll support them if I need to and charge them accordingly. But I want to offer alternative solutions so it doesn't look like I'm price gouging them. 
+A Mac just works...as long as you only play in the Mac sandbox.  The instant you try and do something Mac wasn't specifically designed to do and do well it falls apart.

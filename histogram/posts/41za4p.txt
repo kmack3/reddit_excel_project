@@ -1,0 +1,69 @@
+Need to unlock password protected and vba protected Excel spreadsheet
+Invite her in to get her on tape blackmailing you for access to the files. Have a cop there. Hopefully she'll be scared enough to give you the pass codes! (Source: I want to write movies for a living.)
+I guess OP does not have a good backup copy? We pull nightly backups of shares. Sounds like OP's company would get hosed if ransom-wared.
+Excel 2013 can't be un-password protected (yet) due to a change in the method of password protection.
+
+The old-school VBA method no longer works.
+
+You could try saving it as an XLS (2003) file, and using the VBA method.
+It may do something if you upload it to google docs and let it convert it for you. It may get you past some or all of the password blocked content. 
+Try opening the files using Open Office Calc.
+And this is why businesses often walk people offsite after letting them go... It's a mistake you only make once. 
+
+
+You may have a shadow copy of the files, if you run Windows, and it would allow you to set it to a point before the password was put on. 
+Sorry you're in this mess. Did you try this link:
+
+https://www.reddit.com/r/excel/comments/399ts9/now_former_coworker_altered_all_our_groups_xlsm/cs1mb98
+
+And so...
+This: https://home.ayra.ch/unlock/
+
+and attempt a DPB edit? 
+Try uploading to GDrive and convert to Google Sheets
+I can offer you this for vba unlocking at least: https://home.ayra.ch/unlock/
+Open it in a free program? I've unlock Word documents before by saving it as a ZIP and then going into the text and deleting the protection manually. That may work?
+That doesn't really help, but you should sue her.
+I found a macro on a website once that will unlock basically any document by running it.  I haven't had to try it in a long while, but it's always worked for me in the past.  May not work on 2013.  http://www.mcgimpsey.com/excel/removepwords.html
+
+Open the spreadsheet in another  spreadsheet software. That usually drops the passwords. 
+I came across this a while back, not sure if it works and have not tried it. I'd use it on a copy of your file if anything.
+
+https://www.reddit.com/r/excel/comments/3wu61g/slug/cxz40yh
+
+Good luck
+I've used this a few times: http://www.straxx.com/free-excel-password-remover-2012/
+
+Always works for me. I
+It will unlock sheets and workbooks I believe, and the page suggests a solution for VBA.
+I can't help with the excel issue but just for more background info, why was she let go? I.E. what motivated her to do this?
+Do you have a program (like IDEA) to convert pdf to excel? Print to pdf and then convert to excel again.
+This is not a solution, but rather a way to prevent this from happening in the future.
+
+I would recommend that any company using Microsoft Office, should set up an escrow key.  What this does is that any password protected file created on the company's network will be recoverable with either the original password or the escrow key.  This is useful in case the original password is forgotten, lost, or unknown in this case.
+
+More information:
+https://technet.microsoft.com/en-us/library/jj923033.aspx
+Well..might as well give you some credit here. The file is wonky, but at least with the conversion I have some access to the file still to copy and use and analyze with. Not perfect, but at least I can still fix this via a few allnighters. 
+
+Thanks. 
+
+
+I will be losing data because some rows and columns are above the row and column limit of 2003, in addition to a lot of conditional formatting. Isn't there anything else?
+I didn't try the home.arya thing, but I did do the whole DPB edit, and it doesn't work, cause the zip file only gives the following files:
+
+[6]DataSpaces
+EncryptedPackage
+EncryptedInfo
+
+[There's no sheet protection or anything](http://blog.bitcollectors.com/adam/2011/10/how-to-unprotect-a-password-protected-xlsx-file/comment-page-2/)
+God fucking dammit, we're already pursuing legal action, but everyday we can't get these damn Excel files opened, analyzed, and then sent to clients, we lose a $1000. But I'm probably gonna get the brunt of all this nonsense cause I got three managers breathing down my neck and asking why I can't bloody fix this bloody mess. 
+Anyone have a copy of Excel 2010?
+Tried [this](http://stackoverflow.com/a/27508116) to remove the vba-password already?
+
+It is confirmed to be working with 2013 x86 and x64
+
+//Changed link to comment I was referring to
+
+
+I just used this a few days ago! It's the easiest method and worked for me with 2010 on an .xlsm file. 

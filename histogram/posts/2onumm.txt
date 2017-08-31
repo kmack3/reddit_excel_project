@@ -1,0 +1,51 @@
+Show /r/Excel: Accelerate Excel – 100x faster spreadsheets
+So after reading the documentation on your website, can you explain more about how it works?
+
+Why do I need to click the "deaccelerate" button if I'm sending my workbook to an individual that does not use the add-in.  What changes does this add-in make to the workbook?
+
+Thanks.
+What does "static optimization" mean?
+How does it work and how much faster will it make excel?  Does it have any downsides?
+Let's say I have a large file with a bunch of formulas such as SUMPRODUCT, IRR, NPV as well as some macros. What I don't have is any VLOOKUP or INDEX/MATCH formulas. Does your add-in help me?
+Does your add-in have any feature to speed up data table calculation?
+I'll check it out.
+
+From a functional standpoint, though, couldn't you hook into workbook_load() and workbook_unload() (or whatever its called nowadays) events to replace the native Excel functions with your own and vice versa, provided they have matching parameters?
+
+That'd get rid of the need to rely on the user to manually "accelerate" and "decelerate."  And it'd allow for sharing with people who don't have it.  Wouldn't it?
+I tried it out today. Whenever I hit accelerate or dexelerate, it would say "deceleration failed" followed by either "acceleration successful" or "decelartion successful" depending on which I chose. 
+
+Maybe I'll try again but only install for my user rather than all users (the option in the install)
+
+Edit: ah ha! Had to install for "just this user". It didn't install properly for "all users". Might have been my work security settings. 
+
+
+
+Sure. We replace some of the built-in functions with our own functions. These take the same inputs and give the same results, but faster. If you send the spreadsheet to someone else without decelerating, though, the new functions won't work.
+Generally, it means looking at a program's source code when it's not running (that's why it's called static), and optimizing it.
+
+In this case, we look at the formulas in your spreadsheet and figure out where multiple functions are unnecessarily repeating work. When that happens, we replace them with our own functions that produce the same result as Excel does, but do less work to do so.
+We use static analysis (a software optimization techinque) to speed up the spreadsheet. 
+
+Performance depends on the spreadsheet - our beta users have seen anywhere from 50% to 10x speed-ups. If you run a million vlookups on a table with a million rows it'll be like 500x faster.
+
+The only downside is that it's a beta, so there might be some bugs.
+Not yet. We're working on speeding up other formulas and spreadsheet structures in the future.
+If the data tables use VLOOKUP or INDEX-MATCH in the calculations then yes, we'll speed them up.
+That's a great idea - we'll look into it. Thanks!
+Sorry about that! Could you send me an email (ben at datanitro dot com)? I'd like to ask you a few questions so we can fix it.
+Ah, thanks.  So the add-in effectively does a global replace on VLOOKUP, INDEX and MATCH, replacing these functions with the functions in the add-in?
+
+
+Tnx for the explanation! It sounds interesting. How about memory consumption (especially when managing large datasets)?
+I used it in a spreadsheet with approx 100k rows with some complex lookups. This normally takes a couple minutes per lookup. 
+
+The vlookupnitro accomplished each lookup in seconds. Unbelievable. Holy shit. 
+
+Can you do SUMIFS next?
+Yes, basically. It does some analysis on the backend too, but that doesn't change the spreadsheet.
+We don't currently improve memory consumption. How much memory do your workbooks take up?
+We're working on it =)
+We have some very big files (let's say 120K rows, 50 cols) and sometimes we get the "Excel cannot complete this task with available resources" error...
+Are you using 32-bit Office? If so, upgrade to 64-bit (you'll need 64-bit Windows as well, but you probably have that); that should help.
+I will, tnx a lot

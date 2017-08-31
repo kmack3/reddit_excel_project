@@ -1,0 +1,32 @@
+6ieme7
+Trouble with Countif. Trying to get a value if two columns are non-blank
+Trying to get a sum of all the values where two of the columns are filled. An Example of this would be:
+
+A | B
+-|-
+X | y
+X | y
+X | 
+X | y
+X | 
+
+In this case I would like the count to be 3. I have tried the following: =Countif(a:a,"x",b:b,"y") but I get a "Too many arguments were entered". Is there a different function I should be using or is there a way to fix what I am doing? 
+
+I am using a 2013 mac version of excel if that is relevant and I will only be using this function once a week or so. 
+
+
+-------------
+How about:
+    =SUMPRODUCT((A2:A5<>"")*(B2:B5<>""))
+-------------
+COUNTIFS
+-------------
+>  =SUMPRODUCT((A2:A5<>"")*(B2:B5<>""))
+
+That worked! The only thing is its counting the title of column as well. How would I make it only count the x and y marked in each cell/ exclude the title?
+
+Edit: Ended up just shifting the range from a2:a1000. Hopefully wont get a thousand data points but if I do I'll have o remember to fix the range.
+-------------
+Would you kindly reply solution verified to my post to give me a clippy point? :)
+
+Happy to have helped.

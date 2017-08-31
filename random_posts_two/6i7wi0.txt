@@ -1,0 +1,74 @@
+6i7wi0
+Sum of Column B, based on whether Column A contains a specific string?
+My data contains a list of browser editions in column A, and a count of each in column  B.  How can I generate a sum of the values in column B for all of the entries in column A that equal a key string, such as "google" or "microsoft"?  
+  
+Data:  
+Browser	Counts  
+Microsoft Internet Explorer 11	14,663,128  
+Google Chrome 56.0	14,271,471  
+Google Chrome 58.0	9,707,101  
+Google Chrome 55.0	7,956,523  
+Google Chrome 57.0	7,583,190  
+Mozilla Firefox 51.0	2,719,967  
+Mozilla Firefox 53.0	2,684,489  
+Microsoft Edge 14	2,661,672  
+Mozilla Firefox 52.0	2,511,072  
+Google Chrome 45.0	2,090,451  
+Mozilla Firefox 50.0	1,659,763  
+Mozilla Firefox 45.0	1,351,311  
+Safari 10.0	1,061,779  
+SouGou Browser	940,309  
+Google Chrome 49.0	892,798  
+Google Chrome 50.0	699,347  
+Chrome Mobile 55.0.2883	557,010  
+Chrome Mobile 56.0.2924	549,134  
+Microsoft Internet Explorer 8	548,227  
+Chrome Mobile 58.0.3029	484,780  
+Safari 10.0.3	451,055  
+Google Chrome 54.0	448,582  
+Microsoft Internet Explorer 9	438,534  
+Microsoft Edge 13	386,992  
+Mozilla Firefox 47.0	378,444  
+QQBrowser	373,093  
+Google Chrome (unknown version)	357,763  
+Microsoft Internet Explorer 10	353,913  
+Google Chrome 59.0	338,554  
+Chrome Mobile 57.0.2987	332,495  
+Google Chrome 53.0	310,496  
+Google Chrome 51.0	307,649  
+Safari	283,317  
+Microsoft Edge 15	258,387  
+Safari 10.0.2	220,125  
+Safari 10.1	209,204  
+Google Chrome 47.0	203,818  
+Google Chrome 52.0	178,136  
+Safari 10.1.1	166,853  
+Maxthon Browser	157,738  
+Mozilla Firefox 49.0	151,974  
+Safari 9.0	145,953  
+Yandex.Browser	132,569  
+Samsung Browser 4.0	132,486  
+Mozilla Firefox 38.0	129,405  
+Microsoft Edge 12	121,768  
+Google Chrome 48.0	121,214  
+Mozilla Firefox 31.0	119,109  
+Mozilla Firefox 48.0	115,342  
+Google Chrome 43.0	102,845  
+
+
+
+
+-------------
+How about:
+
+    =SUMIFS(B:B, A:A, "*google*")
+
+or if you want to use a cell link
+
+    =SUMIFS(B:B, A:A, "*" & C1 & "*")
+-------------
+     =sumif(A:A,"=*google*",B:B)
+-------------
+Thank you!
+-------------
+Thank you!

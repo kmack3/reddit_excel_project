@@ -1,0 +1,23 @@
+Tips on making a pivot table report look more presentable?
+My advice... use the pivot table to get the data but make a second table just for displaying it. The second table should call on the pivot table so it automatically updates when the pivot table updates. You can make the second table look anyway you want
+Tableau
+Can you describe what the data is, and what it contains? For example it's year over year sales data. I make dashboards nonstop for my job using pivot tables, and slicers. There are quite a few cool options people don't talk about enough. For example, I track my companies energy usage and utilities bill on a monthly basis. I added slicers and a timeline so you can decide which grouping of facilities you want to see, and for what time period. I also subtotaled the years and allow them to minimize to a years only view, or a monthly view. I also gave them the option to drill into each location by any grouping. So if my CEO wants to see how much our pump stations cost us he could at a high level, but then he can say OK what's our most expensive stations, then drill in and see a list by cost
+There's lots of ideas for "Dashboards" on YouTube which reformat data coming from a pivot. You can also create your own tables and use the "Hide from Client Tools" if you use the Data model (data view or diagram view). That way you can call tables whatever you want and only have the stuff your client cares about to be present, even though all the data is still there behind the scenes. 
+
+There's also fun stuff like KPI's which help summarize data.
+Slicers?
+I like this idea but I want the client to be able to adjust the pivot based on 2 of the filters.
+Could you talk a bit more about the second table - How do you make the second table so automatic? 
+This
+
+Edit: Apparently, we can't agree by saying "this" anymore. Noted.
+The setup is like this:
+
+Program, Sub-Program, Plan, Spent, variance, variance %
+
+I do the report for 5 programs which have anywhere from 1-10 sub programs. The numbers are reported mostly on a yearly basis, occasionally comparing the numbers each month.
+Check out PivotTable slicers - useful filters you can put alongside a nicely formatted table that reads from a pivot
+So, I do most of my data grouping in power query but it's not necessary. In your data you would want a column that says the name of the program then the sub program then the plan that it's on (if I'm understanding you). I do this quickly by making a lookup table that index's everything, so when you see this plan, assign it to this sub program, which is assigned to this program. If your data doesn't already include all of this in a column I would make it but making the index table then running some Vlookup or index matches. From there you can put the data in the pivot table, then create three slicers, make your program slicer first, when that's clicked it will drill down to a given program, and only make the sub programs and plans available within that program available to click. From there they can drill down to sub program and make a selection in that slicer. At that points it's drilled into the sub program and only shows the plans available within that sub program. They can then click the +sign next to any plan to reveal the variance and variance percentage
+Also i find that the light or dark style pivots tend to look a bit better, when someone does want an adjustable doc instead of static. 
+
+For whatever reason, all the Medium Styles make me cringe. 

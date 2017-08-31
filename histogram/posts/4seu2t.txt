@@ -1,0 +1,302 @@
+I don't know if this is the best place to post this... but I made a simulation of the Monty Hall problem in excel and I figured you guys would be the ones that would appreciate it most! (Macros enabled)
+Very nicely done and fun to play with! 
+Do you mind sharing with us how you make it? Thanks
+[deleted]
+Upvote, as I'm familiar with the Monty Hall problem.  It's good to see some numerical solution to it, since the theoretical isn't the most intuitive.
+Great job! I like your code too!
+looking forward to seeing the code, but don't have time right now.  On lunch break.
+
+A variation of this was in the St. Louis paper about a decade ago.  The columnist insisted that if you dropped 100 dimes and one rolled under your car, and the 99 you could see were all heads, the one under your car had a ridiculously high probability of being tails.  I debated that it was still 50/50.  Through numerous emails we never could agree, but I still maintain that that dime doesn't know or care about the other 99, there's no omniscient force pushing it, so it's still 50/50.
+Very nice!
+Thank you for sharing this! It would be cool if there is a way to automate the selection for a large number of samples, say 10000 tries, and then the selection and results would be stored in succeeding rows.
+Sure! Here's a copy of the macro code. I'll try to explain how it all works.
+
+    Function getWinningDoor() As Integer
+        randomNum = Rnd()
+Determine the winning number...
+
+                If randomNum > (2 / 3) Then
+                    winningNumber = 1
+                ElseIf randomNum > (1 / 3) Then
+                    winningNumber = 2
+                Else
+                    winningNumber = 3
+                End If
+    getWinningDoor = winningNumber
+    End Function
+... and pass it out of the function... 
+
+    Sub showGoat()
+        randomNum = Rnd()
+Get the selected door and the winning door...
+
+        winningNumber = Val(Range("winningDoorNo"))
+        selectedDoor = Val(Range("J12"))
+
+Iterate through all possible numbers 1-3
+
+        If randomNum > (2 / 3) Then
+            doorReveal = 1
+        ElseIf randomNum > (1 / 3) Then
+            doorReveal = 2
+        Else
+            doorReveal = 3
+        End If
+        
+Call the sub again if the randomly generated door selection conflicts with either the chosen door or the winning door. (This is a clever workaround to hardcoding each possible result.)
+
+        If doorReveal = selectedDoor Then
+            showGoat
+            Exit Sub
+        ElseIf doorReveal = winningNumber Then
+            showGoat
+            Exit Sub
+        End If
+        
+There is a hidden picture of a goat and a car on top of each door. The goats are pictures 1,3,4 and the car is picture 5,7,8. Because only a goat can be revealed, it's easiest to show the goat and save the other only option as "Monty"'s door.
+
+        If doorReveal = 1 Then
+            ActiveSheet.Pictures("Picture 1").Visible = True
+            If selectedDoor = 2 Then
+            Range("montyDoorNo").Value = 3
+            ElseIf selectedDoor = 3 Then
+            Range("montyDoorNo").Value = 2
+            End If
+        ElseIf doorReveal = 2 Then
+            ActiveSheet.Pictures("Picture 3").Visible = True
+            If selectedDoor = 1 Then
+            Range("montyDoorNo").Value = 3
+            ElseIf selectedDoor = 3 Then
+            Range("montyDoorNo").Value = 1
+            End If
+        ElseIf doorReveal = 3 Then
+            ActiveSheet.Pictures("Picture 4").Visible = True
+            If selectedDoor = 1 Then
+            Range("montyDoorNo").Value = 2
+            ElseIf selectedDoor = 2 Then
+            Range("montyDoorNo").Value = 1
+            End If
+        End If
+    End Sub
+   
+This sub runs when the sheet is launched. It resets the board and hides the images. 
+
+    Sub auto_open()
+        Dim door As Integer
+        Dim montyHall As String
+        Dim low As Double
+        Dim high As Double
+        ActiveSheet.Pictures("Picture 1").Visible = False
+        ActiveSheet.Pictures("Picture 3").Visible = False
+        ActiveSheet.Pictures("Picture 4").Visible = False
+        ActiveSheet.Pictures("Picture 5").Visible = False
+        ActiveSheet.Pictures("Picture 7").Visible = False
+        ActiveSheet.Pictures("Picture 8").Visible = False
+        low = 1
+        high = 3
+        MsgBox "Let's Make a deal!", vbOKOnly, "Monty Hall Says..."
+        Range("winningDoorNo").Value = getWinningDoor()
+        Range("J12").Value = ""
+        Range("montyDoorNo").Value = ""
+        Range("gameOver").Value = ""
+        Range("Monty").Value = "Behind one of these doors is a brand new car! Behind the other two doors are goats. Once you pick your door, I will reveal a goat from one of the other two doors. You can choose to swith doors if you so choose. No takebacks!"
+    End Sub
+
+This sub runs every time a cell or range is selected. It handles every action after the initial auto_open.
+
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    doorSelection = 0
+    doorChosen = False
+
+This section covers the selection of one of the three doors. After the door is selected, its value is saved to the worksheet and picking another door is prevented. 
+
+    If Target.Address(False, False) = "H6:I11" And Range("J12").Value = Empty Then
+        targetDoor1 = MsgBox("Is this your final choice?", vbYesNo, "Door #1")
+        If targetDoor1 = vbYes Then
+            Range("Monty").Value = "I will now reveal one of the doors with a goat. Do you want to switch?"
+            Range("J12").Value = 1
+            showGoat
+        End If
+    ElseIf Target.Address(False, False) = "H6:I11" And Range("J12").Value <> Empty Then
+        MsgBox "You've already chosen a door!", vbOKOnly, "Hold on, there!"
+    End If
+    If Target.Address(False, False) = "J6:K11" And Range("J12").Value = Empty Then
+        targetDoor2 = MsgBox("Is this your final choice?", vbYesNo, "Door #2")
+        If targetDoor2 = vbYes Then
+            Range("Monty").Value = "I will now reveal one of the doors with a goat. Do you want to switch?"
+            Range("J12").Value = 2
+            showGoat
+        End If
+    ElseIf Target.Address(False, False) = "J6:K11" And Range("J12").Value <> Empty Then
+        MsgBox "You've already chosen a door!", vbOKOnly, "Hold on, there!"
+    End If
+    If Target.Address(False, False) = "L6:M11" And Range("J12").Value = Empty Then
+        targetDoor3 = MsgBox("Is this your final choice?", vbYesNo, "Door #3")
+        If targetDoor3 = vbYes Then
+            Range("Monty").Value = "I will now reveal one of the doors with a goat. Do you want to switch?"
+            Range("J12").Value = 3
+            showGoat
+        End If
+    ElseIf Target.Address(False, False) = "L6:M11" And Range("J12").Value <> Empty Then
+        MsgBox "You've already chosen a door!", vbOKOnly, "Hold on, there!"
+    End If
+     
+If you want to cheat and see what door is the winner, you can click the named range and you will be able to see it in the formula bar... but where's the fun in that?
+
+    If Target.Address(False, False) = "R3:R4" Then
+        MsgBox "That's cheating!!!"
+       ' Range("F3").Select
+    End If
+    
+This snippet runs every time the reset button is pressed. It is nearly identical to the auto_open above.
+
+    If Target.Address(False, False) = "O3:P4" Then
+        Dim low As Double
+        Dim high As Double
+        ActiveSheet.Pictures("Picture 1").Visible = False
+        ActiveSheet.Pictures("Picture 3").Visible = False
+        ActiveSheet.Pictures("Picture 4").Visible = False
+        ActiveSheet.Pictures("Picture 5").Visible = False
+        ActiveSheet.Pictures("Picture 7").Visible = False
+        ActiveSheet.Pictures("Picture 8").Visible = False
+        low = 1
+        high = 3
+        winningNum = getWinningDoor()
+        Range("winningDoorNo").Value = winningNum
+        Range("montyDoorNo").Value = ""
+        Range("J12").Value = ""
+        Range("gameOver").Value = ""
+        Range("H13:P15").Value = "Behind one of these doors is a brand new car! Behind the other two doors are goats. Once you pick your door, I will reveal a goat from one of the other two doors. You can choose to swith doors if you so choose. No takebacks!"
+    End If   
+
+If you choose to stay with your door, this is the "if" statement that handles it.
+
+    If Target.Address(False, False) = "O5:P6" And Range("J12").Value <> "" Then
+        If Range("gameOver").Value = "GAME OVER" Then
+            MsgBox "The game is over! Restart for a new game!", vbOKOnly, "Game Over!"
+        ElseIf Val(Range("winningDoorNo").Value) = Range("J12").Value Then
+            Range("Monty").Value = "You win!!!"
+            Range("gameOver").Value = "GAME OVER"
+            Range("Wins").Value = Range("Wins").Value + 1
+        Else
+            Range("Monty").Value = "You lose..."
+            Range("gameOver").Value = "GAME OVER"
+            Range("Losses").Value = Range("Losses").Value + 1
+        End If
+This section displays the correct goats/cars. Nothing spectacular about this part. 
+
+        If Val(Range("winningDoorNo").Value) = 1 Then
+            ActiveSheet.Pictures("Picture 5").Visible = True
+            ActiveSheet.Pictures("Picture 3").Visible = True
+            ActiveSheet.Pictures("Picture 4").Visible = True
+        ElseIf Val(Range("winningDoorNo").Value) = 2 Then
+            ActiveSheet.Pictures("Picture 1").Visible = True
+            ActiveSheet.Pictures("Picture 7").Visible = True
+            ActiveSheet.Pictures("Picture 4").Visible = True
+        ElseIf Val(Range("winningDoorNo").Value) = 3 Then
+            ActiveSheet.Pictures("Picture 1").Visible = True
+            ActiveSheet.Pictures("Picture 3").Visible = True
+            ActiveSheet.Pictures("Picture 8").Visible = True
+        End If
+    ElseIf Target.Address(False, False) = "O5:P6" And Range("J12").Value = "" Then
+        MsgBox "You need to select a door first!"
+    End If
+
+CONTINUED IN REPLY
+I've generally found that this is the easiest and best way to explain the concept to people unfamiliar with it. This is definitely the easiest explanation to wrap your head around, in my mind. 
+The only problem with the variation is that each coin must have a head or a tail. The difference between this and the three doors is that the doors will, for each instance, only have one car total. The ONLY way that the journalist's assumption could be true is if the coins could only have one end up being tails. How he would pull that off I have no idea, but even then there would always have to be TWO coins you didn't see for any probability to take place. If every coin dropped before the rolled coin was a heads, the one under the car would have to be a tail. If even one of those coins came up as a tail, it invalidates the reason to drop the other X coins yet to be dropped. 
+
+Tl;Dr: each coin holds 50/50 and this will not change. A single coin will always be 50/50. 
+
+Your door has a 1/X chance with # of goats being X. 
+Monty's door has a X/X+1 chance with # of goats being X.
+I did a quick and dirty spreadsheet to test this.  I think it's sound.
+
+    A1  =randbetween(1,3)
+
+    B1  =INDEX(D1:D3,MATCH(A1,C1:C3,0))
+
+    C1  =1
+    C2  =2
+    C3  =3
+    D1  ="Goat 1"
+    D2  ="Goat 2"
+    D3  ="Car"
+
+    E1  =IF(A1=1,2,1)
+    E2  =IF(A1=3,2,3)
+
+    F1  =MAX(E1:E2)
+
+I then copy/pasted this down quite a ways.  Got bored after 330 iterations.  I did this with Calculations set to Manual.  Then in I1 I did a countif where A:A = 3, in J1 is a countif where F:F=3, then divided I1 by 330.  Each time I hit f9 it randomizes again.  I'm consistently getting 29-35%.
+
+I realize in my example the car is always behind door 3, but I don't think that matters.  It's just to make the formula easy.  The player door selection is random, Monty always takes away a goat, and the remaining door onstage is always a car if you didn't pick the car.  So I think it works.
+ This is the same as the above "if" loop, but this checks Monty's door and not the one chosen. 
+
+    If Target.Address(False, False) = "O7:P8" And Range("J12").Value <> "" Then
+        If Range("gameOver").Value = "GAME OVER" Then
+            MsgBox "The game is over! Restart for a new game!", vbOKOnly, "Game Over!"
+        ElseIf Val(Range("winningDoorNo").Value) = Val(Range("montyDoorNo").Value) Then
+            Range("Monty").Value = "You win!!!"
+            Range("gameOver").Value = "GAME OVER"
+            Range("Wins").Value = Range("Wins").Value + 1
+        Else
+            Range("Monty").Value = "You lose..."
+            Range("gameOver").Value = "GAME OVER"
+            Range("Losses").Value = Range("Losses").Value + 1
+        End If
+        If Val(Range("winningDoorNo").Value) = 1 Then
+            ActiveSheet.Pictures("Picture 5").Visible = True
+            ActiveSheet.Pictures("Picture 3").Visible = True
+            ActiveSheet.Pictures("Picture 4").Visible = True
+        ElseIf Val(Range("winningDoorNo").Value) = 2 Then
+            ActiveSheet.Pictures("Picture 1").Visible = True
+            ActiveSheet.Pictures("Picture 7").Visible = True
+            ActiveSheet.Pictures("Picture 4").Visible = True
+        ElseIf Val(Range("winningDoorNo").Value) = 3 Then
+            ActiveSheet.Pictures("Picture 1").Visible = True
+            ActiveSheet.Pictures("Picture 3").Visible = True
+            ActiveSheet.Pictures("Picture 8").Visible = True
+        End If
+    ElseIf Target.Address(False, False) = "O7:P8" And Range("J12").Value = "" Then
+    MsgBox "You need to select a door first!"
+    End If
+
+This section of code clears the contents of the win/lose ranges, in case you want to start fresh.
+
+     If Target.Address(False, False) = "R9:R12" Then
+        Range("O9:P12").ClearContents
+    End If
+    
+This runs at the very end of the entire sub. No matter what happens in the above code, this is *always* executed. It prevents the values of cells from being changed by preventing any cell from being selected for more than a fraction of a second. 
+
+    Range("F3").Select
+    End Sub
+
+So there you go, OP delivered. 
+specifically to the monty hall question, I have never understood why the door you originally chose would get worse odds than the one you didn't.  if you update the odds for it, don't you also update for the remaining sealed doors?    what force is remembering your choice and holding you to your original odds?
+
+maybe it's just that I'm still referring to the same broken article.  the columnist argued that you should always change your door selection because the one you chose is still 1/3, but the other is 2/3.
+Cool! /u/A_Very_Brave_Taco updated the file [here](https://www.reddit.com/r/excel/comments/4sl57s/in_order_to_help_resolve_any_confusion_on_whether/). We can now simulate 100k tries in seconds.
+"Switch" has a win rate of 66.7% and "Stay" has a win rate of 33.3%.
+though in the process of doing this, I realize I'm just counting the odds of =randbetween(1,3) picking 3.  But that's what this boils down to.  Either you picked the car or you didn't.  As others have said, throwing out one of the goats doesn't change that simple fact.
+
+These questions always boil down to whether or not it is appropriate to recalculate the odds.  Since the design of the test dictates that there will always be a goat on stage to remove, the act of removing it doesn't cause a recalculation.  There wasn't a random selection; no variables were changed.  You're not deciding between two equal options, you're deciding between your initial choice and the better of his two choices, since it's impossible for you to pick the worse of his two.
+Wow! I am very impressed. Thank you.
+put another way: you originally picked one of 3.  one is then removed, since the house always has one goat to show me no matter what you pick.  you're now picking from 2 and the odds are 50/50.  what sentient force is there saying "no it was 3, you're still at 1/3 and we maintain 2/3"?
+Happy to help!
+The mistake most often made is the thought that the goat and car are the only two choices. The truth of the matter is that there are three choices at all times, Monty just removes one of them for you each time. 
+
+Think of it this way. Your original door holds either 1. a car, 2. a goat, or 3. a goat. There is a 1/3 chance that the original door holds the car and a 1/3 chance it holds the first goat and a 1/3 chance it holds the second goat.
+
+By statistics alone, there are only two results that could happen.
+
+1. Your door is one of the two goats. Monty reveals one of the doors as the goat you didn't pick. He is forced to leave the other door, knowing that the car is behind it, closed. The likelihood of you choosing a goat on your first guess is a 2/3 chance. By switching to his door you will always win because he *cannot* open the winning door. 
+2. Your door is the car. Monty can reveal either of the two doors because either way he loses. The likelihood of you choosing the car on your first guess is a 1/3 chance. By switching to his door you will always lose because both doors are a loss. 
+
+Does that make more sense?
+So, once again going back to that article I keep harping about, they were talking about that recent gameshow where you picked a briefcase.  I don't remember how many there were, but let's say 100.  If you keep picking cases and all that's left is 1 cent or 1 million dollars, one by your side and one with a model onstage, do you agree that there is a 99% chance that the model has the million?
+
+EDIT: personally I think this one is a little different because all of the cases revealed had an equal chance, whereas on Let's Make a Deal the one thrown out was always a dud.  Just not sure how much of a difference that makes.  Maybe all of it?
+
+EDIT2: and the more I think on it, I think that was my problem with the article all along.  Since it is always a dud that gets thrown out, it is completely different from the 1 in 100 cases that you picked vs the 1 in 100 cases that that model walked out with.

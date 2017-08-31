@@ -1,0 +1,448 @@
+Is there a shorter, easier way to do this?
+=sumif(V$3:V$83,B88,T$3:T$83)
+I'm sorry to laugh at your misfortune OP, but the thought of you typing out those 80~ if statements made me chuckle. 
+
+/u/animalpatent has you covered. 
+I'm a bot, *bleep*, *bloop*. Someone has linked to this thread from another place on reddit:
+
+- [/r/bakanewsjp] [エクセルサブレで、OPの1727文字の式を別のredditorが28文字に短縮](https://np.reddit.com/r/BakaNewsJP/comments/3ai9he/エクセルサブレでopの1727文字の式を別のredditorが28文字に短縮/)
+
+- [/r/bestof] [Redditor shortens an Excel formula from 1,727 characters down to only 28](https://np.reddit.com/r/bestof/comments/3afyqx/redditor_shortens_an_excel_formula_from_1727/)
+
+[](#footer)*^(If you follow any of the above links, please respect the rules of reddit and don't vote in the other threads.) ^\([Info](/r/TotesMessenger/wiki/) ^/ ^[Contact](/message/compose/?to=\/r\/TotesMessenger))*
+
+[](#bot)
+[deleted]
+I like the biggest formula best. So I can tell my boss this took me a day or two to figure it out
+Also, as of Excel 2007, you also have SUMIFS, that supports multiple conditions (as with COUNTIFS). Extremely useful, rather than using an array formula.
+So many if statements o.O
+Man...I didn't even think to ever check if there were subreddits for this type of thing.  I may be pooping in here every now and then since I do a lot of crazy stuff in Excel!
+OP are you missing row 63, 67 and 68, and duplicating row 64 on purpose? Or is it just missed because of the terrible unmaintainable code you have written?
+I'm an excel fanatic (not an expert!) and my favourite formula is newish. It's SumifS. It's like sum if, but with multiple criteria options.  Made life way more easy.
+http://www.cpearson.com/Excel/Topic.aspx - an awesome resource!
+[deleted]
+A helper table would also have worked here.  Eliminate the $ before the row number in the formula and copy down.  Last cell =sum(HT3:HT83)
+
+But, /u/animalpatent nailed it. 
+Rows 17-21 need looked at in your formula. However, it looks like you are not using that formula anymore so nevermind! 
+And some say evolution doesn't exist. 
+Reminds me of the time a friend at work asked if I could help with an db app he was working on.  He estimated it was going to take ~30 hours to run to completion.  I fiddled with it for a bit, and then it finished in 5 minutes.
+
+He was doing a query against a header table, then running a corresponding detail query.  Just combine the two and watch for header changes on the client side.
+I wish I knew about this thread yesterday. Did almost the exact same thing at work, with about 100 cells... Lesson learned, spend more time on Reddit during work hours not 23:30 on a Saturday night.
+Seems like it might be easier to put the data into a database and just use SQL. 
+I used to have excessively long date formulas, then I discovered EOMONTH, and POW, my formulas became much shorter. This reminds me of that. 
+
+One thing: SUMIF?, who doesn't know that?
+[deleted]
+Yea use python and export
+This is one of those answers where you wish you could see OP's reaction when he sees/tries it :)
+And you're now my hero.
+This guy fucks!
+do you think sumif could help me shorten a similar formula?  I have a similar problem, so if you want to point me to some Excel resources, I will highly appreciate the gesture!
+
+I use the following formula to calculate my number of employees at any given time. It's already complicated, but there must be a way to reduce those 1800 characters!
+
+=IF(AND(B$3<=$R5,B$4>$R5,C$3=""),1,0)
++IF(AND(B$6<=$R5,B$7>$R5,C$6=""),1,0)
++IF(AND(B$9<=$R5,B$10>$R5,C$9=""),1,0)
++IF(AND(B$12<=$R5,B$13>$R5,C$12=""),1,0)
++IF(AND(B$16<=$R5,B$17>$R5,C$16=""),1,0)
++IF(AND(B$19<=$R5,B$20>$R5,C$19=""),1,0)
++IF(AND(B$22<=$R5,B$23>$R5,C$22=""),1,0)
++IF(AND(B$25<=$R5,B$26>$R5,C$25=""),1,0)
++IF(AND(B$29<=$R5,B$30>$R5,C$29=""),1,0)
++IF(AND(B$32<=$R5,B$33>$R5,C$32=""),1,0)
++IF(AND(B$35<=$R5,B$36>$R5,C$35=""),1,0)
++IF(AND(B$38<=$R5,B$39>$R5,C$38=""),1,0)
++IF(AND(B$42<=$R5,B$43>$R5,C$42=""),1,0)
++IF(AND(B$45<=$R5,B$46>$R5,C$45=""),1,0)
++IF(AND(B$48<=$R5,B$49>$R5,C$48=""),1,0)
++IF(AND(B$52<=$R5,B$53>$R5,C$52=""),1,0)
++IF(AND(B$55<=$R5,B$56>$R5,C$55=""),1,0)
++IF(AND(B$58<=$R5,B$59>$R5,C$58=""),1,0)
++IF(AND(B$62<=$R5,B$63>$R5,C$62=""),1,0)
++IF(AND(B$65<=$R5,B$66>$R5,C$65=""),1,0)
++IF(AND(B$68<=$R5,B$69>$R5,C$68=""),1,0)
++IF(AND(B$72<=$R5,B$73>$R5,C$72=""),1,0)
++IF(AND(B$75<=$R5,B$76>$R5,C$75=""),1,0)
++IF(AND(B$78<=$R5,B$79>$R5,C$78=""),1,0)
++IF(AND(B$82<=$R5,B$83>$R5,C$82=""),1,0)
++IF(AND(B$85<=$R5,B$86>$R5,C$85=""),1,0)
++IF(AND(B$88<=$R5,B$89>$R5,C$88=""),1,0)
++IF(AND(B$92<=$R5,B$93>$R5,C$92=""),1,0)
++IF(AND(B$95<=$R5,B$96>$R5,C$95=""),1,0)
++IF(AND(B$98<=$R5,B$99>$R5,C$98=""),1,0)
++IF(AND(B$102<=$R5,B$103>$R5,C$102=""),1,0)
++IF(AND(B$105<=$R5,B$106>$R5,C$105=""),1,0)
++IF(AND(B$108<=$R5,B$109>$R5,C$108=""),1,0)
++IF(AND(B$112<=$R5,B$113>$R5,C$112=""),1,0)
++IF(AND(B$115<=$R5,B$116>$R5,C$115=""),1,0)
++IF(AND(B$118<=$R5,B$119>$R5,C$118=""),1,0)
++IF(AND(S$92<=$R5,S$93>$R5,T$92=""),1,0)
++IF(AND(S$95<=$R5,S$96>$R5,T$95=""),1,0)
++IF(AND(S$98<=$R5,S$99>$R5,T$98=""),1,0)
++IF(AND(S$102<=$R5,S$103>$R5,T$102=""),1,0)
++IF(AND(S$105<=$R5,S$106>$R5,T$105=""),1,0)
++IF(AND(S$108<=$R5,S$109>$R5,T$108=""),1,0)
++IF(AND(S$112<=$R5,S$113>$R5,T$112=""),1,0)
++IF(AND(S$115<=$R5,S$116>$R5,T$115=""),1,0)
++IF(AND(S$118<=$R5,S$119>$R5,T$118=""),1,0)
++1 Point
+This is your first [ClippyPoint](http://goo.gl/azYpno) on /r/excel - so well done for making it an absolutely amazing one!
+
+
+ I punch those numbers into my calculator, it makes a happy face.
+Do you mind if I ask how you came up with this formula? Did you initially see a pattern in OP's formula, or did you just crunch through the data?
+That's nothing.  Once, back in college, I had a freshman CS major as a roommate.  For (pun intended) a project, he forgot what a for-loop was.  He copy-pasted over 7,000 lines of if-then statements instead.  The best part when he proudly declared his progress and how he had only 3,000 more lines to go.  I reminded him what a for loop was.
+Don't want to be too fernickety, but don't you need $B$88? OP didn't seem to mind though so I'm guessing he worked that one out.
+
+
+Is it the correct answer tho?
+if(V$64=B88,T$64,0)) appears twice and there is no if(V$67=B88,T$67,0)) or if(V$68=B88,T$68,0)) 
+nice :)...though I have archived sumif due to the superior function of sumifs!!
+Why do I find this so sexy? 
+Shit like this is why I am glad the College of Business I attend for accounting makes an excel class mandatory.  It is called Quantitative Business Analysis but it is all just how to use excel.  
+This gives me a compsci hardon
+How does sumif work?
+No disrespect to OP because I do the same kind of things sometimes but the difference between someone who knows how to use Excel and the rest of us that just hack our way though a problem a few times a year is huge.
+
+I learn tricks like this then forget 6 months later when I need them :\
+It won't work the same, OP's formula does not include V$63
++1 point
+Colin, is that you?
+Great job, I could have been able to do this one! Lol
+=sumif(red,d,it)  
+  
+Using named ranges :)
+If only you saw the how many columns I have a version of this forumla in, haha
+
+Pff, 80 if's are nothing, just take a look at [this](https://paste.ee/p/bZgzF), which was posted on [/r/shittyprogramming](http://www.reddit.com/r/shittyprogramming/comments/2pca27/on_the_topic_of_minecraft_plugins/).
+No kidding.  I wasn't even willing to read it, let alone type it.
+I can just envision OP building his formula piece by piece in a column of cells using CONCATENATE()
+Hmm, dunno. I guess it would take me 2 minutes to write that formula. Obviously not typing it out. But with copy&amp;paste and search&amp;replace you can get there quickly.
+> [/r/bakanewsjp[1] ] エクセルサブレで、OPの1727文字の式を別のredditorが28文字に短縮
+
+wat
+the biggest lie a recent grad ever told their employer
+
+Having a boss that doesn't know how much value you're actually providing creates some frustratingly bizarre incentives.
+I highly recommend everybody familiarize themselves with SUMIFS.
+
+70% of the time I do Excel "wizardry" to come up with quick calculations in meetings it's some version of a SUMIFS formula. It's like a party trick that never gets old. Have your screen projected onto the wall for maximum effect.
+sumproduct
+
+Pooping
+Make My Taco, Poop.
+Po(o)p?
+[removed]
+A mistake because of the way I was trying to do it. Definitely shouldn't be like that. Thankfully it never came into play, because most of the time, the data never went past about the 30th row. 
+Doesn't have to be necessarily
+
+If he showed this to an employer they would look at him like he is an idiot. This shows that he isn't experienced in excel (which is okay) because there are much easiers ways to do what he wanted.
+
+edit: Should be easier not easiers. 
+Instead of the hours in the past I lost, I'll think of the hours in the future I'll save!
+Maybe he wrote them with a formula! That's not a bad thing to learn how to do either :)
+It was probably like my face when I learned that I could use =iferror instead of if(iserror(. Or when I learned that I could highlight and comment out whole sections of code without having to manually enter ' over and over. 
+[Mind Blown](http://38.media.tumblr.com/tumblr_m5gqb0aUoI1rxc156o1_500.gif)
+maybe you should buy the man some gold
+http://i.imgur.com/rsRy7fR.gif
+[Bros before hoes.](http://img.pandawhale.com/post-61922-Silicon-Valley-Jared-Ill-go-fi-HJfk.gif)
+You may be looking for SUMIFS.  It's the same as SUMIF but with multiple conditions.
+[deleted]
+More than happy to help, but would you mind explaining what each column contains/the conditions you want? 
+In complete seriousness,  consider T&A software.  The amount of time spent on spreadsheeting hours like this could be used elsewhere really easily with the right tool in place 
+Yea...the setup is weird. What the other person said, one extra column would work. Just have =if(and(B3<=$R$5,B4>$R5,C3=""),1,0) in cell D3 or whichever column you want. Then select D3:D5 (or the column you chose) and drag down to D118. The formulas will on show data every third row. You'll need to do something similar for the data in columns S:T. Then just sum what you did.
+    =Sumproduct((B3:b118<=r5)*(b4:b119>r5)*(c3:c118="")*(mod(row(c3:c118),3)=0)+(s3:s118<=r5)*(s4:s119>r5)*(t3:t118="")*(mod(row(t3:t118),3)=0))
+
+
+Try this, hit ctrl+ shift+ enter instead of just enter, because it's an array formula. On mobile right now so can't properly write out explanation, but basically you line up your inputs in 3 true/false vectors, and then only use every third result to account for your spacing. This is where the mod() formula comes in, gives you an array of {1,0,0,1,0,0,...,1}
+You have awarded one point to animalpatent
+Would you believe I played portal 2 for the first time yesterday? A whole new world of references that I never saw before. 
+That's actually quite obvious if you have some experience with such sums. You can disregard everything except for the first if clause. It sums up the element in T# if the element in the same row V# is equal to the constant $B$88
+How does a CS major forget a for-loop? O_O
+OP said it was a mistake, but this is the correct answer.
+Why would you archive it when they are for different use cases? 
+Basically you're asking the formula to sum data based on criteria. For example, you have a column of data, say, animals, and another column of the number of animals you have.  Sumif can be used to total up the number of cats.
+Google is awesome for learning excel 
+That only works for mods.
+
+OP says "Solution Verified" - and for commentors it doesnt work =)
+
+Please see side-bar for more details about ClippyPoints
+If you're doing lots of =sumif formulas, I'd suggest creating a [pivot table](http://www.excel-easy.com/data-analysis/pivot-tables.html) instead, especially if you start wanting to do sumif with multiple "if" criteria.
+SumifS. Even better. Multiple criteria 
+Oh my lord, what did I just look at? That was over a 1000 lines of if statements. Was it really a poor design, was there a better way to do it?
+What am I looking at here
+that... wow
+Pretty much reads the same as the bestof title but in japanese haha
+Or just use sumproduct, which has been around forever and does the same thing.
+Popping. 
+
+I'll try to keep my poop to myself. 💩
+Tacos make me poop, Kong Dong. 
+Ha! I meant "popping". Screw it. Not editing it. 
+FYI - you're shadowbanned by reddit.
+Let that be a lesson for everyone about writing maintainable code. Also, if it makes you feel any better, I've reviewed code by senior software engineers that was similar to your excel formula.
+[deleted]
+Absolutely! I was anticipating an excited face.
+I've run across this formula a few times in various Excel Books.  It was the first thing I thought of after reading the first two expressions.  However, I've never seen anyone use it outside of a textbook application.  Glad someone here could help.  
+
+Now you should next look at =CountIf()
+Go get your promotion OP!
+Kind of like when you were young and it took a while to achieve a certain "objective" - but today you can do it so quick you kind of wish it took longer...
+I didn't even know about this subreddit, office is the tits
+Wait till you learn about vlookup 
+You should've just used the compression algorithm from the show Silicon Valley 
+[removed]
+/u/animalpatent alt account confirmed! 
+gold?
+someone downvoted you for this?! fuck it, i'll give him gold, mainly because even the original post made me feel stupid (i came here for basic budgeting spreadsheets)
+You mean give Reddit corp some free money? They're the ones you are actually rewarding for his post.
+http://i.imgur.com/pfGFrgf.gif
+Friggen sumifs elevate you to God status in the office. My boss can't fire me because he can't do sumifs, countifs and index/ match. Learn them.
+A helper column is a great way to go here, even if he just did it best to his main data, the helper formula could be copied down and the values summed. As a non-volatile alternative to indirect you can also use index:
+
+    =Index(b:b,row(a1)*3)
+
+Should yield the same but you work around indirect.
+Okay!
+
+* column B contains starting and finishing times for each employee, excluding breaks. For example, B3:5, B6:8, B9:11 and B12:14 are the four blocks of Employee1 on a monday. B3 is a start time, B4 a finish time and B5 is the hours spent working (=B4-B3).
+
+* column R contains all the quarter hours of a given day. R5 is 7:15, R6 is 7:30 and R7 is 7:45 up until R61, which is the closing fifteen minutes at 21:15.
+
+* column C needs to be empty, because when it contains information the employee is working at another location. The information contained in column C describes the other work location (only important for payroll, but usually empty).
+
+What I find makes it more complicated than OP's formula is two things: The fact that we have a bunch of AND's to include in there as well as the need to skip values irregularly. For ex.: 3 → 6 → 9 → 12 → **16** → 19 → 22 → 25
+People always do crazy stuff like this in Excel when they should probably be using a database like Access instead.  Or off the shelf software designed for whatever business problem they're trying to solve.
+The reasons why I'm looking for help in this sub are 
+
+* to become better at excel
+* to cut costs. I simply don't have a budget.
+F me, didn't see the occasional but regular skips, that works make the formula substantially more complicated, and I don't have time to write that up lol
++1 Take over the world.
+awww man, when I first saw this reply, I thought it was from "crappy_office_asst", and busted up laughing. I'm going to have to write up a new bot now.
+I have no idea.  And that's not the dumbest thing he did either.  He still graduated on time.
+Sumifs just allows for multiple criteria.  still the same basic function.
+Ah, thanks. It's also great to know that this community downvotes people for trying to be nice.
+OP is getting a crash course in "useful shit in excel" today.
+Love me some pivot tables.
+If you want to do SUMIF with multiple if criteria, use SUMIFS.
+One way would be to put all the strings to look up in a list and iterate that list.
+
+    for (String str : list) {
+        if (!this.getConfig().getBoolean("item." + str + ".blacklisted")) {
+            itemNames.add(str);
+        }
+    }
+
+edit: noticed it's pretty much the same solution you'll find in the thread: http://www.reddit.com/r/shittyprogramming/comments/2pca27/on_the_topic_of_minecraft_plugins/cmvnz0n
+There is **definitely** a better way to do all of that. If the code architecture were designed properly. 
+Appears to be a minecraft clone or mod of some sort that has absolutely terrible code architecture, no encapsulation of logic or abstraction of any kind, and approximately 1million if statements. Although not really optimizing it in anyway, a helper method would have helped make it a million times more readable. 
+Your looking at the source code for [this minecraft plugin.](http://dev.bukkit.org/bukkit-plugins/ultimarket/?page=2)
+Thank you :)
+Sumifs if much easier to use than using a sumproduct workaround to get the same result.
+/r/popping 
+Wow didn't realize I made such a stupid mistake. I will admit that I was being an idiot. I would never tell an employer I typed something like that though haha.
+> (if(V$59=B88,T$59,0))+(if(V$60=B88,T$60,0))+(if(V$61=B88,T$61,0))+(if(V$62=B88,T$62,0))+(if(V$64=B88,T$64,0))+(if(V$65=B88,T$65,0))+(if(V$66=B88,T$66,0))
+
+As excited as he gets when he finds out (if(V$63=B88,T$63,0)) is missing.
+:O
+[deleted]
+I've used a lot of somewhat obscure excel functions. SumIf has definitely been useful. A lot of people know about VLookUp, but have you ever used HLookUp? That's saved me once or twice.
+I landed here because of the bestof post, but I wanted to say that CountIf saved my bacon last year when management wanted more detailed compliance data than was available via our reporting interface.  (Users  sign a thing, their signature gets recorded with a date-stamp, total compliance is reported.  For this request we used CountIf against the date-stamp to show new signatures by day).
+Or sumifs
+Sumif and countif are daily functions for me.  I do stuff where I get chunks of complex data and I need excel to check it for various internal logic benchmarks and generate totals for only the numbers I'm concerned about.
+Whenever making dashboards for data, such as in digital marketing, sumifs come up a lot
+Sumif is super helpful. Most functions with built in conditionals are super helpful, especially in Excel.
+Really? Because I think his boss found an employee who a) recognizes when he has a problem, b) knows where to ask for help with the problem, c) actually does something about the problem, d) learned something that they can apply in the future, and e) implemented a bandaid solution until they could generate a permanent fix. 
+
+I'd settle for two of those five from most people I know. I'm not even sure I care which two. 
+And that's why you're not his boss. In fact you're probably not the boss of anyone with that shitty, pathetic mindset. 
+I'd be willing to bet that OP's boss doesn't even have a clue what the formula that he is using looks like. That's why his boss hired him, to do the formula writing so he doesn't have to do it. I guarantee you that my bosses at my old job had no idea how I drafted, they just knew that I drafted and that I did it fast. 
+Would be fired* I bet his boss knows that. 
+Dunno why you're getting so many down votes. You'd be sparing at least one employee from having to put up with a shitty boss.
+Keep bitching, and maybe they will stop!
+Are you kidding? That's White Collar Productivity. Making a process better/more efficient. And you learn something in the process. Even better. I like to hire people that can learn. They're a little cheaper than people that know everything.
+
+Also, fuck Olly.
+[deleted]
+I'm the -100th, can I at least get silver?
+A.) If you're actually in charge of people it's unfortunate.  Who penalizes their staff for using available resources to improve the quality of their work?
+B.) You're an asshole.
+How do you see who gave you your final down votes bro
+On the bright side, you're pretty unlikely to ever be anyone's boss if that's the way you view things like this.
+Frankly I'm just amazed you're at -664 right now.  I didn't know there were that many active users on this subreddit, unless there was a brigade from elsewhere.
+Beep beep beep beep
+That's why you are not a boss
+Aww I'm too late.
+1000th idiot checking in!
+Nah. Bosses know to hire the laziest people around because they're the ones that'll find the easiest way of doing things.
+I gave you 1107. No gold. Still worth it.
+Hey man, i was your 1000th downvoter. Pls give me gold.
+Would not fire him, but would seriously question his ability to solve problems.  If the job requires regular use of excel, you should have this type of function memorized. .
+A shame you're getting down voted. The lead on my team says the same thing. If you end up beginning to write long repetitive code, stop and ask for help first. Don't waste your time
+[deleted]
+our accounts were made 2 days apart...very suspicious 
+I'm not quite sure I understand your question so I will just give a bunch of answers.
+
+I was simply suggesting that OP should buy /u/animalpatent Reddit Gold for the help.
+
+Not exactly sure who gilded me or why.
+
+For more information on Reddit Gold go [here](https://www.reddit.com/gold/about)
+The user gets benefits from receiving Gold.
+
+More info [here](https://www.reddit.com/gold/about)
+Free money for the free services they give you? Sounds fair to me...
+This might be the first image with a transparent background that I've hovered over on reddit.
+I have mastered sumifs and countifs but I just can't work out index/match :(
+Me too!!!  People think I. A genius!
+I am immortal in the cubes after implementing a few simple vlookups.
+He can't do them? Excel describes the arguments you're supposed to pass in as you type out the function; does he not read those?
+I think you would be better off formatting your data into a table so one time in and time out on a single row. Then you can use Pivot Table to summarize data.
+The problem is your spreadsheet, you need to find a way to organize it better. B and C aren't actually providing the information you need, you are using them to infer the information you need.
+
+The question you are asking is "how many employees do I have on the floor at a given time"
+
+The question you are setup to answer is how many employees have overlapping time entries at t=x.
+
+I'm thinking you could use countif() targeting the array of time entries and a <> for the 15 minute interval you are curious about. 
+The reasons why I'm looking for help in this sub are 
+
+* to become better at excel
+* to cut costs. I simply don't have a budget.
+[deleted]
+-Good, Excel is awesome:) hope you get what you want from the sub
+-I've been in your shoes. Take a look what is out there as it may be worth it 
+Did he finish his pile of if's?
+exactly, if you want to pidgen-hole yourself into only being allowed to use one criteria that's fine :) it is just a good habit to use sumifs so you don't have to rearrange your formula ever again
+Its probably from the 30,000+ people who came to visit today from bestof.
+Yeah but you can't justify two years of pay for that little amount of code
+Sumproduct isn't a workaround. It literally one of the things it is meant to do.
+Also (if(V$64=B88,T$64,0)) was there twice, with 67 and 68 also missing.
+Also 64 is there twice and 67, 68 are missing
+8=====D   O:
+
+8=====D  D:
+
+8=====D:
+
+8==O:
+Consider learning index,match. More versatile than your vhlookups and only one function to implement for both directions
+it's all about that index match
+Index and sumproduct are good to learn too, more versatile. 
+I still can't wrap my head around getting my data set up for vlookup.
+Guys I got it! Dungrapid4 is a shitty employee that gets yelled at at work and hates his job so he comes to Reddit to be a dick to everyone. *checks post history to confirm* oh my bad, being an asshole with extremely cringe jokes on reddit IS his job.
+/u/dungrapid4 must be one of the bosses featured on Horrible Bosses, holy hell I'd throttle him after he signed my first paycheck.
+Whilst I agree with you, the comment above, whilst being a bit overkill about it, is right. If an employee wastes that amount of time without even checking if there is a simpler way then they're a huge waste of resources. 
+Said the guy who disagreed with me. You would give me gold if you were rich.
+http://i.imgur.com/n521hVi.png
+https://youtu.be/E8RPorI6bis
+It has been posted on /r/bestof, maybe that's why. 
+Maybe next time ...
+Here is your  /user/gold1000.
+jesus christ this is a completely side opinion that is not affected at all by which side your taking, that quote is so overused and regurgitated. 
+
+"That person deserves my best because they can handle me at my worst"
+Keep thinking that. 
+It's not a surprise I've been getting downvotes. The idiots clearly outnumber the smartones. On the bright side, if the idiots get smarter, then we have more competitors. You wouldn't want that, would you?
+It's not a troll account. He's just a moron.
+I knew it! Off to /r/Conspiracy with this info!!!
+I'm slow, didn't cross my mind that you implied that little gold star, but actual gold ingots.
+
+Thank youfor the explanation.
+=INDEX(A,MATCH(B,C,0))
+
+A - What information you want. This is what will appear in the cell.
+
+B - The common information you want to be the searched for.
+
+C - Where you want the common information to be searched for (related to A).
+
+0 - Used for Exact match.
+[deleted]
+=INDEX (**Column I want a return value from** , ( MATCH ( **My Lookup Value , Column I want to Lookup against** , Enter “0” ))
+I made a shitty guide line to index match in a recent post if you want to look briefly into my post history. Dont go too deeply or you may never emerge
+I'm thinking the hours spent working should be in another row, too. Right?
+ - Open Source Software
+Not really. My comp has Access already so I don't know what it costs to get it but I could likely pull the data from Excel, into Access, and run a query to get the desired output before that long formula could even be typed.
+
+There is a bit of a learning curve involved but it is just as easy to start an Access db and pull data into it as it is to create an Excel workbook and pull data into it.
+Sadly, yes.
+It's meant to sum the product of two arrays of numbers. Sumifs is a sum based on conditions. It's a shorter way to get the same result.
+ExcelLent.
+8:
+Index(match ()) is one of the most important formulas I use... From quick comparisons to giant workbooks, it's efficient, easy to understand and works. 
+Ahhhh index with match... that looks useful. Thanks for the tip!
+The way I think of it is that I'm looking for a value in a group of values, repeatedly. So if I have 5 values in col A and 100 in col B, and I want to check if any of A are in B, I'd use =vlookup(A1,B:B,1, false) in col C and drag that formula from C1 to C5. No match will result in N/a, a match will return the value in A.
+
+Sometime the data you want is what's N/a. You can do the reverse as well, by looking what matches from B in A, but you'd have to drag the formula down to the end of B, or 100 rows. You can then filter the data you want to see, or wrap the vkookup in an if(isna()) statement.
+
+Remember when you cut and paste the results, to paste values, as the results of the formulae are garbage out of context.
+Hell yes, now I know the username of the asshole down voted to oblivion.
+He copy and pasted the same line 80 times then had to change a couple numbers in each line. Exactly how long do you think that took?
+I once took down a very large cognos server with two lines of script. Got I back up with a hashed out patch and then did the research to simplify and idiot proof it for the next data cube run. Wrong way, right way, best way.
+Fair enough 
+Calm yer tits.
+Is this how you deal with people disagreeing with you always? Just throw "idiot" around everywhere and disregard any ideas that other people may differ from you?
+
+I understand you're trying to cultivate a persona of being above the commonfolk (you'd use "idiots" here, I imagine) but it's hard to peg you to the sort of professionalism you seem to attach yourself to when you react so caustically to the slightest bit of dissent.
+>smartones
+Judging someone's intelligence based on a single excel formula say a lot more about your skill set then it does about theirs. 
+I'm not going to lie, OP is pretty silly for writing code that long to hardcode a sumif without asking for help or looking at how to do it beforehand (no hard feelings OP) but a boss would know better than to fire someone for something like this. You're not even anyone's boss are you?
+He's not a moron, he's clearly Dwight Schrute!
+
+Edit : [link](https://www.youtube.com/watch?v=3PL4wUIFU-c)
+/r/LeGoldConspiracy
+Sounds like you two should trade notes!
+[deleted]
+So many fetishes.
+Can you send me a sample sheet and I can try to make something for you?
+True but often this data is being shared between people and the formulas are to present it in a decent format. And rarely do the desired recipients know how to use access.
+Yes, and one of those arrays could be 0 or 1 results of an logical comparison.
+Instead of seeing the excel joke, I read this in the voice of William Shatner when he is trying out for the part of Mr burns in the film festival episode of the Simpsons 
+:
+This guy get it.
+I still don't understand how this really works even though I use it in some of my books. 
+You never need to actually drag down 100 rows. In your formula, select the first cell in the range and hit ctrl + shift + down-arrow, and it automatically selects all the rows. You only run into problems with this if there are blank rows in your range, as it takes you to the end of the data. 
+Thank you!
+I'm not sure why you're being downvoted. I used to use SUMPRODUCT like that on occasion, but I'd completely forgotten about it. Adding that back into the toolbox might save me a from needing an intermediate calculation column every now and then.
+
+Intermediate calculations are the worst. Long live the 600-character formula!
+(:
+Just when I thought the joke couldn't have got better... You sir are an ASCII art king.
+Index: For a range (rectangle) of possible solutions , specify the row and column of the answer. Example: INDEX(A1:B2,2,1)=value in the 2nd row, 1st column of A1:B2.
+
+Match: Given a list of values, which # matches a given value?  Example: MATCH(A1,B3:B10,0)=The index number of the value in B3:B10 that matches A1.  The "0" at the end means find an exact match (rather than highest without going over).
+
+To use like a Vlookup:
+VLOOKUP(A1,Data!A1:B50,2,FALSE)=INDEX(B1:B50,MATCH(A1,A1:A50,0))
+
+Lots of advantages here:
+
+ 1. Not a [volatile formula](http://www.decisionmodels.com/calcsecretsi.htm).
+ 2. Your lookup column doesn't need to be to the left of your return values.
+ 3. Your lookup column doesn't even need to be on the same tab as your return values.
+ 4. Combines vlookup AND hlookup functions, and can even specify BOTH at the same time (row and column lookup).  That means I can use INDEX/MATCH to look up by, for example, student name and month with the same formula.
+ 5. It's dramatically more maintainable.  You can reference dynamic ranges, drag horizontally without using weird tricks to update the result column number, insert columns in your return values without breaking your model... it's a happy thing. :)
+
+In conclusion I like INDEX/MATCH.  The end.
+
+Edit: formatting
+I'm doing this away from Excel, but I remember it as =index(range of the data I want to get, match(the adjacent cell that I'm matching, range that cell is in, 0) (nb I might be swapping the first two match() fields) 
+Yeah there're lots of variations on this. Just thought I'd keep it simple.
+You can always go deeper.  -Abraham Lincoln
+
+
+I like you.
+Great advice! Thanks!
+That.. that's incredible. I think you've just changed my life in a small but awesome way. 
+
+VLOOKUP,  as helpful as it is, can also be the bane of my existence.  I don't foresee needing the full scope of what INDEX/MATCH can do,  but if I can just use it as a much more robust version of VLOOKUP it will be effin great. Thanks again! 
+You just rocked my world!
+Wait until you try to do countIF (ok), sumIFS (ok). 
+
+Here's the kicker minIF or minIFS. Good luck with that!

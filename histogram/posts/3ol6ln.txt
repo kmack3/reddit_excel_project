@@ -1,0 +1,45 @@
+LPT: When creating complicated Excel worksheets, always write down step-by-step instructions
+a top tip is to use text boxes to add notes as necessary as they cant get in the way of calcs / formatting. 
+Some Pro Tips for your Pro Tip, you can use alt+Enter to step the formula down to the next line, which can help you organize nested statements.  You can also add +N("text here") anywhere in a formula and it will not do anything with it, so you can use it for notes.
+I tend to write full instructions as the last action so that someone else can use the tools I've built if I'm not around. Thereby boosting everyone's efficiency!
+I make a separate tab for instructions about the sheet. That way when someone comes to me years later and says, "That spreadsheet you built doesn't work! Please fix!" I don't have to try to remember everything about it. And if I get hit by a bus, the next sucker who knows something about Excel will have a starting place.
+I create a hidden sheet where I do background calculations, list static data, etc.  It is also where I make notes if I think the workbook is complex enough to require it.  Most of the time it is faster to read the formulas and jog the memory.
+If I'm dealing with something very wacky I often boot up mspaint and draw a diagram with arrows going between sheets or different types of sheets.
+
+With regard to types of sheets, I also color code them by coloring the sheet tab. E.g. Red = raw data, purple = static parameters, yellow = calculations, green = output, light blue = splash page / input selection.
+
+I'm sure I'm going to get some "zomg rainbow" comments, but if you're dealing with 20+ sheets and you'll be adding and subtracting sheets all the time, having the sheets color coded by types let's you loop through your sheets and do something for all sheets of a specific type. This can be hiding everything except green and light blue sheets (output/input) or to refresh data connections, normalizing the data or whatever.it also means that when you get a new data sheet, you can just color it red, and it will be treated same as the rest of your sheets.
+I also keep a single table of data per sheet and rename the worksheet to the same name as the table. I just find it easier to navigate to datasets I'm looking for.
+Flair Set to Pro Tip.
+
+Please keep the sub tidy.
+if you have to write step-by-step instructions in order to understand an excel model, the excel model hasn't been constructed properly
+You mean comments in cells? Yeah, that may be even better depending on the job.
+    =IF(
+        (A3="Biscuit factory")+N("Check for biscuit factory"),
+        COUNTIFS(Biscuit_managers!A:A,B3) + N("count how many LOB current manager is responsible for"),
+        "BUILD MORE BISCUIT FACTORIES")
+
+This is pretty neat if you're doing more complicated stuff with a lot of number inputs, but can confuse some other users :/  
+something about teaching a man to fish.
+This is a really good practice to keep up, it also forces you to think over your sheet "verbally", which can sometimes help you catch some redundancies. 
+
+I've always wondered if anyone ever read the things I wrote after I left/handed it off, but it makes me feel fuzzy to know that if they DID feel like reading it, instead of just clicking furiously and inputting things in different places until it worked, they could! 
+Another thing I got used to doing is naming ranges and tables after I spent too much time trying to figure out where the formula links when it says Table7.
+The colours for sheets/cells are quite a good idea. I usually colour input cells yellow, and just whatever colour suits at the time for the different tabs.
+Why is this being down voted? It's a valid comment. If a second person can't validate the calculations in a spreadsheet I'm not going to use it let alone base any critical decisions off of it. 
+Disagree. OP isn't writing instructions to understand his model. He created it, and he understands it. OP is saying that he needs to write down his model so he doesn't forget it when he re-visits it. I don't see anything wrong with that. It's the same as properly commenting a computer program. 
+no use text boxes to overlay, - using the comment tooltip thing is a bit untidy and not guaranteed to be read by users, whenever i use ridiculously complicated formula i add a description in a text box. 
+Agreed and I actually have yet to use it, but I run across so many that had no idea about it, I felt I should share.
+a good excel model is not only functional, it is simple, intuitive, dynamic, and scalable. A model is not just a calculator, it is a tool that should provide efficiency and leverage. 
+
+A spreadsheet that requires its own creator to spend hours trying to understand how it functions actually increases time spent to complete a task... and would be impossible for anyone afterwards to use.
+
+Excel isn't about creating an 8-line function that is impossible to troubleshoot. It is about creating an elegant, efficient solution to a complex problem. 
+
+I don't see how this is a "life pro tip," more of a "common pitfall to avoid"
+But what about printing--don't the text boxes print?
+erm, cant say i ever print from excel, most of my work is a mass of calculations that sit behind a formal document.  - text boxes probably not the best choice if you need to print. 
+>> that sit behind a formal document.
+
+Your ideas are intriguing to me and I wish to subscribe to your newsletter.  Would that be a Word document, or some other type of document?  More importantly, are the Excel results automatically updated in the document?  If so, what is the mechanism that does that, VBA?  I'm just trying to ascertain if this could be an option for the documents I create (student projects for an high school course in IT).  I'm always looking to automate my work flow (mainly in creating/grading assignments).

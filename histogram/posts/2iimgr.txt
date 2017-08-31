@@ -1,0 +1,65 @@
+What are things a beginner should know about writing macros?
+I truly believe the best book you will get on the subject is the MR. Excel series on VBA and Macros.  I use the book as a reference every day.  It is chock full of useful tips for both the beginner and experienced programmer.  You will not be disappointed, it is the best book series on the subject and I doubt you'll have many arguments from anyone here.  
+
+disclaimer:  I am not at all paid by that company
+One tip - don't be afraid to use the macro recorder! 
+http://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/
+
+Forget what everyone else is saying, John Walkenbach has the greatest books (don't forget what others say, I'm being silly).  They are very easy to read, have some excellent examples and it even comes with a CD with the exercises on.
+
+Whilst the macro recorder can show you how to do things that appear magical, it is a very bad teacher.  It will teach you that .Select is a good thing, variable declaration is not required, plus others I can't remember this early on a Tuesday morning. 
+
+The best way to learn is to get your hands dirty and do stuff (in my opinion):  
+
+* Create a game
+* Build a calculator using forms
+* Test your maths AND programming skills over at https://projecteuler.net/
+* Use GOOGLE!
+* See if you can solve problems on here
+* Understand how other users have got to a solution
+* Please do not be afraid to ASK QUESTIONS!
+* Post your code and ask how others can improve it
+* Automate EVERYTHING
+Turn option explicit on. This forces you to declare all variables before running a macro. it helps prevent typos.
+A few basic things to make sure you understand:
+What each variable type is ie integer, string, boolen, long etc  
+The difference of public and private subroutines  
+How to pass variables from one sub to another without global referances  
+
+As for books, Power Programming with VBA (Mr. Spreadsheet's Bookshelf)  is quoted a lot as a great book to have to hand when using VBA at all levels. I don't actually have a copy myself so don't know how true it really is but generally the Mr Spreadsheet and also Mr Excel books are both invalubable.
+
+* Macros should replace repetitive, manual actions and should not be used for calculations.  VBA will almost always run slower than a formula.
+
+* It's almost always a good idea to disable automatic calculations at the beginning of a macro.
+
+Hmm, I have a lot of Excel/VBA books (talking over 20 here), and by far the greatest ones I have read are by John Walkenbach.  I foudn the Mr.Excel books less forgiving than JW's.
+
+
+Is this it?
+
+http://www.mrexcel.com/store/index.php?l=product_detail&p=49
+If you do use it though learn what exactly it's doing and then find a way to improve on it.
+Always a nice thing when you forget the syntax of exactly what you're trying to do, or the parameters of something you want to edit.
+> John Walkenbach has the greatest books
+
+Any book in particular? He seems to have a number of series spanning different versions of Excel.
+> VBA will almost always run slower than a formula.
+
+I disagree with this, massively.
+
+Example, using .Find is 128378912x faster than =VLOOKUP (I made up that number, but it's faster).
+
+
+Could you kindly give a book title?  I'd be interested in seeing if the book you are recommending is something I have already gone over or not.  I'm always looking for good books!
+
+this is the 2013 version:
+
+http://www.amazon.com/gp/product/0789748614/ref=s9_psimh_gw_p14_d0_i1?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=center-2&pf_rd_r=132JG4CTDEEZZ6GB36HZ&pf_rd_t=101&pf_rd_p=1688200382&pf_rd_i=507846
+http://www.amazon.co.uk/Excel-Power-Programming-Spreadsheets-Bookshelf/dp/1118490398/ref=sr_1_1?s=books&ie=UTF8&qid=1412752286&sr=1-1&keywords=john+walkenbach
+
+Excel 2013 Power Programming with VBA
+
+http://www.amazon.co.uk/Excel-Power-Programming-Spreadsheets-Bookshelf/dp/1118490398/ref=sr_1_1?s=books&ie=UTF8&qid=1412752286&sr=1-1&keywords=john+walkenbach
+
+Excel 2013 Power Programming with VBA
+thank you!

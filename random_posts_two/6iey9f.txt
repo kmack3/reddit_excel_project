@@ -1,0 +1,138 @@
+6iey9f
+Having issues with VBA copying sheets
+Hi everybody,
+
+I'm a bit of a newbie to VBA, just picking it up after years of not using it (since 1 class in college). 
+
+I'm trying to troubleshoot why my code is not properly pasting in copied selections to the workbook I'm running the Macro from. My code is able to go into each xls* file and select and copy (I know this because when I open workbooks after running code I see the first sheet is selected & I get the prompt for clipboard data), but is not able to paste into a new sheet in the target workbook. I've tried several paste methods to no avail.
+
+Any suggestions to fix my code below would be much appreciated!
+
+     Sub LoopAllExcelFilesInFolder()
+          'PURPOSE: To loop through all Excel files in a user specified folder and perform a set task on them
+
+     Dim wb As Workbook
+     Dim ws As Worksheet
+     Dim myPath As String
+     Dim myFile As String
+     Dim myExtension As String
+     Dim FldrPicker As FileDialog
+     Dim sourceSheet As Worksheet
+     Dim sourceWB As Workbook
+     Dim destSheet As Worksheet
+     Dim destWB As Workbook
+
+
+     'Optimize Macro Speed
+       Application.ScreenUpdating = False
+       Application.EnableEvents = False
+       Application.Calculation = xlCalculationManual
+
+      'Retrieve Target Folder Path From User
+       Set FldrPicker = Application.FileDialog(msoFileDialogFolderPicker)
+
+       With FldrPicker
+        .Title = "Select A Target Folder"
+        .AllowMultiSelect = False
+       If .Show <> -1 Then GoTo NextCode
+        myPath = .SelectedItems(1) & "\"
+       End With
+
+     'In Case of Cancel
+      NextCode:
+        myPath = myPath
+      If myPath = "" Then GoTo ResetSettings
+
+     'Target File Extension (must include wildcard "*")
+         myExtension = "*.xls*"
+
+     'Target Path with Ending Extention
+         myFile = Dir(myPath & myExtension)
+
+     'Loop through each Excel file in folder
+         Do While myFile <> ""
+     'Set variable equal to opened workbook
+         Set wb = Workbooks.Open(fileName:=myPath & myFile)
+      
+    
+      'Ensure Workbook has opened before moving on to next line of code
+        DoEvents
+      'Disable Prompts for Clipboard
+        Application.DisplayAlerts = True
+    
+      'Copy worksheet from source
+        wb.Sheets(1).Cells.Copy
+      
+      'Paste worksheet to destination
+        ThisWorkbook.Sheets.Add
+        ActiveSheet.Activate
+        Range("A1").Select
+        Range("A1").PasteSpecial xlPasteAllExceptBorders
+    
+      'Save and Close Workbook
+        wb.Close SaveChanges:=True
+      
+      'Ensure Workbook has closed before moving on to next line of code
+        DoEvents
+
+      'Get next file name
+        myFile = Dir
+      Loop
+
+     'Message Box when tasks are completed
+       MsgBox "Task Complete!"
+
+     ResetSettings:
+      'Reset Macro Optimization Settings
+         Application.EnableEvents = True
+         Application.Calculation = xlCalculationAutomatic
+         Application.ScreenUpdating = True
+
+     End Sub
+
+
+
+
+-------------
+Try
+
+    Thisworkbook.Sheets.Add
+    wb.Sheets(1).UsedRange.Copy
+    Thisworkbook.Sheets(Thisworkbook.Sheets.Count).PasteSpecial xlPasteAllExceptBorders 
+
+
+Also I think you were looking for `Application.DisplayAlerts = False` to disable the clipboard messages. Make sure to do a `Application.DisplayAlerts = True` before ending the macro.
+
+-------------
+Hmm I'm still getting blank sheets. Could it be because of the rolling number of new sheets "SheetXX" after my numerous trials and errors?
+
+Edit: So now I actually notice it is pasting one of the workbook sheets into the last sheet in the coded workbook.
+-------------
+I updated my comment - it looks like it's pasting into the last sheet and overwriting data in that tab. Is there a way to specify the new tab in your code?
+-------------
+Sheets.add should add a sheet to the end of your workbook if I'm not mistaken. I could be wrong, on mobile at the moment 
+
+You can do...
+
+    Dim newSheet as worksheet 'at top
+    Set newSheet = Thisworkbook.sheets.add
+
+
+Now you can refer to the new sheet directly 
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+The code that worked is as follows:
+     'Paste worksheet to destination
+         Set newSheet = ThisWorkbook.Sheets.Add
+         wb.Sheets(1).UsedRange.Copy
+         ThisWorkbook.ActiveSheet.PasteSpecial xlPasteAllExceptBorders
+-------------
+Glad it worked but the idea was to do 
+    
+    newSheet.Range("A1").PasteSpecial xlPasteAllExceptBorders

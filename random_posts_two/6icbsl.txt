@@ -1,0 +1,19 @@
+6icbsl
+INDEX MATCH where the lookup value that determines the row could be in one of multiple columns. Is that possible?
+I could provide a sample image if necessary (I'm only holding back on that because the info is somewhat sensitive so I'd need to recreate the table with fake names). 
+
+Basically, instead of the returning a value from column A based on finding a certain value in column B, that certain value could be in any of columns B to E (though it can't be in more than one of them). I figure this could be done by using a bunch of nested IFs, but I'm wondering if there's a simpler way. 
+
+Edited for clarity
+
+
+-------------
+Someone may post a formula, I wrote a [UDF - Superlookup](https://www.reddit.com/r/excelevator/comments/5e17j0/udf_superlookup_get_information_on_search_result/) for just such a scenario.
+
+It can be trimmed down as required
+-------------
+Thanks, I'm definitely going to take a look at this tomorrow, when my brain will hopefully be able to process it. 
+
+For now I made a helper table, in which I converted the four columns into rows. So now there are four times as many rows. This might actually be the most sensible way to do it, but I'm still curious if there's a way to do it without the extra table. 
+-------------
+Or you could concatenate all the values into a comma delimited list and do a partial search in a single column with `MATCH ( "*" & value & "*", concat_column , 0 )`

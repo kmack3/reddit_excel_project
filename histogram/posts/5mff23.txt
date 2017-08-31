@@ -1,0 +1,241 @@
+[Rant] I HATE Calibri font.
+Arial is bland. 
+
+Calibri can be made to look good if used properly.  
+
+Flair changed to discussion. 
+
+E.g. 85% zoom with size 11 - doesn't look too bad, especially when you use ALL CAPS headers.
+Give Segoe UI a try. It's the font defaulted to in this sub (if you have the CSS on)
+
+I'll be honest - it never bothered me.
+    Public Sub Calibri_Eight()
+    For Each Worksheet In ActiveWorkbook.Worksheets
+        With Cells
+            With .Font
+                .Name = "Calibri"
+                .Size = 8
+            End With
+            .Borders.LineStyle = Excel.XlLineStyle.xlLineStyleNone
+        End With
+    Next 'Worksheet
+    End Sub
+
+* Launch Excel | File | Save As | Save as Type: Excel Add-In (\*.xlam) | Filename **eightball**.xlam
+
+* File | Options | Add-Ins | Manage: Excel Add Ins | Go... | Browse... | Select **eightball**.xlam | OK | Check box next to **eightball** | OK
+
+* Quit Excel | Re-launch Excel
+
+* Developer Tab | Visual Basic | Right-click VBAProject (**eightball**.xlam) | Insert | Module... | Copy/Paste above code into window that opens | Save button | Close VBA window
+
+* Right-click ribbon | Customize the Ribbon... | New Tab | Rename... | Display name: **Lifesavers** | OK
+
+* New Group | Rename... | Display Name: **Formatting** | OK
+
+* Choose commands from: | Macros | Under Macros, click **Calibri_Eight** | Under **Lifesavers**, click **Formatting** | Click Add >> | OK
+
+* Under **Formatting**, click **Calibri_Eight** | Rename... | Select Eight ball icon | OK
+
+REJOICE
+As part of the UK's Actuarial Qualification, students are required to take an exam which is basically creating a decent spreadsheet (CA2 for those interested). I was so tempted to format all of my fonts to comic sans. Do you think they'd have docked marks?
+
+Anyways, it always strikes me as odd when I receive a spreadsheet which has the font changed. If you wanted it to look professional why not put your final results into a report? 
+Give me Comic Sans or give me death.
+I use Excel daily - and have worked with spreadsheets for the last 20 years - as long as I've known about it, always use Calibri!  Each to their own, I guess.
+
+
+So out of spite, you want to make the spreadsheets look...worse?
+Open Sans is our organization default. Looks nice.
+
+Arial looks dated to me, almost as bad as Times New Roman.
+Consolas
+I used to change everything to Courier New just to annoy people
+I am so boring in spreadsheets. I do not care about how a spreadsheet looks, I want it to be readable. Those last years I've been converting everything to any fixed width font with slashed zeros and a clear distinction between i, l, I, L and 1.
+
+*edit* I should add that I do not use excel extensively. It's for a small inventory (less than  2000 items) of hardware, electronics and softwares. So lots of alphanumerical serial, part and model numbers. Hence the need for distinctive 'Ls' and 'Is', 0s and Os. I also use spreadsheets for editing lists, they consist mainly of timecode entries (HH:MM:SS:FF). I really wish Excel could understand and generate timecode data  at different framerates like it does with time and date data. I used this https://latenitefilms.com/blog/calculating-timecode-in-excel/ for a while and it stopped working last year. Than this method https://www.youtube.com/watch?v=68muCWvUsrA but I hate it so much.
+
+Arial Narrow <3
+I've always felt the same way. Calibri looks particularly shitty when it's big, like 16 pt+.
+I used to care about things like fonts and teaching people how to do things the fastest way in Excel (i.e. my way). But now I don't give a shit. I am much happier for it now.
+Times New Roman 12pt
+I was just thinking the same thing today.  I always zoom out to 70%, which changes the displayed font (I believe).  I did a quick google search, but couldn't figure out which font is displayed.
+
+Does anyone know the font that is displayed as you zoom out?
+Fixed width fonts! Courier New, 11, 75% zoom.
+Calibri Light is so much cleaner and professional looking, I wish it would replace Calibri as the default
+Calibri is the best looking professional font in spreadsheetes. Arial looks odd. 
+
+KPMG's financial models all come in Calibri, I worked on their modelling team and that is what the template came in. 
+Georgia or go home. Actually, Georgia was created to be viewed on a screen so if you find yourself working with digital documents often you may find it beneficial to use Georgia. I hope this doesn't get buried, because this was very helpful to me along with using a blue filter. 
+Partially disagree- 
+
+I find that Calibri on Windows is a great font for email reading. On Mac it's not as great (surprise surprise), it's too bold, a little too cuddly and half a point too large, but still there's a lot worse. About 98% of my work emails (medium sized corporation) are in Calibri.  
+
+Arial & Helvetica both look like crap on Windows and wouldn't advise using those for heavy reading.
+
+Segoe UI is nice, but not as easy to read as Calibri. It also doesn't come installed on Mac (you CAN install it if you have the Windows file). There's a reason Microsoft kept Calibri as the default across all Office apps. 
+
+Calibri Light is a little too thin for body text (which is why MS designates it for headings style). 
+
+I wish there would be 1 email font to rule them all but there just isn't, yet :/
+So ... change it?
+
+https://www.reddit.com/r/typography/
+
+
+Exactly, I do the same thing.  Verdana  10.
+Calibri, Arial, Tahoma, they all look fine to me.  The only ones that are commonly used that really bother me are comic sans and times new roman.
+I'm partial to Verdana
+Lucida Console for numbers, Lucida Bright for text.
+Times 10 is where it's at.
+Segeo UI is my go to - the default in MS Dynamics NAV reports. Before that I was a tahoma man....
+I hate Arial and Calibri. Too dull, too typewritter ish. I deal with excel 80% of my work and urgh when a staff/colleague insists to use Arial/Calibri.
+Thank you for the flair change. Didn't know how to on mobile. 
+Calibri is just as bland as Arial and indicates that the maker doesn't care. And at least Arial has the benefit of being extremely legible. 
+Segoe UI is the shit. It's my default for everything
+I default Segoe UI Semilight on everything.
+Segoe UI is the Microsoft font when you visit their websites etc
+Other than being a slightly larger font than calibri ( segoe UI 10 pt == calibri 11 pt), they are extremely similar.
+Mah nigga
+MY MAN
+so long and you have to click every time, just declare this in ThisWorkbook:  
+
+    Private WithEvents App As Application
+  
+then in Workbook Open:  
+
+    set App = Application  
+  
+and add this event function:  
+
+    Private Sub App_WorkbookOpen(ByVal wb As Workbook)
+       
+        For Each Worksheet In wb.Worksheets
+        With Cells
+          With .Font
+            .Name = "Calibri"
+            .Size = 8
+          End With
+        .Borders.LineStyle = Excel.XlLineStyle.xlLineStyleNone
+       End With
+    Next 'Worksheet
+    
+    End Sub   
+  
+now add the AddIn.  
+Everytime a file is opened the macro runs by itself.  
+I developed a nice CSV interceptor to custom format some dates, and with auto-updates through internet too :)
+I've just started to learn macros, VBA, buttons etc by myself. 
+Could you ELI5 what does that code do?
+More fun is setting the "normal" style to comic sans and then change all the sheet fonts to something better. All of the column and row labels are in comic sans everything else isn't. 
+Por que no los dos?
+"I'll take death please"
+
+"Just kidding, I'll take Comic Sans"
+[the choice is yours ...](http://i1.kym-cdn.com/photos/images/original/000/232/743/880.jpg) 
+Yeah I like the look of Calibri but I don't really have much to say about fonts.
+
+Except to say that I program in fixed width and for documents I use any font that is easy to read.
+My company's style guide says we must use Century Gothic
+Some people just want to watch the world burn 
+Yeah, about the only formatting I tend to use is to distinguish column headings and totals and the like.
+
+If you wanted it to be really prettily set out you'd use a report.
+If you want it to be readable *by others*, you should care. Everything you personally make will be readable to your eyes.
+Gill Sans for me.
+Hmm. I prefer the King James Version, but I respect your right to choose.
+Ok I'll try it out! 
+I find Calibri to be more legible than Arial. One has to imagine the new (as of W7) fonts are superior to the old ones, or they wouldn't have been made default.
+I suppose just changing it from the default indicates you thought about it. 
+
+I'm a lot less bothered about font choice in spreadsheets in general, come to think of it. I'm really partial to good typography in documents but with spreadsheets it's all about the data.
+There's a considerable difference in the ratio between the x height, cap height, and average letter width. There's also more consistency in the heights extending beyond the x height. The consistency helps with the slightly more "professional" feel that OP was pining for. Also low x heights feel a little more "crowded" when reading. 
+
+As for me, I find Calibri perfectly suitable. I also find Arial a little lacking in character, pun intended. Also a very odd thing I've noticed: the font rendering produces a lot of antialiased pixels with an orange hue which has always been a bit unsettling to me. 
+
+I uh... used to be a graphic designer. Those muscles don't get stretched a lot. 
+LOL, I'm glad you figured out you can replace Calibri with your font of choice
+I frequently work with other people's files, so I like having the option to trigger it manually, but good tip all the same.
+Is there a way to do something similar with dates being added as text?
+
+I deal with files frequently that have dates stored as "14-APR-2001" instead of "14-Apr-2001". Somehow, being in all caps throws excel for a loop and it treats the entry as text instead of a date.
+
+Using the 'Text to Columns' feature fixes it, but I'm wondering if there is a better, more automated way to do this, without creating a macro in the personal.xlsb or importing one into documents that have this issues to run 'Text to Columns' on the data
+My best guess is a button or a macro, that instantly changes the format of all worksheets from calibri to one of your preference.
+
+We have a policy at work of locking your laptop if you leave your desk. If you leave it unlocked people tend to mess around with it (ctrl + alt + down is a favourite). I might do this next time! 
+In the same cell at the same time. MUAHAHAHA
+"So my choice is 'or death'? I’ll have the chicken then, please."
+Courier New? My go to when things need to be spaced out well.
+I'd quit
+fuck
+for us it's hernandez, and prior to that shires. anything smaller than like 36 is pretty much illegible. horrible choices made.
+https://cdn.myfonts.net/s/ec/cc-201201/cc-hernandez.png
+https://s-media-cache-ak0.pinimg.com/564x/f2/8d/e1/f28de1a04a7dc87dcd826a551a7107f2.jpg
+[On the other hand, I changed someone's console font to this](http://i.imgur.com/EcQ00ba.png)
+They are made default to mess with you, so that you feel obligated to release your sweet sweet cash to upgrade, you tightwad.  :)
+
+
+O yea it's beautiful. 
+They probably just wanted to look different to everything else 
+Bro - the feels on this one..
+>There's a considerable difference
+
+Maybe for a graphic designer, but for an 'average' person the two fonts would be nearly indistinguishable. I'm not arguing that there aren't significant difference if you know where to look, but for the average person submitting an excel file there will be very little difference. I would bet every penny I have that if I adjusted the font sizes correctly, my boss would have zero clue that calibri and segoe were different fonts.
+Should not matter..
+
+Try this
+
+1.  Type 0 in a cell and copy cell
+2.  Highlight all time cells
+3.  Paste Special Value Add
+4.  You may have to format cell back to date format...
+
+
+
+> Is there a way to do something similar with dates being added as text?
+
+My add-in does something similar, date are stored like 14.04.2001 in the CSV and since we have to deal with a lot of this types of CSV my add-in basically run a regex through every cell reformatting the data so Excel can interpret it (bonus: VBA add-in takes 10 second for 50.000 cells, tried with C# and it takes 900ms).  
+  
+But you are asking it without using macros so...a VBA add-in is basically a macro. You should try /u/excelevator solution.
+Yeah I think that too. I tried following the instructions but :
+
+* 1. I'm using excel in spanish which makes things harder. 
+* 2. I've been in the computer all day long so I'm very tired.
+* 3. I could'nt get the code to work so I rage quit my worksheet.
+
+[Good choice!](https://youtu.be/rMMHUzm22oE?t=4m56s)
+Courier new is fine but there are some great monospace fonts out there as well. I like Courier because it's simple and available on everything that I use but every once in a while I like to try a different font for programming.
+
+I was just searching around and found this it appears to be a font that you can customize and download (i.e. how the letters look to avoid confusion).
+
+http://input.fontbureau.com/preview/
+
+I've heard people on the internet say they program in variable width fonts which I just can't get behind but to each their own.
+Wtf? Those are cool looking fonts, but this is the equivalent of using Comic Sans to me. If I opened a spreadsheet that looked like that, I'd think you're new. 
+I agree with you on all points, but I'd also tack on a wager that the subtle differences would effect your boss's perception of the data. You know, if such a thing were measurable. 
+Hmm.. When trying to self-generate the issue, I can't. I'll take a look at the input file and see if I can fix it that way. Thanks for helping me realize this =)
+
+Perhaps the data is already in a .xls that someone has forced to TEXT as well, I'll have to look at that also, but simply telling excel that the column is filled with dates has not fixed it thus far, yet 'Text to Columns' does.
+Sorry, I was too specific. I meant a macro that would either reside in personal.xlsb or the sheet itself was something I was trying to avoid. I'm uncertain if I can use add-ins at work however, so perhaps if I created a script that would modify the data outside of excel that would be better.
+My steps above do a few things: 
+
+* It creates a new add-in (xlam) file, which can optionally be loaded when Excel is launched
+* It configures Excel options to instruct it to load the add-in file you just created
+* It creates a module in the file, which is a space in which VBA code can reside
+* It puts a single macro in the module. A macro is a programmable way to automate tasks.  This macro, when run, changes the font on all sheets in the current workbook to Calibri 8 pt and removes all cell borders.
+* It then sets a different set of Excel options to customize the ribbon -- the thing at the top of the Excel app. Specifically, it creates a new tab (for example: **File**, **Home**, **Insert**) and a new group (under Home, for example, Clipboard, Font, Alignment) under that tab, and places a single button in the new group that runs the macro.
+
+When you've done everything, you'll have a button that, with two clicks, reformats all cells in your current workbook to your font of choice, and removes drawn-in borders, which I happen to find annoying.  
+
+The macro itself can be programmed to do many other things, if you wish.  Or, you can write many macros that each do a single thing and assign them to different buttons.
+
+The advantage of using an add-in is that you don't have to keep loading the macro code separately each time you open a file; it'll just be available to you as a button, the same way that the Font type and size dropdowns are available to you in the Home tab of the ribbon.
+
+yep they look great when they're all big but they insist on this in spreadsheets at 14pt. makes me cry inside it's so unreadable.
+So I think that they are CSV?  
+I'd go with a C# console application, running a compiled regex will be fast as hell.
+I gave it another try yesterday and works like a charm, thanks!!!
+Thanks for this explanation. I don't know much about Excel programming.
+Thanks you so much! It sounds really useful, I will give it another try in the afternoon! :)

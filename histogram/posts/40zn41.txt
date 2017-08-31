@@ -1,0 +1,144 @@
+[VBA] Copy rows of information if a cell has a specific value
+I don't know exactly what your code looks like but if you're using something like
+
+      Sheets("Sheet1").Range("A1").Copy Sheets("Sheet2").Range("A1")
+
+Then it may be quicker to just perform it like this
+
+    Sheets("Sheet2").Range("A1") = Sheets("Sheet1").Range("A1")
+Yeah, don't use record macro because it sucks. Learn how to write efficient code. If you want real advice give more information about what you want to happen...
+
+
+    for each something in something
+        if something is something then
+            somewhere.copy somewhereelse
+        end if
+    next
+Can you post your code here so we can better understand what exactly you're doing?
+If you are copying lots of data it can be useful to do this at the start of your code:
+
+    Application.ScreenUpdating = False
+then do
+
+    Application.ScreenUpdating = True
+right at the end
+
+This will turn off screen updating while the macro runs, which could be useful with lots of screen updating.
+
+Is the cell with the value in the row?? Maybe a screenshot of your data could make this easier to figure out. But you're basically going to want a couple lines Mixed together. 
+
+    For each Cell in Sheets("{sheet}").Range({range})
+        If Cell = {some value} Then
+            Range.Copy
+            Sheets("{othersheet}").OtherRange.PasteSpecial xlPasteAll
+        End If
+    Next Cell
+I want to extract the row if a cell is equal to a certain value.
+Maybe best to not get him involved in this kind of code early on. Un-Handled errors could lead to screen updating becoming a semi-permanent issue. 
+delete, cut/paste, or copy/paste? what has is this extracting does pls?
+Doesn't it turn back on automatically as soon as code ends?
+Ah sorry. It just copies and pastes. Like let's say cell (x,3) = A for rows x = 1,3,5,6 then i want to copy rows 1,3,5,6 into a separate sheet. To make things a little more annoying, I don't want to copy the entire row, Just selected cells
+No. If the code terminates prematurely due to an error, it is not automatically re-enabled. That goes for any application settings like status bar, calculations, alerts, events...
+
+Sometimes closing and reopening Excel doesn't even solve it until code is run to reverse the setting (E.g. setting calc to manual).
+
+If you're going to do this, use an error handler to turn everything back on and display the error message.
+Yeah that's actually pretty easy and believe it or not you're going to use a For/If combination just like in my example up there.
+
+    For Each Cell in Range("A1:A100")
+        If Cell.Value = "A" Then
+            Range.(Cell, Cell.Offset(0, ??)).Copy Sheets("??").Range("??")
+        End If
+    Next Cell
+
+Offset ?? is for the number of columns you need to copy. 
+
+sheets(??).range(??) is for where you want to paste the stuff
+Ah ok, thanks for the info! I guess I just never noticed it because I usually would fix errors and make sure the code runs smooth again before attempting anything else.
+Here's a [graphical representation](http://i.imgur.com/BDUX9P9.png) of what I want to do. How will your code fit into this? The criteria is if there is a Y in column D, it will copy that row if information, except column C and paste it into another worksheet.
+VBA can do this pretty easily, but a query may be more sustainable and doesn't clear the undo history when you refresh it. And if you don't have much call to use VBA, difficult to edit or make changes when you're not sure how. There are many good resources for Query that are easy to adapt since it is a built in tool, while every VBA solution is custom to solve a very specific problem.
+
+[Here](http://www.ashishmathur.com/dynamically-filter-data-from-one-worksheet-to-another/) is a query tutorial you can look at.
+
+This code is way overkill, but will definitely do what you need. I use it for filtering unique values from a range and creating a new sheet for each value and the rows that match that value.
+
+
+    Option Explicit
+        
+    Sub filt_sh()
+    Dim Wkb As Workbook         ' Active Workbook
+    Dim DestSh As Worksheet     ' Destination worksheet
+    Dim SourceSh As Worksheet   ' Worksheet containing source data
+    Dim FiltArr() As Variant    ' Values to filter
+    Dim dict_uniq As Object     ' Dictionary to hold unique values
+    Dim uniq_Arr() As Variant   ' Array of unique values from Dictionary
+    Dim i As Long               ' Counter
+    Dim LR As Long              ' Last Row
+    Dim LC As Long              ' Last column
+    Dim SrcRng As Range         ' Source Data Range
+    Dim destShName As String    ' Temporary String to hold sheet name
+    Dim Thing As Variant
+
+    On Error GoTo ErrorHandler:
+    ' Create the dictionary
+    Set dict_uniq = CreateObject("Scripting.Dictionary")
+    Set Wkb = ActiveWorkbook
+    'Set the source sheet by name or sheet number
+    Set SourceSh = Wkb.Sheets("Sheet1")
+    LR = SourceSh.Cells(Rows.Count, "A").End(xlUp).Row
+    LC = SourceSh.Cells(1, Columns.Count).End(xlToLeft).Column
+    Set SrcRng = SourceSh.Range("A2:" & Cells(LR, LC).Address)
+
+    ' Grab the values from the range to filter
+    FiltArr = SourceSh.Range("C2:C" & LR)
+
+    ' Dictionaries will only hold a value once, duplicates are automatically discarded
+    For i = 1 To UBound(FiltArr)
+        dict_uniq(FiltArr(i, 1)) = 1
+    Next i
+
+    ' Cycle through the array to create worksheets and copy data
+    For Each Thing In dict_uniq.Keys
+                'Test if the sheet already exists
+                destShName = Thing
+    DefDestSh:      If SheetExists(destShName, Wkb) Then
+                    destShName = InputBox("There is already a sheet named " & destShName & ", please enter a new name.", "Duplicate Sheet Name")
+                    GoTo DefDestSh:
+                Else
+                    ' Create the destination worksheet
+                    Set DestSh = Wkb.Sheets.Add
+                    ' Name the worksheet
+                    DestSh.Name = destShName
+                End If
+
+                ' Filter and copy the values
+                SrcRng.AutoFilter
+                SrcRng.AutoFilter Field:=3, Criteria1:=Thing
+                SrcRng.SpecialCells(xlCellTypeVisible).Copy DestSh.Range("A1")
+    Next Thing
+    
+    Set dict_uniq = Nothing
+    Set SrcRng = Nothing
+    Set SourceSh = Nothing
+    Exit Sub
+    ErrorHandler:
+        
+    MsgBox "There was an error. Number: " & Err.Number & " Description: " & Err.Description
+    If Err.Number = 1004 Then
+        MsgBox "There is probably a duplicate sheet name, or an invalid character in a sheet name, and we weren't able to resolve it. Exiting Sub.", vbCritical
+    Set dict_uniq = Nothing
+    Set SrcRng = Nothing
+    Set SourceSh = Nothing
+    Set Wkb = Nothing
+    End If
+    End Sub
+    
+    Function SheetExists(shtName As String, Optional wb As Workbook) As Boolean
+    Dim sht As Worksheet
+
+     If wb Is Nothing Then Set wb = ThisWorkbook
+     On Error Resume Next
+     Set sht = wb.Sheets(shtName)
+     On Error GoTo 0
+     SheetExists = Not sht Is Nothing
+    End Function

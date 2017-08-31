@@ -1,0 +1,80 @@
+6ic6n0
+Sum of cells with letters
+I've googled and googled and can't find an answer to this one.
+
+I have a range of cells (D11:Q11) which can either have 12.5, 10L, 10E or blank as the value.  I need to sum these cells up but exclude the letter.  Anyone have any ideas on how to do this?  
+
+Example:
+
+http://i.imgur.com/wemUrqu.jpg
+
+That should add up to 85 but because there's a 10L in one of the columns, it's not counting the 10.  I am unable to modify the 10L/10E to only be the number so that isn't an option unfortunately.
+
+
+-------------
+    =SUM(IF(ISNUMBER(RIGHT(range)*1),range,LEFT(range,LEN(range)-1)*1))
+
+Enter in cell and press ctrl+shift+enter
+-------------
+Are the values you posted the only possible values that can exist?
+
+If so, you can use the below array formula:
+
+    =sum(if(isnumber(d11:q11),12.5,10))
+
+**Note:** array formula must be input with CTRL+SHIFT+ENTER, not just ENTER, or they will not calculate
+-------------
+Another method.. remove right side alpha characters
+
+array formula ctrl+enter+shift
+
+    =SUM(--IFERROR(LEFT(A1:C1,LEN(A1:C1)-(CODE(RIGHT(A1:C1,1))>57)),0))
+-------------
+I'm getting #NAME? with that.  Was there something I needed to specify in there for the D11:Q11 cells?
+-------------
+>Are the values you posted the only possible values that can exist?
+
+10E, 10L, 12.5, or blank.
+
+> =sum(if(isnumber(d11:q11),12.5,10))
+
+That for some reason outputs 155.  Getting closer though
+-------------
+Thanks for the response.  That throws a #VALUE!.  Could it be because some of the cells within the D11:Q11 range are blank?
+
+-------------
+Do you have empty cells? If so, the formula needs to be modified a bit.
+-------------
+Moreover, "range" is a generic name. You need to specify either D11:Q11 or use named ranges instead.
+
+Try ctrl+H "range" to "D11:Q11"
+-------------
+>Could it be because some of the cells within the D11:Q11 range are blank?
+
+Yep, fixed above :)
+-------------
+That makes sense.  I tried messing around with that before and got #VALUE!
+
+Could it be because some of the cells within the D11:Q11 range are blank?
+
+-------------
+You are awesome!  Thank you so much!!!!!
+
+Solution Verified!
+-------------
+I actually forgot..  I have one more section of this that has the options of 10.5, 10.5MSR, 11 and blank.  I'm trying to wrap my head around what you gave me to modify it to work with that.
+-------------
+Yup... you'd need to modify the formula a bit for non-blank values only
+-------------
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Assuming you only have those Letters as the indicators the below array formula will do the trick. You would need to add more `SUBSTITUTE`'s for each new letter indicator.
+
+Enter with **ctrl+shit+enter**
+
+    SUM(IFERROR(INT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(A2:N2,"L",""),"E",""),"MSR","")),0))
+-------------
+Thank you!!

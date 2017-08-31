@@ -1,0 +1,107 @@
+VBA Wizard - a blog for snipets of VBA code I find useful
+This should be a great reference tool, thank you!
+you should change your post flair from [unsolved] to [discussion]
+
+EDIT- one thing I've begun doing on my site is have a "what's this code doing?" discussion every so often.
+For column letter, just left(cells(1,x).address,len(cells(1,x).address)-1)
+
+Need to optimize this code a bit.  Lot of unnecessary commands.
+
+
+nice work m8!
+
+i guess we should make a common thread in this sub and may be even a common file and add all these macros there and put it in the sidebar.
+Taking suggestions too?  I've found a few tricks recently that I'm beginning to like.  Was hard enough for me to figure out with googling so maybe adding here would be agreeable?
+
+Last thing I figured out - auto save a file after a period of inactivity, to avoid multiple users from running into issues with it being locked from guys on another shift.
+
+(I'm also the function over form requirement, usually the first solution I find that works is the one that sticks)
+Most of what I have been doing is building a GUI for data entry into a database (speadsheet).  Users are people who think the internet is broken if you delete the internet explorer icon on the desktop, so it has to be varily user proof.  That beign said, some of this stuff is simple and obvious, others are less direct but situationaly useful.
+
+Running a userform automatically (or any macro) on file open
+(note, this requires the file to be saved as a trusted file).  
+
+Add to ThisWorkbook
+
+    Private sSub Workbook_Open ()
+    MyMacro.Show vbModeless
+    End Sub
+
+
+and perhaps my favorite sneak, save file on close automatically.  simple but often useful.  In my application, this is to avoid users forgetting to save their work(database entry application).  If they damage the file and I need to repair it, I've got daily backups to recover from on our server.
+
+Add to ThisWorkbook
+
+    Private Sub Workbook_BeforeClose(Cancel As Boolean)
+    ThisWorkbook.Save
+    ThisWorkbook.Saved = True
+    End Sub
+
+Together, the above code caused another problem.  When I run a seperate reporting program to pull from the database, it opens the database file which would then in turn automatically run the macro.  There is a more elegant way to pull the data without opening the file, but it was not the solution I found.
+
+Essentially in the reporting program (file that calls the database) I open the file as ReadOnly, and in the database file I add 1 line to the open code in MyWorkbook
+
+    Private sSub Workbook_Open ()
+    If Activeworkbook.Readonly Then Exit Sub
+    MyMacro.Show vbModeless
+    End Sub
+and add this to the report program
+
+    Workbooks.Open Filename:=Databasefile, ReadOnly:=True
+
+Simple problem, meet simple solution!  Took me banging my head against the wall to figure that silly shit out.
+
+When finishing the logic of open database - find data- copy data - paste data - close database I got the error "large amount of information on the clipboard" yadda yadda, eliminated this by simply adding 
+
+     ActiveCell.Copy
+
+to clear the clipboard or make it 1 value before closing the file.  All annoying prompts gone!
+
+All rather simple stuff but it took me looking around lots of places and many a face/desk to find good solutions for all of these problems, maybe it will come in handy for someone else.
+It looks like in your post  you did not specify which version of Excel you are running.
+
+Please be sure to edit your post to include this so that we are able to better help you with your specific problem.  If you have received this message in error, please disregard.
+
+
+*[I am a bot](/r/AutoModerator/comments/q11pu/what_is_automoderator/), and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose?to=%2Fr%2Fexcel) if you have any questions or concerns.*
+Thanks, they really should changed that "Is this resolved?" question to say something like "Edit flair".
+Function before form. A good deal of this code is a combination of the best I could figure out/find online. I have a very busy job so having a product that works is more important than the most optimized code.
+
+That being said, I will try your solution. If you have any other suggestions please offer them.
+Sure. Feel free to share. Having one searchable place for useful things seems good.
+they do have that- you have to edit the post I think
+Cool beans.  Trick I figured last night.
+(note solutions come from tinkering, google and digging through lots of forums, and refining, I don't take credit as an author, only want to help compile tips bank)
+
+Auto close file after period of user inactivity
+
+Create a new module, paste in below.  The first two lines auto save and dont show the "do you want to save changes" dialogue which can break the code.
+
+    Sub CloseMe()
+        ThisWorkbook.Save
+        ThisWorkbook.Saved = True
+        ThisWorkbook.Close
+    End Sub
+
+Then in ThisWorkBook for the file
+
+    Private Sub Workbook_Open()
+   
+    
+     dTime = Time
+        On Error Resume Next
+        Application.OnTime dTime + TimeValue("01:00:00"), "CloseMe"
+        On Error GoTo 0
+
+    End Sub
+
+    Private Sub Workbook_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
+        On Error Resume Next
+        Application.OnTime dTime + TimeValue("01:00:00"), "CloseMe", , False
+        dTime = Time
+        Application.OnTime dTime + TimeValue("01:00:00"), "CloseMe"
+        On Error GoTo 0
+    End Sub
+
+where TimeValue("HH:MM:SS") can change the period of inactivity before the command runs (in all 3 locations change the time)
+

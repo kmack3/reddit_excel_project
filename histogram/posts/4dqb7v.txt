@@ -1,0 +1,60 @@
+How to delete data based on values in another field.
+Ok, think I got it.
+
+For every PA number, if there isn't a corresponding H4 or H14 in the SP column, delete every row of that PA number.  If there *is* a corresponding H4 or H14, keep the PA number.
+
+This should achieve that, but let me know if I've got the logic wrong.  With that logic, in your example above out of PA numbers 071564-071561, only 071561 should remain?
+
+**Please save your workbook before running this macro in case things go awry.  Also note that you must have the sheet on which to run this as the activesheet and you'll probably need to change the variables `colSP` and `colPA` (lines 9 and 10) to their respective columns in your worksheet.**
+
+    Sub Deleter()
+    
+    Application.ScreenUpdating = False
+    Dim i As Long, j As Long, lastRow As Long
+    Dim colSP As String, colPA As String
+    Dim startRow As Long, endRow As Long
+    Dim checker As Long
+    
+    colSP = "I"
+    colPA = "B"
+    lastRow = Cells(Rows.Count, colSP).End(xlUp).Row
+    
+    For i = lastRow To 2 Step -1
+        If Cells(i, colPA) <> Cells(i + 1, colPA) Then
+            endRow = i
+        End If
+        
+        If Cells(i, colPA) <> Cells(i - 1, colPA) Then
+            startRow = i
+            checker = 0
+            For j = endRow To startRow Step -1
+                If Cells(j, colSP) = "H4" Or Cells(j, colSP) = "H14" Then
+                    checker = 1
+                End If
+                If j = startRow And checker = 0 Then
+                    Range(Cells(startRow, 1), Cells(endRow, 1)).EntireRow.Delete _
+                    shift:=xlUp
+                End If
+            Next j
+        End If
+    Next i
+    
+    Application.ScreenUpdating = True
+    End Sub
+[deleted]
+Wow! thank you so much that worked perfectly and you replied so fast!
+SOLUTION VERIFIED!
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+No problem, happy to help!  Thanks for the ClippyPoint :)
+Gold!?  Sweet! Thanks! :)
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You're welcome, you likely saved me hours of time in the office!

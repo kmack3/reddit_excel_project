@@ -1,0 +1,169 @@
+When would I ever want to use VLOOKUP over INDEX-MATCH?
+It's quicker to type and is slightly faster from what I've read.  The performance can decline over large/complex variable sets. 
+
+Generally, if I have a really basic one off lookup to do, I use VLOOKUP.  If it's something I want to really use in the future, I use Index/Match.  A lot of people take the stance that as soon as you learn the new fancy thing, you should never use the old one, but there's a reason both exist.
+The thing I like to differentiate regarding these, is as follows:
+
+VLookup is good for a singular contiguous dataset that you can actually set up a dynamic columnar reference.  It also can be used for some of the simplest datasets and is faster in that regard.  (Usually, it'll be something of the type of =VLOOKUP([@Ref],Sheet1!A:B,2,false).
+
+Index-match-(match) is extremely strong.  What it's good for:
+
+* Mismatched data columns (Not in a setup for VLOOKUP)
+
+* When you're doing a double lookup (both based on data and a date range, etc) it's easier.
+
+* IMM is great for actually doing dynamic sum ranges.  (For eg, I've built out a solid cash flow worksheet that summarizes based on the top date ranges and can be indefinitely updated)
+
+So sometimes VLOOKUP can be used, and really is just up to the designer's laziness :)
+TIL I should rather use INDEX-MATCH instead of VLOOKUP if I work with large files or when I want to search right to left.
+Mostly it's a matter of preference and need (if you can't/don't want to change your data structure to fit vlookup), performance differences are pretty immaterial, here's a writeup I did a while ago: 
+
+https://www.reddit.com/r/excel/comments/2wvo4g/calculation_performance_vlookup_indexmatch/
+
+I almost always use INDEX, to me it's much more straightforward to read than a VLOOKUP, but I've seen it a million times :) ,You could say that VLOOKUP is generally more "reader-friendly", based on whether it's a VLOOKUP or HLOOKUP, you can instantly read what the intention is in what direction, the leftmost column will always be the lookup column, etc. 
+
+They'e a little more intuitive with "Find the value you're looking for in a column and return the thing in the same line, x columns to the right" rather than "Okay, imagine your data table as a coordinate system and  return the value you want by finding the value you are looking for in a column with a different formula to return it's index value !"
+If you're going to share your workbook or are helping still learning these formulas.
+I save INDEX, MATCH, OFFSET, INDIRECT*, and array formulas (among other things, those were just off of the top of my head) for places in spreadsheets that nobody should ever have to touch.
+
+Including places I want to *turn into* things nobody should ever have to touch.  Like changing SUM(A1:A20) to SUM(A1:INDIRECT(ADDRESS(ROW()-1,COLUMN()))).
+There are 2 big advantages of VLOOKUP:
+
+1) If you have to look over 2 sheets, it's MUCH EASIER to type. With Index/Match you have to switch between the sheets 3 times, with VLOOKUP only once. Can be confusing. Especially when you have to combine more columns for search criteria. 
+
+2) if you have to fill in a large and same formatted database with an primary key index, it's much easier and you can copy it easier.
+
+INDEX-MATCH is of course a mightier Tool, but often it's too complex for a small lookup and search function. 
+
+I use VLOOKUP much more often, but like the other one too.
+I would use index-match when you feel lazy about about moving columns around. Else, vlookup
+I've never used index-match for an approximate match, does it do that?  But the nature of index-match I would think it would be harder to pick an approximate.  I use sometimes for finding classification buckets from continuous data sets into discrete buckets.
+
+
+I typically use vlookup() because I do a lot of quick and dirty matching and cleaning that won't be used again and I can pretty much type all from muscle memory without thinking about it.
+Does anyone have a good tutorial on INDEX-MATCH they can recommend? I always seem to go back to VLOOKUP a lot when i should probably be using INDEX-MATCH. I need to force myself to learn how to do it better. 
+I mainly use vlookup for my reports at work but my data tables mainly track <70 people who are constantly rotating.  I've only really used it for one report where I needed to do something that involved a two large data tables that didn't necessarily match that also required 2 look-up criteria (territory and name) index-match pulled my ass out of the fire in that situation.  
+One thing I haven't heard yet is user readability. If you're passing a workbook off to another person, they may be more familiar with VLOOKUP, especially if they're not very familiar with Excel. 
+If other people are going to be using your workbook, vlookup is more commonly known and easier to understand. 
+
+Sometimes it's worth it just so that you don't have to explain Index/Match to someone who isn't as excel saavy
+INDEX MATCH, when I need to find values to the (edit: left, not right) or have a variable column that I need to find.  VLOOKUP for pretty much everything else.
+Damn, this is a real good question. I've heard it's the second way, but don't have a concrete reason why.
+With INDEX-MATCH, you can do a MATCH column and then use the result to do multiple INDEX columns. So if you need to lookup 10 columns of data you would only have to do the lookup once with INDEX-MATCH. 
+
+When you get a datatable as input, it's generally assumed to be similar to a table in a database. This means you can't depend on the number of data rows to be the same, you can't depend on the order of the data rows, you can't depend on the number of columns to be the same, and you can't depend on the order of the columns (fields). This makes VLOOKUP a poor choice compared to INDEX-MATCH because VLOOKUP depends on the order of and the number of columns.
+Index - Match is still way over my head. I am watching a tutorial and still don't get it. :(
+
+
+INDEX-MATCH or OFFSET-MATCH?  
+I never use VLOOKUP.  I got wrong data due to sorting once and I threw it out of my list of functions.
+> It's quicker to type
+
+This. The only time I use it is if I'm using it to create something and I don't plan on revisiting it, or I'm going to paste as values once I have the column calculated. 
+Great point.
+For cash-flow statements, I have had lots of success with the following approach that uses neither VLOOKUP nor INDEX/MATCH:
+
+* Each period is represented by a column having the period start and end dates in rows at the top. Calculation worksheets have this structure with a low-level granularity.
+* Output worksheets are also organized such that each period has a start and end date in separate rows at the top. However, the periodicity for output sheets can be different (and dynamic) from the worksheets.
+* Each cell in output worksheets aggregates data from the calculation worksheets using SUMIFS with comparisons to see that the start date of the output sheet is less than or equal to the start date of a calculation sheet and that the end date of the output sheet is greater than or equal to the end date of a calculation sheet.
+
+In my former life, I did financial modelling at a big 4 and this worked very well.
+[deleted]
+On workbook open events a named range "ptrCellAbove" is created so I don't have to deal with this nonsense.
+1) When I use index-match I write it like this:
+
+=INDEX(;MATCH(B2;
+
+then I switch sheets, select the lookuparray for MATCH, the array for INDEX and press enter. That way I only need to switch sheets once.
+
+But I still agree that VLOOKUP is easier though.
+Named ranges...
+Especially if you've used INDIRECT to create your formula.  Adding in new columns will mess up your col count in VLOOKUP, but if you are indexing a column with a reference cell, should be ok.
+But why? 
+There's a good argument for replacing your OFFSET-MATCH, in whatever situation you're using it, with an INDEX-MATCH or VLOOKUP solution. OFFSET is a volatile formula that will refresh whenever anything is changed in your spreadsheet, INDEX and VLOOKUP aren't, so if you have a lot of data or a lot of OFFSETs, it could help reduce drag in your sheet. 
+[deleted]
+could you screenshot a quick example? blurred out numbers if needed of course
+For some cash flow statements that'd work, but with the way our company functions, we have somewhere in the range of 100+ variant inflows/outflows for our base business, not counting our corporate functions. 
+
+I do agree SUMIFS are functional too, but I have a few other things that are reliant on a few conditionals that makes it easy for me to aggregate items based on the IMM.  
+Or if you want to have more modular control over each aspect of the Lookup and the ability to split out the two key elements, Index and Match into separate entities / locations (should such a need arise).
+One for each sum formula?
+Nice tip, thanks.
+Vlookup is easier when the criteria is in the far left column.
+I'm afraid that in my 'new life' I don't even own a copy of Excel :D
+
+Example source/calculation sheet (monthly periodicity):
+
+      | A          | B          | C          | ... | Z
+    1 | Start Date | 2015-01-01 | 2015-02-01 | ... | 
+    2 | End Date   | 2015-01-31 | 2015-02-28 | ... |
+    3 | Revenue    | 1000       | 1050       | ... |
+
+Example output sheet (quarterly periodicity):
+
+      | A          | B          | C          | ... | Z
+    1 | Start Date | 2015-01-01 | 2015-04-01 | ... |
+    2 | End Date   | 2015-03-31 | 2015-06-30 | ... |
+    3 | Revenue    | See below  | See below  | ... |
+
+Formula to be placed in the first 'see below' and copied:
+
+    =sumifs(Sheet1!$B3:$Z3,Sheet1!$B$1:$Z$1,">="&B$1,Sheet1!$B$2:$Z$2,"<="&B$2)
+It's global, so the named range will always reference the cell above it.
+If you know some VBA, here's the code I use... you need to create a class for Application and use the _WorkbookOpen event to run this code so it's available in every workbook.
+
+    Sub CreateDefinedNames(Wb As Workbook)
+    'adds useful defined names to workbook
+    'ptrCellAbove will always reference the cell above where it's used, regardless of rows inserted/deleted
+    'ptrCellLeft acts similarly
+    'NotFirstRow is everything but row 1. This is useful for getting column totals in row 1 without creating a circular reference.
+        'eg. in cell A1... =SUM(A:A NotFirstRow)        (the space is a union operator)
+    Dim lMaxRows As Long
+    
+    If Right$(UCase(Wb.FullName), 3) = "XLS" Then
+        lMaxRows = 65536
+    Else
+        lMaxRows = 1048576
+    End If
+    
+    On Error Resume Next
+    
+    If Not Wb.Name = ThisWorkbook.Name Then
+        
+        With Wb.Names
+            .Add "ptrCellAbove", , , , , , , , , "=!R[-1]C"
+            .Add "ptrCellLeft", , , , , , , , , "=!RC[-1]"
+            .Add "NotFirstRow", , , , , , , , , "=!R2:R" & lMaxRows
+        End With
+        
+    End If
+    
+    On Error GoTo 0
+    
+    End Sub
+
+My approach is similar:
+
+    =INDEX(range,(MATCH(1,range,0))
+
+I switch sheets once as I type the formula and select the ranges.  Hitting enter at the end pops me back to the original sheet.  I can then select the "1" in the formula and pick the right match criteria on the original sheet.
+That's pretty cool. Half monthly data would have been a pain though :D.
+
+The first neat hack I saw was also in date wrangling for financial models. 
+A near formula that calculated (1/N+1/YYYY) -1. Dd/mm/yy format.
+It looks like it may be easier to normalize the data and pivot on it.
+Is there a reason you don't just run this as needed as a standalone function?  The VBA here is pretty simple, the main sticking point is R1C1 notation for me, but it looks like you are creating named ranges that reference a range on a relative basis.  I would need to actually type this into Excel to see what argument you are setting with that string though, since I don't know off the top of my head what every argument for .Add is.
+
+I didn't know you could do this.  Is there a way to do it without VBA?
+You can use EOMONTH or EDATE to automate that.
+That would imply your output being perpetually out of sync with your input and calculations. I've taken this approach on 25 year, monthly cash flows and had a very responsive and usable model. 
+
+An additional bonus is that with this approach your calculation sheets can be formatted in a human-readable manner because they are not constrained to the requirements of PivotData.
+I don't run it as needed because I've set it up so it just happens in the background and I never need to think about it.
+R1C1 is a pain, usually, but pretty useful in VBA. R[-1] means the cell above, C means the same column.
+It just adds a named range "ptrCellAbove" to the Workbook.Names collection which can be used anywhere to reference the cell above.
+Your =SUM(A1:INDIRECT(ADDRESS(ROW()-1,COLUMN()))) becomes =SUM(A1:ptrCellAbove).
+You can do this without VBA by adding a defined name that Refers to: "=!A1", when the active cell is A2.
+Edit: the argument is refers to.
+
+

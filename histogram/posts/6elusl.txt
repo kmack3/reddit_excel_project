@@ -1,0 +1,21 @@
+Multiple input cells to trigger output to new sheet (everything working for single input)
+I would do this using a one-variable [Data Table](http://www.excel-easy.com/examples/data-tables.html).
+
+See demo:
+
+http://upload.jetsam.org/documents/tsigalko11.xlsx
+
+
+Hi, 
+Thanks for the quick reply.
+Do you mind explaining a bit how/what you did?
+
+Also, I would like to have all 3 inputs (INPUT_1, INPUT_2 and Selection_1) used this way. As I will get it in the future as 3 columns filled sheet. So I can just copy it and everything is done automatic. 
+
+Sorry for not explaining it properly in the OP.
+
+Thanks once more.
+
+Just read the link - it can explain things a lot better than I can.
+
+The three inputs cannot be used this way. This is a one-variable data table, so we can only change one variable and hold everything else constant. If you wish to do all permutations of all variables and capture the results, you will have to use VBA scripting to do it (and I can't help you with VBA).

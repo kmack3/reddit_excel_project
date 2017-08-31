@@ -1,0 +1,115 @@
+Is there a way to format thousands as k, millions as m, billions as b, and trillions + as t?
+Hey OP, I wasn't sure what you wanted to do with numbers less than a thousand, so I just left it to display as normal. "536.00" as an example.
+
+This is just an expansion of what /u/sqylogin has said, so thanks to him for figuring out that much. Each custom format can only have three different situations. But what we can do to cheat this is using Conditional Formatting.
+
+I'll just do a basic step by step, if you get stuck, let me know.
+
+Select the cell you want to apply this to (I'll assume A1). Under Conditional Formatting, select "Manage Rules"
+
+Create a new rule. Your rule type should be "Use a formula to determine which cells to format."
+
+In the "Format values where this formula is true:" box, you enter the criteria. Enter:
+
+    =A1<1000000000
+
+That's One Billion, we're setting up this format for all numbers under a billion.
+
+Select Format > Custom Format, and enter this:
+
+    [>=1000000]0.00,,"M";[>=1000]0.00,"k";0.00
+
+This sets up the same thing /u/sqylogin did, for less than 1000, k's, and M's.
+
+Click OK, and OK. You can click OK again and test it out on numbers less than a billion to make sure you're doing things right so far.
+
+Now to setup another one.
+
+Again, new rule, and the same rule type. This time for the criteria, you want:
+
+    =A1<1000000000000000
+
+That's any number less than a quadrillion (We had room for more, but you only wanted to go into the Trillions).
+
+This time, your custom formatting will be:
+
+    [>=1000000000000]0.00,,,,"T";[>=1000000000]0.00,,,"B"
+
+You'll notice this time we only used two rules, so there's room for a "Q" if you want to add that in there. Click OK, and OK again.
+
+Finally you want to check your Rule order. Smallest at the top (the first one we made), largest at the bottom. This is because numbers less than a billion technically meet the criteria of both rules, so Excel will favour the upper rule.
+
+Now click OK and give it a go.
+
+You can copy it to other cells literally by copy+pasting. And this can be expanded quite a bit with additional rules (remember three orders of magnitude per rule). Though your notation gets messed up by the likes of Quadrillion and Quintillion that both start with Q. Sextillion/Septillion as well.
+Because of limitations in Excel (we can only define up to three, namely positive, negative, and zero), you can only have three of these.
+
+Here's an example giving you Billions, Millions and Thousands. No format for hundreds or trillions.
+
+[>=1000000000]0.00,,,"B";[>=1000000]0.00,,"M";0.00,"k"
+
+
+Source: http://www.excelbanter.com/showthread.php?t=176004
+Excel won't magically "detect and apply" notations that are non-standard. However, you can define and translate it fairly easily using formulas.
+
+For example: We know that "thousands" will always be between 4 - 6 digits in length (including hundred thousands). So an IF formula to format Thousands would be:
+
+    =IF(AND(LEN(A1)>=4,LEN(A1)<=6),A1/1000&"K",A1)
+
+(Assuming that A1 is where your underlying number is stored)
+
+You can then extend that same formula to include Millions (between 7 - 9 digits):
+
+    =IF(AND(LEN(A1)>=4,LEN(A1)<=6),A1/1000&"K",IF(AND(LEN(A1)>=7,LEN(A1)<=9),A1/1000000&"M",A1))
+
+And so on, and so on. Just keep pushing out as many levels as you need.
+
+This would give you the following results:
+
+Input | Output |
+---|---|
+1000 | 1K |
+2700 | 2.7K |
+5625000 | 5.625M |
+
+This assumes that you are working with nice whole numbers, and don't need to worry about decimals or rounding, etc. Not to say this isn't possible, just that they add layers of complexity.
+Number formatting will only handle 3 cases. However, from Excel 2007 on, number formatting is available through conditional formatting, so you could use conditional formatting using formula conditions to detect value >= 1E12 and format as __0,,,,\T__ and stop if condition true, then detect value >= 1E9 and format as __0,,,\B__ and stop if condition true, then detect value >= 1E6 and format as __0,,\M__ etc.
+Hey OP, just be careful when using that notation because it can mean different things depending on who reads it. For example, some businesses use "M" to signify 1000 and "MM" to signify 1000000. 
+Format number, custom, ##.##"M"
+
+Should do the trick. Lose the .## if you don't want decimals. 
+Couldn't you just use the engineering notation format?  
+
+edit: Use the custom format \##0.0E+0
+
+You have to use conditional formatting
+
+First set the formatting to normal for numbers less than 1000
+
+Next set up a conditional formatting rule for numbers greater than 1000 set format to "0.##,K"
+
+Next set up a rule for numbers greater than 1000000; format numbers as "0.##,,M"
+
+And so on for each order of magnitude just add an extra comma after the #
+
+This method will not modify the values in each cell so you can still perform arithmetic on them 
+Solution Verified
+I disagree. It'd be a bit complex, but he can use (on mobile so not 100% sure of the functions, but I know their operations exist) 
+
+FIND and REPLACE to find all characters LEFT of the decimal point, which will then let him use CHOOSE to determine the number of digits so he can pick the proper suffix, and then he can also use RIGHT and ROUND to get whatever the decimal is and then he can CONCATENATE the results. 
+
+
+Thanks, that's part of it. But I want Excel to DETECT whether it's thousands/millions/billions/trillions and use the correct formatting accordingly.
+excel says it cant use the number firmat i typed. and suggests i use the built in ones
+
+You have awarded one point to _Supertrinko_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+That's no longer changing the format, it's turning a number into a string ie changing the underlying value
+On mobile but can't you just do a simple if statement? If it's greater than 1,000 but less than 1,000,000, divide by 1000, &"K", etc?
+You could use an IF statement and count the number of digits.  if between 4 and 6, use k, if between 7 and 9 use m, etc., then divide the number by 1000 or 1000000 and use the format command to add the suffix.
+Use if statements and concatenate? 
+I'm on mobile and my laptop across the room feels like it's lightyears away from the confines of my cozy bed. 
+
+Ill resolve this for you in the morning. It will be my first item of procrastination when I get into the office. 
+I guess it depends on what OP is using the numbers for. Display purposes, then my way works, but if he wants any math, then you're right, my method fails 

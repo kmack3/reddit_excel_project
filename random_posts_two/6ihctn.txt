@@ -1,0 +1,40 @@
+6ihctn
+Pulling data from a table based on two inputs.
+Hi there!
+I'm looking for help with pulling from a data set on a seperate sheet in an excel file, based on two inputs (width and height). I tried to use Index/Match to call upon the data but something isn't working properly. I have a couple snapshots of the excel file and the formula i'm trying to [use.](http://imgur.com/a/CL5jS) I'm pretty inexperienced with the heavier hitting stuff and I may be approaching this the wrong way. 
+
+The Formula seems to be calling on a different part of the sheet, it should be 96 but it is coming through as 90. when I try to use the same formula with a different input it comes up as N/A. 
+
+Any suggestions? Does this require macro's, or a different set up? 
+
+Edit 1: So I set this up in a test file with the data table on the same page as the input. Still it is pulling the wrong information. see the [screenshot.](http://imgur.com/a/KI8c9)
+
+Edit 2: Is there a way to get the input to round to the next highest amount? For example, if I input 24 for the height and the lowest in the data table for height is 30, it produces a N/A in the Formula cell. Also, if it's a height in between one of the sizes, it produces an N/A. Is there a way to get it to reference the next highest in the total? 
+
+
+
+
+-------------
+You'll want to lock the last match column.
+
+AG7:AG24 -> $AG$7:$AG$24
+
+As you drag down, AG7:AG24 becomes AG8:AG25, etc. Instead of 48 being the 4th item in the array, it is now the third, causing the MATCH to return 3. It then looks up in your orginal array and returns the 3rd row when you want the 4th.
+
+--------------
+
+Also, you can use 1 as the third term in the match only because your table is sorted in decending order. If there is any chance your table will not be sorted, use 0 instead. FWIW: I almost always use 0 unless computational speed *needs* to be taken into account. Limits errors.
+-------------
+Locked the last match column and the tried toggling between 1 and 0 for the third term in the match.
+
+Still I'm getting results from another part of the page, and not the result needed. It's not pulling the correct number from the data table. 
+
+-------------
+Might have row and column switched
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _windowtothesoul_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,20 @@
+6g1tr7
+Covert PowerPivot Pivot Table
+Hi, 
+
+I have a Pivot Table that pulls from a data model generated from a SQL query.  I’d like to preserve the Pivot Table (all column headers are the same) and switch the source from the SQL data table to a table within the workbook.  I’ve added the workbook table to the data model, however, when I try to switch the data source I get the following error:  “You cannot choose a connection that is incompatible with the existing connection.” 
+
+Is there a way to do this?   
+
+Or am I forced to rebuild the Pivot Table?    
+
+The Pivot Table is heavily formatted, so for time’s sake, I hoping not to have to rebuild it.  
+
+Thanks in advance! 
+
+
+
+-------------
+Was the sql connection made using power query?
+-------------
+PowerPivot

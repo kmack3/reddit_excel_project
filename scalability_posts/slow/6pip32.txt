@@ -1,0 +1,33 @@
+slow
+6pip32
+Very slow copy/paste time
+
+I have a workbook I created that has suddenly started taking a very long time (30 min+) to change a formula by copying and pasting (alt-hvf) down.  There are ~45k rows, but that's not any bigger than I'm used to working with.  When I start a new workbook, and copy down the same formula, it pastes in seconds.
+
+Here's the formula I'm trying to paste:
+=IF(SUMIFS(M$1:M1,A$1:A1,A2)=0,IF(M2>Sheet1!$F$2,1,0),H1+1)
+
+I'm replacing ">0" with the ">Sheet1!$F$2" term.  It's a simple counting formula, and I'm just trying to make the lower limit dynamic with the link.  I've tried a find and replace function, and I can see the cells changing in the cell name box, but i can almost count as fast as its moving through.
+
+I've disable 'Enable Live Preview', 'Show Paste Options button', and 'Show Insert Options button'.  Doesn't seem to help.  Calculations are on manual.
+
+I've copied and pasted down various columns a number of times, and am thinking it has something to do with the clipboard retaining all of that, but I can't figure it out.
+
+Any direction would be appreciated.
+
+
+
+
+
+-------------
+Are there any other formulas in the workbook with volatile functions (INDIRECT, TODAY, NOW, OFFSET, etc.) that might be causing problems?
+-------------
+Try to adjust your nesting so the smaller formula calculates first:
+
+    =IF(M2>Sheet1!$F$2,IF(SUMIFS(M$1:M1,A$1:A1,A2)=0,1, H1+1), 0)
+-------------
+nope
+-------------
+good thought.  i'll try that.  but i think the issue is the copy/paste itself.  (and delete as well.  highlighting the column and pressing the 'delete key' takes >10 mins before i kill it)
+
+the workbook recalculates in 10 seconds

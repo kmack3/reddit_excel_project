@@ -1,0 +1,52 @@
+Free Chapters from Advanced Excel Essentials
+This is great stuff! As someone who hasn't (yet) taken any formal classes on Excel or VBA, this could definitely be useful for me. So far my only resources are /r/excel, stack overflow, and google.
+
+Would you say a majority of this book is based off of your personal views on how to accomplish certain things (like the option explicit bit in chapter 1), or is it mostly objective step-by-step guides? Not that it matters either way; just curious.
+I love the examples that come after each new concept in Chapter 3. The examples help me make intuitive sense of the concepts so I can apply them later even without your book next to me (which is a good thing). I can't wait to try out CHOOSE and the intersection function next time I work with a dataset. 
+
+The dynamic range part looks really useful, but I personally had trouble understanding the formula intuitively. Wish I could tell you what made it so confusing, but yeah suffice it to say I was confused. Could just be that the example is pitched to a higher level Excel user than myself. Nevertheless, I'm sure I'd be able to figure it out if I had your book as a reference beside me when actually working with a spreadsheet.
+
+Another comment: at first, I didn't see the rationale for the XOR section in Chapter 3. After some rereading, it finally clicked--XOR fits a boolean data structure better than IF. There has to be a more intuitive way to convey this idea than just using the truth tables. Maybe by using XOR instead of CHOOSE in the odd-even example?
+
+Lastly, calling for users to drop the IF function is a big ask. If/then/else thinking is just so intuitive; any alternative should be equally intuitive. The rationale for dropping IF should be strong and compelling.
+
+There's my feedback. It may xor may not help. Either way, you're offering a great resource here, so more power to you!
+whoah! I didn't know about the intersect operator, that's super cool, not entirely sure when I would use it over a pivot table, but I am sure it will come up at some point. It's pretty neat that it returns an array if you are using contiguous areas, so you can feed it into index formulas or array formulas. And if you do the union method it returns the same number of "areas" as you put in, so that's finally a potential use for the "area num" optional of the index function! 
+
+I'm still not entirely convinced because you have to go define a ton of names ranges instead of using a MATCH function, but still, it's cool to learn something new and I can't believe I haven't come across it before!  
+
+On page 16 I might have liked a footnote on "--" being shorthand for converting a string to a number, just saying that it is just doing so by multiplying with -1 twice, you could use 1* instead of --, -- is just the standard shorthand, but I am probably being pedantic :P  
+
+Other than that it looks pretty good, nice brevity, lots of examples, etc. and the emphasis on IF and booleans is something I think is great. 
+
+At a few points I felt like making some very nitpicky editorial comments, but that's not really something that is essential to an Excel book, and overall it looks good! 
+
+This book looks like it might be exactly what I need to bring my VBA / Excel skills to the next level. I have been using excel for years and learned several new tricks in 3rd chapter!  
+
+But what advanced VBA topics does it cover?
+I could see this as useful.
+What if I know quite a lot about functions but I am still a beginner at VBA. Is your book for me?
+Jordan, please could you being a copy that I can buy to ModelOff in three weeks? I want to get it signed
+ Either way, I look forward to meeting you there! Levi
+It's a healthy mix of both! All that theory would be meaningless without application.  The first few chapters of the book are more theory with small examples. the last four chapters have you work through a real spreadsheet application. 
+Well, it's not about asking you to drop IF, it's about asking us to consider alternatives. Like I say in the beginning, the most important item required is creativity. You can only be creative once you know what's available to you. In truth, I rarely use the intersection operator. But the one or two times I've used, it's saved my ass! Again, my argument here isn't that you should do what I do, but rather you work towards creativity and best practices. 
+
+Concerning best practices, I do truly believe the formula used should naturally reflect the underlying problem as much as possible. As you saw from the IF replacement examples, some problems don't always perfectly lend themselves to the replacements either. My point here is to get us thinking about how to structure formulas. 
+Please send me those editorial comments via private message. I've found a few already I've brought to my publisher. If we do end up doing a second production later this year, we can include them.
+In following the theme of the book, it applies VBA to build spreadsheet applications. So I don't necessarily cover advanced VBA, like windows API. But I do show you advanced applications, particularly how to build some neat stuff in Excel more quickly with less code (and with less headache!). To give you an idea, both of these blog posts were starting points for chapters in this book
+
+* http://optionexplicitvba.com/2013/10/17/creating-a-spreadsheet-based-wizard/
+* http://optionexplicitvba.com/2013/09/16/development-principles-for-excel-games-and-applications/
+
+In particular, we start with the spreadsheet based wizard in the book and turn it into a fully functional Excel application (or, if you're in my field, we call it a decision support system). 
+
+You can also go to the book [website](http://www.apress.com/9781484207352) and download the source files, by clicking on the source files tab. Those are always free. 
+
+Probably not... you'll need a good handle on VBA to get going. 
+You got it!
+Thanks for the response. I was hoping for a more VBA focused book. All I ever find are beginner/intermediate VBA books, I guess most serious programmers move on to other languages. 
+
+If you know of any advanced vba books, let me know. ( I would consider using LSet to cast a Long to a Single, or Application.Run() to use strings like function pointers to be "advanced")
+Well, that's the thing. Everyone views advanced Excel as being a VBA game, and it's really not. The heavy focus on VBA has encouraged people to develop spreadsheets that are iteration heavy and slow. The best use of Excel is when you are employing a synergy between the spreadsheet itself, by way of formulas and charts and VBA.
+
+As for serious programmers, I also do C++, C#, VB.net, R, jQuery, Python and a slew of others. When it comes to quickly building applications, Excel does a better job than all of these... but only if we pull away from the paradigm that says VBA is the thing required to make advanced applications. I talk about this in Chapter 1. 

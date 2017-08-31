@@ -1,0 +1,24 @@
+6gfbwn
+Unsure how to re-format this userform to improve layout/appearance.
+I am making a nice budget tracker for myself, and added unnecessary bells and whistles. The excel file has a tab for each month, and there is a button for a userform on each page. This userform shows each category, Last months spending in that category (LMS), andlast months budget for the category (LMB).  The way it is currently laid out looks bad, and im not sure if there is a way to make the data display more like a table than these sloopy lines of text. If anyone has any suggestions to what I might try to make it look more appealing, that would be awesome. Thanks!
+
+ [Here is the userform in its current state.](http://imgur.com/bFtkYwf)
+
+
+-------------
+That looks kinda messy. Try setting a user form with three fields:
+
+- **Item** what you're getting  
+- **Category** the ones you've set up there: Rent, gas, Vacation...
+- **Amount** how much you've spent
+
+You'll then get a worksheet with the following data:
+
+Date | Item | Category | Amount
+----|----|--------|------
+01/01/2017 | Jan Paycheck | Income | 5000
+01/01/2017 | Jan Rent | Rent | 2000
+01/02/2017 | Gift for Nick | Gifts | 50
+01/03/2017 | Sushi | Dining out | 40
+
+You get the idea. The date is added automatically every time you fill out a form. You can then extract the data to elaborate from there.

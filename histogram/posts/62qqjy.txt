@@ -1,0 +1,16 @@
+Interesting mathematical pattern!
+pretty beautiful pattern 
+How did you make this? Its amazing
+Reddit made me do it
+
+    =LOWER(ROMAN(599,4)&LEFT(ADDRESS(1,7509,4),3)&REPT(REPLACE(0=0,2,3,),2))
+Wow, I didn't even know Excel could do that!
+Cool!
+
+That's actually really cool!
+Impressive. Most impressive!
+I saved this post because I was on my mobile at the time - just got around to trying it out myself... beautiful! Just beautiful. 
+Wow... just as beautiful in Google Sheets. Spreadsheets can do amazing things.
+Cool, but some of the steps won't work for everyone (they depend on certain system settings, but I don't want to spoil the effect by saying too much).
+What's going on with the REPLACE function here? I don't understand what's going on...
+0=0 evaluates to TRUE. The REPLACE function takes the 3 characters starting from the 2nd character of TRUE (which, handily, it first converts to a string "TRUE") and replaces it with nothing. Result: T.

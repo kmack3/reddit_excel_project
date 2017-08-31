@@ -1,0 +1,12 @@
+I cannot get "Text to Column" to "see" what I am seeing in the cell when trying to convert text to column.
+The line breaks screw it up - [add another delimeter and hit Ctrl+J](http://i.imgur.com/MMcw4KT.png) (and treat consecutive delimeters as one) and you should be all set, unless you have a newline character in there as well (there's new line, code 10, and carriage return, code 13, that can cause line breaks). 
+
+You can also make a new column with `=SUBSTITUTE(A1,CHAR(13),"")` to get rid of carriage returns first, or do `=SUBSTITUTE(SUBSTITUTE(A1,CHAR(10),""),CHAR(13),"")` to get rid of carriage returns and new lines, then Text to Columns off of that.
+SOLUTION VERIFIED!
+
+Thanks for your help.
+Hey, thanks for the gold!
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

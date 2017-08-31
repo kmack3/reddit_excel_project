@@ -1,0 +1,27 @@
+crash
+5axyax
+What is the best way to make a file lighter/crash less? Problems after Excel 2016.
+
+So, i work in a place that has a really shitty network. And since we updated to the new Excel 2016, our biggest files keep crashing, or taking reaallly long to read. These files have a database of something around 600000 lines and 20 columns, i've already saved all of them in XLSB, but they keep crashing and excel keep updating the "calculating" in the bottom bar. I've also already deactivated automatic calculation, but even with that, everytime that we try to save the file excel do all the calculations before saving.
+
+So, what's my best option for having an excel database that is lighter, more functional and crash less?
+
+
+-------------
+At this point, your best course of action would be to move your data into an actual database. Access, SQL, either of those would perform better than Excel for the amount of data you are working with.
+-------------
+Have you checked for superflous cells?
+
+Press CTRL+END - does this land on the junction of the last column and last row with data in it? If not, find the last row/column, and delete everything past that point and hit save.
+-------------
+Agree. I found that after 100K rows I noticed exponentially worse performance within Excel. Databases or Power Pivot or equal started being critical. 
+-------------
+what does a database do? Is it like excel but can handle more data?
+-------------
+I don't have much knowledge with Databases(sql) nor Power Pivot. Guess the time to learn has arrived. Do you know which one is the easiest to learn?
+-------------
+Yes, a database is similar to Excel in the fact that it can store massive amounts of data within tables, which are essentially the individual worksheets within Excel. You could have millions of lines of data stored in a database and with a simple query, get how many of those contain a certain value within seconds, versus waiting for Excel to sift through each row before spitting out your info which can take upwards of a minute for the 600000 lines of data that OP seems to be working with.
+-------------
+Power Pivot by far. If you can pivot stuff you can learn power pivot. 
+
+SQL is much more work, though doable to learn on your own. I taught both power pivot and SQL to myself at my last job. They can work well together if you do both. 

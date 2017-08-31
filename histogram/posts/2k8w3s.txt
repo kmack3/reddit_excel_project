@@ -1,0 +1,97 @@
+From JP Morgan to governments: The five worst spreadsheet mistakes... Ever
+Not an error in making a spreadsheet, but still a huge mistake in Excel:
+
+The biggest cock-up I was responsible for, and had to fix, was done by an employee of mine at a large American bank. One of her responsibilities was cataloguing and destroying all of the cards which were returned to us. This just means typing the details into Excel whilst someone watches and checks it, then securely saving the file with the day's password and pinging it off to whoever needs it. Then you destroy the paperwork and the cards.
+
+On this particular day, something went horribly wrong. First, I got emails saying no one could open the file (note, this wasn't a password-protected Excel file, it was actually secure). So I checked with the staff member on which password they used, and they confirmed it was the right one. I tried CapsLock on, randomly hammering the shift button, typing it really quickly so I missed letters, everything. Eventually, the problem came out to be a spectacular combination of mistakes; instead of "Snooker123" we had a password of "sNNOKER123" (not actually that, but it did have capslock and a double letter, so it's close enough).
+
+I was quite pleased with myself, and told everyone what the password had been set as. Then, they came back saying there were no data for today. The silly bint had not only set the wrong password, but also clicked "No" at the "Do you want to save your changes?" page. The cards had already been completely and utterly destroyed, and the paperwork placed in the secure storage bin.
+
+Cue a meeting with the head of security. I told him I needed to get some paperwork out of the secure bin, but I didn't know how much of it there was, exactly. I would have to wade through half a day's waste to get to it. So two security guys stood and watched as I sifted through the paper, and came to the slow realisation that she had ripped it up. This is not necessary. All this does is make my life impossible. I took every scrumpled half-sheet I could find, signed off on the necessary paperwork, and sat down to have a look at the mess I was left with.
+
+After matching up the torn sheets, I had the name and address information of about 20 customers, whose cards we had received that day. What I didn't have was their card numbers. The cards had been folded up with the letters, though, so I went on the hunt for a pencil. After finding one in a dusty old store cupboard, I chiselled the longest point ever seen onto it with a knife, and began taking rubbings. Eight hours after the initial "I can't open the file" email, I had complete card numbers for all but two of the customers, but I had enough of theirs to search internally for the missing digits.
+
+Needless to say, I wasn't very happy about the whole situation, and we had to change process once again, wasting time every day from then on, to account for one stupid person's moment of stupidity.
+
+TL;DR: "Do you want to save your changes?" "No." "Do you want to set a password?" "ySE>"
+Heh
+
+Mine is probably setting an assload of criteria in "countifs" formulas and just using whole columns rather than just making the selections as big as they need to be, then doing shit to link them together
+
+Get all the formulas set up, hit F9
+
+20 minutes later, it stops crashing
+
+Countifs on full columns are a terrible, terrible idea :(
+I thought this would be a list of common easy to avoid mistakes.
+
+Not a list of easy to avoid mistakes that were expensive or embarrassing. 
+
+My worst mistake was that I forgot to make a value absolute.
+
+Which completely invalidated a RPG's Excel Character generator's results.
+
+I very quickly went from 0.83 to 0.84 as an official release.
+Anytime I ever select multiple worksheets at once. Then I'm just asking to lose data. 
+I feel like validation testing should really be a skill that gets more attention. Things like, e.g., divisions don't ad up to the totals it throws a flag on a testing page. It's essentially internal auditing and QA, but I get that it's costly.
+My first office job was working at a printing company that kept all of their bill of materials in spreadsheets. They kept separate workbooks for each account with multiple sheets designated for different product lines. The cost of goods was maintained using named ranges within each workbook and there was no linkage whatsoever to their accounting/billing software which was another piece of shit built on top of Access.
+
+They were notoriously cheap and didn't pay anyone very well. But they had dozens of people, the majority with very little experience in Excel, maintaining these critical documents on a daily basis. If a price changed, sometimes the named range was updated properly, sometimes the individual cells were changed instead. No one had ever audited these files and it wasn't why I was there either but I did it anyway - took a few days of dumping the info into an Access database and then imported the billing information from the accounting software.
+
+There was thousands of dollars of incorrect billing every month. The main business was printing so you would have items like a manual impression, which is the cost of an individual page and that can vary from type of paper or what have you. If the price was wrong by even 0.1 cents per page on a 450 page book, that was significant. Took months of me doing this over and over before it got to somewhere near accurate, but it was always going to be a problem. Last thing I remember is that they were trying to come up with an in house web app to handle it, but the developer was strictly a coder that had no experience with implementing databases and he had no idea how the business worked.
+
+They're still in business, but I don't know how.
+I've made plenty of errors on spreadsheet models that have totally wrong results.  Thankfully my coworkers and I have caught them all before we sent any results to our sponsors, so yay for internal QA.  I'd feel pretty damn bad if the Army retired a bunch of airplanes because I didn't type a formula correctly.
+here there is another interesting stat: 88% of spreadsheets have errors 
+
+http://www.marketwatch.com/story/88-of-spreadsheets-have-errors-2013-04-17
+Since spreadsheeting is just another way to program, why not adopt programming in one of the modern languages like python or Julia. Since the code is quite simple to look at, and easier to peruse than thousands of cells each with their own formula, achieving an error free end result should take less effort. I would like to propose a framework model, like Ruby on Rails, for setting up a spreadsheet like application in python or Julia, for people (like me) who don't know the first thing about how to program a spreadsheet like application. Such a framework could contain a domain specific language centred around spreadsheets and include spreadsheet specific functions. Is there anybody with any further suggestions regarding such a spreadsheet framework?
+Unfortunately I never investigated how, but my colleague made 2 interconnected spreadsheets that contained a budget and source data for the budget - every time you would open both of them, the budget would grow by 1000.
+In school at the end of one semester, my economics professor posted my final grade and it was lower than it should have been.  I always tracked my grades so I knew it was definitely incorrect.  I emailed her and we went back and forth, finally she emailed me her spreadsheet showing the grade calculation.  Her final grade formula was missing the midterm exam grade for everyone in the class, causing everyone in the class to be graded much lower than they should have been.  Somehow I was the only one in the class that noticed and complained, I sometimes wonder if she ever went back and corrected the grades of those people that didn't complain. 
+Intern era. Large spreadsheet with unfamiliar information. Somehow didn't select all when setting filters. Once the order changed the info got all mismatched and I had no idea until the boss was using it as his presentation.
+Oh my god. 
+
+Please tell me you aren't still using an excel file to track this
+OnBeforeSave event to ungroup any spreadsheets you frequently print as a group.  Lifesaver.
+You! What have you done with the A-10?!
+Do you mean that you were using the spreadsheet to model some kind of physical/mechanical system (e.g., some parts of the plane)? 
+Funkyb are you able to disclose any of your formal qa framework?
+Not a spreadsheet framework, but if you're inclined towards data analysis and manipulation, then try out R programming.
+Have you seen BPM Modules? I'm not sure if that's even close to what you're talking about, and IMO the execution needs a lot of work, but it's the only public example I'm aware of. Worth a look.
+sadly because joe bloggs cant pick up a python script and understand it at the same base level as a spreadsheet and because there are so many legacy tools in excel now that its not cost effective to abandon it. 
+> Since spreadsheeting is just another way to program, why not adopt programming in one of the modern languages
+
+I agree with you on this point but I think that the most of people without technical background they see a "regular" programming language as something too difficult to learn. On the contrary Excel is so intuitive...
+I'm very interested in the topic of interconnected spreadsheets. Can you say something more about that? Are yuo talking about two different files with a kind of "circular reference"?
+The worst thing in this story is that as an economics professor she probably uses Excel every day :-/
+I'm not still working there, actually. Moved to a smaller company, where change for the better is actually implemented, instead of everything being dreamt up by incompetent fuckwits in management and then never simplified, only made more complex until it takes two people all day to do a 10-minute job.
+That one ain't on me!
+Used it to model use of the fleet, actually.  We examined a few years of historical data for a particular type of aircraft and made recommendations based on their use.
+not funkyb but in my experience of aero - once your job is complete, you write a sheet saying what your sheet does and exactly how it does it, someone then checks A) what you've said makes sense b) that you've done what you've said. often using a known result as a test case. 
+
+p.s. a/c fatigue spreadsheets are not much fun, and massive. 
+I think it was some sort of a circular reference, but unfortunately I never had the time to investigate. 
+
+Basically it looked like this:
+
+real amount that you should see was 50k.
+
+If you would open both files, you would see 51k.
+
+If you would save any of them, and open again -> you would see 52k.
+
+Close without saving -> and open you see 52k, but if you would save and open once more -> 53k.
+
+Now when I write about it Ive started to wonder how did he actually manage to do that, because with my whole Excel knowledge I am not sure if I could repeat this without VBA (and his file had no VBA), I think it was some circular reference, but I dont remember seeing the warning you see when you open a file containing this "error" (I believe that in 99% of cases circular references are errors, but I remember reading somewhere that in few rare cases they are useful).
+Ok, you were analyzing data. I asked so because some friends of mine working in civil engineering told me some big mistakes in their spreadsheets used to design some buildings :-/
+This is similar to how we do it, though our process is a little less formal.  We also run a number of cases with known answers to make sure the Nigel is acting as intended.
+How do people check those things?
+
+When you say massive, do you have an idea of the approximate number of unique formulae?
+Very interesting... Is it common for you to use linked files? What are the common issues that you have to face with that? Do you put the files in a common folder to avoid broken links? Tnx a lot!
+That's...not good.  I hope they redid the analysis and confirmed there wasn't any danger.
+Thanks.
+
+Always good to keep old Nigel in line.
+as i said in a different thread my .xlsb is about 400MB atm ~60 sheets with between 20 and 25000 rows, luckily its a lot of data manipulation so not that many unique formula ~ 50 across the whole workbook
+Wow that's big!

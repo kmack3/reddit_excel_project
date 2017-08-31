@@ -1,0 +1,69 @@
+I get emailed the same report everyday, and have to do the same few steps to filter it everyday. How could I do this more efficiently?
+How efficiently do you want to do it?
+
+Step 1) Get an outlook macro to automatically extract the attachment from the email, save it as a set filename, in a set locations
+
+Step 2) Have an XLSM with an on_open macro that opens up the pre-determined file, does the hokey pokey, saves it wherever you want, then closes itself down.
+
+Have Step 1 open up the file referenced in Step 2...  and boom.    When your Outlook is open, the file shows up, gets mauled by the Macro bear, and you're done.
+
+[This might be a good base for Step 1](https://gallery.technet.microsoft.com/Save-attachments-from-5b6bf54b)
+Outside the box question - is it possible for you to get closer to the data source (i.e., edit the data pull itself that is coming to your email).  That's by far the best method to make this happen.
+I'm in a similar situation and I've created a template to import data from text file, and then use a macro to trim.
+First - It is all possible only with VBA Macro within Outlook itself.
+Do these one step each day. Within a week, you can have it automated completely.
+Press Alt + F11 from Outlook. It will open up VB Editor. 
+Day1: Get code to save attachment from current email to a designated folder.
+Day2: Get code to extract data from One workbook (input) to another workbook.
+Day3: Automate tasks to be done on the Output Report Worksheet.
+I have all three codes present in blog - officetricks. Will assist with the coding, if you are interested.
+Could you give us a small sample of what needs to be done? I've done this exact thing in a consulting project for a local non profit who needed files from a special machine uploaded into Salesforce.
+
+What needs to become what in order to be in the final form?
+
+I agree with /u/YanisK that a template and macro would be your best bet
+This could be in /r/vba very easily. 
+
+For what it's worth, I have a half dozen of reports that come in on outlook, and have written VBA to automatically identify them and then execute proper routines on them (save, clean, import into databases, then trigger any necessary alerts/reports).
+If it is really the same data and same size I'd use a program called auto hot key. It's a macro program that can take over your computer and perform mindless tasks for you. 
+I would do it in Python. I know it might sound like a big jump, but it's really not that hard and there are very good resources, e.g. "Automate the boring stuff with Python". I use Python to process Excel files and send the resulting tables in SQL and it's a breeze.
+Check out powerquery , i think it will work for you. There is plenty of tutorials on it and i don't know it well myself but from what I've seen, it's amazing. 
+Quite frankly this doesn't seem worth the effort to automate. Sounds like it takes a few seconds, maybe a minute at the most.
+Mauled by the Macro bear! Genius
+OP, this is what I've done on a similar report and highly recommended. It's not that difficult either if you are willing to tinker with the macro a bit.
+
+Only caveat here is around how much "tinkering" with the raw data you have to do. Is it super repeatable or will it require a human set of eyes to figure out? 
+That's what it's all about 
+unfortunately not
+There's an R/VBA/ too? Following that now
+Automation isn't just about speed, its about risk reduction as well
+#HERESY!
+I've made a *career* out of automating simple tasks that don't seem worth automating, and it pays the bills.
+
+Let's say you have a task that you have to do each weekday, it takes you a measly five minutes.
+
+Each year, that "simple, five minute task" will devour at least 21hrs of productivity (not including time lost to context/task switching).
+
+Let's assume it takes a full eight hour day to automate it. 
+
+^((which is actually on the high side, in my experience)^)
+
+
+That means after roughly 19 weeks, that day of development has paid for itself, and will **keep** adding savings, provided the process doesn't change.   
+
+The task will run regardless of how you're feeling, whether you're stuck in traffic, on vacation, or hell, still even employed there.    It won't complain, it won't get bored, and it won't make hare-brained mistakes because it didn't sleep well that night.
+
+Automating the simple, silly tasks can *really* add up.   One of my past positions I had was loaded with  roughly 50hrs per week worth of manual effort when I started it.    I got the job BECAUSE I was an Automator, and put in some extra time at the start to chew through the processes.  Over the course of a few years, I was effective enough that I was able to absorb the workload of roughly **five** other people in addition to my own.
+
+My final workload there?   Roughly 30 minutes *per week*, and that was basically just checking job outputs to make sure everything was happy.
+
+Which of course, I effectively automated too, so it was primarily looking over a screen that consisted of happy/sad icons, poking the sad ones, and then wondering how I'm going to kill time for the remaining 39.5hrs in the week.
+From the sound of it, the coding only takes a short amount of time as well. Rather simple really. 
+In that case you need to write a VBA macro or you need to record yourself a macro based on your actions on the sheet you are importing. 
+Yeah. It gets less activity than this, but the knowledge pool is just as deep if not deeper. Cross over between posters too, and very friendly to beginners. 
+Lol, you are off course absolutely correct.
+
+However, my position rests on the assumption that op is not in that kind of position, but rather simply trying to reduce the tedium of a daily task.
+
+It just seems to me that there are likely many more effective fish to fry than sorting some data. 
+Yes, but if OP is stumped by sorting/re-formatting data, what better minnow to fry in order to teach the joy of fishing? :)

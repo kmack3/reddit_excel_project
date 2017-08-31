@@ -1,0 +1,292 @@
+What is your favorite small spreadsheet addition that really adds an extra level of professionalism to your sheets ?
+I like to center my titles with "Center Across Selection" rather than merge and center. That way, you can select the whole column when defining ranges and don't lose any of the aesthetics. 
+I'm (sadly) the resident Excel guru in my current department, and have been in my past few departments as well. I build spreadsheets to do tasks, and then some years later, someone says, "Hey, that spreadsheet you made doesn't work anymore. Please fix." So now I add a separate tab with info about the spreadsheet - what it's supposed to do, where the data comes from, range names are identified, etc. That way, I have some clue when someone asks me to make it work again. And if I get hit by a truck, the next Excel guru will have a better starting place. 
+
+I also make an extra, unmolested copy of any spreadsheet that non-me users are going to be using. I park that in my personal network drive so if the spreadsheet in use gets too messed up to unfuck easily (not that that *ever* happens), I can just copy the data into the clean spreadsheet instead of trying to figure out who broke the macro or whatever.
+
+Not sure if that's "an extra level of professionalism" but it helps me retain my status as Excel guru for the Excel deprived.
+For me, a (very) small thing I do before sharing a spreadsheet is ensuring all cursors and zooms are the same across all worksheets (usually 85% zoom and the cursor in the upper left) so that when someone flips through it doesn't jump all over the place. I've been burned too many times by someone who didn't realize they had to scroll up to get a full picture of the data.
+
+What kind of things do include in your spashscreens that don't come across as excessive or unnecessary? 
+1. Always format for printing.
+2. Add headings so reader has context.  (Business unit name, product line, etc). 
+Naming your used sheets, and deleting "Sheet 2" and "Sheet 3".  Kind of kidding.  But only kind of. 
+Remove all merged cells.  I hate merge.
+This?
+
+http://i.imgur.com/ZY8dKpA.gif
+I have a lot of files that are multi-user files. Files that people are supposed to go into at least once a week to do updates in. I can't tell you how many times I've gotten into a meeting to review said sheet, which was clearly lacking updates, and was accused of having a corrupt or older version of the file (there aren't multiple versions, we just keep using the same one file). So I added this to every one of those files:
+
+    Private Sub Workbook_Open()
+    
+        Dim n As Integer
+        n = WorksheetFunction.CountA(Sheets("LOG").Range("A1:A50000")) + 1
+        
+        If Application.UserName <> "MY USERNAME" Then
+            Sheets("LOG").Range("A" & n).Value = Date & " -- " & Time
+            Sheets("LOG").Range("B" & n).Value = Application.UserName
+        End If
+    
+    End Sub
+
+LOG is a hidden sheet that records the date-time and username of everyone that opens **and saves** the file. So, when someone says, "I did my updates, I don't know what you're talking about" while grandstanding in front of their manager, I show the LOG tab on a huge projection screen, sort for their name and show everyone in the room that the last time they were in the file/saved it was 3 weeks ago.
+
+I'm not sure that this adds professionalism so much as it adds CYA (cover your ass) capability to deal with lying asshats.
+It won't necessarily make the sheet look more professional, but Dynamically Named Ranges are my favorite thing about excel. 
+I always name my sheets with underscores instead of spaces in between words.
+
+The reason: referencing to another sheet is easier to modify and understand
+
+Example: =Test_123!A1 is easier to read/modify than 'Test 123'!A1
+View gridlines = off
+Adding vbInformation, vbCritical or vbExclamation to relevant msgboxes.
+
+Makes it appear so much more useful!
+Set columns for the same kind of data ( for example, financial statement data) to the same width. 
+I try to color code my numbers and data so I can easily know what's going on in the cell:
+
+- Blue: hard coded number or calculation of (eg "4" or "=365/72*.5")
+- Black: formula / calculation based on other cells (eg "=B12*B23")
+- Green: formula or link from another sheet (eg "='Data!'B73")
+
+Also, I play with cell formats a lot. For example if I have a cell that says "4 years," I'll reformat the cell so the value is actually only "4" but it shows as "4 years" so I can link to it. 
+How do you do the splash screen? 
+- deactivate grid lines in the view menu
+- use insert - table as much as possible. It often works better than a named range (instead of a range "dates" you can go dates[month]), enables filtering by default, makes quick formatting easy, applies formulae to the rows automatically, etc. If you don't like the look just choose the empty/white theme
+- leave the first column of the sheet empty and set its width to 10-20. This looks more natural and airways shows the user that he it she is at the left most part of the sheet.
+-use row and column fixation. if you click on, let's say, C3 and fix the view, two rows on the top and two columns on the left will not scroll.
+- hide any sheets that are not useful for the user (lists for dropdowns, lookups, etc)
+- color code your sheets or at least use anything other than the default. I often use green for data sets and blue for summaries.
+- use slicers (insert - slicer) for filtering tables. They look cool/new to most users and can be placed everywhere. You can also create new templates to make them more minimalistic eg without any borders
+
+I do a lot of xy scatter plots and often times need to label many of the data points with text.  I have been using XY labeler for a few years now and it works great.  It allows you to apply labels from a column of names to the points in the chart.  I found it to be very useful and it saves me a lot of time.
+
+[XY Labeler](http://www.appspro.com/Utilities/ChartLabeler.htm)
+
+(I believe this is where I got it from)
+
+[Edit - I thought this thread was about excel add-ins.  Oh well]
+Use top and bottom borders on sub totals and totals building headers and totals is also usually the way to go. 
+I always put the &[Path]&[File] to the left footer and the &[Tab] to the right footer, so if I print it, I will know a few months later where did it comes from.
+Select all text: Change font color from full-black to 80%-black.  Grey text is less jarring. 
+
+Also, if you have gridlines, make them the lightest possible shade of grey.  
+
+[deleted]
+When creating charts, I always adjust the chart style to the setting two below the default. The change is subtle, but gives the chart a little more depth.
+I like to start all my worksheets (pretty much) with shrinking columns A B and C to about 10 pixels wide, then making them Bold, Underline, Italics respectively.
+
+That way the steps to whatever analysis I am doing are very clear and I can quickly adjust formatting.
+Consistent column widths for alike data items. Over-use of autofit can create a spreadsheet that appears too "cramped".
+I use styles to easily achieve consistent formatting. It is also quick and easy to change.
+If it's a spreadsheet others will be using, I'll use Active buttons to run the macros.
+
+Also, color coding the tabs can be very helpful.
+
+This last one isn't so much for professionalism, but if I have a cell for price, for example, I might add a custom format to show the unit of measure so I can reference the cell to calculate revenue. This is mostly when you have multiple columns next to each other and don't want to add a column in between to hold the UoM. Custom formatting has a lot of other uses too.
+Type my initials in XFD16634 in case anyone tries to steal my work!
+I like it too.. the only problem with this is if you need to hide that first column you lose the whole title.  That won't happen with merge and center (a lot of other problems will).
+A bit late, but to use this easily just put this sub in your personal macro folder and then bind it to a key or a button: 
+
+    Sub CenterAcrossSelection()
+        With Selection
+            .HorizontalAlignment = xlCenterAcrossSelection
+            .MergeCells = False
+        End With
+    End Sub
+
+TIL. Thanks!
+i picked this up from consultants last year, this is a game changer. merge and center ruins sheets if you want to select columns imo
+Why is there no command bar button I can add for this?
+I know this is an old thread but I have to say thank you. This is the best computer tip I've ever received. 
+> I also make an extra, unmolested copy of any spreadsheet that non-me users are going to be using.
+
+
+I used to do that too. Then I thought I hit upon the perfect method to idiot-proof my spreadsheets: distribute them in template format. Until an otherwise intellegent coworker admitted he didn't save them once he'd filled them in and wanted to know if there was some way I could recover his work.
+If you work in finance this is generally a requirement (depending on if your dept is subject to SOX).  Workbooks are heavily controlled for obvious reasons.
+I worked supporting a bench marking product whose reports were large pages of numbers.  They output to pdf or excel, so I got handy taking the excel output and programming some fancy looking data visuals and manipulation on top.
+
+I left that job a few years ago, every now and again I get calls by my old co workers to help them fix things.  Usually has to do with their product team changing the logo (theyv'e been bought and sold a lot) on and bumping the header rows a line. This was before I was seasoned enough to evaluate for rows and such to account for the variability.
+I actually wrote a macro that does this... it's at work so can't C&P it, basically just a for loop to go through all the worksheets in sheets and select A1, set zoom to 100%, and freeze the top row. Put it on my tool bar and just run it before sending a workbook out.
+[deleted]
+Re: printing.. Add "**Printed:  &[Date]**"  as a custom footer. The text and current time stamp can help avoid confusion for those that rely on printouts of sheets that change often.
+I have my Excel set to open a new workbook with only one sheet, so I don't even have to bother deleting the other two.
+Merged cells can burn in hell.
+What's your method to center what would be a merged heading?
+What's wrong with calibri?
+For small amounts of data, that's awesome.  Larger ones you'll probably need some gridlines, but make them the lightest shade of grey and it'll be less noisy.  But in general, that's an awesome infogif.  :)
+If you report to someone, after doing all this, you get a "I want it to stand out! Introduce bright primary colors! THICK borders! And make the fonts fat."
+Source: http://darkhorseanalytics.com/blog/clear-off-the-table/
+
+Also related: http://darkhorseanalytics.com/blog/salvaging-the-pie/
+I agree with most of it except cleaning up repeated information. Normalisation is really great and helpful. With a small table like the one in the gif, you can just sum up stuff with a fee clicks but once it gets larger, cleaning up repeated cells won't allow you to use sumifs, sorting and the like.
+I think it's much better to use conditional formatting to check if the value in the next row is the same and if so, turn it light grey. This will look good, enables filtering, sorting, a lot of formulae and so on.
+I like this. Hadn't seen it before. Thanks for sharing.
+There a few of these for chart and other presentation tips that I've seen. Does anyone know where I can find the others?
+This is bloody excellent! Very illustrative of how much the formatting and layout matters for readability. As someone who read through the entire documentation for [the LaTeX package "booktabs"](http://ftp.acc.umu.se/mirror/CTAN/macros/latex/contrib/booktabs/booktabs.pdf) I appreciate a well formatted table. 
+Hey this is awesome. Thanks for sharing!
+Can't you just use the track changes option ?
+What happens if the user disables macros?
+I disagree. They definitely do. Whats your best method?
+Tables and ranges are a lifesaver.
+Agreed - There is never a good time to use a space in a variable/reference. Coming from DOS, It took me a LONG time to get used to even putting spaces in folders (ahem...DIRECTORIES!)
+
+camelCase all the way for me though.
+Interestingly, converting to open doc will put underscores in any sheet titles.
+
+I learned this a few days ago.
+Good when copying to a deck. I would hate it for actually working in the spreadsheet. 
+I do the same colors as you. And then I tell people what the colors mean (on an info tab) and they still fuck it up.
+argghh my pet hate.. grey main text... keep it black.
+
+The recent PeopleSoft release has gone pastel, its shit on the eyes. 
+That totally depends on the charts you are making. I make mostly XY scatter graphs, and I always want the gridlines. However, I make them the lightest shade of grey (or 2nd lightest).
+
+I don't get it. What does that achieve?
+You'd be better off putting your initials in A1 on veryhidden sheet. Putting them way down there makes excel think you need every cell in between and needlessly bloats file size
+Yeah, what I like to do is add super thin columns at either end of the spreadsheet - width "1". Nothing goes in those columns except the titles. That way, you can add/delete columns and your header will still be centered - additionally, you can hide or move columns around within the range.
+lol the hot key for this is so bad: alt+h+f+n+*tab, frantically*+enter
+God damn that's a good idea. Wish I'd read this in my last job. 
+That is a great idea. Couldn't you write it as something that happens every time you save a workbook, also? Just to save that one step, I haven't done it before, but I'm pretty sure that it is possible. 
+That sounds infuriating.
+Also, the networked path to the spreadsheet in the footer! Huge help in companies with large networks.
+Me too, that's the best way to roll
+I'd never even considered looking a setting that would do this.
+Yeah, I've enabled that setting as well. And now I always curse the people in my company who've constructed their macros to assume that all new workbooks are created with 3 sheets by default. 
+Especially when people use it purely to remove gridlines. *bleugh*
+Center across selection. 
+It is rare to need merge, typically if you need to use merge you are not structuring your data well to begin with.
+
+Merge is the least "excel" feature of excel.
+And what font did he/she change to?  Seems like that'd be useful info if he/she's saying to ditch calibri.
+Consolas is my default now. Strike through zeros and monospaced makes it very readable in excel. 
+I like Calibri..
+Hey a work-around that you can use if you need the values to be there for calculations is to make the text color the same as the background color [white].
+Source: http://darkhorseanalytics.com/blog/clear-off-the-table/
+
+Also related: http://darkhorseanalytics.com/blog/salvaging-the-pie/
+Heh, you have no idea of the Excel experience level of the guys I work with. 
+Say I have a header in A1 and data starting in A2, I usually name the range whatever the header is and then for the formula use:
+
+    =OFFSET('Sheet Name'!,$A$2,0,0,COUNTA('Sheet Name'!$A:$A),1)
+
+I'll go through and name anything that may be used for a formula later. Takes some time at first with a lot of columns, but it is worth it. Plus it always blows peoples minds if you hook them up with a chart.
+Each to their own. I used to use ranges, but when I returned to workbooks months or years later and had to change something then having to look up where 10 different ranges are actually located is a lot more difficult than having the sheet and cell references actually in the formula.
+> CamelCase
+
+FTFY. Also, TIL CamelCase. I usually do that too but didn't know there was a word for it
+[deleted]
+It's personal style more than anything.  I find it lets me use indents and formatting quickly and clearly.
+Ouch. 
+Stupidly late to this thread, but ctrl+1 opens the cell formats tab.
+
+I mean, you can memorize the hotkey phrase to get into the specific tab that you need, or just hit ctrl+1 and then ctrl+tab or ctrl+shift+tab to get to the alignment page (or whichever page you need)
+I'd have to agree. That will end up wasting a lot of time if it is a file that is accessed often.
+Similar things can be less annoying provided all of the following are true:
+
+* It only pops up when it has something interesting to show.
+* It shows things that are interesting to you. For me this includes the existence of hidden sheets, external links, iterations enabled etc.
+* It doesn't linger.
+* There's a "Don't show again" button that works.
+I'm pretty sure it's the default setting on Excel 2013 and 2016 if you're using either of those.
+Why would someone do that?
+Are you talking about 'Merge and Center'? Can you elaborate?
+I think it's Segoe UI.
+Dj moo?
+You can set that up with conditional formatting as well for large data sets.
+I'd be more concerned with them not ENABLING macros then.... :)
+Yes but excel disables macros from default...
+I use a macro to make these. Saves a bit of time. Only downside is I can never remember the formula anymore.
+
+    Sub dynamicName()
+
+    Dim sel As Range
+    Dim first As Range
+    Dim name As String
+
+    Set sel = Selection
+    Set first = sel.Rows(1)
+
+    name = InputBox("What name would you like to give the range?",     "Dynamic Named Range")
+
+    ActiveWorkbook.Names.Add name:=name, _
+    RefersTo:="=OFFSET(" & first.Address & ",0,0,COUNTA(" & sel.Address & "),1)"
+    ActiveWorkbook.Names(name).Comment = ""
+
+    End Sub
+This is a complete graveyard reply, but I don't actually understand what this is trying to do, so I can't replicate it, but everyone seems like this is a good thing.
+
+Where is the formula going? b1?
+Cntrl-g should give you a popup screen with all of your named cells / ranges. As long as you don't have 100 corrupted names, it should be easy. 
+Don't fix what isn't broken - camelCase it is.
+
+Always start with a lower case first letter. Unless you're a *godless heathen* that likes "upper camel case" ("CamelCase") ;)
+I found the book "Visual Display of Quantitative Information" by Tufte to be filled with great guidelines.That's where I picked up the light grey lines.  
+Because, like someone mentioned earlier, it's not really a setting you go looking for so I'm assuming that these people *assumed* all new workbooks always get created with 3 sheets and never even stopped to think that maybe they should take precautions for when that's not the case. 
+
+Another thing these same people didn't account for was that not everyone will use Excel/Windows in our native tongue (e.g. I prefer to use everything in English) but they've decided to select and switch sheets in new workbooks going by their default Finnish names which makes me a sad panda. So yeah, I always have a jolly good fun fun time correcting these workbooks.
+Hardcoding for defaults is easy.  Building appropriately-flexible code is the right, but time-consuming, way to do it.
+Yes.  Excel's primary business case function is a database with a user friendly interface.  In a database there is no use for a Merge, it is a report function at the data layer. Aesthetically pleasing, no other functional purpose.  
+
+Merge at times can affect lookups and references due to the offset irregularity it creates.  
+
+If you are keen to data, you stay away from this feature.
+My favorite!
+Why is this downvoted?
+I love this macro! I just added one last step to it, to let you select the target cell for the Data Validation.
+
+    Sub Dynamic_Name()
+    On Error Resume Next
+    
+        Dim sel As Range
+        Dim first As Range
+        Dim DVLoc As Range
+        Dim RngName As String
+        
+        Set sel = Selection
+        Set first = sel.Rows(1)
+        
+        RngName = InputBox("What name would you like to give the selected range?", "Dynamic Named Range")
+        
+        ActiveWorkbook.Names.Add name:=RngName, _
+        RefersTo:="=OFFSET(" & first.Address & ",0,0,COUNTA(" & sel.Address & "),1)"
+        ActiveWorkbook.Names(RngName).Comment = ""
+        
+       Set DVLoc = Application.InputBox(prompt:="OPTIONAL: Select location for Data Validation", Type:=8, Title:="Data Validation Location")
+        With DVLoc
+            .Parent.Parent.Activate
+            .Parent.Activate
+            .Select
+                With Selection.Validation
+                    .Delete
+                    .Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, Operator:= _
+                    xlBetween, Formula1:="=" & RngName
+                    .IgnoreBlank = True
+                    .InCellDropdown = True
+                    .InputTitle = ""
+                    .ErrorTitle = ""
+                    .InputMessage = ""
+                    .ErrorMessage = ""
+                    .ShowInput = False
+                    .ShowError = False
+                End With
+        End With
+       
+    End Sub
+Or just have the actual direct reference in your formulae and not have to bother. I've come to view ranges as a complete waste of time, as if the data is laid out and titled properly then why use them?
+
+Ranges just add another layer of unnecessary complexity and extra debugging steps. But as I said before - each to their own.
+Might be mistaken, but I don't think that dynamic ranges show up with Ctrl+g.
+Haha to each their own :D
+I'm having a hard time imagining why a macro would even need to assume that the workbook had three sheets.
+I can't think of a macro I've ever written that required the default three sheets. 
+
+I think that's where my incredulity comes from. 
+Ah, I see. I would never use it with data contained within a table, but may use it for column headers and titles and such.
+A lot of the work I do in excel is pulling data from a website generated excel file.  The amount of data fluctuates with the amount of people (I'm looking at medical records, primarily), and I often create names for a specific type of look up.  That way, I can tell my formula to look in the column for 'SoldiersAge' rather than 'DataPage!K1:K1200'.
+
+It also allows me to make derivative formulas that much easier, so for instance if I want an array to spit out all the soldiers in Alpha company who need a Yellow Fever shot, I can simply use those predefined names.  I personally don't have the ability to change the data dump the web page gives me, so creating names to make it more manageable is almost a necessity. 
+
+Plus by defining a name rather than using a direct reference, I can limit the amount of times I fuck up a 7 line formula because I added/omitted a dollar sign.
+Well some of our templates have 1 or 2 sheets (out of a lot) that are printed to a customer, and that we also like to keep a copy of, at least for a time. Instead of saving a copy of the template with all its macros and form objects, or stripping away all that redundant stuff along with the macros, we have a macro create a new workbook and simply copy over the essential stuff from the few sheets we want/have to keep. Simply to save some storage space. This sometimes assumes there are 3 existing sheets in a new workbook to copy data into. Now don't ask me why it's setup like this, cause it's been like this for at least 10 years, and I don't get payed enough to think of anything better.
+If it works for you that's great, I just found my life so much easier when I stopped using ranges.

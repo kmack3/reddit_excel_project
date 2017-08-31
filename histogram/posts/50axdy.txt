@@ -1,0 +1,33 @@
+Financial Formulas
+a) PMT function
+
+Note that since our periods our monthly, we'll need to divide the interest rate by 12. We will have 60 periods (5 * 12). Our starting value is negative, since it's an amount owed. Overall formula:
+
+    =PMT(5.5%/12,5*12,-45000)
+
+b) FV function
+
+We don't know if periods are yearly or not, so will assume regular 7% rate and 15 periods. I'll assume this an investment, so we are not paying down a loan. In that case, pmt needs to be negative. Overall formula:
+
+    =FV(7%, 15, -250)
+
+c) PV function
+
+Similar to b for the Rate and periods. We have no pmt amount. Present value is positive, which is the opposite of a loan, so fv is negative. Overall formula
+
+    =PV(15%,3,0,-56000)
+
+In summary, I'm guessing you were getting tripped up between when formulas are expecting a negative value or not. Comes up a lot because many times you're dealing with loans, where value is actually negative vs. a payment is positive. Difference in how you see credits vs. debits, really. Hope this helps!
+
+
+
+> our periods our monthly
+
+Hehehehe.
+It all makes a lot more sense now, thank you so much :)
+Wonderful, you're very welcome. Solution Verified?
+SOLUTION VERIFIED
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,204 @@
+Is using Excel the best solution here?
+I would recommend importing your data to Access, and performing the calculations there if necessary. Excel can totally store the some odd 400k rows of data, but working with it becomes a battle of wits in speed.
+
+I can offer this subroutine that could potentially speed up your macro:
+
+    Public Sub LudicrousMode(ByVal Toggle As Boolean)
+        Application.ScreenUpdating = Not Toggle
+        Application.EnableEvents = Not Toggle
+        Application.DisplayAlerts = Not Toggle
+        Application.Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+    End Sub
+
+Simply call it with true to enable a faster VBA processing mode, and false to disable this mode and return Excel to normal.
+
+Lastly, I do recommend trying to optimize your code. If you're performing a lot of repetitive tasks and don't quite have your code structured properly, you may be making it work harder for no reason. If you have questions about code structure, by all means ask away. If you feel it's sensitive information, PM me, and I can give more detailed explanations.
+To echo everyone else's comments, this really depends.
+
+
+My first suggestion would be to read the range into a 2d array, have a separate 1d array to put the answers in, and then write that 1d array to the column. This will be MUCH faster, as one of the slowest things in Excel is reading and writing data to a cell.
+
+
+Are you using a lot of Excel functionality when you run the complex if/then scenarios? If so, you may not be able to duplicate this functionality in Access.
+
+PM me if you can't respond in public.
+You can probably improve the performance of your code. 
+
+Do you read in the rows one by one? 
+
+Could you read them in in chunks to decrease frequency of accessing the sheet?
+
+Can you maybe restructure the ifs for speed improvements? (log the number of times a branch is executed for example)
+
+Have you looked at alternative solutions to the bunch of ifs?
+
+Do you make use of early binding?
+
+Do you turn off the usual options for your macro? (manual calc. etc)
+
+Otherwise I think it certainly does sound like a case of Excel being abused as a database when it just isn't one.
+Are the if / then scenarios relatively simple and only use inputs from that row in your table. If so you could load the table into Power Pivot and do the if then's in calculated columns.
+
+Edit: Excel is not a great tool in the 100k range. Sure you may be able to improve your code, but crashes / slowness are not surprising.
+I'd recommend R or Python.  The data set has graduated to code. :)
+Honestly, I think this is where there is a bit too much to deal with for Excel. It is a great piece of software, but it sounds like it is struggling under the weight.
+
+You could do an Access setup. It isn't as hard as it looks and if you want a few quick tutorials on it, you can find it. It only gets as complicated as the programming you assign it.
+
+You can also split the data into different sheets. It sounds like some of this data is dead data. If it is by year, you can split the years out and make a new datasheet with the current year. If you need to pull data from other workbooks, you can add in a few macros to make that easier too.
+
+It just depends on what you want to do with the data. If it is there to CYA, then splitting is fine. If it is there because it is the only data you have, then discuss a database setup.
+Anytime you ask the question should I be using excel? The answer is usually you should be using access. 
+Excel is never the best solution for anything.
+
+Excel is the second best solution for a lot of things.
+
+Access is pretty good.  If you want automated reporting and are learning something anyways, might as well learn R or python.  But that's not to say that sticking with Excel is necessarily the wrong choice.  Depends on your needs and if you have the time to invest on learning a new tool.
+My preference is to setup SQL Server and connect Excel to it. Instead of using calculated cells in Excel, write some SQL Views. Every time you need to display the data as either a normal table or a pivot table - create a special view for it.
+
+Access works too, but I hate Access queries. Real T-SQL lets you do a whole lot more, and you could probably get away with just SQL Server  Express.
+You should check whether all 60 columns of data are needed for each calculation and whether these 60 columns of data change all the time.
+
+For example, the first 30 columns may be static data and never change but the last 30 columns change daily. So it would be unwise to go through the first 30 columns every time.
+Yes. 
+
+(Probably, depends on the actual calculations needed)
+Not sure if you are already using this and not really sure if it works as well as it seems. But instead of coping and/or pasting items, I found stating this equals that is much faster. ex: 
+    
+     range("a1").value = Result  (VBA variable)
+     
+     range("a1").value = range("b1").value
+     
+
+Would you be willing to post any of your code?
+may i ask what your job is?!  i would reall ylike a job lke this with big data!!
+That's about the size when you want to migrate to Access- IF there's no way around it (such as splitting 10 or so columns at a time into 5 or 6 spreadsheets, and using manual calculation so it only does a couple million cells at a time. If the data is very dynamic and you need it very current, Access or a DBMS might be your only choice. If running your formulas once a day is OK (or updated weekly, etc), it might simply be time to split the processing work over several workbooks.
+Just use inbuilt power pivot instead of putting all the data on the sheet directly. power pivot can handle tremendous amount of data with ease and wouldn't break a sweat with 400,000 rows at all, you may have to learn a little bit of DAX category of formulas instead of excel sheet formulas, they are similar in some sense
+I'm going to throw out there, consider maxing out the ram on your PC.  I've been relegated to a PC with 4gb of ram. After using a machine with 16gb, I'm sad every day.
+
+Also, to echo some of the statements already made here, putting your input and output into arrays should gain some efficiencies assuming the data can be held in memory.  Read once, write once.
+In case you decide to move on to a different system, I would suggest that you do not pick Access. That software is slow and unreliable when compared to a proper SQL database, and 400k rows can make it struggle (depending on the processing you have to do). You may want to consider Microsoft SQL Server Express instead, or move to some open source database solution such as Postgres. With your data on a database server, it also becomes easier to share the dataand work on it collaboratively. 
+I noticed the `IIf` when you posted the LudicrousMode sub before and read through the msdn documentation... which I did again today. And I'm still not really understanding why one would use `IIf` vs `If` is it simply more concise? or are there other benefits/features I'm not seeing?
+I'm curious about seeing an example of what you mean when you say code optimization
+I'm somewhat new to VBA. Could you expand on what each part of this sub is doing? 
+I agree, something like Pandas could handle this with ease, but if you're not familiar with the languages it will most likely take longer than just setting up the VBA better, or transferring to Access 
+This is the problem my company runs into. We run analysis on the data, but rarely is the analysis ever altered once done. I keep asking them "why are we storing four years worth of data in one workbook when the calculations are already done?" I keep offering alternatives, even as simple as spinning the old data into its own workbook, but they're super resistant to change.
+
+Seriously, when you've reached a point that your books are over 20mb in size and it takes an i7 processor several minutes to run basic formulas, you need to rethink your processes.
+Excel VBA can handle 400k rows / 60 columns. You just have to know how to write the code properly. 
+Excel is a 32 bit program. You would need to download the 64 bit *in place* of the 32 bit, and VBA is different on the 64 bit so may be problematic.
+It's more concise, but basically only works with boolean logic.
+
+    Result = IIf(True/False, True Value, False Value)
+
+    Versus this:
+
+    If True/False Then
+        Result = If True Value
+    Else
+        Result = If False Value
+    End If
+I'm certainly no expert, but there are many things you can do to optimize code with the aim of reducing the computing resources necessary to run it (memory, cycles, etc.) by being careful and clever with how it is designed.
+
+Say, for example, you're making a program to check if a number is prime.  You could just take your number and divide it by every number less than it and check for a remainder.  OR you could realize that once you get past the square root of the number you're just duplicating work and only divide by numbers less than the square root.  This will mean the program has to do far fewer calculations for each test.
+Take the following code for example:
+
+    Option Explicit
+    
+    Public Sub InefficientExample()
+        Dim RowCounter As Long
+        Do While RowCounter < GetLastRow(ActiveSheet, 1)
+            RowCounter = RowCounter + 1
+            'Do Stuff
+        Loop
+    End Sub
+    
+    Public Sub MoreEfficientExample()
+        Dim RowCounter As Long
+        For RowCounter = 1 To GetLastRow(ActiveSheet, 1)
+            'Do stuff
+        Next RowCounter
+    End Sub
+    
+    Public Function GetLastRow(ByVal TargetWorksheet As Worksheet, ByVal ColumnNo As Long) As Long
+        GetLastRow = TargetWorksheet.Cells(TargetWorksheet.Rows.Count, Chr(64 + ColumnNo)).End(xlUp).Row
+    End Function
+
+Both examples contain a simple loop that is designed to iterate the number of rows contained on the worksheet. They both do the exact same thing, but they go about doing it differently.
+
+* Inefficient example: This loop checks to see if the value of `RowCounter` is less than the last row. It does this *every loop* to see if it needs to stop looping.
+
+* More efficient example: This loop checks to see what the last row value is before looping. It then loops accordingly, but doesn't ever need to check for the last row value ever again.
+
+When you iterate both of these loops over the course of 400k rows of data, this simple design change will yield a huge difference in performance speed, even though the net output would still be identical.
+Without knowing just how new to VBA you are...
+
+>Public Sub LudicrousMode(ByVal Toggle As Boolean)
+>End Sub
+
+Those lines define the start and end of the code that defines the subroutine. LudicrousMode is the name of the subroutine - you could run this subroutine  from somewhere else by calling it using this name. Public is the scope, which determines where you can call this subroutine from - this one can be accessed from any code in the instance of Excel. Toggle is an input/output for the subroutine, and in this case is strictly used as an input; when you call LudicrousMode, you'd pass it something to use here. ByVal tells the subroutine that you're passing it a value, which immediately gets disassociated with whatever you used to call the subroutine. This means that, even if you change the value of Toggle within the LudicrousMode subroutine, it won't change the value of whatever you passed to it when you called it. The other option would be to pass it as a reference, ByRef, which would allow that. A subroutine like
+
+    Sub dontAddOne(ByVal i as integer)
+    i = i+1
+    End Sub
+
+When you call that in some other subroutine, Call dontAddOne(counter), after you run that Call statement, counter wouldn't have changed. On the other hand, if you had
+
+    Sub doAddOne(ByRef i as integer)
+    i = i+1
+    End Sub
+
+and you did Call doAddOne(counter), after you run that Call statement, counter would be one more than before.
+
+The As Boolean after Toggle tells the subroutine what the variable type is for Toggle, similar to using a Dim statement inside the code for a variable that is created inside the code. In this case, Toggle is a True/False variable. When you call LudicrousMode(True), the code is written so that you turn on some speedups.
+
+> Application.ScreenUpdating = Not Toggle
+
+This sets the ScreenUpdating property of the application you're calling LudicrousMode from, which, if it's false, tells Excel, do whatever you're doing, change values of the cells in memory, but don't bother wasting time actually updating what's displayed on the screen. It turns out, it takes some processing power to do that, especially if you have charts. You can get to that yourself in File > Options, I think on the General tab. Not Toggle just takes the opposite of the Boolean value of Toggle. So if you're calling LudicrousMode (True), you're setting ScreenUpdating to False, and vice versa.
+
+Be careful with this one, because the value you see in the spreadsheet may be different from what the value actually is.
+
+> Application.EnableEvents = Not Toggle
+
+This sets the EnableEvents property of the application in which LudicrousMode is called. VBA code can be set to run when certain events happen - a spreadsheet changes, a chart is selected, a button is clicked, etc. This turns off those triggers.
+
+> Application.DisplayAlerts = Not Toggle
+
+This sets the Display alerts property of the application from which LudicrousMode is called. Basically, it suppresses any of the message boxes that might appear, and returns the default response to them back to the code.
+
+> Application.Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+
+This sets the Calculation property of the application you're calling LudicrousMode from, which tells Excel whether to go and recalculate values in the spreadsheet like it normally does, or only when you ask for it. So, if you have B1 = A1+1, and B2 = A1+A2+1, in the normal (automatic) mode, if you change A1, it will recalculate both cells B1 and B2. But if the next thing you do is update A2, then the recalculation of cell B2 was just wasted. So you can save some time by not doing it. Setting the calculation to manual is also available through File > Options on the General tab.
+
+The Calculation property is being set to the output of the iif function. The iif function works like the IF() function in the Excel workbook. It evaluates whether Toggle is true or false; if it is true, it returns xlCalculationManual, and if it's false, it returns xlCalculationAutomatic. Those are the names for preset integer constants in Excel, intended to be used when setting the Calculation property.
+
+You should be careful with this one, because if you pull a value from the spreadsheet into the code, it may not be the value you're expecting if it's waiting for a manual recalculation.
+I can understand the frustration. That is not fun at all. It sounds like there needs to be a better database option. This needs something more advanced than Access. They are probably avoiding the costs though. 
+
+Just keep soldering through and see if you can create some external workbooks that can extract data.
+Be pro-active, just do it and show them the results..
+
+
+
+
+That is assuming everything is current. A company I worked for recently still used Office 2003. They also had Access 2003. They refused to invest in updating their software.
+Well, OK, I don't crush the dream, man.
+
+>You would need to download the 64 bit *in place* of the 32 bit, and VBA is different on the 64 bit so may be problematic. 
+
+Didn't include the 64-bit piece (you'll have to do that), and I haven't experienced any issues with VBA coding.  I really noticed a performance boost with the additional ram, YMMV.
+I learnt something new today
+perfect - thx
+After I found about iif I've started using it whenever I have a "simple" "IF", that is, some sort of straight-forward assignment of a value, nothing funky. 
+
+it makes for a clear distinction between "check if something is true and assign a value to this variable" and "test if something is true and then *do stuff*"
+And if you do end up using Access, it's the only if that works.
+Thanks for the explanation!
+ Oh wow.  Thanks for putting that together.  I appreciate the time you took to explain it!
+Question does the loop structure matter if you use the function to set a value of variable instead of calling it each time?
+Awesome! Thanks for the great answer! 
+There are a few differences between 32 bit & 64 bit VBA, but as far as I know, it's only when working with some Windows API calls, which I doubt OP is doing. 
+Wait, really? In VBA running in Access, you can do a normal If statement? Or are you talking about within Access itself, much like the IF function within Excel?
+If the value of the variable doesn't have to change with each iteration of the loop (like in this case), by all means set it before entering the loop. By keeping loops as simple as possible, you reduce the amount of time spent needlessly performing calculations that could otherwise have been spent elsewhere.
+No problem. Also, if you're using this, or something like it, make sure to turn it all off when you're done, and don't forget to turn it all off if your subroutine errors out!
+Oh sorry I should have been clearer - not VBA, but in the version of sql that access uses, instead of case/when/then like in normal sql, or normal if like in excel, you have to use iif. 

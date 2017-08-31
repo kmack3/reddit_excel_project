@@ -1,0 +1,71 @@
+large
+65jc60
+Need help efficiently sorting through a very large Spreadsheet
+
+There are two spreadsheets.
+
+1. The master spreadsheets with a column of case numbers and a second column with those case's status. Includes every single case we have.
+
+2. My spreadsheet which is the same but has a smaller subset of cases with concerns that I need to investigate
+
+I want the master spreadsheet to be searched and for Excel to automatically match case numbers with their statuses in the second column and autofill the spreadsheet I'm working on. 
+
+The act of manually searching each case number for the status is proving tedious. 
+
+
+-------------
+Search youtube for 'excel vlookup'. You can link the case numbers in your worksheet to the master sheet and find all associated statuses at once.
+-------------
+Is the master sheet just a separate sheet or a completely different workbook?
+-------------
+I would use INDEX MATCH if it's truly a massive amount of data. 
+
+=INDEX ( *column to return value from* , MATCH ( *lookup value* , *lookup against column* ,0))
+
+
+
+
+-------------
+I feel like I got a handle on it, but I'm still getting an error in my formula.
+
+Here's my formula: =VLOOKUP(A80,Master,2,False)
+
+The number I want to look up is in cell A80.
+
+"Master" is the range name that includes two columns. The first is a list of case numbers, the second is their status.
+
+The cell I'm entering the formula in cares about the SECOND column from the "Master" range so I use 2.
+
+I want exact matches so I use "False"
+
+I keep getting a #N/A error though. I feel like I'm doing everything right. I did the search using the simple find function and the case number is definitely in there. 
+-------------
+if its a different workbook you may need to do something like =vlookup(A80,[Master.xlsm]Sheet1!$A:$B,2,false)
+-------------
+You may need to ensure you're looking to and from cells of the same type. For various reasons, Excel may consider one a number and the other text. 
+
+To make sure the plumbing is right, manually create a matching in the to and from columns. (a successful lookup tells you it's wired correctly)
+
+A failure means you may have to override the range formatting to number on either side. I've even had to override this seemingly failsafe method with hackery like looking up to a cell * 1 depending on how the data was sourced. 
+-------------
+Try throwing abs() or trim in there. There's a good possibility that either the information your looking up or the information your searching has a few extra spaces before or after it in the cell.
+-------------
+Using quotes around master?
+-------------
+Hmmm I am getting an error on the master table that says 
+
+"The number in this cell is formatted as text or is preceded by an apostrophe."
+
+When I hover over the case numbers. Is that effecting it?
+
+EDIT: This was it! I converted them to numbers and it worked!
+-------------
+Hey, that's a cool workaround. Thanks! 
+-------------
+What does abs() or trim mean?
+-------------
+Abs(absolute value, returns absolute value of a cell) trim(trims the extra spaces before or after the contents of a cell)
+
+You'll have to insert a column on the one sheet if this is the case, just take the case numbers, Trim them into a new column and Vlookup that data.
+
+If this is the issue it should clear it up pretty quickly.

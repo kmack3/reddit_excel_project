@@ -1,0 +1,31 @@
+PSA: some users report Excel security update KB3178690 is breaking macros
+First place I looked after I started having problems this morning, I figured it wasn't only me. 
+
+The number of Excel issues I have with updates is going up from *maybe* 1 every two years before the exit of Sinofsky, and has been going steadily up during the Nadella tenure to about 3 a year now. 
+
+You know what I don't want Microsoft? You playing beta games with literally my money, especially when I'm being sold phoned-in updates with a subscription. 
+
+
+
+This whole Microsoft update has fucked up a lot of things.  It broke our SharePoint 2013 workflow engine too:
+Huge thanks!
+
+Some people might be able to disable the security update through Control Panel -> Programs and Features -> View installed updates.
+
+The problems were occurring for me in normal use - changing simple formulae (direct cell references), inserting and deleting rows, copying and pasting. It would happen most frequently when I had multiple sheets selected (and sometimes when working on just one sheet).
+
+The drawback for me of disabling that update is that now my computer is crashing (bluescreen) when the screensaver tries to come on. I'm not 100% sure that these are related.
+Glad you posted and I remembered this thread!  Just had almost this exact problem.  In my user's case, an object/method type error popped up on a very simple line like:  
+    
+    activecell.offset(0,3).value = "OK" 
+or something similar.  Then it crashed.  Uninstalled the KB and it started working again.
+You will need to Hide the update by going back to Check For Updates after you've uninstalled the offending KB's, otherwise they'll just be reinstalled again. 
+
+It is also worth noting that for Windows 10, you can't hide updates from Windows Update anymore - you need a separate tool. Should be simple enough to locate and download but the fact that you have to do this is also retarded for systems with the "Pro" nomenclature. 
+
+What makes me really mad is that Microsoft is going down the route of treating everyone like Apple does because that seems like what works,  without seemingly realising that 
+
+a) Microsoft's new shit, and new patches for old shit that was actually stable back in its day, is actually more broken at this point and 
+
+b) The most everyday mission-critical stuff most people do on their Macs is their new music track (that they're often too dumb to back up), pretty picture or a shopping list in their Notes. We do quite a bit more in Windows. 
+

@@ -1,0 +1,138 @@
+crash
+14ese7
+Excel crashes - Need to bring in data from 374 files into one sheet.  How to do it?
+
+I have 374 excel files.  I am trying to aggregate the info from those excel files into 1 file.
+
+I was able to bring in the data from the 374 files into 5 files, but the size of each file proved to be unwieldy (around 15 MB each).
+
+So I decided to aggregate these files into 1 more file hoping this would cut down the file size.  The new file is now at 50+ MB and I'm not even finished yet.
+
+What would be the best way to do this?  Is excel not the right choice for this? Can I use access and bring in the files through that? Any other way or another program to do it?
+
+We need to use this data to model/forecast the numbers so I need excel eventually.  But any help will be appreciated to make this manageable, e.g., smaller file sizes, quicker, etc.
+
+Thanks!
+
+
+-------------
+Without launching into a bit lecture, I will tell you that Access is probably the better application for working with data like that.
+-------------
+I had to do this with about 5000 sheets once.. MS Access would be ~~the best~~ better than excel for this, even if you don't use the "relational database" aspects of it (but i'd encourage you to do so!). 
+
+With an access form, and some vba, you can automate it; or it has a Import Wizard, but that'll only do one sheet at a time. How'd you consolidate them into the 5 sheets? Vba?
+
+
+-------------
+what kind of structure are we talking about? 
+multiple sheets per wb file or single sheets?
+Will this be a new sheet per file or aggregated in some way?
+
+You may want to rethink Excel as the storage for this. You are getting into DB territory. You could use VB to modify and aggregate the sheets, but this could get really cumbersome. You can use odbc to access excel files and read them through a sql server or a vb app. You may need to really look at the job and if the tools are right, legacy or not, and whether they will meet your goals over time.
+-------------
+How many total rows are we talking about (not file size)?
+-------------
+have you seen this?
+
+http://msdn.microsoft.com/en-us/library/cc837974.aspx
+
+
+I'm trying to do a similar thing at the moment, but i don't have MS Access  unfortunately. (and a very limited understanding of VBA) .. trial and error at the moment to get what I want.
+-------------
+I thought so.
+
+May I ask, what would I do after I have the data in Access the way I want it?  Can I then bring that data into Excel to manipulate it?  
+
+Also wanted to add that I need to update the data set with 374 new sheets every month.  Will this be a problem with Access?
+-------------
+It took a bit of VBA, hlookup, vlookup, and a host of other functions.  
+
+What would be "the best" choice for this?  If I get the data into access will I be able to move it into excel in order to manipulate it?  Everything we work with is in Excel so I'll need to bring it into Excel eventually
+
+Also, I should have added that I need to update these 374 excel files every month.  Will this be a problem with Access?
+-------------
+So the files are split into regions.  Let's say 5 regions.  Each region has 50 products, so each file per region is for a product.  The products are the same throughout the regions.  Within each file, the columns headings are the country the product is being imported from, and the row headings are the dates starting from January 1995.
+
+Each month this data is updated by the government and I'll require 374 new spreadsheets.  I already have a script which automatically downloads the files so that's not an issue.
+
+I need to get the dates (the row headings) to become column headings, then I need to aggregate the files so I can see each region, total, per date for each product.  
+
+The way I've set it up now, is that I get all of that data and through a bunch of annoying functions and code, I have the country imported from as the row headings, the dates as the column headings, and a separate tab per product.  I have 5 spreadsheets like this, 1 spreadsheet per region.  I then need to bring all of that into 1 spreadsheet cumulative.
+
+Then I need to do all of this again but this time for exports from those same 5 regions to specific countries by date.
+
+And all of this data needs to be updated each month.  Atleast, the newer data.  Historical data will obviously stay the same.
+
+Which program would you suggest for this? and how should I structure it?  It's burdensome data that I'm trying to make useful.
+-------------
+Depends on the region.  From 20 minimum to 142 maximum.  And 228 columns exactly.
+
+This is per sheet.  1 sheet per file.
+-------------
+yea, I saw that.  It's not very helpful for my problems though.
+-------------
+Assuming there is some kind of logic to the name and location 374 sheets the monthly update scrip shouldn't be too difficult.  
+
+/r/msaccess can help with specifics.
+-------------
+You can definitely export the data back into excel. It may still be pretty large. But at least you wont have all of the lookups live in excel which could cause it to crash and burn with so much data.
+
+Good luck!
+-------------
+Access is pretty good at moving data to excel (copy paste, or wizards etc..), but you have to learn how to query the data tables to get what you want. The idea is that you export just the data you need to do whatever analysis; and ideally use access to do a lot of the data preprocessing.
+
+To do a similar task, I have a form in an empty access database.. I pick a folder, and a vba script runs, which imports all the excel files in that folder to one table. Works good as a tool, but can be pretty slow to run.  
+
+I can't say what the "best" is, just what I know. Personally, I'd be using MSSQL and a .net desktop application. 
+
+You can check out /r/MSAccess, and /r/SQL for more info.
+
+
+
+
+-------------
+Ok, I think that part of the issue is the way the data is broken up.
+
+A single table with the following (I think I got all of it)
+Region, Product ID, Country of Origin (CoO is how i would abbreviate), Date, Quantity
+
+Make a single set of data like this then either use a filter to switch between region and product combo or some script to create the files off of that. This makes it easier to perform aggregation on and update. I know you talked about the sheets being updated so I am not totally clear on the process, so maybe there are considerations that would make using a single data source harder, but if I was doing this from scratch that is what I would do.
+
+This can either be a SQL database, Access DB, or even an Excel sheet. It could even be a flat file (csv or tab delimited text) that is stored someplace and brought into a tool using VB. I would use a snowflake structure, for example the region col would have a number and in a separate sheet or table is a list of numbers and corresponding region names. Same with products and CoO. "Madegascar" 50 times takes up more space than 50 two digit numbers and "Madegascar" once in the look up table. This also makes you better able to handle data entry since a typo here could cause your aggregation and filtering to fail.
+
+So I would say overall the plan seems to be that a chunk of data is naturally partitioned by the files and you need to de-partition it to make it useful on a more global scale. 
+
+
+
+
+-------------
+Here's an easy solution. In access, you can link to a spreadsheet so it appears as a table.  Then write a really long union query combining all tables since columns are static. Export query to excel.  In excel  select all, copy,  paste special - transpose. 
+-------------
+Crap.  Now I have to go learn Access.  I was hoping this project would be finished by tonight.
+
+Thanks for the help
+-------------
+Kills the formatting to, so smaller files. 
+-------------
+I decided to split the data into chunks of 5 years.  And i'm keeping the historical data (pre-2010) as static numbers instead of vlookups.  Thus far, I have manageable 13 MB files.
+
+Thanks for your help
+-------------
+This script should work perfectly for you to import all the files: http://www.eraserve.com/tutorials/MS_ACCESS_VBA_Import_All_Files.asp
+
+Change .csv to .xls (or .xlsx) and change  
+
+    DoCmd.TransferText acImportDelim, , strTableName, strPath & objF1.Name, True 
+
+to something like this (tweak as appropriate)
+
+    DoCmd.TransferSpreadsheet acImport, acSpreadsheetTypeExcel9, _
+    "YourTableName", strPath & objF1.Name, True
+
+
+-------------
+I decided to split the data into chunks of 5 years.  And i'm keeping the historical data (pre-2010) as static numbers instead of vlookups.  Thus far, I have manageable 13 MB files.
+
+Thanks for your help
+-------------
+I'd you save as excel binary xlsb it should have a smaller file size. 

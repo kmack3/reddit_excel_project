@@ -1,0 +1,71 @@
+Slicing this file and distributing it is taking me hours. i know it shouldnt. help?
+This is pretty trivial for VBA to do. Do you (or anyone at your employment) know anything about scripting?
+I would do this in VBA.
+
+Build a template file.
+
+Have a table with each account holder and their email address.
+
+Have a field that filters/recalculates everything else based on the Account Holder's Name.
+
+Have a script to iterate through each account holder, and generate a file with only that user's data for each of the 8 pages.
+
+Spend some time proofing the files.
+
+Once you're confident, have another Macro that emails each of those files out to the respective account holder by iterating through your account holder/email table.
+
+My preference is to do this sort of thing from Access, since mass data manipulation is easier there, and update template cell/worksheets using the Excel Object Library, but you can do it entirely self contained within Excel as well.
+
+Alternatively you can just send it as an email instead of an Excel spreadsheet, populating the text with the cell items for each user.  It seems like that would be easier for this limited set of data.
+
+Here's a couple of links to give you an idea:
+
+http://ccm.net/forum/affich-689536-generate-excel-workbooks-based-on-excel-list#1
+
+http://chandoo.org/wp/2015/10/28/save-range-as-text-using-vba/
+
+https://stackoverflow.com/questions/8469960/send-an-email-from-excel-2007-vba-using-an-outlook-template-set-variables
+Does this really need to exist on 8 separate worksheets? If it is all on one it makes summaries, pivot tables, reports and such quite easy.
+
+Including splitting and sending the data to each Account Owner.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+I'll assume by _pages_ you mean worksheets.
+
+Picky: if __Account Owner__ is in different columns on different worksheets, the 8 worksheets would look different even though all contained tables.
+
+A VBA macro would be best for this. Is there an __Account Owner__ label in some column in row 1 in each worksheet? If not, how do you find the account owner column in each worksheet?
+
+A macro switching recalculation to Manual, turning off screen updating, and creating new workbooks for each distinct account owner should take no more than a few minutes to run.
+I'd make a macro that checks every row for the account owners name. If it's not there, delete the row and move to the next, if it's there, keep that row and move on. After you reach the end of the list, move to the next sheet and repeat. You could then just make a copy of the file, run the macro on the copy and send the result to the account owner. Be sure to switch recalculation to manual at the start of the macro and back on at the end.
+Is the header always in the same row and does the account owner title always equal "Account Owner"?
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 5 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+Can't he use pivot tables or something? I'm not super familiar with those, but I'm curious since they're used for data sorting. 
+Came here to say this. Consolidate the data and add another column to show whatever information is being given by it being on a given tab. 
+Pivot tables can be helpful when it comes to sorting and calculating lots of data its true. That's not really what's needed here though. A simple loop for each unique entry would be sufficient to filter, format, the email the appropriate data to the right person. You'd need a lookup table (to know where to send the data), but otherwise its straightforward. 
+Okay. Thank you! 

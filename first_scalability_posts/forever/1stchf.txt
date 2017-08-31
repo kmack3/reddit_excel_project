@@ -1,0 +1,108 @@
+forever
+1stchf
+Accounting department spending forever printing/manually entering information into spreadsheets that's already in a spreadsheet to begin with. How can I help them automate the process?
+
+I was hoping I could lay out the way we're doing things now and maybe you guys could help me figure out the way to start automating this process a little bit for them.
+
+Right now, employees send in their time cards (.xls or .ods) through e-mail to their supervisor.  Their supervisor prints out the time card spreadsheets, makes notes on them regarding adjusted rates/overtime/sick pay/etc. and then walks them over to accounting.  Accounting then spends their time entering that information from the printed spreadsheet into their payroll spreadsheet that they upload to our payroll software.  Then they scan the spreadsheet with the handwritten notes and save it on the hard drive.
+
+Is there some way that we can add in cells for all the things that they're handwriting notes for and then export all of that from one spreadsheet to another spreadsheet?  I'm sure it's possible, I just don't have any experience at all with the best way to export things from one spreadsheet to another.
+
+But they're spending 4 whole days and countless hours among 5 different employees every single pay period to get our payroll out and wasting a ton of paper in the process.  There has to be a better way!
+
+
+-------------
+Do they WANT an automated solution?   I was brought in to an accounting department SPECIFICALLY to help automate their processes, and most of them, while not hostile, were quite ambivalent towards efficiencies.
+
+Keep in mind, if your payperiods are two weeks, you're looking to eliminate almost half their workload.
+-------------
+Be sure to set conditional formatting on the master once this is done. The payroll department will love you for making something highlight red when it is above normal (someone accidently typed in 88 hours instead of 8 or someone continually logs overtime, flagging it for management.
+-------------
+so just to be clear, you are looking to open one single spreadsheet and have it open multiple different spreadsheets and pull in values automatically? This can definitely be done, ive done it thousands of times.
+
+What you may need to do, for consistency and ease, is save all of the spreadsheets that have the data you are pulling in, in a single location. Then have your other spreadsheet open that folder and loop through all of the folders contained files, open them one by one, and pull in their data.
+
+I can write sample code for you if this is what you are looking for.
+-------------
+Now you're talking my language! I love automating things.
+
+If you could send a sample of the spreadsheet you use, it would be easier to visualize how to optimize.
+
+It sounds like there could be some finetuning with just how the supervisor takes notes (a sickday should just be a dropdown option that calculates elsewhere, etc.)
+
+The first step to take is to figure out how to universalize the forms.
+Then figure out who needs what information and make it the most accessible (maybe separate each department entries by worksheet?)
+
+Walking anything over to another department is easily the easiest thing to fix. 
+
+Let me know how it goes, and if you want more detailed suggestions!
+-------------
+They seemed very excited to cut down their work load. 
+-------------
+Good to note!  I'm not at the office this weekend but I'll post the spreadsheet when I get there tomorrow morning and maybe I can actually figure this whole thing out.
+-------------
+Well my idea was to make a network share on the server and call it Time Cards, then have a folder in there created for each pay period.  The employees send in their time cards and rather than printing them, they save them all to the appropriate pay period folder.  This would take the place of the "scanned" time card folder they use now after they've printed, taken notes, and rescanned them all in for record keeping.  So putting them all in one folder was the plan anyway!
+
+Then I just need to find a way to pull, for example, cell B3 from Joe's time card and put it in S10, then pull cell G11 from his time card and put it in Q10 (the employees all have their own row in the master payroll spreadsheet that we upload to our payroll software).
+-------------
+Universalizing the forms is going to easily be the hardest part (I think) just because of how many types of employees we have and how we pay them in such weird ways.
+
+For example, we hire someone on as a salary home health nurse.  For the first 6 months, they are actually paid hourly during their orientation period, then they switch to salary.  But on the weekends, they get paid per visit and compensated extra for mileage.  And if they do a VI rather than a VN they get even more compensation.
+
+All of this is done manually right now by the supervisors.  They check the time card, see that Susie worked Saturday doing a VI and they mark on the spreadsheet the rate that they should be paid for that.  Then accounting gets those notes, looks up/knows the proper rate, and enters that final bit into the payroll spreadsheet.
+
+Trying to make one spreadsheet for all the employees is incredibly difficult.  This is made more complex by the fact that our payroll software is divided into our different company divisions, so we have a Home Health/Hospice/Private Services entry for a lot of employees.  So on our big payroll spreadsheet, we have one line with Linda (Home Health) then another line with Linda (Hospice) and the hours that she works are paid differently based on which kind of visits she did.
+
+I wish I was a spreadsheet wiz because I'm sure it's possible to make these all into one comprehensive spreadsheet, but i have no idea how to even begin doing that.
+
+Would be happy to send/post some examples of blank time sheets if that would help.
+-------------
+without actually working on the spreadsheet its difficult to give you the neatest way of doing this but here goes:
+
+if employees save the spreadsheet as firstnamelastname.xlsx what you can do is this:
+
+    Sub getdata()
+        Dim row As Long
+        Dim filepath As String
+        Dim myWkbk As Workbook
+        Dim empWkbk As Workbook
+        
+        filepath = "c:\whatever\"
+        row = 1
+        Set myWkbk = ActiveWorkbook
+        
+        Do While myWkbk.Worksheets("employees").Cells(row, 1).Value <> ""
+            Worksheets.Open filepath & Replace(Worksheets("employees").Cells(row, 1).Value, " ", "") & ".xls"
+            Set empWkbk = ActiveWorkbook
+            myWkbk.Worksheets("employees").Cells(row, 2).Value = empWkbk.worthsheets("sheetname").Range("S10").Value
+            myWkbk.Worksheets("employees").Cells(row, 3).Value = empWkbk.worthsheets("sheetname").Range("G11").Value
+            empWkbk.Close savechanges:=False
+            row = row + 1
+        Next row
+    End Sub
+    
+
+
+Its hard to test this without your spreadsheet but im 100% sure if you tweak this around it will work for you
+-------------
+This is definitely a feasible thing to simplify - can I see a blank time sheet to see how the information is entered by the employee?
+
+The supervisor shouldn't need to make any notes of how the rates should work - you can make a master table that could be pulled to any timesheet.
+-------------
+You can always do what I do and troll through the Online Templates built in to Office and then reverse engineer whatever I find that I like.
+
+But what you're asking is pretty much the entire reason for Excel's existence, at least for most people.
+
+If you made a generic template (and keep in mind, generic doesn't have to be simple) and provided a drop-down option for every column (hourly/salary, VN -y/n, rate, travel, etc) you could just import the data from each user's workbook and create a pivot table.
+
+While there are tons of very useful formulas out there, they can be very time consuming to fine tune, and if you don't know what you're doing, can be broken without you ever knowing.  Which isn't something I would want my payroll department doing with my time card, if they were as novice with Excel as it sounds.
+-------------
+That's a really good starting point, thanks for taking the time to get that together for me!
+
+[Here](https://dl.dropboxusercontent.com/u/15850529/01_Timesheet%202013%20current%20BLANK.ods) is a copy of a blank 2013 Timesheet to give a better idea of what we're actually working with.  
+-------------
+cant open :(
+-------------
+Oops, that was the .ods version.  Oops!  All of our field staff (the ones filling out the time cards) use OpenOffice and the office staff use Excel.  [This](https://dl.dropboxusercontent.com/u/15850529/01_Timesheet%202013%20current%20BLANK.xls) is the Excel copy of that spreadsheet.
+
+Sorry!

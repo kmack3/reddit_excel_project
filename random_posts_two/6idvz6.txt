@@ -1,0 +1,28 @@
+6idvz6
+What is this formula about?
+    =MAX(IF(DV9=$DV$8:$DV$18750;$EJ$8:$EJ$18750;))
+
+I don't get the 
+  DV9=$DV$8:$DV$18750
+especially. Does it check if DV9 is inside the $DV$8:$DV$18750 array? Or what?
+
+
+-------------
+Yes, it is an array formula, so you need to use Ctrl+Shift+Enter instead of just Enter to make it work properly. Basically what it does is it checks to see if a value (in this case DV9, however this value is not locked) is in the range $DV$8:$DV$18750, and if it is then it finds the MAX of the corresponding value in the range $EJ8:$EJ18750. If it isn't, then it returns 0.
+
+http://imgur.com/a/3xx4h
+-------------
+Yes, it is an array formula checking if the value in DV9 is in the first column and then returning the corresponding value on the same row in the other column.  If the number appears more than once in the $DV$8:$DV$18750 part, it returns the highest value of the ones beside those cells.  One thing of note, those semi-colons are probably just commas.
+-------------
+Thank you! I used only Enter and was confused. Why is the combination different? How should I go about calculating a whole column of these formulas? Manually or through macros? 
+
+Also, I tried to check if a value is inside an array in some independent way, but it's not working. The formula syntax looks the same.  https://imgur.com/a/bE7J6  (ЕСЛИ is IF function).
+
+-------------
+Try using this instead: =IF(COUNTIF(A1:A10,"=" & F6),1,0)
+
+As far as why it's different, the short answer is that Ctrl+Shift+Enter tells Excel you're using an array formula. The long answer is [it's... complicated](https://superuser.com/questions/674566/when-to-use-ctrlshiftenter-and-when-to-use-enter-in-excel).
+
+If the whole column is using the same formula with just a relative cell reference, then dragging the formula down manually should be fine.
+-------------
+But I want to understand the current formula, what it returns in terms of IF and why it seems to return False in that context..

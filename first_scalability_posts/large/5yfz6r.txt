@@ -1,0 +1,35 @@
+large
+5yfz6r
+Adding Sheets in Large Workbook
+
+Hopefully someone here can help. I'm currently working on a model and am having difficulty adding additional sheets to it without excel crashing. The model is 20+Mb and is basically a multi site multi phased cash-flow model, a lot of index match match to consolidate sites into phases. Things I have tried so far include, adding it using the plus button, copying blank sheets from within the workbook, copying blank sheets from other workbooks, using a macro to switch Application.EnableEvents to False before adding sheets. So far none of these methods work. To be fair I have let them run for about 20 minutes before calling it quits and using task manager to kill excel. Any help appreciated!
+
+
+-------------
+I think the crashing is a symptom of a much larger problem. To be that big in size, is it file bloat or are you realling dealing with millions of rows of data?
+
+Do you have lots of Event macros that are firing? It sounds like yes, but might be worth doing a debug to make sure they're playing nice and not going through unnecessary recursive loops (e.g., a change event macro that then makes changes itself).
+
+Do you have a lot of volatile functions? Things to watch out for are: NOW, TODAY, OFFSET, INDIRECT. Each of those will cause their formula, and any dependent formula, to recalculate *every time you change any little thing* in the workbook.
+-------------
+I have avoided volatile functions and instead used macros when required. There are limited volatile formulas (less than 20) within the workbook. 
+
+I have no event macros in the workbook. In the workbook, I only have 5 macros which are all triggered only by manually clicking on them.
+
+There is one worksheet which churns out different site inputs into an output worksheet. As there are 50 sites, the output sheet is large, roughly 5 million cells. A1:TW13801
+-------------
+That amount of data isn't useful sitting there. That should be in Access or some other database. Then if you want to extract data or a summary from the database, use one of many tools available such as Power Query (get and transform), Power BI Desktop, SQL, or VBA. Or different 3rd party software. Excel isn't a database.
+-------------
+Well, that's a legitimate answer, a lot of data.
+
+Is the data stored in an XL table so you can leverage structural references? Could you use a PIvotTable (or more) to handle the massive calculations, and then run formulas off of the PTs?
+-------------
+Thanks for the reply. Would it be easy for me to set that up? Eg for a macro in excel to run cash flow for site 1 and then export data into Access, run cash flow for site 2 and export data into Access ... all the way till site 50. Then for the phasing sheet in excel to pull data from the access database more efficiently then currently set up?
+-------------
+There aren't any calculations, it's just pulling data from the correct cell out of the 5 million cells, so not sure how much a PT would help 
+-------------
+I'm a bit confused. Are you using the 5 million cells as a source for data extraction? Or are you using them as a place to store data that is generated from your formulas? 
+-------------
+Both. The cash flow within the workbook generates 50 different cash flows which is then copied and paste special as values into a separate sheet. That sheet then becomes the source for data extraction 
+-------------
+Okay, then that's your problem. You need to divide your data into 2. Your database should be the source of your data and should have all of the invoice information etc. You should then also have your report which drives data entry into the database. 

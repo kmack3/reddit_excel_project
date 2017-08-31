@@ -1,0 +1,82 @@
+crash
+2ioha3
+Crash course in vba/macros/csv export
+
+I have an Excel sheet that documents expenses over the course of the month. 
+
+* Rows 1-4 are the firms logo, employee information, and date. 
+* The 5th row contains "headers" (fields) that describes the data to enter below.
+* And rows 6-200, where said data is input. 
+
+I want to create macro that converts this sheet as a .CSV, so I can import it to our accounting system. 
+
+* The Excel sheet headers are friendly names for the actual CSV headers. 
+* Does not require any field validation, etc. 
+
+I'm very savvy with PowerShell scripting, dabbled in VBScript, and come from a programming background. I don't quite have all the Excel/VBA chops to handle this, but I'm willing to give it the 'ole college try. 
+
+Can you recommend any resources that would help me? Anything similar that I can franken-code together? I just need that one push in the right direction and I'm confident I can work through this.
+
+
+-------------
+Would you be okay with a simple macro that copies all of the information (rows 6-200) and pastes them in a new sheet, then exports that sheet as .CSV? I'm pretty sure if you save the file as a CSV, it'll only save the active sheet.
+-------------
+Thanks to both responders, I was able to work these examples and fit my use case. I'm sure I'll be back in the future.. I can smell more of these projects.
+-------------
+That would be an excellent start (A6:R200)
+
+
+The new sheet should contain CSV headers in the first row (maybe we can dump them into an array in VBA, and cycle through them IE. 1:A = HeaderArray[0], 1:B = HeaderArray[1]), and then if we dump the cells A6:R200 into this new sheet starting at Row 2, I think it will be fine.
+
+-------------
+Awesome! We're happy to help!
+-------------
+I would give something like this a try:
+
+    Private Sub exportCSV()
+    
+        Dim ws1, ws2 As Worksheet
+            Set ws1 = Worksheets("Sheet4") 'CHANGE THIS TO ORIGINAL WORKSHEET'
+        Dim today As String
+            today = Format(Now(), "mm.dd.yyyy hh.mm")
+            
+        Worksheets.Add After:=Worksheets(Worksheets.count)
+        Set ws2 = Worksheets(Worksheets.count)
+        
+        ws1.Range("A5:R200").Copy Destination:=ws2.Range("A1")
+    
+        ActiveWorkbook.SaveAs Filename:="test " & today, FileFormat:=xlCSV, CreateBackup:=False
+        
+    End Sub
+
+
+It'll change the format of your entire file, so the next time you save it, you'll have to change it back. Another way around this would be to create an entire new workbook with the data and just use that one as the CSV and not touch the original.
+
+Also, to prevent the issue of trying to save a file with the same name, I made it save as "test" and then put the date and time afterwards in the format `mm.dd.yyyy hh.mm` and you can change the word "test" to whatever you'd like.
+-------------
+Meh.. I didn't see you already answered and wrote a quite similar macro, which leaves the original untouched.
+I'll post it anyways..
+
+    Sub stuff()
+    Dim wsData As Worksheet, wsCsv As Worksheet
+    
+    Set wsData = Worksheets("Sheet1") ' Set your source sheet
+    Set wsCsv = Sheets.Add 'adds a helper sheet
+    wsCsv.Range("A5:R200").Value = wsData.Range("A5:R200").Value 'copy stuff to helper sheet
+    wsCsv.Copy 'create a new Workbook from the helper sheet (this makes the new Workboot the active one)
+    ActiveWorkbook.SaveAs Filename:="C:\expenses.csv", FileFormat:=xlCSV 'save that new workbook as csv, change the filename as desired
+    ActiveWorkbook.Close 'close the saved file
+    
+    wsCsv.Delete 'delete the helper sheet
+    
+    End Sub
+-------------
+Solution Verified
+-------------
+Solution Verified
+-------------
+You have awarded one point to MidevilPancake
+-------------
+You have awarded one point to Derpfox
+-------------
+Yay. Thanks for the point :)

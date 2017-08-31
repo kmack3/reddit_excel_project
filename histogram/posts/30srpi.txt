@@ -1,0 +1,42 @@
+Not the macro you need, but the macro you deserve.
+What does it do?
+I saw "Red" "Blue" and "Star" and thought - NOPE.
+
+If someone saw that going past my screen, they'll throw me over to the yanks.
+Screenshot for the lazy? 
+***NICE WORK, PATRIOT***
+So... 49 stars?
+
+edit: nevermind, 1 star was invisible because it got placed on a white stripe. Script gets a bit wonky in Excel 2007.
+Aww darn, /r/MURICA doesn't allow cross-posting. They'd love this.
+Haha awesome. The right-most column of starts is just outside of the blue though. 
+    Set BL = [$A$1:$W$21]
+    Set RD = [$W$1:$AX$3,$W$7:$AX$9,$W$13:$AX$15,$W$19:$AX$21,$A$25:$AX$27,$A$31:$AX$33,$A$37:$AX$39]
+    Set WH = [$W$4:$AX$6,$W$10:$AX$12,$W$16:$AX$18,$A$22:$AX$24,$A$28:$AX$30,$A$34:$AX$36]
+
+this is the right code for the blue for me. I'm on excel 2010
+I've been thinking about this, here's a little addition that I think would really set it off.
+
+Sub StarSpangBanner()
+
+' A very minor and simple addition to LaughingRage's macro
+
+Application.Speech.Speak "Oh, say can you see by the dawn’s early light. What so proudly we hailed at the twilight’s last gleaming? Whose broad stripes and bright stars thru the perilous fight, O’er the ramparts we watched were so gallantly streaming? And the rocket’s red glare, the bombs bursting in air, Gave proof through the night that our flag was still there. Oh, say does that star-spangled banner yet wave O’er the land of the free and the home of the brave?"
+
+End Sub
+
+
+'Haha nice!
+
+But on my sheet I had to set the blue to end at V and the red & white to begin at  W... but well done!
+It Liberates your Workbook.
+For me was when I saw:
+
+    Sub USA()
+    'haha
+Depends if you like Alaska or not.
+That gives me a huge gap between the edge of blue and last star.  I'm not sure why its turning out different for everyone else.  Maybe because I'm on 2010.
+That's weird, everything is matching up on my computer.
+Please elaborate.
+That would be my guess... I'm on 2013.
+I had the same issue, but i'm on 2010...

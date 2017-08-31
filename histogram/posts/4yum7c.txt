@@ -1,0 +1,135 @@
+[Discussion] Tips to make an Excel VBA Application more professional
+1) removing the columns and row bars. 
+
+2) Colour schemes and fonts should be consistent.
+
+3) Get rid of the borders on cell backgrounds. Fill entire sheet white if you have to.
+
+4) Use textboxes rather than macro buttons
+
+5) Depending on number of pages have a index people can use to navigate (I developed a pop out sidebar)
+
+6) Custom message boxes with company logos look better than excel message boxes. 
+What gentleman/gentlewoman has mentioned already. Adding a side bar for navigation and a header with a current version number adds a nice touch. Also you can add a pop-up when you first open the file in vba that shows the companies logo, version number and your name .
+It's still probably worth looking at a copy of *Professional Excel Development (2nd edition)* even though it's getting a bit long in the tooth now.
+A lot of my points pertain to VB Applications, versus making a spreadsheet look nice. (I generally value function over form just because I don't make spreadsheets for other people)
+
+* Error Catching
+* Data Sanitation
+
+The less amount of work your users need to do in terms of ensuring data is entered correctly, the better. This makes data manipulation all the more easier because you know your application will ensure data is valid.
+
+* Automation
+* Intuitive Controls
+
+The better the tools you create in your application, the easier it will be to manage. Receiving user feedback, or working with those who will be using the application is a must upon deployment.
+
+* Documentation
+* Help Files
+
+If your application also utilizes tooltips, and other help documentation, the easier it will be for your users to take advantage of everything your application has to offer. The less amount of explaining you need to do because you provided the documentation for users to familiarize themselves with, the better. Intuitive controls still heavily applies here, as all the documentation in the world won't make someone want to use your application if it's extremely difficult to work with.
+
+* Clean Functionality trumps Pretty Fluff
+
+Just because you can make something look pretty, doesn't mean it *has to be added* if it serves no other purpose other than to look pretty. If the company you work for has a set color scheme and other standards on presentation and format, adhere to them like butter on toast. The better you can stick to them, the easier it will be to sell your creation as a tool everyone should use.
+While Excel allows you to do things like remove the column and row bars, depending on the purpose of the spreadsheet you may want to leave them in.
+
+On one that I built, I found out that the users liked having the row bar. They visually used it to know where their selection was. It wasn't something that I expected and brought it back simply because it was a convenience for them. The same went for the formula bar. Some users preferred writing in it.
+
+As for colors, or really anything having to do with the visual design, feel free to use the techniques and tools that web designers use. There's extensive info on the web. There's also tons of web pages out there dedicated to working with colors. Just search for Complementary Color Generator, or something similar. Other tools that can be handy are RGB to Hex calculators, and color pickers.
+
+As a suggestion, when I'm developing something in Excel, I'll have a dedicated "Variables" sheet that stores all my lists (named ranges for stuff like drop downs), including a dedicated settings list (that's also named).
+
+The settings list has about 4 columns (more could be added). The columns are: names, values, human-readable note, and an ID. I can then reference the list for values that I use globally throughout the workbook. These would take the place of global variables in VBA, and they're more stable, having persistence between sessions. Those values could be standard row heights, colors, column names and placements, etc. The human-readable portion comes in handy for both knowing what value you're looking at and also if you want to display additional information about the value to the user. The ID allows you to group settings together programmatically.
+
+For instance, I have VBA that's constantly looking at a particular range of cells. I could hard-code their column and row extents, but then if I wanted to move them due to a UX change, I'd have to look through 9k lines of code and change every instance. If I put those extents into settings, then I can always reference the setting and not have to worry about digging through code.
+
+I've made a special function that acts sort of like VLOOKUP but is tailored to the above needs. It actually looks through the entire sheet for the named setting and returns a range including all instances that it found, offset by a specified number of columns (with the default set at 1). So if I wanted a range of settings with a specific ID, I name the ID and give it an offset of -2 so it returns a range from the value column.
+
+A UDF shell that encapsulates this function can then be used in formulas. It seems like a complicated approach, but it looks very clean in code and allows me to optimize the lookup so I can do things like caching multiples calls to the same setting. With caching, lookups with a large sheet of settings can happen in fractions of a millisecond.
+
+I mean, this is common sense programming, but I don't see a whole lot of it in the Excel community.
+Additionally, data entry into cells via VBA dialog box removes the need for the formula entry box. This was implemented with a custom user tab on the ribbon with a selection of sections and buttons which ran macros, depending on which value you wanted to enter/modify. 
+
+Everywhere was locked down to the user except through this ribbon tab. In effect it behaved like the get; set; modules in modern programming languages allowing restricted entry points into the sheet and where input could be preprocessed before adding into the sheet. 
+
+In use it isn't as clumsy as it might first appear.
+How do you make a pop out sidebar? 
+I have 1 sidebar but it has 3 layers, first one is the main navigation across the system then you can drill into them and select certain functions/reports.
+
+It's pretty simple and is mainly database controlled.
+
+Firstly I have a Worksheet_selectionchange event located on whichever sheet I wish the sidebar to be on.
+
+
+    Public Sub worksheet_selectionchange(ByVal selection As Range)
+
+      Dim coli, rowi As Integer
+            coli = selection.column
+            rowi = selection.Row
+      
+      If coli = 5 And rowi = 1 Then
+            If ActiveSheet.Cells(1, 5).Value = ChrW(&HE0A6) Then
+                  Call Close_Sidebar
+            ElseIf ActiveSheet.Cells(1, 5).Value = ChrW(&HE0AB) Then
+                  Call Show_Sidebar
+            End If
+      ElseIf coli <= 5 And rowi <> 1 Then
+            Call load_sidebar
+      ElseIf coli >= 6 And coli <= 10 Then
+            Call load_sidebar2
+      ElseIf coli >= 11 And coli <= 14 Then
+            Call load_sidebar3
+      End If
+     
+    End Sub
+
+
+The Close_Sidebar just clears and hides the first 14 rows and changes the direction of the arrow located in cell(1,15)
+
+The Show_Sidebar unhides columns 1-4 and checks the database for the available modules and writes their names in the respective cells (with formatting).
+
+The Load_Sidebar calls whichever function is clicked.
+
+Here's a screenshot  of how it looks. - http://imgur.com/2vvsIEJ
+
+Ignore the top 2 items (red text), I've just been working on having all the sheets that are currently open displayed their in order of when they were opened for even quicker navigation.
+
+
+Wow, thanks. So the first 15 rows, and the first five columns are dedicated to the sidebar? Does that mean that the content of the worksheet starts in cell (16,6)? What does it look like if you expand the sidebar and then make the window bigger? Can you see the worksheet content below?
+
+How did you put icons down column 5? When the Show_Sidebar macro is called, does it load these as images into column 5?
+Wow that's awesome. Would you mind uploading that template?
+https://www.reddit.com/r/excel/comments/4z85hj/a_sidebar_template_for_vba_applications/ - Here you go mate, please feel free to suggest ways to improve the code/ideas behind it.
+
+Yeh, I did consider using just 1 column and moving all the cells over each time but far too much work on the Worksheet_SelectionChange event with that so went for this approach.
+
+I did have a workbook_resize event that scaled the sidebar to the height of the window but it was causing too many layout problems on different peoples screens so decided to have a fixed height. When there's content on the page and the sidebar is expanded it moves everything on the page right. The screenshot I did is of my main landing page and when the user logs in it displays their respective division name and logo on the sheet but it's all connected to an on premise database so I can't log in from home.
+
+The icons are just Segoe MDL2 Asset characters or something like that, nothing special, the macro just sets the font of the cell to the MDL2 font and then they are formatted and the values set to the specified character.
+
+The whole idea is from Windows 10 UWP apps which I've started programming in, started this project in VBA as a small reporting tool but people wanted more and more functionality as it performs better than our main ERP. I regretted it as soon as Windows 10 came out but was too far into it. My current project is making this a UWP/C# app, I wouldnt recommend to anyone to do this size app in VBA/Excel you end up doing huge amounts of unnessessary work and it's not as easy to manage as a UWP application.
+
+
+Will do tomorrow... just got in bed haha
+After looking at the code this morning: I'm really sorry but I'm really going to struggle to upload without literally tearing the project apart as it's all so intertwined with databases/other modules etc.
+
+Uploading the whole project is impossible as it will identify who I am and due to security issues would break my contract. 
+
+When I get home from work tonight I'll create a new workbook with just a sidebar and upload that to my GitHub. I'll PM you my Repo. 
+https://www.reddit.com/r/excel/comments/4z85hj/a_sidebar_template_for_vba_applications/ - Here you go mate, please feel free to suggest ways to improve the code/ideas behind it.
+Another one looking forward to seeing how this operates!
+I would like to see it too, if you wouldn't mind!
+After looking at the code this morning: I'm really sorry but I'm really going to struggle to upload without literally tearing the project apart as it's all so intertwined with databases/other modules etc.
+
+Uploading the whole project is impossible as it will identify who I am and due to security issues would break my contract. 
+
+When I get home from work tonight I'll create a new workbook with just a sidebar and upload that to my GitHub. I'll PM you my Repo. 
+https://www.reddit.com/r/excel/comments/4z85hj/a_sidebar_template_for_vba_applications/ - Here you go mate, please feel free to suggest ways to improve the code/ideas behind it.
+Hi Mate, Since there has been a bit of interest I'll post it to the Excel Page, will PM you with a link when its on. Just lost the file (Unsaved Crash because I'm an idiot and it's getting late) so not a happy chappy right now.
+https://www.reddit.com/r/excel/comments/4z85hj/a_sidebar_template_for_vba_applications/ - Here you go mate, if you have any suggestions ideas please get in touch as I'd love to improve the idea.
+Also one looking very forward to this! Would highly appreciate if you could PM me the Repo aswell. Thanks!
+Thank you very much!
+https://www.reddit.com/r/excel/comments/4z85hj/a_sidebar_template_for_vba_applications/ - Here you go mate, please feel free to suggest improvements to the code/idea behind it. 
+
+Thanks mate, appreciate it! 

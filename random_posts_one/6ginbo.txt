@@ -1,0 +1,43 @@
+6ginbo
+How can I extract one piece of data using two vertical lookups
+This is for a tracking sheet for apartment renovations - right now someone spends about 2 hours a day manually inputting these dates. 
+
+The imgur pics are simplified - there are around 80 apartments and 20 progress milestones that are tracked as each apartment nears completion. 
+
+I had the inspector start using a google form in hopes of eliminating all of this manual entry and just having these dates autofill from a simple tracking log
+
+Hopefully I'm clear on what I'm trying to do.
+
+For example - Unit 024M had "backsplash install" on 6/7. 
+
+I need something that could search the tracking sheet, match the Unit in Column B, match the Milestone in Column C, and put the Date from Column A into cell E2.
+
+https://imgur.com/gallery/KzxyE
+
+Thanks in advance - reddit gold for whoever can help me out here.
+
+
+-------------
+I would recommend using a "key column" and then doing a match/index or vlookup to do whatever matching you want. In the key column you would combine all the values that you want to match on.
+
+The key column would contain this formula:
+
+    =A1 & B1 & C1
+
+And then you'd do a match/index on that column to do whatever else you're trying to do.
+
+You could also use array formulas to do this, but those are more complicated, easy to break, and **slow**
+-------------
+send me a pm.. I'll write the formula for u.. it's just gonna be index/match with an ampersand.. a basic array formula, and given ur sheet size, shouldn't slow down ur workbook at all 
+-------------
+suppose your first image is on sheet1, from A1 to C18, such that A1=Date and B1=Unit. The second image is on sheet2, with A2=024M and b1="Demo".
+
+Place this formula at B2: 
+
+    =IF(B$1=INDEX(Sheet1!$C$2:$C$18,MATCH($A2,Sheet1!$B$2:$B$18,0)),INT(INDEX(Sheet1!$A$1:$A$18,MATCH($A2&B$1,INDEX(Sheet1!$B$1:$B$18&Sheet1!$C$1:$C$18,),0))),"")
+
+Drag across, then drag down. 
+
+You may see just numbers, such as 42893. Just format the columns to show dates. 
+-------------
+Others gave good solutions, that being said, if you have access Microsoft Project or other scheduling software (P6) you should really give that a try. 

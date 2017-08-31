@@ -1,0 +1,240 @@
+[Ideas/Help?] - A job I'm applying for asked me to demonstrates my "savviness with Excel". What do you consider savvy with excel?
+From what I can tell, you seem pretty "savvy" already. I will say some employers lose their shit over Pivot Tables, especially for data entry jobs. It might be worth a refresher on them even if there are better solutions (I prefer Index Match which someone already mentioned).
+Pivot tables. Index Match. Shortcuts - shift click, ctrl click, ctrl down/up arrow, ctrl shift l to toggle filters, f4 to turn on and off your $ anchors, windows left arrow to move the window you are working with to your other screen etc. etc. 
+INDEX(MATCH())
+Really depends on who you're presenting to. I could write a slick VBA code that does my task with only 3 input cells and 1 output cell. A programmer may love this, a marketer may gaffaw and assume I don't know how to use cell formulas and/or color-coded tabs.
+This is going to depend greatly on the job you are applying for. 
+Pivot tables are old news. Power Pivot is a lot better. Get and Transform (Power Query) is the index-match killer.
+I ran into a similar question/request when I was interviewing for my current role (I work for a pretty large telephone company). For the most part, following up with the interviewer and creating a macro was what got me the job.
+
+I would say if you are able to automate reporting aggregation into something useful (i.e. a dashboard), which it sounds like you are, I believe that would be a start. 
+
+With a simple dashboard, you could include a wide range of functions, macros, buttons, etc. to show your savvy. You could include formulas and graphs that provide trend analysis and/or statistical information (i.e. account production trends). 
+
+This past year some of our executives fell in love with waterfall charts. If you aren't familiar here is Microsoft's Excel tutorial on them: http://tinyurl.com/zmopbt6  
+In my expirence if you'll be preparing data for higher level executives, you want it to be as concise and impactful as possible. 
+
+I think showing that you can not only use excel functions to extract relevant data from multiple reports, into a single concise report, but also automate that process is clutch. To me time is much more valuable than showing knowing and/or demonstrating a single function.
+
+Lastly, I would add, if the job requires user input I would definitely include data validation/drop downs lists, as well. I think being able to restrict cells, and the data that goes into them, is a really easy way to show that you're able to manage and control user inputs to reduce errors. It was incredible some of the entries I would get from the reps I support when I first started (like asking for a date in month/day/year, sometimes I would just get "no" as a response). 
+
+At any rate, good luck with the new job! Hope it goes well.
+
+
+
+
+
+
+
+
+
+[deleted]
+you can show savvy by knowing when to use something else, e. g.  MS Access or MS Power BI
+Other than what people are saying often VBA impresses people more than it ought to. I'd make use of multiple files, pulling data, a line of vba and some cookie cutter index(match()).
+Tables,structured cell references, pulling data from SQL or SharePoint, use/abuse of the name manager,index/match, custom cell functions, conditional formatting using data from cells other than the one being formatted. 
+Using Range names and savinness with index match.  Also, anyone that can do project economics - set up a project free cash flow with discounting (to obtain a project net present value (NPV)) gets points in a lot of types of jobs.
+If the job is in a finance field you can create a financial sheet (master data page) with a bunch of daily info such as stock prices increase or decrease, X year of investment at X% which would yield $X, with a bunch of paragraphs to explain everything. That would be your data sheet which you would import from a website and your third sheet could be a concatenate formula which would summarize all the info from the other pages. That would show your competence to import data from an external source, use more complex formulas, show the results and demonstrate your understanding of finances as your explanation paragraph would demonstrate those skills.
+
+    =concatenate("Thus, the amount of ", DOLLAR('R-4 & R-5-1 and R-5-2'!T42,0), " represents fairly the total approved costs incurred for the period from ", TEXT(MP!B30,"[$-409]mmmm d, yyyy;@"), " to ", TEXT(MP!B31,"[$-409]mmmm d, yyyy;@"), ".")
+  When managers see the formula from concatenate it impresses them as concatenate gets messy when your paragraph becomes 10+ lines while taking 5 different numbers, % amounts and uses dates. 
+Ask them to show what existing Excel related work the staff does and write VBA code to do them automatically.
+[deleted]
+Do a pivot table or two.  Maybe an array function if you feel comfortable demonstrating it.
+Nobody has mentioned the minverse or linest functions. Or making a few small but useful UDFs.
+You can make a functioning game on excel. That's pretty impressive.
+All kinds of great stuff here. 
+
+A little one that I've gotten a lot of positive reaction from. An if statement at the beginning of your formula to leave the cell blank if the key information it needs hasn't been entered yet. =if([key cell]="","",[whatever the rest of your formula is])
+
+Keeps everything clean, and looks like magic.
+savvy = efficiency so lot of stuffs done quickly/automatically/etc
+Hmm.
+- sumifs and countifs
+- SUBTOTAL for calculations within filtered tables
+- if(iserror
+- conditional formatting 
+- self-sorting list based on large and match fxns
+- named ranges
+
+I'd think someone was pretty legit if they could use those effectively. 
+use named ranges in formulas
+Savvy is kind of all over the place isn't it? Some jobs will demand utter mastery, but I've heard tales of others whose employers were super impressed that they knew anything at all.
+> Pivot tables
+
+I can make them.
+
+> Index Match
+
+I'm still a vlookup scrub.
+
+> shift click, ctrl click
+
+Necessary in EVE Online so I got this.
+
+> ctrl down/up arrow
+
+It was so convenient when I learned these commands to zoom across a spreadsheet.
+
+> ctrl shift I to toggle filters
+
+What? :o
+
+> f4 to turn on and off your $ anchors
+
+WHAT? :O
+
+> windows left arrow to move the window you are working with to your other screen
+
+Are you a wizard?!
+
+> etc. etc.
+
+Please, keep going!
+
+I'm in the middle of my group for excel knowledge, need to look-up a couple of these. Thanks.
+Oh INDEX(MATCH()) baby. I'm on it. vlookup is dead to me. 
+
+I'm just confused as to what a savvy project would be. Looking for ideas. 
+
+Maybe a time sheet?
+A budget?
+
+
+
+I once tried to stunt on someone at my company. He is considered the most technically skilled and one of the smarted in the company. A Stat and CS major from an Ivy. I tell him how I don't use lookup because it's limiting and prefer index match and discredit people who use vlookup. To which he responds "never been an issue. If you can think ahead at all and format your data properly than Vlookup is great"
+
+I felt dumb for trying to be smart. 
+I have heard a lot about Index match,  but how is it superior to vlookup and why should I use index match and not vlookup?. I am asking because I worked with vlookup and goofed up big time by using a column wrongly and wrote g data got shown in reports.... So your comment made me think if index match can be the answer...? 
+I once  made up a little song... "Let me show you Index Match; a whole new world - a new fantastic tool to have".  (Aladdin) It was about 11 o'clock at night and I was still at work on a tight deadline.   There was more but I forget now. 
+You'd be surprised how many people are utterly allergic to the use of VBA (because it's generally very hard to find someone to fix it when it doesn't work...).
+
+I'd claim to understand it, know when it's appropriate and leave it at that. 
+Fair, it's actually a marketing job, a big part will be Data Analysis.
+
+So as far as I can tell it could be a pretty intermediate project but I'm just unsure what the project should be. :P
+This. Know Power Pivot, Power Query, pivot tables, and some basic Dax (measures / "calculated fields"). 
+
+VLOOKUP, INDEX/MATCH, SUMIF(S), etc. are good to know, but they're of limited utility when you're analyzing millions of records of data from numerous sources/systems.
+I have power pivot in my new job. Played around with it but not sure what is the huge difference to vanilla pivot tables?
+
+Thanks for the waterfall tip. I'll dive into it today.
+I wish I did this from my last job. I had a schedule made, automated inventory, work needed on units and a few other simple stuff. I asked my old boss (who I'm close with) if I could get a copy of my old excel work. 
+
+I just never experienced a job asking me for a excel portfolio (the job is at a start up and not excel related, just must use excel often).
+I'll look up NPV. New term for me. Thanks.
+Instead of =concatenate, use "&":
+
+    ="Thus, the amount of"&DOLLAR('R-4 & R-5-1 and R-5-2'!T42,0)&" represents fairly the total approved costs incurred for the period from " ...
+
+Sometimes can be useful. 
+Oh sorry, I thought my other one was being removed because I put [unsolved] in the title! 
+I've never heard of minverse or linest functions. Something to look up and use!
+
+If you keep hitting f4 it will change where the $ is - row + column, row, column, off entirely.
+ctrl shift : and ; insert current date and time 
+General Windows commands that are super useful:  windows d gets you to your desktop (useful when you have 100 files open...whoops), windows e opens up file explorer.
+
+If you are the person I'm interviewing tomorrow, then good on you for doing your research :P
+Don't forget Alt-E-S for paste special (Alt-E-S-T for paste formats, Alt-E-S-F for formulas, etc). 
+I've created fantasy football tools inn excel before that people consider impressive.  It's really just some simple formulas, a bit of macros, and a lot of index match. If you have anything similar in your life you are interested in,  you could do something like that 
+Try to find out what the current post holder uses Excel for. I've had to blag before because I was trying to transition from crime stats to waste stats. Numbers is numbers, but try to only ask the interviewer for small leeps of imagination. 
+
+Also bang some data validation and conditional formatting in there. Chicks dig conditional formatting. 
+Honestly fuck any troglodyte still using vlookup*. Indexmatch isn't an indicator of excellence, just basic competency. 
+
+* Unless you are using vlookup for slightly faster calculation or some other weird edge case
+> and discredit people who use vlookup.
+
+It's always hard to "discredit" working solutions. If the guy *can't do it* with VLOOKUP then fire away but if his spreadsheets work you just come off like the guy who tells people they should use emacs.
+That's how you end up with several variant copies of a table when different parts of your workbook need a different index column.
+My biggest issues with vlookup is how much it can slow down spreadsheets. Sometimes, I'd rather use a loop through vba to match the data I need.
+That guy's "thinking ahead" is code for being lazy and not using index match.  
+Two main reasons:
+
+1) your data doesn't have to be organised with your search column in the left, like it does with VLOOKUP. You can search on any column and return data from any column, even one further to the left. So it's a bit more flexible.
+
+2) it's faster than VLOOKUP. This won't matter in a small spreadsheet, but if you're pulling data from a massive table with hundreds of rows and columns VLOOKUP will start to slow down the spreadsheet when it recalculates whereas INDEX/MATCH won't.
+It's worth more karma in the r/excel circlejerk.
+> but how is it superior to vlookup
+
+In practice it's not imo because it's far more difficult to audit than VLOOKUP
+
+They are going to want some analysis done then. Pivottables that drive graphs and charts.  
+
+Find a large chunk of raw data and make some meaningful graphs out of it. 
+Focus on fitting a lot of metrics into one illustration. Try finding a dummy attribution list and make a stacked bar chart of traffic sources or CTR by source. You could also show custom formulas in a pivot table to show that you can still pivot out ridiculous requests. Make sure that everything is as consistent and clean looking as possible. 
+
+Another thing that's cool in excel that not many people know about is the check box button that you can insert into a cell from developer tools. One application I have for that auto-fills a table based on which categories are checked by the check box. 
+Pivot tables, conditional formatting, index match, and create charts to represent data visually. Marketing is big on charts and pivot tables. They will care about vlookup. Knowing index match will guarantee a call back.  
+
+Oh and know some formulas by heart. If statements are good. Sum, multiply, &  concatenate. 
+Powerpivot too...
+
+- Maybe even download and try the MS Power BI Desktop (which is free)...
+
+- Definitely conditional formatting.
+
+Maybe also linking sheets into Powerpoint and/or Word to show how you can change the excel data and the images update. If you don't know how to do that, PM me.
+Knowing Power Query will help with that, it's a good tool to clean up and manipulate data before you analyze it. 
+If you're doing anything with millions of records, Excel is the wrong tool.
+PowerPivot is an interface for managing the data model in Excel. Most of the time, if you use the DM, you're also going to use PP. The data model just means that you've created relationships among tables in Excel, much like you would do in a relational database. If you do this, you can use multiple tables in your pivot tables, rather than being limited to using one table. Another big feature of the data model is it lets you interact with millions of rows (I think the limit is around 2 billion.) I think you can do this without using PowerPivot as well. But if you want to do anything advanced with your data, you have to use PowerPivot.
+[deleted]
+Or CTRL+ALT+V and then use the arrow keys to choose what you need
+Combine this with F4 (repeat last command) and you look like a formatting wizard.
+Saving this ... thanks!
+hmm, first one on this thread I never used before, thx for the tip haha
+Do you have a file I could peek at to see what it looks like?
+It's easier for other people to understand, which is a huge benefit in spreadsheets used by multiple people.  That's a big reason why I'm generally against array formulas or custom VBA functions unless absolutely necessary. Those type of things lead to spreadsheet maintenance nightmares. 
+Personally for simple lookups, I think vlookup is easier to setup and get results than index and match.  Unless you have larger data sets or array functions, I just don't see the point. 
+There's nothing that prevents you from using match in vlookup to get the column index.
+It's also how you get emails about broken spreadsheets on network drives that 50 people have access to/can edit.
+“I choose a lazy person to do a hard job. Because a lazy person will find an easy way to do it.”
+
+
+― Bill Gates
+3) the entire expression can use structured references/named columns from tables, vs vlookup needing a column number. 
+
+4) this means you can add columns or  move columns around in the lookup table without breaking the lookups. 
+
+5) For many lookups in the same row from the same table and key, you can do match in one column, then use that row number in the index formulas in many other columns. 
+I actually disagree with you, but then again, I've been using Index/Match since 2009.
+I think it's way easier. It's just:
+
+- column of stuff that contains the answer you want (foreign key)
+- primary key
+- column that contains primary key
+- match type
+My newest tool for wowing those at work is a pivot table with a couple of slicer boxes.  For some reason the slicer boxes always elicit a "cool" response
+Oh great advice! I'll DL it now.
+Best thing I ever did was learning how to use Access to do all the DB functions and then just using Excel as the reporting tool.
+I have to disagree- years ago, certainly so. However, the Power Pivot/Query combo essentially creates a mini Analysis Services cube within Excel's data model. In my experience, this setup can run circles around purpose-built tools like Tableau until you start to approach 100M records.
+>from AutoModerator sent 50 minutes ago
+
+>Hello!
+>Please do not use: [Unsolved] in your title. Per the rules of this sub, post titles should be concise and reflect the content of your post and not contain superfluous terms.
+>Please read the submission guidelines and the side-bar and feel free to repost. Thank you!
+>I am a bot, and this action was performed automatically. Please contact the moderators of this subreddit if you have any questions or concerns.
+
+I just assumed it was going to be auto deleted and to resubmit! 
+
+Could I just delete the one with UNSOLVED and keep this one?
+
+Both of these will save me a lot of time.
+
+> spreadsheets on network drives that 50 people have access to/can edit.
+
+Those spreadsheets were doomed whatever formula you use.
+I had a boss tell me that she had never seen someone work so hard to ensure they didn't have to work hard in the future.
+
+My goal is to walk in and push a button and watch the magic happen.
+6. You can do index-match-match for some vlookup/hlookup crossover. 
+[deleted]
+There is no way to create a workbook that is idiot proof.
+I tend to backup and password protect all my spreadsheets. The password is always something like, "ISwearOnMyFutureChildrens'HonorThatIWon'tDestroyThisWorkOfArt," or whatever.
+And we still have people, that print out a 12-page table, mark the working hours of every weekend, take a calculator and sum up the marked hours instead of just filtering those days in excel and mark the hours to get the sum. Some just don't want to invest an hour to learn sth. new, that could save them days of work.
+You're the best.
+Exactly, they just find better idiots to make new mistakes.
+I once saw someone pressing 1, enter, 2,enter 3, enter etc all the way to 30. Taught the dude why one corner of the selected cell looks different. Blew man's mind. 
+Run into this at my job when sales people are building a quote and matching up Vendor part#s to pricing. It causes me physical pain.
+Sometimes the small things matter. But that's also why excel is so great, even after 7 years of extensive use, there are still moments where you learn something new that blows your mind. My last one was when i read, that you can mark a formula or range and press F9 to see the result of it. Don't need it that often, but it was something that i never heard of before.
+Yep or trying to help them by giving them a well formatted sheet, only to get a call 2 days later that it's not working anymore and see the mess they created.

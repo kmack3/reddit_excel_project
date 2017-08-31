@@ -1,0 +1,37 @@
+freeze
+4kp7cl
+Having issue with Freeze Panes.
+
+I recently have been having an issue with clicking on cells while using the freeze pane feature in the view tab. Every time I attempt to click on a cell it selects one about 12 rows higher. It seems to fix the issue when I deselect freeze panes but I do not want that to be my solution to this problem. Has anyone else encountered something similar to this and knows of a easy way to correct it. I am running Excel 2016.
+
+Thank you.
+
+
+-------------
+Haha I have had that same problem many times. I have no idea what causes it or how to fix it really. I usually just deal with it until I can close excel completely and reopen and hope it fixes it.
+
+I'm not sure if I've had that exact problem recently, but a lot of the visual bugs I've been encountering I've been able to fix by simply running a macro. I have a macro that goes to the next sheet (similar to ctrl+pgup) and it magically fixes a lot of my problems. I have no clue why. Try it, might work! Who knows.
+
+    Sub GoForth()
+        MoveSheet (1)
+    End Sub
+
+    Sub GoBack()
+        MoveSheet (-1)
+    End Sub
+
+    Sub MoveSheet(iMove As Integer)
+        Dim iSheetNum As Integer
+        iSheetNum = ActiveSheet.Index
+        On Error Resume Next
+        Do
+            Err.Clear
+            iSheetNum = iSheetNum + iMove
+            If iMove > 0 Then
+                If iSheetNum > Sheets.Count Then iSheetNum = 1
+            Else
+                If iSheetNum < 1 Then iSheetNum = Sheets.Count
+            End If
+            Sheets(iSheetNum).Select
+        Loop Until Err.Number = 0
+    End Sub

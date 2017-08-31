@@ -1,0 +1,101 @@
+XML & ZIP: Explore Your Excel Workbooks File Structure
+This is great information to share. Knowing that .xlsx files are collections of XML docs has allowed me to use XSLT to translate thousands of bibliographic entries stored in an Excel file into HTML and RDF formats for document archiving and cataloging.
+Interesting read, but I don't understand what to do with this. Can you give me some practical applications/reasons for wanting go nose in the source code? 
+
+Besides, curiosity and wanting to learn of course.
+This is why you can easily bypass password protected worksheets by using [these simple steps](https://www.reddit.com/r/excel/comments/4lv3je/hi_there_i_am_trying_to_open_a_xlsx_file_which_is/d3qdoot/). It's also why it is highly recommended to not store sensitive data in Excel documents that are intended to be distributed to other people who are not meant to see this data.
+>It’s documented well (the core document has more than 5,000 PDF pages).
+
+.. so wait, which one is it? ;)
+I wrote a macro to extract and save vector graphics images of charts so that they can be easily resized in emails etc. It worked by saving a workbook as zip and extracting the file from the structure. I then found a much easier method online that got the same image from the clipboard.
+
+Edit: I can post the code if anyone is interested. One part is a generic unzip function and the other is for getting the image from the selected chart.
+It's a useful way of identifying where file size growth is coming from especially where there are lots of tabs. 
+These steps seem not to work with password protected workbooks. Our test workbooks can't be opened when they are zipped.
+That's an interesting application. What was the easier method in the end?
+This only applies to password protected worksheets, as they are the most common means of protection people tend to use with Excel. This is not applicable for encrypted documents.
+Most likely the whole zip is encrypted like a normal password protected zip file. You would need to rename to zip and brute force to decrypt. There are utilities that can do that, but it takes time and/or computing power. 
+This is the easier method (found online and customized by me). Drop it in its own module and run it with a shortcut or something. There is a bug with the PtrSafe delcarations on 64bit office in some versions.
+
+    Private Declare PtrSafe Function OpenClipboard Lib "user32" (ByVal hwnd As Long) As Long
+    Private Declare PtrSafe Function CloseClipboard Lib "user32" () As Long
+    Private Declare PtrSafe Function GetClipboardData Lib "user32" (ByVal wFormat As Long) As Long
+    Private Declare PtrSafe Function EmptyClipboard Lib "user32" () As Long
+    
+    Private Declare PtrSafe Function CopyEnhMetaFileA Lib "gdi32" (ByVal hENHSrc As Long, ByVal lpszFile As String) As Long
+    Private Declare PtrSafe Function DeleteEnhMetaFile Lib "gdi32" (ByVal hemf As Long) As Long
+
+    Public Function fnSaveAsEMF(strFileName As String) As Boolean
+        Const CF_ENHMETAFILE As Long = 14   ' ID for EMF format
+        Dim ReturnValue As Long
+    
+        OpenClipboard 0
+        
+        ReturnValue = CopyEnhMetaFileA(GetClipboardData(CF_ENHMETAFILE), strFileName)
+    
+        EmptyClipboard
+        CloseClipboard
+        DeleteEnhMetaFile ReturnValue
+    
+        fnSaveAsEMF = (ReturnValue <> 0)
+    End Function
+    
+    Public Sub ExportSelectedChartEMF()
+        Dim wb As Workbook
+        Dim objChart As ChartObject
+        Dim sPath As String, sName As String
+        
+        On Error Resume Next
+        
+        Set wb = ActiveWorkbook
+    
+        ' Check if workbook has been saved
+        If FileIO.IsNeverSaved(wb) Then
+            MsgBox "Workbook has not been saved.", vbCritical, "Error"
+            Exit Sub
+        End If
+        
+        ' Check if there are even any embedded charts on the activesheet
+        Set objChart = ActiveSheet.ChartObjects(1)
+        If objChart Is Nothing Then
+            MsgBox "No charts have been detected on this sheet.", vbCritical, "Error"
+            Exit Sub
+        End If
+         
+        ' Check if there is a single chart selected
+        If ActiveChart Is Nothing Then
+            MsgBox "You must select a single chart for exporting.", vbCritical, "Error"
+            Exit Sub
+        End If
+        
+    Try_Again:
+        sName = Application.InputBox("Please specify a name for the exported chart." & vbCr & _
+            "The chart will be saved in the same folder as this workbook.", "Chart Export", "")
+         
+        ' User presses "OK" without entering a name
+        If sName = Empty Then
+            MsgBox "You have not entered a name for this chart.", vbCritical, "Error"
+            GoTo Try_Again
+        End If
+         
+        ' Check for valid filename
+        If FileIO.ValidFileName(sName) = False Then
+            MsgBox "The file name cannot contain /\:*?""<>.", vbCritical, "Error"
+            GoTo Try_Again
+        End If
+         
+        ' Check for Cancel button
+        If sName = "False" Then
+            Exit Sub
+        End If
+        
+        sPath = wb.path & Application.PathSeparator
+        ActiveChart.ChartArea.Copy
+        
+        If fnSaveAsEMF(sPath & sName & ".emf") Then
+            MsgBox "Chart Saved!" & vbCr & vbCr & sPath & sName & ".emf", vbInformation
+        Else
+            MsgBox "Chart not saved!", vbCritical, "Error"
+        End If
+    End Sub
+

@@ -1,0 +1,83 @@
+6g0p7k
+Show value of cell next to date, when date is between two dates
+Hi
+
+I have a long list (600 rows) of dates with a corresponding text next to it. 
+
+I want to be able to input two dates, and have shown the text and date for every date between those. 
+
+I think i need to use some sort of array formula, but I'm not sure how (the exact formula, not array as a whole)
+
+
+-------------
+Let's say that your start/end points are entered in C1 and D1. 
+
+In some cell, put this formula:
+
+    =IFERROR(INDEX(A:A, SMALL(IF(($A$1:$A$600>=$C$1)*($A$1:$A$600<=$D$1), 
+     ROW($A$1:$A$600)), ROWS($A$1:$A1))), "")
+
+Confirm as an array using **Ctrl+Shift+Enter**, then copy formula down as far as would ever be needed, and to the right one column.
+-------------
+So, lets simplify this. Lets assume you have dates in A1 and Text in B1
+
+In D1 put your startdate, and in E1 put your enddate
+
+in C1, put the formula 
+
+     =IF(AND(A1>D1,A1<E1),"Between","NotBetween"
+
+Pull that formula down. Now, insert a pivot table, (you can put it on the same sheet if you want), put the text in the rows and the Between/NotBetween in the filter. Just select 'between'.
+
+Now you can change the dates and update the pivot table.
+
+
+-------------
+This is very much like what I have been trying, but I can't get it to work.
+
+My dates are in F10:F610, and I have some data above it. Would that make a difference?
+-------------
+Pivot table is unfortunately of the table, but thanks
+-------------
+Assuming raw data then is in F10:G610
+
+    =IFERROR(INDEX(F:F, SMALL(IF(($F$10:$F$610>=$C$1)*($F$10:$F$610<=$D$1), 
+     ROW($F$10:$F$610)), ROWS($A$1:$A1))), "")
+
+Again, I'm guessing that your control cells for the start/end point are in C1 and D1 respectively.
+-------------
+Solution verified
+-------------
+Thanks for the gold! :)
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+You deserved it, it saved me a lot of frustration
+
+And now that I have you. Is there any way to sort the results?
+
+I now have two columns, one with a date, another with some text. I need that text sorted by the date. There are duplicate dates, so I can't use a simple index/match. 
+-------------
+Assumign you want to to this using a formula, we will need a helper column (I'll say it's col M). If dates are in col F, helper formula is
+
+    =F2+ROW()/10000
+
+This will add a miniscule decimal to each date, and allow all dates to be unique. Then, in N2 you can do:
+
+    =SMALL($M$2:$M$100, ROW(A1))
+
+Copy down to get a list of all the dates, sorted. Then, to retrive the text:
+
+    =INDEX($G$2:$G$100, MATCH(N2, M$2:M$100, 0))
+-------------
+Solution verified!
+
+Thanks a bunch, I can go on weekend now. :D
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

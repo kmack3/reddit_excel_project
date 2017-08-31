@@ -1,0 +1,38 @@
+Problem using Index-Match in an Array Formula
+Without taking the time to break apart and understand your entire formula, it seems to me that if your formula is returning values one row too low (in both the upper bound and lower bound cases), it you might just need to subtract one from the row reference on the 2nd criteria of the INDEX function, like so:
+
+     =IFERROR(INDEX(Players[pName],SMALL(IF((Players[Value]>$M$20)*(Players[Value]<$M$19),ROW(Players[Value]))-1, ROW(1:1))),"")
+
+the INDEX function works based on the row-index you give it. 
+
+So if you do
+
+    =INDEX(B2:C3,1,1)
+
+it will give you B2. it's the first row of the first column, in the range you are indexing. 
+
+the ROW() formula returns the absolute row number in the worksheet. So if you have a header column, the first value in your list will be at row 2. 
+
+     =INDEX(B2:C3,MIN(ROW(B2:C3)),1)
+     =INDEX(B2:C3,MIN({2,2;3,3}),1)
+     =INDEX(B2:C3,2,1)
+     =B3
+
+So you have to subtract however many rows you have above the data in your ROW() formula, from the values it returns, in order to get the correct index value. 
+
+I think this might be what is causing your issue. 
+How are you determining/calculating player values?
+Huh, that's awesome! I was trying to do -1 on the column reference and missed the fact that it was the row that was the problem...Thank you! 
+
+solution verified
+Thank you so much - was very stumped. 
+solution verified
+Scraping dynastyfftools.com/players manually (i.e copy-paste). Haven't figured out how to query it yet.
+
+You have awarded one point to _mac-0_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

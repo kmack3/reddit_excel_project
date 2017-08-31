@@ -1,0 +1,18 @@
+6fw8yt
+Trying to match "column a and column d" from spreadsheet A with "column h and column k" from spreadsheet B then populating all fields from match and merging into one spreadsheet.
+A little bit of context. I have two different spreadsheets. Both which contain the same information however one has more data's of column than the other. As such, I am looking to "match" the respective columns with identical values and then populating and merging all data onto a single spreadsheet. 
+
+
+-------------
+First you should move the sheet from Spreadsheet B into Spreadsheet A.   
+
+[This](https://www.deskbright.com/excel/index-match-multiple-criteria/) may guide you -- it's an INDEX/MATCH solution based on two columns. [Here's](http://www.excel-easy.com/examples/two-column-lookup.html) a second source describing the same approach. A perhaps simpler way (avoiding array formulas) is to make a "helper column" that combines A&D into a single cell, then H&K into a single cell. Then a simple INDEX/MATCH or VLOOKUP can be used to pull in all the data.
+-------------
+I think the problem I described may not be resolved with the solution you've pointed me towards(but I certainly appreciate the help!). There are duplicates found in column a and column h which need to be matched. 
+
+I've merged the 2 spreadsheets together and am now looking to match each respective value to one another. i.e. Work Order #999 in column a to match with Work Order #999 in Column h, Work Order #998 in column a to match with Work Order #998 in Column h, etc...
+ 
+-------------
+What's in columns D and K?
+
+If you're just matching numbers in Col A to numbers in Col H, it is just an INDEX/MATCH or VLOOKUP, i.e. `=Index(ValueColToReturn,MATCH(A1,Sheet2!H:H,0))`. However if #999 is in Col H multiple times, it's only going to match with the first one it finds.

@@ -1,0 +1,112 @@
+I often use F4 to toggle the $ in a formula. Is there any way to select multiple cells and toggle the $ for all of them?
+I'm sorry you haven't gotten an answer yet, but holy crap this is awesome.  The feature I never knew I needed.  
+Best bet would be to go with a macro - here's the code I use (4 functions in a class module, called from a user form for ease of use. can be written as 4 different subs, shouldn't matter)
+
+> Public Function RelCells()
+>
+>For Each rngSelected In Selection
+>
+>   If rngSelected.HasFormula = True Then
+>
+>        rngSelected.Formula = Application.ConvertFormula(rngSelected.Formula, xlA1, xlA1, xlRelative)
+>
+>        End If
+>
+>    Next
+>
+>Set rngSelected = Nothing
+>
+>End Function
+>
+>Public Function AbsCells()
+>
+>For Each rngSelected In Selection
+>
+>    If rngSelected.HasFormula = True Then
+>
+>        rngSelected.Formula = Application.ConvertFormula(rngSelected.Formula, xlA1, xlA1, xlAbsolute)
+>
+>        End If
+>
+>    Next
+>
+>Set rngSelected = Nothing
+>
+>End Function
+>
+>Public Function AbsColumns()
+>
+>
+>For Each rngSelected In Selection
+>
+>    If rngSelected.HasFormula = True Then
+>
+>        rngSelected.Formula = Application.ConvertFormula(rngSelected.Formula, xlA1, xlA1, xlRelRowAbsColumn)
+>
+>        End If
+>
+>    Next
+>
+>Set rngSelected = Nothing
+>
+>End Function
+>
+>Public Function AbsRows()
+>
+>For Each rngSelected In Selection
+>
+>   If rngSelected.HasFormula = True Then
+>
+>       rngSelected.Formula = Application.ConvertFormula(rngSelected.Formula, xlA1, xlA1, xlAbsRowRelColumn)
+>
+>        End If
+>
+>    Next
+>
+>Set rngSelected = Nothing
+>
+>End Function
+
+Hey Microsoft!  Are you reading this?   It is a great idea.
+I didn't know this was a feature, and it's really fascinating! But now I've got a couple of questions for you: How would this feature know which state you want the address to be anchored in if there are four different anchor states?
+
+1. `A1`
+2. `$A1`
+3. `A$1`
+4. `$A$1`
+
+In addition to that, how would it know which cell address to target if there are multiple cell addresses? Right now this works for a single cell by requiring you to set the cursor next to or within a valid cell address. But then it also toggles through the four address states as shown above. So would something that does this for multiple cells change *all* the cell addresses to the same state as each other?
+If the cells all have the same formula, can't you just do the toggle in the first formula and then copy and paste it over all the other formulas? e.g. if A2's formula is "= A1 + 5", and B2's is "=B1 + 5." If you change A2 to "=$A1 + 5" and copy and paste that down, B2 will update to "=$B2 + 5."
+You could do a find and replace on then. Find F4 replace with $F$4
+Usually that is rarely needed since the reason for using absolute references most is fix one cell, copy it to other rows/columns.
+Haha I'm so glad! 
+ps not included in these snippets but I'd highly reccomend adding
+
+> Application.Calculation = xlCalculationManual
+
+at the start of the sub and
+
+> Application.Calculation = xlCalculationAutomatic
+
+at the end of the sub, or else with large ranges with lots of cell references, excel will try to recalc the wb every time it changes a formula for you.  also worth noting this will change ALL the cell references in your formula, so its functionality is limited if trying to lock different references within the same formula
+You can keep pressing F4 to cycle through all combos.
+No not quite. The data is organized by rows in the data sheet but I need to switch it to by column on the new tab. 
+Unfortunately that's not a fix-all. The link formulas are all different so it would be extremely tedious to find and replace each one 
+Or find A1 replace with $A$1. Only highlight the cells you want it applied to
+Thanks!!!!!!!
+I'm betting you just taught loads of us this trick for the first time, myself included. Is there a way to give you points for this?
+Well I knew F4 but I didn't know you could cycle through... Awesome 😀
+Yes, but if they wish to perform this action on multiple cell values, that may or may not have the same amount of cell addresses means you will not have a consistent application of these anchor formats.
+
+The simplest method would be to convert every single cell address using the same formatting, which if this is the case, I can definitely make a macro to perform said actions. If this is not the case, then I'm not sure the reward is worth the extra work of needing to iterate through each cell address to change the format type it requires.
+Would it work to do a find / replace on the formula? change all "=" to "#=".
+
+Ex.  =A22+B22  changed to #=A22+B22.
+
+Then, the cells are text, not formulas. You can copy and paste/transpose then change all "#=" to "=".
+
+
+Is there no syntax that you can use to find and replace in parts?  Using parentheses and colons I can usually find at least parts of the formulas that I need and do multiple f+r.
+F4 doesn't work when you select multiple cells :) that was the purpose of my post. I was asking if there was a workaround. 
+Darn. Sounds like macro is the way to go 
+Sooo, are you trying to apply the same formatting to all cell addresses within a cell's formula?

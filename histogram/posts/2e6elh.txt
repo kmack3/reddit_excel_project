@@ -1,0 +1,51 @@
+I'm looking to have a blank World Map on MS Excel so that I can fill in each country I have been to with a colour, and the countries on my list to go to with a different colour. Is this possible? If so, anyone know how?
+Here's a link to a file with each country as a shape, I think it should give just what you need: [http://www.clearlyandsimply.com/clearly_and_simply/2009/06/choropleth-maps-with-excel.html](http://www.clearlyandsimply.com/clearly_and_simply/2009/06/choropleth-maps-with-excel.html)
+May I ask why you'd like to use Excel for this? I think it would be simpler to just download Inkscape or another vector graphics package and edit [this map](https://upload.wikimedia.org/wikipedia/commons/8/8c/BlankMap-World-Microstates.svg).
+Call me crazy, but I think you could do this in something like Paint or a photo editing software better than Excel.
+
+My only thought with Excel would be to somehow screw with your data so that you could use [Power Map](http://office.microsoft.com/en-us/excel-help/get-started-with-power-map-HA104091224.aspx?CTT=5&origin=HA104204034) to highlight certain countries if it has a 1 next to it in the data a certain color and highlight certain countries if it has a 2 next to it in the data, each corresponding with either a country you've been to or want to go to.
+
+Let me know if this works, I'm kinda interested to see how it turns out.
+
+Note: Power Map requires Excel 2013.
+As long as you aren't planning to post the map to /r/MapPorn . . . :-P
+USE QGIS and you'll be able to do this with a native excel sheet far easier than dinking around in excel.
+That's absolutely perfect! Thank you!
+That is a nice resource. Thanks.
+QGIS even easier
+Not at all, I want to print it out to go in my room as a little reminder of why I work - to pay my travel :D
+Hi!
+
+It looks like you received an answer to your question!  Since the top is still marked as unsolved, I am here to assist you!
+
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?
+
+[Help Changing Your Flair?](http://www.reddit.com/r/excel/wiki/index)
+
+[Flair Descriptions](http://www.reddit.com/r/excel/wiki/index)
+
+
+Also, if you're trying to avoid using shapes, this blog post may be helpful.  The author uses lat/long data to create map in cells rather than shapes.  The map may look a bit wonky, but might be easier to update/change/toggle things; a lot of the commenters seem to be proposing fixes to some of the method's shortcomings.  For what it's worth.  Best of luck!
+
+http://uxblog.idvsolutions.com/2012/12/excel-hack-map.html
+No problem!  I actually had a coworker who drew each border by hand at one point, but that's way too much work for me...
+eh, I think going full-blown GIS is overkill. Definitely much more versatile.
+Wat
+
+Go home Clippy, you're drunk.
+How the heck did it even trigger on that?
+Interesting... so let me explain why it responded to his 2nd post.
+
+Clippy first checks the comments, since his "first" response was:
+
+> That's absolutely perfect! Thank you!
+
+Clippy said "HEY! TwoFingersInCider needs to mark this as solved."  Once that process started the user made another comment:
+
+> Not at all, I want to print it out to go in my room as a little reminder of why I work - to pay my travel :D
+
+So Clippy being all Clippy like was like wait, now I don't know which comment was the OP's comment that said thanks, so he said "oh well I will just reply to the most recent comment" or the newest comment by the OP... 
+
+hence the crazy post... not sure how to fix that one... 

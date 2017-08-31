@@ -1,0 +1,20 @@
+I made a spreadsheet to track my house's expenses
+If you're doing this for fun, then you're almost there! If this is just an attempt to keep things straight, you should check out Splitwise.com. 
+
+On your last question, once you've entered a formula and hit enter, you can select that cell again, hit copy and then hold shift and click the last cell in the range you want and hit paste. 
+Wegmans!!
+Get your shit together Jim
+To you question about having a formula "go on forever" you might try it in a range as, for example, sum(c100:c), where it would sum every item in column c after line 99.
+TransactionID | Date | HouseMate | Vendor | Amount
+
+Those are all the headers you need.
+
+You can pivot the data to see who is spending what, the most.
+
+Although, you need to make sure you protect that data like your life depends on it.
+I have not looked through the logic of the sheet yet, but if I understand your question about making the formula 'go on forever' you can take a look at formatting as a table.  Then each time you add a row your formulas will be applied. 
+I can see what you are going for here,  but It may be more beneficial to have another sheet for each individuals information.   You can do this in Google sheets and allow access for all to use it.   If others are able to assist,  it will make things easier for you anyways. 
+Splitwise is great. Used it for 2 years in a house of 3 guys during college and it made tracking/splitting expenses a breeze. 
+I think he wants a formula in each cell, not a formula that sums the cells.
+Thanks!
+Yes, just having a formula repeat in all cells in Column after C:5, for example

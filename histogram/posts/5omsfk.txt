@@ -1,0 +1,64 @@
+Best way to convert PDF of excel files back to excel files?
+Try tabula.  Runs locally, no uploading to random websites.  Works pretty well, once you get the hang of it.
+
+I usually just tell people that if they want me to work on it, I need the original file, or they need to retype it.  I got more important shit to do than data entry.. :)
+Try [PDF to Excel](http://www.pdftoexcel.org/). They have a free service to do OCR and it works fine for my purposes.
+There are different online tools for converting pdf spreadsheets to excel
+for example: [1](http://pdftoxls.com/) 
+The other way is as follows:
+
+In the nutshell, the conversion involves exporting the data first into a Word document first, and then copying it to an Excel workbook. The detailed steps follow below.
+
+1. Copy the source table from a PDF file.
+Open the PDF file in Adobe Reader, or any other PDF viewer, select the table you want to convert to Excel and press Ctrl + C to copy it to the clipboard.
+
+(http://imgur.com/a/XrLLV)
+
+
+2. Paste the table into a Word document.
+Open a new Word document and paste the copied data by pressing Ctrl + V. You will get something similar to this:
+
+(http://imgur.com/a/Sbmxl)
+
+3. Convert the copied data into a table (optional).
+If your PDF data was pasted into a Word document as a properly structured table, like you see in the screenshot above, skip this step.
+
+If the data was inserted into Word as text rather than a table, you can convert it to a table in one of the following ways:
+
+Fast way. Press Ctrl + A to select all the data, switch to the Insert tab and click Table > Inset table...
+Convert the copied data into a table.This should convert the pasted data into a poorly formatted but correctly structured Word table.
+
+(http://imgur.com/a/d5hiD)
+
+Longer way. If the fast way did not produce the expected result, select all the data and click Insert > Table >Convert Text to Table… The dialogue box will appear, and you select Other under Separate Text at, click in the little box next to it, delete what is there, type in a space, and press OK.
+
+(http://imgur.com/a/0uxok)
+
+4. Copy the table from Word to Excel.
+In the Microsoft Word document, select all the data (Ctrl + A), open a new Excel sheet, select any cell (this will be the left-most cell of the table) and press Ctrl + V to paste in the data copied from Word.
+
+5. Format and edit the Excel table.
+If you are converting a small and simple table, this step may not be necessary. However, from my experience, it's a very rare case when the data exported from PDF to Excel manually does not require any further manipulation. Most often, you would need to do some adjustments to restore the original table's layout and format. For example, you may need to delete some blank rows or add / remove individual cells to ensure the columns are correctly aligned.
+
+Advantages: The main "Pro" of this approach is that no special tools are required, only a PDF viewer, Microsoft Word and Excel.
+
+[Source](https://www.ablebits.com/office-addins-blog/2014/10/22/convert-pdf-excel/)
+I  only know a roundabout way of pdf>html>csv using jquery but it depends on if you can select the pdf text or not
+Adobe acrobat can export directly from PDF to Excel. Works great.
+From my experience over the past 10+ years of working, Adobe Acrobat (paid version) converts the best. The best free options I have tried don't work well at all. Word 2016 does a decent job, but can't always do tables of data correct. The best OCR results I've seen has come from a commercial Fuji scanner that creates PDFs with searchable text.
+Very long time ago I used a program called ABBY FINE READER. Since it was paid software, you dont upload your data to unknown websites. I dont know if a better program wasnt created recently.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+Communicate with the people that are sending you these scanned PDFs. Tell them the file is useless and to send the original Excel file. They filled out the data in a spreadsheet program it has to be available somewhere. There is always the risk of any of these conversion programs misreading digits, there is also the same risk of someone manually retyping everything. A work around is not a solution to something that should not be difficult.  Most of the time I have no issues getting original files after the situation is explained. 

@@ -1,0 +1,21 @@
+Need some help with VBA (used a code from the internet and trying to change to outcome of saving to .pdf to .xlsm.
+Replace lines 37 - 43 with:
+
+    wsA.SaveAs myFile
+
+Exporting as PDF is not the same as saving as XLSM - they are separate actions and not just renameable.
+It worked! thanks again! Also while weare are on the topic whats the difference between exit sub and end sub? 
+SOLUTION VERIFIED!
+Exit Sub means "quit here, don't run the rest" therefore, you can have code after the Exit Sub and it won't run it if you hit the Exit Sub (you can execute it/avoid it with an if statement)
+
+End Sub means "this is the end of the code" and anything after "End Sub" is not a part of that which came before it.
+
+Exit Sub is like a "Go to the end" and End Sub is the bottom of the container.
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+owkee thanks for the explaination! I googled it a bit but couldn't really find a clear explaination. also where did you learn VBA? since the more I learn it the more fun it gets :P
+It's all in the sidebar :D
+
+We collated alot of our best resources.

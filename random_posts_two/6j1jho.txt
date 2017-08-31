@@ -1,0 +1,19 @@
+6j1jho
+Time card template is not calculating the correct total hours worked
+My time card template I made is not calculating the correct hours worked. This is the formula I am using and there is a picture below of what it looks like, any help is very much appreciated
+
+    =SUMPRODUCT(Q10:Q15-O10:O15-P10:P15/(24*60))
+
+http://imgur.com/Xtr0BXe
+
+
+-------------
+=SUMPRODUCT((Q10:Q15-O10:O15)*24-(P10:P15)/60)
+
+That should give you the correct answer, test it out and let me know! Not sure why yours doesn't work, this is one of my first times looking at SUMPRODUCT and I still don't fully understand how it works.
+-------------
+You should be getting 41 hours. That is what I get using your formula. To get the total hours worked, format the cell with the formula as a custom format like this:  [hh]
+-------------
+I know what I should be getting and yes it is formatted as [hh]:mm. I am not sure why it is not calculating correctly. 
+-------------
+For the purpose of testing, add an extra column at the end and calculate each day and you might find a problem. Check the data and formatting of all the cells.

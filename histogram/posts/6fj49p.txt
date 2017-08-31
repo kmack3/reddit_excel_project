@@ -1,0 +1,6 @@
+Adding values from JSON API Call
+I found a crude fix, but I believe it's the only thing that would work.
+
+=value()
+
+Used this to convert the string value to a numerical value. Everything started working with =sum after that.

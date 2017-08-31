@@ -1,0 +1,100 @@
+Convert PDF to Excel without formatting loss
+If you have Pro and save as xlsx, it will kinda get you there, but more often than not the formatting is totally fucked.
+
+One work around is to hold ALT when you select data from the PDF.  This will let you select data in columns, and once you get the hang of it, you can probably strip all of the data out of the PDF fairly efficiently this way.  It will still be kind of annoying, but its better than selecting each individual number one by one.
+It might be impossible unless you have Adobe Professional:
+
+http://www.myengineeringworld.net/2012/07/vba-macro-to-open-pdf-file.html
+I use Able2Extract. It's awesome. Let's you line up and edit the columns as you see fit. 
+I used to do this kind of stuff all the time.  It depends on the formatting of your pdf, but I can't recall what the differences were.  We used to use Monarch Pro 11 to do conversions and it would work for some files and not others.  That won't likely help you much since Monarch is insanely expensive.
+
+There's another similar data extraction program called [Report Miner by Aster](http://www.astera.com/reportminer-data-extraction-software) that we started to use a bit.  I know there's at least a free trial on it.  
+
+Good luck!
+We couldn't figure it out, so we use a program called Able2Extract.
+
+If you folks can find a native way to do it, more power to you!
+I posted this awhile back to help someone else, but look into Nuance PDF converter. I work in public accounting and it is my teams go to. It can be a little sensitive, you may have to work on enhancing the document if it is scanned in, but it will get you 90% of where you need to be most times.
+There are plenty of free add-on to make PDF's. Have you try some of those?
+If the data in PDF is in a table you might be able to use apache's pdfbox with some c#/vb to convert the PDF into an excel sheet. I use pdfbox to read a PDF table and stuff it into an XML file for word automation. I say might because there are different sub types of pdfs that can cause some issues. 
+
+Edit for Link  http://pdfbox.apache.org/
+[deleted]
+https://online2pdf.com/pdf2excel
+If you select the mouse/pointer icon in the toolbar (instead of the hand), you can highlight the content of the pdf.  Right click on the highlighted data and click "Export Selection As", a window will open asking where you want to save the file.  Before you save it, change the dropdown menu to xlsx (or whichever excel variant you want) and it should maintain all of the original formatting in a fresh excel file for you.
+Have you tried to highlight your pdf right click > Copy with format?
+
+
+There are programs such as Able2Extract that I've found to be better than Acrobat Pro, but I don't think anything will keep formatting. That is, if you're referring to more than just getting the text in the correct cell.
+
+Is there a way to drag the column to the next page? This seems really good if your PDF table just spand a couple of pages, but what if it's massive?
+Thanks! I'll check it out
+
+Or Nitro Pro.
+Impossible is a very unfortunate response. My vba knowledge is very limited as I am only familiar with the basics when using it with Excel. I was just trying to read into using it for Outlook, but have not touched PDFs.
+
+Thanks
+
+Thanks for the feedback!
+
+Solution Verified
+Thanks! I'll look into this. Trials are cool :p
+Thanks, i'll see if this will work. Many people have recommended Able2Extract and i plan on signing up for the trial to see how it works.
+I actually am trying to do the opposite. I have PDF exports from a work station that I want to use in an Excel file. Every time I convert or copy/paste, everything drops in to one column.
+Thanks for the feedback. Check this out. I could save a ton of time if I can manage to make this happen!
+Unfortunately i don't have 2013 on my work pc. And it doesnt work on 2007 haha. Thanks though.
+What version of Adobe Reader/acrobat are you using? I don't have this option
+I understand. Just trying to get values in the correct cells. That's what I meant by correct formatting. I can filter and pull values after they are moved into a spreadsheet.
+Unfortunately not that I have found.  It always screws up in transitioning between pages.
+Well, if you have Office 2013/365, Word is able to open them preserving the table, you can then try to convert it to Excel, I actually forgot about it, but you might have to test it yourself, as I don't have access to 2013/365 at this moment.
+No problem! Glad it's working out for you!
+
+You have awarded one point to _ColinScatt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Ok...
+
+Are these scanned PDF's or PDFs created from actual data?
+
+What you are trying to do is "hard" to do. If you had Acrobat, you can save it to excel but you will still need to do some manipulation. 
+
+If you are using scanned PDF's, you are better off copying and pasting the data from excel manually.  
+Then Able2Extract is a pretty good option if you're willing to pay for it. 
+I'll look into this! I only have 2007 on my work station...
+
+Thank you.
+Just need to produce an ROI to justify spending $99.
+
+The $99 is a one time buy right?
+The PDFs are exported from a website so they're automatically generated. :p guess there's never a perfect solution for anything, but we're always about innovation and improvements right?haha
+Thanks! I'll have to check it out when I find time at work.. Maybe I can get it on company dollar If i can use it often enough.
+Won't work on 2007 I'm afraid :/
+So sorry no idea why I'm just seeing this in my inbox! Yes it's one time! 
+OK, Can you export the data as text file?
+You can then write a macro to export the text file to excel
+That's how I got it! 
+Able2Extract is popular and very good - If you're willing to pay (but not as much as $99) then pdftables.com is one I recommend.
+You DaneelR Downer!
+
+Thanks! They call it a subscription so just wanted to clarify!
+
+Just purchased QuickBooks for work too and they call their one time buy a subscription as well.
+Could it be possible to get a link to the website?
+Absolutely Terrible ahaha
+Weird. Very confusing lingo. I definitely paid once and never since. Hopefully it hasn't changed. I did buy it probably two years ago.
+Its a company website, I wouldn't be able to link it. The vendor we use for this only exports in pdf on some of their reports. This is one of them. Hahah.
+If you can access the data via the website, it's possible for excel to exctact the data directly from the website, bypassing the need for PDFs altogether.
+
+Let me know if it's an option, I can provide you with VBA functions that will connect to the opened IE (or open one with URL you provide for you), then navigate their way and export the data you need into excel.
+
+You'll need to do some work of identifying required HTML tags, but if you're desperate to get the data, you'll find the required motivation :)
+Hmm possibly! 
+
+I have two ways to get the report. I can manually export a ton of them into excel, however i cannot perform a max export. I did recently discover a way to mass export what I want, however it was in pdf only.
+
+So my situation is take my time exporting which is pretty tedious, or do a one time conversion with the pdf. I want to see which is quicker. 
+
+Thanks!
+But can you, at any point, see all the data on the screen? (or at least some of the data with an ability to go to the next/previous page).
+
+If so, you can do it via VBA.

@@ -1,0 +1,14 @@
+6fx7mv
+How to combine the contents of cells in column "P" if there are duplicate cells in column "C"
+hello, I need to merge data in column P if the data in column C has a duplicate value within the column.  Currently, I've sorted column C for duplicates and there are over 2,500 rows of duplicates, ranging from 2-3 duplicate rows up to 10-15+.
+
+Does anyone have a formula that can accomplish what I'm looking for? Thanks!
+
+
+
+-------------
+Assuming your first row of data is row 2, this goes in P2:
+
+    =IF(COUNTIF(C:C,C2)>1,[merged bit],"")
+
+Replacing [merged bit] with what you actually want in there. Then just drag down the formula to the rest of column P.

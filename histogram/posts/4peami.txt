@@ -1,0 +1,78 @@
+What are the advantages of Vlookup over Index and Match?
+If you're used to using the "Insert Function" button when creating formula in Excel, VLOOKUP is better, because the wizard will guide you through it, whereas using the MATCH within INDEX isn't really supported.
+
+Other than that, INDEX/MATCH is more flexible, faster, and all-around better, though takes a little longer to get your head around.
+
+I almost never use VLOOKUP any more, I'm so used to INDEX/MATCH that I always use it (except for very rare instances that I actually use a `1` for the [range_lookup])
+I always used index match. It's more flexible and your data set does not have to be setup in a specific way. The only advantage of vlookup is that you can do multiple look ups easier if you're doing multiple columns.
+Vlookup is equivalent to the combination of index plus a match on the vertical, so it's two functions in one. You can still run a match on the horizontal to pick the correct column. If you have to share your spreadsheet with co-workers, I would not expect them to be capable of using index. So if you don't want to fix every little problem for them ...
+There is one situation where vlookup is 100% better and no one is mentioning it. Let's say in column A we have the low end of a range (let's pretend it's a college grading scale) 90. In column B we have the high end of the range 100. In column C you have the letter grade it represents an A. If someone was to score a 92 vlookup considers that, that is between 90-100 and will return you A. It's so insanely useful, I don't know that you can do this with a simple index match without adding more formulas to it
+Using INDEX(MATCH()) also allows you to better utilise the TABLE dimensions...
+
+    =INDEX(BRANCHES[BranchName],MATCH(BranchDetailID,BRANCHES[BranchID],0))
+
+For anyone interested, there's a lengthy discussion on the Excel User Voice site on a suggestion for a replacement vlookup / index match function
+[HERE](https://excel.uservoice.com/forums/304921-excel-for-windows-desktop-application/suggestions/14049132-make-a-simple-safer-version-of-vlookup-and-index-m)
+In general, vlookup is easier to use, but if you need look up "backwards", index and match is the usual go to, although it's not as good with large data sets.  Instead of index and match, you can also use indirect and match. You define the letter of the column you want to return as a result, and then define the row number using the match formula. It seems to work pretty well for bigger data sets. Example:  =INDIRECT("A"& MATCH(M12,D:D,0)).
+I've never run into an instance that index/match couldn't do what vlookup does. I generally use vlookup because it's what I learned first and can do it practically in my sleep, and it's also easier to teach to others... So basically it boils down to laziness, I only use index/match when vlookup doesn't quite do what I need.
+I generally do not like VLOOKUP.  However, instead of using INDEX/MATCH I prefer using OFFSET/MATCH since my OFFSET can be dynamic.  What are your thoughts on this?
+In my experience, vlookup works better when there's a significantly large amount of data and you want to sort. Sort with index match and your data reference looses it's fidelity. Also, you can use match with vlookup in ways that you can't use with index. Google using match with vlookup and you'll see what I mean. I use it all the time ever since I learned it. Im too lazy to explain it. 😊
+I actually realized recently that you can use index/match for the 1-in-the-range-lookup instances as well, by setting the [match_type] to be -1,0, or 1.
+This is the main benefit of vlookup imo
+This is the only advantage that I can think of, too.  Many users are familiar with =VLOOKUP() and relatively few are familiar with =INDEX(MATCH()).  Coworkers will probably not understand the mechanics of what you've done.
+
+Personally, I use =INDEX(MATCH()) 100% of the time.
+That's the example I gave in my answer of when I still use VLOOKUP
+I question if this is faster than just specifying the column in an index function. Ill have to try it but it would be the same calculation essentially.
+1. Offset is a volatile function which is generally a negative except for edge cases  
+2. What do you mean that offset can be dynamic?  
+  
+
+> Also, you can use match with vlookup in ways that you can't use with index.
+
+That's just not true mate...  
+  
+Show me anything with VLOOKUP and I will replicate it with INDEX...
+I sort with Index/Match with no issues.  Not sure what you're referring to.
+This solves the sorting problem when used in the row-selecting match.
+
+    INDIRECT(ADDRESS(ROW(),COLUMN(A1)))
+Yeah, you can, so there's no scenario where VLOOKUP works, and INDEX/MATCH doesn't, but I still use VLOOKUP for it :)
+I usually use vlookup(item,inRows,match(onColumn),false) or hlookup(item,inColumns,match(onRow),false)
+Yea I just wrote a tutorial for index and share it. Or give them an online tutorial. They need to learn, it isn't going away anytime soon and im the one that always ends up doing it for them anyways.
+I see you answer, I might have just misunderstood what you meant. Someone further down says you can still use index match in this situation though. I am going to test it tomorrow
+Vlookup, and rather then putting in a number for the column to pull in I put in a match function to sync up with column headers. This makes it so I can drag the formula across and it populates everything based on the column header titles. Its fast, easy and accurate. 
+But sometimes that becomes more time consuming to make an entire formula with index than just simply using a vlookup. I posted an example in the thread. Vlookup considers a range automatically if you have a low and high value in separate columns. I know how to get the same results with an index but is it more efficient? I honestly don't think you could solve that with just an index/match which is what the post is asking
+With how much data? I do it with over 10k lines and it always screws up. 
+I made a post in this thread. There is one instance where vlookup works and I do not think index match will without another supporting formula. I messaged a few times on this post hoping someone will prove me wrong because I am genuinely curious if you could do it with an index match
+VLOOKUP works when referencing a closed workbook. I do not believe INDEX/MATCH has that ability.
+Yes, you can, BUT only if the values you're matching in are in order - the last parameter for MATCH allows you to enter -1, 0 or 1 for 'less than', 'equal to' and 'greater than'
+So you can do the exact same thing with index...  
+  
+    =INDEX(Range,Row,Column)  
+  
+So you just put a second match for the optional 3rd argument...
+So all you need to do is use the third argument of the match formula as -1 or 1 (instead of 0 for exact match) to do the exact same thing, but you get to chose which band it'll go to... (Either higher or lower)
+Maybe not that much.  2000 lines with 120 columns and across several sheets.
+If you keep your raw data in one place and calculations in another you can just make a blank column, hide it, and then you'll have mo issue and better performance.
+
+It is slow because of how much data, that you just have to wait for. Ive got ~30k rows and just sip my coffee and watch the cpu until it drops back down from 100% then get back to it.
+With over 10k of data you really should be putting that data in a table in a database. You're just temping fate by using it in native excel.
+Ahhh I see. I was wondering how it would work, couldn't wrap my head around it. 
+I will give this a shot tomorrow, I never thought of that. Was genuinely curious as this is pretty much the only instance I use vlookup anymore unless I'm just lazy and don't want to write an index match. Appreciate the response
+Whoa. Could you please elaborate a bit more? I have one sheet with data. I do an index match on another sheet to pull in that data. How does a blank column help? 
+Not always an option for everyone. Ive got access to some dbs and Excel but nothing else. Just learn to backup like crazy.
+I do store data in data bases. I need excel for the calculation capabilities. 
+If you're on another sheet then it doesn't. But if you're working on the same sheet with raw data on the left and then a blank column, then do your manipulations you can fix the to the cell reference, only practical in some instances while in others it is better to make them part of your table as those cell references and more dynamic than they would be in a simple range.
+
+Depending on how often your data changes, I sometimes just keep row 1 as text to explain formulas on row 2, have a blank row 3, then all my data in row 4. on data refreshes ill put the formulas to work, then paste as values. It isn't the most ideal solution but it speeds everything up.
+Power Pivot IS available to everyone. It is an analytical database that is part of Excel(as an add in in 2010-2013, natively in 2016). There is also SQL Express which is free and MS Access.
+
+Here the beautiful part about Power Pivot. Once you build your models and calculations, all you have to do is press refresh to pull in the latest data. No copy paste shenanigans, no manual BS. 
+
+Build it once and reuse over and over.
+If you're taking 10K of records from a database to put in Excel so you can write calculations I'm forced to ask, why aren't you doing this in power pivot? Once you define a model that works well in Power Pivot you can promote that model to Analysis Services and let everyone else benefit from those calculations.
+Not everyone can get that at work unfortunately... Red tape.
+Don't ask, just use it(power pivot). It's part of Excel.
+Only in new versions, in 2010 it is an add on and needs admin 
+So tell IT to install it. 

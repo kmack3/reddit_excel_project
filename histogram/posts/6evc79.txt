@@ -1,0 +1,12 @@
+Is there a way to customize which duplicates you want to mass delete?
+Create a helper column. Run a numerical sequence in it (1, 2, 3, ...) Sort descending on this column. Do your remove Duplicates. Sort Ascending by helper column.
+How do I create a helper column? Is there a specific formula? For the sake of ease, the concatenated rows are in column A, how can I input a formula in column B to run a numerical sequence and then sort?
+Nothing special about it, it's just an extra column to your data. Just pick a blank column next your existing data, or insert one. Start typing in a number sequece (1, 2, 3), then use the Auto Fill (double-click on bottom right) and XL will know to continue to sequence.
+But that's implying that all employees have the same amount of duplicates. Some have none, some have up to 25. I just tried this and it only autofills the number that I'm double clicking on
+
+EDIT: or it will continue the sequence, as in 1-the end of the rows, not something like: 1 / 1,2,3 / 1,2,3,4,5 / 1,2,3 / 1,2,3,4,5,6,7,8 / 1,2,3 etc...
+To u/nidenikolev: This assumes your data is spaced evenly/follows the same pattern of let's say "ever 4 rows is the consolidated data". In that case you could use u/CFAman 's method and use 1, 2, 3, 4, then drag that sequence by highlighting those four cells then dragging. Excel would understand that you want to repeat that sequence.
+The autofill will keep all the numbers the same in some cases, but you should see a pop up at the bottom I think that you can click on and select "Fill Series" or something like that. Before you drag, select all the rows you want to drag. Don't just drag the first cell.
+The latter. For N rows, you're just creating a sequence of 1, 2, .. , N. Then, we basically flip the data upside down, remove duplicates (so that what was previously last item with all data is now first). Then, reverse the sort to set it "right-side up".
+
+Sorry, I'm not sure where idea of having a repeated sequence came from. It's just a regular running number.

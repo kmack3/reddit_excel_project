@@ -1,0 +1,54 @@
+Charting daughters progress with Leukemia. Spreadsheet already cluttered. Seeking advice.
+First of all, best of luck your family and your daughter. I'm really sorry that you're going through this.
+
+I personally am not a medical professional, nor have I had a family member who has had leukemia, so I don't really understand what most of that data means, but I'll try to get you started on some organization; maybe lead you down the right path.
+
+Most of your data seems to organized by date. I would look at all of your different sheets (tabs) and ask yourself "does this really need to be in a seperate sheet?".
+
+For example, instead of three different tabs for the WBC/RBC results, "Consolidation", and "Interim Maintenance", combine all those fields into one sheet. Then, to differentiate these time periods, make one of your first columns a "Time Period" category (so the values in this field would be "Consolidation" or "Interim" or whatever else periods of time apply). Then, have one date be the unique identifier for every piece of data.
+
+Sure, this will give you a lot more columns since you're combining all the fields, so it might be hard to read.
+
+To solve this, you can use Pivot Tables and Pivot Charts (http://www.excel-easy.com/data-analysis/pivot-tables.html) to easily display your data in the way you want.
+
+If you combine your data like I mentioned above, then make a pivot table and pivot chart out of it, you can dynamically tell the chart and table to show which data you want to graph. So, instead of needing a bunch of different sheets with different charts, you can have a single pivot table and pivot chart and just select what you want to view (for example, only WBC count over time, or WBC and RBC count together, etc).
+
+It will also let you to "create a new graph on the fly just by entering a date range" as you said, simply by filtering the pivot table/chart by year or month or whatever (This would require you to make seperate columns in your raw data that pull the year/month/day from the date column. Let me know if you want further explanation).
+
+Of course, this may not work with ALL of your data, but from what I can see it would with most of it.
+
+Let me know if you have any further specific questions or anything.
+
+
+
+Are your goals simply to track the different vital metrics or to analyze them for trends or summary statistics?
+One thing I've learned by working with large sets is that all the data should be in one sheet. Consolidate your data. Your other sheets are for manipulating and presenting information from the database. 
+
+What you want to do is have a field where you label the type of data. This will let you filter out what is needed. For example, one type would be CBC, another type would be induction. Since you're consolidating different types of data you will have some columns that are meaningless for that particular type. Fill them with something meaningless like a "#". 
+
+If you want to get fancy you can throw in some error checking to make sure that you enter the data correctly. You can error check with either conditional formatting or a separate column of concatenated if statements.  If entering in the data gets confusing or tedious you could create a form to simplify the process. These two things are probably a poor use of your time, but I'm mentioning them just so you know they exist.
+
+To do graphs dynamically you want something called a "pivot chart". To filter the date range you will use a filter on the dates for pivot table that the pivot chart is derived from. Do you know how to use filters? 
+
+There are many of us on this sub that would be happy to help.  Keep us updated with the help that you receive from this post and we can all work with you to make managing the information easier.  Best advice you have received is to consolidate the data into one tab and then use pivot tables and pivot charts to watch for trends.  Prayers are with you and your family.
+Thanks for the well wishes. It's going to be a long road but our situation isn't as bad as others we have seen.  So we are very fortunate.
+
+Thank you very much for your suggestions. I guess I have some homework to do. I consider myself an advanced beginner in Excel so hopefully the Pivot tables/charts isn't too complex. :) I will start looking at that route and let you know if I run into a snag. 
+
+Have a wonderful day!
+
+
+I am mainly concerned about trends over time. Using graphs helps me see how her bone marrow is reacting/responding to treatment. It also helps me identify patterns and associate them to a particular  treatment process so I can predict/prepare for future occurrences.  
+I haven't learned the art of the Pivot Chart/Table yet. :)
+Thanks. u/isecretlyloveyou has begun putting something together for me. This sub has been very nice indeed.
+I'll work on this over the day and send you something by the end of the day
+Once you know a pivot table, a pivot chart is simple. 
+
+A pivot table is basically a dynamic summary of your data. Select the data then make a pivot table from it. It's under the insert menu. 
+
+You will have 4 places to put in your data: rows, columns, values, and filter. I almost only use rows and values. Let's say I have a bunch of products I make and the dates they are made on. If I want to see a breakdown of product quantity by date I would put date and product in rows, with date being on top. Then I would put quantity in values and set it to sum. It generally defaults to sum, but there are other options like count. Right click on the box in the value to change it. 
+no worries brother, I just sent you the initial version.  Take it for a test drive and get back to me with any changes.  There's still a few things I want to add in, but I figured this was a workable start.  
+Wow. That would be amazing. Do you want me to email you an original version or is the link sufficient? 
+If the link has all the data in it--it should be fine, i downloaded it from there.
+The spreadsheet is AMAZING. I don't have much to give, but take some gold for your effort. :)
+Very happy to help, the gold is totally unnecessary but appreciated.

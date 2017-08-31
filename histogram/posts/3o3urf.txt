@@ -1,0 +1,34 @@
+How do I delete infinite blank rows?
+Follow these steps:
+
+1. Highlight the first blank row below your data (i.e. the first row you want to delete)
+
+2. Hit ctrl + shift + down arrow to highlight all of the rows below
+
+3. Right click the row labels (where each row's number is shown) on the left side and select "delete" in order to delete all of these rows.
+
+4. Hit ctrl + home in order to go back  to the top of the document.
+
+5. Hit ctrl + s in order to save the document. As it saves, you should see the scroll bar on the right side change, indicating that the blank rows are disappearing.
+You will need to delete the extra rows and then save the file... Excel is reserving this as its "used range". At one point you likely had formatting or a formula etc that filled in those cells... This should do the trick.
+It may be easier to copy the data cells into a new sheet. Are you sure they are empty and containing null values or just new cells waiting to be filled? It could be some other calculation going on cell by cell slowing this down.
+
+
+
+Go to the vba editor (alt+F11) then on the left side click the worksheet you want to change. Then in the properties window in the bottom left you can change the scroll range to whatever you want it to be.
+I'm not sure I understand your question. When I delete the rows, blank rows and cells are in their place. I *can* copy them into a new sheet but it's a shared workbook so am trying to find a better solution than just a workaround. 
+Delete the rows and then save the workbook. Keep an eye on the scroll bar when you press Save.
+Clippy: ISEMPTY
+
+Go to one of these empty patches and use isempty() and give it the cell to the left or right. Is it true or false?
+
+If you scroll in excel you can keep going a long way. It shows you empty cells that you can start typing in, but the row and/or column don't exist until you start creating contents. Just because you see a bunch of 'cells of opportunity' doesn't mean they exist yet.
+
+Another test is to save the sheet out as a csv then open it in notepad or another text editor. Are there a ton of lines with ,,,,,, at the bottom? if not then those rows don't exist yet. The same goes for a bunch of ,,,, at the end of each row indicating empty columns.
+I just filtered a column and it fixed it so didn't get to try your solution. Thanks!
+
+Hi!  It looks like you're looking for help with an Excel function!    
+Unfortunately I have not learned that function yet. If you'd like to
+change that, [message the
+moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)!
+

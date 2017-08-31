@@ -1,0 +1,317 @@
+Over 15 years of using excel and I *just* learned cntl + semicolon inserts the current date...
+Ctrl + shift + semicolon = current time
+I love that one.  Here is the [total list](http://office.microsoft.com/en-us/excel-help/excel-shortcut-and-function-keys-HP010073848.aspx) for those who might be interested.
+
+Another one that I find really handy is F4 when doing formulas.  You know how in a formula you can use $ signs to make a cell or range absolute so it doesn't change when the formula is moved/copied.
+
+Well, F4 cycles through the various combinations of absolute and relative references.  Sure is easier than manually typing in multiple $ signs.
+After working with Excel virtually since it came out and all that time being blissfully unaware of the Format Painter function, I one day happened to be observing the least competent Excel user in our office (and there was a lot of competition for that title, believe me) to track down a problem -- and she was using FP like an artist.  It was all I could do to not give away the fact that I had no idea the function existed.  
+
+Humility is an acquired virtue.
+I abused CTRL+D once I discovered it filled down.
+How about this one:  put the cursor below a cell with a formula with cell references. Type Ctrl + ' (that's an apostrophe). The same formula appears in the cell you're in, with no shifting in the cell references.  
+Have y'all used the vba script to remove protected sheets? I'll snag it for you tomorrow when at work. So freaking useful to see others formulas especially when they don't want you too...it's like opening the gates to Narnia.
+
+Edit: [Delivered. Sorry for the Google doc. I suck at formatting on Reddit](https://docs.google.com/document/d/1zEgagjUvZnRw_EFm7DtzVRhf_LK_mOMOnAThN0V8bE8/edit?usp=sharing)
+
+* On your sheet hit Alt+F11
+* Double click the sheet you want to remove protection
+* Drop in the script in the google doc 
+* Hit F5.  
+
+(look at that, I learned how to use bullets!)
+......Well that's a game changer
+I recently learned that Alt+Enter within a cell inserts a return.  Would have been nice to know 10 years ago.
+Don't feel too bad.  I created a custom script which essentially solves the same problem as Mail Merge.
+alt+D+F+F.  Automatic Autofilter.  
+How often do you guys add the current date to your sheets?!! I love hotkeys but never use this one. Ctrl+shift+! On the other hand...
+Ctrl + +
+Ctrl + -
+
+The former is insert row, column, selection, or cell, depending on selection. 
+The latter is delete. 
+
+That was the last excel shortcut I found that blew my mind. 
+Highlight a function and hit F9 to give you it's result.
+ALT + = will insert a sum or subtotal function
+
+CTRL + SHIFT + F3 will name every Row/Column in a spreadsheet using the top/first entry as the name. Very handy if you have to name a lot of fields.
+I hated the ribbon at first, but it really has made a lot of keyboard shortcuts easier.
+
+
+Anyway, since I didn't see anyone mention it, ctrl~ shows all formulas which can be nice when auditing.
+a kid that we hired straight out of college taught me that one
+two things that I learned late were ctrl+space and shift+space.
+LOL.  I was in the same boat.  Been using excel for a long time, and just learned that "trick" a few months back.
+Saved for latter 
+Don't feel bad. I have been using Excel since 2.0, and only just learned that this year. 
+TIL. 
+I just ran into my boss's office and said "LOOK WHAT I JUST FOUND OUT!"
+
+He says, "That's pretty awesome!  ...for something I'll forget about in two seconds."
+After many years (not quite 15) I just learned that you aren't limited to the standard font size options. You can use VBA to make huuuge font sizes.
+
+Range("A1").Font.Size = 300
+Maybe use this magical website called gogle and search for a list of Excel shortcuts? I think there is one in the "help" too.
+mind. blown.
+All this commands are there in the help menu you can do through once and,u will,find,the one
+I loved f4 on excel, until work gave me an ideapad yoga.  I guess the guys at lenovo thought "nobody uses the function keys, let's give them default functions instead"  The default function they gave f4? Force Close.
+
+http://cdn.arstechnica.net/wp-content/uploads/2012/11/windows-button.jpg
+
+That resulted in a lot of wasted work until I figured out how to change it in bios.
+Double-clicking "locks" the format painter "on."
+
+So you can blissfully "paint" that format all over the place.
+
+It's a game-changer. 
+That's a great lesson to learn and probably one of the only ways I could learn it. 
+Try CTRL + SHIFT + D. It will fill a series down to the last used adjacent row.
+There is a key combo for this?? Damn I've been wasting a lot of time
+Been using Excel for years and just learned that one... going to be giving that a go tomorrow
+Ctrl+R does the same thing to the right.
+That one doesn't seem to work in Mac, though I use it all the time in Windows. Anyone know how I can have it in Mac, too? 
+O.o
+
+This is my favorite in the thread so far.  I'm always like F2, shift+ctrl+leftarrow, ctrl+c. move to new cell.  F2, ctrl+c.
+
+I don't suppose there are similar formulas to move that way but to the right instead of down?
+Huh, that's an interesting one. However, it'd be more useful to me if it worked left to right. I don't often need the identical formula in the next row, but would use it for the next column. 
+Yes, I've used that!  It's awesome.  People at work think I'm some expert hacker.  I tried to explain to them its a VBA code I found via google, but they still seem to want to give me credit.  I'll take it I guess :D
+OP, please deliver.  This VBA code would be awesome to have!
+How's this work?
+I found this out because I was about to write a macro to insert the current date, it didn't even occur to me it would be a shortcut. Been coding too long.
+I created a macro that did Paste Values in Excel '03 or so because I was too lazy for the extra keystroke it would have taken.
+
+In my defense, in the job I had at the time, i had to paste values a lot and it was much easier to hit Ctrl+Q.
+Same as Ctrl+shift+L?
+I use this one so often, my left hand is deformed into the shape needed to hit those keys.
+Freaking status reports, current date for every item that gets updated, and there are a lot of items getting updated.
+Ok.  Just tried cntrl shift ! And nothing happened....  What does it do?!
+Alt i r inserts row, alt I c does column. Alt e d deletes row or column too.  Never tried your way.
+Which does...
+You can change the font size to 300 without using VBA.  Just click on the font size in the toolbar and change the number with the number pad.  I think, however, that there is a font size limit of 409, whether it is through the toolbar or through VBA.
+Also you can just type it in. Instead of using the drop-down menu just highlight and type what size you want. I did a size 37 the other day. 
+LMAO why would one ever use this though
+Works in all Office apps if I recall correctly
+Oh wow.  What a particularly nasty change, especially when alt-F4 would do the same force close.
+You can't turn that off in settings somehow? 
+FYI you can change the default of which action the F keys do....
+HOLY Crap!!  great trick!  
+
+Here's one.  ctrl+Shift+arrow down to highlight all cells to the first break.
+holy shit cheers for this...2 months late
+I was going to say this.. Took me a year to figure that out.  
+Damnit, I also had a love/hate relationship with format painter. Now it's all love :)
+OH GOD THANK YOU
+
+
+Great tip, as big an eye opener and 100 times more useful the OP tip :-)
+WHAAATTT? Have to try this right now.
+Use the mac as a cooling pad for your pc.
+
+Edit: I couldn't resist. I want to throw my Mac every time I use excel on it. Why couldn't they just make them the same with cmd in place of control as the only difference?
+F2, ctrl+a, ctrl+c, move to new cell. Ctrl+c.
+
+Ftfy
+Then just move the duplicate. 
+http://www.mcgimpsey.com/excel/removepwords.html
+
+    Public Sub AllInternalPasswords()
+            ' Breaks worksheet and workbook structure passwords. Bob McCormick 
+            '  probably originator of base code algorithm modified for coverage 
+            '  of workbook structure / windows passwords and for multiple passwords
+            '
+            ' Norman Harker and JE McGimpsey 27-Dec-2002 (Version 1.1)
+            ' Modified 2003-Apr-04 by JEM: All msgs to constants, and
+            '   eliminate one Exit Sub (Version 1.1.1)
+            ' Reveals hashed passwords NOT original passwords
+            Const DBLSPACE As String = vbNewLine & vbNewLine
+            Const AUTHORS As String = DBLSPACE & vbNewLine & _
+                    "Adapted from Bob McCormick base code by" & _
+                    "Norman Harker and JE McGimpsey"
+            Const HEADER As String = "AllInternalPasswords User Message"
+            Const VERSION As String = DBLSPACE & "Version 1.1.1 2003-Apr-04"
+            Const REPBACK As String = DBLSPACE & "Please report failure " & _
+                    "to the microsoft.public.excel.programming newsgroup."
+            Const ALLCLEAR As String = DBLSPACE & "The workbook should " & _
+                    "now be free of all password protection, so make sure you:" & _
+                    DBLSPACE & "SAVE IT NOW!" & DBLSPACE & "and also" & _
+                    DBLSPACE & "BACKUP!, BACKUP!!, BACKUP!!!" & _
+                    DBLSPACE & "Also, remember that the password was " & _
+                    "put there for a reason. Don't stuff up crucial formulas " & _
+                    "or data." & DBLSPACE & "Access and use of some data " & _
+                    "may be an offense. If in doubt, don't."
+            Const MSGNOPWORDS1 As String = "There were no passwords on " & _
+                    "sheets, or workbook structure or windows." & AUTHORS & VERSION
+            Const MSGNOPWORDS2 As String = "There was no protection to " & _
+                    "workbook structure or windows." & DBLSPACE & _
+                    "Proceeding to unprotect sheets." & AUTHORS & VERSION
+            Const MSGTAKETIME As String = "After pressing OK button this " & _
+                    "will take some time." & DBLSPACE & "Amount of time " & _
+                    "depends on how many different passwords, the " & _
+                    "passwords, and your computer's specification." & DBLSPACE & _
+                    "Just be patient! Make me a coffee!" & AUTHORS & VERSION
+            Const MSGPWORDFOUND1 As String = "You had a Worksheet " & _
+                    "Structure or Windows Password set." & DBLSPACE & _
+                    "The password found was: " & DBLSPACE & "$$" & DBLSPACE & _
+                    "Note it down for potential future use in other workbooks by " & _
+                    "the same person who set this password." & DBLSPACE & _
+                    "Now to check and clear other passwords." & AUTHORS & VERSION
+            Const MSGPWORDFOUND2 As String = "You had a Worksheet " & _
+                    "password set." & DBLSPACE & "The password found was: " & _
+                    DBLSPACE & "$$" & DBLSPACE & "Note it down for potential " & _
+                    "future use in other workbooks by same person who " & _
+                    "set this password." & DBLSPACE & "Now to check and clear " & _
+                    "other passwords." & AUTHORS & VERSION
+            Const MSGONLYONE As String = "Only structure / windows " & _
+                     "protected with the password that was just found." & _
+                     ALLCLEAR & AUTHORS & VERSION & REPBACK
+            Dim w1 As Worksheet, w2 As Worksheet
+            Dim i As Integer, j As Integer, k As Integer, l As Integer
+            Dim m As Integer, n As Integer, i1 As Integer, i2 As Integer
+            Dim i3 As Integer, i4 As Integer, i5 As Integer, i6 As Integer
+            Dim PWord1 As String
+            Dim ShTag As Boolean, WinTag As Boolean
+            
+            Application.ScreenUpdating = False
+            With ActiveWorkbook
+                WinTag = .ProtectStructure Or .ProtectWindows
+            End With
+            ShTag = False
+            For Each w1 In Worksheets
+                    ShTag = ShTag Or w1.ProtectContents
+            Next w1
+            If Not ShTag And Not WinTag Then
+                MsgBox MSGNOPWORDS1, vbInformation, HEADER
+                Exit Sub
+            End If
+            MsgBox MSGTAKETIME, vbInformation, HEADER
+            If Not WinTag Then
+                MsgBox MSGNOPWORDS2, vbInformation, HEADER
+            Else
+              On Error Resume Next
+              Do      'dummy do loop
+                For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+                For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+                For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+                For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+                With ActiveWorkbook
+                  .Unprotect Chr(i) & Chr(j) & Chr(k) & _
+                     Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
+                     Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                  If .ProtectStructure = False And _
+                  .ProtectWindows = False Then
+                      PWord1 = Chr(i) & Chr(j) & Chr(k) & Chr(l) & _
+                        Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                        Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                      MsgBox Application.Substitute(MSGPWORDFOUND1, _
+                            "$$", PWord1), vbInformation, HEADER
+                      Exit Do  'Bypass all for...nexts
+                  End If
+                End With
+                Next: Next: Next: Next: Next: Next
+                Next: Next: Next: Next: Next: Next
+              Loop Until True
+              On Error GoTo 0
+            End If
+            If WinTag And Not ShTag Then
+              MsgBox MSGONLYONE, vbInformation, HEADER
+              Exit Sub
+            End If
+            On Error Resume Next
+            For Each w1 In Worksheets
+              'Attempt clearance with PWord1
+              w1.Unprotect PWord1
+            Next w1
+            On Error GoTo 0
+            ShTag = False
+            For Each w1 In Worksheets
+              'Checks for all clear ShTag triggered to 1 if not.
+              ShTag = ShTag Or w1.ProtectContents
+            Next w1
+            If ShTag Then
+                For Each w1 In Worksheets
+                  With w1
+                    If .ProtectContents Then
+                      On Error Resume Next
+                      Do      'Dummy do loop
+                        For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+                        For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+                        For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+                        For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+                        .Unprotect Chr(i) & Chr(j) & Chr(k) & _
+                          Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                          Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                        If Not .ProtectContents Then
+                          PWord1 = Chr(i) & Chr(j) & Chr(k) & Chr(l) & _
+                            Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+                            Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+                          MsgBox Application.Substitute(MSGPWORDFOUND2, _
+                                "$$", PWord1), vbInformation, HEADER
+                          'leverage finding Pword by trying on other sheets
+                          For Each w2 In Worksheets
+                            w2.Unprotect PWord1
+                          Next w2
+                          Exit Do  'Bypass all for...nexts
+                        End If
+                        Next: Next: Next: Next: Next: Next
+                        Next: Next: Next: Next: Next: Next
+                      Loop Until True
+                      On Error GoTo 0
+                    End If
+                  End With
+                Next w1
+            End If
+            MsgBox ALLCLEAR & AUTHORS & VERSION & REPBACK, vbInformation, HEADER
+        End Sub    
+I delivered. I keep it on a "sticky note"on my desktop so I can easily c/v it.
+[You know how](http://media.tumblr.com/tumblr_lr5sogzd4j1qfd3x7.gif)
+Yeah, my google-fu failed me before I started writing that one.  Good reminder to double check before starting to write code.
+Whoa, ctrl+q pastes values? I created a special button for it on my "ribbon" for it because I use it so much.
+Um. Menu key (between the alt and ctrl keys on the right of the space bar), s then v will paste special.
+
+Menu key, s, f. Will paste formulas.
+Not sure... I'll have to try it and see.  
+why not use =today() and then it has the date that you print it
+ctrl+space highlights whatever column(s) you have a cell selected in.  shift+space highlights whatever row(s) you have a cell selected in.
+Don't forget that F4 by itself (without pressing F2 first) repeats the keyboard command, whatever last keyboard command you put in. So, for example, if you had done a control+B to bold, then the next time you want to do bold something just press F4.
+You can disable the hotkey I believe, but not in an application.  
+By pressing Ctrl+A with selected blank cell, you'll highlight whole worksheet. With selected cell inside some data array - you'll highlight only this array.
+kind of like this?
+https://www.youtube.com/watch?v=KJwBivB2LYU
+> F2, ctrl+a, ctrl+c, move to new cell. **Ctrl+c.**
+> 
+> 
+> 
+> Ftfy
+
+
+Not well.....
+the ctrl+a part isn't working for me in excel 2010, ctrl+v part is.  
+
+And we both forgot ESC after ctrl+c.
+Holy shit balls that's long. Mine (the one I found months ago) was much shorter. 
+
+What does your do differently?
+It does once you record a macro and assign it to the 'Q' key.  :)
+it does not, he probably did macro to do it...
+I think he's saying he created a macro and assigned it to Ctrl+Q.
+I am aware of this.  If.you read my original post though, the point I was making is that I was getting annoyed with 3 keystrokes which is why I made the macro.
+
+Ctrl+Q is quick and easy to do left-handed, especially when you are alt-tabbing back and forth a lot.  And only 2 keystrokes.
+But doesn't that change each day? I need a fixed date for the last update since I'm updating different tasks at different times.
+
+I *could* make a function to update the date any time a line changed, but there are not that many items getting updated!
+thanks for explaining the F2 part...
+
+With that F4 to repeat the previous action.  Is it any different than ctrl+y?
+This is excellent!  I've always been a ctrl+y guy but this is so much easier!
+I know :)
+From the article, linked; 
+> This macro, for which the true origin is lost in antiquity, will unlock ***all*** the internal passwords in your workbook. It will report which password strings worked (so that if you have other workbooks by the same author, you can try it on them), but it will NOT report the original password
+
+So this is useful if you have a ton of password protected spreadsheets in your workbook. The much shorter code will unlock one by one.
+No different than ctrl+y except that it's only 1 key you have to press!  Ctrl+y has always been a pain for me because the two keys are hard to hit with just my left hand.
+Ahh good to know. I'll archive that one away. Thank you
+It's slightly different. ****Occasionally**** Ctrl+Y works multiple times when F4 only works once.

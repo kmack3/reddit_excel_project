@@ -1,0 +1,66 @@
+crash
+50k979
+Excel 2016 kinda crashes
+
+Hello everyone, 
+
+An issue has been plaguing our network for awhile and I just haven't been able to find an answer for it.  Excel just seems to go grey at times, all cells and ribbon options go grey (Not greyed out but grey so you can't see anything) same with the menu which goes green(I think it goes to what the default background colour is).   It hasn't crashed but it's rare for it to recover and usually you have to kill the task.  
+
+You can sometimes get a cell in the worksheet to respond and click on odd things but it is completely unusable. 
+
+Has anyone seen this before?  Thanks
+
+
+
+
+-------------
+Is this after running a macro, by any chance?
+
+Sounds kind of similar to what happens when Application.ScreenUpdating is set to False and not set back to True before the macro ends.
+-------------
+windows 10 with an intel gfx driver? - try ctrl alt (left arrow) to rotate your screen - this reinitialises the graphics driver, you can also try disable hardware acceleration from the advanced options menu. 
+-------------
+I think its a known bug from what i saw. I have almost to 0 crashes after i updated the office application. Click File >Account >Update Options and Update to latest office.
+-------------
+No, just seems to be random at times.
+
+More common on larger spreadsheets but seen it happen on small ones as well.
+
+
+-------------
+Yep, win 10 and intel graphics.
+
+I tried disabling hardware acceleration on a few computers and haven't had a complaint since.  Nice to know with the intel card.
+
+Will try that trick  next freeze and let you know how it goes.
+
+
+-------------
+Ok will try that.  Thanks
+-------------
+Are you running 32-bit Office? I've seen it crash quite a bit and usually with some interface weirdness/gradual loss of control.
+-------------
+How old are the computers you are running Excel on? 
+How much RAM do you have installed?
+
+Do other programs seem to hang and stall, or is it just Excel?
+
+If it is not localized to Excel it could be a memory issue.
+
+Try hitting ctrl + alt + delete and bring up the task manager. Using task manager, check the available memory while you have all your normal programs (including Excel) open. If your computer is topping out that may be the source of your issues. 
+-------------
+Pretty sure it is 64 bit office.
+-------------
+The machines are a mixed bag, some are older.  One that it happened to was a fairly new I5 with 4GB RAM.  It has also happen to an i7 with 8Gb Ram.
+
+I did that but I don't remember Ram being an issue I did notice that excel was using about 50% CPU despite doing nothing.  The CPU wasn't maxed out though.
+
+I just got word that it has happened in PowerPoint as well.  Have been polling the entire office about this.
+-------------
+Hmm, yea it doesn't sound like a memory issue.
+
+Do other programs work normally while this is happening to Excel (i.e. can you open a browser and use it normally?), or does the whole computer freeze?
+-------------
+Just seems to be excel and powerpoint rest of the machine is fine, its not 100% frozen, just unusable. For instance I can click on the menu but can't see the menu items but can click on them. If anything else come sup I can't see what it is either.
+
+

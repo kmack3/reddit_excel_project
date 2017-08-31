@@ -1,0 +1,278 @@
+10 Most helpful commands
+Here are 5
+
+* Know how date and time values work
+
+* INDEX-MATCH combo
+
+* SUMPRODUCT (with logicals)
+
+* Array Formulas (practice by making MAXIF, MINIF, use with SMALL etc)
+
+* INDIRECT
+One thing that I loved once I figured it out:  pressing f4 when selecting cells while entering a formula makes it a static cell (changes A1 to $A$1).
+Not 10, but most of mine have already been mentioned:
+
+* F5(goto)-Special-Visible Cells Only (for a selection that contains hidden rows/columns)
+* Ctrl-Shift-[arrow key] (for selecting contiguous ranges)
+* Copy a cell with 1 as the value and paste-special-multiply (to convert text values to numbers)
+* TRIM() (for removing extra spaces before and after text)
+
+
+
+I like the way, as a group or culture, we rejected OP's request for 10 and gave a few or 5. ..Ain't nobody got time for dat..
+I don't have the time to list 10, but one of my biggest pet peeves is when people show me an Excel file loaded with formulas that produce an error; #DIV/0, #VALUE or whatever. Wrap your functions inside an IFERROR so, in the event of an error, your function produces a zero or blank cell instead.
+-F4 key for adding $ signs
+
+-& for putting string together
+
+-countif/sumif/averageif/countifs/sumifs/averageifs
+
+-iferror
+
+-proper/trim/ other text manipulators 
+
+Thanks all.  Time to put these in practice.  Keep the greatness coming.
+Here another 5  
+* PivotTables  
+* Defined Names   
+* Advanced Filter (unique records)  
+* Custom Cell Formats  (you can use formula's!)  
+* Knowledge about volatile functions  
+Can you explain most of those?
+
+Namely sumproduct and index-match?
+That's something I wish I had known a while back.
+
+If you select the cell then hit F4 it's $A$1. Hit F4 again and it's A$1. Once more and its $A1. I'm guessing you all know the difference.
+Anchors. So much time spent entering them individually... Sigh
+Trim()
+
+Cool, I didn't know about that one.
+Quick!  Give me your 32,767 most useful Excel commands!  I'm just getting started, and mastering the first three will take me weeks, but I'm interested in them all!
+
+Or, an [alternative explanation](https://www.youtube.com/watch?v=I48hr8HhDv0&t=0m45s) for "10"
+
+Edit: And so I don't get accused of not contributing, my own ten actual Excel commands, not VBA macros, in order of frequency I think I use them in:
+
+* Ctrl + Pg Up/Pg Dn: Activates the previous/next worksheet (a/k/a the "tabs" at the bottom).  Show this to 90% of people and become an instant Excel wizard.
+* Copy / Paste Special (as values).  Newer versions make "paste as values' more accessible, which is good, because Excel loves to think about formulas you've typed, and CopyPasteSpecialValues relieves Excel from having to do that.
+* VLOOKUP.  INDEX/MATCH is for people that can't change/dictate the layout of their data.  VLOOKUP sucks in many ways, but it works, if you know its eccentricities.
+* F4: Toggles a reference in a formula that's being typed between absolute and relative.  DOLLA DOLLA BILLS YO
+* Boolean comparisons, a/k/a =This=That.  Worried about Excel's shortcomings when it comes to sorting, de-duping, decimal precision, or any other baked-in faults?  Not sure that the layout you're using is the same as the layout you're copying from?  Equals this equals that.  TRUE.  TRUE.
+* COUNTIF.  Don't have time to count the TRUEs from your Boolean comparisons?  =COUNTIF(range,TRUE) = COUNTA(range).  Or better, =COUNTIF(range, FALSE) should return 0.
+* & the ampersand concatenate operator.  ="L"&"O"&"V"&"E"  LOVE.
+* =CHAR(34).  It's the formula for a double quote.  You need a double quote, but if you type it, Excel eats it in some way?  =CHAR(34) is what you're looking for.
+* =CLEAN(cell).  Why the fuck is there a non-Latin-alphanumeric non-Unicode, legacy, unprintable, *undisplayable*, whatever-the-fuck character in this export from some clearly bullshit software that fucks up all my shit?  Ohai CLEAN, let me introduce you to clients' data that I hate.  You make me hate them less.
+* Ctrl + G: "**G**"o to a specific cell address.  Ever scrolled like a thousand times when you know exactly where you want to end up?  Ctrl + G, yo.
+
+That's what I do when I am building any sheet but sometimes I get handed over sheets that doesn't have IFERROR on all the formulas and it starts to be loaded with #DIV/0, #VALUE 
+So the question is. Is there a way to add an IFERROR(formula,0) to all the formulas within a sheet? would be really helpful
+
+I understand this need for clean sheets, but there is a reason for it. In my experience with charting datasets with lots of 'holes'  Excel will bring the value to 0 on the chart if the value is 0/"". Which is why i usually tell these formulas iferror( , na()) so that it just doesn't produce a point and mess up my charts.
+I can probably think of 5:
+
+1.  **Subtotals**  (got asked to create a macro to generate a summation report, I did what was requested but called subtotals and they were floored it did exactly what they wanted)
+
+2.  I'll expand to add the subtotal formula.  Very handy with auto-filters
+
+3.  Auto-Filters
+
+4.  Conditional formatting
+
+5.  Validation/Validation Lists
+
+All this said, the single most powerful for me has to be the macro recorder and (Alt+F11) it got me started really being able to do anything in excel.  Even if you are new to it, it really helps you learn what is out there.    
+> Know how date and time values work
+
+Dates and times in excel are measured from 1/1/1900. Everything to the left of the "." is the day (today is 42131). So if you want a day ten days from now, today() + 10 will give you that. That number is always in the background, it's just if you choose to format the cell as a date/time it will display in the more familiar way.
+
+Times are to the right of the ".". So 0.5 is half a day, or 12 noon. If you want to add one hour to a time that you have, you add +1/24. If you had a date/time in cell A1 and wanted to display the number of seconds it was from midnight you could do this (there's actually easier ways but I just want to show everything in this example):
+
+    Cell is displaying "9:30 am 5/7/2015". That actual value is then 42131.3958333.
+
+To get what I'm asking for, you need to remove the date portion...
+
+    =mod(a1,1)   (which will give you 0.395833....note that this is 9.5/24...9:30)
+
+Now covert decimal days to seconds....
+
+    =mod(a1,1)*24*60*60  which gives you 34200
+
+> INDEX-MATCH combo
+
+This is another, faster, more flexible way to do a vlookup. If you find a situation where vlookup can't do what you want or it slows your sheet down too much, try this.
+
+MATCH returns the position of a match in an array. So if I give it array A1:A10 and ask it to match the contents of B1...=MATCH(B1,A1:A10) and that match is in A6, it will return 6.
+
+Now imagine I have a second array of 10 values in E21:E30 and want to return the 6th value because B1 matched the 6th value. VLOOKUP can't do it. But I can do =INDEX(E21:E30,MATCH(B1,A1:A10))
+
+Note: This is a faster function than VLOOKUP.
+
+> SUMPRODUCT (with logicals)
+
+There's a lot you can do with this one but it's necessity has been marginalized a bit by the addition of SUMIFS. SUMPRODUCT takes two or more arrays and multiplies each row together, then adds them up. What makes it useful is that logical values work out to True = 1 and False =0. So if you wanted to sum the values of B:B where A is >10 and C is = 20, you could do:
+
+    =SUMPRODUCT(B:B, --(A>10), --(C=20))
+
+The -- there just converts the array of {T,T,T,F,F,T} of the two logical statements to {1,1,1,0,0,1} so that when you multiply you only use the values of B that fit both conditions. If you watch on this sub you'll see more complex ways SUMPRODUCT can solve problems.
+
+> Array Formulas (practice by making MAXIF, MINIF, use with SMALL etc)
+
+[Here](http://www.techonthenet.com/excel/array_formulas/index.php) are some examples of what array formulas can do.
+
+> INDIRECT
+
+This probably seems like it would never be useful but it can be for complex lookup situations. If there's a "3" in A10 you can use =INDIRECT("C"&A10) to return the value in C3. 
+SUMPRODUCT takes two or more arrays of the same size, multiplies corresponding elements together, and then adds those values up. It's often used with a comparison to generate an array of true/false values, which can be converted into 1 or 0 (and, of course, 1 times something means you include that something in a sum, and 0 times something means you don't). You'll find a lot of creative uses if you google excel SUMPRODUCT example.
+
+The match function works like vlookup, if you're familiar with that - it searches through a range of cells to find the cell that matches what you're interested in. But where vlookup returns a value some specified number of columns to the right of the column you're matching, the match function returns the position of the match. Then, you can use that position with the index function to make a reference to a cell. For example, index(B1:B10,match("apple",A1:A10,0)+1,1) will look in column A for apple, and return the value in column B that is one row below apple.
+I don't :(
+Ctrl+PgUp/Dn ... No shit!
+I like how you chose 2 to the 15th (forgive my ignorance of how to type that in my phone!) minus 1 for your joke reply about how many tips to give OP. Interestingly enough that is the last number that if put in a tab name in (), example: sales (32,767), when the tab is copied excel will increase the number by 1. I think I worded that badly...
+
+Anyway, you said vlookup sucks in many ways, do tell. I f***ing LOVE vlookups and could do them in my sleep. So tell me how you find this function lacking. I've never used INDEX/MATCH. Please elaborate on how this can be used instead of vlookup in a vlookup situation.
+
+I've also never used CHAR or CLEAN. I could google them, yet as you said these are favorites, please do elaborate there too. I'm so curious.
+
+Excellent post my friend!
+
+Edit: or not our
+
+
+    Sub Add_IFERROR_Activesheet()
+    Dim myCell As Range
+        Cells.SpecialCells(xlCellTypeFormulas, 23).Select
+        For Each myCell In Selection.Cells
+            If myCell.HasFormula And Not myCell.HasArray Then
+                myCell.Formula = "=IFERROR(" & Right(myCell.Formula, Len(myCell.Formula) - 1) & ",0)"
+            End If
+        Next
+    End Sub
+
+[Copied from here.](http://www.excelitems.com/2011/03/wrap-iferror-iserror-formulas-add.html)
+Sure, obviously, in some cases there may be a legitimate need for the error result to show, like the one you cited. But, when someone shows me a sheet that has a % Spent column and some projects don't have a budget yet, but dollars spent and it's loaded with #DIV/0 errors... that's just sloppy.
+Neato! Thanks
+So the $ sign locks it to the row or the column. Both present locks it to the cell. In front of the row indicator locks it to the row and in front of the column indicator locks it to that column.
+
+I hope that makes sense. 
+If you copy a cell (either by copy/paste or dragging the fill handle), any references to cells in the form A1 will increment by the number of rows/columns you move them. So, if you have in cell B1, =A1\*2, and you fill that down to cell B10, then B2 will be =A2\*2, B3 will be =A3\*2, etc. If you copy cell B1 and paste it into cell D5, the formula in D5 will be =C5\*2. This is called a **relative** reference.
+
+If you reference a cell with $A$1, and you copy/paste or fill, the new formulas will always reference $A$1. This is called an **absolute** reference.
+
+You can also have relative row, absolute column, or vice versa. If you put your cursor in the reference in the formula, you can use F4 to toggle between A1, $A$1, A$1, and $A1.
+Enjoy your instant upgrade to 'wizard'!
+`VLOOKUP` is [right-handed](http://chandoo.org/wp/2010/11/02/how-to-lookup-values-to-left/); `INDEX/MATCH` is [ambidextrous](http://www.mrexcel.com/forum/excel-questions/463366-vlookup-right-hand-side.html). 
+
+I use `VLOOKUP` all the time, and `INDEX/MATCH` rarely.  However, if you're just learning, it's really easy to teach how to assign names to the the ranges that belong to `INDEX/MATCH`.
+
+`CHAR(code)` returns the ASCII character returned by the integer *code*.  Specifically, `CHAR(34)` returns a double quote, which is reserved by Excel for use in its formulas.  Say you want Excel to calculate a text field that would be used in some other software, and the other software requires double quotes.  `CHAR(34)` is your friend.  Here's another really good use: Take advantage of the fact that the alphabet appears consecutively in ASCII.  Capital A is `CHAR(65)` and lowercase a is `CHAR(97)`.  Need a cheap way to convert numbers to alphabetic characters, say, to convert a few column numbers to A1-style cell addresses?  Put your cursor somewhere in column A and type 
+
+    =CHAR(COLUMN() + 64)
+
+Another good use is `CHAR(10)` which inserts a newline character.  So,
+
+    ="Yo"&CHAR(10)&"There"
+
+Displays
+
+    Yo
+    There
+
+`CLEAN` removes stuff that Excel can't read, can't display, and you can't use and don't want.  Again, as with `CHAR(34)`, useful when using Excel as poor man's middleware.
+That is absolutely fantastic.
+Thanks for posting this.  For debugging this is almost like the comment and uncomment.  This actually inspired me to create this:
+
+    Sub Subtract_IFERROR_Selection()
+    Dim myCell As Range
+    
+        For Each myCell In Selection.Cells
+            If myCell.HasFormula And Not myCell.HasArray Then
+                If Left(myCell.Formula, 9) = "=IFERROR(" Then
+                    myCell.Formula = "=" & Mid(myCell.Formula, 10, InStrRev(myCell.Formula, ",") - 10)
+                End If
+            End If
+        Next
+    End Sub
+
+It should remove the iferror if it is right after the =  (stuff that is nested would have required work).
+
+It works based on selection, but that portion could be easily modified.
+
+**Edit:**  Just changed the name of the sub to have selection instead of activesheet, as that makes more sense.
+
+[deleted]
+Worked like a charm!! Thank you
+
+I made a small addition today to allow for a user inputted error. 
+
+Sub Add_IFERROR_Selection()
+Dim myCell As Range
+Dim Err_Input As String
+Err_Input = InputBox("If error, then..", , Chr(34) & "NA" & Chr(34))
+    For Each myCell In Selection.Cells
+        If myCell.HasFormula And Not myCell.HasArray Then
+            myCell.formula = "=IFERROR(" & Right(myCell.formula, Len(myCell.formula) - 1) & "," & Err_Input & ")"
+        End If
+    Next
+End Sub 
+Thanks a lot! 
+Thanks! Together with Caladbolg2s comment I understood that! 
+Thanks for your reply! I have new things to play with...
+Okay, so you just blew my mind. I didn't follow anything you said in the paragraph about char. So I took it line by line with my boyfriend (a software engineer) to explore excel and understand it. Omg! We just spent about an hour discussing your ideas and everything makes sense now.
+
+One thing that didn't work was that your char(10) example didn't return a new line, it just put in a space. I wonder if that's 'cause we're using Mac. On Mac Excel ALT ENTER doesn't work, doesn't take you to a new row in the cell, and I don't know anyway to do that. (If you do, do tell.)
+Wouldn't it be better if you did something like:
+
+    If Not myCell.Formula Like "iferror" then
+
+So it will skip the cell if it contains "iferror" anywhere in the cell.  Right now you're just checking if it starts with "=iferror" but what if (for some stupid reason) someone started it with:
+
+    =1*iferror(...)
+
+Then your function would add iferror to the front of that.  Oh and don't forget to add
+
+    Option Compare Text
+
+to the start of the module.
+
+
+I have no idea. I tested it on a random sheet that I filled with about 15 #DIV/0 error formulas and it fixed them all, no problems.
+No prob, added some more uses of CHAR
+The newline isn't showing up because the cell isn't formatted to display the newline characters. Try this.
+
+* Open a new sheet
+* Type ="ME"&CHAR(10)&"YOU"
+
+On my machine it appears as 
+
+    MEYOU
+
+Then:
+
+* Format the cells (Ctrl+1 -- on a Mac, it might be Cmd+1 -- or just right click the cell and select **Format Cells**)
+* Under text control, select **Wrap text**
+
+It now appears as
+
+    ME
+    YOU
+
+Yup was just looking at basically an undo for the previous one.  Quick and dirty. 
+[deleted]
+This is so weird.  
+
+In the first example I get:
+
+ME YOU and you got MEYOU
+
+I get the space.
+
+Then when I wrap text, no change.  Even if I make the row taller it doesn't work.  Even changing the column width gives regularly expected results:
+
+ME Y
+OU
+
+I gotta try this on my PC at work to see it that's why I'm getting different results. 
+Ahh ok then yeah that'd fix it.
+Every time you run it it will add another one, any chance you ran it 47 times?

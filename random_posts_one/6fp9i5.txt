@@ -1,0 +1,20 @@
+6fp9i5
+Can you use vba to download/save an attachment from an email?
+If so can someone explain how?
+
+
+-------------
+Yes.  I have some code at work to do it.  The code I have  is run from Excel, and prompts the user to select the email(s) from outlook you wish to download attachments from.  There are certainly other ways you could "select" the e-mails, but it is not really a "simple" thing to do.
+
+The code is not super hard, it is more the expected behavior that is hard to nail down. How to "select" emails, where to save files, save all files or just certain ones? Embedded images as well?  Etc.
+
+If I remember tomorrow, maybe I will obfuscate company stuff in my code and post a sample here.  But here are a couple links to get you started:  
+
+[Stack Exchange 2011](https://stackoverflow.com/questions/7890612/vba-code-to-save-an-attachment-excel-file-from-an-outlook-email-that-was-insid)
+
+[Ron DeBruin](https://www.rondebruin.nl/win/s1/outlook/saveatt.htm)
+
+-------------
+Thanks! I appreciate the help. 
+If you have code for it, then mine should be relatively simple, I have to pull an excel file from an email with the same name and same person every single day. 
+The saving of files, editing the data etc. I already have code for so I am only concerned with pulling it from outlook.

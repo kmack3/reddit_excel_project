@@ -1,0 +1,205 @@
+First Macro
+Lots of naysayers in this thread, don't worry about them, they are just too lazy to type out useful answers, you came here looking for answers, the answer should never be "google it"...
+
+####Reference a cell
+
+Okay there are a few ways you can reference cells and depending on what you are doing with the cell, will depend on how you want o reference them.
+
+The most common use is with the RANGE function.  This looks something like this:
+
+      Range("A2")
+
+Pretty simple right?  Well with this you can do all sorts of things, you can use:
+
+     Range("A2").Value ' this will pull the value from the cell
+     Range("A2").Comment.Text ' this will pull any comments that are on the cell
+     Range("A2").Offset(#,#).Value ' Offset will pull values from adjacent cells.
+     Range("A2").Value = Range("A2").Value + 1 ' this will add 1 to the value of A2
+
+So you can see how you can do just about anything with that, you can even change the fill color:
+
+     Range("A2").Interior.ColorIndex = 6 ' this is for the yellow highlight
+
+You can also reference a cell with the RC (Row & Column) values, so something like this:
+
+     Cells(2,1).Value 
+
+This will return the value at the intersect of Row 2 and Column 1, or A2... 
+
+
+####Go to a different sheet and find the associated row
+
+This is a little more tricky in that you need to specify how you find the associated row.
+
+To change a sheet is pretty straight forward:
+
+     Sheets("Data").Select
+
+This will select the "Data" Sheet, or whatever you sheet is named.  Now how do you want to find the associated row?  What is the criteria for that?
+
+This is where things start to get a little more tricky, in that you may end up using a MATCH or WITH/FIND function depending on what you are looking for, you might even get into loops here.  A little more details is in order.
+
+####Add 1 a certain number of cells over
+
+This is where you would use the offset function I mentioned above.
+
+So lets say your value is in C5, and you want to change the value in K5, then you would simply use the offset function.
+
+     Range("C5").Offset(0,8).Value =      Range("C5").Offset(0,8).Value + 1
+
+Now this is not very handy, in that you could just do:
+
+     Range("K5").Value = Range("K5").Value + 1
+
+Which does not sound like what you are looking for, so let me get into a simple loop and you can see where it takes you.
+
+In this example I will use a variable and loop to look for a specific value.
+
+So lets look at the syntax of a macro.
+
+First ALWAYS use Option Explicit, not only for you sanity but for the sanity of anyone that has to come back and look at the code behind you.
+
+Here is the textbook definition of Option Explicit:
+
+> When Option Explicit On or Option Explicit appears in a file, you must explicitly declare all variables by using the Dim or ReDim statements. If you try to use an undeclared variable name, an error occurs at compile time. The Option Explicit Off statement allows implicit declaration of variables.
+
+So basically EVERY variable must be declared, this will save you so many headaches, and if anyone else has to come back and look at your code then it will make them very happy.
+
+I am going to use a few variables.  When you are using variables you are going to use the DIM function, which tells the code how to handle the variable.  I will be using a Range and a Long.  A range is just that, a range, and a long is a variable can store a value between – 2,147,483,648 and 2,147,483,647, which should be more than enough for most things.
+
+You can use integer if your numbers are always going to be below 32,767.  The two variables I am going to be using are:  
+
+         Dim rngCell As Range
+         Dim lngLstRow As Long
+         Dim varValue As Variant
+
+I will add a variant, which means it could be different things, to store your value that you are looking up.  Since I don't know if you are looking for a string or if you are looking for a value, I will use Variant.
+
+The next step would be to find the last row of your sheet, there are quite a few ways to do this, but I seem to find much more success with this one:
+
+     lngLstRow = Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+
+What this does is set **lngLstRow** as what ever your last row is, so lets say you have 232 rows, anytime I use lngLstRow, that value is stored as 232.
+
+     varValue = "Value you are looking" 
+
+This can be changed to whatever it is you are looking for the range.
+
+Now we get into the loop.  In this example I am going to be using a For Each loop, which is exactly like it sounds.  For each cell in this range, do something...
+
+     For Each rngCell In Range("C2:C" & lngLstRow)
+
+So, for each Cell in Range (C2:C232) do whatever the next line in the code is.
+
+Next we need to ask excel if the value of the cell is the value we are looking for equals the value we are looking do something else...
+
+     If rngCell.Value = varValue Then
+
+If it finds that value, then we are going to use the offset value for the range cell we are looking at to add one to whatever value is in the cell.
+
+            rngCell.Offset(0, 8).Value = rngCell.Offset(0, 8).Value + 1
+
+So essentially what we are looking at is a macro that will be looking for the value we set in Column C, and if it finds the value then go over 8 columns (K) and add one to the value that is in that cell.
+
+So the whole code might look something like this:
+
+
+    Option Explicit
+    
+        Sub SearchingValues()
+    '---------------------------------------------------------------------------------------
+    ' Module    : Searching Values
+    ' Author    : FearNotTheWrath
+    ' Date      : 2/9/2015
+    ' Purpose   : Macro Walkthough
+    '---------------------------------------------------------------------------------------
+        
+        Dim rngCell As Range
+        Dim lngLstRow As Long
+        Dim varValue As Variant
+        
+        ' Select the "Data" Sheet
+        Sheets("Data").Select
+        
+        ' Find the last row on the "Data" sheet
+        lngLstRow = Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+        varValue = "Value you are looking"
+        
+        ' Loop to look for the value (varValue) in Column C and add on to the value in Column K
+        For Each rngCell In Range("C2:C" & lngLstRow)
+            If rngCell.Value = varValue Then
+                rngCell.Offset(0, 8).Value = rngCell.Offset(0, 8).Value + 1
+            End If
+        Next
+        
+        End Sub
+
+
+As you start to get into macros, please for the love of all things excel, use notes and comments as much as you can.  If there is even the slightest chance that someone is going to have come behind you to modify your code, they will be speaking your praises if you do this.
+
+Nothing like jumping into a jumbled mess of code only to find no option explicit and no comments/notes...
+
+Anyways, I hope that helps, and keep your head up.. It is a big task to get into, but in the end you will have a lot of fun with the stuff you can do with macros.
+
+Please let me know if you have any questions...
+Your best bet it to look at youtube tutorials. you will learn a lot more that way. People donating code will not teach you anything. There are loads of tutorials. Just search Excel VBA tutorials.
+
+Your write-up is amazing and the OP should find it extremely helpful, but I have to respectfully disagree with this statement:
+
+    ...the answer should never be "google it"...
+
+Google is perfect for quickly finding out if your particular question has already been *asked and answered*. In the case of the OP, his question was actually a three-parter and he wanted to bring it all together. So that's a little more involved than a simple Google search, but, if the answer is really, "never google it" then this subreddit might very well explode with questions like, "how do I open the VBA editor?"
+I love your attitude. This is exactly how I feel about people who get mad when people ask questions at work in person because "it's in the wiki". Some people learn differently and not everyone is awesome at researching answers. Or even wants to. I would rather ask the supposed expert getting paid 500k to tell me than read some documentation.
+BZ on your thoughtful response to OPs question.  In your response you used the code:
+
+     lngLstRow = Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row  
+
+I use the next bit of code fairly often and wondered how it differs from yours above. I usually search down a particular column (say column C) for my last row via the following:
+
+    IngLstRow = ActiveSheet.Cells(Rows.Count, "C").End(xlUp).Row
+Awesome write-up, and I agree with your opinion on the "google it" attitude.
+
+A quick pet peeve of mine is that `.Select` is hardly ever needed. In most cases it can be replaced by `.Activate` without actually changing the current selected sheet/cell. In many cases, however, neither one is needed. For the particular example, I would use something like:
+
+    Dim Data as Worksheet
+    Set Data = Sheets("Data")
+
+    With Data
+        lngLstRow = .Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+        'And so on and so forth...
+    End With
+
+
+I didn't want anyone to write the code for me I wanted to know where to start. So off to youtube it is then!
+You are right, I should not have said never, but if they have taken the time to come to the sub and type up the question, in the amount of time you typed out "google it" you could have just typed out "alt+f11", and that is an easy ClippyPoint^TM for you!
+
+I guess coming from a moderator stand point, is that our sub is for people with questions, and answering a question with a "google it", to me seems rude.
+
+I mean if a co-worker came up to you and said "hey, can you help me with this formula" would you reply with "can't you just google it?"
+
+And that is how I view this sub, like a big workplace, we are all working and using this tool, well maybe not all, some use it for homework, but very few use it for personal use, or outside the work place, so why treat it any different.
+
+Just my 2 cents... 
+I agree.  Even with a 3 parter, you can google the individual parts, and toy with it until you figure out how to band it together.  A couple years back I was trying to write a macro that would open up workbooks based on a location i would specify, copy data out of those books, and then close em.  Found it all via google in separate posts and cobbled it together.  
+     lngLstRow = Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row  
+     IngLstRow = ActiveSheet.Cells(Rows.Count, "C").End(xlUp).Row
+
+To be honest, the only difference is that your code is specific to column C, but what if Column D has more rows than column C, then column C would be missing some...
+
+Now if only want to apply it to column C that is great, and sometimes that is necessary.  Mine is like a shotgun, wide blast, yours is more of a rifle exact and to the point... 
+
+Does that help?
+
+> A quick pet peeve of mine is that .Select is hardly ever needed. In most cases it can be replaced by .Activate
+
+While yes this is can be true, when you talking to someone that is new to macros, you want to start small... I mean even jumping into a loop right out of the gate is pretty intense for someone that has never written a macro, or that does not know VB, you have to speak to your audience... 
+
+Now to speak to your point, you don't even really need a with, you can just use:
+
+     lngLstRow = Sheets("Data").Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+
+Which eliminates the need for the extra lines, but arguing this is really pointless, it really is a matter of preference and complexity.
+
+
+There is a lot of good info in [here](https://www.reddit.com/r/excel/comments/2e28s3/rexcel_advice_thread_repository/)
+Yes sir. Thanks for what you bring to the community!

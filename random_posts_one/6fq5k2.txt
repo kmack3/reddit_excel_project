@@ -1,0 +1,92 @@
+6fq5k2
+Forecasting completion date
+Hi everyone,
+
+I'm creating a spreadsheet to track my training. I'll try to explain my objectives clearly, and how my excel sheet is laid out as best as possible, so you can understand what I'm trying to achieve.
+
+OBJECTIVE: I train BJJ. I set myself goals of things to work on (ie. Armbars). I track how many armbars I get each day.
+
+GOAL: Have a cell on my spreadsheet tell me when I should reach my goal based off what I have been tracking.
+
+ISSUES: Some weeks I train more, and some weeks I train less, I want the formula to take this into account.
+
+SPREADSHEET SETUP:
+- Column C: Date
+
+- Column D: Reps Completed (ie, 3 armbars today or 10 armbars today)
+
+- Column E: Running total (formula below)
+
+    =D3+E2
+
+    =IF((D4=""),"",D4+E3)
+
+- J3; Rep Aim (My goal to hit; ie. 50 reps or 100 reps)
+
+This is the formula I am using at the moment, but just want to verify that I have done it correctly. My maths isn't good enough to check to ensure that it's forecasting correctly sorry.
+
+    =FORECAST(J3, C:C,E:E)
+
+Which translates to,
+
+    =FORECAST(REP AIM, DATE,RUNNING TOTAL)
+
+I hope this make sense.
+
+If someone could please help me confirm the formula is correct, or help me fix the formula I would appreciate it.
+
+If you need more information or need to see the spreadsheet please let me know. :)
+
+
+-------------
+**Edit:** See my reply comment later. Everything else in this comment is unnecessary.
+
+---
+
+The `FORECAST` formula appears to give you a future y-value for a specified x-value. In your case, that would mean it would guess "how many reps can I do on this day in the future", and not what you want, which is "on which day will I be able to do this number of reps".
+
+`FORECAST` assumes a linear trend, so we'll do the same. (That is, if you plotted reps against date, you'd get a straight line and not a curved one.)
+
+A linear trend can be described by `y = mx + c`, or in words, something like `future reps = gradient * future date + starting point`. It's up to us to calculate the gradient and the starting point, and fortunately one formula can do both!
+
+Select two cells next to each other (e.g. F1 and H1), and paste the formula `=LINEST(D2:D10,C2:C10)`, but replace D2:D10 with however many rows you've filled with reps, and C2:C10 with the same number of rows in the dates column.
+
+Confirm the formula with control+shift+enter (instead of just enter), to make it an array formula – you'll see {curly braces} appear around it in the formula bar. The number on the left is the gradient (should be a small positive number), and the number on the right is the starting point (it'll probably be a big negative number).
+
+Let's go back to our linear trend formula, except we want to re-arrange it to predict a future date, not a future rep count. So:
+
+    x = (y - c)/m
+    future date = (future reps - starting point)/gradient
+
+Finally, turn that into an Excel formula by plugging in the cell references/values:
+
+    =(50-H1)/G1
+
+Change your goal rep to any other desired number (or a cell containing that goal), and change H1 and G1 to whichever cells you entered the `LINEST` formula in earlier.
+
+The trouble with this solution is that the calculation of the gradient and starting point won't currently take into account new data. To do that, you should format the data in columns C and D as a table, using Home > Format as Table. Go back to the LINEST formula and replace the D2:D10 and C2:C10 references with the columns, probably called [Date] and [Reps] or similar. Now as the table grows, all the formula will update automatically.
+-------------
+Thank you for taking the time to reply.
+
+I'm a little confused by your comment, and I think that may be because I have not explained myself correctly.
+
+This is my spreadsheet; http://imgur.com/a/zE1Wf
+
+I tried your formula above and I ended up with a negative number on the left and a positive number on the right. After following your instructions I'm not sure how to convert it to a date either. Sorry to be difficult!
+-------------
+Ah, okay, I misunderstood a part. I answered as though you were looking to increase reps each day, not reach a running total on a certain day.
+
+In fact, on further thought... your original approach with `FORECAST` was fine – for a linear trend, it's irrelevant whether dates are "x" and reps are "y" or vice versa.
+
+In short, I'm going to say yes, your existing formula is fine – sorry for the confusion!
+
+You can confirm this by graphing cumulative reps against date in a line chart, adding a linear trendline, and having the chart extend that trendline to forecast about 200 days into the future. You'll see that the trendline crosses the 50 reps line somewhere in December, as your formula predicts.
+-------------
+Solution Verified
+
+Thank you for the help. :)
+-------------
+
+You have awarded one point to _RuktX_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

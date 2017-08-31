@@ -1,0 +1,471 @@
+Never use nested IFs again!
+This is what /r/excel should be about. I like helping newbies, but this intermediate level stuff, and showing people how to attack problems in creative ways, really make the sub beyter.
+Suprising to see no =choose(match(),).
+
+I've used that as my go-to formula every time anyone asks me to debug anything with nested ifs.
+very nice. I will test the calculation speed of our 350.000+ row/15 file connected excel based simulation with your updated formula.
+
+will report back
+If you're the only one maintaining the workbook, go nuts using this method. But unless you and all the other people that *may* need to maintain it at some point in the future have all agreed to use this method, I'd highly recommend sticking with nested ifs or VLOOKUP. 
+
+Maintaining a workbook of 100,000 rows/20 sheets is the same as maintaining a decently sized java/c++/c# codebase, and enforcing the same sorts of style/coding conventions that you would with a big codebase will save you from building up technical debt that could come back to bite you in the long run. To that end, cool (and I mean that sincerely) hacks like this may may make your formulas quicker or more readable, BUT you also run the risk that 3 years from now Barb from accounting is going to have to start playing with your workbook, and have no idea what's going on.
+Nice job. I tend to prefer the vlookup because of data control reasons, but the other methods seem cool as well
+While it looks like a really fresh take on a lot of situations, it also seems like you're working ten times harder on not learning IFs than it would be to just learn ifs. 
+
+Ifs are easy to not get lost in. You just need to learn the language.
+Hm, I will have to remember this when I get back to work. I imagine that the sum option might work for replacing some nested IFs when trying multiple criteria in array formulas. Nested IFs are generally my fallback when needing to replicate AND or OR in an array formula.
+
+Edit: Maybe this would be a good time to get srs about learning sumproduct's versatility.
+Nice write-up on alternatives to most IF-scenario's. I prefer VLOOKUP for obvious reasons and almost never have to use one formula per se.    
+
+  I've used Excel for numerous years (mostly in Dutch though) and have never heard of REPT - so even the intended audience is probably wider than you'd think! For the Dutch - it's called HERHALING in our version.  
+
+Your comment on CONCATENATE however - arguably it's more readable than & ? I see the point though.   
+
+Saved for future reference, might even make a write-up for our internal users. Never too old to learn.
+I do not particularly like this method, because maintaining such a formula, while easier than nested IFs, is still problematic.
+
+I say, don't try to get it all in one formula, and just use helper cells/columns. You can always hide what you don't need. And it will save time when you have to go in and fix something later.
+One of my favorite tricks for complex lookups is using indirect() with named ranges.
+
+For example, instead of having a vlookup point at table Monday or table Tuesday or table Wednesday, depending on an if statement and the day of the week, you can name the table ranges MondayTable, TuesdayTable, WednesdayTable, etc, and then 
+
+    =VLOOKUP(*target*, TEXT(TODAY(),"DDDD") & "Table",x,0)
+
+I've done similar to point to data per currency, and I'm sure it would come in handy for other problems where you have a discrete number of routing as well!
+Great post.
+
+Here are a couple of variations along the same lines. Some people may find one approach easier to understand than another.
+
+We can use the concatenate operator instead of the concatenate function. The following examples are equivalent:
+
+    =CONCATENATE("Hello ","world!")
+    ="Hello "&"world!"
+
+We can use a (single, not nested) IF instead of REPT. The following examples are equivalent:
+
+    =REPT("A",A2>90)
+    =IF(A2>90,"A","")
+
+All told, the following examples are equivalent:
+
+    =CONCATENATE(REPT("A",a2>90),REPT("B",AND(A2<=90,A2>80)),REPT("C",AND(A2<=80,A2>70)),REPT("D",AND(A2<=70,A2>60)),REPT("E",a2<=60))
+    =IF(A2>90,"A","")&IF(AND(A2<=90,A2>80),"B","")&IF(AND(A2<=80,A2>70),"C","")&IF(AND(A2<=70,A2>60),"D","")&IF(A2<=60),"E","")
+
+EDIT: Formatting above, and also wanted to mention that the grading example is a classic case for a LOOKUP/INDEX(MATCH) etc.
+    =IF(AND(AS68>=AS257,AS68<AS$278,AS$104=1),CONCATENATE(TEXT(((AS68*AS$104*1000)/(AS522*AS$543)),"#,##0.00")," J"),IF(AND(AS68>=AS257,AS68<AS$278,AS$104>1),CONCATENATE(ROUND(((AS68*AS$104*1000)/(AS522*AS$543)),2)," J"," D"),IF(AND(AS$104=1,AS68<AS257),"U",IF(AND(AS$104>1,AS68<AS257),"U D",IF(AND(AS68>AS$279,AS$104=1),CONCATENATE(ROUND(((AS68*AS$104*1000)/(AS522*AS$543)),2)," E"),IF(AND(AS68>AS$279,AS$104>1),CONCATENATE(ROUND(((AS68*AS$104*1000)/(AS522*AS$543)),2)," E D"),IF(AND(AS68<AS$279,AS$104>1),CONCATENATE(ROUND(((AS68*AS$104*1000)/(AS522*AS$543)),2)," D"),ROUND(((AS68*AS$104*1000)/(AS522*AS$543)),2))))))))
+
+
+
+This is an example of my use of concatenate before I learned to use &, 
+
+
+oh, and nested ifs
+For long IF statement, I often substitute a combination of lookup tables and the CHOOSE() formula.
+
+Basically, I assign an indexed value to a condition for which I'd like to test. Then I arrange the necessary formula to compute based on this value.
+
+CHOOSE() operates by ingesting a number to decide which formula to run. So, =CHOOSE(indexed value, formula1, formula2, formula3, etc) would evaluate formula2 if the indexed value is 2, which would come from a vlookup table created for this purpose.
+Hell, I can't even sleep. I NEED TO KNOW!
+You're just doing more work to reduce the maintainability of your formulas.
+This is really intersting, thanks for posting.
+This is awesome.
+
+I don't need to use Excel functions much but I'll definitely remember these tricks when I need to use IF again.
+[deleted]
+"One of the 'secrets' of Excel is that you can use TRUE as 1 and FALSE as 0"
+
+This is referred to as using a "truth value" statement.  Google it.
+The lookup example was strained at best. A simple AND shorter approach in one formulas is
+
+=VLOOKUP(A2,{"A",90;"B",180;"C",360;"D",720},2,0)
+
+which has the added benefit of returning #VALUE! when A2 isn't any of the expected options.
+
+IF is mainly necessary for trapping and bypassing errors. Yes, there's now IFERROR, but it's too broad. For example, MATCH returns #N/A if there's no match for its 1st arg in its 2nd arg. Typical formula
+
+=IF(ISNA(MATCH(x,y,0)),"no match",INDEX(z,MATCH(x,y,0))
+
+You could contrive an alternative like
+
+=IFERROR(INDEX(z,MATCH(x,y,0),"no match")
+
+but this is where TOO BROAD becomes a problem. It'd be VERY useful to see any & all errors other than #N/A as the formula result, especially #NAME?, #REF! and #NULL! since they'd indicate serious errors in the model.
+
+The ultracontrived alternative to avoid IF calls would be using a single-cell range, which I'll call q, holding the string *no match*. Then
+
+=INDEX((z,q),IFERROR(MATCH(x,y,0),1),1,1+ISNA(MATCH(x,y,0)))
+
+If you think this is better than the original IF formula, we have to disagree.
+
+Many have written a great deal about avoiding bushy IF-THEN-ELSE constructs, but no decent programmer would ever say avoid all IF statements.
+One other quibble. IF(condition,reference,"") uses less RAM during recalc and takes less time recalculating than REPT(reference,condition). The IF call tests the condition, and if TRUE, returns the reference, which already exists in RAM. The REPT call has to allocate memory and recreate the text value of reference when condition is TRUE.
+
+Anyone interested in recalc efficiency should check out http://www.decisionmodels.com/fastexcel.htm
+I didn't want to exceed the maximum post size (or the maximum size people were likely to bother reading) :)
+
+I like CHOOSE as an alternative, and was definitely considering posting an example of using it, but if I did that, I'd have to include an INDEX/MATCH, as well, and then where does it end?
+Isn't there a point where you shouldn't use excel anymore and use something like python with pandas and maybe a real database? 350.000+ rows sound like it.
+Please make sure you do your testing on a copy of the file :)
+Assuming you're serious, you know that's slow because of the external connections, not the speed of any particular formula, right?  Looking into closed files is veeery slow.
+
+I have a file that has similar number of connections, and I have an update cycle for it that willa actaully open all the data files, execute the formulas, freeze them, and then close down the data files.
+I can sort of understand your point, but then, where do you draw the line, trying to cater for the skill-level of *potential* future users of the workbook?
+
+Does Barb know about INDEX, or do I have to use VLOOKUP?
+
+Does Barb know about using Data Validation, or is she going to be stuck trying to update the list?
+
+What about Conditional Formatting?
+
+Or, since you raised the issue of maintaining code, do you avoid using `CASE` statements because a future maintainer only knows about using IF statements?
+
+Again, to borrow from the world of programming, if this is going to be a tool for use by many in the business, it should be well-documented somewhere
+I do, too (well, INDEX/MATCH, but basically the same) - you'll notice I said each time "Arguably, VLOOKUP is the better way to go"
+
+But I thought that I might provide some 'simpler' options for those who find themselves nesting IFs regularly
+I just repeat the mantra "If.. Then... Else..." until I find Nirvana. 
+Once you get too many nested ifs they can be a PITA to unravel to troubleshoot or modify, and they grow to the point where they are counter intuitive or easy to screw up.  If its 3 or 4, sure that isn't too bad.
+In general, AND can be performed by multiplication, OR can be performed by addition
+
+Salesman | Region | Sales Value
+-|-|-|
+Bob|North|$100
+Al|North|$30
+Bob|South|$50
+Bob|North|$80
+Steve|South|$75
+Bob|South|$100
+Steve|South|$150
+Al|North|$80
+Steve|North|$50
+Al|South|$40
+
+Bob AND North: `=SUMPRODUCT((A2:A11="Bob")*(B2:B11="North"))`
+
+* Which is `=SUMPRODUCT(({TRUE;FALSE;TRUE;TRUE;FALSE;TRUE;FALSE;FALSE;FALSE;FALSE})*({TRUE;TRUE;FALSE;TRUE;FALSE;FALSE;FALSE;TRUE;TRUE;FALSE}))`
+
+* Which is `=SUMPRODUCT({1;0;0;1;0;0;0;0;0;0})
+
+* Which is 2 (though in Excel 2007+ you'd probably use `=COUNTIFS(A2:A11,"bob",B2:B11,"North")` if that's what you need).
+
+* Want the total sales value for Bob AND North? `=SUMPRODUCT((A2:A11="Bob")*(B2:B11="North")*(C2:C11))`
+
+Al OR Steve: =SUMPRODUCT((A2:A11="Al")+(A2:A11="Steve"))
+
+* Which is `=SUMPRODUCT(({FALSE;TRUE;FALSE;FALSE;FALSE;FALSE;FALSE;TRUE;FALSE;TRUE})+({FALSE;FALSE;FALSE;FALSE;TRUE;FALSE;TRUE;FALSE;TRUE;FALSE}))`
+
+* Which is `=SUMPRODUCT({0;1;0;0;1;0;1;1;1;1})`
+
+* Which is 6 
+
+(Bob OR Steve) AND North: `=SUMPRODUCT(((A2:A11="bob")+(A2:A11="Steve"))*(B2:B11="South"))` 
+
+* Please note the extra set of grouping brackets, here. The OR parts are grouped together
+
+Be careful with OR, though - the conditions have to be **exclusive** for this to work, by which I mean you couldn't use this for Bob OR North, because rows 1 & 4 match *both* conditions, and therefore get counted twice
+Thanks :)
+
+On the matter of `concatenate` vs `&`, it's probably personal preference
+
+I learned that you could append text with & before I ever heard of the function. But I thought, for the post, the consistency of wrapping numeric values in `SUM` and text in `CONCATENATE` worked better
+
+The only reason I added that comment was because last time I used the function in a solution post on here, I got 2 or 3 responses to the post telling me that & is another option :)
+Hiding worksheets, good. Hiding rows or columns, bad.
+
+If you need very involved calculations, use separate worksheets to perform the calculations step by step, use the final results in other worksheets, and hide the worksheet with the calculations.
+You left out the INDIRECT call.
+
+Problematic. INDIRECT is volatile, so cells with formulas calling INDIRECT will recalc every time anything triggers recalculation even if nothing would otherwise have changed.
+
+Better if longer to use CHOOSE, e.g.,
+
+=VLOOKUP(x,CHOOSE(WEEKDAY(TODAY()),SundayTable,MondayTable,. . .,SaturdayTable),n,0)
+
+Now TODAY() is also volatile, so this wouldn't actually save recalc time. However, this is the sort of situation in which you should use Workbook_Open macros, in this case to store the value of the current date in a named cell as a constant.
+Yep, I quite like CHOOSE, too, and was seriously considering posting an example of using it.
+
+I particularly like CHOOSE when you're dealing with something like dates (which already have 1-12 inherent in `text([date],"m")`.
+
+And, because CHOOSE actually allows other functions, I've used TRUE/FALSE in CHOOSE in the form `CHOOSE([TRUE/FALSE]+1,[complicated_false_formula],[complicated_true_formula])`
+If the conditions could be presented as a range or array, then you could use
+
+CHOOSE(MATCH(TRUE,condition_range_array,0),table1,table2,. . .)
+
+with the added benefit that if no conditions were true, the formula would return #REF!
+There *are* some instances that nested IFs are the best answer, but I doubt your example is one of them
+
+I bet you could do that with SUMPRODUCT, rather than nesting IFs
+
+And, really, that's one of the reasons I posted this - when all you have is a hammer, everything looks like a nail
+
+Once you start to think about boolean logic in Excel, it opens up a world of possibilities
+I *did* say, in each example, that VLOOKUP was a good option, though I'd personally use INDEX in almost every case, if I want to do a look-up.
+
+I'm not sure that `#VALUE` is an added benefit to the grading example - I'd argue that's not very user-friendly if you're building a model for a non-technical audience. I'd use data validation to ensure the end-user doesn't actually enter a value outside the acceptable range (which has the benefit of allowing for a custom error message to be crafted) and, depending on circumstance, wrap the formula in an `IF(a2="","",`
+
+I take no exception, whatsoever, to your error-trapping example, though I wouldn't describe the `IFERROR` as contrived. It, too, has perfectly valid uses
+
+> but no decent programmer would ever say avoid all IF statements.
+
+I don't claim to be a programmer, nor do I say to avoid all IF statements - they absolutely have a part to play in many models. 
+
+My real point is that Boolean logic in a simple (flat) formula can be a much better solution than using tiers of nested IFs in many instances
+Please reread the post title :)
+
+You keep providing valid examples of using `IF`
+
+I have no objection to `IF` - you seem to think I actually said "Never use IF again"
+
+But if you're nesting `IF`s because you want to return *something* based on the value of a cell, there are better solutions.
+
+I happen to think that a Look-up (be it `VLOOKUP` or `INDEX` or `HLOOKUP`) is the better solution to this class of problem, and stated so in each of my 3 cases.
+
+The target audience for this post is not someone like you, who is comfortable hard-coding a 2D array in a `VLOOKUP`, but someone who uses nested `IF`s in the exact way I demonstrated in my examples, which I see time and time again, both in questions posted here and in workbooks I see from colleagues IRL.
+
+In fact, the "grading" example was taken from a workbook I saw recently which was being used as part of an employee evaluation worksheet in the workplace.
+
+EDIT: I changed the grading worksheet to use `INDEX/MATCH`, not `REPT` :)
+I forgot to mention, the reason I down-voted your post is not because I disagree with the substance, but because the link you posted is an add for a tool which seems vastly over-priced (is that your site? If so, you might consider upgrading the design - it looks like a mid-90s  Geocities page), it's not actually a page which does anything to clarify Excel calculation speeds or support your post.
+I like choose/match because it's less of a burden on system resources if you're working with volatile functions. Normally, I'd use something like: 
+=(a2="A")*90+(a2="B")*180+(A2="C")*360+(A2="D")*720
+
+And you're totally right-- it's so much easier to both understand and error check. 
+
+but if instead of them just being numbers, you have a few indirect functions or a now() function, those functions will always be re-evaluated. 
+
+One of the benefits of choose (I think) is that if the choice is B, the answers for A/C/D are not evaluated. Also because it's match and not index/match, you're just looking up one dimension so it ends up taking much less time. 
+
+But yeah-- grand scheme of things if you're not using volatiles, it's much better visually to use your 90*(a2="A") example. 
+
+
+
+2 hours?
+
+psysxet is ded, you killed him op :·(
+
+Now we need some volunteer to try on a, say, 200.000 row/15 file simulation.
+oh,i am full aware of the slowiness beeing a result of slow interconnected files. 
+There is, however a immense difference between time consumption of **formulas**.
+
+light example:
+
+100,000 rows with 100 columns
+
+3 parameter (A, B and Row 3) to fill a 100,000*100 Matrix
+
+You COULD use a sum(if) matrix formula for this matrix, but this will happen:
+
+Each formula will check each matrix row (100,000) and each column (100) and then add up the findings (1,0,0,0,0,1,00,0,0,0,0) etc.
+
+If you use a VLOOKUP(COMPARE) formula instead, however, you can split the computation time **dramatically**, since this combination searches the 100,000 rows UNTIL it finds the looking value and then do the same for th 100 columns and ONLY uses the found cell-adress-value.
+
+I have tested this on several occasions and there is, undoubtfully, a massive perfomance boost just by optimizing a simple formula if the file is big enough
+My point is more that you need to make sure everyone who is going to be working on the workbook needs to be "coding" to the same standard. If the standard is going to be "we use sum/boolean instead of nested ifs in these cases", then absolutely do it.
+
+That said, if there isn't a standard, I'd stay away from things where a quick google search won't be able to explain the formula. If I google vlookup or index, I can find lots of examples. Googling sum will probably not give me what I'm looking for.
+
+Don't get me wrong, I think its a very useful method for decluttering formulas, and will probably use it myself when I'm hacking around. However, I've spent enough time staring at other people's code, scratching my head, and saying WTF that I'm wary of using neat tricks in a situation where other people might need to maintain what I'm working on, even if the neat trick makes the code better.
+Tempted to send your post to some ex-colleagues cause I think you summed it so well. Then I remembered I don't want them on Reddit.
+
+(I shy away from INDEX/MATCH because I tend to give other people my work and they are more complex - but are more powerful and are a little slower)
+I can get up to 12 nested ifs and still navigate okay.
+
+That said, at design i usually keep it simple. Im not creating a new function with each if, im repeating the same argument for 12 different criteria.
+
+Perhaps that makes it easier for me to navigate the nests.
+In general is there any reason to use sumproduct over sumifs in AND only situations?
+I've rarely had an issue hiding columns in my 10 years of heavy use. Much more so with rows, because of the way that data grows in a tabular environment.
+You're right, I did leave out the indirect.   Didn't test my solution!
+[deleted]
+Data validation is EASILY BROKEN. Excel never prevents pasting into unlocked cells, and pasting bypasses data validation. Try it.
+
+We can differ about the user-friendliness or error return values. If you want something nicer, then
+
+    =IF(AND(T(A2)<>"",COUNT(FIND(A2,"ABCD"))),45*2^FIND(A2,"ABCD"),"the value of cell A2 isn't one of A, B, C or D")
+
+As for _contrived_, to me the contrivance is the additional range q and the multiple area INDEX call with the 4th argument. Not the IFERROR call.
+
+Another place IF constructs can't be replaced is array formulas. Maybe no one should use array formulas either, but there's another problem in /r/Excel about tax calculations when tax rates vary. I'll provide a simplified example. The following (including column headings) in A1:C5.
+
+    __Low__________High______Rate
+    ______ 0________10,000_____0%
+    __10,000________50,000_____5%
+    __50,000_______100,000____10%
+    _100,000_1,000,000,000____25%
+
+[Add more 0s to the right of B5 if you're concerned about capturing all the tax base.]
+
+If the tax basis were 123,000, tax would be 0 on the first 10,000, 2,000 on the next 40,000, 5,000 on the next 50,000, and 5,750 on the topmost 23,000. One array formula solution is
+
+    =SUM(IF(IF(base>B2:B5,B2:B5,base)>A2:A5,IF(base>B2:B5,B2:B5,base)-A2:A5)*C2:C5)
+
+This could be rewritten without IF calls as
+
+    =SUMPRODUCT(--((base>B2:B5)*B2:B5+(base<=B2:B5)*base>A2:A5),(base>B2:B5)*B2:B5+(base<=B2:B5)*base-A2:A5,C2:C5)
+
+but it's a significantly longer formula. Also, the array formula with the IF calls recalcs faster than the SUMPRODUCT formula with no IF calls. Finally, some Excel functions, notably and most annoyingly SUMPRODUCT, don't convert boolean TRUE/FALSE into numeric 1/0 automatically.
+Some of the points you make are valid. However, the string example using CONCATENATE and REPT is an example where the alternative is worse than the original. It was another case where a lookup would be better.
+
+Many nested IFs could be replaced by lookups or CHOOSE.
+I'm not Charles Williams.
+
+FastExcel has been around since the 1990s, and people who've been using it for decades rather prefer to avoid change for change's sake. It's a standard tool, perhaps the most recommended for Excel performance profiling.
+
+I may have linked to the wrong page. Perhaps the following would be better. Check out all the links at the top. http://www.decisionmodels.com/optspeed.htm
+Yep, agreed 100% - I just double-checked that `CHOOSE` *does* evaluate the actual choice, and not the others.
+
+Which gives it an advantage of both the nested IFs (where *all* branches are evaluated regardless of the point at which the test is TRUE - i.e `IF > ELSE IF > ELSE IF` evaluates all the branches even when the TRUE comes in the first IF) and, without even needing to test, my suggestion.
+It was *so* much more efficient, he knocked off early, and went to the pub :)
+Absolutely, there are faster and slower ways to construct formulas.  And you are probably going to see that difference much more clearly with closed file connections!
+
+My point was, you may end up getting a 50% reduction in process time via clever formulas, but improving the data connections might potentially give you a 50x performace increase.  I've had workbooks go from 30+min refresh times for closed file connections, to under 1min for open source-> data capture -> close.
+
+edit: noting that I'm working on a corporate network that's heavily utilized, not local files.  YMMV.
+I've heard, before, the suggestion that INDEX/MATCH is slower than VLOOKUP
+
+To me, intuitively, INDEX/MATCH is more efficient, since it only has a 1-dimensional range as the first parameter, and another 1-dimensional range for the MATCH (in the form which replicates the VLOOKUP functionality)
+
+A quick search (https://duckduckgo.com/?q=INDEX+vs+VLOOKUP+calculation+speed) turns up, as the top 5 results, 4 that say INDEX/MATCH is faster, and 1 that seems to suggest, initially, VLOOKUP is faster, but that is contradicted later on in the post
+
+Now, admittedly, most of these are simply opinions - I don't know of any authoritative answer - and there is a link to a site which claims a 5% advantage for VLOOKUP (http://www.decisionmodels.com/optspeede.htm) yet, paradoxically, still recommends the use of INDEX/MATCH
+
+That site also seems to be 15 years old (there's a discussion on Excel 97 vs Excel 2000)
+
+Do you know of ant resources that compare the 2?
+The big advantage SUMPRODUCT has is that it accepts functions:
+
+&nbsp;
+
+Sales Date|Region|Value
+-|-|-|
+1/01/2015|South|456
+2/01/2015|North|261
+3/01/2015|South|171
+4/01/2015|North|394
+12/01/2015|South|410
+13/01/2015|South|384
+14/01/2015|South|102
+15/01/2015|North|383
+16/01/2015|South|26
+17/01/2015|South|326
+18/01/2015|South|94
+19/01/2015|South|265
+20/01/2015|North|267
+21/01/2015|North|6
+31/01/2015|South|48
+1/02/2015|South|98
+2/02/2015|North|171
+3/02/2015|North|384
+4/02/2015|North|357
+10/02/2015|South|378
+11/02/2015|South|78
+
+&nbsp;
+
+You need the Sales in February AND South?
+
+    =SUMIFS(C2:C22,month(A2:A22),2,B2:B22,"South") #"The formula you typed contains an error"
+
+On the other hand
+
+    =SUMPRODUCT((MONTH(A2:A22)=2)*(B2:B22="South")*(C2:C22)) #$554
+
+Now, this is just a made-up example - I would undoubtedly Pivot this data to get the value, if this was a real work-sheet - but you can use just about any function(s) you like in SUMPRODUCT
+I've been writing spreadsheets for others to use for 30 years. Hiding rows or columns is OK in locked worksheets as long as maintainers are aware of them, madness otherwise.
+Perhaps, I should have been clearer - you use the SUMPRODUCT inside an INDEX statement to return the row number where all the conditions are TRUE
+
+Obviously, I am not familiar with your particular set-up, but I'll bet you a month of Reddit gold nested IFs aren't the only solution to your problem :)
+I don't agree that my suggested alternative is *worse* - I think it's 2nd-best to a look-up, because it doesn't require untangling nests of IFs
+
+I was seriously thinking about posting `CHOOSE` examples.
+
+I particularly like choose when working with dates as the 'test condition' since they already have an inherent 1-12 using `MONTH()`.
+
+As I said to another commenter, I thought the post was already straining the bounds of most people's TL;DR limit.
+
+I might make another post with CHOOSE solutions in a week or so.
+
+Or, if you feel like contributing to the community as a whole, instead of nit-picking my post, feel free :)
+Wrong.
+
+IF only evaluates its 2nd arg when its 1st arg is TRUE. You could test this using the following user-defined function.
+
+    Public Function foobar(v As Variant) As Variant
+      foobar = v
+      MsgBox Title:="foobar", Prompt:=CStr(v)
+    End Function
+
+and calling it in a formula like
+
+    =IF(A1=0,foobar(0),IF(A1=1,foobar(1),IF(A1=2,foobar(2),IF(A1=3,foobar(3),IF(A1=4,foobar(4))))))
+
+Enter 2 into cell A1, and the dialog in the foobar udf will appear only once.
+
+You may want to consider testing your beliefs about how Excel works.
+no, i didnt have any moment to try this, i will report back in 2-3 weeks, is what i actually ment :D
+i absolutly agree with you, as you can see in my commenthistory on r/excel i actually note this very thing you mentioned on every thread where cross-file-connections is mentioned.
+
+I, for the matter of fact, actually wrote a VBA Macro that does the updating like this:
+
+Open external file in existing application
+
+update formulas only for this file
+
+close external file
+
+repeat until master-file is updated.
+
+
+I only have personal experience where I have had it slow down by orders of magnitude when I have to convert to an INDEX/MATCH (my install is a bit shot at the moment so can't fairly test). Though I would argue that a VLOOKUP (if microsoft properly coded it) just uses one 1-dimensional array not 2. It is always the first column so no point regarding the rest of the 2d array and only regarding it as 1d.
+
+Of course INDEX can do a 2d array and would probably be much better than trying to do that with a V/H LOOKUP + probably an OFFSET
+see http://www.reddit.com/r/excel/comments/2slys1/never_use_nested_ifs_again/cnqxbfz
+Ahh gotcha, haven't got that scenario yet. Thanks and good explanation on the ways to avoid ifs, I use them a lot and will have to try to use some different methods.
+[deleted]
+Worse in the sense of RAM usage and recalc time. The advantage of the nested IF formula is that it returns immediately when it reaches a TRUE condition. Meaning it makes 3 comparisons on average. Your CONCATENATE and REPT example always makes 7 comparisons, and generates 7 temporary strings in RAM, and concatenates them. NBD when used just a few times in a workbook, but not good if used a lot.
+
+Anyway, I **am** contributing by nitpicking your post *if* there's a chance doing so could improve your posts in the future.
+Hello, 
+It's been ages in reddit's timescale, but can you explain your logic in the VBA and formula?
+2 weeks later, and here I am, wondering
+Have you tried it yet?
+OK, whatever makes you happy
+> Anyway, I am contributing by nitpicking your post if there's a chance doing so could improve your posts in the future.
+
+LOL
+
+Now I'm starting to think you're just a well-spoken troll!
+
+You've "informed" me that VLOOKUP is better than the solutions I presented (when I said that each time, myself), you've "informed" me that no programmer says to avoid IF (when I never said that), you've demonstrated that there are valid uses of IF (which, again, was never in question).
+
+And now you seem to think that I'm going to post in future with the thought, in the back of my mind "Will /u/hrlngrv like this post?"
+
+The post currently has about a 90% up-vote ratio, which suggests that the majority think that my post was good.
+
+Trying to prove that you're smarter, or better with Excel, than me is not helping the sub, at all.
+
+I guarantee that most people won't be (re)visiting my post, and reading all the way to the bottom of the comments where you've come in.
+
+So there's a close to 100% chance that I'm the only one who'll see your comments, and you already know what *I'm* starting to think of you.
+
+Make a new `pro-tip` post with which to point out all the ways I'm an idiot - you'll have a much better chance of getting the message out.
+
+Alternatively, you can just make sure never to read any of my posts again, if that helps keep your blood-pressure down.
+    
+The VBA implements a user-defined function which may be called from a cell formula. There's minimal logic to it: it returns the value it's passed, so foobar(x) returns the value of x, and it displays a message box dialog.
+
+The formula calls this user-defined function. If Excel's IF function evaluated both its 2nd and 3rd arguments, then the formula above would cause the message box dialog to appear 5 times. Try it. Only one message box appears, which means Excel's IF function evaluates either its second or third argument BUT NOT BOTH.
+sorry, there was absolutly no possibilty in the office for experimentation these days
+nope, i couldnt make time free at the office. There was hands-down, not a bit of downtime since i posted this :(
+Do I care what you think?
+Thanks a lot.
+Get absolutely fucked, /u/buy-in waited for you
+[Surely we'll have a report back soon](http://img.pandawhale.com/39559-OP-will-surely-deliver-We-just-4lFx.jpeg)
+What about now?
+And your journey to the troll-side is complete
+By the way; another way of confirming, if I am not mistaken, is by Evaluate Formula dialogue box.
+Hahah I was really just browsing the old thread and saw that his comment was 14 days ago
+
+We're all wondering...
+Hahaha

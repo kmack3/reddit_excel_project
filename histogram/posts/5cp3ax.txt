@@ -1,0 +1,157 @@
+Connect Adobe Acrobat with excel - Insert values from pdf in excel via VBA
+You can convert PDF to text files using an external exe (http://www.foolabs.com/xpdf/download.html) that you run from command line in vba. Then you load the text file into vba and parse into excel.
+I used this website to learn how to navigate the Adobe acrobat object model with vba.
+
+http://www.khk.net/wordpress/2009/03/04/adobe-acrobat-and-vba-an-introduction/
+There is. I recently had to hack something together to extract certain pieces of text from a bunch of PDFs and get that into tables in excel. The method I came up with was to use VBA to open an instance of Word, then use that to open each PDF. Word converted the PDF into text, and I could get at what I wanted by working through the paragraphs in Word to find/extract what I needed.
+
+
+When researching I found there were various tools/addons which could do it for you, but we don't get install rights at work, so had to make soemthing with what I had at hand.
+[deleted]
+Do you mind sharing more details of how you did this, maybe even the code, for those of us who are vba challenged? 
+SOLUTION VERIFIED
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+Sure. Here's the basic code:
+
+	Public Type TextDatum
+		MarkerType As String
+		WasBullet As Boolean
+		Text As String
+	End Type
+
+	Public TextData() As TextDatum
+
+	Sub ReadFiles()
+		Dim wrdApp As Word.Application
+		Dim wrdDoc As Word.Document
+		Dim oPara As Paragraph
+		Dim r As Word.Range
+		Dim Text As String
+		Dim ParaCount As Long
+		Dim SourceFileName As String
+		Dim SourcePath As String
+		Dim SourceFileNameMask As String
+		Dim OpenFileName As String
+	   
+		Set wrdApp = CreateObject("Word.Application")
+		
+		' Read source files
+		SourcePath = FormatPath(GetFolder)
+		SourceFileNameMask = "*.pdf"
+		
+		SourceFileName = Dir(SourcePath & SourceFileNameMask)
+		
+		Do While SourceFileName <> ""
+		
+			' Get source file
+			OpenFileName = SourcePath & SourceFileName
+			
+			Set wrdDoc = wrdApp.Documents.Open(OpenFileName, ConfirmConversions:=False, ReadOnly:=True)
+			
+			ParaCount = 0
+			
+			For Each oPara In wrdDoc.Paragraphs()
+			
+				Set r = oPara.Range
+				
+				If r.Information(wdWithInTable) Then 'We are only interested in text within a table
+				
+					ParaCount = ParaCount + 1
+					
+					ReDim Preserve TextData(1 To ParaCount)
+					
+					If r.ListFormat.ListType = wdListBullet Then
+					
+						r.ListFormat.RemoveNumbers NumberType:=wdNumberParagraph
+						TextData(ParaCount).WasBullet = True
+						
+					Else
+					
+						TextData(ParaCount).WasBullet = False
+				
+					End If
+				
+					TextData(ParaCount).Text = Trim(Application.WorksheetFunction.Clean(r.Text))
+				
+					TextData(ParaCount).MarkerType = MarkerType(TextData(ParaCount).Text) 'MarkerType is a sub I wrote that looked for specific markers in found text
+				
+				End If
+				
+				Set r = Nothing
+			
+			Next
+			
+			wrdDoc.Close (Word.WdSaveOptions.wdDoNotSaveChanges)
+			Set wrdDoc = Nothing
+			
+			' Obtain next file
+			SourceFileName = Dir
+			
+		Loop
+				
+		wrdApp.Quit
+		Set wrdApp = Nothing
+		
+	End Sub
+
+
+	Function GetFolder(Optional strPath As String) As String
+	' Ask user for a folder, return that folder path
+	' Adapted from http://www.mrexcel.com/forum/excel-questions/294728-browse-folder-visual-basic-applications-2.html
+
+		Dim fldr As FileDialog
+		Dim sItem As String
+		Dim sInitDir As String
+		 
+		sInitDir = CurDir ' Store initial directory
+		
+		Set fldr = Application.FileDialog(msoFileDialogFolderPicker)
+		 
+		With fldr
+			
+			.Title = "Select a Folder"
+			.AllowMultiSelect = False
+			.InitialFileName = strPath
+		 
+			If .Show <> -1 Then GoTo NextCode
+		
+			sItem = .SelectedItems(1)
+		
+			End With
+		
+	NextCode:
+		
+		' Reset directory before exit
+	'    ChDrive sInitDir ' Return to the Initial Drive
+	'    ChDir sInitDir ' Resets directory for Initial Drive
+		
+		GetFolder = sItem
+		
+		Set fldr = Nothing
+
+	End Function
+
+
+	Function FormatPath(FilePath As String) As String
+
+	' Ensure last character of FilePath contains a backslash
+
+		If Right(FilePath, 1) <> "\" Then
+			FilePath = FilePath & "\"
+		End If
+		
+		FormatPath = FilePath
+
+	End Function
+
+
+You have awarded one point to _SheikYerbouti_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Probably worth noting also, that I had to set a reference to Word in my VBA project to expose the Word object model. Tools menu in the VBA editor if someone wasn't already aware where to find it.

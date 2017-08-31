@@ -1,0 +1,62 @@
+Getting stock price data into Excel
+I can tell you how I do it on PC. It's very easy so I bet you can get it to work in Mac using similar methods. Maybe there is an easier method out there, but this works for me so far.
+
+* go to Google finance and search for the stock you are interested in loading
+* click "historical prices" in the left menu
+* look for "download to spreadsheet" on the right under export
+* copy that hyperlink, don't actually click or download the file
+* For reference: the link for Tesla (TSLA) looks like this: http://www.google.com/finance/historical?q=NASDAQ%3ATSLA&ei=WuMPWbHvKcepmAGg-L-ADw&output=csv
+* now open Excel 
+* Go to Data>New Query>From other Sources>From Web
+* Paste your link in the box and click OK
+* this is the weird part... it will try to load the file, but you will get an error (it will fail).
+* click Edit in the error box
+* now in the new box that opens you will have a new option (that didn't exist before) to "open file as"
+* Choose Csv Document and click ok
+* You will get a file preview, make sure the formatting looks good, then click "load"
+* Ta-da! you now have a live table of historical prices. You can play with this however you want. I have a function that finds the latest price and puts it in my dashboard and does calculations like how much I am up or down.
+* You may also want to look at the connection properties and choose to refresh the connection whenever the file opens so that it updates itself.
+
+You advanced users may want to skip those clicks and just use the power query code as follows:
+
+    let
+    Source = Csv.Document(Web.Contents("http://www.google.com/finance/historical?q=NASDAQ%3ATSLA&ei=WuMPWbHvKcepmAGg-L-ADw&output=csv"),[Delimiter=","]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Open", type number}, {"High", type number}, {"Low", type number}, {"Close", type number}, {"Volume", 
+    Int64.Type}})
+    in
+    #"Changed Type"
+Hi OP. I asked the exact same (or at-least very similar question as you did some time ago). The macro that is provided as a solution to my question works superbly and I am still using it to import stock data and to calculate the sharpe ratios for portfolio risk/return optimization. 
+
+https://www.reddit.com/r/excel/comments/54w6na/how_to_import_stock_data_from_yahoo_finance_into/
+Check out Excel 2013/16s new WEBSERVICE function which can pull data from websites, and FILTERXML can pair it down to just the fields you want.
+
+I've found it to be a bit harder to get to work than I'd hope but I only just started playing with it. There's a chance I'll be crushing it like my VLOOKUPs after too long. It's also super lean in comparison to external data sources option.
+quandl.com and tiingo.com are both great sources of historical price data. tiingo.com also has live market data from IEX that includes top of book and last trade. You're not a programmer, so I strongly recommend you switch to Excel on Windows to get access to the many free and commercial Excel addins not available on the Mac. For instance, quandl has an addin for pulling in data [3]. I have an open source addin [2] with ready to install binaries here [1] that can pull in live market data from tiingo and historical data from both tiingo and quandl. I've just added Google Analytics too.
+
+[1] http://spreadserve.com/s3/downloads.html
+
+[2] https://github.com/SpreadServe/SSAddin
+
+[3] http://help.quandl.com/collection/237-excel-add-in
+At work I have reason to use some VBA that is taken mostly from this superuser.com post: https://superuser.com/questions/745160/how-do-i-download-a-stock-price-in-excel-2013-is-there-an-equivalent-to-google
+
+If you really want to avoid VBA (it's not too bad I swear - ALT+F11, copy, paste, type formula into cell) there are also recommendations on there for installing plugins from the Office Store (I'm not familiar with how that works).
+You can download the data in excel format from Yahoo Finance. Not sure what numbers you're looking for exactly but the site has the date, open, high, low, close, adjusted close, and volume.
+
+Just look up the ticker symbol and click the "historical data" tab, set the time window, and hit download data.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+Brilliant work!

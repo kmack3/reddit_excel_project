@@ -1,0 +1,70 @@
+Is it possible to create a combo "If statement" that looks at more than one cell? For example: IF(C3=Yes AND C4>12% then....)
+just need to change the format a little
+
+    =if(and(c3="Yes",c4>12%),1,0)
+
+Where 1 is the number if both conditions are correct and 0 if none or only 1 condition is correct. 
+    =IF(AND(C3="Yes",C4>0.12),True,False)
+I had this exact problem yesterday, =countifs was the solution i ended up using
+i believe a "loop" through VBA would also work here
+Solution Verified
+
+Ah okay I'm going to try this right now. You guys are fast!
+When I enter that formula the computer wants to correct it by putting an * in front of TRUE. Do you know why?
+This should be higher.  From Op's description, sounds like a countif is the better solution.
+The last thing this guy wants to do is code in VBA
+
+You have awarded one point to _wiredwalking_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+You're meant to replace True and False with your own statements.
+
+Use this
+
+    =IF(AND(C3="Yes",C4>0.12),"True","False")
+Don't forget the "s", allows multiple criteria
+Okay I'm still getting an error message..here's my statement:
+=IF(and($B5=4130,D5=11) C5,0)
+
+EDIT: oh nevermind I was just missing that comma. This was super helpful. Thanks!!
+Well can you expand about = countifs ? ....or should I just look it up in Excel help?
+It sounds promising.
+Awesome, please reply with Solution Verified to award a ClippyPoint. 
+Sure, break this down:
+    =if(and(c3="Yes",c4>12%),1,0)
+
+C3 must equal "Yes"
+
+C4 must be over 12%
+
+Result is that the value of the cell with the formula is 1
+
+Then we use count on the column that has the formula
+
+Let's say this is our data:
+
+.|A|B|C|D|E|F
+:--|:--|:--|:--|:--|:--|:--
+1|John|Mike|Kelly|Janet|Bob|Jared
+2|Yes|Yes|No|No|Yes|Yes
+3|45%|2%|27%|100%|6%|18%
+
+The countifs function takes in the following input:
+
+criteria_range1 (column to compare to), criteria1 (value to look for), [criteria_range2], [criteria2], .....)
+
+According to the formula above, our criteria is that for each column within our dataset, row 2 has to have the value "Yes" and row 3 has to have a value bigger than 12%.  Let's try to put that into a countifs:
+
+    =COUNTIFS(A2:F2, "Yes", A3:F3, ">="&0.12)
+
+Result:
+
+    2
+
+Bonus tip: If you're comparing across the entire row, you can just use 2:2 and 3:3 as your criteria range
+Solution Verified
+Awesome! I can think of a million ways to start using this. 
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

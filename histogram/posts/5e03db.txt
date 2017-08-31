@@ -1,0 +1,55 @@
+Is there a way to make "software" with Excel? Details inside...
+Look into Microsoft visual basic programming. I went the same route and learned VBA for excel and then moved over to making programs in VB.net. they were cleaner and had a nice gui I could design. The program could do more than I ever thought and was quick to pick up given prior vba knowledge (similar syntax).
+
+Although this was also 10yrs ago so not sure if there are any newer programs that so the same.
+Microsoft Access might be something to look into. You can create entry forms and link it to your excel sheets. They can also work as little stand alone apps.
+
+As others have suggested VBA might be a good tool for you, the nice thing is that the office products all allow you to use VBA and connect between the different products (excel to access, access to excel).
+If you're at the point to ask this question, then your answer could come from outside of Excel.
+
+It's not too tricky to make a web app that uses php and sql along with html and web forms. 
+Excel has forms built in. They're not really any better than using Excel normally, unless you use VBA for input checking sanitation. But if you just want a different look and feel, enable the Developer tab on options and [go from there](https://www.youtube.com/watch?v=lV9X2K8uEYE). If you don't like that auto form, note all the other options on the Developer tab under Insert.
+You can format excel to look almost like anything.  You can even hide the excel ribbon, etc so that a user wouldn't  even know it was excel by looking at it.  Getting there takes alot of experience, and VBA expertise 
+Access.
+
+Web app, php.... sure, but to me, too much of a learning curve. IMHO though, Access is an easy step up from Excel, and you can build an entire GUI around it, forms for data entry, reports for output, SQL queries on demand to get whatever info management needs... plus, as another poster shared, interoperability between Excel and Access is damn near seamless.
+You can do it in excel using forms with VBA but only on the windows version. OSX office does not support forms.
+
+Source: built out a pretty extensive GUI to automate manual entry into legacy systems.
+Remember, pretty much any language has a way to read and write csv files, as does excel. This can be your bridge if you want to use another programming language.
+[deleted]
+is the same code - vba- for google sheets?
+If you want to stay withing the Microsoft ecosystem, then Access and Sharepoint allow for smoe data input over web/intranet.
+
+Alternative is using VBA in Excel.
+
+There are also lots of companies offering solutions that suport Excel.
+Thank you so much! 
+
+https://www.youtube.com/watch?v=hkDD03yeLnU
+
+What would be a good route to learn those?
+Thanks I'll message you when I'm off work! 
+Haha yes! Mine would pull from Craigslist listings and then modify bookmarks within my worddocument  resume and cover letter to customize those to the job postings. Then PDF them out and generate a draft email in outlook with my template text and keywords for that job. I'd run it and apply to a couple hundred jobs a day lol. There are a ton of resources out there on VBA but if you're already making excel programs you'll do great.
+I'm far from good at it.
+
+But what I did was spend ~$30 + $12/month for my own .com.  For that price, most include everything you'll need.
+
+Then I just did a ton of googling for source code. Lots of good info on Stack Overflow. Plus randomly finding someone's blog with a tutorial that I could understand.
+
+But it's pretty cool and exciting to make the first simple program. Where I can go to my webpage, "submit" a number, and check that yup, it's stored in my SQL table.
+
+If you're good with excel, then you're probably pretty handy with formulas. I mean, once you can have a user submit data, and store it and save it and retrieve it, there's no  limit to what you can do.
+
+Do you still have that code?  I would like to get a copy if I can.
+Would like a copy if possbile.
+Hey guys, sadly the code left the earth when my then old ass HDD bit the dust. I had plans to sell this type of program as an auto job application program. This was back when monster.com was taking off with their fill out an app once idea but wasn't hitting the mark. I used word document bookmarks to call the certain sections of the resume and cover letter and had different sentences depending on the industry the Craigslist job posts were coming from.
+
+Got the posts via RSS feed and Using the source code of the job post found the subject line and position titles. I then had to review each submission before sending but that took no time at all.
+
+VBA also plays well with Windows so I had it create folders for me and named them by job. Im sure there is an easier way to do this but it was a while ago and i didn't consider my self a true programmer. 
+
+What was funny though was that is start getting phone calls for jobs I applied to and had to use specific questions to figure out what the job was without letting the caller onto me. It worked as I was able to secure a sweet job I would stay at for 8 yrs.
+
+Good luck!
+

@@ -1,0 +1,54 @@
+Python use?
+You're going to want to get out of excel and start using data frames in pandas. Import the csv into pandas and do everything you would in excel. Then you can save it as a csv if you need the results.
+
+There is [another udemy course](https://www.udemy.com/learning-python-for-data-analysis-and-visualization/) I used to learn the data viz portion. It will get you through the basics of matplotlib, pandas, and seaborn.
+The closest I've came is exporting out xls files.
+
+I'm having someone on my team redo the backend of a lot of excel sheets so they rely on data feed csv files we create with Python instead of any fancy / heavy VBA.
+
+
+I've integrated python and excel for purposes of generating and consuming complex XML. It's Python accessing Excel data rather than the other way around though.
+
+- Essentially you end up operating in a python environment outside of Excel - accessing data inside excel (taking into account the restricted flavours of .xlsx files the various python packages can consume and generate) and potentially updating sheets inside excel.
+- there's no integration within excel itself - i.e. you're not able to make call-outs to python functionality from within Excel.
+
+Microsoft ARE considering full integration.
+
+https://excel.uservoice.com/forums/304921-excel-for-windows-desktop-application/suggestions/10549005-python-as-an-excel-scripting-language
+
+No one uses python for simple analyses on small data sets. It's much easier to do with Excel. 
+
+But try pulling dissimilar data from multiple systems and running a complex analysis on a few million rows in excel and you're gonna have a bad time. 
+If you are referring only to [chapter 12](https://automatetheboringstuff.com/chapter12/) then its definetely simpler to use VBA.  
+
+But if you need to do several integrated task like : 
+1. Scrap data from the web or some json files    
+2. Clean/Manipulate that data  
+3. Upload the data to some Database (in remote linux server)  
+4. Do some of those Sql and/or nosql things  
+5. Download the aggregated data and convert it to excel
+6. Beautified the reports (This step maybe easier with VBA, but if you already scheduled task 1-5 to run with python at 2 o'clock in the morning, you better integrate this step in python)  
+
+This step is merely an example, for some case maybe after step 4, you are better to analyze the data with power pivot/query  
+No, but I've been working R into my workflow with Excel over the last few years.  I'm a CPA, not a programmer.  For whatever reason, R clicked with me more than Python.   
+Do you have an example of code where panda is doing everything in python?
+I wonder if python would do any better in that scenario...
+can you explain what you kind of do with sql at work? I am trying to learn sql again and I am just curious what you would do with it in a work place/real world situation.
+I don't have an example handy, but if you can tell us what you're trying to accomplish I may be able to outline something for you. Most of the scripts I've written have been about 50 lines.
+try this site http://pbpython.com  
+
+BTW you will have better answer to this question in r/learnpython.  
+
+edit: Sorry u/epicmindwarp, I misread the question, I thought you're the OP :)
+> can you explain what you kind of do with sql at work?  
+
+[Usually just doing something excel called VLOOKUP :)](http://www.w3schools.com/sql/sql_join.asp)
+
+
+Take something very simple:
+
+Two columns of data, if the data in column F = column G for a row, put in column H "MATCH". Number of rows always changing.
+
+That's probably a decent starting point.
+I'm not sure this is something you'd want to approach in python like this. I would be more likely to return a total count of the matches or something like the list of ones that didn't match. Here's a [sample snippet](http://pastebin.com/fsun94KU) of your request.
+That's actually crucial information, means I should stick with VBA for now!

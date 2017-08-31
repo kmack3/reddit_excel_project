@@ -1,0 +1,39 @@
+6iei8q
+Importing multiple CSV files, of different formats
+Hi,
+I wish to be able to import CSV files in excel and then export, once manipulated.
+
+There are approx 8 different types of file which contain data in different formats.
+E.G. when using data importing, some column formats will be general, or text, or date etc...
+
+All the files are comma separated, they have different number of columns.
+I would like to be able to set different defaults for the data import tool, is that possible?
+Something like having a defined connection for each different type of CSV file.
+
+Thank you,
+Der
+
+Example:
+File A blabla.csv 
+12 columns, 
+Column C, E and G formatted as text
+Column B formatted as date yyyy/mm/dd
+
+File B blablabla.csv
+9 columns
+Column C formatted as date yyyy/mm/dd
+column D, e formatted as text
+
+etc... for multiple different csv files.
+
+I hope this helps.
+
+
+
+
+-------------
+Unclear. CSV is CSV at least in terms of what Excel parses automatically.
+
+What do you mean by different CSV formats? If all you mean is different numbers of columns, NBD. If instead you mean some use column separators other than commas, details would help.
+-------------
+Will do...

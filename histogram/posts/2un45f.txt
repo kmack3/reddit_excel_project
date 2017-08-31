@@ -1,0 +1,93 @@
+I can pull data and manipulate it accurately. But struggle making it presentable for high level presentations
+For this kind of data, if you want to put it all on one graph, I would recommend a [clustered bar graph.](http://www.excel-easy.com/data-analysis/charts.html) Along your X axis would be My Company, Competitor A, Competitor B, etc. and then percentages going up the x-axis. You may have to leave out the "total" column, simply because it'll throw off your scale, since it's in dollars instead of percentages. 
+The new Excel has Power View which has a lot of fancy report options (although I must confess that I have yet to use most of them).
+
+Reports are all about audience.  Like most of you (I assume) I think the data part is fun and the presentation is an annoying afterthought at best. Unfortunately nobody looking at your report thinks that way. 
+
+I have always found it really helpful to start by sketching out what a report will look like BEFORE I actually get all of the data. Ideally I can go back and forth with the person requesting the report a few times to nail the format down.  Once I know what it is going to look like I get to have fun figuring out how to fill in all of the vales. 
+
+This limits rewrites and focuses my data research to what is really important instead of the "get everything in case it's important" approach that I usually use. 
+
+To your question, sketching the report on paper let's you be more creative with the format and layout. I have found that Excel can do pretty much anything I want, it just takes some research.
+
+You shouldn't force your data into a chart just because it is available in Excel. You should be focusing on what you want to say and then figuring out how to say it. 
+
+tl;dr Start with the layout on paper to guide your data and get away from your preconceived ides of what Excel can do. 
+I would do this as 3 separate grouped column charts.
+
+Separate them because them because the groups don't actually relate to eachother in this context.
+
+[Like so.](http://i.imgur.com/Cr7JsGK.png)
+On mobile so I can't actually do this for you but here are a few of my thoughts for the table. 
+
+1. Format your totals to millions with one decimal. (make sure to note this in the header) 
+2. Format your headers to a dark fill and use white font and white borders to separate the headers. 
+3. Keep the black borders for the columns but alternate the row fill with light Grey and white. (ex. Table formats in excel). 
+4. If those are your real row categories separate the sections with a small white row between the dates, salaries, and countries. 
+
+Those are some basics for the table. I'd high recommend you using graphs instead for executive presentations which I hope someone can chime in on. Otherwise I can provide some tips when I get to a computer. Good luck and let me know if you have questions 
+You can use Conditional Formatting: color scale to not only spruce up the data but give 'at a glance' information about where the competitors' data is in relation to your company's.  
+
+"As you can clearly see, Competitor D is our closest competition, but we lead in every category."
+If you're looking for formatting advice I'd say:
+
+*Avoid having rows of different heights, however the header row can be taller than the data rows
+*Instead of black text, try a dark grey
+*If your data is in grey text you can put your headers in black or darker grey without having to bold them.  This can look better, but sometimes bold is better.
+*Use thin, lighter grey borders
+*If you don't have many rows of data, you can make all rows taller and vertically center all cells to give the effect of margins
+*Use custom colors and lower the saturation of your colors by making them slightly grey.  Loud, vibrant colors are straining to work with when you're trying to read data.  Plus you can save vibrant colors for bringing attention to important information.
+*If you alternate row interior colors make the differences between the two colors or shades as slight as possible while still being easy to differentiate.
+
+Kind of like this: http://imgur.com/m4AyawU
+
+Hope that helps.
+I'd do three separate bar graphs and use pivot slicers to tie them all together. 
+
+For chart and dashboard, I recommend [Stephen Few's books](http://www.amazon.com/Stephen-Few/e/B001H6IQ5M).
+
+
+How about a [stacked bar](http://betterevaluation.org/sites/default/files/2d_StackedColumnChart2.png)? Since your company represents the highest percentage in each metric I think it would work well. 
+the issue with a clustered bar graph in this situation, would be that there are about 30 different categories in total on the table. So the amount of clusters id have to make seem excessive.
+To add to an already annoyingly long comment... 
+
+I frequently end up with multiple report formats for the same data. Usually at least an overview/executive summary and a detailed view that I can use to answer questions. 
+
+Speaking of questions, another thing I try to keep in mind when designing a report is what questions the audience is trying to answer instead of what data they ask for. That helps me know what to focus on and highlight. 
+
+So for you, to make this into a chart (since you have so much data) you need to think about what questions are going to be answered with the data in order to consolidate or narrow the data. 
+i appreciate the time you took to do that. Though, if i put that on a power point, it is still 3 seperate graphs(4 actually since i didnt post the data for one grouping).  that makes things seems crammed and overwhelming 
+OP, if you want to use a table in your presentation, I would definitely recommend these tips. But, as /u/deathstarrynight said, it's *highly* recommended to use graphs instead of tables. Managers, especially high level execs, love pretty colors and lines, mainly because they're easy to read and grab information from quickly.
+It's unprofessional to present that much data in one view regardless of how you sex it up. Humans can only store [7 +/- 2 things](http://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two) in working memory, so that's the most independent data points you should provide. If you're presenting data points that form a trend, you can present more individual points but less than 7 sets of points. *[The Visual Display of Quantitative Information](http://www.edwardtufte.com/tufte/books_vdqi)* presents a bunch of other principles.
+
+You should first figure out the *smallest* sets of data you can present individually and only group them if they're incredibly simple.
+Can you lump them together into several categories on different charts? 
+If you are doing a ppt, then you can animate these so it had focus on one, then next, then next, then next. That way they are all in full view, but at different moments. 1 slide, 4 unique graphs. Would focusing one at a time work for you? 
+That is way too much info to digest in one slide.  Stick with the column chart.  Just show the most relevant points.  Take the three best points where your company performed best and show those against your competitors.  Title the  Sales (millions of USD) and use the labels on the left on the x-axis.  Format it in your company's colors for bonus points.
+
+Your data should show a clear and concise story.  Most people will trust it when presented with confidence.  You can include the entire table of data in an email with the entire .ppt afterwards for those that are interested in a deeper dive.  
+well the difficult thing is, i have to keep my powerpoints small without tons of slides.  so if i seperate it out too much, then while it may look pretty, it will be 1000 slides long.
+I agree, this is a good method.
+
+I don't really see a good all-encompassing graph method inside of Excel.
+
+Unless he wants to try [Sparklines for Excel](http://sparklines-excel.blogspot.com/)... But I don't see anything in there that's standing out
+Sounds like you have *too much* data, which rarely happens. You have limited time with the execs, so I'd just pick the absolute most important information and put it in one graph. You can fill the graph, but still make it readable. 
+Whittle it down. You are trying to convey too much information. Communicate the method and the conclusions, provide the data as an attachment that no one will bother looking at. If you try to give this all to them in a meeting, they will walk out with nothing. They should walk out with your conclusions/recommendations.
+
+Conclusions: 
+
+1. Overall we are ahead of competitor A by x, B by y, C by z.    
+2. Our strongest market is the widget produced in this location over the best competitor by 6%.  
+3. Our weakest market is bleh.    
+As others have essentially said, your job is to tell a story now. Execs don't need "all the data," and you fail if all you do is format a spreadsheet and dump it in ppt.
+
+They don't need proof that you did work, just attach the xls -- you're supposed to tell them something that matters, hence presentation. Its difficult to get specific because you provided a fake example, but I'll bite.
+
+I'd start by turning total $ by market into a graph that makes sense. I'd call out your highest and lowest market shares, and any notable trends. Graph + three-five bullet points = slide 1 (preface this with lead slides on what you're presenting)
+
+Next slide: competitive view, what competitors have more market share than us? What's trending up / down? SIMPLE table or graph, some lucidly clear bullet points on state of the market = slide 2
+
+Slide 3 = conclusions, next steps, questions etc. There should be very little data here.
+Good idea. And if anybody cares make the rest of the data available in a user-friendly report generator like Power View.
+I've always heard it as 'nobody cares about your data, they care about the story'. You're the only one who needs to see the ridiculous amount of information it took to get you to this point, they need to see the pointed, designed, and thoroughly planned presentation of the critical data, and what it means.

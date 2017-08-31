@@ -1,0 +1,13 @@
+I have a list of 10 emails in column A and a list of 20 emails in column E. The information in E is related to the data in F and G. What is a formula to find matching emails in E that are in A and then populate Column B and C with the data that is found in F and G that matches that same email?
+In B4: INDEX($F$4:$F$10,MATCH($A4,$E$4:$E$10,0)), and copy down.
+
+In C4: INDEX($G$4:$G$10,MATCH($A4,$E$4:$E$10,0)), and copy down.
+
+Enter this formula in to B4, = VLOOKUP(A4,$E$4:$G$10,2,0) and fill down. Use the same formula in C4, just change the "2" in the third argument to a 3 and fill down.
+> =VLOOKUP(A4,$E$4:$G$10,2,0)
+
+PERFECT!
+Happy I could help, please mark as solved and write solution verified.
+> Solution Verified
+
+Solution Verified

@@ -1,0 +1,155 @@
+[Reward offered: $50] Generate a list of file names, dates and word counts
+> Mods, feel free to redirect me and remove this
+
+This post is okay to stay as we do not directly prohibit this.
+I tried. It's not perfect yet but this is my output with 2 folders:  
+http://i.imgur.com/kvzU5rB.png  
+  
+My Google-fu is pretty strong so I can hardly take any credit but it did take me a while to pierce everything together.  
+  
+I took the following steps:  
+* Reference Word application in VBA (Alt-F11, Tools, REferences, search for Microsoft Word x.0, check)  
+* Create a macro to Count words
+* Create a macro to Loop through Folders  
+* Create a macro to Loop through Files  
+* Create a macro to bind everything together and output  
+  
+This uses hardcoded Masterfolder. Your Excel file can't be inside the Masterfolder. My Masterfolder is C:\Temp\WordFiles and every folder and file is below this folder.  
+  
+Continued below.
+
+
+
+OP needed a solution, it was provided, the problem was interesting, but one of the Mods, /u/epicmindwarp, who obviously is a pro at Excel, provided a solution sooner than others. And now the post is downvoted.
+
+Keep it up, /r/excel community, great spirit.
+I will make this for you later today as currently I am at the airport.
+
+PM me your email please so I can send it to you later.
+Create a new project in VBA (Alt-F11 again) and just paste this in:  
+Macro 1:  
+    
+    Option Explicit
+
+    Sub get_wpm_errorcount(ThisDoc As Object, itemNumber As Integer, LastLine As Integer)
+    'Dim ErrorCnt As Integer
+    Dim WordCnt As Integer
+    
+    WordCnt = ThisDoc.Range.ComputeStatistics(wdStatisticWords)
+    Cells(LastLine, 4).Value = WordCnt
+
+    End Sub  
+
+  
+Macro 2:  
+  
+
+
+    Sub Demo()
+    Dim fso As Object 'FileSystemObject
+    Dim fldStart As Object 'Folder
+    Dim fld As Object 'Folder
+    Dim fl As Object 'File
+    Dim Mask As String
+
+    Set fso = CreateObject("scripting.FileSystemObject")
+    Set fldStart = fso.GetFolder("C:\Temp\WordFiles") ' <-- Change your Master folder here
+
+    Mask = "*.docx"
+    Debug.Print fldStart.Path & "\"
+    ListFiles fldStart, Mask
+    For Each fld In fldStart.SubFolders
+        ListFiles fld, Mask
+        ListFolders fld, Mask
+    Next
+    
+    MsgBox "Done!"
+    End Sub  
+
+Macro 3:
+
+    Sub ListFolders(fldStart As Object, Mask As String)
+    Dim fld As Object 'Folder
+    For Each fld In fldStart.SubFolders
+        Debug.Print fld.Path & "\"
+        ListFiles fld, Mask
+        ListFolders fld, Mask
+    Next
+
+    End Sub  
+
+Macro 4:  
+  
+
+    Sub ListFiles(fld As Object, Mask As String)
+    Dim fl As Object 'File
+    Dim FileCount As Integer
+    Dim LastLine As Integer
+    Dim wordApp As Word.Application
+    Dim wordDoc As Word.Document
+    
+    FileCount = 0
+    
+    For Each fl In fld.Files
+        If fl.Name Like Mask And Not fl.Name Like "*$*.docx" Then
+            LastLine = Range("A65536").End(xlUp).Row + 1
+            FileCount = FileCount + 1
+            Debug.Print fld.Path & "\" & fl.Name
+            Cells(LastLine, 1).Value = fld.Path & "\" & fl.Name
+            Cells(LastLine, 2).Value = fld.Name
+            Cells(LastLine, 3).Value = fl.Name
+            Set wordApp = CreateObject("Word.Application")
+            Set wordDoc = wordApp.Documents.Open(fld.Path & "\" & fl.Name)
+            Call get_wpm_errorcount(wordDoc, FileCount, LastLine)
+            wordDoc.Close (wdDoNotSaveChanges)
+            wordApp.Quit
+            Set wordApp = Nothing
+        End If
+    Next
+    End Sub  
+  
+Let me know if you have any questions.
+
+
+Eh, no need to upvote the post now, it doesn't need any exposure (if anything, downvoting it ensures the "ongoing" threads have higher visibility). It'll still turn up in future searches regardless of downvotes, that's what matters!
+People also downvote it to reduce visibility i.e. if less people see it, then less people are working on it, i.e. more likely that they will get there first.
+
+But it's not an issue, the post is at +2 now.
+Sorry, got someone one the case already! No need to waste your time, but thanks!
+Darn, just before you replied /u/epicmindwarp sent me a blank Excel file by PM where I just had to plug in the path and it did everything automagically. Way easier than copy/pasting macros in VBA. Still, I'm sending you 3 months of gold for your efforts, thanks a bunch!
+I was curious as to how this worked and tried to reproduce your steps with a new spreadsheet and copying the macro's into VBA however it threw up a compile error for me on the first line of macro 4.
+
+The error is below and i'm using excel 2010 in case that matters.
+
+User-defined type not defined
+
+    Sub ListFiles(fld As Object, Mask As String)
+
+I was wondering if  /u/epicmindwarp would upload his result so others we could see how their working result was built.
+This works on Networkfolders as well as I can see in your screenshot.  
+You can use Excel itself to format the Foldername to a date if you need to (SUBSTITUTE(A2, " ","-"))
+Any chance of sharing the file? 
+Nice! /u/epicmindwarp; must be nice to have a file handy. Or did you create from scratch?   
+No worries - I learned a lot this morning in the 45 mins this took me, and that's my goal for 2016 - learn something new everyday!  
+  
+Thanks for the gold!!
+> automagically
+
+automagically > automatically
+Ill see if I can help you tomorrow at work.
+Which macro did you try to run?  
+I'm calling Demo() from the Sheet (ribbon - Developers - Macro's).
+I had the initial loop to hand, added the second loop, and then had to write out the connection to word - so it was a bit of both!
+
+Learned something new too!!
+I was going to delete the thread, but who knows, it might turn up if someone searches for something similar in the future, and your code will probably come in handy :-)
+I got it working, for some reason even after doing this step
+> Reference Word application in VBA (Alt-F11, Tools, REferences, search for Microsoft Word x.0, check)
+
+It decided to untick the box, however closing excel, reopening VBA and re-ticking the box worked.
+
+Great solution thanks.
+Hey man, any chance you can post publicly what you sent him so others can benefit from this question? 
+I dont see his answer posted. Did he DM you? If so, do you mind sharing because I could benefit from this as well.
+Nice, good job!
+I was referring to the series of macros above, which - presumably - do the job. I'm not comfortable sharing the file I was sent in a PM, since it was paid work and therefore not mine to give around.

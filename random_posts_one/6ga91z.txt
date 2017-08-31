@@ -1,0 +1,19 @@
+6ga91z
+Calculating average year in pivot table only for cells with year present
+I have a pivot table. The source data has a "year" column - not every row however has an entry for the year. I want to show the average year on my pivot table, but I don't want Excel to treat the lack of a year as a 0 when calculating the average. How do I get it to only calculate the average of cells with a year present in a pivot table?
+
+
+-------------
+If years are in Col A
+
+`=AVERAGEIF(A:A,<>0,A:A)`
+-------------
+What do you mean by 'show the average year'? Because [Excel alrady doesn't treat lack of years as 0](http://i.imgur.com/Eusnwji.png). Now if you're looking to not include *values* without a year [you can set up a filter](http://i.imgur.com/bRFZy0g.png).
+-------------
+Found the issue - I had the years as "number stored as text" - this cause an issue with a #div/0!. One of the other columns I had ended up with 0's in the year column... >< many thanks!
+-------------
+Found the issue - I had the years as "number stored as text" - this cause an issue with a #div/0!. One of the other columns I had ended up with 0's in the year column... >< many thanks!
+-------------
+Cool, cheers
+-------------
+Gotcha - numbers stored as text sometimes gets converted to numbers as some formulas expect numbers. But Pivot Tables accept anything, so you have to be careful with those formats.

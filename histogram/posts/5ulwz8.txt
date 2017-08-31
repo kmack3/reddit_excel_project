@@ -1,0 +1,13 @@
+How do I get excel to only show 1 page?
+You cant stop at one page, but you can adjust the layout.
+
+Go to VIEW in the ribbon, and pick Page Break Preview
+Highlight the row after the last one you want to show,  press ctrl+shift+down to highlight all rows below it, then right click and select "Hide". 
+Select the area you want to print by clicking and dragging over the cells. 
+
+Go to: Page Layout > Print Area
+
+Then go to: View >Page Break Preview, drag any dotted lines to where you want them.
+[deleted]
+You can then also hide all the columns to the right you don't want. It's a good strategy for sending out reports. 
+However it causes the hidden rows to be calculated, sometimes causing unresponsiveness

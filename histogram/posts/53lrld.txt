@@ -1,0 +1,79 @@
+Microsoft hosting Excel World Championship
+will they be streaming this on twitch?
+Is this the first time they're running such a competition?
+
+Would be interesting to see previous years' questions, if they were released...
+Just to make sure I'm not missing something....residents of the US have to enter the "international" competition, right? I'm not seeing USA listed as a country in the list provided.
+Thanks for the link!
+
+Haha, yikes. Four rounds. I was planning to get my butt whipped in ModelOff again this year, and that's just two virtual rounds. This one is double the masochism! 
+Hah this looks fun! Hadn't heard about it before I'm totes gonna sign up for my country!
+I would love to see the problems. Whatever happened to the challenge?
+I'll be sure to share this at the office
+How do I go about preparing for something like this? I'd love to participate but I don't think I'm remotely ready yet.
+That's so geeky, I love the idea!
+I didn't even know this was a thing... TIL
+Grand Prize: a trip to Seattle, USA and a meeting with Excel Product Leads to provide feedback on the next features added to Excel.
+
+**LAME!**
+Get your popcorn ready
+Not really from Microsoft, but it's from another Excel competition that's held every year.
+
+http://www.modeloff.com/questions/
+
+I learned Monte Carlo simulation by doing this, basically.
+Yeah I was wondering about that too.
+Yes.  If your country is not listed you have to enter the "International" competition.
+I'm really not sure.  I've watched a couple of ModelOff competition videos on Youtube and noticed that competitors really know how to manipulate data into formats that they need and have tons of formulas memorized.
+
+For example, turning a date (5/12/2009) into "2Q 2009" in another cell via 1 formula.
+How else am I going to get them to make undo specific to each workbook?!
+Whoever wins, please pitch MEDIANIF and/or calculation of medians in a pivot 
+I mean, I would legitimately watch if this was streamed on twitch, with commentary. 
+can you please elaborate on monte carlo simulation
+Just be glad it isn't universal between other Office instances (e.g. Excel and Word).
+
+Just imagine...
+Things I would love to see:
+
+1. Spreadsheet specific undo
+
+2. Some way to FIND or SEARCH the nth instance of a string in a single cell.
+
+3. Approximate MATCH that works with text strings and not just numbers
+
+4. INDIRECT that can read data from closed External files
+
+5. Ability to insert multiple pictures at once and still treat them as pictures (currently only the first is treated as a picture, and the rest are treated as objects)
+
+6. A DEDUCT function, cause I'm lazy
+
+7. Why does the NPV function not recognize a year 0 when IRR does?
+
+8. Why is DATEDIF undocumented when it's so useful?
+Array formulas not good enough for you!?
+Vlookups()
+I wouldn't even need commentary, I'd just be interested in watching
+It's basically the use of Excel to create simulations where you generate values given a particular probability and probability distribution.  Your goal is to aggregate the information from the simulations to generate a simulation-specific probability distribution where you can use to answer questions such as "probability of winning", "probability of getting a profit of at least $100,000", "probability of a loss".
+
+Some simulation methods involve pre-generating the random probability variables, but ModelOff encourages the use of Data Tables to conduct simulations.
+
+The following problems are ModelOff challenges that dealt with Monte Carlo:
+
+1. Use Excel to calculate the chances of winning a Snakes and Ladders game
+http://www.modeloff.com/portfolio-item/snakes-and-ladders/
+
+2. Use Excel to model a custom dice game
+http://www.modeloff.com/wp-content/uploads/2013/04/Monte-Carlo-Question.pdf
+When you have lots of random numbers, you can do some cool things with them. Say you generate two random numbers between -1 and 1, with equal probability. Call the first one x and the second one y. Plot them on a graph. Do this a thousand times, and the split them into two groups: one where x^2 + y^2 < 1, and the rest. If you count up the number of points in the first group, and divide it by the total number of points, you get approximately pi. All just from making a bunch of random numbers!
+Just want to point out that this is one of the MANY examples of things you CAN but not necessarily SHOULD do in Excel. There are numerous turn key programs as well as libraries out there for Monte Carlo simulation that are both significantly more robust and easier to develop in over Excel. What's best depends on your needs but it's virtually certainly never Excel.
+
+Source: run a simulation company
+Array formulas are great but there are some formulas I can't use in Tables.
+Of course your source of drops need not be a random number generator. Although this is sometimes called a raindrop experiment, one can use [actual raindrops](https://www.youtube.com/watch?v=I-BC_vI4CAE). 
+Very true. With a bit of prodding, Excel can be your accounting system. It can be your HR system. It can do linear programming. It can do simulations.
+
+But not at all particularly well.
+
+But, when you have a hammer, everything looks like a nail :D
+Haha, yeah I was just joking. While array formulas can be useful, it's usually much better to use a built in function anyway. Should have put a /s at the end of my comment!

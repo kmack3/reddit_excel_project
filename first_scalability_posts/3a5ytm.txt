@@ -1,0 +1,38 @@
+big
+3a5ytm
+Copying big list of corresponding data to another spreadsheet with same data, but in different order
+
+So I am given a list of data (SKUs) in a column (spreadsheet 1), and must transfer data (spreadsheet 2) giving the URL of each SKU to the corresponding SKU in spreadsheet 2. 
+
+So for example,
+Spreadsheet 1 has:
+PR00010171_BK |||| BLANK
+
+Spreadsheet 2 has: 
+PR00010171	corresponding.url
+
+but they are not in the same rows, so a copy and paste is not possible. Does anyone know how of any functions that I can use to quickly use the SKU to find the corresponding URL and drag it down or something of the sort? Thanks, any help would be appreciated.
+
+
+-------------
+I think we need a bit more information. From what I'm looking at a VLOOKUP or something similar will be used.
+
+Are you able to share a screenshot / a copy of each spreadsheet? you can hide the sensitive data if you want.
+-------------
+could do something like
+
+=INDEX(Spreadsheet2!A:A,MATCH(LEFT(Spreadsheet1!A1,10),Spreadsheet2!B:B,0))
+
+wonder if something like that would work.
+-------------
+sure thing, http://i.imgur.com/WEFtZwP.png
+
+spreadsheet 1 is to the left, and spreadsheet 2 is to the right. 
+
+currently, I am copying the SKU of spreadsheet 1, finding it in spreadsheet 2, and copying the corresponding URL into spreadsheet two.
+-------------
+i was thinking the same, but to save from using a helper column i would use something like this...
+
+    =INDEX(Sheet2!A:A,MATCH(IF(SEARCH("_",A2,1)=2,RIGHT(A2,LEN(A2)-2),A2),A2:A16,0),1)
+
+using the if function with search you can eliminate the s/m/l underscore prefix 

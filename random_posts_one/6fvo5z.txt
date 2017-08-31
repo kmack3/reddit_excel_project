@@ -1,0 +1,34 @@
+6fvo5z
+Filter function help
+Heres my issue, no idea if theres an easy way to do it or not..
+
+I want to filter a list by a certain parameter, but make it so no matter how its filtered, it keeps certain lines. For clarity: I am making a spreadsheet for a client and the client is distributing it to thousands of people and dont want their distributees to overlook certain lines.
+
+Example:
+
+Group 1
+
+Group 2
+
+Group 3
+
+Group 4
+
+All Groups
+
+
+Is there a way to filter Group 1 line items while keeping All Groups no matter what? (Client customers cant uncheck All Groups out of the filter or its not an option to uncheck or its locked, etc.)
+
+
+-------------
+If the All Groups item is at bottom like in your example, then yes. You can define the filter range to not include those rows. I.e., if the all groups info begins at row 50, then turn off your Filter, select rows 1:49, and then re-apply the filter. Now the filter will only affect things in the first 49 rows.
+-------------
+This would solve my problem if it wasnt for one thing: The client is hoping to use the spreadsheet as a database of sorts, but one that they can add to, so basically I have to design it with the assumption an absolute moron will be using it and they probably wont be able to understand the concept of inserting a row and carrying the equations through.
+-------------
+Can you put the individual groups in a xl Table, and then the All groups stuff below (but not in table)? If the data is same width, then as you add rows to the table, XL will auto-shift the All Groups info down, and will also be expanding the formulas you need. (Select last cell in table, and hit Tab to create new row). You could either write this small bit of instructions for your users, or perhaps a small macro (just record the above steps) and assign to a button?
+-------------
+Hmmm interesting idea. Instructions were going to be part of the finished product so this may work. Ill try it when I get a chance. I just made a rough draft idea of the concept and it seems like it may do the job Im looking for. 
+
+Thanks so much for the help! 
+-------------
+I actually might put the All groups stuff below in a table too. My biggest concern is that if there are too many line items, things could get too busy/cluttered. But yeah, thanks again. 

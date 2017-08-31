@@ -1,0 +1,85 @@
+large
+665i9q
+Want to reduce calc time with large data table
+
+Hello, I have a large data table that has 180,000 rows and 11 columns that I am currently using a SUMIFS formula to gain information from.  The formula is matching 3 different criteria to pull back the data I am looking for.  Currently it looks like this:
+
+=SUMIFS('Data'!$J:$J,'Data'!$A:$A,MS!$B19,'Data'!$K:$K,MS!BK$11,'Data'!$C:$C,MS!$C$5)
+
+I then have this same formula repeated in 23,650 other cells to pull back data related to the next 3 data points.
+
+To calculate all of these formulas, it currently takes 2 mins each time I enter in new data, which is much too long.  I've been trying other ways to try and knock this time time and so far this is the best I have been able to come up with.  I've also tried doing INDEX/MATCH and GETPIVOTDATA instead of the SUMIFS, but the calculation times using those are significantly higher than the SUMIFS formula.
+
+Unfortunately this spreadsheet is being completed on my work computer, which is not very fast and does not have a lot of memory.  I will not be able to change my computer so I'm looking for other options on how to calculate this template more efficiently.  Any recommendations are much appreciated.  Thanks for your time!
+
+
+-------------
+Just turn the workbook calculations to manual in options and enter all your data. Then you can refresh the workbook and it will only calculate once. 
+-------------
+And have you tried a pivot table for this?
+-------------
+Load the table into power pivot. It will do a 3 criteria sum if on that number of rows in less than a second for sure.
+-------------
+Is it that this formula will only ever return a single value from column J?
+-------------
+Excel isn't geared up for that heavy amount of calculations. Load it into MS Access or some other program. Personally, I'm a heavy SAS user, it would take about 2-3 seconds to process that much data in SAS.
+-------------
+Could you create a macro for it.  So the macro will creates the formula in all the required cells.  work out the answer and then save it all as a value.   It would still take a while for it to work out but it would only do it when you want to run the macro.
+-------------
+Another thing that should dramatically speed it up is to turn the source data into an actual "Table" (select data, click "Insert", pick "Table"). Right now each of the SUMIFS formulas is searching all 1 million + rows in the worksheet for each criteria. If the data is in a table, the formulas just search until the end of it (row 180,000). And the table will resize as you add data to it.
+
+This would also make your formulas a lot more readable, especially if you give the table columns descriptive names. And the formulas will still work even if the columns in the source table get rearranged:
+
+=SUMIFS(SourceTable[ColumnToSum],SourceTable[CriteriaCol1],MS!$B19,SourceTable[CriteriaCol2],MS!BK$11,SourceTable[CriteriaCol3],MS!$C$5)
+-------------
+You have two solutions that will work. Get Access and use that instead of Excel to pull the data together. Your second one is usb thumb drive and moving the file to a faster computer. Other than that, you are sol. Sumifs runs quickly compare to the other excel functions.
+-------------
+Load the table into power pivot. It will do a 3 criteria sum if on that number of rows in less than a second for sure.
+-------------
+That is how I have it setup right now. The problem is that I need to consistently change the data and recalc.  I can't do the calc all at once either because the data point information changes each time as well if that makes sense. 
+-------------
+Yes I have, that's when I tried the GETPIVOTTABLE function, but it ended up taking more time to calc
+-------------
+I need to figure out how to use Power Pivot. Will it work well for my situation?  Let me expand a bit. 
+
+I have a data set that will not change, this is currently where the SUMIFS are pulling from. But I also have other data that I dump that will change for every calc that I need to do. It's this data that actually makes up what the three data points to reference will be. 
+
+With Power Pivot will I be able to dump data quickly to do these calculations?  Speed is key here as I will need to do about 70 separate dumps and calcs 
+-------------
+Yes, after matching up the three qualifying points, it will only return one result from column J
+-------------
+Unfortunately I do not have access to use SAS at work, plus this needs to be a template that multiple users use
+-------------
+That doesn't sound like great options 🙁
+-------------
+That doesn't make sense.
+
+If you start with one set of data, all calculations would be based off that data, and if your formulas use only nonvolatile functions, pressing [F9] (recalc) would do nothing since the data hadn't changed. Call those initial formula results A.
+
+Then you enter some new data, and the formulas would recalculate and give updated results, call these formula results B. However, if you enter more data, the formulas would update again, and you'd then have formula results C. And so on.
+
+What do you mean by _the data point information changes each time_?
+
+FWIW, there's another alternative, use a cell to indicate whether formulas should recalculate or not. Name the cell RECALC. Then convert all formulas to __=IF(RECALC,SUMIFS(...),"pending")__. When the RECALC cell contains or evaluates to FALSE, 0 or is blank, the formulas will ___quickly___ return __pending__. When the RECALC cell contains or evaluates to TRUE or any nonzero number, the formulas will recalculate no slower than they would usually.
+-------------
+ Can you give me something more to work on regarding the overall sheet structure,  
+
+- what do these Sumifs do? 
+
+- How big was the pivot table eventually? 
+
+- can this not be spilt into smaller chunks and  if not,  why not? 
+
+- Can some elements of the calculations be performed up front or using power query? 
+-------------
+Still too hard to say based on your description. The data analysis way of doing this would probably be to pull all 70 data sets into the data model and then calculate the 70 expected results. 
+
+Could be set up via Power Query to be refreshable from one click, would depend on how much data gets pulled in. A guesstimate is 10k rows a second. 
+
+Can you post a screenshot of the main data and one of the 70 files? Then a simple description of what you are doing, i.e. "Sum of every thing in column x where column a = New York and column b = 2015. 
+-------------
+Consider creating another 2 column table composed of: first column: a concatenation of columns A, K and C and second column the values of column J. Then sort this table alphabetically by its first column. Then rather than a SUMIFS, use a VLOOKUP on this table with TRUE as the 4th argument. Should be nice and fast.
+-------------
+I've thought about this option, but at this point in the worksheet I've stripped out any other calculations that wouldn't need to recalc every time.
+
+I have two data sets, one that does not change, and one that changes every time I need to calc.  The function I listed above needs to reference data from both the data set that changes as well as the one that does not.  Every reference in the formula that I have to 'Data' is the unchanged data source.  But the values in B19, BK11, and C5 in the 'MS' tab will change every time.  Is there a better way to break this up?

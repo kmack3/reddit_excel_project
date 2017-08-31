@@ -1,0 +1,188 @@
+Just a question, how many of you afficionados have gone though stages of constructing ridiculously conflagrated formulas? Here's one of mine, needing to keep it within length allowed by Excel 2003.
+Note: The flair should be changed to discussion on this one :)
+
+But...
+
+Haha, I love how these turn out. They're usually not very "complex", more just tedious.  Here's a funny example of someone who didn't want to reformat their data, so I wrote a formula that worked around it.
+
+And then reformatted the data and showed them how simple the formula would be :)
+
+https://www.reddit.com/r/excel/comments/3xtymb/using_vlookups_for_a_data_download_with_too_many/cy8sh58
+
+Be sure to check out the images in there
+Doesn't seem to be a stage for me, I still do that from time to time. I sort of enjoy the puzzle. Here's one from a file I've open currently, but I'm sure with a bit of searching I could find formulas that are quite a bit longer and contain more complex functions.
+
+    =IFERROR(IF(OR($H$3="(All)";$H$3="(Multiple Items)");IF(AND(ISBLANK(G16);ISBLANK(H16));"";IF(ISBLANK(H16);COUNTIFS('Edited'!AB:AB;"Start dom";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16))/COUNTIFS('Edited'!CH:CH;"Bereikt";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16));COUNTIFS('Edited'!AB:AB;"Start dom";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16);'Edited'!Y:Y;H16)/COUNTIFS('Edited'!CH:CH;"Bereikt";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16);'Edited'!Y:Y;H16)));IF(AND(ISBLANK(G16);ISBLANK(H16));"";IF(ISBLANK(H16);COUNTIFS('Edited'!CJ:CJ;$H$3;'Edited'!AB:AB;"Start dom";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16))/COUNTIFS('Edited'!CJ:CJ;$H$3;'Edited'!CH:CH;"Bereikt";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16));COUNTIFS('Edited'!CJ:CJ;$H$3;'Edited'!AB:AB;"Start dom";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16);'Edited'!Y:Y;H16)/COUNTIFS('Edited'!CJ:CJ;$H$3;'Edited'!CH:CH;"Bereikt";'Edited'!CF:CF;IF(ISBLANK(G16);G15;G16);'Edited'!Y:Y;H16))));"")
+One thing that I find that helps is breaking large formulas up into multiple lines. In the editor, Excel doesn't care how many lines it's on. Sometimes I even write formulas in Sublime or Notepad before pasting them into Excel, depending on the complexity of the formula.
+
+For a simple example, take the following formula:
+
+    =IF(AND(D2="Employee A",A2<=DATEVALUE("04/27/2015")),"Main","Overflow")
+
+Not a super complex formula, but it might cause trouble for those who find it difficult to keep track of parenthesis, commas, etc. Here's an "exploded" view of the same formula:
+
+    =IF(
+      AND(
+        D2="Employee A",
+        A2<=DATEVALUE("04/27/2015")
+      ),
+      "Main",
+      "Overflow"
+    )
+
+I'm also a stickler for line indentation in programming which is where this may stem from. 
+That is insane. I've never had to create anything as remotely complex as that.
+Flair changed to discussion. Please keep the sub tidy.
+
+I've written things that are longer than my arm, and I can't explain it anymore.
+This is the largest array function I've messed around with.
+
+    {=IF(IF(ISERROR(INDEX(DKSalaryLogs[[Position]:[Date]],SMALL(IF(DKSalaryLogs[Date]=$M$1,ROW(DKSalaryLogs[Date])),ROW(1:1)),2)),"",INDEX(DKSalaryLogs[[Position]:[Date]],SMALL(IF(DKSalaryLogs[Date]=$M$1,ROW(DKSalaryLogs[Date])),ROW(1:1)),2))="Matt Murray", "Matthew Murray", IF(ISERROR(INDEX(DKSalaryLogs[[Position]:[Date]],SMALL(IF(DKSalaryLogs[Date]=$M$1,ROW(DKSalaryLogs[Date])),ROW(1:1)),2)),"",INDEX(DKSalaryLogs[[Position]:[Date]],SMALL(IF(DKSalaryLogs[Date]=$M$1,ROW(DKSalaryLogs[Date])),ROW(1:1)),2)))}
+I'm getting a little itchy at all the hardcoding in that formula!
+At some point, I just dedicate a sheet to conditions, write out the conditions in separate cells, test them and have it output a 1 or 0 (or TRUE FALSE) and if it meets all the conditions, the sum or product will be greater than 0. Then I can visually see what's going on better and correct things.
+A long formula is one thing, but the truly monsterous ones reference cells in other sheets, which themselves reference cells in other sheets, which then reference cells in other workbooks.  To qualify for brutal status, a formula needs to have a dedicated powerpoint presentation to navigate.
+Sometimes I think it's helpful to break complicated formulas up into their intermediate steps which can be placed on a separate worksheet (kind of a nod to Unix philosophy). Worksheet can be hidden if need be, and it's always helped me months later when I need to quickly reference my work for something else I'm building. 
+
+Also, VBA helps for readability when you've got a lot of conditionals and error checking gunking up your formulas. 
+Wasn't there a post on here somewhere where someone had a really really really really long formula, and someone else was able to simplify it down to a single line?  
+  
+  
+EDIT : [Here it is, 1,727 characters down to 28](https://np.reddit.com/r/excel/comments/3afqk4/is_there_a_shorter_easier_way_to_do_this/) 
+I always break it into many smaller formulas so I can see how each step works. Then I combine them into fewer and more complex formulas until I have one big formula that works. Do you need one big formula, or is this just a personal goal to get it into one piece?
+I took the file out back and shot it years ago, but one of my positions, they had me build a report, in Excel, that showed Call center coverage, per agent, per skill, per 15 minute interval, for...I think it was a month?     
+
+Took me weeks to build out and populate the data...
+
+I can't even remember how many sheets in Excel XP I had FILLED, top to bottom, left to right....   the file, being nothing but formulas and some data, weighing in at about 130MB as an XLS.
+
+It got so big that I actually had to get upgraded to 2003 so I could open it again...
+
+Then the fuckers decided they didn't want to use it...
+It isn't too bad, is it. 
+
+
+    =IF(AND(INDEX(INTRO!$D$10:$D$21,MATCH(I$2,INTRO!$C$10:$C$21,0))="Eurostat",NOT($F12="")),IF(ISNUMBER(FIND(" ",INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)))),LEFT(INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)),FIND(" ",INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)))),INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0))),IF(AND(INDEX(INTRO!$D$10:$D$21,MATCH(I$2,INTRO!$C$10:$C$21,0))="AMECO",NOT($G12="")),ROUND(INDEX(INDIRECT($G12&"!"&"1:65536"),MATCH($E12,INDIRECT($G12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($G12&"!"&"1:1"),0)),1),IF(ISNUMBER(FIND(" ",INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)))),LEFT(INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)),FIND(" ",INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)))),INDEX(INDIRECT($F12&"!"&"1:65536"),MATCH($D12&$E12,INDIRECT($F12&"!"&"A:A"),0),MATCH(I$2,INDIRECT($F12&"!"&"1:1"),0)))))
+
+
+I would probably choose a different way of doing it if I were to redo it today, but basically it was a lookup for a sort of dynamic dropdown kind of thing, that would then pull macroeconomic indicators for 28 countries on 28 different indicators, from either one database or another (Eurostat and Europan Commission's annual database which is sometimes slightly different). 
+
+Based on these ~1000 lookups (for the years 2008-2015, so really up to 8000'ish lookups), it'd then create a  couple of standardised reports based on regulatory reporting requirements. 
+
+I was pretty chuffed with it at the time, but today, ugh. 
+I don't know if this qualifies because it is mainly repetition but I thought it might fit in here. It was a very weak form of encryption I made for fun..Probably pretty easy to crack..Input 1-18 digit password/phrase, out comes a jumbled mess. 
+
+    =INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$3,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$4,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$5,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$3,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$4,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$5,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$3,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$4,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A$5,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A6,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A7,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A8,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A6,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A7,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A8,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A6,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A7,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A8,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A9,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A10,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A11,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A9,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A10,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A11,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A9,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A10,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A11,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A12,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A13,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A14,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A12,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A13,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A14,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A12,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A13,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A14,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A15,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A16,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A17,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A15,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A16,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A17,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A15,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A16,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A17,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(E$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A18,1)),CODE($B$23:$B$94), 0))+E$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A19,1)),CODE($B$23:$B$94), 0))+E$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A20,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(F$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A18,1)),CODE($B$23:$B$94), 0))+F$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A19,1)),CODE($B$23:$B$94), 0))+F$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A20,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))&INDEX($B$23:$B$94, MATCH(MOD(G$1*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A18,1)),CODE($B$23:$B$94), 0))+G$2*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A19,1)),CODE($B$23:$B$94), 0))+G$3*INDEX($A$23:$A$94, MATCH(CODE(MID($B$2,$A20,1)),CODE($B$23:$B$94), 0)), 73), $A$23:$A$94, 0))
+You all need Jesus.
+
+Two things:
+
+1. As others have stated, put each step into a separate cell. Not necessarily each function, but each "thing" that it does. Check for A? Cell A1. Check for B? Cell B1. Absolute value of their addition? Cell C1.
+
+2. Any nested if statement is an error. You're going to miss edge cases. What you need are lookup tables for anything more than a single nested if (one if inside another). So learn vlookup and index/match well. Google to understand how if statements are lookup statements.
+
+3. Never be proud of these functions. I do them too. They're wrong. I'm not proud when I do them. For anything more than a one-off file that you don't intend to save they need to be redone.
+
+4. Keep learning, don't just stop at IF. There's so much handy logic and functions in Excel. One of my personal heroes (Simon Peyton Jones) and many other intelligent people have created something so full of depth yet relatively easy to use. So keep learning all they put in there for you.
+
+
+I may have gone off topic. But as someone who has had to reverse engineer these types of functions after people have left I can't stand them.
+
+Your "code" does a couple things, it saves time, saves mental effort, and records knowledge. Writing a function that goes on for days is like writing a novel that has no paragraphs or periods. It's not the right way to tell a story.
+gets 9 numbers from various places depending on a few conditons and formats them nicely to put in a final place 
+
+    =IFERROR(IF(F18=$F$18,ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)),IF(F18=$F$18,ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)))
+Yikes, I agree with /u/eirunning85 on this one. There are very few occasions where you need a formula that big in a single cell. Especially when the file is passed around and you start having to try and dissect it.
+I used to do this. My best one was something that would dynamically strip out addresses from a blob of text that had multiple places and numbers of carriage returns as well as not always having the same information (some lacked a second address line, some had phone and email, some fax and email, etc).
+
+Then I learned VBA. After that I only used cell formulas as a lazy (but good) to remind myself what I was doing in a particular project (they're a tad easier to read than VBA).
+Not overly complicated by any means but one day I thought it'd be cool to calculate the exact age of someone. Just because. 
+
+=DATEDIF(N2,TODAY(),"Y") &amp; " Years, " &amp; DATEDIF(N2,TODAY(),"YM") &amp; " Months, " &amp; DATEDIF(N2,TODAY(),"MD") &amp; " Days"
+=IF(OR(H53=$K$73, IFERROR(VLOOKUP(H53,AN:AO,2,FALSE)+1=VLOOKUP($K$73,AN:AO,2,FALSE),FALSE), J53=$K$73),"",IF(K95=MEDIAN(K95,VLOOKUP(D53,AN:AO,2,FALSE),IF(VLOOKUP(F53,AN:AO,2,FALSE)<VLOOKUP(D53,AN:AO,2,FALSE),100,VLOOKUP(F53,AN:AO,2,FALSE)-2)),1,""))
+
+All it does is return a 1, 0, or nothing.
+    =IFERROR((SUMIFS('Callouts Made'!L2:L10000,'Callouts Made'!L2:L10000,"<>",'Callouts Made'!A2:A10000,">="&'Q1'!B1,'Callouts Made'!A2:A10000,"<="&'Q1'!D1)-SUMIFS('Callouts Made'!A2:A10000,'Callouts Made'!L2:L10000,"<>",'Callouts Made'!A2:A10000,">="&'Q1'!B1,'Callouts Made'!A2:A10000,"<="&'Q1'!D1))/COUNTIFS('Callouts Made'!A2:A10000,">="&'Q1'!B1,'Callouts Made'!A2:A10000,"<="&'Q1'!D1,'Callouts Made'!L2:L10000,"<>"),"")
+
+One of the longer formulas I've done. First one I could think of. Calculates the average number of days spent per case, given the cases started between two specified dates.
+A year? When you get to that kind of time frame, wouldn't it make sense to write a function in VBA?
+I usually split stuff like this into multiple columns for sub steps and colorcode then hide these columns. Easy to troubleshoot as well, plus sometimes a subvalue can be used in other calculations again.
+I wish my brother was on reddit. He is insane with this shit. He works for a police dept. in accounting and wrote something to calculate all their benefits and salaries and adjustments, and one mouseover was enough to send me straight home. 
+
+Honestly, he should be writing code but I don't think he realizes it is even an option.
+Err..sorry, set flair..
+Noice! I'd hate to be the guy trying to figure that out stepping into your shoes if you got hit by a truck. So don't get hit by a truck mate
+..
+The nested IFs, the glorious amount of references, the "IFERROR" bracket to make it clean...
+
+It's... it's beautiful...
+To add for other readers who didn't know that Excel allows whitespace, you can insert line breaks with Alt+Enter when in Edit mode. 
+To anyone picking up this technique (breaking up into multiple lines), please notice that it is written in such a way that anyone looking at any of lines 1-7 would know that the formula isn't finished.
+
+The following formula would be frowned upon:
+
+    =IF(
+      AND(
+        D2="Employee A",
+        A2<=DATEVALUE("04/27/2015")
+      ),
+      "Main",
+      "Overflow"
+    )
+    
+    
+    
+    
+    +50000
+It was a bit ridiculous..it took a long time messing with separate bits to come together..but man, I was pretty happy when I stitched it..nobody really understood.. Excelporn bby!
+
+Try using IFERROR instead of IF(ISERROR...it'll save you some space/typing/parentheses :) 
+Yikes! Dat Matt/Matthew Murray must be bad news..formula is wicked..
+
+I fully concur, was just a personal goal. I didn't leave it as such, for the sake of those who inherited the tool.
+Oh I agree! Before I left that job I set everything up so it was in easily understandable steps, but I did enjoy as an exercise trying to distil it all down to a single formula.
+And now it gets 18 numbers from various places depending on a few conditions and formats them nicely to put in a final place
+
+    =IFERROR(IF(F18=$F$18,ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)),IF(F18=$F$18,ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)))&IFERROR(IF(F18=$F$18,ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)),IF(F18=$F$18,ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(CB_Forces_SP!$D$2:$I$2528,SUMPRODUCT(MATCH(1,(--(CB_Forces_SP!$A$2:$A$2528=RF_Summary!Q18)*(--(RF_Summary!R18*1=CB_Forces_SP!$B$2:$B$2528))),0)),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),1),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),2),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),3),0)&CHAR(10)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),8),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),9),0)&CHAR(32)&CHAR(9)&ROUND(INDEX(Critical_Cases_SP!$E$3:$N$2213,MATCH(TRIM(RF_Summary!N18),Critical_Cases_SP!$D$3:$D$2213,0),10),0),ROUND(INDIRECT(E18&"!F100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!G100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!H100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!B100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!C100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!D100"),0)&CHAR(10)&ROUND(INDIRECT(E18&"!I100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!J100"),0)&CHAR(32)&CHAR(9)&ROUND(INDIRECT(E18&"!K100"),0)))
+
+Sorry, bad joke?
+Funny to see, I've got a similar one. I actually put in a line break instead of typing the CHAR(10) though.
+
+    =IF(ISERROR(INDEX(C:E;MATCH("Checked Edited";A:A;0);MATCH("LAN1";$C$2:$E$2;0)));"";IF(ISBLANK(INDEX(C:E;MATCH("Checked Edited";A:A;0);MATCH("LAN1";$C$2:$E$2;0)));"";TEXT(INDEX(C:E;MATCH("Checked Edited";A:A;0);1);"dd/mm")&": "&INDEX(C:E;MATCH("Checked Edited";A:A;0);MATCH("LAN1";$C$2:$E$2;0)))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+1))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+1);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+1);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+1);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+2))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+2);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+2);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+2);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+3))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+3);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+3);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+3);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+4))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+4);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+4);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+4);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+5))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+5);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+5);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+5);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+6))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+6);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+6);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+6);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+7))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+7);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+7);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+7);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+8))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+8);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+8);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+8);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+9))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+9);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+9);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+9);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+10))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+10);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+10);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+10);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+11))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+11);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+11);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+11);MATCH("LAN1";$C$2:$E$2;0))))&IF(INDEX(A:A;(MATCH("Checked Edited";A:A;0)+12))<>"Checked Edited";"";IF(ISBLANK(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+12);MATCH("LAN1";$C$2:$E$2;0)));"";""&TEXT(INDEX(C:E;(MATCH("Checked Edited";A:A;0)+12);1);"dd/mm")&": "&INDEX(C:E;(MATCH("Checked Edited";A:A;0)+12);MATCH("LAN1";$C$2:$E$2;0)))))
+Can't even begin, but you win..most of my megaforulas ar from back with companies when we were using Excel 2003, stuck with a 1024 character limit, so trying to distil within as a cognitive challenge.. These days I tend to break it up on separate worksheets in case I leave the company to make it more understandable if the next person manages to break it. Love yer work but!
+Formulating was more of a curiosity for me, seeing if I could achieve it..but I cu it back, because whilst it was fun, it's not handeroverable..so I'd split it on my way out, cuz I never want it to fall apart without me.
+
+Noice! So pleasant to turn hours of repetitive work into ZAP done..
+Yes, but you enjoyed the sleekness once you wrote it hey..
+He definitely should. Tell him to learn Python or VBA. VBA is kind of arcane though so an easier language (like Python) may be the best way to start.
+
+BTW I can pretty much thank Excel for getting me into programming. And these skills are infinitely useful, particularly in places where no one else has them. Like your brother's police department.
+Haha, I know. You should see my VBA code, I'm afraid it's worse. :) Trying to work on getting better habits.
+Thanks. :)
+Yeah, I'm quite the fan of IFERROR too. Always happy to see it in other people's formulas.
+There's a point where I'd just use VBA to do the heavy lifting for me versus using formulas to come up with a solution. This is well beyond that point haha.
+You have a LOT of "Magic Numbers" in that formula... I'd suggest making a "Variable" sheet, giving each cell a descriptive name, and plugging the values in... be a lot easier to update if the values every needed to change too
+Will do, thanks!
+I agree, unless you need the file to be backwards compatible beyond Excel 2007..
+I was manually changing it every time, which wasn't too annoying. I don't even have to think twice about it now though haha.
+Lol sounds like the Excel equivalent of an obfuscated code competition. Or code golf.
+it was a bit tedious to figure out but saved hours of manual typing from then on... 
+Nah, good job! :D
+There is so much recurring stuff in there I doubt this needs to be as long as it is.  
+Btw I wouldn't use C:E or A:A if the data is finite, saves resources esp for formulas like these.
+Oh it can definitely be a challenge, especially when you limit yourself to 2003 or 2000 editions. I sent a workbook to a guy the other day and some of the formulas broke because 2003 doesn't have sumifs. I didn't feel bad though.
+Lawdy..VBA you gotta stick notes unless they're your short term babies.. I may be bad at this too, but if it's gonna be used by anyone else, then leave a tral hey!
+
+Y'see..I argue this point..I loves my VBA, but classy formulas and templates can do a fine job, depends on the dataset and requirements..both options are fun..por que no los dos?
+
+That, or calculate intermediate values in other cells. One of my gripes with excel is lack of readability in a lot of complex/convoluted formulas
+Point taken, thanks for calling it out.
+Pretty sure you could've used rolling cell references..but then text data sux..
+
+It does. The recurring stuff is because it checks several following dates (12 in total I believe) and then formats each date separately within the same cell. Could've gone for more, because technically there is no limit to how many dates the data can contain, but 12 seemed plenty for most cases.
+
+True about the entire columns. I watch out for this in 'heavier' files, but this one doesn't contain many other long formulas, so I didn't have to account as much for the resources used. Combined with the fact that the data could technically be any number of rows, I didn't  bother limiting it.
+thats function dependent i believe, for sumproduct its defiantly true but for index i think can figure out when the data stops. - array formula hate full column selections though. 
+Aha, but all complicated formulas generally come from separate parts that then get mashed together to create the cacophonic symphony of the megaformula..we know it's evil, but it feels gooood..
+
+Both can certainly live in harmony. My personal preference is one or the other though. That way if things go awry, it's easy to tell where it went wrong.
+Well if I can get funky formulas coordinated to do the job in a live worksheet, I like that. But if it's a repetitive task in a repetitive dataset, then macro that baby up..

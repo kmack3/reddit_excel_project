@@ -1,0 +1,28 @@
+Taking figures from one workbook and averaging them on another
+Try this: 
+
+> =AVERAGEIF(['C:\Users\ExcelAssistanceReq\Workbook1.xls']!A:A,"="&B4,['C:\Users\ExcelAssistanceReq\Workbook1.xls']!E:E)
+
+If you want to add the sheet name, use this:
+
+    =AVERAGEIF('C:\Users\ExcelAssistanceReq\[Workbook1.xls]Sheet1'!A:A,"="&B4,'C:\Users\ExcelAssistanceReq\[Workbook1.xls]Sheet1'!E:E)
+Thank you for helping! This gave me a #VALUE error, which is a step in the right direction. I got rid of the top row which had headings I don't need, but it still was #VALUE. Any thoughts?
+SOLUTION VERIFIED
+I tried it in an actual excel file and it seems to work. Here's an example. You may just replace the filename/column names.
+
+[First workbook](http://i.imgur.com/VT6BHxM.png)
+
+[Second workbook](http://i.imgur.com/B4v8SGY.png)
+
+
+You have awarded one point to _speqter_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I figured it out; it was because I had the 2 workbooks open in separate instances. When I opened them both in one instance of Excel, it worked properly. Thank you!!
+Thank you, I typed it in with exactly the format you have in your screenshot, but it's still coming up #VALUE. From what I understand, #VALUE is when the cells don't have numbers in them so it can't do math. I selected the columns and made sure they were formatted as Numbers, but that didn't help either. Here is the actual formula, with actual file names:
+
+    =AVERAGEIF('C:\Users\Moreilly\[Stretch Plus Audit History.xls]StoreInv'!$A:$A,"="&$B4,'C:\Users\Moreilly\[Stretch Plus Audit History.xls]StoreInv'!$E:$E)
+
+
+Everything in Columns A and E on the referred-to XLS sheet is a number, so what else could be making it #VALUE?
+You're welcome. Glad to be able to help.

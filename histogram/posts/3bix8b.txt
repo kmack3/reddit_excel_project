@@ -1,0 +1,76 @@
+HELP! Laggy spreadsheet, can't figure out solution.
+I had an issue with a spreadsheet like this. The only solution for me was to cut and paste into another spreadsheet without formatting. best of luck! 
+I'd also look for:  
+
+- volatile functions like NOW, RAND, INDIRECT etc  
+
+     if you have a repeating series of "NOW" or "TODAY" etc - it's better to set 1 cell to "NOW" and then reference that cell in those other forumlas  
+
+- complex array formulas (look for the {} around the formula)
+- conditional formatting
+
+Try setting worksheet calculations to "Automatic except for data tables". This will speed up the workbook, but you'll have to manually press F9 to calculate data tables
+
+In Excel 2010, File>Options>Formulas>Calculation Options
+(Also) See if you accidently filled down/right into too many cells. 
+
+In other words, on each sheet, find the bottom-right most cell you're interested in, then delete all rows/columns past that point. 
+
+
+Press ALT+F10 - this loads the objects window. Do you see a bunch of objects in there, but none on the screen? Delete them if necessary (includes everything such as shapes and macro buttons).
+Can u share it? 
+Try going to Formulas -> Name Manager and seeing what is in there. If you copied data, a lot of times you can bring a bunch of garbage with it.
+I would take a look at the conditional formatting (if you have it) and make sure it only affects the desired cells. If you have it run all the way down the page / across the row, Excel will be calculating the formatting on hundreds of thousands of cells, rather than just the ones you need. 
+I don't think it's this but on each sheet do F5, go to special, Last Cell. If it takes you past the last cell, than you have some bad formatting. 
+
+To fix the formatting, do alt+h, e, a to on all the cells you think should be empty, then ctrl+- to delete 
+How many sheets do you have?
+<sarcasm> Try upgrading your hardware ... sounds like your are running a ti-83!
+Do formulas in the workbook reference/lookup cells that exist on a different Excel workbook? Perhaps that other workbook resides on a network drive?
+Problem might actually be in the formulas on another worksheet.  IE if there's heavy array formulas on another worksheet reading this one, then any change would cause excel to rerun those heavy calculations.
+
+Only other thing I've seen cause this is circular references, but you've made no mention of errors when you open the workbook - these usually whine when you open the workbook if they exist, but they can crush performance if you leave them.
+Is Track Changes enabled under the Review tab on the ribbon? I've had a workbook get huge an bloaty with this enabled before.
+How about formatting?  I had both standard formatting slow down a sheet and conditional formatting do the same.  How about copy and 'paste special / values/formulas' to a new sheet?
+
+
+You need to systematically eliminate the issues. When does it lag... when you move around the spreadsheet in general?, or after you do data entry and press enter (recalculating the spreadsheet)?  Does it only lag on the one sheet or does it lag when you do data entry on any sheet?
+
+If it is on calculate then there are different solutions to just a general lag.
+
+
+1.If it is recalculation then a number of solutions have already been suggested.  Make a copy of the spreadsheet and play the 50% game.  By that I mean delete 50% of your data.  If you still have the problem then delete another 50%, if not then add another 50%,  systematically work your way to isolate the issue.    You are looking for the problem so that you have a repeatable specific problem.  Once you have that then it is much easier to solve.
+
+The problem may not be formulas on the problem sheet, but may be formulas on other sheets.  If you can delete all the information on the sheet and it is still slow then look on the other sheets for formulas that reference the problem sheet (Again play the deleting game).  
+
+2. If is is a general lag then deleting will not help. 
+2.1 Is it the network. (save locally)
+2.2 Are their hidden objects (Goto Special - Objects - Delete).  Are there any hidden sheets? (very hidden?)
+2.3 I note that you have no conditional formatting or any range names..
+2.4 Is it a macro enabled file? are there any on-event macros on the sheet or in the workbook,. Could also be a custom worksheet function?
+
+I would try deleting the problem sheet then building it in stages, checking each time when the lag begins.  
+
+Also if you have a history (Saved every day), do the old copies still work lag free?  If you how about finding an old file that still works and copy pasting  the recent changes into it?
+
+People can throw up a million different possible solutions but they are just going to be guesses until you can narrow the problem down to something more specific.
+I noticed that as soon as I put percentages into the cells that have them, it begins lagging... Even with a fresh spreadsheet page with no formatting 
+Do you happen to have any add-on accidentally opened?
+Is it possible you've used formulas that refer to entire rows or columns instead the used range. Ie =sum(a:a) instead of a1:a3 thus causing excessive calculation?
+Also check out the fastexcel plugin over at decisionmodels.com they have a plug-in tool to solve issues like this
+look for hidden objects.  
+
+http://www.extendoffice.com/documents/excel/714-excel-delete-all-auto-shapes.html  
+
+happened to me once, for some reason there was like 500 autoshapes hidden on the excel sheet.
+
+
+Yeah I don't have complicated functions in my worksheet, keeping simple claim adjusting data basically. I've got the following formulas: SUM, AVERAGE, HYPERLINK, and 2 cells divide #s. No conditional formatting (though I planned to include it in the future) and no complex array formulas either 
+I attempted this right now as well and got no result. Ahhhhhh this is making me crazy, literally all of my data is pretty much visible without zooming out so there isn't that much. The formulas im using are hyperlink(to share drive folders), sum, average and that's it. No heavy calculating at this point, and I tried removing the hyperlink formulas but still  nothing 
+Ok I did this, still nothing (went to the bottom and deleted all but my info)
+The numbers for the rosaries remain after doing the right click delete though.
+I actually don't have anything in the name manager. I do have a lot of names on the spreadsheet though for keeping track of their data. 
+Would you recommend recreating the worksheet page? 
+Negative, no conditional formatting either. I don't have anything running to the bottom of the SS either. Thanks for the responses btw
+My guess it is the hyperlinks. Copy your worksheet into another workbook and copy, paste values. Save the new workbook, close it and try playing in it. If you have the same issue, then you know you have a bigger issue (hardware, Excel in general). If it goes away, then it is something idiosyncratic to your specific workbook. 
+The thing about the hyperlinks is that I have them in all of the other work sheets and they go to the same shared drive folders.... So far I've tried to make a total new workbook with the information and it still lags. Also, is lagging on Co workers computers too, even if they save a copy of the file from the shared drive rather than opening it on location. 

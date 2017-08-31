@@ -1,0 +1,5 @@
+Totalling pieces for in between time frames.
+I'm having a little bit of a hard time following the format you have, but it sounds like you can have a SUMIFS formula that just says 
+
+    =SUMIFS([Pieces Column],[Wait Time Column],">="&[Wait Time Min],[Wait Time Column],"<="&[Wait Time Max])
+I will try that tonight and let you know. Thank you 

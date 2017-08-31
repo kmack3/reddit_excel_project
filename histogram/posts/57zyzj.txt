@@ -1,0 +1,91 @@
+When to use Excel vs a database
+A few initial thoughts:
+
+* You are trying to mess around with > 100K rows
+
+* You are finding yourself making a ton of VLOOKUPs to join two tables together or get information from other tables
+
+* You are maintaining multiple (>5?) Excel documents that are all interrelated
+
+* It takes you a long time to put together a report using VLOOKUP, SUMIFS, Pivot Tables and/or manual copy/pasting
+
+* The amount of time/effort it takes you to complete reports (or store data) is increasing each month. Excel might be working now, but in 3-6 months maybe you'll start hitting its limits
+
+* Storage of historical data. This is tougher to do in Excel and is really easy to do in a database.
+
+There are likely other barriers but that is generally what I have been using to decide between the two.
+How much data are you going to be dealing with and how are you going to be inputting it?
+I'd start with an xlsx and set the sheets up like I would the SQL db. When you experience issues, replicate your current xlsx file in a cloud SQL as a service.
+
+The benefit of starting with excel is that you will know your usage and can better estimate your costs to move to the cloud.
+I'm also in manufacturing and recently started using access when multiple people need to be adding data and potentially at the same time. Single user excel is fine, but sometimes I also use access because automated reporting can be nicer.
+As a guy who knows a lot about excel and nothing about databases:  I always use excel. :)
+Repeat after me.
+
+Excel is a spreadsheet.
+
+Excel is a spreadsheet.
+
+Excel is a spreadsheet.
+
+Not a database.
+
+:p
+Never
+Power Query (Excel 2010/2013) or what is now named "Get & Transform" in Excel 2016 solves a lot of the merging issues. I've taken models that use 1000's of vlookups and annihilated them with Get & Transform. I used to copy and paste a lot of CSV files and now I just use Get & Transform to link to them permanently and when I need to update I just rerun the CSV files and open the spreadsheet and have it update the links and all of then merging is done simultaneously. It's a serious time saving tool. Mashup Query language is truly a game changer.
+Makes a lot of sense. We don't really have a big IT organization, is it easy to DIY?
+
+Edit: DIY for a database I mean
+Hey, sorry for not responding at the time. I was trying to get a sense of when to use each so I can codify some guidelines. It seems it's mostly about:
+- Size of data
+- Importance of data integrity
+- Necessity for audit trail
+- Turnover: how fast do you need to get the latest info/insights
+Could you explain "cloud sql as a service" please? 
+This so much as some one who has and to go in and untangle a clients membership "database" that was in excel, believe it when someone says excel is not a database.  
+
+Doing transnational data? Use a database
+Storing and updating historical data?  Use a database
+Have multiple users that need to use the same data set at the same time?  Use a database   
+Need a clear audit trail on what was done to the data?  Use a database. 
+
+I'm in a situation where my employer (more specifically, my department) doesn't have any databases outside of Access.  One of the data sources I deal with has between 200k and 500k rows of data each month which include comments.  Due to the way that Access stores data, I can only get ~3 months worth of data into Access before I hit he 2gb limit.  As a result, I'm forced to store it in Excel with each month on a separate tab.  I currently have 12 months worth of this data and the Excel file is about 0.5 gig.  It sucks, but I don't see any other options until they (hopefully) pony up some cash next year to get Oracle or SQL....  something....
+/u/Nateorade pretty much covered everything but I also wanted to throw out there PowerPivot.  It's a free Excel add-on from Microsoft but you have to download it.  It allows you to make relationships between the most common data sources: 
+
+https://msdn.microsoft.com/en-us/library/gg399082(v=sql.110).aspx
+Depends on how technically minded you are.  I DIY'd my own database system for the last place I worked (which was in toy manufacturing, funny enough).  I had an IT guy who could set up an empty database for me and I took it from there.  But I also figured out how to make my own database using MySQL as well.
+
+Definitely DIY-able, but takes a bit of initiative and ability to learn SQL relatively rapidly.
+[text](https://cloud.google.com/sql/docs/)
+
+This link should help. Basically, you store your information in SQL tables and you pay for every connection to retrieve or store info.
+
+Let me know if you have any questions.
+I believe there are free database applications out there. 
+
+http://blog.capterra.com/free-database-software/
+
+But if you are bent on having it in Excel, don't store in Excel. Use this instead:
+
+https://support.office.com/en-us/article/Power-Pivot-Powerful-data-analysis-and-data-modeling-in-Excel-d7b119ed-1b3b-4f23-b634-445ab141b59b
+I like this. Thanks for adding. I utilized power pivot on top of my mini database, but you're right that this might be best as a stopgap for someone between Excel and Databases!
+Thanks a lot for all this. And usually how do people interact with the data at that point? Export into Excel or build web forms/visulalizations?
+My employer only uses specific database applications and it's not really a matter of money so much as budgeted money for our department for the remainder of the fiscal year.  I use Power Pivot (and mentioned that as a possible tool for the OP in another comment) but, for this particular data source, it doesn't help because it comes monthly from a 3rd party and is uploaded to a SharePoint...  Unfortunately, Power Pivot currently does not support published server documents from SharePoint.
+That entirely depends on your stakeholders.  I have used a ton of different ways to get data to people.  All the way from automating reports to be sent to their email down to giving them the keys to looking into the database with SQL.  And that was at the same company.
+
+So, depends on what people are expecting.  Hard to answer beyond that without something more specific to go on :)
+Makes sense on the "reporting" side.
+
+On the input side, some of my inputs can be flowed into the database with a bit of programming (I think) and some are human inputs that are usually done in Excel. Or in your case are you the only one entering data?
+Data came in from a few different ways, but needs to be automated *wherever possible*.  It is a terribly boring and tedious job to clean up Excel files from people.  Thankfully the company I worked at had a great ERP for most data.  The manual tables I updated were minimal, but took a significant amount of time.
+
+Automate the data inputs as much as possible.  Data cleanup before inserting into a DB is awful if you end up having to do that.
+/u/freeasabird922], /u/Nateorade], /u/bambam_mcstanky2 would love your thoughts on [zTables](http://ztabl.es) (I built it). The way you're talking about it, it would be a tool to allow you to stay in Excel without going crazy.
+
+Edit: Quick explanation, it allows you to keep data in Excel with a DB in the backend with robust validation, version control, permissions
+Solution Verified
+Interesting!! Will keep tracking how it evolves. Seems like something I could use to keep me in Excel a bit longer.
+
+You have awarded one point to _Nateorade_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

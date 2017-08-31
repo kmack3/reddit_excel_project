@@ -1,0 +1,37 @@
+6ikgqd
+How to look up last value of column A and show value in the same row but in column B.
+I have two columns A and B. The last value is A50, and I want to look up cell in B50. How do I do this? 
+
+I have formula
+
+    =(LOOKUP(2;1/(A:A<>"");A:A)) 
+
+to find the last value, but I guess I have to add something more to find the cell next to the initial column.
+
+
+-------------
+You can just change the last values:
+
+    =(LOOKUP(2;1/(A:A<>"");B:B)) 
+
+does this work for you?
+-------------
+Interesting, I never thought to use lookup in that way.
+
+-------------
+Yes, it worked. Thank you!
+-------------
+    Solution Verified
+-------------
+Since he solved your problem don't forget to give him a solution verified :)
+-------------
+
+You have awarded one point to _man-teiv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Do you mean change the flair of the post? 
+-------------
+No, by typing solution verified when someone helps you they get clippy points for assisting.
+
+https://www.reddit.com/r/excel/wiki/clippy#wiki_clippypoints

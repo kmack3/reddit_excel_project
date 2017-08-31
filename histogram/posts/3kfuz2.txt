@@ -1,0 +1,61 @@
+My college room mate locked my workbook so I can't edit it. How can I unlock it without him here
+If you are using something older than Office 2013, use this
+
+http://www.theofficeexperts.com/VBASamples/Excel02.htm
+
+If you are using Office 2013, your screwed
+did he password lock it? if so, can't you copy everything out of it?
+You can open it with open office.
+Make a copy of the sheet in Windows explorer that should take the password off.
+There's a macro you can use it, I have it on my work laptop so I'll post it tomorrow if you still need it.
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 3 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+
+Hi!
+
+It looks like you have received a response on your questions.  Sadly, you have not responded in over 4 days and I must mark this as abandoned.
+
+If your question still needs to be answered, please respond to the replies in this thread or make a new one.
+
+
+^This ^message ^is ^auto-generated ^and ^is ^not ^monitored ^on ^a
+^regular ^basis, ^replies ^to ^this ^message ^may ^not ^go ^answered.
+^Remember ^to [^contact ^the
+^moderators](http://www.reddit.com/message/compose?to=%2Fr%2Fexcel)
+^to ^guarantee ^a ^response
+
+>  For i = 65 To 66: For j = 65 To 66: For k = 65 To 66
+>  For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
+>  For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
+>  For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
+
+> ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+> Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
+>  Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
+
+Why would this work? Isn't Chr(65) just A and Chr(66) just B? What if the roommate decided to set the password to something other than ABBAABBAABBA?
+would this work on encrypted workbooks or just protected sheets/workbooks?
+I used Google sheets to successfully clear a workbook protection password.
+If I remember correctly, it takes advantage of the way Excel checked passwords. Basically, it doesn't store your actual password, it stores a hash of your password. Since the algorithm Microsoft used to generate this hash was flawed, it can generate the same hash for different inputs. Essentially, this code doesn't try to figure out the actual password, it just finds a password with the same hash and then since Excel only stores this hash, it works to unlock the workbook. Also, if you notice, the last character ranges from 32 to 126 so the first 11 characters can only be A or B but the last character can be everything. 
+Excel passwords are hashed. You can get all possible hash values using above code.
+pretty sure just protected
+That's a pretty major security flaw! Shame on Microsoft for not fixing this until Office 2013.
+
+I feel like posting this to /r/todayilearned
+You lock spreadsheets to keep others from making changes and messing things up, not for information security.
+Protection =/= security. The passwords to open a workbook and via project are designed as security measurements. The worksheet and work book protection passwords are designed to stop accidental destruction of data or formatting which is why you can  also exclude certain cells.
+
+You use workbook passwords to stop unauthorised people looking at your spreadsheet and you use worksheet protection to stop Sandra in admin from deleting your formulas when you give her the spreadsheet to update this week's figures.
+yeah it is pretty crazy that it took until 2013 to fix that.  Hopefully it helps!

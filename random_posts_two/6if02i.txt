@@ -1,0 +1,61 @@
+6if02i
+Querying a Cell value in an External text file and returning it
+In Column A, I have Fruit names (APPLE, BANANA, etc)
+
+I have an external text file that has labelled descriptions for each fruit like so:
+
+    (APPLE)
+    A red crunchy apple
+
+    (BANANA)
+    A bendy banana
+
+Is there a way I could create a macro that looks at the fruit name in Column A, finds the description it in the External Text, and then  paste it into Column B?
+
+
+-------------
+There's probably a more elegant way to write this but...
+
+    Sub GetInfo()
+        Dim AllData As String, TextArray() As String, Str As String
+        Dim SearchRange As Range, SearchTerm As Range
+        
+        Set SearchRange = ActiveSheet.Range("A1:A10") ' Modify to your range
+        
+        Open "C:\folder\fruitlist.txt" For Input As #1
+        AllData = Input$(LOF(1), 1)
+        Close #1
+        TextArray = Split(AllData, vbNewLine)
+            
+        For Each SearchTerm In SearchRange
+            If Len(SearchTerm) > 0 Then
+                For i = LBound(TextArray) To UBound(TextArray)
+                    If InStr(UCase(TextArray(i)), UCase(SearchTerm.Value)) > 0 Then
+                        SearchTerm.Offset(0, 1).Value = TextArray(i + 1)
+                        Exit For
+                    End If
+                Next
+            End If
+        Next SearchTerm
+        
+    End Sub
+-------------
+Surely it can be done but I suggest you to normalize your data before creating something that could bite you back.  
+Take the external file and have it normalized in a CSV like format:    
+
+Fruit,Description  
+Apple, A red crunchy apple  
+Banana, A bendy banana  
+  
+Import this to a new worksheet, or link it into a table, do a VLOOKUP based on your Column A and this new worksheet.  
+  
+You may want to write a script for converting the external file in something more excel-readable given that the structure of the file is standardized.
+-------------
+Worked a charm, thanks so much! Solution Verified
+-------------
+I certainly agree, and will make note in future.
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

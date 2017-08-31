@@ -1,0 +1,71 @@
+6j2bw2
+Help with VBA (possible VLOOKUP) code to match TWO column text then copy row and paste to new sheet.
+Hi guys,
+
+Pretty new to VBA and I've been searching Google for an answer but haven't had any luck so far.
+
+Here is an [image](http://imgur.com/a/yRBfi) of my spreadsheet. Basically I'm trying to write some code that would find all "Used" with "0" and copy the row and paste to a new sheet. The only problem is that all the "New" have "0" too.
+
+Hopefully you guys can help me out here. Let me know if you need more info and I'll do what I can.
+
+Thanks in advance.
+
+SOLUTION:
+
+    Set ws = Sheets(1)
+    For i = 2 To ws.Cells(Rows.Count, 2).End(xlUp).Row
+    If ws.Cells(i, 4).Value = "Used" And ws.Cells(i, 10).Value = "0" Then
+    matchRow = Rows(i)
+        Rows(i).Select
+        Selection.Copy
+
+        Sheets("No Photos").Select
+        ActiveSheet.Rows(i).Select
+        ActiveSheet.Paste
+        ws.Select
+    End If
+    Next i
+
+
+-------------
+What do you currently have written?
+
+You want to loop through your records, and check two cell values.
+
+    If ws.Cell(x, 4).Value = "Used" And ws.Cell(x, 10).Value = "0" Then
+        Do Stuff
+    End If
+-------------
+Honestly I don't really have anything written yet, it's part of a larger macro I'm creating. I'll give that a shot though, thanks!
+
+What does the 'x' stand for? Just any row?
+-------------
+> If ws.Cell(x, 4).Value = "Used" And ws.Cell(x, 10).Value = "0" Then
+
+Hey, so I tried combining this with a similar code I had written earlier and came up with this.
+
+    If ws.Cell(x, 4).Value = "Used" And ws.Cell(x, 10).Value = "0" Then
+        matchRow = Cell.Row
+        Rows(matchRow & ":" & matchRow).Select
+        Selection.Copy
+
+        Sheets("No Photos").Select
+        ActiveSheet.Rows(matchRow).Select
+        ActiveSheet.Paste
+        Sheets(1).Select
+
+    End If
+
+Any idea why I might be getting "run-time error '424' object required"?
+
+Thanks again for your help.
+-------------
+x would be a variable for your loop. You'll want to look through your records, something like below:
+
+    For x = 2 to ws.Cells(Rows.Count, 1).End(xlUp).Row
+        Do Stuff
+    Next x
+-------------
+You'll need to define ws. It is a worksheet object. Something like this:
+
+`Set ws = Sheets("enter sheet name here")`

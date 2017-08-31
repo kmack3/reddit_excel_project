@@ -1,0 +1,205 @@
+What's everyone working on this week?
+Nothing.. im working on absolutely nothing. I am the forgotten worker. I've been sitting at my desk browsing reddit on my phone and occassionally faking mouse-clicks to simulate fake work on an empty excel spreadsheet. Been at it for over a month now.
+I'm working on the consolidation of 26 different rate sheets for one of our customers (road transportation), where each and every rate sheet has different formatting, different weight brackets, and unclear geographical information. Oh, and merged cells!
+
+So much fun!
+Trying to link two separate databases where there isn't a common identifier between them, even though the records are about the same thing.  
+
+I'm using manufacturer name, and a few metrics like width, weight, capacity etc to narrow it down but the model name has been entered by hand differently in the two databases, for example one could have "MachineA TypeB 100 (large)", and the other "large MachineATypeB100 (blue)".  
+
+Currently trying to get some sort of fuzzy match working to be able to suggest a top 5 of possible matches which someone can pick from. Frustrating to say the least, would be so much easier if someone had thought to include some kind of universal ID for each...
+I just made my first ever macro!
+
+It's pretty basic, just exports a pdf, prints and saves, but it'll save me a few minutes every day and I actually enjoying making it.
+
+No I'm gonna have try and force macros into every workbook I use!
+I'm working on a balance sheet to KPI/MI generator.
+
+Enter your numbers, it scans for key metrics, and then generates pretty graphs with colours _yay_
+
+I'm trying to get the benchmark to work now, using the total average of the previous year (adjusted for anomalies).
+Debating on whether I want to use Excel as a database instead of Access because: 1) I don't know enough about Access to get the relationships to work in my favor, 2) nobody knows how to use Access anyways and 3) the people that do (slim) are busy.
+
+Pros and cons anyone? It'd be a database for about 500... It's not too large, but at the same time it wouldn't be a small spreadsheet with what I hope to do with it.
+Hahaha!! I wish I was working!!
+
+Just collecting [Ripple XRP](https://coinmarketcap.com/currencies/ripple/) at the moment. Missed the big jump while my account was being verified, quite by poor chance. Anyone else feel the pain, or did you get in before the jump?
+
+If anyone wants some work done.. let me know :)
+
+Happy to take Ripple or any alt coin. PM me.
+
+Otherwise just dreaming of a life with money in the bank and no worries.. oh, and managing the r/Excel queue.
+I'm creating a model to automate the forecasting out to 2020 for 180 partners around the world. Currently backtesting to see how accurate this is and whether the slightly less accurate forecast would have driven any different business decisions.
+
+Assuming this is accurate enough,  it will be rolled out and free up hundreds of hours for people around the world to focus on more value add tasks.
+* Polish my Insurance Rating Calculator with UserForms
+
+* Log every quote issued into an SQL database using VBA
+
+* Use QlikSense (visualisation tool) to connect to the live SQL database
+
+* Create weekly reports in QlikSense and present to the underwriting teams
+
+This is all one big project which stemmed from an idea to build a simple quotation tool on Excel for one small team, which suddenly turned into something company-wide. 
+
+Not going to lie, it's pretty tough trying to maintain all different rating calculators because it's niche for every team, each underwriting different products.
+
+I've also got one team based in Miami who for some reason can't connect to our London-based SQL Server so as an alternative, I'm trying to create a specific tool for them to log quotes into an AccessDB on our shared network drive (which they have access to).
+
+Along the way, I've learnt a good deal of VBA and now have a basic understanding of T-SQL
+I'm writing a macro to automate a monthly analysis of our accrued purchases account, which was done manually prior to my arrival. Almost done, in final simulation phases now, trying to break logic.
+I am building a workbook for our pricing engine (for mortgage loans) and one specific investor is not firing properly when our clients price out the loan scenario in our system.... so I am troubleshooting the investor in a basic workbook and inputting the eligibility guides for a Jumbo loan product.... but its not working...and it's driving me nuts. 
+Analysing effort to convert/correct/remake MI KPI sheets. 
+
+Sounds like /u/epicmindwarp and I are in the same boat.
+I do a lot of internal MI reporting
+
+We got a new payroll system so trying to work out the best way to format and present all of the data with the outputs it gives me.
+
+Don't want to fall into the trap of trying to make it identical to previous reporting as there is more info available and it's a good chance to rethink a lot of stuff, but it's a pretty big task, all MI reporting needs to be re-made, or at least the source data does.. and some I need to work in Q1's data which is in the old format. Hm.
+I'm restructuring the infrastructure behind the spreadsheets I use to run and analyse information from a project of mine, which is a massive open knockout bracket with over 16,000 entries.  I'm running against the limits of what my current layout can do in terms of useful statistics on the results thus far, and want to restructure it to be more efficient.
+
+(r/mtgbracket for the curious)
+I am watching videos on how to use Python. Everyone says its simple, but it got a little fast for me after about the 7th video.
+https://www.reddit.com/r/excel/comments/6bb5dg/how_to_automate_adding_user_comments_made_next_to/
+
+ How to automate adding user comments made next to a pivot table back onto the source data.
+I'm analyzing multiple cuts of our own sales time series data vs several thousand external indicators, to determine the best indicators for purposes of forecasting (regression), and assessing our own historical performance to perceived market growth. This supports supply chain and financial planning, and marketing decision making.
+Someone has finally rewritten a huge amount of what I do (I wanted to do it :( ) - I'm going to be trying to idiot-resist it at some point this week. 
+Consolidating sales info tables in SQL into a single view followed by a conversion into sales KPIs in excel, erring towards some sort of dashboard as it's for non tech savvy people. I can't be the only person who hates pivot tables right???
+I'll be making an invoices sheet that, once a cell is filled with the invoice number, it pulls the rest of the row's info from a database (already have that working, minus a couple indexes not working sometimes. And making a sheet for accruals - which I barely understand - and trying my best with a shitload of IF functions I guess. This will be interesting. 
+Building a new macro to calculate the EPRC rankings for rugby teams who've played in Europe since 1995. Have it done formulaicly, just trying to do it using VBA.
+My long term project is a Excel championship manager type game.  it plays well, but a few little niggles that need ironning out, and I need to write a lot more dialog (I hate the dialog).
+I'm working on developing a plug n play tool to get insight into how a % change on a rate card (hourly charge rate) will effect our revenue next year (broken down by region, role, service, etc.). 
+
+You can plug in the % change on the rate and the number of hours expected to be charge and output is the effect on our projected revenue in comparison to previous years and additional cost to our clients. 
+
+Mainly a tool to give us more insight before going in to negotiation.
+Early dismissal exceptions for weekday SLA calcs, especially as they impact 2 hour limits (not subject to off-hours measurements).
+
+And refactoring, refactoring, refactoring.
+Coding a macro that recursively loops through a folder specified by the user to search for excel files, then loops through each file and identifies hidden sheets, rows, columns and a bunch of other things the user might not see visually. It dumps all of that into a summary table.
+
+Also working on a timesheet submission process using excel and access for the office.
+Lynda is not free, but cheaper than enrolling in a course I suspect, plus there is the flexibility of pursuing parallel interests. Any VBA I've done has been learned from poking around here and there online (and building on the BASIC and FORTRAN I learned in the 80's !)
+My company has recently moved to BI Launch Pad as the tool to report some KPIs. I'm trying to figure out how to modify the report to resemble the structure we used to get so that when I export it to Excel the format doesn't mess up my PowerQuery instructions too much. Other than that, random ad hoc analysis and chart making for ppts 
+I completed my project tgis morning.  It was si.ple, but somehow i am the excel guru in the office (sad to be honest).  
+
+This sheet is used as an inspection sheet for operations.  It was all ma ually being calculated, it was painful to see excel used like that.
+
+Now the sheet will count the highest score possible based on the rows and will exclude any marked n/a.  This allows them to add categories without having to rework the numbers.  It blew them away.
+I'm reading about different Database management system to eventually convince my boss that we (I) need one.
+Used Excel today to create a few SQL statements to do some manual inserts. I always come back to Excel for something. Been rebuilding this workbook as an actual set of tables for quite awhile. All these hidden referenced columns and rows. So ugly. The person before me worked hard on this.. Excel was not the right choice but it was probably what he was familiar with.
+I've got a spreadsheet for work at my commission only sales job. I need to update the sheets for the rest of the year (I have them set up monthly) to match the new formatting I set up. 
+Trying to build a pricing tool using our company's price book. Basically learning vlookups and a little bit of Visual Basic to learn how to make an interface so we can quote doors more efficiently. All noob stuff. 
+I'm trying to do a Web Query-Table Export, but Excel doesn't detect the table i need although the table in HTML Code from the web page is classified as "Table"..
+
+Now i'm looking for a solution, but i don't find anything helpful... Just absurd VBA programming routines and too complicated stuff for my brain. 
+
+All i want is one single exported table in my excel sheet, which updates itself everytime i open it.
+We got some problems teaching the people to fill up a time shift properly.
+
+For example, they entered 9:00 - 1:00 when they actually mean 9:00 - 13:00
+
+So I did a form in excel that recognise this kind of mistakes, show you the total number of hours, the breaks, etc... and don't let you send the form unless is correct. Once you are sure the time shift is correct you press a button and excel generate the mail for you and send it.
+
+I was quite proud of myself but then my girlfriend told me:
+
+*So instead of teaching the people the correct way to do it, you create a system foolproof and contribute to the proliferation of idiocracy.*
+
+__________________
+
+*Damm, sometimes women are evil. They are not violent but they shit on your heart*
+
+Louis C.K.
+I can build you a macro that can move then mouse every 5 minutes, so your status on any instant messenger remains online... 
+Living the dream...
+oh man. this is so me. I got a new job a few weeks ago and am completely unnecessary. I've never used excel before so I literally made a fake spreadsheet and have been reading this sub to learn how to manipulate it
+It always amazes me how many different formats for storing essentially the same information one person can come up with, surely it would be quicker and easier for whoever created it to just stick to one format for everything!
+
+I guess on the bright side they aren't using the cell colour to store information.
+Fuck their face that needs to be in ERP not spreadsheets 
+Power query...
+Fuzzylookup saved my life indexing some 60k records against a 40k master data, with nothing to go on but inconsistently formatted names and businesses, sometimes without qualifying info (*alex k. smith at westport manufacturing, Inc., Providence, RI* vs *A. Smith-Haynes at West port manufacturing incorporated*...fml)
+When we really got organized with our company's employee IDs, and including it with all employee records, it made me realize how creepy and powerful an individual identifier is. So easy to analyze groups or individuals at a very large scale.
+I've had to deal with fuzzy ID's before - I used Vlookup(left(criteria,8),range,0) - it got me 80% of what I needed
+Awesome! There's always stuff that can be automated with macros and it can be fun to get something built that works!
+I'm in the same boat now. Started a small-ish scale project developing a data collection and reporting tool for a math assessment being used for two grades in 14 school districts. The project was well-received and has to be re-built to accommodate 5 different grades across 17 school districts. Looking at at least 1.5 million data points now. I'm working on a solution that integrates the existing excel front-end tool with an access back end... maybe... I'm still learning! 
+Please don't ever use Excel as a database, it makes baby Jesus cry.
+
+Access is the correct answer to this 100% of the time. People find it intimidating, but it is dead easy. Teach yourself with a couple of online tutorials and you'll open up a whole new, very powerful tool that you can use in the future.
+I use Access Queries to find the relational data instead of lookups and then create a dashboard on Excel with it. I would really recommend that as a workflow. I have all my tables on the database and when I want some new insights I just run a query. It takes no time at all.
+you think it'll raise even higher ?
+Any piece of advice for someone who would start QlikSense soon? What has worked the best for you? Currently I have only given this software a brief look, but manuals and materials in the web don't look very intuitive.
+How will these calculators be maintained if you leave the company?
+Keep at it - perseverance is key. 
+PM me if you get this work!
+Have you tried power query?
+Please inbox mesage me the VBA code
+You can also have one fake web traffic to websites that your company uses to make it look like you are doing stuff.
+This is a ridiculous idea. Why not just change your messenger settings? 
+Honestly, I was in a similar situation a few years ago and while it felt awesome for the first week or two, doing nothing gets tedious very quickly - at least it did for me.
+It amazes me that in this day and age people working in data/mi areas still don't know how to create a data table that's usable without tonnes of prep work.
+ERP?
+I know right!
+
+I don't master this subject, all I know is that the sales assistant on our side needed a tool to ease her pain anytime they asked for rates, and that on the customer side, they needed to have an easy overlook on the rates, to check they were not bullshitted...
+
+Would love to know more about ERP though.
+I am not comfortable enough with the Power BI tools to do just that, so I had to find some shenanigans. I'm pretty proud of what I came up with, even if I know there are sexier ways to consolidate data, and create user friendly tools to get rates from them.
+
+Anyway I will follow a 2 days training next week on Power BI, hopefully I will be able to optimize this kind of work later on.
+This. We have two separate staff directories with different nomenclature and having to reconcile those two before preparing a report can be a pain. Fuzzy look up cuts this process at least by 80%. The hardest part about the look up was not to let my boss know and continue giving him the impression that his demands take up alot of time. 
+Yeah, they're so useful and would make this whole project a walk in the park...
+
+Unfortunately the two databases come from two different government departments so I can't see this changing any time soon.
+Thanks for the suggestion, it works some of the time, but also returns a lot of false positives (which could cause huge problems), better to not match records then match them to the wrong thing (or at least if not sure flag the match for human verification, which is the route I'm going down).
+Oh, that seems smart to me!
+
+Excel is great because it's user friendly, and I feel like Access might only come across in someone's college course.
+
+Supposedly you can have Excel tables within Access (forms?) and update the information from Access to show up in Excel, but I don't think it works vice versa... 
+
+I'd LOVE to take another database and possibly advance spreadsheet course, but who's gonna pay for it haha.
+Right, I don't really want to use Excel and I actually can use Access to create simple relationships, but I don't know where to learn more without taking a college course...
+What is a dashboard?
+
+You store all of the information in Access, and use Excel for what then?
+
+I was hoping to create a way to save post-action items from agendas in Access instead of having the data remain static, but what I want is more complex than I can create atm.
+I wouldn't be putting money into it if I did not think so!
+I found that trying to recreate any existing Excel-based dashboards you already have helps. I agree it's not very intuitive but it really depends on how often you use QlikSense; overtime you'll start to get used to it.
+
+I would just start by dropping some data into QlikSense and see if you can build any meaningful charts.
+
+I started using QlikSense, coming from a Tableau background so I sort of had a headstart on what I can expect from QlikSense
+Depending on your industry, the qlik community may have a lot of samples to learn from. 
+I'd have to train someone to know how to use VBA and SQL or have to hire someone equally or more experienced.
+
+I'm technically still in a fairly junior role and I'm using what I've done as a way to move up the ladder, so to speak. Essentially, if I were to leave right now, nobody will know how to maintain the calculators
+For anyone interested in the excel scanning tool I built, here's a link for downloading:
+
+https://drive.google.com/file/d/0B5FPYnSHKk7Fd3VaOXhfS01fYlU/view?usp=sharing
+Waiting for Accounting to finish closing March.  At least I've already got March prelim loaded into my variance analysis models.  Then it's preparing management power points and financial reviews with my business unit leads.
+
+Until then I'm trying to cost out a move, work on budget recast stuff (when it comes up), and trying to look busy.
+Yup, rates tables were clearly made by people for whom Excel is just something to put stuff in cells.
+
+No foresight on whether this is usable and exploitable by someone else.
+Enterprise Resource Planning system. It's a software suite that handles all aspects of business. Sales, purchasing, general ledger, inventory, EDI, planning. Huge industry. SAP is the 800 lb. gorilla but there are tons of megacorps like Infor that have a scores of products serving a wide range of industries.
+It's an information system, AS3000, Oracle JDE, SAP, sales force is like an ERP, 
+Make it stricter- that was simply what worked for me
+I splashed out for a subscription to Lynda.com good variety of content, well organized, self-paced, support files, etc. I'd love to go back to school and take a data management course, just not in the cards time-wise. 
+I may have misunderstood your comment, but in my particular case it works like this. I have 3 sometimes 4 tables with employee IDs and various other information that I need. I run a query to link all the tables together and get it on one table. I export that table back to Excel and from there on I work in Excel.
+That's a huge risk. If you really want to move up, consider discussing that with management. They're fucked if you leave, and you'll have to babysit the calculators if you get promoted.
+Gorilla! EDI such awe!
+Is that free or not?
+
+Also, not sure if you do any coding, but I know Code Academy is free.
+Oh yes I understand that. :) That makes sense. Access queries are great!
+It's true. I have talked to management. It's just in the waiting stages right now whilst my manager talks to his manager regarding my salary. I did get a pay-rise last month but I expressed it wasn't enough for what I've achieved for someone my age and specified role.
+
+Having said that, I don't think it would take much to train the person to know how to maintain the calculator because I learnt how to write VBA and SQL whilst building the calculators; I still am learning!
+Lynda is not free but it's good. TBH I just start with a need a google what I don't know. Now, googling is the skill to have.
+That's a fair point! God bless the internet.

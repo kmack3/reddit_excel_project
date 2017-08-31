@@ -1,0 +1,118 @@
+I'm at work and completely stumped. Need to make a quote log. Any one able to help?
+I would do this in reverse.
+
+Make a table that has each field of the quote in a column. The first can be the quote number.
+
+Use vlookup on the quote to popultate the quote template when a quote number is typed in on the quote template.
+
+The 3 of you then complete the quote directly in the table and when submitting the quote go to the template and type in the quote number, print to pdf ans send.
+
+Make sure you never send the excel file, as you client will then see the history of all your quotes. You may wnat to keep the table in a seperate workbook to avoid this accidental situation.
+
+
+I think you are doing it wrong.
+
+You do not need the quotes, you need the data for the quotes.
+
+Then use a template where you enter the quote ID, the data is pulled from the table, you copy paste the data to an email or whatever..
+
+You do not need to save each quote .. just the data for the quote., you will have a record of the actual quote in your email sent folder
+How about a mail merge printed to a PDF?  You can use whatever existing Excel calculations you have to build your quote.  Create a summary tab, that is essentially two columns that link a name with a value, e.g. FNAME, John, SERVICE, "Replace the Johnson rod".
+
+Then, in Word, you create your template, with the variable names in there.  It will pull the values in from your sheet. 
+This can totally be done via VBA if you're trying to automate the process. What do you have in mind for laying out a quote template, and how do you want to keep a log of them?
+Lol...VBA? 
+
+We already have a quote template laid out that's been used for the past year or two. It basically has customer name, quote requested date, system, location of installation and cost on the template. There are a few other details but they're not important in terms of being recorded. I hope that answers your question..
+
+In terms of keeping a log,
+
+It would be a basic enough looking spreadsheet with quote number being the first column, then customer name, date requested, system, location, total cost.
+What about power query, you can set a folder as source and save your quotes there. As long as the file have similar format it should be doable.
+There is another option, you could look into using the MailMerge feature of Word. Basically, you would recreate the template in Word and then tie the document to your table in Excel. Word then auto generates the populated form based on the excel table. Otherwise I'd agree with the other users here, doing this solely in Excel would be best with some VBA.
+Possibly. This is still a pretty vague problem statement. One guess, you could have a large table where you store all the data that will feed your quote. THen, on another sheet you build teh "pretty" layout of actual quote. Use formulas to pull over information. Just an idea to get started...
+
+You could also browse some of the linked articles here, perhaps spur your imagination? http://blog.contextures.com/archives/2013/02/12/print-invoices-with-excel-macro/
+OP, the time it takes to learn what to do would be worth the company paying someone $200 to make it for you. You'll spend time googling, copying and pasting code, making errors, learning to comment code, and possibly lose data. 
+This.
+VBA is actually the most convenient way to do it, to be honest. File-to-File interactions are really difficult otherwise. 
+
+Post a screenshot or a dummy worksheet of the quote template with your company info scrubbed but with the exact locations of the required cells so that someone can write you the appropriate code. 
+
+To be clear, what you're asking is to have the employees fill out the individual template and then have that data replicated on a log-sheet, and not the reverse where the employees fill out the log and it automatically fills the template, correct? 
+This sounds pretty doable. Basically have cells in the excel 'Quote Log' and when they're filled they would populate the Word document 'Quote'
+Ill try make it clearer.
+
+So there are 3 of us. We currently just email quotes to customers. These quotes are presented on a pre made template (Edit > Excel Template...)with company branding etc. This template has been used for the past year or two.
+
+The idea would be to have these quotes on a shared drive folder. When the quote is made and saved, it would automatically update a new excel spreadsheet with the desired information from the quote itself, ie, quote number, customer name, country, final cost. 
+Hi, see shots below. Basically save the template in a folder and have the "log" update automatically with the details. 
+
+Template > https://imgur.com/a/BVlPn
+
+Log > https://imgur.com/a/uIjtm
+Oh, so you dont need to make a quote generator.
+
+You want to make a sales dashboard.
+
+I mean, if you got really clever with VBA, and you were really militant about the file naming conventions for your quote files, you could create a VBA loop that runs through the shared drive and grabs all of the files.
+
+That would be really tough to make though, and being one character off on the shared drive file names or duplicating names would hork the entire system.
+
+edit: Since its just the 3 of you, and even if it were 20 of you, just creating a shared spreadsheet where you log those datapoints after you make a quote would be a much smarter way to go about it.
+Just tagging /u/ViperSRT3g to see your response :)
+Can't you just do a quick macro to copy and paste? If you are inputting the information into the template, you can have the log look reference the cells of all the data field you need and paste it into the log and move to next line. 
+
+    Private Sub CommandButton1_Click()
+
+    'Copy Range (copy the referenced cell from Template)
+    ActiveSheet.Range("G1:J1").Copy
+
+    'Append Values To The Next Available Blank Row
+    appendRow = ActiveSheet.Cells(Rows.Count, 1).End(xlUp).Row + 1
+    Range("A" & appendRow).PasteSpecial 
+
+    End Sub
+
+So G1:J1 could be where you look up the information you need. G1 = date, H1 = name etc. Once you reference with the table all you need to do is create an active button and add in the macro and it will paste the data in for you
+
+
+Ah thanks for this, OP didn't reply to my post. What OP's describing is essentially a variation on something I currently use at work to track our submitted requisitions, expenditures, and monthly budgets. It's a log that iterates through all the files of the folder the log is located in. With each file, it extracts certain cells of information and keeps everything in a neat long list.
+
+/u/damiendevlin what are the names of the worksheets your screenshots are from? (The code requires the worksheet names in order to correctly identify cells on closed workbooks, bypassing the need to completely open documents to load data)
+Sorry. Was driving home there. 
+
+The sheet for the template is sheet1 and for the log it is just "log"
+
+Really appreciate the help from all of you so far 
+!RemindMe 4 hours "Modify REQ Tracker Code"
+Here's a link to a [zip file](https://drive.google.com/open?id=0Bx6qbYbtBah6Z2JadDBNRk1DY00) that contains a folder with the quote log document, and two quote example templates with which you can see example data filled in. Tagging /u/solarpool for interest :]
+
+This file uses the same basic idea as my current document that I use at work, although with some slight refinements in design as you have less information to keep track of.
+
+1. This quote log will automatically generate unique Quote IDs with which it compares between what is already in your log, and the quotes it scans.
+
+2. This quote log should automatically remove duplicate entries (It clears the log before regenerating it) which shouldn't be too bad. I do recommend setting up an archive with which you can store quotes older than a certain timeframe in so the quote log doesn't get too cluttered. (I use an annual archive for my document)
+
+3. This log is generated by the macros iterating through each file contained in the same folder as this document. So this quote log should be located in the same folder as your quotes.
+
+4. If you have log clearing disabled (#2) then you'll be able to see this feature at work. This quote log is able to detect filename changes, and flag filenames accordingly with red highlights.
+
+5. You can modify the appearance of this document as long as the worksheet layout is preserved. (Columns cannot change, unless you also change the column IDs in the macro)
+
+---
+
+Edit: Also tagging /u/epicmindwarp and /u/excelevator for interest
+I will be messaging you on [**2017-03-14 22:16:39 UTC**](http://www.wolframalpha.com/input/?i=2017-03-14 22:16:39 UTC To Local Time) to remind you of [**this link.**](https://www.reddit.com/r/excel/comments/5zcsdo/im_at_work_and_completely_stumped_need_to_make_a/dexa790)
+
+[**CLICK THIS LINK**](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[https://www.reddit.com/r/excel/comments/5zcsdo/im_at_work_and_completely_stumped_need_to_make_a/dexa790]%0A%0ARemindMe!  4 hours ) to send a PM to also be reminded and to reduce spam.
+
+^(Parent commenter can ) [^(delete this message to hide from others.)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Delete Comment&message=Delete! dexa7ps)
+
+_____
+
+|[^(FAQs)](http://np.reddit.com/r/RemindMeBot/comments/24duzp/remindmebot_info/)|[^(Custom)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=Reminder&message=[LINK INSIDE SQUARE BRACKETS else default to FAQs]%0A%0ANOTE: Don't forget to add the time options after the command.%0A%0ARemindMe!)|[^(Your Reminders)](http://np.reddit.com/message/compose/?to=RemindMeBot&subject=List Of Reminders&message=MyReminders!)|[^(Feedback)](http://np.reddit.com/message/compose/?to=RemindMeBotWrangler&subject=Feedback)|[^(Code)](https://github.com/SIlver--/remindmebot-reddit)|[^(Browser Extensions)](https://np.reddit.com/r/RemindMeBot/comments/4kldad/remindmebot_extensions/)
+|-|-|-|-|-|-|
+I definitely need to do some formatting to make it look like it needs to for the company but OH MY GOD. At first glance and a quick test quote of my own it seems to be exactly what I needed. How long did that take you?
+Erm, maybe an hour or two of straight up editing code, but I was jumping between projects at the time. I already had pre-existing code that did the same thing, it just had different formatting to read/write to. My current code is more complex because it uses a separate worksheet to track individual line items per REQ since that is what I'm tracking. It also tallies up spending per account #, and provides a dashboard for overall budget tracking.
+Thats crazy, this appears to be exactly what I was after. Question though, I assume if I want to move the data in the quote around it will mess up and the code wont read it? For example, if 'location' need to be moved a cell or two down that cant be done, is that right?

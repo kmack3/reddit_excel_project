@@ -1,0 +1,21 @@
+How do you divide a number by the number of days remaining in the month?
+Use this formula to work out how many days are left in the month.
+
+    =EOMONTH(Today(),0)-Today()
+
+Or use this formula to work out how many working days there are between now and the end of the month.
+
+    =NETWORKDAYS(TODAY(),EOMONTH(TODAY(),0))
+
+
+You can then use this in your "budget/days" formula.
+I'm assuming you mean working days? Here are a couple of approaches:
+
+http://stackoverflow.com/questions/8878362/number-of-working-days-remaining-this-month
+
+
+Holidays are going to be another issue :-)
+Thank you so much! The first formula is what I was looking for!
+Your welcome!
+
+You can award clippy points for correct answers by replying to the comment with "solution verified"

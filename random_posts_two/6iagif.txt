@@ -1,0 +1,42 @@
+6iagif
+Could someone point me in the right direction with an algorithm?
+[Here](http://imgur.com/a/4T8K9) is what I have. Could anyone tell me what algorithm I need to use in in order to adjust the duration of events (in minutes) and it would change the time? Such as if the registration & breakfast lasts 30 mins it would push everything on the schedule back 15 minutes. (since the original time was set to 15 minutes)
+
+Please forgive me if this is the wrong place to post a question like this. I am not too experienced in excel. 
+
+Thanks in advance!
+
+
+-------------
+u/Syracks
+
+A reminder to please read the [sub guidelines](https://www.reddit.com/r/excel/wiki/sharingquestions) about post titles.
+
+Your post title must contain a description of your problem, this makes searching for it again easier. Your title is generic as to apply to 95% of posts.
+
+Posts may be removed where do not describe the problem.
+
+Suggested title from your question: **How can I adjust duration of events using time values in a schedule**  or similar
+
+-------------
+If your times don't have any gaps, just add the times. So set A3 `=A2+B2/(24*60)` (Excel's time units is days, so minutes is divided by 24\*60). Or `=A2+TIME(0,B2,0)` if that's easier. And just make sure the first time is formatted as time, not text. No worries if you get stuff like 0.321 or whatever after putting in this formula, just format cells as time.
+
+[Screenshot](http://i.imgur.com/lP64uP0.png)
+
+If the times are not contiguous, then you can do a one-time fix by creating a new column, `=B2/(24*60)`, drag down, copy go to A2, Paste Special, Add.
+-------------
+Assuming the word __Time__ were in cell A1, with 7:30 in cell A2, 15 in cell B2, then you could use formulas in the rest of column A.
+
+    A3:  =A2+TIME(0,B2,0)
+
+Fill A3 down as far as needed. Change the durations in column B or the initial start time in A2, and the other start times in column A will adjust automatically.
+-------------
+Thanks so much. I feel like I am almost there. [Here](http://imgur.com/a/2U2hn) is what I have so far. It just doesnt seem to be registering. 
+
+I'm sorry I am kind of new to excel. Is there something basic that I am not doing correctly for it to register?
+-------------
+So your cell is formatted as text, so it's not evaluating formulas. Excel really needs to make it more obvious why it doesn't evaluate formulas in this case.
+
+Anyway, change C2 on down to Time format (or better yet, Ctrl+1, Custom, type in `h:mm`). Type in `6:00` into C2 (it will now properly evaluate as a time), then that formula you have in C3 and use the [fill handle](https://www.computerhope.com/cdn/fillhand.jpg) to copy the formula down.
+-------------
+Thank you so much! I got it!

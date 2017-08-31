@@ -1,0 +1,25 @@
+VBA Help with looping through a horizontal list, checking if a worksheet exists with the same name as the values within those cells in the list and then create a sheet if it doesnt.
+Interestingly i solved it myself. Here is the code.
+
+    Sub CreateSheetsFromAList()
+        Dim lcol As Long
+        Dim sheetToFind As String
+        Dim sheet As Worksheet
+        Dim MyCell As Range, MyRange As Range
+         
+         Set MyRange = Sheets("Overview").Range("B1")
+        Set MyRange = Range(MyRange, MyRange.End(xlToRight))
+    For Each sheet In ThisWorkbook.Worksheets
+        For Each MyCell In MyRange
+            If MyCell <> sheet.Name Then
+            Sheets.Add After:=Sheets(Sheets.Count) 'creates a new worksheet
+            Sheets(Sheets.Count).Name = MyCell.Value ' renames the new worksheet
+            End If
+        Next MyCell
+        Next sheet
+    End Sub
+
+
+
+Loop through the worksheet names and store them into an array. Then loop through your range and test each value to see if it is in the array. If not, then add it as a new worksheet. 
+Imagine you have a sheet named A amongst others. You also have A in you range. How many times are you trying to create A?

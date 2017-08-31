@@ -1,0 +1,63 @@
+Invoking Python script from a Macro
+How about [xlwings](https://www.xlwings.org)? You can invoke python from VBA and vice versa. Connects the two quite nicely.
+You should be able to execute your python using the vba "shell" function.
+
+Execution would probably be something like:
+
+Use vba to generate a temp file name. 
+Use vba to take the data you want from your workbook and dump it into the temp file. 
+Launch your python, invoke it with the temp file name as a command line argument. 
+
+Use python to read the data from the temp file
+
+Use python+web scraping to manipulate it as you see fit, then save the temp file
+
+When the python execution completes the vba will resume on the line after the shell statement...you can then read the temp file data, put it in your workbook and delete the temp file. 
+Either use xlwings or convert your command line python script to gui (I suggest search python+gooey) 
+Thanks, I'll look into this. I want the user to click a macro button, and all Python work to happen in the background. I hope this can be achieved by xlwings. 
+VBA's Shell function is asynchronous. VBA spawns the new process, but it doesn't wait for the process to finish before continuing the VBA code. You could test it with
+
+    Sub foo()
+      Shell Environ("COMSPEC")
+      MsgBox Title:="foo", Prompt:="is console still running?"
+    End Sub
+
+You'll see the message box in Excel before you exit from the console session.
+
+For synchronous, Google search ___VBA ShellAndWait___.
+
+As an alternative, it'd be possible to launch a Python script which connected to Excel via Automation and pulled in what it needed from Excel directly rather than using temporary files.
+
+Wow, this makes sense! Thanks for that. I'll comment later on to update if this is successful or if I have issues while executing this.
+Interesting. It looks, though, that the GUI is only Windows compatible? 
+Indeed you are correct, I was thinking of VB.Net's shell function.  Shellandwait would certainly work but most of the solutions out there use windows API or Windows Script Host and OP wanted it to work on MAC too.  There are a variety of ways to tackle it though, I presented him another option.
+Sorry, but as /u/hrlngrv points out, the VBA code will continue running without waiting for the shelled process to complete.  His suggestion, implementing a "shellandwait" function will work, but you need to implement it, also, I don't think it really meets your requirements since you'd need to implement it separately on Mac and Windows.  Most of the solutions I saw for it utilize either the windows script host or the Windows API, so they wouldn't really work on Mac.  
+
+Another possibility that would be a bit more platform agnostic would be to add a loop to your vba code and look for the timestamp on the tempfile to change. Something like:  
+
+    shellcommandline = "mypython.py"
+    tempfile = "tempexcelfile.xlsx"
+    
+    modtimestamp = FileDateTime(tempfile)
+    Shell shellcommandline
+    While modtimestamp = FileDateTime(tempfile)
+        Application.Wait (Now + TimeValue("0:00:01"))
+    Wend
+    MsgBox "done"
+Crude semaphore? Better to create another temporary file which the script would delete as its final operation. The VBA code would loop and wait as long as that file existed, then proceed as soon as it's gone.
+
+    Sub CrudeShellAndWait(cmdline As String)
+      Dim tfn As String, fd As Long
+      tfn = Environ("tmp") & "/deleteme" & Format(Rnd, ".00000000")
+      fd = FreeFile
+      Open tfn For Output As #fd
+      Print #fd, "WAIT!"
+      Close #fd
+      Shell PathName:=cmdline, WindowStyle:=vbNormalFocus
+      Do
+        Application.Wait Now + TimeSerial(0, 0, 2)
+      Loop Until Dir$(tfn) = ""
+    End Sub
+
+The called script given in the cmdline argument to this procedure would need to delete all files matching __$tmp/deleteme.*__ for the VBA code to proceed past the Do loop. Note that Windows will accept __/__ as a separator in pathnames.
+Thanks for clearing this. 

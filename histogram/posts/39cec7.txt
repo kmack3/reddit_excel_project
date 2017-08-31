@@ -1,0 +1,118 @@
+When someone says 'you can use VBA' and posts a formula, where do I put it in VBA? (total noob here)
+Sounds like you got the first part, but Press Alt+F11.  This will open up the VBA editor.  Right click on the workbook in the menu on the left.  Select Insert > Module
+
+    Sub Example()
+        Dim lngColor As Long
+        lngColor = RGB(60, 40, 50)
+        With Range("A1").Interior
+            .Color = lngColor
+            ActiveWorkbook.Colors(.ColorIndex) = lngColor
+    End With
+    End Sub
+
+Next, run the macro.  You can call this from the Ribbon by 1st revealing the developer tab and selecting Macro, or you can do it right from the VBA editor.  Make sure your cursor is on the first line of the macro "Sub Example ()" then click the play button (the green triangle in the menu).  
+
+This will set the color of the cell to the RGB colors selected. (60, 40, 50) is a purplish color.  
+
+As for learning VBA, I learn best using books, so I picked up John Walkenbach's Excel 2013: Power Programming with VBA.  I worked on some of his samples and read through the book.  I then kept it by my as a reference guide while trying to work out problems in my daily work.  Took me about 6 months to be what I would consider proficient.  From there, I kept tackling new problems at work and that book has been invaluable. 
+
+
+
+Brilliant question man. This was one of the biggest questions I had before I learnt VBA
+If you're not sure how to do something in Excel VBA, click "Record Macro". Do whatever you need to figure out and then press "Stop Recording". Then click "View Macro" and you can see the code for what you just did.
+This a great example of a courteous OP on this sub. Clear, polite and extremely grateful. Even gave gold to the man who helped him out! Good job 
+You need to [stick it in a subprocedure](http://www.easyexcelvba.com/chapter_2.html) (or you can just run it in the immediate window).
+
+
+This is awesome! Works like a charm. Thank you so much!!! 
+
+How do I get it to change colour depending on the values within the cells the macro is applied to? 
+Alt+F4? Doesn't that close the window?
+
+Isn't it Alt+F11 to open VBA editor?
+Thanks! I'm a lady though. ;) 
+
+I feel like this knowledge has opened so many doors for me... I'm going to be automating so many of my admin tasks now. Haha! 
+Well, I just figured, this guy took a good chunk of his time out to write the responses, went above and beyond my initial question, he was really clear, and I really valued his help. I should have written "solution verified" after his first response probably. 
+
+Anyhow, after he started me off on the right track I also added another sub and a function to the macro, an made them all happen at the touch of an in-sheet button. Yay! I love learning. 
+For that, you'd probably want conditional formatting.  Like a lot of VBA, the easiest way to start learning it is with the "Record Macro" function.  Select "Record Macro," make sure you save it on that individual worksheet (though you'll want to save the worksheet) and not a roaming profile.  Then use the "Conditional Formatting" menu to set the formatting you want.  When you're done, stop recording the macro, and then open the macro menu and "Step Into" to see what the code looks like.
+If this answers your question, would you mid responding with "Solution Verified"?  Thank you
+
+I assume you want 3 columns that have the possible values for RGB in them. 
+Column A is Red Hex Value, B Blue, C Green. Then D is the final color. 
+
+You could set up a For Next loop and have it go down a list of potential values too. 
+
+(OneDrive Link)[http://1drv.ms/1JLnzDR]
+
+    Sub Example()
+        Dim lngColor As Long
+        Dim RColor As Long
+        Dim GColor As Long
+        Dim BColor As Long
+        
+        RColor = Sheets("Sheet1").Range("A2").Value
+        GColor = Sheets("Sheet1").Range("B2").Value
+        BColor = Sheets("Sheet1").Range("C2").Value
+    
+        lngColor = RGB(RColor, GColor, BColor)
+
+        With Range("D2").Interior
+            .Color = lngColor
+            ActiveWorkbook.Colors(.ColorIndex) = lngColor
+        End With
+        End Sub
+
+Yes it does.  Editing now!  So much for proofreading.  
+
+Alt+ F4... just the usual emergency "close my browser" when someone walks in...
+Sorry, got a habit of putting "man" behind my sentences when Im in extreme agreement.
+
+Now you can put VBA on your CV!
+You have awarded one point to Ewan27
+Ha you inadvertently gave me a point by typing "that phrase", but lets not tell anyone and we'll get away with it :) You asked initially the best way to learn VBA, I would agree that recording macros and inspecting the code is a great way. I found the best way to learn was to have a practical use for any code, i.e. this will make my job easier, there must be a way to do it. Also looking at other people's (in my case, my boss') cool spreadsheets and seeing the code is very helpful. Even if you can do something quicker manually, try writing code to do it; by learning to do the easy things the hard tasks will be less daunting. 
+This is incredibly important when learning VBA.  Hit record macro and do something (usually a repetitive task that you do) and then check out the code.  You'll start to learn a lot of the language by doing this. 
+Solution verified 
+This is great! Thank you! I've verified and given you gold. :) 
+
+I was wondering.. Can I have a list of different colour numbers that all populate different colors? 
+
+Like your above, but applied to whole collumns. I tried changing the values from A2 to A:A but that gave me an error. 
+
+I suppose I could copy the whole thing and change the cell references in each copy, but is there a more elegant way? 
+Thank you /r/solsed for the gold!
+You have awarded one point to True_Go_Blue
+You can!  It's called a for-next loop.  Using I as a counter, and Dcell as a defined range, you can cycle through a range for I number of times. 
+
+[One Drive Link with columns for value](https://onedrive.live.com/redir?resid=f19ec51c17f4d7fe!22171&authkey=!AP7BaQCxSg25LW0&ithint=file%2cxlsm)
+
+    Sub Example()
+        Dim lngColor As Long
+        Dim RColor As Long
+        Dim GColor As Long
+        Dim BColor As Long
+        Dim I As Long
+        Dim DCell As Range
+        
+    
+        
+    For I = 0 To 255
+        Set DCell = Sheets("Sheet1").Range("D2").Offset(I, 0)
+        RColor = Sheets("Sheet1").Range("A2").Offset(I, 0).Value
+        GColor = Sheets("Sheet1").Range("B2").Offset(I, 0).Value
+        BColor = Sheets("Sheet1").Range("C2").Offset(I, 0).Value
+    
+    
+        lngColor = RGB(RColor, GColor, BColor)
+    
+        With DCell.Interior
+            .Color = lngColor
+        End With
+    
+    Next I
+    
+    
+    End Sub
+
+Thank you for the help! :) 

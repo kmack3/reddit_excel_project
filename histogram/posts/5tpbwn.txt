@@ -1,0 +1,117 @@
+Would anyone point me in the right direction as to how to figure these out? I'm trying to get better at Excel and these were in a pre-interview test and I failed because I don't know how to do all these things.
+So #1 and #2 you can find out easily. For #3, `MAX` (or `LARGE(...,1)`). I don't see options for #5, but `=D4*5%` works.
+
+For #5, this is where you demonstrate knowledge on absolute references. The best answer is `=C4*$H$4`. Then `=C4*D4`. Note you don't want dollar signs as you want the references to move as you copy the formula. #7 also deals with this issue: it works for D4, but as you copy down the formula becomes `=VLOOKUP(B5, G5:H7, 2,0)` in row 5. You want to lock those rows, so `=VLOOKUP(B4, G$4:H$6, 2, 0)` or `=VLOOKUP(B5, $G$4:$H$6, 2, 0)`. So option 3.
+
+For the last one, you didn't do `,0` at the end of the lookup so it returns the highest value lower than or equal to the lookup value. L<M, so it returns the 3% value.
+
+Anyway, on where to learn, +1 for ExcelIsFun. [He has a beginner to advanced playlist of like 50 videos](https://www.youtube.com/playlist?list=PLrRPvpgDmw0nh4BBxqjcsnbB4ME4JjzfJ). Tons and tons of stuff in that playlist.
+
+*edit*: Updated playlist link, thank you /u/kenniky 
+
+
+actually: I suggest you open a blank Excel document, click on a blank cell and type the function ROUND, MAX, MIN, LARGE, SMALL into a blank cell and click on the fx to the left of the formula bar. In the resulting help window that pops up, click on the blue underlined "help on this function" link. You can read and learn a bunch!
+Depends on how you learn, but for me i learn by doing, so videos on youtube rock. Look for user "ExcelIsFun" and maybe "WiseOwlTutorials" if that works for you. 
+
+Also chandoo.org has some good "homework" challenges once you get the knack.
+
+I've been self teaching for about 5 weeks now and all of those were fairly easy. 
+I'm going to add to /u/melsonee answer and point you to some more resources as well. It doesn't matter whether your version of Excel is MacOS or something else, the program works just about anywhere. 
+
+Here's a site that explains the    =ROUND function (and a whole shitload more than just that) https://exceljet.net/excel-functions/excel-round-function
+
+The    =COUNTIF function can be found here
+https://exceljet.net/excel-functions/excel-countif-function
+
+Now, it is clear that you went to this thing thoroughly thinking you could breeze your way through it. Excel requires a proper understanding and if you don't have a proper understanding (and in your case, I doubt you did anything more than casually glance at a few websites) then Excel will frustrate you to no end. Follow /u/melsonee their lead and get comfy with it. It's clear that you didn't have a clue because these were damn simple to figure out - but only if you were familiar with Excel.
+
+Contextures.com, and ablebits.com along with excelnuggets.com will all give you a solid understanding. If you want to know how to use Excel you have no choice but to dig in, set up a spreadsheet full of dummy data and get to work. 
+> Excel for Mac 2011  
+  
+Can you get parallels/boot camp into a windows partition? 
+I believe that just throwing the answers toy you, is not what you need.    
+You need to be prepared to any kind of questions they might ask you.   
+The sample questions you posted here, are kind of simple, but for a business Analyst position the Excel requirements are going to be a lot more demanding.    
+There are plenty of video lessons, even maybe some free ones but the best way to learn technical skills is by hands-on practice.   
+The company I work with has developed a learning system that consists of test exercises, on the real excel  application, along with video solutions of these exercises.    
+We even developed a massive course for data analysts.   
+[TEST4U data Analysis](https://www.test4u.eu/en/e-tests/ms-excel-data-analysis-en)   
+Unfortunately it runs on a PC and requires a PC installation of Microsoft Excel.   
+If you have a PC lying around try the free demo first, and I am sure you will understand its value.   
+All the video solutions for the exercises are also free to watch on our youtube channel [TEST4U youtube channel](https://www.youtube.com/user/test4ueu)
+1. 6.59, because it rounds to the nearest 2 decimal points.  
+2. =COUNTIF counts and tallys for each cell which satisfies the argument. There are 4 months which are >1000, so the return is 4.  
+3. =MAX can do this and return the highest value of the array.  
+4. =D4*0.05  
+5. =C4*$H$4  
+6. =B4*C4
+7. The table array is not an absolute reference. Meaning you needed to add $ signs for the array.  
+8. The vlookup formula does not specify the parameter for the 4th argument in the vlookup function, the vlookup function has 4 arguments. The fourth one specifies whether you look for exact values, or nearest. If not specified, the parameter is automatically 1. That means it will take the nearest value to Manchester. In this case, Luton, alphabetically is nearer to Manchester, so it took Luton's value.
+Next time when they ask what's wrong with the VLOOKUP formula, say "It's not INDEX/MATCH". lol (learn that one too btw)
+Follow up question for everyone. How typical is this of an Excel test? Do you feel that this is much easier or harder for a job that relies on reporting and analytics in excel?
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+thank you to everyone contributing. I have to start working these out tomorrow
+The function round, rounds the number to two digits because of the number 2 in the formula .so the answer would be 6.59 
+**1.**6.59, this is literally just me guessing, I never had to learn what ROUND does. I assume A3 is the cell and 2 is saying rounding to two decimal places.
+
+**2.**COUNTIF means that if the number in the cells we are talking about are higher than 1000 (>1000) than you tally it, if they are lower, then do not. So the answer should be 4
+
+**3.**What /u/rnelsonee said. I personally would have had to look that one up. I've used DMAX, though so I was trying to think if that would work in some convoluted way.
+
+**4.**D4 * 1.05, this should be reminiscent if you have ever had to calculate sales tax or a tip or whatever.
+
+**5.**H4 * C4 drag down
+
+**6.**B4 * D4 drag down
+
+**7.**Even without looking at the formula the reference not being absolute where it should be is the problem 99% of the time.
+
+**8.**This is a total guess because I put TRUE and FALSE at the end of my VLookups and HLookups, but I am guessing that 2 is TRUE, meaning that it will return the next highest value. I 'd actually be curious to see a case where an alphabetical  TRUE would suffice in business practice.
+FYI, you linked an image instead of a playlist
+Vlookup is a better choice when working with large data sets because it runs significantly faster than index/match.
+Yeah, 75% of that test should have been easy just by being able to read.  Very little Excel knowledge is needed to ace it.  It's really fucking basic.
+Number 8: that 2 is the ref column. True or false is 1 or 0, so in this case the true/false argument is missing and the formula is just returning the same value in every cell. 
+
+I think. I'm half asleep so can't guarantee making any sense
+Mostly good answers, except #8. 
+
+    VLOOKUP({value to find}, {range or table to look for the value}, {column number to return from}, {TRUE/FALSE or 1/0 return the highest value below the lookup value if nothing is found})
+
+The value to find 'B5' must be in the leftmost column of the range to look for the value (it is correct here 'G4:H4')
+
+The column to return from is 2, containing the percentage to apply
+
+TRUE/FALSE can also be 1/0, but is missing from this equation so it still returns a value 'TRUE' which is the default for VLOOKUP
+
+
+***Study the image***
+I agree with you. However, when those datasets become large enough to make a difference, it may be a better option to use a database to query it. Smaller sets:  I use access. Larger ones: I use SSMS. Sometimes I'll jump into python and use pandas. Many tools to do the same job.
+
+I guess it all depends on what tools the user has access to.
+
+None of this is relevant to this post. I only made this comment in jest and to bring attention to another formula option. 
+Yeah, you're mostly right - although technically any non-zero value is TRUE and zero is FALSE. So you could do something `VLOOKUP(A1, $C$1:$D$100, 2, 2)` if you wanted to.
+
+ But note the last argument is optional (that's why it's in brackets in the tooltop when you type out the formula). Without it, a TRUE (for an approximate match) is assumed. So  `VLOOKUP(A1, $C$1:$D$100, 2)`  is the same as the earlier formula.
+Do not try and learn the image, that's impossible. Instead, only try to realize the truth...there is no image
+OK, so why is it returning 7% for Mcr when there is no data for it? Surely this should return an #N/A?
+So there is a match if we're in approximate mode. How it works is it returns the highest value that is less than or equal to the lookup value. "L" comes before "M", so that's valid, and it returns 3% for Manchester.
+
+The data in this example is sorted, so it all works just  fine (it was designed for things like determining bonuses or finding your tax bracket, so being non-exact is fine). If it's unsorted [this happens](http://i.imgur.com/nEUZ2ov.png). Note VLOOKUP and MATCH use a [binary search]https://en.wikipedia.org/wiki/Binary_search_algorithm) so it starts halfway through (at the 50), then goes up if it's <=50, and down if it's >50. And it keeps dividing the range in half, so it goes to One or Five after that, and never 'sees' the other half it just ignored. So it only really works when the data is sorted.
+Ah, approximate mode finally makes sense!!
+
+I don't think I can give you a clippy point though can I?
+I don't think so... that's fine though, I have enough :)

@@ -1,0 +1,13 @@
+Pulling a row of data from a table based on two Variables and put on a separate tab. Possible?
+>these are more for single cell applications not the entire row of a chart.
+
+You can do this using INDEX/MATCH, and just autofill to the whole row.
+>...but obviously, these are more for single cell applications not the entire row of a chart.
+
+A house is made of single bricks, a row is made of single cells...
+
+Apply the formula in each cell to return that data element for a given machineID.
+Can you give me an example of the formula? I couldn't get this to work, it is my first time using these functions since school... also would this work as lines are added to the master list.
+
+Edit: Lines are added to the top of the master list with a VBA macro. 
+[The wiki](https://www.reddit.com/r/excel/wiki/frequentlyusedformulas#wiki_index.2Fmatch) can give details about the INDEX/MATCH option, or I'd need more details about where everything is to help with building the formula.

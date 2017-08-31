@@ -1,0 +1,32 @@
+6fwpy6
+Using Countifs to allocate time stamp data entries into hourly buckets.
+Hello r/excel. Thanks in advance for helping me out!
+
+I have a list of data entries by time that I would like to arrange into hourly time buckets. The data accounts for every 'event' that occurs over a 14 day period. I want to arrange this information into hourly count for each day (meaning the hours would be in the rows and the day would go into the columns). This is done so that I can compare the number of events that occur between say 11 am to 12 pm for each day by looking across the row. I'm trying to use Countifs to allocate each entry into the buckets. 
+
+However, because date and time in the hourly buckets correspond to a single date (01/01/1900), I can't get the criteria to match against the date/time in the data entries which correspond to the year 2016. How can I address this problem?
+
+
+-------------
+Sounds like a Pivot Table will be your friend, here
+
+Click in any cell in your data-set, and go to Insert > Pivot Table from the ribbon
+
+Drag days to the 'Column Labels' and time to the 'Row Labels' and then your data to the 'Values'
+
+You can then right-click on your times in the actual pivot table and select 'Group'
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+

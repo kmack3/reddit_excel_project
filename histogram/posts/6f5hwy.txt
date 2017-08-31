@@ -1,0 +1,87 @@
+How do I use Excel to fill out this text box and press "search" in Internet Explorer?
+Yes and yes:  
+
+Add a reference to "Microsoft Internet Controls" in your VBA project.  
+
+Create your variables:  
+
+    Dim IE As InternetExplorer  
+    Dim ieDoc  
+    Dim mySheet as WorkSheet    
+
+    Set IE = New InternetExplorer  
+    Set mySheet = ThisWorkbook.Sheets("your_sheet_name")
+
+Navigate to the URL:    
+
+    IE.Visible = True
+    IE.Navigate "http://yoururlhere.whatever"  
+  
+Wait for IE to complete the task:  
+    
+    ieWait IE  
+  
+ieWait function:  
+
+    Function ieWait(IE As InternetExplorer)
+        Do While IE.Busy
+        Loop
+        Do While IE.ReadyState <> 4
+        Loop
+        Do Until IE.Document.ReadyState = "complete"
+        Loop
+    End Function  
+Sometimes the `ieWait` fails, I don't know why. It works 99% of the times.
+  
+Retrieve the IE document:  
+
+    Set ieDoc = IE.Document  
+  
+Fill the text:  
+    
+    ieDoc.getElementbyId("ctl00_Search_txtKeyword").Value = mySheet.Cells(1,1).Value  
+  
+Click the button:  
+
+    ieDoc.getElementbyId("ctl00_Search_btnGo").Click  
+    ieWait IE  
+  
+You can now search the document body for whatever you're looking for, better if you know where what you are searching is supposed to be:  
+
+    ieDoc = IE.Document  
+
+if, for example, it is in a table row:  
+  
+    Set theTable = ieDoc.getElementsByTagName("tr")  
+   
+In this example I'm looping through all the elements and looking for a numeric ID:  
+
+    i = 1
+    For Each el In theTable 
+        If IsNumeric(el.getAttribute("ID_of_something")) Then
+            mySheet.Cells(i, 3).Value = el.getAttribute("ID_of_something")
+        End If
+        i = i + 1
+    Next el  
+  
+You can basically do whatever you need. I was able to script an "auto ticket filler" where the script logon into a page and check/fill all the flags/texts needed to open a ticket in my system. You can download files, call API, etc... or ask Google for the distance between two places... you name it :)
+What version of excel are you using?
+
+EDIT: Also, what is the URL of a search?
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+What a great comment this is. Saved for posterity. 
+Hey! Thanks! :)
+I completely agree with him.

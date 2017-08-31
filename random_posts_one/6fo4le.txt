@@ -1,0 +1,145 @@
+6fo4le
+Question about macro filtering large amounts of data using conditional formatting.
+Hello Reddit:
+
+I am trying to use an Excel (2016) Macro to filter a large amount of data for my dissertation. In a nutshell, I am looking at text occurrences over 20 years. Thus, for each journal I am studying, I have twenty different sheets with the text occurrences. As I’m doing this for multiple text occurrences and multiple journals, I have a lot of data to sort.
+
+**Here is what I need to do:**
+
+* Filter relevant cells (that contain specific text occurrence) to top
+* Randomize relevant cells
+* Pick random 25 relevant cells and move to a different workbook (for the second level of analysis)
+
+**Here is what I’ve tried:**
+
+* Conditionally formatting for text occurrence (ex: keyword “student”)
+* Filter conditionally formatted to top (usually by cell color)
+* =Rand() on Col A
+* Filter smallest-largest
+* Cut/copy top 25 and drop in new workbook
+
+**Here’s what doesn’t work:**
+
+I would like to do this all in one action as I have thousands of occurrences I have to parcel through. However, when I set up and run my macro to do run it, **it does not filter by conditional format.** 
+
+It will run fine when I set up the macro, but when I try and apply it to a new sheet, no filtering happens. [Here](http://imgur.com/a/IvYZY) is an image of running the macro in a second sheet. As you can see, the macro fails to filter the relevant cells to the top.
+ 
+Any help would be greatly appreciated. I am not knowledgeable at VBA, but could figure some things out. 
+
+Here is the Macro I’m working with (sorry it is messy). It is also incomplete because I have my move data to another worksheet macro as separate.
+
+     Sub CleanandFilter()
+     '
+     ' CleanandFilter Macro
+     '
+     
+     '
+     Columns("A:A").Select
+     With Selection
+     .HorizontalAlignment = xlGeneral
+     .VerticalAlignment = xlCenter
+     .WrapText = False
+     .Orientation = 0
+     .AddIndent = False
+     .IndentLevel = 0
+     .ShrinkToFit = False
+     .ReadingOrder = xlContext
+     .MergeCells = False
+     End With
+     With Selection
+     .HorizontalAlignment = xlCenter
+     .VerticalAlignment = xlCenter
+     .WrapText = False
+     .Orientation = 0
+     .AddIndent = False
+     .IndentLevel = 0
+     .ShrinkToFit = False
+     .ReadingOrder = xlContext
+     .MergeCells = False
+     End With
+     With Selection
+     .HorizontalAlignment = xlCenter
+     .VerticalAlignment = xlCenter
+     .WrapText = True
+     .Orientation = 0
+     .AddIndent = False
+     .IndentLevel = 0
+     .ShrinkToFit = False
+     .ReadingOrder = xlContext
+     .MergeCells = False
+     End With
+     Selection.ColumnWidth = 15.29
+     Selection.FormatConditions.Add Type:=xlTextString, String:="writer", _
+     TextOperator:=xlContains
+     Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+     With Selection.FormatConditions(1).Interior
+     .PatternColorIndex = xlAutomatic
+     .Color = 65535
+     .TintAndShade = 0
+     End With
+     Selection.FormatConditions(1).StopIfTrue = False
+     ActiveWindow.SmallScroll Down:=-12
+     Columns("A:A").Select
+     ActiveWorkbook.Worksheets("Sheet14").Sort.SortFields.Clear
+     ActiveWorkbook.Worksheets("Sheet14").Sort.SortFields.Add(Range("A1:A740"), _
+     xlSortOnCellColor, xlAscending, , xlSortNormal).SortOnValue.Color = RGB(255, _
+     255, 0)
+     With ActiveWorkbook.Worksheets("Sheet14").Sort
+     .SetRange Range("A1:A740")
+     .Header = xlGuess
+     .MatchCase = False
+      .Orientation = xlTopToBottom
+     .SortMethod = xlPinYin
+       .Apply
+      End With
+      Columns("A:A").Select
+      Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+      Range("A1").Select
+      ActiveCell.FormulaR1C1 = "=RAND()"
+      Range("A1").Select
+      Selection.AutoFill Destination:=Range("A1:A103"), Type:=xlFillDefault
+         Range("A1:A103").Select
+         ActiveWindow.SmallScroll Down:=-135
+         Columns("A:B").Select
+         ActiveWorkbook.Worksheets("Sheet14").Sort.SortFields.Clear
+         ActiveWorkbook.Worksheets("Sheet14").Sort.SortFields.Add Key:=Range("A1"), _
+        SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+         With ActiveWorkbook.Worksheets("Sheet14").Sort
+             .SetRange Range("A1:B741")
+             .Header = xlGuess
+             .MatchCase = False
+             .Orientation = xlTopToBottom
+             .SortMethod = xlPinYin
+             .Apply
+         End With
+     End Sub
+
+
+-------------
+Replace every instance of "Worksheets("Sheet14")" with "ActiveSheet" and see where that gets you.
+-------------
+Thanks for replying!
+
+It throws the error:
+    Run-time error '9':
+    Subscript out of range
+-------------
+When throwing the "Run-time error '9': Subscript out of range" error, [here](http://imgur.com/a/kv4D5) is the part of code it highlights as the issue. 
+-------------
+Sorry I wasn't clear, you need to replace the entire phrase "Worksheets("Sheet14")" with "ActiveSheet", i.e.  
+
+    ActiveWorkbook.ActiveSheet.Sort.SortFields.Clear 
+
+This makes the code run on whatever sheet you have open, rather than Sheet14.
+
+
+"ActiveWorkbook" isn't really necessary either but you can keep it if you want. 
+
+
+-------------
+> ActiveWorkbook.ActiveSheet.Sort.SortFields.Clear 
+
+Aha! That worked! Thank you SO much. This has been driving me insane for awhile now. The rest of the process should go relatively smoothly from here on out. Thank you /u/pancak3d, I appreciate your patience and help. 
+
+-------------
+Solution Verified!

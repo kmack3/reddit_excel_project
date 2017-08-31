@@ -1,0 +1,11 @@
+How do I stop VBA automatically changing a number range to a date (i.e. "12-16" to "16-Dec")?
+Use this before setting a value to the cell:
+
+    wks.Range(Cells(CurrentStartRow, X), Cells(CurrentEndRow, X)).NumberFormat = "@"
+If you know the value should be text, instead of doing .value = .value, use .formula = "'" & .value
+
+This should change "12-16" to "'12-16" which Excel will accept as a string value on the front end.
+I also always make sure all of my "interval" values always start with an apostrophe 
+
+the problem with that solution is sometimes I want the format to be a number depending on which column its copying.  My solution right now is just to change the format of everything in the column beneath the formula cell to Text
+Perhaps you could use a select case switch statement to determine which number format to use based on the column number?

@@ -1,0 +1,82 @@
+Buying a PC.... What's better for Excel? - More Ram or a better CPU?
+RAM.  A much cheaper i5 will be more than enough for you.
+Excel apparently does support hyperthreading so there would be benefit to having i7.
+
+That being said, I would definitely not buy anything with less than 8GB of ram. CPU wise, thats a bit hard to say just because i7 does yield benefits does not mean you need it. I recently built an i5-4670k machine at home, but I do not use taxing Excel files there (thats what my shitty office computer is for).
+
+If you want to you can come up with a code that will take a while to run and we can compare how long it takes on mine vs your current machine - that way you can decide if i5 is good enough.
+Alternatively, as a cheaper option, you can opt for Access / SQL to create a large database and have Excel create a connection to it. 
+
+
+All depends on what you're using Excel for, of course. 
+32 bit Excel uses 1 Gig ram max.
+
+[deleted]
+CPU all the way. 
+I would also suggest using PowePivot for analysis on large tables. It comes standard in Excel 2013 and is a downloadable addon for 2010. It helped me out massively on both my i3 and i5 for large spreadsheets. Be sure to do all the table calculations in the PowerPivot window and not in the raw data file. 
+The *amount* of RAM becomes irrelevant at some point. However, the speed of the RAM and the speed of the CPU both can improve excel performance until a much higher point in spending.
+
+RAM is cheap so I don't see how 8GB vs 4GB makes much difference in price. Nobody here can tell you how much you need because they don't know what other applications you may be running simultaneously. However, 8GB is fine for most users.
+
+My recommendation is 8GB + fastest CPU within budget.
+Roughly said: RAM for size and CPU for speed/complexity.
+
+If you run out of RAM the system crashes. If you run out of CPU the system slows down. 
+
+Go with RAM.
+I always max out the RAM, as a casual user, you'll notice lack of RAM *way* sooner than you'll notice CPU effects.   Interestingly, neither of them will have a huge effect on speeding up a workbook caught in calculation hell.
+
+Look into replacing volatile formula with their non-volatile counterparts, the speed gain from just swapping VLOOKUP() with INDEX() MATCH() is pretty impressive.
+
+http://chandoo.org/wp/2014/03/03/handle-volatile-functions-like-they-are-dynamite/
+
+
+You might want to consider buying FastExcel from decisionmodels.com
+
+It was made for creating better recalc speeds
+Hmm, can't say there's an easy answer to this.  If you have a lot of cascading formulas (i.e. formulas that refer to other formulas) then more memory could be more beneficial.  Hyperthreading is more effective when there are fewer dependencies.  If there are a lot of formulas that depend on other formulas then you're probably not utilizing every core.
+
+It's most concerning to me that it takes about 5 minutes just to open the file.  Either your hard drive is incredibly slow or your workbook is recalculating every time it opens.  As large as your spreadsheet is you should always turn off auto-calculate.  Hitting F9 will become second nature after a while (like hitting space or return).
+You also should make sure you're being most efficient with file format (saving as xlsb) and what functions you're using.
+Buy the best CPU you can afford to begin with, you can always upgrade RAM as you find it to be a bottleneck.  A small SSD will be a relatively negligible cost but will also be an excellent choice.
+Flash drives.. Read and writes a lot quicker. Agree on the RAM vs CPU thing..
+I don't think Office is a major resource hog, so Larger screens or more than one screen might be a better use of money... 
+The vast majority of people run 32bit excel.  How is he going to address more than 4GBs of ram
+This guy is right. I have the SP1, which is awesome as hell, but the RAM is a huge limiting factor. I often reach my limit and programs are forced to shut down. I run Dropbox, SPSS, Excel, OneNote, Outlook, and Firefox.
+1.4 - 1.8 in my experience. but yeah 64 bit is needed for anything more, (Excel pulled 16Gb usage on me today) 
+=Sum(a2:a5)
+
+But it does it at blinding speed.
+>CPU all the way. 
+
+I agree with /u/xolieo, it's usually easier and more cost efficient to add more RAM rather than get a new CPU. You can even install RAM more easily. If you get a better CPU now, it'll last for years. If you decide you need more RAM, you can add it at any time. 
+Actually it's not quite standard on all Excel 2013s. If you buy Excel 2013 as a standalone product, you're good. If you want the whole microsoft suite, I'd be careful about which one, as only the best include PowerPivot 
+Maybe I'm misunderstood, but I thought when you run out of RAM, the system will just use your hard drive space for storage. It will cause a slowdown, but it shouldn't crash. Also, I don't think you can run out of CPU, but processes will have to queue up.
+this is not always true sometimes its better to use an offset(count( to size an index rather than casually apply it to 25000 cells... 
+Flash drives are limited by the USB and the quality of the USB thumb drive.
+
+Mechanical hard drives can read from 80MB/s to 120MB/s.
+
+An SSD connected via USB 2 can do about 30MB/s (personal experience).
+
+An SSD connected via USB 3, will probably be as fast as the SSD minus the protocol overhead.
+
+The fastest USB 3 thumb drive might be as expensive as an SSD.
+
+Now it's just a matter of cost and convenience. 
+A flash drive capable of reading that fast would cost more than the processor and RAM combined.
+I assumed he was going to be using 64bit Windows & Excel, due to him wanting 8GB.
+[deleted]
+Keep in mind that when running on a 64-bit OS and CPU, even 32-bit Excel will be able to use more RAM. If you get a 4GB system, that has to be shared between Windows, Excel, and everything else. If you get an 8GB system, 32-bit Excel can use 3.5GB all by itself and still have room for other stuff. 
+If he's building his own computer, he's likely saavy enough to install a 64 bit OS and Excel.
+[deleted]
+That's a good point! Thanks for clarifying.
+Yeah, ram will cache out but Excel, in my experience, doesn't appreciate it and likes to get crashy. Personal experience. You can't run out of CPU . Bad joke for parallelism. You are right that your process will suffer and slow down.
+Yes, but his version of windows may not be licensed to use it even if it does support it. It's actually pretty unlikely that he has windows 2000 advanced server edition. So it's much simpler to tell him to get a 64 bit computer. And he isn't running mac OS, which does support PAE on any updated version.
+
+http://en.wikipedia.org/wiki/Physical_Address_Extension
+
+>Microsoft Windows supports PAE if booted with the appropriate option, but according to Geoff Chappell, Microsoft may limit 32-bit versions of Windows to 4 GB as a matter of its licensing policy.[9] Microsoft Technical Fellow Mark Russinovich says that some drivers were found to be unstable when encountering physical addresses above 4 GB
+big ass (800Mb xlsb) tried to recover it to xlsx to get stability. (i think my named ranges may have corrupted somehow) or it just really hates a massive data extraction formula in it. but the workbook contains about 12gb of data in plain text 
+[deleted]
+Processing time history of veichel loads: 60 events, some events with 30,000+ lines of loading

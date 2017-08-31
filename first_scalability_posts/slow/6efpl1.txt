@@ -1,0 +1,30 @@
+slow
+6efpl1
+Slow to open a sheet with 5 million rows
+
+What aspect of my PC do I need to upgrade if my excel sheet takes forever to load? Is it RAM? The processor? Thanks in advance!
+
+
+-------------
+I might be wrong, but I've been put under the impression that this isn't a limitation of your PC, but rather a limitation of Microsoft Office. If you're using 5 million rows, you might want to consider switching to like a SQL database or something a little more hefty than excel.
+-------------
+Wait. I thought Excel tops off at 2^20 (1,048,576) rows?
+
+Opening even 100,000 rows is enough to make the latest version of Excel, on the latest PC with the fastest 32GB RAM and SSD choke.
+-------------
+Try importing it into access. Excel limits you to just over a million rows
+-------------
+I'm going to second this. I know I don't like to mess with more than 100k rows due to the instability I encounter.
+
+If you're exporting from a database, I'd export as a CSV text file, and then use the query feature in excel to add that to your data model and then setup a pivot table from there.
+-------------
+You might be right - in asking for my bro who doesn't use Reddit. He could have easily exaggerated when he gave me the row count 
+-------------
+SOLUTION VERIFIED
+-------------
+Yes, this exactly. I don't mean to sound like an echo chamber but I've run into some major issues with spreadsheets that go above 100k rows.
+-------------
+
+You have awarded one point to _Roy_Isme_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

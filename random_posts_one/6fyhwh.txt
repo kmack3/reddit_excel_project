@@ -1,0 +1,24 @@
+6fyhwh
+Creating a template for basic data analysis
+Hi, I am creating a template for my professor who is collecting data via surveys for a research project. I would like the template to provide basic data analysis such as max, min, mean, median, stdev etc. however, I do not know the expected sample size so my issue now lies in the fact that I have just select a large amount of cells as my range.
+
+This is a problem for 4 out of the 5 functions that I would like to use so I was wondering if there is a way to code my template such that it only takes into consideration cells with input.
+
+In other words, I don't want null cells (0) being included in the sample size and returning under-estimations for functions like mean or min.
+
+I have considered using 'countif' to help in determining sample size but that doesn't really solve the issue of only selecting the cells with input for calculations.
+
+Thank you!
+
+
+-------------
+Try to use a sumif function.  Set your criteria to >0
+-------------
+Ah, I found away around it using a combination of array and if formulas. Thanks for the help.
+-------------
+Solution verified
+-------------
+
+You have awarded one point to _mickpo88_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

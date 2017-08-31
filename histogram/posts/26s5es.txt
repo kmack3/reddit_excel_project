@@ -1,0 +1,95 @@
+Dynamic Named Ranges - without formatting as a table!
+Dancing ants ha!
+
+I use this for drop down lists. It's a great trick, but I can't help but feel like it should be a standard feature. 
+
+Excel should make this more accessible to the average user. 
+Adding to this (hopefully, I think this is an add and not a hijack), dynamic ranges are really useful for drop down boxes as well. Normally when you click a drop down it'll start at the bottom of the list and show all the blanks that may be at the end of your list if, for example, you had an employee list with only 18 names, but set the range of the list to A2:A50. However, if you make the range dynamic with OFFSET, the drop down list will start at the top and not show any of the blank cells that may be at the bottom of the list.
+
+    =OFFSET('DROP DOWN LISTS'!$A$2,0,0,COUNTIF('DROP DOWN LISTS'!$A$2:$A$50,"*"),1)
+
+Go to name manager, give your list a name (like, "Employees") and put that formula as the reference. Then Data Validation, List and =Employees.
+
+It offsets from A2 (A1 is a header where I pulled this from) with a range that counts the number of non-blank cells between A2:A50 and makes the height of the list that size. **Yes, blanks in the middle of your range can mess it up so keep them at the end**, but, otherwise, this works great for always having your drop down lists start at the top and be exactly as large as the list of values that feed them.
+Use this macro to create the dynamic named ranges of every column.
+
+    Sub CreateNames()
+    'http://www.contextures.com/xlNames03.html
+    
+    ' written by Roger Govier, Technology4U
+        Dim wb As Workbook, ws As Worksheet
+        Dim Lrow As Long, lcol As Long, i As Long
+        Dim myName As String, Start As String
+        Dim shtname As String
+        
+        ' set the row number where headings are held as a constant
+        ' change this to the row number required if not row 1
+        Const Rowno = 1
+    
+        ' set the Offset as the number of rows below Rowno, where the
+        ' data begins
+        Const Offset = 1
+    
+        ' set the starting column for the data, in this case 1
+        ' change if the data does not start in column A
+        Const Colno = 1
+    
+    
+        On Error GoTo CreateNames_Error
+    
+        Set wb = ActiveWorkbook
+        Set ws = ActiveSheet
+        shtname = Replace(ws.Name, " ", "_")
+        
+        ' count the number of columns used in the row designated to
+        ' have the header names
+    
+        lcol = ws.Cells(Rowno, 1).End(xlToRight).Column
+        Lrow = ws.Cells(Rows.Count, Colno).End(xlUp).Row
+        Start = Cells(Rowno, Colno).Address
+        
+        wb.Names.Add Name:=shtname & "lcol", _
+                     RefersTo:="=COUNTA($" & Rowno & ":$" & Rowno & ")"
+        wb.Names.Add Name:=shtname & "lrow", _
+                     RefersToR1C1:="=COUNTA(C" & Colno & ")"
+        wb.Names.Add Name:=shtname & "myData", RefersTo:= _
+                      "=" & Start & ":INDEX($1:$65536," & shtname & "lrow," & shtname & "Lcol)"
+    
+        For i = Colno To lcol
+            ' if a column header contains spaces,
+                ' replace the space with an underscore
+                ' spaces are not allowed in range names.
+            myName = Replace(Cells(Rowno, i).Value, " ", "_")
+            If myName = "" Then
+                ' if column header is blank, warn the user and
+                ' stop the macro at that point
+                ' names will only be created for those cells with text in them.
+                MsgBox "Missing Name in column " & i & vbCrLf _
+                       & "Please Enter a Name and run macro again"
+                Exit Sub
+            End If
+            wb.Names.Add Name:=shtname & myName, RefersToR1C1:= _
+                 "=R" & Rowno + Offset & "C" & i & ":INDEX(C" & i & "," & shtname & "lrow)"
+    nexti:
+        Next i
+    
+        On Error GoTo 0
+        MsgBox "All dynamic Named ranges have been created"
+        Exit Sub
+    
+    CreateNames_Error:
+    
+        MsgBox "Error " & Err.Number & " (" & Err.Description & _
+        ") in procedure CreateNames of Module Technology4U"
+    
+    End Sub
+    
+Yep, gonna start using drop down lists again. Thanks!
+I was wondering if this exact thing is possible last night.  My colleagues are going to be all "yo what's with all the drop down lists".  Thanks. 
+The only downside to this macro is that it doesn't quite work if you have lists of varying length. 
+
+E.g. I may have list of employees in column A which go down to row 300, but in column B I may have list of Months. 
+
+I tend to use a single sheet for my lists so everything is in one place. Helps me organise everything better. 
+In those instances, I manually change the ranges to just that column.  It's is quicker to run the macro and edit the ranges than to write all new formulas for each range.
+I agree. The macro is brilliant. A little bit of manual editing is better than a lot. 

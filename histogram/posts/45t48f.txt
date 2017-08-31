@@ -1,0 +1,44 @@
+Making the transition from Excel to Access
+I would a make a strong suggestion that instead of graduating to Access that you graduate to Power BI or the Power Pivot and Power Query add ins for Excel.  This is the future and in the long run be a much better decision for where Microsoft is heading instead of where Microsoft has been. 
+
+Anything that can be solved with Access can be solved with the tools mentioned above, generally more quickly and certainly more geared for future proofing.
+
+Once you have created your models you should be able to use odbc connectors to tie in Tableau.  Once you head down this road though that may not even be necessary.  You may just choose to use this new set of tools as your solution. 
+
+I hope that you take the time to at least see what is out there and available. 
+
+Completely uninformed user here. Can someone give an ELI5 for the difference between Excel and Access? What are advantages of Access?
+If you're going to learn something new, including database design, Access has been discouraged for a long time. Far better to try any other database (SQLite is good for "small" DBs) and a more widely-used language like Python. Those skills will be more universally applicable and can get more done.
+[Start here.](https://en.wikipedia.org/wiki/Third_normal_form) for information regarding how/why a database is structured into discrete tables.
+
+For Access help specifically, [begin your journey here.](http://allenbrowne.com/tips.html)
+Acdb is pretty straight forward and there are several wizards to help achieve your goals here. I used it to build a tool for a data cleanse so that people weren't updating directly to the production server and I really think it's under utilized. I'd suggest starting out by setting up a test environment at first and use that for a couple of months to make sure you don't do anything that has a negative business impact.
+I can't really suggest how you should approach it or implement it beyond that since it would require a lot of specifics about your business needs and how you're currently using your data. As far as moving data from excel to acdb it's very easy and cohesive.
+While 'graduating' to Power BI is very useful for analyzing and visualizing your data, do not make the mistake that it is in any way, shape, or form a database. It is not. You do not store data in Power BI. You store data in a database (SQL server or access). 
+
+Your first order of business is to decide how you will store your data. It may be as simple as having many excel sheets with organized filenames and tables (e.g. Data_sales_2016, data_contacts, etc.), or it may be more complicated as an Access database, or more future proof like a SQL server database. 
+
+Your second order of business is that once you've got your data stored, how will you retrieve it and how will you analyze it? Use the Power Query for excel plug in to retrieve and query your data (download for 2013/2010, no need to download for 2016). When you want to analyze your data you can use Pivot Tables. If you want more functionality out of your Pivot Tables download the Power Pivot plug in, however be warned that only certain versions of Excel can use this plug in. Once you've got all of that sorted, you can finally decide if you want to go ahead and use PowerBI to distribute your analysis with shareable and pretty visualizations.
+
+
+This, hardcore. My company has been using (abusing?) a combo of Access and Excel and we're finally converting to a real data warehouse built in SQL and using Power Pivot to manipulate the data we need. It is INFINITELY more useful and easier to use. Power Pivot is like excel on steriods.
+Excel is a spreadsheet, it can hold and manipulate data.  As much as it can hold data it isn't really good with large sets of data, nor is it good at selecting specific data.
+
+Access is a database, it holds data, but can not manipulate it very well (or at all?).  You can query easily.  You can ask for the phone numbers for anyone with the name Robert, or you can get the list of people who live in the state of Georgia.  This is what databases are for.
+
+You can have spreadsheets or other programs pull data from databases for manipulation of that data.
+
+I have to disagree with you in some sense.  Best practice would always be to have a database to run the data through.  However, power query does allow for you to use different streams of data and model that data in very useful ways.  I would make an argument that whatever can be done in access could be done in SSAS Tabular, Power Pivot or Power BI.  Best practice is to obviously have a data base running underneath the data.  The Power products are however not only presentation layer.  They are a robust engine for bringing all sorts of data in and structuring that data so it can be used in helpful ways.  Power Query is very powerful ETL tool.  This can get you around the necessary step of a database for a very long time if required.  Access I think is a step backwards for anyone wanting to move foward with their career.  Just my opinion as a BI Engineer and BI consultant.  Only my opinion.
+Great explanation--thank you!
+Back to the fundamental problem:
+>the data I use is getting rather large and complex & I think would be better suited to a database system
+
+
+I'm not saying Access is a great database system, in fact I'm currently working on a project to move across a terribly implemented Access database over to SQL server. I also agree that Access is not great at querying data and that Power Query is much more user-friendly and powerful. 
+
+
+What I am saying, however, is that PowerBI, Power Query, PowerPivot, or even SSAS tabular are **not** databases. The fundamental problem that OP has is storing their data. They may want to perform better analysis on their data, but regardless of what analysis tools you use, you can't analyze data if you haven't stored it somewhere! You write that you "would make an argument that whatever can be done in access could be done in SSAS Tabular, Power Pivot or Power BI", however the flaw again is that where in those applications do you store raw data, where do you add new records? The answer is that you can't. 
+
+
+The Power family of products are fantastic, but to utilize them you need to store your raw data in a database system, and while I would normally not recommend Access, some people do find merit in using it as a basic database. What I personally recommend is to instead store your data in a pseudo database in Excel as you eventually migrate to SQL server. 
+You're welcome.

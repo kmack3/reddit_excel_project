@@ -1,0 +1,52 @@
+Looking for two macros, not sure if they can be done.
+mark as changed - Could work if you want to save a value perhaps on a hidden cell.  Example - make cell zz1 = 0 if no change and 1 if changed.    You would add the code under the Worksheet CHANGE event or on the Workbook CHANGE EVENT. 
+
+Then when YOU log in you would check that cell value - and change it back to zero for the next user.
+Since no one has suggested this so far, for tracking changes you could make a macro that duplicates the sheets that you want to track and hides it. That way you have an old version and could use another macro that would compare both and mark the changes that were made. Just switch the first Character of the sheet copy with a underscore or sth. like that to be able to identify it. 
+
+This would double the file size of course, so keep that in mind.
+In regards to the first macro you are looking for...
+
+This can be accomplished with a macro; do any of your rows have a column with labels for the corresponding tab?
+There are macros to record changes in a certain sheet or area of this sheet. I am using one to track my changes and protocol them in another sheet. It uses the windows log in name for user identification. This could be helpful. 
+
+It might slow your workbook down though. 
+
+I am quite a beginner with vba myself and only have the macro at work. But if there is interest I can post it here tomorrow 
+All of what you said is possible, it just takes a lot of work. Your hide if 0 can be performed with data filtering.
+
+The whole mark as read thing is really only feasible if you have a user account system. Otherwise a sheet will be marked as read if anyone has visited it, as the worksheet has no real means to track a person's read history.
+
+So yes, everything can be done, with a great deal of work.
+Use worksheet_change to change the color of any cell changed by a user other than OP.  Then when OP opens the sheet, have code to reset all the colored cells when he has finished reviewing them.
+     Sub HideRows()
+     Dim i As Integer
+     Dim ShtNm As String
+     
+     For i = 1 To 10
+     If Cells(i, 1) = 0 Then
+          Rows(i).Hidden = True
+          'You will need to identify the corresponding sheets so you can hide them because I don't know how your sheet is formatted.
+          'Sheets(ShtNm).Visible = False
+          Else
+     End If
+     Next i
+     
+     End Sub
+
+Thanks for the reply. Why would a macro that just turns on track changes not work?
+^better
+I'm not sure what this track change feature you are speaking of is. I'm not aware of something like that inherently built into Excel.
+On the review tab, there is track changes. I've used it in word, never excel though. 
+
+
+Would a macro for the 0 cell be easier if there was an idividual button for each row that only effected that row and it's tab rather than looking at all of them?
+Hm, I just played around with the track changes thing, and it doesn't seem to track changes between saves, though I'm on a work computer so I can't really just save and access the file as another user.
+
+As for the 0 thing, you could have that run when the workbook is opened. Though things could get a little funky when other people need to open it as well, after it has already hidden things. (Which is why the whole user account thing would need to be implemented)
+You may want to look in to version control. I think the new excel has version history when saved to OneDrive... Or something similar to Git where each save can be traced and reloaded if mistakes were made. I am using the 2016 version, but have not really tried playing around with the version history yet. 
+
+Ya looks like I'll have to abandon the track changes thing. 
+
+Let me clarify about the multiple users. Only one person would ever be in it at the same time. It's shared through email. Would this make the 0 macro work now? 
+It would work all the time. If it's a permanent thing, then you've got minimal issues with hiding rows. If you want to later edit data and unhide them, you would have to unhide whichever rows you are needing to edit, unless you have some sort of toggle for it.

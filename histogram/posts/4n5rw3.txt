@@ -1,0 +1,44 @@
+Excel to PDF automatic macro
+Here is what you're looking for. Let me know if you need any changes
+
+    Sub Save_PDF()
+
+    Dim strYear          As String: strYear = Year(Date) & "_"
+    Dim strMonth         As String: strMonth = Month(Date) & "_"
+    Dim StrDay           As String: StrDay = Day(Date) & "_"
+    Dim StrReport        As String: StrReport = "Report"
+
+    Application.DisplayAlerts = False
+
+         ThisWorkbook.Sheets(Array("Report Sheet", "Data Sheet")).Select
+         ActiveSheet.ExportAsFixedFormat _
+            Type:=xlTypePDF, _
+            Filename:="Your File Location" & strYear & strMonth & StrDay & StrReport, _
+            Quality:=xlQualityStandard, _
+            IncludeDocProperties:=True, _
+            IgnorePrintAreas:=False, _
+            OpenAfterPublish:=False
+
+    Application.DisplayAlerts = True
+      
+      '  Popup Message that the conversion and save is complete
+     
+         MsgBox "File Saved As:" & vbNewLine & strYear & strMonth & StrDay & StrReport
+
+    End Sub
+
+Please read the sidebar to get your code formatted properly.
+    Solution Verified!
+Thank you, this is so close to what I would like to do. How would you make it so the only sheet that is saved as a PDF is "Report Sheet"? As it stands now, it is saving the entire workbook as a PDF .
+Thank you. My apologies, first time poster, it should be correctly formatted now.
+
+You have awarded one point to _Armygeddan_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Sorry for late reply.
+
+So you want to only PDF the "Report Sheet" and not the other tabs of the project correct?
+I believe all you'd need to do is change line 10 to
+
+    ThisWorkbook.Sheets("Report Sheet").Select
+Oh wow, can't believe I didn't see that. Thank you!

@@ -1,0 +1,102 @@
+6fu0eu
+Auto detecting a blank cell
+I have many reports. Let's say I have column B filled with comments for 1000+ lines for all my reports. I need to make sure no row in column B is missing something or is blank. 
+
+Is there a way I can make a macro or something that can run so it can detect a blank cell I may have missed? Can this be done once for multiple excel reports/workbooks? Can this be automated to run once a day? 
+
+
+-------------
+What you can do is use the formula below, and it will tell you the first blank cell in that column. 
+
+    =MIN(IF(A:A="",ROW(A:A)))
+
+Confirm the formula with CTRL + SHIFT + ENTER
+-------------
+You can select the entire column, Press F5, Click Special, Select Blanks and then OK.
+
+This will select all blank cells in the entire column. Would this help?
+-------------
+You're correct to look into VBA for this. It is excellent for producing diagnostic reports.
+
+    Dim wb as workbook, ws as sheet
+    For each wb in workbooks
+        wb.activate
+        for each ws in wb.sheets
+            ws.activate
+            dim cnt as integer: cnt = ws.usedrange.specialcells(xlCellTypeBlanks).count
+            debug.print wb.name + "," + ws.name + "," + cnt
+            if  cnt > 0 then 'You may want to comment out this section depending on the number of workbooks/sheets...
+                msgbox "There are " & cnt & "blank cells in the used range of this sheet."
+            end if
+        next
+    next
+
+The above script will loop through all sheets of all open workbooks, count the number of blank cells in the 'used range' and report back to you the number (for each sheet) when it finds a count > 0. It will also debug.print a CSV of all the workbook names, worksheet names and their respective counts.
+
+Example CSV generated in the Immediate Window:
+
+    Workbook1.xlsx,Sheet1,0
+    Workbook1.xlsx,Sheet2,5
+    Workbook1.xlsx,Sheet3,2
+    Workbook2.xlsx,Sheet1,0
+    Workbook2.xlsx,Sheet2,0
+    Workbook3.xlsx,Sheet1,3
+-------------
+Countblank?
+-------------
+Sorry if I miscommunicated. I have multiple separate workbooks and want to check all of them at once. 
+
+Is this possible to have it run automatically at end of day so I can see which workbook may have a missing comment or blank cell? 
+-------------
+Do I just copy and paste the above script?
+
+This looks fairly advanced. What level of VBA would you say this is? Advanced? Highly advanced? 
+-------------
+And within each workbook, do you have one or multiple sheets you wish to check for blank cells?
+-------------
+definitely need a recursive loop setup...
+-------------
+Interesting question... I have been programming in VBA for 3 years and this is definitely not the most advanced thing I have ever created. There have been many questions on reddit that have been more advanced than this at least... I would suggest this code is beginner to intermediate... Took me about 2-3minutes to write out.
+
+Breaking down the only thing in the code I would classify as intermediate would be the use of the ':' which simply just merges lines together... I.E.
+
+    Dim s as string: s = "bob"
+
+is the same as...
+
+    Dim s as string
+    s = "bob"
+
+Otherwise most of that code is fairly beginner level. But of course you need to know those methods of those objects exist, which is what a large part of being a beginner is. Looking up how to do things. Granted I still spend a lot of time researching how to do certain things, and still copy and paste a lot of code! But at the stage I am with VBA at the moment, VBA has got to the point that it's largely insufficient for the tasks I want to achieve... So don't really touch VBA much anymore... Regardless, keep at it! Even though it has fell out of favour with me, it's still an extremely powerful language! But bare in mind, there is a lot more power out there... and after you experience that power you never want to go back!
+
+-------------
+
+Yes you can just copy and paste the above script into a named sub:
+
+    sub getBlankCounts()
+        '<CODE GOES HERE>
+    end sub
+
+and then run the sub.
+
+**Edit:**
+
+Also I didn't see that you said in Column B. In this case use:
+
+    dim cnt as integer: cnt = Application.intersect(ws.usedrange.specialcells(xlCellTypeBlanks),range("B:B")).count
+
+on line 6
+-------------
+Some have one sheet. Some have multiple sheets. 
+-------------
+Thanks I'll try this out! I hope I can get to this point someday. I'm in the very beginning process of learning. Any suggestions for resources, tips, etc are also appreciated. 
+-------------
+Best tip I can provide is keep curious, keep pushing to optimise your code and keep asking questions.
+
+I answered a question on Stack Overflow recently that you might find interesting:
+
+https://stackoverflow.com/a/44339860/6302131
+
+If you want to discover the true power of VBA look into COM/OLE and DDE.
+
+Finally, when you are pretty happy with VBA syntax, you should definitely not hesitate to start developing in VB.NET if you get the chance! It is so vastly more powerful and flexible than VBA, that you'll likely never visit VBA again (unless your largely forced to like I am) :P. But note that all your VBA experience will be completely portable to VB.NET, so your time in VBA won't be wasted!

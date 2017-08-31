@@ -1,0 +1,114 @@
+6gejyv
+How to create an Index-Match that will return values from named range using partial lookup on a lookup value with numbers as text
+Hello,
+
+I thought this would be easy enough but I guess I need to call in the big guns.
+
+http://imgur.com/TyGEWEM
+
+The image above most closely shows a problem I am dealing with at work. I would like for a specific name from the 'Preferred Name' column to be applied in the 'Formula' column whenever something in the 'Product' column is in the 'Part Number' column. This would then give me a field to group transactions by vendor in a pivot table instead of scrolling through the field as it currently exists which gives me part of the vendor name or the vendor number jumbled up with other data in the same cell. I am using wildcards so that spaces, dashes, and varying positions do not affect the result. I would like to keep the 'Part Number' column as is and not parse out the data because this is only time I will be using the info from that column and the format is very inconsistent making Text to Column too hard to use.  
+
+I added in an 'Expected Output' of how I envision the results of the formula and an example of the closest I've gotten to making it work on my own on the first row of 'Formula'. 
+
+I am aware that I need to add asterisks in quotes with '&' on each side in order to allow partial matches, but is there anything more to it? There are spaces in some areas which I expect the wildcard to address without issue, unless I have that wrong too. Lastly, I believe that I have to use Text to Column for all numbers in the Product column, but that isn't the reason why I cannot even get the first row to work. 
+
+Thank you
+
+
+-------------
+This is not efficient, and I'm sure there are better ways to achieve this. But, here's what I got:
+
+http://upload.jetsam.org/documents/ac714.xlsx
+-------------
+    {=INDEX(Preferred_Name,SMALL(IF(ISERROR(SEARCH(Product,G9)),"",MATCH(Product,Product,0)),1))}
+
+This is an array formula so you'll have to copy and paste this into your formula cell without the { } and then press CTRL + SHIFT + ENTER in that cell. Once that's done in cell H9, you can copy it and paste it down the column.
+
+The problem with your original formula is that if you have wildcards in MATCH, it must be in the first argument, the lookup value. There can't be wildcards in the lookup array. 
+
+The formula I made uses an array to do a text SEARCH [instead of wildcards] for all Product values in the Part Number value. If the SEARCH is successful then it'll do a mindless MATCH of itself just to grab what row number the search was successful on. I then do an INDEX with that row number to bring up the Preferred name.
+
+I hope that helps!
+-------------
+Solution Verified
+-------------
+I have spent at least 15 minutes trying to figure out how this formula works. 
+
+Can you tell me a little about why Max is used? That's probably the only part that I can understand and see myself incorporating into future formulas in the short term. 
+-------------
+Solution Verified
+-------------
+I appreciate your help on this since it was in fact going over my head.
+I am studying the formula and would like to know if you can explain why SMALL is used? I understand it is used essentially to pull unique values in sequential order, but I do not understand how that fits into this formula or why it does not work without it. I would think this task does not call for specifically taking the first nth result to output.
+
+Another questions is if it is 'normal', or maybe just not uncommon, for the Match portion to have the lookup array be the same as the lookup value. I understand this portion of the formula is used when there is no error detected and following that it looks for any value in the Product range, that I guess exists in the Product range again, but also matches the Search result to retrieve the row number. I guess that makes sense, just weird seeing "Match(Product,Product,0))"
+
+Sorry if I am not wording this coherently.
+-------------
+
+You have awarded one point to _sqylogin_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+My formula returns an array that either contains the row number of the matching term, or something blank. MAX takes the biggest number from that array.
+
+The reason I did that was INDEX doesn't work with arrays.
+
+Obviously using MAX creates a limitation - if there are multiple matches, it will only show the match with the highest row number.
+
+There's a fair bit of the function that is just for aesthetics. You can chop the length by more than half if you are happy with zero instead of #N/A
+
+It went like: IF(INDEX()=0,NA(),INDEX()).
+
+Just using INDEX() will suffice.
+-------------
+
+You have awarded one point to _lifenoodles_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Ha no worries. I'll be glad to try to explain it:
+
+Firstly this is an array formula, so it'll work slightly different than you're used to with non-array formulas. The formulas of course all work the same, but the input/output is tricky.
+
+For the purpose of illustration, lets work with the data in your screenshot, and lets pretend we're looking at cell H10's formula that looks at the value in G10 "813135-ghlk"
+
+Looking at the formula, we'll start with the SEARCH. The lookup value of SEARCH is set to an entire array, Product. This consists of multiple values so it means we have to run the formula a couple of times to evaluate the entire array. Lets start doing it the first time, with the first value in the Product array. Now it becomes 
+
+    SEARCH( search for the text of the first product "Shure", search for that in cell G10)
+	
+That outputs to an ERROR because you can't find "Shure" in "813135-ghlk". Next step in the formula checks if the value we just got from the SEARCH was an error or not. This evaluates to TRUE.
+
+The next part of the formula is doing the IF formula. Since our output of the calculation is TRUE, it will do the TRUE condition, which is just a blank "". We'll save that value "" and come back to it later.
+
+Here's the array part: because this is an array formula and we just finished evaluating the first row, now we have to go to the second row of Product and evaluate that. Keep evaluating until we've gone through every value in the Product array. Taking a shortcut, I can tell you that the first 3 products will all result in the same blank "". Lets go through the formula on the fourth time it's running, which is the fourth value in Product:
+
+We start with SEARCHing for the 4th product "813" in the text G10. Success, we find the value "1". Now we do the ISERROR check on "1". Is that an error? FALSE it is not an error, it's a number of course. Now we can look at the IF formula with the FALSE condition we just got. The false condition asks us to do MATCH(Product,Product,0). But remember how this is an array formula and that we're doing the 4th value of product? Well now that we got here, the MATCH formula actually looks like this at this moment:
+
+    MATCH( search for the FOURTH product, search for that in the Product array, make it an exact match)
+	
+The reason is because you can't have an array in the first argument of MATCH, it must be a single value. That's the exact same reason of how we started evaluating this formula with breaking down SEARCH and running that multiple times too. Since this is the 4th "run" of breaking down the Product array, it means the match will look at the 4th product value.
+
+So evaluating the MATCH *at this moment*, it is now:
+
+    MATCH ( "813", search for that in Product array, exact match)
+	
+813 is the fourth item in the Product array, so the MATCH formula returns 4.
+
+Finally the array formula part is done. We've gone through the Product array and ran out formula 4 times, once for each value in Product to give us 4 results. You and I have calculated the first and the 4th result manually and you've taken my word for the 2nd and 3rd values haha. But in summary the results are:
+
+    { "" ; "" ; "" ; 4 }
+
+Moving down the formula, we're at the pivotal SMALL. We're looking at the array of values we just calculated, and I'm asking for the Nth smallest number, which I've set to be the 1st smallest number. Looking at the values it's easy to see that 4 is the smallest number, since the blanks aren't even numbers! The point of the SMALL is to get rid of all those blank values and just tell me what row the match was for when we found the product in the part number.
+
+With the value 4, we plug that into the INDEX formula to grab the 4th item in the Preferred Name range, of course being GRADOS INC. Final output.
+
+And that's how it works!
+
+The SMALL is to get rid of the blanks and give me the only result I care about to plug into the INDEX, and the MATCH having the same lookup value and lookup array is just to tell me the index of the value that had the successful SEARCH. 
+-------------
+This is a very detailed reply that I will digest over the next few days. 
+
+I've used some of these formulas before without really understanding it well enough to create them on the fly, so this is a game changer. VERY minor comment that in your example 'gh' is the lookup value which is a match in the 4th row position and not "813". I understand what you meant because of your explanation. Amazing how the array interprets Product as a single cell instead of the entire range in the Match formula, or rather, the . I get it now. I'm even getting a lot from the Evaluate Formula option in terms of observing how the array calculates to True/False and 0/1.
+
+Thanks!

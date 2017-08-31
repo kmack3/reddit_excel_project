@@ -1,0 +1,52 @@
+slow
+4j2xei
+Really Slow Excel- 100+MB files
+
+Working with 100MB+ files, doing lots of indexing formulas. Computer crawls or says "out of memory" something along the lines of switch to 64bit Excel. Anyone have experience with Excel 64 bit here? Recommended? 
+
+Stats: 
+Windows 7
+12GB Ram
+64bit operating system
+Intel Core i5
+CPU 2.2Ghz
+Excel '13
+
+
+-------------
+If you use lots of 3rd party add-ins, they likely won't have 64 bit versions available, and won't work. Other than that I haven't noticed anything different between versions except access to that sweet sweet memory.
+-------------
+I've found sometimes there are way too many styles in the workbook or the last cell in the page is set to something ridiculous and blank data needs to be deleted to reset.
+
+Edit: link to the xlstyles silverlight webtool: http://xlgeekwebapps.cloudapp.net/default.aspx .
+
+Navigate to your file and it will show you how many useless styles are in the workbook. I believe the version on the windows app store even resets all last cells and deletes broken named ranges.
+
+Xlstyles is endorsed by Microsoft in numerous hot fix articles, though not created by them.
+-------------
+If you want to reset the used range I have a simple macro for that.
+
+      Sub ResetUsedRange()
+
+    Dim sht As Worksheet
+
+    Dim lng As Long
+    
+    Dim COL As Long
+    
+
+    For Each sht In ActiveWorkbook.Worksheets
+
+        lng = sht.UsedRange.Rows.Count
+        COL = sht.UsedRange.Columns.Count
+        
+    Next
+
+    End Sub
+
+
+
+You may need to delete the "extra" rows/columns first to make sure nothing is there.
+
+
+

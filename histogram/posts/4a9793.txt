@@ -1,0 +1,51 @@
+What's the add-in you use mostly ?
+The person sitting next to me at work. He is more knowledgeable them me.
+ASAP Utilities
+Power Pivot and Power Query.  Why use anything else?
+Power Pivot and Power Query.  I guess technically they are no longer add ins.
+Analysis tool and currently experimenting with the data mining add in.
+Fuzzymatch is useful if you have to try to make 2 mixed up data like company names or non standardized inputs 
+I've a custom addin which compares two workbooks based on the primary key column.
+NextAnalytics. Pulls in Google Analytics and Adwords, transform and pivot/search & replace on download to save corrections work after download. Batch scripts and dashboard refresh. Also automatically creates a named range now so no need to add dynamic range code when new data added (quite proud of that, think it was my nagging got that feature included) 
+Solver. I don't use it often but has a few tricks.
+Chart labeler
+Do I know you? LOL
+I use ASAP a tremendous amount. As well as KUTOOLS. 
+I've been wondering about this.  Main functions you use it for?
+So if I had a list of checks with the names of people spelled a million different ways, could I use fuzzymatch to group them?
+explain more?
+Solver is amazing, people are really missing out by not using it more
+[This one?](http://www.appspro.com/Utilities/ChartLabeler.htm)
+Oh very nice.
+There are so many useful functions you should really try it. Just download the home/student version and it's free. A few I use a lot are delete leading/trailing spaces, apply formula to cell, find/replace on all sheets, convert unrecognized format to number, fill empty cells with value above, center across select with no merging...
+U can match 1 list with another. The algorithm tries to match texts with the highest probability 
+Let's say we have two worksheets and each sheet have  customer information with CID as primary key.
+
+When i run my addin it'll asks us to select sheets and then for primary key column and based on that it'll compare both sheets and find all the non-matching cells.
+
+E.g.
+
+Table1:
+
+
+CID | Web
+---|---
+1 | reddit
+2 | google
+3 | facebook
+
+Table2:
+
+
+CID | Web
+---|---
+2 | google
+1 | redditABC
+3 | facebook
+4 | xb0y
+
+When i run the addin it'll highlight redditABC 
+yes. exactly.
+That sounds helpful. Is it free?
+Yep. It's downloadable from Microsoft's website. Just google "excel fuzzy match" and I'm sure you can find it
+Cool, thanks!

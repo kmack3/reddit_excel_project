@@ -1,0 +1,159 @@
+Virus/Ransomware damaged 90% of Excel Reports - XML? Help?
+Bit of a long shot, but to get the data itself out, can you try building an external link to the *closed* workbook.
+
+I.e., create a new workbook. In a cell, put a formula like
+
+    ='C:\Some folder\[Your workbook.xslx]Big Sheet'!A1
+
+then copy right/down as needed. I'm guessing it's the repair process that's removing the data, so this way you might be able to at least get the data.
+
+Alternative, and maybe better, is manually removing the XML formats. with the new 2007+ file structures, XL files can be changed to ".zip" files and then opened. You can then find the different pieces, such as the XML which controls formats/tables and remove it. Then, change ".zip" back to correct extension, and try to open file (DO THIS WITH A COPY, NOT ORIGINAL!)
+
+Hopefully this gives you some ideas. Sorry to hear about the loss/attack. :(
+Are these pdfs the kind that can be converted to HTML? If so then you could probably write a script to batch convert them then use power Query to extract the data.
+
+https://www.google.co.uk/amp/s/powerbloggerbi.com/2016/03/10/power-query-import-pdf/amp/?client=safari
+This happened to us, the virus was called .zepto.... We lost copious amounts of data from one file that wasn't backed up that contained thousands of excel docs. I came here for help. 
+
+Through our genius IT Director's research, we were able to locate potential shadow copies running in the background of the computer that the files were located on natively. 
+
+If I were a tech guru, I could explain how this is going to help exactly... but I'm not. 
+
+However, I think you should chase the shadow copy rabbit and see what that nets you. 
+Have you tried opening the files in libreoffice or gnumeric?  I've had some luck recovering data with those applications.
+
+You can also try renaming the excel file from .xlsx to .zip.  then open the file in 7zip or some other archiving software.   You can then browse to the xl/worksheets/ folder where you'll see an xml file for  each sheet.   Try copying this file out separately.   Now open a new workbook and drag the xml file into it.  You may get an error about not having a schema but it should be able to make one up and import the data.  It may need some wrangling to get back to your original format but this may be easier than re-keying in all the data.
+
+Good luck.
+
+I can only hope that at least 1, possibly 2 people have been fired. Ransomware and several unreadable back-ups. That's the stuff where nightmares are made of.
+
+Wishing you good luck, I'm afraid you're going to need it.
+
+I come from a programming background, and I'd be kind of interested to take a look. Would you be able to PM me a small or non-privileged sheet, if you have any?
+What happens if you try to connect to the file with Power Query? Also blank?
+Thanks to /u/Gazpage !
+
+Power Query did it! I can recover 99% or 100% of the data from some of these files at least, and re-assemble it via macros/copy/pasting into the repaired workbooks.
+
+You are literally a life saver, thank you so much!
+
+Thanks to everyone else who helped me look at this problem as well. I appreciate all of your efforts.
+https://www.reddit.com/r/excel/comments/5sf23k/virusransomware_damaged_90_of_excel_reports_xml/ddele3a/
+
+Yeah, see my other response here about the ZIP/XML idea. It looks like the XML files themselves for the large sheets are corrupted somehow. Invalid XML codes that prevent us from even taking them out of the ZIPs.
+Thanks for the suggestion...I attempted to follow this, but the data in the PDF is not really in table format, so it doesn't work to re-import it in this manner.
+
+To be honest, the big problem is that these reports are formatted backwards, and though I was planning to fix this issue when we migrated from Excel to a database (SQL, Crystal Reports, Access, whatever), we never did.
+
+The problem is that the tables with the most useful data are linked FROM report-like forms that are filled out by our reps in the field, rather than the reps filling out the tables and having the report be created later. It's a shitty system, and it looks like it's finally catching up to us.
+Yes, we hired an IT consultant to help with our recovery, and he and I discovered that XLSX to ZIP trick...the XML files for the damaged tabs were completely unrecoverable that way either...we couldn't even extract them from the ZIP file.
+Thanks. Nobody got fired because we're a small company, and it was basically ALL of management's fault that they just didn't realize we weren't better protected. The company is paying for it in having to pay a large sum to do all of the security upgrades at once now.
+I'd love to, but the reports here are 20mb Excel files. (I know, I've been told many times this is RIDICULOUSLY big for Excel reports.)
+
+I just attempted (again) to rename to ZIP and try to copy out the affected worksheets to send to you, and it gives me this error:
+
+"An unexpected error is keeping you from copying the file. If you continue to receive this error, you can use the error code to search for help with this problem.
+
+Error 0x80004005: Unspecified error
+
+sheet16
+
+Type: XML document
+
+Date modified: 12/29/1899 4:00 PM
+
+Size: 26.3 MB"
+
+
+Okay, hold on a second.
+
+Would it be worth it to send you the XML file for a damaged tab that opens in Excel as completely blank, but the XML still shows as being a 24,590 KB file?
+This is the first I've heard of Power Query, but it looks like something I need to check out.
+SOLUTION VERIFIED!
+You had a question further up the chain, but from this I take it you are sorted?
+
+Just to note that Power Query is really good at transforming data so maybe easier to cut and paste it within that rather than in VBA. That is more about cleansing your data for interrogation than presenting it though so maybe not. 
+Bummer. Did the direct link (w/o opening file) work?
+>  XLSX to ZIP trick...the XML files for the damaged tabs were completely unrecoverable that way either
+
+A bit of a long shot but can you open the zip file in a hex editor (like [HxD](https://mh-nexus.de/en/downloads.php?product=HxD)) and check if it starts with the letters "PK" and the end contains some sort of garbled directory index? Just to check if the file is actually a proper ZIP. The directory index will be visible as a list of file names with junk between them.
+
+Next question: do you have a damaged excel file you could provide?
+I looked up the error code, it seems like it may have [something to do](https://answers.microsoft.com/en-us/windows/forum/windows_vista-files/0x80004005-unspecified-error-during-unzipping/28447609-6401-4f14-bf94-e0c8408051bb) with Windows' built in unzip tool being unable to unzip files with a certain type of encryption. MS answers can be hit or miss, though.
+
+Another site said it's essentially windows "not being willing to admit" that they don't support the zip format, which is pretty funny if true.
+
+Could you try unzipping using [7-Zip](http://www.7-zip.org/)? WinRAR may work as well.
+That'll work quite well, yes.
+I'm confused a bit. Are you able to extract the xml from the file or not? Another reply you said you couldn't. 
+Well your xml file looks like an ok xml, so I wonder if Power Query would recover some of your data. 
+
+It's part of Excel 2016, but needs to be downloaded and installed on Excel 2013 and 2010. Try it on the excel first, but if that fails then maybe try on the xml.
+
+You have awarded one point to _Gazpage_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I'll try it out and report back. I suspect no, because I've had issues with attempting to link to non-open files in the past.
+
+Thanks for the suggestions.
+I opened one in Notepad like this, and it does match. PK at the start, bunch of .bin and .xm files listed at the end.
+I checked this with 7-Zip and Tested the file, it came out clear. Per /u/AyrA_ch this probably confirms that the problem is with the XML, not the compression.
+Most of them I am unable to do so. I checked a couple others and found one I was able to extract.
+
+The XML contains a large amount of data, but when I open the workbook copy in Excel the corresponding tab is blank.
+Hey there...
+
+...so, I finally checked out Power Query...and this MIGHT work! It says it failed to load the file, but when I look at the Query Editor, the data IS there...I just have no idea how to get it out!
+
+To tell you how convoluted this is, the tab that is missing is 11,775 rows long...set up as report-style, in pairs of pages, 110 of each, so 220 pages total. If I can recover this tab, all of the other tabs that have been missing/damaged can be recovered from the data on this one.
+
+Where do I go from here?
+Next step would be to open an excel file in 7-zip and press the test button. If it reports that everything is OK, then the XML itself is corrupted. If an error is reported, something is wrong with the ZIP container.
+Yep, he's absolutely correct - if the hex editor does show that then the XML is the issue. I'll look over the XML itself and see if there's anything I can get from it.
+Done, all clear. So it must be XML. (This seems to match the conclusion we came to a week ago.)
+> (This seems to match the conclusion we came to a week ago.)
+
+This usually indicates that the file was probably already corrupt when backing up, unless somebody extracted the XML files, corrupted them and added them back to the archive. Is the XML completely unreadable (looks like random in Hex editor) or does it seem to contain some patterns? You can let HxD count the bytes and show stats with the analyse menu
+Nope, the XML appears to be readable.
+
+It is possible that the backup was corrupted when backing up, but it still seems weird that in a backup file consisting of almost a TERABYTE of data, that only Excel files and a couple of database files were affected by this corruption.
+
+And I can very nearly guarantee that all of these files were perfectly usable prior to the attack...
+
+One other question we were attempting to answer (and found not confirmation) was if there was some sort of Windows or Office update that coincidentally happened at the same time and messed with the XML?
+(Here is a pic of the XML viewed in Notepad. Looks okay from this.)
+
+http://i.imgur.com/pTxbTVW.jpg
+> but it still seems weird that in a backup file consisting of almost a TERABYTE of data, that only Excel files and a couple of database files were affected by this corruption.
+
+I can only imagine that this happens if the file was still open in some application while being saved. When backing up, software usually creates a snapshot of the disk, this includes any file that is in an invalid state at the moment of snapshotting, however, this would usually have a negative effect on the zip container rather than single XML.
+
+> One other question we were attempting to answer (and found not confirmation) was if there was some sort of Windows or Office update that coincidentally happened at the same time and messed with the XML?
+
+There are two things you can try to do. First, Get yourself Notepad++, the reason for this is, that it highlights the XML syntax. Open the XML file and press the button to make line-breaks for oversized lines, then scroll through the XML file with the `Page Down` key and see if you can spot any weird coloring (like suddenly everything is purple only). This can indicate a problematic XML tag.
+
+To check for problematic office update you could send me a file as I haven't updated my system for almost a year now (including office) or try to open it on one of your personal devices.
+
+**Just a warning here**
+
+I once had a ransomware on a client computer that would modify some files and then wait for a while before encrypting everything. Purpose was probably that if a backup was restored, it was likely that the damaged version was used instead.
+I think you should definitely try Power Query. Even if some of the data is corrupt it may be able to pull in the 2/3 that is not. I don't mind trying it for you, but if you google it it takes 1m to download and install.
+Yeah, if you're familiar with CryptoLocker, that is what we were hit with. We had three backups, and two were completely encrypted along with the main system. The third backup was from a day or two earlier, and has the damaged files.
+
+It's very unlikely that the damage was from files open at the time of backup, as it's affecting DOZENS, maybe HUNDREDS of Excel workbooks, and we have less than 50 employees, and only about 5-10 who touch the Excel stuff.
+
+I'll try the Notepad++ thing next. Thank you very much for the advice!
+OKAY, I HAVE SOMETHING.
+
+This is really strange. If it's okay, I'll share the XML file with you to look at.
+
+At location Ln: 2 Col:16,777,221, about 2/3rds through the file = the codes start overlapping each other.
+
+It goes from
+
+"<c r="H19992" s="592">"
+
+to
+
+"<c r="I19992"@592">" where the @ is the quote, S and equal sign overlapping each other. Everything below this point appears to do the same thing, characters are overlapping in every cell.

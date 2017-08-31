@@ -1,0 +1,70 @@
+Setting an Excel test as a part of an interview.
+Depends what you mean by data-heavy... how rough?
+
+BASIC:  give them a dataset, ask them to write some statements that might require LEFT or CONCATENATE or IF statements.  Or maybe conditional highlighting or some graphs?
+
+MEDIUM: same dataset, ask for a pivot table.
+
+HARD:  throw in some VBA, or maybe do a pivot without using an actual pivot table (i.e. SUMPRODUCT, maybe a nested AND or IF)?
+
+I've hired a few entry-level analyst roles before... my test is always pivot tables.  If you can take some data, so a sort, filter, create a pivot... I can teach the rest.
+
+*Edit: fixed SUMPRODUCT not SUMPRODUCTIF, I do a nested IF fairly frequently...
+Try everything in our wiki and here's some sample data sets
+
+https://www.reddit.com/r/excel/comments/2spty0/does_anyone_know_where_i_can_get_sample_data_sets/
+
+
+Flair changed to discussion.
+Just to add in to the discussion... you may want to consult your HR department before implementing such a test.
+
+I wanted to create an Excel test when I needed to fill a spot in my department, but our HR person said, "nope." She then went on to explain that we could be in an actionable position if new employees (or people that failed the test) found out that other people in the department never had to take a test for employment.
+
+I'm pretty terrible at all things HR, so I don't know if that's bullshit or not. Just thought I would tell you. 
+From the side being hired, is it too much to bring in some examples of difficult projects that i've worked on previously? Maybe examples of VBA or networked files  that use most of what i'll need for a position? 
+
+Reason being i'm a lot better at excel when i take my time on a project and am prone to mistakes or forgetfulness when tested on the spot.
+Get them to run some formula/features that you use in your day-to-day work with some actual data (if appropriate) or a mock-up set. Maybe give an open ended task like manipulating a data set and finding and presenting something (anything) of interest within 2 minutes.
+I've set that kind of test before, people get really stressed even for simple Excel tests, but you get some good results.
+
+The way I liked to do it is to set questions that get increasingly more complex, and require more and more intuition (because that is important as an analyst).
+
+Tell them at the start that they absolutely won't finish it, because you've set way more questions than can be done in the allowed time, and it isn't on quantity of questions answered but is more about the way they structure their work and understand what is going on. I set more questions because I wanted to see if people moved to new sections of questions if hey got stuck on one area. Also this prevents people from getting too stressed because they know they won't be able to finish it so there is no expectation of completion, they just work to what they can.
+
+You can handle the working under stress part either through interview, or asking them to prepare a small presentation on e.g. A company they like, some new technology, an interesting dataset, whatever is relevant. Tell them that as part of that section you might ask to see a dataset and ask them to do some very basic manipulations in front of the interviewer.
+
+This gives a nice complete view, you test their functional knowledge, their business understanding, and their working under stress all in one!
+
+For example, give them a P&amp;L with technical account codes instead of account names, and if the codes have some logic to their code naming, then see if they can sort or sum them, whatever, in an appropriate way. Ask them to handle missing data, layout data for commentary, or prepare some analysis with Actual vs Forecast. This is basic business stuff, so you get to see how they do it, why they think it is valuable,
+And the end result.
+
+Of course the above samples are aimed at financial type roles but you should be able to use them as a base to math the profile or type of work you have.
+
+(Written on a phone, probably shitloads of spelling mistakes)
+I had to do this for an interview. They wanted me to show them that I could do vlookups, Pivots, sort & filter, basic stuff like that. Some tasks were open to how I wanted to do them, so I could show them that if I didn't know a specific function or formula to complete the task, I could quickly think of a work around. 
+They had me come back and do a presentation with Powe Point and excel, which was very interesting. 
+
+I wish more companies would do these types of interviews, and even though I got the job, I didn't stay long. Management was poor and their MRP data system was a mess to the point of it being almost useless. 
+If this would be the test, I will pass in the VBA part but will fail in the SUMPRODUCTIF. 
+Perfect, thank you - same, entry level analyst roles. Looking to see how they approach the problem, more than having the solution front-of-mind.
+
+thank you for the response.
+
+Thanks for this. 
+I'd be very careful, to be honest. You want to somehow demonstrate your previous excel work without bringing a ton of company data to an interview. The best case scenario in that interview is they go "your work's great but we obviously aren't going to trust you with anything in case you bring it to your next interview".
+I am hiring as well. For the role I am hiring for, past work experience means I have a phone interview, but it is how I will judge their ability to learn that will be more important.
+Two minutes seems a little tight on time to not only get to grips with whatever foreign dataset it is, but also infer context and then meaning from it.
+The key is "failing" in a way that shows you have the core skills to work with data, even if the exact syntax needed for the test problem is unknown to you.  
+  
+So long as they competently offered creative workarounds, I'd know they could google their way to an appropriate solution in real scenarios. If the employer *didn't* recognize viable alternative solutions (within reason), that would be a red flag that I might not want the job.
+It's not a hard function to learn.  You see one example functioning normally and it's easy to replicate.  It's a nice way to build in pivot table-like functionality, summaries and filters... but easier to drop in updates.  I use it mostly for graphs/charts... run a query, drop the results in Excel... SUMPRODUCTIF allows the data table to update automatically.
+A great test is put the data in a strange order and see how they sort it/deal with it. You probably want the ones who are unphased and index match, the ones who transpose it in a second and probably dont want the ones who try to unravel it line by line and manually seperate something with delimiters. Most of the people who are "faking it" with excel have a rough grasp of some functions, but not actually dealing with data. Sure they can do a vlookup, but you dont want to pay them for 4 hours a week of putting your data dump into the structure required for vlookup. 
+Very good point. Luckily there's open source data available: https://r-dir.com/reference/datasets.html  
+  
+Public domain historic financial data, stuff from twitter and amazon, etc. Not sure I'd bring something like /u/leothelion634 suggested unless it was expected since there's no guarantee on authorship and practical turnaround times
+> SUMPRODUCTIF 
+
+This isn't a real formula though. There are ways to nest if statements into sumproducts, but AFAIK there is no =SUMPRODUCTIF() formula...
+He probably meant to hyphenate, Sumproduct-if, like Index-Match, etc.
+You're right, it's SUMPRODUCT but I do a nested IF statement.  Thanks for calling out the clarification...
+Correct, sorry for being unclear...

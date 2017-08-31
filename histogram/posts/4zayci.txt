@@ -1,0 +1,21 @@
+Article x-post from /r/Technology: 20% of Scientific papers on genes contain name Conversion errors caused by Excel.
+hmmm... that comment... what happens when you wanna paste zip codes and of of them is 08033? I guess you would what paste as text to ensure it doesn't end up as 8033?
+I really hate floating point numbers. Is there any reason to have that feature on by default?
+Is there a way to actuall turn this off? aka "default paste as text"?
+I think it's pretty frightening that 20% of published papers were produced by people who don't know how to use their spreadsheet software, and didn't do this type of error checking.
+Yup, I ran into this problem at work with CUSIP numbers (unique identifiers for securities). I solved it by formatting the column they were going into as text and then pasting copying destination formatting. 
+
+It's easy to avoid these kinds of errors if you know what you're doing with excel but a lot of people really don't.
+=right("0000"&RC,5) or 9 if you're using cusips like the poster below.
+
+What I can't stand are the non-blank, non-text, non-number cells I keep getting from client .xls files. What the hell are these things?!
+Some people do prefer them, and I guess it's a compatibility thing at this point.
+
+Still, I hate that we don't even have an option to set the default. I work with EANs every day and need to set formatting every time.
+Yeah excel isn't great when you're dealing with "000xxxx" type id's and case sensitive id's (e.g. "abx004" and "abX004" are distinct)
+
+You can text format it but then you run the risk of it screwing up when pasting it in a new sheet or screwing up the formatting of an existing sheet when you paste format
+
+If you really want to go hardcore 100% fool proof just add extra columns and convert the id into the individual Char() codes
+There are a few operations where the conversion must be undone after import. I run into them infrequently, so I never remember what they are specifically.
+Same for stock tickers

@@ -1,0 +1,74 @@
+Formula to use instead of vlookup when the lookup_value is repeated in the array.
+I think you mean you want the first formula to return the value co-inciding with first value of Apple, the second formula to return the value co-inciding with second value of Apple, etc.
+
+yes?
+It's not the simplest of formulas, but here you go:
+
+    =INDEX($A$6:$B$11,SMALL(IF($A$6:$B$11=$A$1,ROW($A$6:$A$11)),ROW())-ROWS($A$1:$A$5),2)
+
+Enter as an array formula (press CTRL+SHIFT+ENTER), and this formula relates to this image: http://i.imgur.com/Uvmvs16.png
+
+A6:B11 is the range of the table I'm looking up in.
+
+A1 is the value I'm looking up.
+
+A1:A6 is the column I am looking in.
+
+and then you want to subtract off the
+
+    ROWS($A$1:$A$5)
+
+to wherever your range is -1.  If my range started in A12 I'd use
+
+    ROWS($A$1:$A$11)
+Late to the party, sorry about that. I was reading this thread out of interest and figured I would make a small alteration to the formulas that have been proposed. I'm basically piggybacking of /u/semicolonsemicolon 's formula, because there's no point in reinventing the wheel, but I'd propose the following:
+
+    =INDEX(B$1:B$6;SMALL(IF(A$1:A$6=A8;ROW(B$1:B$6)-ROW($B$1)+1);COUNTIF($A$8:A8;A8)))
+
+This makes it more like an actual vlookup than having to put the number value in a separate cell to indicate which instance of the fruit-reference you want to use. Hope this makes sense, [here](http://i.imgur.com/crni5HS.jpg) is a screenshot for clarification.
+
+No need for a clippy point, just figured I might as well post my little idea.
+Ya, that's correct. Or one formula that returns a list of the three values. 
+Oh man, you're fast - beat me to it. Also, yours is better - I need to figure out what your -ROWS is all about...
+
+[My attempt](http://i.imgur.com/rwwI6Mp.png)
+
+
+    =IFERROR(INDEX($B$2:$B$6,SMALL(IF(ISNUMBER(FIND($D$1,$A$2:$A$6)), MATCH(ROW($A$2:$A$6),ROW($A$2:$A$6)),""),ROW(A1))),"")
+In your case assuming the
+
+|Apple|Red|
+|-|-|
+
+Is row 2, and we're looking up Apple.
+
+    =INDEX($A$2:$B$4,SMALL(IF($A$2:$B$4="Apple",ROW($A$2:$A$4)),ROW())-ROWS($A$1:$A$1),2)
+Damn dude, you're a legend.
+Solution verified
+Cool. This should work nicely. It's going into the memory banks.
+/u/eirunning85 beat me to it. I had come up with a formula that was practically identical to his:
+
+    =INDEX(B$1:B$6,SMALL(IF(A$1:A$6=$C$7,ROW(B$1:B$6)-ROW($B$1)+1),C8))
+
+The above would go in A8. C7 contains the word Apple, C8 to C10 contain 1, 2 and 3, and A1 to B6 contain the list of values.
+
+Enter as Ctrl-Shift-Enter. Copy down to A9 and A10.
+
+http://i.imgur.com/B9Mz5fz.png
+If you just look at the SMALL portion (remove the INDEX) and run it, it returns the absolute row number (in my example, 7, 9, 11).
+
+By subtracting off the number of rows between row 1 and 1 row before your table starts, you're basically changing the absolute row reference to a "relative".  I subtracted off 5 rows, so 6 (absolute) becomes 1 ("relative"), 7 becomes 2, yadda yadda!
+Haha thanks! and thanks for the ClippyPoints!
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Solution verified
+
+You're a legend too
+Gotcha, I was seeing that when trying to get rid of my MATCH, which gets {1,2,3...}. It seems like there's always a different array to get that key array. I ended up with ROW(range)-ROW(first-cell-in-range)+1 just like in semisemicolon's solution. 
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+6 of one, half dozen of the other :)

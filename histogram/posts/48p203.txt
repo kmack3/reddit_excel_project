@@ -1,0 +1,29 @@
+Is it possible to restrict edits to a worksheet depending on the time of day?
+Here's what you could do:
+
+Have a macro that runs when the workbook opens and checks the time, and if it's outside the allowed time, it locks the sheet2 with a password. You could also use a timer to call it to unlock/lock later (so if you open it at 07:00, it unlocks itself at 8:00 and if you open at 11:00, it relocks itself at noon). Or instead of a timer, you could have it check and lock/unlock everytime you switch worksheets.
+
+To be semi-secure, you would need to password protect the VBA project too.
+A lot of up-votes with no answers... hold in in there
+Private Sub Workbook_Open()  
+Application.OnTime TimeValue("17:00:00"), "Protectsheets"   
+End Sub  
+
+Sub Protectsheets()  
+  Sheets("Sheet1").Protect Password:="Password"  
+  Sheets("Sheet3").Protect Password:="Password"  
+End Sub   
+
+[source](http://www.mrexcel.com/forum/excel-questions/68817-protect-sheet-after-certain-time.html)  
+
+EDIT: [Better way](http://www.cpearson.com/excel/workbooktimebomb.aspx)
+And it would need to fetch the time from the internet, not from a local computer.
+Lock the sheet with s password by default and have the macro unlock it. You can always disable macros to get around the lock if it's set unlocked by default. 
+I'll give this a go, thanks :)
+
+
+Solution Verified
+
+You have awarded one point to _Jos_Metadi_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

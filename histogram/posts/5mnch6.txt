@@ -1,0 +1,14 @@
+Why does Excel do this? Pasting in new cell
+Excel will put in new columns on pasted data for certain characters like tabs and newlines. Spaces are not one of those delimeters. 
+
+To change this behavior, [click on the drop down by Paste and go to Use Text Import Wizard](http://i.imgur.com/IaMVMd0.png), and if you want spaces as a delimeter, just hit Finish. Or paste first, then go to Text to Columns on the Data tab.
+When you copy data from bank page , data is in HTML table and you can easily past the data in the same format to excel, but whenever the data you copy from google search and data is not in table format, it will be copied into single cell only
+The thing that confuses me is the text from my bank statement only has a space between each column when I paste it somewhere such as Google. What exactly is included in with this copied data to make Excel see it as delimiters? 
+The bank formats is like a table, there's hidden information that you don't see that lets the computer know to treat it like each piece of data is separate.
+SOLUTION VERIFIED!
+
+
+You have awarded one point to _CallMeAladdin_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Hey glad you make it, one of my old issues, have nostalgia when you mentioned it.

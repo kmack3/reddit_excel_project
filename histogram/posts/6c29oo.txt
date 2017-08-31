@@ -1,0 +1,89 @@
+Styling excel sheets
+[This is one of the classics](http://i.imgur.com/ZY8dKpA.gif) - however I disagree with a few points.
+
+> using cell styles and hiding grid lines, and attempting to create a small color palette that fits nicely together.
+
+Exactly what I do.
+
+Headers are mainly from the top row of the palette, and the opposing colour is used to highlight for emphasis (so blue strong header and light orange column for emphasis)
+Mine's not really about spreadsheets but it's somewhat related - charts.
+
+I'm all for more pastel-based colours (except for when I want to highlight something odd) and minimal design.
+
+Also, ***absolutely no 3D charts***. This just skews the information and charts are meant to display a trend at a quick glance
+
+I follow most of the chart rules & designs from here https://zebrabi.com/infographic-choose-right-chart/. I even got a printed copy on my desk in case I need to refer to it.
+I don't know if newer versions of Excel has this, but I'd love a button to do Thick border around, and thin/extremely thin (ie dotted/grey) lines in the middle.
+
+Or even Thick border around AND headers, and the rest.
+
+I should really write a macro for it.
+
+I actually like the alternating line colour format too (which /u/epicmindwarp's video recommends you take out - but I believe that's more for **presentations** than for excel).
+Just wanted to say you guys are all awesome and thank you so much. I will definitely be saving this post. 
+I think there is some interesting stuff on this blog:   [dark horse analytics](http://www.darkhorseanalytics.com/blog/) EDIT: this is the same blog that /u/epicmindwarp 's GIF comes from.
+
+Might be able to find some other advice in this thread:   [r/excel - Making Excel Pretty](https://www.reddit.com/r/excel/comments/11ic8s/making_excel_pretty/)
+
+Personal tips (some are less formating more making the spreadsheet appear proffesional, which I think is in the spirit of the question):
+
+When saving a spreadsheet you will be sharing, make sure you have cleared all filters unless they're required - that each the cursor is in cell A1 of every sheet, and that the if you have a summary / cover sheet that you save on this sheet so excel opens on this sheet.
+
+Use consistent formatting for headings throughout the workbook, I also find that colour coding the headings based on data type works quite well.  Lookups & any thing pulling data in could be green, formulas blue, manually entered data yellow or orange, error checks / messages red etc.
+
+Try not to put anything below tables unless you know they're not going to need to be expanded.  Use spacer columns in between different tables.
+
+If your spreadsheet will be used by others put your contact details on a tab somewhere, also keep a clean version yourself, with notes on what exactly it is supposed to be doing.
+
+Sensible descriptive file names is another one.
+
+If your serious about colour pallets the [Adobe Kuler](https://color.adobe.com/create/color-wheel/) is quite good, although maybe over kill.
+I mostly sick to my companies color pallet and design rules. They made a whole ppt showing how all tables and charts should look.
+
+I'm one of the few people who actually does this though. Of course as a result my files look better than everyone else's.
+When distributing a printed report, use Headers & Footers to identify the title, page number, author, date printed, etc.
+Freeze Top Row
+
+Bold Top Row
+
+Select just the data/cells in use, then: All Borders, Thick outside Border, and double line border under the Top Row.
+
+Select All, fill in white.
+
+Then filter all the cells.
+**This video is bad***
+
+You should never remove duplicates because you now have rendered your data unusable for analysis. Might as well put inline headers. 
+
+And the white space? Maybe if you just adjust cell heights.  But that is also hard to maintain if you add data. 
+
+In fact I think whoever did that video should probably stop talking about excel. I feel that strongly about people screwing up usable data charts. 
+
+**Here is what I so**
+
+First five columns are pretty narrow. Like 25-30 pixels. Let's you do easy indentations and have hierarchal in line headers that don't contaminate data within a particular column. 
+
+Use accounting underlines for titles. Have them center across selection so you can easily show hierarchy of column titles. 
+
+Add conditional formatting to color the text white if the preceding cell is the same.  It gives you the look of the removed duplicates without the loss of function. 
+
+Similarly dotted horizontal border lines in light gray are helpful to follow data from left to right. Automate these with conditional formatting as well.  This means your data can change and you don't have to go around messing with white space. 
+
+Leave the font in fucking Calibri. It is easy to read and is what people are used to reading. It is also a monumental waste of time to be messing around with different sans serif fonts that are mostly equivalent. 
+
+If you create a custom table format, you can do exactly this!
+>Select All, fill in white.
+
+If you're doing this simply to make things look neater i.e. no gridlines then FYI you can turn off gridlines in one of the view menus.
+I always took that advice from Dark Horse as applying to tables for presenting results more effectively rather than for intermediate analysis. Ironically, they don't make that particularly clear. 
+> however I disagree with a few points.
+
+I did disclaimer that I don't agree with it all.
+I prefer that tables can ideally do both as much as possible.  Which is why I made the suggestions above.  Very rarely I will make a sheet for presentation. 
+
+But usually I was presenting to C suite so everything was taken over to PowerPoint and graphs anyway. 
+Yeah.  You did. 
+
+Sorry. I spend a lot of time cleaning up crappy excel data (as I am sure many of us do). And my general rule is it is fine to style it so long as you can add data and pivot data easily. If one of those functions requires lots of extra work then it is not maintainable. 
+
+And everyone is always like " well this is final" yeah right. 

@@ -1,0 +1,64 @@
+Monitoring usage of macros
+Try something like this - I use it at work all the time to do exactly this.
+
+    Sub NormalRoutineHere()
+    
+        'LOG THE PERSON'S USERNAME - TIME - AND ALSO ADD THE SUB NAME HERE
+        Call LogData(Application.UserName & " - " & Now & " " & "SubNameHere")
+    
+        'REST OF MACRO
+    
+    End Sub
+    
+    Sub LogData(TextToLog As String)
+        
+        On Error GoTo ExitSub
+        
+        Dim strFile_Path As String
+        
+        strFile_Path = "C:\temp\log.txt" 'Change as per your test folder and exiting file path to append it.
+        
+        'IF YOU DO NOT HAVE ACCESS TO THE FOLDER, THEN QUIT
+        If Dir(strFile_Path) = "" Then GoTo ExitSub
+        
+        Open strFile_Path For Append As #1
+        Write #1, TextToLog
+        Close #1
+    
+    ExitSub:
+    
+    End Sub
+
+
+The `Sub LogData` is the main one, it writes the data to an external text file. You need to make sure it sits in a folder everyone has access to, so maybe where the addin is saved in - just hide the file if you want or leave it there. You can replace the txt with a csv if it's easier. However, make sure everyone has read AND write access to the folder, or the macro will crash.
+
+Then, call the `LogData` sub as per the first sub, and feed through the data you want to send in.
+I have a small sub that I call at the start of any macro. It posts data to a firebase (free) account where I track the macro, version, user and timestamp. Having the data on firebase makes it easy to use when needed.
+Solution Verified
+Great, thank you. Will test it out once I return home
+
+I thought about using external file but I'm wondering about two things. 1) most of computers at our office is quite outdated. Opening and closing .txt file each time macro runs won't cause significant delay in is execution? 2) what happens when two people run macro at the same time, meaning that one of them will have read access only? Crash as well?
+
+
+I would have username as part of the filename so you don't have multiple users trying to write at the same time.
+
+You have awarded one point to _epicmindwarp_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+It won't take hardly any time (I've done the same thing myself)
+
+Unless you setup error handling, it will throw an error on the very very very small chance someone else currently has it open (I've done that too when I was changing it on one machine only to have another machine try to write what it had just finished doing).
+
+
+One thing you might consider, it's helpful to log start and end times to track performance, if you're running macros that take a substantial amount of time (some of mine take >30 minutes and it's nice to be able to see what's taking longer depending on the machine it's running on).
+>  Opening and closing .txt file
+
+It doesn't - writes it in memory so it doesn't open anything so it's very quick.
+
+> two people run macro at the same time
+
+It's so quick that the chances of that happening are quite low - but I really don't know!
+Then you'll have 30 files to go through 
+Just tested it and works perfect. Thanks for your help!
+They can be easily concatenated.
+Make me a script 

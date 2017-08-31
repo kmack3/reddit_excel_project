@@ -1,0 +1,18 @@
+Is there a way to simplify this long chain of SUMIF's?
+If you are converting all the numbers between 1-8 to 1, then it looks like you aren't really summing, but just counting?
+
+    =COUNTIFS(E2:E149,">0",E2:E149,"<9")
+You are just counting the number of cells with a value greater than zero.  =countif(range,">0")
+Picky: this would include numbers with fractional parts. To count only integers,
+
+    =SUMPRODUCT(COUNTIF(E2:E149,{1;2;3;4;5;6;7;8}))
+Yeah, thanks. I just couldn't find the function. 
+You should post "Solution Verified" now so aelios gets credit - for good etiquette.
+No worries, it was a creative use of the function.  Took me a sec to figure out what you were trying to do.
+
+Feel free to respond to any user that helped with "Solution Verified", as noted on the sidebar, to award ClippyPoints and automatically mark the question as solved.
+Solution Verified
+
+You have awarded one point to _aelios_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

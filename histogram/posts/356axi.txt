@@ -1,0 +1,21 @@
+Cool trick for protecting worksheets/workbooks
+Can you lock a sheet for a certain user and then another for another user?  I have a file that has 16 tabs and only certain users should modify each... 
+This isn't going to protect against maliciousness, though. Disabling macros will get the workbook open and allow the user to view a sheet. And once it's open, they can get to the code.
+Something like this may be useful for you. https://www.youtube.com/watch?v=8ULrJBnQBAE
+If the VBA Project is locked from within VBE then disabling macros wont allow the user to view the code.  They will be allowed to open up the workbook but if the worksheets are set to very hidden and macros are turned off there will be no way to gain access to those worksheets.
+Yes you can.  You would just have a different Authorized_Users variable for each sheet.
+Marcos will only be turned off for that workbook.  You can still write a very simple loop to go through and I hide all of the worksheets from another workbook (or more likely, your personal workbook).
+You don't even need VBA to unhide "very hidden" sheets.
+You're thinking too much into it.  If someone was that adamant about cracking into a workbook they're not allowed in then they would just download a hex editor and take off the passwords completely.  Excel can only be protected to a certain extent.  If someone wanted a truly secure program to store data then I doubt Excel would ever be a top choice.
+How else you going to do it?  You either need a piece of code or going under the properties for that worksheet, both of which would be locked.
+I know that, but I certainly don't like to advertise it. I do think your idea is cool though. 
+You can unhide a sheet from the VBA window using the immediate section and typing the normal line of code to unhide a sheet. You do have to know the sheet name already though.
+
+You can also disable events in the same way to prevent any event driven code from running. You just have to do it before you open the sheet using events.
+
+Still, your average users don't know how to do these things. So your idea is still a good way to add some extra protection that can be customised to certain users with minimal fuss. I use similar code to hide certain pages/data depending who opens the sheet and it works a treat
+I don't think the properties of the worksheet get locked.
+True, if the VBA Project was the only think that was locked then you can still use the immediate window to unhide sheets.  However, if the workbook is locked as well then you wont be able to hide/unhide any sheets.
+
+Excel can only be protected to a certain extend.  Its not a tool built around security and there will always be a way to crack into the workbook.
+When a project is locked, everything pertaining to that workbook is not viewable within the VBE.

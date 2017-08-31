@@ -1,0 +1,48 @@
+*st, *nd, *th
+http://www.techrepublic.com/blog/windows-and-office/pro-tip-add-an-ordinal-indicator-to-a-value-in-excel/
+There are plenty of ways online which describe how to add ordinals. [MS Answers](http://answers.microsoft.com/en-us/office/forum/office_2010-excel/automatic-ordinals-in-excel-2010/ebe04027-cc08-431b-a27b-0b7ac1b8b667?auth=1), for example, has
+
+    =A1&MID("thstndrdth",MIN(9,2*RIGHT(A1)*(MOD(A1-11,100)>2)+1),2)
+
+If you don't want the number itself included in the ordinal, just take out the `A1&` part.
+    =IF(FLOOR(MOD(A1,100)/10,1)=1,"th",CHOOSE(MOD(A1,10)+1,"th","st","nd","rd","th","th","th","th","th","th"))
+
+Edited to remove a couple examples that were not, in fact, easier
+    =IF(AND(MOD(A1,100)>10,MOD(A1,100)&lt;14),"th",CHOOSE(MIN(RIGHT(A1,1)+1,5),"th","st","nd","rd","th"))
+
+The AND and the MOD 100 return the exceptions for any number that ends in 11, 12, 13--they all return the "th" ending. The CHOOSE selects the ending based on the last digit. The +1 in the CHOOSE is to get around the fact that the CHOOSE index must be at least 1.  The MIN in the CHOOSE reduces the need to repeat the "th" after number 4 (or 4+1=5 in the CHOOSE index).
+
+EDIT:  Oops, didn't see that this was answer given in the first link. The only improvement I can suggest is the use of the MIN to minimize the repeated "th" for numbers 5-9. 
+solved.
+
+I couldn't think of the word to do a search, "ordinals".  Thanks!
+solution verified is what I meant
+ordinals...dangit...that's the word I was looking for.  Thanks!
+solution verified
+solution verified.
+
+Though not what I'll use, it reminds me how useful helper sheets/rows/columns can be.
+Thanks!  That'd work, though is a bit messier.
+Hello!
+
+**Posting a comment with 'solved.' does not mark the thread as solved.**
+
+Please read the sidebar on how to set the correct flair.
+
+Thank you for keeping the sub tidy - please take the time to familiarise yourself with the guidelines on the side bar and the submit page.
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+
+You have awarded one point to _caribou16_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+No problem. Don't forget to reply with Solution Verified to all the answers which helped!
+
+You have awarded one point to _empire539_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+
+You have awarded one point to _Quantology_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Thanks!

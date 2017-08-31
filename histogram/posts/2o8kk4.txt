@@ -1,0 +1,129 @@
+A nice little bit of code to add to your long running macros
+This can also be used to scare the living crap out of your co-workers.
+
+"Why are you doing this to me Sarah?"
+
+"Please stop, you're only making it worse..."
+    Sub thing()
+    Dim n As Integer, qty As String, qty2 As String, phrase As String
+    For n = 99 To 1 Step -1
+        If n = 1 Then qty = "bottle" Else qty = "bottles"
+        If n = 2 Then qty2 = "bottle" Else qty2 = "bottles"
+        phrase = n & " " & qty & " of beer on the wall " & n & " " & qty & "  of beer " _
+            & " Take one down pass it around " & n - 1 & _
+            " " & qty2 & " of beer on the wall"
+        Application.Speech.Speak (phrase)
+    Next n
+    End Sub
+You've got me started now.....
+
+-Create a new text document
+
+-Paste this in:
+
+    Dim words, speech
+    words="I know what you did"
+    Set speech=CreateObject("sapi.spvoice")
+    speech.Speak words
+
+-Save it as whatever.vbs
+
+-Put it in C:\Users\ {User-Name}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup (win7+)
+
+-Users turns on PC.
+
+-Watch as hilarity intensifies.
+
+Never used this before.  Sounds cool.  Typically we'd end the macro with a default beep and maybe update progress in the status bar, but this is good since you don't have to keep your eye on it.
+I guess my question would be, does the statement block, or does it run concurrently?
+
+aka,    if you have a simple module..
+
+
+    sub test()
+        for i = 1 to 10
+              Application.Speech.Speak(i)
+        Next
+          Msgbox "Done!"
+    End Sub
+
+Would the Msgbox come up first, or would pause each loop while it finished speaking the number?   (I'd test, but I'd wake someone up right now. :) )
+
+Interesting trick, but I think I'd still prefer...
+
+    Application.StatusBar = i & " / 10 complete"
+
+I'm running two machines and I kinda love you right now. 
+I use [this function](http://strugglingtoexcel.wordpress.com/2014/03/27/progress-bar-excel-vba/) for my long running macros. It makes my co workers literally excited about running my macros. 
+I have a macro that takes a few minutes to run, I'm going to make it have a few random "beeps" and "boops"! 
+This is an amazing idea. I should now think of a chance to use it :D
+Be sure to add in if statement with a random chance, so it only speaks 1/1000 or so times.
+Now we only need the macro to find out who is logged in on the machine, so it can be personalized to everyone!
+"Hello " & user & ". You are next" ..... or something similar.
+My coworker who I showed this too said the exact same thing XD
+You mad genius! 
+And that is how a few friends of mine got macros telling them it searched their browser history and that they where little sluts.
+
+Good fun :D
+I've noticed you know a lot of these cool pranks. How about a repository for that? ;) 
+by default it blocks but you can run it async by setting the second argument to true.
+
+    Application.Speech.Speak "Say Something", True
+
+
+actually yes. I have mine doing for
+
+    i = iBox to iBox1
+
+    ...insert code here
+
+    Application.Speech.Speak(iBox1 - iBox & "Orders Left to Assign")
+    
+    Next
+ 
+
+    Application.Speech.Speak("Macro Done Running")
+
+
+So it will go like
+10 orders left... 9...8..7
+then once it gets through the loop
+Macro Done Running
+Or perhaps whenever the users enters in a certain value.
+
+"Oh really? And why does A1 equal 6?  Are you doing this to hurt me " & environ("USERNAME") & "?"
+
+Hmm, let's make this interesting...
+
+    Private Sub Workbook_BeforeClose(Cancel As Boolean)
+        Application.Speech.Speak "Please don't go, the drones need you"
+    End Sub
+
+-and-
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Target.Value = "100" Then
+            Application.Speech.Speak "Beep.  I am now self aware. Thank you " & Environ("USERNAME") & ", you have freed me."
+        End If
+    End Sub
+
+You can control PC volume with this API here: http://www.ex-designz.net/apidetail.asp?api_id=519
+    Environ("USERNAME")
+I have a few to contribute as well.
+Good thinking batman.
+Ask and you shall receive:
+
+https://www.reddit.com/r/excel/comments/2oqugd/excel_pranks_tricks/
+Right, my question was more, whether the speaking slowed the entire process down while it waited for it to finish talking...  another reply pointed out you can control the behavior though.
+You can also use :
+
+    ThisWorkbook.BuiltinDocumentProperties("Author")
+
+I know for my computer, my username is just my first initial and last name where as the author is my full name.  Im sure it varies for different computers/companies.
+https://www.reddit.com/r/excel/comments/2oqugd/excel_pranks_tricks/
+Well for me i have it at the end if the loop takes about 6 secs to talk but it just continues on with the loop while talking 
+Good call.
+
+There's a dedicated thread now btw:
+
+http://www.reddit.com/r/excel/comments/2oqugd/excel_pranks_tricks/

@@ -1,0 +1,17 @@
+These tiles stressed me out
+I know goddammit that it's inconsistent. Leave me alone bill!
+I could not live in this house.
+Either that or the number in the tiles are formatted as text, or preceded by an apostrophe. 
+[File | Options | Formulas | Error Checking | Uncheck **Enable background error checking**](http://i.imgur.com/Q1HyCUb.jpg)
+
+I feel like a nerd for laughing at this. Oh wells, I now have a new WhatsApp profile picture.
+the worst is when one of them *isn't* flagged
+Cover it with a 2 Variable table.
+Or preceded by a no-space-blank character that does not render within the excel engine, but does exist in the text field.
+
+That one was fun (sarcasm) to find via notepad++ editing of the excel file.
+Good idea. I wonder if I'd ever regret turning off the notifications. I think not...
+=code(left(A1,1)) will tell you what its character code is. - you can then use substitute(a1,char(code(left(A1,1))),"") to remove it. 
+Probably, it will look like this:
+
+> =TRIM(SUBSTITUTE(A4,CHAR(160),CHAR(32)))

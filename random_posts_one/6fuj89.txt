@@ -1,0 +1,46 @@
+6fuj89
+Combine two rows using OFFSET
+Folks,
+
+I've tried to rearrange the OFFSET formula (linked below) to fit my situation but I may be trying to use the wrong tool for the wrong job. 
+
+https://answers.microsoft.com/en-us/msoffice/forum/msoffice_excel-mso_winother/excel-combine-alternating-2-rows-into-one-row/b8103a3c-fec4-42a0-b624-0fc2110d7b7a?rtAction=1496780878816
+ 
+I'm trying to combine each second row into a single row. For example, I'd like row 2 and 3 combined into a single row. You can see that they can be linked by their shared gameorder and gameid in the example from the first few rows of ~10,000.
+
+http://imgur.com/a/ry6DX
+
+Any help in achieving this is appreciated.
+
+Thanks
+
+
+-------------
+Huh, seems like `COLUMN(A:A)` needs to be `(COLUMN(A:A)-1)`.
+
+Assuming you have 16 columns:
+
+    =OFFSET($A$2,(ROW(1:1)-1)*2+INT((COLUMN(A:A)-1)/16),MOD(COLUMN(A:A)-1,16))
+
+[Imgur](http://i.imgur.com/cXwXTrX.png)
+
+Or this might be easier
+
+    =OFFSET($A$2,(ROW(1:1)-1)*2+INT((COLUMN(A:A)-1)/COLUMN($P:$P)),MOD(COLUMN(A:A)-1,COLUMN($P:$P)))
+-------------
+Right, thank you. That fixed that after I adjusted it to start on A3 and have 24 columns. BUT I've realized I haven't thought this far enough through. 
+
+When I've moved that data across I also want each second line to be deleted so I end up with a dataset that has double the columns but half the rows. Put another way, my end game here is a single row for each unique *gameid*.
+
+In that case, is OFFSET the easiest approach?
+-------------
+If you're looking to delete rows, then do the offset, copy and paste as values, then go delete your source data. 
+
+But then again if you're okay with deleting source data, there's no need for a formula. Just make a new column, `=MOD(ROW(A1),2)` and sort by gameid then by the new column, copy the top half (the 0's), paste next to the 2nd half (the 1's).
+-------------
+......and we're there. Solution Verified.
+-------------
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

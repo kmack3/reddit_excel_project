@@ -1,0 +1,264 @@
+What was the most annoying thing about Excel to you and how did you hack it?
+The default layout of pivot tables (compact with subtotals on everything) is not good (imho).  There is a button you can add to the quick access toolbar to make the format Tabular.  I also have a button to remove subtotals, and another to make the values repeat.
+The dropping of leading zeros.  Yes, Excel, the nine zeros DO need to be there.
+
+Soooooo annoying.
+honestly, the most annoying thing about excel is how it crashes so easily when you run macros.
+
+the best idea i've ever had in my life   is to add ONE SIMPLE LINE to the beginning of each macro i write/record
+
+ThisWorkbook.Save
+
+since i've done this, i have never lost any work due to excel crashing at the wrong time. 
+
+note; you should add it to the BEGINNING of your macro, not the end. 
+
+Pressing F1 by accident when trying to edit a cell. Stopped by using a macro that makes F1 effectively void.
+I deal with csv files a lot and the way Excel handles them by default drives me crazy. It turns long numbers like FedEx tracking numbers into scientific format and drops zeros from the front of numbers that should be treated as text. I've tried a few ways around it and ended up using the PowerShell script on this page: http://superuser.com/questions/307496/how-can-i-set-excel-to-always-import-all-columns-of-csv-files-as-text/527894#527894
+
+It opens a little slow and always comes up in a new instance but it's nice to be able to just double click the file in explorer and have it open in the right format.
+On the get pivot table data issue, you can actually go into the option of Excel and take that off so it no longer uses that feature.
+
+My biggest issue is when I have large sets of data using multiple columns from multiple sources. Sometimes even though a number looks like it is equal to another number it is not the same, and the only way I have found to fix it is to multiply it by 1 or add an apostrophe in front of it Exedra Exedra,
+The inability to intelligently discern between text and numeric fields.  Hands down.
+I have a super simple one. I changed my mouse wheel to scroll one row at a time, instead of three. It's handy when working through a list. 
+Hope this is not too long, but I have a bunch!   (I have been using Excel for 25 years). This is a list that I have been keeping since Excel 2003, so it is a little disorganized, and some items may not apply to the latest versions, or may have even been fixed (LOL).  So here it is:
+
+Copy and paste:
+
+Cut and Paste REF:
+If you cut and paste an unprotected cell that is referenced by a formula in a protected cell, then the protected formula will be #REF!'ed.  This allows unauthorized "changes" to a protected workbook with no hope of reversing
+the change once past the point of undo without unprotecting the workbook. There should be a way to turn off the stupid "feature" that REF's cut cells. Allowing users to "break" a protected sheet with normal edits is just "broken"!
+
+Copy and Paste Merged Cells:
+When copying a range of cells, normally you need to select only the first cell in the range to paste.  When pasting a range that begins with a merged cell, however, an error appears telling you that the copy and paste ranges are 
+different, even though only one cell is selected.  You must select entire range. 
+
+"#REF!" IN FORMULAS AFTER "CUT" OPERATION:
+When deleting referenced locations, the reference should simply be removed from formulas instead of inserting "#REF!" into the formulas. For example, instead of changing my formula to SUM(A1,B1,#REF), why can't Excel just change it to SUM(A1,B1)?  The workaround is an extra step of search and replace ",#REF" with "".  When I delete something, I want it DELETED from everything!
+
+1. Why do borders copy by default?
+2.  Why is there no option to set the default copy/paste type (borders, values)?
+3.  Why do links copy by default, even though there is already an option to copy links, but there is no option to NOT copy links?
+4.  Paste Values:  Why do cells have to be exactly the same size? It's VALUES!
+5.  Formats/Comments:
+On a protected sheet, users can copy a formatted/commented cell (or fill down), and all of the pasted cells will have the copied formats/comment.  
+A) Formats/Comments shouldn't copy with cells on a protected sheet (values only).
+B) The clear/edit comment functions do not work on a protected sheet!!!  (As they should, but this is inconsistent!)
+So, on a protected sheet, you can copy and paste cells w/comments all you
+want, but don't think about clearing or editing them! You've just allowed a user to muck up your sheet by bypassing the sheet protection!!!
+6.  Validation is not checked when using paste values onto a cell with validation. Validation is destroyed when using normal paste onto a cell with validation.
+7.When pasting links, the full path of the file is not shown until the workbook is closed.
+
+Search and replace:
+Why can't you search and replace an UNprotected range on a protected sheet?  The only workaround is to unprotect first.  This is broken.
+
+When merging and unprotecting cells, you must first apply the merge, then unprotect, otherwise the cells will not be unprotected, even if the "locked" box is unchecked on the "Protection" tab.
+
+When performing search and replace on a text string that is part of a sheet name of a referenced sheet in a formula, if the replaced string results in a sheet name that does not exist, the replace will fail, and there will be no error message. (Unlike when the replace is done manually.)
+
+Indestructible links:
+Once you create a button link to an external macro, the link remains in the list of workbook lnks (Edit, Links) even if the button is deleted.
+
+Group edit mode:
+If there is an error that applies to all sheets (Ex.1. merged cell will keep leftmost data only), you will get a popup error for EACH sheet!  One is enough!  Do I really need to click "OK" 40 times if I have 40 sheets grouped?
+Ex.2.  When pasting and merged cells would be unmerged, an error message is generated for EACH sheet when one message would be sufficient.
+
+Cannot use "Insert Paste" while in group edit mode.  Links to other sheets will be offset by one row.  To work around this bug, Insert row or column first, then copy and paste cells as needed.
+
+You can't change the format of an UNprotected cell on a protected sheet using the format utility, but you CAN with copy and paste.
+
+PRINT AREA:
+When inserting rows or columns, the print area is NOT adjusted, so that rows or columns that previously printed are then "bumped" down outside of the print area.  This is usually not noticed until after you've printed something!
+
+LINKS
+Links are checked for validity every time you close "options", even if you click "cancel".  If there exist invalid links, you get an annoying popup message.
+
+MORE LINKS -- BUTTONS
+If there are BOTH buttons with links to internal macros AND buttons with links to external macros in the same workbook (I.e. two different kinds of linked buttons), and the workbook is saved and closed, then renamed, some or all of the links to the buttons will be broken.  This does not happen if all buttons are linked the same (either all linked to internal macros, or all liked to external macros).
+
+You save the workbook that contains the links into the same folder as the workbook it is linked to, and close both workbooks.  Then you move or copy the workbook (that contains the links) to another folder.  When you open the
+workbook from its new location, the links will have changed to a nonexistent workbook in the new location.
+
+Word wrap:
+Text shows as fitting to one line in cell when in entry mode, but after pressing enter, part of the text disappears as though it was wrapping, but cell size does not change unless an extra character is added.
+
+VBE:
+Workbook name in title bar does not match code that is shown if a workbook with a protected VB Project is opened and the last active workbook had an unprotected VB Project.  The unprotected code will be visible, but you will be unable to work with it until making it active with the project explorer.
+
+There is no reliable way to force a user to run macros when opening a workbook.  Microsoft is hell bent on convincing everyone that macros are the epitome of evil, and that they must not be run at any time.  If your workbook has been designed to run with macros and will not run properly without them, then you are at the mercy of your user to not disable them. (I've seen a lot of quirky schemes to force users to run macros, but none are bullet proof, and in the end, it's more important to ensure that the WORKBOOK runs rather than the macros.)  That being said, why couldn't 
+Microsoft implement just one more (!) extension for Excel, say .xlsr (macro run).  If macros were disabled, a message would popup when the workbook was opened telling the user "This workbook requires macros to function properly.  Please enable macros, then try again."  The workbook would then close.  No harm done.  No macros are forced upon the user.  But, the user would not be allowed to muck up the workbook by running it without macros.
+
+My workaround for the macro issue now is to push registry edits to force macros to run out to all user's computers on a regular basis.  My workaround for most of the other issues is to bombard the users with "msgbox" popups as reminders, or whenever they do something that might damage the workbook.  This is why macros must run.
+
+Sorry Micro$oft, as much as I like Excel, you get a FAIL on this one!!!
+
+My copy was in a foreign language (internship abroad).
+
+I wrote a VBA macro that did selection.formula = selection.formula, set a shortcut to it, and typed all formulas in English before running my macro.  VBA is 100% English, but converts to the local language before outputting to the Excel side, but doesn't notice if Excel didn't recognize the formula you give it.
+Hated: importing text files or generic report spreadsheets and going through multiple steps of formatting and index-matching my way to the reports I needed over and over again at work. 
+
+Fix #1: started building macros to do it. Started having to tweak macros and then build more macros. ADHD took over. Abandoned the effort. 
+
+Fix #2: stumbled on power query and powerpivot. Power query handles formatting all the spreadsheets and text files before bringing them into my spreadsheets. Powerpivot eliminated all the index-matching. It's fucking glorious.
+Replaced Ctrl+V with a Paste values macro. If there's ever a moment that I need to autofill a formula down, I just use Ctrl+D or Ctrl+R and it eliminates me from having to push Alt+h+v+v every time I want to change my formulas to values. 
+Learn to use GETPIVOT, and you'll be grateful.  Trust me, once I actually started using it, I realized it was a godsend.  I always let Excel generate the base formula, then I replace the arguments manually (with references).
+The phantom spaces that sometimes get inserted when copying data from some of our web side applications. The fault very easily could be with those apps, but it's frustrating.
+
+Example, list of names gets pasted into excel. Seems normal. Try to vlookup, fails. Click on the name in the address bar, the cursor is blinking after the last character of the name (ie it didn't paste the name with a space at the end for you to delete). However, if you backspace from this point, nothing seems to happen but this phantom space is deleted and the vlookup works. If you double tap backspace, the last letter of the last name gets deleted. So there is very clearly some character showing up at the end of the names, but again it's not displaying between the name and the blinking cursor line. Very odd. 
+
+Couldn't find a way to deal with them. Tried using offset or other various methods but whatever character/space was in there stayed there. 
+
+Again it might have been less on excel and more on the output of the web app, but it's still odd that in excel when you click in the formula bar initially, there doesn't seem to be anything there. 
+- Not being able to build and used named range references in INDIRECT formulas. The solution is to use a UDF. Code below (not mine - got it from [here](http://dailydoseofexcel.com/archives/2005/03/01/indirect-and-dynamic-ranges/)).
+- Not being able to use negative column or row offsets in VLOOKUP and HLOOKUP. Solution is to use INDEX and MATCH so its not that big of a deal but would make for cleaner formulas.
+
+
+        Public Function DINDIRECT(sName As String) As Range
+            ‘It stands for Dynamic Indirect
+           
+            Dim nName As Name
+            
+            ‘Make sure the name supplied exists
+           On Error Resume Next
+                Set nName = ActiveWorkbook.Names(sName)
+                Set nName = ActiveSheet.Names(sName)
+            On Error GoTo 0
+            
+            ‘Set the function to the range or return the name error
+           If Not nName Is Nothing Then
+                Set DINDIRECT = nName.RefersToRange
+            Else
+                DINDIRECT = CVErr(xlErrName)
+            End If
+            
+        End Function    
+The thing that changes any number string, like a product Id, with an "e" toward the end into scientific notation!  It always ruins my day!  Tables helped a lot because you can select the whole column and format as text in a couple of clicks. 
+1 - Running a Replace (Ctrl+H), and then when doing another replace, the "Replace with" field gets the focus instead of the "Find what" field. Workaround: swear a lot.
+
+2 - Pasting after running a Text to Columns and having the pasted content split by the Text to Columns rules. Workaround: Do a fake Text to Columns, clearing the rules, before pasting content.
+I hate that the text to columns has a memory and applies to things you paste, only for delimited, though. So for example you do text to columns on
+
+    John,Mary,Steve
+
+And then you go to paste in values like
+
+    $10,123
+    $98,765
+
+And you get two columns of data. I wrote a macro to reset the TTC to fixed width, and put it on a button on my QAT. Still forget to use it before I paste, but it's at least a quick fix.
+Programs exporting numbers as text and having to change it every time. 
+
+Now that I think about it, I am going to find a way to make a macro for this. 
+VBA, built a SQL database and learned python
+The fact that you can't format buttons. They're ugly grey things. 
+[deleted]
+God, I am going to do that. I didn't realize you could add those to quick access. I fix those every time. Look into adding the auto-adjust row height and column width to quick access as well, if you haven't already. Should be defaulted.
+[deleted]
+I run into this all the time. You know how to use custom format to make them show, right?
+
+Just go to custom format and enter 000000000 and leading zeros will start showing. 
+This is a great tip!
+
+It makes sure anything you've done before you hit run is saved, and it also saves your sheets in the state they were in *before* the macro runs in case you messed something up in your code... Thanks!
+That is genius.
+This is great. I've effectively been doing the same thing since I muscle-memory hit ctrl+s before running any VBA, but this is much more idiot proof.
+
+It also helps for debugging for those of us not as familiar with VBA.
+Poor man's Undo for macros:
+
+Create a macro in your personal workbook to restore last save, and then add a shortcut to it on the QAT. From memory, mine is something like:
+
+    Public Sub RestoreLastSave()
+    
+        Dim fileName As String
+        fileName = ActiveWorkbook.FullName
+        
+        ActiveWorkbook.Close False
+        Application.Workbooks.Open fileName
+    
+    End Sub
+
+Thank you for the tip.
+I removed my F1 key from my keyboard (along with a few others).
+Came here to say this. My god is that thing annoying!
+You should try power query.  It's amazing for csv and other data prep stuff.  It saves all your steps so you can use it again and again for the same files. It's free that helps getting it at work.
+et cetera?
+Is Exedra exedra a joke I'm not understanding?
+I agree! To save time I often just put a 1 somewhere and copy/paste special/multiply over everything just to be safe. It doesn't hurt text and makes number strings real numbers.
+Fix formulas by turning text to numbers =VALUE(ref) or =TEXT(ref,"0") to do the opposite.
+
+Much better than messing about with Text to Columns.
+How can I do this as well?
+Ooo, the language switch is the worst! For a while I was having to use excel in both English and Spanish depending on where I was (work vs home vs school) and I carried a printed sheet with me everywhere relating functions in each language.
+What, this sounds like I need to learn this. Although I'm basically using excel as a formatting tool and not an data analysis tool though.
+interesting.  i use ALT + ESV  for the exact same thing.  which is not a custom hotkey, i believe that's standard for all excel.
+I did similar, but bound it to Ctrl+shift+v.  I don't know why you'd give up regular paste.
+I added it to the QAT, alt+number was easier to remember than anything else. 
+I use ctrl+alt+v, v for paste special, values. 
+If I want to use the relative reference of a cell from a pivot I select two cells and delete everything after the colon in the formula bar. 
+
+It's fast and allows you to keep the GETPIVOT formula. 
+I feel your pain. While not ideal (though, I'm not sure if there's a better way if you're dealing with third party data that gets pasted in from another application), using the TRIM function as a helper step before doing vlookups has saved me a lot of time.
+Try power query if you can. It's great for things like that. 
+You're in the /r/excel subreddit buddy. 
+Change cell formatting to a fixed length number is usually the fix. Or make it text like you suggested. 
+The issue I have with this is they aren't actually "there" it just appears that they are, so a lookup in a field with the full string fails. I use =TEXT(A1, "0000000000000") in an adjacent column and then paste the values back over originals. 
+yep, it's a lifesaver
+If you have any other users using these workbooks they may not have the same habit of ctrl s!
+
+I'll definitely check it out, I've been meaning to for a while.
+I think it's a phonetic version of etc.?
+Now that's a new way of doing it...
+Doesn't help when excel to put numbers in this order 456, 456b, 742, 742b, 1437, 1437c.
+Yeah, except I am mostly receiving data in Excel from clients and trying to import it into Access, and then... Well, let's just hope the CSVs in that one field aren't in three digit clumps.
+Go to your computer's control panel, then mouse. Select the wheel tab. Under Vertical scrolling, change the following number of lines at a time to 1. 
+izquierda is the worst.
+Still worth looking into. More the power query side. I'm on my phone, or I would give you some video links. I used YouTube to get a basic understanding of it. 
+It's standard for Excel I use it constantly
+I use ctrl-alt-v for paste-special values macro and ctrl-alt-b for paste-special formulas.
+Or just click on a cell outside of the pivot table and drag (with the mouse :|) the selected cell onto the pivot table cell
+That removes the GETPIVOT formula.... What I mean is, let's say hypothetically, you have a table with three hedge funds' Total Net Assets.  You create a pivot table with these, with fund as your column label, date as your row label, and TNA as your data.
+
+Now create a formula by pressing =, and clicking a cell.
+
+This is what you get.
+
+     =GETPIVOTDATA("Assets",$A$3,"Fund","ABC","Date",DATE(2015,5,7))
+
+Now if you change "ABC" to a cell reference, you can get the TNA of a given fund on May 7, 2015.  You can then replace DATE(2015,5,7) with another date, and you have a much more versatile way to reference data than V/HLOOKUP or INDEX+MATCH.  In fact, you can use it in much the same way without using ugly "helper" columns.
+
+Use a combination of identifiers in the columns and rows that uniquely finds your data, and use the data as a sum (or average, if you have duplicates of the same data).  Even if the table looks awful, as long as you make sure the table doesn't grow too large for the sheet to physically contain it, you can easily reference any data from the table that you need without even looking at it.
+Iirc, we tried trim and it didn't work either. 3 of us spent about two hours each trying to figure it out and just gave up - it wasn't worth the time we were putting into it, but damn if it wasn't frustrating to not find s solution. 
+[deleted]
+2nded I deal with this.
+
+Format cell to text. Or use the text formula. 
+Never open .csv files in excel first open then in notepad. 
+
+Or pad your numbers with a character ie. 
+a123456789
+a000123456
+
+IF you wanna check use {=min(len(a1:a6))} cnt + shift + enter to check your range. 
+Gotcha.. I was really trying to figure out if there was a joke I didn't get. Thank you.
+thanks!
+Great idea
+When I've had this problem I have fixed it a few different ways. The last time I just typed the string in the next column over and then let it flash fill. That got rid of the spaces. This doesn't always work unfortunately. 
+Next time, try to do 
+
+   =CODE(right(A1,1)) 
+
+to get the character value of the blank space. It could be a carriage return or something wonky like that rather than a space, which wouldn't be caught by TRIM. 
+
+Once you've found out what character is being moved over, either use a column of SUBSTITUTE(A1,problem_character,"") or text-to-columns on your data with the character as a delimiter. 
+Just saying you're in a subreddit about excel where discussions will probably be focused on vba usage.  It's like going into a Toyota subreddit and talking about how everyone should drive chevies instead. 
+Yeah I was using speech to text and didn't notice 
+Thanks for the gold :)
+Sounds like a plan. I think we were using text to columns with a space and it wasn't working. Your initial plan to isolate and identify the mystery character seems like a good one, although I think it may return just a blank cell. It may be a character excel has trouble expressing visually. 
+
+If I ever have to work with those reports from that web app again, I'll give that a try 
+[deleted]
+Anytime!
+Cheers, these kinds of problems are super frustrating lol. 
+Let's face it, it's the Dane Cook of programming languages. But it's pretty solid for its intended purpose as most the code that people produce tends to be pretty uniform. 

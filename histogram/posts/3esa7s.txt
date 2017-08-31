@@ -1,0 +1,152 @@
+Looking for Excel Wizard to Design Spreadsheet to Keep Track of a Stripper's Tips
+you really need to add meta data to the spreadsheet too, in order to optimize tips...   things like songs danced to, moves performed.  And see if there are correlations to them vs. tips received. 
+&#3232;_&#3232;
+> I'm thinking the fields should be the date, day of the week, shift (day or night), earnings brought home, and quantity of lapdances.
+
+If you set up a sheet with these as column headers, then have the day column be `=TEXT([corresponding day cell in each row],"ddd")`, you can have a separate sheet as a sort of summary sheet, with tables like these:
+
+&nbsp;
+
+**Weekly earnings**
+
+| | A | B | C |
+| - | - | - | - |
+| 1 | **From** | **To** | **Earnings** |
+| 2 | [Date of start of week] | =A2+6 | =SUMIFS([Earnings column],[Date column],">="&A2,[Date column],"<="&B2) |
+| 3 | =B2+1 | (drag down from B2) | (drag down from C2) |
+| 4 | (drag down) | (drag down from B2) | (drag down from C2) |
+
+**Average earnings**
+
+| | A | B | C |
+| - | - | - | - |
+| 1 | **Day** | **Shift** | **Average earnings** |
+| 2 | Mon | Day | =AVERAGEIFS([Earnings column],[Day column],A2,[Shift column],B2) |
+| 3 | Mon | Night | (drag down from C2) |
+| 4 | Tue | Day | (drag down from C2) |
+
+&nbsp;
+
+The beauty of having all the raw data is you could also get info like Total lapdances done, or Average earnings per lapdance if you want to! ;)
+Actually, I'd look at Google Forms/Docs.
+
+Build a simple form to enter a date and the tip amount, it will automatically populate a spreadsheet. If there are different locations, could have a third form field with a dropdown for location.
+
+Benefit of this is it is easy to add information on the fly from a smartphone, tablet or computer.
+Are you sure this data is for her?
+outfit worn and how long. 
+  
+those are two fields in my spreadsheet.
+  
+just sayin.
+The good money is for lapdances from regular customers that think of her as their girl. Tips for dancing on the stage or pole are ok, but she should be working on getting regulars that keep coming back for her. She should divide up the money by rgular customersr, stage dancing and random lap dancing. Set up a column for each. The serious income is in landing a regular with good money.
+
+Also, daytime is good for retired old guys with money. Night time is about getting drunk blue collar guys on payday. A good stripper is an awesome sales personthe ones that make.money are the ones that have the personality that knows how to sell.
+I would make it [like this](http://i.imgur.com/OMC94WG.jpg)
+
+She would simply fill the left table, hit update and the pivottable and pivotchart on the right would automatically calculate the new average. You can add more columns and use them as filters. Pivottables are the perfect tool for such things since you can switch between row and column-data as you wish.
+Is asking for pics in this subreddit against the rules??
+Data dump after a few months.  I want to see if I can make something pretty with tableau from it.
+Since everyone else is throwing their hat in the ring, I followed exactly what you asked for; these guys are being data scientists, naturally, but you're trying to make a living.
+
+Here's your calendar:
+[Imgur](http://i.imgur.com/OfvxEhZ.png)
+
+And here's a handy box-and-whisker chart (no pun intended) to make it easy to see what kind of earnings you should expect by weekday: [Imgur](http://i.imgur.com/0jrwqY8.png)
+
+If you like it, let me know, and I'll PM you a drop box location.
+Honestly, if that is the only thing you are tracking I would just have one column with the date and one with the amount.  You might have another column to keep track of how much she pays to dance.  
+
+With most things in excel, many times the simple solution is the best.
+Sounds like a lot of VLOOKUPS to me.
+Excel applications never cease to amaze me. Really impressed with how far this has gone
+Thought about that. Did she have a repeat customer show up that night? Did she wear fake eyelashes? Was Otakon in town (like it was this weekend, she gave a lapdance to a dude dressed up like Mario). I'm trying to keep it simple, but hey man, if you're putting it together, throw whatever fields you want in there. 
+Day of week, early shift vs late shift, happy hour in effect, wild card column for conventions in town or sprting events going on........
+Strippers need to keep track of their money too. Excel's practical applications are expansive. 
+Can you add more fields later?
+Damn sure. I'm not pretty enough to strip, if that's where you're going with that. Nobody wants to see me naked. They'd probably pay for me to keep my clothes on. 
+Was kind of thinking the same thing. Since the guy (girl?) doesn't care about tips or a lot of other things that could impact the total brought home, it almost sounds like a club owner looking to keep track so s/he doesn't give out too much money. 
+She should name them and record by that level of granularity. Would make a great research paper....... Hmmm
+I came back to this thread just to see the solutions and I have to say I like yours.  Simple and pretty and you did a great job on providing sample data.  The only thing I would add based on OPs comments is a column for if it was a holiday or not.
+Google sheets' pivot tables auto updates and is less complex... It may be a better option for beginners. Pivots with ms require more finesse
+You mean of his final spreadsheet, right?? I don't think that's a problem here :-P
+We could model her tips to forcaste income... what kind of variables go into stripper income?
+I love it. The calendar format is excellent. 
+That's simple enough, but that doesn't help her track the average of each shift of each day of the week. She wants to be able to look at this spreadsheet and say to herself "I can expect to make $X if I work a Saturday night shift". I put together the spreadsheet I'm looking for, but it just looks a damn mess.
+(amirite?)
+Putting it together is easy... keeping up with the tracking is a time consuming chore.  You have to decide what's realistic to keep track of.
+
+* Can she keep a count of how many unique customers she had that night?  
+* Does she wear more than one costume a night?  If so, tracking costumes probably won't be easy.  
+* Does she have a set play list? Does it make sense that song changes will change her lap dance count?
+
+To the last point, you probably want to think about what makes the most sense in terms of affecting lap dance count and concentrate on those.
+Hey dude, just saw this post on r/excel. I've been to Otakon since 2003 and my friends and I always wondered about the strip club scene in bodymore. Do you have any recommendations and/or where your fiance works?
+I thought you were trolling (and I'm still not 100% sure you're not), but I'll give it a shot. Define her shift cycles (night/day, 7-2, etc.), is she able to track her money brought in on a per hour basis or just end of shift? Will we include what outfit she was wearing to see what kind of clothing (or lack thereof) brings in the most money. Also, from the very few things I know about strip clubs (I'm usually drunk and throwing money not asking questions) don't they charge the dancers a fee? Is this a per hour fee or a per shift fee? We can make this thing as complicated or as simple as you like. 
+My sister in law used to strip. She would keep track of her tips and found that the club she was that lunch time during the week was the time she made the most because the business men would come in and drop a lot of cash. I'm not sure if she still has her tracker though.
+Make sure to post the results to /r/dataisbeautiful. 
+I think it would be very interesting to see! 
+Yes, it just puts them on the last column
+Haha, I'm a data junkie, so if my girl was dancing, I'd make her collect data for me just so I could learn something.
+
+Excel has pretty easy templates you can download that will give you what you want.  Google "income template" and see if it gives you what you're looking for.  
+I know a bunch of strippers. The suscessful ones are looking for regulars and working hard to keep them. The best will make 100 k a year. They typically dont report taxes... most are washed up by 40 years old, with no retirement, no past reported income, no valid work experience. Drugs and prostitution are rampant.
+Thanks, i have to present data for a living, therefor have learned to keep it simple and clean. I agree with the holidays, the good thing wirh a pivot setup is that you can add all the data that you think might be useful, analyse it after a while and then remove those columns again that seem to provide no useful information. With to many columns i would put that table on a separate sheet though.
+I have never used those, but will look into them since i read in another comment here that you can add data easily with your phone which seems useful.
+hahahaha yes... "spread"sheet
+I bet we can back out her menstrual cycle with like 3-5 months worth of data.
+Try this http://www.fast-files.com/getfile.aspx?file=96061
+
+The averages will update as the table is updated.  Just make sure no lines are skipped to allow the table to update correctly.
+
+This is a quick and dirty version.  If you wanted to get fancy you could use a pivot table.
+That's when you use a pivot table on the data. Each row is a date and shift, put columns for whatever you want to collect for data, e.g., tips, shift, #hours, etc... Google sheets would do very well and its free with mobile ability, as well as a form driven capabilities.  
+
+As far as meta data, you could split the data by the song, rather than just the date. She can record each transaction (show, dance, etc.) rather than just the end of the night totals. Google sheets will auto update the pivot so she can see where she is at for the week/month/year, as well as whether she is meeting or exceeding her budgeted or expected tips.
+
+Honestly, this sounds like a blast to analyze. If you just collect the data and share the link, with a new gmail of course, we can dig in and add cool stuff. At least I will
+There was some big gaming or anime convention that happened in the past few months, and a lot of the people came from the convention to The Gold Club. They did some special night where the girls dressed up in cosplay. It was cool as shit.  Gold Club is my favorite club and it happens to be where my girl works. 
+[removed]
+Sweet. Where did you read about that? I'd love a link to some lit on it
+OK. Sad research paper, apparently.
+You should take out the part about where she works.  Doxxing and all that.
+This is as simple as it gets.
+
+http://imgur.com/fxFmyVn
+
+It finds not only the shift with the highest average tips per shift (TPS), but also which individual shift had the highest TPS.
+
+Let me know what else you want and I'll finish and PM you a dropbox link.
+No personal information is allowed on reddit.
+
+Please remove all references to personal information i.e. where someone works and try posting again.
+No documentation, but I have been working with google forms and spreadsheets for a while, and this is what I have discovered:
+
+Let's say you create a [form](https://docs.google.com/forms/d/1wtt7YqDS4F2iRM3JBQGIfZalgscim_P389u2RGF1MvI/viewform?usp=send_form) with 3 questions. The [spreadsheet](https://docs.google.com/spreadsheets/d/17rUlW4TK3LDwgh4aZOwQXCiSIs5XN6chGCdwTTXU5sQ/edit?usp=sharing) is going to populate columns A:B:C:D with the Timestamp,Q1,Q2,Q3 form responses. 
+
+
+If you add another question to the form, the spreadsheet with create a space for the new question in column E and shift anything you may have added to the right. Same thing goes for anything you put into the sheet below the last form response. Does that makes sense?
+Since you're offering your help, I'll take you up on it, and thanks a million. Some ideas;   
+
+Dollars per lapdance is static - she takes $20 per dance every time, so tips per dance doesn't do much for her in this context. She does, however, take home some small amount of tips from poledancing, hence the field for total dollars brought home each night.  
+
+What she's looking for is not necessarily which shift is most lucrative between day and night, but what she can expect to bring home on average on each shift of each day, like monday day, monday night, tuesday day, tuesday night, etc. This will help her determine which shifts to ask to be scheduled.   
+I use Google Docs for tracking shifts at a music school where I teach and student attendance. It is a quick and easy way to track material I have covered, who attended and when I taught so I can bill the school.
+Add another column with the day of the week and then you can get this information.  
+
+With the data in the table, you can do a Pivot Table. Google it, it isn't very hard to learn once you get the basics of Excel down, there are good Youtube explanations out there. Even the basic Microsoft explanation is enough to show you. 
+> she takes $20 per dance every time
+
+Off topic.... but is this standard?  I used to go to strip clubs quite a bit in the mid to late 90s, and it was $20 back then too.  I know most working class people have seen wage stagnation, but this is ridiculous.
+
+Also - remove the personal info dude... lots of creeps out on the internet reading this.
+
+Excel:
+
+Add a column called Day of Week with the formula "=TEXT(A2,"dddd")" (replace A2 with a reference to the cell with the date). 
+
+Then you can add a pivot table or a simple lookup table to analyze things by day of week.
+> http://imgur.com/4bSkaUS
+
+Look good?
+Fuckin beauty! Thanks so much, she'll love it

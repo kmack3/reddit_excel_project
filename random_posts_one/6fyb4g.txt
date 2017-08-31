@@ -1,0 +1,15 @@
+6fyb4g
+Building Key Performance Indicators (KPI's) Dashboard from database link. Would like to capture trends. Possible to do without VBA?
+We have a SQL database that I am able to pull data from in Excel using Data > From Other Sources > From Microsoft Query.  I'm looking to build a KPI Dashboard (KPIs are essentially a corporate report card) that includes data and graphs that show both current state and trends.  Current state is easy, I can build what I want from the tables and just Refresh All when I need an update.  What is the best way to capture this data on a periodic basis and log it in order to build graphs to display trends?  Can it be automated?  I imagine it will take some VBA to automate.  I'm not proficient in VBA (yet), so if there's a way to do it without, that'd be great.
+
+Thank you.
+
+
+-------------
+Am no expert and have no clue about sql sources. 
+My opinion would be to extract the data, put it into a data table on one sheet, then create a or multiple pivot tables from this data table. 
+
+This way, when the data table updates it will be included into the pivot tables and also update the charts you made from that data. 
+
+The only issue left is to make the data table automatically be populated from the sql data, which I'm not sure how it's done. 
+

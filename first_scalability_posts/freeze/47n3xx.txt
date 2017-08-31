@@ -1,0 +1,26 @@
+freeze
+47n3xx
+Top row of data being sorted even though Freeze Panes is active
+
+Excel 2010. 
+
+First row is column information, so I've frozen the panes for that row. Now I need to sort the remaining information ascending/descending, but it's sorting the top row as well, moving my column headers around.
+
+I'm sure I've done this before. Any advice?
+
+Thanks
+
+
+-------------
+When you click the sort button from the 'Data' ribbon, you will see an un-ticked box at the top right hand corner that says [] My data has headers
+
+Tick that and you should be good to go
+-------------
+Yeah, freezing the window panes has nothing to do with telling Sort to ignore or pay attention to a header row.
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _craygeeboy_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

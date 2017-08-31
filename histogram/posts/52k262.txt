@@ -1,0 +1,163 @@
+Is it worth it in the long-run to learn VBA?
+I don't think learning something useful is ever a waste of time. Even if VBA goes extinct next year you've still learned the principles of logical thinking necessary to program in any language. And it's such an integral part of excel I don't see it going anywhere yet. It might be old, but it's still good.
+If your work is already Excel-focused, it sounds very worth it.
+
+I started work as a Workforce Analyst for a call center 1.75 years ago. I was very comfortable with Excel but didn't know any VBA. I got a one-week crash course from my predecessor and then self-taught from there. I worked hard to become the best at VBA on our small team — constantly pushing to optimize the code further and to learn new functionality instead of just sticking with the status quo.
+
+By speeding up and automating so much of our work, my team now outputs about three times as many reports in less than a quarter of the time.
+
+Beyond just automating reports, I've used VBA to create self-auditing tools to make sure our reports are pulling accurately, interactive dashboards, and a full-fledged account management tool based in Excel (it has since been phased out, but it was a solid stopgap until the software development team had a better solution).
+
+I have received two significant raises in the past year — a net 64% from where I started (given, I started with quite low pay for the work I was doing — my title didn't indicate anything about analysis at all). The latter raise came with a proper "analyst" title.
+
+There are solutions besides VBA, but there's no way I could produce work at such a high quantity or quality with Excel alone. Like I started with, VBA is an excellent choice if your work is already Excel-focused. VBA is easier to learn if you're already comfortable with Excel and there's undoubtedly value with how built-in it is. VBA has had wide use for years, so there are tons of good resources online. The skills you'll learn from VBA will definitely help you pick up another programming language later, if you think that's in your future.
+VBA is great, but I'm really happy that I (A) never got particularly deep into it, and (B) learned to use Python well instead. I've never heard of anything that VBA can do well that Python can't do well - [openpyxl](https://openpyxl.readthedocs.io/en/default/) is a great tool for creating and manipulating spreadsheets in Python. I've written scripts that create pivot tables for me, for instance. Plus Python is so readable, so attractively formatted (if you use a nice text editor like SublimeText, Brackets, or Vim), and it's so widely used across all kinds of industries that I think it's a much more valuable skill.
+If you learn VBA, you learn the basics of VB itself, which is still very much in use with VB.NET (Though there are a lot of syntax changes between them). Once you learn VB.NET, you get a foothold on C#, and the rest of the .NET framework, all through a little bit of VBA here and there.
+The biggest investment banks in the world still use VBA and Excel to do even the most basic of calculations.
+
+VBA is so dynamic and essentially a free tool that it saves companies a shed load of time - making anyone who knows it well a valuable resource to employ.
+
+Source: Directly employed in finance industry.
+I don't think it is a waste;  The basics you learn will just help the you when you want to learn new languages.  Also, I have been in working in BI roles for nearly 20 years, During those 20 years, I am constantly hearing how we are moving away from Office\VBA.  We do learn new technologies, but the fact of the matter is that the people that actually use the reports, still love Access\Excel and so it just never goes away.
+
+Not to mention the fact that even on non-work related things, I have lost count of how many times knowing VBA has saved me hours of tedious work.  
+I'm a web developer with Java and .NET (VB and C#) experience (as well as some R from a Data Science course), and even I have made a lot of use of VBA. I think VBA still has a lot of life in it, and even if it did die, the basics of programming are there and you can take them to any language.
+
+Also I made the infamous programmer-learning-vba mistake: I used loops to access sheets instead of Excel's Find function. Ever since converting all my forms over to Find my functions are about 10 times faster... sometimes learning another language first is actually bad for you!
+I'm actually in the process of learning VBA right now (literally went from my Excel book to /r/Excel to look something up) and something that's helping me learn is the fact that it's fairly similar to other languages. So even if you never use VBA in your life as it's becoming more obsolete, it'll at least help you learn Python, C, Java, and the like when you move on. 
+Regarding your edit- regardless of what you use for data analysis, there is no large company in the world today that is not dependent or even over-dependent on Excel for various business processes.  No matter your role, you are bound to keep using Excel in one capacity or another, and efficiencies VBA brings to the table will never stop being useful.
+I think there are a lot of things in VBA that can pass out into other realms.  Where I work, I am limited on what I can install onto my computer system.  I had used what knowledge I had from VBA to apply to my use of VBS, and VBS I can write in notepad, change to a .VBS extension, and am good to go, writing a lot of useful scripts that apparently keep me at work.
+
+Obviously, I can do much more in VBA, however the point is, my VBA skills helped me switch over to VBS.
+VBA may not be relevant to 100% of your possible future career choices or the programming needs related to them.  The chances of it being irrelevant to 100% of your actual future career choices is probably quite close to zero.  Learn it if you want, or don't if you don't, but there isn't much more to it than that.   
+My answer mirrors others here, for somewhat different reasons. Excel *is everywhere*. Changing that is happening, but Excel is staying relevant especially with the new Office 365 API and their Power Pivot offerings. 
+
+I wouldn't learn VBA more than what your particular work projects require. However I would routinely sanitize my work and post to various forums and ask 'how can I use VBA to improve this' or 'how can I speed this up'? Just the best practices feedback will be useful in improving your offerings and critical thinking.
+Depends on what your long term goal is. If you are going to strictly stick with Excel at work, it would be very useful. However from what I read, it sounds like you should spend your time on something that is more dashboard focused. If you learn R, which in my opinion is harder but better for statistic models, you can utilize Shiny to create dashboards. If your company is open to licensing software, SQL and QlikView would be easier and better overall, in my opinion.  
+
+Also keep in mind what you want to do long term and how it could assist you in future jobs. Learning Python and or R could lead you to data scientist positions. While learning a data visualization tool could lead you to being a business analyst and dashboard developer.
+I do most of my work in SAS/SQL/R/Python, but sometimes the end product is still an xlsx. Thus knowing at least some VBA remains immensely useful.
+> am I wasting my own time learning VBA if there are other better languages to learn?
+
+I don't think so. VBA is the main programming language in Microsoft Office products. According to Wikipedia, Microsoft Office is used by like a billion people world wide. While it's probably mostly used in Excel, it's also used in Access quite heavily as well. So knowing VBA would be beneficial outside of Excel.
+
+I think the question you have to ask yourself is how heavily will you be using Excel? I'm literally in Excel probably between 50 - 75% of my day. I've recorded and written a few dozen macros that help me significantly in my work. And knowing VBA allows me to tailor those macros to my needs in ways that may be hard or not possible to record.
+
+Also, realize that while you might be able to find alternatives to manipulate a worksheet, VBA is more versatile than just worksheet manipulation. You can use VBA to write custom functions, link it with userforms to create custom dialog boxes, etc. The data validation that can be done in VBA is also far superior, and more versatile, to the one that Excel provides natively.
+
+Office and Excel are integral parts of many businesses, education institutions, governments, etc. In particular within businesses, entire industries are based on Excel (e.g. Accounting, finance, and consulting) Most of the jobs you take in your life will likely have Microsoft Office and VBA for you to utilize. The same cannot be said for other products which your IT department may not be able to let you install. So no, learning VBA is not useless. It's a really useful language and will likely be a central part of Excel for many years. That being said, you can always learn another language. After getting a good foundation in VBA, I'm trying to learn Python now.
+why does vba go extinct next year precisely?
+As an aspirant Data Analyst myself, what would be the logical next step after VBA?
+That's great and I agree with what you say, unless you work for any major organisation, where your computers are so locked down you can't use anything but Excel 2003!
+This is me right now. Didn't have a lick of programming experience outside of a Visual Basic course in college when I took my job. Looked through my boss' VBA applications, modified some to add functionality when I needed to. Then I started developing my own VBA applications. After about 6 months of that, I decided to start learning VB.net since that's what my boss prefers to code in. I'm currently working on a project to regularly download 4GB+ text files from a USG source, process the files, and load an access database with the data. I will then be coding out an application to take advantage of our access to that data (Querying, etc). We currently pay a company $9000 a year for licenses to retrieve the same information. We're just cutting out the middleman.
+
+I have two questions:
+  1) Am I wrong to think I'm being severely underpaid for my capabilities at $14.50/hr?
+  2) Major pitfalls for moving from VB.Net to C#? I KNOW that I want to learn C#, I'm just wondering where to start, knowing my background in VBA and VB.Net?
+Incoming investment banking associate here. Can you opine as to whether this is useful at all in a front office role, and maybe a good starting place to start picking this up? I've tried to look at scripts that I see on here before and have gotten about as far as getting the Developer tab onto my home screen, but have no fucking clue how to actually input any of the scripts I see.
+[deleted]
+I got really really lucky when I first started with VBA, I was actually using the macro record ability and hadn't really started learning programming yet and while I had an idea of what loops can do, I had no idea how to apply it to a project at work. So when I was recording the macro I used the find and replace function. 
+
+By chance, are you familiar with python? I've been working on learning it so I can edit excel files more efficiently with the xlwings module, and I'm still somewhat of a n00b. Would this looping thing cause issues if I'm using python to edit a spreadsheet, or would it be okay because I would be importing the spreadsheet?
+It's doesn't. The Microsoft Excel team has publicly stated on Reddit that they love VBA and see it sticking around for the foreseeable future. And even if other languages gain use over VBA, (e.g. R or Python) Excel will almost certainly still support VBA. Excel still supports XLM (Excel Macro Language) which was language that was used prior to VBA (pre 1995 I think.)
+Integration of python and r into excel/office
+SQL. Then either python or R or possibly javascript.
+R is pretty frequently used in data analysis, and there's some pretty good free online references available for learning it.
+Python is really quite slick.
+Oracle/SQL and SSRS or a similar suite of relational data coding.  
+  
+Not only is building and pulling your own datasets a key skill for analysts, but it also is highly transferable and compliments excel, VBA, and other programming languages used to build data models. I'm currently learning Python and my background in relational data is a huge leg up. SQL seems to be viewed as a necessary evil by many programmers, so having a solid foundation in syntax and architecture will goes a long way.
+I'd echo /u/All_Work_All_Play. I'm just starting to incorporate SQL into my work. From my understanding, Access covers a very small sweetspot between Excel and SQL, so it's generally worthwhile to skip straight to SQL.
+
+I've had several job interviews specifically ask about R even though the lob listing didn't. I see Python and JavaScript recommended a lot for data analysis.
+This. We ourselves only recently got Chrome installed as a second browser so now I can fiddle with Python in a browser-based IDE, but having it installed on the actual computer? Ha! When pigs fly.
+1. I would consider that amount of pay rather low.
+2. There's not really any major pitfalls for converting from VB to C#. The syntax are nearly identical between the two, you basically are swapping out a few words for curly braces and stuff. This just makes you ever more flexible in a development environment. The cool part about being able to switch between VB.NET and C# is you then get familiar with the formatting of C# then transitioning to Java becomes all the more easier as C# and Java are similar.
+Geez, Access has a 2GB size limit -- how are you handling that amount of data in there?
+>  KNOW that I want to learn C#, I'm just wondering where to start, knowing my background in VBA and VB.Net?
+
+Any time I start learning a new language I work through Project Euler excersizes.
+In front office it's used almost exclusivley to source and analyse data from Bloomberg, using addins and API calls. The stuff I've done has been quoted as "legendary". If you give me a ticker, I can probably get you every piece of information ever possible, with graphs, charts and forecasts.
+
+I've even got as far as being able to generate an investor's pack purely from a ticker and a date range.
+
+If you want to learn, can you get me into the front office too doing the same job? lol
+I should have been more precise. When I was searching for things on a worksheet, I would grab a range of all rows with data and loop through each one looking for the row that had matches on all my parameters. It seems the ideal way is to use Find and loop FindNext to only check the rows matching at least one of the parameters. Of course had I just used the macro recorder I would have figured this out...
+If you're importing the spreadsheet into another file/format then looping through it is fine. It's doing it in Excel using its VBA engine that is slow.
+ah so it's true. microsoft will use python with them. nice. I studied a bit python while knowing vba. it's not that difficult. i wonder tho, how they make the integration.
+
+Anyway how will it work? what if I have a vba macro on an excel file?
+When?
+Thanks for the heads up! I know VB.Net, while exceptionally accessible to a noobie like me, isn't as widely used in the real world as C#. The code repositories available to me would grow 10 fold if I understood those subtle syntax changes. The curly brace thing seems more scary than maybe it actually is I suppose. Thanks again.
+My understanding is Access has a "filesize" limit of 2GB.
+
+ I might have phrased it wrong, but I'm not loading and processing a 4GB text file and then another and another. What I'm doing is, I process a single 4GB file full of about 50million lines of text. I extract the pieces of info I need from the given line (based on it's first two characters), add them as a new record in a datatable, using DAO to transfer the datatable into my table in Access once I reach the upper limits of memory.
+
+I've only brought in maybe 1/6 of the "records" I will end up with, and I didnt check the filesize when I was done, so I cant speak to that....but I can give you the metrics I do have.
+
+Currently processing 30million lines of text (test phase still).
+
+About 3.7 million resulting Access records 
+
+
+Processed from start to finish in 4 minutes and 12 seconds.
+
+You've made me curious as to how big that file is now though, I'll have to check in the morning.
+Thanks for the info. I'll check that out.
+Lol. If I had a dollar for every time I get that question. Sadly I'm too junior to have any meaningful ability to get you there, but based on stuff you've said in your post I know for a fact that you're not at my bank, and my biggest suggestion is to try to move internally, rather than going somewhere else on the Street. If moving to a front office role is a priority, think about ways that you can build proprietary tools that are going to be valuable to bankers: dynamic tools that bankers can use in client meetings to adjust football field graphs and other valuation tools, automatic WACC computation tools, comp set sheets that aren't 289347923847928734 MB large and which don't run like a dead hog in molasses. These are ways that you can demonstrate an accounting / finance understanding, passion for the industry, and ways you can also wow the people who are basically calling you up with menial tasks, and get opportunities to say "hey let's grab a coffee". Hustle from there. Alternatively, go get an MBA.
+If you load the rows into a variant array beforehand, you'll see a huge speed increase. Probably not faster than native commands, but for more complex operations it's a godsend.
+Load your range into a variant array and it is significantly faster. I made a partial matching thing that churned through 140000 strings, getting the number of matching characters from each string with the search term (typically 8-15 chars in each) and outputted the resulting matches in a second or less. 
+
+If you're just looking for something specific in your sheet it's probably not faster, but vba isn't half bad even with larger amounts of data (within reason!)
+
+
+Ah great, thanks for clarifying, that's kind of what I was expecting, but I wanted to make sure.
+Maybe not accurate, but as far as I understand they will integrate said languages, but still keep vba.
+
+Your macros should be fine for the forseeable future.
+I recommend starting out with C# by converting it into VB. This lets you see the exact same code side by side, and forces you to learn how to interpret C#. Once translating it becomes easy, then you can start writing C# from scratch. Since they're both using the .NET Framework, the code essentially becomes identical, with only minor syntax differences.
+
+Your learning style may differ by working better at converting VB *into* C#, but I still prefer converting C# into VB lol.
+Wow, that's really impressive and cool..  Yeah, Access has a filesize limit of 2GB, and that includes all data and system stuff.  It can act as a front end for other databases though, and they aren't constrained by Access's limitations.
+I have automation skillz so hopefully that can sell me.
+
+I'm actually UK based, so I guess don't look at... the Wharf?
+
+Good lord, an MBA costs £70k
+Do you mean loading the rows into a variant array? I don't fully understand, but it sounds like that would be a more natural way for me to do it coming from other languages. Definitely would appreciate more information!
+No, Python and R are already integrated via third party packages and there is no indication of those becoming official at all.
+
+It's [already known](http://www.theregister.co.uk/2015/10/01/microsoft_office_2016_for_developers_vba_lives_on_new_javascript_apis_coming_for_mobile/) that M$ is moving forward with Javascript-based automation after VBA. However, considering most of the places I've worked at are still using an Office version 5-10 years old and many places rely on VBA scripts for a lot of work automation, I doubt they're going to wholly dump VBA anytime soon (and if they do a bunch of people will be rather quickly downgrading, especially in finance).
+Good point. I've been using telerik to convert C# I've run into in the past, but I've never looked at the differences closely.
+
+One more question since you seem like an experienced developer.....is there a point where you felt like you were more of a "developer" than a "script kiddie?"
+
+I find I'm constantly looking up reference materials, googling errors/problems, and researching "how to implement such and such in vb.net".
+
+My finished applications often start out as a few various code examples I found online, implemented in a manner I need it in, and tested for any errors. 
+
+Is there a point where I'll feel more comfortable calling myself a "programmer"? At what point am I a "marketable" programmer? I guess ultimately what I'm asking is how much does the average programming rely on google and how much comes straight out of their head into code?
+After compact and repair the other day. That same database I described, loaded with 1/6 (very rough estimate, could even be 1/2 because more analysis is needed of the records), was 300ish MB. I'm thinking I might be awefully close to that 2GB limit when it is all said and done if I truly have only load 1/6. I'm already considering splitting my records up based on their content into different Access databases and then directing my queries to the proper one through code and tying it together on the front end. Thanks for jump starting my brainstorming! I think I might even try experimenting with Parallel processing and try to load the various Access databases all at once in one push. I'm hoping that should help it run more efficiently too when populating the Access tables.
+Can't speak to UK roles, but from what I know, they are much more grueling in terms of their need for people to hit the desk with an understanding of technicals.
+Yeah, this guy explains it better:
+
+https://blogs.office.com/2008/10/03/what-is-the-fastest-way-to-scan-a-large-range-in-excel/
+"We’re going to investigate this for a future update to Excel.. of course the probability of getting it done goes up proportionately to the votes we get on this item, so please gather as many votes as you can!
+
+Also, would love to hear if you have preferences for ordering between Python or R."
+
+Guess where I copied this from. 
+As long as you're not opposed to reinventing the wheel, you'll *always* be using premade code, or a library/api.
+
+Unless you want to start a project from scratch, then have at it haha. I'm currently working on a networking app that uses UDP/TCP too connect to other instances, and the majority of it is modified code from many other sources.
+That would be interesting, I'd like to hear how it turns out.
+Thanks for this! 
+Oh that's perfect for what I'm doing. Thanks!
+Er.. a year-old UserVoice post that neither indicates that "VBA will go extinct" nor that they actually intend to implement Python, as opposed to the JS APIs already present in Office 2016, along with [this statement](https://www.reddit.com/r/IAmA/comments/3rid26/we_are_the_microsoft_excel_team_ask_us_anything/cwob2sq) that VBA is definitely sticking around - actually moreso than I thought, since they also claim that any new features will also be VBA accessible.
+
+Think of it from M$ perspective. Python 3.0 had so many changes that it breaks just about everything 2.x out there, and a significant chunk of the Python userbase are still catching up (or actively refuse to). That kind of stuff from the core team and community doesn't exactly spell AAA reliability or long-term planning. Yeah, it's a fun to use and noob friendly language, but it's hacky, old, comparatively slow, and brings a ton of instability and deadweight along with it. Honestly, if you're at 3.0 and you can't even decide how a string should work why would you be taken seriously for an enterprise level application?
+
+JS is flexible, more popular, faster, and they already have tech built around it on several fronts. That said, I personally do like Python over JS, but a throwaway comment that "we'll look into it" by a single member of the dev team is pretty meager evidence against the fact that they've already implemented another language, one which falls more or less perfectly in line with their Cloud/365/web integration strategies. And let's not forget the more code-savvy crowd have .NET & PowerShell support built in to Excel already.. that's like 5 different languages in one, all of which M$ has a finger in the pie of, instead of being held to the whims of a third party - something which, historically, they'll do just about anything to avoid (including trying to use their sheer coverage to basically override the spec and take the community over).
+
+So.. how much longer do you think they'll need to "investigate"?
+Thank you for letting me pick your brain a little. You've definitely given me a lot to think about.

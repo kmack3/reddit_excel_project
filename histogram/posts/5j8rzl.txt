@@ -1,0 +1,113 @@
+How to convert phone number to string of numbers?
+Use nested SUBSTITUTE to remove specific characters as such:
+
+=SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(A1,"(",""),")","")," ",""),"-","")
+
+This replaces parenthesis, dashes and spaces with blanks.
+=(MID(A1,2,3)&MID(A1,7,3)&RIGHT(A1,4))+0
+
+Assuming you meant to write (111) 867-5309.  Nice 80s reference!
+[deleted]
+I know this is the Excel subreddit but if anyone is curious how you could do this in R, see below. If the Excel sheet is imported and named "dat", and the relevant column is named "phonestrings", you can do
+
+    m   <- gregexpr('[0-9]+', dat$phonestrings)
+    out <- regmatches(dat$phonestrings, m)
+    dat$phonestrings <- sapply(out, paste0)
+
+
+then use write.csv or write.xlsx or whatever to export.
+Lol. 
+
+Forget formulas. 
+
+Learn find and replace. While formulas are nice, sometimes they require troubleshooting and time. This approach is virtually error proof.
+
+Select the column of numbers. Ctrl + H. 
+
+Type ) in the find what box. Ensure the replace with box is blank. 
+
+Replace all. 
+
+Lather, rinse, repeat for each of the symbols (space is treated as a symbol). 
+Use flash fill.
+Use flash fill.
+In an empty cell type the number in the format you want. I.e
+
+(123) 4567 - 1234567
+
+And press ctrl+e ( flash fill) drag to all the cells.
+Solution Verified
+Care to dissects this? Seems a quite interesting approach.
+It does nothing right now.
+Nice to know :) because you never know.  
+Maybe that's obvious but you can do regex on VBA too.  
+Do you know if in R you can compile it?  
+I'll try to explain: I did an addon for excel based on a regular expression. The VBA addon take 10 seconds for 50.000 cells, I then developed the same algorithm on C# (without linking it into Excel) and:  
+- without compiling the regex in takes about 6 seconds for 50.000 strings (csv);  
+- compiling the regex it takes 900 milliseconds :D
+My thirst thought was Regex as well. But that requires knowledge of it and VBA. You could create a Public Function that could be used in the excel sheets. 
+Exactly. It comes down to how often OP needs to convert different sets of phone numbers into strings. I know there's an XKCD that perfectly describes what I mean to say. I couldn't find it, exactly, but [these](https://xkcd.com/1319/) [are](https://xkcd.com/1205/) [relevant](https://xkcd.com/1445/) [too.](https://xkcd.com/974/)
+that's too simple, it'd never work.  /s  
+
+Damn, talk about not seeing the forest for the trees.  Should've thought of this immediately.  Thanks. 
+
+You have awarded one point to _l3rooklyn_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Seriously. I have no idea what the hell is going on here but it looks fascinating. 
+I can confirm :)  
+Hope it's a riddle and the parentheses are wrong, in the other case I just possibly discovered how much I don't get it.
+[Image](http://imgs.xkcd.com/comics/efficiency.png)
+
+[Mobile](https://m.xkcd.com/1445/)
+
+**Title:** Efficiency
+
+**Title-text:** I need an extension for my research project because I spent all month trying to figure out whether learning Dvorak would help me type it faster\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/1445#Explanation)
+
+**Stats:** This comic has been referenced 94 times, representing 0.0668% of referenced xkcds.
+
+----
+[Image](http://imgs.xkcd.com/comics/is_it_worth_the_time.png)
+
+[Mobile](https://m.xkcd.com/1205/)
+
+**Title:** Is It Worth the Time?
+
+**Title-text:** Don't forget the time you spend finding the chart to look up what you save\. And the time spent reading this reminder about the time spent\. And the time trying to figure out if either of those actually make sense\. Remember, every second counts toward your life total, including these right now\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/1205#Explanation)
+
+**Stats:** This comic has been referenced 545 times, representing 0.3874% of referenced xkcds.
+
+----
+[Image](http://imgs.xkcd.com/comics/the_general_problem.png)
+
+[Mobile](https://m.xkcd.com/974/)
+
+**Title:** The General Problem
+
+**Title-text:** I find that when someone's taking time to do something right in the present, they're a perfectionist with no ability to prioritize, whereas when someone took time to do something right in the past, they're a master artisan of great foresight\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/974#Explanation)
+
+**Stats:** This comic has been referenced 93 times, representing 0.0661% of referenced xkcds.
+
+----
+[Image](http://imgs.xkcd.com/comics/automation.png)
+
+[Mobile](https://m.xkcd.com/1319/)
+
+**Title:** Automation
+
+**Title-text:** 'Automating' comes from the roots 'auto\-' meaning 'self\-', and 'mating', meaning 'screwing'\.
+
+[Comic Explanation](https://www.explainxkcd.com/wiki/index.php/1319#Explanation)
+
+**Stats:** This comic has been referenced 416 times, representing 0.2957% of referenced xkcds.
+
+---
+^[xkcd.com](https://www.xkcd.com) ^| ^[xkcd sub](https://www.reddit.com/r/xkcd/) ^| ^[Problems/Bugs?](https://www.reddit.com/r/xkcd_transcriber/) ^| ^[Statistics](http://xkcdref.info/statistics/) ^| ^[Stop Replying](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=ignore%20me&message=ignore%20me) ^| ^[Delete](https://reddit.com/message/compose/?to=xkcd_transcriber&subject=delete&message=delete%20t1_dbethy0)
+I like this part especially: *10^ROW($1:$1)/10)

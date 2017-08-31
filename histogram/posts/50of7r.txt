@@ -1,0 +1,13 @@
+What does "~~" mean in Excel
+it's a search string. The formula is probably used to find the location of the 4th / in a string. To do this the formula will substitute the 4th / in the c2 cell with a " ~~ " then locate that number. 
+
+Probably, the formula results in an error because the ~ symbol is often used as a wildcard exception. Use a different formula such as 
+
+    =SEARCH(" @@ ",SUBSTITUTE(Data!C2,"/"," @@ ",4))
+
+
+Solution Verified
+
+You have awarded one point to _wiredwalking_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,78 @@
+freeze
+2k6xsk
+Code to kill process or retry process after it stalls too long. Using this for webscraping when it freezes on connecting to web
+
+I'm trying to webscrape about ~1000 webpages with unique urls. I have the code working correctly (pulls in a table, then Excel does work within its program to reorganize, then moves onto the next url).
+
+It works until it decides to freeze on connecting to one of the urls. So then I kill excel, open it up, and start it right where it left off. Is there anyway to set a timer for my code that will see if a process is taking too long and ask it to try again?
+
+Or maybe if someone is more familiar with web scraping, is it a problem with me trying to connect to too many websites without somehow closing each connection that overloads the program?
+
+I'm using code similar to this form I found online
+
+    Sub FetchData()
+        With ActiveSheet.QueryTables.Add(Connection:= _
+            "URL;http://www.zillow.com/homes/comps/67083361_zpid", Destination:=Range( _
+            "$A$1"))
+            .Name = "67083361_zpid"
+            .FieldNames = True
+            .RowNumbers = False
+            .FillAdjacentFormulas = False
+            .PreserveFormatting = True
+            .RefreshOnFileOpen = False
+            .BackgroundQuery = True
+            .RefreshStyle = xlInsertDeleteCells
+            .SavePassword = False
+            .SaveData = True
+            .AdjustColumnWidth = True
+            .RefreshPeriod = 0
+            .WebSelectionType = xlEntirePage
+            .WebFormatting = xlWebFormattingNone
+            .WebPreFormattedTextToColumns = True
+            .WebConsecutiveDelimitersAsOne = True
+            .WebSingleBlockTextImport = False
+            .WebDisableDateRecognition = False
+            .WebDisableRedirections = False
+            .Refresh BackgroundQuery:=False
+        End With
+End Sub
+
+
+-------------
+Put a wait timer in between each connection to slow it down a bit? You are probably being throttled by the web server
+-------------
+I was just trying to do something similar yesterday. As part of a huge automation, I have Excel upload a file to Box, but on occasion the box server doesn't respond in time, or at all, causing a freeze- I was thinking of adding a timer and of it goes >x seconds, retry. 
+-------------
+Hi!
+
+It looks like you are trying to ask a question!  Since you have not responded in the last 24 hours, I am here to assist you!
+
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?
+
+[Help Changing Your Flair?](https://www.reddit.com/r/excel/wiki/flair)
+
+[Asking Question and Sharing Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+
+-------------
+As a programmer who is new to this sub, and knows very little about excel, I just have to say that this doesn't fix the problem. It hides the problem, maybe. If a connection does end up blocking, he's still screwed. 
+
+Is there not a way to add a timeout to the connection? I found a few things on google, but don't feel confident enough in my understanding to suggest anything. 
+-------------
++1 point.
+-------------
+You can use a  XMLHTTP object rather than the inbuilt webquery function. You can add a timeout loop into that.
+
+            Set objHttp = CreateObject("MSXML2.ServerXMLHTTP")
+            
+            myURL = ""
+            objHttp.Open "GET", myURL, False
+            objHttp.send
+            
+            objHttp.waitForResponse    
+
+Loop round the objHttp.waitForResponse  with a timer. You may be able to do the same with the webquery function but I'm not aware of any way
+-------------
+You have awarded one point to dotmanwill

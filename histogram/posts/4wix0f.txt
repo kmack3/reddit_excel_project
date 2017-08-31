@@ -1,0 +1,96 @@
+What's the future of VBA
+See this comment from the Excel team [last year] (https://m.reddit.com/r/IAmA/comments/3rid26/we_are_the_microsoft_excel_team_ask_us_anything/cwob2sq):
+
+>We love VBA, and we plan to keep it around for the foreseeable future. As we add new features to Windows Desktop and Mac versions of Excel (where VBA is supported), we’ll continue to add object model for those features (seehttp://dev.office.com/blogs/VBA-improvements-in-Office-2016), so you have programmable access to all of the capabilities of the application.
+>
+>That said, the VB runtime was built long before today’s cross platform world (on the VB6 platform which the Visual Studio team has talked about on UserVoice – see [http:// visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/3440221-bring-back-classic-visual-basic-an-improved-versi] (https://visualstudio.uservoice.com/forums/121579-visual-studio-2015/suggestions/3440221-bring-back-classic-visual-basic-an-improved-versi), and with the significant investments we’ve made to run Office across multiple platforms, we want to bring all the great scenarios VBA enabled into this new world and we also want to take advantage of the new opportunities this new world creates for our customers. This has caused us to explore new approaches in order to address the new opportunities of a cloud anchored, cross device world (service connectivity, cross-platform authoring and execution, standards-based languages, cloud based deployment/management, and more).
+>
+>An early stage of this work is the cross-platform JavaScript APIs available to developers in Office 2016, and we are actively working on dramatically extending that API set to be in line with the existing VBA/COM OM. The good news here is that the new APIs will work regardless of the Excel endpoint/device, which will mean that solutions will be much more universal than they are today. Once we’ve broadened the API set, we’ll start working through some of the tooling (a more modern editor than the VBE) and macro recording.
+>
+>Cheers, Dan [MS]
+
+EDIT: Fixed link in quote. 
+
+
+There has been no meaningful updates to the language ever. It's a dead end. The future is in VSTO for advanced functionality within Office. Once the financial institutions migrate their VBA based toolsets and models out of Excel, or VBA, it's dead.
+Thanks for posting this, what's funny is I think I actually read this before and forgot about it. In any case, this perfectly answers my question and I will continue to invest time into learning this language 
+I read that as well. It was assuring that the Office team was forward thinking. I mean, Office has likely taken a hit with cloud services, and is somewhat unpopular with the anti-MS crowd, but when you need Office, there's no real substitute.
+Not sure if I can ask it here...
+I am not a programmer neither am I very good at VBA. Just asking out of curiosity...
+Even if the mode of programming changes wouldn't the object model remain the same? Will just the method of invoking the application differ? Not sure if it makes sense...
+
+Suppose, now, in VBE we write: Range("A1").Value = 10
+
+If a new approach comes up in the future we'd probably go like this:
+
+    [new code to start Excel and add workbook]
+    Range("A1").Value = 10
+
+So those who already know Excel VBA will only need to learn that extra bit of codes? Is that it? Or will the whole language/syntax change?
+This seems extremely unlikely to me.  Nearly all VBA is written by end-users, not programmers.  Switching over to something that requires a much deeper understanding of the Windows ecosystem just to do simple automation tasks would be, for all practical purposes, throwing away the only advantage Excel has over the dozens of competing spreadsheet programs.
+Would you say the phase out would start around 2019, and then it would then take a few years for financial institutions to catch up? 
+Yeah that's true, Google Apps and Sheets in particular has eaten into the productivity market that Office has dominated for so long. For example PWC, while still using the standalone Office desktop applications, [opted for Google Apps over Office 365 (+ Exchange)] ( http://www.cio.com.au/article/558339/pwc-drop-office-notes-google-apps/). 
+
+In terms of online accessibility, the Google sheets API had a big head start over Microsoft's Excel API (part of Graph) though [it's looking to catch up very quickly] (https://blogs.office.com/2016/08/03/announcing-the-general-availability-of-the-microsoft-excel-api-to-expand-the-power-of-office-365/). 
+
+Another area that Microsoft has recently started excelling in is business intelligence with Power BI, which seems to be eating away at Tableau and perhaps even some Oracle applications (Essbase). 
+
+I'd say one of Microsoft's biggest weaknesses in terms of productivity is their sync client for OneDrive. It seems to turn people away for O365 even though there are so many other good things included. Hopefully their next gen client fixes up sharepoint libraries and sync issues. 
+I'm not much of a programmer either, but taking a quick look at the [Excel Javascript API] (https://dev.office.com/docs/add-ins/excel/excel-add-ins-javascript-programming-overview) shows that it's mostly the same, this shows how you would update a range of cells A1:A20 with the text "Due Date":
+
+    Excel.run(function (ctx) { 
+        sheetName = 'Sheet1'; 
+        var rangeAddress = 'A1:A20'; 
+        var worksheet = ctx.workbook.worksheets.getItem(sheetName); 
+        var range = worksheet.getRange(rangeAddress);
+        range.values = 'Due Date';
+        range.load('text'); 
+        return ctx.sync().then(function() { 
+            console.log(range.text); 
+        }); 
+    }).catch(function(error) { 
+        console.log("Error: " + error); 
+        if (error instanceof OfficeExtension.Error) { 
+            console.log("Debug info: " + JSON.stringify(error.debugInfo)); 
+            } 
+    });
+While you're probably right in that most VBA is written by end users, there are still a lot of enterprise applications out there that operate on complex VBA. Just as one example, Oracle's Essbase has popular Excel add ins that use VBA to extract and upload data. While only an add in, I'd think that it is still the most popular way of getting data in and out. Sure Oracle could update the add in with whatever replaces VBA, but there will always be some easily accessible core language that  Excel operates on. 
+I was trying to explain that to my boss the other week, when she seemed extremely surprised when I told her that IT did not know Excel at all. She does not have a technical background.
+I totally agree with you. VBA is a nitch market. Perhaps it's replaced with "something" else for general users but the compatibility with VBA still be there. Even with .NET Microsoft never dropped VB so they know there is a lot of VBA to drop it and make it obsolete. 
+They will switch to R. 
+Financial institutions do not want to spend money building something to replace something else that already works, unless there was a legal requirement to do so or for competition. It's also why some Office installs are still 32bit, since the 64bit versions do require rewriting for many applications, including 3rd party add-ins, e.g. an older version of bobj.
+
+Microsoft will likely not invest heavily into making Office no longer VBA compatible as core functionality is rarely touched (including minor bugs dating back decades), but they will likely add new functionality in Office which will not be supported in VBA.
+Just to tag on to this Power BI kills tableau. I use both an while tableau is still smoother and has a cleaner UI, BI is free/$10/month where tablaeu is $1,000 per user.
+That's.. kinda disgusting. The simplicity, with a nod to extensibility, of VBA is what's most appealing about it, IMO. It's why all my coworkers can write a macro even though maybe one of them has ever studied core programming concepts.
+
+Besides, I've always hated that megabracketed lowercase mess that seems to be the going style with JS dev. Functions in functions in functions. Useful, yes - elegant, god no.
+I learned VBA to speed up the mundane things I was doing in Excel. I continue to use VBA to automate things that should not even been done in Excel in the first place.
+R is great for doing statistics, but it isn't a spreadsheet, nor can it reasonably be used to replace most use-cases of spreadsheets.
+> Financial institutions do not want to spend money
+
+And really, it ends right there. A bunch of places are still running <=2007, and the rest will definitely stop upgrading if stuff that already works stops working. What could new versions of Office possibly offer to make them choose that chaos+expenditure over BAU?
+Not gonna lie, it is pretty gross. I found another fairly interesting article about VBA's potential future [here] (http://analystcave.com/vba-dead-whats-future-vba/). 
+
+It seems to compare the different use cases of VBA, with replacements being Visual Studio Tools for Office (VSTO) and the new Office Javascript APIs. Both let you access the object model, and both let you create Add-ins (only Office js gets to deploy on the Office store). 
+
+The thing they don't seem to be able to replace is the quick and dirty ability to start making a macro on the fly, or using the macro recorder to test/learn. On top of that, **everyone** has the VBE built in, no need to get the IT department to let you install Visual Studio. 
+
+It seems to me that the Excel team will either let VBA die a very slow death or they'll come up with an in built editor that uses VB.Net and/or some kind of Javascript editor. I wouldn't hold your breath though. 
+Glad someone else shares this sentiment.
+This is basically my current career in a nutshell.
+Are you intentionally obtuse or just that guy? 
+
+They will switch from VBA to R. 
+Please mind your tone on the sub. 
+
+R is primarily used for data science/analysis/statistics. VBA is primarily used for automation of tasks and calculations in excel/office. 
+
+As people in unis and stuff get more familiar with R (at my econ dept. we have some courses using SAS, some using STATA, SPSS, R, MATLAB, and some courses using VBA), and the tech companies emphasize it more, I am sure it will start seeing more use, and I like R a lot so don't mind that at all. But, R and VBA have different strengths, and I doubt most businesses will replace VBA where they are currently using that (spreadsheet automation and data entry and whatnot) with R.   
+I can see using VBA for reporting getting phased out though in a lot of cases, as the BI landscape develops and becomes more user-friendly. 
+
+
+
+Honest question, but have you ever worked a job whose main data tool was Excel? Ever try getting them off Excel to promote other alternatives like R?
+
+You're not going to have much luck selling R to your older colleagues and superiors who've been out of college for at least 15 years, and they're certainly not going to take the time to learn something brand new when Excel and VBA have been working for them and their partners just fine for many years.  

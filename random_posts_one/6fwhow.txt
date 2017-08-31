@@ -1,0 +1,39 @@
+6fwhow
+Generating text without copy/paste special
+I have a rather complicated form that I'm building with classified information, so the example I'm providing is not exact.
+
+https://docs.google.com/spreadsheets/d/1Nn_uUHJ4_MoFNEBJuY0wztC6hkz1DhyE3STGwvwWMsU/edit?usp=sharing
+
+I am trying to get a form to dynamically enter text into the result cell with changes to entries within the form. I want to be able to select the text from within the cell, rather than the formula when the result cell is highlighted. I know this can be accomplished because I have a working example, but I have thus far been unable to replicate the process. 
+
+The closest solution I have found is using copy/paste special to return text AFTER the form is completed, but this is not ideal for the function this form will be used for. 
+
+I have also already looked at inserting a macro to perform the copy/paste function, but again, this is not ideal.
+
+How do I get excel to do this?
+
+
+-------------
+By "form" do you mean userform? If this data is entered via UserForm, you can edit the UserForm's code to place all the data into a single cell. If by "form" you mean just manually typing into columns A, B, and C, then a macro is your only option. You don't need to copy/paste via macro, but you do need a macro. The macro can be set to run automatically any time a value in Column A, B, or C is changed.
+-------------
+It's just a basic excel spreadsheet with concatenate formulas, it has not been entered via UserForm. Though I will look into that now.
+-------------
+I didn't know I could run macros automatically. Thank you! I will look into that.
+-------------
+My recommendation is using a Worksheet function macro (right click sheet name, click "view code")
+
+In the case of your example...
+
+    Private Sub Worksheet_Change(ByVal Target As Range)
+        If Target.Column <= 3 Then
+            Cells(Target.Row, 4) = Cells(Target.Row, 1).Value & " " & Cells(Target.Row, 2).Value & " " & Cells(Target.Row, 3).Value
+        End If
+    End Sub
+
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _pancak3d_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

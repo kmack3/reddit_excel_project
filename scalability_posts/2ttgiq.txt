@@ -1,0 +1,55 @@
+big
+2ttgiq
+Is it possible to compose a cell of various numbers (from other cells) that are separated by commas and brackets. being able to drag across would be a big help.
+
+Hi all. 
+I need a little help. I have four sets of values in  four different 7x3 tables. They represent the median value, Q1, Q3 and n for a set of values, each cell in the respective position in each table is the different aspect of the same set of values.
+
+I need to make one 7x3 table that presents them as: median (Q1,Q3,n). That would be one cell with the values from 4 different cells separated by brackets and commas. 
+
+ Is there a way to do this without just typing each out? being able to drag across would be a bonus. ie producing something like: 
+
+D4 (D14, D24, D34)   that could become D3 (D13,D23, D33)  (This represents the the contents of the cells. These are values, not just "D3" etc
+
+
+I hope this makes sense. I haven't tried Googling, but that's cause I wouldn't really know what to look for! I have a bit of Excel experience, but I'm no expert. 
+
+
+Thanks in advanced.  
+
+
+-------------
+To provide some more info:
+
+    =D4 & "("& D14 & ", " & D24 & ", " & D34 & ")"
+-------------
+> being able to drag across would be a bonus
+
+Have you tried this?.. it works for me!
+
+Hand type the first one, and drag!
+-------------
+Solution verified
+-------------
+Oh my shits you are amazing. Thank you very much, solved me a lot of hassle! 
+
+Thank you!
+
+Just quickly, what is this kind of thing called. ie what would I Google to find out more?
+
+-------------
+Sorry, maybe I wasn't clear! D4 (D14, D24, D34) is just to represent the cell contents. There are values in those cells I need that won't drag.
+-------------
+You have awarded one point to *_intelligentLife_*
+-------------
+Concatenation - Excel has a `CONCATENATE` function with which you could achieve the same thing:
+
+    =CONCATENATE(d4," (",d14,", ",d24,", ",d34,")")
+-------------
+Thank you. [This](http://i.imgur.com/bmN2kpZ.gif) would have been me without you. 
+-------------
+Happy to help :)
+
+Please reply SOLUTION VERIFIED to mark your post as "Solved" and give me a rep point
+
+Thanks

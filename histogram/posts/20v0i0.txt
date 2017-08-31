@@ -1,0 +1,152 @@
+Boss thinks I'm smart
+Logic: IF/OR/AND, and just writing boolean statements (eg =(A1>3))
+
+Lookups: Index/Match, VLookup/HLookup
+
+Counts: Count, Countifs, CountA, probably some others
+
+Sumproduct and all its quirks
+
+String manipulation: TEXT, LEN, FIND, SEARCH, SUBSTITUTE, LEFT/RIGHT/MID, and using the & operator
+
+Error handling: IFERROR, ISERROR, ISBLANK
+
+**Definitely read up on array formulas**
+
+Probably some others I've missed :P
+Most of these are reiterations of what other people have said, but these are my 2 cents. (and remember, a big formulas is just a bunch of small formulas stuck together, sit down and break it apart and it is no big deal) 
+
+More or less in order of importance:
+
+**PIVOT TABLES** - you're in a business setting, they will be useful and you will run into them, in newer versions of excel they have "Slicers" which makes everything easy for excel-challenged managers. Prepare to see pivot tables applied to _everything_ if you work with a certain demographic in the business sphere, even things where they probably shouldn't be. 
+
+**SUMIFS, COUNTIFS, AVERAGEIFS** - These are amazing and you can do some real magic with them depending on your data, sum/count/average numbers in a list if all of your conditions are true. 
+
+**INDEX/MATCH** - Versatile and straightforward reference functions that I have used in pretty much every project I have ever done. 
+
+**LOGIC** - IF() functions, Nested IF() functions, OR(), AND(), NOT(), are some of the ones I use the most. Having a solid understanding of boolean logic will help you with creating complex (or surprisingly simple!) formulas, and it is transferable to writing macros or doing array calculations. 
+
+**TEXT FORMULAS** - LEN(), MID(), RIGHT(), LEFT(), FIND(), SEARCH(), SUBSTITUTE(), TRIM(), TEXT(), & (this character concatenates text). Clean data is the exception rather than the rule, and these fellas are what you want, to get what you need out, of what you have. They are also useful when helping that cute chick from marketing. 
+
+**DATA VISUALIZATION** - or charts, or graphical representation of information, if you're doing business reports, guys are gonna wanna see charts. They're also going to remember a good chart that they can use to convince other people with, so familiarize yourself with the different options. Read a few blogs on how to create and present different kinds of business'y charts (waterfall charts, bullet charts, etc.) One of the better resources for this is the Peltiertech website: http://peltiertech.com/Excel/Charts/ChartIndex.html (check out chart types and chart types - custom) the walkthroughs and examples are straightforward, and he often makes deliberations on the different chart types and their appropriateness as well. Of course there are many other sources (and opinions), just google. 
+
+**OFFSET** - This is a gem, especially if you're dealing with weird data layouts or subsections of data based on the position of a cell or something like that. Combine it with INDEX(MATCH()) and COUNT formulas for more versatility. Also great for making dynamic named ranges. 
+
+**INDIRECT/ADDRESS** - Indirect will let you use a string as a reference. This may sound a little tame, but when you have data in 32 different-but-consistently-named worksheets and you have to pull something from each of them into a table, you will be blessing the gods for INDIRECT(). ADDRESS() returns to you the address (e.g. "B4) of a cell depending on a row number and a column number you give it. Again this sounds a bit bland, but it can increase the versatility of your INDIRECTs.  
+
+**ARRAY FORMULAS** - are the hammer with which I hit most problems, I am ashamed to say. Most formulas can be used as array formulas by hitting ctrl+shift+enter. Computationally they are often not the best for large spreadsheets, but I like the logic of them and once you have that down it helps break down the process into smaller steps. I don't advise you use them extensively, but I think it's important to know about them, as they can be lifesavers. Look up SUMPRODUCT and FREQUENCY, frequency especially can be beautiful.
+
+**VBA / MACROS** - If you find yourself doing the same thing over and over again every day or every week; copy pasting a report into another report removing the first two rows then sorting and and changing the formatting before making it into a chart (or whatever) - it's time to record a macro. Recorded macros are never pretty, and they often aren't great, but they're baby's first steps into automating things with VBA, something that will make you seem like a grand wizard AND make your life a lot easier until it makes it a lot harder. 
+
+**GROUPING** - one of my least favorite features of Excel but business guys love it, they can click it and it expands/hides parts of their reports. Know about it and apply it if you deem fit. 
+
+I am probably leaving something out, but as the last thing, but not the least important: 
+
+**SHAMELESSLY USE THE MICROSOFT EXCEL TEMPLATES AVAILABLE ONLINE**
+
+Some dude at microsoft is paid to sit there and make these templates available. They generally work all right, and you can get great ideas of how to get nifty functionality out of spreadsheets with it. (like this sweet [project-timeline-in-a-graph template](http://office.microsoft.com/en-us/templates/results.aspx?qu=project&queryid=d3b3ab4d-9b08-44c2-be39-551ce231d770&avg=zxl#ai:TC102930043|))
+
+Edits: 
+Holy run-on sentences, Batman! Also minor edits, deletion of commas.
+The ones that I use all day everyday working with big spreadsheets:
+
+     vlookup()
+     match()
+     index()
+     if()
+     countifs()
+
+Those are all pretty basic once you get the hang of it.  Really for spreadsheets the part that will take some getting used to is the logic.  Especially in a business setting.  You have to think about who the report is being published to, who is going to be editing it, and what are their skill levels in excel.
+
+If you are going to be doing a lot of reporting, I recommend learning VBA.  It's pretty easy to get the grasp of and any question you have is probably already answered and out there.  A quick google search will reveal a lot.  Also, excel has the "record macro" option so you can record your steps and learn that way.
+
+Finally, if you have any questions, feel free to pm me.  My job is currently 100% VBA automation so I'd be willing to help you out and explain any questions you might have,
+since all you know is the SUM function presumably, I would look into VLOOKUPs, IF statements, and knowing pivot tables would help too
+Can't... tell if satire...
+
+Besides functions to learn, you should also learn shortcuts and the available tools that Excel has.
+
+For example, doing CTRL+SHIFT+DOWN will select all the cells beneath your active cell that has values in it, up until it hits an empty cell. Very very useful when you want to quickly select hundreds or even thousands of cells at a time. 
+
+Tools that are pretty helpful are stuff like Evaluate Formula, Conditional Formatting, Text to Column, etc...
+
+Oh and the almighty PivotTable.
+Definitely Vlookup. IF function comes in very handy as well. Once you figure out the logic of the IF function you can start nesting IF functions with AND OR logics. Also, be sure to learn pivot tables, which can save you a ridiculous amount of time when working with alot of data. Also, converting your data in to tables is wonderful. It makes working with data a bit quicker overall. Just select a cell and hit ctrl+t.
+
+Other than these, you get better with practice. Always think along the lines of "I'll bet excel can do this" and then google it. Youtube has alot of helpful tutorials as well.
+Some things I didn't notice mentioned while scanning the thread from mobile... named ranges, data validation, indirect(), conditional formatting
+CHOOSE(MATCH(A1,{Key1, Key2, Key3}), Door1, Door2, Door3) is definately a keeper.
+
+Also CHOOSE(SIGN(A2-A1)+2,"Less Than","Equal to", "More than") will save you a lot of heartache if working with KPIs and targets.
+The best resource to learn Excel for a beginner: 
+https://www.youtube.com/user/ExcelIsFun
+
+Also, if you don't know how to do something just ask google, 99.9% chance someone had trouble with the same thing and posted to a forum for help.
+Indirect is awesome.  GetPivotTable is super useful.  Index and Match is almost like VLookup for smart kids. 
+
+Anytime you need to know how to do something, chances are it's on YouTube.  You'd be amazed at the random stuff you find.  I've often thought to myself, "This has to be possible."  Then I search for something that sounds like what I'm trying to do and boom, there's a youtube video that explains exactly what I need.
+There's so many useful and versatile functions that it's hard for me to say. I strongly recommend reading this subreddit for some solutions some clever users have came up with to see how amazing these functions are. Also, there are some great resources on the sidebar that I STRONGLY recommend checking out.
+
+What kind of work are you performing currently?
+asking for help *is* smart.  I've been using excel for 15 years and I've *never* used index/match, but I get the impression I'm missing out
+What you need to know depends on what kind of spreadsheet your are going to create. If you are making some ledger with all sorts of maths on it then you need to know the arithmetic functions... Counts, etc. BUT, if you are like me... you will ending making some data tracking spreadsheet. Then you'll really need to know VLOOKUP and HLOOKUP! Holy crap. When I used that that first time the result was amazing. They thought I was a witch or sumthin'! 
+You really should just go and buy one of those big thick books about the Excel version your are working on. I recommend Microsoft Press Inside/Out series. It will teach you and be there for future reference. 
+Excel is a tool based on logic, learning new formulas is not that hard to be honest. It is understanding what is being asked and then focusing on a solution that is hard t ofind.
+
+Id say he sees something in you, you can easily youtube most concepts, just learn to use them on your own
+You will pick it up pretty quickly. Google helps.
+SumIf and SumIfs are a godsend.
+What's your job?
+if you learn this, you should be good.
+
+You can learn most of his lines in 1-2hours max through youtube
+Gah, can't believe I forgot INDIRECT/ADDRESS/OFFSET and TRIM!
+
+Also, I'd say CHAR and CODE (and CLEAN) might be incredibly useful if you're getting your data imported from some source that gives you weird characters.
+
+Sweet tip on the templates. I should really check those out!
+
+Excellent!  "...make your life a lot easier until it makes it a lot harder" was my favorite line here.  How true!
+This is an amazing response. Well done.
+Can someone elaborate on how to use Frequency other than its basic form?  I imagine you mean to combine it with something to perform a higher function?
+Someone hire this guy!
+Would you mind explainign quickly how and when is the "index" function usefull ?
+
+Tangential topic here, but how did you possibly find a gig doing 100% VBA? That sounds pretty awesome. 
+Very good tip about range-jumping, so I'd like to second that. 
+
+On another note, both times I've seen you I've read your name as Aristitle and had myself a giggle. 
+CTRL+SHIFT+DOWN... thank you thank you thank you..
+Usually just using it as a count formula as part of another array. Say you have a lot of different intervals where different things happen, could be points assignment for scoring a certain placement in a group in a race, and you have 200 races you want the combined score for, for 1 person, you could do something like sumproduct(frequency(all_races_positions,groupings),score_values_for_groupings). Instead of having helper columns and counts and IF >2 but <5 then else if >5 but <10 then etc. 
+
+Maybe that's not the best example, I'm a bit stumped for amazing examples atm, but it's a neato burrito formula when you can use it.
+http://www.randomwok.com/excel/how-to-use-index-match/
+
+Here's a pretty good explanation of the difference between vlookup and index/match.
+Google "index match", or check out chandoo in the sidebar.  Most often it's used as a more robust replacement for V/HLOOKUP, but the uses go as far as your imagine.  I use it often in VBA when working with arrays.
+Whenever you have a range of values, and you can find the index in the range of the value you want to pull, then you use INDEX. Often this index is found with another formula, so most INDEX formulas look like
+
+    =INDEX(range, f(input)), where f is a formula that returns the desired index
+
+INDEX is extremely important when dealing with array formulas because it can pull a value from the array the same way it pulls a value from a range.
+I use Index/Match a lot when combing data from different sheets or sources. For example I will have a list of accounts with some info in one place and a list of accounts with other info elsewhere. If the account lists are identical you can just sort, copy and paste. But things are never that easy so I use index and match to take the data from both sheets and combine them.
+
+It is also very useful to create drop-downs and use in charts to allow users to filter easily.
+Started out in a position that I made obsolete through VBA and standard reporting procedures. I started to automate anything and everything I could and that's what I've been doing for about 5 months now. I'm slowly running out of things to automate so we'll see what the future holds. 
+My job is similar. Reporting/Data analysis roles in companies without dedicated BI systems tend to be pretty VBA heavy, I find. I guess if you're good enough at it, they'll get you to do it all the time. I reckon I'm probably around 80% VBA at the moment.
+
+It's kinda cool in the sense that you're basically problem solving all day. But also not cool in the sense that you will eventually run out of stuff to automate.
+:) Glad to see people are still getting some use out of an old post.
+Oh well, this explains the basics, thanks !! 
+
+I'm looking forward to try this, as i was having issue with some files at work being slow due tu many Vlookups
+
+*" While not a big deal when it comes to simple lookups, this can definitely become a factor if you are dealing with large files that have thousands of lookups.  By limiting your arrays to only the lookup and return columns, you reduce the processing load on Excel. "*
+Any more complex examples but still understandable ? Other than the replacement of the Hlookup and Vlookup 
+I can not believe I've been scrolling down 100,000 rows just to make a range this entire time...
+I'm mobile and haven't read the article but if it didn't mention it... INDEX couples well with MATCH to replace VLOOKUP functionality while easing up significantly on your processor(s). 
+
+Edit: and then of course I scroll down 1/2 an inch to find this already mentioned... 
+This array formula is like VLookup but pulls the Nth match rather than the first match.
+
+    =INDEX(output_range, SMALL(IF(lookup_range=lookup_value,ROW(lookup_range)-ROW(start cell of lookup_range)+1), N))

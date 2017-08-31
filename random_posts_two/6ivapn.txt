@@ -1,0 +1,48 @@
+6ivapn
+why is ti so hard to paste only in visible cell?!
+hello all cleints send me budget every week and I need to enter them in my excel (which has more row than him, but every row I added i made a filtered colum with and X so i can filter them out, and only show his original budget....
+
+BUT when i copy paste his budget in my filtered budget it copy in filtered cell too.... is there a way to fix that?!?
+
+
+-------------
+Hey,
+
+You're referencing a non-contiguous range for copy. Excel then needs a destination for the paste that matches the range dimensions, if one cell is selected, the default is to overwrite the cell and ones directly below regardless of visibility. I'm pretty sure copying and pasting multiple cells to multiple locations in one action is forbidden with the gui.
+
+You can specify a destination range (non-contiguous) to match the copied range through a VBA solution...
+
+-------------
+Ya, dealt with this yesterday. I think I ended up using index match to pull the info, but even that isn't great because you get the same issue when trying to paste values.
+-------------
+If lookups aren't an option, instead of creating a filter column, create 2 sort columns. One to sort the rows so that all of the client's data comes in the same order as the client has it, with all additional rows at the bottom (or anywhere else) - and another column to bring everything back to where they are supposed to be.
+-------------
+There is a "dirty" way to deal with this. This method generally assumes that there aren't complicated formulas in other places that refer to the original data source that we "temporarily" reformat.
+
+Let's say that your "original data" is in columns A-D.
+
+1. You use a "temporary" column E, where you simply insert row numbers: 1, 2, 3 (as values - this is very important that those are values).
+
+2. You use a 2nd "temporary" column F, where you mark the stuff you want to change (mark it with "x" or "1, 2, 3" - obviously "x" is easier -> more about it later)
+
+3. Add filter on whole table.
+
+4. SORT (not ~~filter~~, SORT) data by column F. Hopefully it is enough, and you dont need to make some sort of a sort by column A and then later F. (this is why in point 2 I mentioned that maybe you need to mark stuff with numbers)
+
+5. Now you can easily paste the data you wanted to paste; there are no "rows-in-between"
+
+6. You use column from point 1 to sort your data again, chronologically (to get the original layout of table again).
+
+7. You can delete the 2 support columns.
+
+Sadly quite a few things can go wrong here, especially if you have external formulas to the data source, but sometimes this method is good enough.
+
+
+-------------
+On the home tab > Goto button (far right) > Special > Visible Cells only 
+-------------
+ya thats fhe fix i am using atm xD but still i thought excel cojld do something as simple as paste into visible cell..
+-------------
+i get an error msg saying that the copy zone and the paste zone arent the same size
+-------------
+I don't know if this will work, but you can try opening up a new Excel spreadsheet and pasting it there first. Or maybe close your spreadsheet and reopen it. It has worked for me in the past, but it doesn't usually. 

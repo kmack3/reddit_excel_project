@@ -1,0 +1,53 @@
+Having stock prices update automatically in excel 2016?
+Try these two links:
+
+http://www.excel-university.com/msn-moneycentral-iqy-web-query/
+
+http://www.stockkevin.com/2013/03/how-to-pull-stock-quotes-into-excel.html
+
+First one has a download link to the .IQY files required for the second one.
+I would use the WEBSERVICE function with FILTERXML.
+
+This will return the current value for AAPL.
+
+=FILTERXML(WEBSERVICE("http://dev.markitondemand.com/MODApis/Api/v2/Quote/xml?symbol=AAPL"),"StockQuote/LastPrice")
+
+You could replace AAPL with a cell reference containing a given symbol.
+Any idea how to do this in Google Sheets?  Would be even cooler if you could benchmark percent up/down from time added, time bought, etc
+Solution Verified
+How delayed are MSN price quotes?
+Thanks a Bunch
+Solution Verified
+> =FILTERXML(WEBSERVICE("http://dev.markitondemand.com/MODApis/Api/v2/Quote/xml?symbol=AAPL"),"StockQuote/LastPrice")
+
+Im getting the #name? error, any idea what i can do?
+
+Running prompt on Excel for Mac 2011 v. 14.3
+
+They have a Google Finance integration built into Google Sheets 
+
+http://googledrive.blogspot.com/2010/08/tips-tricks-googlefinance-in-google.html
+Is there a Google sheets sub as well? Curious
+
+You have awarded one point to _almightybob1_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+I would imagine at least the standard 15 minutes but I don't know for sure.
+Solution Verified
+No worries. If you reply to me saying "solution verified" I get a clippy point btw. Just sayin :D
+
+You have awarded one point to _thetoastmonster_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Great thanks!
+I tried this solution, to be honest, it is very elegant and I wish Microsoft had a similar feature
+/r/googlesheets
+That feel
+
+You have awarded one point to _TheVentiLebowski_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+Not sure how much I helped, but thanks. 
+Solution verified 
+haha sorry about that I accidentally replied to the other guy
+It has to be the OP, but thanks anyway :)

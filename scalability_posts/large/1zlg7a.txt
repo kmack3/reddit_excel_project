@@ -1,0 +1,116 @@
+large
+1zlg7a
+Working with a rather large database, would like to use SQL within Excel or some other method to make it so I don't need to COUNTIFS through so many entries.
+
+Ok I'm gonna try to reword this completely.
+
+I have a sheet that has data from about 200 games of League of Legends.  Each game is a row, each row contains about 20 columns (teams that are playing, champion picks, winning team, server where the game was played, etc).  The rest of the notebook is charts that count the number of times that entries occur in various rows/columns.  For example, it might filter by rows that have a certain team and then count the number of entries of "Elise" in 3 of the columns.  This requires that I do a ton of restrictions in my COUNTIFS, and it would be a lot faster if I could just do a filter and then a single COUNTIF after the filter.
+
+I want the calculations to run faster; right now about 90% of the time I spend updating my data page is waiting for it to recalculate.  I know I can do manual calculations, but I still try to save frequently, and there are times I want the automatic calculation for other reasons.
+
+I've done some of the calculations separately in SQL, and if I could do that but still within Excel that would be ideal (need conditional formatting, and want "instant" updates upon entering more data).  I'm open to the idea of using VBA but would prefer to do SQL if that's possible.  What I do NOT want to do is make additional sheets for each team/server/etc because that would just get out of control.
+
+
+-------------
+I read over your question at least 4 times and I can honestly say I have no idea what you're asking.  What exactly is wrong with the countifs?  You say you want to be more efficient but you need to describe HOW you want to be more efficient? Do you want more flexibility in your formula?  IE some sort of user import to change what is being pulled out of the data?
+
+Disclaimer: I know nothing about LOL
+-------------
+I've done this by running a macro that dumps the sheet into a temporary table and then queries it. You could use MySQL for this. It's surprisingly fast.
+-------------
+Could you maybe just use a pivot table to do the count, then pull the data from the pivot table into a table where you can do calculations? 
+
+Also going by the data amount you have (20 columns of 20 rows) and the description of your spreadsheet, have you considered it may be the large number of graphs that slow things down, rather than the countifs? 
+
+Regardless, you really should disable automatic calculation and just F9 it whenever you want a fresh update. 
+
+-------------
+Yes, you can do SQL on the xls sheet itself :)  
+[look at this](http://stackoverflow.com/questions/18637376/query-my-excel-worksheet-with-vba)  
+  
+have nice stats ;)
+-------------
+K I rewrote the entire post.  Sorry, it's hard to describe since it's something I've been working so closely with for a few months now.
+-------------
+This is essentially what I'd like to do but don't know how to do.
+-------------
+I have 20 columns of 120 rows each, each cell of which is referencing 4-8 cells in each of 200 rows with countifs.  And multiple sheets with similar numbers of references.  I have no graphs at all (tho I'm starting to work on adding some and getting frustrated by the inability to ignore blanks in bar charts), the only thing that could be slowing it down additionally is the conditional formatting, but that doesn't disable when I turn off autocalculate, and it doesn't take long to apply formatting at all.
+
+I haven't used pivot tables at all, I'll look into that and let you know if anything works out.  Thanks!
+-------------
+ok i'm boiling this down a bit based on just a few sentences but it might be a start.  Have you tried using SUBTOTAL()?  When I read filter + operation that's the first thing I think of.
+-------------
+Not sure if you're checking in periodically, so fresh reply. I'd like to give credit to the originator of this, but someone else I work with found it originally, so I can't. But I suspect you should be able to get the gist of the process from here.
+
+https://www.dropbox.com/s/tb77pd3galob1km/ExcelSQL.xlsm
+
+Let me know if my comments aren't clear (I do that sometimes)
+-------------
+I need to go to work soon, but once you have the connection (to an external file containing the data even) it's pretty straightforward. I'll link you to an example later and give you a few pointers. If you're decent with SQL, you'll find it easy.
+
+Basically, you need to set up a connection to the dataset (either in the same file, or a separate file; you can use a database on a server too if you really want to) and then construct the SQL query and call it, using the connection you created.
+
+This should give you a recordset that you can just print on the sheet. I'll be at work in about 90 minutes and I'll edit a file from our server for you as an example.
+-------------
+You 100% want to use a pivot table.  
+  
+Box the raw data, hit ctrl & T to make it a "Table" And then use that as the source data for the pivot table. (Alt n, v)  
+  
+Also play some DOTA you scrub :•p
+-------------
+These are all words, not numbers.  I don't think that would work?
+-------------
+For an example of what I'm doing,
+
+=COUNTIFS(Data!$DB:$DB,"* "&$A95&" *",Data!$N:$N,AA$1)+COUNTIFS(Data!$DC:$DC,"* "&$A95&" *",Data!$O:$O,AA$1)
+
+that formula gets repeated about 100 times with only A95 changing.  So if I could filter out the second condition first (matching AA1 within Data!O) then I'd be removing a ton of dependencies.
+
+-------------
+if you set the first argument to "3" it will do a countA formula in the subtotal which won't matter if there are words, numbers or both.
+
+
+-------------
+maybe it's because i'm exhausted and it's late or maybe it's because I don't understand... You keep using the word "filter" so why don't you filter your data?
+
+I just can't piece together what you want your data to display in the end.  It looks like you may have found an answer below, though.  If a "query" is really what you're looking for then don't forget about the querying capabilities already setup in excel under the DATA tab.  You could also looking into the Add-on Power Query.
+-------------
+I'm not sure this is what I'm looking for.  I don't actually want to apply a filter to my data...that takes like 15 seconds to load, and I need to be able to compare multiple filters at the same time.
+-------------
+Sorry, I want to "filter" but not literally apply a filter---I need to see results from "filtering" by multiple teams at the same time, side by side, all without hiding any of the original chart.
+-------------
+[Here](http://i.imgur.com/uKkDzRt.png) is a screenshot of what I'm doing, sorry puush isn't working, but if you look for example at columns B, G, L, Q, V, AA, AF, and AK, those are all the number of times that each team played the champion in that row.  So B13 is the number of times that Alliance played Brand, for example.  This just feels silly to me because if I could just somehow say "only consider games in which Alliance was playing" for all the entries in column B, each of those 100 COUNTIFS would have to look up one less thing in each of 200 rows.
+-------------
+I've read through this and I still don't think I understand.   Here's what I think you're saying.
+
+The table that you made a screenshot of (note: not *chart*; a [chart](http://en.wikipedia.org/wiki/Chart) is a graphical representation of data, and is synonymous with "graph"), I'm calling that the **main table**.  The main table contains lots of conditional formatting and COUNTIFS formulas that pull data from a **data table**.  
+
+>I want to "filter" but not literally apply a filter---I need to see results from "filtering" by multiple teams at the same time, side by side
+
+So what you're looking for is a programmatic way to rearrange the data in the main table?  You want to group rows according to some criteria, and have those rows appear together, and have other rows that fail the criteria appear below?
+
+>all without hiding any of the original chart.
+
+You don't want to apply a filter to the main table, because every time you clear the filter, Excel needs to recalculate all the cells that you've made visible, and this takes lots of time.
+
+As /u/kieran_n [said](http://www.reddit.com/r/excel/comments/1zlg7a/working_with_a_rather_large_database_would_like/cfuvb3v), it sounds like you want a to make a pivot table based on your data table.
+
+[Here are a list of tips for speeding up Excel](http://chandoo.org/wp/2012/03/27/75-excel-speeding-up-tips/).  Pivot tables are faster than formulas, and conditional formatting is also slowing it down (those are all formulas that need to be evaluated).  Here's some other advice: if you're going to redesign how the data is collected/summarized, try it out with a few rows of data *first*, then add all the data rows once you've got it working.  Debug with little data, test performance with lots of data.
+
+Good luck.
+
+
+-------------
+try DAta -> From Other Sources -> From Microsoft Query and load data through there.
+
+If in 2010 or below then it might say "New Database Query" instead.
+
+I'm going to bed now but i can pick this up again tomorrow if you're still in need.
+-------------
+Yes, basically that.
+
+However, I specifically don't want to reorder the data table in order to fill the main table.
+
+I'm going to try to use a pivot table (more likely, several pivot tables I think), but unfortunately I've been really busy since I first made this post so I haven't figured out how to get that to do what I want it to yet.
+
+Thanks!

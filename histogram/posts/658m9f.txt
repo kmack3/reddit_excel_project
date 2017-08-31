@@ -1,0 +1,208 @@
+VBA Essentials: Loops
+I have added this post to the "Guides" section of the Wiki.   
+
+If anyone recalls similar threads that are not already listed there, feel free to update it. 
+
+https://www.reddit.com/r/excel/wiki/guides
+
+
+**Applause**
+
+Nice intro to loops here, and way to keep it real with examples that interact with the workbook. The power of looping through a range with `For..Each` cannot be overstated!
+A+
+
+Did not know about *Exit Loop*. Makes my *GoTo* statements for the purpose of exit loops look idiotic..
+
+Thanks! 
+If I want to follow your posts all the way through where do I start and what do I go to next until I'm caught up??/
+Thanks for the great post!
+
+>When running the macro you’ll notice the final value of I is actually 11 and not 10. Why is this?! On the last pass through the loop “Next i” assigns a value of 11 to i. This is greater than the acceptable range of i’s so the macro does not execute the 11th pass and skips to the next line following the loop. This is important to keep in mind if you plan to use i later in the macro.
+
+
+Best practice, if you need the final value of i outside the loop would be to use a separate variable.
+**bold**
+
+     Code
+     **bold code**
+
+Bold code doesn't work sadly, so in Ex7 it should be:
+
+      Exit for
+Not:
+
+      **exit for**
+         
+Nice post!
+
+Bonus info on loops:
+
+It's super useful to loop through a range to set each cell's value via big, ugly calculations, but it's not always the fastest way to do it. (In other languages - like MATLAB - loops are often evidence of poor coding, but that's a different story.)
+
+When working with hundreds or more lines of data, it's often faster to use VBA to enter a formula into a cell, extend it down the column with FillDown, and then Copy/PasteSpecial::values to convert it to static values. It can still be faster even if you have to add a couple helper columns before adding your final column. Then after you PasteSpecial::Values, you can delete the helper columns if you want.
+>This brings us to our final loop type and my favorite loop type. I use For Each…Loops all the time (probably too much).
+
+Like you, I also use for-each-next loops all the time. Many of my macros (maybe 20% or more) just shuffle through elements in a collection. And they either just get information from those elements or manipulate them in some way. That being said, for-each-next loops were probably the most conceptually difficult for me to understand. That's mainly because it took me a long time to understand what collections really were. So I'd recommend giving more examples of different types of collections. (e.g. for each cell in selection; for each cell in activesheet.usedrange) and also an example of nested for-each-next loops (for each ws in worksheets, for each cell in selection, etc.)
+Am I able to loop through names of objects that have a numbering system involved? Like:
+
+    Dim i As Integer 
+    For i = 1 To 10
+    Label & i .Caption = Range("A" & i)
+    Next i
+
+I know my syntax may be entirely correct. But does this idea work?
+More of these tutorials will definitely be appreciated!
+You're really good at explaining. Have you ever considered video form though?
+Thanks for the feedback! 
+
+Please feel free to add too, or correct anything!
+
+Any addition will be added as an edit to the post!
+
+Not just range, but any collection of objects. This includes sheets, workbooks, textboxes, etc.
+Don't forget about Exit Do, based on whichever loop you use, and Exit Sub in case you actually want to skip the remainder of the running sub's code.
+I'm glad you learned something new!
+That's a great question! Let me give you a bit of background on these posts...
+
+I started this out making "lessons" for users who had a moderate understanding of VBA. I'm now redirecting this series to capture a more beginner crowd(thanks to some input of our mod team). I've yet to make a post for those who are just getting their toes wet. Writing Clean Code is a great place to start, but if you're brand new, I haven't yet covered the very basics of starting VBA. 
+
+I want to know what the community wants to learn; I'm beginning to realize that a ground up approach might be the best way to move forward. We'll see in the feedback. 
+
+I've been part of this community for over two years now and I have great passion for helping others learn, especially VBA. Please let me know what you'd like to learn and what you'd like to get out of being a part of this community. 
+
+Thanks for the comment!
+
+His previous posts are linked at the end of his post.
+Thanks for the input!
+OP put a "please note" under that code snippet. Although perhaps it might have also worked to draw attention to that line like this
+
+    Exit For  ' ********* THIS LINE ****** OVER HERE ******* HEY LOOKIT
+That's a great observation and you are 100% correct!
+
+I address this right under the example!
+
+Edit: I went with semicolonx2's idea to leave out confusion!
+Very true! Using *range*.Find is also much faster than looping trough a range to find something!
+
+Looping is not always the best way to code a problem!
+
+Thanks for the input!
+I wish I could have covered everything. If you check out my links to dictionaries and collections you can see some examples of looping through them. 
+
+To be honest, the document was getting quite long and I was losing steam and wanting to post sooner than later. ForEachNext was the last loop I covered and I'm afraid I didn't do as well of a job as I'd hoped. 
+
+Thank you for the feedback! Luckily this post will be archived in our wiki and will be editable so there's always time to make it more comprehensive. 
+
+If you feel the spark, you can comment with some additions and I'll add them to the post!
+I don't understand your code, but yes you can loop through objects with a numbering system.
+Awesome! Glad you liked it!
+I have considered it. Not really sure how to get that going though.
+Absolutely... I do not disagree. Range resonated hard with me as I use it often, but of course use cases are abundant!
+Ooh! Also Exit Function for, well, exiting functions.
+Was talking to my friend who is a software developer but doesn't know VBA and he suggested that using *break* would work as well. Is there any practical difference? Interested to hear your thoughts.
+You are amazing - thank you for posting these!
+
+Well I've been dabbling and done some successful code at work, but nothing clean. A few have been reliable, but not the mouse efficient.
+
+I've also taken only a semester off c++ coding, but what often gets me thrown off is object oriented programming. A better understanding of how the code works and operates in the computer would probably help me understand ***why*** what I do works the way it does.
+done
+Ah, my feedback was meant purely in a constructive criticism form of way. Sorry if it didn't come off that way. I didn't mention this in my initial post, but FWIW I thought you did a pretty solid job. I thought this from the beginning when I saw "While...Wend" LOL! Sure, I can provide some examples. And I'll expand a bit more into how they work conceptually.
+[Camtasia](https://www.techsmith.com/camtasia.html)
+
+[Udemy](https://www.udemy.com)
+Why would you ever exit a function instead of returning?
+Unfortunately there is no break command in VBA. 
+Thanks! : )
+
+Have a chicken!  <(* )(( ) )
+It was very constructive and I appreciate you taking the time comment and respond!
+
+Have a chicken! <(* )(( ) )
+I haven't made a lot of functions, but I have used the exit function statement before. I don't think they're mutually exclusive. For example, if you use a function in the worksheet function object, (e.g. vlookup) and it results in an error, the function will just return an error. So you can set the function to a return value (perhaps a string indicating an error) and exit the function before the error occurs. That's at least how I've used it. I'm sure there are other ways to use it as well.
+To use for-each-next loops, you need a controlling variable which represents one of the elements in the collection. This controlling variable is called an iteration variable because it iterates through the elements in the collection. The variable needs to be either of the same datatype as the collection you’re trying to shuffle though, or of the variant data type. (the former is the preferable.) For-each-next loops are popular for manipulating cells within a worksheet. So here are a few examples of manipulating ranges of cells in the worksheet
+
+    Dim cell as range
+
+    For each cell in selection
+	If not isempty(cell) then
+		Msgbox cell.value
+	End if
+    Next cell
+
+This for-each-next loop starts declaring a variable called cell of the range datatype. It then goes through the collection of cells that are in the selected within the activesheet. It the cells are not empty, then a messagebox appears with the cells value. An important thing to note is that the way in which these cells are ‘collected’ is based on what’s in the selection. So if you select a different group of cells in the worksheet, these new cells will now be part of the new selection. Let’s look at a similar example but with a different collection
+
+    Dim cell, UR As Range
+
+    Set UR = ActiveSheet.UsedRange
+
+    For Each cell In UR
+        If Not IsEmpty(cell) Then
+            MsgBox cell.Value
+        End If
+    Next cell
+
+
+This example is similar to the last example, but with a few differences. A variable called “cell” is declared, but is not declared with a particular datatype. So its datatype is variant. A variable named UR is also declared, which will be used as an object variable. UR is set to the usedrange within the activesheet. Another difference in this example is that the collection of elements are all of the cells that are in the usedrange in the worksheet in Excel. (note: The usedrange is the range of cells from the upper-leftmost nonempty cell to the bottom-rightmost nonempty cell. So if you only have two non-empty cells in the worksheet, B1 and E3, the usedrange includes all of the cells within the range B1:E3) This for-each-next loop goes through all of the cells within the usedrange (regardless of whether they’re selected or not) and displays a messagebox with their value if the cells are not empty. Let’s look at one last example of manipulating cells within the worksheet.
+
+    Dim cell as range
+
+    For each cell in activecell.currentregion
+
+	If isnumeric(cell) then
+
+		Cell.value = cell.value + 1
+
+	End if
+
+    Next cell
+
+Like the other for-each-next loop, this loop also shuffles through a collection of cells. The collection of cells that are shuffled through are those within the current region of the activecell. If those cells are numeric, one is added to their value. (Note: the current region of the activecell is a bit difficult to describe. But it’s essentially all of the adjacent nonempty cells next to the activecell. And any non-empty cells adjacent to the cells that are adjacent to the activecell. If there are no nonempty cells, the current region just includes the activecell)
+
+What's important to note in all of these examples is that the object (cells within the worksheet) is the same. However the objects that are elements of the collection are different. Now that we’ve seen a number of examples with cells, let’s look at a non-cell example
+
+    Dim nm As Name
+
+    For Each nm In Names
+
+        MsgBox nm.Name & ": " & nm.Value
+     
+    Next nm
+
+This for-each-next loop goes through collection of names within the workbook. It concatenates each name's name, and the value that the name corresponds to. Lastly, let’s look at one final example with nested for-each-next loops
+
+    Dim wb As Workbook, ws As Worksheet, rng As Range
+
+    For Each wb In Workbooks
+        wb.Activate
+        For Each ws In Worksheets
+            ws.Activate
+            For Each rng In Selection
+                MsgBox rng.Address
+            Next rng
+        Next ws
+    Next wb
+
+This for-each next loop loops through every element in the workbook collection (i.e. every open workbook) and activates it. Then it loops through every worksheet in the worksheet collection (i.e. every worksheet within a given workbook) and activates it as well. Finally, it returns the address for the cells in the selection. In other words, these for-each-next loops activate every worksheet in all open workbooks, and displays the address for every selection of cells in a messagebox.
+
+I hope these examples give you an idea of how powerful for-each-next loops are for manipulating objects within a collection.
+
+Hey this is great! To prevent my post from getting too long, I'm going to make an edit at the bottom with a link to this comment!
+
+In your second example 'cell' is being declared as a variant. Is this on purpose? Also, it's not a great practice to name variables things like 'cell' because it may cause confusion. Most of the time I would call it 'cl' or 'myCell'. 
+
+Thanks for the hard work put into this!
+>Hey this is great! To prevent my post from getting too long, I'm going to make an edit at the bottom with a link to this comment!
+
+Sure that sounds great!
+
+>In your second example 'cell' is being declared as a variant. Is this on purpose?
+
+Yup, it's on purpose. I do it to illustrate the fact that you can use variant data types for the control variable with for-each-next loops. That can be useful if you don't know what the datatype you should be using for the control variable should be.
+
+>Also, it's not a great practice to name variables things like 'cell' because it may cause confusion. Most of the time I would call it 'cl' or 'myCell'.
+
+Ah, to each their own! That's just the naming convention I learned. I was thinking of putting something along the lines of "not to be confused with the "cells" method" but didn't do so. While I agree it can be confusing, it has the advantage of reading like English. "For each cell in selection" reads like English, and tells you that you're doing something to each cell in the selection. You don't get that imo if you write "for each cl in selection" or "for each myCell in selection"
+
+>Thanks for the hard work put into this!
+
+Sure you're welcome!

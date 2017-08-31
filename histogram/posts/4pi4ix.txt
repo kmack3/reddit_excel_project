@@ -1,0 +1,21 @@
+What are your tips & tricks to creating easily read and printed dashboards?
+I often use the excel Camera Tool (You will have to look for it, since it´s not included in the standard ribbon).
+What it basically does is to take a picture of a cell, or a group of cells and then paste it as linked image that will change every time you change the linked cells.
+
+Once you have it formated as an image, you can either increase or reduce its size to fit it in a dashboard.
+I believe you can do the same by copy/paste as linked image, but I got used to the camera icon.
+
+Edit: grammar...
+I wouldn't worry about the columns and rows so long as it is logically laid out and is pleasing to the eye. If you share your dashboards as a tool I would hide the column and row headers anyway. Hide grid lines too. Set up a freeze panes on the very bottom right cell outside the report and you won't have to worry about people scrolling or messing with cell widths. 
+
+Other tips. 
+
+*Use color sparingly. Use it to draw attention to data that needs it. 
+
+*I really like Segue UI font for reporting. Segue UI Light works well for headers. 
+
+*Print with "narrow" margins to make your reports print larger. Always assume your boss can't read small font. 
+
+85% zoom all day long.
+I haven't created a dashboard, but rather than freezing panes, wouldn't it be better to hide all unused rows and columns, and enable certain sheet protections to maintain the structure? I'd think freezing panes may cause problems for other users with differently-sized resolution/monitor/window sizes. 
+I haven't ran into many issues with it yet. I do have worksheet protections in place and the freeze panes is relatively easy to turn on off versus hiding/unhiding things. 

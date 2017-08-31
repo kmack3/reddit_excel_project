@@ -1,0 +1,49 @@
+6fxdpi
+Retrieving the h:mm sum of non-neighboring time sets
+I've been googling this for a few hours, and I get a lot of examples for how to find the sum in a linear row or column (A1:A20, etc), but when attempting to find the sum of non-neighboring cells, it's not returning a value. I'm sure I'm just forgetting to do something simple. 
+
+Basically, I'm making a timesheet. I work from home, so I tend to work in three or four chunks over the course of the day. I want to find out how many hours I've worked for each chunk, and then add those hours/minutes up to find my total for the day.
+
+[Image.](http://i.imgur.com/uhbM5Jz.jpg)
+
+You can see in the function box how I'm retrieving the total of that chunk for day 7. I'm having difficulty with the total column, though. I've been trying this:
+
+    =SUM(D7,G7,J7,M7,P7)
+
+But it just returns 0:00. I played with the time/number format, but it doesn't seem to help. 
+
+I'm just going to be preemptively embarrassed. I'm sure I've just done something dumb, lol. But any advice is appreciated!
+
+
+-------------
+is this correct? 
+
+    =SUM(D7,G7,J7,M7,P7)
+
+Based on your screenie it looks like it should be 
+
+    =SUM(E7,I7,M7,Q7)
+
+The formula in `E7` casts the time as text, and `SUM` is pointed at text. Instead of using the `TEXT` function, just do the math `=D7-C7`, and format that column as "h:mm". The `SUM` should work after that. 
+-------------
+Do not wrap in TEXT, it is text.
+
+Just format the cell as required `[h]:mm` it remains as a number
+-------------
+Ahhh, y'all were right! I had it wrapped as TEXT because of a tutorial I was following. It's working great now. Thanks!
+
+Solution Verified
+-------------
+Thanks so much! You're right, it works without TEXT. 
+
+Solution Verified
+-------------
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

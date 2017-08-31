@@ -1,0 +1,126 @@
+6igw4s
+Default to value in cell if blank, override if not blank
+I am trying to create a model where a region can set an average selling price for a product, but if no ASP is set, it defaults to a value set in a global table. 
+ 
+Please refer to my original thread for more clarification:
+ 
+https://www.reddit.com/r/excel/comments/6ib0h6/calculate_revenue_based_on_volume_and_global/
+ 
+Basically the logic is: if there is a value in the "regional ASP" table, use that value, if not, use the value in the "global ASP table". 
+
+The formula that it needs to go into is this:
+ 
+    =P2*VLOOKUP($B2,'Sales Drivers & Assumptions'!$B$5:$E$20,4,0)
+ 
+The part I'm struggling with logically is how to make sure it references the correct table, because there are multiple regions and each would have its own ASP table.
+ 
+The data that is the starting point for the calculation is rows of unit volume and location (region), so the formula needs to check the region in each record, then reference that against the ASP table for that region. If the ASP table for that region is blank, then it should multiply the volume against the global ASP table to generate a revenue number. 
+ 
+
+
+
+-------------
+Assuming your data has a 'region' column. 
+
+1. Combine all the regions and product averages (by region) into one worksheet. Make sure to retain the region name. (I refer to columns in this worksheet as [...]Array)
+
+2. Use a SUMPRODUCT to pull the average. 
+
+ie.
+
+    =SUMPRODUCT((Region=RegionArray)*(Product=ProductArray)*AverageCostArray)
+
+then you just have to multiply to get your total.
+-------------
+Question: will the ASP tables have no entry (VLOOKUP returns "#N/A") or a blank value (VLOOKUP returns "0")?
+
+If no entry, you could use IFERROR...
+
+=P2*IFERROR(VLOOKUP($B2,'SD&A'!,$B$5:$E20,4,0),VLOOKUP($B2,'Global Average Sales!,$F$5:$I$20,4,0)
+
+Looks like you're trying to avoid IF statements, but if a blank value...
+
+=IF(VLOOKUP($B2,'SD&A'!,$B$5:$E20,4,0)<>0,P2*VLOOKUP($B2,'SD&A'!,$B$5:$E20,4,0),VLOOKUP($B2,'Global Average Sales!,$F$5:$I$20,4,0),P2*VLOOKUP($B2,'Global Average Sales!,$F$5:$I$20,4,0)
+
+I know the closing parentheses aren't right, but Excel will correct for you so long as the rest of your formula is correct. 
+
+There are probably more elegant formulas, but those should work. Probably a pain in the ass if you have a lot of regional ASP tables though. 
+-------------
+Ok, so I ended up using a combination of the 2 solutions listed. For anyone interested, my formula ended up looking like this:
+ 
+=$D2*IF(
+  
+SUMPRODUCT(($E2='Regional Driver helper'!$B$5:$B$84)*($B2='Regional Driver helper'!$C$5:$C$84),('Regional Driver helper'!$D$5:$D$84))=0,
+  
+VLOOKUP($B2,'Regional Driver helper'!$C$5:$F$20,2,0),
+  
+SUMPRODUCT(($E2='Regional Driver helper'!$B$5:$B$84)*($B2='Regional Driver helper'!$C$5:$C$84),('Regional Driver helper'!$D$5:$D$84)))
+ 
+Basically - do a SUMPRODUCT on the arrays based on the Product and Region. If that equals zero (meaning there is no regional value), then return the value of the VLOOKUP for the Global ASP table. If that value is NOT zero, then return the value of the SUMPRODUCT for that combination of region and product.
+ 
+I ended up making a helper sheet to simplify the array references but the solution seems to work pretty well.
+-------------
+I'm not sure I understand how this works. By way of example, lets say I have 2 regions and 2 products: East and West, and apple and banana.
+
+For this example I would have a total of 2 mandatory prices and 4 optional prices. One "global" price for apples and bananas, then regional prices for each. Like this:
+ 
+ A | B | C
+:- | :- | :-
+Global | Apples | 10
+Global | Bananas | 15
+East | Apples | 5
+East | Bananas |  
+West | Apples | 
+West | Bananas | 12
+
+What I want in this example is for Apples-East to calculate with 5 as the price, and Bananas-East to calculate with 15 as the price, and for Apples-West to have 10 as the price and Bananas-West to have 12 as the price. 
+ 
+If I'm understanding the SUMPRODUCT formula, you're creating a boolean on the first 2 arrays (columns A and B in this case) by matching against the value in the transaction record for that specific product and region, such that if the transaction record was for Bananas in the West region, the only result of the multiplication is 1x1x12 and the rest of the products have a zero somewhere in the chain and thus do not return anything to be summed.
+ 
+The part I'm not understanding is how this allows me to default to the Global value if no value is present in the regional table. For example, a transaction record for Apples in the West region - no price is specified, so I want to apply the Global price, but the SUMPRODUCT will return zero because "Global" will never appear in a transaction record and therefore will always result in a zero for that boolean test. 
+ 
+I may be missing something here, so please correct me if I'm not understanding this correctly.
+ 
+Thanks for your help!
+
+
+
+
+
+
+-------------
+Solution Verified
+-------------
+It looks like this *may* work, but you're right in that I think it will get messy. I only have 4 regions, but wouldn't that require nesting 4 ifs?
+ 
+Or maybe I'm not looking at it right. IFERROR is saying:
+ 
+- Do a VLOOKUP comparing the value for Region in this transaction record to the value in the Regional price table
+- If there is no price in that table - i.e. the VLOOKUP returns "N/A", then return the result of the VLOOKUP pointed at the Global sales table
+- If the original VLOOKUP does NOT return an error, return the value of that VLOOKUP
+ 
+Is that correct? If so, I think it would work, but I don't know if I have blanks or no entry in the regional ASP tables. Is there a way to force it into blanks if there is no value typed in the cell? 
+-------------
+Solution Verified
+-------------
+> default to global
+
+The above doesn't.
+
+One way would be to wrap the sumproduct in an if statement.
+
+* The true condition would be the sumproduct as is.
+
+* The false condition would be the sumproduct, except with "global" (in quotes) instead of Region.
+
+* Based on your comments, the conditional could be sumproduct(.)=0 but you'll have to try that out and see what cases you want to throw to the global.
+-------------
+
+You have awarded one point to _windowtothesoul_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _Tacoman50_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,37 @@
+6fy33a
+A method to count the colored Cells?
+Scenario: Following cells
+a1  - highlighted green
+a2  - highlighted green
+a3 - highlighted yellow
+a4 -  - highlighted red
+
+Is there a way to make a counter that says:
+2 green
+1 yellow
+1 red
+
+Thanks
+
+
+-------------
+I posted this method last week to determine the color of a cell. From there you can count how many etc.
+
+https://www.reddit.com/r/excel/comments/6epyg2/is_it_possible_to_check_if_a_cell_or_group_of/dicota6
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+Not easily. Using VBA, yes. But first, are the cells coloured as part of a conditional formatting setup? If so, then you can leverage that to count the number of times the conditions are met rather than count the resulting colours.

@@ -1,0 +1,37 @@
+crash
+2vc7tr
+COUNTIF crash
+
+I need to compare two documents that are roughly 115,000 records each.  I've been using the following formula:
+
+    =COUNTIF(Sheet1!A51474:$A$116094,B51474)
+
+Results > 0 should confirm  match with the other list.  The problem is that this is apparently processor intensive.  I can't do more than a couple thousand records at a time without having Excel 2013 crash.  Is there a better way to do this?  
+
+
+-------------
+COUNTIF is very processor heavy.  You could probably accomplish the same thing by using the following:
+
+    =IFNA(MATCH(B51474,SHEET1!$A$54174:$A$116094,0),"")
+
+This would give you the value in B51474 if it's in the other document and a blank cell if it isn't.  This should keep you from freezing.
+-------------
+One last idea for you is to turn off auto-calculate.  then get your formulas all set for your range.  Then calculate before heading to your next meeting.
+
+At my last company I developed a capacity model for all our plants and lines that used to take about 1.5 hours to calculate.  Granted, that was on a 7 year old laptop now, but planning around that kind of time commitment was always fun.
+-------------
+[deleted]
+-------------
+I will try this next time.  Thanks.
+-------------
+Yes, I think so!  Thank you!  I'm not sure why the cells weren't fixed properly - usually F4 fixes all four values.  Better go fix the first 51,474 entries, I guess...
+-------------
+Formulas such as Match and Vlookup are less resource intensive as they stop once they find the first record that matches.  CountIf has to check all records for each query.  If you only care if there is at least one match, the prior formulas are more efficient (Match more so, but a lot of people learnt Vlookup first so it may be more comfortable to begin with).
+
+BTW, if you use a formula and then figure out that it is abusing your CPU, you can often hit Escape to cancel the calculation and prevent Excel from killing itself.
+-------------
+F4 sets all 4 values if pressed right after the range is selected.  If you go back later and F4, it only changes the range the cursor is in.
+-------------
+[deleted]
+-------------
+Yes, but I have the 32 bit version of Excel, and my processors can't keep up with that.

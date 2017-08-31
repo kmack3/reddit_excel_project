@@ -1,0 +1,36 @@
+6g49a3
+Matching Values from One Table to Another (so that if you type in a value in a different table it automatically fills in the info from original table)
+Hi so. Title kinda says it but I'm having trouble describing. Basically, imagine table one:
+
+Column A = Protocol
+
+Column B = ID
+
+So:
+
+Protocol 1 = ID a
+
+Protocol 2 = ID b
+
+Protocol 3 = ID c
+
+And so we have this giant list that goes on and on. 
+
+Now I have a second table, where these protocols are repeated multiple times through thousands of rows. Is there anyway that I can have excel match the values from the first table? So in the new table when I have "Protocol 2" it will automatically pull up "ID b" etc?
+
+Thanks friends
+
+
+-------------
+Sure - vlookup - but both files have to be open.
+
+https://www.reddit.com/r/excel/wiki/frequentlyusedformulas#wiki_vlookup
+-------------
+SOLUTION VERIFIED
+
+Perfect. Thanks!
+-------------
+
+You have awarded one point to _small_trunks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

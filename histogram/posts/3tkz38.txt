@@ -1,0 +1,103 @@
+Criticize my first ever dashboard please.
+Going in for the kill.
+
+- Too dark - however your green and blue lines look like they're lasers, so that's cool!
+- Consistent colour use is good, but some differentiation is welcome between charts e.g. shades, alternating colour schemes.
+- Inconsistent graph sizes, although sometimes that is unavoidable.
+Overall, you did a nice job assuming this is a draft attempt. In my company, a lot of smart people I work with spent untold hours refining a collection of dashboards. The point of me saying this is to let you know that even when you feel you have perfected something like this, don't be discouraged when your audience throws it back at you. Dashboarding is not a simple thing to do well in spite of the hooplah you will hear from vendors, Microsoft included. Successful dashboarding comes from 80% thinking, and 20% technical prowess of constructing graphs. 
+
+So, on to the critique...
+
+What is the purpose of the graphs? It looks like they communicate low- to mid-level operational measures. In your context, perhaps that is already assumed. Put yourself in the seat of your audience and ask whether they would instantly understand what you are trying to convey. If yes, you're probably fine. Still, an overall title statement that answers "What Am I Looking At/Why Do I Care About This?" never hurts. 
+
+I like the color scheme. When choosing dark vs. light feel, it's often useful to think of how it will be presented. Dark tends to work best when projecting onto large video display. Light is best for printed work, unless the document overall is light-on-dark. For desktop display, I go with light, because that best matches other applications the audience is using (usually). 
+
+I also like that you used good choices of graph styles: bars, columns, lines. Good.
+
+I'm not clear why things are arranged the way they are. It doesn't flow, so I'm hunting all over the page for a message. 
+
+Get rid of unnecessary precision, especially in axis labels (RCP, Water Permeability). 
+
+Be wary of value axes that do not have origin at zero (Water Permeability). A lot of times people chop the axis like this to exaggerate the difference in values, but this can be misleading. Unless the entity property being measured is sensitive to small changes in the region you have magnified, don't magnify it. I don't know your subject matter, so I can't say whether this is the case here.
+
+I do not like the background gradient. It serves no purpose. Also, it's used inconsistently. Similarly, the 3-d lozenge effect on the bars throughout adds no value, although the very light treatment given is not too distracting. 
+
+I would make titles and labels much larger.
+
+Get rid of value labels (Admixtures). They are redundant. They also make the chart busy, meaning they make the reader focus on something that adds no value or understanding. If the precise values are important, use a data table, like you did in 'Total Cements and Water'. 
+
+I like to put legends below, rather than beside the graph. This allows the graph to flow horizontally through the real estate you provided. 
+
+I can't tell if there is some kind of goal or target for any of the metrics. Maybe there isn't, and that's OK. If there is, you show show it. 
+
+The 'Slump' and 'Compressive Strength' graphs look way too big considering the number of data points. Maybe you have more data now, or will soon, and it makes sense to have this much space available. Just something to think about. 
+
+I recommend reading [Junk Charts](http://junkcharts.typepad.com/) for lots of graphing presentation tips!
+In general I think it's pretty good, just a couple of visual suggestions of what I'd do:
+
+*Remove the 3D effect of your charts and light effect on your line chart
+
+*Try to use a lighter color fo the background (as somebody already told you)
+
+*Make sure you hide the non used coumns and rows so the user canot scrol to where there is no data
+
+*Hide the Column and Row title Goto to View>Show>Titles
+
+*Make sure your slicer uses the same color scheme from your data
+
+Good job!
+Only issue I can see that makes things just a tiny bit distracting is the background gradient. If you can either even that out, or have a consistent border between each chart, it would make focusing on a single chart all the more easier.
+I like it.  It's easy on the eyes and is clean.  Do you need the decimals on the top two right graphs?
+I would try a version that adds some padding or space between the graph areas. As far as colours go, the Green and blue go nicely together but I would try to lay off all the gradients everywhere :-) 
+Great work.
+
+In addition to what JulioRadillo and epicmindward said:
+
+* Consider putting the three charts with similar time axis (RCP, Water Permeability and Water Absorption) immediately above and below one another and align everything horizontally so that it is easy to see how movements over time correspond.
+* It's easy to get the corners of charts to fit together nicely by snapping to cell corners. Do this by holding down the Alt key while moving / resizing them.
+* I don't know the subject matter well so this might be off-point, but it looks like your selections between column charts and line charts might be somewhat arbitrary. This decision should be mostly science and only small part art. Lines are appropriate for things that could be meaningful at any moment in time (e.g. prices, temperatures, evaporation rates) and columns are more likely to be appropriate when the data is inherently discrete (e.g. mass of each planet in the solar system, storage capacity of various cupboards). It's more of an art with things like widget production - if a chart covers two years then columns are probably better for annual data and lines are better for daily data.
+* Once the chart types have been revisited you might find it's possible to use combination charts to show more information in less space without making it cluttered.
+* Some of these charts might be better with the legend on the bottom rather than the side.
+* If you have charts in a group (e.g. my first point) and the colouring is consistent across the group, you might only need one legend for the entire group. It might be easier to get the aesthetics right if you make the backgrounds flat and remove any borders.
+remove some of the legends. Only need one 
+Do the charts link to the data tables so ifnthe raw data changes or is added to, the charts will automatically update?  *after you manually refresh the pivot table.
+like /u/KaiDaiz said below you don't need to restate the legend for each graphic.
+
+I would add the following suggestions...
+
+* Inconsistent use of data labels. Some graphs have them while others don't
+* Inconsistent use of grid lines. Vertical and Horizontal lines are overkill
+* IMO, relating to the above 2 points, I prefer to have no gridlines but have data labels
+*First graph doesn't include axis titles, which is Inconsistent with the others. If it's not obvious what the axis represents then it should be included.
+* Are the graph titles all the same format? The 2 really wide graphs appear to be slightly different.
+* Align all graphs horizontally and vertically (no jagged lines moving from graph to graph). May require adjusting the height of all the graphics to be the same.
+
+nice work!
+When posting graphs next to each other, make sure that it enhances the presentation of the data. That it demonstrates a correlation, other wise the user will struggle a little harder to understand what it means.
+This looks great! I'm copying you.
+[deleted]
+Somehow "Trial Mix Reference" was the first thing I focused on.
+
+Read as "Trail Mix".
+
+Thought *"Holy shit, this guy really likes his nuts and raisins."*
+
+10 seconds later, felt very silly.
+[deleted]
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+To add on to the inconsistent graph sizes,; I would just make sure everything you are showing fits into on rectangle. That table on the top right is driving me nuts, but I'm sure I could get past it if the Graph on the bottom right didn't stick out past the others. I would say widen the 2 above the bottom right one so they are even with it. 
+Pastelly blues/greens/yellows go down quite well.
+.
+You can also try earth tone colors, browns tans and maroons. 
+Doesnt work well for me that combination.
+
+Show me some good ones?

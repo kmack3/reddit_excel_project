@@ -1,0 +1,205 @@
+R for Excel
+Everytime I hear about R, I hear about Python. I'm not sure how similar they are and I'm not sure what R can really do but what I do know is that Python  has a lot more uses other than data analysis. So I chose Python over R. Sorry if I did not really answer your question. Just giving you another option to look into since R and Python are almost always mentioned together.
+R is useful for taking huge datasets and pulling out only what is necessary for your Excel spreadsheet. Like for instance taking hundreds of files in different folders, with hundreds of thousands of cells in each and pulling out only the top 100 entries, or taking the averages of the entirety. From there you can pull it into Excel and work with the data visually or make beautiful colorful graphs.
+
+R is like Excel without the fancy RAM intensive interface, but difficult to produce something that looks good. Excel is easy to use but slogs through complicated and extensive calculations.
+
+Python could probably accomplish the same things as R, but you would learn a lot of stuff that isn't pertinent, while R is specifically designed for data.
+If you need to do statistical analysis, that's where R becomes really useful.  Since you don't, I wouldn't bother with it. It's real advantage is that it's free, open source, and there's user developed packages you can install for tons of different functions. Academics love it for those reasons.
+>Is there anything for me to gain from R that I wouldn't get from PQ or VBA
+
+R does three things extremely well: datasets too large for excel, stats, and visualization. However, unless you're going to be in a field where R is used, you might want to enhance your skills with Python+Pandas+Jupyter instead. This combo is a popular replacement for R studio.
+For what you're doing - if you want to learn something new for fun, hit up R. It's straight forward and interesting, gives you some other possibilities / ways of thinking about problems than excel/VBA usually does (like using vectorized functions and lists of lists), and the graphics side offers interesting possibilities - You can make neat web-apps with shiny which might be interesting from your perspective. 
+
+But in general, it sounds like you can do everything you need to with excel, so I'm not sure if there is necessarily a "need" for you to change into something else. 
+
+Python is more a general programming language, but you can use that too.
+R is capable of some [amazing visualizations](http://timelyportfolio.github.io/rCharts_512paths/) as well as being able to [publish reports](http://timelyportfolio.github.io/rCharts_nyt_home_price/) and [create dashboards](https://mbienz.shinyapps.io/tourism_dashboard_prod/).  The catch is that there's a learning curve (and in the case of dashboards, you need to deploy them through a server or RStudio's online service). If excel isn't quite cutting it for what you need, then it might be worth taking a closer look into R (and at the cost of 0 it couldn't hurt).
+Do you have a good basic understanding of statistics? I would start with that first. The reason I say this is so that you are applying the functions correctly to your data sets. I am sure there is an opportunity to apply it to your reporting. Excel has the Analysis ToolPak add in that covers a lot of basic statistics that I would look into first before jumping into R or Python.  
+It sounds like you're working with at least a decent amount of data. R is better than excel for working with data. Your code will be shorter, easier to read and understand, more adaptable, more extensible.
+
+The low-hanging fruit:
+
+1) data visualizations. ggplot gives you a ton of flexibility. one thing in particular I find myself using this for is faceted plots, which really fills a gap in excel's charting capabilities.
+
+2) data cleaning/manipulation. dplyr/data.table is absolutely indispensible and when you are used to using it, you will never go back. my (limited) understanding is that the Pandas package for Python is similar. Anyhow, if you find yourself doing a ton of vlookups, index/match, making lookup tables and splicing them together.... R will save you an incalculable amount of time and effort. 
+
+3) functional programming. Code in Excel is tied to the workbook you're using. While it's possible, most people don't try to solve the "general case" in excel, they solve the problem that is right in front of them. R lends itself towards solving the general case, and then applying to the specific case. You can have a more elegant, portable, re-usable solution.
+
+The down-the-line stuff -- to the extent you're going to be doing any type of forecasting or modelling, R blows VBA away, just not even close. you can create a linear (or non-linear) model with one line of code. Modelling in excel is a huge pain in the ass and often gives you unexpected (and sometimes incorrect!!) results. There is a ton of support for newer forecasting techniques in R as well - machine learning etc.
+
+Lastly, integrating R and Excel might take a bit of getting used to but it is very doable, and I have a lot of stuff that relies on this. You can use VBA to run an R script, which kicks out an .xls file, and then use VBA to go grab the data from this .xls file, bring it into your workbook, and then do whatever you need to. I'll use this when I want to use R for the heavy lifting (data sourcing/cleaning/manipulation/summarization/visualilzation) but want to send some conditionally-formatted data in the body of an email -- one thing that I can't really do with R is send graphics in the BODY of the email (attaching it is a breeze).
+
+hope this was helpful. In a nutshell, learning R or Python is going to be worth your time, I highly recommend it.
+As you pointed out, R's main functionality is statistics. However, I also find it useful for quickly making plots/graphs. The graphics aren't as pretty as excel, but it's much faster than excel if you're just trying to get a visual summary of your dataset and don't care about presentation quality.
+If you need to publish high quality statistical analyses, there's almost no better tool than R. However, if you only need to do it *sometimes*, it might not be worth diving into. There are alternatives that are easier to use "out of the box", albeit for a price. STATA comes to mind as the easiest statistical software I've ever used. I used STATA a lot while getting a MS in Economics and it is very very easy to use. The advantage of R is that it's free, very flexible, very powerful, and can use it on any computer easily. That comes at the cost of a learning curve.  
+Just adding my two cents here, even though you e gotten plenty of feedback already. 
+
+R is amazing for statistics and that's about it. I'm using it in a graduate course at the moment. The more I learn from the internet and my friends, I'll transition to Python after this class. Especially considering you already know VBA, I think you'll like the freedom that comes with learning a language versus a program. 
+
+There's also a website called datacamp that teaches you data analysis. There's some free portions but it's mostly subscription based. It gives you the option to learn either R or python...if that's any indication that they have a lot of overlap. 
+
+Good luck and let us know how it goes!!
+MIT just started an online course in to python and statistical programming!
+
+Check it out, its free! It's the 2nd course and it followed an introduction to python class, so you might not know too much of the python.
+
+But here it is anyways: [Check it out on EdX](https://www.edx.org/course/introduction-computational-thinking-data-mitx-6-00-2x-5)
+The only thing it sounds like you haven't mentioned is PowerPivot. You can look into that. I actually don't know a ton of PQ or PP. Mainly it's because they don't interact with my job, and I'd rather learn other things (e.g. More VBA, SQL, Python, C#, etc.)
+
+I was in a similar position as you, wondering what I should learn next and where I should be dedicating my time. I already know VBA pretty well. But I still have some major gaps in my knowledge (mostly more advanced stuff, like OLE automation, Windows API calls, other reference libraries, etc.) Should I continue learning VBA? Should I learn the object models in other MS Office products like Access or PowerPoint so that I can manipulate them using VBA? I learned Python, but what next? Should I learn Pandas, Requests, something else? Should I learn SQL? Java, since it's really popular in enterprise? etc. 
+
+Currently, I'm focusing on C# (and to a lesser extent on VBA) after doing a lot of research on it for several reasons. It's a popular language; I like other MS products like Excel and SQL Server (although I'm not a fan of SSMS or VS); it would allow me to potentially develop addins for Excel (and other MS office applications) with VSTO; I could develop UWP that could work on Windows, Windows Phone, and maybe Xbox? And I could develop on Android or Iphone using Xamarin. And from the little I know so far, it looks like a neat, well constructed language.
+
+So like I said above, think about what your end goal is, and what will take you there. And then focus on that.
+Hi there,
+
+I'm a bit late to the game here, but I'd like to think I have relevant input as I was in your shoes not too long ago. I was proficient in both PQ and VBA, making forms, interfaces, and processes in VBA for users around my office to enjoy. Here are the things I've focused on and why.
+
+1) SQL. After reading through some of your responses to other comments, it seems like you're learning this. As important as you think it is, it's more important. For arguments sake, if you could but an awesome machine learning model but can't query your database to get the data you need, you are probably going to have a bad time. 
+
+2) SQL. I am reiterating because more people will need SQL than being able to make a nice model in R. Getting data from source system to you is priority #1 (and apparently #2).
+
+3) R/Python (Statistics). So, as pretty much everyone else has pointed out, R is AMAZING at statistics. It was built for it. Python is a general language that is capable of doing statistics. If you are really needing an advanced ARIMA model that has your own custom correlation functions written in as a parameter, than R is for you.
+
+If you need to build a linear regression, yes it is 1 line of code in R:
+
+    small_model <- lm(target_var ~ pred1 + pred2 + pred3, data = my_df)
+
+vs the same model in Python:
+
+    from sklearn import linear_model
+    small_model = linear_model.Linear_Regression()
+    small_model.fit(training_predictors, outcomes)
+
+I guess my point is that normal statistics is NOT where you will get major benefit from R over Python. 
+
+4) R/Python (non-stats). 
+
+So, I went the route of Python even after learning R for ~9 months. I came to the realization that I don't plan on going to grad school for a couple of years, and Python is more aligned with my goals as of right now. I've been constructing automated processes that populate tables in a database that I am creating for my department's use. I liked Python as its easy to learn (syntax is much friendlier than R's, almost non-existent learning curve for someone who understands the concepts of computer science like you do), and very easy to distribute programs as exe's. To my knowledge (and I haven't looked into this specifically, so please don't crucify me haha), you need R on your computer to be able to run R code (unless its a shiny server). I like being able to create programs that help my department stop doing redundant analyses and automate the execution and distribution of the end results. 
+
+5) Other Random Notes
+
+So, I couldn't think of a place that really fit with the flow of the comment, but I thought they were important enough to mention. First, R is way better at graphics. Hadley Wickham's ggplot2 is practically industry standard for visualization outside of Tableau. Second, if you want to get into Big Data, I'd recommend Python. As it is a general language, many programs have Python APIs (first thing to come to mind is Apache Spark with PySpark). Third, for more of a data engineering role (little to no statistics, moving data from point A to point B or automation of tasks), I'd recommend Python. Fourth, if you ever plan on designing a front-end for someone, I'd recommend Python. Edit*: Fifth, Microsoft is integrating R into their SQL Server platforms, so that is definitely something to be aware of. Sixth: If you have any specific questions about me or my background, feel free to PM me.
+
+So thats my whole thought process, but in case you don't want to read, here's a TLDR;
+
+1) Learn SQL. Seriously, do it.
+
+2) R is better than Python at statistics and graphing.
+
+3) Python is better than R at other stuff.
+
+4) Both are better than Excel at larger data sets because Excel sacrifices a ton of efficiency to be user friendly.
+
+5) Pick one and stick with it. Being awesome at one is WAY better than "meh" at both. 
+
+Edit: Forgot to add #5 to my random list.
+I'll chime in and say you can also use Statgraphics instead of learning R. It's a commercially available program, so there's a cost, but it could be simpler depending on your goals.
+I love R. If you want to get started with it, [swirl](http://swirlstats.com/) is a good way to get a grasp on the basics (there is a learning curve!).
+When you say learn R, what exactly do you plan on doing once you know R?  Learning a coding language is quite a large time investment, so if you have a legit reason for wanting to learn (such as you want to become a data scientist) then totally go for it.  If you are just trying to improve your job function skills as an analyst, I think your time might be more valuable spent learning more advanced Excel skills or perhaps becoming an advanced user of visualization tools like Tableau.
+Fuck r python but seriously powerbi uses r so maybe learn dax too
+I know both languages,, Python goes well with Excel(with XLwings and OpenPyxl). R also has rexel but IMO python as a scripting language works so much better with Excel than R.
+
+If you want to perform statical analysis, just export data to csv and import in R.
+Python is a language, R is a program and a language. The syntax that R uses is pretty similar to Python as far as I know.  That's probably why they get mentioned together. If you know Python, you could probably figure out how to use R for data analysis with a minimal learning curve.
+Thank you.  I've heard a bit about Python as well.
+Python is rather closer to MATLAB than to R.
+
+R works for statistical analysis, but it's more directly geared towards making pretty graphs than the other options. MATLAB (and similar Python libraries) are geared towards putting large arrays of numbers through mathy processes. They can also plot just fine, but are not so targeted at that.
+Thank you so much.  This is helpful.  Do you suggest learning Python as the other person stated - and why (what are some use cases for it that can't be done in Excel or can be done much easier in Python)?
+> R does three things extremely well: datasets too large for excel, stats, and visualization.
+
+Yup. These are the main things I learned when I was looking into R.
+
+I should note though that with PowerPivot, Excel can support nearly two billion rows. And with Power BI you can get a bunch of different visualizations.
+how would you recommend one get started with that combo? I have some free time this Friday to play around
+Completely agree with this!  I have been using R for about 10 months now and can crank out insightful visualizations in a few lines of ggplot that would take much longer to do well in Excel.  I especially love facet_grid to clean up what otherwise can seem really messy in a single Excel chart.
+
+I've also created an app for a customer on Shiny that is much more smooth and useful than what I had built in Excel with PowerPivot.  The client loved that its web-based and anybody can access the same version at any time.  Seemed much more professional too.
+I understand statistics and have a good math foundation, but I've never been taught statistics.  I'll mess around with the Analysis ToolPak.  Great tip!
+Thanks a bunch!  This is great.  I'm coming to some conclusions now...
+A little time learning ggplot2 and you can make plots and graphs that look better than Excel, at least in my opinion.
+Ok, good to know.  Thanks!
+R does much more than just statistics, it can do everything excel can do in fraction of the time. I use R everyday from data cleaning to parallel computing terabytes of data
+Thank you!  I'll check it out. 
+> R is amazing for statistics and that's about it. I'm using it in a graduate course at the moment. The more I learn from the internet and my friends, I'll transition to Python after this class.
+
+I wish you luck with that. You'll probably need it. It's not very easy to abandon R once you have written R code that covers 90% of what you regularly do with it. As much as I'd like to switch to Pandas, I can't find enough willpower to start from scratch. :(
+
+Excellent resource. Thanks!  
+Wow you nailed it on the head. I've had most of those thoughts. I just want to become a master at analytics. Though I'm the strongest person I know with excel and data manipulation , I'm light years behind most of the people on this sub.   
+
+The thing about me is that I won't stop learning (I can't). So I'll buy books and courses and saturate my mind with this stuff until I can't take anymore. 
+
+How does C# fit in with all of this?
+There is an Excel package to directly import an xls file.
+question about OpenPyxl. I use Excel a lot at work but we were forced to upgrade to 2013 office. Last time I checked, OpenPyxl was only for 2010. Is there a good python tool for 2013/16? 
+R is a language based on S, which is specific to statistical analysis as data science, and benefits primarily from 2 major advantages:
+
+1 - a large open source community which produces packages useful for pretty much any data science or statistics related project you may want, with a robust central authority for vetting of package quality. If you're doing statistics, you have a huge environment of premade packages specific to that practice. Python is a more versatile language, but that versatility means that the development community for statistics specifically is less focused and consistent.
+
+2 - rStudio is perhaps the best IDI ever designed, at least for what R is used for. 
+
+If you're not doing much data analysis or statistics, Python has far more versatility, but R is very powerful for statistics largely due to its community.
+
+Learning Python would also probably make picking up R if necessary very easy - it's a high level language and doesn't require memorizing much basic syntax.
+Python has much better libraries for scraping websites.
+
+Much of the regression that Python does well can also be done in VBA with some work/outside libraries.
+
+VBA is king for Office products (for now) especially charts and pivot tables.
+
+If you need to automate Excel stuff, start with VBA + Macro recorder. When you need to do something outside of Excel/Office, look into Python.
+I don't know a ton about it, but I think everyone should probably know a programming language. My guess is that you could write scripts to automate some of the tasks you do in Excel, which could either make you more productive or give you more reddit time.
+[tute set 1](http://www.dataschool.io/best-python-pandas-resources/) and [tute set 2](http://pandas.pydata.org/pandas-docs/stable/tutorials.html)
+
+The first one has a tutorial on transitioning from excel, but the second one has a detailed tutorial on slicing. So you'll probably need to mix and match.
+I'm a bot, *bleep*, *bloop*. Someone has linked to this thread from another place on reddit:
+
+- [/r/isloneechoalive] [\/u\/YouTee has some free time this Friday to play around.](https://np.reddit.com/r/IsLoneEchoAlive/comments/60tpja/uyoutee_has_some_free_time_this_friday_to_play/)
+
+[](#footer)*^(If you follow any of the above links, please respect the rules of reddit and don't vote in the other threads.) ^\([Info](/r/TotesMessenger) ^/ ^[Contact](/message/compose?to=/r/TotesMessenger))*
+
+[](#bot)
+I'd suggest some courses about statistical inference, significance, hypothesis testing etc. Also study basic ML algorithms like linear/logistic regression and random forests.
+not to mention faceting and other nifty features that let you get a graphical overview of data really easily. 
+Thanks, this is definitely on my list!
+> A little time learning ggplot2
+
+Also plotly and others to make interactive charts...
+
+
+That's fair enough. The stuff I use excel for at work can't really be replicated in R...at least to my knowledge. 
+
+Could you provide some more specific examples of the way you use R instead of Excel?
+I can totally see that. Luckily I haven't written a whole lot of code that handles my day to day stuff, it's just been what I need for class. 
+
+What kind of stuff do you use R for that you don't want to have to re-write?
+I mentioned C# in reference to how it fit in with my goals, which I stated in my previous comment. If you want to be a master at analytics, I would focus on PQ and PP (They're both incredibly powerful. And I really believe they're going to be huge within 10 years) and learn SQL.
+XLwings, for macros, user defined functions and interactive use. Openpyxl is for reading/writing excel files. Both work fine with 2013, not sure about 2016.
+Haha!  That's all I need (more Reddit time).  I can write decently well in VBA, which I've used to automate a BUNCH of reports for myself and others, so I have a basic understanding of programming at that level.  I think, based on the responses, that I will pick up a couple Python books and segue into R after learning that.  And brush up on my stats knowledge as well.  Thanks!
+Sure can!
+
+Sometimes it's a combination of tools, mainly powershell for sending emails and also a querying program for our database. However R does have the ability to query directly some types of databases, it could possibly have an email module somewhere but I build out vanilla so it can be placed on any server. 
+
+In my company we have lots of manual reports being done. People taking data doing matches applying formula all in excel. So I use R and automate those. 
+
+What about giving people data based on logic and business rules. I also use R to calculate, spilt, and distribute data based on complex logics that would be very taxing to do in excel. 
+
+Brief me around what you do in excel that you're unsure if R can do. Something like multiple tab excel files used by multiple users inputing into forms? 
+Anything Excel can do, stats packages can also do, just not the same way.
+Just the basics: slice, which, grep, aggregate, plot. I don't use R nearly often enough to memorize, so I resort to re-using templates. The weird part is I use python to crawl and scrape only to save the results as a csv file which I would import into R.
+Oh. Ok. I'm currently enrolled in a SQL online course at the local community college. Pretty decent at PQ already and taking a paid course in PP from myonlinetraininghub.com currently.  Thanks so much for the guidance. 
+Thanks for the info! I didn't know R could be used to automate a bunch of functions. Like I said, I'm pretty new to it. 
+
+
+So I think I would run into two big issues:
+
+Excel is king where I work. Interns are asked on their first day what they know about excel, and every single person uses it. So I think even if I was able to do my work in R, I would face fierce opposition, and the second I get moved to a new role I wouldn't be leaving spreadsheets behind. It's an uphill battle in trying to get new things implemented, but I like challenges. 
+
+Your last bit is spot on. My team has a giant share file. Within it, we have tabs that are used as logs to track spending. All of these logs feed into three "main" tabs that more or less compile a bunch of data. Sorry if this is too vague--I'm trying not to give away too much compromising info. 
+
+From your experience, is this the kind of stuff that R can handle? What are your thoughts?
+Microsoft is literally updating Power Query every month. Be sure to keep up with the updates. For PowerPivot, I'd recommend "The Definitive Guide to DAX: Business intelligence with Microsoft Excel, SQL Server Analysis Services, and Power BI (Business Skills)." This book was written by Microsoft MVPs, who are essentially considered experts by Microsoft (FYI, their new book, which has been delayed several times, is scheduled to come out next month.) And if you're interested in learning more PQ, I'd look into Rob Collie's book (he's a former Microsoft Excel engineer.) He also has a website called PowerPivotPro.
+Just ordered that book and I'll keep my eye out for the other. I update PQ every time I get s notification. Thanks again. 
