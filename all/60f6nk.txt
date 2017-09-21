@@ -1,0 +1,91 @@
+large
+60f6nk
+Automate data transfer from large number of workbooks into one destination workbook
+
+I've got about 900 spreadsheets, each in its own workbook file. I'd like to copy or move all that data into a single sheet so I can analyze it as a whole. But I don't want to go into each document, select what I need, and copy/paste x 900. Is there a fast way to do this?
+
+Some other notes:
+
+* I don't need to preserve any formatting.
+
+* All of the source workbooks are laid out exactly the same way, in case that's relevant.
+
+Thanks in advance, folks.
+
+
+-------------
+How much data in each spreadsheet?
+
+With that many spreadsheets you are limited to 1165 records each.
+-------------
+Powerquery does this simply.
+
+http://myexcelonline.com/blog/consolidate-multiple-excel-workbooks-using-power-query/
+-------------
+Hey, thanks for the reply. Each spreadsheet contains 1293 cells of information, but I only need 391 of them.
+-------------
+I've never used Power Query before, but it looks quite helpful. I'll try this too and get back to you. Thank you.
+-------------
+That was promising, but I ran into some trouble. How do I limit the rows that get transferred into the target document? I only need the first 27.
+-------------
+Is all the data in the same range in each worksheet?
+
+what is the range?
+-------------
+Depending on how you did it, but In the power query editor, after the source is read in, you want to choose to "Keep rows" (and enter the 27).
+
+Make sure you  have the very latest Power query downloaded - the most recent one supports opening a folder and combining all the files in it the same way (it has the option to combine IN the file selection pop-up, which is new...).
+-------------
+It's all B1:S25
+-------------
+Solution verified
+-------------
+The Powerquery thread posted by u/small_trunks is worth a look, otherwise some VBA can help
+If line 1 is the same header for each file, suggest you update B1 below to B2 so you are copying the header over and over again.. Suggest you test on a small batch of files first.
+
+
+        Sub getFileData()
+        Dim objFSO As Object
+        Dim objFolder As Object
+        Dim objFile As Object
+        Dim wb As Workbook: Set wb = ActiveWorkbook
+        Dim ws As Worksheet: Set ws = wb.ActiveSheet
+        Dim filepath As String: filepath = "D:\data\myExcelfiles"
+        Dim target As Range
+        Set target = ws.Range("B1:S25") 'set initial paste range
+        'Create an instance of the FileSystemObject
+        Set objFSO = CreateObject("Scripting.FileSystemObject")
+        'Get the folder object
+        Set objFolder = objFSO.GetFolder(filepath)
+        'loops through each file in the directory and prints their names and path
+        For Each objFile In objFolder.Files
+            Workbooks.Open (objFile.Path)
+            target.Value = ActiveSheet.Range("B1:S25").Value 'copy range
+            Workbooks(objFile.Name).Close
+            'set the next paste range
+            Set target = target.Offset(25, 0) 'increment paste range
+        Next objFile
+        End Sub
+
+-------------
+
+You have awarded one point to _small_trunks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Power query is more *fun*. 
+-------------
+That looks promising. I will try it at work tomorrow and see. Thank you.
+-------------
+Haha,.,.probably.. I really want to investigate it more.. 
+
+Curious, can it limit the copying to a smaller range from a large range as per this post requirement?
+
+From what I saw of your link it did not allow.. but surely it could!
+-------------
+Yes.
+
+- you have the option to discard N rows from the top and/or from the bottom
+- you can also filter in/out specific rows when they contain (or don't contain) certain values, words etc. Like a normal column filter, except you're only left with the remaining rows.
+- you could add a row number to each file as it comes in and then filter on the range of rows you'd like.
+- All of these amendments could be made parameter driven

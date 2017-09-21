@@ -1,0 +1,92 @@
+large
+3egcsm
+Filtering out certain data from a very large data set.
+
+Alright excel wizards, I need your help.
+
+I have this data set ( I cropped it to only include what I need ).
+
+http://imgur.com/MQTOBoQ
+
+
+It is 60,000 rows long.
+
+This is for an analysis of a bridge.
+
+* Column A is the name of the member.
+* Column F is a loading condition.
+* Column P is the load associated with that loading condition in that member ( there are over 250 steps.
+
+What I need is an output that looks something like this:
+
+http://imgur.com/JpW14Xb
+
+
+I need the following.
+For each step in member "597", display the maximum, if P>0 or the minimum if P<0.
+
+
+I need this for a large amount of members
+
+
+Trying something like this: =IF(AND(K4=A:A,L3=F:F,G:G>0),MAX(IF(AND(A:A=K4,F:F=L3),G:G),MIN(IF(AND(A:A=K4,F:F=L3),G:G))))
+
+its Returning False
+
+
+-------------
+So I need something that says this.
+
+If A = 597, and F = 1, Display Highest or lowest value of P in all rows where the following 2 criteria are met.
+-------------
+I'm not following this description.  What determines whether you want the MAX/MIN of P? Are you saying for every row meeting the A & F criteria where P is + find the MAX and then find the MIN from the - values?  Last question -- is this real data? b/c barring F=1, for all the other F values, the P values are the same?
+-------------
+P is either a tension member P is > 0 or a compression member where P < 0.
+
+If its in tension I need max tension, If its compression, i need max compression.
+
+Basically, I need the number furthest away from 0.
+-------------
+You are correct in what you said about criteria for P, also, it is real data. F = 1 is actually me just messing around to see if it works. This is a truss and the 3 numbers are the loads going through the member at the beginning, midpoint and end. These should be the same in most cases.
+
+I have about 250,000 lines of this stuff that I need to combine into 1 table that I can just pluck my maximum loading conditions out of.
+-------------
+so for each set you only need 1 number returned - the one of the 3 P values that is the furthest from 0.  NOT both the MAX and MIN of the 3 values, correct?
+-------------
+Yes, just the worst one
+-------------
+This will return the further value based on the two values in A & F... right now it's returning the absolute value.. meaning you'd have to seperately evaluate if it should be +/- - can that be determined by the StepNumber? i.e. will step 2 always return a - value? anyway partial progress here is this:  
+
+    =MAX(IF(Sheet1!$A:$A=$A2,IF(Sheet1!$F:$F=B$1,ABS(Sheet1!$G:$G))))  
+
+it goes in B2 on your evaluation sheet  
+
+EDIT: it's an array formula - CTRL+SHIFT+ENTER
+-------------
+I'm getting #REF!
+
+Also, I need it to show positive and negative numbers because with a couple of thousand members it will take ages to go through and see which are - and which are +
+-------------
+Are you using 2 sheets or just one?  I set it up as two sheets -- you have to adjust the cell references to match wherever your data is.  This is what it looks like in 1 sheet  
+
+    =MAX(IF($A:$A=$J2,IF($F:$F=K$1,ABS($G:$G))))  
+
+A:A is the Frame, F:F is the StepNumber, G:G is the P values.  J2 is the first column in summary area, the cell contains "597" K1 is the header for that step, it contains "1"
+
+-------------
+Now I'm getting 0
+-------------
+my question on +/- was if the member number could be used to predict it -- i.e. will "597" always be negative?
+-------------
+did you enter it as an array formula? (CTRL+SHIFT+ENTER)
+-------------
+Yes, the same member will always be either all negative, or all positive.
+-------------
+It works with absolute now.
+Can you replace the ABS($G:$G) to something like (IF($P:$P>0,Max($G:$G),Min($G:$G))
+
+I tried this and am ending up with a 0
+-------------
+If you have a table where you already know that "597" will always be returning negative numbers, that would be better.  If that's not the case and you really have to look up the +/- this will work.  It's finds the ABS MAX P for each Frame/StepNumber then goes back and gets the sign of the first P value for that same Frame/StepNumber.  
+
+    =MAX(IF($A:$A=$J2,IF($F:$F=K$1,ABS($G:$G))))*SIGN(INDEX($G:$G,MATCH($J2&K$1,$A:$A&$F:$F,0)))

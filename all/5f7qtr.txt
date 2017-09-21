@@ -1,0 +1,98 @@
+crash
+5f7qtr
+VBA Code only crashes when used on a Mac
+
+
+**EDIT ** : Ok, so by googling the error message, it seems that the problem is when trying to assign the combo-box value, by using Combobox.value = "value" . It seems it's better to assign it by using ComboBox.listindex = IntegerValue.
+
+
+Yeah, I know, Excel for macs. What can I say, the people I built something for have some employees use their Macs.
+
+I'm reaching out to the community as a last attempt before I tell my client that it'd be more cost effective for him to buy a second hand laptop for his employee who processes order than it is for him to pay me to debug this. But maybe you guys have encountered this before.
+
+It's a simple code to call a userform to show. The code fails on Userform.Show. Which normally means that it's something in the Initialize trigger of the code that fails.
+
+I encountered the situation that if a userform textbox is locked, Excel for Mac won't let your code put something in it, while Excel for PC doesn't care. I solved this one by putting a ".locked = false" call before inserting value and a ".locked = true" call after.
+
+But it's not doing it. Here's the code 
+
+        Sub ModReservationClick()
+    
+    If Selection.Rows.Count > 1 Or Selection.Columns.Count > 1 Then
+        MsgBox "Select only 1 cell", , "Selection error"
+        Exit Sub
+    Else
+        RowReservPub = ActiveCell.Row
+        
+        If ReservationsWS.Range("A" & RowReservPub).Value <> "" And RowReservPub <> 1 Then
+            
+            ModReservationForm.Show
+        Else
+            MsgBox "Veuillez choisir une rŽservation en cliquant n'importe o " & Chr(10) & _
+            "sur une ligne de rŽservation ci-bas", , "SŽlectionner une rŽservation"
+        End If
+    End If
+    End Sub
+
+
+End then for the Initializing of the form
+
+    Private Sub UserForm_Initialize()
+    
+    Dim ItemNo As String
+    Dim DispoQte As Long
+    Dim ReservedQte As Long
+    
+    RepBox.List = Application.WorksheetFunction.Transpose(Ranges.Range("Reps"))
+    ClientBox.List = Application.WorksheetFunction.Transpose(ClientsWS.Range("ClientsList"))
+    
+    
+    
+    RepBox.Value = ReservationsWS.Range("E" & RowReservPub).Value2
+    ClientBox.Value = ReservationsWS.Range("A" & RowReservPub).Value2
+    NoteBox.Value = ReservationsWS.Range("F" & RowReservPub).Value2
+    
+    QteBox.Locked = False
+    ProduitBox.Locked = False
+    
+    QteBox.Value = ReservationsWS.Range("C" & RowReservPub).Value2
+    ItemNo = Right(ReservationsWS.Range("K" & RowReservPub).Value2, NoCharItem)
+    ProduitBox.Value = Application.WorksheetFunction.VLookup(ItemNo, ItemsWS.Range("ItemsData"), 4, 0)
+    Datebox.Value = Format(ReservationsWS.Range("D" & RowReservPub).Value2, "yyyy-mm-dd")
+    
+    DispoBox.Locked = False
+    ReserveBox.Locked = False
+    
+    
+    DispoBox.Value = Application.WorksheetFunction.SumIf(ItemsWS.Range("ItemsNo"), ReservationsWS.Range("B" & RowReservPub).Value2, ItemsWS.Range("ItemsDispo"))
+    ReserveBox.Value = Application.WorksheetFunction.SumIf(ReservationsWS.Range("ReservedItems"), ReservationsWS.Range("B" & RowReservPub).Value2, ReservationsWS.Range("ReservedQte"))
+    
+    QteBox.Locked = True
+    ProduitBox.Locked = True
+    
+    DispoBox.Locked = True
+    ReserveBox.Locked = True
+    
+    End Sub
+
+
+
+
+-------------
+Check UTF-8, charsets, all that stuff. I see you are using special characters, sometimes shit happens with that
+-------------
+What error is it giving you? As far as I know, Excel for Mac does not support activex. Could that be the issue?
+-------------
+Looks like you haven't defined all of your objects explicitly, you may want to spend 5 minutes and try that. My thought is Mac may be more "fussy" when it comes to variable types. 
+-------------
+Error has only been described to me. I don't have a Mac.
+
+Going off memory, it went something along the line of "Could no show property value" ...
+-------------
+Thank you for your input!
+
+I see what you mean, though the variables that appear to be undefined are actually public variables (RowReservPub) or public constants (NoCharItem) that are explicitly defined somewhere else. And all my worksheets are referred to by their index name.
+
+Anyways, my client will meet me today at lunch with his Mac and we'll see what we can do.
+-------------
+Gotcha, good luck. 

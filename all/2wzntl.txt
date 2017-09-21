@@ -1,0 +1,151 @@
+large
+2wzntl
+seeking best practice for working with a large excel file. Is it better to store some tabs as separate linked files rather than tabs?
+
+I am trying to improve the performance and usability on an existing budgeting spreadsheet. 
+The file is lovingly referred to as "the Master to rule them all" - and that's what it has turned into, a monster out of control:
+
+- a new tab for every quarter going back years
+- monthly changing FX rates
+- currency conversions
+- querying data from _a_lot_of_other_ tabs
+- numerous lookups
+- budget control formulas
+- estimations, projections, breakdowns by country, region, vendor, currency
+- a lot of "if this is empty and this is empty take this otherwise do this and prompt this" 
+- stored on a remote server so replacing the file is a tedious slow task
+- used by different team members in different locations 
+
+Due to the some of the older quarters still running the formulas in the background, the file has become very prone to crashing. To add it, it's stored on an off shore Server making working with it across teams very challenging.
+
+In my naiveté I thought of storing some of the static tabs in separate files on the server and archiving the finished quarters and unlinking them from the workbook. But since I am no where near as good in these things as people around me presume, I wanted to check if this is actually a good idea? Or will this just cause other problems?
+
+Any advice, tips and tricks to improve the performance and ease of working with this file would be much appreciated! 
+
+
+-------------
+[deleted]
+-------------
+I would suggest hardcoding (ie no formulae) periods which are static (probably prior years)
+
+Normally I would suggest a database, but having run big budgets (>1billion) I know its probably not possible
+
+It might be sensible to pull some of your vendor information to separate files - most companies don't budget by vendors, they calculate by vendors
+
+Also I would recommend switching off automatic calcs and do no share it (using excel share) it becomes very slow
+
+Potentially talk to IT to get it hosted on a better/closer file server - but that often isn't possible
+-------------
+IMHO it is still best to hold all information in one file, so that you can make reports on longer timespans fast (e.g. by means of a pivot table) - perhaps old data can be pasted as values
+
+-------------
+it's hard to say without looking at your specific setup and all the cross-linkages that are probably going on, but some generally speaking: 
+
+Avoid volatile formulas (offset, indirect, today, etc.), use INDEX:INDEX formulas instead of OFFSETs, the initial calculation can be a bit heavier, but they are not volatile, so navigating the sheet is easier. Volatile functions recalculate whenever you do anything, rather than whenever you do something they are involved in. 
+
+If you find yourself needing to use indirect to reference different quarters, consider if it is possible to put your data in a single database sheet, where you add a column for the quarter, a column for the year, and have all your data for all years and quarters stacked on top of each-other. Then extract reports from this single database. 
+
+If there are parts of your sheet you don't use, replacing them with their values (so no formulas anymore) and archiving them certainly doesn't seem like it would hurt. Along with the archive, save a copy of your current monster book, with all the formulas etc. there. 
+
+Avoid referring to whole ranges ("A:A") in formulas, use the relevant ranges, and if you have array calculations and need dynamic ranges, use structured references or dynamic INDEX:INDEX ranges. 
+
+Avoid complex conditional formatting if possible. 
+
+Storing the static tabs in a different place will probably just make things worse, depending on what you use them for, a reasonable amount of raw data generally doesn't slow down anything other than the initial opening of the workbook. 
+
+Have a read through this article on optimizing performance, and it's two companion articles that are linked in there: 
+
+https://msdn.microsoft.com/en-us/library/office/ff726673%28v=office.14%29.aspx
+
+
+
+-------------
+I have in the past had success by turning off calculations. I haven't worked lately with any complexity in Excel, but this might help you out: http://lifehacker.com/5811745/speed-up-excel-by-turning-off-calculations-and-other-tricks
+-------------
+How familiar your team with database?
+
+These go to database:
+
+* a new tab for every quarter going back years
+* monthly changing FX rates
+* currency conversions
+* querying data from a_lot_of_other tabs
+* numerous lookups
+
+These stay in excel:
+
+* budget control formulas
+* estimations, projections, breakdowns by country, region, vendor, currency
+-------------
+Reminder: Please award ClippyPoints^TM to helpful posts by replying to their post with: Solution Verified
+
+
+See side-bar.
+
+-------------
+Unfortunately the last two quarters are used for calculations as well.
+
+We need the last two quarters in the file for closing out the previous two quarters. So let's say we're in Q1 FY15 now, we would still heavily work in Q3 and Q4 of FY14.
+
+We change static tabs quite often, having a completely separate file for every year would require us to change the static tab across the other files as well and this is were human error sets in and how I would stop sleeping :/
+-------------
+I was thinking of transferring the file into a database, maybe it's time to convert 
+-------------
+So I read the performance article, thank you for sharing.
+
+I have been reworking the file for the past 24 hours and removed as many volatile formulas as I can - or so I think. 
+
+Somewhere in the article, or maybe it was something I googled to find out what an volatile forums is ^_^ it states that you can turn volatile formulas into less volatile formulas by minimising the used range. So can I ask if the below is less volatile by using IF(ISNA  with INDEX & MATCH instead of VLOOKUP and minimising the used range?
+
+I turned 
+
+=IF(ISNA(VLOOKUP([@Country],Region!A:C,3,0)),"",VLOOKUP([@Country],Region!A:C,3,0))
+
+into
+=IF(ISNA(INDEX(Region!$C$1:$C$23,MATCH([@Country],Region!$A$1:$A$23,0))),"",INDEX(Region!$C$1:$C$23,MATCH([@Country],Region!$A$1:$A$23,0)))
+
+Volatile or not violate is the question?
+
+
+
+-------------
+Turning off calcs can have a massive impact but the other suggestions are odd. The copying to a new file works due to bugs in Excel which happen - but aren't all that common. And if your file is massive it probably isn't the cause of issues. 
+
+I've never seen formatting be the issue, but generally I try to keep formatting to a minimum on all but the presentation pages
+-------------
+Solution Verified
+-------------
+When files in excel get unmanageable I tend to recommend a database. (and this community complains everytime) But given the complexity most budgeting systems need a multi-dimensional like Essbase/TM1/BPC I wouldn't get my hopes up pushing it to Access (or another DB) as a lot of the data would effectively be stored in the same table (ie Budget cost) Analysis services might be a way to go - but I can't give advice on that (I'm BPC/Essbase)
+-------------
+Neither of them should be volatile, the volatile functions you most often run into is OFFSET, INDIRECT, and TODAY or RAND, other than those few ones you're usually pretty safe. 
+
+But even with non-volatile formulas it's usually a good idea to reduce your input range to minimize how many cells your formulas have to think about, and reduce normal calculation time (like when you save your workbook). A formula recalculates whenever a cell it refers to is changed, so minimizing the range also reduces your risk of forcing unnecessary calculations when you dick around in your sheet. 
+
+Here's a few articles on volatile functions that you may already have found: 
+
+http://www.decisionmodels.com/calcsecretsi.htm   
+https://msdn.microsoft.com/en-us/library/office/bb687891.aspx#sectionSection2
+
+
+If you're on Excel 2007+, you can use IFERROR() to make the kind of error-catching you're doing a lot nicer looking, of course it catches ALL errors, which might be problematic in its own right. 
+
+
+-------------
+I can't speak to their other ones. It was probably a hastily grabbed reference. I was hoping that they would actually walk through the process, in addition to the others.
+-------------
+You have awarded one point to ies7
+-------------
+What about FileMaker? I haven't really explored the formula functions in FileMaker but I presume it can at least do half the things :D
+-------------
+Solution Verified
+-------------
+I've heard good things, but never used it myself.
+
+But essentially I think it is a normal database - how would you represent your data and organise your tables? Trying to get a Normal Form will be very difficult as each month/quarter is essentially the same type of data, but is referential on itself
+-------------
+You have awarded one point to tjen
+-------------
+Solution Verified
+
+-------------
+You have awarded one point to johnfbw

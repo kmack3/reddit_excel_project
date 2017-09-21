@@ -1,0 +1,36 @@
+slow
+4sbw00
+Pasting a range into a table is very slow - why?
+
+* a large range.  Pasting a range of 100 is instant - pasting a range of 4,000 seems to almost crash Excel.  
+
+Full setup, if it matters. 
+
+Workbook 1 has a sheet with several thousand rows (in a range)
+
+Workbook 2 has a sheet with a pivot table, that points to a table on another sheet in Workbook 2. 
+
+When I copy and paste the range from Workbook 1, into Workbook 2's table, things freeze up and almost seem to crash.  The data gets there, but it's slow. 
+
+My point in setting things up this way, was so that I could point the pivot table at tables, rather than ranges - and thus every time I use this template, the pivot table would automatically grab all the data, without me entering in the data range manually.   Somehow adding a range of any length to the table, is very slow though (which kinda defeats the purpose). 
+
+Any idea what's going on?  Is this just an Excel limitation - copying very many rows into a table, is inherently a slow operation? 
+
+Thanks, 
+
+
+-------------
+Be more concerned with if your workbook has bloat or some sort of corruption I do some 400k++ on 32-bit with Excel and experience what you're saying but you shouldn't be dealing with that at just a few thousand. If you transfer this setup to a brand new workbook - paste as values and then recreate the table and PivotTable see if you have the same issue. 99% of the time you can't see issues like this but they just exist and a brand new workbook can make a world of difference.
+-------------
+Huh, so the plot thickens - you're right, doing this same operation in a new workbook, the range copies over into the table, no problem. 
+
+So it's something else in the workbook.  Which is another issue so...
+
+Solution Verified!
+
+
+-------------
+
+You have awarded one point to _eddiemurphysghost_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

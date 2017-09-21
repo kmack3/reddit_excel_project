@@ -1,0 +1,75 @@
+large
+2x4h2o
+(Probably) a simple one: Search through one data set for a large number (>1000) of terms
+
+Hi guys,
+
+I asked a question here a couple months ago and got a really helpful response, so I thought I would try again.
+
+I have one list of over 2200 company names. I have a second list of over 1000 companies with whom we currently have relations. I want to search the list of 2200 companies for companies we already have relations with, and have that appear in a separate list.
+
+As an Excel noob, the only way I would know how to do this is manually, although I assume there must be a straightforward way to ask Excel to search one set of data for all individual terms in a second data set?
+
+Thanks!
+
+
+-------------
+You can put a COUNTIF() formula next to each name on one list and see if it shows up on the other list.  
+  
+  
+  
+  
+  
+Clippy: Countif
+-------------
+I usually do this quite often and it's usually a one-off task.
+
+I use a combination of INDEX and MATCH.
+
+Assuming your list of 2200 companies is in column A and the list of over 1000 companies in column C.
+
+Type this formula in cell B1, which is next to your list of 2200 companies.
+
+    =INDEX(C:C,MATCH(A1,C:C,0))
+
+Where you see #N/A, it means that this particular item is not found in your list of over 1000 companies whom you currently have relations. You can then apply a filter to your list and uncheck the errors and voila, your list of companies. I'm sure there's a better way though...
+-------------
+I've done this! You want [Fuzzy Lookup](http://www.microsoft.com/en-au/download/details.aspx?id=15011). It's a free plugin that does a lot of different searches for similarity and gives an overall match score. It is good because it avoids errors where it is not a perfect match (ie. Spelling errors, Pizza Hut vs Pizza Hut Pty Ltd, etc).  Googling Fuzzy Lookup should give you everything you need, but pm me if you need further help 
+
+edited to add link now that I'm not on my mobile
+-------------
+
+Hi!
+
+It looks like you are trying to ask a question!
+
+Since you have not responded in the last 24 hours, I am here to assist you!
+If your questions has been solved, please be sure to update the flair.
+
+Would you like help?    
+[Help Changing Your
+Flair?](https://www.reddit.com/r/excel/wiki/flair)    
+[Asking Question and Sharing
+Data](https://www.reddit.com/r/excel/wiki/sharingquestions)
+
+-------------
+[COUNTIF](http://office.microsoft.com/en-us/excel-help/countif-HP005209029.aspx)
+
+     Syntax: COUNTIF(range,criteria)
+
+
+Counts the number of cells within a range that meet the given criteria.
+-------------
+Thanks for the suggestion! I ended up using a different method but I'll keep COUNTIF in mind in future.
+-------------
+You don't even need the index, just the `=MATCH(A1, C:C, 0)` (it'd return either the lookup value or #N/A if the value is not found)
+-------------
+Thanks for the suggestion! I'll take a look at this and see if it could be of use in the future.
+-------------
+You're right :D
+-------------
+Thanks for your suggestion! I ended up using a different method (semi-manual), To be honest I forgot that I had even asked and by the time I realised, I was almost done- only took about 30 minutes in the end though!
+-------------
+[deleted]
+-------------
+You have awarded one point to HuYzie

@@ -1,0 +1,194 @@
+slow
+4a5wkm
+VLOOKUP slows down spreadsheet to unusable speeds
+
+I'm working on confirming current inventory against an older document, so I've set up two sheets, one holding the old information, and another where I can scan in bar codes. When I scan the bar code I put the date and location next to it (copy & paste because they're all the same for a batch). I have two VLOOKUP's with the old data to show the inventory date and location, and a combination IFERROR(VLOOKUP) with the new data to show the name associated with the bar code and say 'NOT FOUND' if it's not on the list. Compared to other sheets this one is running really slow, and bogs down my workstation when I try to do anything that affects the entire data set, like deleting a few rows. I tried pausing formulas, but apparently VLOOKUP isn't covered by that, because it kept running and the sheet was still slow. Any ideas on how I can get this sheet back to a better speed? Deleting all the VLOOKUP's until I finish isn't really an option, because I need to be able to see what inventory still needs to be found as I'm working.
+
+
+-------------
+you'll get a slight performance benefit on large arrays using index(<range>,match(<data to mathc>,<range to match in>,0)) instead of the older vlookup function
+-------------
+[/r/excel frequently used formulas FAQ](https://www.reddit.com/r/excel/wiki/frequentlyusedformulas)
+
+Check out INDEX/MATCH.  In my experience, much faster for large workbooks.  
+-------------
+Why not pivot table and do refreshes as the raw data gets updated 
+-------------
+You could try the two vlookups method.
+
+https://fastexcel.wordpress.com/2012/03/29/vlookup-tricks-why-2-vlookups-are-better-than-1-vlookup/
+-------------
+Maybe your sheet is calculating on empty cells that aren't needed for some reason. Press ctrl+end and if that goes way beyond your needed range, that might be your issue. 
+
+To fix this, delete the rows you don't need then save, close, and reopen the workbook
+-------------
+Same, I've been trying to ween myself off of vlookup when possible. INDEX/MATCH seems more confusing at first but the more I've gotten a handle on it the more useful it's been.
+-------------
+Are you running the file on your local drive or a network drive? Sometimes a network drive can slow things down. 
+-------------
+[deleted]
+-------------
+This seems to me like other formulas and events are in play.
+
+What other formulas are used in the file you have? Indirect? Countif? Offset? Any custom functions?
+
+How many files does your current file link to?
+
+What are the full set of actions taking place when you scan a bar code?
+-------------
+I'm doubtful vlookup is the problem.  In my experience, what you describe sounds like you're looking up against a huge dataset.  Anything over 60k rows and your performance dwindles rapidly on lookups.
+-------------
+Hey OP /u/Crushnaut 's response has what you need if you're able to sort your old data by barcode. Using Vlookup's approximate match is orders of magnitude faster if you're dealing with a large data set. 
+-------------
+So I'm trying INDEX/MATCH, and I can get it to work within a sheet, but I can't seem to get it to work on a multi-columned array. What I've got is:
+
+    =INDEX(INV,MATCH(A2,INV,0))
+
+but that throws an error. Do I have to redefine my arrays to be one column only?
+-------------
+This method should work, thought it might be easier if you knew what the formula was doing... 
+
+Index match is just a direct reference to a particular cell. So its looking at INV and then returning the cell value dictated by your two match formulas. 
+
+So your INV table does not need to include the header rows (your match statement is just a formula to count the number of columns).
+
+This should save a lot of processing time in the file 
+-------------
+Because that's not a thing I know how to do...
+
+Could you set that to refresh every time a new bar code is scanned? And would that affect the ability to scan multiple items quickly, having to wait for refreshes?
+-------------
+One caveat to this: the lookup column has to be sorted in ascending order. Otherwise, it'll return incorrect data. This is due to the differences in how vlookup handles exact matches vs fuzzy matches. 
+
+That said, if OP can sort his old data by barcode, this is exactly what they need. I had a 500k record file with a lookup of 30-50k at a time using INDEX/MATCH took 5-7 minutes. Converting this lookup to binary search cut the time to 10 seconds. 
+-------------
+The input sheet is, but that's only because I couldn't get it to automatically enter the formula when a new item is scanned. If there's a clever way to do that it'd help.
+-------------
+Solution verified
+-------------
+Network drive, and I see your point, but I don't think it's saving every time I make a change in the file, unlike Office 365. I have had experience with Photoshop having minute plus save times on a network drive. Also, it bogs down regardless of whether I'm on the 100 Mb/s connection in the office or the 15 Mb/s connection in the storeroom.
+-------------
+What does the bar do? I would find = and replace with '=
+-------------
+Just VLOOKUP's, but nested within an IFERROR, and the other part of the IFERROR is an IF.
+
+When I scan a bar code the scanner drops it in a column, a cell two rows over checks it against the inventory and puts the name there if it's found, or 'Not found' if it's not in the inventory. On the inventory sheet two VLOOKUP's look for the bar code of everything in the input sheet, then show the manually entered inventory date and location (which is copied down after scanning a batch all in the same location).
+-------------
+The original dataset is <300 rows, but the input sheet has formulas all the way down because I couldn't get it to copy automatically when I started a new row (scanned a new bar code).
+-------------
+I might be misunderstanding what you mean, but the bar code needs to match exactly, otherwise a widget and a phidget with barcodes 12345 and 12346 could get confused, which would make the entire procedure useless.
+-------------
+You need to do a match for the column as well so it knows which one to search. 
+-------------
+To filter the pivot table dynamically, you will need to use VBA. 
+
+Instead of using IFERROR which always runs the VLOOKUP, use IF(COUNTIF instead.
+
+    =IF(COUNTIF(Barcode range, scanned barcode cell), VLOOKUP(lookup stuff), "Product doesn't exist")
+
+Make sure to limit your ranges, don't use entire columns/rows.
+
+
+-------------
+
+You have awarded one point to _idontcontributemuch_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+equally as effective, personal preference. I replace = with #
+-------------
+FYI the var is called a pipe :-)
+-------------
+Do you know the mechanism the barcode process uses to enter data into the worksheet?
+
+A few years ago, at an old job, formulaic processes and event handling meant some custom add-ins (that I did not build) were recalculating the entire workbook or worksheet every time a new value was added into table, including correcting existing values. The event handling was part of the addin where each cell change event triggered a recalc, and the formulaic processes meant changes to thousands of cells.
+-------------
+When you say formulas go 'all the way down' do you mean from row 1 to row 1 million plus???
+
+
+If that's the case then without a doubt that's the culprit.  The sheet has to recalc over a million formulae everytime!
+-------------
+I saw that you're working with an original data set of <300 so lookup performance is definitely not your root cause. However, to clarify,  I meant sorting the entire data by barcode ascending. Like below: 
+
+Barcode | Widget 
+-------|-------
+5 | Widget 1
+3 | Widget 2
+1 | Widget 3
+2 | Widget 4
+4 | Widget 5
+
+Becomes: 
+
+
+
+Barcode  | Widget 
+--------|-------
+1 | Widget 3
+2 | Widget 4
+3 | Widget 2
+4 | Widget 5
+5 | Widget 1
+
+
+-------------
+So replace the array with another MATCH?
+-------------
+It's just a bar code scanner connected to the computer. When you scan a bar code it punches in whatever that bar code means, then hits return.
+-------------
+Yeah, but how do I get it to add the formula to each new row as a bar code is scanned? I need it there immediately, rather than whenever I get time to copy it down.
+-------------
+Solution verified
+-------------
+    =INDEX(INV,MATCH(A2,INV,0),Match(Column Header,range,0))
+
+Does that make sense? 
+
+-------------
+If you use Excel tables, any formula columns will automatically fill down as rows of data are added
+-------------
+Ok so we've established that there is NOTHING wrong with lookups - your issue, as I thought based on your description, is due to the sheer amount of cells you've setup Excel to calculate.
+
+
+My friend what you need is to learn about Excel's: worksheet on change event.  It'll trigger the macro to run when you scan a barcode (which changes the worksheet hence triggering the code).
+
+
+I can dig up some code i wrote years ago that did similar stuff of what you're asking for but I'm on vacay and it'll be a week before i can access that stuff!
+-------------
+
+You have awarded one point to _twizttid1_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+I think so, but for that would I have to redefine the INV array to include the headers?
+-------------
+Yes. 
+
+I'm not a fan of excel tables, but this seems like a golden opportunity for OP to [research them](http://www.excel-easy.com/data-analysis/tables.html) and see if they are what he/she needs.
+-------------
+What do you mean by Excel tables?
+
+Edit: Reading u/semicolonsemicolon's link I realized what you meant. I do know how to use tables, but I can't in this case because I need to keep the dataset from being sorted, and if I pass it off with a table in it it will inevitabley get sorted by someone who doesn't know what they're doing, and then I'm in trouble. I was hoping to get the same effect without using a table.
+-------------
+I'd love to see it when you get the chance.
+-------------
+For the range just put where the formula can find the headers. If you send a picture of your layout I can give you more details.
+-------------
+[Here's screenshots](http://imgur.com/a/rd9tp) of the original (using VLOOKUP) with fake data.
+-------------
+Is this on different sheets or books? Ranges will need to be updated for where the row and headers are located. 
+B1 "Date" and F1 "Inventory Date" need to be the identical for this to work:
+
+    =iferror(INDEX(INV,MATCH($A2,Sheet1!$A:$A,0),MATCH(F$1,Sheet2!$A$1:$H$1,0)),"NOT FOUND")
+
+• I think you know what the iferror does, Index(INV, is the range it will return values from. You just need to tell it what row and column in that range. 
+
+• The first match is for the row, so I reference $A2 and have it search the range A:A to find it. Please note A:A should be replaced to match the height of INV but only column A. 
+
+-Let me know if you have any questions!
+
+
+-------------
+OK, I've got it to work fine, but it's still slower than molasses in November, as my dad would say. I think what I really need is a way to get it to automatically enter the formula each time a barcode is scanned. Thanks a bunch for your help!
+-------------
+Solution verified

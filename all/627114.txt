@@ -1,0 +1,21 @@
+crash
+627114
+[FIX] - After installing KB3178690 in Excel 2010, calculation may result in a hang or crash - [KB3191855] March 28, 2017, update for Excel 2010 fixes this issue
+
+[Original notice](https://support.office.com/en-us/article/After-installing-KB3178690-in-Excel-2010-calculation-may-result-in-a-hang-or-crash-14cd3b5c-aa2a-4fba-ba0a-414dedeb3ba0)
+
+[Fix](https://support.microsoft.com/en-us/help/3191855/march-28-2017-update-for-excel-2010-kb3191855)
+
+This should resolve any issues you may have with:
+
+> After installing KB3178690 in Excel 2010, calculation triggered either by code or a user interaction in the workbook may result in a hang or crash for some users.
+
+**STATUS: FIXED**
+
+The fix is now available in KB3191855
+
+
+
+
+-------------
+Confirmed and tested on a 2010 PC.  A spreadsheet that had its vba broken by the prior update (I had uninstalled/blocked that update) works with the new one.

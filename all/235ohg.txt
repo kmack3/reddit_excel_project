@@ -1,0 +1,31 @@
+forever
+235ohg
+I have an excel sheet that pulls in data from a system and then does a series of calculations to it. However occasionally it needs to pull in 50k+ lines, and it takes forever to run. What's the best way to speed it up
+
+It does about 30 calculations with the data that's extracted, so my question is, should I try and break the calculations into multiple sheets and run it with a few different computers, should I make a macro that only calcs what I select, and do the calculations piece by piece, or is there another solution I haven't thought of.
+
+It seems that the slow down is less with the extraction of data and more with the calculations. We have to run these on poor, sad work computers so the time is insanely slow. It usually takes around 4 hours to finish the whole sheet. Is there any way to speed this up? What's the most efficient way to get through this process?
+
+
+-------------
+If it is possible to change your sheet structure to break down long and difficult calculations that might help. Say you have a large formula that does a whole number of operations, if you can break it into 5 columns that do smaller calculations, that should speed it up. Also avoid volatile functions. Array formulas and index formulas get heavy with huge tables, if there is anything you can do with a pivot table instead of.  
+
+http://msdn.microsoft.com/en-us/library/ff700515(v=office.14).aspx
+
+Make sure you have everything that you don't need turned off (like displaying updates as they happen, see below link)
+
+http://blogs.office.com/2009/03/12/excel-vba-performance-coding-best-practices/
+
+If you have already taken every precaution then I don't know, if you are running 2010-2013, look into microsoft tools like powerquery and powerpivot, but then that's entirely down to what you need done. 
+-------------
+If you can share the sheet and/ or the formulas performing these calculations, maybe there are ones which we can help you optimize for better performance, or drop entirely with a better alternative.
+-------------
+IMO post as much of the macro as you can (use pastebin or similar if its large though).  Chances are good with a few key changes we can speed it up by an order of magnitude if not more.
+-------------
+Check if you will benefit from upgrading your memory or storage.
+
+Memory upgrade: no need to use pagefile/virtual memory.
+
+Storage upgrade: switch to SSD and even if you use virtual memory, it'll feel like everything is faster (unless you use a lot of network bandwidth, which SSD can't help much).
+
+I'd open up task manager and see how much pagefile is being used when you open the excel sheet.  If it uses up a lot, maybe parts of it are being written to disk since it won't all fit into available memory.

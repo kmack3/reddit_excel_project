@@ -1,0 +1,173 @@
+slow
+2lvfrt
+VBA Macro Surprisingly Slow
+
+Hello /r/Excel!
+
+I am trying to write a macro that takes data collected from several different SQL query tables and organizes them into one sheet. The following snippet shows the flow of the macro:
+ 
+    Private Sub DigitalAlarms()
+        Dim iCount As Integer
+        Dim iRowAppendix As Integer
+        Dim iRowPrcInput As Integer
+        iCount = 2
+        iRowAppendix = 2
+        iRowPrcInput = 2
+    
+        'Sheet8 (Digital Input Alarms)
+        Do While Sheet8.Cells(iRowPrcInput, 1).Value <> ""
+            iRowPrcInput = iRowPrcInput + 1
+        Loop
+        If iRowPrcInput > 2 Then
+            Do While iCount <= (iRowPrcInput - 1)
+                Sheet4.Cells(iRowAppendix, 1) = Sheet8.Cells(iCount, 1)
+                Sheet4.Cells(iRowAppendix, 2) = Sheet8.Cells(iCount, 3)
+                Sheet4.Cells(iRowAppendix, 3) = Sheet8.Cells(iCount, 2)
+                Sheet4.Cells(iRowAppendix, 5) = "bAlm"
+                Sheet4.Cells(iRowAppendix, 6) = Sheet8.Cells(iCount, 5)
+                Sheet4.Cells(iRowAppendix, 7) = "Digital Input Alarm"
+                Sheet4.Cells(iRowAppendix, 8) = Sheet8.Cells(iCount, 6)
+                Sheet4.Cells(iRowAppendix, 9) = Sheet8.Cells(iCount, 7)
+                iCount = iCount + 1
+                iRowAppendix = iRowAppendix + 1
+            Loop
+        iCount = 2
+        End If
+        iRowPrcInput = 2
+    
+        ...
+    
+    End Sub
+
+I've noticed that going cell by cell appears to be very time consuming, but have no idea what I could do to improve the macros performance. The macro seems to take .5 seconds just to populate one cell.
+
+I took a screenshot: https://i.imgur.com/739VaRX.png
+
+The highest amount of run-time is taken up within the Do While loops.
+
+Does /r/Excel have any suggestions?
+
+Thanks!
+
+EDIT: Clarified how often a cell was being populated.
+
+EDIT: Added a screenshot
+
+
+-------------
+Not entirely sure what's going on in your macro, but if it's possible to load your data into a variant array and test them there? 
+
+Or replace your Do While loop with a For loop? 
+
+http://blogs.office.com/2008/10/03/what-is-the-fastest-way-to-scan-a-large-range-in-excel/
+
+http://bytes.com/topic/access/insights/797078-next-vs-do-loop-winner
+
+
+-------------
+Put this near the beginning of your macro
+
+    Application.ScreenUpdating = FALSE
+
+and this at the end of your macro
+
+    Application.ScreenUpdating = TRUE
+-------------
+would this work?
+
+    Sub DigitalAlarms()
+
+        Dim iRowPrcInput As Integer
+        Application.ScreenUpdating = FALSE
+        'Sheet8 (Digital Input Alarms)
+        iRowPrcInput = Sheet8.Range("A" & Rows.Count).End(xlUp).Row
+        Sheet4.Range("A2:A" & iRowPrcInput).Value = Sheet8.Range("A2:A" & iRowPrcInput).Value
+        Sheet4.Range("B2:B" & iRowPrcInput).Value = Sheet8.Range("C2:C" & iRowPrcInput).Value
+        Sheet4.Range("C2:C" & iRowPrcInput).Value = Sheet8.Range("B2:B" & iRowPrcInput).Value
+        Sheet4.Range("E2:E" & iRowPrcInput) = "bAlm"
+        Sheet4.Range("F2:F" & iRowPrcInput).Value = Sheet8.Range("E2:E" & iRowPrcInput).Value
+        Sheet4.Range("G2:G" & iRowPrcInput) = "Digital Input Alarm"
+        Sheet4.Range("H2:H" & iRowPrcInput).Value = Sheet8.Range("F2:F" & iRowPrcInput).Value
+        Sheet4.Range("I2:I" & iRowPrcInput).Value = Sheet8.Range("H2:H" & iRowPrcInput).Value
+        Application.ScreenUpdating = true
+    End Sub
+
+I just looked at your screenshot, this code might make the single line faster but it won't work for the code that inserts 3 lines.
+-------------
+This is tangential, but one improvement I'd make is how you have calculated iRowPrcInput.  You're trying to find the last used row in column A, right?  So use..   
+
+    iRowPrcInput = Range("A" & rows.Count).End(xlUp).Row
+    
+I'd probably also try to structure the main loop using offset.  Note that it doesn't perfectly follow what you have since you go 1, 3, 2...you'd have to arrange so it can go sequentially.
+    
+    Do While iCount <= (iRowPrcInput - 1)
+        Set rng = Sheet4.Cells(iRowAppendix, 1)
+        For i = 0 To 8
+            rng.Offset(0, i) = Sheet8.Cells(iCount, i + 1)
+        Next
+        iCount = iCount + 1
+        iRowAppendix = iRowAppendix + 1
+    Loop
+
+-------------
+Is it downstream of the cell fill?  Try setting calculation to Manual:
+(near the beginning)
+
+    With Application
+    .Calculation = xlManual
+    .StatusBar = "Auto Calculation OFF"
+    End With
+
+and near the end, reset it to auto....
+
+     With Application
+     .Calculation = xlAutomatic
+     .StatusBar = False
+     End With
+     
+-------------
+The reason I was avoiding a for loop was because I wanted to ensure that my loop would execute at least once. Anyway even using the following:
+
+        For iCount = 2 To iRowPrcInput - 1
+            Sheet4.Cells(iRowAppendix, 1) = Sheet8.Cells(iCount, 1)
+            Sheet4.Cells(iRowAppendix, 2) = Sheet8.Cells(iCount, 3)
+            Sheet4.Cells(iRowAppendix, 3) = Sheet8.Cells(iCount, 2)
+            Sheet4.Cells(iRowAppendix, 5) = "bAlm"
+            Sheet4.Cells(iRowAppendix, 6) = Sheet8.Cells(iCount, 5)
+            Sheet4.Cells(iRowAppendix, 7) = "Digital Input Alarm"
+            Sheet4.Cells(iRowAppendix, 8) = Sheet8.Cells(iCount, 6)
+            Sheet4.Cells(iRowAppendix, 9) = Sheet8.Cells(iCount, 7)
+            iCount = iCount + 1
+            iRowAppendix = iRowAppendix + 1
+        Next iCount
+
+I'm still averaging about 1 cell being filled about every .5 seconds
+-------------
+Good suggestion however after running it with the change it still seemed to go slow, the only difference was that Excel had become unresponsive.
+-------------
+With this included it's still very slow running on both mine and another colleagues computer. Here is a screenshot, the highest amount of time being used is within these while loops. 
+
+https://i.imgur.com/739VaRX.png
+-------------
+That is super weird. What version of Excel are you using?
+-------------
+Application.EnableEvents = False before the loop, and then Application.EnableEvents = True after may (or may not) help.
+-------------
+Lots of questions!  
+1) did you write this?  I see that this code is on the worksheet tab.  Is there code on sheet 11's tab?
+2) was it *ever* fast?  Like did it get slower each time you ran it?
+3) the SQL tables, are they set up through the data connection?  Are they set to auto-refresh?  
+-------------
+Microsoft Excel 2010
+-------------
+1. Yes I wrote this. All the code resides on Sheet4  as that is the only sheet being written to by the code.
+
+2. At one point it did seem to be sufficiently fast but it appears to slow down after every iteration of it running.
+
+3. The tables in the other sheets are being populated by a data connection made to a Microsoft Access database using different SQL queries for different tables. They are not set to auto refresh.
+-------------
+It's wacky, but it could be page breaks.  In the code for sheet 4, add the following at the top, near where we had you turn off screenupdating and calculation...
+
+     ActiveSheet.DisplayPageBreaks = False
+
+http://support.microsoft.com/kb/199505

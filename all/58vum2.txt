@@ -1,0 +1,58 @@
+freeze
+58vum2
+2 questions : freeze reference content in a cell + select all cells from selected to botom of the column
+
+Hello,
+
+I have 2 things that I would need to learn to do with Excel in order to make a kickass spreadsheet tool for work.
+
+Here is it :
+
+1) "Freeze" the content reference of a cell even is this reference is cut/paste.
+I'll only be able to explain with an example :
+
+In A1 I have "abc".
+In B1 I have "abc".
+In A2 I have "def".
+In B2 I have "ghi".
+
+In C1 I put this formula =IF(A1=B1,"YES","NO") and extend this formula vertically on the column (so automaticly on C2 i will have =IF(A2=B2,"YES","NO").
+
+So, In my actual setup in C1 I will have "YES" and in C2 I will have "NO".
+So far no problem.
+
+The thing is, now I go on A1 and press ctrl X, then ctrl V on A2, then I go in B1, press ctrl X, then ctrl V in B2.
+And now in C1 i'll have =IF(A2=B2,"YES","NO") and in C2 a broken formula looking for non existing references.
+
+Me, I want that after my 2 CTRL X and CTRL V, in the case C1 and C2 the formula do not change, it's sill respectively =IF(A1=B1,"YES","NO") and =IF(A2=B2,"YES","NO"), the fact that I cut did not move the references into the forumulas.
+So, after the cut/paste, in C1 I would like to have "YES" and in C2 "YES" (since A1=B1, the two being empty, and A2=B2 now that there is "abc" in both cells).
+
+The formulas is C1 and all the cells below after I extend C1 in the column are frozen and do not edit because of my cut/paste.
+
+2) Select all cells in a column from the selected cell to the bottom of the column.
+This one is easier to explain.
+
+What I would need :
+I select A10.
+I do a magic manipulation, and my selection is now A10 to A10.000 (or any high number being very far in the bottom of the column).
+I deal with huge data tables and often need to modify the vertical position of the datas in the column, but not all the datas, datas starting from a certain one. Example : it's a really a huge loss of time to everytime have to select A10, then scroll back to A500, press shft and press A500 before my cut/paste to put those datas to A13 to A513.
+
+Thank you very much for your help
+
+
+-------------
+1) Two solutions. One is to stop cutting and pasting, and use copy and paste instead, then delete A1 and B1 if you want. The other solution is to use a function like OFFSET or INDIRECT. `=IF(OFFSET(C1,0,-2)=OFFSET(C1,0,-1),"YES","NO")` or `=IF(INDIRECT("A"&ROW(C1))=INDIRECT("B"&ROW(C1)),"YES","NO")`, e.g. Note both of those are now relative to *C*1, not A1 or B1. The junk with `&ROW(C1)` is there to keep the formula 'dynamic' as you drag it down.
+
+2) Ctrl+Shift+Down. Also, use Ctrl+Enter to enter a dynamic formula into multiple cells. Like if you have data in A1:A1000, select B1, Ctrl+Shift+Down, formula bar type in `=A1` and Ctrl+Enter, and B1=A1, B2=A2.. BN=AN.
+-------------
+Perfect solutions to both of my issues in 10 minutes.
+Awesome.
+
+Thank you very much.
+-------------
+ Solution Verified
+-------------
+
+You have awarded one point to _rnelsonee_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,61 @@
+large
+3i74u2
+Extracting a set amount of data from one large list to another sheet.
+
+How do I find a large list of data within one excel sheet? It needs to include stock, prices, quantities. Was wondering if someone could show me or describe to me how the steps are done.
+
+
+-------------
+Are you looking to find specific rows where multiple criteria are met? Such as 500 shares of PG at $73.44? Or are you just looking for all of the rows that have PG in them?
+-------------
+So I am in the tackle industry. Theres a master list of items, lets say theres hooks, swivels and ice fishing, rods reels and etc... I want to just take all the unique columns of an ice fishing list and pull them from the master spreadsheet.
+Thats what I am looking at to do. If that makes sense.
+-------------
+Ah, gotcha. You're not using Google Sheets by chance, are you?
+-------------
+Is it easy to discern what items are ice fishing? Your best bet would be to code all the items (so all ice fishing items would have an IF, for example, in an additional column). Then sort the list by the codes and you'll have all of your ice fishing items grouped together. You can copy paste from there. 
+-------------
+You could copy your list to another tab and then follow the steps [here](https://support.office.com/en-us/article/Filter-for-unique-values-or-remove-duplicate-values-ccf664b0-81d6-449b-bbe1-8daaec1e83c2) to remove duplicates. 
+
+When you perform these steps, make sure you previously delete any column you really don't need, like quantity or totals, if you keep them, you probably won't get unique values... 
+-------------
+No.
+-------------
+Theres 40,000 items. So I would have to search by each model number for the 500 items. I didn't know if there was a way to select all the items I wanted while searching. Also using excel 2011 on my old trusty macbook pro. But I do have a desktop at home I could do it on if there was a way.
+-------------
+Thanks for all the help guys. I guess there isn't an easy way to do it. Thanks again for the assistance.
+-------------
+I did see that there was a category for them but how do I extract all items in that category with all their rows?
+-------------
+Excel's not really meant to do this which is why you have to use a pretty ugly formula to take care of it. See [this blog post](http://fiveminutelessons.com/learn-microsoft-excel/use-index-lookup-multiple-values-list) for more info.
+-------------
+Is there any discerning information in each row that says whether or not the product is for ice fishing? If so, you can probably use an IF statement to code it automatically for you. If it's coded, this will be super simple.
+-------------
+Mmmm... I think I got lost with what you need to do with the data afterwards... 
+
+Have you tried using [Pivot Tables](http://www.excel-easy.com/data-analysis/pivot-tables.html)?... 
+
+It will let you put any category on the row or column field and summarize stock, prices and quantity in the Value Area... 
+-------------
+Dam. This will be a long day. Thank you!
+-------------
+Everything under one category or number that is listed. So for example 123 is the category number it is listed under, and I need all the items with that number with all its data in the sheet to put on another sheet.
+-------------
+Sure thing!
+
+If you just need to do it once, I'd recommend filtering (or sorting) the table and then copy and paste things over. It's not automated, but it's better than nothing!
+-------------
+Got it.
+
+Last week [I suggested this](https://www.reddit.com/r/excel/comments/3hr2zc/can_someone_explain_how_to_use_show_details_for/cu9smkz) based on a Pivot Table, this macro will split the details for each category into separate tabs and will name the tabs with the categories names. 
+
+I think this may accomplish your desired result.
+-------------
+So this will take everything from the 02013 tag and put all those items on a new sheet?
+-------------
+Correct, you need to put your category field in the Row Labels area and run the macro... it will repeat the process for each category... put all the items on a new sheet and rename this new sheets with the tags accordingly... 
+
+So this 02013 tag Details will be stored in a Sheet name 02013
+-------------
+Thanks will try it!
+

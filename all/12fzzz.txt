@@ -1,0 +1,57 @@
+large
+12fzzz
+Large number problem
+
+I'm working on number theory homework, specifically RSA encryption.  I'm trying to decrypt 
+
+y=5,272,281,348
+
+with
+
+p=187963
+
+q=163841
+
+m=30796045883
+
+k=48611
+
+u=20709535691
+
+so I need to solve
+
+x~y^u mod m
+
+but that's not the important part.  To solve for x I have to multiply large numbers by large numbers, with products reaching 20 digits, maybe 21, but excel is rounding after 15 digits.  Is there a way around this?  I can post the spreadsheet or a screenshot if necessary but I doubt that'd help...maybe theres a different software I should be using for this?
+
+edit:  if i cant get 21 digit numbers, could i have excel calculate the congruences?
+
+
+-------------
+Excel will not work for this application, and I don't think vanilla MATLAB will either. The maximum number of significant digits for 64-bit integers is 18 or so, and less for floating point (as you discovered). 
+
+You need to use a programming language like Java (with the Big number objects & functions) or Python (which automatically transitions to arbitrary big number math when needed).
+-------------
+You're probably better off using Matlab for this. Excel isn't widely known for its precision with large values.
+-------------
+http://precisioncalc.com/What_is_xlPrecision.html
+
+If not this, something similar.  There are libs to handle this sort of thing.
+-------------
+[This](http://www.python-excel.org/) seems relevant.
+-------------
+i've been meaning to get into programming, i guess theres no better time to start than now.  any suggestions where to start?
+-------------
+Matlab uses the same OS-defined 64 bit floats as Excel, but that's not enough.
+-------------
+wouldnt install correctly....it doesnt say anything about installing in win7, do you know if its supposed to work?
+-------------
+Or [this](https://datanitro.com/downloadpage.html)
+-------------
+[pythonxy](https://code.google.com/p/pythonxy/) gives you everything you need in one excellent package, and python probably has more tutorials on the web than any other modern language.
+
+It's also got a native CSV reader.
+-------------
+I don't use any of them, I'm just aware of their existence because I know there are algorithms that specifically address the problem you are having.
+-------------
+thanks, i'll probably try to learn how to use python this weekend

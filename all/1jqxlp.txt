@@ -1,0 +1,56 @@
+crash
+1jqxlp
+Excel 2010 crashes when I try to enter text into an imported report when recording a macro. Any idea why?
+
+I have brought data in from another Access-based database.  The imported report looks fine, organizes and sorts without issues.  I need to do some analysis on this data, so I am trying to record a macro which will do some simple addition and display the totals at the bottom of the report.  But when I click on Record macro and try to enter any additional text into the report Excel immediately crashes as soon as I try to click out of the field I just entered data into. 
+
+The Event Viewer shows an Event ID 1000 with the following text:
+
+Faulting application name: EXCEL.EXE, version: 14.0.6126.5003, time stamp: 0x505b0834
+Faulting module name: EXCEL.EXE, version: 14.0.6126.5003, time stamp: 0x505b0834
+Exception code: 0xc0000005
+Fault offset: 0x002096ed
+Faulting process id: 0x2280
+Faulting application start time: 0x01ce91f8aec8ac29
+Faulting application path: C:\Program Files (x86)\Microsoft Office\Office14\EXCEL.EXE
+Faulting module path: C:\Program Files (x86)\Microsoft Office\Office14\EXCEL.EXE
+Report Id: fdc44699-fdeb-11e2-a2cc-005056c00008
+
+I posted this over at the MS Excel forums but got no response.  Any ideas why this might be occurring?  
+
+
+
+
+
+-------------
+Have you reinstalled MS Office?
+-------------
+I had the same problem today. My coworker had the same problem as well with my file but no problem with a different file. I tried another file and it worked fine on my excel so it seems this issue is with the file and not excel. I have no idea why it happened but I didn't really have time to address the issue so I simply copied the code for renaming cells into a txt file so it could be easily copied into the macro editor when needed and just replace the column/row values and headlines. Problem "solved" - for now.
+It takes a bit longer to record macros since you cant name anything during recording but doing it afterwards in the editor wasn't that much of a pain.
+-------------
+Tried running a repair but not a full reinstall.  After further testing I found it crashes on two different computers running Office 2010, so I think it's a bug in Excel.  
+-------------
+Interesting... Try to save your file as .txt then import and see if your macro still crashes excel.  To me that'd be one way to test.  
+-------------
+Doesn't crash when I do that.  Strange.  Here's the crash text, but haven't found anything useful relating to this problem online:
+
+Problem signature:
+  Problem Event Name:	APPCRASH
+  Application Name:	EXCEL.EXE
+  Application Version:	14.0.6126.5003
+  Application Timestamp:	505b0834
+  Fault Module Name:	EXCEL.EXE
+  Fault Module Version:	14.0.6126.5003
+  Fault Module Timestamp:	505b0834
+  Exception Code:	c0000005
+  Exception Offset:	002096ed
+  OS Version:	6.1.7601.2.1.0.256.48
+  Locale ID:	1033
+
+Additional information about the problem:
+  LCID:	1033
+  skulcid:	1033
+
+
+-------------
+If it doesn't crash from a .txt it's something to do with the formatting bringing in from Access I believe.  

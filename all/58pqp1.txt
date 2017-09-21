@@ -1,0 +1,30 @@
+big
+58pqp1
+Can an excel file with many tabs, expanding tables, functions and conditional formatting be too big to save and function?
+
+I have a file (stored on a shared drive, edited by multiple users) that I created that is an expanding table with many drop down inputs, vlookups, sumifs, etc. this file also has about a dozen other tabs that all have tables, functions, etc that are based on the main data set. I spent the past few days adding four new tabs that all have hundreds of cells with large functions and today the file started acting up. The main table would not expand for new entries, i got an error message that said "excel cannot complete this task with available resources. Choose less data or close other applications" when trying to delete a few rows, and finally it just refused to save.  Is there a cause for all this? And if so, is there a solution? Any help would be much appreciated as my office depends on this file. Thanks!
+
+
+-------------
+It's a memory function, not a complexity issue. Save it, close it, then close down a few programs. Happens to me from time to time.
+-------------
+32-bit or 64-bit Excel? Bit of a trade-off. 64-bit supports larger workbooks, but doesn't support various controls.
+
+How big is the file on disk? How much memory does Excel use when the workbook is open in Excel? It could be too big, and in that case you may need to split it into separate parts.
+-------------
+
+Hi!
+
+You have not responded in the last 24 hours.
+
+**If your question has been answered, please change the flair to "solved" to 
+keep the sub tidy!**
+
+Please reply to the most helpful with the words **Solution Verified** to do so!
+
+See side-bar for more details.   If no response from you is given within the next 5 days, this post will be marked as abandoned. 
+
+*I am a bot, please message /r/excel mods if you have any questions.*
+
+-------------
+Sorry for the late reply! Unfortunately my VPN is not working so I cannot access the file to find out the exact size but I will reply when I can. 

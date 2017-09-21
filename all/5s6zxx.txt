@@ -1,0 +1,47 @@
+big
+5s6zxx
+Vertical sheet too big in file size after transpose
+
+Hi,
+
+I have this sheet where I put my weight and circumferences of my body. It also makes graphs out of the data. The file has seven different sheets, one for data and six different graph sheets.
+The sheet used to be horizontal like this [picture](http://imgur.com/AtiuZmv). 
+File size was very nice 59,0kb.
+
+Yesterday I thought to make it horizontal. I copied the sheet under the original sheet, used transpose and moved the new, transposed sheet to start from A1. I also added some borders to the sheet and froze the first row. I had to do all the graph sheets again, so I did that. 
+Now the sheet looks like this [picture](http://imgur.com/wYUKIDd).
+And whaaat, over 6Mb?!
+After the transpose the file started to work really slow. My i5-6600K struggled to get the sheet work.
+I have used 6001 rows in the sheet. That means 16 years. But, the file was heavy before I added all these years. I deleted all the formatting from 6002 - *end of sheet* to make it work smoother, but this had little effect.
+
+So, what to do? I feel like it isn't right that it takes 5 seconds to change from a sheet to another, as it happened instantly before the transpose. Why is vertical sheet so much bigger in file size and harder to process?
+Of course I have the old version saved, I can use it, but I'd just want to know why this happened. Have I done something wrong?
+
+Thanks for your help!
+
+
+-------------
+Copy the data to a new sheet, do not format...  just use the data for your graphs.. save as .xlsb
+
+metadata accrues in the spreadsheet file as you edit and redo and undo.. so start with a clean spreadshee.t xlsb is binary format the saves smaller also.
+
+
+-------------
+[deleted]
+-------------
+There must somehow been a **LOT** of metadata. Thanks, this helped, without all the fancy formatting the file size is now 430kb, and the file now works smoothly.
+-------------
+Solution Verified
+-------------
+Hello!
+
+It looks like you tried to award a ClippyPoint, but you need to reply to a particular user's comment to do so, rather than making a new top-level comment.
+
+Please reply directly to any helpful users and Clippy, our bot, will take it from there. If your intention was not to award a ClippyPoint and simply mark the post as solved, then you may do that by clicking Set Flair. Thank you!
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/excel) if you have any questions or concerns.*
+-------------
+
+You have awarded one point to _excelevator_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,77 @@
+large
+5eun5q
+Really Large Spreadsheet Bogs Down
+
+So I've got a really large spreadsheet. 78MB, about 35 worksheets.
+
+I've on a i7 laptop, 16GB ram, SSD. Takes about 20 seconds to open said sheet, similar amount of time to save and close. 
+
+If I'm pasting a range of formulas, sometimes doesn't calculate automatically and I have to manually update it, but even if it does, it takes its time. 
+
+Is this normal? The data that I'm working with really wouldn't be conducive to splitting it out into multiple sheets. 
+
+
+-------------
+If you're dead set on keeping it as is, the first thing you can do is save it as an xlsb. This is a binary file that Excel can manipulate a lot easier, and will be smaller. 
+
+The real thing you should do is as others mentioned, you really should be using some sort of database software for this. 
+-------------
+Treate Excel like a database... that is what you doing after all, database functions.
+
+You should have all the data on one sheet with appropriate identifiers for each subset of data, such as Year/Month
+
+Excel is designed with functions to deal with finding data in amongst data, you do not have to break it up... 
+
+You can then have a second sheet with all the subtotals and analysis. 
+
+Consider using [Double TRUE  Vlookup](https://fastexcel.wordpress.com/2012/03/29/vlookup-tricks-why-2-vlookups-are-better-than-1-vlookup/) for super fast lookups. 
+
+Doing these two things alone will Turbo Drive your experience..
+
+
+-------------
+Why is your document 78MB for 35 worksheets? Do you have lots of cell formatting (colored cell backgrounds, cell borders, etc) on the various pages taking up entire columns/rows of cells? Do you have lots of charts or images embedded within your document? If you can figure out why the filesize is so large, I'm sure it will help speed things back up again.
+-------------
+You really shouldn't let an xls file go over 20mb. You should look into using Access or SQL Server.
+-------------
+Something I've come across is that the use of vlookup formulae tend to bog a sheet down, while using the index (match) setup, which grants you the same data, tends to require less processing power. I made the conversion and noticed a slight difference
+-------------
+This was posted a few weeks ago in this sub. This is the most scientific breakdown I've seen of calculation speed in excel. You should definitely give this a read and make sure you are hitting the lowest hanging fruit first. I also maintain a monster of a workbook with lots of manipulation of data sets for the purpose of inventory analysis and production planning. I may get on later and follow up with some tricks later when  I'm home. 
+
+https://www.reddit.com/r/excel/comments/5c0pid/performance_of_excel_study_shows_how_to_speed_up/
+-------------
+I've had similar issues and ended up running sql queries within Excel. Much much faster.
+-------------
+Check out Power Query and/or Power Pivot to organize and streamline your source data.
+-------------
+Are you using 64-bit Excel? If not, 32-bit Excel can only use 4GB RAM.
+
+Do you have a lot of formulas with INDIRECT or OFFSET calls?
+
+Do you have a lot of COUNTIF[S] or SUMIF[S] calls which use ranges or arrays as criteria arguments?
+
+Do you have lots of lookups or MATCH calls searching large ranges for exact matches?
+-------------
+Delete all the unused cells, it could be that they contain some formatting you aren't seeing and blowing up the file size. 
+-------------
+I'll give the xlsb thing a shot. Also moving to static data over time, as there's no reason to be running a lot of logic functions on data that isn't changing. 
+Database might be the next step, but I'd like to put it off as long as possible. 
+-------------
+Well, there monthly data going back nearly three years, one sheet per month. Most of those sheets have 1,000+ rows, and columns out to about FD. The first 8 columns are data (employee seniority lists), the rest is me asking questions of the data through a variety of means. 
+There's about 12 other worksheets where I'm manipulating the data that I've created on the monthly sheets, and 2 worksheets with just charts. It's a real monster. 
+-------------
+While I have access to Access, I wouldn't even know where to start. Most of the data is numeric and there's a lot of formulas going on. 
+-------------
+Yeah, I don't use any lookups, it's all index match for what I'm doing. 
+-------------
+Are the other columns all live formulas? Since they're old data, could you make them static using paste values? 
+-------------
+You... probably want to move to Access. This is really beyond what Excel is for.
+-------------
+Are your monthly sheets identical in structure, just different numbers and therefore chart display?  Is the 1k+ rows pulled or calculated from somewhere else?  What version of Excel are you using?  If you are using Excel 2007 upwards then the first thing would be to look and consolidating the data into 1 sheet and only 1 monthly sheet where users are prompted somehow on what month they would like to see.  The selected month is then dynamically populated.  This will significantly reduce your file size,.  You now only have 1 chart and 1 sheet with any fancy cell/conditional formatting.  Depending on your use of formulae and static numbers the performance of the 1 data sheet could still be very fast.  This change would also effectively be a middle step in transferring your data eventually to a database.
+-------------
+Where is your data coming from and what are you using it for? Maybe you can use power query.
+-------------
+If your match is exact (using zero),  you have the same performance problems as vlookup
+-------------
+There's a lot that could be made into static numbers. That might be something to try but will take some careful thought. 

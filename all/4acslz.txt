@@ -1,0 +1,149 @@
+slow
+4acslz
+spreadsheet calculating too much and slow
+
+Hi team
+
+I have a issue which has been bothering me for a good few weeks now. 
+
+I have this big spreadsheet that has a huge number of calculations being performed, and has led to it being really slow and calculates for about 3 seconds each time any change is made to the sheet. 
+
+The 3 seconds is a long time. 
+
+I know there are some functions which do take a lot of processing power e.g. INDIRECT and OFFSET and I have minimized them where possible but still there is no change. 
+
+Can you please give me some pointers on what to look out for to try and make this fast moving? I know I'm doing something wrong to get this slow. 
+
+Hope you can help.
+
+
+-------------
+vlookup functions refresh often. instead use index/match. Also RAND of RANDBETWEEN refreshes all the time, making it slow probably. If you have your data sheet separated from your formula sheets, exporting the data sheet to csv might help. Also google for a vba that lists all of the links that your document has with external files, maybe you can delete half of them.
+-------------
+If statements; sumifs, countifs, nested ifs, etc. Even if the first condition is met, IF statements still run through all conditions. They REALLY slow down the sheet. 
+
+You could always make the calculation manual. 
+-------------
+What version of Excel are you using?
+-------------
+Are there any array formulae?  Those can pull quite a lot of processing power.  Various lookups (index, vlookup, hlookup) can also use a lot of power, especially in large scale.
+
+The other thing that can slow it down is external references to another file, and ESPECIALLY if that other file is not open, or on a shared/network drive vs the local machine, or both.  If you rely on external data on a file that's slowing down, consider some kind of import vs external references, IE, import the data to a "data" tab in the file, and reference that instead of the external file.
+-------------
+I had a file that would run to slowly, steps to help:
+
+- avoid volatile formulas;
+- Set your ranges to a fixed length;
+- Conditional formatting will slow files down;
+- order your sheets in calculation order and be check your calculation order - changing one cell on a previous sheet could cause the entire sheet to recalculate;
+
+- I had a friend who used to work for Deloitte and had some great macros to analyze spreadsheet performance. I had begged and plead but he wasn't keen on sharing. 
+-------------
+Save it as a binary file.
+-------------
+If there is no way around reducing the formulas, I use VBA to place the formulae for me then paste the values again with a refresher button. 
+
+There are better ways, but this is by far the quickest and most simple way to drop this issue like a hot potato.
+
+Its quick, smooth, and doesn't waste time.
+-------------
+Would it be a usable solution for you if you turned off the automatic calculation? So the cells would be only refreshed upon your request.
+-------------
+Set calculation to manual
+-------------
+Zombie Cells, eating your processors brains.
+-------------
+Hiya mate, I'm not sure about how further to optimise your calculation time without seeing the formulae in question really, but if it's bugging you that the sheet recalculates every time you make a change to it, you can turn off Auto-calculation so that it'll only update things once you tell it to. See link below for more information:
+http://www.howtogeek.com/162219/how-to-change-the-automatic-calculation-and-multi-threading-features-in-excel-2013/
+-------------
+Thanks mate - I can tell you the answers to most of the concerns. 
+90% is all index and match and only some very basic/very few vlookups are there. There is no RAND/RANDBETWEEN anywhere. The data is all in the same worksheet as seperate tabs. And there is no external data (i.e. no data is outside the sheet). 
+-------------
+There's a lot of sumifs but again making calculations manual has other potential for error. This sheet is used by other operators who are not good with excel and they do some basic data entry in it and show to customers the results. I can't see them remembering to or bothering to turn on and off calculations so its up to me to fix the backend to make it faster
+-------------
+2010 but I have seen it slow on 2013 too
+-------------
+Yes there are in fact loads of arrays in there. But again there is no alternative. Definitely no external data in there.
+-------------
+Thanks. What are volatile formulas?
+In terms of fixed length, I was told that for index match length does not matter and same for sumifs
+I'll be looking at conditional formatting.
+I'll like to know about calculations order though?
+-------------
+Thanks will try it out. That just reduces the size right?
+-------------
+That's interesting. This must be super complicated. I'm really a chump with vba
+-------------
+alright, how about conditional formatting? i heard this can make a file very large and slow as well. hope it helps
+
+ah btw, that vlookup is not providing any o the input data for other index/matches right? like it needs to recalculate a chain of formulas with every refresh
+-------------
+You could try replacing some INDEX/MATCH and vlookups with the two vlookup method.
+
+https://fastexcel.wordpress.com/2012/03/29/vlookup-tricks-why-2-vlookups-are-better-than-1-vlookup/
+
+Just make sure the data you are looking into is sorted by the index you use in the lookup.
+
+-------------
+regarding arrays, you should make sure they are defined only to the range they apply to, not whole columns / rows. 
+
+Excel formulas have a lot of "cleverness" built in, so if you go SUMIF(A:A,blah) it only looks on the part of A:A that there's stuff in, no big deal. 
+
+if you perform a similar calculation in an array formula (SUMPRODUCT(A:A=blah*A:A)), then excel is stupid - it will evaluate every single row in A:A, even if there's no data in it. 
+
+So if you have to use arrays, it's important to use only the necessary range. If your data changes in size from time to time, either use tables, or make dynamic ranges with INDEX formulas (not offset)
+
+-------------
+This link is amazing 
+http://www.decisionmodels.com/calcsecretsi.htm 
+
+Just did a quick scan and think it should answer all questions 
+-------------
+Not only that but it also makes it faster to save and to load.
+
+You can read more about it [here](http://blog.datasafexl.com/excel-articles/advantages-of-xlsb-excel-binary-format/)
+-------------
+Nope. Super easy. Should be able to stale a whole sheet in seconds
+-------------
+Theres a lot of conditional formatting I would say but how can I avoid it? 
+
+Will check if vlookup is a part of index match and will come back.
+-------------
+Sorry for the delay - yes there is a vlookup that is an argument for index matches. I have no idea how to avoid this though.
+
+Actually, I have 2 spreadsheets, both do kind of the same thing with same formulas. In fact the slower file has got all conditional formatting and all needless formulas removed. The only other difference is in the number of columns. One has about 12 columns with formulas (the faster one) and the other has about 50 (the slower one). 
+
+The difference in slowness is ridiculous. Like each value entered in any cell takes up to 5 seconds of processing, so you can imagine how frustrating it is.
+
+Its doing my head in. Can you please suggest something? 
+
+I also remember you said data into csv. There is some "tabs" with data that the formula sheets are using, but the data is in the same workbook, so they cannot be converted to CSV right?
+
+Thanks so much.
+-------------
+By not using the CF :D. I guess just go through the rules in the CF Rules Manager and see what you can delete.  Or maybe first make a copy of your file, and do this in every sheet with Every Tab just to see if it makes any difference: ctrl + A (select all) and ctrl + H E A (delete formats) (*and ctrl Page Down to go to next sheet). 
+
+-------------
+Lol ok. You can convert any sheet to (a new, temporary) csv (file). Just save as, close Excell and then open the sheet that needs enlighting and the csv file. When you copy the sheet to your new file you can be sure there are no ridulous values hidden anywhere (could also check the csv file before importing in notepad). But, actually I think the problem should not be those values. I'm working with 1200 columns and I only have to wait for like 3 seconds sometimes. Try finding all of your vlookups with ctrl f, search for vlookup( and if necessary change that box to search formula (or vice versa), also search in whole workbook. Then you know where they are and you can change them to index match functions. Best thing to do probably i guess is start up a brand new file, copy paste the csv files and build the formulas (or copy paste them (ONLY FORNULAS - also no vlookups)). Goodluck! 
+-------------
+ps. the only way to delete conditional formats, but keep the format as they are, is by using a vba (quite complicated). An easier method is to copy tables to Word and copy paste them back to Excel (this will maintain the formats but without the conditions). As your formulas go lost this way, you can copy paste those again with the Paste Special option. 
+-------------
+Thanks. I don't get your idea for CSV. Do you mean I can convert an individual tab in my workbook into csv while the actual workbook remains xlsx?
+
+For the vlookup in the index match, what do you recommend I do? Like an index match inside an index match?
+
+So you reckon only vlookups could be the only culprit? Assuming there is very less conditional formatting.
+-------------
+With the csv I mean you copy paste the values of the newly created sheet back, just to make sure all the formats are gone etc. 
+
+As I read somewhere that vlookups tend to refresh a lot, I think replacing them with index match is def worth it, so yes, also when it will become nested index match functions. 
+
+These two things are the only thing I can think of that slow it down, but as the ammount of clippy points next t my name will tell you, I'm not an expert. 
+
+With the csv thing, you could also do that with building an entire new workbook /file. Copy paste to csv sheet for sheet and copy paste sheet for sheet to the new file. After that insert the formulas, and during inserting them (guessing it are quite a bit) save as the file a lot with different versions to see when it becomes slow (when as in what change makes it that way) 
+
+Don't know if I mentioned it earlier, i guess external links (links to other files) can slow the file down a lot, but that is just a guess. 
+
+If this is to much work then repost your problem and hope for somebody with more experience to reply (and also tell me if you solved it cause I would like expecially the vlookup /index match theory to get verified). 
+
+BTW, you did add the FALSE argument to the vlookup functions right? Don't know it matters with speed, but it def is precise (and randomly unreliable if you don't have it there, as TRUE is the default setting) 

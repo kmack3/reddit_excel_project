@@ -1,0 +1,62 @@
+forever
+41nvir
+How to make a formula/formatting go on forever?
+
+Hey all,
+
+recently I encountered the following issue as I was creating an account in excel. The account would take on the left a description of the value entered on the right. Thus to demonstrate how this would work 1A:1C are merged into one cell and form the name of the account 2A:2B are merged and are named SUM, while 2C represents the value of the sum. The formula of the SUM is SUM(3C:ForeverC). Now everything below 2A:2B (e.g. 3A:3B) is merged in the same manner as 2A:2B which is done so the user can enter the name of the entry and beside them there is always the empty cell xC where the value  of the entry should be entered. 
+
+Now my question/problem is the following, how could I instruct Excel that the formula should go on forever regardless how many values are entered and how to instruct excel to always merge the cells xA:xB, regardless how far down I would scroll on the sheet?
+
+Thank you for any feedback! 
+
+
+-------------
+Alright, going to make some suggestions that will likely neaten your stuff up., starting with my personal favorite:  If you don't need to merge cells, DON'T! :)
+
+Also, a tip, cells are reference by [LETTER][NUMBER], so A1:C1, not 1A:1C.
+
+Anyway...
+
+Can cell A1 just be made wider and have the name of the account? (this avoids the merging).  Cell A2 would then have "SUM", and cell B2 would then be:
+
+    =SUM($B$3:$B$1048576)
+
+Then you don't have to worry about merging anything.  All rows past that would have the name of the entry in column A, and the amount in column B.
+
+That should do the trick and make for "cleaner" data :)
+-------------
+If we're talking best-practice.... Don't make a formula that long. Use a Dynamic named range.  
+http://www.excel-easy.com/examples/dynamic-named-range.html
+-------------
+But I love merging cells haha :P
+
+The reason I am merging cells is because I am actually too lazy to format (resize) them. You have to imagine that I need to fit 7 accounts on the sheet, each taking a pre set amount of room so they all fit and they have to look the same. 
+
+But even if I would solve this situation as you propose (which I admit is a good solution), my question has a more general purpose, which is, how to make ANY kind of formatting go on forever. The "exercise" given above is only a testing ground, even through it would find a practical purpose. I could have as well asked how could I make a varying cell shading to go from A3 to forever. 
+
+Also any idea why it is exactly this cell (number) $B$1048576, that is refereed to as the "end" cell by excel, as I noticed this already at some point.
+-------------
+Good point... combination of good practice and laziness on my part.
+
+https://s-media-cache-ak0.pinimg.com/originals/87/88/9e/87889e19d31e1359d02f2ff8b497dbd2.gif
+-------------
+1048576 is 2^20. ~16000 is 2^16.  
+Arbitrary choices.
+-------------
+Formulas and formatting are different things.  In any case...
+
+Holding CTRL+SHIFT and hitting an arrow key will select every cell from where you first placed your mouse to the end of the row/column.  You can then type the formula into whichever cell you had initially selected and hit CTRL+ENTER to apply that formula to every cell.
+
+Likewise, if you select a range that has the formatting you want, double click format painter then select the first range you want to apply this to, then use CTRL+SHIFT+arrow, it will repeat the formatting for all cells in that row/column
+-------------
+Solution Verified
+-------------
+Thank you, that is what I was looking for! 
+-------------
+
+You have awarded one point to _eirunning85_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+No problem! Thanks for the ClippyPoints! :)

@@ -1,0 +1,51 @@
+crash
+5ecx2v
+Crash caused multiple PDF hyperlink paths to change to \appdata\roaming\ - cannot redirect
+
+Hi! First time posting in r/excel, apologies if I miss out anything crucial. 
+
+I have a spreadsheet that is essentially a calendar with roughly 30 entries per day, and a hyperlink to a relevant pdf within each cell. 
+
+When a colleague crashed Excel, he accidentally saved the auto-recovered version, rendering all hyperlinks impossible to open. 
+
+When clicked, I am greeted with 'cannot open specified file' as the path has changed to C:\\Users\AppData\Roaming\Microsoft\... rather than C:\\Users\[username]\MyDocuments\... 
+
+In the past, we would have daily backups, meaning that if such a thing should happen, we could manually enter any recent edits. Unfortunately, we have not backed up in a few days and a lot of content has been added in that time. I could manually edit each and every hyperlink, but there are thousands and I always thought Excel was a bit more intuitive than that. 
+
+Having spent hours searching, I've found that I need to be using a VBA/Macro in order to redirect all paths back to the original locations within My Documents. 
+
+I have followed many google step by steps and have found [Hyperlink cells changing path to \appdata\roaming\..] (https://www.reddit.com/r/excel/comments/3l3xpg/hyperlink_cells_changing_path_to_appdataroaming/) and [Excel hyperlinks change from network path to local path, messing up 500++ hyperlinks] (https://www.reddit.com/r/excel/comments/2tadvq/excel_hyperlinks_change_from_network_path_to/) but cannot seem to resolve the issue. 
+
+Needless to say, I know nothing about VBA/Macro and am completely winging it. 
+
+It seems many have encountered this problem, yet for some absurd reason Office/Excel do not have any official guide on how to rectify it. 
+
+Would appreciate any suggestions you may have, and will of course provide any additional info I may have missed. 
+
+Thanks in advance!
+
+**EDIT** We've given up and moved on to doing it manually. Thanks for your suggestions. Feel free to keep them coming as they may be useful next time someone messes things up! 
+
+
+-------------
+Without more information, cannot you search replace (ctrl+H ) the main path...
+-------------
+Copy the column with hyperlinks into another spreadsheet, and export to text or CSV.  Perl/Grep/REGEX the links into the correct form, open in Excel, and C&P them back into the spreadsheet.
+
+If that munges the data too much, save as XML and REGEX that a bit more carefully.
+-------------
+Unfortunately not, as it is doesn't find and replace hyperlink addresses. We've moved on to doing it manually, as we've spent hours on this to no avail. 
+
+Thanks for your reply though. 
+-------------
+Interesting! Will see if that works, would be time consuming to do for the entire year though. Saying that, we've moved on to doing it manually and comparing the backed up version, still time consuming, but at least we know what we're doing haha. Thank you! 
+-------------
+Ah, embedded URL, I assumed incorrectly it was `hyperlink` function .. and on that note it might be worth using the `hyperlink` function instead where you have the path in text on the worksheet.
+-------------
+Yes! Sorry! Knew I'd forgotten something important 🙈 Thank you!
+-------------
+Did you set this question to Abandoned?  
+
+Would suggest you leave it open as someone may have an answer at sometime.
+-------------
+I did! I'd personally abandoned it haha, but will re-open now. Thanks! 

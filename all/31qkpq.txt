@@ -1,0 +1,69 @@
+slow
+31qkpq
+Script is slow when called from ActiveX button, fast when changing the linked cell
+
+I have a sheet with 2000 cells containing an OFFSET formula that depends on a single cell (K1) and cells in another sheet. The sheet also contains an ActiveX SpinButton control which is linked to K1. Finally, I have a PivotTable with the 2000 cells as its source data.
+
+When I change the value of K1, I want Excel to wait until the 2000 cells are updated, before it refreshes the PivotTable. 
+
+My solution is this VBA code, which is stored in the sheet object:
+
+    Private Sub SpinButton1_Change()
+        n = 0
+        While (Application.CalculationState <> xlDone And n < 10)
+            n = n + 1
+            Application.Wait (Now + TimeValue("0:00:01"))
+        Wend
+        Sheets("Data").PivotTables("PivotTable1").PivotCache.Refresh
+    End Sub
+
+
+Now, this works well (instantly) if I just change the value of the linked cell manually. However, it I change the value of the linked cell using the ActiveX control, it takes forever (timeout with n=10). 
+
+I'm using Excel 2010 on Windows 7.
+
+
+-------------
+I've tried changing to a form control (linked to K1), but it doesn't help. Either 1) I have to move my code to a module and assign it to the button, which makes it as slow as the ActiveX button, or 2) I link the Form Control button to the cell, and keep the ActiveX button out of sight (but linked to K1). This makes the Form Control able to change K1, which again calls the ActiveX macro SpinButton_Change().  This is as fast as typing a new number in the cell, but it's just a workaround.
+-------------
+I'm stuck with Excel 2007 at work on Windows 7, but not noticing the lag you are.  I took out the whole n and the application.wait stuff, as I just want it to refresh once things are ready.
+
+Windows experience index of 7.1, 7.2, 5.0, 6.3, 5.9 for CPU, Ram, GPU, Game GPU, HDD for reference.  That said, my offset may not be as involved... I suspect there must be something else going on.
+-------------
+Update:
+
+The problem is that the Spinbutton is linked to a cell, and that the sheet doesn't update when the spinbutton changes the value.
+So to get around that, I replaced the link with VBA code. In hindsight I could have put it under Spinbutton_SpinUp and _SpinDown, but I didn't realize that at the time, and instead opted for two commandbuttons labeled < and >, for which I've replicated the function of the spinbutton, including keyboard commands. 
+-------------
+I've also tried replacing the SpinButton with two CommandButtons (labeled < and >). Their *_Click() macros change the value in K1 through the .Formula property, which works just like writing in the cell.
+
+It seems like it's the linking of the cell to the spinbutton that works differently.
+-------------
+The thing is that without application.wait, it refreshes the pivottable with old data. 
+-------------
+
+Hi!
+It looks like you received an answer to your question!  
+
+Please award a ClippyPoint^TM to helpful users by replying
+to their post with the words: *Solution Verified*
+
+This will also change the flair to "solved" for you.
+See the side-bar for more information.
+
+Would you like help?
+[Help Changing Your Flair?](http://www.reddit.com/r/excel/wiki/index)
+[Flair Descriptions](http://www.reddit.com/r/excel/wiki/index)
+
+-------------
+Odd... doesn't seem to do that for me, but again perhaps it is cause the raw data and pivot is too simple in the quick ~5k cell data I created.
+-------------
+Maybe. The data table I reference is usually 50000 rows and 20 cols. 
+-------------
+Ah, that makes a bit more sense then.  IF you don't mind givein an example of the offset formula?  Is it just straight offset? Or a summation of an offset for example.  Once you get arrays or arrays of arrays... although it is odd there would be a speed difference in the spin button.  I also find it interesting that old data is populated if you don't have the waits inserted.
+
+
+-------------
+Basically just OFFSET(Sheets("Dataset").Range("A1");$K$1;0)
+-------------
+Hmm.  Well hopefully someone else with an idea comes along... not sure why mine seems to hum along.  That said, could be that I am using 2007, although I would expect it to be slower rather than faster.

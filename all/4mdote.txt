@@ -1,0 +1,48 @@
+large
+4mdote
+Rush project - Make a small list of random values from a large list with no duplicates.
+
+Need to create a total of 5,000 "lists" - each a row of 33 cells. List is made up of 15 cells from one range (A2:A29) of 28 and 18 cells from a separate range of 52 (B2:B53).
+
+The cells in each list group need to be a random pull from the larger range, with no duplicates. 
+
+Macro or formula welcome, thanks for your help. 
+
+
+-------------
+I hate telling people to do helper cells but I think this solution is either VBA or...
+
+On another sheet (rand!) fill in D1 through CE5000 with RAND().
+
+On your sheet with the columns, in D1 you put:
+
+    =if(column(A$1)<16,index($A$2:$A$29,rank(rand!D1,rand!$D1:$AE1)),index($B$2:$B$53,rank(rand!Q1,rand!$AF1:$CE1)))
+
+copy over to cell AJ and down to row 5000
+-------------
+Nice, yeah I was already thinking VBA the best bet with multidimensional arrays to help keep track of what values have been used... it is sort of a big ask... 
+-------------
+helper cells are fine!
+
+I have it setup but have a few #ref! popping up: http://i.imgur.com/q8eF9aH.png
+
+This is sample data, but it's behaving the same way as the real data
+
+*edit: Evaluation: http://i.imgur.com/UKSpDjy.png
+-------------
+Sorry had to make a couple edits, I'm doing something a little funky because of your deal where you switch after 15 items. I counted wrong in my original
+
+What's in there now should work, starting from D1...
+
+    =if(column(A$1)<16,index($A$2:$A$29,rank(rand!D1,rand!$D1:$AE1)),index($B$2:$B$53,rank(rand!Q1,rand!$AF1:$CE1)))
+
+
+edit: Please check that all selections from A and B show up somewhere in the 5000 sets (ie Whatever is in A29 and B53 show up at least once).
+-------------
+Perfect, solution verified! All selections are showing up, and surprisingly the amounts are pretty even across the board. Thank you so much! :)
+ 
+-------------
+
+You have awarded one point to _monstimal_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

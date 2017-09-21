@@ -1,0 +1,68 @@
+slow
+4qnwxb
+Is there a way to speed up the "Paste Values"? Why is it so slow?
+
+Hello,
+
+I have a column A that contains 80.000 rows of 10 digit numbers. Most numbers occur only once. Some occur more than once (up to 70 times). Column B should show me how often the number has already occured. To calculate this I used this Formula
+
+=COUNTIF($A$1:A1;A1)
+
+It works pretty well and the calculation just takes a minute or so for the whole 80.000 rows. The strange thing happens when I try to copy and paste the rows of column B as values in column C. This took more than 1 hour. 
+
+Is there a way to speed up the process? Does anyone know why this could take so long?
+
+Some background:
+The rest of the workbook is completely empty. No conditional formats, volatile formulas or pivot tables. My excel 2013 64bit is running on a virtual PC on a windows server with 32gb and a lot of processing power.
+
+
+-------------
+So if you think about what the formula is doing, the first row checks 1 cell, but the 80000th row checks 80000 cells. In between, the number of cells adds one each row. 
+
+Remember how to sum `1 + 2 + 3 + ... + n`? It's `n * (n + 1) / 2`, so that's 3,200,040,000 comparisons --- this is going to take a long time no matter how you approach it. 
+
+u/hrlngrv has the best advice -- approach the problem differently by not doing so many comparisons. 
+-------------
+*COUGH COUGH* Use a PivotTable?....
+-------------
+I think you need to turn your calculation mode to manual (in Options), paste and then go back to automatic mode...
+-------------
+You have 80K values in col A, COUNTIF formulas in col B, initially nothing in col C, then you copy col B and paste-special as values into col C.
+
+I've noticed paste-special as formats triggers recalc.
+
+FTHOI, if cols A and B are in A2:B80001, try entering =B2 in cell C2 then double-clicking C2's fill handle. Is that fast? Then select C2:C80001, copy, and paste-special as values. Does that also take 1 hour?
+
+Anyway, your col B formulas use a very slow algorithm. Time for an old-fashioned mainframe-like approach. Assuming all columns other than A are initially blank.
+
+    B2:  1
+    B3:  =B2+1
+
+Fill B3 down into B4:B80001. Select B2:B80001, copy, paste-special as values. Sort A2:B80001 on col A in ascending order. Excel should maintain col B order for multiple equal col A values.
+
+    C2:  1
+    C3:  =(A3=A2)+1
+
+Fill C3 down into C4:C80001. Select C2:C80001, copy, paste-special as values. Select A2:C80001, sort on col B in ascending order to return col A to its original order. You'd have the instance numbers as constant values in col C. Clear col B if not needed further.
+-------------
+copy/paste column b into notepad, select all, paste into column c, hurrah!
+-------------
+I would understand if the calculation would be slow. But the calculation is actually pretty fast (a minute or so). Also if I copy column B and paste all the formulas to Column C, this happens basically instantly. It´s pastingthe values what isso slow...
+-------------
+I´m sorry but I do not understand how this helps my problem... 
+-------------
+I´ve tried that. No positive effect...
+-------------
+The PivotTable will condense all the unique values in the ROW field and then you can use the VALUES field get a count of how many times they occur. Avoiding the formula route all together and making use of an object that was designed for such aggregation activities.
+-------------
+While it's running the paste special, press CTRL-BREAK - is there some kind of macro running?
+-------------
+Thanks for the tipps. Unfortunately no. No macros. 
+-------------
+Can you use macros? If so the following will write the values of column B into Column C
+
+    Sub copyColVal()
+    
+        ActiveSheet.Columns("C").Value = ActiveSheet.Columns("B").Value
+    
+    End Sub

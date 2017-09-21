@@ -1,0 +1,18 @@
+big
+4ycelk
+I've got a big overlay over my massive table and have no idea how to get rid of it
+
+Big blue lettering "_FilterDatabase". I'm not sure what I did to get it there, but it's only visible when I scroll all the way out. Thanks for any help you guys can offer!
+
+Cheers
+
+
+-------------
+I'm guessing it's a named range. When your zoom level is lower than 40%, XL will show the names for your Named Ranges. It doesn't have any affect on printing or other things. If it **really** bothers you, you can try going to Formulas - Named Ranges and removing it...just be warned that anything that is currently referring to teh range "_FilterDatabase" would crash.
+-------------
+Thanks, I doubt anyone will zoom out that far, so I'll just leave it. Thank you though! Solution Verified
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,68 @@
+large
+3j0zqb
+Nested LARGE/IF statement help needed ...
+
+I have a file ([here](https://dl.dropboxusercontent.com/u/21174424/RedditSample.xlsx)) that has one worksheet of raw data (the tab is called DATA) and I need to have the SUMMARY tab pull in the top 5 in each category, listing the store number beside each employee name and their $ total in column D. I can do this; however, I am really getting confused with nesting statements.
+
+The deal is I need to
+- exclude all employees who have less than 50 transactions in column B of the data tab
+- exclude all rows with a missing name! 
+
+You're my only hope r/excel!
+
+
+-------------
+Try:
+
+In Most Transactions in the Summary sheet:
+
+=LARGE(data!C:C, 1), 1 will get the top highest, so copy that down so you see 1 through 5.
+
+in the Employees column of the Summary worksheet:
+
+=INDEX(data!B:B, MATCH(summary!D2, data!C:C, 0)) then drag down to the other cells. Index/match will find the name associated with that score.
+
+The only concern is if they have the same score, I believe index/match only grabs the first option, and using index/match requires your Employee name column to be sorted a-z or the numbers need to be sorted highest to lowest, I can't remember which, but it looked fine for me with employees sorted a-z in your example.
+
+There are ways I'm sure of fixing this, but my brain is fuzzy right now. This will give a good start though.
+-------------
+Yes, as /u/lobster_liberator said, there are people who are tied so the MATCH function isn't enough on its own. [This](https://drive.google.com/file/d/0B2QMEN_nL1swSEpCNXRldm44WEk/view?usp=sharing) takes care of that. I've got one helper column off to the right to find the position in the data of the found incidence of the LARGEst 5.
+-------------
+Just use power pivot. That's what it's for.
+-------------
+1. Pivot table is by far the easiest, but you don't need PowerPivot (though it's great).
+2. Add a column of formulas in col G: =IF(OR(C18<50,B18=""),"Exclude","")
+3. Name the column something like "Exclude Row?"
+4. Wrap the whole thing in a pivot table, and then drag the "Exclude" field to the filter box, set it to exclude all your "Exclude" value.
+5. Now just configure your pivot table to show top 5 values of each thing that you want.
+
+Using arrays/nested Ifs is definitely the bigger pain in the ass, and can blow up your file if it's really big.
+-------------
+I think you're better off adding ranking columns in the Data tab using the RANK function, then using LARGE to bring in the values to the Summary tab. You can use Index match to bring in Name and Store based on the Rank. 
+
+However, in order to break rank ties, you will need to use COUNTIF on the Rank column, multiplied by a random number between 0 and 1 on True and take the original rank on False. 
+
+EDIT: I populated the transactions summary here: https://www.dropbox.com/s/hhufyof96p2vfmx/RedditSample.xlsx?dl=0 using this methodology. 
+
+
+-------------
+Im good with that - but how to exclude rows that have under 50 transactions, and exclude rows that are missing names?
+-------------
+Okay - but how to exclude rows that have under 50 transactions, and exclude rows that are missing names?
+
+
+-------------
+Cant do that - I mean, I can. But the formulas need to be embedded in the cells. Users wont be sorting or filtering.
+-------------
+Done. Take a look.
+-------------
+Why do the formulas need to be embedded in the cells? You've already indicated you're sorting and filtering "Top 5" , "Excluding Employees with less than 50..." This is exactly the kind of problem Power Pivot is used for. 
+http://www.powerpivotpro.com/what-is-powerpivot/
+
+-------------
+Solution Verified - Awesome! Thank You So Much. I will dig into this formula's logic and build further. Appreciated!
+-------------
+
+You have awarded one point to _semicolonsemicolon_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

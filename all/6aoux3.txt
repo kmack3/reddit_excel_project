@@ -1,0 +1,27 @@
+crash
+6aoux3
+Excel 2013 crashes upon saving workbooks that contain comments
+
+Sorry for the maybe title gore.
+
+When my mom tried saving a workbook on her Windows 10 user account, she found that Excel 2013 would stop responding and then crash. This would only happen with certain workbooks, but for those certain workbooks, the problem would happen consistently.
+
+I managed to isolate the issue to comments: if there's a comment in the workbook, Excel 2013 can't save it. Oddly, on my user account (same computer), I can save workbooks with comments just fine.
+
+Anyone have any idea why this would happen? I guess the obvious "solution" would be simply not to use comments, but that's more avoiding the issue than solving the problem.
+
+Thanks!
+
+
+-------------
+So you're tell me that an entirely empty NEW workbook with a single comment in a single cell breaks on her account and not on yours?
+
+Have you tried this exact scenario?
+
+-------------
+Exactly this, yup. Completely new empty workbook aside from any one comment causes the issue. An otherwise completely empty new workbook  with a random cell filled in with some data (to allow me to hit the "Save" button) saves just fine.  
+-------------
+Does your Excel have any add-ins? Specifically in the crashing profile.
+
+Check the location and size of the PERSONAL.XLSB in each of the profiles. : http://wheatblog.com/2011/08/where-is-the-excel-personal-macro-workbook-located/
+ 

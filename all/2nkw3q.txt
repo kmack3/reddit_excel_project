@@ -1,0 +1,56 @@
+large
+2nkw3q
+Free disk space and large workbooks
+
+Does anyone know or want to guess why my very large workbook - approx 600mb xlsb -requires over 100gb of free hard drive space to open?
+
+ Without enough free space I can watch it start to load into the ram (5.2gb usage) and it won't reach the full required usage and excel crashes. I cant find any documentation regarding the issue online so if you know where I can find it let me know
+
+And yes, I should have used access but its too late now
+
+
+-------------
+I would guess it has to do with how windows uses its paging file and space. It may not be too late if you'd like to try to [convert it to access](http://smallbusiness.chron.com/convert-excel-documents-microsoft-access-40490.html)
+-------------
+Although there's no known limit to the filesize that Excel can handle, with an .xlsb at the size of 600mb, I think you've stretched too far ahead of excel's ability to handle the files smoothly. 
+
+I know it must have been suggested numerous times, but here's another push - suggest to your clients too; if the difficulty of handling the files is not a reason enough to warrant the change, such huge files also run the risk of being corrupted.
+-------------
+Yeah that was my assumption, that it needs to reserve enough space to write it uncompressed maybe? Although 100gb seems a lot more than the total data in the book which I estimate to be about 60gb if it were plain text. 
+
+Will look at access but I dont think weve agreed it with the client so it maybe out.
+-------------
+Yes, I have about 10 individual backups from today alone and we had to build a server spec machine to run it.  I think to deliver we'll break it down to component sheets but the functionality of having it in one place and linked is too useful to waste. Especially as theres another bloke 3 days behind me spotting my mistakes! 
+
+Lesson learnt though, next time ill learn to use access. 
+
+On a side note apparently ms plans to further extend the calc grid, which seems odd as it starts to struggle already
+
+-------------
+Also access isn't the only other option. You could also use php and a sqlite db or any sql for that matter. Sqlite and nosql are fairly portable if that's a concern. If its a permanent asset then go with mysql or mssql to handle the amount of data better. Off the top of my head it would be a hell of a journey from here to there with csv converting but when you get to the end, anything will be possible including a full spectrum of reporting capabilities :)
+-------------
+> Although 100gb seems a lot more than the total data in the book which I estimate to be about 60gb if it were plain text.
+
+You can check this. XLSX, XLSM, and XLSB are all straight-forward zip files under the hood.
+
+Assuming you have WinZip, WinRAR, 7-Zip, or some other compression application installed (and don't just rely on Windows' built-in zip functionality):
+
+1. Copy your XLSB file
+2. Rename the file extension to .zip
+3. Open the ZIP within your compression app. (Don't actually extract it!)
+4. Within the app, navigate to: **\xl\worksheets\**
+5. Check the uncompressed size of **sheet1.bin**
+
+I'm not sure that necessarily *helps* you any... but would be interesting to know. ;)
+-------------
+Is it all raw data which makes up the 600 mb? or do you also have formulas in there too? I'm sure you'd have done the important things to keep the filesize on the bare minimum needed, like no formatting, no lookups or other volatile formulas, etc.
+-------------
+theres a reasonable amount of data, but also a lot of formula, couldnt avoid index match as a down select tool. (- i thought index match was relatively effecient??)
+
+I've avoided volatiles for the most part theres as small number of index(indirects to named ranges. 
+
+
+-------------
+Any kind of lookup, even INDEX/MATCH, if used for a large number (tens of thousands) of rows bloats the file size considerably.
+
+I'd suggest you to look into using PowerPivot to see if you can swap a few of your current processes with that. It does most of the calculation in memory (RAM) and you don't need to keep redundant data in it. You can basically maintain an Access-like database in Excel itself.

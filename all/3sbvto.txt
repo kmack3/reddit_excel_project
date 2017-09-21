@@ -1,0 +1,67 @@
+large
+3sbvto
+Problems working a very large data set
+
+I am trying to work with an excel sheet that has too many rows (1,048,576+) for excel to open completely. I don't need all the data. There is a column labeled "DocumentDate". I want to delete all the entries that don't occur between 1994 and 2007. However, as I am unable to open it I can't delete the rows. The format of the "DocumentDate" column is mm/dd/year.
+
+
+-------------
+Load it in Power Query, filter out the unneeded dates, load to worksheet.
+
+https://support.office.com/en-ie/article/Filter-a-table-Power-Query-b5610630-f5bf-4ba4-9217-a628f9b89353?ui=en-US&rs=en-IE&ad=IE
+-------------
+Link to it by reference in Access. Create a query that filters between 1994 & 2007. Link to the query from Excel.
+-------------
+Would it be possible to start a new file, then link the cells to the ones you need (like trying to link the first 50,000 in a spreadsheet, delete the ones you don't need then the next 50,000 etc). This way it wouldn't be needed to open up the file at all (as long as you know the spreadsheets name you'll be good) 
+
+> ='[c:/user/bob/themfbigfileyoucantopen.xls]spreadsheetname1!A1'
+
+-------------
+I switched to R for large data sets. It might help you too, give it a try.
+-------------
+Use a different workbook and link the first 500,000 rows to the first 500,000 rows in the workbook you can't open.  Then on another worksheet link rows 500,001 to whatever.  The clean out the rows you don't need in both lists and combine them.
+-------------
+This is just off the top of my head, but try changing the excel sheet to a .csv format. I have opened large data sets this way. Maybe then you can filter it. What I did in the same situation was save the data as .csv, write a VBScript that includes a SQL query to subset the data and then save it to another .csv. That worked but had alot of steps. 
+-------------
+Can you screenshot the file? I would load the data into powerpivot as a linked table and delete the source or better yet save the spreadsheet as a csv and import that into powerpivot. You can then you can create measures to load only the data you need. I once had a file with more row than you with a 4.3mil row query but when the data was pivoted, there were only 34,000 rows. When the hourly data was aggregated by month, I had less than 500 rows. 
+-------------
+The simplest method might be the best in this case.  MS Word can open large files.  Use it to open the CSV, then use word to save the file in two halves as TXT files.  I use this when I need a quick and dirty way to split a file.
+-------------
+I agree with using access, if nothing else just look up how to import the txt file into it to create a table in a new database.  After that go to excel and import from access as a pivot table.
+-------------
+Seconded. Power Query/PowerPivot is definitely the way to go here. I use it everyday at work and it's pretty incredible. There's a bit of a learning curve to it though. 
+
+If that's not a option for you, you could also try [Delimit](http://delimitware.com/). It can't do much other than read/write, but you can use it to split the file into smaller chunks that Excel can handle.
+-------------
+Thanks for the tip, but I have never used access before and I am completely at a loss at what it is even used for.
+-------------
+[removed]
+-------------
+Solution Verified
+-------------
+How do I link to a workbook?
+-------------
+The original file is already in a .csv format. Opening the file only opens the first million rows (or what ever the cap is).
+-------------
+Solution Verified
+-------------
+It's a visual front end for SQL - a poor man's database. [Query vid.](https://www.youtube.com/watch?v=S095_Fi17sI)
+-------------
+It's used (primarily) to query supermassive data sets just like the one you mentioned. Import your data into a table, query the table and then you can export it back to excel if you wish. 
+-------------
+
+You have awarded one point to _tuetano_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+
+You have awarded one point to _SnickeringBear_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+    Solution Verified
+-------------
+
+You have awarded one point to _Antimutt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,62 @@
+crash
+3weav3
+Running a macro to sort works but afterwards, saving crashes Excel
+
+(Excel 2010) On a roster spreadsheet with multiple tabs of no more than 100 people each, I have a macro to run a custom sort tied to a button. The macro works, but once it runs, if I later save, excel crashes, saying there is unreadable content. Any ideas? My VBA knowledge is limited pretty much to frankensteining code I find online together to make things work. Any thoughts?
+
+Sub SortRank()
+
+Dim xlSort As XlSortOrder
+Dim LastRow As Long
+Dim sCustomList(1 To 18) As String
+
+sCustomList(1) = "Maj"
+sCustomList(2) = "Capt"
+sCustomList(3) = "1stLt"
+sCustomList(4) = "1st Lt"
+sCustomList(5) = "2ndLt"
+sCustomList(6) = "2nd Lt"
+sCustomList(7) = "CWO"
+sCustomList(8) = " WO"
+sCustomList(9) = "MGySgt"
+sCustomList(10) = "1stSgt"
+sCustomList(11) = "MSgt"
+sCustomList(12) = "GySgt"
+sCustomList(13) = "SSgt"
+sCustomList(14) = "Sgt"
+sCustomList(15) = "Cpl"
+sCustomList(16) = "LCpl"
+sCustomList(17) = "PFC"
+sCustomList(18) = "Pvt"
+
+With ActiveSheet
+Application.AddCustomList ListArray:=sCustomList
+
+        LastRow = .Cells(.Rows.Count, "A").End(xlUp).Row
+
+         If (.Range("A9").Value > .Range("A" & CStr(LastRow))) Then
+             xlSort = xlAscending
+         Else
+             xlSort = xlDescending
+         End If
+         
+         .Range("A8:PR" & LastRow).Sort Key1:=.Range("A8"), Order1:=xlSort, Header:=xlYes, _
+            OrderCustom:=Application.CustomListCount + 1, MatchCase:=False, Orientation:=xlTopToBottom, _
+            DataOption1:=xlSortNormal
+     End With
+     
+If Application.CustomListCount > 4 Then
+         Application.DeleteCustomList (Application.CustomListCount)
+     End If
+
+End Sub
+
+
+
+
+
+
+-------------
+Is there any other code in your workbook? Is it just the sort macro or is there anything in the Worksheet or Workbook module?
+-------------
+No it's only the single module

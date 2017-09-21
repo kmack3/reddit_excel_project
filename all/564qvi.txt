@@ -1,0 +1,124 @@
+large
+564qvi
+=LARGE(-!G:G;COUNTIF(-!G:G;MAX(-!G:G))+1) Need second Highest
+
+I am using this formula to find the second highest value in a range of cells. How can I get third highest?
+
+
+-------------
+Forgot to mention there are like 20 repeated numbers so I would like something else than adding +2 at the end
+-------------
+Hi,  
+
+Not sure to understand precisely your comment but you could replace 1 by row(A1) so if you drag down it will return the 3rd highest then 4th etc.
+-------------
+Hi, lets say you have your formula for second highest value in cell A1.
+
+Then use 
+=LARGE(IF(G:G <A1;G:G);1) and press Ctr+Shift+Enter instead of just Enter (just in case you are not familiar with array formulas)
+-------------
+    =large(-!G:G;COUNTIF(-!G:G;MAX(-!G:G))+COUNTIF(-!G:G;<secondhighestnumber>)+1)
+
+should do it.  Essentially in your formula you are counting the number of instances of the largest number and adding 1 to find an instance of the second highest number.  All you have to do is count then number of times of the largest plus second largest numbers and add 1.  And you know what the second highest number is from your formula.  So either reference that cell, or include that whole formula in this one.
+
+I wouldn't like to keep extending in this manner to find the nth highest value though!
+-------------
+Not the most elegant or in line solution, but you could pivot the data with the values in the rows and then sort by value large to small and referenced the 2nd, 3rd whatever value. 
+
+-------------
+Why can't you just do =LARGE(A1:A10,3)?   Are you looking for the third largest *unique* number?
+-------------
+In the formula there is a number that specifies which highest number I want. Due to the amount of repeated values, it will not work correctly so I need another idea.
+-------------
+=LARGE(IF(CONQUEST!$G:$G <M5;CONQUEST!$G:$G);1)
+
+Because thats the thing I use comes out with #NUM error
+
+-------------
+Nevermind this is exactly perfect! 
+-------------
+[deleted]
+-------------
+>SOLUTION VERIFIED
+-------------
+Perhaps help me out on the 4th highest? That would be the final! Thanks
+-------------
+Would really slow everything down (it's a huge excel already)
+-------------
+Indeed a third unique number.
+-------------
+To overcome the repeated values thing, I usually just use a helper column of value + (row()/10000).  
+It gives it a small fraction at the end to ensure the values are all unique. 
+-------------
+Does your formula look like this in formula bar?
+
+{=LARGE(IF(CONQUEST!$G:$G <M5;CONQUEST!$G:$G);1)}
+-------------
+
+You have awarded one point to _ethorad_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+the general format is:
+
+    = LARGE ( RangeOfAllNumbers, CountAllNumbersHigherThanOneYouAreLookingFor + 1)
+
+To count the instances of a particular number you use
+
+    =COUNTIF( RangeOfAllNumbers, Number)
+
+So using this, for the largest number, there are no numbers higher so the formula is just
+
+       = LARGE ( G:G, 1)
+
+For the second largest, we need to count the number of times the largest number appears.  The number of times this appears, from the above, is just
+
+    =COUNTIF(Range, LargestNumber)
+    =COUNTIF(G:G, LARGE(G:G,1))
+
+So the second highest is found by
+
+    =LARGE(Range, CountLargerNumbers+1)
+    =LARGE(G:G,COUNTIF(G:G,LARGE(G:G,1))+1)
+
+For the third highest, we need to count the number of second largest and largest.  We've already got the largest count from above.  We also know what the second largest number is from above.  So the count of the number of instances of the second largest is
+
+    =COUNTIF(Range, SecondHighestValue)
+    =COUNTIF(G:G, LARGE(G:G,COUNTIF(G:G,LARGE(G:G,1))+1) )
+
+And so the third highest is
+
+    =LARGE(Range, NumOfSecondLargests + NumOfLargest + 1)
+    =LARGE(G:G,
+        COUNTIF(G:G, LARGE(G:G,COUNTIF(G:G,LARGE(G:G,1))+1) ) +
+        COUNTIF(G:G, LARGE(G:G,1))
+        +1)
+
+Continuing this, you can see that the fourth highest is
+
+    =LARGE(Range, NumOfThirdHigh + NumOfSecondHigh + NumOfHighest +1)
+
+The formula starts to get quite long at this stage, unless you can reference the third highest value previously calculated in another cell.
+
+Hopefully that helps you with the fourth highest and any further you want to go.
+
+(The formula above is slightly different from the original, as I'm now using LARGE(G:G,1) to get the maximum instead of MAX(Range) for consistency with the other steps)
+
+-------------
+> =LARGE(IF(G:G <A1;G:G);1)
+
+Yeah
+-------------
+I have actually added
+
++COUNTIF(CONQUEST!G:G;M2)+1)
+
+making it slightly weird
+
+=LARGE(CONQUEST!G:G;COUNTIF(CONQUEST!G:G;MAX(CONQUEST!G:G))+COUNTIF(CONQUEST!G:G;M2)+1+COUNTIF(CONQUEST!G:G;M2)+1)
+
+but it still does seem to work :S
+-------------
+I can see that you're counting the instances of the largest number with MAX, but then you're counting the number of instances of the number in M2 twice.  This may work in some instances but not all.
+
+Essentially there is a range of numbers which will give you the right result for the fourth largest number, the length of the range being the number of instances of the fourth largest number.  As such there is a range whereby your countifs can go wrong, but the result is correct.  I would amend your formula so that one of the M2 points to the second largest number, and the other points to the third larges.

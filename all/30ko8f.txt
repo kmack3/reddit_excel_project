@@ -1,0 +1,31 @@
+slow
+30ko8f
+Inserting row into worksheet is very slow.
+
+Inserting one blank row (highlight row, control, shift, plus) takes about 5-8 seconds. The file size is just 2,300kb. There are no complex formulas like sumifs. Hitting control end on the 20 or so tabs shows that at I'm anywhere between 10 and 1000 rows from cell A1. I checked the name manager and I only have like 30 entries all resulting from setting print targets and repeating rows to print on every page. 
+
+Any suggestions to get the insert/delete row function to be faster?? I've never had this problem before. Thanks!
+
+
+-------------
+[deleted]
+-------------
+holy crap, it's finally fixed.
+
+i am using my company's template for a databook. it somehow had a bunch of wacky broken reference conditional formatting on all my tabs, tons of rules, and deleting them made it return to normal!
+-------------
+You know what's weird is that when I check how big my spreadsheets are, I see they're not very big. I also delete the excess rows and columns but it doesn't change the ending cell location that I see when I hit control end. 
+-------------
+I had a similar issue with an excel file that my company uses for scheduling. I ended up having to re-build the entire thing. Now I'm pretty sure it was broken conditional formatting, the one thing I didn't think about checking. 
+-------------
+[deleted]
+-------------
+I've deleted excess rows and columns on every single excel spreadsheet in the workbook. The workbook is only filled of numbers and simple formulas, like sums. There are manual subtotals and linking between tabs.  I tried the save as after deleting rows/columns, and still it takes a long time to add a row/column.
+-------------
+[deleted]
+-------------
+no way, i spent probably 50 hours importing the financial data into this databook!
+-------------
+[deleted]
+-------------
+yeah, aware of the recalculation. but it was the conditional formatting!

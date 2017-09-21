@@ -1,0 +1,21 @@
+slow
+1y9a1l
+Access help- R/MSAccess is slow at responding
+
+I would like to include an expression in my query that divides one column by another to get an average. Right now in my query I set up Expr1: "SumOfElapsed Time"/"Count Of Orders". Is there a way I could use the average function instead? My expression isn't returning the average when I run the query, even though I'm not getting an error message. I am using information from a previous query instead of from a table. I don't think this should cause any problems with my expression, but I'm including it just in case.
+
+
+Any suggestions are welcome!
+
+
+Thanks in advance.
+
+
+-------------
+ New expression- Still working out the kinks. 
+
+=([SumOfElapsed Time] / [Count Of Orders])
+-------------
+Average returns an average of the numbers..... what you're doing IS creating an average...   Assuming one order per line.
+
+Try doing a GROUP BY on your order number )so you get a 1:1 in the query, and see if that expression returns the same value as Elapsed time  (assuming Orders is a field that contains a 1)

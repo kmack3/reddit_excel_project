@@ -1,0 +1,70 @@
+crash
+4ds0nf
+COUNTIFS and AVERAGEIFS formulas pointing to a separate spreadsheet. Works when separate spreadsheet is open, crashes when closed
+
+So I have these 2 formulas:
+
+=COUNTIFS('[Revenue Recognition - New Method as of Aug 2015.xlsx]Revenue'!$C$83:$C$1003,">=4/1/16",'[Revenue          Recognition - New Method as of Aug 2015.xlsx]Revenue'!$C$83:$C$1003,"<=4/30/16")
+
+=AVERAGEIFS('[Revenue Recognition - New Method as of Aug 2015.xlsx]Revenue'!$E$83:$E$1003,'[Revenue Recognition - New        Method as of Aug 2015.xlsx]Revenue'!$C$83:$C$1003,">=4/1/16",'[Revenue Recognition - New Method as of Aug      2015.xlsx]Revenue'!$C$83:$C$1003,"<=4/30/16")
+
+They work fine when the sheet being referenced is open, crashes when it closes, which isn't surprising since I know those formulas don't work under those circumstances.  Wondering if there is any formulas I can use in place of those 2 to get the same results without having to have the source sheet open.  Thanks in advance
+
+
+
+
+-------------
+Hello,  
+
+I am on phone so I maybe missed something can't you calculate your count if and sumif in the respective spreadsheets and only reference to the result?  
+
+Best regards
+-------------
+yeah you gotta use sumproduct for this unfortunately
+-------------
+well yeah, but that's no fun
+-------------
+Oh ok so let's try for the countif you could probably use SUMPRODUCT with something like:  
+
+    =SUMPRODUCT(--(MONTH(yoursheet!$C$83:$C$1003)=4))  
+
+Ike's me know if it works
+-------------
+If this work then for the other one you could add to this formula the array in your E column so it will sum all the value in E for the corresponding dates and then you divide it by the count if we just made.  
+
+Sorry for lack of detail but on phone it is not easy ;) But it is a nice occupation while commuting!
+-------------
+Thanks for the formula, it works for most months, however for January (1), I get a number that's waaay off the count.  Should be 5 and I get 821
+
+Edit: Would also be really helpful if the year could be added 2016
+
+    =SUMPRODUCT(AND--(MONTH(yoursheet!$C$83:$C$1003)=4))*YEAR(()??? 
+-------------
+Thanks, I got this to work perfectly, just need to know why count formula doesn't work for January, seems to work for the other months
+-------------
+Hi,  
+
+Sorry for the delay it was night time here.  
+So I made some test and the issue you are facing with Jan is the fact that excel returns 1 when you do month() on an empty cell si you probably have around 816 empty cells in your range. This issue should solve by adding the year.  
+
+To take the year into account you can use the following formula:  
+
+    =SUMPRODUCT(--(MONTH($C$83:$C$1003)=1),--(YEAR($C$83:$C$1003)=2016))  
+
+Let me know if it works.  
+
+Best regards
+-------------
+Thanks, works perfect now
+-------------
+solution verified
+-------------
+Dumb question, what does the "--" in front of the month and year formulas mean?
+-------------
+
+You have awarded one point to _Starwax_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Nice! Glad we finally found a solution.  
+The "--" is used to force excel to interpret true as 1 and false as 0 so we can count them

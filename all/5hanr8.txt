@@ -1,0 +1,46 @@
+long time
+5hanr8
+How to manipulate raw data to show how long a person is engaged in a particular platform based on time stamps of actions taken
+
+Hi Excel,
+
+I'm currently working with a raw set of data that tells me the date and time a person did something on my platform. Please see this screenshot as an example: http://imgur.com/UrMnUGf.
+
+As you can see, each line represents a time stamp for an action that a person performed. I'd like to know how long, on average, a person is engaged in my platform. I have no idea how to compute this and would really appreciate the communities input.
+
+I'm thinking that perhaps I may need to figure out a way to count the lapsed from the first event to the last for that particular day (assuming there was more than one), for that particular person. But I'm at a loss of how to go about achieving this.
+
+Any input is appreciated. Thanks Excel!
+
+
+-------------
+using pivot table would help. So insert your data as pivot table under "Insert". Put Rows as Name and Put Time as Values. With Time change "Value field Settings", change Number Format to Time. 
+-------------
+Without a start end date/time how can you determine time spent?
+-------------
+I would accomplish this in Excel 2016 with MAXIFS - MINIFS.
+-------------
+Hi fewwmzc,
+
+Thanks for this, I may figure this one out if I can calculate the difference between min and max. Would you happen to know how to do that?
+-------------
+This is true, Unfortunately this is all the data I have to work with. 
+-------------
+So first find the Unique names into a column 
+&nbsp;
+
+You can use =MIN(IF(A2:A12=F2,C2:C12)) then enter CTRL ENTER SHIFT. Change To Max for Max Values
+&nbsp;
+
+A2:A12 is the range of Names and C2:C12 is the Range of TIME. F2 is the unique name you are matching it to. 
+
+&nbsp;
+After getting the Min and Max you create another column = Max - Min
+-------------
+So at the very least you need some kind of metric to associate with the entries to determine time spent.. otherwise how do you expect to do it?
+-------------
+Hello,
+
+The formula you provided is returning a zero value. Would I add this formula in another column, lets say in between name and date?
+-------------
+yea add this formula in a different column and dont forget to use CTRL+ENTER+SHIFT when doing it

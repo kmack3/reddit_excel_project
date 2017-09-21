@@ -1,0 +1,58 @@
+crash
+3jdd3t
+Excel crash issue after adding column
+
+Hello,
+
+
+Was wondering if any of you have by chance an answer for this one.
+
+
+I have a file with calculations both left and right of column N. The columns on the right of column N are hidden and column N and left of that are visible/designed.
+
+
+I need to insert one more column to the visible/designed side of my sheet. When I do that, and save it, the whole sheet still works. But the next time I open it, it will crash excel once I try to do anything on the sheet. I am able to press ALT F11 to access my macros, but it does give me an error upon opening and if I try to alter anything:  > compile error: error in loading dll
+
+
+Anyone got any idea what causes it? The file works perfectly without that added column.
+
+
+Edit: also tried moving all columns right of column N one column to the right. Gives me the same problems.
+
+
+-------------
+* What version of Excel are you using?
+* What file format are you using?
+* Are you using third-party add-ins?
+* What do the macros do?
+* Go to: VBA Editor > Tools > References and tell us what reference the workbook is loading.
+* Go to: File > Options > Add-Ins and tell us what add-ins Excel is loading.
+-------------
+Reading your post I am opening up the file again to answer your questions. It didn't crash... Not sure why. I had it crashing on me on 3 different business computers. My personal computer handles it just fine...
+
+Sorry to waste your time. I will report back monday when I get to test it out on a work computer again.
+
+
+Edit: If you want I could send it to you, maybe check if it crashes at your computer?
+-------------
+> Edit: If you want I could send it to you, maybe check if it crashes at your computer?
+
+No thanks.
+
+Report back on Monday if you want. Will try to help.
+
+
+-------------
+Will do! Thanks so far :)
+-------------
+Hey!
+
+Wanted to report back. It didn't crash at work either anymore. So to clean the file a bit before implementing it, I resized a column a bit to fit the text better. Aaand it crashed because of that.
+
+Very strange. Not sure what to think anymore. I think the file is just corrupted or something. I'll just make changes to columns at my home computer, as it does not crash at my own computer.
+
+
+-------------
+So, I reread your post, and do you mean that you've set as hidden *all* columns to the right of N?
+
+

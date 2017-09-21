@@ -1,0 +1,102 @@
+slow
+4sjav0
+Is this macro code just inherently really slow or is there something wrong with my Excel or Computer?
+
+http://codepad.org/2ma5MwRd
+
+I'm learning VBA/Excel. I gave myself a little project to code up Conway's Game of Life. I have existing programming proficiency (C/C++ and MATLAB).
+
+Is VBA-Excel just really badly optimized for that code I've written or is something else going on. Because it takes over 10 seconds to run,
+
+edit: here's all the code
+
+Here is the module: http://codepad.org/aSmO0m4e
+
+And sheet1: http://codepad.org/MD6LmRdU
+
+
+-------------
+Bad form I'm afraid. Why are you using a collection here? I don't see it anywhere except for declaring and setting; you're also setting it twice. When you dim as new collection it auto sets it. Check out my collections tutorial [here](https://www.reddit.com/r/excel/comments/47h8rm/vba_essentials_collections/).
+
+Your code is modifying a huge number of cells. A1:AZ1048576 and A1:XFD150, is this on purpose or did you mean to do something like this:
+
+    Sub FormatCells()
+        
+        With Sheets(1).Range("A1:AZ150")
+            .ColumnWidth = 3348 / 776
+            .RowHeight = 93 / 4
+            .Interior.ColorIndex = xlNone
+            .Font.Color = xlNone
+            .Value = 0
+        End With
+        
+    End Sub
+
+-------------
+Are there lots of formulas in your workbook? If so, you may want to set Calculation to manual at the top of the macro then set it to automatic at the bottom of the macro.
+
+The linked code shouldn't take 10 seconds to run.
+-------------
+You are formatting and setting a huge number of cells resulting in a file that probably exceeds 20 megs.  When Excel loads that file, Excel will hit 250 to 350 megs.  This is the usual cause of files taking a long time to load.  A simple way to clear it is to create a new worksheet, then delete all old workheets, then rename the remaining empty sheet with the name you are using in code.
+
+Excel is the source of the limits you are bumping into because of the way individual cells are formatted and assigned values.  VBA is capable of doing far more than Excel will allow you to do.
+-------------
+Events are slow.  You usually don't notice unless you call them frequently.
+-------------
+Turn off page updates and auto calc in code re enable them at the end. 
+-------------
+More likely it's the Run procedure than the Prep procedure which is the problem. If all the ranges you'd be collecting are in the same worksheet, you'd be better off using a union of ranges than a collection. That is, a Range object can have multiple areas and thus work like a collection.
+-------------
+The collection is used in an event handler in another module.
+-------------
+Something else is wrong, because it's also taking forever to save simple changes to the code as well.
+-------------
+add an application.screenupdating = false at the start, then set to true at the end.  this may help.
+-------------
+I've also set calculations to manual in thisworkbook.
+
+Hasn't made a difference to the time it takes to load the wookbook (from a cold start - Excel not started beforehand). Still over a minute to load up. Well over a minute. :(
+
+And nothing else on my computer is running like that.
+-------------
+Just checked the size of the workbook...153 meg!
+
+Cheers :)
+-------------
+Hasn't made a difference to the time it takes to load the wookbook (from a cold start - Excel not started beforehand). Still over a minute to load up. Well over a minute. :(
+-------------
+The collection should be set in the module it's used in for cleanliness. You may have other problems unrelated to Excel. Either way, the macro you posted is not streamlined. If you'd like, I'll help you with technique on the entirety of the program. Post what you have.
+-------------
+I'd say you probably just have a lot of formatting that you don't realise. Search up how to enable the "inquire" tab in excel, then click the "clear excess formatting button". Let me know if this helps! 
+-------------
+Yes, you've been manipulating over 100 million cells with your original macro. What is the current file size?
+-------------
+this will make the code being executed faster... but that is A LOT of cell
+-------------
+> The collection should be set in the module it's used in for cleanliness.
+
+...it's used between modules, or rather it will be. It's a global.
+
+edit: I added all my code at the top in an edit :)
+-------------
+I did. We'll see how it goes. 
+
+Another issue. When I open the workbook, it takes ages to load as well. More than a full minute!
+
+Here is the module: http://codepad.org/aSmO0m4e
+
+And sheet1: http://codepad.org/MD6LmRdU
+
+And it's auto-running the macro upon opening. 
+-------------
+153 meg :P
+-------------
+I see you've marked the thread solved.
+
+Good luck on your program!
+
+If you need anything else don't hesitate to post a new thread!
+-------------
+[deleted]
+-------------
+I'm not that well versed. I just click save as.

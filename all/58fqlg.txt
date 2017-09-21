@@ -1,0 +1,147 @@
+crash
+58fqlg
+My VBA code works at first, but if used twice in a row makes excel crash
+
+Hello excel wizards, 
+
+I come to seek your help because as a beginner at coding and vba i don't understand what's going on with my code. 
+
+TL;DR : code works first time then makes excel crash
+
+What I aim to do is to copy and paste the value of a pivot table into a new workbook and save it. (the final objective is to get a list of clients for a mailing merge with word). 
+
+I wrote this code using the macro recorder and some code found on the internet. But, even if it works perfectly at first. If i re-run it before waiting a certain amount of time (like  15 min) or if i don't close excel, the code will make excel crash. I am lost. 
+
+     Sub Export_client_list()
+
+    Application.ScreenUpdating = False
+
+    'Saving the file
+    
+    ActiveWorkbook.Save
+
+    'Export parametters
+        Dim Path_name As String
+        Dim File_name As String
+            Path_name = ThisWorkbook.Path
+            File_name = "New_Workbook with infos " & Format(Now, "dd-mm-yyyy") & " " & Format(Time, "hh - mm") & ".xlsx"
+            
+            
+    ' Pivot table updtate
+
+        Sheets("Relances").Select
+        ActiveSheet.PivotTables("PT_Name").PivotCache.Refresh
+        ActiveSheet.PivotTables("PT_Name").PivotFields("Condition_filter").ClearAllFilters
+        ActiveSheet.PivotTables("PT_Name").PivotFields("Condition_filter").CurrentPage = "clients who need to be contacted"  
+    '''is there a way to check in the pivot table if the field contains the value "clients who need to be contacted" and if not to stop the execution of the code ? 
+
+    ' Pivot table selection
+    
+     Dim derniere_ligne As Integer
+        derniere_ligne = Range("ae1048576").End(xlUp).Row
+
+        Range("W9:ae" & derniere_ligne).Select
+        
+    ' 'copy of the pivot table values into a new sheet
+    
+    Selection.Copy
+    Sheets.Add before:=ActiveSheet
+    Range("A1").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+     ' Moving the created sheet into a new workbook
+     
+     ActiveSheet.Select
+     Application.CutCopyMode = False
+     ActiveSheet.Move
+     ActiveSheet.Range("A1").Select
+    
+     ' saving the workbook in the same place as the fisrt workbook
+     
+     ActiveWorkbook.SaveAs Filename:=Path_name & "\" & File_name, FileFormat _
+        :=xlOpenXMLWorkbook, CreateBackup:=False
+    
+    Application.ScreenUpdating = True
+    End Sub
+
+Thank you for your help ! 
+
+I work with the 2016 version, in french. (may the accents used in my Pivot table name/field cound impact the code?)
+
+
+
+-------------
+Can you F8 through the code when it runs a second time and let us know which line it breaks on?
+
+Thanks
+-------------
+Try this
+
+    Application.DisplayAlerts = False   'Drop the overwrite window
+    ActiveWorkbook.SaveA Filename:=Path_name & "\" & File_name, FileFormat:=xlOpenXMLWorkbook, CreateBackup:=False, AccessMode:=xlExclusive, ConflictResolution:=Excel.XlSaveConflictResolution.xlLocalSessionChanges    
+    Application.DisplayAlerts = True
+-------------
+I had this happening to me a lot with some vba that was going from access to excel, repeatedly saving reports.  I remember fixing it, but making sure to fully qualify sheets and what not.
+
+So Instead of somethinkg like 
+
+Activesheet.range...
+
+
+I'd do...
+
+wkbk.wksht.range....
+
+
+
+After doing that and making sure all my variables were set to nothing afterwards, I didnt get any more errors.
+-------------
+OP, when you execute the `SaveAs` method, are you saving the file in the exact same location every time? If you are, then it might be running into the error that it is unable to overwrite the target location because you currently have the file opened (`SaveAs` performs a file access check prior to saving). If you are only trying to save the file to its current location, use the `Workbook.Save` method instead.
+-------------
+it breaks on the line :
+
+    ActiveWorkbook.SaveAs Filename:=Path_name & "\" & File_name, FileFormat _
+    :=xlOpenXMLWorkbook, CreateBackup:=False
+
+Because there is already a file in the folder with the same name, excel asks me if i want to replace it. It crashes when I click "yes". If I click no Visual Basic return the error 1004 "SaveAs has failed" I have always closed the created workbook before runing the code again. 
+
+I got a error 1004 while debuging about macro opened in different workbooks (sorry bad translation from french).
+-------------
+I just tried and i got an  error 438 "object doesn't support this property or method
+
+-------------
+Change to this
+
+    Application.DisplayAlerts = False
+    ActiveWorkbook.SaveAs Filename:=Path_name & "\" & File_name, FileFormat _
+    :=xlOpenXMLWorkbook, CreateBackup:=False
+    Application.DisplayAlerts = True
+
+And see if that helps.
+-------------
+Try using an On Error Resume Next at the beginning of the code and see what happens
+-------------
+still crashing :/
+-------------
+it crashed again the second time i ran the code
+-------------
+Then the issue resides with your installation of Excel, that should forcefully override and save over the file.
+-------------
+I had a similar issue with a workbook I created where users would create a PDF based off of a copied worksheet. The solution I came up with was adding the Workbook(Sheets).Count to the end of the file name. However it sounds like you are using the same table to create a new workbook so this might not work. 
+
+
+Maybe you could have it first check the folder to see if the file already exists, and then add a number or something to the end if it does?
+-------------
+Ok. I will try it on a different computer with excel and come back to you.
+Do you think it could be because i am saving the file in folder inside my OneDrive ?
+Thank you for your help !
+-------------
+I will try to implement that. Thank you for your help !
+-------------
+Try repeating these same steps with your files on a physical drive instead. I have run into similar issues in the past with macros trying to save files directly to Google Drive too often.
+-------------
+Ok ! Will try asap ! Thx !
+-------------
+Tried on a physical drive and nothing changes. 
+Thanks anyway !

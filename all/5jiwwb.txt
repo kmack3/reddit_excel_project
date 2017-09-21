@@ -1,0 +1,62 @@
+big
+5jiwwb
+Convert big hexa number (more than 10 carracter) into decimal
+
+I have a verry big csv file with a collumn I need converted from hexadecimal do decimal, all hexa numbers are the same size but it's too long for the HEXDEC fonction.
+Is there another way to convert it?
+Here's a example :
+0x26F8BC62048F3097F35241BEA984B476
+
+
+-------------
+Some possible solutions here:
+http://superuser.com/questions/472223/how-can-i-convert-a-hex-number-to-a-decimal-number-in-excel
+-------------
+You'll need to split it into pieces and do each part separately then convert and add to a result.
+
+http://www.mrexcel.com/forum/excel-questions/379420-hexadecimal-subtraction.html
+
+-------------
+Can you explain this formula? I'm not very used to excel, what are the arguments after the cell (C8) and why is he using the POWER?
+    = HEX2DEC(RIGHT(C8,10))+HEX2DEC(MID(C8,3,5))*POWER(16,10)
+-------------
+That's not going to work - because you have a 32 digit HEX number so you need to split it into 4 pieces, anyway...because HEX2DEC has an upper limit of a 10 digit hex number.
+
+The power is to calculate the shifted part (digits 11,12,13,14,15) value in decimal. 
+-------------
+Look at this sheet I made.
+
+https://expirebox.com/download/09eeaf722619ce2c333da6d5ab350192.html
+
+Although it *appears* to lose least significant values...
+-------------
+Yeah, I know, I wanted to adapt it but I don't get how it works excatly.
+I belive that "HEX2DEC(RIGHT(C8,10))" convert the first 10 digit but i dont get the "C8,3,5" in "HEX2DEC(MID(C8,3,5))" and how can I dapt it to use the rest of the number?
+-------------
+SOLUTION VERIFIED!
+
+This worked, thank you!
+Just one last thing, excel display result like these "1,23486E+38" insted of "123485684420329000000000000000000000000" no mater what I do.
+I need the full version so i can remove the 0 behind whith "=STXT(G4;1;15)", I can display it but the STXT fonction still return "1,23485684420329"
+Any ideas?
+
+
+-------------
+See my other message - I made it to show you. It seems to indicate numeric overflow, however.
+-------------
+
+You have awarded one point to _small_trunks_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Change format from General to Number...
+
+Convert to text =TEXT(A1,"0")
+
+-------------
+I seems like I can use your solution, has I understand it (although I might be wrong) you convert two hex in dec then subtract then and then re-convert them in hex.
+I just have a very large number tha I need converted in dec.
+For clarification, thoses a phones numbers converted in hex to be stored in a sql database (I work from the extact of tha database).
+But before the dec to hex conversion something add a bunch of 0 after the phone number supposely to make it fill the max digit number of the field, with is I now have to deal with insanely great numbers and complicated excel stuff.
+
+Edit: My bad, I didn't see the right message, I'll look at your sheet.

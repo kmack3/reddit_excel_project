@@ -1,0 +1,24 @@
+large
+6bxr2a
+Transposing a large table (200 rows, 25 columns) into unique rows with the both row and column data (5000ish rows, 3 columns)
+
+Hi all! I have an excel table and the ultimate goal is a bar graph. The table has 25 columns, which consist of unique locations (office facilities). In the rows I have 200 unique cost centers. The value of each cell within the table is the total number of employees using that cost center at that location. 
+
+After using that to create a pivot table I wasn't getting the format I had hoped for... I want to be able to show a bar chart comparing the cost centers (not all at once so using the filter to sort by cost center or cost center category) by location. So, the x axis would show the locations by name (not the value in the cell) and the y axis would show the number of facilities using that cost center. 
+
+My next thought was to transpose the table so that each row was unique of cost center and location...column A cost center, column B location, column C employee total. Is there an efficient way to do this? 
+
+I apologize for the lack of pictures but it's for work and I can't access reddit on my work computer (sigh). Thank you!!
+
+
+-------------
+Without seeing the data, my guess is that you need to unpivot it.
+
+https://support.office.com/en-us/article/Unpivot-columns-Power-Query-0f7bad4b-9ea1-49c1-9d95-f588221c7098
+-------------
+Check out the Tableau Reshaping addin - its free and I THINK I'm reading that it will suit your needs 
+-------------
+Just looking at the link quickly I think this is exactly what I need will report back shortly. Thank you!! 
+-------------
+This worked perfectly. Thanks again! 
+

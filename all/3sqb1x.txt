@@ -1,0 +1,40 @@
+large
+3sqb1x
+Pivot table and extremely large data set
+
+I am working on a report linking up support tickets that have been billed with the state that the customer who opened the ticket is in(so we know whose territory they are in), for our sales team to generate support plan leads. Unfortunately, the dataset being exported from the ticketing database does not include city/state/etc, just the account number.
+
+I have an export of our customers with their state and account number, however it is north of 759k rows, and I cannot create a pivot table by merging the two tables, as Excel doesn't have the resources available to complete the operation.
+
+I tried doing it by creating a relationship between the two tables, however we have duplicate accounts in our system, so it is not unique, and any customer with multiple billable tickets will break the relationship due to not being unique there.
+
+I also have the accounts in an Access database, if that helps. This is my first time messing with Access, so I don't know a whole lot on that side of things. I'm using Excel 2013 and Access 2013.
+
+Thanks in advance.
+
+
+-------------
+If I have this straight, you have a list of account numbers in Excel, and a table of account numbers with relevant customer details in Access. And the latter is too big for Excel. 
+
+There might yet be a way to finagle the customer data to fit in Excel, but for my money a data set this large is easier to manage in a database like Access. 
+
+If you use your wits, you will find it's not too difficult to import the ticket data in Access, and then create a simple query joining the tickets and the customers on the common account number. It's a bit much to detail here though, and alas this sub is for Excel.
+-------------
+This is something you should tackle in Access with an INNER JOIN. I don't have a huge amount of experience with SQL but have done this stuff a couple of times before, you want something along the lines of:
+
+    SELECT TicketList.TicketNumber, TicketList.AccountNumber, CustomerList.CustomerName, CustomerList.State FROM TicketList INNER JOIN CustomerList ON TicketList.AccountNumber = CustomerList.AccountNumber;
+
+You'll need to amend the above with the correct database and data field names, but once you have, it should hopefully spit out the information you need.
+-------------
+You might try PowerQuery and PowerPivot. Both are official Microsoft excel add-ons that make displaying data in a database with Excel MUCH easier. I've loaded datasets with over 2 million rows in a SQL Server db without a problem.
+-------------
+This did it, thanks!
+-------------
+Solution Verified
+-------------
+No problem, glad it worked :)
+-------------
+
+You have awarded one point to _almightybob1_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

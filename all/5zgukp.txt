@@ -1,0 +1,28 @@
+crash
+5zgukp
+Excel file crashes when running Macro unless you hit the save button first
+
+I'm pretty new at the VBA game and over the last few months have been developing a pretty complicated excel file with a GUI interface which has around 5000 lines of VBA code in macros + forms, which I've password protected to prevent code modification. I've deployed it to about 50 users so far. 
+The file has a button on the main worksheet which triggers a macro that loads a form. A decent number of users are having issues with Excel crashing as soon as they click on the button.  If they click on the save icon before clicking the button the form loads 100% of the time. If they click on the save button and close the file, once they open it again they still need to resave before clicking the button otherwise it will crash. When Excel crashes there is no debug options nor can I find any entry saved to Windows Event Manager. I've tried stepping through the form load and don't experience any crashing.  
+
+Any idea why users might have to save a the file immediately after opening before the form loads correctly?  
+
+
+-------------
+Try reducing the code base until you get to the point where the problem remains and you can't remove more code (this will be unusable for anything but debugging). That should give you some hints on what it might be. Then copy that code to Notepad. Start a new workbook and copy the pasted code back. That will help you confirm if your original workbook is corrupted. 
+-------------
+Is any code being run on the before save event?
+
+Does the macro require everything to be calculated before working properly? If so, is it possible things are happening when the workbook opens, but calculation isn't set to automatic, so things aren't calculated properly until the users hits save?
+-------------
+If everything else fails try to run the workbook through something like the VBA Code Cleaner tool. If on 64-bit try the clean function in MZ Tools instead. These tools have saved me a number of times when garbage has built up in my projects and one of my projects is more than 12x the size of yours in code lines.
+-------------
+I haven't added anything that would run before the save event. There are no calculations or formulas in the workbook as I've handled handled all calculations through inputs selected in the forms. 
+
+I was looking at adding code to run when the workbook launched but moved away from that, although I do have empty Subs in the "ThisWorkbook" object
+
+Private Sub Workbook_Open()
+End Sub
+ 
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+End Sub

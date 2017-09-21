@@ -1,0 +1,62 @@
+slow
+4upqbq
+VBScript Excel to CSV converter is very slow and Protected view slows it even more
+
+I found a VBScript to convert Excel files to CSV files, and modified it to my needs. The files I'm dealing with are usually in protected view, so I have the following code:
+
+    format = 6
+    
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    
+    src_file = objFSO.GetAbsolutePathName(Wscript.Arguments.Item(0))
+    dest_file = objFSO.GetAbsolutePathName(WScript.Arguments.Item(1))
+    
+    Dim oExcel
+    Set oExcel = CreateObject("Excel.Application")
+    
+    oExcel.DisplayAlerts = False
+    oExcel.ProtectedViewWindows.Open(src_file)
+    If oExcel.ProtectedViewWindows.Count > 0 Then
+        oExcel.ActiveProtectedViewWindow.Edit
+    End If
+    Dim oBook
+    Set oBook = oExcel.Workbooks.Open(src_file)
+    
+    oBook.Worksheets(5).Activate
+    
+    oBook.SaveAs dest_file, format
+    
+    oBook.Close False
+    oExcel.DisplayAlerts = True
+    oExcel.Quit 
+This script removes the protected view from the Excel files and saves the current selected worksheet as a csv file. If I run this the first time, it takes about 25-27 seconds to convert 4 protected view excel files into csv files. When I run it the second time, where the excel files are no longer in protected view, I get a similar result. I was curious to see what would happen if I removed the checking for Protected View, so I did the following:
+
+    format = 6
+    
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    
+    src_file = objFSO.GetAbsolutePathName(Wscript.Arguments.Item(0))
+    dest_file = objFSO.GetAbsolutePathName(WScript.Arguments.Item(1))
+    
+    Dim oExcel
+    Set oExcel = CreateObject("Excel.Application")
+    
+    oExcel.DisplayAlerts = False
+    
+    Dim oBook
+    Set oBook = oExcel.Workbooks.Open(src_file)
+    
+    oBook.Worksheets(5).Activate
+    
+    oBook.SaveAs dest_file, format
+    
+    oExcel.AutomationSecurity = lSecurity
+    
+    oBook.Close False
+    oExcel.DisplayAlerts = True
+    oExcel.Quit
+Now I can't open protected excel files with this script, but if the excel files are unprotected it converts them much more quickly than the previous script. The same 4 excel files that are now not in protected view take an average 14 seconds to convert into csv files. I have ran this many times to make sure and I get the same result every time.
+
+Why does checking for protected view cause the script to take much longer? Are there any ways to make it run faster? Also, are there any other alternatives to converting Excel files to CSV through command line? I also tried Powershell and it was even faster than VBScript! but I couldn't get it to work for protected view files. I should mention that I am running these scripts through QProcess in Qt 5.6. Thanks for any help
+
+

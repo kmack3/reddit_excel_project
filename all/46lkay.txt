@@ -1,0 +1,26 @@
+long time
+46lkay
+How to calculate hourly rate & overtime when rate is based on what time the work was performed, not for how long.
+
+Hello /r/excel ! I am a Beginner/Intermediate Excel user on the 2003 platform in Windows.  I am trying to create a time sheet for recording a Technician's time on site by inputting their time in and time out.
+
+The fun part is that my company bills at different rates depending on the time of day.  We bill at $115/hr from 0700 to 1800 and $172.50 from 1800 to 0700.  I just need daily totals and will total for the week with a =SUM formula.
+
+I am trying to think of a way to do it with formulas, but can't think of a way to capture the cost reliably.  
+
+
+-------------
+As long as your start time was always the lowest number of the day (i.e., your times didn't roll through midnight) then this might work.  Note I listed times as numbers (i.e. '700', '1800', etc.), not as times.  
+D1=700 (starting time of regular pay)  
+E1=1800 (ending time of regular pay)  
+B3:C3 - start and end time  
+
+
+    =IF(B3<D1,(D1-B3)/100,0)+IF(C3>E1,(C3-E1)/100,0)  
+  
+This will give you the number of hours of overtime.
+
+-------------
+Here's how I'd do it (A2 = $115, B2 = start_time, C2 = end_time):
+
+    =A2/100*(if(B2>C2,C2+2400,C2)-B2+1/2*max(0,700-B2)+1/2*max(0,if(B2>C2,C2+2400,C2)-max(B2,1800)))

@@ -1,0 +1,91 @@
+large
+176u7d
+My local excel expert was stumped.  Best way to transfer data from a large PDF into an excel spreadsheet?
+
+The PDF in question: http://ethics.gov.state.md.us/Jan-Emp13.pdf
+
+Thanks in advance for your help.
+
+EDIT: Should probably mention that I'm only interested in the names of the groups in bold.  Not interested in the rest.
+
+EDIT 2: Apparently my excel expert misunderstood what I wanted.
+
+
+-------------
+We use a PDF program called PDF Converter by Nuance. does a pretty good job.
+-------------
+You can copy and paste from the PDF into Excel, which will dump everything unformatted into column A.  That's about the same as you'll get from any supposed converter app.
+
+From there, it's just a matter of finding patterns to pull out what you want.  It'll probably be quicker to do it in VBA than through formulas, especially if this is something that you have to repeat often and not just a one-off.
+
+The things I've noticed that I think ought to pull out what you need:
+
+You obviously don't want blank lines, so check Len(Trim(<cell>)) > 0
+
+The bold names from the PDF are always fully capitalized.  You can do a do a StrComp() between Upper(<cell>) and <cell> to filter out those lines that don't meet that criteria.
+
+The items you do want don't contain two dates.  So you can split each line using Split() into an array (based on the space character) and check if the resulting array contains 2 dates as its first two elements.  The ones that don't follow this pattern are the cells you ultimately want to keep.
+
+All in all, it's 30ish lines of VBA.
+-------------
+It won't be better (probably not even as good) as the suggestions of stand-alone converter programs, but if you have the *paid* version of Adobe Acrobat, it has more than one... "copy type" (not sure what else to call it). Select what you want from a page and then press ctrl-c and then right-click and you'll see a menu. One option on that menu is "*export selection as...*" At that point, you'll be presented with a standard Windows *Save As" dialog where Microsoft Excel XLS is one of the several options. 
+
+I do recommend a stand-alone program if your budget will allow it. You'll get better results, probably, than what I've outlined (and certainly no worse). I'm merely pointing it out because ***IF*** you have the paid version of Acrobat, this method is free and might be sufficient to satisfy your needs. OTOH, it's not worthy buying full Acrobat merely for that feature. 
+-------------
+    CTRL+A
+    CTRL+C
+    CTRL+V
+  
+  
+EDIT : [Here you go...](https://docs.google.com/spreadsheet/ccc?key=0AsqzffKb1DHadDA1VkJzbklPc0JnVVA4UklTMjBqcFE)
+-------------
+You need a .pdf to .xls conversion program. But the results can be spotty.
+-------------
+I've used a converter before and had less than optimal results; from a quick search/reviews this http://download.cnet.com/PDF-to-Excel-Converter/3000-2079_4-10464282.html doesn't look too bad.
+-------------
+I do this a lot.  In fact, I've saved the company a lot of money by figuring out ways to do it.  If the pdf has a consistent layout, you can create an IF/Index (or in my case, offset) after you run text to columns.  My data comes out with the left column being a store number, then the next 1 or 2 columns being a text store name (Sacramento is 1 column, San Francisco is 2) and the rest being numerical data.
+  
+=IF(ISTEXT(OFFSET($A$1,MATCH($R32,$A:$A,0)-1,S$29)),OFFSET($A$1,MATCH($R32,$A:$A,0)-1,S$29),0)
+  
+  
+So this is basically embedded in a vlookup table and acts as a search tool.
+
+-------------
+The data's a little quirky when importing by CTRL-C+CTRL-V.  Not all lines with a blank line above them are the desired bold names, for example.  My copy and paste also imported the data as plaintext, so I couldn't test for 'boldness'.
+
+To suss out the company names there are several tricks you can do without VBA:
+
+* Test the ASCII code of the last character to see if it is capitalized.  (includes some nonalpha characters like periods in the case of 'INC.')
+
+        AND(CODE(RIGHT(A1,1))>45, CODE(RIGHT(A1,1))<91)
+    
+* Count the number of "/"'s to eliminate lines such as 11/01/2012 - 10/31/2013  D. ROBERT E******
+
+        LEN(A1)-LEN(SUBSTITUTE(A1,"/",""))<4
+
+So combining those two tests you get
+
+    =AND(AND(CODE(RIGHT(A1,1))>45, CODE(RIGHT(A1,1))<91), LEN(A1)-LEN(SUBSTITUTE(A1,"/",""))<4)
+
+
+This generally did the trick but not without a few errors.  There are some lines like "01/17/2013  Page 1 of 141 AAA MID-ATLANTIC, INC." that you can easily screen out with a FIND().  There's also a few dupes like "AT&T" that showed up because that's the way they were on the pdf. 
+
+Scrubbing data is always idiosyncratic.  There's a good chance a few false positives/negatives slipped past these tests so your resident excel person will have to adjust accordingly but hopefully these tricks will get you 95% there.  As always, QC before you send it out.
+-------------
+You can convert PDF to Text using the OCR text conversion function. At that point you can likely do text-to-columns and manually set up column widths. Depends on the format of your PDF.
+-------------
+If you have Adobe Acrobat (not Reader), you can use the adobe API in VBA to turn the .pdf into a textstream that you can parse.
+
+Obviously a one-off like this isn't going to need to an app to read them and fiddle the data into what you need, but if you parse a few hundred a day like I do... 
+-------------
+why would this ever get silently downvoted? if you have acrobat and don't want to get a standalone converter for whatever reason, this is a good option
+-------------
+This is great, thank you
+-------------
+This gets the raw data completely unformatted, which doesn't parse out the lines that OP wants without much more work.  It's a start, but not a solution in itself.
+-------------
+Thanks for that. My thoughts too, but I try to refrain from sounding like the 10,000 other whiners on Reddit who complain, rightly or wrongly, about being downvoted. 
+-------------
+The Original question was about getting the data into excel - which I did.  
+  
+The edit said he was only interested in certain cells - I've updated the sheet to highlight them.

@@ -1,0 +1,64 @@
+large
+3fsxg7
+Given three large worksheets of data. Looking for advice on where to start sorting using excel lookup formulas.
+
+Background: I'm familiar with excel and some functions but i've never "worked" or been paid to use excel. I have some basic / intro excel knowledge and have done some assignments in university with excel. Also new to reddit/ this sub so i hope my post is well written enough not to be deleted >.<
+
+So i've started a new contract and i've been given three large worksheets of data. One contains a lot of customer information in columns such as name, address, number, etc. There are a lot of empty columns that need to be filled such as website, billing codes, registration numbers etc. Lets call this worksheet A.
+The missing information is contained within the other two worksheets. 
+ However, worksheets B/C's "matching information" is not identical to A. 
+I am somewhat familiar with using vlookup, index match and fuzzy lookup which i suspect are some of the main tools i need to use to complete this project.
+
+Im not looking for someone to tell me HOW to do my job or what to do, rather im looking for advice on a place to start and work from there.
+
+Thanks a lot in advance.
+
+
+-------------
+I read through your post and subsequent comments, and I have potential advice.  I think you need to have a way to standardize one set of data points, like the client names. However, you don't have to adjust your data to do that. You can add your own column and create a unique ID (or abbreviation) as a client code. You'd then be able to use that client code in any sumif formulas, vlookups, sub totals, etc.  basically, helper columns are your friends with handling large data sets like this.  You could do that process with any set of data points, and you can even have 2nd and 3rd level helper columns if you want to segment the data that much. 
+-------------
+http://www.ozgrid.com/Excel/ is a good place with examples and easy to follow explanations...
+-------------
+If the data doesn't match, then how were you planning to deal with the missing information? Human eyeballs and brains or what? There are many techniques for matching up data but bad data can become worse data pretty easily.
+-------------
+Solution Verified
+-------------
+Also the wiki from this subreddit https://www.reddit.com/r/excel/wiki/frequentlyusedformulas
+-------------
+ummm i would say that the company names dont match up 100% but are similar? so like on one sheet it may be IBM and another might say international business machines. i believe for both entries though things like address, phone #, contact person are the same so i can vlookup those...but i guess thats why its a mess cuz im nto sure what matches and what doesnt.
+
+-------------
+
+You have awarded one point to _Taylorvongrela_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+i've actually been reading this quite often haha. 
+
+ive been trying to play around with the data using Vlookup but i feel as if i dont have a good enough grasp or full understanding of the formula to apply it to my work. thats why im not so much asking for what to do but more like how should i approach. anyways ill check out ozgrid first and report back. thanks a lot
+-------------
+I believe that you need to define first your output, and what do you need with your data... in order to pick an specific formula, macro, query, etc. 
+
+If what you want is to merge the data you could explore work with External Data and query the three tabs with Microsoft Query, have a look at this article: http://exceluser.com/formulas/msquery-excel-relational-data.htm
+
+It's quite helpful when working with big chunks of data, and helps you avoid frustrations with complicated formulas or macros (not that a mix of the three techniques won't make a great workbook)
+-------------
+my finished product or output would essentially be the CRM filled in with sales information and past interactions. the data would be used to forecast future sales and target markets stuff like this.
+
+i think im really having trouble wiht how to start cleaning the data or clean it up.
+-------------
+I would recommend Power Query over Microsoft Query. 
+
+https://support.office.com/en-in/article/Introduction-to-Microsoft-Power-Query-for-Excel-6e92e2f4-2079-4e1f-bad5-89f6269cd605
+-------------
+If you get stuck, try creating a demo file or screenshots and you will get good suggestions... 
+-------------
+I don't know what volume of data you're looking at, but I'd suggest a fourth sheet where you can place a unique list of company names (use advanced filter - unique records only - copy to another location). You can then pick off the more obvious discrepancies. You could use countif to try and sort the big hitters.
+
+You could also use vlookup to pull in other information for verification.
+
+As others have said, add extra columns to give you unique id and aliases, then you can use lookup commands to merge in data from different locations.
+-------------
+I just installed Excel 2010... (corporate decisions delay) I will give it a try, thanks.
+-------------
+yes def, ty. something i will post/ try to do once i get back to work tomorrow. i realize its kinda hard to get anywhere (help wise) without something to look at.

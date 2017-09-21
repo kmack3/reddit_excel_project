@@ -1,0 +1,97 @@
+big
+4p8oj3
+Big data merger
+
+So I have 2800 spreadsheets of stock data. Is there a simple way where I can merge all of the spreadsheets? 
+
+
+-------------
+Can you convert to csv and just combine them all in order?
+
+This seems like a better job for sql or powershell 
+-------------
+I've used this in the past  to merge a coupe of hundred workbooks with single worksheets.
+
+http://www.oaultimate.com/office/merge-multiple-excel-files-into-a-single-spreadsheet-ms-excel-2007.html
+-------------
+>2800 spreadsheets
+
+>simple
+
+Pick one.
+
+
+Being completely honest, Excel probably isn't it the correct tool when working with this amount of data. If you go into a little more detail about how you you want the final worksheet to look, I culd probably build a Python script for you to use.
+-------------
+What format are the spreadsheets in? If they are .csv you can use this approach below. I did this for approx. 190 csvs saved locally and it takes 30 seconds (to do 2800 of similar size and complexity it would take a little over 7 minutes). You'll have to customize the data merging loop (what columns, and where to copy) to your needs of course.
+
+    Sub MergeCSVs()
+    
+    Application.ScreenUpdating = False
+    
+    Dim CSVPath
+    Dim FS
+    Dim file
+    Dim wkb As Excel.Workbook
+    Dim ResultsSheet As Worksheet
+    Dim CSVUsed As Range
+    Dim CSVRows As Integer
+        
+    Dim InputRow As Long
+    InputRow = 3
+    
+    Set ResultsSheet = Sheets("Master List")
+    ResultsSheet.Activate
+    
+    MsgBox ("The window will minimize in order to speed up execution." & vbCrLf & vbCrLf & _
+            "Please do not alter files in Microsoft Office products while this process is running.")
+    
+    Application.WindowState = xlMinimized
+    
+    'Clear the results sheet
+    ResultsSheet.Cells.Delete
+    
+    Set FS = CreateObject("Scripting.FileSystemObject")
+    
+    'The CSV files are stored in a subfolder of the folder where
+    'this workbook is stored.
+
+    CSVFolder = "\Subfolder name"
+    CSVPath = ThisWorkbook.Path & CSVFolder
+    
+    If Not FS.FolderExists(CSVPath) Then
+        MsgBox "Subfolder does not exist."
+        Exit Sub
+    End If
+    
+    ResultsSheet.Range("A2:D2").Value = Array("Client", "Name", "Disabled", "Display Name")
+    ResultsSheet.Range("A2").EntireRow.Font.Bold = True
+    For Each file In FS.GetFolder(CSVPath).Files
+        If Right(file.Name, 3) = "csv" Then 'Only look at files with .csv extension
+            Set wkb = Application.Workbooks.Open(file.Path)
+            Set CSVUsed = wkb.Sheets(1).UsedRange
+            CSVRows = CSVUsed.Rows.Count
+                
+            For x = 2 To CSVRows
+                ResultsSheet.Cells(InputRow, 1) = Left(file.Name, Len(file.Name) - 4)
+                ResultsSheet.Cells(InputRow, 2) = CSVUsed.Cells(x, 1)
+                ResultsSheet.Cells(InputRow, 3) = CSVUsed.Cells(x, 2)
+                ResultsSheet.Cells(InputRow, 4) = CSVUsed.Cells(x, 3)
+                InputRow = InputRow + 1
+            Next x
+                
+            wkb.Close False
+    
+        End If
+    Next
+
+End Sub
+-------------
+If you don't want to try a macro-driven approach you can try the Power Query add-in. You would select "from file -> from folder" to merge the contents of an entire folder.
+-------------
+Solution Verified 
+-------------
+
+You have awarded one point to __Usari__.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

@@ -1,0 +1,126 @@
+large
+5yni81
+changing a large array to multiple single rows
+
+I have a large array that I want to modify. 
+
+Rows with identical A column values would be merged to a single row, without repeating column A value. Does this make sense? I have images of an example, much smaller array in the before and ideal after states. 
+
+[screenshots](http://imgur.com/a/znrkc)
+
+
+
+Currently, I am filtering the array to just identical A values, copy pasting to a different sheet with a prenamed array, then use this formula,
+
+=INDEX(b,1+INT((ROW(A1)-1)/COLUMNS(b)),MOD(ROW(A1)-1+COLUMNS(b),COLUMNS(b))+1)
+
+have it preset to be dragged down the necessary number of rows, copy that single column array, paste values transposed as a row in a different, new array. 
+
+As you can imagine this is painful as I currently have thousands of rows and in the final array will be left with about 100.
+
+
+-------------
+ok, do this, copy your entire column A to new sheet, delete duplicates from pre-defined function in data ribbon at the top, then use transpose function
+https://support.office.com/en-us/article/TRANSPOSE-function-ed039415-ed8a-4a81-93e9-4b6dfac76027
+-------------
+try the Tableau Reshaping Tool. It's free and I THINK this is what it does 
+-------------
+Wow, this is crazy. I'm curious why do you need this?
+
+I would look for a solution in VBA. Just set up a macro that use the excel built in tool to filter unique column A (just like what you're doing now). Then the macro loops, for each unique element, all elements in the original table getting the info you need.
+If this is too slow then you will need to get all the data to an array, sort and index it for make it faster.
+Let me know if it helps.
+-------------
+I'm not sure I'm understanding you correctly. 
+
+1. I copy column A to a new sheet.
+2. I then remove duplicates from the original array? or from this copied column?
+3. If I remove duplicates from the original array, then transpose the array. I get this: [screens](http://imgur.com/a/RJQom)
+
+I am doing something wrong?
+
+Here is a simpler example
+
+Make:
+
+A - red - 5
+
+A - blue - 7
+
+B - purple - 3
+
+B - pink - 4
+
+Into: 
+
+A - red - 5 - blue - 7
+
+B - purple - 3 - pink - 4
+-------------
+Thank you, I'll look into this.
+-------------
+Yes, I was considering making a macro, but have never used VBA before.
+-------------
+The import tool that this file is going to be fed into requires a given account's properties to be in a single row. If they are in multiple rows or multiple uploads on the same column headers the values will just be overwritten.
+-------------
+Ok ok...
+See if this code works for you (you may need to adjust the ranges):
+
+
+
+      Option Explicit
+      
+      Public vData As Variant
+      Public vUniqueIds As Variant
+      
+      Sub Main()
+         Dim N As Long, K As Long, L As Long
+         Dim sTemp As String
+         vData = Sheet1.Range("a1").CurrentRegion
+         Call GetUniqueEmails
+         For N = 2 To UBound(vUniqueIds)
+            Sheet2.Range("A1")(N, 1) = vUniqueIds(N, 1)
+            L = 1
+            For K = 2 To UBound(vData)
+               If vData(K, 1) = vUniqueIds(N, 1) Then
+                  Sheet2.Range("A1")(N, L + 1) = vData(K, 2)
+                  Sheet2.Range("A1")(N, L + 2) = vData(K, 3)
+                  Sheet2.Range("A1")(N, L + 3) = vData(K, 4)
+                  Sheet2.Range("A1")(N, L + 4) = vData(K, 5)
+                  Sheet2.Range("A1")(N, L + 5) = vData(K, 6)
+                  Sheet2.Range("A1")(N, L + 6) = vData(K, 7)
+                  L = L + 6
+               End If
+            Next K
+         Next N
+      End Sub
+      
+      Function GetUniqueEmails() As Variant
+         Dim WS As Worksheet
+         Set WS = ThisWorkbook.Sheets.Add
+         WS.Range("a1").Resize(UBound(vData), 1) = vData
+         WS.Range("a1").CurrentRegion.RemoveDuplicates Columns:=1, Header:=xlYes
+         vUniqueIds = WS.Range("a1").CurrentRegion
+         Application.DisplayAlerts = False
+         WS.Delete
+         Application.DisplayAlerts = True
+         Set WS = Nothing
+      End Function
+
+-------------
+Solution Verified
+
+!!!!
+
+
+Thank you! I changed the range and ran it and it worked almost perfectly. It broke half way through, probably just due to some formatting issue. But I just ran it again on just the remainder and patched the halves together.
+
+
+Thank you so much! Very helpful.
+-------------
+Solution Verified
+-------------
+
+You have awarded one point to _investidor_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

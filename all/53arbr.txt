@@ -1,0 +1,61 @@
+freeze
+53arbr
+How to make "=today" freeze to the date a sheet was created?
+
+I should disclose that this is actually Google Sheets.
+
+I have a script that auto-copies a template to a new sheet every day and it names the sheet based on a cell that currently reads "=today" -- the result is that the sheet is named the day it was created. Thus, the sheet created on 9/15/2016 is named "9/15/2016."
+
+I have another script that archives some data to another sheet when I run it. I'd like to archive the date as well, but sometimes I run that script on a later day. To be clearer, I tried to archive 9/15/2016 today (9/18), but the date that was archived was 9/18, since "=today" returned today.
+
+Does that make sense? I'm having trouble explaining it more coherently. 
+
+Anyway, what I'd like to do is have the template still be automatically copied and renamed to the day of copy, but also be able to archive that specific date. Is there a solution?
+
+
+-------------
+It would be a simple case of recording a macro that copies the TODAY formula output, and pastes as values to another cell in the sheet (which means it won't ever change). Not sure if this can be done in Google Sheets however...
+-------------
+Is the date always in the same location? Would you be averse to doing it with a script?
+-------------
+Just make a macro copying and pasting the date as values then set the macro to a button or however you wish. 
+-------------
+Other than writing a macro with a custom function, there really is no other way to do this as others have suggested.
+-------------
+Had the same issue.
+I had
+
+A1 = Today ()
+
+
+B1 =A1
+
+My fix was after B1 = A1, I did B1.Value = B1.Value
+-------------
+A quick google found this script for copy/paste values:
+
+function moveValuesOnly() { var ss = SpreadsheetApp.getActiveSpreadsheet(); var source = ss.getRange('Sheet1!A1'); source.copyTo(ss.getRange('Sheet2!A1'), {contentsOnly: true}); source.clear(); }
+-------------
+I have something for the date the sheet was last saved. Tomorrow at work I'll follow up. 
+-------------
+Yeah, assuming A1 is the cell that says "=TODAY," all I could think of doing was making B1 say "=A1" but that'll still change when A1 changes... Not sure how to pull it off. 
+-------------
+The date is always in the same location, yeah. I've solved the larger problem with a script that renames another cell to the sheet name, thus preserving the date. 
+
+But I don't know VBA (or Google's script editor). So while I'm not opposed to a more elegant solution with a script, I was hoping it was possible without, which is why I'm asking /r/excel. Was hoping there was a cell formula that applied to both programs. 
+-------------
+Thanks, will give this a shot. Wasn't sure what to search for but it seems obvious in hindsight. Still would prefer a non-script solution if anyone has one. 
+-------------
+Yep. Do you know how to paste as values? That will solve your issue. I'm just not certain about how to automate it in Google Sheets though. 
+-------------
+I see, besides turning off automatic update of formulas I can't think of a non-script solution, sorry.
+-------------
+In excel there are formulas that can return the sheet name. On mobile but easy to find on google.
+
+Then you would have the script that saves the sheet also change the formula to the sheet name one.
+-------------
+Yeah, I know how to paste as values. Just wanna automate it and I'm afraid I don't know enough of Google's script editor to suss it out. There's an onEdit trigger, but that would still run every time the date changes. If there were some sort of "onCreate" trigger, I'm sure I could figure something out, but I don't think there is one. 
+-------------
+To be fair, this is no longer an /r/excel issue.
+
+It's the same story, though. You want a google apps script (google this exact phrase) that pastes the calculated date as a value (google this exact phrase).

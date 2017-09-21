@@ -1,0 +1,27 @@
+big
+47ulwa
+Not a power user, but work with big excel files, what's the best Mac solution?
+
+I don't really consider myself a power user and don't do anything crazy, but I do often have multiple worksheets open that are fairly large. 500k rows, 20 columns is normal.
+
+I have Office 365 right now and the beach ball just comes up way too often.
+
+I have the newest rMBP (base model)
+
+
+
+
+-------------
+Have you tried saving the files in excel binary format? 
+
+Is the file larger than the amount of RAM you have? If it's pure CSV try opening it with VIM. 
+
+Otherwise another way is to use CLI or scripting language (Python) to read the file 
+-------------
+The 64bit Windows version in parallels ?
+-------------
+I've never had good experiences with Excel files that size on a Mac. No idea why though.
+
+Are you running the 32 bit or 64 bit version of Office 365? The 32 bit version can only use 2gb of ram, which isn't really enough for a file that large. 
+-------------
+Depending on what you're doing, it might not take long to learn how to do what you need by importing your csv/xlsx into R. In my experience most excel formulas have fairly straightforward equivalents in R. If you go that route I'd recommend using Rstudio.

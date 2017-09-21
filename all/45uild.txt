@@ -1,0 +1,59 @@
+large
+45uild
+Large formulas in VBA
+
+I have a large formula and I need to cram multiple iterations (nested IF statements) into it.  Using 2 iterations I can copy and paste the formula into VBA using RANGE("A1").Formula =, throwing quotes on either end, and  doubling all of the quotes through the formula itself (i.e., a ="Y" becomes =""Y"").  I increased the formula in a cell to 4 iterations and tried to duplicate the results.  VBA will not allow me to put the whole formula on a single line so I continued the line using & _ and started the second line with quotes.  When I try to run the code I get Run-time error '1004', Application-defined or object-defined error.  
+  
+Is there a max size I'm hitting?  Did I manage to wrap lines incorrectly?
+  
+* each iteration is about 380 characters long.  
+  
+This is a scrubbed version of a single iteration:  
+  
+       IF(OFFSET('Spreadsheet_Name'!$A$2,MATCH(A2,'Spreadsheet_Name'!$A$3:$A$34025,0),MAT    CH("OFFER_"&OFFSET(Pull!$H$2,MATCH(((((K2+360)-Pull!$F$2)/30)*(ES2-ER2))+(DW2-(ES2-ER2)),Pull!$I$3:$I$15,-1),0)&"_PRICE",'Spreadsheet_Name'!$B$1:$BK$1,0))="Y",OFFSET(Pull!$H$2,MATCH(((((K2+360)-Pull!$F$2)/30)*(ES2-ER2))+(DW2-(ES2-ER2)),Pull!$I$3:$I$15,-1),0),
+
+
+-------------
+Your post is incomplete. That's not a finished formula.
+
+There is a maximum formula size; IF, for example, only allows up to 7 nested statements.
+
+There must be a better way though, in the formula you posted you are calculating the same thing twice.
+
+IF A then A, else...?
+
+I would try to come up with a simpler test to see if the return value is possible.  Otherwise, save yourself the pain and break each iteration of the statement out into a new column.
+-------------
+For what it's worth, I would suggest proofing the formulae again.  When I was first learning vba (on the fly, seemed like it would be useful at work for something I was going to work on), I had huge amounts of code and got the same error at a few points (I got a lot of errors I had to work through).  Turned out for at least one in my nested IFs with vlookups referencing other sheets I made an error (I no longer remember if it was a typo or just screen fatigue).  Spent some time glaring at it, eventually went for a walk, came back and found the error in short order.  Short of posting your entire code, that might be the best you can do.  
+-------------
+Two questions: 
+
+1) Would you able to upload a scrubbed example of some of the data you're working with? 
+
+2) Do you need the formula in the cells or the results? I.e, are these results that will change? 
+
+I want to have a crack at throwing this into arrays/ collections and iterate your lookup criteria through loops. Not only would arrays be faster, proofreading vba functions is infinitely easier than troubleshooting formulas. No promises as I'm still learning vba myself but this looks like an interesting challenge. 
+
+-------------
+If using VBA to key in a formula..since you are writing VBA, write that function in a UDF in VBA so can call a much simpler formula.
+-------------
+I would suggest breaking the formulae down in parts, each iteration within their own cell. Once you have that, you can begin to build it together.
+
+As others have said, its incomplete so its hard to help here.
+-------------
+As I stated, the example I left was a single iteration.  i.e., the "else" portion of the formula will be the same IF statement again with a minor incremental change.  
+  
+Also, Excel 2010 has a limit of 64 nested IF statements.  I believe that change was made in Excel2007.  Each iteration would be a single nested IF and I am fighting with 4 so no matter what the limit, it number of nested IF statements isn't it.
+-------------
+Excellent advice.  Unfortunately in this case I'm not sure it will help much.  I have the formulas (both 2-iteration and 4-iteration) written and they work fine when copied into a cell.  It is the translation of the 4-iteration version into VBA for automation that I seem to be either missing something or hitting a limit somewhere.
+-------------
+Fair enough, I haven't updated my knowledge of IF limits, so I'll do so (mind, if I ever need 64 I hope someone shoots or fires me).
+
+So, found the specs from MS and 8,192 is the maximum length of a formula, 64 nested functions. Your formula *4 is still only about 1300-1400 characters.
+
+Without a peek at sample data, I can't provide any real support on this. I apologize for wasting you time. Perhaps someone else has a better handle on optimizing this.
+
+-------------
+A response is rarely a waste of time.  8192 characters for a formula and 64 nested functions is excellent data that I will be squirreling away.  Thank you.
+-------------
+Perhaps we should hold an /r/Excel contest to write the longest formula, and the one that holds the greatest length after the community whittles it down wins!

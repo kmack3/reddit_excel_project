@@ -1,0 +1,241 @@
+slow
+6ltfek
+Using a single sheet as an Elo rating system, but it's slow and cumbersome -- potential optimisations?
+
+I'm currently trying to use a single sheet as an [Elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system) for tennis players, with each row in the sheet expressing one result from the history of the sport as well as the values relevant to Elo. [Looking at this screenshot](http://i.imgur.com/NuGrqwF.png), you can see how each row contains details about not only who played in each match and when/where, but also: 1) what their respective Elo ratings were heading into the encounter, 2) their respective probabilities of victory, and 3) their new Elos after the match, with the winner gaining points and the loser losing them as per the way Elo works.
+
+The issue is that there are a *lot* of matches in the history of tennis, and using the current format I've dragged the formulas expressing the above things down throughout nearly half the length of the sheet (~250,000 rows) but this has been extremely slow and cumbersome. It has taken me a week to even get this far as I can only rely on Excel to calculate max ~5,000 rows' worth of match results without crashing, with each batch of 5,000 currently taking well over 2 hours. I have turned automatic calculation off, and am currently using the RangeCalc add-in so that only those 5,000 new rows are calculated and nothing else, but I am currently looking at over another week of dragging and calculating 5,000 new rows until this spreadsheet is up to date with this year's match results. Not only that, but Excel is struggling more and more each day to simply open the workbook, and I am worried that by the time I finish it will be bogged down with so much data that even adding small amounts of new matches to update and maintain the sheet will be a sluggish chore.
+
+I suspect the hellish calculation times have a lot do with the formulas I am using (see below), one of which incorporates the INDIRECT function and a few of which are very lengthy, but I am not proficient enough in Excel to know which (if any) functions to use as alternatives. As for how slow the workbook is to load, and how slow I fear it will be when I try to enter new lines (with the workbook fast approaching 600k rows), I don't really know what I can do about this -- would getting more RAM help? I'm already using 16-bit Excel, but I don't know what more I can do right now.
+
+[Please see this Pastebin for a breakdown of the formulas I'm using, as including them here would make this post seem way too long -- I have asked for help on this subreddit before on this same spreadsheet but I suspect the length of my post put a lot of people off, so I am trying to keep this short.](https://pastebin.com/2XfkvcWb)
+
+
+-------------
+Well, you've identified the culprit. INDIRECT is volatile function, meaning that *every* formula is getting recalculated every time you do something on the sheet, or when you open it. Yikes!
+
+So, how to fix that? You tend to use this structure alot, to define a column and row:
+
+    INDIRECT(ADDRESS(Y287200,14)
+
+A better way is with INDEX, which lets you give an array and then specify row/column. The above could be replaced with
+
+    =INDEX(N:N, Y287200)
+
+Since you know what column it is. This is much less work for XL to calculate. So, your column S formula could be changed to this, assuming this is going into cell S287200
+
+    =IF(COUNTIF($I$2:N287200,I287200)=1,1500,
+     IF(INDEX(N:N, Y287200)=I287200, INDEX(X:X, Y287200),INDEX(W:W, Y287200))
+
+Col T can be changed in a similar manner.
+
+Next, the SUMPRODUCTs are the heavy lifters, dealing with large arrays. We need to simplify those as well. Assuming this goes into Y2:
+
+    =SUMPRODUCT(LARGE(($I$2:$N1=$I2)*ROW($I$2:$N1),1))
+
+and Z2:
+
+    =SUMPRODUCT(LARGE(($I$2:$N1=$N2)*ROW($I$2:$N1),1))
+
+anyway, start with that, and see if things get better.
+
+
+-------------
+Are you able to link to a small subset (e.g 500 rows) of this problem with all your current formulas?
+
+Trying to conjure this mentally and/or reproduce is all too much effort
+-------------
+You can certainly speed this up a little, but probably not enough by using standard Excel functions alone. You have a fundamental problem in the structure of your data - you are trying to keep track of the previous Elo score for each player. To do this, you're essentially searching previous rows for this information. Let's do some analysis to see why this will be slow when performed over 500,000 rows.
+
+Let's guess that we can search one million rows in 0.01 seconds. In the first row, we don't need to perform a search - each player gets a starting Elo of 1500. In the second row, we need to search the previous 1 row to find out what the players' previous Elos were. In the third row, we need to search the previous 2 rows, etc. If we count up all the rows we need to search in total, we will find that we need to search 124,999,750,000 rows. Even searching a million rows in 0.01 seconds, this will take over 20 minutes.
+
+In reality, it will probably take longer.
+
+The good news is that this is easily avoided. This would be easy to implement in VBA. Read your data a line at the time, keep the most recent Elo for each player, update the players in the current row, write out the new scores to your worksheet. Even if you don't optimise your code, it's bound to be faster than trying to do this with standard Excel functions because you won't need to perform massive searches.
+
+(As an aside: Are you sure you've implemented the Elo update correctly? I'm not familiar with how this score is calculated, but the way you're using the expected probabilities of the players winning looks odd to me.)
+-------------
+VBA would certainly be the most efficient because you're dealing with iterative calculations that excel always sorta stumbles with, especially when you're dealing with as large a range as you are. 
+
+/u/CFAMan covers a lot of useful bases, but if you add some more helper columns and a little trickey, you can get rid of a lot of the "heavy" calculation you're doing. 
+
+Here are my columns from S:AB in Row 2: 
+
+Row: | Winner_MatchID | Looser_MatchID | Winner_LastMatchRow | Loser_LastMatchRow | winner_curELO | loser_curELO | winner_Pwin | loser_Pwin | winner_newELO | loser_newELO | 
+:--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | 
+1 | 1100230001 | 1077600001 |  |  | 1500 | 1500 | 0.5 | 0.5 | 1565.663195 | 1434.336805 | 
+500 | 1000160008 | 1000540005 | 472W | 473W | 1824.452962 | 1624.260327 | 0.759949277 | 0.24005072 | 1846.664086 | 1599.340443 | 
+
+With the following formulas: 
+
+Row | Winner_MatchID | Looser_MatchID | Winner_LastMatchRow | Loser_LastMatchRow | winner_curELO | loser_curELO | winner_Pwin | loser_Pwin | winner_newELO | loser_newELO | 
+:--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | 
+1 | =I2\*10000+COUNTIF($I$2:I2,I2)+COUNTIF($N$2:N2,I2) | =N2\*10000+COUNTIF($I$2:I2,N2)+COUNTIF($N$2:N2,N2) | =IFERROR(MATCH(S2-1,$S$1:S1,0)&"W","")&IFERROR(MATCH(S2-1,$T$1:T1,0)&"L","") | =IFERROR(MATCH(T2-1,$S$1:S1,0)&"W","")&IFERROR(MATCH(T2-1,$T$1:T1,0)&"L","") | =IF(U2="",1500,INDEX($AA$1:AB1,1\*(LEFT(U2,LEN(U2)-1)),(RIGHT(U2,1)="L")+1)) | =IF(V2="",1500,INDEX($AA$1:AB1,1\*(LEFT(V2,LEN(V2)-1)),(RIGHT(V2,1)="L")+1)) | =1/(1+(10\^((X2-W2)/400))) | =1/(1+(10\^((W2-X2)/400))) | =W2+(250/(((1\*RIGHT(S2,4)-1)+5)\^0.4))\*(1-Y2) | =X2+(250/((((1\*RIGHT(T2,4)-1)+5)\^0.4)))\*(0-Z2) | 
+500 | =I500\*10000+COUNTIF($I$2:I500,I500)+COUNTIF($N$2:N500,I500) | =N500\*10000+COUNTIF($I$2:I500,N500)+COUNTIF($N$2:N500,N500) | =IFERROR(MATCH(S500-1,$S$1:S499,0)&"W","")&IFERROR(MATCH(S500-1,$T$1:T499,0)&"L","") | =IFERROR(MATCH(T500-1,$S$1:S499,0)&"W","")&IFERROR(MATCH(T500-1,$T$1:T499,0)&"L","") | =IF(U500="",1500,INDEX($AA$1:AB499,1\*(LEFT(U500,LEN(U500)-1)),(RIGHT(U500,1)="L")+1)) | =IF(V500="",1500,INDEX($AA$1:AB499,1\*(LEFT(V500,LEN(V500)-1)),(RIGHT(V500,1)="L")+1)) | =1/(1+(10\^((X500-W500)/400))) | =1/(1+(10\^((W500-X500)/400))) | =W500+(250/(((1\*RIGHT(S500,4)-1)+5)\^0.4))\*(1-Y500) | =X500+(250/((((1\*RIGHT(T500,4)-1)+5)\^0.4)))\*(0-Z500) | 
+
+
+(hopefully this outputs all right, otherwise check the workbook link below). 
+
+So basically what you do is create a unique ID for each match that consists of the number of games played by this player (up to 9999 matches for 1 player).  
+This is done by multiplying the ID by 10000 and adding the count of occurrences in the loser+winner columns so far so far. 
+
+This allows you to find the row of the previous match by doing a MATCH on the current unique game ID minus 1 in both the win and the loss columns.  
+While you are at it, you can add a "W" or a "L" to the end of the string, to indicate which column it was. 
+
+Now for your current ELO, you don't need to count or match anything.    
+you already have the row number and column of the previous match(if there was one) in the LastRow column, so you just do an INDEX pointing to these values. 
+
+Your win/lose percentage formulas are the same as always. 
+
+Your "NewELO" formula again uses the count you already have in your unique MatchID.
+
+This way, your "heavy lifting" formulas are reduced to two instances: 
+4 COUNTIF's (2 in the winner_MatchID and 2 in the Loser_MatchID)   
+4 MATCH's looking for an "exact" match (2 in the winner_LastMatchRow and 2 in the Loser_LastMatchRow)
+
+With this in mind - Even a simple formula WILL be slow to calculate when you are calculating 500.000 of them. 
+So what I'd advise is that once you slog through calculating your current matches,  you copy-paste-as-values everything except the last row.   
+When you then process a new batch of matches, copy the formula down (It'll never be fast with a 500.000 row COUNTIF, but it should be doable) and then copy-paste-as values again
+
+ooooooor you could use the Macro that /u/MRMCMLXXXV made :D 
+
+Here's a copy of the workbook with a limited sample (I stole from mrmxmlxxxv so his stuff is still in there)
+
+https://www.dropbox.com/s/0c79f0tav8peh2q/elosample.xlsm?dl=0
+
+
+-------------
+I've looked at this now for a while and it's really NOT an excel sort of problem. I suspect that with a few dozen lines of python, this could be done much easier.
+
+In the weekend, then...
+-------------
+Wow, thank you for responding so quickly! Just to reiterate, I'm using RangeCalc and have automatic calculation turned off, so I don't know if everything is actually being recalculated every time I do something -- if it were, I don't think I'd be able to do anything at all. The main issues are the >2 hour calculation times per 5,000 rows when I do actually execute a calculation and the fact that the workbook seems to be struggling with how many sheer rows of data are contained in it (only really a problem when opening the workbook or saving it, which take about 60 and 20 seconds or so respectively, but still). That said, I'll have a go at implementing those solutions as soon as possible and get back to you on the results.
+-------------
+Solution Verified!
+-------------
+I haven't had a chance to implement the alternative formulas provided by /u/CFAman yet, but [here's a link to a sample of what I'm currently working with](https://www.dropbox.com/s/8yil0z9vmdhwb8a/elosample.xlsx?dl=0).
+-------------
+> The good news is that this is easily avoided. This would be easy to implement in VBA. Read your data a line at the time, keep the most recent Elo for each player, update the players in the current row, write out the new scores to your worksheet. Even if you don't optimise your code, it's bound to be faster than trying to do this with standard Excel functions because you won't need to perform massive searches.
+
+I actually [made a post](https://www.reddit.com/r/excel/comments/6jeag3/best_approach_to_get_this_workbook_to_function_as/) over a week ago asking whether using VBA/a macro would be a much better approach to what I was attempting to do at the time, which was keep a list of player IDs and their most recent Elo scores in a separate sheet called 'players'. Rather than finding the last Elo score of a player wherever it occurred in the *same* sheet, my initial idea was to try and run a macro that: 1) pulled a player's Elo score from the 'players' tab and put it into the main sheet containing all the match results; 2) calculated win probabilities based on those scores; 3) updated the Elo scores according to the results vis-à-vis the probabilities; and finally, 4) sent those new scores to the 'players' tab to overwrite the values that were pulled from the sheet in step 1. I don't know if this is similar to what you suggested I try to write a macro for, but I was told in that post that it was likely impossible. If you're suggesting something totally different, I'd be hugely appreciative if you could go into a bit more detail about how I could carry it out -- I have limited proficiency in Excel (hence my trying to use it for this project in the first place when, as others have stated, it's probably not the best tool for it) and would find it easier to work out how formulas and code are functioning if I can see them, rather than trying to create my own from scratch.
+
+> (As an aside: Are you sure you've implemented the Elo update correctly? I'm not familiar with how this score is calculated, but the way you're using the expected probabilities of the players winning looks odd to me.)
+
+The formula for score updates can be found [here](https://www.betfair.com.au/hub/betting-better/tennis-modelling-elo/) (under the first subheading "How does the Elo model work". The K factor in that formula is also explained in that article (and takes into account how many matches a player has played before, hence the COUNTIF ... minus 1 part of my formula, if that's what looked off to you). Maybe I don't have the best eye for these things, but I thought I had recreated the formula accurately and it seemed to be working -- if you care to double check it, then I would be immensely grateful.
+-------------
+Wow -- I haven't had a chance to go through this yet but I'll just say I'm hugely grateful for the effort you've gone to! I'm a little behind and thus far I've only had time to test out what /u/CFAMan suggested (which yielded mixed results as I explained [in this comment](https://www.reddit.com/r/excel/comments/6ltfek/using_a_single_sheet_as_an_elo_rating_system_but/djz938a/)).
+
+You've definitely gone about it in a way I could have never conceived of, and I'll have to actually put it into practice to see if it works and I understand it, but I'll keep you posted as soon as I do.
+-------------
+Solution Verified!
+-------------
+Gotcha. One other thing, you can reduce some of your arrays by 66%. Instead of referring to I:N, which is 6 columns, when you're searching for (looks like an ID?) it's actually faster to do 2 COUNTIF's with a single column each.
+
+I.e., change this
+
+    COUNTIF($I$2:N287200,I287200)=1
+
+to this
+
+    COUNTIF($I$2:$I287200, I287200)+COUNTIF($N$2:$N287200, I287200)=1
+-------------
+
+You have awarded one point to _CFAman_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Its a great puzzle! I think too much for my little mind. I shall keep looking at it though. :)
+-------------
+Take a look at this file: https://www.dropbox.com/s/41xcnj48tt4kpza/elosample.xlsm?dl=0
+
+I've used your sample, removed the formulas and added a macro that produces exactly the same results. Take a look and see if you understand. Just run the CalculateElos() sub.
+
+I've only had half an hour on this, so I've not checked whether your Elo scores are correct but I'm happy to accept that its right and just looks odd to my unfamiliar eyes!
+-------------
+Yeah, I mean /u/MRMCMLXXXV's Macro will with like... 100% certainty be the most efficient way to do it. 
+
+The macro iterates over each line, and keeps a "register" of each player, which it then updates with a value every time a player wins or loses. 
+
+So at each match, no matter what number of match it is, you have the basic ELO calculations + an assignment to the register + keeping the register in memory (let's say it maxes out at 100.000 different players)
+
+Using Excel formulas, even with just a few ones like above, you still have to do the ELO calculations for each game, but each time there is a new game you have to perform the COUNTIF and MATCH operations on an increasing amount of games. 
+
+With 10 rows, your COUNTIFS from 1 to 10 will have checked 55 values before they are done calculating. 
+
+With 100, it's 5050
+
+With 1000 it's 500500
+
+With 10000 it's 50005000
+ 
+With 550000 rows, 1 countif all the way down will have checked around 150 billion values.
+
+times 4.
+
+The number of operations in the macro will be in the range of millions'ish instead, for everything. 
+
+-------------
+
+You have awarded one point to _tjen_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+So I began implementing these formulas last night from scratch, and what was taking me two hours to calculate (5,000 rows) was taking me FAR less time (something like ten minutes), so even those few suggestions you made improved efficiency by a long, long way. Unfortunately, after getting to (incidentally) around the same point in my new workbook as I had in my old one -- about 250k rows in -- and saving and closing the file, it absolutely refuses to open. The old workbook would be sluggish to open but would do so after a minute or so, but no matter how long I wait, the program just hangs endlessly trying to open this new one and there are severe memory leaks. 
+
+No idea why this would suddenly be the case when what I already had was still reliably opening, but I suspect maybe something might have gone wrong the file is "corrupted(?)" somehow. Given that it only took me a night to actually get through half the entire database of results, I'll just start again from scratch and see how I go -- that is, after trying out what /u/MRMCMLXXXV and /u/tjen have suggested to determine what the best outcome is. Thanks again and I'll keep you posted!
+-------------
+As I stated [in this comment](https://www.reddit.com/r/excel/comments/6ltfek/using_a_single_sheet_as_an_elo_rating_system_but/djz938a/), I've only just gone through the suggestions /u/CFAMan gave, and calculating everything was a hell of a lot quicker, though the file now refuses to open after having calculated half of the entire sheet of match results. Right this second I'm still waiting to see if the workbook will load, but if/after I give up on that I'll try this macro out -- but is your macro one that automates the calculations that I had in the first place (and not the ones /u/CFAMan provided) given that those calculations were extremely inefficient? If so, will running this macro just get me stuck in a hopeless loop that my computer will run out of memory before it can even complete?
+
+Either way, I'll let you know what I find once I've tested both this and what /u/tjen posted out -- thanks again!
+-------------
+Sorry it ran into more issues, but I think the macro idea posted below will be the way to go. Hope you get it working!
+-------------
+It avoids the long running calculations responsible for lookups altogether. It should not get stuck.
+-------------
+All I can say is wow. It worked perfectly in the sample and (after Googling how to import macros into other workbooks) in a larger workbook that I tested it on. There are just a few things that I need to ask, though, so apologies if this is a bit lengthy:
+
+* 1) By looking at the code (my first time ever in Visual Basic, so I'm treading carefully), I can kind of tell what's going on generally, but one thing I'm a bit unclear of is what's happening in the process of getting/creating new players. My initial strategy for creating new players in the players table didn't intend to do it via the macro, but rather manually by myself and with me assigning the player their ID. I assume I can still do this and simply not utilise the 'create player' function of the macro, but it got me wondering what it's actually using in the get and create player processes -- specifically, whether it's using player names. I ask because as long as the winner/loser IDs match up to the player IDs in the players table, everything is fine, even if, for example, that player decides to change their name and nationality and I enter their name in the sheet differently from then on. For example, let's say I run this macro on a database of women's matches. Up until this point, the macro will accurately retrieve and return the Elo score of a player throughout her career. Now, if she were to get married and change her surname, I'd like to be able to reflect this in the sheet by entering her new name each time she plays a match but *without* having to replace all old instances of her name, because, after all, her player ID remains the same. While I could easily just Find+Replace all instances of her name if it *is* an issue, what about players who change their nationality, since it's a lot harder to go back and change all instances of RUS next to the name of a player who now represents KAZ? Will the macro have an issue with either of those things (I assume it wouldn't with the latter anyway since I don't see why it would incorporate nationality)? For that matter, does the macro actually *rely* on me entering matches by way of the players' names and create new entries in the player tables based on new unique names? I can see that getting a bit messy particularly with East Asian players who may well share the same name and only possibly be distinguished by their player IDs. As I said, I intend on manually updating the players table myself anyway -- I just wanted to check whether I have to stick religiously to some combination of player ID-name that the macro has used to calculate that player's Elo up until now and whether it will treat a player with the same ID but a different name as for some reason a new player who starts at 1500 (which would obviously be incorrect).
+
+* 2) The fact that the macro returns the new Elos is in and of itself fantastic and I can do a lot with just that. The fact that the "current Elo" columns no longer contain any values is not a huge problem, since manually searching for that player's last recorded Elo score isn't a huge chore. However, the "win probability" columns are quite useful outside of just the calculation process. The appeal of Elo as a rating system to me, as a huge tennis fan, is the fact that when applied correctly it can be a remarkably accurate predictor of the likelihood of match outcomes. There are a number of things you can do with a database or subset of matches that affect its predictive capabilities, and I really want to be able to test some of those myself by pulling certain subsets of matches (for example, only those matches played on clay, or excluding all matches that ended in a retirement), running the macro from scratch, and sorting the results by the winner's probability of victory. That will allow me to easily see how many matches were correctly predicted by Elo (with the winner having a win probability of >50%) for that subset, and I could compare the results to, say, how many more or fewer results are correctly predicted when I only include certain *kinds* of clay court matches, or I *include* retirements in the dataset. I don't see an easy way of doing this when the only things actually available to me in the output are the new Elo scores.
+
+* 3) That leads me to my next question. As I hinted above, it is worth using matches only played on specific surfaces (like clay or grass) when using Elo as a predictive tool -- surface-specific Elo is a better predictor of match results than is an overall Elo that takes into account all matches on every surface, and using a hybrid of the two has been seen to yield the best predictive accuracy. That said, this necessitates players having at least five different Elo scores -- one for all their matches, and one for only the matches they have played on each surface (hardcourt, grass, clay and carpet). If the right methodology is devised, even clay and hardcourts could potentially be usefully segmented into multiple speeds/varieties of clay and hardcourt, with players having several new Elo scores for those kinds. In my head I simply envisioned this as necessitating entering each match result into anywhere up to three different databases (e.g. a match at Wimbledon would be entered into the main tab with every match that has ever been played as well as into a tab that only includes matches on grass, whereas a match at the French Open would be entered into the main tab, a clay court matches tab, and possibly even a third tab for matches played on slow-paced clay courts). My question is this -- if entering match results into multiple tabs is the way I choose to go about it (assuming it is the most logical way of doing this, as the only other way I can think of is having the main matches tab contain *all* of the different Elos a player might have, with the macro simply ignoring the vast majority of Elo scores in that given row as they don't need to be updated (e.g. ignoring all surface-specific Elos other than grass if it is a match at Wimbledon), but it sounds like this would be a lot trickier to write into the macro), how would I go about being able to run the macro separately on any one of these sheets at a given moment? I don't actually know whether your macro is interacting with the 'players' worksheet at all, but if so I was figuring I would simply add extra columns to it for each Elo score they have alongside the main one that everyone starts with (but given that everyone's score in that tab is still 1500 after running the macro maybe your macro doesn't utilise that worksheet after all).
+
+* 4) Pertaining again to the 'players' worksheet, whether the macro does or doesn't utilise it, can it be adapted to be able to at least feed Elo scores into it so that I could keep the 'players' worksheet as an Elo ranking table that functions essentially just like [this page](http://tennisabstract.com/reports/atp_elo_ratings.html)? This is a list of players and their overall and surface-specific Elos; however, it is non-exhaustive, and I would like to be able to view and rank any and all players' Elos at any given moment as well as potentially add a wider variety of surface-specific Elos (e.g. slow/medium/fast hardcourt Elo in addition to the main hardcourt Elo). Elo is fascinating as a predictive tool, but it would be nice to just be able to view the ratings as a neat leaderboard.
+
+* 5) I know you chalked it up to you just not being familiar with the system, but out of curiosity are you able to explain what looked off to you about the score calculation formula? I've double-checked that your macro score updates output identical values to the sheets I've worked with thus far, and they do, but that doesn't matter if I've made an error with the formula in the first place. I'm no mathematician, so I'm not 100% confident that I've actually replicated the new Elo formula properly...
+
+I think that about covers it, and sorry for inundating you with the above -- let me know if nothing is clear and I'll do my best to re-explain!
+-------------
+1. The code only look at player IDs, with the assumption that all IDs are static and uniquely identify a player in perpetuity (validated against the sample data you provided). Your players may change their names and nationalities as often as they like and the macro won't even be aware. You don't need to run any other functions/subs manually.
+2. Win probability can be output as easily as the new Elo if desired. If you don't work it out (or if someone else doesn't add it) before I get a chance, I update the macro to do that.
+3. The file I saw from you didn't have a Players worksheet (or maybe I missed it), so the macro doesn't use it. I would keep all the matches on one tab and make sure there is a column that defines the "type" of match (e.g. clay court, grass, etc). This is much easier than separating the data according to another variable (this is a general principle that should be adhered to whenever possible with Excel). It would be easy to update the macro to calculate Elos for any number of these types - you could include different types of weather etc. Instead of using a single number as the current Elo, I'd use a Collection (if this was for me I'd use a Hashtable for performance reasons but as a public example, a Collection is less surprising) and I'd simply add to it any time a player found themselves playing a new type of match.
+4. I've not seen your Players worksheet, but if it's like the link you sent then yes, that's easy enough. Once the macro has finished, it has a register of all the different players and some information about them. You would just write some more code to write this information onto your player sheet, then do some tidying up (e.g. sorting it). At the moment, the information the macro compiles about each player is limited - just the current Elo and the number of matches played - but this can be added to. For example, you'd want to add the player id, current name, current nationality, peak Elo, etc.
+5. So, I noticed that it never uses the probability of the winner winning. For both the winner and loser, it calculates their Elo using the probability of the loser winning (1 - probability_of_winner_winning = probability_of_loser_winning). That seemed strange to me at first but now I think this is probably right and is probably because there is an asymmetric relationship between the winner and the loser. The good news is that it's easy to update the Elo calculation in the macro to do whatever is necessary! So if it needs tweaking, that can be done without messing with anything else.
+
+VBA (related but different to Visual Basic - important when searching for help) is perhaps not easy to grasp if you've no prior coding experience (and I'm not sure if VBA is the best first language to learn) but it can be a useful skill. To be honest, the language is easy but the Excel data model takes a while to learn and it can feel like you're spending hours searching through documentation for the right class or function instead of making any progress. The first couple of years is the hardest :) Please feel free to develop this macro further if it is of any benefit to you. I'm happy to try to explain anything you don't understand. I might take it a little further (e.g. implementing some of your suggestions/questions here), depending on my time, so I'll update you if I do.
+-------------
+I've updated my macro to output more information (previous Elo, probabilities of winning) and to create a summary of all the players involved (including their Elo scores calculated across different court types). You can get it from the same link that I posted previously.
+-------------
+You're completely right -- I totally forgot that the 500-row sample you were working with was the sample that *I* took from the larger workbook, and that I didn't bother to include the 'players' sheet in that sample. If you don't mind opening it (it's a large file, but it's full of just data and no actual formulas), you can see the 'players' worksheet [here](https://www.dropbox.com/s/xo2jhiregwkob6v/elodbtest.xlsb?dl=0) (noting that I wanted it to display any and all relevant Elo scores for each player alongside their amount of completed matches on each surface/sub-surface), but I've yet to look at the new macro that you've provided which may render looking at that worksheet unnecessary anyway because by the sounds of it it already outputs something similar.
+
+I'm absolutely ecstatic that you've managed to get something like this working, and that whatever issues there are with the new macro (if any), you've basically managed to get set up the exact kind of project I had envisioned from the beginning. The next step for me from here (in addition to maintaining the database) is absolutely to get stuck into VBA -- I feel like motivating myself to do so is a lot easier when I've actually got a meaningful macro in front of me that I want to have the freedom and capacity to tweak myself, rather than just learning it from scratch without really knowing what I'm working toward. 
+
+Also, as for the Elo update score, you're actually quite right and now I'm second guessing whether my own interpretation of the formula is correct. I linked it once up above, but the operation of the formula is explained very briefly but succinctly under the first subheading [of this page](https://www.betfair.com.au/hub/betting-better/tennis-modelling-elo/). My application of this formula seems consistent with what's explained here for the winner's new score -- their win probability is subtracted from their match outcome (1), which obviously results in the loser's win probability, as you said, and this final value is multiplied by the adjacent part of the formula -- but now I'm not sure about how I've determined the *loser's* new score. The outcome for the loser, a loss, is definitely supposed to be represented by 0 in the formula, but I'm not sure whose win probability is actually supposed to be subtracted from 0. I went ahead and assumed it was the loser's (hence, if a loser's win probability was 36%, the equivalent value of the loser's win probability in the winner's new Elo-determining formula is -36, so, as you said, it's using the loser's probability again, just in the negative). However, the article reads:
+
+> Where elo_i (t+1) is the updated Elo, elo_i (t) was their Elo before the match,  is a factor we will discuss more later (for now, assume it to be constant, e.g. 32), outcome is an indicator of the match outcome (1 if it was won by player A, 0 if lost), and **Pwin was the pre-match probability of winning for player A,** as given by the previous formula.
+
+This is different to the formula I have used; while the two respective values I have arrived at in the formula are, say, 36 and -36 if I use the example of winner's win probability being 64% and loser's being 36%, this part seems to indicate that *both* players' Elo scores should be subtracting the winner's win probability from the match outcome. This would result in values of 36 and -64, not 36 and -36. I know you said my application of the formula ended up seeming correct to you, but I think it is very possible I've made a misstep here!
+-------------
+I've been unexpectedly busy the last couple of days so I'm hard up trying to find the time to actually start playing around with the macro you provided (I'm actually cleaning up the initial database right now, there are lots of dud matches that I don't want in there and will never have any use for so I'm in the process of pruning those & then I have to do the exact same with the database of women's tennis matches), but it works so well judging by the sample you've provided that I figure I should be okay and if I have any problems or I need help doing something with it I may bother you with an inbox or something (if that's okay)! I just wanted to award the ClippyPoints that were long overdue :)
+
+Is it considered appropriate to award ClippyPoints to everybody who provided a solution, or just the one that ended up being the "best"? I really would like to thank everyone here somehow for attempting to help, as there are various ways of going about it and I'm very appreciative of everybody's efforts.
+-------------
+Having briefly looked at some examples on the web, I think you're calculation of the Elo is probably correct.
+-------------
+Thanks, I'm glad it's of some help. I'm happy to answer questions whenever I have the time. Good luck with your project!
+
+I'm not sure what's appropriate with Clippy points. As far as I'm concerned, you should award them to whomever you want.
+-------------
+Solution Verified!
+-------------
+Just out of curiosity, while I know the macro successfully keeps separate Elos for as many different surfaces as it can identify, does the generation of a new surface-specific Elo take into account only the total number of matches played *on that surface*, or is it taking all of them into account? It should be the former (so, even if somebody has played one hundred matches throughout their career, if they've only played ten on grass, their 'total matches' count should only be ten in calculating their new Elo (but obviously one hundred in the overall Elo calculation)), but I can't reliably tell by looking through the macro so I figured I'd check with you. Thank you!!

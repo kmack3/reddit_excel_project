@@ -1,0 +1,70 @@
+big
+6texwn
+My big old everything spreadsheet is starting to crash
+
+I have a spreadsheet that I use everyday to track my whole life.  I track my bank account and credit card balances, mortgage amortizations, work hours, work invoices, etc.  I've had it for at least 10 years.  once a year or so I archive the old version and cull old data out of it to keep the file size from getting too big but my 2017 version is starting to lock up frequently when I do basic calculations.  The screen freezes and I sometimes I see little symbols on the cells like copies of function buttons.  After a second it completes the calculation and the screen goes back to normal.  This only happens with this one spreadsheet.  Any ideas?
+
+**EDIT:**  So I went through today and copied tab by tab to find my issue.  Basically I had some ridiculous circular references that caused waterfall calculations from an accidental copy and paste mistake.  Once I corrected the calcs for a single row everything started humming along!  FWIW the symbols I was seeing were little "CTRL" button symbols, very weird.
+
+
+-------------
+What symbols are they? Just hash marks?
+
+Is the calculation type automatic or manual? If it's still automatic it might be time it graduated to manual calculation. Once a file starts to slow down due to size or amount of calculations that often fixes it.
+-------------
+You may want to look into setting up a database. They are a lot of work to get going but once you get it all setup data entry, management, and calcs are a breeze.
+-------------
+I used to use spreadsheets to track my financial life too and after a few years of constant "improvement" they became unwieldy and not to mention time consuming to update. 
+My solution was Quicken (home and business version). all my credit card and bank transactions download and you can setup assets, mortgages, investments, business expenses, etc.
+
+I ran it in Tandem to my spreadsheets for a month or 2 and then just abandoned the spreadsheet all together once I was comfortable.
+
+Sorry this doesn't address your actual excel problem but figured I'd offer this suggestion based on my past experience.
+-------------
+If you have tons of formula on old cells might be best to copy and past ethose as values.
+
+Also how do you delete our old data? If you aren't deleting cells and are just clearing then old shit can still hang around. Try deleting all the blank cells around your data. Or copy your data into a new excel file.
+
+Have you upgraded the sheet to XLSX?
+-------------
+Your using the wrong program. You need an access database 
+-------------
+Have you thought about incorporating Power Pivot? 
+-------------
+If the worksheets was originally designed for Excel 32 bit and you are running on Excel 64 bit, it could cause some issues.  Especially, if you have code written for Excel 32 bit.  I would back track to determine what you have changed software or hardware wise recently.  Also you night want to try to recover the files, be sure to make a back up of your files.  Best of Luck, and keep us posted.
+-------------
+One of my coworkers did a seemingly innocuous thing...highlighted a column, copy, paste values. This activated every single row in the spreadsheet, made the file over 15mb and made it impossible to work in. 
+
+We fixed it by restoring to a previous version, but there are tools to set the active area and discard all the rest. 
+
+Did anything like that happen to your file?
+-------------
+What kind of functions are you using throughout the sheet? Things like Vlookup can quickly bog down a sheet if the reference array is an entire column or row. 
+-------------
+Lol, you guys are funny.  I appreciate all of the advice.  I use excel because it's quick and easy and useful for everything. I don't need any front end programming to setup a database and its easy to expand for new info such as phone numbers or to quickly calculate something.  The file is only 800kb or so.  I think what I'm going to do is just copy portions of it into a new spreadsheet to see if I can isolate the problem.  Thanks for all of the advice.  
+-------------
+From the sounds of it this is likely OPs problem
+-------------
+Noob here. Could you please explain the difference between automatic and manual calculations?
+-------------
+Out of my own curiosity, would a copy-> paste values, on historic data, reduce the file size where even manual calculations are? 
+-------------
+What would you recommend to look at to do this? Access? 
+-------------
+Is there an easy way to set the active area and discard the rest in stock Excel (2013)? I realize I could manually be selecting the first cell in each row, scroll all the way to the bottom, and then across to the last column, then copy/cut and paste into a new sheet/workbook, then delete the old sheet, but I have this problem a lot with data I have to download, massage a bit, and then import into Access.  I know what I ought to do is write up some code in Access to properly import the file, but I'd have to do it on my own time, since my employer looks dimly on employees spending time actually improving processes (Federal government, go figure); if there's no immediate output, then we are clearly wasting taxpayer's money.
+-------------
+With automatic calculations the spreadsheet will recalculate whenever you change any data in the spreadsheet: if your spreadsheet is large with lots of formulas every change to the spreadsheet will cause the spreadsheet to calculate every formula over and over again. With manual calculations the spreadsheet only recalculates when you tell it to, no matter how much you change the data. (Unless you turn this off in Options/Formula, it'll also recalculate every time you save the file.)
+-------------
+This hopefully would cut the size down enough to buy some more time. 
+-------------
+See this thread for an easy Access setup.
+ http://www.reddit.com/comments/6oi8se/_/dkhldvt?context=3
+
+-------------
+It uses a little VBA but the information on this website looks like what had worked on a file I couldn’t restore:
+
+https://www.accountingweb.com/technology/excel/resetting-the-last-cell-in-an-excel-worksheet
+-------------
+Wow I never knew that. That's incredibly useful. Thank you!
+-------------
+You're very welcome!

@@ -1,0 +1,35 @@
+freeze
+4pn5i9
+Screen freezes when unfiltering ~3000 rows of data
+
+Hello, I have a spreadsheet that I often filter in different ways and it works just fine with ~3000 rows. However, when I try to clear the filters, or select all on the filter, or make it a table, the screen freezes. The scroll marker on the sidebar still moves when I scroll, but nothing on the screen changes. I am not able to refilter, and saving, exiting, and going back in doesn't change anything. Any solutions?! 
+
+
+-------------
+Try this, it's weird, but it seems to be a solution when Excel has its moments.
+
+1. Save your document in binary format, "xlsb"
+
+2. Close all instances of Excel, then open your new xlsb document.
+
+3. If everything works properly, you can re-save the file as "xlsx" again.
+-------------
+Try Sorting the filtered column, then Unfilter.
+-------------
+[deleted]
+-------------
+This did not work. 
+
+Thank you for the interesting solution though, haven't heard of this before! Will keep it in mind for future Excel 'moments.'
+-------------
+Did not work. I do have it filtered on multiple columns though. I've tried doing them one by one, and just through Filter > Clear. 
+
+Also just to clarify, after the screen freezes, if I Undo, the data gets refiltered, and the screen becomes responsive again. 
+-------------
+I do... I've tried pasting over the entire spreadsheet as values but that gives me an error message. 
+-------------
+It seems to fix problems where Excel freezes or crashes, this sounded similar enough to warrant a try.
+-------------
+[deleted]
+-------------
+Yes.  My issue is that I cannot unfilter.

@@ -1,0 +1,29 @@
+freeze
+4iq0mr
+Column Headers - More than "Freeze Top Row"
+
+Hello, first time poster here.
+
+One of my professors a few years back put out some spreadsheet where it acted similar to Freeze Top Row as we're all familiar with, but every 20-30 rows it picked up a new column header that would replace the previous one at the top of the screen.
+
+As an example, if you go Ribbon -> View -> Freeze Panes -> Freeze Top Row, then row 1 will follow you wherever you scroll. I'm wondering how my prof made his spreadsheet pick up rows 21, 41, 61, etc as the new column header as you scrolled past them.
+
+Let me know if I was unclear on something. Thanks!
+
+
+-------------
+Is it possible that the spreadsheet was multiple tables, which the other poster mentioned will automatically freeze as you scroll down?
+-------------
+If your data is in a table I believe it will do that automatically. I am not 100% of the subtitles though.
+-------------
+You could simulate different top row values using formulas in the top row and a SelectionChange event handler which recalculates just the worksheet or just the top row when ActiveCell moves through an N-row threshold. Then just freeze the top row and make sure events are enabled, and the top row's values can change as you move down through the worksheet.
+
+For the top row, maybe something like
+
+    A1:  ="Viewing row "&CELL("Row")
+
+Moving the cell pointer doesn't trigger recalculation, so the SelectionChange event handler is needed to make this change with the cell pointer.
+-------------
+Yes, I'm asking for the subtitles. The main title will always work. Even if your table starts on row 2, Freeze Top Row will still use the blank row 1.
+
+Although I think I misunderstood something in what you said, this seems pretty obvious.

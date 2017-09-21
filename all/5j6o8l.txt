@@ -1,0 +1,96 @@
+large
+5j6o8l
+Is there a way to create shortcuts that opens specific sheets of a large excel file?
+
+I have one large excel file that has over 50 sheets for different projects. If I wanted to create folders that has pdf's of documentation and a shortcut that goes straight to the sheet that goes with the source documents, how would I be able to do that?
+
+
+-------------
+You can right click - hyperlink - place in this document, then chose the sheet you want to link to. 
+-------------
+Are you open to a VBA solution to this problem? There is no direct method of implementing this without using VBA.
+-------------
+This is not what you are asking for, but in case someone wanted to actually put the shortcuts in Excel instead...
+
+The hyperlink formula allows you to dynamically create hyperlinks to almost anything.
+
+This will take someone to cell A2 of Sheet2 within the same document.
+
+    =HYPERLINK("#'Sheet2'!A2","go to sheet2 A2")
+
+This will allow someone to open a PDF in a specific location
+
+    =HYPERLINK("C:\mypdf.pdf","open mypdf.pdf")
+
+Similarly, you can use this to go to a specific location in another Excel file
+
+    =HYPERLINK("[C:\book1.xlsx]'Sheet2'!A2","go to sheet2 A2 of some other file")
+-------------
+1. Select the cell that contains the text you wish to link to another worksheet.
+2. Right-click on the same cell, and click on the Hyperlink.. option.
+3. In the Insert hyperlink window, navigate to Place in This Document. From the call reference option, select the sheet’s name to which you want to link, and click OK.
+
+=HYPERLINK("#'Sheet2'!A2","go to sheet2 A2")
+
+Hope this can help you !
+
+-------------
+If that's the only way, then yes.
+-------------
+Alrighty, first, here's the code you will need to copy into the VBA Module `ThisWorkbook` so this code can be executed as soon as the workbook is opened.
+
+    Option Explicit
+    
+    Private Declare Function GetCommandLineA Lib "kernel32" () As Long
+    Private Declare Function lstrcpynA Lib "kernel32" ( _
+       ByVal pDestination As String, ByVal pSource As Long, _
+       ByVal iMaxLength As Integer) As Long
+    
+    Private Sub Workbook_Open()
+        Dim pCmdLine As Long
+        Dim strCmdLine As String, WorksheetName As String
+        pCmdLine = GetCommandLineA
+        strCmdLine = String(300, vbNullChar)
+        lstrcpynA strCmdLine, pCmdLine, Len(strCmdLine)
+        strCmdLine = Left(strCmdLine, InStr(1, strCmdLine, vbNullChar) - 1)
+        WorksheetName = GetSwitch(strCmdLine)
+        If SheetExists(WorksheetName) Then Worksheets(WorksheetName).Activate
+    End Sub
+    
+    Private Function SheetExists(ByVal SheetName As String) As Boolean
+        On Error GoTo NonExist
+        Dim WS As Worksheet:    Set WS = Worksheets(SheetName)
+        If Not WS Is Nothing Then SheetExists = True
+        Set WS = Nothing
+        Exit Function
+    NonExist:
+        SheetExists = False
+        Set WS = Nothing
+    End Function
+    
+    Private Function GetSwitch(ByVal RunTimeString As String) As String
+        GetSwitch = Replace(RunTimeString, """", "")
+        GetSwitch = Replace(GetSwitch, Application.ThisWorkbook.FullName, "")
+        GetSwitch = Replace(GetSwitch, Application.Path & "\excel.exe", "")
+        GetSwitch = Replace(GetSwitch, "/", "")
+        GetSwitch = Replace(GetSwitch, "-", "")
+        GetSwitch = Replace(GetSwitch, " ", "")
+        GetSwitch = Trim(GetSwitch)
+    End Function
+
+
+All this code does is extract the switch you used on runtime to open up the document. But due to Excel quirks, there's slight requirements you must perform for everything to operate properly.
+
+When formatting your shortcuts, you *must* point them to the Excel executable, add the switch, then the file path of the document you want to open. Here's the formatting below, as explained:
+
+    "C:\FullFilepath\excel.exe" - WorkSheetName "C:\FullFilepath\TargetFile.xlsb"
+
+If you look closely at the switch, it's preceded by `- ` then the name of the target worksheet. This dash and space is there because Excel takes the first switch indicator, and the first character of the switch string, and uses that to figure out what code to execute. So if your worksheet name happens to be `Sales` then Excel will open up in safe mode, because the first letter it found in your switch was an S. To counter this, we replace the first character with the Unicode character `U+255` (You can use the hotkey combo: ALT+255) which equates to a special space character that doesn't match up to any default Excel switch. Then we can append the actual worksheet name to this switch to make everything work properly. You can adjust this special syntax in the code if you wish, this was just my solution to it.
+
+---
+
+[^Original ^Executable ^Runtime ^Switch ^code ^from ^dmcinfo.com](https://www.dmcinfo.com/latest-thinking/blog/id/247/read-command-line-parameters-from-vba)
+
+Edit: A word.
+-------------
+That's a nifty solution. Good find! And thanks for sharing.

@@ -1,0 +1,103 @@
+crash
+6k3f9r
+macro crashes when played, runs fine debug line by line
+
+If I run this code 1 line at at time (F8) it works fine.  Playing at 'full speed' it crashes every time with "Code execution has been interrupted".  I'm testing this on 3 files, crashes happen usually on file1 but sometimes 2 or even 3.  The lines most often highlighted as the culprit are 17 but a few times 23.  Help identifying why this is happening?  (yes the path is correct, I typoed the foldername and just decided to leave it)
+
+edit: if you get it, pick up 2x points as it was intended to be a solution [here](https://www.reddit.com/r/excel/comments/6jvnxj/many_excel_files_that_need_reformatting_want_to/)
+
+    Option Explicit
+    
+    Sub ManyFiles()
+        
+        Application.ScreenUpdating = False
+        Application.DisplayAlerts = False
+        
+        Dim sFile As String, sPath As String
+        Dim wb As Workbook
+        Dim rCell As Range, rCol As Range
+        Dim iEnd As Integer
+        
+        sPath = "c:\users\me\downloads\testser\"
+        sFile = Dir(sPath & "*.xlsx")
+        Do While sFile <> ""
+            Set wb = Workbooks.Open(sPath & sFile)
+            iEnd = wb.Worksheets(1).Cells(Rows.Count, 4).End(xlUp).Row
+            Set rCol = wb.Worksheets(1).Range("D2:D" & iEnd)
+            For Each rCell In rCol
+                rCell = WorksheetFunction.Substitute(rCell, " mph", "")
+            Next rCell
+            wb.Close SaveChanges:=True
+            sFile = Dir
+            iEnd = 0
+        Loop
+    
+        Application.DisplayAlerts = True
+        Application.ScreenUpdating = True
+    
+    End Sub
+
+
+
+-------------
+I have this problem occasionally but I stopped short of looking for answers when I realized pressing `F5` usually resumes execution without further incident. 
+
+That said, your question made me look around a little. Check out [this SO post](https://stackoverflow.com/questions/2154699/excel-vba-app-stops-spontaneously-with-message-code-execution-has-been-halted).
+
+
+-------------
+iEnd declared as an Integer (16-bit, only up to 32767) could be the problem, though it should throw an overflow runtime error. Regardless, you should change its type to __Long__ (32-bit, up to 2147483645). These days there's never a good reason to use _Integer_ rather than _Long_, especially for anything like row numbers which could easily exceed the upper bound of what _Integer_ can handle.
+
+The other possibility is automatic recalculation after changing individual cells in rCol.
+
+If it were me, I'd rewrite this as
+
+    Sub ManyFiles()
+      Const SPATH As String = "c:\users\me\downloads\testser\"
+    
+      Dim sFile As String
+      Dim wb As Workbook
+    
+      Application.ScreenUpdating = False
+      Application.DisplayAlerts = False
+    
+      sFile = Dir(SPATH & "*.xlsx")
+    
+      Do While sFile <> ""
+        Set wb = Workbooks.Open(SPATH & sFile)
+        Application.Calculation = xlCalculationManual
+        With wb.Worksheets(1)
+          .Range("D2", .Cells(Rows.Count, 4).End(xlUp)).Replace _
+           What:=" mph", Replacement:=""
+        End With
+        Application.Calculation = xlCalculationAutomatic
+        wb.Close SaveChanges:=True
+        sFile = Dir
+      Loop
+    
+      Application.DisplayAlerts = True
+      Application.ScreenUpdating = True
+    
+    End Sub
+
+That is, I'd set recalc to manual, then use the Range object's Replace method rather than changing cells one at a time, then set recalc back to automatic before saving each workbook.
+-------------
+Solution Verified  
+
+This was exactly the problem -- I'd even done the manual break earlier in the day as the 2nd response describes.  Thank you!
+-------------
+Solution Verified  
+
+Thanks for this, esp the`.Replace`method.  I've got other applications for that already!
+-------------
+
+You have awarded one point to _feirnt_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+Thanks for that feedback. I was wondering if the manual break theory would hold up.
+-------------
+
+You have awarded one point to _hrlngrv_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

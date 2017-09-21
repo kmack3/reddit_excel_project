@@ -1,0 +1,33 @@
+lag
+4j739o
+Extracting unique values from c - Filter/Lag Troubles
+
+Plan1 with 3 columns: A = order of incidents (1,2,3,4...), B = client name, C = $ client expended. 
+
+Plan2 with 2 columns: D = unique values extracted from Plan1!B:B, E = SUMIF comparing B and D
+
+(Example: 1 John $50, 2 John $60, 3 John $70; D=John, E=$180)
+
+
+Extracting the unique values works with something like:
+
+    {=IFERROR(INDEX(Plan1B;B,MATCH(0,COUNTIF($D$1:D1,Plan1!B:B),0)),"")}
+
+
+Troubles:
+
+
+* When I try to use filter on Plan2!E (organize from max to min values of client expended), everything just bug, **can I escape from this?**
+
+
+* Using array formula can be laggy with lots of values, a friend of mine build this and I've got better speed, but still cant filter:
+
+
+        {=IFERROR(INDEX(code,MATCH(0,COUNTIF($D$1:D1,code),0)),"")}
+
+            code: =OFFSET(Plan1!$B$2,0,0,COUNTA(Plan1!$B:$B)-1,1)
+
+Cant use pivot/vba for other reasons, just interested in formulas
+
+
+

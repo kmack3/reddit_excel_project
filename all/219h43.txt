@@ -1,0 +1,48 @@
+large
+219h43
+summing values based on 4 variables from large dataset without killing computer
+
+Hi everyone,
+
+I'm trying to tally up the number of items sold in a given month, based on the following variables: item, customer, month and year. The data set is over 20,000 lines and continues to grow. My current situation is as follows:
+
+
+- The interested time period starts from April 2009 - Present (approximately 60 entries)
+
+- There are approximately 30 customers for each item.
+
+- I'm using the formula "sumproduct((itemset=item) x (customerset=customer) x (monthset=month) x (yearset=year) x (soldset))" to sum all entries that match the variables.
+
+- I've propagated this into a matrix that has each customer listed down in Column A and the month/year as the rows. This gives me a 30x60 matrix, or 1,800 cells with which to calculate the above formula.
+
+Now, the formula works great and does exactly what I want, but the processing time is unacceptable. It takes arount 15mins-30mins to update the values.
+
+Does anyone know of a quicker way of tallying multiple variables from a large dataset without ridiculous processing times?
+
+Thanks in advance.
+
+
+-------------
+Have you tried a pivottable?
+-------------
+Dsum will be the fastest function for calulating the sums, but you will need to setup a criteria range a set of cells with headers and values which can be used to tell Excel which values you want summed for every summed value.  This will be a massive pain to setup, but it guaranteed to be faster.
+-------------
+Yes. Why isn't this in a pivot table already? Something we're missing?
+-------------
+That would be the best option, but unfortunately a pivot table isn't dynamic, so I'd have to run the report manually for 300+ items monthly. Thank you though. 
+-------------
+This looks like the best solution afterall. I'll have to write a little macro that refreshes the table each time, but it will still be faster than waiting for the sumproduct formula to update.
+
+I'll mark this as solved. Thanks!
+-------------
+Thanks, I'll give that a try tomorrow! 
+-------------
+You're right; the setup is ridiculous for what I'm hoping to do. Thanks anyway though.
+-------------
+right-click on the pivot table. Choose Refresh. No macro required.
+-------------
+Put all of your data in a table (highlight data and hit Ctrl+T. Make sure your data has headers) on one tab (I usually call it Data). I then create another tab called Summary and insert a pivot table. The reference for the pivot table is Table1 (unless you changed the name of the table you created above). Now you drag the fields you want into the boxes for the pivot table. You can even have more than one field in a box. (Try it to see the results. It's awesome). Pivot tables are amazing.
+
+P.S. If you want to post some sample data, I can create a pivot table that illustrates what I'm talking about.
+-------------
+Thanks, that's exactly what I did. I've got a lot of products to manage, so the downside is that I have to refresh the data for each item each month, but it's working out to be waaaay faster than watching my computer crawl through 1,800 calculations. 

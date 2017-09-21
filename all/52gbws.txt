@@ -1,0 +1,93 @@
+big
+52gbws
+Summarizing Big Data
+
+Hi, I've recently started working with big data at my job and I ran into a problem. My task is to summarize the diagnoses patients have received on a specific date. This sounds simple enough except the data I've been given is very large (47,000 points) and many values repeat. 
+
+Where should I start if I want to make a list containing the patient ID, admit day, and the related diagnoses in an easy to view manner? My problem is that the diagnoses codes repeat for each patient within a single day causing there to be rows with a lot of the same data. I want to remove the duplicates (within patient and admit day) and then collapse the unique codes according to patient/day. 
+
+Any help or direction is appreciated.
+
+
+-------------
+Kinda OT, but none of this is big data.. 150k rows is actually quite small. Big data refers to datasets in the heavy GB if not TB-PB and is definitely not something you should (if you even could) use Excel for:
+
+> Big data is a term for data sets that are so large or complex that traditional data processing applications are inadequate to deal with them. Challenges include analysis, capture, data curation, search, sharing, storage, transfer, visualization, querying, updating and information privacy. Big data requires a set of techniques and technologies with new forms of integration to reveal insights from datasets that are diverse, complex, and of a massive scale. (Wikipedia)
+-------------
+try pivot tables.
+
+Google it. i hope this helps
+-------------
+Pivot tables are your solution here.  You can put each piece of information into the Rows section, with ID, then Date, then Diagnosis (stacked in that order, top to bottom).
+
+To view this as a table, which will collapse as you want, go to Design > Report Layout > Show in Tabular Form.
+
+Then also go to Design > Report Layout > Repeat All Item Labels.  This will get everything showing as expected.
+-------------
+"PIVOT!" As others have said  this is exactly the kind of thing pivot tables are designed for. They seem really complicated at first but you'll get the hang of them really fast. 
+
+Start by highlighting all your data. Every column must have a header, so if any don't just write "x" or similar in them. 
+
+Then go insert > pivot table and use the defaults (i.e. it should be prefilled with your data range and then set to create the table in a new sheet.
+
+You'll get a new sheet that's almost blank. It should have a list of your column headers on the right with a grid below. 
+
+Drag Patient ID from the list under where it says ROWS in the grid below. 
+
+Now drag Admit Day underneath where you dropped Patient ID, and diagnosis under Admit Day. As you go along  you'll see your data start to appear at the right of the screen.
+
+You can also drag Header names into the other parts of the grid  for example if you had a Discharge Date column, you could drag it into the Filters part of the little grid  and then filter so you only see patients discharged in June or whatever. Or if you had a column of numbers such as cost of treatment, you could drag that to the VALUES section and then summarise by sum (not count) to see the total cost for each diagnosis.
+
+You can also use the tools under the Design menu to change how the data is displayed. 
+
+The best way to learn is to play around with it and see what happens when you change things around. 
+-------------
+If you haven't used it yet you really need to get Power Query it's a free addin from Microsoft for Excel it will change your life.
+
+You basically set up steps to process your data - it's super versatile - and then when you get new data it'll automatically rerun the steps on the new data.
+
+And then take a look at Power Pivot, super powerful analytic engine baked into Excel 2013 and again a free download for 07 and 10.
+
+Absolute essentials for data work in Excel.
+-------------
+Data -> Remove Duplicates
+-------------
+I work with big data every day.  To give you an idea, my most commonly used data report is 145,000 rows and 74 Columns in size.  I'll try to give you some ideas from how I would look at it.  
+  
+1st off make a copy and create a table if you have not already done so.  This locks all of the data into rows for sorting and filtering.
+  
+I would also copy the sheet after you do the above into a new sheet so you can play with the data and torch it as needed.  
+  
+Now remove every column other that the three you want to report on so you just have a sheet with just Patient ID, Admit day, and diagnosis columns.
+  
+If you have duplicate rows of remove duplicates is a good tool if used properly.  If you click anywhere in the table and chose remove duplicates you will be prompted to choose more columns.  By default it selects all and that is what we want so remove duplicates and you should have a data set with only unique rows.   
+  
+You can now filter this by opening the dropdown on any column head and selecting items to filter on.  You can also sort data.  But this doesn't really give a good view on anything.
+  
+From here I would start analyzing with pivot tables.   
+  
+Click into the table anywhere and select insert pivot table.  By default you should have all columns part of it I believe.  If not just hit ctrl+a twice to select the entire table(selects the column headers) I think an interesting view would be to be able to see a count of diagnosis so drag/drop diagnosis over to the rows section and then drag it again form the top into the counts area.  the grab the date and drop it on the filter area.  From here hit okay and you should have a pivot table appear with the total count per diagnosis with the ability to filter on a date or date range from the filter on the top.  From here you can select insert pivot chart and turn it into a nice graph with the filter.  
+  
+From here you can experiment with different pivot tables and charts.  The recommended tables/charts is a good place to start for inspiration.  I think a nice view would be to create a pivot chart showing the count of dates in a line graph since that would show trends of busy times.  you can also do charts that would show all the diagnosis stacked by count under each date to show high diagnosis rate changes over time.  
+  
+Let me know if you have any questions.  I wouldn't mind playing with the data for fun, but I'm not touching HIPAA data.  
+  
+Watch some YouTube videos on pivot tables, pivot charts and slicers.  Once you are comfortable, start watching excel dashboard videos.  I have learned everything I know about excel from watching youtube videos and google.  "Top excel tips and tricks" was where I started with google.
+  
+And watch a video on the record macro button!  VBA is very powerful for automating routine tasks and reports.
+  
+
+-------------
+Prior to this job i was working with data WAY less than 1k rows and only so many variables (CogScience) so i assumed this much data would qualify. Thanks for the explanation. 
+-------------
+Thanks, this was really helpful 
+-------------
+Thanks for letting me know about these addins. I'm new to analyzing data like this so your advice really helps me out. 
+-------------
+Columns are defined by patient and diagnostic code. Patients obviously have the same codes so it's not that simple.
+-------------
+I did the basic stuff that has been instructed and i got a pretty good yield from the data. I'm definitely going to play around with it more to see what other things i can do. We use a software that extracts a whole bunch of patient data into a text file which i then work with in excel(or other programs). I feel like i have a lot of room to be creative. 
+-------------
+:) No problem at all. Glad to be able to help. 
+-------------
+Sounds like you do have a lot of room and that's always enjoyable.  

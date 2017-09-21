@@ -1,0 +1,58 @@
+large
+5r2s06
+Am I able to create a large, reference cell that changes based on another cell that is selected?
+
+What I'm interested in doing is creating a cell that will show expanded notes based on what cell in a table is selected.
+
+Ideally, it would duplicate the cell notes of the selected cell. The other, more time-consuming option, might be to duplicate the cell contents entirely, and I would include those additional notes in the actual table, but just keep them hidden by fixing the size of the cell so they don't appear in the source cell.
+
+
+-------------
+You could concatenate the cells and use references to any user input if I'm understanding you correctly
+-------------
+It'll have to be in VBA, I believe.
+
+Use the SelectionChange event.
+ 
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        range("a1").value = selection.value
+    End Sub
+
+
+is a quick example
+
+
+-------------
+You mean a comment or the whole cell being the "note"?
+-------------
+Hmm, I wasn't able to get anything to work using this.
+-------------
+Since it was hard to explain, I mocked up a quick example [of what I was thinking](http://imgur.com/a/d8yFo). Hopefully this is helpful.
+-------------
+I don't have Excel at home but try this.
+Alt+F11 to open VBA editor.
+
+Double click Thisworkbook on the left pane to open a workspace where you can type VBA codes. ( I dunno what's that called)
+
+
+Paste the code below. I modified the code to work with your screenshot.
+
+    Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+        thisworkbook.sheets("Sheet1").range("D4").value = selection.value
+    End Sub
+
+The above code can be improved but for your needs, it looks sufficient.
+
+
+
+
+
+-------------
+Solution Verified
+
+Thanks so much, Yellising!!!
+-------------
+
+You have awarded one point to _yellising_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

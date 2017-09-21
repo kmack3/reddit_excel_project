@@ -1,0 +1,30 @@
+slow
+4oxrjb
+My Index/Match array is too slow and i think there's a better way to do it.
+
+So I've made a sheet that looks for a specific machine number in another sheet and then takes different data from different columns in that row. I have made each cell look for the machine number and the date since the sheet will be updated each day and the machine number will a recurring number. This is quite slow and i think there's a better way of doing it. How can i get excel to only use match index to locate the correct row and then put the data from different columns into the corresponding cells in the sheet. This is really confusing so i have made some screenshots. Its in danish btw but i have tried to translate it. 
+
+Here are 4 pictures and I hope that's adequate for understanding what i mean. 
+
+http://imgur.com/a/RauX0  
+
+Thank you!
+
+
+-------------
+Can you put your MATCH formula in a helper column (ex: Column Z)?
+
+And then your 5 columns (column B, C, etc) will just contain an INDEX formula that points to column Z?
+-------------
+Perfect! That took the calculation time down from 6 minutes to 6 seconds! 
+
+Great response, thank you! 
+-------------
+Solution verified!
+-------------
+You're welcome! Glad it worked.
+-------------
+
+You have awarded one point to _speqter_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

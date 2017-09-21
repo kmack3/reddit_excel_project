@@ -1,0 +1,28 @@
+slow
+4usd8o
+Slow Excel Calculation
+
+Hi r/Excel,  
+
+I am noticing that my Excel takes minutes (like 2-10 min) to apply a vLookup or Filter on a spreadsheet with 70-300k rows and 25-50 columns of data, is that normal?  
+
+This particularly happens when I build a new report. The slowdown seems odd since I don't think 300k rows of data is that much. I suspect it is because I am working on a virtual machine, but correct me if I am wrong.
+
+There are no external links, all of the raw data is in the workbook.
+
+I am using a virtual machine with a 4-core processor, Win 10, Excel 2016; if this info helps.
+
+Thanks!
+
+
+-------------
+Is your data formatted as a Table? 
+I do have anecdotal experience that trying to bulk-update formulas in a table can sometimes take significantly longer than a normal range (though I've never bothered to investigate why, and I've certainly never had anything as dramatic as 10 minutes - I assume the virtual machine is responsible for that bit) :-S
+
+See if this helps: instead of saving your workbook as an .xlsx file, save it as an .xlsb (excel binary). This should significantly reduce the file size, and this can - in some cases - make a difference to processing times.
+-------------
+Hi,  
+
+The data isn't formatted as a table. I've never tried saving as a binary file. I will try that and see how it is.
+
+Thanks

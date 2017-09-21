@@ -1,0 +1,39 @@
+slow
+3gmooa
+Looking for the most efficient way to work with two slow files
+
+I have two files with 700,000+ lines each, and I want to vlookup them against one another to add 16 columns to one file and four to another.
+Would it be easier on my computer to have two huge tabs in a single file, rather than keeping the data in two separate files and maintaining external links in each?
+
+(The real answer is that I should be using a database, not a spreadsheet, but unfortunately that's not something I can change.)
+
+
+-------------
+Break the one you're *not* searching against (the one that doesn't have the reference table) and break that up into smaller files. Then, open Excel in two different instances (click on the Excel icon with your middle mouse button). 
+
+The other (possibly better) option would be to export them both as a CSV, load them to another application (like a database, or R, or a python script), merge them together, then put it back in Excel.
+-------------
+In which format do you have your files... if you could save them as xlsb that would improve the size considerably... 
+
+Unless your files are used by another software that needs the XML structure, you will be fine
+
+http://superuser.com/questions/390742/downsides-to-microsoft-excel-2007-xlsb-binary-format
+
+(Yeah... most of us face the same constrains... )
+-------------
+Sadly, I'm searching against both of them. They're different data sets with a common element, but each of them have different rows being added or updated each day. They have different audiences, but both audiences want additional information that's maintained in the other file.
+
+I think what I need to do is strip all the extras out of the file that owns fewer columns of unique data, and vlookup all of that data in the bigger file. I can filter out the columns the other audience doesn't need, and make the smaller file flat rather than having both files lookup back and forth.
+-------------
+They're xlsx right now. I'll look into changing the format. 
+
+Do you know if xlsb will make things weird for anyone else using the file? (Am I going to start getting emails saying "it's not opening the way it used to"?)
+-------------
+I'm starting to think that we work at the same company hehe... the functionality of the file won't be affected... 
+
+What I experienced in the past with my users is that if the file has the same name and they usually overwrite... this first time they will save, but make sure that they open the updated version now in xlsb and not the previous one... it silly... but quite common...
+-------------
+I too would suggest using XLSB however, note that you will have 2 files created. Wont over write your old XLSX file since the extensions are different. Just send across or point them to the XLSB file and they won't know the difference.
+There should be no change in the way others see the data. The size of the file will be considerably reduced.
+
+Another thing I like to do is change my Power Settings to High Performance.

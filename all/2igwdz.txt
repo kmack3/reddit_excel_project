@@ -1,0 +1,21 @@
+crash
+2igwdz
+I added 3 columns to the spreadsheet my pivot table is pulling from - when I "Change Data Source" to include these fields, excel crashes.
+
+I have calculated fields in my original pivot table - could this be causing excel to crash when I change the data source?
+
+EDIT: if you insert columns into the the data table as opposed to appending them on the end, excel will not stop working.
+
+
+-------------
+Quite possibly. Does Excel completely crash and say that it stops working?
+-------------
+Have you added headers to the columns? Pivot tables don't work unless all coluumns of data include headers.
+-------------
+It says it stops working. I am thinking I just need to create a new pivot table and redo all my calc fields.
+-------------
+Yes. The Pivot table was working until I added three (3) new columns to the existing data table - so A:V was the original data table, and then I added W:Y to the end, and selected "Change Data Source" to add the last three columns in - that is when excel stops working.
+-------------
+Can you recreate the pivot table on a new sheet and if so does it work? I've never had ot add in new data to a pivot table before so I can only assume it's some weird bug with them.
+-------------
+Yeah, I can. And I have. I was just curious as to what the issue was that causes excel to stop working in the first place.

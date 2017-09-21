@@ -1,0 +1,42 @@
+forever
+3wz3cf
+[Fairly urgent] Pasting 700k rows by 7-8 columns, taking forever!!
+
+Right I have an issue. 
+
+I'm pasting approx 700k rows of data by 7-8 columns. 
+
+Usually I don't think this would be an issue but I'm having difficulty...I'm 2.5 hours into the paste. 
+
+I think the situation arrises because I have 7-8 additional columns (to the right if that matters) that have formulas. I do have manual calculations turned ON so I don't see why they're trying to calc? 
+
+Any advice/reasoning for this(?) would be greatly appreciated. 
+
+
+
+-------------
+Make sure calculations are OFF (set to Manual), you ONLY paste in the rows and columns you need (not entire rows and columns) AND you only have those two workbooks open, there aren't too many applications open etc.
+
+2.5 hours for a paste is just wrong. Should take minutes, not hours.
+-------------
+Have you tried pasting smaller chunks?  I wonder if the formulas are redirecting to the other workbook or something silly.  
+
+Maybe try turning auto-save off, I wonder if it's trying to make a backup while you're pasting (there's a calc.manual setting that recalculates on save).  What version of Excel is this?
+
+Are the 7-8 additional columns all the same formula (meaning column #2 is the same formula, column #3 is the same formula, etc)?  If so, you can probably get away with pasting the 700k rows of the first column, then only copy/paste the first row of column numbers 2 - 9, and then paste those down the 700k rows.
+-------------
+And just to be clear, youre doing this with vba?
+
+One of my tricks to increase speed of the workbook beyond just disablinf calculations is to make a 'calculate' macro that goes column to column, enter formula, autofill, copy, paste values in place, move on to the next column.
+
+Reduces file size and forces excel to think less.
+-------------
+Vba write the data rather than copy, also on that many rows using 64bit might be a good idea
+-------------
+Why are you pasting 700,000 rows of data? Is it from another work book?
+
+edit: I think it's important to know why OP needs to *paste* that much data into a spreadsheet. There's a certain point where using clipboard to move information around loses efficacy over other methods and I think they're well past it.
+
+OP, if pasting is your preferred method try doing so onto another sheet in the workbook first, clearing your clipboard cache, then moving the columns to the desired location within the workbook. If the data is in another workbook, try using Excel's Get External Data tool instead.
+-------------
+This is what I was thinking! Stressing me out. 

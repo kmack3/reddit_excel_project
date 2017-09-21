@@ -1,0 +1,51 @@
+large
+1h24cb
+removing spaces in a large number of cells
+
+I copied and pasted a couple thousand cells with numbers in them to excel and I want to make a graph. The problem is that there are 2 spaces behind each number so excel doesn't recognize it as a number and will not make the graph. If I remove the spaces, manually, one at a time using 'Backspace' excel lets me make the graph but there are far to many cells for me to do this for each number so I need a quicker way to remove to spaces.
+
+
+-------------
+Several ways to go at this, here is how I would do it, [shown in this GIF.](http://i.imgur.com/Tu6vzds.gif)  Good luck.
+-------------
+My preferred approach is just to select the cells you want to change, press CTRL-F, click the Replace tab, type a single space in the top box and nothing in the lower box, and click on Replace All. 
+
+Keep repeating until all the spaces are gone. 
+-------------
+This will do the job and will preserve internal spaces if there are any text fields in the sheet.
+
+    Public Sub TrimCells()
+        Dim UsedCell As Range
+        For Each UsedCell In ActiveSheet.UsedRange.Cells
+            Application.StatusBar = "Working: Row = " & Format(Str(UsedCell.Row)) & " Column = " & Format(Str(UsedCell.Column))
+            If Not IsError(UsedCell.Value) And UsedCell.Value <> "" Then UsedCell.Value = Trim(UsedCell.Value)
+        Next UsedCell
+        Application.StatusBar = ""
+    End Sub
+
+-------------
+I had no idea there were so many ways to do the same thing........
+
+What I normally do is highlight the entire column and then do Data... Text To Columns... leave the delimiter blank... and then finish.
+-------------
+=trim. or, if there is exactly 2 on ..wherever it is, use =len with =right or left.
+-------------
+Can you select the number column, then do a find and replace?  Hit two spaces into the Find part, and then leave Replace blank.
+-------------
+It sounds like Excel is reading them as text. You can try using the =VALUE([cell with number and trailing spaces]) function in a new column.. it will turn a cell with any text that can be a number (i.e. no letters) into a number. Letters will result in an error.
+
+If that doesn't work are other options, but I'd try that one first.
+-------------
+A good trick to fix this is to type the number 1 in any cell, copy the cell, and paste special *multiply* on the cells that you want to convert from text to number.
+-------------
+You could also do a find and replace... find two spaces, replace with nothing... 
+-------------
+=trim(the cell you want to remove the spaces from)
+-------------
+I have to say I am really loving this use of illustrative GIFs going on lately. 
+-------------
+Whoa. Didn't know this existed. I use the *multiply by 1* style.
+-------------
+This is my preferred method.  Trim is ok too if you need to preserve spaces, but in the OPs example, it doesn't sound like it.  If it were some product number, where one might expect spaces, it wouldn't be an issue for them to be text.
+-------------
+This is my method as well.

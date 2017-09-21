@@ -1,0 +1,31 @@
+crash
+5f5imp
+Using copy/paste in excel macros causes crashes
+
+If you have written many macros, chances are you have used copy/paste to move data from one range to another.  There is a major issue with doing this but it only shows up in large workbooks with lots of data being moved around.  Each time "Copy" executes, it pushes a chunk of data into the clipboard until eventually the clipboard is full.  The macros will either slow down to a crawl or else Excel will crash and burn depending on version.  There is a simple fix for this that is part of good coding practice and should always be used instead of copy/paste constructs.  Please note, I am saying that Copy/Paste should NEVER be used in good excel code.  It is not needed if proper code is used.
+
+Here is an example of the code that causes crash and burn.
+
+    Sub Test()
+        Range("A1:Z20000").Copy
+        Range("AA1").PasteSpecial Paste:=xlPasteValues
+    End Sub
+
+As you can see, there is nothing unusual in the above.  Either Paste or PasteSpecial performs the same basic sequence of moving the selected data into the clipboard and if executed enough times eventually triggers the crash.
+
+Here is an example of a directed copy which takes less code and is more versatile.  This method does not use the clipboard, instead moving the data straight into the new range.  This method does not perform conversion of formulas into values.
+
+    Sub Test()
+        Range("A1:Z20000").Copy Range("AA1"))
+    End Sub
+
+And here is a way to convert to values the same as using PasteSpecial.
+
+    Sub Test()
+        Range("AA1:AZ20000") = Range("A1:Z20000").value
+    End Sub
+
+
+
+
+

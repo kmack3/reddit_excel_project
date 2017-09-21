@@ -1,0 +1,101 @@
+big
+4sov1z
+How to match up the same values in different columns for big datasets
+
+Hello,
+
+I study wildlife biology and I am currently working on a project that deals with behavioural and GPS data. Long story short, the animals are followed and behaviours are collected through observations within a certain time interval. At the same time (and through a different device such as a garmin) GPS points are collected. That gives me two sets of data. Here is an example: http://i.imgur.com/NLg8AvJ.jpg
+
+So, in this image you can see the following: on the left side (A,B,C) are the coordinates as well as Time A. These are the times when an observation was about to occur. 
+
+On the right side (discount match for the time) in F,G,H, you have Activity (the behaviour), the habitat, as well as Time B. Time B represents when the Observation took place. Unlike Time A, there is way more data for Time B (as within one Time A interval which represents the start of a recording, 20 or so observations can be made).
+
+On the far right, you can see match. That is through this function: =COUNTIF($F:$F,C2)  which shows you how many observations took place during time A (so, for the first example, there were four observations via TimeB that were recorded during TimeA).
+
+My goal is to not get the sum of observations (as shown in the match column), yet, is to essentially find out whether a TimeB observation matches a date from time A. That is, I want to see if a TimeB date can count as a 1 when it matches up with a Time A date (remember, they are not in order) and 0 if it does not. Sometimes, the GPS coordinates (time A) were taken but no observations took place. 
+Matching the two will allow me to put the behavioural data as well as the GPS coordinates together so I can process them through GIS. 
+
+I hope that this makes sense and I have been trying to figure this out all day but to no avail. Any help would be greatly appreciated. I apologise for the long post. 
+
+
+-------------
+To confirm what you're asking (I'm not sure I'm clear) you want to have your match column return 1 if timeB matches a value in timeA and 0 if there is no match?  I'm assuming every time in your GPS record will be unique?
+
+If so could be accomplished with a COUNTIF but you need to change your parameters:
+
+    =COUNTIF($C:$C, F2)
+
+Edit: 
+
+A second way to do this, which is less elegant but better if you decide you want to return something other than a count (for example the lat long) is to use a VLOOKUP.
+
+This formula will return the time that was matched or an error #N/A if not:
+
+    =VLOOKUP(E3,$C:$C,1,FALSE)
+
+If we wanted to get a 1 for match or 0 for no match, you could put the VLOOKUP in some conditional statements that will handle an error which is what happens by default if there's no match and replaces it with a 0, and if there is no error which happens if there is a match return 1:
+
+    =IF(IFNA(VLOOKUP(E3,$C:$C,1,FALSE),0)<>0,1,0)
+
+If you wanted to return the lat or long you'd need to reorganize your columns so that the lat and long come after timeA.  Then you could just modify the 3rd argument of your VLOOKUP to return whatever column you want to the right of timeA.
+
+    =VLOOKUP(E3,$C:$C,2,FALSE)
+-------------
+Wo8uldn't this formula work? 
+
+    =IF(ISNUMBER(MATCH(F2,$C$2:$C$100,0)),1,0)
+
+Place at j2 and drag down
+-------------
+Thank you so much!
+
+the first statements worked fine (vlookup and if) however, getting the latitude and long gave me a ref! error. http://i.imgur.com/OA9agrb.jpg
+
+I am not sure why that is.....Did I organise the lat and long correctly? (note that the image that you are seeing is from the bottom and as there are way more timeB points than timeA, you won't actually see the coords themselves. 
+
+
+-------------
+This works but only if the time in F is an exact match to the time in C. 
+
+The below works looking at dates only:
+
+Put the following in D2 and copy it down:
+
+=LEFT(C2,FIND(" ",C2)-1)
+
+Put the following into K2 and copy it down:
+
+=IFERROR(IF(MATCH(LEFT(F2,FIND(" ",F2)-1),D:D,0)>0,1,0),0)
+
+It'll spit out a 1 if there is a date match and a 0 if not.
+
+-------------
+Ok there's 2 things you may need to check.
+
+The first is to expand your range in argument 2 to include your whole range of data.  This was a mistake in my original formula. 
+
+    =VLOOKUP(I2285,$A:$C,2,FALSE)
+
+Where $A:$C is the timeA, lat, and long columns with timeA being the first column.  That last part is very important.  Your VLOOKUP won't work if your lat and long come before timeA.
+
+So you want your coulmns to look like
+
+    A         B      C
+    timeA    lat    long
+
+The second thing to check is the 3rd argument in the VLOOKUP, right now it's 2.  Looking at the range I just made above this corresponds to column B.  So if your data is laid out this way you'll return the lat.  You'd want to change this to 3 to return the long.
+-------------
+If looking for dates only, you could just use the int() function: 
+
+    =IF(ISNUMBER(MATCH(INT(F2),INDEX(INT($C$2:$C$100),,),0)),1,0)
+-------------
+thank you so much! I'll give it a go, now!
+-------------
+Solution Verified!
+
+! 
+-------------
+
+You have awarded one point to _salt9k_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

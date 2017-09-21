@@ -1,0 +1,88 @@
+large
+25q82c
+Removing Both Duplicates of a Large List
+
+I have two email lists:
+
+One is all accounts and the other is of active accounts.
+
+I'd like to merge both lists together and then remove any names that appear more than twice (effectively filtering out only inactive accounts).
+
+The remove duplicates function doesn't work because I'd like to remove both the duplicate AND the original.
+
+Is there a quick way to do this? I tried highlighting duplicates with the intention of sorting by highlight cell, but the number of unique names crashes excel. 
+
+Thanks a bunch.
+
+
+-------------
+Get them all into one big list, put it all in column A for example, starting A2.
+
+Put this in B2 (next to first name) and use formula
+
+    =COUNTIF(A:A,A2)
+
+And fill down to the bottom.
+
+Use AutoFilter to filter out anything except 1 values.
+
+Delete all the 2s,3s,4s etc.
+
+Edit: it will search for the value in A2 in the whole A column
+Edit2: Numpty got range and and criteria wrong way around
+-------------
+I'm confused...  If you merge them, and remove ones that are not active, you'll end up with just the active accounts list again...
+-------------
+Quick question:
+
+So right now the list is:
+
+Column A: username
+Column B: Email
+Column C: Date created
+
+If I want to use the countif for username - what would be the formula be?
+-------------
+Poor explanation on my part. It should read "effectively leaving only inactive accounts on the list"
+-------------
+Oh wait, I made a mistake in the original formula. It should target A2 in A:A. See above.
+-------------
+In that case, do what /u/epicmindwarp says :)
+-------------
+Append *all accounts* to the end of *active accounts* leaving an easily found gap or change in format. Remove duplicates. Then remove the *active accounts* bit, leaving inactive accounts.
+-------------
+Any idea why it returned everything as "1"?
+
+I even double checked duplicates to make sure there weren't any spacing issues.
+
+There are definitely names I see appearing 2x in column A but it only has 1 in the countif, which doesn't make sense.
+-------------
+Hit F9 and let me know what happens.
+-------------
+F9 without a specific cell selected = nothing
+
+F9 after double-clicking on the CountIF formula returns an error that reads:
+
+"Formula is too long. Formulas may not exceed 8192 characters"
+-------------
+I have no idea what you're doing, F9 re-calculates every cell automatically.
+
+Are all the duplicate names exactly the same or are there subtle differences?
+-------------
+Exactly the same.
+
+So definitely will see two versions of "epicmindwarp" in column A (verified no phantom spaces etc), but the COUNTIF (A2,A:A) only returns as "1".
+
+Very strange :(
+-------------
+I'm a frigging numpty.
+
+Use this:
+
+    =COUNTIF(A:A,A2)
+-------------
+You're making me look bad you numpty!
+-------------
+Numpty? You seem to smart for me - especially when I don't even understand your words :P
+
+Thank you so much for the assistance. That worked perfectly! I just need to do it piece-meal since the list is so big it keeps crashing Excel.
