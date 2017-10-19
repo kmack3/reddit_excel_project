@@ -1,0 +1,43 @@
+slow
+24rswz
+Excel updating links VERY Slow
+
+I have an Excel workbook with over 2000 cells extending to column BH, most with links to external workbooks that are on a shared network server. 
+
+I know that updating this is going to take some time, but it's taking sometimes up to 30 minutes for it to update and finish loading the links. Is there any way that I can help to speed this process up?
+
+
+-------------
+I've found it to be more reliable/faster to copy the network shared workbooks to a local drive and update from there.  I would suggest creating a recurring scheduled task to run a .bat file to copy/replace the network workbooks to a local folder, copy the local summary workbook with a versioned filename and open the summary workbook and have an "on open" macro to refresh the links.
+-------------
+You might be able to check your connections via Workbook Connections.
+Try refreshing them one by one to see which connection is causing problems.
+-------------
+Do you have the external files linked as tables or just in formulas?
+
+How many external files are you using in this file?
+
+Also some formulas can cause that excel is really slow when it recalculates.
+-------------
+How static are the original files you're reading - it sounds like the names / locations remain the same - if so just record and edit the macro to open and scrape the necessary files upon running - might take just a few seconds / minutes to complete as opposed to dealing with links etc. I would ensure that Save Changes is false and Read Only is in tact to maintain the original documents integrity.
+-------------
+Thanks for the reply! I do this similar type of thing after the month end, but I can't move any of the actual workbooks off the server because other people need to be in them and are constantly feeding info into them during a whole month. 
+
+
+-------------
+Each cell is basically a reference to another workbooks sheet. 
+
+For example, a person might be going line by line on their own sheet and answering "yes, no, or N/A" to a list of questions. Their answers are in Workbook1, column B, rows 1-10. 
+On this sheet I'm trying to update, I would want their answers so I'd put in
+
+=[Workbook1]Worksheet1$B1 (etc 1-10). 
+
+I think it's taking forever because everything is hosted on our server, but I'm just not sure if I can do anything on my end to speed things up. It's frustrating! 
+-------------
+You would have just a local copy or rather snapshot of the last save of what's in the network workbook. Other folks would still be inputting into the network workbook.  This also helps prevent to network workbook from getting corrupted (and as an aside I hope your work has a good backup plan for network shares). 
+
+Edit: it sounds like your summary workbook is also on the network. I strongly suggest not doing that. 
+-------------
+It sounds too complicated to use Import XML (my first idea). So next solution (doingsomething already wrote it) can be coping the files from network to local PC (it can be done by macro) and change formulas to take data from local PC.
+
+

@@ -1,0 +1,66 @@
+slow
+2fgp87
+Why do my excel docs (seemingly) randomly become super slow?
+
+I use Excel to manipulate a lot of data. Sometimes my files can be around ~200MB, but my computer is supplied by my company and is super fast with a lot of memory. It performs perfectly fine most of the time.
+
+Lately, I've noticed that (seemingly) randomly, my computer will take FOREVER to run a formula, or even just change a font size, of the data in my document. However, when I copy & paste all the data into a new document, I can perform the same function or task and it will run perfectly fast and smoothly.
+
+I'm tired of copy and pasting the data into new documents each time it slows down, so I was wondering if the /r/excel community has any advice or insight into why this is happening and how to fix it.
+
+Thanks!
+
+**TL;DR; Excel slows down after using document for a while. Have to copy paste data into new document, then it's fine. Why is this happening?**
+
+[edit]
+
+There are NO formulas in my excel document. All the cells have been copy + pasted as values.
+
+
+-------------
+There could be numerous reasons for that. Do you have a lot of lookups, cell references, volatile formulas like Today() and Now()? They use up a lot of memory, so try alternative ways of doing the same things; you could ask for those specific suggestions in this forum.
+
+Also, when it slows down, press CTRL+END to find out the last cell with data or formatting. If it is way beyond you actual used range, I'd suggest you clear all the extra rows by going to Home>Clear>'Clear All'.
+Excel only stores the data/formatting in the used range while saving a workbook, so deleting the extra rows/columns keeps the file-size to minimum and it's also lighter on system memory.
+
+-------------
+That seems odd.  The only time excel would slow down like that for me is when I have a lot of data and a lot of formulas.  For that instance, I would go to Formulas>Calculation Options>Manual so that the entire workbook does not try to recalculate every time I change a number.  When I am done manipulating numbers and formulas, then I would click "Calculate Now" and let excel run through its processing.  
+You can try that to see if it works...
+-------------
+Sounds like you have volatile functions in your workbook. What this means is that formulas such as OFFSET repeats itself whenever another formula finishes computing and loops until all other formulas have finished calculating 
+-------------
+> Also, when it slows down, press CTRL+END to find out the last cell with data or formatting. 
+
+I've seen people select an entire row/column and hit the yellow fill button, or the cell outlines.  Then you get 1M+ rows of data.
+
+You can undo that and save to get a much smaller document.
+-------------
+Thanks, I'll make sure to do that.
+-------------
+Already have that enabled :/
+
+Also, there are no formulas in my data anymore. They're all cells that have been copy + pasted as values to reduce size.
+-------------
+There are no formulas in my workbook. I copy + pasted them as values to reduce the size of the file and try to troubleshoot this issue.
+
+When I enter a new formula, though, or else try to change the font size or any other parameter of the document, it goes uber slowly... do you think it could be file size? It's 200MB+ which is sizable, but not the largest I've ever seen.
+-------------
+Looks like the issue was a circular reference in a different workbook that was causing the issue. Jesus that took me way too long to find.
+-------------
+Totally, and contrary to general intuition, color formatting in thousands of rows does increase file-size **significantly**.
+-------------
+Yeah, I thought of that too and deleted all the formatting from outside my data :/
+-------------
+Gotcha, then /u/xlViki suggestion will hopefully work
+-------------
+How many rows of data do you have? When it gets to around 500,000 it becomes incredibly slow. For that much data, I would suggest setting up an SQL database
+-------------
+I have 120,000ish rows and 500ish columns of data.
+
+On another note... No one in my company (small business) has experience with SQL yet :/ would you happen to have any recommendations on where I can learn enough SQL to establish and manipulate a database? We were thinking about SPSS, but not sure.
+-------------
+Microsoft SQL Server is a pretty good place to start. The software is also free!
+-------------
+I know this if off-topic now, but do you know if it has tutorials or anything that would enable us to figure out how to use it?
+
+Thanks!

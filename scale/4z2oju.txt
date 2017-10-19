@@ -1,0 +1,50 @@
+big
+4z2oju
+Large dataset referencing, the file gets too big
+
+I have a 10x800k (column/row) dataset, combined with some other smaller ones (10x16k).
+
+We use a macro in our daily work, and need to look up the data in the corresponding dataset. As the dataset is updated every month my boss asked me to try to fix this so we dont need to copy/paste the updated data every month. Right now the data is in a different tab. So I referenced all the cells to the dataset that is updated, but the file got so big that excel was completely useless.
+
+So first off, is this possible using excel, or is the dataset too big?
+
+Would a macro solve this easier than just referencing?
+
+Any other solutions using Excel? My department have limited access to other software.
+
+I tried to search first, but the results didn't answer my question.
+
+
+-------------
+If you are getting to hundreds of thousands of rows, it's time to graduate from Excel.  It's not designed for that kind of work.
+
+Highly recommend putting this into a SQL database and pulling the data out using SQL into a more manageable form in Excel.  MySQL is freeware that you can quickly get up and running on a small server (or your own local machine).  
+-------------
+We have som SAS SQL software where the data is gathered, but my department doesn't have access to the software. Is it possible to connect the workbook to a colleague in a different department easily?
+
+Or are you suggesting I create my own SQL database, and connect the data from my colleague into that database, then connect it to my excelsheet? (Other people than me is using the workbook by the way)
+-------------
+There's no real way that I can answer that question for you, since it depends on your company.  At the end of the day you need this document to live in a database.  That means you need to coordinate a few things that you aren't doing today:
+
+1) Where will the DB be housed?  Is there a team you can have house it internally who are already good at setting up basic databases for departments?
+
+1b) If you have to house it, you need to go through the steps to figure out what computer will be the server, set up the database, load the data, etc.
+
+2) You need to figure out what your base set of tables are.  Make sure to use relational database principles so that your data maintenance needs are minimal.
+
+3) You need to establish the cadence at which data gets into the database, and establish how the data will upload.  Is there a query that can run to get the new data automatically in?  Do you need to upload it from an Excel file of the new rows?
+
+4) You need to figure out how people are using the file today and make sure they don't have any major interruptions.  That means setting up SQL views/jobs to get reports out regularly or get them access using PowerPivot or some other tool to connect into the database to get what they need
+
+There are other steps, but that's the basic part of it if you're going from Excel to a database.  And it sounds like you need to.  I've done this before, so it can be done, but it may become a bigger project than you anticipate - but again that all depends on the company.
+-------------
+Solution Verified
+-------------
+Thank you, I believe this is too great of a task for me tho.
+
+
+-------------
+
+You have awarded one point to _Nateorade_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+

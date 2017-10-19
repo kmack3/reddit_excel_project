@@ -1,0 +1,55 @@
+large
+32kdgr
+Counting Occurrences In A Large Data Set
+
+I have a set of 32,939 email opens, 28,947 are duplicate IDs, and possibly triplicate and so on.  The column I have to identify individual opens is an eight digit ID.  Now I need to know, of those 28,947, which ID numbers are doubles, triples, and so on.  The data set is too large for a pivot table, and to large to do individual COUNTIF of each IDs, as there's probably 25K + of them.  Any ideas to show how many times each ID number is showing up?  
+
+
+-------------
+    ={SUM(1/COUNTIF(A1:A32939/A1:A32939))}
+
+Entered as array formula
+-------------
+    Sub CountIDs()
+
+    Dim d As Object, c As Range, k, tmp As String
+
+    Set d = CreateObject("scripting.dictionary")
+    For Each c In Selection
+        tmp = Trim(c.Value)
+        If Len(tmp) > 0 Then d(tmp) = d(tmp) + 1
+    Next c
+
+    For Each k In d.keys
+        Debug.Print k, d(k)
+    Next k
+
+End Sub
+
+Select the column that has your ID numbers. The results will display in the Immediate window.
+-------------
+Grab the column of iIDs, paste them onto a new sheet. 
+Select Data, Remove Duplicates.
+Then you can do a countif() next to the de-duped data.
+-------------
+Thanks for the help, I actually just ended up sorting by ID, breaking it down to 4 10K lists and making a pivot table on those 4 then combining the data.  It's a little neanderthal, but it looks like I need to learn more about COUNTIFs and Macros. 
+-------------
+I entered it as
+
+=(SUM(1/COUNTIF(c1:c32939/c1:c32939)))
+
+As C has the ID data and hit ctrl shift enter and was told it had too few arguments. 
+-------------
+How do I actually enter that in to an excel sheet?
+-------------
+Shoot, my bad. Meant to put:
+
+    ={SUM(1/COUNTIF(A1:A32939,A1:A32939))}
+
+Should be a "," in between those, not a "/"
+-------------
+It's a macro, so you'll have to display the Developer Tab. http://www.addintools.com/documents/excel/how-to-add-developer-tab.html
+
+Then you'll create a new Macro named CountIDs, then paste it in and run it.
+-------------
+Ahhhh my world just became a bigger place...

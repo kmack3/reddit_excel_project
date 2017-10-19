@@ -1,0 +1,34 @@
+slow
+1wkx2c
+Is there a way I can slow down a data pull off of a server with a macro?
+
+At work I pull massive data sets from our server and it takes a while for excel to chug.  Sometimes the pull fails because I think there isn't enough RAM on my computer (They aren't going to give me a new computer).  Is there a way I can write a macro or something to maybe slow down the pull so the computer can pull easier without failing?
+
+
+-------------
+How and from where from is the data being pulled?  This almost sounds like a timeout issue where Excel quits waiting for the server to return the information.  With SQL calls, there should be a way to set the timeout larger than the default.
+-------------
+Look into 'DoEvents'.
+-------------
+Like /u/user699 asked, we need more information on how the data is being pulled.
+
+Is it possible to make separate pulls? Maybe Date ranges? Is it a loop? 
+
+It may be possible, but not without a little more information.
+-------------
+It is being pulled from a ODBC Database.
+-------------
+Are you using ADODB?  If so, you probably have a line that is similar to:
+
+    Dim con As New ADODB.Connection
+
+You could try:
+
+    con.CommandTimeout=300
+
+before executing the query.  The default looks to be 30 seconds.  This would give it five minutes.  
+
+Not really sure if this is your problem, but it's worth trying.
+
+EDIT - This is assuming you are using VBA to pull the data rather than using an add-in of some sort.
+

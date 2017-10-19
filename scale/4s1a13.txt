@@ -1,0 +1,23 @@
+long time
+4s1a13
+Time Efficient Methods of Organizing and Sorting a Very Long Database?
+
+I am assisting a colleague in organizing a spreadsheet containing information on the career paths of 18,000+ graduates from a University. This spreadsheet lists the first and last names, ID #, major, and subsequent organization and position title in their area of employment. I need to be able to easily filter by job title, however, the raw data was compiled in such a way that every individual could enter their own idiosyncratic position title in whatever wording they chose. As a result, there are hundreds upon hundreds of individual position titles (some of which are similar to one another). 
+
+My first thought was to merge and reassign similar sounding position titles into a more concise list of broad titles. I thought of doing this by using a large number of conditional IF functions that flag someone with a predetermined position title if a certain string of text appears in the position title they entered. However, with 18,000+ entries, even this approach would be immensely time consuming and very manually intensive. 
+
+This considered, I was wondering if anyone here had any ideas as to a more time efficient means of organizing the values in this spreadsheet?
+
+
+
+
+-------------
+I would approach it like this:
+
+* copy the column containing the job titles to a separate sheet/book
+* Data->Remove Duplicates to reduce it to unique values
+* Add a second column called "Standardized Job Title"
+* Fill in the second column with whatever your "cleaned" job title would be for the user-input job title.
+* Add a new column to your existing sheet that does a simple vlookup from the original job title to get the standardized title.
+
+[Here's a screenshot. Just pretend the orange stuff is on a second sheet/book.](http://i.imgur.com/X05FVYQ.png)

@@ -1,0 +1,23 @@
+big
+r2983
+Importing big file
+
+I am trying to import a file into excel 2007 that has about 1.7 million rows.  When I do excel tells me that the entire file has not been imported.  I guess there is a size limit?  Is there a way to get the entire data into excel?
+
+
+-------------
+Unfortunately, one worksheet in 2007 can only have 1,000,000 rows.
+-------------
+Depending on the tools available...     
+
+Open it in notepad (will it handle such a monster?) and essentially cut the file in half.   Save both files, import those into Excel..
+
+That said, if you're working with 1.7m rows of data, then you probably want to Level up into using a Database, [or even MS Access](http://instantrimshot.com/index.php?sound=rimshot&play=true).....  I shudder to think how long a VLOOKUP would take on that in Excel...
+-------------
+[Why the hate for Access?](http://www.reddit.com/r/msaccess)
+-------------
+I don't think Notepad will, but Notepad++ might.
+-------------
+Was able to gut the rows in half.  Did A Vlookup on 868,xxx rows.  took like 15 mins, haha.
+-------------
+My issue with Access basically boils down to the unholy hybrid of VBA and SQL that you use to interact with the dataset.   "Speaking" both languages, it's just different enough from both to drive me to distraction every time I tried to do anything with it.   I'm sure it has its uses, but my experience has been that it's simpler for me to stand up a SQL server than try to fight Access into doing what I want.

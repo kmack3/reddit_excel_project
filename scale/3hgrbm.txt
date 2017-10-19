@@ -1,0 +1,158 @@
+big
+3hgrbm
+Need to split big CSV file
+
+I need to split a CSV file into about 3 or 4 unique files, while keeping the header row for all my files. 
+
+Is there a fast way to do this?
+
+
+-------------
+Have you tried text editors like Notepad or Wordpad? This doesn't appear to be something for Excel.
+-------------
+See if this may work for you - http://www.scaled-solutions.com/blog/open-source-csv-file-splitter
+-------------
+How big is the file? If it's sufficiency large, I'd skip Excel and work with the CSV directly using a batch file or some specialized utility. (Searching "batch file split csv keep header row" yields some promising results.) Excel will have a lot of overhead relative to these alternatives so unless it's a somewhat small file which you'll then analyze in Excel, I would find another way. 
+-------------
+Python works well for this.
+
+    import sys  
+
+    number_of_outfiles = 4  
+
+    if __name__ == "__main__":  
+        k = []  
+        for i in range(number_of_outfiles):  
+            k.append(open('c:\\data\\data_' + str(i) + '.csv','w'))  
+        with open(sys.argv[1]) as inf:  
+            for i, line in inf:  
+                if i == 0:  
+                    headers = line  
+                    [x.write(headers + '\n') for x in k]  
+                else:  
+                    k[i % number_of_outfiles].write(line + '\n')  
+        [x.close() for x in k]  
+
+
+This script never reads the whole file in, it just reads line by line and drops them into a list of files. the files will go to 'C:\data\'. The number of files is determined by... you guessed it... the line that says "number_of_files = 4".
+
+Sorry if that's no help.
+-------------
+I've attempted this in the past and it takes significant time for Excel to open and manipulate a large dataset from CSV. I tried both FileSystemObject and ADODB to do the job and the fastest I got to was around 15 mins. for a million rows, if my memory serves me right. 
+
+Again, there's the limitation of maximum rows in Excel, so that may be an issue. How large is your dataset? If it's not too big, I'll share the code I used to parse the CSV data with you. If it's a large dataset I would suggest you go try some other application.
+-------------
+> ds the whole file in, it just reads line by line and drops them into a list of files. the files will go to 'C:\data\'. The number of files is 
+
+This looks cool! If you have time could you explain how it works and what I would need to do to run it?
+-------------
+This didn't work for me. I saved this code in a file and gave **[this file as input](https://drive.google.com/file/d/0BxEplHqK-a3GaTd6SG1HVk9oMzg/view?usp=sharing)**. It gave me an error: “ValueError: too many values to unpack (expected 2)” on the following line:
+  
+    for i, line in inf: 
+
+I also tried to convert it into a function and run it via IDLE, but it gave the same error.
+
+Interestingly, the code created 4 output files, but they were blank.
+
+Can you help me with this?
+-------------
+> f maximum rows in Excel, so that may be an issue. How large is your dataset? If it's not too big, I'll share the code I used to p
+
+It's around 50k rows
+-------------
+1. [Download and Install Python 3.4](https://www.python.org/downloads/)
+2. Copy xeroskiller's code into a file, maybe name it csv_splitter.py
+3. Create/make sure the directory C:\data\ exists.
+3. Open a new command prompt and cd into the directory of the csv_splitter.py file and then type "python csv_splitter.py C:\Path\to\large_csv.csv"
+-------------
+Looks like /u/ramse beat me to the "what"
+
+As for how, it creates the specified number of outfiles, then runs down your file, tracking it's position along the way. As it does, it drops the lines into each file based on the line number's remainder when divided by 4 (or however many files you make). This prevents reading in any more than is necessary, and should actually be a very memory-efficient program.
+
+Cheers, mate!
+-------------
+I messed that line up,. it should be 
+    
+    for i, line in enumerate(inf):
+
+Sorry, man.
+-------------
+I improved upon my code to avoid reading into Excel at all.
+
+Try it and let me know how it works. You can change the maxRows variable to whatever you want as the row limit for each file (excluding the header row).
+
+    Sub xlParse()
+    
+    Dim strfilepath As String, fso As Object
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    Const ForReading = 1
+    Const ForWriting = 2
+    maxRows = 500
+    i = 0
+    n = 0
+    
+    strfilepath = Application.GetOpenFilename
+    If strfilepath <> "False" Then
+        Set outFile = Nothing
+        Set readFile = fso.OpenTextFile(strfilepath, ForReading)
+        Header = readFile.ReadLine
+        Do Until readFile.AtEndOfStream
+            If i = 0 Then
+                If Not outFile Is Nothing Then outFile.Close
+                Set outFile = fso.OpenTextFile("Output_" & Right("00" & n, 2) & ".csv", ForWriting, True)
+                outFile.WriteLine (Header)
+                n = n + 1
+            End If
+            outFile.WriteLine (readFile.ReadLine)
+            i = (i + 1) Mod maxRows
+        Loop
+        readFile.Close
+        If Not outFile Is Nothing Then outFile.Close
+    
+    End If
+    End Sub
+ 
+-------------
+Wow! that did it. Thanks a bunch!
+
+One minor issue is that there's a blank row between every two rows.
+
+Also, would you mind explaining the difference between the two lines of code? What does enumerate do?
+-------------
+In all the files produced?
+
+The original line was just wrong. The enumerate function that i added to it produces two values per line: the line number, and the line data. Earlier, it was expecting 2 values, but only received the line data, hence the error about unpacking values.
+
+Try this instead. It should remove the blank lines.
+
+
+    import sys  
+
+    number_of_outfiles = 4  
+
+    if __name__ == "__main__":  
+        k = []  
+        for i in range(number_of_outfiles):  
+            k.append(open('c:\\data\\data_' + str(i) + '.csv','w'))  
+        with open(sys.argv[1]) as inf:  
+            for i, line in inf:  
+                if line[-1] == '\n': line = line[:-1]  
+                if i == 0:  
+                    headers = line  
+                    [x.write(headers + '\n') for x in k]  
+                else:  
+                    k[i % number_of_outfiles].write(line + '\n')  
+        [x.close() for x in k]  
+-------------
+Yes, in all the output files.
+
+Thanks for the explanation.
+-------------
+This worked great! I just had to add the enumerate function in line 10.
+Thanks a lot for your help.
+-------------
+No problem, bud. Python is great for 1-off data handling. I recommend you check it out.
+-------------
+I have taken up a few basic Python courses, so I understand the basics of the language. I just haven't dealt with dataframes and libraries such as Pandas and numpy which I believe are the goto tools for number crunching and data analysis; that's my next goal though.

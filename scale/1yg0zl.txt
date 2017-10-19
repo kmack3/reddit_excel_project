@@ -1,0 +1,44 @@
+slow
+1yg0zl
+Excel Querying Existing Access Database Going Slow
+
+Hi everyone, I'm creating a Dashboard for my work and I'm running into this issue and was wondering if any body can help me :) There are roughly 4 millions rows of data (maybe 8-10 columns) in the Access file and here's my code, in summary:
+
+Sub GetData_Click()
+
+Dim cn As Object
+    Dim rs As Object
+    Dim strSql As String
+    Dim strConnection As String
+    Set cn = CreateObject("ADODB.Connection")
+    strConnection = "Provider=Microsoft.ACE.OLEDB.12.0;" & _
+        "Data Source=FILE LOCATION"
+    strSql = "SQL Code"
+    cn.Open strConnection
+    Set rs = cn.Execute(strSql)
+    
+Worksheets("Dashboard").Range("A2").CopyFromRecordset rs
+
+rs.Close
+Set rs = Nothing
+cn.Close
+Set cn = Nothing
+
+End Sub
+
+The code always seem to get hung up at the Copyfromrecordset section. The same SQL code when I try to query within Access is instantaneous where as in Excel it takes up to minutes for the data to return. Thanks for all the help, I can provide more details as required. 
+
+
+-------------
+(Full disclosure, I've never used the CopyFromRecordset method, but I've done a lot of back and forth application queries) 
+
+Two things come to mind possibly the *writing* to Excel is taking to long. Are you writing to and from two network locations? Watch your network traffic to see if it's bottlenecked.
+
+The other is you're trying to do too much with a single query, or it isn't optimized. If it's a complex query with groups and where statements, break it into several smaller steps. Also see that your Where statements are working with indexes when possible.  
+
+-------------
+Try using power pivot instead of excel alone. Excel doesn't do well with massive data sets. (Sql is suppose to be fast because it's a database) Excel also only supports just over a million rows, and uses is quite CPU bound. (Other applications store a lot of the data as cache in RAM to call it up faster.) 
+
+So you may need a faster computer as well. 
+-------------
+Can you dump it to a fresh sheet without issue?  Are there a lot of complicated calculations present in the Excel sheet?

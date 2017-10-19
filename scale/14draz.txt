@@ -1,0 +1,43 @@
+slow
+14draz
+I've created a giant, slow, spreadsheet.  How can I make it more efficient?
+
+I've got a spreadsheet (Excel 2010) with ~100K rows of data (and I used named ranges for the columns to write formulas easier).  I'm then using a bunch of array formulas to calculate a whole bunch of ratios, which I use to generate a report (it's all very boring insurance stuff - please let me know if you need more detail).  The array formulas have gotten super ridiculous, for example:
+
+    =SUM(PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=10)*(PdLosses_CQ=1),PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=21)*(PdLosses_CQ=1),PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=90)*(PdLosses_CQ=1), CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=10)*(CaseResv_CM=3),CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=21)*(CaseResv_CM=3),CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=90)*(CaseResv_CM=3))/SUM(PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=10),PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=21),PdLosses_Direct2*(PdLosses_AY=$M7)*(PdLosses_YrsOut=N$6)*(PdLosses_ASL2=90),CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=10)*(CaseResv_CM=12),CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=21)*(CaseResv_CM=12),CaseResv_Direct2*(CaseResv_AY=$M7)*(CaseResv_YrsOut=N$6)*(CaseResv_ASL2=90)*(CaseResv_CM=12))
+
+And now my file is super large and sllooooow (currently at 7260 kb).  I thought array formulas were the most space efficient way to do this kind of thing, but maybe I should write a custom function in vba, or put in some intermediate steps (although that seems kind of counter intuitive to me), or maybe it's just the amount of data I have and I'm fucked?  I only have the report done for one line of business (there are at least 10 more that I need to do), so it's only going to get worse/bigger/slower.  If any of you lovely people have any ideas about how to improve this file I would be forever grateful.  
+
+I would post screenshots if I could, but imgur (and I assume most other sites I could use) is blocked at my work :(.
+
+
+-------------
+SUMPRODUCT should move a bit quicker than array formulas, and since you're in Excel 2010, SUMIFS should work even faster than that.
+
+Make sure that your named ranges are defined to encompass no more rows than are necessary to refer to your data (so nothing like `PdLosses_Direct2 = E2:E50000` when your data only goes to 24000 rows or whatever.)
+
+___
+Additionally, if this gets that bad, it may be time to consider performing this sort of thing in SQL.  
+
+With SQL you have three very viable options:  
+
+* You can set a query inside of Excel against the contents of that same Excel book. This is accessible and refreshable to anyone with the workbook. It's a bit of a pain to set up, but not terrible.  
+* You could port your data to Access and create a query to your access table. This is accessible to others if the access database is on a shared network drive, or you might be able to set it up so that sending the access database alongside would let people refresh. This is easy enough to set up, but I hate Access for a variety of reasons.
+* You could port your data to SQL Server (freebie express version available online). This is only slightly more complex to set up than Access, with the added detriment of having to download and install if you don't already have it. Not really portable if you wish for someone else to retrieve the data.
+
+For any of these, you can turn off the query and preserve the results if you wish to send the workbook elsewhere **without** the ability to refresh the data.
+
+I can also give you a pretty good guarantee that SQL will perform worlds faster than array formulas, sumproduct, and sumifs.
+
+___
+Another viable option is to do this all in pivot tables. Very fast and easy to use.
+-------------
+I've found [this OzGrid post](http://www.ozgrid.com/Excel/ExcelSpreadsheetDesign.htm) to be extremely helpful in understanding what may be affecting calculation speed and filesize.
+-------------
+I would suggest using VBA to calculate everything if you don't need to change the formula or the data. Then you would have just more numbers and no more formulas. I've worked with 900K+ row spreadsheets (~80 MB) and it is the only way to do it for it to at least open before you have to go home 
+-------------
+PowerPivot was made for this. It's a free Excel add-in. A bit tough to get started, but if you want to learn something new, this would be the way I'd go.
+-------------
+The only way to make it faster would be to use a program that is more able to handle something like this, perhaps Access?  That said, if you want to turn off automatic calculation, that will allow you to enter data without having to recalculate every time you change a cell.
+-------------
+I thought that might be the case. I'll probably have a chat with some of my coworkers about a different data source.

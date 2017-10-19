@@ -1,0 +1,43 @@
+large
+1cjbw5
+Working with large data files (10k rows).
+
+I have a workbook with 2 csv data connections each about 10k rows. The files are about 1.5 mb in size. 
+
+Is there anyway to reduce the amount of cpu load this is causing? With workbook calculation set to automatic, its taking 15 seconds after each cell update to calculate. Sometimes it calculates instantly, so I'm not sure what variables are causing it to take so long. Any tricks out there? Is there a way to set an individual sheet's calculation to manual?
+
+
+-------------
+You can set formula calculation to manual from the Formulas tab > Calculate Options > Manual.
+
+http://i.imgur.com/TqPtZYa.jpg?1
+-------------
+Brian Jones wants you to use the SDK: http://blogs.msdn.com/b/brian_jones/archive/2010/05/27/parsing-and-reading-large-excel-files-with-the-open-xml-sdk.aspx
+-------------
+at least for file opening and size, I have found using Excel 2010 or later with the Excel Binary file format does help a bit.
+Otherwise, I'd choose a section of the spreadsheet to investigate, use shortcut Ctrl-' to see formulas. ( My ' character is below the tilde ~, YMMV). Any section ( column, row) that has stupid calc " =15123.132 * vlookup(whacka whacka) * 0 " gets copy-paste as values.
+
+slowly, methodically, you beat the truth out of it.
+edit: format
+-------------
+You may be able to use an event macro to cancel calculation of a particular sheet, but you'd need to wrap it with some sort of true/false logic.. maybe based on a named range or something.
+-------------
+• Use 64bit Excel
+• Convert your files to .xlsx format.  .csv is an ASCII file type so it must be 100% loaded ino memory before calculations are done.
+• Write a macro that toggles application.screenupdating to false when doing calculations.  Or minimize the application while calculating will do the same thing. 
+-------------
+commenting to read later.
+-------------
+also commenting to read later. thanks.
+-------------
+Wow, minimizing excel is equivalent to turning off screen updating?
+
+Thanks for the tip, I never realized that!
+-------------
+Good info, thanks.
+-------------
+He has other posts in the series worth a read as well.
+-------------
+Yup. If the application has no screen to update, then you get pretty much all o the benefits.
+
+I'm not sure how it handles being an inactive but maximized window (eg you alt tab to your full screened browser). 

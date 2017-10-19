@@ -1,0 +1,110 @@
+crash
+4dk9hh
+A macro I based off of a recorded macro cause Excel to run out of stack space and crash. Lots of "Method so and so object so and so failed". Can anyone tell me what's wrong?
+
+The macro is an attempt to extend or shorten a threshold line on about 10 graphs when an input is changed.
+
+Base macro:
+
+    Sub Macro3()
+    '
+    ' Macro3 Macro
+    '
+    
+    '
+        ActiveSheet.ChartObjects("Chart 11").Activate
+        ActiveChart.FullSeriesCollection(2).Select
+        ActiveChart.FullSeriesCollection(2).Delete
+        ActiveChart.SeriesCollection.NewSeries
+        ActiveChart.FullSeriesCollection(2).name = "=""Baseline"""
+        ActiveChart.FullSeriesCollection(2).Values = "=baseline!$L$2:$L$23"
+        ActiveSheet.ChartObjects("Chart 11").Activate
+        ActiveChart.FullSeriesCollection(2).Select
+        ActiveChart.FullSeriesCollection(2).Trendlines.Add
+        ActiveChart.FullSeriesCollection(2).Trendlines(1).Select
+        Selection.name = "Baseline"
+        Selection.Forward = 0.5
+        Selection.Backward = 0.5
+        With Selection.Format.Line
+            .Visible = msoTrue
+            .ForeColor.ObjectThemeColor = msoThemeColorText1
+            .ForeColor.TintAndShade = 0
+            .ForeColor.Brightness = 0
+            .Transparency = 0
+        End With
+        With Selection.Format.Line
+            .Visible = msoTrue
+            .Weight = 8
+        End With
+        ActiveChart.FullSeriesCollection(2).Select
+        Selection.Format.Fill.Visible = msoFalse
+        Selection.Format.Line.Visible = msoFalse
+        ActiveChart.ChartGroups(1).Overlap = 90
+        ActiveChart.ChartGroups(1).Overlap = 100
+    End Sub
+
+My Macro: 
+
+    Public Sub UpdateBaseline(ByVal chartName As String, ByVal baselineColumn As String)
+    'On Error GoTo ErrHandler
+        Dim currentSeries As Integer
+        With Sheets(plotsSheet).ChartObjects(chartName).Chart
+            If .SeriesCollection.Count >= 2 Then
+                For currentSeries = 2 To .SeriesCollection.Count
+                    .SeriesCollection(currentSeries).Delete
+                Next currentSeries
+                MsgBox .SeriesCollection.Count
+            End If
+            .SeriesCollection.NewSeries
+            With .SeriesCollection(2)
+                .name = "=""Baseline"""
+                .Values = "=baseline!$" & baselineColumn & _
+                    "$2:$" & baselineColumn & "$" & _
+                    (Sheets(inputSheet).Range("D8").Value - Sheets(inputSheet).Range("D7").Value + 2)
+                .Trendlines.Add
+                With .Trendlines(1)
+                    .name = "Baseline"
+                    .Forward = 0.5
+                    .Backward = 0.5
+                    With .Format.Line
+                        .Visible = msoTrue
+                        .ForeColor.ObjectThemeColor = msoThemeColorText1
+                        .ForeColor.TintAndShade = 0
+                        .ForeColor.Brightness = 0
+                        .Transparency = 0
+                        .Weight = 8
+                    End With
+                End With
+                .Format.Fill.Visible = msoFalse
+                .Format.Line.Visible = msoFalse
+            End With
+            .ChartGroups(1).Overlap = 100
+    '        .FullSeriesCollection(2).name = "=""Baseline"""
+    '        .FullSeriesCollection(2).Values = "=baseline!$" & baselineColumn & _
+    '            "$2:$" & baselineColumn & "$" & _
+    '            (Sheets(inputSheet).Range("D8").Value - Sheets(inputSheet).Range("D7").Value + 2)
+    '        .FullSeriesCollection(2).Trendlines.Add
+    '        .FullSeriesCollection(2).Trendlines (1)
+        End With
+    'ErrHandler:
+    '    MsgBox chartName
+    '    Exit Sub
+    End Sub
+    
+I don't see anything crazy jumping out, but I'm a VBA newbie. Any thoughts?
+
+
+-------------
+Change currentSeries to a Long for a start. Then if it still fails give the exact error message.
+-------------
+I don't think that's strictly necessary, as there's no conceivable situation where there will be more that 2.1billion series in a chart. Also, I figured it out! This code was being called from a Worksheet_Change() event of another sheet, and I wasn't disabled events via `Application.EnableEvents = False`. I figured this out after reading [this StackOverflow answer](http://stackoverflow.com/questions/13860894/ms-excel-crashes-when-vba-code-runs/13861640#13861640) on how to use the Worksheet_Change Event properly.
+-------------
+32,000 for an Integer, and I always make sure if an inbuilt function returns a particular type I use the same type for my variable. In this case [SeriesCollection.Count returns a Long](https://msdn.microsoft.com/en-us/library/office/ff198230.aspx).
+
+Anyway, glad it's sorted.
+-------------
+Really? I thought it was a 32 bit number, as per [this article](https://msdn.microsoft.com/en-us/library/06bkb8w2.aspx)? Good call on the type matching though, I'll be sure to change it.
+-------------
+That article is for Visual Studio. If you highlight the word Integer in your VBA and press F1 you should get the Excel limits.
+-------------
+That makes more sense. Cheers!

@@ -1,0 +1,36 @@
+slow
+2u7mfk
+ActiveX Scrollbar - slow update
+
+I've created a file (Excel 2010) with an ActiveX scrollbar as part of a table to summarize the data.  The scrollbar behaves how I would expect, but the sheet takes a while to update after moving the scroll position.  This workbook has a lot of data and complex formulas so it's not terribly surprising to see the delay.  However, what's throwing me off is that if I manually change the value in the scrollbar's linked cell the sheet updates much more quickly.  I have quite a few other controls (combo and check boxes) that handle many more formulas and those have almost instantaneous response.  Is there something unique about the scrollbar that is causing it to be so much slower?
+
+
+EDIT: This has nothing to do with my specific sheet as I just tested it with a new workbook and experience the same behavior.  To see for yourself, open a new workbook and add an ActiveX scrollbar.  Go to the scrollbar properties and set the linked cell to any cell in your workbook.  Then in another cell, enter "=rand()".  Exit Design Mode.  Click the scrollbar and you'll see the rand cell change immediately, then again after a couple seconds.  (This doesn't happen every time but pretty regularly).
+
+
+-------------
+I would suggest it is because every time the number is increased by 1 by scrolling, the workbook updates all the formulas.
+
+I tested this by having a =rand() value cell, it updates every time the linked cell of the scrollbar increments by 1.
+-------------
+After looking into this more, it appears as though calculations are being performed twice each time the scrollbar changes.  When I change the scrollbar, a few cells will update automatically but then it's another two seconds before  the rest of the sheet updates.
+
+What's even stranger is that some cells calculate both times.  I have a cell with "=rand()" in it that changes both when I click the scrollbar and then again with everything else two seconds later.  No idea what's causing any of this to happen.
+-------------
+That was my first guess, but it's not the case.  The combo boxes also cause every cell to update, but like I said, those are very responsive.
+-------------
+Can you make a copy available to download?
+
+I would be interested to see how it behaves on my PC
+-------------
+Is this issue dependant on how far the bar is scrolled? 
+
+I ask as unless you have small numbers in the scroll bar limits it will update all formulas hundreds of times as you scroll.
+
+A combo box will only activate formulas once on change..
+
+Each number increment on the scroll is an on change event.
+
+The default value on scrollbars is 0 thru 32767, so a small move on the bar means hundreds or thousands of on change events firing ALL the formulas in the worksheet.
+-------------
+Nope, the delay is the same regardless of how far I scroll.  There's no difference between just moving one increment and scrolling the entire length of the bar.

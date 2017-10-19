@@ -1,0 +1,78 @@
+slow
+3rjgeh
+Specific Excel sheet is extremely slow
+
+I work in IT and our Dietary department has this spreadsheet for food slips that has become nearly impossible to use. Trying to scroll up one line takes a full 3-5 seconds, and the document freezes often. They claim it NEVER used to be slow back when we had Excel 2010 (we now have Excel 2013 as part of O365 suite). It's on a network drive but pulling it down to my laptop (which has an i5 and SSD) does not make it any faster.
+
+Here's an image [Imgur](http://i.imgur.com/yfdzoLM.png). The whole sheet is 62 pages like that. The funny thing is if you switch the workbook over to the 2nd-floor or 3rd-floor sheets, it is much faster. Those only have 37 pages each though. Is it just too many pages to handle? I feel like Excel should be able to handle much more complex things than that.
+
+Also the entire file is only 1.3MB. It's all just text... There's no add-ins enabled or anything. We tried messing with graphics acceleration and some other random options but nothing seemed to help.
+
+Thoughts?
+
+edit: So in case anyone somehow comes across this thread again, there seems to be 60k+ empty Text Box objects in the sheet. Hiding them made it noticeably faster, not sure if it will let me delete them without crashing but I'm trying.
+
+
+-------------
+File | Open | select file | click the down arrow on the Open button and select Open and Repair.  
+  
+Another possible option is the number of formats applied.
+-------------
+Data tab - connections
+
+Any external conections to anything else?
+
+Looks like a simple sheet... why not just copy paste to new workbook?
+
+Maybe paste special values and format so it doesn't bring anything extra with it
+-------------
+It could be possible that you have a big amount of blank rows at the bottom in those sheets. Did you check this out?
+-------------
+Can you elaborate on what these slips do for them? Sometimes the best answer is to take their plan and throw it directly out the closest window.
+
+Honestly, it may be best to look at what this is for and make something better than try to fix a turd.
+-------------
+Try saving as a binary file (xlsb)
+-------------
+Is there any conditional formatting?  I've seen some workbooks get tremendously bogged down from a few simple conditional formatting rules that get copied thousands of times over when people aren't careful about copying and pasting.
+-------------
+Resulted in this 
+
+    "<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <recoveryLog xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><logFileName>error027600_02.xml</logFileName><summary>Errors were detected in file 'C:\Users\*****\Desktop\meal slips - new format - 6-22-2015.xlsx'</summary><additionalInfo><info>Excel completed file level validation and repair. Some parts of this workbook may have been repaired or discarded.</info></additionalInfo></recoveryLog>"
+
+Doesn't seem any faster. I'm about to just start destroying chunks of the file and see if it gets better lol. Tell them to split it up more in the future or something...
+-------------
+No connections.
+
+I guess I can try that.. it's a lot of text though. We'll see if it crashes on me first..
+-------------
+Nope it doesn't
+-------------
+It's a comprehensive list of dietary needs for a bunch of rehab patients and lists their breakfast/lunch/dinner instructions/preferences/etc.
+
+I don't really know how they could make it any better.
+-------------
+It appears that something with it has been corrupted pretty bad.  Can you restore it from an old backup?
+-------------
+Well hopefully ctrl+a and ctrl+c won't kill it ,But if it does you could write a formula in a new workbook that only references the crappy one and just drag that puppy through the worksheets.  Then copy paste special values and formats
+-------------
+You can do this with two sheets and vlookup. 
+
+CSV style row data where a row is the patient and the columns are the fields of the current form. One form. Tons of happy providers.
+-------------
+'Some parts of this workbok may have been repaired' means it has bad corruption? I was expecting an actual log file.
+
+I did end up deleting like half of the pages on (a copy of) the sheet and it was no faster. Then I deleted down to 3 sheets and it was much faster.
+
+Not sure if I have backups that old.. they've been having this issue for a while. Might have to check an old server. Also it would be way out of date obviously...
+-------------
+So turned out the sheet had 60,000+ empty text boxes. I was able to Go To Special > Object to have it select them all and hit Delete. Waited like 10 minutes while it was frozen and it eventually got rid of them all. Took file size from 1.5MB to 400kb.
+-------------
+It took like 10 minutes to copy/paste about half of the sheet and it's nearly just as slow as the original. It's 1300 rows of the originals 2700. It's a bit quicker but still not something I would enjoy using.
+-------------
+I'll look into it. Don't know if I would have the time to do it for them or if they could learn it...
+-------------
+If each one is the same cell location, you can write a quick script to convert each record to one line on another sheet.
+
+Then it's a matter of a vlookup. Assuming consistent forms, this should take no longer than a couple hours to dev. However, it would only be brownie points for you.
