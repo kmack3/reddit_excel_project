@@ -1,0 +1,97 @@
+6i8jun
+Need an alternative to Index/Match with multiple criteria (array formula)
+I am having some trouble performing a lookup with index/match using multiple criteria when it is an array formula. I have 2 workbooks, one with 500,000 rows (this one contains the value I want to lookup) and the other has 300,000 rows. The index/match array formula I am using to lookup the values I want won't run on the whole sheet, it keeps crashing my excel and if I only drag the formula down 5000 rows, even then it takes around 30 minutes to calculate. 
+
+
+
+Are there any alternatives I could use to lookup a value using multiple criteria? 
+
+
+
+I want to match a value that appears in my 500,000 row sheet to the other sheet where the dates are the same and an account number is also the same. 
+
+
+
+The formula i'm using looks something like this:
+
+
+
+    Index(ColumnInBook1, Match(DateInBook2&AccountNumInBook2,  
+    DateColumnInBook1&AccountColumnInBook1, 0))
+
+
+
+If you need any other information please let me know. Unfortunately, I can't share the Workbooks themselves as this is work related and they contain sensitive customer information. I am open to using VBA to accomplish this, if anyone knows how to put that kind of code together. 
+
+Thanks for any and all help :) 
+
+
+-------------
+My trick in situations where I need an index/match with multiple criteria is to create helper columns in the both arrays of data that are concatenations of the criteria.  So if I'm looking up against criteria in column A and B, I'll make a temporary column that is "colAcolB" and then make sure my match column in the other array is in the same format.  Much much faster than an Index/Match with multiple criteria.
+-------------
+If the returned value is a number, try
+
+    =SUMPRODUCT((DateCol=Date)*(AcctCol=Acct)*ColumnInBook1)
+
+If it's not a number
+
+    =INDEX(ColumnInBook1, SUMPRODUCT((DateCol=Date)*(AcctCol=Acct)*(ROW(DateCol)-X+1))
+
+where `X` is the row number of the first data point.
+-------------
+If you have datasets that large you really want to be using a database, not Excel. I would look into Power Query aka Get And Transform, which adds database-like options to Excel. There are lots of great tutorials on Youtube etc - look for one about merging tables.
+-------------
+Sorry for taking so long to get back to you. I tried this method and it was significantly faster and eventually worked for me without my Excel crashing (although it still took around 30 minutes to run), thank you :) 
+
+I also found pasting the data all into 1 workbook helped to speed it up as well, rather than referencing another workbook. 
+
+Solution Verified
+-------------
+The value is a not a number, its letters from A - F. 
+
+
+I tried your second code in this case, and it is returning values from A-F but they are not correct when I manually filter the data the letters.
+
+This is how I entered the formula in my sheet:
+
+    =INDEX('[New Segment Data from 
+    March.xlsx]Sheet1'!$U:$U,SUMPRODUCT(('[New Segment Data from 
+    March.xlsx]Sheet1'!$A:$A=E2)*('[New Segment Data from 
+    March.xlsx]Sheet1'!$L:$L=N2)*(ROW('[New Segment Data from 
+    March.xlsx]Sheet1'!$A:$A)-2+1)))
+
+
+Where: [New Segment Data from March.xlsx]Sheet1'!$U:$U is the value I want to return. 
+
+
+[New Segment Data from March.xlsx]Sheet1'!$A:$A is the column that contains the dates in the lookup workbook
+
+
+E2 is the date in the workbook that I want to match against the lookup workbook. 
+
+
+[New Segment Data from  March.xlsx]Sheet1'!$L:$L is the column that contains the accout number in the lookup workbook. 
+
+
+N2 is the account number I want to match against in the lookup workbook. 
+
+
+For X i entered 2 since my data starts on row 2, the first row is headers. 
+
+-------------
+
+You have awarded one point to _Everyday_Bellin_.    
+[^Find ^out ^more ^here.](https://www.reddit.com/r/excel/wiki/clippy)
+
+-------------
+>For X i entered 2 since my data starts on row 2, the first row is headers.
+
+2 is good, but then select from row 2 downwards. There's no reason to select the whole column unless you have data in all million+ rows - it's only going to slow things down. So change your full column references to something like `L$2:L$50000`. 
+
+If you do want to keep using full columns, use X=1.
+-------------
+You mean instead of selecting $U:$U use $U2:$U500000?
+
+Would the 2 at the end always be 2, or should it change to 3, 4, 5, etc...as I drag the formula down?
+
+Edit: Sorry looks like you added more to your comment after I posted this so I didn't see it immediately. 
