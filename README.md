@@ -8,3 +8,5 @@ After running search_term.py, run get_aready_pulled.py to copy the names to the 
 
 already_pulled.txt is a list of the ids of all of the posts that have been scraped.
 
+The directory "all" contains the search term posts
+The directories "random_one" and "random_two" contain the two random samples.
